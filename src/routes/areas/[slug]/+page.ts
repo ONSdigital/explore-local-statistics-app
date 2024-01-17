@@ -15,9 +15,9 @@ export const load: PageLoad = async ({ params }) => {
 
 	if (result.kind === 'Failure') {
 		if (result.status === 404) {
-			error(404, `Couldn't find area ${code.value}.`);
+			error(404);
 		} else {
-			error(500, `Couldn't get area ${code.value}.`);
+			error(500);
 		}
 	} else {
 		const canonicalSlug = makeCanonicalSlug(result.place.areacd, result.place.areanm);
@@ -26,6 +26,10 @@ export const load: PageLoad = async ({ params }) => {
 			redirect(301, canonicalSlug);
 		}
 
-		return result;
+		return {
+			title: `${result.place.areanm} (${result.place.groupnm}) - local statistics from the ONS`,
+			description: `Explore local statistics from the ONS for ${result.place.areanm} (${result.place.groupnm}).`,
+			...result
+		};
 	}
 };

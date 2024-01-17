@@ -4,7 +4,12 @@ declare global {
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
-		// interface PageData {}
+
+		// custom title and description properties
+		interface PageData {
+			title: string;
+			description: string;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}
