@@ -6,7 +6,11 @@ type GetAreaResult =
 	| { kind: 'Success'; place: any; geometry: any }
 	| { kind: 'Failure'; status: number };
 
-export const getArea = async (typeCode: string, code: string): Promise<GetAreaResult> => {
+export const getArea = async (
+	fetch: typeof window.fetch,
+	typeCode: string,
+	code: string
+): Promise<GetAreaResult> => {
 	const result = await fetch(`${cdnUrl}/${typeCode}/${code}.json`);
 
 	if (result.ok) {

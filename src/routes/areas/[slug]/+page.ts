@@ -4,14 +4,14 @@ import { getArea } from '$lib/api/getArea';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
 
 	if (code.kind === 'Failure') {
 		error(404, { message: 'Invalid area code' });
 	}
 
-	const result = await getArea(code.type, code.value);
+	const result = await getArea(fetch, code.type, code.value);
 
 	if (result.kind === 'Failure') {
 		if (result.status === 404) {
