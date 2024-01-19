@@ -10,6 +10,14 @@ it('handles apostrophes', () => {
 	expect(slugify("It's a test")).toBe('its-a-test');
 });
 
+it('handles ampersands', () => {
+	expect(slugify('One test & another')).toBe('one-test-and-another');
+});
+
+it('handles multiple ampersands', () => {
+	expect(slugify('One test && another')).toBe('one-test-and-another');
+});
+
 it('removes leading and trailing hyphens', () => {
 	expect(slugify('-Hello World-')).toBe('hello-world');
 });

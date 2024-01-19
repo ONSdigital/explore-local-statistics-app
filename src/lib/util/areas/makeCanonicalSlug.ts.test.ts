@@ -10,7 +10,7 @@ describe('makeCanonicalSlug', () => {
 
 	it('should handle names with special characters', () => {
 		expect(makeCanonicalSlug('E12000003', 'Yorkshire & The Humber')).toBe(
-			'E12000003-yorkshire-the-humber'
+			'E12000003-yorkshire-and-the-humber'
 		);
 	});
 
