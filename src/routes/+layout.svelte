@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 
-	// import { PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
+	import { PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
 </script>
 
 <svelte:head>
@@ -14,4 +14,11 @@
 	<meta property="og:description" content={$page.data.description} />
 </svelte:head>
 
-<slot />
+<PhaseBanner phase="beta" />
+<Header />
+
+<main>
+	<slot />
+</main>
+
+<Footer />
