@@ -1,10 +1,10 @@
 import { error, redirect } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import type { LayoutLoad } from './$types';
 import { getArea } from '$lib/api/getArea';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
 
 	if (code.kind === 'Failure') {
