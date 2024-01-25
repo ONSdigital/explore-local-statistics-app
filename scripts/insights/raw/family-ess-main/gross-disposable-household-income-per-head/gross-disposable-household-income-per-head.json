@@ -1,0 +1,72 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Gross disposable household income per head",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2020.",
+    "description": "This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2020.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/bulletins/regionalgrossdisposablehouseholdincomegdhi/previousReleases#) \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "money",
+        "spending",
+        "saving",
+        "region",
+        "local-authority",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-03-31T12:12:48.541529",
+    "themes": "https://www.ons.gov.uk/economy/regionalaccounts",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Gross disposable household income per head",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

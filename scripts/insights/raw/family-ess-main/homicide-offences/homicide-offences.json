@@ -1,0 +1,71 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Homicide Offences",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Rate of Homicide offences per million population, England and Wales, 04/2019-03/2022.",
+    "description": "This dataset shows the rate of Homicide offences per million population, in England and Wales, for period 04/2019-03/2022.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nRegions,\nPolice Force Area,\nNations (England, Wales),\nCountry (England and Wales)\n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) \n - Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) \n\n\n### Source Notes and Caveats \nData presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 6 December 2022. The data will change as subsequent court hearings take place or as further information is received. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "home-office-homicide-index",
+        "police-force-area",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-11T11:56:05.595427",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-interval"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "per million",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 1e-06
+            },
+            "measure": {
+                "label": "Homicides",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#crime-rate"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

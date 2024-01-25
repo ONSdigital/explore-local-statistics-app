@@ -1,0 +1,126 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Homicide Offences
+          - Label: Homicide Offences
+          - Issued: 2023-05-11T11:56:05.595427
+          - Modified: 2023-05-11T11:56:05.595427
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice
+          - Keywords: 
+		-- home-office-homicide-index
+		-- region
+		-- subnational
+		-- police-force-area
+          - Contact Point: None
+          - Identifier: Homicide Offences
+          - Comment: Rate of Homicide offences per million population, England and Wales, 04/2019-03/2022.
+          - Description: This dataset shows the rate of Homicide offences per million population, in England and Wales, for period 04/2019-03/2022.
+		
+		### Coverage 
+		
+		England and Wales
+		
+		#### Geography definition
+		
+		Regions,
+		Police Force Area,
+		Nations (England, Wales),
+		Country (England and Wales)
+		
+		### Source
+		
+		 - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) 
+		 - Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) 
+		
+		
+		### Source Notes and Caveats 
+		Data presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 6 December 2022. The data will change as subsequent court hearings take place or as further information is received. 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Homicide Offences
+    - Columns: 
+                              Title         Type  Required                                              Property URL Observations Column Titles
+                             AREACD    Dimension      True     homicide-offences.csv#dimension/statistical-geography                      Value
+                             AREANM   Suppressed     False                                                      None                           
+                          Geography   Suppressed     False                                                      None                           
+                      Variable Name   Suppressed     False                                                      None                           
+                          Indicator   Suppressed     False                                                      None                           
+                            Mission   Suppressed     False                                                      None                           
+                           Category   Suppressed     False                                                      None                           
+                             Period    Dimension      True   homicide-offences.csv#dimension/gregorian-time-interval                      Value
+                              Value Observations     False                   homicide-offences.csv#measure/homicides                      Value
+                            Measure   Suppressed     False                                                      None                           
+                               Unit   Suppressed     False                                                      None                           
+    Lower Confidence Interval (95%)    Attribute     False homicide-offences.csv#attribute/lower-confidence-interval                      Value
+    Upper Confidence Interval (95%)    Attribute     False homicide-offences.csv#attribute/upper-confidence-interval                      Value
+                 Observation Status    Attribute     False        homicide-offences.csv#attribute/observation-status                      Value
+                           Polarity   Suppressed     False                                                      None                           
+                              Notes   Suppressed     False                                                      None                           
+    - Columns where suppress output is true: 
+    		-- AREANM
+    		-- Geography
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 2
+        - Code Lists:
+                                                  Code List                               Code List Label Columns Used In
+                      gregorian-time-interval.csv#code-list                       Gregorian Time Interval          Period
+ons-geography-code-list-for-homicide-offences.csv#code-list ONS Geography Code List for Homicide Offences          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 55
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD             AREANM         Geography                                   Variable Name         Indicator    Mission                                                  Category                  Period     Value                                 Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+k04000001  England and Wales           Country Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 10.839712 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e92000001            England            Nation Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 10.904009 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e12000001         North East            Region Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  9.587290 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000013          Cleveland Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 16.386947 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000008             Durham Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  5.735144 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000007        Northumbria Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  8.626970 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e12000002        North West             Region Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 12.502204 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000006           Cheshire Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  6.238422 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000002            Cumbria Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 11.336553 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000005 Greater Manchester Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 15.822306 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+        - Last 10 Rows: 
+   AREACD             AREANM         Geography                                   Variable Name         Indicator    Mission                                                  Category                  Period     Value                                 Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+e23000036  Avon and Somerset Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  7.918181 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000035 Devon and Cornwall Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  7.860551 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000039             Dorset Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  6.874627 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000037    Gloucestershire Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 11.468069 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+e23000038          Wiltshire Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  3.676270 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+w92000004              Wales            Nation Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  9.692320 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+w15000004        Dyfed-Powys Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y 13.416670 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+w15000002              Gwent Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  8.377305 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+w15000001        North Wales Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  7.596327 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+w15000003        South Wales Police Force Area Homicide Offences (rate per million population) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y  9.925556 Rate of offences per million population Rate per million population                              NaN                              NaN                NaN        -1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+  Measure        Unit  Count
+Homicides per million     55
+        

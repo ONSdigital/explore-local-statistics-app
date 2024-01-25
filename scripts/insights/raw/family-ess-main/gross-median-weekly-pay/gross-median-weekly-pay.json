@@ -1,0 +1,71 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Gross median weekly pay",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Average (median) weekly pay based on where people live, UK, 2002-2022.",
+    "description": "This dataset shows the average (median) weekly pay based on where people live, in the UK, for 2002-2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nMetropolitan Counties,\nCounties,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales)\n\n### Source\n\n - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/previousReleases) \n - Northern Ireland: [Northern Ireland Statistics and Research Agency](https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/annual-survey-hours-and-earnings) \n\n\n### Source Notes and Caveats \nThe country level figure for Northern Ireland has been sourced from NOMIS rather than NISRA. This is to allow for confidence intervals. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "employee-earnings",
+        "annual-survey-for-hours-and-earnings",
+        "subnational",
+        "local-authority",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-17T12:41:11.468465",
+    "themes": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Gross median weekly pay",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

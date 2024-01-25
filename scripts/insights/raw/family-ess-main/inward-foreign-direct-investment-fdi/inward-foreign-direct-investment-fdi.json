@@ -1,0 +1,72 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Inward foreign direct investment (FDI)",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Total foreign FDI international investment position at end period (experimental statistics), Great Britain (Northern Ireland national figure included), 2015-2021.",
+    "description": "This dataset shows the total foreign FDI international investment position at end period (experimental statistics), in Great Britain (Northern Ireland national figure included), for 2015-2021. To see these figures presented visually, please refer to Figures 2 to 5 in [Foreign direct investment, experimental UK subnational estimates: 2021](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/2021).\n\n### Coverage \n\nGB (England, Wales and Scotland). Northern Ireland national figure included.\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1 and 2,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/previousReleases) \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "business-investment",
+        "investment-flows",
+        "stocks",
+        "subnational",
+        "international-territorial-level"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-23T13:05:45.899938",
+    "themes": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling, Millions",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Inward foreign direct investment (FDI)",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+    
+}

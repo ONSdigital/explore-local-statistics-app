@@ -1,0 +1,71 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Persistent absences for pupils looked after by local authorities",
+    "creator": "https://www.gov.uk/government/organisations/department-for-education",
+    "summary": "Percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded primary and secondary schools, special schools and pupil referral units), financial years 2016/17 - 2021/22.",
+    "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded primary and secondary schools, special schools and pupil referral units), for financial years 2016/17 - 2021/22.\n\n### Coverage \n\nEngland (state-funded primary and secondary schools, special schools and pupil referral units)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england) \n\n\n### Source Notes and Caveats \n\nFor the looked after children, absence data is matched to school census data for each school type, meaning that the pupils included are those on the school census with absence data. Persistent absence figures for all pupils and FSM are taken from the national absence figures and are produced using a different methodology based on enrolments and the school type is allocated in a different way so it is not appropriate to compare these figures with those for looked after children. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "state-funded-school",
+        "children-out-of-school",
+        "subnational",
+        "county",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-16T13:35:25.395087",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "government-year"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Pupils looked after by local authorities with persistent absences",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

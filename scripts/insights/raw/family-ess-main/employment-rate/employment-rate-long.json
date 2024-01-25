@@ -1,0 +1,101 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Local labour market indicators",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Employment rate, unemployment rate, economic activity rate and economic inactivity rate for people aged between 16 and 64 years, Great Britain (Northern Ireland national figure included), 04/2004-03/2005 to 04/2022-03/2023.",
+    "description": "This dataset shows:\nEmployment rate age 16 to 64 \n - the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from \n\nUnemployment rate age 16 to 64 \n - the proportion of people aged between 16 and 64 years without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks \n\nEconomic activity rate age 16 to 64 \n - the proportion of people aged between 16 and 64 years who are active participants in the labour market \n\nEconomic inactivity rate age 16 to 64 \n - the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks \n\n In Great Britain (Northern Ireland national figure included), for periods 04/2004-03/2005 to 04/2022-03/2023.\n\n### Coverage \n\nGB (England, Wales and Scotland). Northern Ireland national figure included.\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities, \nMetropolitan Counties, \nRegions, \nCombined Authorities, \nNations (England, Wales, Scotland, Northern Ireland), \nCountries (UK, GB, England and Wales)\n\n### Source\n\n - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousReleases) \n\nData is also available on [NOMIS](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17) \n\n\n### Source Notes and Caveats \nCalculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. \n\nCalculation of unemployment rate: number of unemployed people aged 16 to 64 years divided by the sum of employed people aged 16 to 64 years plus unemployed people aged 16 to 64 years. \n\nCalculation of economic activity rate: number of economically active people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. \n\nCalculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "labour-market",
+        "region",
+        "local-authority",
+        "paid-work",
+        "subnational",
+        "annual-population-survey"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "themes": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork",
+    "dataset_issued": "2023-08-25T12:44",
+    "dataset_modified": "2023-08-25T12:44",
+    "columns": {
+        "areacd": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "areanm": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "period": {
+            "type": "dimension",
+            "from_template": "gregorian-interval"
+        },
+        "unit": false,
+        "indicator": {
+            "type": "measures",
+            "values": [
+                {
+                    "label": "Employment Rate",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                },
+                {
+                    "label": "Unemployment Rate",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                },
+                {
+                    "label": "Economic Activity Rate",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                },
+                {
+                    "label": "Economic Inactivity Rate",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        "value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            }
+        },
+        "measure": false,
+        "numerator": {
+            "type": "attribute",
+            "label": "Numerator",
+            "data_type": "integer"
+        },
+        "denominator": {
+            "type": "attribute",
+            "label": "Denominator",
+            "data_type": "integer"
+        },
+        "lower_confidence_interval_95": {
+            "type": "attribute",
+            "label": "Lower Confidence Interval",
+            "data_type": "decimal",
+            "describes_observations": "value",
+            "required": false
+        },
+        "upper_confidence_interval_95": {
+            "type": "attribute",
+            "label": "Upper Confidence Interval",
+            "data_type": "decimal",
+            "describes_observations": "value",
+            "required": false
+        },
+        "observation_status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        }
+    }
+}

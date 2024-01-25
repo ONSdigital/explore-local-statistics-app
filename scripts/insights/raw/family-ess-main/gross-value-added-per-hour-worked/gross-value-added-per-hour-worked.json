@@ -1,0 +1,79 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Gross Value Added per hour worked",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Measure of business productivity (estimate of the volume of goods and services produced) in \u00a3 per hour worked (experimental statistics), UK, 2004-2021.",
+    "description": "This dataset shows the measure of business productivity (estimate of the volume of goods and services produced) in \u00a3 per hour worked (experimental statistics), in the UK, for 2004-2021.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nITL1 (UK Nations, English Regions, UK less Extra-Regio)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/articles/regionalandsubregionalproductivityintheuk/previousReleases) \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "subregional-productivity",
+        "local-authority",
+        "international-territorial-level",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-19T09:29:33.324488",
+    "dataset_modified": "2023-08-24T16:30",
+    "themes": "https://www.ons.gov.uk/economy/economicoutputandproductivity",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Gross Value Added per hour worked",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

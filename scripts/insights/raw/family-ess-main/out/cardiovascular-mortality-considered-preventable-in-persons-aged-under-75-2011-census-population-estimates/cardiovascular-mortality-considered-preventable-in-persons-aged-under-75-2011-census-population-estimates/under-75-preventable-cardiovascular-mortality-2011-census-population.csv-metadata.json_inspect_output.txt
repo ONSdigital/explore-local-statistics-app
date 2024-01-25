@@ -1,0 +1,129 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Under 75 preventable cardiovascular mortality, 2011 Census population
+          - Label: Under 75 preventable cardiovascular mortality, 2011 Census population
+          - Issued: 2023-09-05T13:14:00
+          - Modified: 2023-09-05T13:30:50
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
+          - Keywords: 
+		-- county
+		-- premature-death
+		-- region
+		-- heart-disease
+		-- local-authority
+		-- subnational
+          - Contact Point: None
+          - Identifier: Under 75 preventable cardiovascular mortality, 2011 Census population
+          - Comment: Age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), based on 2011 Census mid-year population estimates, England, 2001 to 2020 
+          - Description: This dataset shows the age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), based on 2011 Census mid-year population estimates, in England, for 2001 to 2020.
+		
+		### Coverage 
+		
+		England
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Regions,
+		Combined Authorities,
+		Nation (England) 
+		
+		### Source
+		
+		 - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/9/gid/1000044/pat/159/par/K02000001/ati/15/are/E92000001/iid/93722/age/163/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1/page-options/car-do-0) 
+		
+		
+		### Source Notes and Caveats 
+		The data included in this time series are based on 2011 Census mid-year population estimates and therefore should not be used to make comparisons with the published 2021 data, which are based on Census 2021 mid-year population estimates.  
+		Values for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001). 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Under 75 preventable cardiovascular mortality, 2011 Census population
+    - Columns: 
+                              Title         Type  Required                                                                                                                             Property URL Observations Column Titles
+                             AREACD    Dimension      True                                    under-75-preventable-cardiovascular-mortality-2011-census-population.csv#dimension/ons-geography-code                       Rate
+                             AREANM    Dimension      True                                             under-75-preventable-cardiovascular-mortality-2011-census-population.csv#dimension/area-name                       Rate
+                          Geography    Dimension      True                                        under-75-preventable-cardiovascular-mortality-2011-census-population.csv#dimension/geography-type                       Rate
+                      Variable Name   Suppressed     False                                                                                                                                     None                           
+                          Indicator   Suppressed     False                                                                                                                                     None                           
+                            Mission   Suppressed     False                                                                                                                                     None                           
+                           Category   Suppressed     False                                                                                                                                     None                           
+                             Period    Dimension      True                                     under-75-preventable-cardiovascular-mortality-2011-census-population.csv#dimension/mixed-time-period                       Rate
+                               Rate Observations     False under-75-preventable-cardiovascular-mortality-2011-census-population.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75                       Rate
+                            Measure   Suppressed     False                                                                                                                                     None                           
+                               Unit   Suppressed     False                                                                                                                                     None                           
+    Lower Confidence Interval (95%)    Attribute     False                             under-75-preventable-cardiovascular-mortality-2011-census-population.csv#attribute/lower-confidence-interval                       Rate
+    Upper Confidence Interval (95%)    Attribute     False                             under-75-preventable-cardiovascular-mortality-2011-census-population.csv#attribute/upper-confidence-interval                       Rate
+                 Observation Status    Attribute     False                                    under-75-preventable-cardiovascular-mortality-2011-census-population.csv#attribute/observation-status                       Rate
+                           Polarity   Suppressed     False                                                                                                                                     None                           
+                              Notes   Suppressed     False                                                                                                                                     None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ mixed-time-period.csv#code-list  Mixed Time Period          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 12987
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD  AREANM Geography                                                                                        Variable Name                                                                Indicator   Mission                                            Category                                     Period      Rate                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services                                  year/2001 64.349423 Rate per 100,000 population Rate per 100,000 population                        63.532661                        65.174043                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2002-01-01t00-00-00/p3y 56.696262 Rate per 100,000 population Rate per 100,000 population                        56.256655                        57.138441                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2003-01-01t00-00-00/p3y 52.548850 Rate per 100,000 population Rate per 100,000 population                        52.127335                        52.972916                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2004-01-01t00-00-00/p3y 48.464210 Rate per 100,000 population Rate per 100,000 population                        48.060905                        48.870047                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2005-01-01t00-00-00/p3y 45.065313 Rate per 100,000 population Rate per 100,000 population                        44.678354                        45.454777                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2006-01-01t00-00-00/p3y 42.193000 Rate per 100,000 population Rate per 100,000 population                        41.821071                        42.567402                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2007-01-01t00-00-00/p3y 39.348927 Rate per 100,000 population Rate per 100,000 population                        38.992863                        39.707420                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2008-01-01t00-00-00/p3y 37.171894 Rate per 100,000 population Rate per 100,000 population                        36.828972                        37.517201                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2001-01-01t00-00-00/p3y 60.768351 Rate per 100,000 population Rate per 100,000 population                        60.311435                        61.227860                NaN        -1   NaN
+e92000001 england    nation Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services gregorian-interval/2010-01-01t00-00-00/p3y 33.387710 Rate per 100,000 population Rate per 100,000 population                        33.067636                        33.710099                NaN        -1   NaN
+        - Last 10 Rows: 
+   AREACD         AREANM                Geography                                                                                        Variable Name                                                                Indicator   Mission                                            Category    Period      Rate                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity                                                     Notes
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2018 18.294627 Rate per 100,000 population Rate per 100,000 population                        12.663651                        25.560302                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2007 30.698742 Rate per 100,000 population Rate per 100,000 population                        22.301231                        41.205840                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2009 26.391410 Rate per 100,000 population Rate per 100,000 population                        18.786944                        36.033800                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2011 23.530994 Rate per 100,000 population Rate per 100,000 population                        16.464722                        32.585692                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2012 23.318211 Rate per 100,000 population Rate per 100,000 population                        16.362279                        32.215545                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2013 27.184478 Rate per 100,000 population Rate per 100,000 population                        19.732300                        36.510099                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2014 21.783710 Rate per 100,000 population Rate per 100,000 population                        15.289785                        30.089180                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2015 26.057044 Rate per 100,000 population Rate per 100,000 population                        18.991543                        34.875894                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2016 23.673785 Rate per 100,000 population Rate per 100,000 population                        17.054196                        32.000400                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189 south-somerset local-authority-district Under 75 mortality rate from cardiovascular diseases considered preventable (per 100,000 population) Cardiovascular mortality considered preventable in persons aged under 75 Mission 7 Spreading opportunity and improving public services year/2008 29.871278 Rate per 100,000 population Rate per 100,000 population                        21.624066                        40.216842                NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                                Measure        Unit  Count
+Age-standardised mortality rate for those aged under 75 per 100,000  12987
+        

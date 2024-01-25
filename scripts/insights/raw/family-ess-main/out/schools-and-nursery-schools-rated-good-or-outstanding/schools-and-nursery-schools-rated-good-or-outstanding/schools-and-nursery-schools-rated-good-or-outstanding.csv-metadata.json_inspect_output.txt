@@ -1,0 +1,121 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Schools and nursery schools rated good or outstanding
+          - Label: Schools and nursery schools rated good or outstanding
+          - Issued: 2023-05-16T13:36:00
+          - Modified: 2023-09-12T10:33:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/ofsted
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
+          - Keywords: 
+		-- inspections-and-outcomes
+		-- subnational
+		-- state-funded-school
+		-- region
+		-- county
+          - Contact Point: None
+          - Identifier: Schools and nursery schools rated good or outstanding
+          - Comment: Percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated ‘Good’ or ‘Outstanding’ by Ofsted, England (state-funded schools), as at 31 July 2023
+          - Description:  This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated ‘Good’ or ‘Outstanding’ by Ofsted, in England (state-funded schools), as at 31 July 2023.
+		
+		### Coverage 
+		
+		England (state-funded schools)
+		
+		#### Geography definition
+		
+		Counties and Unitary Authorities,
+		Regions,
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Ofsted](https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes) 
+		
+		
+		### Source Notes and Caveats 
+		These figures cover all state-funded schools in England and are updated on a rolling basis. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Schools and nursery schools rated good or outstanding
+    - Columns: 
+                              Title         Type  Required                                                                                                    Property URL Observations Column Titles
+                             AREACD    Dimension      True                          schools-and-nursery-schools-rated-good-or-outstanding.csv#dimension/ons-geography-code                      Value
+                             AREANM    Dimension      True                                   schools-and-nursery-schools-rated-good-or-outstanding.csv#dimension/area-name                      Value
+                          Geography    Dimension      True                              schools-and-nursery-schools-rated-good-or-outstanding.csv#dimension/geography-type                      Value
+                      Variable Name   Suppressed     False                                                                                                            None                           
+                          Indicator   Suppressed     False                                                                                                            None                           
+                            Mission   Suppressed     False                                                                                                            None                           
+                           Category   Suppressed     False                                                                                                            None                           
+                             Period    Dimension      True                                schools-and-nursery-schools-rated-good-or-outstanding.csv#dimension/time-instant                      Value
+                              Value Observations     False schools-and-nursery-schools-rated-good-or-outstanding.csv#measure/schools-and-nursery-rated-good-or-outstanding                      Value
+                            Measure   Suppressed     False                                                                                                            None                           
+                               Unit   Suppressed     False                                                                                                            None                           
+    Lower Confidence Interval (95%)    Attribute     False                   schools-and-nursery-schools-rated-good-or-outstanding.csv#attribute/lower-confidence-interval                      Value
+    Upper Confidence Interval (95%)    Attribute     False                   schools-and-nursery-schools-rated-good-or-outstanding.csv#attribute/upper-confidence-interval                      Value
+                 Observation Status    Attribute     False                          schools-and-nursery-schools-rated-good-or-outstanding.csv#attribute/observation-status                      Value
+                           Polarity   Suppressed     False                                                                                                            None                           
+                              Notes   Suppressed     False                                                                                                            None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+      time-instant.csv#code-list       Time Instant          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 163
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD               AREANM                   Geography                                                   Variable Name                                             Indicator   Mission                                            Category              Period     Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+e92000001              england                      nation Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 88.664618 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e12000001           north-east                      region Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 90.509666 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000047        county-durham county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 88.636364 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000005           darlington county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 83.333333 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000001           hartlepool county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 89.473684 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000002        middlesbrough county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 89.473684 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000057       northumberland county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 93.251534 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000003 redcar-and-cleveland county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 87.931034 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e06000004     stockton-on-tees county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 93.589744 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e08000037            gateshead    local-authority-district Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 92.857143 Percentage    %                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD                AREANM                   Geography                                                   Variable Name                                             Indicator   Mission                                            Category              Period     Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity                                                     Notes
+e06000053       isles-of-scilly county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00       NaN Percentage    %                              NaN                              NaN                  x         1                                                       NaN
+e06000024        north-somerset county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 84.615385 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e06000026              plymouth county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 80.612245 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e06000025 south-gloucestershire county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 94.690265 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e06000030               swindon county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 85.542169 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e06000027                torbay county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 83.333333 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e06000054             wiltshire county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 80.952381 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000008                 devon county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 87.193460 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000013       gloucestershire county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 87.919463 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000027              somerset county-or-unitary-authority Schools and nursery schools rated good or outstanding by Ofsted Schools and nursery schools rated good or outstanding Mission 5 Spreading opportunity and improving public services 2023-07-31t00-00-00 81.132075 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                      Measure    Unit  Count
+Schools and nursery rated good or outstanding percent    163
+        

@@ -1,0 +1,112 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Travel time to employment centres by mode of travel
+          - Label: Travel time to employment centres by mode of travel
+          - Issued: 2023-08-18T09:10:26.937229
+          - Modified: 2023-08-18T09:10:26.937229
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-transport
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- journey-time
+		-- transport
+		-- travel-to-work
+		-- subnational
+		-- local-authority
+          - Contact Point: None
+          - Identifier: Travel time to employment centres by mode of travel
+          - Comment: Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019.
+          - Description: This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019. 
+		
+		### Coverage 
+		
+		England
+		
+		### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Metropolitan Counties,
+		Counties,
+		Regions,
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Department for Transport](https://www.gov.uk/government/statistical-data-sets/journey-time-statistics-data-tables-jts) 
+		
+		
+		### Source Notes and Caveats 
+		Data is not available for 2018. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Travel time to employment centres by mode of travel
+    - Columns: 
+                           Title         Type  Required                                                                                                           Property URL Observations Column Titles
+                          areacd    Dimension      True                                   travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code                      value
+                          areanm    Dimension      True                                            travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name                      value
+                       geography    Dimension      True                                       travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type                      value
+                          period    Dimension      True                                                 travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year                      value
+                           value Observations      True travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs                      value
+    lower_confidence_interval_95   Suppressed     False                                                                                                                   None                           
+    upper_confidence_interval_95   Suppressed     False                                                                                                                   None                           
+              observation_status   Suppressed     False                                                                                                                   None                           
+                  mode-of-travel    Dimension      True                                       travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel                      value
+    - Columns where suppress output is true: 
+    		-- lower_confidence_interval_95
+    		-- upper_confidence_interval_95
+    		-- observation_status
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          areanm
+    geography-type.csv#code-list     Geography Type       geography
+    mode-of-travel.csv#code-list     Mode of travel  mode-of-travel
+ons-geography-code.csv#code-list ONS Geography Code          areacd
+              year.csv#code-list               Year          period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 5565
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   areacd     areanm geography  period     value  lower_confidence_interval_95  upper_confidence_interval_95  observation_status mode-of-travel
+e92000001    england    nation    2014 10.900000                           NaN                           NaN                 NaN        cycling
+e92000001    england    nation    2015 10.807789                           NaN                           NaN                 NaN        cycling
+e92000001    england    nation    2016 11.000000                           NaN                           NaN                 NaN        cycling
+e92000001    england    nation    2017 10.300000                           NaN                           NaN                 NaN        cycling
+e92000001    england    nation    2019  9.852934                           NaN                           NaN                 NaN        cycling
+e12000001 north-east    region    2015 12.000000                           NaN                           NaN                 NaN        cycling
+e12000001 north-east    region    2019 11.133420                           NaN                           NaN                 NaN        cycling
+e12000001 north-east    region    2014 11.900000                           NaN                           NaN                 NaN        cycling
+e12000001 north-east    region    2017 11.455399                           NaN                           NaN                 NaN        cycling
+e12000001 north-east    region    2016 12.200000                           NaN                           NaN                 NaN        cycling
+        - Last 10 Rows: 
+   areacd         areanm                geography  period     value  lower_confidence_interval_95  upper_confidence_interval_95  observation_status              mode-of-travel
+e07000191  west-somerset local-authority-district    2017 24.994379                           NaN                           NaN                 NaN public-transport-or-walking
+e07000191  west-somerset local-authority-district    2019 24.296609                           NaN                           NaN                 NaN public-transport-or-walking
+e07000191  west-somerset local-authority-district    2016 25.445232                           NaN                           NaN                 NaN public-transport-or-walking
+e07000191  west-somerset local-authority-district    2015 25.179924                           NaN                           NaN                 NaN public-transport-or-walking
+e07000191  west-somerset local-authority-district    2014 24.970912                           NaN                           NaN                 NaN public-transport-or-walking
+e07000189 south-somerset local-authority-district    2019 15.639077                           NaN                           NaN                 NaN public-transport-or-walking
+e07000189 south-somerset local-authority-district    2017 16.166257                           NaN                           NaN                 NaN public-transport-or-walking
+e07000189 south-somerset local-authority-district    2015 17.166363                           NaN                           NaN                 NaN public-transport-or-walking
+e07000189 south-somerset local-authority-district    2014 18.724032                           NaN                           NaN                 NaN public-transport-or-walking
+e07000189 south-somerset local-authority-district    2016 17.628747                           NaN                           NaN                 NaN public-transport-or-walking
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                               Measure    Unit  Count
+Travel time to employment centre with 500 to 4999 jobs minutes   5565
+        

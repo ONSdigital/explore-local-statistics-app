@@ -1,0 +1,131 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Pupils at expected standards at the end of key stage 2
+          - Label: Pupils at expected standards at the end of key stage 2
+          - Issued: 2023-03-31T12:15:13.263841
+          - Modified: 2023-03-31T12:15:13.263841
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-education
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
+          - Keywords: 
+		-- region
+		-- writing
+		-- subnational
+		-- state-funded-school
+		-- reading
+		-- county
+		-- key-stage-2-attainment
+		-- maths
+          - Contact Point: None
+          - Identifier: Pupils at expected standards at the end of key stage 2
+          - Comment: Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22
+          - Description: This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.
+		
+		### Coverage 
+		
+		England (state-funded schools)
+		
+		#### Geography definition
+		
+		Counties and Unitary Authorities,
+		Regions,
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-2-attainment/2021-22) 
+		
+		
+		### Source Notes and Caveats 
+		- All figures include LA maintained schools, academies and free schools. Excludes alternative provision and independent schools.
+		- Figures for 2022 are based on revised data.
+		- Figures for Isles of Scilly and City of London are based on a single school in each local authority and therefore figures have been suppressed.
+		- Users are advised to take care when interpreting writing and science teacher assessment measures and reading, writing and maths (combined) measures for West Sussex, particularly when making comparisons over time or between local authorities. This local authority has higher rates of missing teacher assessment in 2022 than other areas. See [Key stage 2 attainment Methodology](https://explore-education-statistics.service.gov.uk/methodology/key-stage-2-attainment).  
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Pupils at expected standards at the end of key stage 2
+    - Columns: 
+                              Title         Type  Required                                                                                                             Property URL Observations Column Titles
+                             AREACD    Dimension      True                               pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#dimension/statistical-geography                      Value
+                             AREANM   Suppressed     False                                                                                                                     None                           
+                          Geography   Suppressed     False                                                                                                                     None                           
+                      Variable Name   Suppressed     False                                                                                                                     None                           
+                          Indicator   Suppressed     False                                                                                                                     None                           
+                            Mission   Suppressed     False                                                                                                                     None                           
+                           Category   Suppressed     False                                                                                                                     None                           
+                             Period    Dimension      True                             pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#dimension/gregorian-time-interval                      Value
+                              Value Observations     False pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#measure/pupils-at-expected-standards-by-end-of-primary-school                      Value
+                            Measure   Suppressed     False                                                                                                                     None                           
+                               Unit   Suppressed     False                                                                                                                     None                           
+    Lower Confidence Interval (95%)    Attribute     False                           pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#attribute/lower-confidence-interval                      Value
+    Upper Confidence Interval (95%)    Attribute     False                           pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#attribute/upper-confidence-interval                      Value
+                 Observation Status    Attribute     False                                  pupils-at-expected-standards-at-the-end-of-key-stage-2.csv#attribute/observation-status                      Value
+                           Polarity   Suppressed     False                                                                                                                     None                           
+                              Notes   Suppressed     False                                                                                                                     None                           
+    - Columns where suppress output is true: 
+    		-- AREANM
+    		-- Geography
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 2
+        - Code Lists:
+                                                                                      Code List                                                                   Code List Label Columns Used In
+                                                          gregorian-time-interval.csv#code-list                                                           Gregorian Time Interval          Period
+ons-geography-code-list-for-pupils-at-expected-standards-by-end-of-primary-school.csv#code-list ONS Geography Code List for Pupils at expected standards by end of primary school          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 1147
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD     AREANM Geography                                                                                                   Variable Name                                             Indicator   Mission                                            Category                  Period  Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2015-09-01t00-00-00/p1y   54.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y   59.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2016-09-01t00-00-00/p1y   62.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2017-09-01t00-00-00/p1y   65.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2018-09-01t00-00-00/p1y   65.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1   NaN
+e92000001    England    Nation Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1   NaN
+e12000001 North East    Region Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1   NaN
+e12000001 North East    Region Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1   NaN
+e12000001 North East    Region Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2018-09-01t00-00-00/p1y   67.0 Percentage    %                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD          AREANM                   Geography                                                                                                   Variable Name                                             Indicator   Mission                                            Category                  Period  Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity                                                     Notes
+e10000013 Gloucestershire County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y   57.0 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000013 Gloucestershire County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2015-09-01t00-00-00/p1y   54.0 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000013 Gloucestershire County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2016-09-01t00-00-00/p1y   62.0 Percentage    %                              NaN                              NaN                NaN         1                                                       NaN
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2015-09-01t00-00-00/p1y   52.0 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y   54.0 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2016-09-01t00-00-00/p1y   59.0 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2017-09-01t00-00-00/p1y   62.0 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2018-09-01t00-00-00/p1y   61.0 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e10000027       Somerset  County or Unitary Authority Percentage of pupils meeting the expected standard in reading, writing and maths by end of primary school (KS2) Pupils at expected standards by end of primary school Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y    NaN Percentage    %                              NaN                              NaN                  x         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                              Measure    Unit  Count
+Pupils at expected standards by end of primary school percent   1147
+        

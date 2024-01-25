@@ -1,0 +1,127 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Persistent absences for all pupils
+          - Label: Persistent absences for all pupils
+          - Issued: 2023-03-31T12:14:18.517953
+          - Modified: 2023-03-31T12:14:18.517953
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-education
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
+          - Keywords: 
+		-- county
+		-- state-funded-school
+		-- region
+		-- subnational
+		-- children-out-of-school
+          - Contact Point: None
+          - Identifier: Persistent absences for all pupils
+          - Comment: Percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded schools), academic years 2008/09 - 2021/22.
+          - Description: This dataset shows the percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2008/09 - 2021/22. 
+		
+		### Coverage 
+		
+		England (state-funded primary and secondary schools, and special schools)
+		
+		#### Geography definition
+		
+		Counties and Unitary Authorities,
+		Regions,
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england#) 
+		
+		
+		### Source Notes and Caveats 
+		Data is not available for academic year 2019/20.
+		
+		Persistent absence includes absence where a pupil had tested positive for COVID-19 (national isolation policies for people ill with COVID-19 were still in effect during this period). Consequently a large proportion of persistent absence and regional variation in persistent absence is due to differing regional spread of COVID-19 rather than pupil behaviour. 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Persistent absences for all pupils
+    - Columns: 
+                              Title         Type  Required                                                                       Property URL Observations Column Titles
+                             AREACD    Dimension      True             persistent-absences-for-all-pupils.csv#dimension/statistical-geography                      Value
+                             AREANM   Suppressed     False                                                                               None                           
+                          Geography   Suppressed     False                                                                               None                           
+                      Variable Name   Suppressed     False                                                                               None                           
+                          Indicator   Suppressed     False                                                                               None                           
+                            Mission   Suppressed     False                                                                               None                           
+                           Category   Suppressed     False                                                                               None                           
+                             Period    Dimension      True           persistent-absences-for-all-pupils.csv#dimension/gregorian-time-interval                      Value
+                              Value Observations     False persistent-absences-for-all-pupils.csv#measure/all-pupils-with-persistent-absences                      Value
+                            Measure   Suppressed     False                                                                               None                           
+                               Unit   Suppressed     False                                                                               None                           
+    Lower Confidence Interval (95%)    Attribute     False         persistent-absences-for-all-pupils.csv#attribute/lower-confidence-interval                      Value
+    Upper Confidence Interval (95%)    Attribute     False         persistent-absences-for-all-pupils.csv#attribute/upper-confidence-interval                      Value
+                 Observation Status    Attribute     False                persistent-absences-for-all-pupils.csv#attribute/observation-status                      Value
+                           Polarity   Suppressed     False                                                                               None                           
+                              Notes   Suppressed     False                                                                               None                           
+    - Columns where suppress output is true: 
+    		-- AREANM
+    		-- Geography
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 2
+        - Code Lists:
+                                                                       Code List                                                    Code List Label Columns Used In
+                                           gregorian-time-interval.csv#code-list                                            Gregorian Time Interval          Period
+ons-geography-code-list-for-persistent-absences-for-all-pupils-csv.csv#code-list ONS Geography Code List for persistent-absences-for-all-pupils.csv          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 2118
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD  AREANM Geography                      Variable Name                          Indicator   Mission                                            Category                  Period    Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2013-08-01t00-00-00/p1y 10.67379 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y 22.50843 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2015-08-01t00-00-00/p1y 10.49978 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2010-08-01t00-00-00/p1y 16.25496 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2016-08-01t00-00-00/p1y 10.78697 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2011-08-01t00-00-00/p1y 13.50786 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2009-08-01t00-00-00/p1y 17.43129 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2017-08-01t00-00-00/p1y 11.16776 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2014-08-01t00-00-00/p1y 10.96052 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e92000001 England    Nation Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2012-08-01t00-00-00/p1y 13.63616 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+        - Last 10 Rows: 
+   AREACD    AREANM                   Geography                      Variable Name                          Indicator   Mission                                            Category                  Period    Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2013-08-01t00-00-00/p1y 10.34848 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2015-08-01t00-00-00/p1y 10.25532 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2011-08-01t00-00-00/p1y 13.82247 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y 24.16310 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y 11.43381 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2010-08-01t00-00-00/p1y 16.10559 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2009-08-01t00-00-00/p1y 16.56498 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2016-08-01t00-00-00/p1y 11.36801 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2017-08-01t00-00-00/p1y 11.54209 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+e10000027 Somerset  County or Unitary Authority Persistent absences for all pupils Persistent absences for all pupils Mission 5 Spreading opportunity and improving public services 2012-08-01t00-00-00/p1y 14.21731 Percentage    %                              NaN                              NaN                 NaN        -1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                            Measure    Unit  Count
+All pupils with persistent absences percent   2118
+        

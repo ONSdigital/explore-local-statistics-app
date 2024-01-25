@@ -1,0 +1,74 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Pupils at expected standards at the end of key stage 2",
+    "creator": "https://www.gov.uk/government/organisations/department-for-education",
+    "summary": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2021/22",
+    "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2021/22.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-2-attainment/2021-22) \n\n\n### Source Notes and Caveats \n- All figures include LA maintained schools, academies and free schools. Excludes alternative provision and independent schools.\n- Figures for 2022 are based on revised data.\n- Figures for Isles of Scilly and City of London are based on a single school in each local authority and therefore figures have been suppressed.\n- Users are advised to take care when interpreting writing and science teacher assessment measures and reading, writing and maths (combined) measures for West Sussex, particularly when making comparisons over time or between local authorities. This local authority has higher rates of missing teacher assessment in 2022 than other areas. See [Key stage 2 attainment Methodology](https://explore-education-statistics.service.gov.uk/methodology/key-stage-2-attainment).  \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "key-stage-2-attainment",
+        "reading",
+        "writing",
+        "maths",
+        "state-funded-school",
+        "subnational",
+        "county",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-03-31T12:15:13.263841",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-interval"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Pupils at expected standards by end of primary school",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

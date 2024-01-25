@@ -1,0 +1,70 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Population under devolution deal in England",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Percentage of the population living in an area covered by the highest level of devolution, England, as of 13 January 2023.",
+    "description": "This dataset shows the percentage of the population living in an area covered by the highest level of devolution, in England, as of 13 January 2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nRegions,\nNation (England)\n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/adhocs/15439populationlivinginanareacoveredbyacombinedauthorityorregionalgovernancebodythathasadevolutiondealwithadirectlyelectedmayorenglandasof13january2023) \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "combined-authority",
+        "mayor",
+        "subnational",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-03-31T12:14:51.117734",
+    "themes": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-instant"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Population under devolution deal in England",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

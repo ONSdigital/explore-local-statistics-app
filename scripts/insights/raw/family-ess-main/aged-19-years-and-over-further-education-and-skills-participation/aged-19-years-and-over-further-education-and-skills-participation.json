@@ -1,0 +1,73 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Aged 19 years and over further education and skills participation",
+    "creator": "https://www.gov.uk/government/organisations/department-for-education",
+    "summary": "19+ further education and skills participation rate per 100,000 population, England, academic years 2017/18 to 2022/23",
+    "description": "This dataset shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2021/22. Figures for 2022/23 are available for August 2022 to January 2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nRegions,\nCounties,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/data-catalogue/further-education-and-skills/2022-23) \n\n\n### Source Notes and Caveats \nFigures for 2022/23 are available for August 2022 to January 2023, other years (2017/18 to 2021/22) are available for full academic years. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "apprenticeship",
+        "community-learning",
+        "education-and-training",
+        "subnational",
+        "local-authority"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-17T12:25:15.99645",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-interval"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "per 100,000",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 1e-05
+            },
+            "measure": {
+                "label": "Aged 19 years and over further education and skills participation",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+    
+}

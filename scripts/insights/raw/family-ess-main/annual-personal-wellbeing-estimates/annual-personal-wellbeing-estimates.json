@@ -1,0 +1,95 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Annual personal wellbeing estimates",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Estimates of life satisfaction, feeling that the things done in life are worthwhile, happiness and anxiety for adults aged 16 years and over, UK, 04/2011-03/2012 to 04/2021-03/2022.",
+    "description": "This dataset shows the average rating of those that feel satisfied about their lives (where 0 is 'not at all satisfied' and 10 is 'completely satisfied'), feel the things they do in life are worthwhile (where 0 is 'not at all worthwhile' and 10 is 'completely worthwhile'), felt happy yesterday (where 0 is 'not at all happy' and 10 is 'completely happy'), felt anxious yesterday (where 0 is 'not at all anxious' and 10 is 'completely anxious'), for adults aged 16 years and over, in the UK, for periods 04/2011-03/2012 to 04/2021-03/2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/measuringnationalwellbeing/previousReleases) \n\n\n### Source Notes and Caveats \nOn 31 October 2022, alongside the publication of the latest personal wellbeing estimates for the period between April 2021 to March 2022, previously published estimates for the periods between April 2011 and March 2019 have been updated due to changes in guidance on data suppression, where estimates are no longer required to be suppressed solely based on their co-efficient of variation (CV) values. Previously published estimates were suppressed based on their co-efficient of variation (CV) values being over 20. Estimates have also been updated following quality assurance of previous publications. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "personal-wellbeing",
+        "subnational",
+        "quality-of-life",
+        "annual-population-survey",
+        "local-authorities",
+        "counties",
+        "anxiety",
+        "happiness",
+        "life-satisfaction",
+        "regions"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing",
+    "dataset_issued": "2023-09-13T13:32",
+    "dataset_modified": "2023-09-14T12:56",
+    "columns": {
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        
+        "Period": {
+            "type": "dimension",
+            "from_template": "government-year"
+        },
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "score",
+                "from_existing": "http://qudt.org/vocab/unit/UNITLESS"
+            }
+        },
+        "Measure": {
+            "type": "measures",
+            "values" : [
+                {
+                    "label": "Anxiety mean score (where 10 is 'completely anxious')",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#scale"
+                },
+                {
+                    "label": "Worthwhile mean score (where 10 is 'completely worthwhile')",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#scale"
+                },
+                {
+                    "label": "Happiness mean score (where 10 is 'completely happy')",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#scale"
+                },
+                {
+                    "label": "Satisfaction mean score (where 10 is 'completely satisfied')",
+                    "from_existing": "https://purl.org/csv-cubed/resources/measures#scale"
+                }
+            ]
+        },
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        }
+    }
+}

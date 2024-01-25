@@ -1,0 +1,114 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Gigabit capable broadband
+          - Label: Gigabit capable broadband
+          - Issued: 2023-03-31T12:12:36.754038
+          - Modified: 2023-08-24T16:26:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/ofcom
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry
+          - Keywords: 
+		-- broadband-mobile-coverage
+		-- connectivity
+		-- local-authority
+		-- subnational
+          - Contact Point: None
+          - Identifier: Gigabit capable broadband
+          - Comment: Percentage of premises with 125 megabytes (MB) or greater, UK, January 2023.
+          - Description: This dataset shows the percentage of premises with 125 megabytes (MB) or greater, in the UK, for January 2023.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities
+		
+		### Source
+		
+		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/spring-2023) 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Gigabit capable broadband
+    - Columns: 
+                              Title         Type  Required                                                                  Property URL Observations Column Titles
+                             AREACD    Dimension      True                    gigabit-capable-broadband.csv#dimension/ons-geography-code                      Value
+                             AREANM    Dimension      True                             gigabit-capable-broadband.csv#dimension/area-name                      Value
+                          Geography    Dimension      True                        gigabit-capable-broadband.csv#dimension/geography-type                      Value
+                      Variable Name   Suppressed     False                                                                          None                           
+                          Indicator   Suppressed     False                                                                          None                           
+                            Mission   Suppressed     False                                                                          None                           
+                           Category   Suppressed     False                                                                          None                           
+                             Period    Dimension      True                                 gigabit-capable-broadband.csv#dimension/month                      Value
+                              Value Observations     False gigabit-capable-broadband.csv#measure/premises-with-gigabit-capable-broadband                      Value
+                            Measure   Suppressed     False                                                                          None                           
+                               Unit   Suppressed     False                                                                          None                           
+    Lower Confidence Interval (95%)    Attribute     False             gigabit-capable-broadband.csv#attribute/lower-confidence-interval                      Value
+    Upper Confidence Interval (95%)    Attribute     False             gigabit-capable-broadband.csv#attribute/upper-confidence-interval                      Value
+                 Observation Status    Attribute     False                    gigabit-capable-broadband.csv#attribute/observation-status                      Value
+                           Polarity   Suppressed     False                                                                          None                           
+                              Notes   Suppressed     False                                                                          None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+             month.csv#code-list              Month          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 374
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD               AREANM                   Geography                           Variable Name                 Indicator   Mission                                              Category  Period  Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e06000047        county-durham county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   52.8 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000005           darlington county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   86.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000001           hartlepool county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   90.1 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000002        middlesbrough county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   94.1 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000057       northumberland county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   39.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000003 redcar-and-cleveland county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   87.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e06000004     stockton-on-tees county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   92.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e08000037            gateshead    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   72.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e08000021  newcastle-upon-tyne    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   79.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+e08000022       north-tyneside    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   84.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD                              AREANM                Geography                           Variable Name                 Indicator   Mission                                              Category  Period  Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   87.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000003                             belfast local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   95.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000004            causeway-coast-and-glens local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   86.6 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000005             derry-city-and-strabane local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   89.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000006                 fermanagh-and-omagh local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   79.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000007             lisburn-and-castlereagh local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   92.3 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000008                 mid-and-east-antrim local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   88.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000009                          mid-ulster local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   76.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000010               newry-mourne-and-down local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   90.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000011                 ards-and-north-down local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2023-01   89.8 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                Measure    Unit  Count
+Premises with gigabit capable broadband percent    374
+        

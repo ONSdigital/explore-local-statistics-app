@@ -1,0 +1,79 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Schools and nursery schools rated good or outstanding",
+    "creator": "https://www.gov.uk/government/organisations/ofsted",
+    "summary": "Percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated \u2018Good\u2019 or \u2018Outstanding\u2019 by Ofsted, England (state-funded schools), as at 31 July 2023",
+    "description": " This dataset shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated \u2018Good\u2019 or \u2018Outstanding\u2019 by Ofsted, in England (state-funded schools), as at 31 July 2023.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Ofsted](https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes) \n\n\n### Source Notes and Caveats \nThese figures cover all state-funded schools in England and are updated on a rolling basis. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "state-funded-school",
+        "inspections-and-outcomes",
+        "subnational",
+        "county",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-16T13:36",
+    "dataset_modified": "2023-09-12T10:33",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-instant"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Schools and nursery rated good or outstanding",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+}

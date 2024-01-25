@@ -1,0 +1,72 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Cancer diagnosis at stage 1 and 2",
+    "creator": "https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities",
+    "summary": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2020",
+    "description": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2020.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/4/gid/1000042/pat/15/par/E92000001/ati/6/are/E12000004/iid/93671/age/1/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1/page-options/car-ao-0_car-do-0_tre-ao-1) \n\n\n### Source Notes and Caveats \n- Due to the impact of the COVID-19 pandemic on both clinical and data quality arrangements, the ability to obtain stage data for cancer registrations was reduced for the 2019 and 2020 diagnosis years. In 2019, the proportion of stageable cancer diagnoses with a registered stage fell from 85% in 2018 to 76%. For the 2020 diagnosis year, stage completeness increased to 81%.\n- Values for Cornwall and Isles of Scilly are in a combined code (E67000002).  \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "tumor",
+        "subnational",
+        "local-authority",
+        "county",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2023-05-17T12:25:53.759812",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "label": "Statistical Geography",
+            "type": "dimension",
+            "code_list": "./geography_code_list.json"
+        },
+        "AREANM": false,
+        "Geography": false,
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Value": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Cancer diagnosis at stage 1 and 2",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Value",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+    
+}
