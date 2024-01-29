@@ -7,6 +7,7 @@ const CONFIG_DIR = `${RAW_DIR}/config-data`;
 const CSV_DIR = `${COOKED_DIR}/csv`;
 
 const DATA_OUTPUT_PATH = `static/insights/data.json`;
+const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 
 main();
@@ -16,8 +17,24 @@ function main() {
 	const config = readConfigFromCsvs();
 
 	const outData = generateOutData(data, config.indicators);
-	writeFileSync(DATA_OUTPUT_PATH, JSON.stringify(outData));
+	writeFileSync(
+		DATA_OUTPUT_PATH,
+		JSON.stringify({
+			combinedDataObject: outData.combinedDataObject,
+			beeswarmKeyData: outData.beeswarmKeyData
+		})
+	);
 	console.log(`Insights data JSON file has been generated at: ${DATA_OUTPUT_PATH}`);
+	writeFileSync(
+		COLUMN_ORIENTED_DATA_OUTPUT_PATH,
+		JSON.stringify({
+			combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
+			beeswarmKeyData: outData.beeswarmKeyData
+		})
+	);
+	console.log(
+		`Insights data JSON file in experimental column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
+	);
 
 	const outConfig = generateOutConfig(config);
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
@@ -26,30 +43,42 @@ function main() {
 
 function generateOutData(data, indicatorsArray) {
 	const combinedDataArray = [...data.combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
+
 	const combinedDataObject = {};
 	for (const indicator of indicatorsArray) {
 		combinedDataObject[indicator.code] = combinedDataArray.filter((e) => e.id === indicator.id);
 	}
 
-	// TODO: switch to column-oriented layout to save space?
-	// This is shown in the commented-out code:
-	//
-	// const combinedDataObject = {};
-	// for (const indicator of indicatorsArray) {
-	// 	const rows = combinedDataArray.filter((e) => e.id === indicator.id);
-	// 	const dataByColumn = {};
-	// 	for (const columnName in rows[0]) {
-	// 		if (Object.getOwnPropertyDescriptor(rows[0], columnName)) {
-	// 			dataByColumn[columnName] = rows.map((row) => row[columnName]);
-	// 		}
-	// 	}
-	// 	combinedDataObject[indicator.code] = dataByColumn;
-	// }
+	// combinedDataObjectColumnOriented is an experimental version that stores
+	// an array for each column to save space.
+	const combinedDataObjectColumnOriented = createCombinedDataObjectColumnOriented(
+		indicatorsArray,
+		combinedDataArray
+	);
 
 	return {
 		combinedDataObject,
+		combinedDataObjectColumnOriented,
 		beeswarmKeyData: data.beeswarmKeyData
 	};
+}
+
+function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDataArray: any[]) {
+	const combinedDataObjectColumnOriented = {};
+	for (const indicator of indicatorsArray) {
+		const rows = combinedDataArray.filter((e) => e.id === indicator.id);
+		if (rows.length === 0) {
+			throw new Error('Unexpectedly empty `rows` array.');
+		}
+		const dataByColumn = {};
+		for (const columnName in rows[0]) {
+			if (Object.getOwnPropertyDescriptor(rows[0], columnName)) {
+				dataByColumn[columnName] = rows.map((row) => row[columnName]);
+			}
+		}
+		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
+	}
+	return combinedDataObjectColumnOriented;
 }
 
 function generateOutConfig(config) {
