@@ -14,10 +14,13 @@
 	<meta property="og:description" content={$page.data.description} />
 </svelte:head>
 
-<PhaseBanner phase="beta" />
-<Header bilingual={false} />
-<main>
-	<slot />
-</main>
-
-<Footer theme="dark" />
+<div class="flex flex-col min-h-screen">
+	<div class="flex-grow">
+		<PhaseBanner phase="beta" />
+		<Header bilingual={false} />
+		<main>
+			<slot />
+		</main>
+	</div>
+	<Footer theme="dark" />
+</div>
