@@ -1,5 +1,6 @@
 import { PathOrFileDescriptor, readFileSync, writeFileSync } from 'fs';
 import { csvParse } from 'd3-dsv';
+import arqueroProcessing from './arquero-processing.js';
 
 const RAW_DIR = 'scripts/insights/raw';
 const COOKED_DIR = 'scripts/insights/cooked';
@@ -9,6 +10,8 @@ const CSV_DIR = `${COOKED_DIR}/csv`;
 const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
+
+await arqueroProcessing();
 
 main();
 
