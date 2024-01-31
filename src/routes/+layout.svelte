@@ -15,10 +15,9 @@
 </svelte:head>
 
 <PhaseBanner phase="beta" />
-<Header />
-
+<Header bilingual={false} />
 <main>
 	<slot />
 </main>
 
-<Footer />
+<Footer theme="dark" />
