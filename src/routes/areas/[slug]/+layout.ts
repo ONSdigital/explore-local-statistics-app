@@ -1,11 +1,17 @@
 import { error, redirect } from '@sveltejs/kit';
+import { base } from '$app/paths';
 import type { LayoutLoad } from './$types';
 import { getArea } from '$lib/api/getArea';
+import { getData } from '$lib/api/getData';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
+	const links = await getData(`${base}/data/links.csv`, fetch);
+	for (const link of links) {
+		if (link.image && !link.image.startsWith('http')) link.image = base + link.image;
+	}
 
 	if (code.kind === 'Failure') {
 		error(404, { message: 'Invalid area code' });
@@ -29,6 +35,7 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 		return {
 			title: `${result.place.areanm} (${result.place.groupnm}) - local statistics from the ONS`,
 			description: `Explore local statistics from the ONS for ${result.place.areanm} (${result.place.groupnm}).`,
+			links,
 			...result
 		};
 	}
