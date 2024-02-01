@@ -57,10 +57,11 @@ export default async function main() {
 async function getListOfNewFiles(previous_file_paths) {
 	let filenames = await readdir(CSV_PREPROCESS_DIR, { recursive: true });
 	filenames = filenames.filter(
-		(f) => f.endsWith('.csv') && !f.includes('/out/') && !f.includes('_IDS')
+		(f) => f.endsWith('.csv') && !f.startsWith('out/') && !f.includes('_IDS')
 	);
 
 	const previous_filenames = previous_file_paths.array('filePath');
+
 	const newFiles = [];
 	for (const f of filenames) {
 		if (!previous_filenames.includes(`${CSV_PREPROCESS_DIR}/${f}`)) {
@@ -78,7 +79,7 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 	let combined_data = aq.table(Object.fromEntries(COMBINED_DATA_COLUMN_NAMES.map((d) => [d, []])));
 	let combined_metadata = aq.table({});
 
-	console.log(`About to process ${file_paths.length} files...`);
+	console.log(`About to process ${file_paths.numRows()} files...`);
 
 	for (const f of file_paths.objects()) {
 		console.log(`Processing ${f.filePath}`);
