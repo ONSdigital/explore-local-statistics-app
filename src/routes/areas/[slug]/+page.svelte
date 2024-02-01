@@ -245,7 +245,7 @@
 		list-style: none;
 		margin: 4px 0 8px;
 		padding: 0;
-		column-width: 170px;
+		column-width: 220px;
 		overflow-x: none;
 		position: relative;
 	}
