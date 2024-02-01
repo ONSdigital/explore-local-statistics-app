@@ -112,7 +112,9 @@ export const geoTypes = [
 	{
 		key: 'uk',
 		codes: ['K02'],
-		source: 'uk'
+		source: 'uk',
+		label: 'United Kingdom',
+		plural: 'United Kingdom'
 	},
 	{
 		key: 'ctry',

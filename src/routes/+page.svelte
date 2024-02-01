@@ -4,7 +4,13 @@
 	import { base } from '$app/paths';
 	import { geoCodesLookup } from '$lib/config/geoConfig.js';
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug.js';
-	import { Breadcrumb, Titleblock, Section, analyticsEvent } from '@onsvisual/svelte-components';
+	import {
+		Breadcrumb,
+		Titleblock,
+		Section,
+		analyticsEvent,
+		List
+	} from '@onsvisual/svelte-components';
 	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
@@ -78,7 +84,7 @@
 		facts and figures for areas in:
 	</p>
 
-	<ul class="ons-list">
+	<List mode="dash">
 		<li>
 			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">Scotland</a>
 			<span class="inline-icon"><Icon type="launch" /></span>
@@ -90,7 +96,7 @@
 				rel="noreferrer">Northern Ireland</a
 			> <span class="inline-icon"><Icon type="launch" /></span>
 		</li>
-	</ul>
+	</List>
 
 	<p>
 		Some data about Wales is also published on the <a

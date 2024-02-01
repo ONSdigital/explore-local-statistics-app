@@ -2,13 +2,13 @@ import { error, redirect } from '@sveltejs/kit';
 import { base } from '$app/paths';
 import type { LayoutLoad } from './$types';
 import { getArea } from '$lib/api/getArea';
-import { getData } from '$lib/api/getData';
+import { getCSV } from '$lib/api/getCSV';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
-	const links = await getData(`${base}/data/links.csv`, fetch);
+	const links = await getCSV(`${base}/data/links.csv`, fetch);
 	for (const link of links) {
 		if (link.image && !link.image.startsWith('http')) link.image = base + link.image;
 	}

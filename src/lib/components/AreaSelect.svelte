@@ -3,7 +3,7 @@
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { base } from '$app/paths';
 	import { geoTypes, geoCodesLookup, geoNames, regionReverseLookup } from '$lib/config/geoConfig';
-	import { getData } from '$lib/api/getData';
+	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { Select } from '@onsvisual/svelte-components';
 
@@ -96,7 +96,7 @@
 		geoNames[type] ? geoNames[type].label : geoCodesLookup[type].label;
 
 	async function getPlaces() {
-		let places = await getData(`${base}/data/places.csv`);
+		let places = await getCSV(`${base}/data/places.csv`);
 		places.sort((a, b) => a.areanm.localeCompare(b.areanm));
 		let lookup = {};
 		places.forEach((d) => (lookup[d.areacd] = d));
