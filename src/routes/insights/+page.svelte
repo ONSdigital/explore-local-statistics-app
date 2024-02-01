@@ -5,3 +5,7 @@
 </script>
 
 {JSON.stringify(data)}
+
+<div>
+	<a href="https://example.com">This is a link</a>
+</div>
