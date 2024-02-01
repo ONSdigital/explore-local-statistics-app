@@ -1,8 +1,12 @@
 import type { LayoutLoad } from './$types';
+import { base } from '$app/paths';
 
-export const load: LayoutLoad = async () => {
+export const load: LayoutLoad = async ({ fetch }) => {
+	const config = await (await fetch(`${base}/insights/config.json`)).json();
+
 	return {
 		title: `Explore local statistics - ONS`,
-		description: `Explore local statistics from the ONS about people and the communities they live in. Includes topics such as population, economy and health.`
+		description: `Explore local statistics from the ONS about people and the communities they live in. Includes topics such as population, economy and health.`,
+		config
 	};
 };
