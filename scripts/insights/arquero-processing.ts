@@ -1,7 +1,9 @@
 import { readdir } from 'node:fs/promises';
 import fs from 'fs';
+import { median, mad } from './stats.ts';
 
 import aq from 'arquero';
+import ColumnTable from 'arquero/dist/types/table/column-table';
 const { op } = aq;
 
 const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
@@ -11,6 +13,9 @@ const PREVIOUS_INDICATORS_FILENAME =
 	'scripts/insights/raw/config-data/indicators/indicators-lookup.csv';
 const PREVIOUS_PERIODS_FILENAME =
 	'scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
+const AREAS_GEOG_LEVEL_FILENAME = 'scripts/insights/raw/config-data/geography/areas-geog-level.csv';
+const INDICATORS_METADATA_CSV_FILENAME =
+	'scripts/insights/raw/config-data/indicators/indicators-metadata.csv';
 const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
 const EXCLUDED_INDICATORS_PATH = 'scripts/insights/raw/config-data/excluded-indicators.json';
 
@@ -45,9 +50,12 @@ const NEW_FILES_WARNING =
 const INDICATORS_LOOKUP_WARNING = `TODO: indicators-lookup warning.`;
 const UNIQUE_PERIODS_LOOKUP_WARNING = `TODO: unique-periods-lookup warning.`;
 const MULTIPLE_PERIODS_WARNING = `TODO: warning: multiple periods for one indicator.`;
+const MISSING_METADATA_WARNING =
+	'This script finished executing, but noted that one or more of the indicators does not currently have associated metadata. This means that the app will error when looking for direction on how to plot data for this indicator. The data frame indicators_without_metadata contains the list of these indicators. Please add the corresponding metadata to the indicators-metadata.csv file in the config-data/indicators folder.';
 
 export default async function main() {
 	const previous_file_paths = await loadCsvWithoutBom(FILE_NAMES_LOG);
+	const areas_geog_level = await loadCsvWithoutBom(AREAS_GEOG_LEVEL_FILENAME);
 	const excludedIndicators = JSON.parse(fs.readFileSync(EXCLUDED_INDICATORS_PATH).toString());
 
 	const newFiles = await getListOfNewFiles(previous_file_paths);
@@ -59,7 +67,7 @@ export default async function main() {
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
-	const [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
+	let [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
 
 	const previous_indicators = await loadCsvWithoutBom(PREVIOUS_INDICATORS_FILENAME);
 	const previous_periods = await loadCsvWithoutBom(PREVIOUS_PERIODS_FILENAME);
@@ -71,6 +79,88 @@ export default async function main() {
 	const periods = previous_periods;
 
 	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
+
+	combined_data = combined_data
+		.join_left(periods.select('period', 'xDomainNumb'), ['period'])
+		.select(aq.not('period'));
+
+	const indicators_calculations = getIndicatorsCalculations(
+		indicators,
+		combined_data,
+		areas_geog_level
+	);
+
+	combined_data = indicators
+		.select('id', 'code')
+		.join_left(combined_data, ['code'])
+		.select(aq.not('code'));
+
+	fs.writeFileSync(`${TMP_CSV_DIR}/combined-data.csv`, combined_data.toCSV());
+	fs.writeFileSync(`${TMP_CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
+	fs.writeFileSync(`${TMP_CSV_DIR}/indicators-calculations.csv`, indicators_calculations.toCSV());
+	// write.csv(combined_data, "./csv/combined-data.csv", row.names = FALSE)
+	// write.csv(indicators, "./config-data/indicators/indicators-lookup.csv", row.names = FALSE)
+	// write.csv(indicators_calculations, "./config-data/indicators/indicators-calculations.csv", row.names = FALSE)
+
+	await abortIfMissingMetadata(indicators_calculations);
+}
+
+function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
+	const combined_data_with_geog_level = combined_data
+		.join_left(areas_geog_level, ['areacd'])
+		.select(aq.not('period'))
+		.filter((d) => d.value !== null);
+
+	const geog_levels = uniqueValuesInColumn(areas_geog_level, 'level').filter((d) => d !== 'other');
+
+	const indicators_calculations: object[] = [];
+
+	for (const indicator of indicators.objects()) {
+		const indicator_data = combined_data_with_geog_level.filter(
+			aq.escape((d) => d.code === indicator.code)
+		);
+
+		const indicatorPeriods = uniqueValuesInColumn(indicator_data, 'xDomainNumb');
+
+		indicator.minXDomainNumb < -Math.min(...indicatorPeriods);
+		indicator.maxXDomainNumb < -Math.max(...indicatorPeriods);
+
+		for (const geogLevel of geog_levels) {
+			const filteredIndicatorData = indicator_data.filter(aq.escape((d) => d.level === geogLevel));
+			for (const period of indicatorPeriods) {
+				const filteredIndicatorDataSinglePeriod = filteredIndicatorData.filter(
+					aq.escape((d) => d.xDomainNumb === period)
+				);
+
+				const nRows = filteredIndicatorDataSinglePeriod.numRows();
+				if (nRows > 1) {
+					indicators_calculations.push({
+						code: indicator.code,
+						geog_level: geogLevel,
+						period,
+						med: median(filteredIndicatorDataSinglePeriod.array('value')),
+						mad: mad(filteredIndicatorDataSinglePeriod.array('value'))
+					});
+				}
+			}
+		}
+	}
+	return aq.from(indicators_calculations);
+}
+
+function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
+	return table.select(columnName).dedupe().array(columnName);
+}
+
+async function abortIfMissingMetadata(indicators_calculations) {
+	const indicators_metadata_for_js = await loadCsvWithoutBom(INDICATORS_METADATA_CSV_FILENAME);
+
+	const indicators_metadata_for_js_codes = indicators_metadata_for_js.array('code');
+	for (const code of indicators_calculations.array('code')) {
+		if (!indicators_metadata_for_js_codes.includes(code)) {
+			throw new Error(MISSING_METADATA_WARNING);
+		}
+	}
 }
 
 function abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata) {
