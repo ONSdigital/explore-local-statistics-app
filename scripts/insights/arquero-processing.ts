@@ -258,7 +258,6 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 }
 
 async function processFile(f, code, areaCodes, combined_data, combined_metadata) {
-	// TODO: read period as string?
 	let indicator_data = await loadIndicatorCsvWithoutBom(f.filePath);
 
 	indicator_data = renameColumns(indicator_data, [
