@@ -7,6 +7,10 @@ const { op } = aq;
 const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
 const FILE_NAMES_LOG = 'scripts/insights/raw/config-data/file-names-log.csv';
 const AREAS_CSV = 'scripts/insights/raw/config-data/geography/areas.csv';
+const PREVIOUS_INDICATORS_FILENAME =
+	'scripts/insights/raw/config-data/indicators/indicators-lookup.csv';
+const PREVIOUS_PERIODS_FILENAME =
+	'scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
 const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
 const EXCLUDED_INDICATORS_PATH = 'scripts/insights/raw/config-data/excluded-indicators.json';
 
@@ -38,6 +42,10 @@ const NEW_FILES_WARNING =
 	`previous-file-paths data frame. Please add these file paths to the ` +
 	`file-names-log.csv file in the config-data folder and re-run.`;
 
+const INDICATORS_LOOKUP_WARNING = `TODO: indicators-lookup warning.`;
+const UNIQUE_PERIODS_LOOKUP_WARNING = `TODO: unique-periods-lookup warning.`;
+const MULTIPLE_PERIODS_WARNING = `TODO: warning: multiple periods for one indicator.`;
+
 export default async function main() {
 	const previous_file_paths = await loadCsvWithoutBom(FILE_NAMES_LOG);
 	const excludedIndicators = JSON.parse(fs.readFileSync(EXCLUDED_INDICATORS_PATH).toString());
@@ -46,12 +54,64 @@ export default async function main() {
 	if (newFiles.length > 0) {
 		console.log('New files:');
 		console.log(newFiles);
-		console.log(NEW_FILES_WARNING);
+		throw new Error(NEW_FILES_WARNING);
 	}
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
-	await processFiles(file_paths, excludedIndicators);
+	const [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
+
+	const previous_indicators = await loadCsvWithoutBom(PREVIOUS_INDICATORS_FILENAME);
+	const previous_periods = await loadCsvWithoutBom(PREVIOUS_PERIODS_FILENAME);
+
+	abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata);
+	abortIfNewPeriodsExist(previous_periods, combined_data);
+
+	const indicators = previous_indicators;
+	const periods = previous_periods;
+
+	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
+}
+
+function abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata) {
+	const prevIndicatorCodes = previous_indicators.array('code');
+	const newIndicatorCodes = combined_metadata
+		.array('code')
+		.filter((code) => !prevIndicatorCodes.includes(code));
+	if (newIndicatorCodes.length > 0) {
+		console.log(newIndicatorCodes);
+		throw new Error(INDICATORS_LOOKUP_WARNING);
+	}
+}
+
+function abortIfNewPeriodsExist(previous_periods, combined_data) {
+	const prevPeriods = previous_periods.array('period');
+	const periods = combined_data.select('period').dedupe().array('period');
+	const newPeriods = periods.filter((p) => !prevPeriods.includes(p));
+	if (newPeriods.length > 0) {
+		console.log(newPeriods);
+		throw new Error(UNIQUE_PERIODS_LOOKUP_WARNING);
+	}
+}
+
+function abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods) {
+	// `periodToGroup` is an object with periods as keys and their corresponding group numbers as values
+	const periodToGroup = Object.fromEntries(
+		periods.objects().map(({ period, periodGroup }) => [period, periodGroup])
+	);
+
+	// For each indicator with code `code`, indicatorToPeriodGroup[code] will contain the periodGroup used
+	// by that indicator. If an indicator uses multiple period groups, something isn't right and an error
+	// will be thrown.
+	const indicatorToPeriodGroup = {};
+	for (const row of combined_data.objects()) {
+		if (!(row.code in indicatorToPeriodGroup)) {
+			indicatorToPeriodGroup[row.code] = periodToGroup[row.period];
+		} else if (indicatorToPeriodGroup[row.code] !== periodToGroup[row.period]) {
+			console.log(row);
+			throw new Error(MULTIPLE_PERIODS_WARNING);
+		}
+	}
 }
 
 async function getListOfNewFiles(previous_file_paths) {
@@ -103,6 +163,8 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 	}
 	fs.writeFileSync(`${TMP_CSV_DIR}/combined-data-js.csv`, combined_data.toCSV());
 	fs.writeFileSync(`${TMP_CSV_DIR}/combined-metadata-js.csv`, combined_metadata.toCSV());
+
+	return [combined_data, combined_metadata];
 }
 
 async function processFile(f, code, areaCodes, combined_data, combined_metadata) {
