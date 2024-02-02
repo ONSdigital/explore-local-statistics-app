@@ -4,8 +4,6 @@
 
 	export let label, hoverId, labelBBox;
 
-	$: console.log(label);
-
 	$: backgroundColor =
 		colorsLookup[hoverId === label.datum.areacd ? 'selected' : label.datum.role].color;
 	$: textColor =

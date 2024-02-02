@@ -2,7 +2,6 @@
 	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
 	import Dropdown from '$lib/prototype-components/modified-svelte-components/Dropdown.svelte';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
-	import AddRemoveComparisonAreas from '$lib/prototype-components/AddRemoveComparisonAreas.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 
 	import { mainChartOptionsArray } from '$lib/config';
@@ -22,10 +21,6 @@
 			el.period === selectedIndicator.maxXDomainNumb &&
 			el.geog_level === combinedSelectableAreaTypesObject.selected.area.geogLevel
 	);
-
-	$: console.log(selectedIndicator);
-
-	//indicatorsCalculationsArray.find((e) => selectedIndicator.code === e.code && maxPeriod.xDomainNumb === e.period && e.geog_level === selectedArea.geogLevel)
 
 	////
 
@@ -75,8 +70,6 @@
 	$: filteredChartDataForVisibleAreas = filteredChartData.filter((el) =>
 		visibleAreasWithDataCodes.includes(el.areacd)
 	);
-
-	let hoverId;
 </script>
 
 <Radio name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
@@ -92,28 +85,23 @@
 	<SubtitleAdditionalDescription {selectedIndicator} {timePeriodsArray} {selectedChartType}
 	></SubtitleAdditionalDescription>
 
-	<AddRemoveComparisonAreas
-		{metadata}
-		{combinedSelectableAreaTypesObject}
-		{visibleAreasWithData}
-		{areasCodesForAreasWithData}
-		bind:chosenParentAreasArray
-		bind:chosenRelatedAreasArray
-		bind:chosenSameRegionArray
-		bind:chosenCountriesArray
-		bind:chosenRegionsArray
-		bind:chosenAllOtherArray
-	></AddRemoveComparisonAreas>
-
 	<div class="chart-container">
 		{#if selectedChartType.label === 'Time series'}
 			<LineChartContainer
 				{selectedIndicator}
+				{metadata}
+				{combinedSelectableAreaTypesObject}
+				{areasCodesForAreasWithData}
 				{visibleAreasWithData}
 				{timePeriodsArray}
 				{filteredChartDataForVisibleAreas}
 				{selectedIndicatorCalculations}
-				bind:hoverId
+				bind:chosenParentAreasArray
+				bind:chosenRelatedAreasArray
+				bind:chosenSameRegionArray
+				bind:chosenCountriesArray
+				bind:chosenRegionsArray
+				bind:chosenAllOtherArray
 			></LineChartContainer>
 		{/if}
 	</div>

@@ -10,9 +10,9 @@
 
 	$: regex = searchText ? new RegExp(searchText, 'i') : null;
 
-	$: areasWithData = metadata.areasArray.filter((el) =>
-		areasCodesForAreasWithData.includes(el.areacd)
-	);
+	$: areasWithData = areasCodesForAreasWithData
+		? metadata.areasArray.filter((el) => areasCodesForAreasWithData.includes(el.areacd))
+		: metadata.areasArray;
 
 	$: searchedForAreasWithData = regex
 		? areasWithData.filter((e) => regex.test(e.areanm))

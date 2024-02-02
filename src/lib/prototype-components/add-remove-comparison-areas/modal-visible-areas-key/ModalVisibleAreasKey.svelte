@@ -9,6 +9,8 @@
 		chosenCountriesArray,
 		chosenRegionsArray,
 		chosenAllOtherArray;
+
+	$: console.log(visibleAreasWithData[1]);
 </script>
 
 <div class="visible-areas-container">
@@ -43,6 +45,6 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		min-height: 20px;
+		min-height: 36px;
 	}
 </style>

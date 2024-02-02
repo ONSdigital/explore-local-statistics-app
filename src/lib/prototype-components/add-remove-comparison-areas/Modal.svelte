@@ -47,7 +47,7 @@
 				></Button>
 			</div>
 		</div>
-		<Divider orientation="horizontal"></Divider>
+		<Divider orientation="horizontal" margin={[10, 0, 10, 0]}></Divider>
 
 		<ModalVisibleAreasKey
 			{visibleAreasWithData}
@@ -60,7 +60,7 @@
 			bind:chosenAllOtherArray
 		></ModalVisibleAreasKey>
 
-		<Divider orientation="horizontal"></Divider>
+		<Divider orientation="horizontal" margin={[10, 0, 10, 0]}></Divider>
 
 		<ParentRelatedAreasCheckboxes
 			{combinedSelectableAreaTypesObject}
@@ -84,7 +84,7 @@
 <style>
 	dialog {
 		width: 760px;
-		max-height: 660px;
+		max-height: 700px;
 		border-radius: 5px;
 		border: none;
 		padding: 0;

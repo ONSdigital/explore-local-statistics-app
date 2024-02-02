@@ -60,11 +60,20 @@ export const colorsLookup = {
 };
 
 export const madRangeLookup = {
-	default: 1,
-	'4g-coverage': 'minMax',
-	'gross-median-weekly-pay': 'minMax'
+	default: { 'line-chart': 1, 'beeswarm-row': 3 },
+	'4g-coverage': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' },
+	'gross-median-weekly-pay': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' }
 };
 
 export const chartConfigurations = {
-	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } }
+	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
+	lineChartRow: { markerRadius: { first: 0, last: 5, other: 0 } },
+	beeswarmRow: { backgroundRadius: 4, primaryRadius: 8 }
+};
+
+export const geogLevelToNameLookup = {
+	lower: 'local authorities',
+	uppper: 'local authorities',
+	region: 'regions',
+	country: 'countries'
 };

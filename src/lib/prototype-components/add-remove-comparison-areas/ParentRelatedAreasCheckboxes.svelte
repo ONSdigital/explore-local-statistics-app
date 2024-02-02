@@ -9,23 +9,26 @@
 		chosenParentAreasArray,
 		chosenRelatedAreasArray;
 
-	$: parentAreasWithData = combinedSelectableAreaTypesObject.parents.areas.filter((el) =>
-		areasCodesForAreasWithData.includes(el.areacd)
-	);
+	$: parentAreasWithData = areasCodesForAreasWithData
+		? combinedSelectableAreaTypesObject.parents.areas.filter((el) =>
+				areasCodesForAreasWithData.includes(el.areacd)
+			)
+		: combinedSelectableAreaTypesObject.parents.areas;
 
-	$: sameRegionAreasObject = haveCommonElements(
-		combinedSelectableAreaTypesObject.sameRegion.codes,
-		areasCodesForAreasWithData
-	)
-		? { id: 'sameRegion', label: combinedSelectableAreaTypesObject.sameRegion.label }
-		: undefined;
+	$: sameRegionAreasObject =
+		!areasCodesForAreasWithData ||
+		haveCommonElements(
+			combinedSelectableAreaTypesObject.sameRegion.codes,
+			areasCodesForAreasWithData
+		)
+			? { id: 'sameRegion', label: combinedSelectableAreaTypesObject.sameRegion.label }
+			: undefined;
 
-	$: similarAreasObject = haveCommonElements(
-		combinedSelectableAreaTypesObject.similar.codes,
-		areasCodesForAreasWithData
-	)
-		? { id: 'similar', label: combinedSelectableAreaTypesObject.similar.label }
-		: undefined;
+	$: similarAreasObject =
+		!areasCodesForAreasWithData ||
+		haveCommonElements(combinedSelectableAreaTypesObject.similar.codes, areasCodesForAreasWithData)
+			? { id: 'similar', label: combinedSelectableAreaTypesObject.similar.label }
+			: undefined;
 
 	$: relatedAreasOptionsArray = [sameRegionAreasObject, similarAreasObject].filter((el) => el);
 </script>

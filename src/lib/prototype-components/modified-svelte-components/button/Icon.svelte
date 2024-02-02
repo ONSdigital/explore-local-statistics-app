@@ -41,6 +41,10 @@
 		cross: {
 			d: 'M 1 1 l22 22 M23 1 l-22 22',
 			viewBox: '0 0 24 24'
+		},
+		circle: {
+			d: 'M 0, 50 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0 M50 10 L50 50 M50 50 L65 65',
+			viewBox: '0 0 100 100'
 		}
 	};
 </script>
@@ -58,3 +62,9 @@
 		<path d={paths[type].d} stroke-width={strokeWidth} {fill} {stroke}></path>
 	</svg>
 {/if}
+
+<style>
+	svg {
+		overflow: visible;
+	}
+</style>

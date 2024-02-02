@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let selectedIndicator, timePeriodsArray, selectedChartType;
+	export let titleText, unitDescriptionText, additionalText;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -17,19 +17,14 @@
 	const onClickEvent = () => {
 		displayAdditional = !displayAdditional;
 	};
-
-	$: subtitleText =
-		selectedIndicator.metadata.subtitle +
-		', ' +
-		(selectedChartType.multiYear === 'Yes' ||
-		(selectedChartType.multiYear === 'Either' && timePeriodsArray.length > 1)
-			? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
-			: timePeriodsArray[0].label);
-	$: additionalText = selectedIndicator.metadata.additionalDescription.split('|');
 </script>
 
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
-	<span>{subtitleText}<InfoButton {expandIcon}></InfoButton></span>
+	<span style="font-weight: bold"
+		>{titleText}<span style="font-weight: normal"
+			>{unitDescriptionText === '' ? '' : ', ' + unitDescriptionText}</span
+		><InfoButton {expandIcon}></InfoButton></span
+	>
 </button>
 
 {#if displayAdditional}
@@ -43,12 +38,12 @@
 <style>
 	button {
 		width: 100%;
-		text-align: left;
+		text-align: justify;
 		font-family: inherit;
 		border: none;
 		background: none;
 		margin: 10px 0px;
-		padding: 0px 5px;
+		padding: 0px;
 		font-size: 18px;
 		line-height: 24px;
 	}

@@ -1,10 +1,7 @@
 <script lang="ts">
-	import AddRemoveComparisonAreas from '$lib/prototype-components/AddRemoveComparisonAreas.svelte';
-	import LineChart from '$lib/prototype-components/data-vis/LineChart.svelte';
-	import HoverKey from '$lib/prototype-components/data-vis/line-chart/HoverKey.svelte';
-	import RelatedAreasKey from '$lib/prototype-components/data-vis/line-chart/RelatedAreasKey.svelte';
+	import LineChartRow from '$lib/prototype-components/data-vis/LineChartRow.svelte';
 
-	import { madRangeLookup } from '$lib/config';
+	import { madRangeLookup, colorsLookup } from '$lib/config';
 
 	export let selectedIndicator,
 		metadata,
@@ -14,19 +11,13 @@
 		timePeriodsArray,
 		filteredChartDataForVisibleAreas,
 		selectedIndicatorCalculations;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
 
 	let width = 1000,
-		height = 500;
+		height = 100;
 
 	let yAxisMaxTickWidth = 0,
 		xAxisFinalTickWidth = null,
-		maxLabelWidth = null;
+		maxLabelWidth = 80;
 
 	$: padding = {
 		top: 10,
@@ -97,30 +88,11 @@
 	let hoverAreaWithDataAdded;
 </script>
 
-<AddRemoveComparisonAreas
-	{metadata}
-	{combinedSelectableAreaTypesObject}
-	{visibleAreasWithData}
-	{areasCodesForAreasWithData}
-	bind:chosenParentAreasArray
-	bind:chosenRelatedAreasArray
-	bind:chosenSameRegionArray
-	bind:chosenCountriesArray
-	bind:chosenRegionsArray
-	bind:chosenAllOtherArray
-></AddRemoveComparisonAreas>
-
-{#if !isHoverLabelVisible && hoverId}
-	<HoverKey {hoverAreaWithDataAdded}></HoverKey>
-{:else}
-	<RelatedAreasKey {visibleAreasWithData} {combinedSelectableAreaTypesObject}></RelatedAreasKey>
-{/if}
-
 <div class="svg-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
-				<LineChart
+				<LineChartRow
 					{selectedIndicator}
 					{timePeriodsArray}
 					{chartWidth}
@@ -134,14 +106,26 @@
 					bind:yAxisMaxTickWidth
 					bind:xAxisFinalTickWidth
 					bind:maxLabelWidth
-				></LineChart>
+				></LineChartRow>
 			{/if}
 		</g>
 	</svg>
+
+	<div class="robo-text-container">
+		<span>Increased since {timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb}</span>
+	</div>
 </div>
 
 <style>
 	svg {
 		overflow: visible;
+	}
+
+	.robo-text-container {
+		margin: 0px 0px 5px 0px;
+		padding: 0px;
+		text-align: center;
+		font-size: 16px;
+		line-height: 16px;
 	}
 </style>

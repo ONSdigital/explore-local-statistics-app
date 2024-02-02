@@ -100,7 +100,7 @@
 	$: similarAreasCodes = metadata.similarAreasLookupObject[selectedArea.areacd].split('|');
 	$: similarAreas = metadata.areasArray.filter((el) => similarAreasCodes.includes(el.areacd));
 
-	$: visibleSimilarAreas = similarAreasCodes
+	$: visibleSimilarAreas = similarAreas
 		.filter(
 			(el) =>
 				!visibleCustomAreasCodes.includes(el.areacd) &&
@@ -111,7 +111,6 @@
 			...el,
 			role: 'similar'
 		}));
-	$: visibleSimilarAreasCodes = visibleSimilarAreas.map((el) => el.areacd);
 
 	////
 	$: visibleAreasRelated = [...visibleSameRegionAreas, ...visibleSimilarAreas];
@@ -185,7 +184,18 @@
 
 <NavSections contentsLabel="Explore this area">
 	{#each metadata.topicsArray as topic, i}
-		<TopicSection {topic} {combinedSelectableAreaTypesObject} {chartData} {metadata}></TopicSection>
+		<TopicSection
+			{topic}
+			{combinedSelectableAreaTypesObject}
+			{chartData}
+			{metadata}
+			bind:chosenParentAreasArray
+			bind:chosenRelatedAreasArray
+			bind:chosenSameRegionArray
+			bind:chosenCountriesArray
+			bind:chosenRegionsArray
+			bind:chosenAllOtherArray
+		></TopicSection>
 	{/each}
 
 	<NavSection title="Select an indicator">
