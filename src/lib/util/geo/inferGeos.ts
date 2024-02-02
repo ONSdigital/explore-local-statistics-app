@@ -3,7 +3,7 @@
 import { geoTypes } from '$lib/config/geoConfig';
 import { capitalise } from '@onsvisual/robo-utils';
 
-const groups = geoTypes
+export const groups = geoTypes
 	.filter((g) => ['uk', 'ctry', 'rgn', 'cauth', 'utla', 'ltla'].includes(g.key))
 	.map((g) => ({ ...g, label: capitalise(g.plural) }));
 

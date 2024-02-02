@@ -4,6 +4,11 @@ import type { LayoutLoad } from './$types';
 import { base } from '$app/paths';
 import { inferGeos } from '$lib/util/geo/inferGeos';
 
+const round = (val, dp) => {
+	const multiplier = Math.pow(10, dp);
+	return Math.round(val * multiplier) / multiplier;
+};
+
 export const load: LayoutLoad = async ({ fetch, parent, params }) => {
 	const { config } = await parent();
 	const indicator = config.indicatorsObject[params?.slug];
@@ -16,6 +21,8 @@ export const load: LayoutLoad = async ({ fetch, parent, params }) => {
 		const codes = [];
 		const years = [];
 		for (const d of data) {
+			d.value = round(+d.value, +indicator.metadata.decimalPlaces);
+			d.xDomainNumb = +d.xDomainNumb;
 			d.areanm = config.areasObject[d.areacd]?.areanm || 'Unknown area';
 			if (!codes.includes(d.areacd)) codes.push(d.areacd);
 			if (!years.includes(d.xDomainNumb)) years.push(d.xDomainNumb);
