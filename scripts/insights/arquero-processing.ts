@@ -1,9 +1,15 @@
-import { readdir } from 'node:fs/promises';
 import fs from 'fs';
 import { median, mad } from './stats.ts';
-
 import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
+import { loadCsvWithoutBom, loadIndicatorCsvWithoutBom } from './io.ts';
+import { abortIfMissingMetadata } from './data-processing-warnings.ts';
+import {
+	abortIfNewIndicatorCodesExist,
+	abortIfNewPeriodsExist,
+	abortIfMultiplePeriodGroupsForOneIndicator
+} from './data-processing-warnings.ts';
+import { abortIfNewFilesExist } from './data-processing-warnings.ts';
 const { op } = aq;
 
 const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
@@ -14,7 +20,7 @@ const PREVIOUS_INDICATORS_FILENAME =
 const PREVIOUS_PERIODS_FILENAME =
 	'scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
 const AREAS_GEOG_LEVEL_FILENAME = 'scripts/insights/raw/config-data/geography/areas-geog-level.csv';
-const INDICATORS_METADATA_CSV_FILENAME =
+export const INDICATORS_METADATA_CSV_FILENAME =
 	'scripts/insights/raw/config-data/indicators/indicators-metadata.csv';
 const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
 const EXCLUDED_INDICATORS_PATH = 'scripts/insights/raw/config-data/excluded-indicators.json';
@@ -40,30 +46,19 @@ const AREA_CODE_MAP = {
 	TLN: 'N92000002'
 };
 
-const NEW_FILES_WARNING =
+export const NEW_FILES_WARNING =
 	`The script has been aborted because the list of file paths read in from ` +
 	`the ${CSV_PREPROCESS_DIR} folder includes files which were not present when ` +
 	`this script was last run. These file paths can be viewed in the ` +
 	`previous-file-paths data frame. Please add these file paths to the ` +
 	`file-names-log.csv file in the config-data folder and re-run.`;
 
-const INDICATORS_LOOKUP_WARNING = `TODO: indicators-lookup warning.`;
-const UNIQUE_PERIODS_LOOKUP_WARNING = `TODO: unique-periods-lookup warning.`;
-const MULTIPLE_PERIODS_WARNING = `TODO: warning: multiple periods for one indicator.`;
-const MISSING_METADATA_WARNING =
-	'This script finished executing, but noted that one or more of the indicators does not currently have associated metadata. This means that the app will error when looking for direction on how to plot data for this indicator. The data frame indicators_without_metadata contains the list of these indicators. Please add the corresponding metadata to the indicators-metadata.csv file in the config-data/indicators folder.';
-
 export default async function main() {
 	const previous_file_paths = await loadCsvWithoutBom(FILE_NAMES_LOG);
 	const areas_geog_level = await loadCsvWithoutBom(AREAS_GEOG_LEVEL_FILENAME);
 	const excludedIndicators = JSON.parse(fs.readFileSync(EXCLUDED_INDICATORS_PATH).toString());
 
-	const newFiles = await getListOfNewFiles(previous_file_paths);
-	if (newFiles.length > 0) {
-		console.log('New files:');
-		console.log(newFiles);
-		throw new Error(NEW_FILES_WARNING);
-	}
+	await abortIfNewFilesExist(previous_file_paths, CSV_PREPROCESS_DIR);
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
@@ -102,7 +97,8 @@ export default async function main() {
 	// write.csv(indicators, "./config-data/indicators/indicators-lookup.csv", row.names = FALSE)
 	// write.csv(indicators_calculations, "./config-data/indicators/indicators-calculations.csv", row.names = FALSE)
 
-	await abortIfMissingMetadata(indicators_calculations);
+	const indicators_metadata_for_js = await loadCsvWithoutBom(INDICATORS_METADATA_CSV_FILENAME);
+	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
 }
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
@@ -132,8 +128,7 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 					aq.escape((d) => d.xDomainNumb === period)
 				);
 
-				const nRows = filteredIndicatorDataSinglePeriod.numRows();
-				if (nRows > 1) {
+				if (filteredIndicatorDataSinglePeriod.numRows() > 1) {
 					indicators_calculations.push({
 						code: indicator.code,
 						geog_level: geogLevel,
@@ -150,76 +145,6 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 
 function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
 	return table.select(columnName).dedupe().array(columnName);
-}
-
-async function abortIfMissingMetadata(indicators_calculations) {
-	const indicators_metadata_for_js = await loadCsvWithoutBom(INDICATORS_METADATA_CSV_FILENAME);
-
-	const indicators_metadata_for_js_codes = indicators_metadata_for_js.array('code');
-	for (const code of indicators_calculations.array('code')) {
-		if (!indicators_metadata_for_js_codes.includes(code)) {
-			throw new Error(MISSING_METADATA_WARNING);
-		}
-	}
-}
-
-function abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata) {
-	const prevIndicatorCodes = previous_indicators.array('code');
-	const newIndicatorCodes = combined_metadata
-		.array('code')
-		.filter((code) => !prevIndicatorCodes.includes(code));
-	if (newIndicatorCodes.length > 0) {
-		console.log(newIndicatorCodes);
-		throw new Error(INDICATORS_LOOKUP_WARNING);
-	}
-}
-
-function abortIfNewPeriodsExist(previous_periods, combined_data) {
-	const prevPeriods = previous_periods.array('period');
-	const periods = combined_data.select('period').dedupe().array('period');
-	const newPeriods = periods.filter((p) => !prevPeriods.includes(p));
-	if (newPeriods.length > 0) {
-		console.log(newPeriods);
-		throw new Error(UNIQUE_PERIODS_LOOKUP_WARNING);
-	}
-}
-
-function abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods) {
-	// `periodToGroup` is an object with periods as keys and their corresponding group numbers as values
-	const periodToGroup = Object.fromEntries(
-		periods.objects().map(({ period, periodGroup }) => [period, periodGroup])
-	);
-
-	// For each indicator with code `code`, indicatorToPeriodGroup[code] will contain the periodGroup used
-	// by that indicator. If an indicator uses multiple period groups, something isn't right and an error
-	// will be thrown.
-	const indicatorToPeriodGroup = {};
-	for (const row of combined_data.objects()) {
-		if (!(row.code in indicatorToPeriodGroup)) {
-			indicatorToPeriodGroup[row.code] = periodToGroup[row.period];
-		} else if (indicatorToPeriodGroup[row.code] !== periodToGroup[row.period]) {
-			console.log(row);
-			throw new Error(MULTIPLE_PERIODS_WARNING);
-		}
-	}
-}
-
-async function getListOfNewFiles(previous_file_paths) {
-	let filenames = await readdir(CSV_PREPROCESS_DIR, { recursive: true });
-	filenames = filenames.filter(
-		(f) => f.endsWith('.csv') && !f.startsWith('out/') && !f.includes('_IDS')
-	);
-
-	const previous_filenames = previous_file_paths.array('filePath');
-
-	const newFiles = [];
-	for (const f of filenames) {
-		if (!previous_filenames.includes(`${CSV_PREPROCESS_DIR}/${f}`)) {
-			newFiles.push(f);
-		}
-	}
-
-	return newFiles;
 }
 
 async function processFiles(file_paths, excludedIndicators: string[]) {
@@ -348,36 +273,4 @@ function tmpFixForMissingVarName(indicator_data, code) {
 	}
 
 	return indicator_data;
-}
-
-async function loadCsvWithoutBom(filename: string) {
-	const table = await aq.loadCSV(filename, {});
-	return table.rename(Object.fromEntries(table.columnNames().map((n) => [n, stripBom(n)])));
-}
-
-async function loadIndicatorCsvWithoutBom(filename: string) {
-	let rawJson = fs.readFileSync(filename).toString();
-
-	// Make column names lowercase. It would be nicer to do this after parsing the CSV, but
-	// in order to ask Arquero to parse the `period` column as strings I think we need
-	// to do the renaming before parsing.
-	const rows = rawJson.split('\n');
-	rows[0] = stripBom(rows[0].toLowerCase());
-	rawJson = rows.join('\n');
-
-	return aq.fromCSV(rawJson, { parse: { period: String } });
-}
-
-function stripBom(string: string): string {
-	// Based on:
-	// https://github.com/sindresorhus/strip-bom/blob/main/index.js
-	// (MIT Licence)
-
-	// Catches EFBBBF (UTF-8 BOM) because the buffer-to-string
-	// conversion translates it to FEFF (UTF-16 BOM).
-	if (string.charCodeAt(0) === 0xfeff) {
-		return string.slice(1);
-	}
-
-	return string;
 }
