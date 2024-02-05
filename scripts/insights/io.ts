@@ -1,22 +1,22 @@
 import aq from 'arquero';
 import fs from 'fs';
 
-export async function loadCsvWithoutBom(filename: string) {
-	const table = await aq.loadCSV(filename, {});
-	return table.rename(Object.fromEntries(table.columnNames().map((n) => [n, stripBom(n)])));
+export function loadCsvWithoutBom(filename: string) {
+	const rawCsv = stripBom(fs.readFileSync(filename).toString());
+	return aq.fromCSV(rawCsv);
 }
 
-export async function loadIndicatorCsvWithoutBom(filename: string) {
-	let rawJson = fs.readFileSync(filename).toString();
+export function loadIndicatorCsvWithoutBom(filename: string) {
+	let rawCsv = fs.readFileSync(filename).toString();
 
 	// Make column names lowercase. It would be nicer to do this after parsing the CSV, but
 	// in order to ask Arquero to parse the `period` column as strings I think we need
 	// to do the renaming before parsing.
-	const rows = rawJson.split('\n');
+	const rows = rawCsv.split('\n');
 	rows[0] = stripBom(rows[0].toLowerCase());
-	rawJson = rows.join('\n');
+	rawCsv = rows.join('\n');
 
-	return aq.fromCSV(rawJson, { parse: { period: String } });
+	return aq.fromCSV(rawCsv, { parse: { period: String } });
 }
 
 export function readJsonSync(filename: string) {

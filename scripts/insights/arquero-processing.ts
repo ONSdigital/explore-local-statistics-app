@@ -13,18 +13,18 @@ import { abortIfNewFilesExist } from './data-processing-warnings.ts';
 import CONFIG from './config.ts';
 
 export default async function main() {
-	const previous_file_paths = await loadCsvWithoutBom(CONFIG.FILE_NAMES_LOG);
-	const areas_geog_level = await loadCsvWithoutBom(CONFIG.AREAS_GEOG_LEVEL_FILENAME);
+	const previous_file_paths = loadCsvWithoutBom(CONFIG.FILE_NAMES_LOG);
+	const areas_geog_level = loadCsvWithoutBom(CONFIG.AREAS_GEOG_LEVEL_FILENAME);
 	const excludedIndicators = readJsonSync(CONFIG.EXCLUDED_INDICATORS_PATH);
 
 	await abortIfNewFilesExist(previous_file_paths, CONFIG.CSV_PREPROCESS_DIR);
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
-	let [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
+	let [combined_data, combined_metadata] = processFiles(file_paths, excludedIndicators);
 
-	const previousIndicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
-	const periods = await loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
+	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
+	const periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
 
 	abortIfNewIndicatorCodesExist(previousIndicators, combined_metadata);
 	abortIfNewPeriodsExist(periods, combined_data);
@@ -55,7 +55,7 @@ export default async function main() {
 	// write.csv(indicators, "./config-data/indicators/indicators-lookup.csv", row.names = FALSE)
 	// write.csv(indicators_calculations, "./config-data/indicators/indicators-calculations.csv", row.names = FALSE)
 
-	const indicators_metadata_for_js = await loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
+	const indicators_metadata_for_js = loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
 	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
 }
 
@@ -103,8 +103,8 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 	return [aq.from(indicatorsObjects), aq.from(indicators_calculations)];
 }
 
-async function processFiles(file_paths, excludedIndicators: string[]) {
-	const areas = await loadCsvWithoutBom(CONFIG.AREAS_CSV);
+function processFiles(file_paths, excludedIndicators: string[]) {
+	const areas = loadCsvWithoutBom(CONFIG.AREAS_CSV);
 	const areaCodes = areas.array('areacd');
 
 	let combined_data = aq.table(
@@ -126,7 +126,7 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 			continue;
 		}
 
-		[combined_data, combined_metadata] = await processFile(
+		[combined_data, combined_metadata] = processFile(
 			f,
 			code,
 			areaCodes,
@@ -140,8 +140,8 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 	return [combined_data, combined_metadata];
 }
 
-async function processFile(f, code, areaCodes, combined_data, combined_metadata) {
-	let indicator_data = await loadIndicatorCsvWithoutBom(f.filePath);
+function processFile(f, code, areaCodes, combined_data, combined_metadata) {
+	let indicator_data = loadIndicatorCsvWithoutBom(f.filePath);
 
 	indicator_data = renameColumns(indicator_data, [
 		{ old: 'lower confidence interval (95%)', new: 'lci' },
