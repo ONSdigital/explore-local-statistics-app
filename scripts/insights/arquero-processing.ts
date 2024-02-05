@@ -23,14 +23,11 @@ export default async function main() {
 
 	let [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
 
-	const previous_indicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
-	const previous_periods = await loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
+	const indicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
+	const periods = await loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
 
-	abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata);
-	abortIfNewPeriodsExist(previous_periods, combined_data);
-
-	const indicators = previous_indicators;
-	const periods = previous_periods;
+	abortIfNewIndicatorCodesExist(indicators, combined_metadata);
+	abortIfNewPeriodsExist(periods, combined_data);
 
 	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
 
