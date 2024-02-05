@@ -1,4 +1,4 @@
-import { NEW_FILES_WARNING } from './arquero-processing';
+import CONFIG from './config.ts';
 
 import { readdir } from 'fs/promises';
 
@@ -72,6 +72,6 @@ export async function abortIfNewFilesExist(previous_file_paths, csv_preprocess_d
 	if (newFiles.length > 0) {
 		console.log('New files:');
 		console.log(newFiles);
-		throw new Error(NEW_FILES_WARNING);
+		throw new Error(CONFIG.NEW_FILES_WARNING);
 	}
 }

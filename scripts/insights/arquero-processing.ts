@@ -10,61 +10,23 @@ import {
 	abortIfMultiplePeriodGroupsForOneIndicator
 } from './data-processing-warnings.ts';
 import { abortIfNewFilesExist } from './data-processing-warnings.ts';
-
-const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
-const FILE_NAMES_LOG = 'scripts/insights/raw/config-data/file-names-log.csv';
-const AREAS_CSV = 'scripts/insights/raw/config-data/geography/areas.csv';
-const PREVIOUS_INDICATORS_FILENAME =
-	'scripts/insights/raw/config-data/indicators/indicators-lookup.csv';
-const PREVIOUS_PERIODS_FILENAME =
-	'scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
-const AREAS_GEOG_LEVEL_FILENAME = 'scripts/insights/raw/config-data/geography/areas-geog-level.csv';
-export const INDICATORS_METADATA_CSV_FILENAME =
-	'scripts/insights/raw/config-data/indicators/indicators-metadata.csv';
-const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
-const EXCLUDED_INDICATORS_PATH = 'scripts/insights/raw/config-data/excluded-indicators.json';
-
-const DEFAULT_VALUE_FIELD_NAME = 'value';
-
-const COMBINED_DATA_COLUMN_NAMES = ['areacd', 'period', 'value', 'code', 'lci', 'uci'];
-
-// TODO: check if it's okay to be missing ITL2 codes like TLM5
-const AREA_CODE_MAP = {
-	TLB: 'E92000001',
-	TLC: 'E12000001',
-	TLD: 'E12000002',
-	TLE: 'E12000003',
-	TLF: 'E12000004',
-	TLG: 'E12000005',
-	TLH: 'E12000006',
-	TLI: 'E12000007',
-	TLJ: 'E12000008',
-	TLK: 'E12000009',
-	TLL: 'W92000004',
-	TLM: 'S92000003',
-	TLN: 'N92000002'
-};
-
-export const NEW_FILES_WARNING =
-	`The script has been aborted because the list of file paths read in from ` +
-	`the ${CSV_PREPROCESS_DIR} folder includes files which were not present when ` +
-	`this script was last run. These file paths can be viewed in the ` +
-	`previous-file-paths data frame. Please add these file paths to the ` +
-	`file-names-log.csv file in the config-data folder and re-run.`;
+import CONFIG from './config.ts';
 
 export default async function main() {
-	const previous_file_paths = await loadCsvWithoutBom(FILE_NAMES_LOG);
-	const areas_geog_level = await loadCsvWithoutBom(AREAS_GEOG_LEVEL_FILENAME);
-	const excludedIndicators = JSON.parse(fs.readFileSync(EXCLUDED_INDICATORS_PATH).toString());
+	const previous_file_paths = await loadCsvWithoutBom(CONFIG.FILE_NAMES_LOG);
+	const areas_geog_level = await loadCsvWithoutBom(CONFIG.AREAS_GEOG_LEVEL_FILENAME);
+	const excludedIndicators = JSON.parse(
+		fs.readFileSync(CONFIG.EXCLUDED_INDICATORS_PATH).toString()
+	);
 
-	await abortIfNewFilesExist(previous_file_paths, CSV_PREPROCESS_DIR);
+	await abortIfNewFilesExist(previous_file_paths, CONFIG.CSV_PREPROCESS_DIR);
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
 	let [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
 
-	const previous_indicators = await loadCsvWithoutBom(PREVIOUS_INDICATORS_FILENAME);
-	const previous_periods = await loadCsvWithoutBom(PREVIOUS_PERIODS_FILENAME);
+	const previous_indicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
+	const previous_periods = await loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
 
 	abortIfNewIndicatorCodesExist(previous_indicators, combined_metadata);
 	abortIfNewPeriodsExist(previous_periods, combined_data);
@@ -89,14 +51,17 @@ export default async function main() {
 		.join_left(combined_data, ['code'])
 		.select(aq.not('code'));
 
-	fs.writeFileSync(`${TMP_CSV_DIR}/combined-data.csv`, combined_data.toCSV());
-	fs.writeFileSync(`${TMP_CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
-	fs.writeFileSync(`${TMP_CSV_DIR}/indicators-calculations.csv`, indicators_calculations.toCSV());
+	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-data.csv`, combined_data.toCSV());
+	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
+	fs.writeFileSync(
+		`${CONFIG.TMP_CSV_DIR}/indicators-calculations.csv`,
+		indicators_calculations.toCSV()
+	);
 	// write.csv(combined_data, "./csv/combined-data.csv", row.names = FALSE)
 	// write.csv(indicators, "./config-data/indicators/indicators-lookup.csv", row.names = FALSE)
 	// write.csv(indicators_calculations, "./config-data/indicators/indicators-calculations.csv", row.names = FALSE)
 
-	const indicators_metadata_for_js = await loadCsvWithoutBom(INDICATORS_METADATA_CSV_FILENAME);
+	const indicators_metadata_for_js = await loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
 	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
 }
 
@@ -147,10 +112,12 @@ function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
 }
 
 async function processFiles(file_paths, excludedIndicators: string[]) {
-	const areas = await loadCsvWithoutBom(AREAS_CSV);
+	const areas = await loadCsvWithoutBom(CONFIG.AREAS_CSV);
 	const areaCodes = areas.array('areacd');
 
-	let combined_data = aq.table(Object.fromEntries(COMBINED_DATA_COLUMN_NAMES.map((d) => [d, []])));
+	let combined_data = aq.table(
+		Object.fromEntries(CONFIG.COMBINED_DATA_COLUMN_NAMES.map((d) => [d, []]))
+	);
 	let combined_metadata = aq.table({});
 
 	console.log(`About to process ${file_paths.numRows()} files...`);
@@ -158,7 +125,7 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 	for (const f of file_paths.objects()) {
 		console.log(`Processing ${f.filePath}`);
 
-		f.valueField ||= DEFAULT_VALUE_FIELD_NAME;
+		f.valueField ||= CONFIG.DEFAULT_VALUE_FIELD_NAME;
 
 		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
 
@@ -175,8 +142,8 @@ async function processFiles(file_paths, excludedIndicators: string[]) {
 			combined_metadata
 		);
 	}
-	fs.writeFileSync(`${TMP_CSV_DIR}/combined-data-js.csv`, combined_data.toCSV());
-	fs.writeFileSync(`${TMP_CSV_DIR}/combined-metadata-js.csv`, combined_metadata.toCSV());
+	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-data-js.csv`, combined_data.toCSV());
+	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-metadata-js.csv`, combined_metadata.toCSV());
 
 	return [combined_data, combined_metadata];
 }
@@ -220,7 +187,7 @@ async function processFile(f, code, areaCodes, combined_data, combined_metadata)
 	indicator_metadata = indicator_metadata.dedupe();
 
 	indicator_data = indicator_data.select(
-		...COMBINED_DATA_COLUMN_NAMES.filter((n) => indicator_data.columnNames().includes(n))
+		...CONFIG.COMBINED_DATA_COLUMN_NAMES.filter((n) => indicator_data.columnNames().includes(n))
 	);
 	combined_data = combined_data.concat(indicator_data);
 
@@ -247,7 +214,8 @@ function renameColumns(table, nameChanges) {
 
 function tidyAreaCodes(indicator_data, areaCodes) {
 	// convert codes like "TLB" to GSS codes
-	const mapAreaCode = (areacd) => (areacd in AREA_CODE_MAP ? AREA_CODE_MAP[areacd] : areacd);
+	const mapAreaCode = (areacd) =>
+		areacd in CONFIG.AREA_CODE_MAP ? CONFIG.AREA_CODE_MAP[areacd] : areacd;
 	indicator_data = indicator_data.derive({ areacd: aq.escape((d) => mapAreaCode(d.areacd)) });
 
 	// only include areas that are in areas$areacd
