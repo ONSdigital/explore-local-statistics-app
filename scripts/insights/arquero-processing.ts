@@ -23,10 +23,10 @@ export default async function main() {
 
 	let [combined_data, combined_metadata] = await processFiles(file_paths, excludedIndicators);
 
-	const indicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
+	const previousIndicators = await loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
 	const periods = await loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
 
-	abortIfNewIndicatorCodesExist(indicators, combined_metadata);
+	abortIfNewIndicatorCodesExist(previousIndicators, combined_metadata);
 	abortIfNewPeriodsExist(periods, combined_data);
 	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
 
@@ -34,8 +34,8 @@ export default async function main() {
 		.join_left(periods.select('period', 'xDomainNumb'), ['period'])
 		.select(aq.not('period'));
 
-	const indicators_calculations = getIndicatorsCalculations(
-		indicators,
+	const [indicators, indicators_calculations] = getIndicatorsCalculations(
+		previousIndicators,
 		combined_data,
 		areas_geog_level
 	);
@@ -67,9 +67,10 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 
 	const geog_levels = uniqueValuesInColumn(areas_geog_level, 'level').filter((d) => d !== 'other');
 
+	const indicatorsObjects = indicators.objects();
 	const indicators_calculations: object[] = [];
 
-	for (const indicator of indicators.objects()) {
+	for (const indicator of indicatorsObjects) {
 		const indicator_data = combined_data_with_geog_level.filter(
 			aq.escape((d) => d.code === indicator.code)
 		);
@@ -87,18 +88,19 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 				);
 
 				if (filteredIndicatorDataSinglePeriod.numRows() > 1) {
+					const values = filteredIndicatorDataSinglePeriod.array('value');
 					indicators_calculations.push({
 						code: indicator.code,
 						geog_level: geogLevel,
 						period,
-						med: median(filteredIndicatorDataSinglePeriod.array('value')),
-						mad: mad(filteredIndicatorDataSinglePeriod.array('value'))
+						med: median(values),
+						mad: mad(values)
 					});
 				}
 			}
 		}
 	}
-	return aq.from(indicators_calculations);
+	return [aq.from(indicatorsObjects), aq.from(indicators_calculations)];
 }
 
 async function processFiles(file_paths, excludedIndicators: string[]) {
