@@ -28,7 +28,6 @@ export default async function main() {
 
 	abortIfNewIndicatorCodesExist(indicators, combined_metadata);
 	abortIfNewPeriodsExist(periods, combined_data);
-
 	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
 
 	combined_data = combined_data
@@ -77,8 +76,8 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 
 		const indicatorPeriods = uniqueValuesInColumn(indicator_data, 'xDomainNumb');
 
-		indicator.minXDomainNumb < -Math.min(...indicatorPeriods);
-		indicator.maxXDomainNumb < -Math.max(...indicatorPeriods);
+		indicator.minXDomainNumb = Math.min(...indicatorPeriods);
+		indicator.maxXDomainNumb = Math.max(...indicatorPeriods);
 
 		for (const geogLevel of geog_levels) {
 			const filteredIndicatorData = indicator_data.filter(aq.escape((d) => d.level === geogLevel));
@@ -100,10 +99,6 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 		}
 	}
 	return aq.from(indicators_calculations);
-}
-
-function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
-	return table.select(columnName).dedupe().array(columnName);
 }
 
 async function processFiles(file_paths, excludedIndicators: string[]) {
@@ -194,6 +189,10 @@ async function processFile(f, code, areaCodes, combined_data, combined_metadata)
 	combined_metadata = combined_metadata.concat(indicator_metadata);
 
 	return [combined_data, combined_metadata];
+}
+
+function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
+	return table.select(columnName).dedupe().array(columnName);
 }
 
 function renameColumns(table, nameChanges) {
