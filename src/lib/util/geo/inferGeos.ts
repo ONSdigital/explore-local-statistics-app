@@ -5,7 +5,7 @@ import { capitalise } from '@onsvisual/robo-utils';
 
 export const groups = geoTypes
 	.filter((g) => ['uk', 'ctry', 'rgn', 'cauth', 'utla', 'ltla'].includes(g.key))
-	.map((g) => ({ ...g, label: capitalise(g.plural) }));
+	.map((g) => ({ key: g.key, codes: g.codes, label: capitalise(g.plural) }));
 
 const years = [
 	{ year: 2018, excludes: ['E06000059', 'E06000060', 'E06000061', 'E06000065'] },
