@@ -242,7 +242,22 @@ function readConfigFromCsvs() {
 
 function readCsv(filename: PathOrFileDescriptor) {
 	const raw = readFileSync(filename);
-	return csvParse(stripBom(raw.toString()));
+	return csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
+}
+
+// A modified version of
+// https://github.com/d3/d3-dsv/blob/main/src/autoType.js
+// , which always leaves dates as strings.
+function autoTypeWithoutDates(object: { [key: string]: any }) {
+	for (const key in object) {
+		const value = object[key].trim();
+		if (!value) object[key] = null;
+		else if (value === 'true') object[key] = true;
+		else if (value === 'false') object[key] = false;
+		else if (value === 'NaN') object[key] = NaN;
+		else if (!isNaN(+value)) object[key] = +value;
+	}
+	return object;
 }
 
 function stripBom(string: string): string {
