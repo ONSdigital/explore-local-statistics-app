@@ -67,8 +67,8 @@ export const madRangeLookup = {
 
 export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
-	lineChartRow: { markerRadius: { first: 0, last: 5, other: 0 } },
-	beeswarmRow: { backgroundRadius: 4, primaryRadius: 8 }
+	lineChartRow: { markerRadius: { first: 3, last: 4, other: 3 } },
+	beeswarmRow: { backgroundRadius: 5, primaryRadius: 8 }
 };
 
 export const geogLevelToNameLookup = {

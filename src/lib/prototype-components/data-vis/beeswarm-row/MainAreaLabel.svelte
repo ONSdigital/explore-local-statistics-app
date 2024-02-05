@@ -72,7 +72,7 @@
 				height={34}
 				fill="white"
 				stroke={colorsLookup.main.color}
-				stroke-width="1.5px"
+				stroke-width="2.5px"
 				rx="2px"
 			></rect>
 		{/if}
@@ -114,6 +114,6 @@
 <style>
 	text {
 		font-size: 30px;
-		stroke-width: 0.5px;
+		stroke-width: 1px;
 	}
 </style>

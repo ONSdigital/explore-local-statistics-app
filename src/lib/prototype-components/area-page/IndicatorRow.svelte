@@ -93,7 +93,8 @@
 </div>
 
 <style>
-	.indicator-container {
+	.indicator-row-container {
+		padding: 0px 0px 5px 0px;
 		display: flex;
 		flex-direction: column;
 	}

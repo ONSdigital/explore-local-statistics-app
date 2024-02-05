@@ -23,17 +23,11 @@
 	let mounted = false;
 
 	onMount(() => {
-		mounted = true;
+		setTimeout(function () {
+			mounted = true;
+		}, 2000);
 	});
 </script>
-
-<!-- <rect
-	x={-spaceForOutliers}
-	width={chartWidth + 2 * spaceForOutliers}
-	height={chartHeight}
-	fill="black"
-	opacity="0.03"
-></rect> -->
 
 {#if mounted}
 	<BackgroundCircles

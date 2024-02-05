@@ -107,5 +107,6 @@
 		text-align: center;
 		font-size: 16px;
 		line-height: 16px;
+		color: #003c57;
 	}
 </style>

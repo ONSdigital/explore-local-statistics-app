@@ -51,17 +51,19 @@
 				{#each subTopic.indicators as indicator, j}
 					<Divider orientation="horizontal" margin={[0, 0, 0, 0]}></Divider>
 
-					<IndicatorRow
-						topRow={i === 0 && j === 0}
-						{indicator}
-						{metadata}
-						filteredChartData={chartData.combinedDataObject[indicator.code].filter(
-							(el) => el.value != 'NA'
-						)}
-						{combinedSelectableAreaTypesObject}
-						bind:hoverId
-						bind:hoverIndicatorId
-					></IndicatorRow>
+					<div style="background-color: {j % 2 === 0 ? '#fafafa' : 'white'}">
+						<IndicatorRow
+							topRow={i === 0 && j === 0}
+							{indicator}
+							{metadata}
+							filteredChartData={chartData.combinedDataObject[indicator.code].filter(
+								(el) => el.value != 'NA'
+							)}
+							{combinedSelectableAreaTypesObject}
+							bind:hoverId
+							bind:hoverIndicatorId
+						></IndicatorRow>
+					</div>
 
 					{#if j === subTopic.indicators.length - 1}
 						<Divider orientation="horizontal" margin={[0, 0, 0, 0]}></Divider>

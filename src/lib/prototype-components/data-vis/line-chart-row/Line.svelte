@@ -31,7 +31,7 @@
 			? 1
 			: 0.1
 		: ['similar', 'sameRegion'].includes(area.role)
-			? 0.75
+			? 1
 			: 1}
 >
 	<path
@@ -40,8 +40,8 @@
 		fill="none"
 		stroke={backgroundColor}
 		stroke-width={!['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd
-			? '3px'
-			: '2px'}
+			? '2px'
+			: '1.5px'}
 	></path>
 
 	{#if !['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd}
@@ -83,7 +83,7 @@
 								]}
 							fill={backgroundColor}
 							stroke="white"
-							stroke-width="1.5px"
+							stroke-width="1px"
 						></rect>
 					{:else}
 						<circle
@@ -95,7 +95,7 @@
 										: 'other'
 							]}
 							stroke="white"
-							stroke-width="1.5px"
+							stroke-width="1px"
 							fill={backgroundColor}
 						></circle>
 					{/if}

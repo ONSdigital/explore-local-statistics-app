@@ -25,7 +25,7 @@
 			fill="white"
 			stroke={colorsLookup.median.color}
 			rx="2px"
-			stroke-width="1.5px"
+			stroke-width="2px"
 		></rect>
 	{/if}
 
@@ -34,6 +34,7 @@
 			y="-20"
 			bind:contentRect={medianLabelRect}
 			text-anchor="middle"
+			stroke={colorsLookup.median.color}
 			fill={colorsLookup.median.color}
 			>{indicator.metadata.prefix +
 				addThousandsSeparator(
@@ -47,5 +48,6 @@
 <style>
 	text {
 		font-size: 20px;
+		stroke-width: 0.5px;
 	}
 </style>

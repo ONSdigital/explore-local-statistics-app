@@ -30,8 +30,6 @@
 		: undefined;
 </script>
 
-<rect width={chartWidth} height={chartHeight} fill="black" opacity="0.03"></rect>
-
 <AxisY {selectedIndicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>
 <AxisX {timePeriodsArray} {chartHeight} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
 

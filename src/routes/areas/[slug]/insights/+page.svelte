@@ -163,8 +163,7 @@
 			parentArea === undefined ? undefined : parentArea.areacd,
 			countryArea === undefined ? undefined : countryArea.areacd
 		];*/
-
-		chosenRelatedAreasArray = ['sameRegion'];
+		//chosenRelatedAreasArray = ['sameRegion'];
 	});
 </script>
 

@@ -22,7 +22,7 @@
 	$: padding = {
 		top: 10,
 		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 17),
-		bottom: 30,
+		bottom: 20,
 		left: 10 + yAxisMaxTickWidth
 	};
 
@@ -127,5 +127,6 @@
 		text-align: center;
 		font-size: 16px;
 		line-height: 16px;
+		color: #003c57;
 	}
 </style>
