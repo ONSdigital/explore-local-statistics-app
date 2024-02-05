@@ -19,6 +19,10 @@ export async function loadIndicatorCsvWithoutBom(filename: string) {
 	return aq.fromCSV(rawJson, { parse: { period: String } });
 }
 
+export function readJsonSync(filename: string) {
+	return JSON.parse(fs.readFileSync(filename).toString());
+}
+
 function stripBom(string: string): string {
 	// Based on:
 	// https://github.com/sindresorhus/strip-bom/blob/main/index.js

@@ -2,7 +2,7 @@ import fs from 'fs';
 import { median, mad } from './stats.ts';
 import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
-import { loadCsvWithoutBom, loadIndicatorCsvWithoutBom } from './io.ts';
+import { loadCsvWithoutBom, loadIndicatorCsvWithoutBom, readJsonSync } from './io.ts';
 import { abortIfMissingMetadata } from './data-processing-warnings.ts';
 import {
 	abortIfNewIndicatorCodesExist,
@@ -15,9 +15,7 @@ import CONFIG from './config.ts';
 export default async function main() {
 	const previous_file_paths = await loadCsvWithoutBom(CONFIG.FILE_NAMES_LOG);
 	const areas_geog_level = await loadCsvWithoutBom(CONFIG.AREAS_GEOG_LEVEL_FILENAME);
-	const excludedIndicators = JSON.parse(
-		fs.readFileSync(CONFIG.EXCLUDED_INDICATORS_PATH).toString()
-	);
+	const excludedIndicators = readJsonSync(CONFIG.EXCLUDED_INDICATORS_PATH);
 
 	await abortIfNewFilesExist(previous_file_paths, CONFIG.CSV_PREPROCESS_DIR);
 
