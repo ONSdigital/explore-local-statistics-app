@@ -10,7 +10,6 @@ import {
 	abortIfMultiplePeriodGroupsForOneIndicator
 } from './data-processing-warnings.ts';
 import { abortIfNewFilesExist } from './data-processing-warnings.ts';
-const { op } = aq;
 
 const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
 const FILE_NAMES_LOG = 'scripts/insights/raw/config-data/file-names-log.csv';
@@ -252,7 +251,7 @@ function tidyAreaCodes(indicator_data, areaCodes) {
 	indicator_data = indicator_data.derive({ areacd: aq.escape((d) => mapAreaCode(d.areacd)) });
 
 	// only include areas that are in areas$areacd
-	return indicator_data.filter(aq.escape((d) => op.includes(areaCodes, d.areacd)));
+	return indicator_data.filter(aq.escape((d) => aq.op.includes(areaCodes, d.areacd)));
 }
 
 function getMetadataColNames(indicator_data, multiIndicatorCategory) {
