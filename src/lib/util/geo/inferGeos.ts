@@ -1,11 +1,37 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-nocheck
-import { geoTypes } from '$lib/config/geoConfig';
-import { capitalise } from '@onsvisual/robo-utils';
-
-export const groups = geoTypes
-	.filter((g) => ['uk', 'ctry', 'rgn', 'cauth', 'utla', 'ltla'].includes(g.key))
-	.map((g) => ({ key: g.key, codes: g.codes, label: capitalise(g.plural) }));
+export const groups = [
+	{
+		key: 'uk',
+		codes: ['K02'],
+		label: 'United Kingdom'
+	},
+	{
+		key: 'ctry',
+		codes: ['E92', 'S92', 'N92', 'W92'],
+		label: 'Countries'
+	},
+	{
+		key: 'rgn',
+		codes: ['E12', 'S92', 'N92', 'W92'],
+		label: 'Countries and regions'
+	},
+	{
+		key: 'cauth',
+		codes: ['E06', 'E09', 'E10', 'E47', 'N09', 'S12', 'W06'],
+		label: 'Upper-tier/combined authorities'
+	},
+	{
+		key: 'utla',
+		codes: ['E06', 'E08', 'E09', 'E10', 'N09', 'S12', 'W06'],
+		label: 'Upper-tier/unitary authorities'
+	},
+	{
+		key: 'ltla',
+		codes: ['E06', 'E07', 'E08', 'E09', 'N09', 'S12', 'W06'],
+		label: 'Lower-tier/unitary authorities'
+	}
+];
 
 const years = [
 	{ year: 2018, excludes: ['E06000059', 'E06000060', 'E06000061', 'E06000065'] },
