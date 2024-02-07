@@ -112,17 +112,12 @@ function processFiles(file_paths, excludedIndicators: string[]) {
 	);
 	let combined_metadata = aq.table({});
 
-	console.log(`About to process ${file_paths.numRows()} files...`);
-
 	for (const f of file_paths.objects()) {
-		console.log(`Processing ${f.filePath}`);
-
 		f.valueField ||= CONFIG.DEFAULT_VALUE_FIELD_NAME;
 
 		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
 
 		if (excludedIndicators.includes(code)) {
-			console.log(`Skipping ${code}.`);
 			continue;
 		}
 
