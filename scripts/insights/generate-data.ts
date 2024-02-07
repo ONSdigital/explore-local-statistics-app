@@ -1,6 +1,7 @@
 import { writeFileSync } from 'fs';
 import arqueroProcessing from './arquero-processing.js';
 import { readCsvAutoType } from './io.ts';
+import { inferGeos } from './inferGeos.ts';
 
 const RAW_DIR = 'scripts/insights/raw';
 const COOKED_DIR = 'scripts/insights/cooked';
@@ -39,7 +40,7 @@ function main() {
 		`Insights data JSON file in experimental column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
 	);
 
-	const outConfig = generateOutConfig(config);
+	const outConfig = generateOutConfig(config, outData.combinedDataObject);
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
@@ -84,7 +85,7 @@ function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDa
 	return combinedDataObjectColumnOriented;
 }
 
-function generateOutConfig(config) {
+function generateOutConfig(config, combinedDataObject) {
 	// TODO: check why the values in similarAreasLookupObject all look equal to each other
 	const similarAreasLookupObject = toLookup(config.similarAreasLookup, 'areacd', 'similarlist');
 
@@ -107,6 +108,9 @@ function generateOutConfig(config) {
 	const indicatorsArray = config.indicators;
 	indicatorsArray.forEach((el) => {
 		el.metadata = indicatorsMetadataObject[el.code];
+		const indicatorData = combinedDataObject[el.code];
+		el.inferredGeos = inferGeos(indicatorData.map((d) => d.areacd));
+		el.years = uniqueValues(indicatorData.map((d) => d.xDomainNumb)).sort((a, b) => a - b);
 	});
 
 	const indicatorsObject = toLookup(indicatorsArray, 'code');
@@ -253,4 +257,12 @@ function toLookup(data, keyName: string, valueName: string | null = null) {
 		}
 	}
 	return lookup;
+}
+
+function uniqueValues(arr) {
+	const set = new Set();
+	for (const item of arr) {
+		set.add(item);
+	}
+	return Array.from(set);
 }
