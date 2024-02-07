@@ -45,18 +45,17 @@ export default async function main() {
 		.join_left(combined_data, ['code'])
 		.select(aq.not('code'));
 
-	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-data.csv`, combined_data.toCSV());
-	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
+	fs.writeFileSync(`${CONFIG.CSV_DIR}/combined-data.csv`, combined_data.toCSV());
+	fs.writeFileSync(`${CONFIG.CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
 	fs.writeFileSync(
-		`${CONFIG.TMP_CSV_DIR}/indicators-calculations.csv`,
+		`${CONFIG.CSV_DIR}/indicators-calculations.csv`,
 		indicators_calculations.toCSV()
 	);
-	// write.csv(combined_data, "./csv/combined-data.csv", row.names = FALSE)
-	// write.csv(indicators, "./config-data/indicators/indicators-lookup.csv", row.names = FALSE)
-	// write.csv(indicators_calculations, "./config-data/indicators/indicators-calculations.csv", row.names = FALSE)
 
 	const indicators_metadata_for_js = loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
 	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
+
+	return [combined_data, indicators, indicators_calculations];
 }
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {

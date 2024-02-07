@@ -8,13 +8,16 @@ const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 
-await arqueroProcessing();
+await main();
 
-main();
+async function main() {
+	const [combinedData, indicators, indicatorsCalculations] = await arqueroProcessing();
 
-function main() {
 	const data = readDataFromCsvs();
+	data.combinedData = combinedData.objects();
 	const config = readConfigFromCsvs();
+	config.indicators = indicators.objects();
+	config.indicatorsCalculations = indicatorsCalculations.objects();
 
 	const outData = generateOutData(data, config.indicators);
 	writeFileSync(
@@ -207,11 +210,9 @@ function findGlobalXDomainExtent(indicatorsArray) {
 }
 
 function readDataFromCsvs() {
-	const combinedData = readCsvAutoType(`${CONFIG.CSV_DIR}/combined-data.csv`);
 	const beeswarmKeyData = readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`);
 
 	return {
-		combinedData,
 		beeswarmKeyData
 	};
 }
@@ -226,10 +227,6 @@ function readConfigFromCsvs() {
 		`${CONFIG.CONFIG_DIR}/geography/areas-parents-lookup.csv`
 	);
 	const areas = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas.csv`);
-	const indicatorsCalculations = readCsvAutoType(
-		`${CONFIG.CONFIG_DIR}/indicators/indicators-calculations.csv`
-	);
-	const indicators = readCsvAutoType(`${CONFIG.CONFIG_DIR}/indicators/indicators-lookup.csv`);
 	const indicatorsMetadata = readCsvAutoType(
 		`${CONFIG.CONFIG_DIR}/indicators/indicators-metadata.csv`
 	);
@@ -241,8 +238,6 @@ function readConfigFromCsvs() {
 		areasGeogLevel,
 		areasParentsLookup,
 		areas,
-		indicatorsCalculations,
-		indicators,
 		indicatorsMetadata,
 		periodsLookup
 	};
