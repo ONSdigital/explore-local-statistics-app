@@ -2,11 +2,7 @@ import { writeFileSync } from 'fs';
 import arqueroProcessing from './arquero-processing.js';
 import { readCsvAutoType } from './io.ts';
 import { inferGeos } from './inferGeos.ts';
-
-const RAW_DIR = 'scripts/insights/raw';
-const COOKED_DIR = 'scripts/insights/cooked';
-const CONFIG_DIR = `${RAW_DIR}/config-data`;
-const CSV_DIR = `${COOKED_DIR}/csv`;
+import CONFIG from './config.ts';
 
 const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
@@ -211,8 +207,8 @@ function findGlobalXDomainExtent(indicatorsArray) {
 }
 
 function readDataFromCsvs() {
-	const combinedData = readCsvAutoType(`${CSV_DIR}/combined-data.csv`);
-	const beeswarmKeyData = readCsvAutoType(`${CSV_DIR}/beeswarm-key-data.csv`);
+	const combinedData = readCsvAutoType(`${CONFIG.CSV_DIR}/combined-data.csv`);
+	const beeswarmKeyData = readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`);
 
 	return {
 		combinedData,
@@ -221,17 +217,23 @@ function readDataFromCsvs() {
 }
 
 function readConfigFromCsvs() {
-	const similarAreasLookup = readCsvAutoType(`${CONFIG_DIR}/clusters/similar-areas-lookup.csv`);
-	const areasGeogInfo = readCsvAutoType(`${CONFIG_DIR}/geography/areas-geog-info.csv`);
-	const areasGeogLevel = readCsvAutoType(`${CONFIG_DIR}/geography/areas-geog-level.csv`);
-	const areasParentsLookup = readCsvAutoType(`${CONFIG_DIR}/geography/areas-parents-lookup.csv`);
-	const areas = readCsvAutoType(`${CONFIG_DIR}/geography/areas.csv`);
-	const indicatorsCalculations = readCsvAutoType(
-		`${CONFIG_DIR}/indicators/indicators-calculations.csv`
+	const similarAreasLookup = readCsvAutoType(
+		`${CONFIG.CONFIG_DIR}/clusters/similar-areas-lookup.csv`
 	);
-	const indicators = readCsvAutoType(`${CONFIG_DIR}/indicators/indicators-lookup.csv`);
-	const indicatorsMetadata = readCsvAutoType(`${CONFIG_DIR}/indicators/indicators-metadata.csv`);
-	const periodsLookup = readCsvAutoType(`${CONFIG_DIR}/periods/unique-periods-lookup.csv`);
+	const areasGeogInfo = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-info.csv`);
+	const areasGeogLevel = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-level.csv`);
+	const areasParentsLookup = readCsvAutoType(
+		`${CONFIG.CONFIG_DIR}/geography/areas-parents-lookup.csv`
+	);
+	const areas = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas.csv`);
+	const indicatorsCalculations = readCsvAutoType(
+		`${CONFIG.CONFIG_DIR}/indicators/indicators-calculations.csv`
+	);
+	const indicators = readCsvAutoType(`${CONFIG.CONFIG_DIR}/indicators/indicators-lookup.csv`);
+	const indicatorsMetadata = readCsvAutoType(
+		`${CONFIG.CONFIG_DIR}/indicators/indicators-metadata.csv`
+	);
+	const periodsLookup = readCsvAutoType(`${CONFIG.CONFIG_DIR}/periods/unique-periods-lookup.csv`);
 
 	return {
 		similarAreasLookup,

@@ -1,16 +1,18 @@
-const CSV_PREPROCESS_DIR = 'scripts/insights/raw/family-ess-main';
+const RAW_DIR = 'scripts/insights/raw';
+const COOKED_DIR = 'scripts/insights/cooked';
+const CONFIG_DIR = `${RAW_DIR}/config-data`;
+const CSV_DIR = `${COOKED_DIR}/csv`;
+
+const CSV_PREPROCESS_DIR = `${RAW_DIR}/family-ess-main`;
 const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
 
-const FILE_NAMES_LOG = 'scripts/insights/raw/config-data/file-names-log.csv';
-const AREAS_CSV = 'scripts/insights/raw/config-data/geography/areas.csv';
-const PREVIOUS_INDICATORS_FILENAME =
-	'scripts/insights/raw/config-data/indicators/indicators-lookup.csv';
-const PREVIOUS_PERIODS_FILENAME =
-	'scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
-const AREAS_GEOG_LEVEL_FILENAME = 'scripts/insights/raw/config-data/geography/areas-geog-level.csv';
-export const INDICATORS_METADATA_CSV =
-	'scripts/insights/raw/config-data/indicators/indicators-metadata.csv';
-const EXCLUDED_INDICATORS_PATH = 'scripts/insights/raw/config-data/excluded-indicators.json';
+const FILE_NAMES_LOG = `${CONFIG_DIR}/file-names-log.csv`;
+const AREAS_CSV = `${CONFIG_DIR}/geography/areas.csv`;
+const PREVIOUS_INDICATORS_FILENAME = `${CONFIG_DIR}/indicators/indicators-lookup.csv`;
+const PREVIOUS_PERIODS_FILENAME = `${CONFIG_DIR}/periods/unique-periods-lookup.csv`;
+const AREAS_GEOG_LEVEL_FILENAME = `${CONFIG_DIR}/geography/areas-geog-level.csv`;
+export const INDICATORS_METADATA_CSV = `${CONFIG_DIR}/indicators/indicators-metadata.csv`;
+const EXCLUDED_INDICATORS_PATH = `${CONFIG_DIR}/excluded-indicators.json`;
 
 const DEFAULT_VALUE_FIELD_NAME = 'value';
 
@@ -53,7 +55,9 @@ const CONFIG = {
 	DEFAULT_VALUE_FIELD_NAME,
 	COMBINED_DATA_COLUMN_NAMES,
 	AREA_CODE_MAP,
-	NEW_FILES_WARNING
+	NEW_FILES_WARNING,
+	CONFIG_DIR,
+	CSV_DIR
 };
 
 export default CONFIG;
