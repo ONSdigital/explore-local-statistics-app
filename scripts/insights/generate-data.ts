@@ -1,6 +1,6 @@
-import { PathOrFileDescriptor, readFileSync, writeFileSync } from 'fs';
-import { csvParse } from 'd3-dsv';
+import { writeFileSync } from 'fs';
 import arqueroProcessing from './arquero-processing.js';
+import { readCsvAutoType } from './io.ts';
 
 const RAW_DIR = 'scripts/insights/raw';
 const COOKED_DIR = 'scripts/insights/cooked';
@@ -207,8 +207,8 @@ function findGlobalXDomainExtent(indicatorsArray) {
 }
 
 function readDataFromCsvs() {
-	const combinedData = readCsv(`${CSV_DIR}/combined-data.csv`);
-	const beeswarmKeyData = readCsv(`${CSV_DIR}/beeswarm-key-data.csv`);
+	const combinedData = readCsvAutoType(`${CSV_DIR}/combined-data.csv`);
+	const beeswarmKeyData = readCsvAutoType(`${CSV_DIR}/beeswarm-key-data.csv`);
 
 	return {
 		combinedData,
@@ -217,15 +217,17 @@ function readDataFromCsvs() {
 }
 
 function readConfigFromCsvs() {
-	const similarAreasLookup = readCsv(`${CONFIG_DIR}/clusters/similar-areas-lookup.csv`);
-	const areasGeogInfo = readCsv(`${CONFIG_DIR}/geography/areas-geog-info.csv`);
-	const areasGeogLevel = readCsv(`${CONFIG_DIR}/geography/areas-geog-level.csv`);
-	const areasParentsLookup = readCsv(`${CONFIG_DIR}/geography/areas-parents-lookup.csv`);
-	const areas = readCsv(`${CONFIG_DIR}/geography/areas.csv`);
-	const indicatorsCalculations = readCsv(`${CONFIG_DIR}/indicators/indicators-calculations.csv`);
-	const indicators = readCsv(`${CONFIG_DIR}/indicators/indicators-lookup.csv`);
-	const indicatorsMetadata = readCsv(`${CONFIG_DIR}/indicators/indicators-metadata.csv`);
-	const periodsLookup = readCsv(`${CONFIG_DIR}/periods/unique-periods-lookup.csv`);
+	const similarAreasLookup = readCsvAutoType(`${CONFIG_DIR}/clusters/similar-areas-lookup.csv`);
+	const areasGeogInfo = readCsvAutoType(`${CONFIG_DIR}/geography/areas-geog-info.csv`);
+	const areasGeogLevel = readCsvAutoType(`${CONFIG_DIR}/geography/areas-geog-level.csv`);
+	const areasParentsLookup = readCsvAutoType(`${CONFIG_DIR}/geography/areas-parents-lookup.csv`);
+	const areas = readCsvAutoType(`${CONFIG_DIR}/geography/areas.csv`);
+	const indicatorsCalculations = readCsvAutoType(
+		`${CONFIG_DIR}/indicators/indicators-calculations.csv`
+	);
+	const indicators = readCsvAutoType(`${CONFIG_DIR}/indicators/indicators-lookup.csv`);
+	const indicatorsMetadata = readCsvAutoType(`${CONFIG_DIR}/indicators/indicators-metadata.csv`);
+	const periodsLookup = readCsvAutoType(`${CONFIG_DIR}/periods/unique-periods-lookup.csv`);
 
 	return {
 		similarAreasLookup,
@@ -238,40 +240,6 @@ function readConfigFromCsvs() {
 		indicatorsMetadata,
 		periodsLookup
 	};
-}
-
-function readCsv(filename: PathOrFileDescriptor) {
-	const raw = readFileSync(filename);
-	return csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
-}
-
-// A modified version of
-// https://github.com/d3/d3-dsv/blob/main/src/autoType.js
-// , which always leaves dates as strings.
-function autoTypeWithoutDates(object: { [key: string]: any }) {
-	for (const key in object) {
-		const value = object[key].trim();
-		if (!value) object[key] = null;
-		else if (value === 'true') object[key] = true;
-		else if (value === 'false') object[key] = false;
-		else if (value === 'NaN') object[key] = NaN;
-		else if (!isNaN(+value)) object[key] = +value;
-	}
-	return object;
-}
-
-function stripBom(string: string): string {
-	// Based on:
-	// https://github.com/sindresorhus/strip-bom/blob/main/index.js
-	// (MIT Licence)
-
-	// Catches EFBBBF (UTF-8 BOM) because the buffer-to-string
-	// conversion translates it to FEFF (UTF-16 BOM).
-	if (string.charCodeAt(0) === 0xfeff) {
-		return string.slice(1);
-	}
-
-	return string;
 }
 
 function toLookup(data, keyName: string, valueName: string | null = null) {

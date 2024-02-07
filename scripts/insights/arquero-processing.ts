@@ -2,7 +2,7 @@ import fs from 'fs';
 import { median, mad } from './stats.ts';
 import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
-import { loadCsvWithoutBom, loadIndicatorCsvWithoutBom, readJsonSync } from './io.ts';
+import { loadCsvWithoutBom, readJsonSync } from './io.ts';
 import { abortIfMissingMetadata } from './data-processing-warnings.ts';
 import {
 	abortIfNewIndicatorCodesExist,
@@ -113,21 +113,17 @@ function processFiles(file_paths, excludedIndicators: string[]) {
 	let combined_metadata = aq.table({});
 
 	for (const f of file_paths.objects()) {
-		f.valueField ||= CONFIG.DEFAULT_VALUE_FIELD_NAME;
-
 		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
 
-		if (excludedIndicators.includes(code)) {
-			continue;
+		if (!excludedIndicators.includes(code)) {
+			[combined_data, combined_metadata] = processFile(
+				f,
+				code,
+				areaCodes,
+				combined_data,
+				combined_metadata
+			);
 		}
-
-		[combined_data, combined_metadata] = processFile(
-			f,
-			code,
-			areaCodes,
-			combined_data,
-			combined_metadata
-		);
 	}
 	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-data-js.csv`, combined_data.toCSV());
 	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-metadata-js.csv`, combined_metadata.toCSV());
@@ -136,21 +132,23 @@ function processFiles(file_paths, excludedIndicators: string[]) {
 }
 
 function processFile(f, code, areaCodes, combined_data, combined_metadata) {
-	let indicator_data = loadIndicatorCsvWithoutBom(f.filePath);
+	let indicator_data = loadCsvWithoutBom(f.filePath);
+	indicator_data = indicator_data.rename(
+		Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))
+	);
 
 	indicator_data = renameColumns(indicator_data, [
 		{ old: 'lower confidence interval (95%)', new: 'lci' },
 		{ old: 'upper confidence interval (95%)', new: 'uci' }
 	]);
-	indicator_data = indicator_data.rename({ [f.valueField]: 'value' });
+	indicator_data = indicator_data.rename({
+		[f.valueField || CONFIG.DEFAULT_VALUE_FIELD_NAME]: 'value'
+	});
 	indicator_data = tidyAreaCodes(indicator_data, areaCodes);
 
 	const metadata_columns = getMetadataColNames(indicator_data, f.multiIndicatorCategory);
 
 	indicator_data = tmpFixForMissingVarName(indicator_data, code);
-
-	// var fullCode = f.multiIndicatorCategory ? `${code}-${f.multiIndicatorCategory}` : code;
-	indicator_data.params({ code, multiIndicatorCategory: f.multiIndicatorCategory });
 
 	indicator_data = indicator_data.derive({
 		code: aq.escape((d) =>

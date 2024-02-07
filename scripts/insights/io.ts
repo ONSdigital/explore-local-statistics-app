@@ -1,22 +1,29 @@
 import aq from 'arquero';
 import fs from 'fs';
+import { csvParse } from 'd3-dsv';
 
 export function loadCsvWithoutBom(filename: string) {
-	const rawCsv = stripBom(fs.readFileSync(filename).toString());
-	return aq.fromCSV(rawCsv);
+	return aq.from(readCsvAutoType(filename));
 }
 
-export function loadIndicatorCsvWithoutBom(filename: string) {
-	let rawCsv = fs.readFileSync(filename).toString();
+export function readCsvAutoType(filename: string) {
+	const raw = fs.readFileSync(filename);
+	return csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
+}
 
-	// Make column names lowercase. It would be nicer to do this after parsing the CSV, but
-	// in order to ask Arquero to parse the `period` column as strings I think we need
-	// to do the renaming before parsing.
-	const rows = rawCsv.split('\n');
-	rows[0] = stripBom(rows[0].toLowerCase());
-	rawCsv = rows.join('\n');
-
-	return aq.fromCSV(rawCsv, { parse: { period: String } });
+// A modified version of
+// https://github.com/d3/d3-dsv/blob/main/src/autoType.js
+// , which always leaves dates as strings.
+function autoTypeWithoutDates(object: { [key: string]: any }) {
+	for (const key in object) {
+		const value = object[key].trim();
+		if (!value) object[key] = null;
+		else if (value === 'true') object[key] = true;
+		else if (value === 'false') object[key] = false;
+		else if (value === 'NaN') object[key] = NaN;
+		else if (!isNaN(+value)) object[key] = +value;
+	}
+	return object;
 }
 
 export function readJsonSync(filename: string) {
