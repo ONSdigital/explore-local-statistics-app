@@ -8,6 +8,10 @@ describe('makeCanonicalSlug', () => {
 		expect(makeCanonicalSlug('E12000008', 'South East')).toBe('E12000008-south-east');
 	});
 
+	it('should create a valid nameless slug when no name to support OAs', () => {
+		expect(makeCanonicalSlug('E00151642')).toBe('E00151642');
+	});
+
 	it('should handle names with special characters', () => {
 		expect(makeCanonicalSlug('E12000003', 'Yorkshire & The Humber')).toBe(
 			'E12000003-yorkshire-and-the-humber'
@@ -22,9 +26,7 @@ describe('makeCanonicalSlug', () => {
 		expect(() => makeCanonicalSlug('E12000011', '')).toThrow('No area name was given');
 	});
 
-	it('throws an error when name is not provided', () => {
-		expect(() => makeCanonicalSlug('E12000012', undefined as unknown as string)).toThrow(
-			'No area name was given'
-		);
+	it('throws an error when name is blank', () => {
+		expect(() => makeCanonicalSlug('E12000012', '')).toThrow('No area name was given');
 	});
 });
