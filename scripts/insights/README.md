@@ -16,7 +16,7 @@ npm run data:generate
 ## Input files
 
 - All of the data CSV files within `scripts/insights/raw/family-ess-main/`; e.g. `scripts/insights/raw/family-ess-main/4g-coverage/4g-coverage.csv`
-- The list of which CSV files to use, along with `multiIndicatorCategory` and `valueField`: `scripts/insights/raw/config-data/data-files-manifest.csv`. (Note: we should maybe delete `-log` from the filename?
+- The list of which CSV files to use, along with `multiIndicatorCategory` and `valueField`: `scripts/insights/raw/config-data/data-files-manifest.csv`.
 - For each GSS code, is it a region, upper tier local authority, etc.: `scripts/insights/raw/config-data/geography/areas-geog-level.csv`
 - A list of the codes of indicators to exclude: `scripts/insights/raw/config-data/excluded-indicators.json`
 - GSS codes and the corresponding place names: `scripts/insights/raw/config-data/geography/areas.csv`
