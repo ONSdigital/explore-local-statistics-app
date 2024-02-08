@@ -5,7 +5,7 @@ const CSV_DIR = `${COOKED_DIR}/csv`;
 
 const CSV_PREPROCESS_DIR = `${RAW_DIR}/family-ess-main`;
 
-const FILE_NAMES_LOG = `${CONFIG_DIR}/file-names-log.csv`;
+const FILE_NAMES_LOG = `${CONFIG_DIR}/data-files-manifest.csv`;
 const AREAS_CSV = `${CONFIG_DIR}/geography/areas.csv`;
 const PREVIOUS_INDICATORS_FILENAME = `${CONFIG_DIR}/indicators/indicators-lookup.csv`;
 const PREVIOUS_PERIODS_FILENAME = `${CONFIG_DIR}/periods/unique-periods-lookup.csv`;
@@ -39,7 +39,7 @@ export const NEW_FILES_WARNING =
 	`the ${CSV_PREPROCESS_DIR} folder includes files which were not present when ` +
 	`this script was last run. These file paths can be viewed in the ` +
 	`previous-file-paths data frame. Please add these file paths to the ` +
-	`file-names-log.csv file in the config-data folder and re-run.`;
+	`data-files-manifest.csv file in the config-data folder and re-run.`;
 
 const CONFIG = {
 	CSV_PREPROCESS_DIR,
