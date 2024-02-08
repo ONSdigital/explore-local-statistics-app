@@ -13,6 +13,8 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 		if (link.image && !link.image.startsWith('http')) link.image = base + link.image;
 	}
 
+	console.log(code);
+
 	if (code.kind === 'Failure') {
 		error(404, { message: 'Invalid area code' });
 	}
