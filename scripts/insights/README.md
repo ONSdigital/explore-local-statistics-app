@@ -1,3 +1,12 @@
+# Generate data for ESS insights
+
+This script creates the data that the /insights (ESS) visualisations use.
+
+- takes the raw data from the GitHub repo https://github.com/GSS-Cogs/family-ess
+- performs some aggregatation (median, mad)
+- adds any missing variable name(s) in the raw data
+- maps some area codes
+
 ## How to run the script
 
 ```
