@@ -4,7 +4,6 @@ const CONFIG_DIR = `${RAW_DIR}/config-data`;
 const CSV_DIR = `${COOKED_DIR}/csv`;
 
 const CSV_PREPROCESS_DIR = `${RAW_DIR}/family-ess-main`;
-const TMP_CSV_DIR = 'scripts/insights/tmp-csv';
 
 const FILE_NAMES_LOG = `${CONFIG_DIR}/file-names-log.csv`;
 const AREAS_CSV = `${CONFIG_DIR}/geography/areas.csv`;
@@ -44,7 +43,6 @@ export const NEW_FILES_WARNING =
 
 const CONFIG = {
 	CSV_PREPROCESS_DIR,
-	TMP_CSV_DIR,
 	FILE_NAMES_LOG,
 	AREAS_CSV,
 	PREVIOUS_INDICATORS_FILENAME,

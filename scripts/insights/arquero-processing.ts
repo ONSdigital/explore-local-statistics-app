@@ -124,8 +124,6 @@ function processFiles(file_paths, excludedIndicators: string[]) {
 			);
 		}
 	}
-	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-data-js.csv`, combined_data.toCSV());
-	fs.writeFileSync(`${CONFIG.TMP_CSV_DIR}/combined-metadata-js.csv`, combined_metadata.toCSV());
 
 	return [combined_data, combined_metadata];
 }
