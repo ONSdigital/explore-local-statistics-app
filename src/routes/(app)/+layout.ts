@@ -1,4 +1,4 @@
-import type { LayoutLoad } from './$types';
+import type { LayoutLoad } from '../$types';
 import { base } from '$app/paths';
 
 export const load: LayoutLoad = async ({ fetch }) => {
