@@ -95,7 +95,7 @@
 										: 'other'
 							]}
 							stroke="white"
-							stroke-width="1px"
+							stroke-width="0.5px"
 							fill={backgroundColor}
 						></circle>
 					{/if}

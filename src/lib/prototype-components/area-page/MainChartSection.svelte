@@ -6,7 +6,7 @@
 
 	export let combinedSelectableAreaTypesObject, chartData, metadata, visibleAreas;
 	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
+		chosenRelatedAreasId,
 		chosenSameRegionArray,
 		chosenCountriesArray,
 		chosenRegionsArray,
@@ -28,7 +28,7 @@
 			{visibleAreas}
 			bind:chosenIndicatorId
 			bind:chosenParentAreasArray
-			bind:chosenRelatedAreasArray
+			bind:chosenRelatedAreasId
 			bind:chosenSameRegionArray
 			bind:chosenCountriesArray
 			bind:chosenRegionsArray

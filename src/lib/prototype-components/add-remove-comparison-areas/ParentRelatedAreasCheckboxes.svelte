@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Checkbox from '$lib/prototype-components/modified-svelte-components/Checkbox.svelte';
+	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 
 	import { haveCommonElements } from '$lib/utils';
@@ -7,7 +8,7 @@
 	export let combinedSelectableAreaTypesObject,
 		areasCodesForAreasWithData,
 		chosenParentAreasArray,
-		chosenRelatedAreasArray;
+		chosenRelatedAreasId;
 
 	$: parentAreasWithData = areasCodesForAreasWithData
 		? combinedSelectableAreaTypesObject.parents.areas.filter((el) =>
@@ -30,7 +31,11 @@
 			? { id: 'similar', label: combinedSelectableAreaTypesObject.similar.label }
 			: undefined;
 
-	$: relatedAreasOptionsArray = [sameRegionAreasObject, similarAreasObject].filter((el) => el);
+	$: relatedAreasOptionsArray = [
+		{ id: 'none', label: 'None' },
+		sameRegionAreasObject,
+		similarAreasObject
+	].filter((el) => el);
 </script>
 
 {#if parentAreasWithData.length > 0 || relatedAreasOptionsArray.length > 0}
@@ -52,14 +57,14 @@
 		{/if}
 		{#if relatedAreasOptionsArray.length > 0}
 			<div class="column-container">
-				<Checkbox
+				<Radio
 					title="Related areas:"
 					name="related-areas-checkbox-selection"
 					optionsArray={relatedAreasOptionsArray}
-					bind:valueArray={chosenRelatedAreasArray}
+					bind:valueId={chosenRelatedAreasId}
 					labelKey="label"
 					idKey="id"
-				></Checkbox>
+				></Radio>
 			</div>
 		{/if}
 	</div>

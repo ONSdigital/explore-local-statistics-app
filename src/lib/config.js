@@ -33,15 +33,24 @@ export let addTheArray = [
 	'West Midlands',
 	'East Midlands',
 	'East of England',
+	'UK',
 	'United Kingdom'
 ];
 
 export let areaPluralObject = {
-	lower: 'areas',
-	upper: 'areas',
+	bespoke: {
+		N92000002: 'countries',
+		S92000003: 'countries',
+		W92000004: 'countries'
+	},
+	lower: 'local authorities',
+	upper: 'local authorities',
 	region: 'regions',
-	country: 'countries',
-	other: null
+	country: 'countries'
+};
+
+export let abbreviatedNamesObject = {
+	'United Kingdom': 'UK'
 };
 
 export const colorsLookup = {
@@ -67,7 +76,7 @@ export const madRangeLookup = {
 
 export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
-	lineChartRow: { markerRadius: { first: 3, last: 4, other: 3 } },
+	lineChartRow: { markerRadius: { first: 2, last: 4, other: 2 } },
 	beeswarmRow: { backgroundRadius: 5, primaryRadius: 8 }
 };
 

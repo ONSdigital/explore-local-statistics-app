@@ -1,0 +1,78 @@
+<script lang="ts">
+	import { colorsLookup } from '$lib/config.js';
+
+	export let chosenAdditionalComparisonAreasGroup, showModalAdditionalComparisonAreaGroup;
+
+	const onClickEventOpen = () => {
+		showModalAdditionalComparisonAreaGroup = true;
+	};
+</script>
+
+<button on:click={onClickEventOpen} class="area-container">
+	<div class="inline-row-container">
+		<svg width="20" height="20">
+			<svg width="20" height="20">
+				<circle
+					cx="10"
+					cy="10"
+					r="5"
+					fill="#e8e8e8"
+					stroke="#222"
+					stroke-width="1.5px"
+					stroke-opacity="0.75"
+				></circle>
+			</svg>
+		</svg>
+		<span>{chosenAdditionalComparisonAreasGroup.label2}</span>
+		<svg width="20" height="20" viewBox="-2 0 16 7.7" class="chevron-svg">
+			<path
+				d="m1.37.15 4.5 5.1 4.5-5.1a.37.37 0 0 1 .6 0l.7.7a.45.45 0 0 1 0 .5l-5.5 6.2a.37.37 0 0 1-.6 0l-5.5-6.1a.64.64 0 0 1 0-.6l.7-.7a.64.64 0 0 1 .6 0Z"
+				stroke="#222"
+				fill="#222"
+				stroke-width="0.5px"
+			></path>
+		</svg>
+	</div>
+</button>
+
+<style>
+	.area-container {
+		margin: 0px;
+		padding: 0px 4px 0px 4px;
+		display: inline-block;
+		border-radius: 4px;
+		border-style: solid;
+		border-width: 1.5px;
+		border-color: #222;
+		font-size: 16px;
+	}
+
+	.inline-row-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 2px;
+	}
+
+	button {
+		background-color: transparent;
+		padding-block: 0px;
+		padding-inline: 0px;
+		font-size: 18px;
+		line-height: 1.6;
+		font-family:
+			opensans,
+			helvetica neue,
+			arial,
+			sans-serif;
+	}
+
+	.area-container:hover {
+		background-color: #f2f2f2;
+	}
+
+	.chevron-svg {
+		margin-left: 5px;
+	}
+</style>

@@ -7,8 +7,6 @@ import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
 
-	console.log(code);
-
 	if (code.kind === 'Failure') {
 		error(404, { message: 'Invalid area code' });
 	}

@@ -1,30 +1,83 @@
 <script lang="ts">
 	import TitleAdditionalDescription from '$lib/prototype-components/area-page/indicator-rows/TitleAdditionalDescription.svelte';
-	import BeeswarmRowContainer from '$lib/prototype-components/area-page/indicator-rows/BeeswarmRowContainer.svelte';
-	import LineChartRowContainer from '$lib/prototype-components/area-page/indicator-rows/LineChartRowContainer.svelte';
 
-	export let topRow, indicator, metadata, filteredChartData, combinedSelectableAreaTypesObject;
-	export let hoverId, hoverIndicatorId;
-
-	$: selectedIndicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) =>
-			el.code === indicator.code &&
-			el.period === indicator.maxXDomainNumb &&
-			el.geog_level === combinedSelectableAreaTypesObject.selected.area.geogLevel
-	);
+	export let topRow, indicator, metadata, indicatorChartData, areasGroupsObject;
+	export let hoverId,
+		hoverIndicatorId,
+		chosenComparisonMeasureOrArea,
+		chosenAdditionalComparisonAreasGroup,
+		startXDomainNumb,
+		endXDomainNumb;
 
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
 		(el) =>
 			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= indicator.minXDomainNumb &&
-			el.xDomainNumb <= indicator.maxXDomainNumb
+			(isNaN(startXDomainNumb) ? true : el.xDomainNumb >= startXDomainNumb) &&
+			(isNaN(endXDomainNumb) ? true : el.xDomainNumb <= endXDomainNumb)
 	);
 
-	$: areasCodesForAreasWithData = [...new Set(filteredChartData.map((el) => el.areacd))];
+	$: xDomain = [
+		timePeriodsArray.length > 0 ? Math.min(...timePeriodsArray.map((el) => el.xDomainNumb)) : null,
+		timePeriodsArray.length > 0 ? Math.max(...timePeriodsArray.map((el) => el.xDomainNumb)) : null
+	];
+
+	$: selectedIndicatorCalculations = xDomain[1]
+		? metadata.indicatorsCalculationsArray.find(
+				(el) =>
+					el.code === indicator.code &&
+					parseFloat(el.period) === xDomain[1] &&
+					el.geog_level === 'lower'
+			)
+		: null;
+
+	$: filteredChartData =
+		xDomain[1] && xDomain[0]
+			? indicatorChartData.filter(
+					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+				)
+			: null;
+
+	$: console.log(chosenComparisonMeasureOrArea);
+
+	$: selectedAreaChartData = filteredChartData
+		? filteredChartData.filter(
+				(el) =>
+					el.xDomainNumb >= xDomain[0] &&
+					el.xDomainNumb <= xDomain[1] &&
+					el.areacd === areasGroupsObject.selected.area.areacd
+			)
+		: null;
+
+	$: comparisonAreaChartData =
+		filteredChartData && chosenComparisonMeasureOrArea
+			? 'label1' in chosenComparisonMeasureOrArea
+				? metadata.indicatorsCalculationsArray
+						.filter(
+							(el) =>
+								el.code === indicator.code &&
+								el.period >= xDomain[0] &&
+								el.period <= xDomain[1] &&
+								el.geog_level === 'lower'
+						)
+						.map((el) => ({
+							xDomainNumb: el.period,
+							value: el.med
+						}))
+				: filteredChartData.filter(
+						(el) =>
+							el.xDomainNumb >= xDomain[0] &&
+							el.xDomainNumb <= xDomain[1] &&
+							el.areacd === chosenComparisonMeasureOrArea.areacd
+					)
+			: null;
+
+	$: backgroundChartData = 100;
+
+	/*$: areasCodesForAreasWithData = [...new Set(filteredChartData.map((el) => el.areacd))];
 
 	$: visibleAreasWithData = [
-		combinedSelectableAreaTypesObject.visible.primaryAreas,
-		combinedSelectableAreaTypesObject.visible.relatedAreas
+		areasGroupsObject.visible.primaryAreas,
+		areasGroupsObject.visible.relatedAreas
 	].map((el) => el.filter((elm) => areasCodesForAreasWithData.includes(elm.areacd)));
 
 	$: visibleAreasWithDataCodes = [...visibleAreasWithData[0], ...visibleAreasWithData[1]].map(
@@ -32,12 +85,12 @@
 	);
 
 	$: filteredChartDataForPrimaryVisibleAreas = filteredChartData.filter((el) =>
-		combinedSelectableAreaTypesObject.visible.primaryCodes.includes(el.areacd)
+		areasGroupsObject.visible.primaryCodes.includes(el.areacd)
 	);
 
 	$: filteredChartDataForVisibleAreas = filteredChartData.filter((el) =>
 		visibleAreasWithDataCodes.includes(el.areacd)
-	);
+	);*/
 </script>
 
 <div class="indicator-row-container">
@@ -50,11 +103,14 @@
 			indicator.metadata.additionalDescription
 		).split('|')}
 	></TitleAdditionalDescription>
+</div>
+
+<!-- <div class="indicator-row-container">
 
 	<div class="visuals-container">
 		<div class="beeswarm-container">
 			<BeeswarmRowContainer
-				{combinedSelectableAreaTypesObject}
+				{areasGroupsObject}
 				{topRow}
 				{indicator}
 				{selectedIndicatorCalculations}
@@ -63,7 +119,7 @@
 				filteredBackgroundChartData={filteredChartData.filter(
 					(el) =>
 						el.xDomainNumb === timePeriodsArray[0].xDomainNumb &&
-						combinedSelectableAreaTypesObject.sameGeogLevel.codes.includes(el.areacd)
+						areasGroupsObject.sameGeogLevel.codes.includes(el.areacd)
 				)}
 				filteredChartDataForVisibleAreas={filteredChartDataForPrimaryVisibleAreas.filter(
 					(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
@@ -78,7 +134,7 @@
 				<LineChartRowContainer
 					selectedIndicator={indicator}
 					{metadata}
-					{combinedSelectableAreaTypesObject}
+					{areasGroupsObject}
 					{areasCodesForAreasWithData}
 					{visibleAreasWithData}
 					{timePeriodsArray}
@@ -90,7 +146,7 @@
 			{/if}
 		</div>
 	</div>
-</div>
+</div> -->
 
 <style>
 	.indicator-row-container {

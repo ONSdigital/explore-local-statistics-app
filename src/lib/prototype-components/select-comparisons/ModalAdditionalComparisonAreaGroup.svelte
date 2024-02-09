@@ -1,40 +1,30 @@
-<script>
+<script lang="ts">
 	//based on https://svelte.dev/examples/modal
-
 	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
-	import ModalVisibleAreasKey from '$lib/prototype-components/add-remove-comparison-areas/modal-visible-areas-key/ModalVisibleAreasKey.svelte';
-	import ParentRelatedAreasCheckboxes from '$lib/prototype-components/add-remove-comparison-areas/ParentRelatedAreasCheckboxes.svelte';
-	import CustomAreasSearch from '$lib/prototype-components/add-remove-comparison-areas/CustomAreasSearch.svelte';
+	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
 
-	export let showModal,
-		metadata,
-		combinedSelectableAreaTypesObject,
-		areasCodesForAreasWithData,
-		visibleAreasWithData;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasId,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
+	export let chosenAdditionalComparisonAreasGroup,
+		comparisonGroupsArray,
+		showModalAdditionalComparisonAreaGroup,
+		areasGroupsObject;
 
 	let dialog; // HTMLDialogElement
 
-	$: if (dialog && showModal) dialog.showModal();
+	$: if (dialog && showModalAdditionalComparisonAreaGroup) dialog.showModal();
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={() => (showModalAdditionalComparisonAreaGroup = false)}
 	on:click|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation>
 		<div class="add-comparison-areas-container">
 			<div class="row-container title-exit-button-container">
-				<p class="modal-title">Add/remove comparison areas</p>
+				<p class="modal-title">Select a group of areas</p>
 
 				<Button
 					on:click={() => dialog.close()}
@@ -49,35 +39,14 @@
 		</div>
 		<Divider orientation="horizontal" margin={[10, 0, 10, 0]}></Divider>
 
-		<ModalVisibleAreasKey
-			{visibleAreasWithData}
-			{combinedSelectableAreaTypesObject}
-			bind:chosenParentAreasArray
-			bind:chosenRelatedAreasId
-			bind:chosenSameRegionArray
-			bind:chosenCountriesArray
-			bind:chosenRegionsArray
-			bind:chosenAllOtherArray
-		></ModalVisibleAreasKey>
-
-		<Divider orientation="horizontal" margin={[10, 0, 10, 0]}></Divider>
-
-		<ParentRelatedAreasCheckboxes
-			{combinedSelectableAreaTypesObject}
-			{areasCodesForAreasWithData}
-			bind:chosenParentAreasArray
-			bind:chosenRelatedAreasId
-		></ParentRelatedAreasCheckboxes>
-
-		<CustomAreasSearch
-			{metadata}
-			{combinedSelectableAreaTypesObject}
-			{areasCodesForAreasWithData}
-			bind:chosenSameRegionArray
-			bind:chosenCountriesArray
-			bind:chosenRegionsArray
-			bind:chosenAllOtherArray
-		></CustomAreasSearch>
+		<Radio
+			title={null}
+			name="additional-comparison-areas-options"
+			optionsArray={comparisonGroupsArray}
+			bind:valueId={chosenAdditionalComparisonAreasGroup}
+			labelKey="label2"
+			idKey={null}
+		></Radio>
 	</div>
 </dialog>
 

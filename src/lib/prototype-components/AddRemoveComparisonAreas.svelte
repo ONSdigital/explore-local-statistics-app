@@ -7,7 +7,7 @@
 		visibleAreasWithData,
 		areasCodesForAreasWithData;
 	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
+		chosenRelatedAreasId,
 		chosenSameRegionArray,
 		chosenCountriesArray,
 		chosenRegionsArray,
@@ -40,7 +40,7 @@
 		{visibleAreasWithData}
 		{areasCodesForAreasWithData}
 		bind:chosenParentAreasArray
-		bind:chosenRelatedAreasArray
+		bind:chosenRelatedAreasId
 		bind:chosenSameRegionArray
 		bind:chosenCountriesArray
 		bind:chosenRegionsArray

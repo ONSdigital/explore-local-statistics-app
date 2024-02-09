@@ -3,6 +3,8 @@
 	import Checkbox from '$lib/prototype-components/modified-svelte-components/Checkbox.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 
+	import { countries, regions } from '$lib/config';
+
 	export let metadata, combinedSelectableAreaTypesObject, areasCodesForAreasWithData;
 	export let chosenSameRegionArray, chosenCountriesArray, chosenRegionsArray, chosenAllOtherArray;
 
@@ -19,19 +21,17 @@
 		: areasWithData;
 	$: searchedForAreasWithDataCodes = searchedForAreasWithData.map((el) => el.areacd);
 
-	$: console.log(searchedForAreasWithData);
-
 	$: sameRegionAreasWithData = combinedSelectableAreaTypesObject.sameRegion.areas.filter((el) =>
 		searchedForAreasWithDataCodes.includes(el.areacd)
 	);
 
-	$: regionsWithData = combinedSelectableAreaTypesObject.regions.areas.filter((el) =>
-		searchedForAreasWithDataCodes.includes(el.areacd)
-	);
+	$: regionsWithData = regions
+		.map((el) => metadata.areasObject[el.code])
+		.filter((el) => searchedForAreasWithDataCodes.includes(el.areacd));
 
-	$: countriesWithData = combinedSelectableAreaTypesObject.countries.areas.filter((el) =>
-		searchedForAreasWithDataCodes.includes(el.areacd)
-	);
+	$: countriesWithData = countries
+		.map((el) => metadata.areasObject[el.code])
+		.filter((el) => searchedForAreasWithDataCodes.includes(el.areacd));
 
 	$: allOtherAreasWithData = metadata.areasArray.filter(
 		(el) =>

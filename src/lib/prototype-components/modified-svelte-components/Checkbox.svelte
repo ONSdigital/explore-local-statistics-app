@@ -8,7 +8,7 @@
 		columns = 1;
 </script>
 
-<div class="checkbox-container" stlye="">
+<div class="checkbox-container">
 	<p class="checkbox-title">{title}</p>
 
 	<div class="checkbox-labels-container checkbox-labels-container-{columns}-columns">
