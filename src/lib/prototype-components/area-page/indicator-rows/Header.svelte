@@ -1,21 +1,9 @@
 <script lang="ts">
-	import AddRemoveComparisonAreas from '$lib/prototype-components/AddRemoveComparisonAreas.svelte';
-	import EditTimePeriod from '$lib/prototype-components/temporary/EditTimePeriod.svelte';
-	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
-
-	export let metadata,
-		combinedSelectableAreaTypesObject,
-		visibleAreasWithData,
-		areasCodesForAreasWithData;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
+	export let metadata, areasGroupObject, comparisonGroupsArray;
+	export let comparisonMeasureOrArea, additionalComparisonAreas;
 </script>
 
-<div class="row-container-split">
+<!-- <div class="row-container-split">
 	<div class="row-container">
 		<AddRemoveComparisonAreas
 			{metadata}
@@ -40,10 +28,10 @@
 		<InfoButton fill="white"></InfoButton>
 		<span>How to read these charts</span>
 	</div>
-</div>
+</div> -->
 
 <style>
-	.row-container-split {
+	/* .row-container-split {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -72,5 +60,5 @@
 		text-align: end;
 		border-radius: 4px;
 		cursor: pointer;
-	}
+	} */
 </style>

@@ -1,10 +1,10 @@
 <script>
 	import { colorsLookup } from '$lib/config';
 
-	export let role, label, chosenRelatedAreasArray;
+	export let role, label, chosenRelatedAreasId;
 
 	const onClickEvent = () => {
-		chosenRelatedAreasArray = chosenRelatedAreasArray.filter((el) => el != role);
+		chosenRelatedAreasId = 'none';
 	};
 
 	$: backgroundColor = colorsLookup[role].color;

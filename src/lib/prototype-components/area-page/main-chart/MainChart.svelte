@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
+	import Tabs from '$lib/prototype-components/modified-svelte-components/Tabs.svelte';
 	import Dropdown from '$lib/prototype-components/modified-svelte-components/Dropdown.svelte';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
@@ -8,7 +8,7 @@
 
 	export let combinedSelectableAreaTypesObject, chartData, metadata, chosenIndicatorId;
 	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
+		chosenRelatedAreasId,
 		chosenSameRegionArray,
 		chosenCountriesArray,
 		chosenRegionsArray,
@@ -72,8 +72,8 @@
 	);
 </script>
 
-<Radio name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
-></Radio>
+<Tabs name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
+></Tabs>
 
 <div class="main-chart-container">
 	<Dropdown
@@ -97,7 +97,7 @@
 				{filteredChartDataForVisibleAreas}
 				{selectedIndicatorCalculations}
 				bind:chosenParentAreasArray
-				bind:chosenRelatedAreasArray
+				bind:chosenRelatedAreasId
 				bind:chosenSameRegionArray
 				bind:chosenCountriesArray
 				bind:chosenRegionsArray

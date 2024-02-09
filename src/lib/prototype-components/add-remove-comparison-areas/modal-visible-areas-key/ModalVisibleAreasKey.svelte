@@ -4,7 +4,7 @@
 
 	export let visibleAreasWithData, combinedSelectableAreaTypesObject;
 	export let chosenParentAreasArray,
-		chosenRelatedAreasArray,
+		chosenRelatedAreasId,
 		chosenSameRegionArray,
 		chosenCountriesArray,
 		chosenRegionsArray,
@@ -28,14 +28,14 @@
 		<VisibleRelatedAreas
 			role="sameRegion"
 			label={combinedSelectableAreaTypesObject.sameRegion.label}
-			bind:chosenRelatedAreasArray
+			bind:chosenRelatedAreasId
 		></VisibleRelatedAreas>
 	{/if}
 	{#if visibleAreasWithData[1].some((el) => el.role === 'similar')}
 		<VisibleRelatedAreas
 			role="similar"
 			label={combinedSelectableAreaTypesObject.similar.label}
-			bind:chosenRelatedAreasArray
+			bind:chosenRelatedAreasId
 		></VisibleRelatedAreas>
 	{/if}
 </div>
