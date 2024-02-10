@@ -60,8 +60,11 @@ export default async function main() {
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
 	const combined_data_with_geog_level = combined_data
-		.join_left(areas_geog_level, ['areacd'])
-		.select(aq.not('period'))
+		.derive({
+			areacd_prefix: (d) => aq.op.substring(d.areacd, 0, 3)
+		})
+		.join_left(areas_geog_level, ['areacd_prefix'])
+		.select(aq.not('areacd_prefix', 'period'))
 		.filter((d) => d.value !== null);
 
 	const geog_levels = uniqueValuesInColumn(areas_geog_level, 'level').filter((d) => d !== 'other');
