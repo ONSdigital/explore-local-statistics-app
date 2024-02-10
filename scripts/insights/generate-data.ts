@@ -108,7 +108,7 @@ function generateOutConfig(config, combinedDataObject) {
 
 	const areasGeogInfoObject = toLookup(config.areasGeogInfo, 'areacd');
 
-	const areasGeogLevelObject = makeAreasGeogLevelObject(config.areasGeogLevel);
+	const areasGeogLevelObject = makeAreasGeogLevelObject(config.areas, config.areasGeogLevel);
 
 	const areasArray = makeAreasArray(config);
 	const areasObject = toLookup(areasArray, 'areacd');
@@ -197,8 +197,10 @@ function makeAreasArray(config) {
 		el.countrycd = areaParentObject.countrycd;
 		el.countrynm = areaParentObject.countrynm;
 
+		const areacd_prefix = el.areacd.slice(0, 3);
+
 		const areaGeogLevel = config.areasGeogLevel
-			.filter((elm) => elm.areacd === el.areacd)
+			.filter((elm) => elm.areacd_prefix === areacd_prefix)
 			.map((elm) => elm.level);
 
 		el.geogLevel =
@@ -211,13 +213,18 @@ function makeAreasArray(config) {
 	return areasArray;
 }
 
-function makeAreasGeogLevelObject(areasGeogLevel) {
+function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 	const result = {};
-	for (const place of areasGeogLevel) {
-		result[place.level] = [];
+	for (const item of areasGeogLevel) {
+		result[item.level] = [];
 	}
-	for (const place of areasGeogLevel) {
-		result[place.level].push(place.areacd);
+	for (const place of areas) {
+		const areacd_prefix = place.areacd.slice(0, 3);
+		for (const item of areasGeogLevel) {
+			if (areacd_prefix === item.areacd_prefix) {
+				result[item.level].push(place.areacd);
+			}
+		}
 	}
 	return result;
 }
