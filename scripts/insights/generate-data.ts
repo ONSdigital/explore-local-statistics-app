@@ -19,6 +19,8 @@ async function main() {
 	config.indicators = indicators.objects();
 	config.indicatorsCalculations = indicatorsCalculations.objects();
 
+	checkSlugs(config.indicatorsMetadata);
+
 	const outData = generateOutData(data, config.indicators);
 	writeFileSync(
 		DATA_OUTPUT_PATH,
@@ -42,6 +44,22 @@ async function main() {
 	const outConfig = generateOutConfig(config, outData.combinedDataObject);
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
+}
+
+function checkSlugs(indicatorsMetadata) {
+	const slugs = indicatorsMetadata.map((d) => d.slug);
+	const slugsSet = new Set(slugs);
+	if (slugsSet.size !== slugs.length) {
+		throw new Error('Error: At least one indicator slug is duplicated!');
+	}
+	const slugRegExp = new RegExp('^[a-z0-9-]*$');
+	for (const slug of slugs) {
+		if (!slugRegExp.test(slug)) {
+			throw new Error(
+				`Error: Slug ${slug} should only contain lowercase letters, numbers, and hyphens!`
+			);
+		}
+	}
 }
 
 function generateOutData(data, indicatorsArray) {
