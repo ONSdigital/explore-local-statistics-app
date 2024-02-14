@@ -39,7 +39,10 @@
 </script>
 
 <Breadcrumb
-	links={[{ label: 'Home', href: '/', refresh: true }, { label: 'Explore local statistics' }]}
+	links={[
+		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+		{ label: 'Explore local statistics' }
+	]}
 	background="#eaeaea"
 />
 <Titleblock title="Explore local statistics" background="#eaeaea">
