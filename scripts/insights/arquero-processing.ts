@@ -3,13 +3,14 @@ import { median, mad } from './stats.ts';
 import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
 import { loadCsvWithoutBom, readJsonSync } from './io.ts';
-import { abortIfMissingMetadata } from './data-processing-warnings.ts';
 import {
+	abortIfMissingMetadata,
 	abortIfNewIndicatorCodesExist,
 	abortIfNewPeriodsExist,
-	abortIfMultiplePeriodGroupsForOneIndicator
+	abortIfMultiplePeriodGroupsForOneIndicator,
+	abortIfNewFilesExist
 } from './data-processing-warnings.ts';
-import { abortIfNewFilesExist } from './data-processing-warnings.ts';
+import { checkedJoin } from './table-utils.ts';
 import CONFIG from './config.ts';
 
 export default async function main() {
@@ -30,9 +31,9 @@ export default async function main() {
 	abortIfNewPeriodsExist(periods, combined_data);
 	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
 
-	combined_data = combined_data
-		.join_left(periods.select('period', 'xDomainNumb'), ['period'])
-		.select(aq.not('period'));
+	combined_data = checkedJoin(combined_data, periods.select('period', 'xDomainNumb'), 'period', {
+		expectAllOnLeft: false
+	}).select(aq.not('period'));
 
 	const [indicators, indicators_calculations] = getIndicatorsCalculations(
 		previousIndicators,
@@ -40,10 +41,9 @@ export default async function main() {
 		areas_geog_level
 	);
 
-	combined_data = indicators
-		.select('id', 'code')
-		.join_left(combined_data, ['code'])
-		.select(aq.not('code'));
+	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code').select(
+		aq.not('code')
+	);
 
 	fs.writeFileSync(`${CONFIG.CSV_DIR}/combined-data.csv`, combined_data.toCSV());
 	fs.writeFileSync(`${CONFIG.CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
@@ -59,11 +59,13 @@ export default async function main() {
 }
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
-	const combined_data_with_geog_level = combined_data
-		.derive({
+	const combined_data_with_geog_level = checkedJoin(
+		combined_data.derive({
 			areacd_prefix: (d) => aq.op.substring(d.areacd, 0, 3)
-		})
-		.join_left(areas_geog_level, ['areacd_prefix'])
+		}),
+		areas_geog_level,
+		'areacd_prefix'
+	)
 		.select(aq.not('areacd_prefix', 'period'))
 		.filter((d) => d.value !== null);
 
