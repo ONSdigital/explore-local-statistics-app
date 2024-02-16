@@ -1,7 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
+	import { AnalyticsBanner, PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
+
+	const analyticsId = 'GTM-P8JVL5X5';
+	const analyticsProps = {
+		contentTitle: 'Explore local statistics',
+		releaseDate: '20240326',
+		contentType: 'exploratory',
+		outputSeries: 'localstatistics'
+	};
 </script>
 
 <svelte:head>
@@ -15,6 +23,7 @@
 
 <div class="flex flex-col min-h-screen">
 	<div class="flex-grow">
+		<AnalyticsBanner {analyticsId} {analyticsProps} />
 		<PhaseBanner phase="beta" />
 		<Header bilingual={false} />
 		<main>
