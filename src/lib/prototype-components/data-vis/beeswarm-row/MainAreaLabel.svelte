@@ -85,7 +85,7 @@
 				fill={colorsLookup.main.color}
 				stroke={colorsLookup.main.color}
 				>{indicator.metadata.prefix +
-					addThousandsSeparator(roundNumber(circle.datum.value, indicator.metadata.decimalPlaces)) +
+					addThousandsSeparator(roundNumber(label.datum.value, indicator.metadata.decimalPlaces)) +
 					indicator.metadata.suffix}</text
 			>
 		</g>

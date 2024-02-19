@@ -1,21 +1,41 @@
 <script lang="ts">
-	import MainAreaLabel from '$lib/prototype-components/data-vis/beeswarm-row/MainAreaLabel.svelte';
-
 	import { chartConfigurations, colorsLookup } from '$lib/config.js';
 
-	export let indicator, circle, y, medianLabelRect, x, selectedIndicatorCalculations;
+	export let circle,
+		y,
+		outline = false;
+
+	$: role = 'role' in circle.datum ? circle.datum.role : 'main';
 </script>
 
-<circle
-	cx={circle.x}
-	cy={y(circle.y)}
-	r={chartConfigurations.beeswarmRow.primaryRadius}
-	stroke="white"
-	stroke-width="1.5px"
-	fill={colorsLookup[circle.datum.role].color}
-></circle>
+<g transform="translate({circle.x},{2 * y(circle.y)})">
+	{#if ['parent', 'country', 'uk', 'median'].includes(role)}
+		<rect
+			transform={['country', 'uk', 'median'].includes(role) ? 'rotate(45)' : null}
+			x={-chartConfigurations.beeswarmRow.primaryRadius * 0.75}
+			y={-chartConfigurations.beeswarmRow.primaryRadius * 0.75}
+			width={2 * chartConfigurations.beeswarmRow.primaryRadius * 0.75}
+			height={2 * chartConfigurations.beeswarmRow.primaryRadius * 0.75}
+			fill={outline ? 'none' : colorsLookup[role].color}
+			stroke="white"
+			stroke-width={outline ? '2.5px' : '0px'}
+		></rect>
+	{:else}
+		<circle
+			r={chartConfigurations.beeswarmRow.primaryRadius}
+			stroke="white"
+			stroke-width={outline ? '3px' : '0px'}
+			fill={outline ? 'none' : colorsLookup[role].color}
+		></circle>
+	{/if}
+</g>
 
-{#if medianLabelRect && circle.datum.role === 'main'}
-	<MainAreaLabel {indicator} {medianLabelRect} {circle} {x} {y} {selectedIndicatorCalculations}
-	></MainAreaLabel>
-{/if}
+<style>
+	rect {
+		pointer-events: none;
+	}
+
+	circle {
+		pointer-events: none;
+	}
+</style>

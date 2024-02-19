@@ -16,6 +16,8 @@
 	let metadata = data.metadata;
 	let chartData = data.chartData;
 
+	$: console.log(metadata);
+
 	//////// defining initial area data ///////
 
 	// define the selected area (with role = main)
@@ -25,6 +27,15 @@
 			...el,
 			role: 'main'
 		}))[0];
+
+	// filter indicators to exclude any where there is no data for the selected area
+	$: filteredIndicators = metadata.indicatorsCodeLabelArray.filter(
+		(el) =>
+			chartData.combinedDataObject[el.code].filter(
+				(elm) => elm.areacd === selectedArea.areacd && elm.value
+			).length > 0
+	);
+	$: filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
 
 	// determine codes for parent, country and uk areas
 	// country area is null if the the selected area or parent area is a country, uk area is set to null if the parent area is the uk
@@ -206,13 +217,20 @@
 <AreaNav areas={metadata.areasArray}></AreaNav>
 
 <NavSections contentsLabel="Explore this area">
-	<TopicSections {metadata} {areasGroupsObject} {comparisonGroupsArray} {chartData}></TopicSections>
+	<TopicSections
+		{metadata}
+		{areasGroupsObject}
+		{comparisonGroupsArray}
+		{chartData}
+		{filteredIndicatorsCodes}
+	></TopicSections>
 
 	<NavSection title="Select an indicator">
 		<MainChartSection
 			combinedSelectableAreaTypesObject={areasGroupsObject}
 			{chartData}
 			{metadata}
+			{filteredIndicators}
 			bind:chosenParentAreasArray
 			bind:chosenRelatedAreasId
 			bind:chosenSameRegionArray

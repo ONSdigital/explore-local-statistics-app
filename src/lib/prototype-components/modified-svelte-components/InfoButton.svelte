@@ -5,8 +5,7 @@
 
 <div class="infoCell">
 	<svg
-		width="20"
-		height="20"
+		style="width: 20; height: 20;"
 		class="c h-16 w-16 inline svelte-nloqxl"
 		viewBox={expandIcon ? '4 6 40 40' : '0 2 48 48'}
 		><path

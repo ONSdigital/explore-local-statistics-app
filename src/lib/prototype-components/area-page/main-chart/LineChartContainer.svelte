@@ -63,7 +63,7 @@
 
 	$: values = []
 		.concat(...filteredChartDataForVisibleAreas.map((el) => [el.value, el.lci, el.uci]))
-		.filter((el) => el != 'NA');
+		.filter((el) => el);
 
 	$: yDomainRaw = [0.95 * Math.min(...values), 1.05 * Math.max(...values)];
 

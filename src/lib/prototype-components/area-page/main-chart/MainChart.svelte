@@ -6,7 +6,11 @@
 
 	import { mainChartOptionsArray } from '$lib/config';
 
-	export let combinedSelectableAreaTypesObject, chartData, metadata, chosenIndicatorId;
+	export let combinedSelectableAreaTypesObject,
+		chartData,
+		metadata,
+		chosenIndicatorId,
+		filteredIndicators;
 	export let chosenParentAreasArray,
 		chosenRelatedAreasId,
 		chosenSameRegionArray,
@@ -19,7 +23,7 @@
 		(el) =>
 			el.code === selectedIndicator.code &&
 			el.period === selectedIndicator.maxXDomainNumb &&
-			el.geog_level === combinedSelectableAreaTypesObject.selected.area.geogLevel
+			el.geog_level === 'lower'
 	);
 
 	////
@@ -78,7 +82,7 @@
 <div class="main-chart-container">
 	<Dropdown
 		name="select-indicator"
-		optionsArray={metadata.indicatorsCodeLabelArray}
+		optionsArray={filteredIndicators}
 		bind:chosenId={chosenIndicatorId}
 	></Dropdown>
 

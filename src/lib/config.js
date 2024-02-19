@@ -55,7 +55,7 @@ export let abbreviatedNamesObject = {
 
 export const colorsLookup = {
 	main: { color: '#003C57', contrast: 'white' },
-	parent: { color: '#746CB1', contrast: 'white' },
+	parent: { color: '#F66068', contrast: 'white' },
 	country: { color: '#118C7B', contrast: 'white' },
 	uk: { color: '#00A3A6', contrast: 'white' },
 	sameRegion: { color: '#d4d4d4', contrast: '#222' },
@@ -65,19 +65,22 @@ export const colorsLookup = {
 	custom3: { color: '#871a5b', contrast: 'white' },
 	custom4: { color: '#27a0cc', contrast: '#222' },
 	selected: { color: '#F39431', contrast: 'white' },
-	median: { color: '#F66068', contrast: 'white' }
+	median: { color: '#746CB1', contrast: 'white' }
 };
 
 export const madRangeLookup = {
-	default: { 'line-chart': 1, 'beeswarm-row': 3 },
+	default: { 'line-chart': 1, 'beeswarm-row': 3, 'line-chart-row': 1 },
 	'4g-coverage': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' },
 	'gross-median-weekly-pay': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' }
 };
 
 export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
-	lineChartRow: { markerRadius: { first: 2, last: 4, other: 2 } },
-	beeswarmRow: { backgroundRadius: 5, primaryRadius: 8 }
+	lineChartRow: { markerRadius: { first: 4, last: 5, other: 3.5 } },
+	beeswarmRow: {
+		backgroundRadius: { 20: 8, 50: 7, 100: 6.5, 200: 5.5, default: 5 },
+		primaryRadius: 8
+	}
 };
 
 export const geogLevelToNameLookup = {

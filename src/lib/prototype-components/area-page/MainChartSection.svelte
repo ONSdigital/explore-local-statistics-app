@@ -4,7 +4,11 @@
 
 	import { onMount } from 'svelte';
 
-	export let combinedSelectableAreaTypesObject, chartData, metadata, visibleAreas;
+	export let combinedSelectableAreaTypesObject,
+		chartData,
+		metadata,
+		visibleAreas,
+		filteredIndicators;
 	export let chosenParentAreasArray,
 		chosenRelatedAreasId,
 		chosenSameRegionArray,
@@ -15,7 +19,7 @@
 	let chosenIndicatorId;
 
 	onMount(() => {
-		chosenIndicatorId = metadata.indicatorsCodeLabelArray[6];
+		chosenIndicatorId = filteredIndicators[0];
 	});
 </script>
 
@@ -25,6 +29,7 @@
 			{combinedSelectableAreaTypesObject}
 			{chartData}
 			{metadata}
+			{filteredIndicators}
 			{visibleAreas}
 			bind:chosenIndicatorId
 			bind:chosenParentAreasArray

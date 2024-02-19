@@ -1,7 +1,13 @@
 <script>
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let titleText, unitDescriptionText, additionalText;
+	export let showVisuals,
+		xDomain,
+		selectedAreaMinXDomain,
+		selectedAreaMaxXDomain,
+		titleText,
+		unitDescriptionText,
+		additionalText;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -20,11 +26,23 @@
 </script>
 
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
-	<span style="font-weight: bold"
-		>{titleText}<span style="font-weight: normal"
-			>{unitDescriptionText === '' ? '' : ', ' + unitDescriptionText}</span
-		><InfoButton {expandIcon}></InfoButton></span
-	>
+	{#if showVisuals}
+		<span style="font-weight: bold"
+			>{titleText}<span style="font-weight: normal"
+				>{unitDescriptionText === '' ? '' : ', ' + unitDescriptionText}</span
+			><InfoButton {expandIcon}></InfoButton></span
+		>
+	{:else}
+		<span style="text-align: left;">
+			<span>No data for</span>
+			<span style="font-weight: bold">{titleText}</span>
+			<span
+				>{xDomain[1] < selectedAreaMinXDomain
+					? 'before ' + selectedAreaMinXDomain
+					: 'after ' + selectedAreaMaxXDomain}</span
+			><InfoButton {expandIcon}></InfoButton>
+		</span>
+	{/if}
 </button>
 
 {#if displayAdditional}
@@ -42,7 +60,7 @@
 		font-family: inherit;
 		border: none;
 		background: none;
-		margin: 10px 0px;
+		margin: 10px 5px;
 		padding: 0px;
 		font-size: 18px;
 		line-height: 24px;

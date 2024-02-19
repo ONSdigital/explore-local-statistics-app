@@ -1,24 +1,21 @@
 <script lang="ts">
 	import BackgroundCircles from '$lib/prototype-components/data-vis/beeswarm-row/BackgroundCircles.svelte';
-	import PrimaryCircles from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryCircles.svelte';
-	import MedianLine from '$lib/prototype-components/data-vis/beeswarm-row/MedianLine.svelte';
+	import PrimaryCirclesAndLabels from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryCirclesAndLabels.svelte';
 
 	import { onMount } from 'svelte';
 	import { scaleLinear } from 'd3-scale';
 
 	export let topRow,
+		metadata,
 		indicator,
-		combinedSelectableAreaTypesObject,
-		selectedIndicatorCalculations,
-		timePeriod,
-		visibleAreasWithData,
-		filteredBackgroundChartData,
-		filteredChartDataForVisibleAreas;
+		selectedAreaFilteredChartDataBeeswarm,
+		comparisonAreaFilteredChartDataBeeswarm,
+		areasGroupsObject,
+		chosenComparisonMeasureOrArea,
+		backgroundChartDataBeeswarm;
 	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
 
 	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
-
-	let medianLabelRect;
 
 	let mounted = false;
 
@@ -31,35 +28,31 @@
 
 {#if mounted}
 	<BackgroundCircles
-		{combinedSelectableAreaTypesObject}
-		{indicator}
-		{filteredBackgroundChartData}
+		{metadata}
+		{backgroundChartDataBeeswarm}
 		{x}
 		{xDomain}
 		{chartWidth}
 		{chartHeight}
 		{spaceForOutliers}
+		{indicator}
+		bind:hoverId
+		bind:hoverIndicatorId
 	></BackgroundCircles>
 {/if}
 
-<MedianLine
-	{topRow}
-	{indicator}
-	{selectedIndicatorCalculations}
-	{x}
-	{chartHeight}
-	bind:medianLabelRect
-></MedianLine>
-
-<PrimaryCircles
-	{indicator}
-	{combinedSelectableAreaTypesObject}
-	{filteredChartDataForVisibleAreas}
-	{x}
-	{xDomain}
-	{chartWidth}
-	{chartHeight}
-	{spaceForOutliers}
-	{medianLabelRect}
-	{selectedIndicatorCalculations}
-></PrimaryCircles>
+<g opacity={hoverId ? 0 : 1}>
+	<PrimaryCirclesAndLabels
+		{topRow}
+		{indicator}
+		{comparisonAreaFilteredChartDataBeeswarm}
+		{selectedAreaFilteredChartDataBeeswarm}
+		{areasGroupsObject}
+		{chosenComparisonMeasureOrArea}
+		{x}
+		{xDomain}
+		{chartWidth}
+		{chartHeight}
+		{spaceForOutliers}
+	></PrimaryCirclesAndLabels>
+</g>

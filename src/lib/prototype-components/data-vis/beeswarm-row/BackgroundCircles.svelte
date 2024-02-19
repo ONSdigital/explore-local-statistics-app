@@ -1,79 +1,71 @@
 <script lang="ts">
 	import BackgroundCircle from '$lib/prototype-components/data-vis/beeswarm-row/BackgroundCircle.svelte';
+	import HoverCircle from '$lib/prototype-components/data-vis/beeswarm-row/HoverCircle.svelte';
+	import HoverLabel from '$lib/prototype-components/data-vis/beeswarm-row/HoverLabel.svelte';
+	import HoverLabelName from '$lib/prototype-components/data-vis/beeswarm-row/HoverLabelName.svelte';
 
+	import { calculateBackgroundCirclesRadius } from '$lib/utils.js';
+	import { chartConfigurations } from '$lib/config.js';
 	import { AccurateBeeswarm } from 'accurate-beeswarm-plot';
 	import { scaleLinear } from 'd3-scale';
 
-	export let indicator,
-		combinedSelectableAreaTypesObject,
-		filteredBackgroundChartData,
+	export let metadata,
+		backgroundChartDataBeeswarm,
 		x,
 		xDomain,
-		chartHeight,
 		chartWidth,
-		spaceForOutliers;
+		chartHeight,
+		spaceForOutliers,
+		indicator,
+		hoverId,
+		hoverIndicatorId;
 
-	$: backgroundCircleDataStep1 = filteredBackgroundChartData.map((el) => ({
+	$: backgroundRadius = calculateBackgroundCirclesRadius(
+		backgroundChartDataBeeswarm.length,
+		chartConfigurations.beeswarmRow.backgroundRadius
+	);
+
+	$: backgroundCircleDataStep1 = backgroundChartDataBeeswarm.map((el) => ({
 		...el,
 		xPosition:
 			el.value < xDomain[0]
 				? -spaceForOutliers / 2
 				: el.value > xDomain[1]
 					? chartWidth + spaceForOutliers / 2
-					: x(el.value),
-		role: combinedSelectableAreaTypesObject.sameRegion.codes.includes(el.areacd)
-			? 'sameRegion'
-			: combinedSelectableAreaTypesObject.similar.codes.includes(el.areacd)
-				? 'similar'
-				: null
+					: x(el.value)
 	}));
 
 	$: backgroundCircleDataStep2 = new AccurateBeeswarm(
 		backgroundCircleDataStep1,
-		5,
+		backgroundRadius / 2,
 		(d) => d.xPosition
 	)
 		.oneSided()
 		.calculateYPositions();
 
-	$: yDomain = [0, Math.max(...backgroundCircleDataStep2.map((el) => el.y))];
+	$: yDomain = [0, Math.max(chartHeight, ...backgroundCircleDataStep2.map((el) => el.y))];
 
 	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
 
-	$: sameRegionCircles = combinedSelectableAreaTypesObject.visible.relatedAreas.some(
-		(el) => el.role === 'sameRegion'
-	)
-		? backgroundCircleDataStep2.filter((el) => el.datum.role === 'sameRegion')
-		: [];
-
-	$: similarCircles = combinedSelectableAreaTypesObject.visible.relatedAreas.some(
-		(el) => el.role === 'similar'
-	)
-		? backgroundCircleDataStep2.filter((el) => el.datum.role === 'similar')
-		: [];
-
-	$: allOtherCircles = backgroundCircleDataStep2.filter(
-		(el) => !combinedSelectableAreaTypesObject.visible.relatedCodes.includes(el.datum.areacd)
-	);
+	$: hoverArea = hoverId
+		? backgroundCircleDataStep2.find((el) => el.datum.areacd === hoverId)
+		: null;
 </script>
 
 <g class="background-circles-group" opacity="0.5">
-	{#each allOtherCircles as circle, index}
-		<BackgroundCircle {circle} {y} arrayLength={backgroundCircleDataStep2.length} {index}
+	{#each backgroundCircleDataStep2 as circle}
+		<BackgroundCircle {circle} {y} {backgroundRadius} {indicator} bind:hoverId bind:hoverIndicatorId
 		></BackgroundCircle>
 	{/each}
 </g>
-<g class="same-region-circles-group">
-	{#if sameRegionCircles.length > 0}
-		{#each sameRegionCircles as circle, index}
-			<BackgroundCircle {circle} {y}></BackgroundCircle>
-		{/each}
+
+{#if hoverArea}
+	<HoverCircle circle={hoverArea} {y} outline={true}></HoverCircle>
+	<HoverLabel area={hoverArea} {y} {indicator} {chartHeight} {chartWidth} {spaceForOutliers}
+	></HoverLabel>
+	{#if hoverIndicatorId === indicator.code}
+		<HoverLabelName {metadata} area={hoverArea} {y} {chartHeight} {chartWidth} {spaceForOutliers}
+		></HoverLabelName>
 	{/if}
-</g>
-<g class="similar-circles-group">
-	{#if similarCircles.length > 0}
-		{#each similarCircles as circle, index}
-			<BackgroundCircle {circle} {y}></BackgroundCircle>
-		{/each}
-	{/if}
-</g>
+	<HoverCircle circle={hoverArea} {y} outline={false}></HoverCircle>
+{/if}

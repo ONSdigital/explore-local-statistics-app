@@ -2,7 +2,7 @@
 	import { colorsLookup, chartConfigurations } from '$lib/config';
 	import { line } from 'd3-shape';
 
-	export let area, x, y, xDomain, hoverId;
+	export let area, x, y, xDomain;
 
 	$: pathFunction = line()
 		.x((d) => {
@@ -12,106 +12,87 @@
 			return y(d.value);
 		});
 
-	$: backgroundColor = colorsLookup[hoverId === area.areacd ? 'selected' : area.role].color;
-	$: textColor = colorsLookup[hoverId === area.areacd ? 'selected' : area.role].contrast;
-
-	const onMouseEnterEvent = () => {
-		hoverId = area.areacd;
-	};
-
-	const onMouseLeaveEvent = () => {
-		hoverId = undefined;
-	};
+	$: markerScaleFactors =
+		area.data.length < 5
+			? [1, 1]
+			: area.data.length < 10
+				? [0.9, 0.8]
+				: area.data.length < 15
+					? [0.8, 0.5]
+					: area.data.length < 20
+						? [0.7, 0.2]
+						: [0.4, 0.1];
 </script>
 
-<g
-	class="line-{area.areacd}"
-	opacity={hoverId
-		? hoverId === area.areacd
-			? 1
-			: 0.1
-		: ['similar', 'sameRegion'].includes(area.role)
-			? 1
-			: 1}
->
+<g class="line-group">
 	<path
 		class="primary-line"
 		d={pathFunction(area.data)}
 		fill="none"
-		stroke={backgroundColor}
-		stroke-width={!['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd
-			? '2px'
-			: '1.5px'}
+		stroke={colorsLookup[area.role].color}
+		stroke-width="2px"
 	></path>
 
-	{#if !['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd}
-		<g class="markers-group">
-			{#each area.data as point}
-				<g transform="translate({x(point.xDomainNumb)},{y(point.value)})">
-					{#if ['parent', 'country', 'uk'].includes(area.role)}
-						<rect
-							transform={['country', 'uk'].includes(area.role) ? 'rotate(45)' : null}
-							x={-chartConfigurations.lineChartRow.markerRadius[
+	<g class="markers-group">
+		{#each area.data as point}
+			<g transform="translate({x(point.xDomainNumb)},{y(point.value)})">
+				{#if ['parent', 'country', 'uk', 'median'].includes(area.role)}
+					<rect
+						transform={['country', 'uk', 'median'].includes(area.role) ? 'rotate(45)' : null}
+						x={-markerScaleFactors[0] *
+							chartConfigurations.lineChartRow.markerRadius[
 								point.xDomainNumb === xDomain[0]
 									? 'first'
 									: point.xDomainNumb === xDomain[1]
 										? 'last'
 										: 'other'
 							]}
-							y={-chartConfigurations.lineChartRow.markerRadius[
+						y={-markerScaleFactors[0] *
+							chartConfigurations.lineChartRow.markerRadius[
 								point.xDomainNumb === xDomain[0]
 									? 'first'
 									: point.xDomainNumb === xDomain[1]
 										? 'last'
 										: 'other'
 							]}
-							width={2 *
-								chartConfigurations.lineChartRow.markerRadius[
-									point.xDomainNumb === xDomain[0]
-										? 'first'
-										: point.xDomainNumb === xDomain[1]
-											? 'last'
-											: 'other'
-								]}
-							height={2 *
-								chartConfigurations.lineChartRow.markerRadius[
-									point.xDomainNumb === xDomain[0]
-										? 'first'
-										: point.xDomainNumb === xDomain[1]
-											? 'last'
-											: 'other'
-								]}
-							fill={backgroundColor}
-							stroke="white"
-							stroke-width="1px"
-						></rect>
-					{:else}
-						<circle
-							r={chartConfigurations.lineChartRow.markerRadius[
+						width={2 *
+							markerScaleFactors[0] *
+							chartConfigurations.lineChartRow.markerRadius[
 								point.xDomainNumb === xDomain[0]
 									? 'first'
 									: point.xDomainNumb === xDomain[1]
 										? 'last'
 										: 'other'
 							]}
-							stroke="white"
-							stroke-width="0.5px"
-							fill={backgroundColor}
-						></circle>
-					{/if}
-				</g>
-			{/each}
-		</g>
-	{/if}
-
-	<path
-		class="overlay-line"
-		on:mouseenter={onMouseEnterEvent}
-		on:mouseleave={onMouseLeaveEvent}
-		d={pathFunction(area.data)}
-		fill="none"
-		stroke={'black'}
-		stroke-width={'20px'}
-		opacity={0}
-	></path>
+						height={2 *
+							markerScaleFactors[0] *
+							chartConfigurations.lineChartRow.markerRadius[
+								point.xDomainNumb === xDomain[0]
+									? 'first'
+									: point.xDomainNumb === xDomain[1]
+										? 'last'
+										: 'other'
+							]}
+						fill={colorsLookup[area.role].color}
+						stroke="white"
+						stroke-width="{markerScaleFactors[1] * 1.5}px"
+					></rect>
+				{:else}
+					<circle
+						r={markerScaleFactors[0] *
+							chartConfigurations.lineChartRow.markerRadius[
+								point.xDomainNumb === xDomain[0]
+									? 'first'
+									: point.xDomainNumb === xDomain[1]
+										? 'last'
+										: 'other'
+							]}
+						stroke="white"
+						stroke-width="{markerScaleFactors[1] * 1.5}px"
+						fill={colorsLookup[area.role].color}
+					></circle>
+				{/if}
+			</g>
+		{/each}
+	</g>
 </g>

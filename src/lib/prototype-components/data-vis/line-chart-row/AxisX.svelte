@@ -12,12 +12,12 @@
 
 	{#each [timePeriodsArray[0], timePeriodsArray[timePeriodsArray.length - 1]] as d, i}
 		<g class="tick" transform="translate({x(d.xDomainNumb)},0)">
-			<line y1="0" y2="8"></line>
+			<line y1={[3, 0][i]} y2="12"></line>
 
 			{#if i === 0}
-				<text bind:contentRect={xAxisFinalTick} text-anchor="middle" y={20}>{d.xDomainNumb}</text>
+				<text bind:contentRect={xAxisFinalTick} text-anchor="middle" y={24}>{d.xDomainNumb}</text>
 			{:else}
-				<text text-anchor="middle" y={20}>{d.xDomainNumb}</text>
+				<text text-anchor="middle" y={24}>{d.xDomainNumb}</text>
 			{/if}
 		</g>
 	{/each}

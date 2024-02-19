@@ -20,7 +20,7 @@
 			<path
 				d="M10 0 l0 18"
 				stroke={colorsLookup[role].color}
-				stroke-dasharray="3 1.5"
+				stroke-dasharray={role === 'median' ? '3 1.5' : null}
 				stroke-width="2px"
 			></path>
 

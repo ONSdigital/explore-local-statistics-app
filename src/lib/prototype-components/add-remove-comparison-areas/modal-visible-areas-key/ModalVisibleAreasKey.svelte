@@ -10,7 +10,7 @@
 		chosenRegionsArray,
 		chosenAllOtherArray;
 
-	$: console.log(visibleAreasWithData[1]);
+	$: console.log(visibleAreasWithData);
 </script>
 
 <div class="visible-areas-container">

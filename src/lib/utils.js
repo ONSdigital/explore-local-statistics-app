@@ -1,4 +1,9 @@
-import { abbreviatedNamesObject, addTheArray, areaPluralObject } from '$lib/config';
+import {
+	abbreviatedNamesObject,
+	addTheArray,
+	areaPluralObject,
+	chartConfigurations
+} from '$lib/config';
 
 export function haveCommonElements(arr1, arr2) {
 	for (const element of arr1) {
@@ -40,10 +45,18 @@ export function generateDivisibleNumbersWithinRange(range, divisor) {
 	const result = [];
 
 	for (let num = Math.ceil(range[0] / divisor) * divisor; num <= range[1]; num += divisor) {
-		result.push(num);
+		// Use toFixed to limit the number of decimal places
+		const formattedNumber = parseFloat(num.toFixed(getDecimalPlaces(divisor)));
+		result.push(formattedNumber);
 	}
 
 	return result;
+}
+
+// Function to determine the number of decimal places in a number
+function getDecimalPlaces(number) {
+	const decimalPart = number.toString().split('.')[1];
+	return decimalPart ? decimalPart.length : 0;
 }
 
 export function generateNumbersIncrementFromMaxValue(range, increment) {
@@ -167,4 +180,97 @@ export function generateComparisonAreaGroups(
 			}
 		];
 	}
+}
+
+export function calculateLabelMidpoints(
+	comparisonX,
+	selectedAreaX,
+	comparisonLabelWidth,
+	selectedAreaLabelWidth,
+	chartWidth,
+	spaceForOutliers
+) {
+	if (
+		(!comparisonLabelWidth && !selectedAreaLabelWidth) ||
+		(comparisonLabelWidth === 0 && selectedAreaLabelWidth === 0)
+	) {
+		return { comparison: 0, selectedArea: 0 };
+	}
+
+	let boundedComparisonX = Math.min(
+		Math.max(comparisonLabelWidth / 2 - spaceForOutliers / 2, comparisonX),
+		chartWidth + spaceForOutliers / 2 - comparisonLabelWidth / 2
+	);
+
+	let boundedSelectedAreaX = Math.min(
+		Math.max(selectedAreaLabelWidth / 2 - spaceForOutliers / 2, selectedAreaX),
+		chartWidth + spaceForOutliers / 2 - selectedAreaLabelWidth / 2
+	);
+
+	if (!comparisonX) {
+		return { comparison: 0, selectedArea: boundedSelectedAreaX };
+	} else if (!selectedAreaX) {
+		return { comparison: boundedComparisonX, selectedArea: 0 };
+	} else if (
+		(boundedComparisonX - comparisonLabelWidth / 2 <=
+			boundedSelectedAreaX + selectedAreaLabelWidth / 2 &&
+			boundedComparisonX + comparisonLabelWidth / 2 >=
+				boundedSelectedAreaX - selectedAreaLabelWidth / 2) ||
+		(boundedSelectedAreaX - selectedAreaLabelWidth / 2 <=
+			boundedComparisonX + comparisonLabelWidth / 2 &&
+			boundedSelectedAreaX + selectedAreaLabelWidth / 2 >=
+				boundedComparisonX - comparisonLabelWidth / 2)
+	) {
+		if (
+			selectedAreaX <= comparisonX &&
+			boundedComparisonX - comparisonLabelWidth / 2 - selectedAreaLabelWidth < -spaceForOutliers / 2
+		) {
+			return {
+				comparison: selectedAreaLabelWidth - spaceForOutliers / 2 + comparisonLabelWidth / 2,
+				selectedArea: selectedAreaLabelWidth / 2 - spaceForOutliers / 2
+			};
+		} else if (
+			selectedAreaX >= comparisonX &&
+			boundedComparisonX + comparisonLabelWidth / 2 + selectedAreaLabelWidth >
+				chartWidth + spaceForOutliers / 2
+		) {
+			return {
+				comparison:
+					chartWidth + spaceForOutliers / 2 - selectedAreaLabelWidth - comparisonLabelWidth / 2,
+				selectedArea: chartWidth + spaceForOutliers / 2 - selectedAreaLabelWidth / 2
+			};
+		} else {
+			if (boundedSelectedAreaX < boundedComparisonX) {
+				console.log(boundedComparisonX - comparisonLabelWidth / 2 - selectedAreaLabelWidth / 2);
+				return {
+					comparison: boundedComparisonX,
+					selectedArea: boundedComparisonX - comparisonLabelWidth / 2 - selectedAreaLabelWidth / 2
+				};
+			} else {
+				return {
+					comparison: boundedComparisonX,
+					selectedArea: boundedComparisonX + comparisonLabelWidth / 2 + selectedAreaLabelWidth / 2
+				};
+			}
+		}
+	}
+
+	return { comparison: boundedComparisonX, selectedArea: boundedSelectedAreaX };
+}
+
+export function calculateBackgroundCirclesRadius(value, breakpoints) {
+	let result;
+	for (const breakpoint in breakpoints) {
+		if (value < breakpoint) {
+			result = breakpoints[breakpoint];
+			break;
+		}
+	}
+
+	// If no breakpoint is found, use the default output (if provided)
+	if (result === undefined && 'default' in breakpoints) {
+		result = breakpoints['default'];
+	}
+
+	return result;
 }

@@ -5,12 +5,22 @@
 
 	import { onMount } from 'svelte';
 
-	export let metadata, areasGroupsObject, comparisonGroupsArray, chartData;
+	export let metadata, areasGroupsObject, comparisonGroupsArray, chartData, filteredIndicatorsCodes;
 
 	let chosenComparisonMeasureOrArea, chosenAdditionalComparisonAreasGroup;
 
 	let startXDomainNumb = 'Earliest available data',
 		endXDomainNumb = 'Latest available data';
+
+	$: backgroundAreasCodes = chosenAdditionalComparisonAreasGroup
+		? {
+				'all-siblings': areasGroupsObject.sameGeogLevel.codes,
+				'same-parent-siblings': areasGroupsObject.sameRegion.codes,
+				'similar-siblings': areasGroupsObject.similar.codes,
+				'local-authority-children': areasGroupsObject.children.laCodes,
+				'region-children': areasGroupsObject.children.regionCodes
+			}[chosenAdditionalComparisonAreasGroup.name]
+		: null;
 </script>
 
 <div class="topic-sections-container">
@@ -34,6 +44,8 @@
 			{chosenAdditionalComparisonAreasGroup}
 			{startXDomainNumb}
 			{endXDomainNumb}
+			{backgroundAreasCodes}
+			{filteredIndicatorsCodes}
 		></TopicSection>
 	{/each}
 </div>
