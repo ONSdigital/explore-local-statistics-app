@@ -29,7 +29,7 @@
 	{#if showVisuals}
 		<span style="font-weight: bold"
 			>{titleText}<span style="font-weight: normal"
-				>{unitDescriptionText === '' ? '' : ', ' + unitDescriptionText}</span
+				>{unitDescriptionText ? ', ' + unitDescriptionText : ''}</span
 			><InfoButton {expandIcon}></InfoButton></span
 		>
 	{:else}
