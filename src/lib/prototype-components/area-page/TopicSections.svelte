@@ -24,7 +24,7 @@
 </script>
 
 <div class="topic-sections-container">
-	<EditTimePeriod {metadata} bind:startXDomainNumb bind:endXDomainNumb></EditTimePeriod>
+	<!-- <EditTimePeriod {metadata} bind:startXDomainNumb bind:endXDomainNumb></EditTimePeriod> -->
 
 	<SelectComparisons
 		{metadata}
@@ -36,6 +36,7 @@
 
 	{#each metadata.topicsArray as topic, i}
 		<TopicSection
+			{i}
 			{topic}
 			{areasGroupsObject}
 			{chartData}

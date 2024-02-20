@@ -35,7 +35,9 @@
 				(elm) => elm.areacd === selectedArea.areacd && elm.value
 			).length > 0
 	);
-	$: filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
+	$: filteredIndicatorsCodes = filteredIndicators
+		.filter((el) => el.code != '4g-coverage')
+		.map((el) => el.code);
 
 	// determine codes for parent, country and uk areas
 	// country area is null if the the selected area or parent area is a country, uk area is set to null if the parent area is the uk
@@ -194,10 +196,10 @@
 	);
 
 	onMount(() => {
-		/*chosenParentAreasArray = [
+		chosenParentAreasArray = [
 			parentArea === undefined ? undefined : parentArea.areacd,
-			countryArea === undefined ? undefined : countryArea.areacd
-		];*/
+			ukArea === undefined ? undefined : ukArea.areacd
+		];
 		chosenRelatedAreasId = 'none';
 	});
 </script>

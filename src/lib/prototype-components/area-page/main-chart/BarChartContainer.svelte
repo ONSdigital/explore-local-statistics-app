@@ -1,8 +1,6 @@
 <script lang="ts">
 	import AddRemoveComparisonAreas from '$lib/prototype-components/AddRemoveComparisonAreas.svelte';
-	import LineChart from '$lib/prototype-components/data-vis/LineChart.svelte';
-	import HoverKey from '$lib/prototype-components/data-vis/line-chart/HoverKey.svelte';
-	import RelatedAreasKey from '$lib/prototype-components/data-vis/line-chart/RelatedAreasKey.svelte';
+	import BarChart from '$lib/prototype-components/data-vis/BarChart.svelte';
 
 	import { madRangeLookup } from '$lib/config';
 
@@ -21,18 +19,17 @@
 		chosenRegionsArray,
 		chosenAllOtherArray;
 
-	let width = 1000,
-		height = 500;
+	let width = 1000;
+	$: height = filteredChartDataForVisibleAreas.length * 80 + 100;
 
-	let yAxisMaxTickWidth = 0,
-		xAxisFinalTickWidth = null,
+	let xAxisFinalTickWidth = null,
 		maxLabelWidth = null;
 
 	$: padding = {
-		top: 10,
-		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 17),
+		top: 30,
+		right: 20,
 		bottom: 30,
-		left: 10 + yAxisMaxTickWidth
+		left: 10 + maxLabelWidth
 	};
 
 	$: chartWidth = width - padding.left - padding.right;
@@ -120,7 +117,7 @@
 	<svg {width} {height}>
 		<g transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
-				<LineChart
+				<BarChart
 					{selectedIndicator}
 					{timePeriodsArray}
 					{chartWidth}
@@ -131,10 +128,8 @@
 					bind:isHoverLabelVisible
 					bind:hoverId
 					bind:hoverAreaWithDataAdded
-					bind:yAxisMaxTickWidth
-					bind:xAxisFinalTickWidth
 					bind:maxLabelWidth
-				></LineChart>
+				></BarChart>
 			{/if}
 		</g>
 	</svg>

@@ -47,9 +47,30 @@
 
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">
-		{#each additionalText as paragraph}
+		<!-- {#each additionalText as paragraph}
 			<p>{paragraph}</p>
-		{/each}
+		{/each} -->
+
+		<p>
+			<span style="font-weight: bold">Definition: </span>The proportion of people aged between 16
+			and 64 years who are not in employment but do not meet the internationally accepted definition
+			of unemployment because they have not been seeking work within the last four weeks or they are
+			unable to start work in the next two weeks.
+		</p>
+
+		<p>
+			<span style="font-weight: bold">Published by: </span>
+
+			<a>Office for National Statistics</a>
+		</p>
+
+		<p>
+			<span style="font-weight: bold">Further data available at: </span>
+
+			<a
+				>https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousReleases</a
+			>
+		</p>
 	</div>
 {/if}
 

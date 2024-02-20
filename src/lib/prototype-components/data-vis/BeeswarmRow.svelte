@@ -22,7 +22,7 @@
 	onMount(() => {
 		setTimeout(function () {
 			mounted = true;
-		}, 2000);
+		}, 200);
 	});
 </script>
 

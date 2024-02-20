@@ -3,6 +3,7 @@
 	import Dropdown from '$lib/prototype-components/modified-svelte-components/Dropdown.svelte';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
+	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
 
 	import { mainChartOptionsArray } from '$lib/config';
 
@@ -44,9 +45,7 @@
 		chartOptionsArray.find((el) => el.id === chosenChartId) === undefined
 			? chartOptionsArray[0].id
 			: chosenChartId;
-	$: selectedChartType = chartOptionsArray[chosenChartId];
-
-	////
+	$: selectedChartType = chartOptionsArray.find((el) => el.id === chosenChartId);
 
 	$: filteredChartData = chartData.combinedDataObject[selectedIndicator.code].filter(
 		(el) => el.value != 'NA'
@@ -74,6 +73,8 @@
 	$: filteredChartDataForVisibleAreas = filteredChartData.filter((el) =>
 		visibleAreasWithDataCodes.includes(el.areacd)
 	);
+
+	$: console.log(selectedChartType);
 </script>
 
 <Tabs name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
@@ -107,6 +108,25 @@
 				bind:chosenRegionsArray
 				bind:chosenAllOtherArray
 			></LineChartContainer>
+		{:else if selectedChartType.label === 'Bar chart'}
+			<BarChartContainer
+				{selectedIndicator}
+				{metadata}
+				{combinedSelectableAreaTypesObject}
+				{areasCodesForAreasWithData}
+				{visibleAreasWithData}
+				{timePeriodsArray}
+				filteredChartDataForVisibleAreas={filteredChartDataForVisibleAreas.filter(
+					(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
+				)}
+				{selectedIndicatorCalculations}
+				bind:chosenParentAreasArray
+				bind:chosenRelatedAreasId
+				bind:chosenSameRegionArray
+				bind:chosenCountriesArray
+				bind:chosenRegionsArray
+				bind:chosenAllOtherArray
+			></BarChartContainer>
 		{/if}
 	</div>
 </div>

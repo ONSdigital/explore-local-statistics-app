@@ -77,12 +77,14 @@
 						? 'Good'
 						: 'Neither'
 				: 'Neither';
-	$: backgroundStyle =
+	/*$: backgroundStyle =
 		goodBad === 'Good'
 			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
 			: goodBad === 'Bad'
 				? 'background-color: #FDE0EF; box-shadow: 0 0 4px 3px #FDE0EF'
-				: '';
+				: '';*/
+
+	$: backgroundStyle = '';
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>

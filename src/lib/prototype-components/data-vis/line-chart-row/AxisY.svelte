@@ -36,7 +36,7 @@
 
 			<text bind:contentRect={ticksWidthArray[i]} text-anchor="end" x="-10" y="5" font-size="16px"
 				>{selectedIndicator.metadata.prefix +
-					addThousandsSeparator(d) +
+					(d > 1000 ? d / 1000 + 'K' : addThousandsSeparator(d)) +
 					selectedIndicator.metadata.suffix}</text
 			>
 		</g>
