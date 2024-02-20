@@ -26,7 +26,10 @@
 		<div class:visuallyhidden={!(open || (!compact && i === 0))}>
 			<h3 class="title-indicators">{capitalise(topic.name)}</h3>
 			<ul class="list-indicators">
-				{#each topic.subTopics.map((sub) => sub.indicators).flat() as ind}
+				{#each topic.subTopics
+					.map((sub) => sub.indicators)
+					.flat()
+					.sort((a, b) => a.metadata.label.localeCompare(b.metadata.label)) as ind}
 					<li>
 						<a href="{base}/datasets/{ind.code}/" class="indicator-link">
 							<span>{ind.metadata.label}</span>
