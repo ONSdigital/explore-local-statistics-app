@@ -20,7 +20,7 @@ export const regions = [
 export let mainChartOptionsArray = [
 	{ id: 0, label: 'Time series', multiYear: 'Yes' },
 	{ id: 1, label: 'Bar chart', multiYear: 'No' },
-	{ id: 2, label: 'Distribution', multiYear: 'No' },
+	{ id: 2, label: 'Beeswarm', multiYear: 'No' },
 	{ id: 3, label: 'Map', multiYear: 'No' },
 	{ id: 4, label: 'Table', multiYear: 'Either' }
 ];
