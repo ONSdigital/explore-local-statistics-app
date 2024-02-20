@@ -20,10 +20,15 @@
 
 	let geoGroup, year, columns;
 	let pivotedData, mapData;
-	let selected = null;
+	let selected = [];
 
 	const getUnit = (ind) => (ind.unit && ind.unit !== 'NA' ? ind.unit : ind.subText);
-	const doSelect = (e) => (selected = e.detail.id);
+	const doSelect = (e) => {
+		const area = e.detail?.area;
+		if (selected.map((s) => s.areacd).includes(area.areacd))
+			selected = selected.filter((s) => s.areacd !== area.areacd);
+		else if (selected.length < 5) selected = [...selected, area];
+	};
 	const refreshData = () => {
 		pivotedData = geoGroup?.codes ? pivotData(data.data, geoGroup?.codes) : [];
 		mapData =

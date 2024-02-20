@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
 	//@ts-nocheck
 	import { createEventDispatcher } from 'svelte';
 
 	export let data;
 	export let hovered = null;
-	export let selected = null;
+	export let selected = [];
 	export let lineWidth = 3;
 	export let height = 15;
 	export let breaks;
@@ -16,9 +16,14 @@
 		'rgba(0,13,84,.8)'
 	];
 	export let formatTick = (d) => d.toFixed(0);
-	export let prefix = '';
 	export let suffix = '';
 	export let snapTicks = true;
+	export let markerColors = ['#206095', '#a8bd3a', '#871a5b', '#27a0cc', 'grey'];
+	export let markerPadding = 4;
+
+	let container, width;
+	let labels = [];
+	let maxOffset = 0;
 
 	const dispatch = createEventDispatcher();
 
@@ -37,7 +42,7 @@
 	};
 
 	const doSelect = (e, d) => {
-		selected = d.areacd;
+		// if (!selected.map((d) => d.areacd).includes(d.areacd)) selected = [...selected, d];
 		dispatch('select', { id: selected, d, e });
 	};
 
@@ -54,31 +59,132 @@
 		return reverseIndex.map((i) => cells[i]);
 	};
 
+	function positionLabels(selectedData, labels, container) {
+		const other = (side) => (side === 'left' ? 'right' : 'left');
+		const clash = (lab1, lab2) => {
+			const minMax = (l) =>
+				l.align === 'right' ? [l.pos, l.pos + l.width] : [l.pos - l.width, l.pos];
+			const l1 = minMax(lab1);
+			const l2 = minMax(lab2);
+			const clash = !(l1[1] < l2[0] || l1[0] > l2[1]);
+			return !(l1[1] < l2[0] || l1[0] > l2[1]);
+		};
+		const filteredLabels = labels.filter((l) => l);
+		if (selectedData && container && filteredLabels.length === selectedData.length) {
+			const sortIndex = Array.from(selectedData.keys()).sort(
+				(a, b) => selectedData[a].value - selectedData[b].value
+			);
+			const sortedData = sortIndex.map((i) => selectedData[i]);
+			const sortedLabels = sortIndex.map((i) => filteredLabels[i]);
+			let labs = [];
+			const containerLeft = container.offsetLeft;
+			const containerRight = containerLeft + container.offsetWidth;
+			for (let i = 0; i < sortedLabels.length; i++) {
+				const lab = {
+					...sortedData[i],
+					pos: sortedLabels[i].offsetLeft,
+					width: sortedLabels[i].offsetWidth + markerPadding
+				};
+				const labelLeft = lab.pos - lab.width;
+				const labelRight = lab.pos + lab.width;
+				if (
+					labelLeft >= containerLeft &&
+					(labelLeft - containerLeft < containerRight - labelRight || labelRight >= containerRight)
+				)
+					lab.align = 'left';
+				else lab.align = 'right';
+				labs.push(lab);
+			}
+			const sides = {
+				right: labs.filter((l) => l.align === 'right').reverse(),
+				left: labs.filter((l) => l.align === 'left')
+			};
+
+			const positionedLabels = [];
+			let offset = 0;
+			let side = sides.left.length > sides.right.length ? 'left' : 'right';
+			while (sides.right.length + sides.left.length > 0) {
+				if (sides[side].length === 0) side = other(side);
+				const label = sides[side].shift();
+				positionedLabels.push({ ...label, offset });
+				const next = sides[other(side)].length > 0 ? sides[other(side)][0] : sides[side][0];
+				if (next && positionedLabels.filter((p) => p.offset === offset).some((p) => clash(p, next)))
+					offset += 1;
+				side = other(side);
+			}
+			maxOffset = offset;
+			return selectedData.map((d) => positionedLabels.find((p) => p.areacd === d.areacd));
+		} else {
+			maxOffset = 0;
+			return [...selectedData];
+		}
+	}
+
 	$: cells = makeCells(data.map((d) => d.value));
+	$: selectedData = selected.map((s) => data.find((d) => d.areacd === s.areacd));
+	$: positionedData = positionLabels(selectedData, labels, container, width);
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="container" style:height="{height}px" on:mouseleave={doHover}>
+<div
+	class="container"
+	style:height="{height}px"
+	style:margin-top="{32 + maxOffset * 20}px"
+	on:mouseleave={doHover}
+	bind:this={container}
+	bind:clientWidth={width}
+>
 	{#each breaks.slice(1) as brk, i}
 		<div
 			class="block"
-			style:width="{100 / (breaks.length - 1)}%"
-			style:left="{i * (100 / (breaks.length - 1))}%"
-			style:background-color={colors[i]}
+			style="width: {100 / (breaks.length - 1)}%; left: {i *
+				(100 / (breaks.length - 1))}%; background-color: {colors[i]};"
 		/>
-		<div class="line" style:left="{i * (100 / (breaks.length - 1))}%" />
+		<div class="line" style="left: {i * (100 / (breaks.length - 1))}%;" />
 		<div
 			class="tick"
-			style:left="{i * (100 / (breaks.length - 1))}%"
-			style:transform="translateX({i == 0 && snapTicks ? '-2px' : '-50%'})"
+			style="left: {i * (100 / (breaks.length - 1))}%; transform: translateX({i == 0 && snapTicks
+				? '-2px'
+				: '-50%'});"
 		>
 			{formatTick(breaks[i])}
 		</div>
 	{/each}
-	<div class="line" style:right="0" />
-	<div class="tick" style:right="0" style:transform="translateX({snapTicks ? '2px' : '50%'})">
-		{prefix}{formatTick(breaks[breaks.length - 1])}{suffix}
+	<div class="line" style="right: 0;" />
+	<div class="tick" style="right: 0; transform: translateX({snapTicks ? '2px' : '50%'});">
+		{formatTick(breaks[breaks.length - 1])}{suffix}
 	</div>
+	{#if Array.isArray(positionedData)}
+		{#each positionedData as d, i}
+			<div style:opacity={d.areacd === hovered ? null : hovered ? '30%' : null}>
+				<div
+					class="marker"
+					style:width="{lineWidth}px"
+					style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
+					style:top="{-20 - (d.offset || 0) * 20}px"
+					style:height="calc(100% + {20 + (d.offset || 0) * 20}px)"
+					style:background-color={d.areacd === hovered
+						? 'orange'
+						: markerColors[i % markerColors.length]}
+				/>
+				<div
+					class="value"
+					style:left="{pos(d.value, breaks)}%"
+					style:transform={d.align === 'left'
+						? `translateX(-100%) translateX(-${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`
+						: `translateX(${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`}
+					style:color={d.areacd === hovered ? 'orange' : markerColors[i % markerColors.length]}
+					bind:this={labels[i]}
+				>
+					{#if d.align === 'left'}
+						{d.areanm} {d.value}{suffix}
+					{:else}
+						{d.value}{suffix} {d.areanm}
+					{/if}
+				</div>
+			</div>
+		{/each}
+	{/if}
 	{#each data as d, i (d.areacd)}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
@@ -88,28 +194,26 @@
 			on:mouseenter={(e) => doHover(e, d)}
 			on:click={(e) => doSelect(e, d)}
 		/>
-		{#if hovered === d.areacd}
+		{#if hovered === d.areacd && !(selected[0] && selected.map((s) => s.areacd).includes(d.areacd))}
 			<div
-				class="marker"
-				style:width="{lineWidth}px"
-				style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
+				class="marker marker-hovered"
+				style="width: {lineWidth}px; left: calc({pos(d.value, breaks)}% - {lineWidth / 2}px);"
 			/>
-			<div class="value">{d.areanm}, {prefix}{formatTick(d.value)}{suffix}</div>
-		{:else if selected === d.areacd && selected !== hovered}
 			<div
-				class="marker"
-				style:width="{lineWidth}px"
-				style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
-				style:opacity={hovered ? 0.4 : 1}
-			/>
-			{#if !hovered}<div class="value">{d.areanm}, {prefix}{formatTick(d.value)}{suffix}</div>{/if}
+				class="value value-hovered"
+				style:left="{pos(d.value, breaks)}%"
+				style:transform="translateX({markerPadding}px)"
+			>
+				{d.value}{suffix}
+				{d.areanm}
+			</div>
 		{/if}
 	{/each}
 </div>
 
 <style>
 	.container {
-		margin: 30px 0 24px 0;
+		margin: 0 0 24px 0;
 		box-sizing: border-box;
 		position: relative;
 		width: 100%;
@@ -136,24 +240,23 @@
 	.marker {
 		position: absolute;
 		z-index: 2;
-		top: -5px;
-		width: 0;
-		height: 0;
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-top: 18px solid currentColor;
+		background-color: black;
 		pointer-events: none;
-		transform: translateX(-8px);
+		top: -20px;
+		height: calc(100% + 20px);
 	}
 	.value {
-		font-size: 16px;
 		position: absolute;
-		top: -30px;
+		z-index: 100;
+		top: -24px;
 		text-align: center;
-		/* transform: translateX(-50%); */
 		background-color: rgba(255, 255, 255, 0.8);
+		white-space: nowrap;
 	}
 	.marker-hovered {
+		background-color: orange;
+	}
+	.value-hovered {
 		color: orange;
 	}
 </style>

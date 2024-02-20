@@ -8,38 +8,41 @@
 
 	export let data;
 	export let breaks;
-	export let selected;
-	export let hovered;
-	export let unit;
+	export let selected = [];
+	export let hovered = null;
+	export let unit = '';
 	export let dp = 0;
-
-	let features;
-
-	const dispatch = createEventDispatcher();
-	const colors = [
+	export let colors = [
 		'rgb(234, 236, 177)',
 		'rgb(169, 216, 145)',
 		'rgb(0, 167, 186)',
 		'rgb(0, 78, 166)',
 		'rgb(0, 13, 84)'
 	];
-	const topoPath = `${base}/data/topo.json`;
+	export let markerColors = ['#206095', '#a8bd3a', '#871a5b', '#27a0cc', 'grey'];
+	export let topoPath = `${base}/data/topo.json`;
+
+	let features;
+
+	const dispatch = createEventDispatcher();
 
 	function doHover(e) {
-		hovered = e.detail?.feature?.properties?.areacd || e.detail?.d?.areacd;
-		dispatch('hover', { id: hovered, e });
+		const area = e.detail?.feature?.properties || e.detail?.d;
+		hovered = area?.areacd;
+		dispatch('hover', { id: hovered, area, e });
 	}
 
 	function doSelect(e) {
-		selected = e.detail?.feature?.properties?.areacd || e.detail?.d?.areacd;
-		dispatch('select', { id: selected, e });
+		const area = e.detail?.feature?.properties || e.detail?.d;
+		dispatch('select', { id: area?.areacd, area, e });
 	}
 
 	const featureCollection = (features, data) => ({
 		type: 'FeatureCollection',
-		features: data.map((d) => {
+		features: data.map((d, i) => {
 			const feature = features[d.areacd];
-			feature.properties = { ...d, color: colors[d.cluster] };
+			feature.properties = { ...d, color: data.length < 6 ? markerColors[i] : colors[d.cluster] };
+			console.log(d, i, feature.properties.color);
 			return feature;
 		})
 	});
@@ -76,8 +79,9 @@
 					let:hovered
 					on:hover={doHover}
 					select
-					{selected}
 					on:select={doSelect}
+					highlight
+					highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
 				/>
 				<MapLayer
 					id="lines"
@@ -93,15 +97,31 @@
 							'case',
 							['==', ['feature-state', 'hovered'], true],
 							'orange',
-							['==', ['feature-state', 'selected'], true],
-							'black',
 							'rgba(255,255,255,0)'
 						],
 						'line-width': 2
 					}}
-					order="place_other"
+					order="place_suburb"
 				/>
 			</MapSource>
+			{#if selected[0]}
+				<MapSource
+					id="selected"
+					type="geojson"
+					data={featureCollection(features, selected)}
+					promoteId="areacd"
+				>
+					<MapLayer
+						id="selected"
+						type="line"
+						paint={{
+							'line-color': ['get', 'color'],
+							'line-width': 2
+						}}
+						order="place_other"
+					/>
+				</MapSource>
+			{/if}
 		{/if}
 	</Map>
 </div>
