@@ -112,6 +112,15 @@
 					promoteId="areacd"
 				>
 					<MapLayer
+						id="selected-outline"
+						type="line"
+						paint={{
+							'line-color': 'white',
+							'line-width': 3.5
+						}}
+						order="place_other"
+					/>
+					<MapLayer
 						id="selected"
 						type="line"
 						paint={{
