@@ -100,6 +100,7 @@
 				<Map
 					data={mapData.data}
 					breaks={mapData.breaks}
+					geos={data.geos}
 					unit={getUnit(data.indicator.metadata)}
 					dp={+data.indicator.metadata.decimalPlaces}
 					{selected}

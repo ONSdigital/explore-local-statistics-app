@@ -249,6 +249,13 @@ export const geoTypesLookup = (() => {
 	return lkp;
 })();
 
+export const countryLookup = {
+	E92000001: 'England',
+	N92000002: 'Northern Ireland',
+	S92000003: 'Scotland',
+	W92000004: 'Wales'
+};
+
 export const regionLookup = {
 	E12000001: 'North East',
 	E12000002: 'North West',
@@ -259,10 +266,7 @@ export const regionLookup = {
 	E12000007: 'London',
 	E12000008: 'South East',
 	E12000009: 'South West',
-	E92000001: 'England',
-	N92000002: 'Northern Ireland',
-	S92000003: 'Scotland',
-	W92000004: 'Wales'
+	...countryLookup
 };
 
 export const regionReverseLookup = (() => {

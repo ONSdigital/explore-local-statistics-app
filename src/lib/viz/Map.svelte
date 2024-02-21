@@ -2,12 +2,15 @@
 	//@ts-nocheck
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { base } from '$app/paths';
+	import bbox from '@turf/bbox';
 	import { makeFeatures } from '$lib/util/geo/makeFeatures';
+	import { countryLookup } from '$lib/config/geoConfig';
 	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
 	import BreaksChart from './BreaksChart.svelte';
 
 	export let data;
 	export let breaks;
+	export let geos;
 	export let selected = [];
 	export let hovered = null;
 	export let unit = '';
@@ -19,10 +22,10 @@
 		'rgb(0, 78, 166)',
 		'rgb(0, 13, 84)'
 	];
-	export let markerColors = ['#206095', '#a8bd3a', '#871a5b', '#27a0cc', 'grey'];
+	export let markerColors = ['#003C57', '#206095', '#a8bd3a', '#871a5b', '#27a0cc'];
 	export let topoPath = `${base}/data/topo.json`;
 
-	let features;
+	let features, bounds;
 
 	const dispatch = createEventDispatcher();
 
@@ -42,27 +45,34 @@
 		features: data.map((d, i) => {
 			const feature = features[d.areacd];
 			feature.properties = { ...d, color: data.length < 6 ? markerColors[i] : colors[d.cluster] };
-			console.log(d, i, feature.properties.color);
 			return feature;
 		})
 	});
 
-	onMount(async () => (features = await makeFeatures(topoPath)));
+	onMount(async () => {
+		features = await makeFeatures(topoPath);
+		const countryCodes = Object.keys(countryLookup).filter((c) => geos.ctrys.includes(c[0]));
+		const geojson = featureCollection(
+			features,
+			countryCodes.map((c) => ({ areacd: c }))
+		);
+		bounds = bbox(geojson);
+	});
 </script>
 
 <div class="map-container">
-	<Map
-		style="{base}/data/mapstyle.json"
-		location={{ bounds: [-8.65, 49.8823, 1.7637, 60.8608] }}
-		options={{
-			fitBoundsOptions: { padding: 10 },
-			maxBounds: [-19, 48, 12, 62],
-			cooperativeGestures: true,
-			preserveDrawingBuffer: true
-		}}
-		controls
-	>
-		{#if features}
+	{#if features && bounds}
+		<Map
+			style="{base}/data/mapstyle.json"
+			location={{ bounds }}
+			options={{
+				fitBoundsOptions: { padding: 10 },
+				maxBounds: [-19, 48, 12, 62],
+				cooperativeGestures: true,
+				preserveDrawingBuffer: true
+			}}
+			controls
+		>
 			<MapSource
 				id="features"
 				type="geojson"
@@ -131,8 +141,8 @@
 					/>
 				</MapSource>
 			{/if}
-		{/if}
-	</Map>
+		</Map>
+	{/if}
 </div>
 <BreaksChart
 	{data}

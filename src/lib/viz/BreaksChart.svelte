@@ -18,7 +18,7 @@
 	export let formatTick = (d) => d.toFixed(0);
 	export let suffix = '';
 	export let snapTicks = true;
-	export let markerColors = ['#206095', '#a8bd3a', '#871a5b', '#27a0cc', 'grey'];
+	export let markerColors = ['#003C57', '#206095', '#a8bd3a', '#871a5b', '#27a0cc'];
 	export let markerPadding = 4;
 
 	let container, width;
