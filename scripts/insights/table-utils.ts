@@ -21,9 +21,13 @@ export function checkedJoin(
 	let setsDiffer = false;
 	if (expectAllOnLeft && [...setB].some((d) => !setA.has(d))) {
 		setsDiffer = true;
+		console.log('Present in right set but not in left:');
+		console.log([...setB].filter((d) => !setA.has(d)));
 	}
 	if (expectAllOnRight && [...setA].some((d) => !setB.has(d))) {
 		setsDiffer = true;
+		console.log('Present in left set but not in right:');
+		console.log([...setA].filter((d) => !setB.has(d)));
 	}
 	if (setsDiffer) {
 		throw new Error(
