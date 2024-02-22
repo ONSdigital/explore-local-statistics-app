@@ -1,0 +1,125 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Local labour market indicators for Northern Ireland
+          - Label: Local labour market indicators for Northern Ireland
+          - Issued: 2023-11-28T11:44:00
+          - Modified: 2023-12-07T19:18:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- northern-ireland
+		-- annual-population-survey
+		-- labour-market
+		-- paid-work
+		-- region
+		-- subnational
+		-- local-authority
+          - Contact Point: None
+          - Identifier: Local labour market indicators for Northern Ireland
+          - Comment: Employment rate and economic inactivity rate for people aged between 16 and 64 years, Northern Ireland, 2022.
+          - Description: This dataset shows:
+		
+		Employment rate age 16 to 64 
+		 - the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from 
+		
+		Economic inactivity rate age 16 to 64 
+		 - the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks 
+		
+		 In Northern Ireland, for 2022.
+		
+		### Coverage 
+		
+		Northern Ireland
+		
+		### Geography definition
+		
+		Local Government Districts, 
+		Nation (Northern Ireland)
+		
+		### Source
+		
+		 - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/labour-force-survey) 
+		
+		
+		### Source Notes and Caveats 
+		Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
+		
+		Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
+		
+		Time series data is available at [NISRA](https://www.nisra.gov.uk/publications/labour-market-status-sub-population-tables). 
+		
+		Because the Labour Force Survey (LFS) is a sample survey, results are subject to sampling error, i.e. the actual proportion of the population in private households with a particular characteristic may differ from the proportion of the LFS sample with that characteristic. 
+		
+		The population totals used for the latest LFS estimates use projected growth rates from RTI data for UK, EU and non-EU populations based on 2021 patterns. The total population used for the LFS therefore does not take into account any changes in migration, birth rates, death rates etc. since June 2021 and hence levels estimates may be under- or over-estimating the true values and should be used with caution. Estimates of rates will, however, be robust.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Local labour market indicators for Northern Ireland
+    - Columns: 
+                           Title         Type  Required                                                                                Property URL Observations Column Titles
+                          AREACD    Dimension      True        local-labour-market-indicators-for-northern-ireland.csv#dimension/ons-geography-code                           
+                          AREANM    Dimension      True                 local-labour-market-indicators-for-northern-ireland.csv#dimension/area-name                           
+                       Geography    Dimension      True            local-labour-market-indicators-for-northern-ireland.csv#dimension/geography-type                           
+                          Period    Dimension      True                      local-labour-market-indicators-for-northern-ireland.csv#dimension/year                           
+                            Unit   Suppressed     False                                                                                        None                           
+                       Indicator     Measures      True                                                http://purl.org/linked-data/cube#measureType                Observation
+                     Observation Observations     False                local-labour-market-indicators-for-northern-ireland.csv#measure/{+indicator}                           
+    Lower_confidence_interval_95    Attribute     False local-labour-market-indicators-for-northern-ireland.csv#attribute/lower-confidence-interval                           
+    Upper_confidence_interval_95    Attribute     False local-labour-market-indicators-for-northern-ireland.csv#attribute/upper-confidence-interval                           
+                       Numerator    Attribute     False                 local-labour-market-indicators-for-northern-ireland.csv#attribute/numerator                           
+                           Total    Attribute     False      local-labour-market-indicators-for-northern-ireland.csv#attribute/number-of-population                           
+              Observation_status    Attribute     False        local-labour-market-indicators-for-northern-ireland.csv#attribute/observation-status                           
+    - Columns where suppress output is true: 
+    		-- Unit
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Observations: 24
+        - Number of Duplicates: 0
+        - First 10 Observations: 
+   AREACD                              AREANM                Geography  Period Unit       Indicator  Observation  Lower_confidence_interval_95  Upper_confidence_interval_95  Numerator   Total  Observation_status
+n92000002                    northern-ireland                   nation    2022    % employment-rate         71.9                          70.9                          73.0     841000 1169000                 NaN
+n09000001             antrim-and-newtownabbey local-authority-district    2022    % employment-rate         74.8                          71.1                          78.5      69000   92000                 NaN
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district    2022    % employment-rate         75.2                          72.1                          78.4     102000  136000                 NaN
+n09000003                             belfast local-authority-district    2022    % employment-rate         65.5                          62.9                          68.2     144000  220000                 NaN
+n09000004            causeway-coast-and-glens local-authority-district    2022    % employment-rate         67.6                          63.0                          72.1      53000   78000                 NaN
+n09000005             derry-city-and-strabane local-authority-district    2022    % employment-rate         67.6                          63.4                          71.9      59000   88000                 NaN
+n09000006                 fermanagh-and-omagh local-authority-district    2022    % employment-rate         73.3                          69.1                          77.6      50000   68000                 NaN
+n09000007             lisburn-and-castlereagh local-authority-district    2022    % employment-rate         75.0                          71.5                          78.5      74000   98000                 NaN
+n09000008                 mid-and-east-antrim local-authority-district    2022    % employment-rate         76.9                          73.2                          80.5      67000   87000                 NaN
+n09000009                          mid-ulster local-authority-district    2022    % employment-rate         73.8                          70.1                          77.5      68000   92000                 NaN
+        - Last 10 Observations: 
+   AREACD                              AREANM                Geography  Period Unit                Indicator  Observation  Lower_confidence_interval_95  Upper_confidence_interval_95  Numerator  Total  Observation_status
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district    2022    % economic-inactivity-rate         22.6                          19.6                          25.7      31000 136000                 NaN
+n09000003                             belfast local-authority-district    2022    % economic-inactivity-rate         32.1                          29.5                          34.8      71000 220000                 NaN
+n09000004            causeway-coast-and-glens local-authority-district    2022    % economic-inactivity-rate         30.1                          25.6                          34.5      24000  78000                 NaN
+n09000005             derry-city-and-strabane local-authority-district    2022    % economic-inactivity-rate         30.6                          26.4                          34.8      27000  88000                 NaN
+n09000006                 fermanagh-and-omagh local-authority-district    2022    % economic-inactivity-rate         25.2                          21.0                          29.3      17000  68000                 NaN
+n09000007             lisburn-and-castlereagh local-authority-district    2022    % economic-inactivity-rate         23.4                          20.0                          26.7      23000  98000                 NaN
+n09000008                 mid-and-east-antrim local-authority-district    2022    % economic-inactivity-rate         22.1                          18.5                          25.6      19000  87000                 NaN
+n09000009                          mid-ulster local-authority-district    2022    % economic-inactivity-rate         25.1                          21.5                          28.8      23000  92000                 NaN
+n09000010               newry-mourne-and-down local-authority-district    2022    % economic-inactivity-rate         24.6                          21.2                          27.9      27000 110000                 NaN
+n09000011                 ards-and-north-down local-authority-district    2022    % economic-inactivity-rate         25.2                          21.7                          28.6      25000 100000                 NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                 Measure    Unit  Count
+economic-inactivity-rate Percent     12
+         employment-rate Percent     12
+        

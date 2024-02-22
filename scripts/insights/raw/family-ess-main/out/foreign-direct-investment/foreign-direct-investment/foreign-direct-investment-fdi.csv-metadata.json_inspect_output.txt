@@ -1,0 +1,113 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Foreign direct investment (FDI)
+          - Label: Foreign direct investment (FDI)
+          - Issued: 2024-01-12T13:05:58.143797
+          - Modified: 2024-02-05T13:05:58.143797
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/businessindustryandtrade/internationaltrade
+          - Keywords: 
+		-- investment-flows
+		-- stocks
+		-- business-investment
+		-- international-territorial-level
+		-- subnational
+          - Contact Point: None
+          - Identifier: Foreign direct investment (FDI)
+          - Comment: Total FDI international investment position in the UK (inward) and abroad (outward) at end period (Official Statistics in Development), Great Britain (Northern Ireland national figure included), 2015-2021.
+          - Description: This dataset shows the total FDI international investment position in the UK (inward) and abroad (outward) at end period (Official Statistics in Development), in Great Britain (Northern Ireland national figure included), for 2015-2021. To see these figures presented visually, please refer to Figures 2 to 5 in [Foreign direct investment, experimental UK subnational estimates: 2021](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/2021).
+		
+		### Coverage 
+		
+		GB (England, Wales and Scotland). Northern Ireland national figure included.
+		
+		#### Geography definition
+		
+		International Territorial Level (ITL) 1 and 2,
+		City Regions,
+		Country (UK)
+		
+		### Source
+		
+		 - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/previousReleases) 
+		
+		
+		### Source Notes and Caveats 
+		 Foreign direct investment (FDI) is cross-border investment made with the objective of establishing a lasting interest in the host economy. FDI is also defined by control relationships, where the direct investor (parent company) controls at least 10% of the voting power (ordinary shares) of the direct investment enterprise. These relationships can be measured in two directions: 
+		 - outward: the direct investments of UK-resident companies in other countries 
+		 - inward: the direct investments in the UK from non-resident companies 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Foreign direct investment (FDI)
+    - Columns: 
+                           Title         Type  Required                                                            Property URL Observations Column Titles
+                       indicator    Dimension      True                   foreign-direct-investment-fdi.csv#dimension/indicator                observation
+                          areacd    Dimension      True          foreign-direct-investment-fdi.csv#dimension/ons-geography-code                observation
+                          areanm    Dimension      True                   foreign-direct-investment-fdi.csv#dimension/area-name                observation
+                       geography    Dimension      True              foreign-direct-investment-fdi.csv#dimension/geography-type                observation
+                     observation Observations     False foreign-direct-investment-fdi.csv#measure/foreign-direct-investment-fdi                observation
+                            unit   Suppressed     False                                                                    None                           
+                         measure   Suppressed     False                                                                    None                           
+                          period    Dimension      True                        foreign-direct-investment-fdi.csv#dimension/year                observation
+    lower_confidence_interval_95    Attribute     False   foreign-direct-investment-fdi.csv#attribute/lower-confidence-interval                observation
+    upper_confidence_interval_95    Attribute     False   foreign-direct-investment-fdi.csv#attribute/upper-confidence-interval                observation
+              observation_status    Attribute     False          foreign-direct-investment-fdi.csv#attribute/observation-status                observation
+    - Columns where suppress output is true: 
+    		-- unit
+    		-- measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          areanm
+    geography-type.csv#code-list     Geography Type       geography
+         indicator.csv#code-list          Indicator       indicator
+ons-geography-code.csv#code-list ONS Geography Code          areacd
+              year.csv#code-list               Year          period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 952
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+                           indicator    areacd           areanm   geography  observation      unit measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    2002355.0 £ million  Pounds    2021                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1919232.0 £ million  Pounds    2020                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1640641.0 £ million  Pounds    2019                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1572819.0 £ million  Pounds    2018                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1392497.0 £ million  Pounds    2017                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1187303.0 £ million  Pounds    2016                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k02000001   united-kingdom     country    1032534.0 £ million  Pounds    2015                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k99000001 uk-not-allocated itl-level-1      87590.0 £ million  Pounds    2021                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k99000001 uk-not-allocated itl-level-1      87535.0 £ million  Pounds    2020                           NaN                           NaN                 NaN
+inward-foreign-direct-investment-fdi k99000001 uk-not-allocated itl-level-1     176852.0 £ million  Pounds    2019                           NaN                           NaN                 NaN
+        - Last 10 Rows: 
+                            indicator areacd            areanm   geography  observation      unit measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+outward-foreign-direct-investment-fdi   tlm9 southern-scotland itl-level-2      11108.0 £ million  Pounds    2019                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi   tlm9 southern-scotland itl-level-2       8395.0 £ million  Pounds    2020                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi   tlm9 southern-scotland itl-level-2       5742.0 £ million  Pounds    2021                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      12840.0 £ million  Pounds    2016                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1       7072.0 £ million  Pounds    2015                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      10736.0 £ million  Pounds    2021                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      11439.0 £ million  Pounds    2020                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      10514.0 £ million  Pounds    2019                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      11589.0 £ million  Pounds    2018                           NaN                           NaN                 NaN
+outward-foreign-direct-investment-fdi    tln  northern-ireland itl-level-1      11812.0 £ million  Pounds    2017                           NaN                           NaN                 NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                        Measure                      Unit  Count
+Foreign direct investment (FDI) Pounds Sterling, Millions    952
+        

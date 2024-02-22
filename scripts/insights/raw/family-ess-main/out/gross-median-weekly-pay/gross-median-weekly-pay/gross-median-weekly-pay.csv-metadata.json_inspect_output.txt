@@ -6,7 +6,7 @@
           - Title: Gross median weekly pay
           - Label: Gross median weekly pay
           - Issued: 2023-05-17T12:41:11.468465
-          - Modified: 2023-05-17T12:41:11.468465
+          - Modified: 2023-12-13T08:55:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,15 +14,15 @@
           - Themes: 
 		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
           - Keywords: 
-		-- region
-		-- employee-earnings
 		-- subnational
 		-- local-authority
+		-- region
 		-- annual-survey-for-hours-and-earnings
+		-- employee-earnings
           - Contact Point: None
           - Identifier: Gross median weekly pay
-          - Comment: Average (median) weekly pay based on where people live, UK, 2002-2022.
-          - Description: This dataset shows the average (median) weekly pay based on where people live, in the UK, for 2002-2022.
+          - Comment: Average (median) weekly pay based on where people live, UK, 2002-2023.
+          - Description: This dataset shows the average (median) weekly pay based on where people live, in the UK, for 2002-2023.
 		
 		### Coverage 
 		
@@ -54,25 +54,23 @@
     - Dataset Label: Gross median weekly pay
     - Columns: 
                               Title         Type  Required                                                    Property URL Observations Column Titles
-                             AREACD    Dimension      True     gross-median-weekly-pay.csv#dimension/statistical-geography                      Value
-                             AREANM   Suppressed     False                                                            None                           
-                          Geography   Suppressed     False                                                            None                           
+                             AREACD    Dimension      True        gross-median-weekly-pay.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 gross-median-weekly-pay.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            gross-median-weekly-pay.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                            None                           
                           Indicator   Suppressed     False                                                            None                           
                             Mission   Suppressed     False                                                            None                           
                            Category   Suppressed     False                                                            None                           
-                             Period    Dimension      True                      gross-median-weekly-pay.csv#dimension/year                      Value
-                              Value Observations     False     gross-median-weekly-pay.csv#measure/gross-median-weekly-pay                      Value
+                             Period    Dimension      True                      gross-median-weekly-pay.csv#dimension/year                Observation
+                        Observation Observations     False     gross-median-weekly-pay.csv#measure/gross-median-weekly-pay                Observation
                             Measure   Suppressed     False                                                            None                           
                                Unit   Suppressed     False                                                            None                           
-    Lower Confidence Interval (95%)    Attribute     False gross-median-weekly-pay.csv#attribute/lower-confidence-interval                      Value
-    Upper Confidence Interval (95%)    Attribute     False gross-median-weekly-pay.csv#attribute/upper-confidence-interval                      Value
-                 Observation Status    Attribute     False        gross-median-weekly-pay.csv#attribute/observation-status                      Value
+    Lower Confidence Interval (95%)    Attribute     False gross-median-weekly-pay.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False gross-median-weekly-pay.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        gross-median-weekly-pay.csv#attribute/observation-status                Observation
                            Polarity   Suppressed     False                                                            None                           
                               Notes   Suppressed     False                                                            None                           
     - Columns where suppress output is true: 
-    		-- AREANM
-    		-- Geography
     		-- Variable Name
     		-- Indicator
     		-- Mission
@@ -83,43 +81,45 @@
     		-- Notes
 
 - The data cube has the following code list information:
-        - Number of Code Lists: 2
+        - Number of Code Lists: 4
         - Code Lists:
-                                                        Code List                                     Code List Label Columns Used In
-ons-geography-code-list-for-gross-median-weekly-pay.csv#code-list ONS Geography Code List for Gross median weekly pay          AREACD
-                                               year.csv#code-list                                                Year          Period
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 6527
+        - Number of Rows: 6709
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD         AREANM Geography           Variable Name               Indicator   Mission                                              Category  Period  Value Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2002  324.8  Pounds    £                       323.526784                       326.073216                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2022  532.5  Pounds    £                       530.412600                       534.587400                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2021  505.1  Pounds    £                       503.120008                       507.079992                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2020  479.1  Pounds    £                       478.160964                       480.039036                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2019  479.1  Pounds    £                       478.160964                       480.039036                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2018  460.0  Pounds    £                       459.098400                       460.901600                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2016  438.4  Pounds    £                       436.681472                       440.118528                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2015  425.1  Pounds    £                       423.433608                       426.766392                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2014  417.9  Pounds    £                       417.080916                       418.719084                NaN         1   NaN
-k02000001 United Kingdom   Country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2013  415.3  Pounds    £                       413.672024                       416.927976                NaN         1   NaN
+   AREACD         AREANM Geography           Variable Name               Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2002        324.8  Pounds    £                       323.526784                       326.073216                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2023        574.9  Pounds    £                       573.773196                       576.026804                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2022        533.7  Pounds    £                       531.607896                       535.792104                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2021        505.1  Pounds    £                       503.120008                       507.079992                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2020        479.1  Pounds    £                       478.160964                       480.039036                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2019        479.1  Pounds    £                       478.160964                       480.039036                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2017        448.5  Pounds    £                       446.741880                       450.258120                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2016        438.4  Pounds    £                       436.681472                       440.118528                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2015        425.1  Pounds    £                       423.433608                       426.766392                NaN         1   NaN
+k02000001 united-kingdom   country Gross median weekly pay Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2014        417.9  Pounds    £                       417.080916                       418.719084                NaN         1   NaN
         - Last 10 Rows: 
-   AREACD                 AREANM                Geography Variable Name               Indicator   Mission                                              Category  Period  Value Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-n09000010 Newry, Mourne and Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2017  368.0  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000010 Newry, Mourne and Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2016  358.3  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000010 Newry, Mourne and Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2018  384.0  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2021  376.4  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2016  311.8  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2017  327.8  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2018  331.9  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2019  347.5  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2020  359.0  Pounds    £                              NaN                              NaN                NaN         1   NaN
-n09000011    Ards and North Down Local Authority District           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2022  394.4  Pounds    £                              NaN                              NaN                NaN         1   NaN
+   AREACD                AREANM                Geography Variable Name               Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000010 newry-mourne-and-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2022        486.4  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000010 newry-mourne-and-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2023        481.6  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2020        359.0  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2021        376.4  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2019        347.5  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2022        394.4  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2017        327.8  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2016        311.8  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2018        331.9  Pounds    £                              NaN                              NaN                NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district           NaN Gross median weekly pay Mission 1 Boosting productivity, pay, jobs and living standards    2023        450.1  Pounds    £                              NaN                              NaN                NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                 Measure            Unit  Count
-Gross median weekly pay Pounds Sterling   6527
+Gross median weekly pay Pounds Sterling   6709
         

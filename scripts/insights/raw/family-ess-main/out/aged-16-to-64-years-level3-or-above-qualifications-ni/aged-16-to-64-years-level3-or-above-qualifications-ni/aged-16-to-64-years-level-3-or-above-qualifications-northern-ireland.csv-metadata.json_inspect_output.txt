@@ -1,0 +1,121 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Aged 16 to 64 years level 3 or above qualifications, Northern Ireland
+          - Label: Aged 16 to 64 years level 3 or above qualifications, Northern Ireland
+          - Issued: 2023-05-23T10:17:47.964593
+          - Modified: 2024-02-09T10:17:47.964593
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
+          - Keywords: 
+		-- annual-population-survey
+		-- subnational
+		-- northern-ireland
+		-- region
+		-- national-vocational-qualification
+		-- local-authority
+          - Contact Point: None
+          - Identifier: Aged 16 to 64 years level 3 or above qualifications, Northern Ireland
+          - Comment: Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Northern Ireland, 2016 to 2022.
+          - Description: This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Northern Ireland, for 2016 to 2022.
+		
+		### Coverage 
+		
+		Northern Ireland
+		
+		#### Geography definition
+		
+		Local Government Districts, 
+		Nation (Northern Ireland)
+		
+		### Source
+		
+		 - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.nisra.gov.uk/publications/highest-qualification-level-2022) 
+		
+		
+		### Source Notes and Caveats 
+		Figures produced by NISRA may differ slightly to other highest qualification levels statistical publications, either due to differing sources, age analysed or slight differences in methodologies for assigning highest qualifications levels. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Aged 16 to 64 years level 3 or above qualifications, Northern Ireland
+    - Columns: 
+                              Title         Type  Required                                                                                                                         Property URL Observations Column Titles
+                             AREACD    Dimension      True                                aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                         aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                                    aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                                                                 None                           
+                          Indicator   Suppressed     False                                                                                                                                 None                           
+                            Mission   Suppressed     False                                                                                                                                 None                           
+                           Category   Suppressed     False                                                                                                                                 None                           
+                             Period    Dimension      True                                              aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year                Observation
+                        Observation Observations     False aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications                Observation
+                            Measure   Suppressed     False                                                                                                                                 None                           
+                               Unit   Suppressed     False                                                                                                                                 None                           
+    Lower Confidence Interval (95%)    Attribute     False                         aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                         aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                                aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                                                                 None                           
+                              Notes   Suppressed     False                                                                                                                                 None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 84
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD                  AREANM                Geography                                                                                                                      Variable Name                                                                  Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2016         49.8 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2017         51.2 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2018         54.1 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2019         55.6 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2020         56.0 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2021         59.9 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n92000002        northern-ireland                   nation Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2022         57.2 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000001 antrim-and-newtownabbey local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2022         57.5 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000001 antrim-and-newtownabbey local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2021         64.0 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000001 antrim-and-newtownabbey local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2020         60.8 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+        - Last 10 Rows: 
+   AREACD                AREANM                Geography                                                                                                                      Variable Name                                                                  Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n09000010 newry-mourne-and-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2018         50.3 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2016         54.7 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2019         55.4 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2021         59.8 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2016         52.7 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2017         51.7 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2018         56.0 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2019         60.5 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2020         60.5 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Proportion of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications (Northern Ireland) Aged 16 to 64 years NVQ level 3 or above qualifications (Northern Ireland) Mission 6 Spreading opportunity and improving public services    2022         59.6 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                            Measure    Unit  Count
+Aged 16 to 64 years level 3 or above qualifications percent     84
+        

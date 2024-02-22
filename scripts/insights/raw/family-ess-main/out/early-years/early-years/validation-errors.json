@@ -1,0 +1,224 @@
+[
+    {
+        "message": "Unable to identify {'type': 'dimension', 'from_template': 'statistical-geography', 'label': 'ONS Geography Code', 'code_list': True}",
+        "json_path": "$.columns.areacd",
+        "offending_value": {
+            "type": "dimension",
+            "label": "ONS Geography Code",
+            "code_list": true,
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+            "cell_uri_template": "http://statistics.data.gov.uk/id/statistical-geography/{+areacd}"
+        },
+        "schema_validator_type": "anyOf",
+        "possible_types_with_grouped_errors": [
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Dimension"
+                },
+                [
+                    {
+                        "message": "'statistical-geography' is not recognised by csvcubed.",
+                        "json_path": "$.from_template",
+                        "offending_value": "statistical-geography",
+                        "schema_validator_type": "enum",
+                        "children": []
+                    }
+                ]
+            ]
+        ]
+    },
+    {
+        "message": "Unable to identify {'label': 'Lower Confidence Interval (95%)', 'type': 'attribute', 'data_type': 'decimal', 'describes_observations': 'observation', 'required': False}",
+        "json_path": "$.columns.lower_confidence_interval_95",
+        "offending_value": {
+            "label": "Lower Confidence Interval (95%)",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "observation",
+            "required": false
+        },
+        "schema_validator_type": "anyOf",
+        "possible_types_with_grouped_errors": [
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Attribute_Literal"
+                },
+                [
+                    {
+                        "message": "Additional properties are not allowed ('describes_observations' was unexpected)",
+                        "json_path": "$",
+                        "offending_value": {
+                            "label": "Lower Confidence Interval (95%)",
+                            "type": "attribute",
+                            "data_type": "decimal",
+                            "describes_observations": "observation",
+                            "required": false
+                        },
+                        "schema_validator_type": "additionalProperties",
+                        "children": []
+                    }
+                ]
+            ]
+        ]
+    },
+    {
+        "message": "Unable to identify {'type': 'dimension', 'from_template': 'gregorian-interval'}",
+        "json_path": "$.columns.period",
+        "offending_value": {
+            "type": "dimension",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+            "label": "Gregorian Time Interval",
+            "cell_uri_template": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
+        },
+        "schema_validator_type": "anyOf",
+        "possible_types_with_grouped_errors": [
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Dimension"
+                },
+                [
+                    {
+                        "message": "'gregorian-interval' is not recognised by csvcubed.",
+                        "json_path": "$.from_template",
+                        "offending_value": "gregorian-interval",
+                        "schema_validator_type": "enum",
+                        "children": []
+                    }
+                ]
+            ]
+        ]
+    },
+    {
+        "message": "Unable to identify False",
+        "json_path": "$.columns.unit",
+        "offending_value": false,
+        "schema_validator_type": "anyOf",
+        "possible_types_with_grouped_errors": [
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Dimension"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    }
+                ]
+            ],
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Attribute_Resource"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    },
+                    {
+                        "message": "Unable to identify False",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "oneOf",
+                        "possible_types_with_grouped_errors": []
+                    }
+                ]
+            ],
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Attribute_Literal"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    }
+                ]
+            ],
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Measures"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    }
+                ]
+            ],
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Observations"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    }
+                ]
+            ],
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Units"
+                },
+                [
+                    {
+                        "message": "False is not of type 'object'",
+                        "json_path": "$",
+                        "offending_value": false,
+                        "schema_validator_type": "type",
+                        "children": []
+                    }
+                ]
+            ]
+        ]
+    },
+    {
+        "message": "Unable to identify {'label': 'Upper Confidence Interval (95%)', 'type': 'attribute', 'data_type': 'decimal', 'describes_observations': 'observation', 'required': False}",
+        "json_path": "$.columns.upper_confidence_interval_95",
+        "offending_value": {
+            "label": "Upper Confidence Interval (95%)",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "observation",
+            "required": false
+        },
+        "schema_validator_type": "anyOf",
+        "possible_types_with_grouped_errors": [
+            [
+                {
+                    "$ref": "#/definitions/v1.0/columnTypes/Attribute_Literal"
+                },
+                [
+                    {
+                        "message": "Additional properties are not allowed ('describes_observations' was unexpected)",
+                        "json_path": "$",
+                        "offending_value": {
+                            "label": "Upper Confidence Interval (95%)",
+                            "type": "attribute",
+                            "data_type": "decimal",
+                            "describes_observations": "observation",
+                            "required": false
+                        },
+                        "schema_validator_type": "additionalProperties",
+                        "children": []
+                    }
+                ]
+            ]
+        ]
+    }
+]

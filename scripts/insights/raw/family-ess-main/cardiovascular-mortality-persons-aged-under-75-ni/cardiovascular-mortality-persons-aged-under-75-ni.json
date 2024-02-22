@@ -1,0 +1,84 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Preventable circulatory mortality, Northern Ireland",
+    "creator": "https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency",
+    "summary": "Age-standardised mortality rate from circulatory diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), Northern Ireland, 2001 to 2022.",
+    "description": "This dataset shows the age-standardised mortality rate from circulatory diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), in Northern Ireland, for 2001 to 2022.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland) \n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.health-ni.gov.uk/publications/age-standardised-death-rate-preventable-cardiovascular-disease-by-local-government-2001-2022) \n\n\n### Source Notes and Caveats \n- All figures up to and including 2011 are based on the 2011 Census mid-year population estimates. \n- All figures from 2012 onward are based on the 2021 Census mid-year population estimates. \n- The 2021 data point for this indicator covers the COVID-19 pandemic period, it will include any effects of the COVID-19 pandemic. \n- Rates presented are based on year of death registration, not year of occurrence.",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "local-authority",
+        "northern-ireland",
+        "region",
+        "subnational",
+        "premature-death",
+        "heart-disease"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2024-01-26T12:41",
+    "dataset_modified": "2024-02-14T10:07:40",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "per 100,000",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 1e-05
+            },
+            "measure": {
+                "label": "Age-standardised mortality rate for those aged under 75",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    }
+    
+}

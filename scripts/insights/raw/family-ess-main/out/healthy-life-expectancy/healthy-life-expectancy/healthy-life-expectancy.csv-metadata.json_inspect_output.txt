@@ -1,0 +1,117 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Healthy life expectancy
+          - Label: Healthy life expectancy
+          - Issued: 2024-01-12T12:13:33.912610
+          - Modified: 2024-02-13T13:23:23.912610
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
+          - Keywords: 
+		-- subnational
+		-- county
+		-- women
+		-- good-health
+		-- region
+		-- annual-population-survey
+		-- men
+          - Contact Point: None
+          - Identifier: Healthy life expectancy
+          - Comment: Average years expected to be lived in good health for females and males born during the reference period, United Kingdom, from calendar years 2011 - 2013 to 2018 - 2020.
+          - Description: This dataset shows the average years expected to be lived in good health for females and males born during the reference period, in the United Kingdom, for calendar years 2011 - 2013 to 2018 - 2020.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		Counties and Unitary Authorities,
+		Welsh Health Boards,
+		Metropolitan counties,
+		Regions,
+		Combined Authorities,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Country (UK)
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Healthy life expectancy
+    - Columns: 
+                           Title         Type  Required                                                    Property URL Observations Column Titles
+                       indicator    Dimension      True                 healthy-life-expectancy.csv#dimension/indicator                observation
+                          areacd    Dimension      True        healthy-life-expectancy.csv#dimension/ons-geography-code                observation
+                          areanm    Dimension      True                 healthy-life-expectancy.csv#dimension/area-name                observation
+                       geography    Dimension      True            healthy-life-expectancy.csv#dimension/geography-type                observation
+                     observation Observations     False     healthy-life-expectancy.csv#measure/healthy-life-expectancy                observation
+                            unit   Suppressed     False                                                            None                           
+                         measure   Suppressed     False                                                            None                           
+                          period    Dimension      True   healthy-life-expectancy.csv#dimension/gregorian-time-interval                observation
+    lower_confidence_interval_95    Attribute     False healthy-life-expectancy.csv#attribute/lower-confidence-interval                observation
+    upper_confidence_interval_95    Attribute     False healthy-life-expectancy.csv#attribute/upper-confidence-interval                observation
+              observation_status    Attribute     False        healthy-life-expectancy.csv#attribute/observation-status                observation
+    - Columns where suppress output is true: 
+    		-- unit
+    		-- measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          areanm
+         geography-type.csv#code-list          Geography Type       geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          period
+              indicator.csv#code-list               Indicator       indicator
+     ons-geography-code.csv#code-list      ONS Geography Code          areacd
+
+- The data cube has the following dataset information:
+        - Number of Rows: 3870
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+                   indicator    areacd         areanm geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+male-healthy-life-expectancy k02000001 united-kingdom   country        62.83  yrs   Years 2018-01-01t00-00-00/p3y                         62.65                         63.00                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        62.90  yrs   Years 2017-01-01t00-00-00/p3y                         62.74                         63.05                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        63.09  yrs   Years 2016-01-01t00-00-00/p3y                         62.94                         63.24                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        63.13  yrs   Years 2015-01-01t00-00-00/p3y                         62.98                         63.28                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        63.04  yrs   Years 2014-01-01t00-00-00/p3y                         62.90                         63.19                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        63.09  yrs   Years 2013-01-01t00-00-00/p3y                         62.95                         63.24                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        62.90  yrs   Years 2011-01-01t00-00-00/p3y                         62.75                         63.04                NaN
+male-healthy-life-expectancy k02000001 united-kingdom   country        63.08  yrs   Years 2012-01-01t00-00-00/p3y                         62.93                         63.22                NaN
+male-healthy-life-expectancy e92000001        england    nation        63.18  yrs   Years 2011-01-01t00-00-00/p3y                         63.02                         63.34                NaN
+male-healthy-life-expectancy e92000001        england    nation        63.38  yrs   Years 2013-01-01t00-00-00/p3y                         63.21                         63.54                NaN
+        - Last 10 Rows: 
+                     indicator    areacd                areanm                geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        62.34  yrs   Years 2018-01-01t00-00-00/p3y                         59.42                         65.25                NaN
+female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        64.66  yrs   Years 2017-01-01t00-00-00/p3y                         62.26                         67.05                NaN
+female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        66.85  yrs   Years 2016-01-01t00-00-00/p3y                         64.40                         69.30                NaN
+female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        66.99  yrs   Years 2015-01-01t00-00-00/p3y                         64.11                         69.88                NaN
+female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        65.02  yrs   Years 2014-01-01t00-00-00/p3y                         62.24                         67.80                NaN
+female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.27  yrs   Years 2016-01-01t00-00-00/p3y                         60.47                         66.07                NaN
+female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        62.91  yrs   Years 2018-01-01t00-00-00/p3y                         59.91                         65.91                NaN
+female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.35  yrs   Years 2017-01-01t00-00-00/p3y                         60.93                         65.78                NaN
+female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        61.02  yrs   Years 2014-01-01t00-00-00/p3y                         57.73                         64.31                NaN
+female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.03  yrs   Years 2015-01-01t00-00-00/p3y                         60.17                         65.89                NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                Measure  Unit  Count
+Healthy life expectancy Years   3870
+        

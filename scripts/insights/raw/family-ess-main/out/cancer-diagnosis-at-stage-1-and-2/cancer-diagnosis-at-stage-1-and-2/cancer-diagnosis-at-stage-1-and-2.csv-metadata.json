@@ -9,19 +9,23 @@
                     {
                         "titles": "AREACD",
                         "name": "areacd",
-                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv#{+areacd}",
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
                         "required": true
                     },
                     {
                         "titles": "AREANM",
                         "name": "areanm",
-                        "suppressOutput": true
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
                     },
                     {
                         "titles": "Geography",
                         "name": "geography",
-                        "suppressOutput": true
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
                     },
                     {
                         "titles": "Variable Name",
@@ -51,9 +55,9 @@
                         "required": true
                     },
                     {
-                        "titles": "Value",
-                        "name": "value",
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2",
                         "datatype": "decimal",
                         "required": false
@@ -71,7 +75,7 @@
                     {
                         "titles": "Lower Confidence Interval (95%)",
                         "name": "lower_confidence_interval_95",
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -79,7 +83,7 @@
                     {
                         "titles": "Upper Confidence Interval (95%)",
                         "name": "upper_confidence_interval_95",
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/upper-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -87,7 +91,7 @@
                     {
                         "titles": "Observation Status",
                         "name": "observation_status",
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status",
                         "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
                         "required": false
@@ -115,50 +119,64 @@
                         "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#slice/cross-measures"
                     },
                     {
-                        "name": "virt_obs_value",
+                        "name": "virt_obs_observation",
                         "virtual": true,
                         "propertyUrl": "qb:observation",
-                        "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2"
+                        "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2"
                     },
                     {
-                        "name": "virt_obs_value_meas",
+                        "name": "virt_obs_observation_meas",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "qb:measureType",
                         "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
                     },
                     {
-                        "name": "virt_obs_value_unit",
+                        "name": "virt_obs_observation_unit",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#unit/percent"
                     },
                     {
-                        "name": "virt_dim_value_areacd",
+                        "name": "virt_dim_observation_areacd",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
-                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv#{+areacd}"
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
                     },
                     {
-                        "name": "virt_dim_value_period",
+                        "name": "virt_dim_observation_areanm",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year",
                         "valueUrl": "year.csv#{+period}"
                     },
                     {
-                        "name": "virt_obs_value_type",
+                        "name": "virt_obs_observation_type",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
-                        "name": "virt_dataSet_value",
+                        "name": "virt_dataSet_observation",
                         "virtual": true,
-                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{period}@cancer-diagnosis-at-stage-1-and-2",
+                        "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#obs/{areacd},{areanm},{geography},{period}@cancer-diagnosis-at-stage-1-and-2",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "cancer-diagnosis-at-stage-1-and-2.csv#dataset"
                     }
@@ -167,7 +185,21 @@
                     {
                         "columnReference": "areacd",
                         "reference": {
-                            "resource": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv",
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
                             "columnReference": "uri_identifier"
                         }
                     },
@@ -181,14 +213,26 @@
                 ],
                 "primaryKey": [
                     "areacd",
+                    "areanm",
+                    "geography",
                     "period"
                 ],
-                "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#slice/{areacd},{period}"
+                "aboutUrl": "cancer-diagnosis-at-stage-1-and-2.csv#slice/{areacd},{areanm},{geography},{period}"
             }
         },
         {
-            "url": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv",
-            "tableSchema": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.table.json",
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
             "suppressOutput": true
         },
         {
@@ -199,126 +243,20 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/year",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/area-name",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/cancer-diagnosis-at-stage-1-and-2",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/statistical-geography",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#slice/cross-measures",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -328,7 +266,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2020.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/4/gid/1000042/pat/15/par/E92000001/ati/6/are/E12000004/iid/93671/age/1/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1/page-options/car-ao-0_car-do-0_tre-ao-1) \n\n\n### Source Notes and Caveats \n- Due to the impact of the COVID-19 pandemic on both clinical and data quality arrangements, the ability to obtain stage data for cancer registrations was reduced for the 2019 and 2020 diagnosis years. In 2019, the proportion of stageable cancer diagnoses with a registered stage fell from 85% in 2018 to 76%. For the 2020 diagnosis year, stage completeness increased to 81%.\n- Values for Cornwall and Isles of Scilly are in a combined code (E67000002).  \n\n\n"
+                    "@value": "This dataset shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2021.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/4/gid/1000042/pat/15/par/E92000001/ati/6/are/E12000004/iid/93671/age/1/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1/page-options/car-ao-0_car-do-0_tre-ao-1) \n\n\n### Source Notes and Caveats \n- Due to the impact of the COVID-19 pandemic on both clinical and data quality arrangements, the ability to obtain stage data for cancer registrations was reduced for the 2019 and 2020 diagnosis years. In 2019, the proportion of stageable cancer diagnoses with a registered stage fell from 85% in 2018 to 76%. For the 2020 diagnosis year, stage completeness increased to 81%.\n- Values for Cornwall and Isles of Scilly are in a combined code (E67000002).  \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -350,7 +288,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-05-17T12:25:53.759812"
+                    "@value": "2024-02-12T16:11:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -372,7 +310,7 @@
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2020"
+                    "@value": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, England, 2013 to 2021."
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -384,7 +322,15 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
+                    "@value": "tumor"
+                },
+                {
+                    "@language": "en",
                     "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
                 },
                 {
                     "@language": "en",
@@ -393,14 +339,6 @@
                 {
                     "@language": "en",
                     "@value": "local-authority"
-                },
-                {
-                    "@language": "en",
-                    "@value": "tumor"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -415,25 +353,25 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/lower-confidence-interval",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/unit",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@value": false
+                    "@value": true
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -443,81 +381,11 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
             "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -533,7 +401,14 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/statistical-geography",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/year",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Class"
@@ -544,8 +419,8 @@
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty"
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -565,14 +440,279 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#csvcubed-build-activity",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
-            "http://www.w3.org/ns/prov#used": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.7"
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/cancer-diagnosis-at-stage-1-and-2",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/year"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/area-name"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/cancer-diagnosis-at-stage-1-and-2"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/unit"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/measure-type"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/geography-type"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#slice/cross-measures",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name"
+                },
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
                 }
             ]
         },
@@ -580,8 +720,8 @@
             "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/upper-confidence-interval",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -600,30 +740,25 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 7
+                    "@value": 9
                 }
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/unit",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/year",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@value": true
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -633,104 +768,13 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/unit"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/statistical-geography"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/year"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/measure-type"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/observation-status"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/cancer-diagnosis-at-stage-1-and-2"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#measure/cancer-diagnosis-at-stage-1-and-2"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/statistical-geography",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Statistical Geography"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/statistical-geography"
-                }
-            ]
-        },
-        {
             "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/year",
             "@type": [
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -755,19 +799,188 @@
             ]
         },
         {
-            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dependency/ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2",
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "cancer-diagnosis-at-stage-1-and-2.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dependency/ons-geography-code",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
-                    "@id": "./ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv-metadata.json"
+                    "@id": "./ons-geography-code.csv-metadata.json"
                 }
             ],
             "http://rdfs.org/ns/void#uriSpace": [
                 {
-                    "@value": "ons-geography-code-list-for-cancer-diagnosis-at-stage-1-and-2.csv#"
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "cancer-diagnosis-at-stage-1-and-2.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
                 }
             ]
         },
@@ -792,8 +1005,8 @@
             "@id": "cancer-diagnosis-at-stage-1-and-2.csv#unit/percent",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
@@ -819,7 +1032,7 @@
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "percent"
+                    "@value": "Percent"
                 }
             ]
         }

@@ -6,7 +6,7 @@
           - Title: Gross disposable household income per head
           - Label: Gross disposable household income per head
           - Issued: 2023-03-31T12:12:48.541529
-          - Modified: 2023-03-31T12:12:48.541529
+          - Modified: 2023-11-02T14:26:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,16 +14,16 @@
           - Themes: 
 		-- https://www.ons.gov.uk/economy/regionalaccounts
           - Keywords: 
-		-- money
-		-- saving
-		-- region
 		-- local-authority
-		-- spending
+		-- region
+		-- money
 		-- subnational
+		-- spending
+		-- saving
           - Contact Point: None
           - Identifier: Gross disposable household income per head
-          - Comment: Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2020.
-          - Description: This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2020.
+          - Comment: Estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, UK, 1997-2021.
+          - Description: This dataset shows an estimate of the amount of money each individual within a household has available for spending or saving after they have paid taxes and received any direct benefits, in the UK, for 1997-2021.
 		
 		### Coverage 
 		
@@ -48,25 +48,23 @@
     - Dataset Label: Gross disposable household income per head
     - Columns: 
                               Title         Type  Required                                                                                      Property URL Observations Column Titles
-                             AREACD    Dimension      True                    gross-disposable-household-income-per-head.csv#dimension/statistical-geography                      Value
-                             AREANM   Suppressed     False                                                                                              None                           
-                          Geography   Suppressed     False                                                                                              None                           
+                             AREACD    Dimension      True                       gross-disposable-household-income-per-head.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                gross-disposable-household-income-per-head.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                           gross-disposable-household-income-per-head.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                                              None                           
                           Indicator   Suppressed     False                                                                                              None                           
                             Mission   Suppressed     False                                                                                              None                           
                            Category   Suppressed     False                                                                                              None                           
-                             Period    Dimension      True                                     gross-disposable-household-income-per-head.csv#dimension/year                      Value
-                              Value Observations     False gross-disposable-household-income-per-head.csv#measure/gross-disposable-household-income-per-head                      Value
+                             Period    Dimension      True                                     gross-disposable-household-income-per-head.csv#dimension/year                Observation
+                        Observation Observations     False gross-disposable-household-income-per-head.csv#measure/gross-disposable-household-income-per-head                Observation
                             Measure   Suppressed     False                                                                                              None                           
                                Unit   Suppressed     False                                                                                              None                           
-    Lower Confidence Interval (95%)    Attribute     False                gross-disposable-household-income-per-head.csv#attribute/lower-confidence-interval                      Value
-    Upper Confidence Interval (95%)    Attribute     False                gross-disposable-household-income-per-head.csv#attribute/upper-confidence-interval                      Value
-                 Observation Status    Attribute     False                       gross-disposable-household-income-per-head.csv#attribute/observation-status                      Value
+    Lower Confidence Interval (95%)    Attribute     False                gross-disposable-household-income-per-head.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                gross-disposable-household-income-per-head.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                       gross-disposable-household-income-per-head.csv#attribute/observation-status                Observation
                            Polarity   Suppressed     False                                                                                              None                           
                               Notes   Suppressed     False                                                                                              None                           
     - Columns where suppress output is true: 
-    		-- AREANM
-    		-- Geography
     		-- Variable Name
     		-- Indicator
     		-- Mission
@@ -77,43 +75,45 @@
     		-- Notes
 
 - The data cube has the following code list information:
-        - Number of Code Lists: 2
+        - Number of Code Lists: 4
         - Code Lists:
-                                                                           Code List                                                        Code List Label Columns Used In
-ons-geography-code-list-for-gross-disposable-household-income-per-head.csv#code-list ONS Geography Code List for Gross disposable household income per head          AREACD
-                                                                  year.csv#code-list                                                                   Year          Period
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 9360
+        - Number of Rows: 9750
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD         AREANM Geography                               Variable Name                                  Indicator   Mission                                              Category  Period   Value Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1997 10757.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2020 21440.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2019 21475.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2018 21019.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2017 20126.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2016 19686.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2015 19529.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2013 18003.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2012 17376.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-k02000001 United Kingdom   Country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2011 16731.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+   AREACD         AREANM Geography                               Variable Name                                  Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1997      10592.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2021      21679.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2020      20907.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2019      21104.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2018      20445.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2017      19694.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2016      19249.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2014      18073.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2013      17544.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2012      16871.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
         - Last 10 Rows: 
-   AREACD              AREANM                Geography                               Variable Name                                  Indicator   Mission                                              Category  Period   Value Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2004 12242.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2003 11758.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2001 10797.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2000 10548.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1999  9910.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1998  9564.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1997  9535.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2019 19300.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2007 13948.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
-n09000011 Ards and North Down Local Authority District Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2020 19120.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+   AREACD              AREANM                Geography                               Variable Name                                  Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2004      11977.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2002      11073.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2001      10495.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2000      10225.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1999       9686.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1998       9359.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    1997       9344.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2020      18487.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2008      13877.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Gross disposable household income, per head Gross disposable household income per head Mission 1 Boosting productivity, pay, jobs and living standards    2021      19108.0  Pounds    £                              NaN                              NaN                 NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                    Measure            Unit  Count
-Gross disposable household income per head Pounds Sterling   9360
+Gross disposable household income per head Pounds Sterling   9750
         

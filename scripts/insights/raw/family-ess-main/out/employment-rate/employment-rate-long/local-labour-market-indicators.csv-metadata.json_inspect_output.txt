@@ -6,7 +6,7 @@
           - Title: Local labour market indicators
           - Label: Local labour market indicators
           - Issued: 2023-08-25T12:44:00
-          - Modified: 2023-08-25T12:44:00
+          - Modified: 2024-02-14T12:40:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,28 +15,23 @@
 		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
           - Keywords: 
 		-- local-authority
-		-- labour-market
-		-- region
 		-- annual-population-survey
-		-- paid-work
+		-- region
 		-- subnational
+		-- paid-work
+		-- labour-market
           - Contact Point: None
           - Identifier: Local labour market indicators
-          - Comment: Employment rate, unemployment rate, economic activity rate and economic inactivity rate for people aged between 16 and 64 years, Great Britain (Northern Ireland national figure included), 04/2004-03/2005 to 04/2022-03/2023.
+          - Comment: Employment rate and economic inactivity rate for people aged between 16 and 64 years, Great Britain (Northern Ireland national figure included), 10/2004-09/2005 to 10/2022-09/2023.
           - Description: This dataset shows:
+		
 		Employment rate age 16 to 64 
 		 - the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from 
-		
-		Unemployment rate age 16 to 64 
-		 - the proportion of people aged between 16 and 64 years without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks 
-		
-		Economic activity rate age 16 to 64 
-		 - the proportion of people aged between 16 and 64 years who are active participants in the labour market 
 		
 		Economic inactivity rate age 16 to 64 
 		 - the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks 
 		
-		 In Great Britain (Northern Ireland national figure included), for periods 04/2004-03/2005 to 04/2022-03/2023.
+		 In Great Britain (Northern Ireland national figure included), for periods 10/2004-09/2005 to 10/2022-09/2023.
 		
 		### Coverage 
 		
@@ -45,7 +40,6 @@
 		### Geography definition
 		
 		Local Authority Districts and Unitary Authorities, 
-		Metropolitan Counties, 
 		Regions, 
 		Combined Authorities, 
 		Nations (England, Wales, Scotland, Northern Ireland), 
@@ -60,10 +54,6 @@
 		
 		### Source Notes and Caveats 
 		Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
-		
-		Calculation of unemployment rate: number of unemployed people aged 16 to 64 years divided by the sum of employed people aged 16 to 64 years plus unemployed people aged 16 to 64 years. 
-		
-		Calculation of economic activity rate: number of economically active people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
 		
 		Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
 		
@@ -83,8 +73,8 @@
                           areanm    Dimension      True                 local-labour-market-indicators.csv#dimension/area-name                           
                        geography    Dimension      True            local-labour-market-indicators.csv#dimension/geography-type                           
                           period    Dimension      True   local-labour-market-indicators.csv#dimension/gregorian-time-interval                           
-                       indicator     Measures      True                           http://purl.org/linked-data/cube#measureType                      value
-                           value Observations     False                local-labour-market-indicators.csv#measure/{+indicator}                           
+                       indicator     Measures      True                           http://purl.org/linked-data/cube#measureType                observation
+                     observation Observations     False                local-labour-market-indicators.csv#measure/{+indicator}                           
                             unit   Suppressed     False                                                                   None                           
                          measure   Suppressed     False                                                                   None                           
                        numerator    Attribute     False                 local-labour-market-indicators.csv#attribute/numerator                           
@@ -106,39 +96,37 @@ gregorian-time-interval.csv#code-list Gregorian Time Interval          period
      ons-geography-code.csv#code-list      ONS Geography Code          areacd
 
 - The data cube has the following dataset information:
-        - Number of Observations: 30172
+        - Number of Observations: 14782
         - Number of Duplicates: 0
         - First 10 Observations: 
-   areacd         areanm geography                  period       indicator  value unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
-k02000001 united-kingdom   country 2004-04-01t00-00-00/p1y employment-rate   72.5    % Percentage 27884200.0   38443100.0                          72.3                          72.7                NaN
-k02000001 united-kingdom   country 2017-04-01t00-00-00/p1y employment-rate   74.8    % Percentage 30810100.0   41180400.0                          74.6                          75.0                NaN
-k02000001 united-kingdom   country 2016-04-01t00-00-00/p1y employment-rate   74.0    % Percentage 30413500.0   41080000.0                          73.8                          74.2                NaN
-k02000001 united-kingdom   country 2015-04-01t00-00-00/p1y employment-rate   73.6    % Percentage 30085600.0   40903900.0                          73.4                          73.8                NaN
-k02000001 united-kingdom   country 2014-04-01t00-00-00/p1y employment-rate   72.6    % Percentage 29544200.0   40703500.0                          72.4                          72.8                NaN
-k02000001 united-kingdom   country 2018-04-01t00-00-00/p1y employment-rate   75.2    % Percentage 31052200.0   41270100.0                          75.0                          75.4                NaN
-k02000001 united-kingdom   country 2022-04-01t00-00-00/p1y employment-rate   75.4    % Percentage 31333700.0   41561700.0                          75.1                          75.7                NaN
-k02000001 united-kingdom   country 2021-04-01t00-00-00/p1y employment-rate   75.1    % Percentage 31088200.0   41405200.0                          74.9                          75.3                NaN
-k02000001 united-kingdom   country 2013-04-01t00-00-00/p1y employment-rate   71.4    % Percentage 28967600.0   40560200.0                          71.2                          71.6                NaN
-k02000001 united-kingdom   country 2020-04-01t00-00-00/p1y employment-rate   74.7    % Percentage 30879300.0   41361300.0                          74.5                          74.9                NaN
+   areacd         areanm geography                  period       indicator  observation unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+k02000001 united-kingdom   country 2022-10-01t00-00-00/p1y employment-rate         75.7    % Percentage 31510100.0   41634400.0                          75.4                          76.0                NaN
+k02000001 united-kingdom   country 2017-10-01t00-00-00/p1y employment-rate         75.0    % Percentage 30903400.0   41226700.0                          74.8                          75.2                NaN
+k02000001 united-kingdom   country 2016-10-01t00-00-00/p1y employment-rate         74.4    % Percentage 30590400.0   41132200.0                          74.2                          74.6                NaN
+k02000001 united-kingdom   country 2015-10-01t00-00-00/p1y employment-rate         73.7    % Percentage 30219300.0   41005300.0                          73.5                          73.9                NaN
+k02000001 united-kingdom   country 2014-10-01t00-00-00/p1y employment-rate         73.2    % Percentage 29864000.0   40803400.0                          73.0                          73.4                NaN
+k02000001 united-kingdom   country 2013-10-01t00-00-00/p1y employment-rate         72.1    % Percentage 29275900.0   40621400.0                          71.9                          72.3                NaN
+k02000001 united-kingdom   country 2018-10-01t00-00-00/p1y employment-rate         75.6    % Percentage 31221600.0   41310300.0                          75.4                          75.8                NaN
+k02000001 united-kingdom   country 2021-10-01t00-00-00/p1y employment-rate         75.4    % Percentage 31257400.0   41479200.0                          75.1                          75.7                NaN
+k02000001 united-kingdom   country 2020-10-01t00-00-00/p1y employment-rate         74.5    % Percentage 30838000.0   41368300.0                          74.3                          74.7                NaN
+k02000001 united-kingdom   country 2019-10-01t00-00-00/p1y employment-rate         75.4    % Percentage 31212300.0   41370500.0                          75.2                          75.6                NaN
         - Last 10 Observations: 
-   areacd           areanm geography                  period                indicator  value unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
-n92000002 northern-ireland    nation 2019-04-01t00-00-00/p1y economic-inactivity-rate   25.9    % Percentage   303000.0    1167800.0                          24.8                          27.0                NaN
-n92000002 northern-ireland    nation 2006-04-01t00-00-00/p1y economic-inactivity-rate   29.1    % Percentage   327200.0    1122700.0                          27.8                          30.4                NaN
-n92000002 northern-ireland    nation 2007-04-01t00-00-00/p1y economic-inactivity-rate   28.3    % Percentage   321200.0    1136600.0                          27.0                          29.6                NaN
-n92000002 northern-ireland    nation 2008-04-01t00-00-00/p1y economic-inactivity-rate   30.0    % Percentage   343500.0    1147000.0                          28.7                          31.3                NaN
-n92000002 northern-ireland    nation 2005-04-01t00-00-00/p1y economic-inactivity-rate   29.4    % Percentage   325900.0    1108500.0                          28.1                          30.7                NaN
-n92000002 northern-ireland    nation 2004-04-01t00-00-00/p1y economic-inactivity-rate   30.8    % Percentage   337700.0    1094900.0                          29.5                          32.1                NaN
-n92000002 northern-ireland    nation 2011-04-01t00-00-00/p1y economic-inactivity-rate   27.2    % Percentage   315000.0    1159400.0                          25.9                          28.5                NaN
-n92000002 northern-ireland    nation 2012-04-01t00-00-00/p1y economic-inactivity-rate   27.6    % Percentage   319800.0    1158600.0                          26.3                          28.9                NaN
-n92000002 northern-ireland    nation 2010-04-01t00-00-00/p1y economic-inactivity-rate   28.8    % Percentage   333500.0    1157700.0                          27.5                          30.1                NaN
-n92000002 northern-ireland    nation 2009-04-01t00-00-00/p1y economic-inactivity-rate   29.9    % Percentage   344600.0    1153200.0                          28.6                          31.2                NaN
+   areacd           areanm geography                  period                indicator  observation unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+n92000002 northern-ireland    nation 2016-10-01t00-00-00/p1y economic-inactivity-rate         27.1    % Percentage   316800.0    1167100.0                          25.7                          28.5                NaN
+n92000002 northern-ireland    nation 2004-10-01t00-00-00/p1y economic-inactivity-rate         29.8    % Percentage   328200.0    1101700.0                          28.5                          31.1                NaN
+n92000002 northern-ireland    nation 2006-10-01t00-00-00/p1y economic-inactivity-rate         28.8    % Percentage   326000.0    1130200.0                          27.5                          30.1                NaN
+n92000002 northern-ireland    nation 2007-10-01t00-00-00/p1y economic-inactivity-rate         29.0    % Percentage   331100.0    1142200.0                          27.7                          30.3                NaN
+n92000002 northern-ireland    nation 2008-10-01t00-00-00/p1y economic-inactivity-rate         30.1    % Percentage   346000.0    1150100.0                          28.8                          31.4                NaN
+n92000002 northern-ireland    nation 2005-10-01t00-00-00/p1y economic-inactivity-rate         29.6    % Percentage   330300.0    1115500.0                          28.3                          30.9                NaN
+n92000002 northern-ireland    nation 2011-10-01t00-00-00/p1y economic-inactivity-rate         27.4    % Percentage   317200.0    1158900.0                          26.0                          28.8                NaN
+n92000002 northern-ireland    nation 2012-10-01t00-00-00/p1y economic-inactivity-rate         27.6    % Percentage   320200.0    1158300.0                          26.2                          29.0                NaN
+n92000002 northern-ireland    nation 2009-10-01t00-00-00/p1y economic-inactivity-rate         29.7    % Percentage   343000.0    1156000.0                          28.4                          31.0                NaN
+n92000002 northern-ireland    nation 2010-10-01t00-00-00/p1y economic-inactivity-rate         28.0    % Percentage   324100.0    1159000.0                          26.6                          29.4                NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                  Measure    Unit  Count
-  economic-activity-rate Percent   7543
-economic-inactivity-rate Percent   7543
-         employment-rate Percent   7543
-       unemployment-rate Percent   7543
+economic-inactivity-rate Percent   7391
+         employment-rate Percent   7391
         

@@ -5,7 +5,7 @@ from pathlib import Path
 
 @click.command()
 @click.argument("input", type=click.Path(exists=True, path_type=Path))
-@click.option("--output", default=Path("./output.csv"), type=click.Path(path_type=Path))
+@click.option("--output", default=Path("./annual-personal-wellbeing-estimates.csv"), type=click.Path(path_type=Path))
 def wrangle(input: Path(), output: Path()) -> None:
     df = pd.read_csv(input, na_values = "na")
 
@@ -17,7 +17,7 @@ def wrangle(input: Path(), output: Path()) -> None:
     all_data = (anxiety, worthwhile, happiness, satisfaction)
 
     for df in all_data:
-        df.columns = ["AREACD", "AREANM", "Geography", "Period", "Value", "Measure", "Unit", "Lower Confidence Interval (95%)", "Upper Confidence Interval (95%)", "Observation Status"]
+        df.columns = ["AREACD", "AREANM", "Geography", "Period", "Observation", "Measure", "Unit", "Lower Confidence Interval (95%)", "Upper Confidence Interval (95%)", "Observation Status"]
     
     df = pd.concat(all_data, axis=0)
 

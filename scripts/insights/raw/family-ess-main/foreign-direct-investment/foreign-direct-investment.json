@@ -1,0 +1,77 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Foreign direct investment (FDI)",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Total FDI international investment position in the UK (inward) and abroad (outward) at end period (Official Statistics in Development), Great Britain (Northern Ireland national figure included), 2015-2021.",
+    "description": "This dataset shows the total FDI international investment position in the UK (inward) and abroad (outward) at end period (Official Statistics in Development), in Great Britain (Northern Ireland national figure included), for 2015-2021. To see these figures presented visually, please refer to Figures 2 to 5 in [Foreign direct investment, experimental UK subnational estimates: 2021](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/2021).\n\n### Coverage \n\nGB (England, Wales and Scotland). Northern Ireland national figure included.\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1 and 2,\nCity Regions,\nCountry (UK)\n\n### Source\n\n - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/foreigndirectinvestmentexperimentaluksubnationalstatistics/previousReleases) \n\n\n### Source Notes and Caveats \n Foreign direct investment (FDI) is cross-border investment made with the objective of establishing a lasting interest in the host economy. FDI is also defined by control relationships, where the direct investor (parent company) controls at least 10% of the voting power (ordinary shares) of the direct investment enterprise. These relationships can be measured in two directions: \n - outward: the direct investments of UK-resident companies in other countries \n - inward: the direct investments in the UK from non-resident companies \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "business-investment",
+        "investment-flows",
+        "stocks",
+        "subnational",
+        "international-territorial-level"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2024-01-12T13:05:58.143797",
+    "dataset_modified": "2024-02-05T13:05:58.143797",
+    "themes": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade",
+    "columns": {
+        "period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "areacd": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "areanm": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "indicator": {
+            "type": "dimension",
+            "label": "Indicator"
+        },
+        "observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling, Millions",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Foreign direct investment (FDI)",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "measure": false,
+        "unit": false,
+        "lower_confidence_interval_95": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "observation",
+            "required": false
+        },
+        "upper_confidence_interval_95": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "observation",
+            "required": false
+        },
+        "observation_status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        }
+    }
+}

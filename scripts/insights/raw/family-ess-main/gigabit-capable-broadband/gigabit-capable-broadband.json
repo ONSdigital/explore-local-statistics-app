@@ -2,8 +2,8 @@
     "$schema": "https://purl.org/csv-cubed/qube-config/v1",
     "title": "Gigabit capable broadband",
     "creator": "https://www.gov.uk/government/organisations/ofcom",
-    "summary": "Percentage of premises with 125 megabytes (MB) or greater, UK, January 2023.",
-    "description": "This dataset shows the percentage of premises with 125 megabytes (MB) or greater, in the UK, for January 2023.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/spring-2023) \n\n\n",
+    "summary": "Percentage of premises with 125 megabytes (MB) or greater, UK, as of September 2023.",
+    "description": " This dataset shows the percentage of premises with 125 megabytes (MB) or greater, in the UK, as of September 2023.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-2023/data-downloads) \n\n\n",
     "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "keywords": [
         "broadband-mobile-coverage",
@@ -13,7 +13,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2023-03-31T12:12:36.754038",
-    "dataset_modified": "2023-08-24T16:26",
+    "dataset_modified": "2024-02-07T16:26",
     "themes": "https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry",
     "columns": {
         "Period": {
@@ -34,16 +34,15 @@
             "type": "dimension",
             "label": "Geography Type"
         },
-        
         "Variable Name": false,
         "Indicator": false,
         "Mission": false,
         "Category": false,
-        "Value": {
+        "Observation": {
             "type": "observations",
             "data_type": "decimal",
             "unit": {
-                "label": "percent",
+                "label": "Percent",
                 "from_existing": "http://qudt.org/vocab/unit/PERCENT"
             },
             "measure": {
@@ -57,14 +56,14 @@
             "label": "Lower Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Upper Confidence Interval (95%)": {
             "label": "Upper Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Observation Status": {

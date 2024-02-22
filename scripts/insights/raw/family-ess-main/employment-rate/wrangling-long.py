@@ -1,17 +1,20 @@
+import click
 import pandas as pd
+from pathlib import Path
 
-df = pd.read_csv("employment-rate/employment-rate.csv")
 
-# Setup columns to use as indicators
-df["employment"], df["unemployment"], df["activity"], df["inactivity"] = [
-    "Employment Rate",
-    "Unemployment Rate",
-    "Economic Activity Rate",
-    "Economic Inactivity Rate",
-]
+@click.command()
+@click.argument("input", type=click.Path(exists=True, path_type=Path))
 
-# Concatenate wide dataframe to long format, using above indicator columns to keep track of value sources
-df = pd.concat(
+def wrangle(input: Path()) -> None:
+
+    df = pd.read_csv(input)
+
+    # Setup columns to use as indicators
+    df["employment"], df["inactivity"] = ["Employment Rate","Economic Inactivity Rate"]
+
+    # Concatenate wide dataframe to long format, using above indicator columns to keep track of value sources
+    df = pd.concat(
     [
         df.loc[
             :,
@@ -33,7 +36,7 @@ df = pd.concat(
         ].rename(
             columns={
                 "employment": "indicator",
-                "employment_rate": "value",
+                "employment_rate": "observation",
                 "employment_rate_measure": "measure",
                 "employment_rate_numerator": "numerator",
                 "employment_rate_denominator": "denominator",
@@ -42,64 +45,7 @@ df = pd.concat(
                 "employment_rate_observation_status": "observation_status",
             }
         ),
-        df.loc[
-            :,
-            [
-                "areacd",
-                "areanm",
-                "geography",
-                "period",
-                "unit",
-                "unemployment",
-                "unemployment_activity_rate",
-                "unemployment_activity_rate_measure",
-                "unemployment_activity_rate_numerator",
-                "unemployment_activity_rate_denominator",
-                "unemployment_activity_rate_lower_confidence_interval_95",
-                "unemployment_activity_rate_upper_confidence_interval_95",
-                "unemployment_activity_rate_observation_status",
-            ],
-        ].rename(
-            columns={
-                "unemployment": "indicator",
-                "unemployment_activity_rate": "value",
-                "unemployment_activity_rate_measure": "measure",
-                "unemployment_activity_rate_numerator": "numerator",
-                "unemployment_activity_rate_denominator": "denominator",
-                "unemployment_activity_rate_lower_confidence_interval_95": "lower_confidence_interval_95",
-                "unemployment_activity_rate_upper_confidence_interval_95": "upper_confidence_interval_95",
-                "unemployment_activity_rate_observation_status": "observation_status",
-            }
-        ),
-        df.loc[
-            :,
-            [
-                "areacd",
-                "areanm",
-                "geography",
-                "period",
-                "unit",
-                "activity",
-                "economic_activity_rate",
-                "economic_activity_rate_measure",
-                "economic_activity_rate_numerator",
-                "economic_activity_rate_denominator",
-                "economic_activity_rate_lower_confidence_interval_95",
-                "economic_activity_rate_upper_confidence_interval_95",
-                "economic_activity_rate_observation_status",
-            ],
-        ].rename(
-            columns={
-                "activity": "indicator",
-                "economic_activity_rate": "value",
-                "economic_activity_rate_measure": "measure",
-                "economic_activity_rate_numerator": "numerator",
-                "economic_activity_rate_denominator": "denominator",
-                "economic_activity_rate_lower_confidence_interval_95": "lower_confidence_interval_95",
-                "economic_activity_rate_upper_confidence_interval_95": "upper_confidence_interval_95",
-                "economic_activity_rate_observation_status": "observation_status",
-            }
-        ),
+    
         df.loc[
             :,
             [
@@ -120,7 +66,7 @@ df = pd.concat(
         ].rename(
             columns={
                 "inactivity": "indicator",
-                "economically_inactive": "value",
+                "economically_inactive": "observation",
                 "economically_inactive_measure": "measure",
                 "economically_inactive_numerator": "numerator",
                 "economically_inactive_denominator": "denominator",
@@ -132,15 +78,15 @@ df = pd.concat(
     ]
 )
 
-# Specifying columns to keep
-df = df[
+    # Specifying columns to keep
+    df = df[
     [
         "areacd",
         "areanm",
         "geography",
         "period",
         "indicator",
-        "value",
+        "observation",
         "unit",
         "measure",
         "numerator",
@@ -151,18 +97,23 @@ df = df[
     ]
 ]
 
-# Use the year from the gregorian interval provided
-#df.period = df.period.str[:4]
+    # Use the year from the gregorian interval provided
+    #df.period = df.period.str[:4]
 
-# Replace 'na' values in dataframe with empty strings
-df.replace(r"^na$", "", regex=True, inplace=True)
+    # Replace 'na' values in dataframe with empty strings
+    df.replace(r"^na$", "", regex=True, inplace=True)
 
-# Replace empty observation_status cells only if value cell is also empty
-# Not necessary if base csv has already been updated to fix this issue
+    # Replace empty observation_status cells only if value cell is also empty
+    # Not necessary if base csv has already been updated to fix this issue
 
-df['observation_status'] = df.apply(lambda x: 'x' if pd.isna(x.value) else x['observation_status'], axis = 1 )
+    df['observation_status'] = df.apply(lambda x: 'x' if pd.isna(x.observation) else x['observation_status'], axis = 1 )
 
-df['lower_confidence_interval_95'] = df['lower_confidence_interval_95'].astype(float).round(2)
-df['upper_confidence_interval_95'] = df['upper_confidence_interval_95'].astype(float).round(2)
+    df['lower_confidence_interval_95'] = df['lower_confidence_interval_95'].astype(float).round(2)
+    df['upper_confidence_interval_95'] = df['upper_confidence_interval_95'].astype(float).round(2)
 
-df.to_csv("employment-rate/employment-rate-long.csv", index=False)
+    df.to_csv("employment-rate-long.csv", index=False)
+    
+if __name__ == "__main__":
+
+    wrangle()
+    

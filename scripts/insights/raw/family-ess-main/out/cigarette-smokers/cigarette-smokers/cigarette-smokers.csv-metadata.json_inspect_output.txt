@@ -1,0 +1,120 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Cigarette smokers
+          - Label: Cigarette smokers
+          - Issued: 2023-03-31T12:11:24.009378
+          - Modified: 2023-10-26T12:00:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
+          - Keywords: 
+		-- region
+		-- annual-population-survey
+		-- local-authority
+		-- subnational
+		-- smoking-habits
+          - Contact Point: None
+          - Identifier: Cigarette smokers
+          - Comment: Percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), United Kingdom, 2012 - 2022.
+          - Description: This dataset shows the percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), in the United Kingdom, for 2012 - 2022.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		English counties,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Country (UK)
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/datasets/smokinghabitsintheukanditsconstituentcountries) 
+		
+		
+		### Source Notes and Caveats 
+		To improve the comparability of smoking prevalence estimates for 2020 and subsequent years, the weighting methodology has been improved to remove the effect of the change in method of data collection between 2019 and 2020. For more information please refer to the [Adult smoking habits in the UK methodology page](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking/methodologies/adultsmokinghabitsintheukmethodology)
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Cigarette smokers
+    - Columns: 
+                              Title         Type  Required                                              Property URL Observations Column Titles
+                             AREACD    Dimension      True        cigarette-smokers.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 cigarette-smokers.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            cigarette-smokers.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                      None                           
+                          Indicator   Suppressed     False                                                      None                           
+                            Mission   Suppressed     False                                                      None                           
+                           Category   Suppressed     False                                                      None                           
+                             Period    Dimension      True                      cigarette-smokers.csv#dimension/year                Observation
+                        Observation Observations     False           cigarette-smokers.csv#measure/cigarette-smokers                Observation
+                            Measure   Suppressed     False                                                      None                           
+                               Unit   Suppressed     False                                                      None                           
+    Lower Confidence Interval (95%)    Attribute     False cigarette-smokers.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False cigarette-smokers.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        cigarette-smokers.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                      None                           
+                              Notes   Suppressed     False                                                      None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 4664
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD         AREANM Geography                          Variable Name         Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2022         12.9 Percentage    %                             12.6                             13.1                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2021         13.3 Percentage    %                             13.0                             13.5                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2020         14.0 Percentage    %                             13.8                             14.3                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2018         14.7 Percentage    %                             14.5                             14.9                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2017         15.1 Percentage    %                             14.9                             15.3                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2019         14.1 Percentage    %                             13.9                             14.3                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2015         17.2 Percentage    %                             17.0                             17.4                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2014         18.1 Percentage    %                             17.9                             18.4                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2013         18.8 Percentage    %                             18.5                             19.0                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2012         19.6 Percentage    %                             19.4                             19.8                NaN        -1   NaN
+        - Last 10 Rows: 
+   AREACD              AREANM                Geography                          Variable Name         Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2012          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2013          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2014          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2015         13.8 Percentage    %                              9.2                             18.5                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2016         13.3 Percentage    %                              9.6                             16.9                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2017         14.1 Percentage    %                             10.4                             17.9                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2018         11.9 Percentage    %                              8.6                             15.1                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2019         13.1 Percentage    %                             10.0                             16.1                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2020         15.3 Percentage    %                             11.0                             19.6                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2022         12.8 Percentage    %                              9.8                             15.8                NaN        -1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+          Measure    Unit  Count
+Cigarette smokers percent   4664
+        
