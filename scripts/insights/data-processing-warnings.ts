@@ -59,12 +59,13 @@ export async function abortIfNewFilesExist(previous_file_paths, csv_preprocess_d
 	filenames = filenames.filter(
 		(f) => f.endsWith('.csv') && !f.startsWith('out/') && !f.includes('_IDS')
 	);
+	filenames = filenames.map((f) => `${csv_preprocess_dir}/${f}`);
 
 	const previous_filenames = previous_file_paths.array('filePath');
 
 	const newFiles = [];
 	for (const f of filenames) {
-		if (!previous_filenames.includes(`${csv_preprocess_dir}/${f}`)) {
+		if (!previous_filenames.includes(f)) {
 			newFiles.push(f);
 		}
 	}
@@ -73,5 +74,18 @@ export async function abortIfNewFilesExist(previous_file_paths, csv_preprocess_d
 		console.log('New files:');
 		console.log(newFiles);
 		throw new Error(CONFIG.NEW_FILES_WARNING);
+	}
+
+	const expectedButMissingFiles = [];
+	for (const f of previous_file_paths) {
+		if (!filenames.includes(f.filePath)) {
+			expectedButMissingFiles.push(f.filePath);
+		}
+	}
+
+	if (expectedButMissingFiles.length > 0) {
+		console.log('Files listed in manifest but missing:');
+		console.log(expectedButMissingFiles);
+		throw new Error(CONFIG.MISSING_FILES_WARNING);
 	}
 }

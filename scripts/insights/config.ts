@@ -36,10 +36,15 @@ const AREA_CODE_MAP = {
 
 export const NEW_FILES_WARNING =
 	`The script has been aborted because the list of file paths read in from ` +
-	`the ${CSV_PREPROCESS_DIR} folder includes files which were not present when ` +
-	`this script was last run. These file paths can be viewed in the ` +
-	`previous-file-paths data frame. Please add these file paths to the ` +
+	`the ${CSV_PREPROCESS_DIR} folder includes files which are not listed in ` +
+	`the manifest. These file paths can be viewed in the ` +
+	`previous_file_paths data frame. Please add these file paths to the ` +
 	`data-files-manifest.csv file in the config-data folder and re-run.`;
+
+export const MISSING_FILES_WARNING =
+	`The script has been aborted because some files listed in the manifest are ` +
+	`not in the ${CSV_PREPROCESS_DIR} folder. Please either add these files, ` +
+	`or remove their names from the manifest.`;
 
 const CONFIG = {
 	CSV_PREPROCESS_DIR,
@@ -54,6 +59,7 @@ const CONFIG = {
 	COMBINED_DATA_COLUMN_NAMES,
 	AREA_CODE_MAP,
 	NEW_FILES_WARNING,
+	MISSING_FILES_WARNING,
 	CONFIG_DIR,
 	CSV_DIR
 };
