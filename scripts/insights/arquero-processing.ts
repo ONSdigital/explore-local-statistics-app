@@ -143,9 +143,19 @@ function processFile(f, code, areaCodes, combined_data, combined_metadata) {
 		{ old: 'lower confidence interval (95%)', new: 'lci' },
 		{ old: 'upper confidence interval (95%)', new: 'uci' }
 	]);
-	indicator_data = indicator_data.rename({
-		[f.valueField || CONFIG.DEFAULT_VALUE_FIELD_NAME]: 'value'
-	});
+
+	if (f.valueField) {
+		indicator_data = indicator_data.rename({
+			[f.valueField]: 'value'
+		});
+	} else if (indicator_data.columnNames().includes(CONFIG.DEFAULT_VALUE_FIELD_NAME)) {
+		indicator_data = indicator_data.rename({
+			[CONFIG.DEFAULT_VALUE_FIELD_NAME]: 'value'
+		});
+	} else if (!indicator_data.columnNames().includes('value')) {
+		throw new Error(`"value" field is unexpectedly missing in data for code ${code}!`);
+	}
+
 	indicator_data = tidyAreaCodes(indicator_data, areaCodes);
 
 	const metadata_columns = getMetadataColNames(indicator_data, f.multiIndicatorCategory);

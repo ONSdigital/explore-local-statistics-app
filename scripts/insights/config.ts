@@ -13,7 +13,7 @@ const AREAS_GEOG_LEVEL_FILENAME = `${CONFIG_DIR}/geography/areas-geog-level.csv`
 export const INDICATORS_METADATA_CSV = `${CONFIG_DIR}/indicators/indicators-metadata.csv`;
 const EXCLUDED_INDICATORS_PATH = `${CONFIG_DIR}/excluded-indicators.json`;
 
-const DEFAULT_VALUE_FIELD_NAME = 'value';
+const DEFAULT_VALUE_FIELD_NAME = 'observation';
 
 const COMBINED_DATA_COLUMN_NAMES = ['areacd', 'period', 'value', 'code', 'lci', 'uci'];
 
