@@ -14,6 +14,14 @@ import { checkedJoin } from './table-utils.ts';
 import CONFIG from './config.ts';
 
 export default async function main() {
+	const nodeVersion = process.version
+		.slice(1)
+		.split('.')
+		.map((d) => +d);
+	if (nodeVersion[0] < 20 || (nodeVersion[0] === 20 && nodeVersion[1] < 1)) {
+		throw new Error('A more recent node version is needed for recursive directory readdir.');
+	}
+
 	const previous_file_paths = loadCsvWithoutBom(CONFIG.FILE_NAMES_LOG);
 	const areas_geog_level = loadCsvWithoutBom(CONFIG.AREAS_GEOG_LEVEL_FILENAME);
 	const excludedIndicators = readJsonSync(CONFIG.EXCLUDED_INDICATORS_PATH);
