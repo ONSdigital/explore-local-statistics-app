@@ -21,7 +21,7 @@
 </script>
 
 <div class="content-block" bind:this={el}>
-	<h3 class="content-subhead">{title} <span>{unit}</span></h3>
+	<h3 class="content-subhead">{title}<span>, {unit}</span></h3>
 	<slot />
 </div>
 <div class="content-actions">
