@@ -17,7 +17,7 @@
 
 	$: embedCode = `<div id="${type}"></div>
 <scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
-<scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}embed?type=${type}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
+<scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?type=${type}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
 <div class="content-block" bind:this={el}>
