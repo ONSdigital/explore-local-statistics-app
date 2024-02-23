@@ -19,6 +19,7 @@ export function checkedJoin(
 	const setA = new Set(tableA.array(on));
 	const setB = new Set(tableB.array(on));
 	let setsDiffer = false;
+
 	if (expectAllOnLeft && [...setB].some((d) => !setA.has(d))) {
 		setsDiffer = true;
 		console.log('Present in right set but not in left:');
