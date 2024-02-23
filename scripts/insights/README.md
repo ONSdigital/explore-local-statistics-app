@@ -24,7 +24,7 @@ npm run data:generate
 - For each indicator: `id,topic,subTopic,code,periodGroup`: `scripts/insights/raw/config-data/indicators/indicators-lookup.csv`. Note: The current file has `minXDomainNumb,maxXDomainNumb` columns in here, but these should probably be deleted because these values are calculated by the script.
 - Lots of metadata such as `unit,measure,polarity` for each indicator: `scripts/insights/raw/config-data/indicators/indicators-metadata.csv`
 - Dummy data for the beeswarm key: `scripts/insights/cooked/csv/beeswarm-key-data.csv`
-- Similar areas lookup: `scripts/insights/raw/config-data/clusters/similar-areas-lookup.csv`. Note: I think this is currently just dummy data.
+- Clusters lookup: `scripts/insights/raw/config-data/clusters/clustersLookup.csv`
 - Urban/rural, IMD, coastal: `scripts/insights/raw/config-data/geography/areas-geog-info.csv`
 - Parent geographies: `scripts/insights/raw/config-data/geography/areas-parents-lookup.csv`
 

@@ -54,9 +54,12 @@
 		.map((el) => el.areacd);
 
 	// determine the codes for similar areas to the selected area
-	$: similarAreasCodes = metadata.similarAreasLookupObject[selectedArea.areacd]
-		? metadata.similarAreasLookupObject[selectedArea.areacd].split('|')
-		: [];
+	$: similarAreasCodes = [];
+	// TODO: Use the new clustersLookup. The previous code is commented out in
+	// the following lines and should be deleted.
+	// $: similarAreasCodes = metadata.similarAreasLookupObject[selectedArea.areacd]
+	// 	? metadata.similarAreasLookupObject[selectedArea.areacd].split('|')
+	// 	: [];
 
 	//////// defining arrays which track which areas are visible on the graphs ///////
 

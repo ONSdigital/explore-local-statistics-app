@@ -103,8 +103,7 @@ function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDa
 }
 
 function generateOutConfig(config, combinedDataObject) {
-	// TODO: check why the values in similarAreasLookupObject all look equal to each other
-	const similarAreasLookupObject = toLookup(config.similarAreasLookup, 'areacd', 'similarlist');
+	const clustersLookup = makeClustersLookup(config.clustersLookup);
 
 	const areasGeogInfoObject = toLookup(config.areasGeogInfo, 'areacd');
 
@@ -168,7 +167,7 @@ function generateOutConfig(config, combinedDataObject) {
 	const globalXDomainExtent = findGlobalXDomainExtent(indicatorsArray);
 
 	return {
-		similarAreasLookupObject,
+		clustersLookup,
 		areasGeogInfoObject,
 		areasGeogLevelObject,
 		areasArray,
@@ -181,6 +180,20 @@ function generateOutConfig(config, combinedDataObject) {
 		periodsLookupObject,
 		globalXDomainExtent
 	};
+}
+
+function makeClustersLookup(clustersLookupRaw) {
+	const clustersLookup = { areacd: clustersLookupRaw.map((row) => row['Local Authority Code']) };
+	for (const columnName of clustersLookupRaw.columns) {
+		if (!columnName.startsWith('Local Authority')) {
+			const shortColumnName = columnName.split(' ')[0].toLowerCase();
+			clustersLookup[shortColumnName] = clustersLookupRaw.map((row) => {
+				const clusterCode = row[columnName].slice(-1).toLowerCase();
+				return clusterCode.match(/[a-z]/) ? clusterCode : null;
+			});
+		}
+	}
+	return clustersLookup;
 }
 
 function makeAreasArray(config) {
@@ -243,9 +256,7 @@ function readDataFromCsvs() {
 }
 
 function readConfigFromCsvs() {
-	const similarAreasLookup = readCsvAutoType(
-		`${CONFIG.CONFIG_DIR}/clusters/similar-areas-lookup.csv`
-	);
+	const clustersLookup = readCsvAutoType(`${CONFIG.CONFIG_DIR}/clusters/Cluster_allocation.csv`);
 	const areasGeogInfo = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-info.csv`);
 	const areasGeogLevel = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-level.csv`);
 	const areasParentsLookup = readCsvAutoType(
@@ -258,7 +269,7 @@ function readConfigFromCsvs() {
 	const periodsLookup = readCsvAutoType(`${CONFIG.CONFIG_DIR}/periods/unique-periods-lookup.csv`);
 
 	return {
-		similarAreasLookup,
+		clustersLookup,
 		areasGeogInfo,
 		areasGeogLevel,
 		areasParentsLookup,
