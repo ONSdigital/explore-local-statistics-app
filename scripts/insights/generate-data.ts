@@ -1,8 +1,10 @@
 import { writeFileSync } from 'fs';
+import aq from 'arquero';
 import arqueroProcessing from './arquero-processing.js';
 import { readCsvAutoType } from './io.ts';
 import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
+import { median, mad } from './stats.ts';
 
 const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
@@ -41,7 +43,7 @@ async function main() {
 		`Insights data JSON file in experimental column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
 	);
 
-	const outConfig = generateOutConfig(config, outData.combinedDataObject);
+	const outConfig = generateOutConfig(config, combinedData, outData.combinedDataObject);
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
@@ -102,8 +104,9 @@ function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDa
 	return combinedDataObjectColumnOriented;
 }
 
-function generateOutConfig(config, combinedDataObject) {
+function generateOutConfig(config, combinedData, combinedDataObject) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
+	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
 
 	const areasGeogInfoObject = toLookup(config.areasGeogInfo, 'areacd');
 
@@ -168,6 +171,7 @@ function generateOutConfig(config, combinedDataObject) {
 
 	return {
 		clustersLookup,
+		clustersCalculations,
 		areasGeogInfoObject,
 		areasGeogLevelObject,
 		areasArray,
@@ -183,17 +187,61 @@ function generateOutConfig(config, combinedDataObject) {
 }
 
 function makeClustersLookup(clustersLookupRaw) {
-	const clustersLookup = { areacd: clustersLookupRaw.map((row) => row['Local Authority Code']) };
+	const clustersLookup = {
+		data: { areacd: clustersLookupRaw.map((row) => row['Local Authority Code']) },
+		types: []
+	};
 	for (const columnName of clustersLookupRaw.columns) {
 		if (!columnName.startsWith('Local Authority')) {
 			const shortColumnName = columnName.split(' ')[0].toLowerCase();
-			clustersLookup[shortColumnName] = clustersLookupRaw.map((row) => {
+			clustersLookup.types.push(shortColumnName);
+			clustersLookup.data[shortColumnName] = clustersLookupRaw.map((row) => {
 				const clusterCode = row[columnName].slice(-1).toLowerCase();
 				return clusterCode.match(/[a-z]/) ? clusterCode : null;
 			});
 		}
 	}
 	return clustersLookup;
+}
+
+function makeClustersCalculations(clustersLookup, combinedData) {
+	const clustersCalculations = {};
+	for (const clusterType of clustersLookup.types) {
+		clustersCalculations[clusterType] = [];
+		const areacdToCluster = aq
+			.table({
+				areacd: clustersLookup.data.areacd,
+				cluster: clustersLookup.data[clusterType]
+			})
+			.filter((d) => d.cluster !== null);
+		const joinedTable = combinedData
+			.join(areacdToCluster, 'areacd')
+			.filter((d) => d.value !== null);
+		const clusters = areacdToCluster
+			.select('cluster')
+			.dedupe()
+			.array('cluster')
+			.sort((a, b) => a.localeCompare(b));
+		const idAndYear = joinedTable.select('id', 'xDomainNumb').dedupe().objects();
+		for (const { id, xDomainNumb } of idAndYear) {
+			const filteredTable = joinedTable.filter(
+				aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+			);
+			const filteredResults = {};
+			for (const cluster of clusters) {
+				const clusterValues = filteredTable
+					.filter(aq.escape((d) => d.cluster === cluster))
+					.array('value');
+				filteredResults[cluster] = {
+					median: clusterValues.length === 0 ? null : median(clusterValues),
+					mad: clusterValues.length === 0 ? null : mad(clusterValues)
+				};
+			}
+			clustersCalculations[clusterType].push({ id, xDomainNumb, filteredResults });
+		}
+	}
+
+	return clustersCalculations;
 }
 
 function makeAreasArray(config) {
