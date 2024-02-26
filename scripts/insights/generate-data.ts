@@ -108,6 +108,12 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
 	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
 
+	const sameParentGeogCalculations = makeSameParentGeogCalculations(
+		config.areasGeogLevel,
+		config.areasParentsLookup,
+		combinedData
+	);
+
 	const areasGeogInfoObject = toLookup(config.areasGeogInfo, 'areacd');
 
 	const areasGeogLevelObject = makeAreasGeogLevelObject(config.areas, config.areasGeogLevel);
@@ -172,6 +178,7 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 	return {
 		clustersLookup,
 		clustersCalculations,
+		sameParentGeogCalculations,
 		areasGeogInfoObject,
 		areasGeogLevelObject,
 		areasArray,
@@ -242,6 +249,75 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 	}
 
 	return clustersCalculations;
+}
+
+function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, combinedData) {
+	const regionAndCountryPrefixes = ['E12', 'N92', 'S92', 'W92']; // English regions and devolved countries
+	const regionAndCountryCodes = new Set(
+		areasParentsLookup
+			.map((d) => d.parentcd)
+			.filter((d) => d !== null && regionAndCountryPrefixes.includes(d.slice(0, 3)))
+	);
+
+	const geogGroups = makeGeogGroups(regionAndCountryCodes, areasParentsLookup, areasGeogLevel);
+
+	const sameParentGeogCalculations = [];
+
+	const combinedDataWithoutNulls = combinedData.filter((d) => d.value !== null);
+	const idAndYear = combinedDataWithoutNulls.select('id', 'xDomainNumb').dedupe().objects();
+	for (const { id, xDomainNumb } of idAndYear) {
+		const filteredTable = combinedDataWithoutNulls.filter(
+			aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+		);
+		const filteredResults = {};
+		for (const geogGroup of geogGroups) {
+			const geogGroupValues = filteredTable
+				.filter(aq.escape((d) => geogGroup.areaCodes.has(d.areacd)))
+				.array('value');
+			filteredResults[geogGroup.parentCode] = {
+				median: geogGroupValues.length === 0 ? null : median(geogGroupValues),
+				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues)
+			};
+		}
+		sameParentGeogCalculations.push({ id, xDomainNumb, filteredResults });
+	}
+
+	return sameParentGeogCalculations;
+}
+
+function makeGeogGroups(
+	regionAndCountryCodes: Set<unknown>,
+	areasParentsLookup: any,
+	areasGeogLevel
+) {
+	const geogLevelToPrefixes = {};
+	for (const item of areasGeogLevel) {
+		geogLevelToPrefixes[item.level] ||= new Set();
+		geogLevelToPrefixes[item.level].add(item.areacd_prefix);
+	}
+
+	const geogGroups = [
+		{
+			parentCode: 'regions_and_countries',
+			areaCodes: regionAndCountryCodes
+		}
+	];
+
+	for (const level of ['upper', 'lower']) {
+		for (const parentcd of regionAndCountryCodes) {
+			geogGroups.push({
+				parentCode: `${parentcd}-${level}`,
+				areaCodes: new Set(
+					areasParentsLookup
+						.filter(
+							(d) => d.parentcd === parentcd && geogLevelToPrefixes[level].has(d.areacd.slice(0, 3))
+						)
+						.map((d) => d.areacd)
+				)
+			});
+		}
+	}
+	return geogGroups;
 }
 
 function makeAreasArray(config) {
