@@ -73,9 +73,6 @@
 	$: filteredChartDataForVisibleAreas = filteredChartData.filter((el) =>
 		visibleAreasWithDataCodes.includes(el.areacd)
 	);
-
-	$: console.log(selectedChartType);
-	$: console.log('filteredIndicators', filteredIndicators);
 </script>
 
 <Tabs name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
