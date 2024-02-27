@@ -25,7 +25,7 @@
 		(selectedChartType.multiYear === 'Either' && timePeriodsArray.length > 1)
 			? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
 			: timePeriodsArray[0].label);
-	$: additionalText = selectedIndicator.metadata.additionalDescription.split('|');
+	$: additionalText = '';
 </script>
 
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>

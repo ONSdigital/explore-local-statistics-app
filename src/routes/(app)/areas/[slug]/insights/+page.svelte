@@ -17,6 +17,7 @@
 	let chartData = data.chartData;
 
 	$: console.log(metadata);
+	$: console.log(chartData);
 
 	//////// defining initial area data ///////
 
@@ -35,9 +36,7 @@
 				(elm) => elm.areacd === selectedArea.areacd && elm.value
 			).length > 0
 	);
-	$: filteredIndicatorsCodes = filteredIndicators
-		.filter((el) => el.code != '4g-coverage')
-		.map((el) => el.code);
+	$: filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
 
 	// determine codes for parent, country and uk areas
 	// country area is null if the the selected area or parent area is a country, uk area is set to null if the parent area is the uk
