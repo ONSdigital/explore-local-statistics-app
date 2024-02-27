@@ -44,12 +44,14 @@
 		}))[0];
 
 	// filter indicators to exclude any where there is no data for the selected area
-	$: filteredIndicators = metadata.indicatorsCodeLabelArray.filter(
-		(el) =>
-			chartData.combinedDataObject[el.code].filter(
-				(elm) => elm.areacd === selectedArea.areacd && elm.value
-			).length > 0
-	);
+	$: filteredIndicators = metadata.indicatorsCodeLabelArray
+		.filter(
+			(el) =>
+				chartData.combinedDataObject[el.code].filter(
+					(elm) => elm.areacd === selectedArea.areacd && elm.value
+				).length > 0
+		)
+		.map((ind) => ({ ...ind, topic: metadata.indicatorsObject[ind.code].topic }));
 	$: filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
 
 	// determine codes for parent, country and uk areas

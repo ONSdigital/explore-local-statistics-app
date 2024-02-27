@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Tabs from '$lib/prototype-components/modified-svelte-components/Tabs.svelte';
-	import Dropdown from '$lib/prototype-components/modified-svelte-components/Dropdown.svelte';
+	import { Select } from '@onsvisual/svelte-components';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
@@ -75,17 +75,23 @@
 	);
 
 	$: console.log(selectedChartType);
+	$: console.log('filteredIndicators', filteredIndicators);
 </script>
 
 <Tabs name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
 ></Tabs>
 
 <div class="main-chart-container">
-	<Dropdown
-		name="select-indicator"
-		optionsArray={filteredIndicators}
-		bind:chosenId={chosenIndicatorId}
-	></Dropdown>
+	<Select
+		id="select-indicator"
+		options={filteredIndicators}
+		idKey="code"
+		labelKey="label"
+		groupKey="topic"
+		clusterByGroup
+		clearable={false}
+		bind:value={chosenIndicatorId}
+	></Select>
 
 	<SubtitleAdditionalDescription {selectedIndicator} {timePeriodsArray} {selectedChartType}
 	></SubtitleAdditionalDescription>
