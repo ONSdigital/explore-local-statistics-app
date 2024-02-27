@@ -12,6 +12,7 @@
 	const dispatch = createEventDispatcher();
 
 	export let postcode;
+	export let urlSuffix = '';
 </script>
 
 <Theme theme="light" background="none">
@@ -34,7 +35,7 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<td
 							><a
-								href="{base}/areas/{makeCanonicalSlug(p.areacd, p.areanm)}"
+								href="{base}/areas/{makeCanonicalSlug(p.areacd, p.areanm)}{urlSuffix}"
 								on:click={() =>
 									analyticsEvent({
 										event: 'postcodeSelect',
@@ -50,3 +51,30 @@
 		</tbody>
 	</table>
 </Theme>
+
+<style>
+	.tbl-results {
+		border-collapse: collapse;
+		width: 100%;
+		min-width: auto;
+		max-width: 450px;
+		background-color: #f5f5f6;
+		/* border-radius: 10px; */
+		margin-top: 10px;
+		box-shadow: 0 2px 0 0 rgb(65 64 66 / 30%);
+		font-size: 14px;
+	}
+	.tbl-results tr + tr {
+		border-top: 1px solid #ddd;
+	}
+	.tbl-results td {
+		padding: 5px 10px;
+	}
+	.tbl-results td:not(:last-child) {
+		white-space: nowrap;
+	}
+	.tbl-results td:last-child {
+		width: 100%;
+		padding-left: 0;
+	}
+</style>

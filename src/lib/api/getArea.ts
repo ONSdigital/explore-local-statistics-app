@@ -22,7 +22,7 @@ export const getArea = async (
 			place: parsed.properties,
 			geoType: geoCodesLookup[parsed.properties.typecd],
 			childTypes: makeChildTypes(parsed.properties.child_typecds),
-			geometry: parsed.properties.end ? parsed.geometry : null
+			geometry: parsed.geometry
 		};
 	} else {
 		return { kind: 'Failure', status: result.status };

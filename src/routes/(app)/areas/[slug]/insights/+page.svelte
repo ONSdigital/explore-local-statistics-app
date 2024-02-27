@@ -1,20 +1,34 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { Breadcrumb, Titleblock, NavSections, NavSection } from '@onsvisual/svelte-components';
-	import Subhead from '$lib/layout/partial/Subhead.svelte';
-	import AreaNav from '$lib/prototype-components/AreaNav.svelte';
+	import {
+		Breadcrumb,
+		Titleblock,
+		NavSections,
+		NavSection,
+		Cards,
+		Card,
+		Button
+	} from '@onsvisual/svelte-components';
+	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
+	import Lede from '$lib/components/Lede.svelte';
 	import TopicSections from '$lib/prototype-components/area-page/TopicSections.svelte';
 	import MainChartSection from '$lib/prototype-components/area-page/MainChartSection.svelte';
+	import AreaSelect from '$lib/components/AreaSelect.svelte';
+	import AreaList from '$lib/components/AreaList.svelte';
 	import type { PageData } from './$types';
 
 	import { onMount } from 'svelte';
+	import { getName, aAn } from '@onsvisual/robo-utils';
 	import { constructSameRegionAreasLabel, generateComparisonAreaGroups } from '$lib/utils.js';
 	import { regions } from '$lib/config';
+	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
 	export let data: PageData;
 
 	let metadata = data.metadata;
 	let chartData = data.chartData;
+	let postcode;
 
 	$: console.log(metadata);
 	$: console.log(chartData);
@@ -204,6 +218,24 @@
 		];
 		chosenRelatedAreasId = 'none';
 	});
+
+	function navTo(e, options = {}, type = 'search') {
+		if (e.detail.type === 'postcode') {
+			postcode = e.detail;
+		} else {
+			postcode = null;
+			// analyticsEvent({
+			// 	event: type === 'map' ? 'mapSelect' : 'searchSelect',
+			// 	areaCode: e.detail.areacd,
+			// 	areaName: e.detail.areanm,
+			// 	areaType: geoCodesLookup[e.detail.areacd.slice(0, 3)].label
+			// });
+			goto(
+				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/insights`,
+				options
+			);
+		}
+	}
 </script>
 
 <Breadcrumb
@@ -215,10 +247,61 @@
 	]}
 	background="#eaeaea"
 />
-<Titleblock title={data.place.areanm} background="#eaeaea">
-	<Subhead>Get localised data, insights and trends for {data.place.areanm}</Subhead>
+<Titleblock title="{data.place.areanm} insights" background="#eaeaea">
+	<Lede
+		>Explore local data and trends for <a
+			href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+			>{getName(data.place, 'the')}</a
+		></Lede
+	>
 </Titleblock>
-<AreaNav areas={metadata.areasArray}></AreaNav>
+
+<Cards marginTop>
+	<Card noBackground>
+		<div style:height="200px">
+			{#key data.geometry}
+				<AreaLocMap geometry={data.geometry} bounds={data.place.bounds} />
+			{/key}
+		</div>
+	</Card>
+	<Card title="About this area">
+		<p>
+			{getName(data.place)} ({data.place.areacd}) is {aAn(data.place.typenm)}
+			{getName(data.place.parents[0], 'in', 'prefix')}
+			<a
+				href="{base}/areas/{makeCanonicalSlug(
+					data.place.parents[0].areacd,
+					data.place.parents[0].areanm
+				)}"
+				data-sveltekit-noscroll>{getName(data.place.parents[0])}</a
+			>.
+		</p>
+		<Button
+			variant="secondary"
+			icon="arrow"
+			iconPosition="after"
+			href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+			small>Read more</Button
+		>
+	</Card>
+	<Card title="Data for other areas">
+		<AreaSelect
+			id="search"
+			mode="search"
+			idKey="areacd"
+			labelKey="areanm"
+			groupKey="group"
+			label="Type a place name or postcode"
+			placeholder="Eg. Titchfield or PO15 5RR"
+			essOnly
+			autoClear
+			on:select={navTo}
+		/>
+		{#if postcode}
+			<AreaList {postcode} on:clear={() => (postcode = null)} urlSuffix="/insights" />
+		{/if}
+	</Card>
+</Cards>
 
 <NavSections contentsLabel="Explore this area">
 	<TopicSections
@@ -254,3 +337,9 @@
 		<p>Here you can find information and links to the data.</p>
 	</NavSection>
 </NavSections>
+
+<style>
+	:global(.select-wrapper label.ons-label) {
+		font-weight: normal;
+	}
+</style>

@@ -19,7 +19,7 @@
 	export let mode = 'search';
 	export let placeholder = 'Type a place name or postcode';
 	export let filterText = '';
-	export let label = null;
+	export let label = '';
 	export let hideLabel = false;
 	export let value = null;
 	export let clearable = true;
