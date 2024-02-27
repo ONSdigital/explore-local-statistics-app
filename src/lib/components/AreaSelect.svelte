@@ -2,7 +2,13 @@
 	// @ts-nocheck
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { base } from '$app/paths';
-	import { geoTypes, geoCodesLookup, geoNames, regionReverseLookup } from '$lib/config/geoConfig';
+	import {
+		geoTypes,
+		geoCodesLookup,
+		geoNames,
+		regionReverseLookup,
+		essGeocodes
+	} from '$lib/config/geoConfig';
 	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { Select } from '@onsvisual/svelte-components';
@@ -23,6 +29,7 @@
 	export let groupKey = 'group';
 	export let multiple = false;
 	export let maxSelected = 4;
+	export let essOnly = false;
 
 	const startsWithFilter = (str, filter) => str.toLowerCase().startsWith(filter.toLowerCase());
 	const filterSort = (a, b) =>
@@ -53,7 +60,11 @@
 			if (json.result) {
 				let places = [];
 				geoTypes
-					.filter((g) => g.pcio)
+					.filter(
+						(g) =>
+							g.pcio &&
+							(!essOnly || (essOnly && g.codes.some((code) => essGeocodes.includes(code))))
+					)
 					.forEach((g) => {
 						let name = json.result[g.pcio];
 						if (name && !name.includes('unparished')) {
@@ -97,18 +108,19 @@
 
 	async function getPlaces() {
 		let places = await getCSV(`${base}/data/places.csv`);
+		if (essOnly) places = places.filter((p) => essGeocodes.includes(p.areacd.slice(0, 3)));
 		places.sort((a, b) => a.areanm.localeCompare(b.areanm));
 		let lookup = {};
-		places.forEach((d) => (lookup[d.areacd] = d));
-		places.forEach((d) => {
-			let type = d.areacd.slice(0, 3);
-			d.group =
+		for (const p of places) lookup[p.areacd] = p;
+		for (const p of places) {
+			const type = p.areacd.slice(0, 3);
+			p.group =
 				type === 'K02'
 					? ''
-					: d.parentcd
-						? `${capitalise(getTypeLabel(type))} in ${lookup[d.parentcd].areanm}`
+					: p.parentcd
+						? `${capitalise(getTypeLabel(type))} in ${lookup[p.parentcd].areanm}`
 						: capitalise(getTypeLabel(type));
-		});
+		}
 		return places;
 	}
 
