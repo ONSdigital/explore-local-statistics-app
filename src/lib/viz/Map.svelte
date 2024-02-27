@@ -11,9 +11,10 @@
 	export let data;
 	export let breaks;
 	export let geos;
+	export let prefix = '';
+	export let suffix = '';
 	export let selected = [];
 	export let hovered = null;
-	export let unit = '';
 	export let dp = 0;
 	export let colors = [
 		'rgb(234, 236, 177)',
@@ -152,8 +153,8 @@
 	{breaks}
 	{hovered}
 	{selected}
-	prefix={unit === '£' ? unit : ''}
-	suffix={!unit || unit === '£' ? '' : unit === '%' ? unit : ` ${unit}`}
+	{prefix}
+	{suffix}
 	formatTick={(d) =>
 		d.toLocaleString(undefined, {
 			minimumFractionDigits: dp,

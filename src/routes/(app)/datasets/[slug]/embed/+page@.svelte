@@ -13,7 +13,7 @@
 
 	const maxSelection = 10;
 
-	const getUnit = (ind) => (ind.unit && ind.unit !== 'NA' ? ind.unit : ind.subText);
+	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 	const doSelect = (e) => {
 		const area = e.detail?.area;
 		if (selected.map((s) => s.areacd).includes(area.areacd))
@@ -65,7 +65,8 @@
 					data={mapData.data}
 					breaks={mapData.breaks}
 					geos={data.indicator.inferredGeos}
-					unit={getUnit(data.indicator.metadata)}
+					prefix={data.indicator.metadata.prefix}
+					suffix={data.indicator.metadata.suffix}
 					dp={+data.indicator.metadata.decimalPlaces}
 					{selected}
 					on:select={doSelect}

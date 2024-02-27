@@ -26,9 +26,7 @@ export const getDataset = async (
 
 	if (metadataResult) {
 		metadata = await metadataResult.json();
-		indicator = Object.keys(metadata.indicatorsObject)
-			.map((key) => metadata.indicatorsObject[key])
-			.find((ind) => ind.metadata.slug === slug);
+		indicator = Object.values(metadata.indicatorsObject).find((ind) => ind.metadata.slug === slug);
 		if (!indicator) return { kind: 'Failure' };
 	}
 

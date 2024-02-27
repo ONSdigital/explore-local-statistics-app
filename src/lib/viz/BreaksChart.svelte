@@ -16,6 +16,7 @@
 		'rgba(0,13,84,.8)'
 	];
 	export let formatTick = (d) => d.toFixed(0);
+	export let prefix = '';
 	export let suffix = '';
 	export let snapTicks = true;
 	export let markerColors = ['#003c57', '#871a5b', '#f66068', '#746cb1', '#a8bd3a'];
@@ -152,7 +153,7 @@
 	{/each}
 	<div class="line" style="right: 0;" />
 	<div class="tick" style="right: 0; transform: translateX({snapTicks ? '2px' : '50%'});">
-		{formatTick(breaks[breaks.length - 1])}{suffix}
+		{prefix}{formatTick(breaks[breaks.length - 1])}{suffix}
 	</div>
 	{#if Array.isArray(positionedData)}
 		{#each positionedData as d, i}
@@ -175,9 +176,9 @@
 					bind:this={labels[i]}
 				>
 					{#if d.align === 'left'}
-						{d.areanm} {d.value}{suffix}
+						{d.areanm} {prefix}{d.value}{suffix}
 					{:else}
-						{d.value}{suffix} {d.areanm}
+						{prefix}{d.value}{suffix} {d.areanm}
 					{/if}
 				</div>
 			</div>
@@ -202,7 +203,7 @@
 				style:left="{pos(d.value, breaks)}%"
 				style:transform="translateX({markerPadding}px)"
 			>
-				{d.value}{suffix}
+				{prefix}{d.value}{suffix}
 				{d.areanm}
 			</div>
 		{/if}
