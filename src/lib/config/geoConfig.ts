@@ -21,24 +21,6 @@ export const geoNames = {
 	}
 };
 
-export const noIndex = ['E00', 'W00', 'E01', 'W01', 'E02', 'W02', 'E04', 'W04', 'E05', 'W05'];
-export const essGeocodes = [
-	'E06',
-	'E07',
-	'E08',
-	'E09',
-	'E10',
-	'E12',
-	'E47',
-	'E92',
-	'N09',
-	'N92',
-	'S12',
-	'S92',
-	'W06',
-	'W92'
-];
-
 export const sources = [
 	{ id: 'uk', type: 'geojson' },
 	{ id: 'ctry', type: 'geojson' },
@@ -114,7 +96,8 @@ export const geoTypes = [
 		codes: ['K02'],
 		source: 'uk',
 		label: 'United Kingdom',
-		plural: 'United Kingdom'
+		plural: 'United Kingdom',
+		index: true
 	},
 	{
 		key: 'ctry',
@@ -122,7 +105,9 @@ export const geoTypes = [
 		pcio: 'country',
 		label: 'country',
 		plural: 'countries',
-		source: 'ctry'
+		source: 'ctry',
+		index: true,
+		ess: true
 	},
 	{
 		key: 'rgn',
@@ -130,7 +115,9 @@ export const geoTypes = [
 		pcio: 'region',
 		label: 'region',
 		plural: 'regions',
-		source: 'rgn'
+		source: 'rgn',
+		index: true,
+		ess: true
 	},
 	{
 		key: 'cauth',
@@ -138,7 +125,8 @@ export const geoTypes = [
 		label: 'upper-tier/combined authority',
 		plural: 'upper-tier/combined authorities',
 		source: 'la',
-		filter: ['all', ...notInTypes(['E07', 'E08']), ['!', ['==', ['get', 'cauth'], 'true']]]
+		filter: ['all', ...notInTypes(['E07', 'E08']), ['!', ['==', ['get', 'cauth'], 'true']]],
+		index: true
 	},
 	{
 		key: 'utla',
@@ -147,7 +135,9 @@ export const geoTypes = [
 		label: 'upper-tier/unitary authority',
 		plural: 'upper-tier/unitary authorities',
 		source: 'la',
-		filter: ['all', ...notInTypes(['E07', 'E47'])]
+		filter: ['all', ...notInTypes(['E07', 'E47'])],
+		index: true,
+		ess: true
 	},
 	{
 		key: 'ltla',
@@ -156,7 +146,9 @@ export const geoTypes = [
 		label: 'lower-tier/unitary authority',
 		plural: 'lower-tier/unitary authorities',
 		source: 'la',
-		filter: ['all', ...notInTypes(['E10', 'E47'])]
+		filter: ['all', ...notInTypes(['E10', 'E47'])],
+		index: true,
+		ess: true
 	},
 	{
 		key: 'wpc',
@@ -164,21 +156,24 @@ export const geoTypes = [
 		pcio: 'parliamentary_constituency',
 		label: 'parliamentary constituency',
 		plural: 'parliamentary constituencies',
-		source: 'wpc'
+		source: 'wpc',
+		index: true
 	},
 	{
 		key: 'sener',
 		codes: ['W10'],
 		label: 'Senedd electoral region',
 		plural: 'Senedd electoral regions',
-		source: 'sener'
+		source: 'sener',
+		index: true
 	},
 	{
 		key: 'senc',
 		codes: ['W09'],
 		label: 'Senedd constituency',
 		plural: 'Senedd constituencies',
-		source: 'senc'
+		source: 'senc',
+		index: true
 	},
 	{
 		key: 'wd',
@@ -220,6 +215,23 @@ export const geoTypes = [
 		source: 'oa'
 	}
 ];
+
+export const noIndex = Array.from(
+	new Set(
+		geoTypes
+			.filter((t) => !t.index)
+			.map((t) => t.codes)
+			.flat()
+	)
+);
+export const essGeocodes = Array.from(
+	new Set(
+		geoTypes
+			.filter((t) => t.ess)
+			.map((t) => t.codes)
+			.flat()
+	)
+);
 
 export const mapSources = sources.map((s) => {
 	return {
