@@ -18,7 +18,7 @@
 	export let formatTick = (d) => d.toFixed(0);
 	export let suffix = '';
 	export let snapTicks = true;
-	export let markerColors = ['#003C57', '#206095', '#a8bd3a', '#871a5b', '#27a0cc'];
+	export let markerColors = ['#003c57', '#871a5b', '#f66068', '#746cb1', '#a8bd3a'];
 	export let markerPadding = 4;
 
 	let container, width;
@@ -163,9 +163,7 @@
 					style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
 					style:top="{-20 - (d.offset || 0) * 20}px"
 					style:height="calc(100% + {20 + (d.offset || 0) * 20}px)"
-					style:background-color={d.areacd === hovered
-						? 'orange'
-						: markerColors[i % markerColors.length]}
+					style:background-color={d.areacd === hovered ? 'orange' : markerColors[i] || 'grey'}
 				/>
 				<div
 					class="value"
@@ -173,7 +171,7 @@
 					style:transform={d.align === 'left'
 						? `translateX(-100%) translateX(-${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`
 						: `translateX(${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`}
-					style:color={d.areacd === hovered ? 'orange' : markerColors[i % markerColors.length]}
+					style:color={d.areacd === hovered ? 'orange' : markerColors[i] || 'grey'}
 					bind:this={labels[i]}
 				>
 					{#if d.align === 'left'}

@@ -31,7 +31,7 @@
 					.flat()
 					.sort((a, b) => a.metadata.label.localeCompare(b.metadata.label)) as ind}
 					<li>
-						<a href="{base}/datasets/{ind.code}/" class="indicator-link">
+						<a href="{base}/datasets/{ind.metadata.slug}/" class="indicator-link">
 							<span>{ind.metadata.label}</span>
 							<Icon type="chevron" margin="4px 0 0" />
 						</a>

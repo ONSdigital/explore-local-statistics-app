@@ -22,7 +22,7 @@
 		'rgb(0, 78, 166)',
 		'rgb(0, 13, 84)'
 	];
-	export let markerColors = ['#003C57', '#206095', '#a8bd3a', '#871a5b', '#27a0cc'];
+	export let markerColors = ['#003c57', '#871a5b', '#f66068', '#746cb1', '#a8bd3a'];
 	export let topoPath = `${base}/data/topo.json`;
 
 	let features, bounds;
@@ -40,11 +40,14 @@
 		dispatch('select', { id: area?.areacd, area, e });
 	}
 
-	const featureCollection = (features, data) => ({
+	const featureCollection = (features, data, options = {}) => ({
 		type: 'FeatureCollection',
 		features: data.map((d, i) => {
 			const feature = features[d.areacd];
-			feature.properties = { ...d, color: data.length < 6 ? markerColors[i] : colors[d.cluster] };
+			feature.properties = {
+				...d,
+				color: options.boundary ? markerColors[i] || 'grey' : colors[d.cluster]
+			};
 			return feature;
 		})
 	});
@@ -118,7 +121,7 @@
 				<MapSource
 					id="selected"
 					type="geojson"
-					data={featureCollection(features, selected)}
+					data={featureCollection(features, selected, { boundary: true })}
 					promoteId="areacd"
 				>
 					<MapLayer
@@ -126,7 +129,7 @@
 						type="line"
 						paint={{
 							'line-color': 'white',
-							'line-width': 3.5
+							'line-width': 4
 						}}
 						order="place_other"
 					/>
@@ -135,7 +138,7 @@
 						type="line"
 						paint={{
 							'line-color': ['get', 'color'],
-							'line-width': 2
+							'line-width': 2.5
 						}}
 						order="place_other"
 					/>

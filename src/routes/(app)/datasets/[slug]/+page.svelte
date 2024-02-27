@@ -22,28 +22,30 @@
 	let pivotedData, mapData;
 	let selected = [];
 
+	const maxSelection = 10;
+
 	const getUnit = (ind) => (ind.unit && ind.unit !== 'NA' ? ind.unit : ind.subText);
 	const doSelect = (e) => {
 		const area = e.detail?.area;
 		if (selected.map((s) => s.areacd).includes(area.areacd))
 			selected = selected.filter((s) => s.areacd !== area.areacd);
-		else if (selected.length < 5) selected = [...selected, area];
+		else if (selected.length < maxSelection) selected = [...selected, area];
 	};
 	const refreshData = () => {
-		pivotedData = geoGroup?.codes ? pivotData(data.data, geoGroup?.codes) : [];
+		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
 		mapData =
 			geoGroup?.codes && year
-				? makeMapData(data.data, geoGroup?.codes, year)
+				? makeMapData(data.chartData, geoGroup?.codes, year)
 				: { data: [], breaks: [] };
 	};
 
 	afterNavigate(() => {
-		geoGroup = data.geos.groups[data.geos.groups.length - 1];
-		year = data.years[data.years.length - 1];
+		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
+		year = data.indicator.years[data.indicator.years.length - 1];
 		columns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
 			{ key: 'areanm', label: 'Area name', sortable: true },
-			...data.years.map((y) => ({ key: y, label: y, sortable: true }))
+			...data.indicator.years.map((y) => ({ key: y, label: y, sortable: true }))
 		];
 		refreshData();
 	});
@@ -76,7 +78,7 @@
 	</Lede>
 </Titleblock>
 
-<Indicators topics={data.config.topicsArray} title="Find another dataset" compact />
+<Indicators topics={data.metadata.topicsArray} title="Find another dataset" compact />
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this dataset" marginTop>
@@ -88,10 +90,14 @@
 				data={mapData.data}
 			>
 				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown options={data.geos.groups} bind:value={geoGroup} on:change={refreshData} />
+					<Dropdown
+						options={data.indicator.inferredGeos.groups}
+						bind:value={geoGroup}
+						on:change={refreshData}
+					/>
 					<Dropdown
 						id="year"
-						options={data.years}
+						options={data.indicator.years}
 						width={10}
 						bind:value={year}
 						on:change={refreshData}
@@ -100,7 +106,7 @@
 				<Map
 					data={mapData.data}
 					breaks={mapData.breaks}
-					geos={data.geos}
+					geos={data.indicator.inferredGeos}
 					unit={getUnit(data.indicator.metadata)}
 					dp={+data.indicator.metadata.decimalPlaces}
 					{selected}
@@ -141,7 +147,11 @@
 				data={pivotedData}
 			>
 				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown options={data.geos.groups} bind:value={geoGroup} on:change={refreshData} />
+					<Dropdown
+						options={data.indicator.inferredGeos.groups}
+						bind:value={geoGroup}
+						on:change={refreshData}
+					/>
 				</div>
 				{#key pivotedData}
 					<Table data={pivotedData} {columns} height={500} stickyHeader compact />
@@ -172,9 +182,12 @@
 		display: inline-block;
 	}
 	:global(select.ons-input--select) {
-		max-width: 280px !important;
+		max-width: 300px !important;
 	}
 	:global(select#year) {
 		width: 90px !important;
+	}
+	:global(section#map > h2) {
+		margin-top: -6px !important;
 	}
 </style>
