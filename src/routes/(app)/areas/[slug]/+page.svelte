@@ -144,7 +144,7 @@
 	title="Areas in {['K02', 'E92', 'N92', 'S92', 'W92'].includes(data.place.typecd)
 		? ''
 		: 'and around'} {getName(data.place, 'the')}"
-	id="related"
+	id="related-areas"
 	height="auto"
 	marginTop
 >
@@ -254,10 +254,10 @@
 		margin: 0;
 		padding: 0;
 	}
-	:global(.ons-tab[aria-selected='true']:not(:focus)) {
+	:global(#related-areas .ons-tab[aria-selected='true']:not(:focus)) {
 		background: #f3f3f3 !important;
 	}
-	:global(.ons-tab[aria-selected='true']:focus) {
+	:global(#related-areas .ons-tab[aria-selected='true']:focus) {
 		box-shadow:
 			inset 0 0 0 4px #f3f3f3,
 			inset 12px 0 0 0 #f3f3f3,
