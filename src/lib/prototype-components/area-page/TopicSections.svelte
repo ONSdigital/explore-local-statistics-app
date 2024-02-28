@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { NavSection } from '@onsvisual/svelte-components';
 	import TopicSection from '$lib/prototype-components/area-page/TopicSection.svelte';
 	import SelectComparisons from '$lib/prototype-components/SelectComparisons.svelte';
 	import EditTimePeriod from '$lib/prototype-components/EditTimePeriod.svelte';
@@ -26,6 +27,7 @@
 <div class="topic-sections-container">
 	<!-- <EditTimePeriod {metadata} bind:startXDomainNumb bind:endXDomainNumb></EditTimePeriod> -->
 
+	<NavSection title="Indicators by topic" hideTitle />
 	<SelectComparisons
 		{metadata}
 		{areasGroupsObject}

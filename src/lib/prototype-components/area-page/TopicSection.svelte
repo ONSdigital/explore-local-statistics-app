@@ -41,7 +41,7 @@
 
 {#if filteredTopicIndicators.length > 0}
 	<div class="topic-section-container-{i === 0 ? 0 : 1}">
-		<NavSection title={topicUppercase}>
+		<NavSection title={topicUppercase} subsection>
 			{#each subTopics as subTopic, i}
 				<div class="sub-topic-container-{i === 0 ? 0 : 1}">
 					<h2 class="sub-topic-header">
