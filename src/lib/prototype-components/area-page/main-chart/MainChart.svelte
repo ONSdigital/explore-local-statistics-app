@@ -74,9 +74,9 @@
 	);
 </script>
 
-<Tabs border>
+<Tabs border bind:selected={chosenChartId}>
 	{#each chartOptionsArray as chart}
-		<Tab title={chart.label} hideTitle>
+		<Tab title={chart.label} id={chart.id} hideTitle>
 			<Select
 				id="select-indicator"
 				options={filteredIndicators}
