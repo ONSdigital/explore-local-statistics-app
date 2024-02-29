@@ -100,21 +100,21 @@ export function generateComparisonAreaGroups(
 				id: 0,
 				name: 'all-siblings',
 				label1: 'Median average of all local authorities',
-				label2: 'all other local authorities'
+				label2: 'All other local authorities'
 				//sameGeogLevelAreasCodes
 			},
 			{
 				id: 1,
 				name: 'same-parent-siblings',
 				label1: 'Median average of areas in ' + formatName(parentName),
-				label2: 'all other areas in ' + formatName(parentName)
+				label2: 'All other areas in ' + formatName(parentName)
 				//sameRegionAreasCodes
 			},
 			{
 				id: 2,
 				name: 'similar-siblings',
 				label1: 'Median average of demographically similar areas',
-				label2: 'demographically similar areas'
+				label2: 'Demographically similar areas'
 				//similarAreasCodes
 			}
 		];
@@ -125,13 +125,13 @@ export function generateComparisonAreaGroups(
 					id: 0,
 					name: 'all-siblings',
 					label1: 'Median average of all UK regions',
-					label2: 'all other UK regions'
+					label2: 'All other UK regions'
 					//sameGeogLevelAreasCodes
 				},
 				{
 					id: 3,
 					name: 'local-authority-children',
-					label2: 'all local authorities in ' + formatName(selectedAreaName)
+					label2: 'All local authorities in ' + formatName(selectedAreaName)
 					//localAuthorityChildrenAreasCodes
 				}
 			];
@@ -141,19 +141,19 @@ export function generateComparisonAreaGroups(
 					id: 0,
 					name: 'all-siblings',
 					label1: 'Median average of all UK regions',
-					label2: 'all other UK regions'
+					label2: 'All other UK regions'
 					//sameGeogLevelAreasCodes
 				},
 				{
 					id: 1,
 					name: 'same-parent-siblings',
-					label2: 'other UK countries'
+					label2: 'Ather UK countries'
 					//sameRegionAreasCodes
 				},
 				{
 					id: 3,
 					name: 'local-authority-children',
-					label2: 'all local authorities in ' + formatName(selectedAreaName)
+					label2: 'All local authorities in ' + formatName(selectedAreaName)
 					//localAuthorityChildrenAreasCodes
 				}
 			];
@@ -163,19 +163,19 @@ export function generateComparisonAreaGroups(
 			{
 				id: 1,
 				name: 'same-parent-siblings',
-				label2: 'other UK countries'
+				label2: 'Other UK countries'
 				//sameRegionAreasCodes
 			},
 			{
 				id: 3,
 				name: 'local-authority-children',
-				label2: 'all local authorities in ' + formatName(selectedAreaName)
+				label2: 'All local authorities in ' + formatName(selectedAreaName)
 				//localAuthorityChildrenAreasCodes
 			},
 			{
 				id: 4,
 				name: 'region-children',
-				label2: 'all regions in ' + formatName(selectedAreaName)
+				label2: 'All regions in ' + formatName(selectedAreaName)
 				//regionChildrenAreas
 			}
 		];

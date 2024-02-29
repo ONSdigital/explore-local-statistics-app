@@ -19,8 +19,6 @@
 		chosenComparisonMeasureOrArea = filteredComparisonGroupsArray[0];
 		chosenAdditionalComparisonAreasGroup = comparisonGroupsArray[0];
 	});
-
-	$: console.log(chosenComparisonMeasureOrArea);
 </script>
 
 <div class="select-comparisons-container sticky">

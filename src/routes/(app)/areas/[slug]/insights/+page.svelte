@@ -30,18 +30,14 @@
 	let chartData = data.chartData;
 	let postcode;
 
-	$: console.log(metadata);
-	$: console.log(chartData);
-
 	//////// defining initial area data ///////
 
-	// define the selected area (with role = main)
-	$: selectedArea = metadata.areasArray
-		.filter((el) => el.areacd === data.place.areacd)
-		.map((el) => ({
-			...el,
-			role: 'main'
-		}))[0];
+	$: selectedArea = {
+		...metadata.areasObject[data.place.areacd],
+		role: 'main'
+	};
+
+	$: console.log(metadata);
 
 	// filter indicators to exclude any where there is no data for the selected area
 	$: filteredIndicators = metadata.indicatorsCodeLabelArray
@@ -79,7 +75,7 @@
 	//////// defining arrays which track which areas are visible on the graphs ///////
 
 	let chosenParentAreasArray = new Array(0),
-		chosenRelatedAreasId,
+		chosenRelatedAreasId = new Array(0),
 		chosenSameRegionArray = new Array(0),
 		chosenCountriesArray = new Array(0),
 		chosenRegionsArray = new Array(0),
@@ -91,6 +87,13 @@
 		...chosenSameRegionArray,
 		...chosenAllOtherArray
 	];
+
+	let testChosen = {
+		aaaa: new Array(0),
+		bbbb: new Array(0)
+	};
+
+	$: console.log(testChosen);
 
 	//////// define area groups ///////
 
@@ -173,8 +176,50 @@
 		selectedArea.areacd === 'E92000001' ? regions.map((el) => metadata.areasObject[el.code]) : null;
 	$: regionChildrenAreasCodes = regionChildrenAreas ? regions.map((el) => el.code) : null;
 
-	//// assemble all area groups into a single object which is passed to components
+	/////////
+	$: sameParentCodes = sameRegionAreasCodes;
 
+	$: countryOptionCodes =
+		selectedArea.geogLevel === 'country'
+			? []
+			: metadata.areasGeogLevelObject.country.filter(
+					(el) => el != selectedArea.areacd && !parentAreasCodes.includes(el)
+				);
+	$: countryOptions = countryOptionCodes.map((el) => metadata.areasObject[el]);
+
+	$: regionOptionCodes =
+		selectedArea.geogLevel === 'region'
+			? []
+			: metadata.areasGeogLevelObject.region.filter(
+					(el) =>
+						el != selectedArea.areacd &&
+						!countryOptionCodes.includes(el) &&
+						!parentAreasCodes.includes(el)
+				);
+	$: regionOptions = regionOptionCodes.map((el) => metadata.areasObject[el]);
+
+	$: lowerTierLocalAuthorityOptionCodes = metadata.areasGeogLevelObject.lower.filter(
+		(el) =>
+			el != selectedArea.areacd &&
+			!parentAreasCodes.includes(el) &&
+			(['lower', 'upper'].includes(selectedArea.geogLevel) ? !sameParentCodes.includes(el) : true)
+	);
+	$: lowerTierLocalAuthorityOptions = lowerTierLocalAuthorityOptionCodes.map(
+		(el) => metadata.areasObject[el]
+	);
+
+	$: upperTierLocalAuthorityOptionCodes = metadata.areasGeogLevelObject.upper.filter(
+		(el) =>
+			el != selectedArea.areacd &&
+			!lowerTierLocalAuthorityOptionCodes.includes(el) &&
+			!parentAreasCodes.includes(el) &&
+			(['lower', 'upper'].includes(selectedArea.geogLevel) ? !sameParentCodes.includes(el) : true)
+	);
+	$: upperTierLocalAuthorityOptions = upperTierLocalAuthorityOptionCodes.map(
+		(el) => metadata.areasObject[el]
+	);
+
+	//// assemble all area groups into a single object which is passed to components
 	$: areasGroupsObject = {
 		selected: { area: selectedArea },
 		parents: { areas: parentAreas, codes: parentAreasCodes },
@@ -201,6 +246,18 @@
 			primaryCodes: visibleAreasPrimaryCodes,
 			relatedAreas: visibleAreasRelated,
 			relatedCodes: visibleAreasRelatedCodes
+		},
+		options: {
+			countries: { areas: countryOptions, codes: countryOptionCodes },
+			regions: { areas: regionOptions, codes: regionOptionCodes },
+			lowerTier: {
+				areas: lowerTierLocalAuthorityOptions,
+				codes: lowerTierLocalAuthorityOptionCodes
+			},
+			upperTier: {
+				areas: upperTierLocalAuthorityOptions,
+				codes: upperTierLocalAuthorityOptionCodes
+			}
 		}
 	};
 
@@ -312,6 +369,7 @@
 		{comparisonGroupsArray}
 		{chartData}
 		{filteredIndicatorsCodes}
+		bind:testChosen
 	></TopicSections>
 
 	<NavSection title="Select an indicator">

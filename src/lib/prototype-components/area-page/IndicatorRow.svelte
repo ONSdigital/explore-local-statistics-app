@@ -112,8 +112,6 @@
 	$: timePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
 
 	$: hoverChartData = hoverId ? filteredChartData.filter((el) => el.areacd === hoverId) : [];
-
-	$: console.log(indicator.metadata.subText);
 </script>
 
 <div class="indicator-row-container">

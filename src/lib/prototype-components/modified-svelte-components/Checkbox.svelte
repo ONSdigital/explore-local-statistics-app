@@ -9,7 +9,9 @@
 </script>
 
 <div class="checkbox-container">
-	<p class="checkbox-title">{title}</p>
+	{#if title}
+		<p class="checkbox-title">{title}</p>
+	{/if}
 
 	<div class="checkbox-labels-container checkbox-labels-container-{columns}-columns">
 		{#each optionsArray as option, i}
