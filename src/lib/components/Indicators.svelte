@@ -3,7 +3,7 @@
 	import { base } from '$app/paths';
 	import { beforeNavigate } from '$app/navigation';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { Section, Button } from '@onsvisual/svelte-components';
+	import { Section, Button, Input } from '@onsvisual/svelte-components';
 	import Icon from './Icon.svelte';
 
 	export let topics;
