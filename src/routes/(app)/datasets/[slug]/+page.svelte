@@ -64,11 +64,11 @@
 	meta={[
 		{
 			key: 'Data source',
-			value: 'ONS'
+			value: 'Organisation name'
 		},
 		{
 			key: 'Last updated',
-			value: `${data.indicator.maxXDomainNumb}`
+			value: 'DD MMM YYYY'
 		}
 	]}
 	background="#eaeaea"
@@ -78,7 +78,15 @@
 	</Lede>
 </Titleblock>
 
-<Indicators topics={data.metadata.topicsArray} title="Find another dataset" compact />
+<Indicators
+	topics={data.metadata.topicsArray}
+	title="Find another dataset"
+	theme="dark"
+	background="#003c57"
+	hideTitle={false}
+	hideToggle={false}
+	compact
+/>
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this dataset" marginTop>

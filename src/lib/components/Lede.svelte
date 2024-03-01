@@ -14,7 +14,7 @@
 		font-size: 22px;
 		padding: 2px 0 0;
 		line-height: 1.4;
-		max-width: 800px;
+		max-width: 608px;
 		margin: -8px auto -12px 0;
 	}
 	.margin-bottom {

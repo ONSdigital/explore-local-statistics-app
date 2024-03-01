@@ -9,6 +9,11 @@
 	export let topics;
 	export let compact = false;
 	export let title = 'Find a dataset';
+	export let open = false;
+	export let theme = 'light';
+	export let background = null;
+	export let hideTitle = true;
+	export let hideToggle = true;
 
 	const count = topics
 		.map((t) => t.subTopics)
@@ -16,12 +21,10 @@
 		.map((sub) => sub.indicators)
 		.flat().length;
 
-	let open = false;
-
 	beforeNavigate(() => (open = false));
 </script>
 
-<Section {title} theme="dark" background="#003c57" width="wide" marginTop>
+<Section {title} {theme} {background} width="wide" marginTop {hideTitle}>
 	{#each topics as topic, i}
 		<div class:visuallyhidden={!(open || (!compact && i === 0))}>
 			<h3 class="title-indicators">{capitalise(topic.name)}</h3>
@@ -41,16 +44,18 @@
 			</ul>
 		</div>
 	{/each}
-	<Button variant="ghost" on:click={() => (open = !open)} small>
-		{compact && open
-			? 'Hide datasets'
-			: compact
-				? 'Show datasets'
-				: open
-					? 'Show fewer datasets'
-					: `Show all ${count} datasets`}
-		<Icon type="chevron" rotation={open ? 90 : -90} />
-	</Button>
+	{#if !hideToggle}
+		<Button variant="ghost" on:click={() => (open = !open)} small>
+			{compact && open
+				? 'Hide datasets'
+				: compact
+					? 'Show datasets'
+					: open
+						? 'Show fewer datasets'
+						: `Show all ${count} datasets`}
+			<Icon type="chevron" rotation={open ? 90 : -90} />
+		</Button>
+	{/if}
 </Section>
 
 <style>
