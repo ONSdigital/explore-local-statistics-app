@@ -10,7 +10,7 @@ const MISSING_METADATA_WARNING =
 
 export function abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js) {
 	const indicators_metadata_for_js_codes = indicators_metadata_for_js.array('code');
-	for (const code of indicators_calculations.array('code')) {
+	for (const code of indicators_calculations.map((d) => d.code)) {
 		if (!indicators_metadata_for_js_codes.includes(code)) {
 			throw new Error(MISSING_METADATA_WARNING);
 		}

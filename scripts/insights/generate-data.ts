@@ -13,13 +13,15 @@ const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 await main();
 
 async function main() {
-	const [combinedData, indicators, indicatorsCalculations] = await arqueroProcessing();
+	const [combinedData, indicators, indicatorsCalculations, _oldStyleIndicatorsCalculations] =
+		await arqueroProcessing();
 
 	const data = readDataFromCsvs();
 	data.combinedData = combinedData.objects();
 	const config = readConfigFromCsvs();
 	config.indicators = indicators.objects();
-	config.indicatorsCalculations = indicatorsCalculations.objects();
+	config.indicatorsCalculations = indicatorsCalculations;
+	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
 
 	checkSlugs(config.indicatorsMetadata);
 
@@ -175,6 +177,14 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 
 	const globalXDomainExtent = findGlobalXDomainExtent(indicatorsArray);
 
+	const indicatorsCalculationsArray = combineIndicatorCalculations(
+		config.indicatorsCalculations,
+		sameParentGeogCalculations,
+		clustersCalculations,
+		clustersLookup.types,
+		indicatorsObject
+	);
+
 	return {
 		clustersLookup,
 		clustersCalculations,
@@ -185,12 +195,29 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 		areasObject,
 		indicatorsCodeLabelArray,
 		indicatorsObject,
-		indicatorsCalculationsArray: config.indicatorsCalculations,
+		_newStyleIndicatorsCalculationsArray: indicatorsCalculationsArray,
+		indicatorsCalculationsArray: config._oldStyleIndicatorsCalculations,
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
 		globalXDomainExtent
 	};
+}
+
+function combineIndicatorCalculations(
+	indicatorsCalculations,
+	sameParentGeogCalculations,
+	clustersCalculations,
+	clusterTypes,
+	indicatorsObject
+) {
+	const indicatorsCalculationsArray = JSON.parse(JSON.stringify(indicatorsCalculations));
+
+	const sameParentLookup = Object.fromEntries(
+		sameParentGeogCalculations.map((d) => [`${d.id};${d.xDomainNumb}`])
+	);
+
+	return indicatorsCalculationsArray;
 }
 
 function makeClustersLookup(clustersLookupRaw) {
