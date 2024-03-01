@@ -55,6 +55,7 @@
 	links={[
 		{ label: 'Home', href: '/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
+		{ label: 'Find a local dataset', href: `${base}/datasets` },
 		{ label: data.indicator.metadata.label }
 	]}
 	background="#eaeaea"
