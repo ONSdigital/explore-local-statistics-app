@@ -23,11 +23,7 @@
 
 	export let data;
 
-	const datasetsCount = data.metadata.topicsArray
-		.map((t) => t.subTopics)
-		.flat()
-		.map((sub) => sub.indicators)
-		.flat().length;
+	const datasetsCount = data.metadata.indicatorsCodeLabelArray.length;
 
 	let postcode = null;
 
