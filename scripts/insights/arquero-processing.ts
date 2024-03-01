@@ -109,7 +109,6 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 				if (filteredIndicatorDataSingleGeog.numRows() > 1) {
 					const values = filteredIndicatorDataSingleGeog.array('value');
 					allCalcsForIndicatorAndPeriod.calcsByGeogLevel[geogLevel] = {
-						geogLevel: geogLevel,
 						med: median(values),
 						mad: mad(values)
 					};
