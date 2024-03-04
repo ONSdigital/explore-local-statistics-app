@@ -9,9 +9,9 @@
 </script>
 
 <g transform="translate({circle.x},{2 * y(circle.y)})">
-	{#if ['parent', 'country', 'uk', 'median'].includes(role)}
+	{#if ['parent', 'country', 'uk', 'comparison'].includes(role)}
 		<rect
-			transform={['country', 'uk', 'median'].includes(role) ? 'rotate(45)' : null}
+			transform={['country', 'uk', 'comparison'].includes(role) ? 'rotate(45)' : null}
 			x={-chartConfigurations.beeswarmRow.primaryRadius * 0.75}
 			y={-chartConfigurations.beeswarmRow.primaryRadius * 0.75}
 			width={2 * chartConfigurations.beeswarmRow.primaryRadius * 0.75}

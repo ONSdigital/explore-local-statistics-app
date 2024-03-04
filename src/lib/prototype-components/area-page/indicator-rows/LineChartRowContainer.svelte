@@ -4,9 +4,8 @@
 	import { madRangeLookup } from '$lib/config';
 	import { roundNumber } from '$lib/utils';
 
-	export let metadata,
+	/*export let metadata,
 		indicator,
-		topRow,
 		areasGroupsObject,
 		hoverId,
 		hoverIndicatorId,
@@ -17,7 +16,20 @@
 		selectedAreaFilteredChartData,
 		comparisonAreaFilteredChartData,
 		backgroundChartData,
-		chosenComparisonMeasureOrArea;
+		chosenComparisonMeasureOrArea;*/
+
+	export let metadata,
+		indicator,
+		selectionsObject,
+		hoverId,
+		hoverIndicatorId,
+		timePeriodsArray,
+		hoverChartData,
+		xDomain,
+		selectedIndicatorCalculations,
+		selectedAreaFilteredChartData,
+		comparisonAreaFilteredChartData,
+		backgroundChartData;
 
 	let width = 1000,
 		height = 80;
@@ -66,7 +78,7 @@
 			? roundNumber(latestValue.value - initialValue.value, indicator.metadata.decimalPlaces)
 			: null;
 
-	$: selectedComparisonDifference =
+	/*$: selectedComparisonDifference =
 		changeValue == 0 ? 'No change' : changeValue > 0 ? 'Increased' : 'Decreased';
 
 	$: goodBad =
@@ -83,20 +95,20 @@
 						? 'Good'
 						: 'Neither'
 				: 'Neither';
-	/*$: backgroundStyle =
+	$: backgroundStyle =
 		goodBad === 'Good'
 			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
 			: goodBad === 'Bad'
 				? 'background-color: #FDE0EF; box-shadow: 0 0 4px 3px #FDE0EF'
-				: '';*/
+				: '';
 
-	$: backgroundStyle = '';
+	$: backgroundStyle = '';*/
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g transform="translate({padding.left},{padding.top})">
-			{#if chartWidth && chartHeight && chosenComparisonMeasureOrArea}
+			{#if chartWidth && chartHeight}
 				<LineChartRow
 					{indicator}
 					{xDomain}
@@ -108,7 +120,7 @@
 					{timePeriodsArray}
 					{hoverChartData}
 					{hoverId}
-					{chosenComparisonMeasureOrArea}
+					{selectionsObject}
 					bind:yAxisMaxTickWidth
 					bind:xAxisFinalTickWidth
 					bind:maxLabelWidth
@@ -117,41 +129,13 @@
 	</svg>
 </div>
 
-<div class="robo-text-container" style="opacity: {hoverId ? 0 : 1};">
+<!-- <div class="robo-text-container" style="opacity: {hoverId ? 0 : 1};">
 	<div class="robo-text-inline" style={backgroundStyle}>
 		<span>
 			<span style="font-weight: bold"> {selectedComparisonDifference}</span>
 			since
 			<span style="font-weight: bold"> {timePeriodsArray[timePeriodsArray.length - 1].label} </span>
 		</span>
-	</div>
-</div>
-
-<!-- <div class="svg-container" bind:clientWidth={width}>
-	<svg {width} {height}>
-		<g transform="translate({padding.left},{padding.top})">
-			{#if chartWidth && chartHeight}
-				<LineChartRow
-					{selectedIndicator}
-					{timePeriodsArray}
-					{chartWidth}
-					{chartHeight}
-					{visibleAreasWithDataAdded}
-					{xDomain}
-					yDomain={yDomainFinal}
-					bind:isHoverLabelVisible
-					bind:hoverId
-					bind:hoverAreaWithDataAdded
-					bind:yAxisMaxTickWidth
-					bind:xAxisFinalTickWidth
-					bind:maxLabelWidth
-				></LineChartRow>
-			{/if}
-		</g>
-	</svg>
-
-	<div class="robo-text-container">
-		<span>Increased since {timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb}</span>
 	</div>
 </div> -->
 

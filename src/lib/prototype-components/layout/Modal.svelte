@@ -2,7 +2,7 @@
 	//based on https://svelte.dev/examples/modal
 	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
 
-	export let showModal;
+	export let showModal, accordionOpen;
 
 	let dialog; // HTMLDialogElement
 
@@ -12,7 +12,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={() => ((showModal = false), (accordionOpen = false))}
 	on:click|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->

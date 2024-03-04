@@ -3,8 +3,8 @@
 
 	export let showVisuals,
 		xDomain,
-		selectedAreaMinXDomain,
-		selectedAreaMaxXDomain,
+		selectedAreaAndComparisonMinXDomain,
+		selectedAreaAndComparisonMaxXDomain,
 		titleText,
 		unitDescriptionText,
 		additionalText;
@@ -37,9 +37,9 @@
 			<span>No data for</span>
 			<span style="font-weight: bold">{titleText}</span>
 			<span
-				>{xDomain[1] < selectedAreaMinXDomain
-					? 'before ' + selectedAreaMinXDomain
-					: 'after ' + selectedAreaMaxXDomain}</span
+				>{xDomain[1] < selectedAreaAndComparisonMinXDomain
+					? 'before ' + selectedAreaAndComparisonMinXDomain
+					: 'after ' + selectedAreaAndComparisonMaxXDomain}</span
 			><InfoButton {expandIcon}></InfoButton>
 		</span>
 	{/if}
@@ -47,29 +47,9 @@
 
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">
-		<!-- {#each additionalText as paragraph}
-			<p>{paragraph}</p>
-		{/each} -->
-
 		<p>
-			<span style="font-weight: bold">Definition: </span>The proportion of people aged between 16
-			and 64 years who are not in employment but do not meet the internationally accepted definition
-			of unemployment because they have not been seeking work within the last four weeks or they are
-			unable to start work in the next two weeks.
-		</p>
-
-		<p>
-			<span style="font-weight: bold">Published by: </span>
-
-			<a>Office for National Statistics</a>
-		</p>
-
-		<p>
-			<span style="font-weight: bold">Further data available at: </span>
-
-			<a
-				>https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousReleases</a
-			>
+			Placeholder text: this section will include the indicator metadata and a link to the indicator
+			page
 		</p>
 	</div>
 {/if}

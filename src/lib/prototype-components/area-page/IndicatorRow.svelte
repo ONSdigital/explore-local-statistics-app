@@ -1,57 +1,63 @@
 <script lang="ts">
 	import TitleAdditionalDescription from '$lib/prototype-components/area-page/indicator-rows/TitleAdditionalDescription.svelte';
+	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 	import BeeswarmRowContainer from '$lib/prototype-components/area-page/indicator-rows/BeeswarmRowContainer.svelte';
 	import LineChartRowContainer from '$lib/prototype-components/area-page/indicator-rows/LineChartRowContainer.svelte';
-	import Divider from '../layout/Divider.svelte';
 
-	export let topRow,
+	export let hoverAreaId,
+		hoverIndicatorId,
 		indicator,
 		metadata,
 		indicatorChartData,
-		areasGroupsObject,
-		backgroundAreasCodes;
-	export let hoverId,
-		hoverIndicatorId,
-		chosenComparisonMeasureOrArea,
-		chosenAdditionalComparisonAreasGroup,
+		selectedArea,
+		selectionsObject,
 		startXDomainNumb,
 		endXDomainNumb;
 
 	$: selectedAreaChartData = indicatorChartData
-		? indicatorChartData.filter((el) => el.areacd === areasGroupsObject.selected.area.areacd)
+		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd)
 		: null;
 	$: selectedAreaPeriods = selectedAreaChartData
 		? selectedAreaChartData.map((el) => el.xDomainNumb)
-		: null;
+		: [];
 
 	$: comparisonAreaChartData =
-		indicatorChartData && chosenComparisonMeasureOrArea
-			? 'label1' in chosenComparisonMeasureOrArea
+		indicatorChartData && selectionsObject['areas-rows-comparison-visible']
+			? 'label' in selectionsObject['areas-rows-comparison-visible']
 				? metadata.indicatorsCalculationsArray
-						.filter((el) => el.code === indicator.code && el.geog_level === 'lower')
+						.filter((el) => el.code === indicator.code && el.geog_level === selectedArea.geogLevel)
 						.map((el) => ({
 							xDomainNumb: el.period,
 							value: el.med
 						}))
 						.sort((a, b) => a.xDomainNumb - b.xDomainNumb)
-				: indicatorChartData.filter((el) => el.areacd === chosenComparisonMeasureOrArea.areacd)
+				: indicatorChartData.filter(
+						(el) => el.areacd === selectionsObject['areas-rows-comparison-visible'].areacd
+					)
 			: null;
+
 	$: comparisonAreaPeriods = comparisonAreaChartData
 		? comparisonAreaChartData.map((el) => el.xDomainNumb)
-		: null;
+		: [];
 
-	$: selectedAreaMinXDomain = selectedAreaPeriods ? Math.min(...selectedAreaPeriods) : null;
-	$: selectedAreaMaxXDomain = selectedAreaPeriods ? Math.max(...selectedAreaPeriods) : null;
+	$: selectedAreaAndComparisonMinXDomain =
+		selectedAreaPeriods || comparisonAreaPeriods
+			? Math.min(...selectedAreaPeriods, ...comparisonAreaPeriods)
+			: null;
+	$: selectedAreaAndComparisonMaxXDomain =
+		selectedAreaPeriods || comparisonAreaPeriods
+			? Math.max(...selectedAreaPeriods, ...comparisonAreaPeriods)
+			: null;
 
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
 		(el) =>
 			el.periodGroup === indicator.periodGroup &&
 			(isNaN(startXDomainNumb)
-				? el.xDomainNumb >= selectedAreaMinXDomain
-				: el.xDomainNumb >= startXDomainNumb) &&
+				? el.xDomainNumb >= selectedAreaAndComparisonMinXDomain
+				: el.xDomainNumb >= Math.max(selectedAreaAndComparisonMinXDomain, startXDomainNumb)) &&
 			(isNaN(endXDomainNumb)
-				? el.xDomainNumb <= selectedAreaMaxXDomain
-				: el.xDomainNumb <= endXDomainNumb)
+				? el.xDomainNumb <= selectedAreaAndComparisonMaxXDomain
+				: el.xDomainNumb <= Math.min(selectedAreaAndComparisonMaxXDomain, endXDomainNumb))
 	);
 
 	$: xDomain = [
@@ -96,22 +102,26 @@
 					...comparisonAreaFilteredChartData.find(
 						(el) => parseFloat(el.xDomainNumb) === xDomain[1]
 					),
-					role:
-						'role' in chosenComparisonMeasureOrArea ? chosenComparisonMeasureOrArea.role : 'median'
+					role: selectionsObject['areas-rows-comparison-visible'].role
 				}
 			: null;
 
 	$: backgroundChartData =
-		filteredChartData && backgroundAreasCodes
-			? filteredChartData.filter((el) => backgroundAreasCodes.includes(el.areacd))
+		filteredChartData && selectionsObject['related-rows-visible']
+			? filteredChartData.filter((el) =>
+					selectionsObject['related-rows-visible'].codes.includes(el.areacd)
+				)
 			: null;
 	$: backgroundChartDataBeeswarm = backgroundChartData
 		? backgroundChartData.filter((el) => el.xDomainNumb === xDomain[1])
 		: null;
 
-	$: timePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
+	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
 
-	$: hoverChartData = hoverId ? filteredChartData.filter((el) => el.areacd === hoverId) : [];
+	$: hoverChartData =
+		hoverAreaId && filteredChartData
+			? filteredChartData.filter((el) => el.areacd === hoverAreaId)
+			: [];
 </script>
 
 <div class="indicator-row-container">
@@ -119,8 +129,8 @@
 		showVisuals={selectedAreaFilteredChartDataBeeswarm || comparisonAreaFilteredChartDataBeeswarm}
 		titleText={indicator.metadata.label}
 		{xDomain}
-		{selectedAreaMinXDomain}
-		{selectedAreaMaxXDomain}
+		{selectedAreaAndComparisonMinXDomain}
+		{selectedAreaAndComparisonMaxXDomain}
 		unitDescriptionText={indicator.metadata.subText}
 		additionalText={(
 			indicator.metadata.subtitle +
@@ -138,16 +148,15 @@
 					<BeeswarmRowContainer
 						{metadata}
 						{indicator}
-						{topRow}
-						{areasGroupsObject}
-						bind:hoverId
-						bind:hoverIndicatorId
-						{timePeriod}
 						{selectedIndicatorCalculations}
+						{backgroundChartDataBeeswarm}
+						timePeriod={latestTimePeriod}
 						{selectedAreaFilteredChartDataBeeswarm}
 						{comparisonAreaFilteredChartDataBeeswarm}
-						{backgroundChartDataBeeswarm}
-						{chosenComparisonMeasureOrArea}
+						bind:hoverId={hoverAreaId}
+						bind:hoverIndicatorId
+						{selectionsObject}
+						{selectedArea}
 					></BeeswarmRowContainer>
 				{/if}
 			</div>
@@ -160,18 +169,16 @@
 						<LineChartRowContainer
 							{metadata}
 							{indicator}
-							{topRow}
-							{areasGroupsObject}
-							bind:hoverId
+							{selectionsObject}
+							bind:hoverId={hoverAreaId}
 							bind:hoverIndicatorId
-							{hoverChartData}
 							{timePeriodsArray}
+							{hoverChartData}
 							{xDomain}
 							{selectedIndicatorCalculations}
 							{selectedAreaFilteredChartData}
 							{comparisonAreaFilteredChartData}
 							{backgroundChartData}
-							{chosenComparisonMeasureOrArea}
 						></LineChartRowContainer>
 					{:else}
 						<span>No historical<br />data</span>

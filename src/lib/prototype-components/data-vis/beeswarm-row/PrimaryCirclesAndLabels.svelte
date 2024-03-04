@@ -7,15 +7,11 @@
 	import PrimaryCircle from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryCircle.svelte';
 	import PrimaryLabel from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryLabel.svelte';
 	import PrimaryLine from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryLine.svelte';
-	import TopRowLabels from '$lib/prototype-components/data-vis/beeswarm-row/TopRowLabels.svelte';
 
-	export let topRow,
+	export let indicator,
 		comparisonAreaFilteredChartDataBeeswarm,
 		selectedAreaFilteredChartDataBeeswarm,
-		indicator,
 		x,
-		areasGroupsObject,
-		chosenComparisonMeasureOrArea,
 		xDomain,
 		chartWidth,
 		chartHeight,
@@ -101,17 +97,6 @@
 </g>
 
 <g class="labels-group">
-	<!-- {#if topRow}
-<TopRowLabels
-	{labelMidpoints}
-	{areasGroupsObject}
-	{chosenComparisonMeasureOrArea}
-	{y}
-	{chartWidth}
-	{chartHeight}
-	{spaceForOutliers}
-></TopRowLabels>
-{/if} -->
 	{#if comparisonAreaOrMeasure}
 		<g class="comparison-label-group">
 			<PrimaryLabel

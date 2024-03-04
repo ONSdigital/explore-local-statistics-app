@@ -17,11 +17,18 @@
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import type { PageData } from './$types';
+	import { derived, writable } from 'svelte/store';
 
 	import { onMount } from 'svelte';
 	import { getName, aAn } from '@onsvisual/robo-utils';
-	import { constructSameRegionAreasLabel, generateComparisonAreaGroups } from '$lib/utils.js';
-	import { regions } from '$lib/config';
+	import {
+		capitalizeFirstLetter,
+		constructVisibleAreasArray,
+		formatName,
+		getGeogName,
+		updateCustomLookup
+	} from '$lib/utils.js';
+	import { changeAreasIncludeExcludeObject } from '$lib/config';
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
 	export let data: PageData;
@@ -36,8 +43,6 @@
 		...metadata.areasObject[data.place.areacd],
 		role: 'main'
 	};
-
-	$: console.log(metadata);
 
 	// filter indicators to exclude any where there is no data for the selected area
 	$: filteredIndicators = metadata.indicatorsCodeLabelArray
@@ -59,223 +64,364 @@
 		: selectedArea.countrycd;
 	$: ukAreaCode = 'K02000001' === selectedArea.parentcd ? null : 'K02000001';
 
-	// determine the codes for the areas which have the same parent as the selected area (includes the selected area itself)
-	$: sameRegionAreasCodes = metadata.areasArray
-		.filter((el) => el.parentcd === selectedArea.parentcd)
-		.map((el) => el.areacd);
-
-	// determine the codes for similar areas to the selected area
-	$: similarAreasCodes = [];
-	// TODO: Use the new clustersLookup. The previous code is commented out in
-	// the following lines and should be deleted.
-	// $: similarAreasCodes = metadata.similarAreasLookupObject[selectedArea.areacd]
-	// 	? metadata.similarAreasLookupObject[selectedArea.areacd].split('|')
-	// 	: [];
-
-	//////// defining arrays which track which areas are visible on the graphs ///////
-
-	let chosenParentAreasArray = new Array(0),
-		chosenRelatedAreasId = new Array(0),
-		chosenSameRegionArray = new Array(0),
-		chosenCountriesArray = new Array(0),
-		chosenRegionsArray = new Array(0),
-		chosenAllOtherArray = new Array(0);
-
-	$: customAreasArray = [
-		...chosenCountriesArray,
-		...chosenRegionsArray,
-		...chosenSameRegionArray,
-		...chosenAllOtherArray
-	];
-
-	let testChosen = {
-		aaaa: new Array(0),
-		bbbb: new Array(0)
-	};
-
-	$: console.log(testChosen);
-
-	//////// define area groups ///////
-
-	// define parent areas (with respective roles) and track which of these areas are visible on the graph
-	$: parentAreasCodes = [parentAreaCode, countryAreaCode, ukAreaCode].filter((el) => el);
-
 	$: parentArea = metadata.areasObject[parentAreaCode];
 	$: countryArea = metadata.areasObject[countryAreaCode];
 	$: ukArea = metadata.areasObject[ukAreaCode];
 
-	$: parentAreas = [parentArea, countryArea, ukArea]
-		.filter((el) => el)
-		.map((el) => ({
-			...el,
-			role:
-				el.areacd === selectedArea.parentcd
-					? 'parent'
-					: el.areacd === selectedArea.countrycd
-						? 'country'
-						: 'uk'
-		}));
-	$: visibleParentAreas = parentAreas.filter((e) => chosenParentAreasArray.includes(e.areacd));
+	// determine the codes for the areas which have the same parent as the selected area (includes the selected area itself)
 
-	// determine areas which are in the same region and which are similar to the selected area based on the codes
-	$: sameRegionAreas = sameRegionAreasCodes.map((el) => metadata.areasObject[el]);
-	$: similarAreas = similarAreasCodes.map((el) => metadata.areasObject[el]);
+	$: sameGeogLevelCodes = metadata.areasGeogLevelObject[selectedArea.geogLevel];
+	$: sameGeogLevelAreas = sameGeogLevelCodes.map((el) => metadata.areasObject[el]);
 
-	// define custom areas (with respective roles = custom1, custom2,... - used for visual encoding) which are visible on the graph
-	$: visibleCustomAreas = customAreasArray.map((el, i) => ({
-		...metadata.areasObject[el],
-		role: 'custom' + (i + 1)
-	}));
-
-	// define any same region areas and similar areas (with respective roles) which should be visible on the graph
-	$: visibleSameRegionAreasCodes =
-		chosenRelatedAreasId === 'sameRegion' ? sameRegionAreasCodes : [];
-	$: visibleSameRegionAreas = visibleSameRegionAreasCodes.map((el) => ({
-		...metadata.areasObject[el],
-		role: 'sameRegion'
-	}));
-
-	$: visibleSimilarAreasCodes =
-		chosenRelatedAreasId === 'similar'
-			? similarAreasCodes.filter((el) => !visibleSameRegionAreasCodes.includes(el))
-			: [];
-	$: visibleSimilarAreas = visibleSimilarAreasCodes.map((el) => ({
-		...metadata.areasObject[el],
-		role: 'similar'
-	}));
-
-	//// create combined groupings of visible areas
-	$: visibleAreasRelatedCodes = [...visibleSameRegionAreasCodes, ...visibleSimilarAreasCodes];
-	$: visibleAreasRelated = [...visibleSameRegionAreas, ...visibleSimilarAreas];
-
-	$: visibleAreasPrimary = [selectedArea, ...visibleParentAreas, ...visibleCustomAreas];
-	$: visibleAreasPrimaryCodes = [
-		selectedArea.areacd,
-		...chosenParentAreasArray,
-		...customAreasArray
-	];
-
-	//// define additional area groups
-
-	// determine areas which are at the same geography level as the selected area
-	$: sameGeogLevelAreasCodes = metadata.areasGeogLevelObject[selectedArea.geogLevel];
-	$: sameGeogLevelAreas = sameGeogLevelAreasCodes.map((el) => metadata.areasObject[el]);
-
-	// determine codes for (lower-tier) local authorities which are children of the selected area (null for regions and countries only)
-	$: localAuthorityChildrenAreas = ['upper', 'lower'].includes(selectedArea.geogLevel)
-		? null
-		: metadata.areasGeogLevelObject.lower
-				.map((el) => metadata.areasObject[el])
-				.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd));
-	$: localAuthorityChildrenAreasCodes = localAuthorityChildrenAreas
-		? localAuthorityChildrenAreas.map((el) => el.areacd)
-		: null;
-
-	// determine codes for regions which are children of the selected area (null for regions and countries only)
-	$: regionChildrenAreas =
-		selectedArea.areacd === 'E92000001' ? regions.map((el) => metadata.areasObject[el.code]) : null;
-	$: regionChildrenAreasCodes = regionChildrenAreas ? regions.map((el) => el.code) : null;
-
-	/////////
-	$: sameParentCodes = sameRegionAreasCodes;
-
-	$: countryOptionCodes =
-		selectedArea.geogLevel === 'country'
-			? []
-			: metadata.areasGeogLevelObject.country.filter(
-					(el) => el != selectedArea.areacd && !parentAreasCodes.includes(el)
-				);
-	$: countryOptions = countryOptionCodes.map((el) => metadata.areasObject[el]);
-
-	$: regionOptionCodes =
-		selectedArea.geogLevel === 'region'
-			? []
-			: metadata.areasGeogLevelObject.region.filter(
-					(el) =>
-						el != selectedArea.areacd &&
-						!countryOptionCodes.includes(el) &&
-						!parentAreasCodes.includes(el)
-				);
-	$: regionOptions = regionOptionCodes.map((el) => metadata.areasObject[el]);
-
-	$: lowerTierLocalAuthorityOptionCodes = metadata.areasGeogLevelObject.lower.filter(
-		(el) =>
-			el != selectedArea.areacd &&
-			!parentAreasCodes.includes(el) &&
-			(['lower', 'upper'].includes(selectedArea.geogLevel) ? !sameParentCodes.includes(el) : true)
-	);
-	$: lowerTierLocalAuthorityOptions = lowerTierLocalAuthorityOptionCodes.map(
-		(el) => metadata.areasObject[el]
+	$: sameParentAreas = metadata.areasArray.filter(
+		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
 
-	$: upperTierLocalAuthorityOptionCodes = metadata.areasGeogLevelObject.upper.filter(
-		(el) =>
-			el != selectedArea.areacd &&
-			!lowerTierLocalAuthorityOptionCodes.includes(el) &&
-			!parentAreasCodes.includes(el) &&
-			(['lower', 'upper'].includes(selectedArea.geogLevel) ? !sameParentCodes.includes(el) : true)
+	$: sameParentSameGeogCodes = sameGeogLevelCodes.filter(
+		(el) => (el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
-	$: upperTierLocalAuthorityOptions = upperTierLocalAuthorityOptionCodes.map(
-		(el) => metadata.areasObject[el]
+	$: sameParentSameGeogAreas = sameParentSameGeogCodes.map((el) => metadata.areasObject[el]);
+
+	// determine the codes for similar areas to the selected area
+	$: selectedAreaDemographicCluster =
+		metadata.clustersLookup.data.demographic[
+			metadata.clustersLookup.data.areacd.indexOf(selectedArea.areacd)
+		];
+
+	$: similarCodes = metadata.clustersLookup.data.areacd.filter(
+		(el, i) =>
+			metadata.clustersLookup.data.demographic[i] === selectedAreaDemographicCluster &&
+			el != selectedArea.areacd
+	);
+	$: similarAreas = similarCodes.map((el) => metadata.areasObject[el]).filter((el) => el);
+
+	$: regionChildrenAreas = {
+		lower: [],
+		upper: [],
+		region: [],
+		country: metadata.areasGeogLevelObject.region
+			.map((el) => metadata.areasObject[el])
+			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd))
+	}[selectedArea.geogLevel];
+	$: regionChildrenCodes = regionChildrenAreas.map((el) => el.areacd);
+
+	$: upperTierLocalAuthorityChildrenAreas = {
+		lower: [],
+		upper: [],
+		region: metadata.areasGeogLevelObject.upper
+			.map((el) => metadata.areasObject[el])
+			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd)),
+		country: metadata.areasGeogLevelObject.upper
+			.map((el) => metadata.areasObject[el])
+			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd))
+	}[selectedArea.geogLevel];
+	$: upperTierLocalAuthorityChildrenCodes = upperTierLocalAuthorityChildrenAreas.map(
+		(el) => el.areacd
 	);
 
-	//// assemble all area groups into a single object which is passed to components
-	$: areasGroupsObject = {
-		selected: { area: selectedArea },
-		parents: { areas: parentAreas, codes: parentAreasCodes },
-		custom: { areas: customAreasArray },
-		sameRegion: {
-			areas: sameRegionAreas,
-			codes: sameRegionAreasCodes,
-			label: constructSameRegionAreasLabel(selectedArea.geogLevel, selectedArea.parentnm)
-		},
-		similar: {
-			areas: similarAreas,
-			codes: similarAreasCodes,
-			label: 'Demographically similar areas'
-		},
-		sameGeogLevel: { codes: sameGeogLevelAreasCodes },
-		children: {
-			laAreas: localAuthorityChildrenAreas,
-			laCodes: localAuthorityChildrenAreasCodes,
-			regionAreas: regionChildrenAreas,
-			regionCodes: regionChildrenAreasCodes
-		},
-		visible: {
-			primaryAreas: visibleAreasPrimary,
-			primaryCodes: visibleAreasPrimaryCodes,
-			relatedAreas: visibleAreasRelated,
-			relatedCodes: visibleAreasRelatedCodes
-		},
-		options: {
-			countries: { areas: countryOptions, codes: countryOptionCodes },
-			regions: { areas: regionOptions, codes: regionOptionCodes },
-			lowerTier: {
-				areas: lowerTierLocalAuthorityOptions,
-				codes: lowerTierLocalAuthorityOptionCodes
+	$: lowerTierLocalAuthorityChildrenAreas = {
+		lower: [],
+		upper: [],
+		region: metadata.areasGeogLevelObject.lower
+			.map((el) => metadata.areasObject[el])
+			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd)),
+		country: metadata.areasGeogLevelObject.lower
+			.map((el) => metadata.areasObject[el])
+			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd))
+	}[selectedArea.geogLevel];
+	$: lowerTierLocalAuthorityChildrenCodes = lowerTierLocalAuthorityChildrenAreas.map(
+		(el) => el.areacd
+	);
+
+	$: parentAndRelatedAreasObject = {
+		parent: parentArea,
+		country: countryArea,
+		uk: ukArea,
+		groups: {
+			'all-siblings': {
+				labels: {
+					comparison:
+						'Average (median) of all ' + getGeogName(selectedArea.geogLevel, false, 'simplified'),
+					related: 'All other ' + getGeogName(selectedArea.geogLevel, false, 'simplified')
+				},
+				areas: sameGeogLevelAreas,
+				codes: sameGeogLevelCodes
 			},
-			upperTier: {
-				areas: upperTierLocalAuthorityOptions,
-				codes: upperTierLocalAuthorityOptionCodes
+			'same-parent-siblings': {
+				labels: {
+					comparison:
+						'Average (median) of all ' +
+						getGeogName(selectedArea.geogLevel, false, 'simplified') +
+						' in ' +
+						formatName(parentArea.areanm),
+					related:
+						'All other ' +
+						getGeogName(selectedArea.geogLevel, false, 'simplified') +
+						' in ' +
+						formatName(parentArea.areanm)
+				},
+				areas: sameParentSameGeogAreas,
+				codes: sameParentSameGeogCodes
+			},
+			'similar-siblings': {
+				labels: {
+					comparison:
+						'Average (median) of all demographically similar ' +
+						getGeogName(selectedArea.geogLevel, false, 'simplified'),
+					related:
+						'Demographically similar ' + getGeogName(selectedArea.geogLevel, false, 'simplified')
+				},
+				areas: similarAreas,
+				codes: similarCodes
+			},
+			'region-children': {
+				labels: {
+					related: capitalizeFirstLetter(
+						getGeogName('region', false, 'full') + ' in ' + formatName(selectedArea.areanm)
+					)
+				},
+				areas: regionChildrenAreas,
+				codes: regionChildrenCodes
+			},
+			'upper-tier-local-authority-children': {
+				labels: {
+					related: capitalizeFirstLetter(
+						getGeogName('upper', false, 'full') + ' in ' + formatName(selectedArea.areanm)
+					)
+				},
+				areas: upperTierLocalAuthorityChildrenAreas,
+				codes: upperTierLocalAuthorityChildrenCodes
+			},
+			'lower-tier-local-authority-children': {
+				labels: {
+					related: capitalizeFirstLetter(
+						getGeogName('lower', false, 'full') + ' in ' + formatName(selectedArea.areanm)
+					)
+				},
+				areas: lowerTierLocalAuthorityChildrenAreas,
+				codes: lowerTierLocalAuthorityChildrenCodes
 			}
 		}
 	};
 
-	// define an array of the possible comparison groups of areas which can be selected in the indicator rows components
+	$: changeAreasOptionsObject = {
+		median: Object.keys(parentAndRelatedAreasObject.groups)
+			.filter(
+				(el) =>
+					changeAreasIncludeExcludeObject[selectedArea.geogLevel].median[el] &&
+					parentAndRelatedAreasObject.groups[el].areas.length > 0
+			)
+			.map((el) => ({
+				key: el,
+				label: parentAndRelatedAreasObject.groups[el].labels.comparison
+			})),
+		related: Object.keys(parentAndRelatedAreasObject.groups)
+			.filter(
+				(el) =>
+					changeAreasIncludeExcludeObject[selectedArea.geogLevel].related[el] &&
+					parentAndRelatedAreasObject.groups[el].areas.length > 0
+			)
+			.map((el) => ({
+				key: el,
+				label: parentAndRelatedAreasObject.groups[el].labels.related
+			})),
+		parents: [parentArea, countryArea, ukArea].filter((el) => el),
+		sameParent: sameParentAreas,
+		country: metadata.areasGeogLevelObject.country
+			.filter((el) => el != selectedArea.areacd)
+			.map((el) => metadata.areasObject[el]),
+		region: metadata.areasGeogLevelObject.region
+			.filter((el) => el != selectedArea.areacd)
+			.map((el) => metadata.areasObject[el]),
+		upper: metadata.areasGeogLevelObject.upper
+			.filter((el) => el != selectedArea.areacd)
+			.map((el) => metadata.areasObject[el]),
+		lower: metadata.areasGeogLevelObject.lower
+			.filter((el) => el != selectedArea.areacd)
+			.map((el) => metadata.areasObject[el])
+	};
 
-	$: comparisonGroupsArray = generateComparisonAreaGroups(
-		selectedArea.areacd,
-		selectedArea.areanm,
-		selectedArea.geogLevel,
-		parentArea.areanm
-	);
+	let selectionsObject = {
+		'areas-rows-comparison-chosen': new Array(0),
+		'areas-rows-comparison-visible': new Array(0),
+		'areas-rows-additional-chosen': new Array(0),
+		'areas-rows-additional-visible': new Array(0),
+		'areas-single-additional-chosen': new Array(0),
+		'areas-single-additional-visible': new Array(0),
+		'related-rows-chosen': null,
+		'related-rows-visible': null,
+		'related-single-chosen': null,
+		'related-single-visible': null
+	};
+
+	$: console.log(selectionsObject);
+
+	$: {
+		selectionsObject['areas-rows-comparison-visible'] = constructVisibleAreasArray(
+			selectionsObject['areas-rows-comparison-chosen'],
+			false,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
+
+		selectionsObject['areas-rows-additional-visible'] = constructVisibleAreasArray(
+			selectionsObject['areas-rows-additional-chosen'],
+			false,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
+
+		selectionsObject['related-rows-visible'] = constructVisibleAreasArray(
+			selectionsObject['related-rows-chosen'],
+			true,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
+	}
+
+	$: rowsAccordionArray = [
+		{
+			label: 'Primary comparison area/measure',
+			type: 'radio',
+			chosenKey: 'areas-rows-comparison',
+			accordion: true,
+			options: [
+				{
+					data: [{ label: 'None', key: 'none' }],
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				},
+				{
+					data: changeAreasOptionsObject.median,
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				},
+				{
+					data: changeAreasOptionsObject.parents,
+					accordion: false
+				},
+				{
+					label: 'Other areas in ' + formatName(parentArea.areanm),
+					data: changeAreasOptionsObject.sameParent,
+					accordion: true,
+					include: ['lower', 'upper'].includes(selectedArea.geogLevel)
+				},
+				{
+					label: 'Countries',
+					data: changeAreasOptionsObject.country,
+					accordion: true,
+					include: true
+				},
+				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{
+					label: 'Upper-tier local authorities',
+					data: changeAreasOptionsObject.upper,
+					accordion: true
+				},
+				{
+					label: 'Lower-tier local authorities',
+					data: changeAreasOptionsObject.lower,
+					accordion: true
+				}
+			]
+		},
+		{
+			label: 'Related areas',
+			type: 'radio',
+			search: null,
+			chosenKey: 'related-rows',
+			accordion: true,
+			options: [
+				{
+					data: [{ label: 'None', key: 'none' }],
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				},
+				{
+					data: changeAreasOptionsObject.related,
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				}
+			]
+		},
+		{
+			label: 'Additional areas',
+			type: 'checkbox',
+			chosenKey: 'areas-rows-additional',
+			dependency: 'areas-rows-comparison',
+			accordion: true,
+			options: [
+				{
+					data: changeAreasOptionsObject.parents,
+					accordion: false
+				},
+				{
+					label: 'Other areas in ' + formatName(parentArea.areanm),
+					data: changeAreasOptionsObject.sameParent,
+					accordion: true,
+					include: ['lower', 'upper'].includes(selectedArea.geogLevel)
+				},
+				{
+					label: 'Countries',
+					data: changeAreasOptionsObject.country,
+					accordion: true
+				},
+				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{
+					label: 'Upper-tier local authorities',
+					data: changeAreasOptionsObject.upper,
+					accordion: true
+				},
+				{
+					label: 'Lower-tier local authorities',
+					data: changeAreasOptionsObject.lower,
+					accordion: true
+				}
+			].map((el) => ({
+				...el,
+				data: el.data.filter(
+					(elm) => elm.areacd != selectionsObject['areas-rows-comparison-chosen']
+				)
+			}))
+		}
+	];
+
+	$: {
+		selectionsObject['areas-rows-additional-chosen'] = selectionsObject[
+			'areas-rows-additional-chosen'
+		].filter((el) => el != selectionsObject['areas-rows-comparison-chosen']);
+	}
+
+	$: customLookup = {
+		'areas-rows-additional-visible': {},
+		'areas-single-additional-visible': {}
+	};
+
+	$: {
+		customLookup['areas-rows-additional-visible'] = updateCustomLookup(
+			customLookup['areas-rows-additional-visible'],
+			selectionsObject['areas-rows-additional-visible'].filter((el) => el.role === 'custom')
+		);
+	}
 
 	onMount(() => {
-		chosenParentAreasArray = [
-			parentArea === undefined ? undefined : parentArea.areacd,
-			ukArea === undefined ? undefined : ukArea.areacd
-		];
-		chosenRelatedAreasId = 'none';
+		selectionsObject['areas-rows-comparison-chosen'] = {
+			lower: 'all-siblings',
+			upper: 'all-siblings',
+			region: 'E92000001',
+			country: 'K02000001'
+		}[selectedArea.geogLevel];
+
+		selectionsObject['related-rows-chosen'] = {
+			lower: 'all-siblings',
+			upper: 'all-siblings',
+			region: 'all-siblings',
+			country: 'all-siblings'
+		}[selectedArea.geogLevel];
 	});
 
 	function navTo(e, options = {}, type = 'search') {
@@ -364,16 +510,17 @@
 
 <NavSections contentsLabel="Explore this area">
 	<TopicSections
+		{selectedArea}
 		{metadata}
-		{areasGroupsObject}
-		{comparisonGroupsArray}
 		{chartData}
 		{filteredIndicatorsCodes}
-		bind:testChosen
+		bind:selectionsObject
+		accordionArray={rowsAccordionArray}
+		customLookup={customLookup['areas-rows-additional-visible']}
 	></TopicSections>
 
 	<NavSection title="Select an indicator">
-		<MainChartSection
+		<!-- <MainChartSection
 			combinedSelectableAreaTypesObject={areasGroupsObject}
 			{chartData}
 			{metadata}
@@ -384,7 +531,7 @@
 			bind:chosenCountriesArray
 			bind:chosenRegionsArray
 			bind:chosenAllOtherArray
-		></MainChartSection>
+		></MainChartSection> -->
 	</NavSection>
 
 	<NavSection title="Similar areas">

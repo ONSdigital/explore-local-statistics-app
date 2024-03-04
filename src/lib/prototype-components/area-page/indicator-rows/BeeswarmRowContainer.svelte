@@ -2,23 +2,23 @@
 	import { madRangeLookup, colorsLookup } from '$lib/config';
 	import { roundNumber } from '$lib/utils';
 	import BeeswarmRow from '$lib/prototype-components/data-vis/BeeswarmRow.svelte';
-	import SelectComparisons from '$lib/prototype-components/SelectComparisons.svelte';
 
 	export let metadata,
 		indicator,
-		topRow,
-		areasGroupsObject,
+		selectedIndicatorCalculations,
+		backgroundChartDataBeeswarm,
 		timePeriod,
 		selectedAreaFilteredChartDataBeeswarm,
 		comparisonAreaFilteredChartDataBeeswarm,
-		backgroundChartDataBeeswarm,
-		chosenComparisonMeasureOrArea;
-	export let hoverId, hoverIndicatorId, selectedIndicatorCalculations;
+		hoverId,
+		hoverIndicatorId,
+		selectionsObject,
+		selectedArea;
 
 	let width = 1000;
-	$: height = topRow ? 80 : 80;
+	$: height = 80;
 
-	$: padding = { top: topRow ? 45 : 45, right: 0, bottom: 5, left: 0 };
+	$: padding = { top: 45, right: 0, bottom: 5, left: 0 };
 
 	$: spaceForOutliers = 40;
 
@@ -77,6 +77,7 @@
 						? 'Good'
 						: 'Neither'
 				: 'Neither';
+
 	/*$: backgroundStyle =
 		goodBad === 'Good'
 			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
@@ -85,6 +86,89 @@
 				: '';*/
 
 	$: backgroundStyle = '';
+
+	/*export let metadata,
+		indicator,
+		areasGroupsObject,
+		timePeriod,
+		selectedAreaFilteredChartDataBeeswarm,
+		comparisonAreaFilteredChartDataBeeswarm,
+		backgroundChartDataBeeswarm,
+		chosenComparisonMeasureOrArea;
+	export let hoverId, hoverIndicatorId, selectedIndicatorCalculations;
+
+	/let width = 1000;
+	$: height = 80;
+
+	$: padding = { top: 45, right: 0, bottom: 5, left: 0 };
+
+	$: spaceForOutliers = 40;
+
+	$: chartWidth = width - padding.left - padding.right - spaceForOutliers * 2;
+	$: chartHeight = height - padding.top - padding.bottom;
+
+	$: madRange =
+		indicator.code in madRangeLookup
+			? madRangeLookup[indicator.code]['beeswarm-row']
+			: madRangeLookup.default['beeswarm-row'];
+
+	$: values = madRange === 'minMax' ? backgroundChartDataBeeswarm.map((el) => [el.value]) : null;
+
+	$: furtherDistanceFromMedian =
+		madRange === 'minMax'
+			? Math.max(...values.map((el) => Math.abs(el - selectedIndicatorCalculations.med)))
+			: null;
+
+	$: xDomain =
+		madRange === 'minMax'
+			? [
+					selectedIndicatorCalculations.med - furtherDistanceFromMedian,
+					parseFloat(selectedIndicatorCalculations.med) + furtherDistanceFromMedian
+				]
+			: [
+					selectedIndicatorCalculations.med - madRange * selectedIndicatorCalculations.mad,
+					parseFloat(selectedIndicatorCalculations.med) +
+						madRange * selectedIndicatorCalculations.mad
+				];
+
+	$: selectedComparisonDifference = !comparisonAreaFilteredChartDataBeeswarm
+		? 'No comparison'
+		: !selectedAreaFilteredChartDataBeeswarm
+			? 'No selected'
+			: selectedAreaFilteredChartDataBeeswarm.value -
+						comparisonAreaFilteredChartDataBeeswarm.value >
+				  selectedIndicatorCalculations.mad
+				? 'Higher'
+				: selectedAreaFilteredChartDataBeeswarm.value -
+							comparisonAreaFilteredChartDataBeeswarm.value <
+					  -selectedIndicatorCalculations.mad
+					? 'Lower'
+					: 'Similar';
+
+	$: goodBad =
+		indicator.metadata.polarity == 1
+			? selectedComparisonDifference === 'Higher'
+				? 'Good'
+				: selectedComparisonDifference === 'Lower'
+					? 'Bad'
+					: 'Neither'
+			: indicator.metadata.polarity == -1
+				? selectedComparisonDifference === 'Higher'
+					? 'Bad'
+					: selectedComparisonDifference === 'Lower'
+						? 'Good'
+						: 'Neither'
+				: 'Neither';
+	$: backgroundStyle =
+		goodBad === 'Good'
+			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
+			: goodBad === 'Bad'
+				? 'background-color: #FDE0EF; box-shadow: 0 0 4px 3px #FDE0EF'
+				: '';
+
+	$: backgroundStyle = '';*/
+
+	$: console.log('helloWi');
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
@@ -93,14 +177,12 @@
 			<g transform="translate({padding.left + spaceForOutliers},{padding.top})">
 				{#if chartWidth && chartHeight}
 					<BeeswarmRow
-						{topRow}
 						{metadata}
 						{indicator}
 						{selectedAreaFilteredChartDataBeeswarm}
 						{comparisonAreaFilteredChartDataBeeswarm}
 						{backgroundChartDataBeeswarm}
-						{areasGroupsObject}
-						{chosenComparisonMeasureOrArea}
+						{selectionsObject}
 						bind:hoverId
 						bind:hoverIndicatorId
 						{spaceForOutliers}
@@ -125,10 +207,10 @@
 			{/if}
 			<span style="font-weight: bold"
 				>{selectedComparisonDifference === 'No selected'
-					? areasGroupsObject.selected.area.areanm
-					: 'areanm' in chosenComparisonMeasureOrArea
-						? chosenComparisonMeasureOrArea.areanm
-						: 'average'}
+					? selectedArea.areacd
+					: 'label' in selectionsObject['areas-rows-comparison-visible']
+						? 'average'
+						: selectionsObject['areas-rows-comparison-visible'].areanm}
 			</span>
 			{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
 				data for

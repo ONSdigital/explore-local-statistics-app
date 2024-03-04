@@ -5,7 +5,16 @@
 	import { onMount } from 'svelte';
 	import { scaleLinear } from 'd3-scale';
 
-	export let topRow,
+	export let metadata,
+		indicator,
+		selectedAreaFilteredChartDataBeeswarm,
+		comparisonAreaFilteredChartDataBeeswarm,
+		backgroundChartDataBeeswarm,
+		selectionsObject;
+
+	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
+
+	/*export let topRow,
 		metadata,
 		indicator,
 		selectedAreaFilteredChartDataBeeswarm,
@@ -13,7 +22,7 @@
 		areasGroupsObject,
 		chosenComparisonMeasureOrArea,
 		backgroundChartDataBeeswarm;
-	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
+	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;*/
 
 	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
 
@@ -26,29 +35,24 @@
 	});
 </script>
 
-{#if mounted}
-	<BackgroundCircles
-		{metadata}
-		{backgroundChartDataBeeswarm}
-		{x}
-		{xDomain}
-		{chartWidth}
-		{chartHeight}
-		{spaceForOutliers}
-		{indicator}
-		bind:hoverId
-		bind:hoverIndicatorId
-	></BackgroundCircles>
-{/if}
+<BackgroundCircles
+	{metadata}
+	{backgroundChartDataBeeswarm}
+	{x}
+	{xDomain}
+	{chartWidth}
+	{chartHeight}
+	{spaceForOutliers}
+	{indicator}
+	bind:hoverId
+	bind:hoverIndicatorId
+></BackgroundCircles>
 
 <g opacity={hoverId ? 0 : 1}>
 	<PrimaryCirclesAndLabels
-		{topRow}
 		{indicator}
 		{comparisonAreaFilteredChartDataBeeswarm}
 		{selectedAreaFilteredChartDataBeeswarm}
-		{areasGroupsObject}
-		{chosenComparisonMeasureOrArea}
 		{x}
 		{xDomain}
 		{chartWidth}

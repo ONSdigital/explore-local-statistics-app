@@ -6,6 +6,16 @@
 		idKey,
 		labelKey,
 		columns = 1;
+
+	function handleCheckboxChange(event) {
+		const { value, checked } = event.target;
+
+		if (checked) {
+			valueArray = [...valueArray, value];
+		} else {
+			valueArray = valueArray.filter((item) => item !== value);
+		}
+	}
 </script>
 
 <div class="checkbox-container">
@@ -16,7 +26,13 @@
 	<div class="checkbox-labels-container checkbox-labels-container-{columns}-columns">
 		{#each optionsArray as option, i}
 			<label>
-				<input type="checkbox" value={option[idKey]} {name} bind:group={valueArray} />
+				<input
+					type="checkbox"
+					value={option[idKey]}
+					{name}
+					checked={valueArray.includes(option[idKey])}
+					on:change={(e) => handleCheckboxChange(e)}
+				/>
 
 				{option[labelKey]}
 			</label>

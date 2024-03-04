@@ -18,8 +18,8 @@
 			<label>
 				<input type="radio" value={idKey ? option[idKey] : option} {name} bind:group={valueId} />
 
-				<div class="optionLabel">
-					<p>{labelKey ? option[labelKey] : option}</p>
+				<div class="option-label">
+					<span>{labelKey ? option[labelKey] : option}</span>
 				</div>
 			</label>
 		{/each}
@@ -32,6 +32,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 10px;
+		width: 100%;
 	}
 
 	label {
@@ -40,7 +41,11 @@
 		gap: 8px;
 	}
 
-	p {
+	.option-label {
+		width: 100%;
+	}
+
+	span {
 		padding: 0px;
 		margin: 0px;
 		font-size: 18px;

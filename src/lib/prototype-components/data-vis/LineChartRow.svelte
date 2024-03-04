@@ -14,6 +14,7 @@
 		chartWidth,
 		hoverChartData,
 		hoverId,
+		selectionsObject,
 		selectedAreaFilteredChartData,
 		comparisonAreaFilteredChartData,
 		timePeriodsArray,
@@ -24,32 +25,9 @@
 
 	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
 
-	/*export let selectedIndicator,
-		timePeriodsArray,
-		chartWidth,
-		chartHeight,
-		visibleAreasWithDataAdded,
-		xDomain,
-		yDomain,
-		isHoverLabelVisible,
-		hoverId,
-		hoverAreaWithDataAdded,
-		yAxisMaxTickWidth,
-		xAxisFinalTickWidth,
-		maxLabelWidth;
-
-	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
-
-	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
-
-	$: hoverAreaWithDataAdded = hoverId
-		? visibleAreasWithDataAdded[1].find((el) => el.areacd === hoverId)
-		: undefined;*/
-
 	$: linesArray = [
 		{
-			role:
-				'label1' in chosenComparisonMeasureOrArea ? 'median' : chosenComparisonMeasureOrArea.role,
+			role: selectionsObject['areas-rows-comparison-visible'].role,
 			data: comparisonAreaFilteredChartData
 		},
 		{ role: 'main', data: selectedAreaFilteredChartData }

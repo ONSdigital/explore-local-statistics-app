@@ -3,142 +3,57 @@
 	import TopicSection from '$lib/prototype-components/area-page/TopicSection.svelte';
 	import SelectComparisons from '$lib/prototype-components/SelectComparisons.svelte';
 	import EditTimePeriod from '$lib/prototype-components/EditTimePeriod.svelte';
-	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
+	import StickyHeader from '$lib/prototype-components/sticky-header/StickyHeader.svelte';
 
 	import { onMount } from 'svelte';
 
-	export let metadata,
-		areasGroupsObject,
-		comparisonGroupsArray,
+	export let selectedArea,
+		metadata,
 		chartData,
 		filteredIndicatorsCodes,
-		testChosen;
-
-	let chosenComparisonMeasureOrArea, chosenAdditionalComparisonAreasGroup;
+		selectionsObject,
+		accordionArray,
+		customLookup;
 
 	let startXDomainNumb = 'Earliest available data',
 		endXDomainNumb = 'Latest available data';
 
-	$: backgroundAreasCodes = chosenAdditionalComparisonAreasGroup
-		? {
-				'all-siblings': areasGroupsObject.sameGeogLevel.codes,
-				'same-parent-siblings': areasGroupsObject.sameRegion.codes,
-				'similar-siblings': areasGroupsObject.similar.codes,
-				'local-authority-children': areasGroupsObject.children.laCodes,
-				'region-children': areasGroupsObject.children.regionCodes
-			}[chosenAdditionalComparisonAreasGroup.name]
-		: null;
+	let showConfidenceIntervals = false;
 
-	$: chosenArray = new Array(3);
+	let hoverAreaId, hoverIndicatorId;
 
-	$: console.log(chosenArray);
-
-	$: accordionArray = [
-		{
-			label: 'Primary comparison area/measure',
-			type: 'radio',
-			options: [
-				{ data: [{ label: 'None', id: 'none' }], accordion: false, labelKey: 'label', idKey: 'id' },
-				{
-					//label: 'Average of group of areas',
-					data: comparisonGroupsArray,
-					accordion: false,
-					labelKey: 'label1',
-					idKey: 'name'
-				},
-				{
-					//label: 'Parent areas',
-					data: areasGroupsObject.parents.areas,
-					accordion: false
-				},
-				{
-					label: areasGroupsObject.sameRegion.label,
-					data: areasGroupsObject.sameRegion.areas,
-					accordion: true
-				},
-				{
-					label: 'Countries',
-					data: areasGroupsObject.options.countries.areas,
-					accordion: true
-				},
-				{ label: 'Regions', data: areasGroupsObject.options.regions.areas, accordion: true },
-				{
-					label: 'Upper-tier local authorities',
-					data: areasGroupsObject.options.upperTier.areas,
-					accordion: true
-				},
-				{
-					label: 'Lower-tier local authorities',
-					data: areasGroupsObject.options.lowerTier.areas,
-					accordion: true
-				}
-			]
-		},
-		{
-			label: 'Related areas',
-			type: 'radio',
-			search: null,
-			options: [
-				{ data: [{ label: 'None', id: 'none' }], accordion: false, labelKey: 'label', idKey: 'id' },
-				{ data: comparisonGroupsArray, accordion: false, labelKey: 'label2', idKey: 'name' }
-			]
-		},
-		{
-			label: 'Additional areas',
-			type: 'checkbox',
-			options: [
-				{
-					//label: 'Parent areas',
-					data: areasGroupsObject.parents.areas,
-					accordion: false
-				},
-				{
-					label: areasGroupsObject.sameRegion.label,
-					data: areasGroupsObject.sameRegion.areas,
-					accordion: true
-				},
-				{
-					label: 'Countries',
-					data: areasGroupsObject.options.countries.areas,
-					accordion: true
-				},
-				{ label: 'Regions', data: areasGroupsObject.options.regions.areas, accordion: true },
-				{
-					label: 'Upper-tier local authorities',
-					data: areasGroupsObject.options.upperTier.areas,
-					accordion: true
-				},
-				{
-					label: 'Lower-tier local authorities',
-					data: areasGroupsObject.options.lowerTier.areas,
-					accordion: true
-				}
-			]
-		}
-	];
+	$: console.log(startXDomainNumb, endXDomainNumb, showConfidenceIntervals);
 </script>
 
-<div class="topic-sections-container">
-	<!-- <EditTimePeriod {metadata} bind:startXDomainNumb bind:endXDomainNumb></EditTimePeriod> -->
+<div class="sticky-container">
+	<h3>Selected areas</h3>
 
-	<!-- <SelectComparisons
+	<StickyHeader
 		{metadata}
-		{areasGroupsObject}
-		{comparisonGroupsArray}
-		bind:chosenComparisonMeasureOrArea
-		bind:chosenAdditionalComparisonAreasGroup
-	></SelectComparisons> -->
-
-	<ChangeAreas
-		selectedArea={areasGroupsObject.selected.area}
+		{selectedArea}
 		{accordionArray}
-		bind:chosenArray
-		bind:testChosen
-		visiblePrimaryAreas={areasGroupsObject.visible.primaryAreas}
-	></ChangeAreas>
+		bind:selectionsObject
+		{customLookup}
+		bind:startXDomainNumb
+		bind:endXDomainNumb
+		bind:showConfidenceIntervals
+	></StickyHeader>
 
-	{#each metadata.topicsArray as topic, i}
-		<!-- <TopicSection
+	<div class="topic-sections-container">
+		{#each metadata.topicsArray as topic, i}
+			<TopicSection
+				{metadata}
+				{topic}
+				{filteredIndicatorsCodes}
+				bind:hoverAreaId
+				bind:hoverIndicatorId
+				{selectedArea}
+				{selectionsObject}
+				{chartData}
+				{startXDomainNumb}
+				{endXDomainNumb}
+			></TopicSection>
+			<!-- <TopicSection
 			{i}
 			{topic}
 			{areasGroupsObject}
@@ -151,5 +66,14 @@
 			{backgroundAreasCodes}
 			{filteredIndicatorsCodes}
 		></TopicSection> -->
-	{/each}
+		{/each}
+	</div>
 </div>
+
+<style>
+	.topic-sections-container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+</style>

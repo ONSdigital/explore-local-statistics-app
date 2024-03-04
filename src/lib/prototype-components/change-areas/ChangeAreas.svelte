@@ -2,10 +2,9 @@
 	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
 	import Modal from '$lib/prototype-components/layout/Modal.svelte';
 	import AccordionSection from '$lib/prototype-components/change-areas/AccordionSection.svelte';
+	import AreaPanel from '$lib/prototype-components/AreaPanel.svelte';
 
-	import { colorsLookup } from '$lib/config.js';
-
-	export let selectedArea, accordionArray, chosenArray, visiblePrimaryAreas, testChosen;
+	export let selectedArea, accordionArray, selectionsObject, customLookup;
 
 	let showModal = false;
 
@@ -28,34 +27,32 @@
 	>
 </div>
 
-<Modal bind:showModal>
+<Modal bind:showModal bind:accordionOpen>
 	<div class="title-container row-container" slot="title">
 		{#if selectedArea}
 			<span>Comparing</span>
-			<div class="area-container" style="border-color: {colorsLookup.main.color}">
-				<div class="inline-row-container">
-					<svg width="20" height="20">
-						<circle cx="10" cy="10" r="8" stroke="white" fill={colorsLookup.main.color}></circle>
-					</svg>
-					<span style="color: {colorsLookup.main.color}; font-weight: bold"
-						>{selectedArea.areanm}</span
-					>
-				</div>
-			</div>
+			<AreaPanel
+				area={selectedArea}
+				{customLookup}
+				markerRadius="8"
+				button={false}
+				fontWeight="bold"
+			></AreaPanel>
 			<span>to:</span>
 		{:else}
-			<span style="font-weight: bold">Select visualised areas</span>
+			<span style="font-weight: bold">Select areas</span>
 		{/if}
 	</div>
 
-	<div slot="content">
+	<div slot="content" class="column-container">
 		{#each accordionArray as accordionSection, index}
 			<AccordionSection
 				{accordionSection}
 				{index}
-				bind:chosen={testChosen.aaaa}
+				bind:chosen={selectionsObject[accordionSection.chosenKey + '-chosen']}
 				bind:accordionOpen
-				{visiblePrimaryAreas}
+				visibleAreas={selectionsObject[accordionSection.chosenKey + '-visible']}
+				{customLookup}
 			></AccordionSection>
 		{/each}
 	</div>
@@ -72,7 +69,7 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		align-items: flex-start;
-		gap: 10px;
+		gap: 5px;
 		align-items: center;
 	}
 
@@ -91,5 +88,11 @@
 		flex-wrap: nowrap;
 		align-items: center;
 		gap: 2px;
+	}
+
+	.column-container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
 </style>

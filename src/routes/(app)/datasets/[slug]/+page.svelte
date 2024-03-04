@@ -15,6 +15,8 @@
 	import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
+	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
+	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
 
 	export let data;
 
@@ -49,6 +51,78 @@
 		];
 		refreshData();
 	});
+
+	let metadata = data.config;
+
+	$: parentAndRelatedAreasObject = {
+		parent: null,
+		country: null,
+		uk: null,
+		groups: {}
+	};
+
+	let changeAreasOptionsObject = {
+		country: metadata.areasGeogLevelObject.country.map((el) => metadata.areasObject[el]),
+		region: metadata.areasGeogLevelObject.region.map((el) => metadata.areasObject[el]),
+		upper: metadata.areasGeogLevelObject.upper.map((el) => metadata.areasObject[el]),
+		lower: metadata.areasGeogLevelObject.lower.map((el) => metadata.areasObject[el])
+	};
+
+	let selectionsObject = {
+		'indicator-additional-chosen': new Array(0),
+		'indicator-additional-visible': new Array(0)
+	};
+
+	$: {
+		selectionsObject['indicator-additional-visible'] = constructVisibleAreasArray(
+			selectionsObject['indicator-additional-chosen'],
+			false,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
+	}
+
+	$: accordionArray = [
+		{
+			label: 'Selected areas:',
+			type: 'checkbox',
+			chosenKey: 'indicator-additional',
+			accordion: false,
+			options: [
+				{
+					label: 'Countries',
+					data: changeAreasOptionsObject.country,
+					accordion: false
+				},
+				{
+					label: 'Regions',
+					data: changeAreasOptionsObject.region,
+					accordion: false
+				},
+				{
+					label: 'Upper-tier local authorities',
+					data: changeAreasOptionsObject.upper,
+					accordion: true
+				},
+				{
+					label: 'Lower-tier local authorities',
+					data: changeAreasOptionsObject.lower,
+					accordion: true
+				}
+			]
+		}
+	];
+
+	$: customLookup = {
+		'indicator-additional-visible': {}
+	};
+
+	$: {
+		customLookup['indicator-additional-visible'] = updateCustomLookup(
+			customLookup['indicator-additional-visible'],
+			selectionsObject['indicator-additional-visible'].filter((el) => el.role === 'custom')
+		);
+	}
 </script>
 
 <Breadcrumb
@@ -82,6 +156,11 @@
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this dataset" marginTop>
+		<ChangeAreas
+			{accordionArray}
+			bind:selectionsObject
+			customLookup={customLookup['indicator-additional-visible']}
+		></ChangeAreas>
 		<NavSection title="Map">
 			<ContentBlock
 				type="map"
@@ -103,6 +182,7 @@
 						on:change={refreshData}
 					/>
 				</div>
+
 				<Map
 					data={mapData.data}
 					breaks={mapData.breaks}

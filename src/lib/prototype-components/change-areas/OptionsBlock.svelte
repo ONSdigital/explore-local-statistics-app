@@ -10,6 +10,12 @@
 		accordionOpen = !accordionOpen;
 	};
 
+	$: {
+		accordionOpen = regex;
+	}
+
+	$: console.log(regex);
+
 	$: labelKey = 'labelKey' in option ? option.labelKey : 'areanm';
 	$: idKey = 'idKey' in option ? option.idKey : 'areacd';
 
@@ -30,7 +36,7 @@
 		<span>{option.label}</span>
 	{/if}
 
-	{#if !option.accordion || accordionOpen || regex}
+	{#if !option.accordion || accordionOpen}
 		<div class="column-container">
 			{#if accordionSection.type === 'radio'}
 				<Radio

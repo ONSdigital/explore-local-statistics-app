@@ -2,7 +2,9 @@ import {
 	abbreviatedNamesObject,
 	addTheArray,
 	areaPluralObject,
-	chartConfigurations
+	chartConfigurations,
+	colorsLookup,
+	geogLevelToNameLookup
 } from '$lib/config';
 
 export function haveCommonElements(arr1, arr2) {
@@ -20,15 +22,6 @@ export function addTheToName(name) {
 
 export function formatName(name) {
 	return addTheToName(name in abbreviatedNamesObject ? abbreviatedNamesObject[name] : name);
-}
-
-export function constructSameRegionAreasLabel(geogLevel, parentName) {
-	let areaPlural =
-		areaPluralObject[geogLevel] === 'local authorities' ? 'areas' : areaPluralObject[geogLevel];
-
-	return ['other', 'country'].includes(geogLevel)
-		? undefined
-		: 'Other ' + areaPlural + ' in ' + addTheToName(parentName);
 }
 
 export function roundNumber(number, decimalPlaces) {
@@ -83,103 +76,111 @@ export function splitTextIntoRows(text, numRows) {
 	return rows;
 }
 
-export function generateComparisonAreaGroups(
-	selectedAreaCode,
-	selectedAreaName,
-	geogLevel,
-	parentName
+export function constructVisibleAreasArray(
+	chosen,
+	relatedAreasBoolean,
+	parentAndRelatedAreasObject,
+	areasObject
 ) {
-	let sameParentAreaPlural =
-		selectedAreaCode in areaPluralObject.bespoke
-			? areaPluralObject.bespoke[selectedAreaCode]
-			: areaPluralObject[geogLevel];
-
-	if (['lower', 'upper'].includes(geogLevel)) {
-		return [
-			{
-				id: 0,
-				name: 'all-siblings',
-				label1: 'Median average of all local authorities',
-				label2: 'All other local authorities'
-				//sameGeogLevelAreasCodes
-			},
-			{
-				id: 1,
-				name: 'same-parent-siblings',
-				label1: 'Median average of areas in ' + formatName(parentName),
-				label2: 'All other areas in ' + formatName(parentName)
-				//sameRegionAreasCodes
-			},
-			{
-				id: 2,
-				name: 'similar-siblings',
-				label1: 'Median average of demographically similar areas',
-				label2: 'Demographically similar areas'
-				//similarAreasCodes
-			}
-		];
-	} else if (geogLevel === 'region') {
-		if (parentName === 'England') {
-			return [
-				{
-					id: 0,
-					name: 'all-siblings',
-					label1: 'Median average of all UK regions',
-					label2: 'All other UK regions'
-					//sameGeogLevelAreasCodes
-				},
-				{
-					id: 3,
-					name: 'local-authority-children',
-					label2: 'All local authorities in ' + formatName(selectedAreaName)
-					//localAuthorityChildrenAreasCodes
+	if (relatedAreasBoolean) {
+		return chosen && chosen != 'none'
+			? {
+					group: chosen,
+					label: parentAndRelatedAreasObject.groups[chosen].labels.related,
+					role: 'related',
+					areas: parentAndRelatedAreasObject.groups[chosen].areas,
+					codes: parentAndRelatedAreasObject.groups[chosen].codes
 				}
-			];
-		} else {
-			return [
-				{
-					id: 0,
-					name: 'all-siblings',
-					label1: 'Median average of all UK regions',
-					label2: 'All other UK regions'
-					//sameGeogLevelAreasCodes
-				},
-				{
-					id: 1,
-					name: 'same-parent-siblings',
-					label2: 'Ather UK countries'
-					//sameRegionAreasCodes
-				},
-				{
-					id: 3,
-					name: 'local-authority-children',
-					label2: 'All local authorities in ' + formatName(selectedAreaName)
-					//localAuthorityChildrenAreasCodes
-				}
-			];
-		}
-	} else if (geogLevel === 'country') {
-		return [
-			{
-				id: 1,
-				name: 'same-parent-siblings',
-				label2: 'Other UK countries'
-				//sameRegionAreasCodes
-			},
-			{
-				id: 3,
-				name: 'local-authority-children',
-				label2: 'All local authorities in ' + formatName(selectedAreaName)
-				//localAuthorityChildrenAreasCodes
-			},
-			{
-				id: 4,
-				name: 'region-children',
-				label2: 'All regions in ' + formatName(selectedAreaName)
-				//regionChildrenAreas
-			}
-		];
+			: null;
+	} else {
+		return chosen
+			? Array.isArray(chosen)
+				? chosen.map((el) =>
+						assignRole(el, relatedAreasBoolean, parentAndRelatedAreasObject, areasObject, 'custom')
+					)
+				: Object.keys(parentAndRelatedAreasObject.groups).includes(chosen)
+					? {
+							group: chosen,
+							label: parentAndRelatedAreasObject.groups[chosen].labels.comparison,
+							role: 'comparison'
+						}
+					: assignRole(
+							chosen,
+							relatedAreasBoolean,
+							parentAndRelatedAreasObject,
+							areasObject,
+							'comparison'
+						)
+			: null;
 	}
+}
+
+function assignRole(
+	element,
+	relatedAreasBoolean,
+	parentAndRelatedAreasObject,
+	areasObject,
+	ifNotParent
+) {
+	if (element === 'none') {
+		return null;
+	} else {
+		let role =
+			parentAndRelatedAreasObject.parent && parentAndRelatedAreasObject.parent.areacd === element
+				? 'parent'
+				: parentAndRelatedAreasObject.country &&
+					  parentAndRelatedAreasObject.country.areacd === element
+					? 'country'
+					: parentAndRelatedAreasObject.uk && parentAndRelatedAreasObject.uk.areacd === element
+						? 'uk'
+						: ifNotParent;
+		return {
+			...areasObject[element],
+			role: role
+		};
+	}
+}
+
+export function updateCustomLookup(currentLookup, updatedArray) {
+	let currentLookupFiltered = Object.fromEntries(
+		Object.entries(currentLookup).filter(([key, el]) => el < colorsLookup.custom.length)
+	);
+
+	let updatedKeys = updatedArray.map((el) => el.areacd);
+
+	let currentKeys = Object.keys(currentLookupFiltered);
+
+	for (var i = 0; i < currentKeys.length; i++) {
+		if (!updatedKeys.includes(currentKeys[i])) {
+			delete currentLookupFiltered[currentKeys[i]];
+		} else {
+		}
+	}
+
+	let newKeys = updatedKeys.filter((el) => !currentKeys.includes(el));
+
+	let takenIndexes = currentKeys.map((el) => currentLookupFiltered[el]);
+
+	for (var i = 0; i < newKeys.length; i++) {
+		for (var j = 0; true; j++) {
+			if (!takenIndexes.includes(j)) {
+				currentLookupFiltered[newKeys[i]] = j;
+				takenIndexes = [...takenIndexes, j];
+				break;
+			}
+		}
+	}
+
+	return currentLookupFiltered;
+}
+
+export function getGeogName(geogLevel, singular, detail = 'full') {
+	let lookup = geogLevelToNameLookup[geogLevel][singular ? 'singular' : 'plural'];
+	return typeof lookup === 'string' ? lookup : lookup[detail];
+}
+
+export function capitalizeFirstLetter(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export function calculateLabelMidpoints(

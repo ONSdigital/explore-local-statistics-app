@@ -58,14 +58,16 @@ export const colorsLookup = {
 	parent: { color: '#F66068', contrast: 'white' },
 	country: { color: '#118C7B', contrast: 'white' },
 	uk: { color: '#00A3A6', contrast: 'white' },
-	sameRegion: { color: '#d4d4d4', contrast: '#222' },
-	similar: { color: '#b0b0b0', contrast: '#222' },
-	custom1: { color: '#206095', contrast: 'white' },
-	custom2: { color: '#a8bd3a', contrast: '#222' },
-	custom3: { color: '#871a5b', contrast: 'white' },
-	custom4: { color: '#27a0cc', contrast: '#222' },
+	custom: [
+		{ color: '#206095', contrast: 'white' },
+		{ color: '#a8bd3a', contrast: '#222' },
+		{ color: '#871a5b', contrast: 'white' },
+		{ color: '#27a0cc', contrast: '#222' }
+	],
+	customExceedThreshold: { color: 'grey', contrast: 'white' },
 	selected: { color: '#F39431', contrast: 'white' },
-	median: { color: '#746CB1', contrast: 'white' }
+	comparison: { color: '#746CB1', contrast: 'white' },
+	related: { color: '#b0b0b0', contrast: '#222' }
 };
 
 export const madRangeLookup = {
@@ -84,8 +86,97 @@ export const chartConfigurations = {
 };
 
 export const geogLevelToNameLookup = {
-	lower: 'local authorities',
-	uppper: 'local authorities',
-	region: 'regions',
-	country: 'countries'
+	lower: {
+		singular: { short: 'LTLA', full: 'lower tier local authority', simplified: 'local authority' },
+		plural: {
+			short: 'LTLAs',
+			full: 'lower tier local authorities',
+			simplified: 'local authorities'
+		}
+	},
+	upper: {
+		singular: { short: 'UTLA', full: 'upper tier local authority', simplified: 'local authority' },
+		plural: {
+			short: 'UTLAs',
+			full: 'upper tier local authorities',
+			simplified: 'local authorities'
+		}
+	},
+	region: { singular: 'region', plural: 'regions' },
+	country: { singular: 'country', plural: 'countries' }
+};
+
+export const changeAreasIncludeExcludeObject = {
+	lower: {
+		median: {
+			'all-siblings': true,
+			'same-parent-siblings': true,
+			'similar-siblings': true,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		},
+		related: {
+			'all-siblings': true,
+			'same-parent-siblings': true,
+			'similar-siblings': true,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		}
+	},
+	upper: {
+		median: {
+			'all-siblings': true,
+			'same-parent-siblings': true,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		},
+		related: {
+			'all-siblings': true,
+			'same-parent-siblings': true,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		}
+	},
+	region: {
+		median: {
+			'all-siblings': false,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		},
+		related: {
+			'all-siblings': true,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': true,
+			'lower-tier-local-authority-children': true
+		}
+	},
+	country: {
+		median: {
+			'all-siblings': false,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		},
+		related: {
+			'all-siblings': true,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': true,
+			'upper-tier-local-authority-children': true,
+			'lower-tier-local-authority-children': true
+		}
+	}
 };
