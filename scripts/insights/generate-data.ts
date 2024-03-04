@@ -27,10 +27,14 @@ async function main() {
 	const outData = generateOutData(data, config.indicators);
 	writeFileSync(
 		COLUMN_ORIENTED_DATA_OUTPUT_PATH,
-		JSON.stringify({
-			combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
-			beeswarmKeyData: outData.beeswarmKeyData
-		})
+		JSON.stringify(
+			{
+				combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
+				beeswarmKeyData: outData.beeswarmKeyData
+			},
+			null,
+			'\t'
+		)
 	);
 	console.log(
 		`Insights data JSON file in column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
@@ -41,7 +45,7 @@ async function main() {
 		combinedData,
 		outData.combinedDataObjectColumnOriented
 	);
-	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
+	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig, null, '\t'));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
 
