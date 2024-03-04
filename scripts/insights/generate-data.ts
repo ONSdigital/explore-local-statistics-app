@@ -172,8 +172,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 
 	return {
 		clustersLookup,
-		clustersCalculations,
-		sameParentGeogCalculations,
 		areasGeogInfoObject,
 		areasGeogLevelObject,
 		areasArray,
@@ -193,14 +191,38 @@ function combineIndicatorCalculations(
 	indicatorsCalculations,
 	sameParentGeogCalculations,
 	clustersCalculations,
-	clusterTypes,
-	indicatorsObject
+	clusterTypes
 ) {
 	const indicatorsCalculationsArray = JSON.parse(JSON.stringify(indicatorsCalculations));
 
 	const sameParentLookup = Object.fromEntries(
-		sameParentGeogCalculations.map((d) => [`${d.id};${d.xDomainNumb}`])
+		sameParentGeogCalculations.map((d) => [`${d.code};;;${d.xDomainNumb}`, d.filteredResults])
 	);
+
+	for (const item of indicatorsCalculationsArray) {
+		if (`${item.code};;;${item.period}` in sameParentLookup) {
+			item.sameParentGeogCalculations = sameParentLookup[`${item.code};;;${item.period}`];
+		}
+	}
+
+	for (const item of indicatorsCalculationsArray) {
+		item.clustersCalculations = {};
+	}
+
+	for (const clusterType of clusterTypes) {
+		const clustersLookup = Object.fromEntries(
+			clustersCalculations[clusterType].map((d) => [
+				`${d.code};;;${d.xDomainNumb}`,
+				d.filteredResults
+			])
+		);
+
+		for (const item of indicatorsCalculationsArray) {
+			if (`${item.code};;;${item.period}` in clustersLookup) {
+				item.clustersCalculations[clusterType] = clustersLookup[`${item.code};;;${item.period}`];
+			}
+		}
+	}
 
 	return indicatorsCalculationsArray;
 }
@@ -241,10 +263,10 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 			.dedupe()
 			.array('cluster')
 			.sort((a, b) => a.localeCompare(b));
-		const idAndYear = joinedTable.select('id', 'xDomainNumb').dedupe().objects();
-		for (const { id, xDomainNumb } of idAndYear) {
+		const codeAndYear = joinedTable.select('code', 'xDomainNumb').dedupe().objects();
+		for (const { code, xDomainNumb } of codeAndYear) {
 			const filteredTable = joinedTable.filter(
-				aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+				aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
 			);
 			const filteredResults = {};
 			for (const cluster of clusters) {
@@ -256,7 +278,7 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 					mad: clusterValues.length === 0 ? null : mad(clusterValues)
 				};
 			}
-			clustersCalculations[clusterType].push({ id, xDomainNumb, filteredResults });
+			clustersCalculations[clusterType].push({ code, xDomainNumb, filteredResults });
 		}
 	}
 
@@ -276,10 +298,10 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 	const sameParentGeogCalculations = [];
 
 	const combinedDataWithoutNulls = combinedData.filter((d) => d.value !== null);
-	const idAndYear = combinedDataWithoutNulls.select('id', 'xDomainNumb').dedupe().objects();
-	for (const { id, xDomainNumb } of idAndYear) {
+	const codeAndYear = combinedDataWithoutNulls.select('code', 'xDomainNumb').dedupe().objects();
+	for (const { code, xDomainNumb } of codeAndYear) {
 		const filteredTable = combinedDataWithoutNulls.filter(
-			aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+			aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
 		);
 		const filteredResults = {};
 		for (const geogGroup of geogGroups) {
@@ -291,7 +313,7 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues)
 			};
 		}
-		sameParentGeogCalculations.push({ id, xDomainNumb, filteredResults });
+		sameParentGeogCalculations.push({ code, xDomainNumb, filteredResults });
 	}
 
 	return sameParentGeogCalculations;
