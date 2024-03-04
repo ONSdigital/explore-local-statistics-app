@@ -25,6 +25,7 @@
 </script>
 
 <div class="sticky-container">
+	<NavSection title="Indicators by topic"></NavSection>
 	<h3>Selected areas</h3>
 
 	<StickyHeader
