@@ -82,6 +82,8 @@
 		);
 	}
 
+	$: console.log(selectionsObject);
+
 	$: accordionArray = [
 		{
 			label: 'Selected areas:',
@@ -92,12 +94,12 @@
 				{
 					label: 'Countries',
 					data: changeAreasOptionsObject.country,
-					accordion: false
+					accordion: true
 				},
 				{
 					label: 'Regions',
 					data: changeAreasOptionsObject.region,
-					accordion: false
+					accordion: true
 				},
 				{
 					label: 'Upper-tier local authorities',
