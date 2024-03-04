@@ -43,27 +43,17 @@ export default async function main() {
 		expectAllOnLeft: false
 	}).select(aq.not('period'));
 
-	const [indicators, indicators_calculations] = getIndicatorsCalculations(
-		previousIndicators,
-		combined_data,
-		areas_geog_level
-	);
+	const [indicators, indicators_calculations, _oldStyleIndicatorsCalculations] =
+		getIndicatorsCalculations(previousIndicators, combined_data, areas_geog_level);
 
-	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code').select(
-		aq.not('code')
-	);
+	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code');
 
-	fs.writeFileSync(`${CONFIG.CSV_DIR}/combined-data.csv`, combined_data.toCSV());
 	fs.writeFileSync(`${CONFIG.CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
-	fs.writeFileSync(
-		`${CONFIG.CSV_DIR}/indicators-calculations.csv`,
-		indicators_calculations.toCSV()
-	);
 
 	const indicators_metadata_for_js = loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
 	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
 
-	return [combined_data, indicators, indicators_calculations];
+	return [combined_data, indicators, indicators_calculations, _oldStyleIndicatorsCalculations];
 }
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
@@ -79,8 +69,9 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 
 	const geog_levels = uniqueValuesInColumn(areas_geog_level, 'level').filter((d) => d !== 'other');
 
-	const indicatorsObjects = indicators.objects();
+	const indicatorsObjects: any[] = indicators.objects();
 	const indicators_calculations: object[] = [];
+	const _oldStyleIndicatorsCalculations: object[] = [];
 
 	for (const indicator of indicatorsObjects) {
 		const indicator_data = combined_data_with_geog_level.filter(
@@ -92,16 +83,33 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 		indicator.minXDomainNumb = Math.min(...indicatorPeriods);
 		indicator.maxXDomainNumb = Math.max(...indicatorPeriods);
 
-		for (const geogLevel of geog_levels) {
-			const filteredIndicatorData = indicator_data.filter(aq.escape((d) => d.level === geogLevel));
-			for (const period of indicatorPeriods) {
-				const filteredIndicatorDataSinglePeriod = filteredIndicatorData.filter(
-					aq.escape((d) => d.xDomainNumb === period)
+		for (const period of indicatorPeriods) {
+			const filteredIndicatorDataSinglePeriod = indicator_data.filter(
+				aq.escape((d) => d.xDomainNumb === period)
+			);
+
+			const allCalcsForIndicatorAndPeriod: {
+				code: string;
+				period: number;
+				calcsByGeogLevel: object;
+			} = {
+				code: indicator.code,
+				period,
+				calcsByGeogLevel: {}
+			};
+
+			for (const geogLevel of geog_levels) {
+				const filteredIndicatorDataSingleGeog = filteredIndicatorDataSinglePeriod.filter(
+					aq.escape((d) => d.level === geogLevel)
 				);
 
-				if (filteredIndicatorDataSinglePeriod.numRows() > 1) {
-					const values = filteredIndicatorDataSinglePeriod.array('value');
-					indicators_calculations.push({
+				if (filteredIndicatorDataSingleGeog.numRows() > 1) {
+					const values = filteredIndicatorDataSingleGeog.array('value');
+					allCalcsForIndicatorAndPeriod.calcsByGeogLevel[geogLevel] = {
+						med: median(values),
+						mad: mad(values)
+					};
+					_oldStyleIndicatorsCalculations.push({
 						code: indicator.code,
 						geog_level: geogLevel,
 						period,
@@ -110,9 +118,11 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 					});
 				}
 			}
+
+			indicators_calculations.push(allCalcsForIndicatorAndPeriod);
 		}
 	}
-	return [aq.from(indicatorsObjects), aq.from(indicators_calculations)];
+	return [aq.from(indicatorsObjects), indicators_calculations, _oldStyleIndicatorsCalculations];
 }
 
 function processFiles(file_paths, excludedIndicators: string[]) {

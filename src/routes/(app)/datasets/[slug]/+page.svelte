@@ -12,7 +12,7 @@
 	} from '@onsvisual/svelte-components';
 	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import Lede from '$lib/components/Lede.svelte';
-	import Indicators from '$lib/components/Indicators.svelte';
+	// import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
@@ -131,6 +131,7 @@
 	links={[
 		{ label: 'Home', href: '/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
+		{ label: 'Find a local dataset', href: `${base}/datasets` },
 		{ label: data.indicator.metadata.label }
 	]}
 	background="#eaeaea"
@@ -140,11 +141,11 @@
 	meta={[
 		{
 			key: 'Data source',
-			value: 'ONS'
+			value: 'Organisation name'
 		},
 		{
 			key: 'Last updated',
-			value: `${data.indicator.maxXDomainNumb}`
+			value: 'DD MMM YYYY'
 		}
 	]}
 	background="#eaeaea"
@@ -154,7 +155,15 @@
 	</Lede>
 </Titleblock>
 
-<Indicators topics={data.metadata.topicsArray} title="Find another dataset" compact />
+<!-- <Indicators
+	topics={data.metadata.topicsArray}
+	title="Find another dataset"
+	theme="dark"
+	background="#003c57"
+	hideTitle={false}
+	hideToggle={false}
+	compact
+/> -->
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this dataset" marginTop>
@@ -249,6 +258,13 @@
 			<p>
 				If you would like a CSV of the data displayed in one of the above charts, you can click the
 				"download data" link immediately below it.
+			</p>
+		</NavSection>
+		<NavSection title="Other datasets">
+			<p>
+				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} datasets
+				you can explore on the ONS <a href="{base}/">Explore local statistics</a> service. See the
+				full list of datasets on the <a href="{base}/datasets">Find a local dataset page</a>.
 			</p>
 		</NavSection>
 	</NavSections>

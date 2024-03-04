@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Tabs from '$lib/prototype-components/modified-svelte-components/Tabs.svelte';
-	import { Select } from '@onsvisual/svelte-components';
+	import { Tabs, Tab, Select } from '@onsvisual/svelte-components';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
@@ -75,72 +74,73 @@
 	);
 </script>
 
-<Tabs name="select-main-chart-type" optionsArray={chartOptionsArray} bind:chosenId={chosenChartId}
-></Tabs>
+<Tabs border bind:selected={chosenChartId}>
+	{#each chartOptionsArray as chart}
+		<Tab title={chart.label} id={chart.id} hideTitle>
+			<Select
+				id="select-indicator"
+				options={filteredIndicators}
+				idKey="code"
+				labelKey="label"
+				groupKey="topic"
+				clusterByGroup
+				clearable={false}
+				bind:value={chosenIndicatorId}
+			></Select>
 
-<div class="main-chart-container">
-	<Select
-		id="select-indicator"
-		options={filteredIndicators}
-		idKey="code"
-		labelKey="label"
-		groupKey="topic"
-		clusterByGroup
-		clearable={false}
-		bind:value={chosenIndicatorId}
-	></Select>
-
-	<SubtitleAdditionalDescription {selectedIndicator} {timePeriodsArray} {selectedChartType}
-	></SubtitleAdditionalDescription>
-
-	<div class="chart-container">
-		{#if selectedChartType.label === 'Time series'}
-			<LineChartContainer
+			<SubtitleAdditionalDescription
 				{selectedIndicator}
-				{metadata}
-				{combinedSelectableAreaTypesObject}
-				{areasCodesForAreasWithData}
-				{visibleAreasWithData}
 				{timePeriodsArray}
-				{filteredChartDataForVisibleAreas}
-				{selectedIndicatorCalculations}
-				bind:chosenParentAreasArray
-				bind:chosenRelatedAreasId
-				bind:chosenSameRegionArray
-				bind:chosenCountriesArray
-				bind:chosenRegionsArray
-				bind:chosenAllOtherArray
-			></LineChartContainer>
-		{:else if selectedChartType.label === 'Bar chart'}
-			<BarChartContainer
-				{selectedIndicator}
-				{metadata}
-				{combinedSelectableAreaTypesObject}
-				{areasCodesForAreasWithData}
-				{visibleAreasWithData}
-				{timePeriodsArray}
-				filteredChartDataForVisibleAreas={filteredChartDataForVisibleAreas.filter(
-					(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
-				)}
-				{selectedIndicatorCalculations}
-				bind:chosenParentAreasArray
-				bind:chosenRelatedAreasId
-				bind:chosenSameRegionArray
-				bind:chosenCountriesArray
-				bind:chosenRegionsArray
-				bind:chosenAllOtherArray
-			></BarChartContainer>
-		{/if}
-	</div>
-</div>
+				selectedChartType={chart}
+			></SubtitleAdditionalDescription>
+
+			<div class="chart-container">
+				{#if chart.label === 'Time series'}
+					<LineChartContainer
+						{selectedIndicator}
+						{metadata}
+						{combinedSelectableAreaTypesObject}
+						{areasCodesForAreasWithData}
+						{visibleAreasWithData}
+						{timePeriodsArray}
+						{filteredChartDataForVisibleAreas}
+						{selectedIndicatorCalculations}
+						bind:chosenParentAreasArray
+						bind:chosenRelatedAreasId
+						bind:chosenSameRegionArray
+						bind:chosenCountriesArray
+						bind:chosenRegionsArray
+						bind:chosenAllOtherArray
+					></LineChartContainer>
+				{:else if chart.label === 'Bar chart'}
+					<BarChartContainer
+						{selectedIndicator}
+						{metadata}
+						{combinedSelectableAreaTypesObject}
+						{areasCodesForAreasWithData}
+						{visibleAreasWithData}
+						{timePeriodsArray}
+						filteredChartDataForVisibleAreas={filteredChartDataForVisibleAreas.filter(
+							(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
+						)}
+						{selectedIndicatorCalculations}
+						bind:chosenParentAreasArray
+						bind:chosenRelatedAreasId
+						bind:chosenSameRegionArray
+						bind:chosenCountriesArray
+						bind:chosenRegionsArray
+						bind:chosenAllOtherArray
+					></BarChartContainer>
+				{:else}
+					{chart.label} not currently available.
+				{/if}
+			</div>
+		</Tab>
+	{/each}
+</Tabs>
 
 <style>
-	.main-chart-container {
-		margin: 0px;
-		padding: 10px 10px 15px 10px;
-		border-radius: 0px 5px 5px 5px;
-		border-style: solid;
-		border-width: 1px;
-		border-color: rgb(128, 128, 128);
+	:global(.ons-tabs) {
+		margin-bottom: 0;
 	}
 </style>

@@ -6,45 +6,46 @@ import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
 
-const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 
 await main();
 
 async function main() {
-	const [combinedData, indicators, indicatorsCalculations] = await arqueroProcessing();
+	const [combinedData, indicators, indicatorsCalculations, _oldStyleIndicatorsCalculations] =
+		await arqueroProcessing();
 
 	const data = readDataFromCsvs();
 	data.combinedData = combinedData.objects();
 	const config = readConfigFromCsvs();
 	config.indicators = indicators.objects();
-	config.indicatorsCalculations = indicatorsCalculations.objects();
+	config.indicatorsCalculations = indicatorsCalculations;
+	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
 
 	checkSlugs(config.indicatorsMetadata);
 
 	const outData = generateOutData(data, config.indicators);
 	writeFileSync(
-		DATA_OUTPUT_PATH,
-		JSON.stringify({
-			combinedDataObject: outData.combinedDataObject,
-			beeswarmKeyData: outData.beeswarmKeyData
-		})
-	);
-	console.log(`Insights data JSON file has been generated at: ${DATA_OUTPUT_PATH}`);
-	writeFileSync(
 		COLUMN_ORIENTED_DATA_OUTPUT_PATH,
-		JSON.stringify({
-			combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
-			beeswarmKeyData: outData.beeswarmKeyData
-		})
+		JSON.stringify(
+			{
+				combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
+				beeswarmKeyData: outData.beeswarmKeyData
+			},
+			null,
+			'\t'
+		)
 	);
 	console.log(
-		`Insights data JSON file in experimental column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
+		`Insights data JSON file in column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
 	);
 
-	const outConfig = generateOutConfig(config, combinedData, outData.combinedDataObject);
-	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
+	const outConfig = generateOutConfig(
+		config,
+		combinedData,
+		outData.combinedDataObjectColumnOriented
+	);
+	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig, null, '\t'));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
 
@@ -67,29 +68,10 @@ function checkSlugs(indicatorsMetadata) {
 function generateOutData(data, indicatorsArray) {
 	const combinedDataArray = [...data.combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 
-	const combinedDataObject = {};
-	for (const indicator of indicatorsArray) {
-		combinedDataObject[indicator.code] = combinedDataArray.filter((e) => e.id === indicator.id);
-	}
-
-	// combinedDataObjectColumnOriented is an experimental version that stores
-	// an array for each column to save space.
-	const combinedDataObjectColumnOriented = createCombinedDataObjectColumnOriented(
-		indicatorsArray,
-		combinedDataArray
-	);
-
-	return {
-		combinedDataObject,
-		combinedDataObjectColumnOriented,
-		beeswarmKeyData: data.beeswarmKeyData
-	};
-}
-
-function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDataArray: any[]) {
+	// combinedDataObjectColumnOriented stores an array for each column to save space.
 	const combinedDataObjectColumnOriented = {};
 	for (const indicator of indicatorsArray) {
-		const rows = combinedDataArray.filter((e) => e.id === indicator.id);
+		const rows = combinedDataArray.filter((e) => e.code === indicator.code);
 		if (rows.length === 0) {
 			throw new Error('Unexpectedly empty `rows` array.');
 		}
@@ -99,12 +81,21 @@ function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDa
 				dataByColumn[columnName] = rows.map((row) => row[columnName]);
 			}
 		}
+
+		// We don't need arrays for id and code, because all array elements are the same
+		dataByColumn.id = dataByColumn.id[0];
+		dataByColumn.code = dataByColumn.code[0];
+
 		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
 	}
-	return combinedDataObjectColumnOriented;
+
+	return {
+		combinedDataObjectColumnOriented,
+		beeswarmKeyData: data.beeswarmKeyData
+	};
 }
 
-function generateOutConfig(config, combinedData, combinedDataObject) {
+function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
 	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
 
@@ -133,9 +124,9 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 	const indicatorsArray = config.indicators;
 	indicatorsArray.forEach((el) => {
 		el.metadata = indicatorsMetadataObject[el.code];
-		const indicatorData = combinedDataObject[el.code];
-		el.inferredGeos = inferGeos(indicatorData.map((d) => d.areacd));
-		el.years = uniqueValues(indicatorData.map((d) => d.xDomainNumb)).sort((a, b) => a - b);
+		const indicatorData = combinedDataObjectColumnOriented[el.code];
+		el.inferredGeos = inferGeos(indicatorData.areacd);
+		el.years = uniqueValues(indicatorData.xDomainNumb).sort((a, b) => a - b);
 	});
 
 	const indicatorsObject = toLookup(indicatorsArray, 'code');
@@ -175,22 +166,69 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 
 	const globalXDomainExtent = findGlobalXDomainExtent(indicatorsArray);
 
+	const indicatorsCalculationsArray = combineIndicatorCalculations(
+		config.indicatorsCalculations,
+		sameParentGeogCalculations,
+		clustersCalculations,
+		clustersLookup.types,
+		indicatorsObject
+	);
+
 	return {
 		clustersLookup,
-		clustersCalculations,
-		sameParentGeogCalculations,
 		areasGeogInfoObject,
 		areasGeogLevelObject,
 		areasArray,
 		areasObject,
 		indicatorsCodeLabelArray,
 		indicatorsObject,
-		indicatorsCalculationsArray: config.indicatorsCalculations,
+		_newStyleIndicatorsCalculationsArray: indicatorsCalculationsArray,
+		indicatorsCalculationsArray: config._oldStyleIndicatorsCalculations,
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
 		globalXDomainExtent
 	};
+}
+
+function combineIndicatorCalculations(
+	indicatorsCalculations,
+	sameParentGeogCalculations,
+	clustersCalculations,
+	clusterTypes
+) {
+	const indicatorsCalculationsArray = JSON.parse(JSON.stringify(indicatorsCalculations));
+
+	const sameParentLookup = Object.fromEntries(
+		sameParentGeogCalculations.map((d) => [`${d.code};;;${d.xDomainNumb}`, d.filteredResults])
+	);
+
+	for (const item of indicatorsCalculationsArray) {
+		if (`${item.code};;;${item.period}` in sameParentLookup) {
+			item.sameParentGeogCalculations = sameParentLookup[`${item.code};;;${item.period}`];
+		}
+	}
+
+	for (const item of indicatorsCalculationsArray) {
+		item.clustersCalculations = {};
+	}
+
+	for (const clusterType of clusterTypes) {
+		const clustersLookup = Object.fromEntries(
+			clustersCalculations[clusterType].map((d) => [
+				`${d.code};;;${d.xDomainNumb}`,
+				d.filteredResults
+			])
+		);
+
+		for (const item of indicatorsCalculationsArray) {
+			if (`${item.code};;;${item.period}` in clustersLookup) {
+				item.clustersCalculations[clusterType] = clustersLookup[`${item.code};;;${item.period}`];
+			}
+		}
+	}
+
+	return indicatorsCalculationsArray;
 }
 
 function makeClustersLookup(clustersLookupRaw) {
@@ -229,10 +267,10 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 			.dedupe()
 			.array('cluster')
 			.sort((a, b) => a.localeCompare(b));
-		const idAndYear = joinedTable.select('id', 'xDomainNumb').dedupe().objects();
-		for (const { id, xDomainNumb } of idAndYear) {
+		const codeAndYear = joinedTable.select('code', 'xDomainNumb').dedupe().objects();
+		for (const { code, xDomainNumb } of codeAndYear) {
 			const filteredTable = joinedTable.filter(
-				aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+				aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
 			);
 			const filteredResults = {};
 			for (const cluster of clusters) {
@@ -244,7 +282,7 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 					mad: clusterValues.length === 0 ? null : mad(clusterValues)
 				};
 			}
-			clustersCalculations[clusterType].push({ id, xDomainNumb, filteredResults });
+			clustersCalculations[clusterType].push({ code, xDomainNumb, filteredResults });
 		}
 	}
 
@@ -264,10 +302,10 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 	const sameParentGeogCalculations = [];
 
 	const combinedDataWithoutNulls = combinedData.filter((d) => d.value !== null);
-	const idAndYear = combinedDataWithoutNulls.select('id', 'xDomainNumb').dedupe().objects();
-	for (const { id, xDomainNumb } of idAndYear) {
+	const codeAndYear = combinedDataWithoutNulls.select('code', 'xDomainNumb').dedupe().objects();
+	for (const { code, xDomainNumb } of codeAndYear) {
 		const filteredTable = combinedDataWithoutNulls.filter(
-			aq.escape((d) => d.id === id && d.xDomainNumb === xDomainNumb)
+			aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
 		);
 		const filteredResults = {};
 		for (const geogGroup of geogGroups) {
@@ -279,7 +317,7 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues)
 			};
 		}
-		sameParentGeogCalculations.push({ id, xDomainNumb, filteredResults });
+		sameParentGeogCalculations.push({ code, xDomainNumb, filteredResults });
 	}
 
 	return sameParentGeogCalculations;

@@ -8,16 +8,22 @@
 		Breadcrumb,
 		Titleblock,
 		Section,
+		Divider,
 		analyticsEvent,
-		List
+		List,
+		Cards,
+		Card,
+		Button
 	} from '@onsvisual/svelte-components';
 	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-	import Indicators from '$lib/components/Indicators.svelte';
+	import UKMap from '$lib/components/UKMap.svelte';
 
 	export let data;
+
+	const datasetsCount = data.metadata.indicatorsCodeLabelArray.length;
 
 	let postcode = null;
 
@@ -43,45 +49,63 @@
 		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
 		{ label: 'Explore local statistics' }
 	]}
-	background="#eaeaea"
+	background="#e9eff4"
 />
-<Titleblock title="Explore local statistics" background="#eaeaea">
+<Titleblock title="Explore local statistics" background="#e9eff4">
+	<UKMap />
 	<Lede>Find, visualise, compare and download statistics for areas within the United Kingdom.</Lede>
+	<div style:height="32px" />
 </Titleblock>
-<Section title="Find a local area" theme="dark" background="#206095" marginTop>
+<Cards marginTop>
+	<Card title="Find a local area">
+		<p>
+			Get information on areas including local authorities, wards, parishes and parliamentary
+			constituencies.
+		</p>
+
+		<label for="search" class="lbl-search">
+			<strong>Search by place name or postcode</strong>
+		</label>
+		<AreaSelect
+			id="search"
+			mode="search"
+			idKey="areacd"
+			labelKey="areanm"
+			groupKey="group"
+			placeholder="Eg. Titchfield, or PO15 5RR"
+			autoClear
+			on:select={navTo}
+		/>
+
+		{#if postcode}
+			<AreaList {postcode} on:clear={() => (postcode = null)} />
+		{/if}
+	</Card>
+	<Card title="Find a dataset">
+		<p style:margin-bottom="36px">
+			Discover patterns and trends in {datasetsCount} datasets, including
+			<a href="{base}/datasets/employment-rate">employment rate</a>,
+			<a href="{base}/datasets/4g-coverage">4G coverage</a>
+			and
+			<a href="{base}/datasets/wellbeing-satisfaction">life satisfaction</a>.
+		</p>
+		<Button icon="arrow" iconPosition="after" href="{base}/datasets">Explore datasets</Button>
+	</Card>
+</Cards>
+
+<Section>
 	<p>
-		You can find information about your area, local authority, combined authority, ward, parish or
-		parliamentary constituency.
-	</p>
-
-	<label for="search" class="lbl-search">
-		<strong>Search by place name or postcode</strong>
-	</label>
-	<AreaSelect
-		id="search"
-		mode="search"
-		idKey="areacd"
-		labelKey="areanm"
-		groupKey="group"
-		placeholder="Eg. Titchfield, or PO15 5RR"
-		autoClear
-		on:select={navTo}
-	/>
-
-	{#if postcode}
-		<AreaList {postcode} on:clear={() => (postcode = null)} />
-	{/if}
-
-	<p style:margin-top="24px">
-		If you do not know the name of the area or postcode you can start your search from <a
+		If you do not know the name or postcode of an area, you can explore all areas starting from <a
 			href="{base}/areas/E92000001-england">England</a
 		>, <a href="{base}/areas/W92000004-wales">Wales</a>,
 		<a href="{base}/areas/S92000003-scotland">Scotland</a>
 		or <a href="{base}/areas/N92000002-northern-ireland">Northern Ireland</a>.
 	</p>
 </Section>
-<Indicators topics={data.config.topicsArray} />
-<Section title="Other sources of statistics" marginTop>
+
+<Divider hr="full" />
+
+<Section title="Other sources of statistics">
 	<p>
 		Scotland and Northern Ireland have their own agencies who produce official statistics. View
 		facts and figures for areas in:

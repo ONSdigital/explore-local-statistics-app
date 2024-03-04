@@ -29,8 +29,8 @@
 </script>
 
 {#if filteredTopicIndicators.length > 0}
-	<NavSection title={topicUppercase}>
-		<div class="topic-section-container">
+	<div class="topic-section-container">
+		<NavSection title={topicUppercase} subsection>
 			{#each subTopics as subTopic, i}
 				<div class="sub-topic-container">
 					<h2 class="sub-topic-header">
@@ -74,8 +74,8 @@
 					{/each}
 				</div>
 			{/each}
-		</div>
-	</NavSection>
+		</NavSection>
+	</div>
 {/if}
 
 <style>

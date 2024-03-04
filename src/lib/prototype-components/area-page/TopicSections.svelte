@@ -14,7 +14,6 @@
 		selectionsObject,
 		accordionArray,
 		customLookup;
-
 	let startXDomainNumb = 'Earliest available data',
 		endXDomainNumb = 'Latest available data';
 
