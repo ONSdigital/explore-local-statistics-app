@@ -35,11 +35,15 @@ export const getDataset = async (
 	if (dataResult) {
 		const allData = await dataResult.json();
 		const colData = allData.combinedDataObjectColumnOriented[indicator.code];
-		const cols = Object.keys(colData);
+		const cols = Object.keys(colData).filter((d) => d !== 'id' && d !== 'code');
 		const chartData = [];
-		for (let i = 0; i < colData[cols[0]].length; i++) {
+		for (let i = 0; i < colData.value.length; i++) {
 			const row: { [key: string]: string | number } = {};
-			for (const col of cols) row[col] = colData[col][i];
+			// id and code are the same for all objects, so they're not stored as arrays in the JSON file.
+			row.id = colData.id;
+			for (const col of cols) {
+				row[col] = colData[col][i];
+			}
 			row.value = round(row.value, +indicator.metadata.decimalPlaces);
 			row.areanm = metadata.areasObject[row.areacd]?.areanm || 'Unnamed area';
 			chartData.push(row);

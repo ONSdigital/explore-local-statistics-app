@@ -46,11 +46,8 @@ export default async function main() {
 	const [indicators, indicators_calculations, _oldStyleIndicatorsCalculations] =
 		getIndicatorsCalculations(previousIndicators, combined_data, areas_geog_level);
 
-	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code').select(
-		aq.not('code')
-	);
+	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code');
 
-	fs.writeFileSync(`${CONFIG.CSV_DIR}/combined-data.csv`, combined_data.toCSV());
 	fs.writeFileSync(`${CONFIG.CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
 
 	const indicators_metadata_for_js = loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);

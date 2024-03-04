@@ -6,7 +6,6 @@ import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
 
-const DATA_OUTPUT_PATH = `static/insights/data.json`;
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 
@@ -27,14 +26,6 @@ async function main() {
 
 	const outData = generateOutData(data, config.indicators);
 	writeFileSync(
-		DATA_OUTPUT_PATH,
-		JSON.stringify({
-			combinedDataObject: outData.combinedDataObject,
-			beeswarmKeyData: outData.beeswarmKeyData
-		})
-	);
-	console.log(`Insights data JSON file has been generated at: ${DATA_OUTPUT_PATH}`);
-	writeFileSync(
 		COLUMN_ORIENTED_DATA_OUTPUT_PATH,
 		JSON.stringify({
 			combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
@@ -42,10 +33,14 @@ async function main() {
 		})
 	);
 	console.log(
-		`Insights data JSON file in experimental column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
+		`Insights data JSON file in column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
 	);
 
-	const outConfig = generateOutConfig(config, combinedData, outData.combinedDataObject);
+	const outConfig = generateOutConfig(
+		config,
+		combinedData,
+		outData.combinedDataObjectColumnOriented
+	);
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
@@ -69,29 +64,10 @@ function checkSlugs(indicatorsMetadata) {
 function generateOutData(data, indicatorsArray) {
 	const combinedDataArray = [...data.combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 
-	const combinedDataObject = {};
-	for (const indicator of indicatorsArray) {
-		combinedDataObject[indicator.code] = combinedDataArray.filter((e) => e.id === indicator.id);
-	}
-
-	// combinedDataObjectColumnOriented is an experimental version that stores
-	// an array for each column to save space.
-	const combinedDataObjectColumnOriented = createCombinedDataObjectColumnOriented(
-		indicatorsArray,
-		combinedDataArray
-	);
-
-	return {
-		combinedDataObject,
-		combinedDataObjectColumnOriented,
-		beeswarmKeyData: data.beeswarmKeyData
-	};
-}
-
-function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDataArray: any[]) {
+	// combinedDataObjectColumnOriented stores an array for each column to save space.
 	const combinedDataObjectColumnOriented = {};
 	for (const indicator of indicatorsArray) {
-		const rows = combinedDataArray.filter((e) => e.id === indicator.id);
+		const rows = combinedDataArray.filter((e) => e.code === indicator.code);
 		if (rows.length === 0) {
 			throw new Error('Unexpectedly empty `rows` array.');
 		}
@@ -101,12 +77,21 @@ function createCombinedDataObjectColumnOriented(indicatorsArray: any, combinedDa
 				dataByColumn[columnName] = rows.map((row) => row[columnName]);
 			}
 		}
+
+		// We don't need arrays for id and code, because all array elements are the same
+		dataByColumn.id = dataByColumn.id[0];
+		dataByColumn.code = dataByColumn.code[0];
+
 		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
 	}
-	return combinedDataObjectColumnOriented;
+
+	return {
+		combinedDataObjectColumnOriented,
+		beeswarmKeyData: data.beeswarmKeyData
+	};
 }
 
-function generateOutConfig(config, combinedData, combinedDataObject) {
+function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
 	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
 
@@ -135,9 +120,9 @@ function generateOutConfig(config, combinedData, combinedDataObject) {
 	const indicatorsArray = config.indicators;
 	indicatorsArray.forEach((el) => {
 		el.metadata = indicatorsMetadataObject[el.code];
-		const indicatorData = combinedDataObject[el.code];
-		el.inferredGeos = inferGeos(indicatorData.map((d) => d.areacd));
-		el.years = uniqueValues(indicatorData.map((d) => d.xDomainNumb)).sort((a, b) => a - b);
+		const indicatorData = combinedDataObjectColumnOriented[el.code];
+		el.inferredGeos = inferGeos(indicatorData.areacd);
+		el.years = uniqueValues(indicatorData.xDomainNumb).sort((a, b) => a - b);
 	});
 
 	const indicatorsObject = toLookup(indicatorsArray, 'code');
