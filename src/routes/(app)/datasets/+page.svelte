@@ -6,8 +6,11 @@
 		Titleblock,
 		analyticsEvent,
 		Section,
-		Input
+		Input,
+		NavSections,
+		NavSection
 	} from '@onsvisual/svelte-components';
+	import { capitalise } from '@onsvisual/robo-utils';
 	import Lede from '$lib/components/Lede.svelte';
 	import Indicators from '$lib/components/Indicators.svelte';
 	import UKMap from '$lib/components/UKMap.svelte';
@@ -63,14 +66,22 @@
 	<div style:height="32px" />
 </Titleblock>
 
-<Section marginTop marginBottom={false}>
+<!-- <Section marginTop marginBottom={false}>
 	<Input label="Type to filter datasets" bind:value={filterText} />
-</Section>
+</Section> -->
 
-{#if filteredCount > 0}
-	<Indicators topics={filteredTopics} open />
-{:else}
-	<Section marginTop>
-		<p>No results for {filterText}</p>
-	</Section>
-{/if}
+<NavSections contentsLabel="Explore topics">
+	{#each filteredTopics as topic}
+		<NavSection title={capitalise(topic.name)}>
+			{#each topic.subTopics as subTopic}
+				<h3>{capitalise(subTopic.name)}</h3>
+				{#each subTopic.indicators as indicator}
+					<p>
+						<a href="{base}/datasets/{indicator.metadata.slug}">{indicator.metadata.label}</a><br />
+						{indicator.metadata.subtitle}
+					</p>
+				{/each}
+			{/each}
+		</NavSection>
+	{/each}
+</NavSections>

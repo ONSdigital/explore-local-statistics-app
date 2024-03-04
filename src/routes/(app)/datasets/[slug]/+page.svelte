@@ -12,7 +12,7 @@
 	} from '@onsvisual/svelte-components';
 	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import Lede from '$lib/components/Lede.svelte';
-	import Indicators from '$lib/components/Indicators.svelte';
+	// import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 
@@ -79,7 +79,7 @@
 	</Lede>
 </Titleblock>
 
-<Indicators
+<!-- <Indicators
 	topics={data.metadata.topicsArray}
 	title="Find another dataset"
 	theme="dark"
@@ -87,7 +87,7 @@
 	hideTitle={false}
 	hideToggle={false}
 	compact
-/>
+/> -->
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this dataset" marginTop>
