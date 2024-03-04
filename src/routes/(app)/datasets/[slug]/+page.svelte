@@ -52,7 +52,7 @@
 		refreshData();
 	});
 
-	let metadata = data.config;
+	let metadata = data.metadata;
 
 	$: parentAndRelatedAreasObject = {
 		parent: null,
@@ -81,8 +81,6 @@
 			metadata.areasObject
 		);
 	}
-
-	$: console.log(selectionsObject);
 
 	$: accordionArray = [
 		{
