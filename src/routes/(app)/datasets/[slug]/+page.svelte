@@ -178,6 +178,13 @@
 				"download data" link immediately below it.
 			</p>
 		</NavSection>
+		<NavSection title="Other datasets">
+			<p>
+				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} datasets
+				you can explore on the ONS <a href="{base}/">Explore local statistics</a> service. See the
+				full list of datasets on the <a href="{base}/datasets">Find a local dataset page</a>.
+			</p>
+		</NavSection>
 	</NavSections>
 {/if}
 
