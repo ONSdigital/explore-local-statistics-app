@@ -8,22 +8,19 @@
 	export let min = 0;
 	export let max = 100;
 	export let format = (d) => d;
-	export let dp = null;
-	export let step = null;
+	export let step = 1;
 	export let value = [2010, 2020];
 	export let order = false;
 
 	export let disabled = false;
 	export let showBar = true;
-	export let unit = '';
 
 	let pos;
 	let active = false;
 	let focusLeft = false;
 	let focusRight = false;
 
-	$: ticksCount = max - min;
-	$: _step = step ? step : dp != undefined && dp != null ? Math.pow(10, -dp) : 1;
+	$: ticksCount = Math.floor((max - min) / step);
 	$: if (active) setValue(pos);
 	$: if (!active) setPos(value);
 	$: if (range && order && active) pos = checkPos(pos);
@@ -33,11 +30,11 @@
     right: ${100 - Math.max(pos[0], range ? pos[1] : pos[0]) * 100}%;
   `;
 	function setValue(pos) {
-		const offset = min % _step;
+		const offset = min % step;
 		const width = max - min;
 		let newvalue = pos
 			.map((v) => min + v * width)
-			.map((v) => Math.round((v - offset) / _step) * _step + offset);
+			.map((v) => Math.round((v - offset) / step) * step + offset);
 		value = Array.isArray(value) ? newvalue : newvalue[0];
 		dispatch('input', value);
 	}
@@ -57,8 +54,8 @@
 
 {#if range}
 	<span
-		>Selected date range <strong>{Math.min(...value)}</strong> to
-		<strong>{Math.max(...value)}</strong></span
+		>Selected date range <strong>{format(Math.min(...value))}</strong> to
+		<strong>{format(Math.max(...value))}</strong></span
 	>
 {/if}
 <div class="track">
@@ -98,8 +95,8 @@
 	on:blur={() => (focusLeft = false)}
 	bind:value={value[0]}
 	{min}
-	{max}
-	step={_step}
+	max={value[1] - 1}
+	{step}
 	{disabled}
 />
 {#if range}
@@ -109,9 +106,9 @@
 		on:focus={() => (focusRight = true)}
 		on:blur={() => (focusRight = false)}
 		bind:value={value[1]}
-		{min}
+		min={value[0] + 1}
 		{max}
-		step={_step}
+		{step}
 		{disabled}
 	/>
 {/if}
