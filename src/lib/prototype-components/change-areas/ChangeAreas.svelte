@@ -43,6 +43,20 @@
 	</div>
 
 	<div slot="content" class="column-container">
+		<div style:display="block">
+			{#each accordionArray as accordionSection, index}
+				{#each Array.isArray(selectionsObject[accordionSection.chosenKey + '-visible']) ? (selectionsObject[accordionSection.chosenKey + '-visible'].length > 0 ? selectionsObject[accordionSection.chosenKey + '-visible'] : [null]) : [selectionsObject[accordionSection.chosenKey + '-visible']] as area}
+					<AreaPanel
+						{area}
+						bind:chosen={selectionsObject[accordionSection.chosenKey + '-chosen']}
+						{customLookup}
+						backgroundColor="color"
+						textColor="contrast"
+						borderColor="color"
+					></AreaPanel>
+				{/each}
+			{/each}
+		</div>
 		{#each accordionArray as accordionSection, index}
 			<AccordionSection
 				{accordionSection}

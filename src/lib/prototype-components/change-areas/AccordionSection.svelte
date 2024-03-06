@@ -40,7 +40,7 @@
 			<span style="font-weight: bold;">{accordionSection.label}</span>
 		{/if}
 
-		<div class="visible-areas-container">
+		<!-- <div class="visible-areas-container">
 			{#each Array.isArray(visibleAreas) ? (visibleAreas.length > 0 ? visibleAreas : [null]) : [visibleAreas] as area}
 				<AreaPanel
 					{area}
@@ -51,7 +51,7 @@
 					borderColor="color"
 				></AreaPanel>
 			{/each}
-		</div>
+		</div> -->
 	</div>
 
 	{#if accordionOpen === index || !accordionSection.accordion}

@@ -23,7 +23,7 @@
 
 <div class="sticky-container">
 	<NavSection title="Indicators by topic"></NavSection>
-	<h3>Selected areas</h3>
+	<strong class="selected-areas">Selected areas</strong>
 
 	<StickyHeader
 		{metadata}
@@ -74,5 +74,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		margin-top: 24px;
+	}
+	.selected-areas {
+		color: #999;
+		text-transform: uppercase;
 	}
 </style>

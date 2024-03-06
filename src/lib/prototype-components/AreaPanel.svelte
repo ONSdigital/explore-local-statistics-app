@@ -55,10 +55,10 @@
 				></path></svg
 			>
 		</button>
-	{:else}
+		<!-- {:else}
 		<div class="none-selected">
 			<span>None</span>
-		</div>
+		</div> -->
 	{/if}
 {:else if area}
 	<div
@@ -91,9 +91,9 @@
 	}
 
 	.visible-area-container {
-		margin: 2px 0;
+		margin: 0 4px 4px 0;
 		padding: 4px 0;
-		display: flex;
+		display: inline-flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		gap: 15px;
