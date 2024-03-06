@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { Button } from '@onsvisual/svelte-components';
+	import { Button, Checkbox } from '@onsvisual/svelte-components';
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/prototype-components/layout/Modal.svelte';
 	import EditTimePeriod from '$lib/prototype-components/EditTimePeriod.svelte';
-	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 
-	export let metadata, startXDomainNumb, endXDomainNumb, showConfidenceIntervals;
+	export let metadata, chosenXDomain, showConfidenceIntervals;
 
 	let showModal = false;
 
@@ -32,20 +31,11 @@
 	</div>
 
 	<div slot="content" class="column-container">
-		<Radio
-			title="Show confidence intervals"
-			optionsArray={[
-				{ label: 'No', id: false },
-				{ label: 'Yes', id: true }
-			]}
-			bind:valueId={showConfidenceIntervals}
-			labelKey="label"
-			idKey="id"
-		></Radio>
+		<Checkbox bind:checked={showConfidenceIntervals} label="Show confidence intervals" compact />
 
 		<Divider orientation="horizontal"></Divider>
 
-		<EditTimePeriod {metadata} bind:startXDomainNumb bind:endXDomainNumb></EditTimePeriod>
+		<EditTimePeriod {metadata} bind:chosenXDomain></EditTimePeriod>
 	</div>
 </Modal>
 

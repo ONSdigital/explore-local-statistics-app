@@ -1,52 +1,39 @@
 <script lang="ts">
-	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
-	import Divider from '$lib/prototype-components/layout/Divider.svelte';
-	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
+	import Slider from '$lib/components/Slider.svelte';
+	import debounce from 'debounce';
 
-	export let metadata, startXDomainNumb, endXDomainNumb;
+	export let metadata, chosenXDomain;
 
-	$: timePeriodOptionsArray = Array.from(
-		{ length: metadata.globalXDomainExtent[1] - metadata.globalXDomainExtent[0] + 1 },
-		(_, index) => metadata.globalXDomainExtent[0] + index
-	);
+	// $: timePeriodOptionsArray = Array.from(
+	// 	{ length: metadata.globalXDomainExtent[1] - metadata.globalXDomainExtent[0] + 1 },
+	// 	(_, index) => metadata.globalXDomainExtent[0] + index
+	// );
 
-	$: console.log(timePeriodOptionsArray);
+	// $: console.log(timePeriodOptionsArray);
+
+	function setChosenXDomain(e) {
+		let min = Math.min(...e.detail);
+		let max = Math.max(...e.detail);
+		if (min === max) {
+			if (min === metadata.globalXDomainExtent[0]) max += 1;
+			else min -= 1;
+		}
+		chosenXDomain = [min, max];
+	}
+
+	$: console.log('start-end', chosenXDomain[0], chosenXDomain[1]);
 </script>
 
-<div class="row-container">
-	<div class="radio-column">
-		<Radio
-			title={'Select start year:'}
-			name="start-year-options"
-			optionsArray={[
-				'Earliest available data',
-				...timePeriodOptionsArray.filter((el) =>
-					isNaN(endXDomainNumb) ? el < metadata.globalXDomainExtent[1] : el < endXDomainNumb
-				)
-			]}
-			bind:valueId={startXDomainNumb}
-			labelKey={null}
-			idKey={null}
-		></Radio>
-	</div>
+<Slider
+	value={chosenXDomain}
+	min={metadata.globalXDomainExtent[0]}
+	max={metadata.globalXDomainExtent[1]}
+	on:input={debounce(setChosenXDomain, 100)}
+/>
 
-	<Divider orientation="vertical" margin={[0, 5, 0, 5]}></Divider>
-	<div class="radio-column">
-		<Radio
-			title={'Select end year:'}
-			name="end-year-options"
-			optionsArray={[
-				'Latest available data',
-				...timePeriodOptionsArray.filter((el) =>
-					isNaN(startXDomainNumb) ? el > metadata.globalXDomainExtent[0] : el > startXDomainNumb
-				)
-			]}
-			bind:valueId={endXDomainNumb}
-			labelKey={null}
-			idKey={null}
-		></Radio>
-	</div>
-</div>
+<span class="small-note"
+	>Note: Charts will show the earliest/latest available dates within this range.</span
+>
 
 <style>
 	.button-container {
@@ -111,5 +98,8 @@
 		font-weight: bold;
 		padding: 0px;
 		margin: 0px;
+	}
+	span.small-note {
+		font-size: 16px;
 	}
 </style>

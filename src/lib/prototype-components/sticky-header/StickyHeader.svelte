@@ -9,8 +9,7 @@
 		accordionArray,
 		selectionsObject,
 		customLookup,
-		startXDomainNumb,
-		endXDomainNumb,
+		chosenXDomain,
 		showConfidenceIntervals;
 
 	$: visibleParentAreas = selectionsObject['areas-rows-additional-visible'].filter(
@@ -85,8 +84,7 @@
 	<div class="row-container buttons-container">
 		<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}></ChangeAreas>
 
-		<ChartOptions {metadata} bind:startXDomainNumb bind:endXDomainNumb bind:showConfidenceIntervals
-		></ChartOptions>
+		<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
 		<ChartInfo></ChartInfo>
 	</div>
 </div>

@@ -14,7 +14,7 @@
 		selectionsObject,
 		accordionArray,
 		customLookup;
-	let chosenXDomain = ['Earliest available data', 'Latest available data'];
+	let chosenXDomain = [metadata.globalXDomainExtent[0], metadata.globalXDomainExtent[1]];
 
 	let showConfidenceIntervals = false;
 
@@ -31,8 +31,7 @@
 		{accordionArray}
 		bind:selectionsObject
 		{customLookup}
-		bind:startXDomainNumb={chosenXDomain[0]}
-		bind:endXDomainNumb={chosenXDomain[1]}
+		bind:chosenXDomain
 		bind:showConfidenceIntervals
 	></StickyHeader>
 
