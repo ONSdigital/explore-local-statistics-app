@@ -129,7 +129,7 @@
 	links={[
 		{ label: 'Home', href: '/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Find a local dataset', href: `${base}/datasets` },
+		{ label: 'Find an indicator', href: `${base}/datasets` },
 		{ label: data.indicator.metadata.label }
 	]}
 	background="#eaeaea"
@@ -153,18 +153,8 @@
 	</Lede>
 </Titleblock>
 
-<!-- <Indicators
-	topics={data.metadata.topicsArray}
-	title="Find another dataset"
-	theme="dark"
-	background="#003c57"
-	hideTitle={false}
-	hideToggle={false}
-	compact
-/> -->
-
 {#if mapData && pivotedData}
-	<NavSections contentsLabel="Explore this dataset" marginTop>
+	<NavSections contentsLabel="Explore this indicator" marginTop>
 		<ChangeAreas
 			{accordionArray}
 			bind:selectionsObject
@@ -225,7 +215,7 @@
         <LineChart data={filteredData} xKey="year" yKey="value" zKey="areacd" idKey="areacd" labelKey="areanm" color={pivotedData.length > 40 ? 'rgba(0,0,0,.1)' : 'rgba(0,0,0,.4)'} lineWidth={0.5} height={500} padding={{ top: 20, bottom: 28, left: 35, right: 100 }} yMin={null} hover labels select {selected} on:select={doSelect}/>
         {/key}
       {:else}
-        <p>Only one year of data is available for this dataset, therefore no timeseries can be displayed.</p>
+        <p>Only one year of data is available for this indicator, therefore no timeseries can be displayed.</p>
       {/if}
     </ContentBlock>
   </NavSection> -->
@@ -250,7 +240,7 @@
 		</NavSection>
 		<NavSection title="Get the data">
 			<p>
-				This dataset was produced by the Office for National Statistics. The original source data
+				This indicator was produced by the Office for National Statistics. The original source data
 				can be <a href="#0">found here</a>.
 			</p>
 			<p>
@@ -258,11 +248,11 @@
 				"download data" link immediately below it.
 			</p>
 		</NavSection>
-		<NavSection title="Other datasets">
+		<NavSection title="Other indicators">
 			<p>
-				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} datasets
+				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} indicators
 				you can explore on the ONS <a href="{base}/">Explore local statistics</a> service. See the
-				full list of datasets on the <a href="{base}/datasets">Find a local dataset page</a>.
+				full list of indicators on the <a href="{base}/datasets">Find an indicator page</a>.
 			</p>
 		</NavSection>
 	</NavSections>

@@ -81,15 +81,15 @@
 			<AreaList {postcode} on:clear={() => (postcode = null)} />
 		{/if}
 	</Card>
-	<Card title="Find a dataset">
+	<Card title="Find an indicator">
 		<p style:margin-bottom="36px">
-			Discover patterns and trends in {datasetsCount} datasets, including
+			Discover patterns and trends in {datasetsCount} indicators, including
 			<a href="{base}/datasets/employment-rate">employment rate</a>,
 			<a href="{base}/datasets/4g-coverage">4G coverage</a>
 			and
 			<a href="{base}/datasets/wellbeing-satisfaction">life satisfaction</a>.
 		</p>
-		<Button icon="arrow" iconPosition="after" href="{base}/datasets">Explore datasets</Button>
+		<Button icon="arrow" iconPosition="after" href="{base}/datasets">Explore indicators</Button>
 	</Card>
 </Cards>
 

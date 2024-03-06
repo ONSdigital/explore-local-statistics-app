@@ -1,19 +1,9 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { base } from '$app/paths';
-	import {
-		Breadcrumb,
-		Titleblock,
-		analyticsEvent,
-		Section,
-		Input,
-		NavSections,
-		NavSection
-	} from '@onsvisual/svelte-components';
+	import { Breadcrumb, Titleblock, NavSections, NavSection } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import Lede from '$lib/components/Lede.svelte';
-	import Indicators from '$lib/components/Indicators.svelte';
-	import UKMap from '$lib/components/UKMap.svelte';
 
 	export let data;
 
@@ -53,24 +43,22 @@
 	links={[
 		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Find a local dataset' }
+		{ label: 'Find an indicator' }
 	]}
-	background="#e9eff4"
 />
-<Titleblock title="Find a local dataset" background="#e9eff4">
-	<UKMap />
+<Titleblock title="Find an indicator">
 	<Lede
-		>Discover patterns and trends in {datasetsCount} datasets, including employment rate, 4G coverage
-		and life satisfaction.</Lede
-	>
-	<div style:height="32px" />
+		>Explore our {datasetsCount} indicators, including <b>life satisfaction</b>, <b>4G coverage</b>
+		and
+		<b>employment rate</b>.
+	</Lede>
 </Titleblock>
 
 <!-- <Section marginTop marginBottom={false}>
-	<Input label="Type to filter datasets" bind:value={filterText} />
+	<Input label="Type to filter indicators" bind:value={filterText} />
 </Section> -->
 
-<NavSections contentsLabel="Explore topics">
+<NavSections contentsLabel="Explore topics" cls="bah">
 	{#each filteredTopics as topic}
 		<NavSection title={capitalise(topic.name)}>
 			{#each topic.subTopics as subTopic}
@@ -82,6 +70,21 @@
 					</p>
 				{/each}
 			{/each}
+			<div class="horizontal-divider"></div>
 		</NavSection>
 	{/each}
 </NavSections>
+
+<style>
+	.horizontal-divider {
+		border-bottom: 1px solid var(--ons-color-grey-15);
+	}
+	.sticky {
+		position: -webkit-sticky; /* For Safari */
+		position: sticky;
+		top: 0; /* Value that defines the threshold at which the element becomes sticky */
+	}
+	.bah {
+		color: red;
+	}
+</style>
