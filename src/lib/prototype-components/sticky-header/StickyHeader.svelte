@@ -27,6 +27,22 @@
 <div class="row-container sticky">
 	<div class="visible-areas-key-container grid-container">
 		<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
+		{#each visibleParentAreas as area, i}
+			<AreaPanel
+				{area}
+				markerShape={area.areacd === selectedArea.parentcd ? 'square' : 'diamond'}
+				markerRadius="8"
+				button={false}
+				fontWeight="bold"
+				{customLookup}
+			></AreaPanel>
+		{/each}
+		{#each visibleCustomAreas as area, i}
+			{#if visibleParentAreas.length + i < maxAdditionalAreasOnKey - 1 || (visibleParentAreas.length + i === maxAdditionalAreasOnKey - 1 && visibleParentAreas.length + visibleCustomAreas.length === maxAdditionalAreasOnKey)}
+				<AreaPanel {area} markerRadius="8" button={false} fontWeight="bold" {customLookup}
+				></AreaPanel>
+			{/if}
+		{/each}
 		{#if selectionsObject['areas-rows-comparison-visible']}
 			<AreaPanel
 				area={selectionsObject['areas-rows-comparison-visible']}
@@ -44,32 +60,7 @@
 				fontSize="16px"
 				backgroundColor="white"
 				textColor="#222"
-				borderColor="color"
 			></AreaPanel>
-			{#each visibleParentAreas as area, i}
-				<AreaPanel
-					{area}
-					button={false}
-					fontSize="16px"
-					{customLookup}
-					backgroundColor="color"
-					textColor="contrast"
-					borderColor="color"
-				></AreaPanel>
-			{/each}
-			{#each visibleCustomAreas as area, i}
-				{#if visibleParentAreas.length + i < maxAdditionalAreasOnKey - 1 || (visibleParentAreas.length + i === maxAdditionalAreasOnKey - 1 && visibleParentAreas.length + visibleCustomAreas.length === maxAdditionalAreasOnKey)}
-					<AreaPanel
-						{area}
-						button={false}
-						fontSize="16px"
-						{customLookup}
-						backgroundColor="color"
-						textColor="contrast"
-						borderColor="color"
-					></AreaPanel>
-				{/if}
-			{/each}
 			{#if visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
 				<span style="font-size: 16px;"
 					>and {visibleParentAreas.length +

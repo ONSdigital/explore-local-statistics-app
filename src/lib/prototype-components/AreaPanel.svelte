@@ -29,11 +29,10 @@
 		? color[backgroundColor]
 		: backgroundColor;
 	$: txtColor = ['color', 'contrast'].includes(textColor) ? color[textColor] : textColor;
-	$: bdColor = ['color', 'contrast'].includes(borderColor) ? color[borderColor] : borderColor;
 
 	$: label = area ? ('label' in area ? area.label : area.areanm) : null;
 
-	$: console.log(customLookup);
+	$: console.log('area-color', area, color);
 </script>
 
 {#if button}
@@ -41,7 +40,7 @@
 		<button
 			on:click={onClickEvent}
 			class="visible-area-container"
-			style="background-color: {bgColor}; border-color: {bdColor}; font-weight: {fontWeight}; font-size: {fontSize};"
+			style="background-color: {bgColor}; font-weight: {fontWeight}; font-size: {fontSize};"
 		>
 			<span style="color: {txtColor}">{label}</span>
 
@@ -67,7 +66,16 @@
 	>
 		{#if markerRadius}
 			<svg width="20" height="20">
-				{#if markerShape === 'diamond'}
+				{#if markerShape === 'square'}
+					<rect
+						x={10 - markerRadius * 0.8}
+						y={10 - markerRadius * 0.8}
+						width={markerRadius * 1.6}
+						height={markerRadius * 1.6}
+						stroke="none"
+						fill={txtColor}
+					/>
+				{:else if markerShape === 'diamond'}
 					<polygon
 						points="{10 - markerRadius},10 10,{10 - markerRadius} {10 + +markerRadius},10 10,{10 +
 							+markerRadius} {10 - markerRadius},10"
@@ -88,6 +96,8 @@
 		text-align: left;
 		font-family: inherit;
 		background: none;
+		border: none;
+		padding: 4px 6px !important;
 	}
 
 	.visible-area-container {

@@ -72,8 +72,10 @@
 
 <style>
 	.title-container span {
+		display: inline-block;
 		font-weight: bold;
-		font-size: 20px;
+		transform: translateY(-3px);
+		/* font-size: 20px; */
 	}
 
 	.row-container {
