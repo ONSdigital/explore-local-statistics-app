@@ -45,6 +45,10 @@ async function main() {
 		combinedData,
 		outData.combinedDataObjectColumnOriented
 	);
+
+	const areaDetails = generateAreaDetails(outConfig, combinedData);
+	outConfig.areaDetails = areaDetails;
+
 	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig, null, '\t'));
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
@@ -189,6 +193,52 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		periodsLookupObject,
 		globalXDomainExtent
 	};
+}
+
+function generateAreaDetails(outConfig, combinedData) {
+	const areaDetails = Object.fromEntries(
+		outConfig.areasArray.map((d) => [d.areacd, { ...d, filteredIndicators: {} }])
+	);
+
+	for (const { code, areacd, xDomainNumb } of combinedData) {
+		if (!(code in areaDetails[areacd].filteredIndicators)) {
+			areaDetails[areacd].filteredIndicators[code] = new Set();
+		}
+		areaDetails[areacd].filteredIndicators[code].add(xDomainNumb);
+	}
+	for (const areacd of Object.keys(areaDetails)) {
+		areaDetails[areacd].filteredIndicators = Object.entries(
+			areaDetails[areacd].filteredIndicators
+		).map(([code, xDomainNumb]) => ({ code, xDomainNumb: [...xDomainNumb].sort((a, b) => a - b) }));
+	}
+
+	const deomgraphicClustersLookup = getDemographicClustersLookup(outConfig.clustersLookup);
+	for (const areacd of Object.keys(areaDetails)) {
+		if (areacd in deomgraphicClustersLookup) {
+			areaDetails[areacd].demographicCluster = deomgraphicClustersLookup[areacd];
+		}
+	}
+
+	for (const areaDatum of Object.values(areaDetails)) {
+		areaDatum.areasWithSameParent = outConfig.areasArray
+			.filter((d) => d.parentcd === areaDatum.parentcd && d.geogLevel === areaDatum.geogLevel)
+			.map((d) => d.areacd);
+	}
+
+	return areaDetails;
+}
+
+function getDemographicClustersLookup(clustersLookup) {
+	const letterToAreaCodes = {};
+	const areaCodeToCluster = {};
+	for (let i = 0; i < clustersLookup.data.areacd.length; i++) {
+		const areacd = clustersLookup.data.areacd[i];
+		const letter = clustersLookup.data.demographic[i];
+		letterToAreaCodes[letter] ||= [];
+		letterToAreaCodes[letter].push(areacd);
+		areaCodeToCluster[areacd] = letterToAreaCodes[letter];
+	}
+	return areaCodeToCluster;
 }
 
 function combineIndicatorCalculations(
