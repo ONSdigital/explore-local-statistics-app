@@ -18,6 +18,8 @@
 		(el) => el.code === indicator.code
 	);
 
+	$: console.log(indicatorCalculationsArray, indicator.code);
+
 	$: selectedChartData = indicatorChartData
 		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd && el.value)
 		: null;
