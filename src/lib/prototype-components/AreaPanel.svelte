@@ -5,6 +5,7 @@
 		chosen,
 		customLookup,
 		markerRadius,
+		markerShape = 'circle',
 		button = true,
 		fontSize = '18px',
 		fontWeight = 'normal',
@@ -62,11 +63,20 @@
 {:else if area}
 	<div
 		class="visible-area-container marker-area-container"
-		style="background-color: {bgColor}; border-color: {bdColor}; font-weight: {fontWeight}; font-size: {fontSize};"
+		style="background-color: {bgColor}; font-weight: {fontWeight}; font-size: {fontSize};"
 	>
 		{#if markerRadius}
 			<svg width="20" height="20">
-				<circle cx="10" cy="10" r={markerRadius} stroke="none" fill={txtColor}></circle>
+				{#if markerShape === 'diamond'}
+					<polygon
+						points="{10 - markerRadius},10 10,{10 - markerRadius} {10 + +markerRadius},10 10,{10 +
+							+markerRadius} {10 - markerRadius},10"
+						stroke="none"
+						fill={txtColor}
+					/>
+				{:else}
+					<circle cx="10" cy="10" r={markerRadius} stroke="none" fill={txtColor} />
+				{/if}
 			</svg>
 		{/if}
 		<span style="color: {txtColor}">{label}</span>
@@ -81,16 +91,16 @@
 	}
 
 	.visible-area-container {
-		margin: 2px 5px;
-		padding: 4px 5px;
+		margin: 2px 0;
+		padding: 4px 0;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		gap: 15px;
 		align-items: center;
-		border-style: solid;
+		/* border-style: solid;
 		border-width: 1.5px;
-		border-radius: 4px;
+		border-radius: 4px; */
 	}
 
 	span {

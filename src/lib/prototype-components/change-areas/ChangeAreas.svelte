@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
+	import { Button } from '@onsvisual/svelte-components';
+	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/prototype-components/layout/Modal.svelte';
 	import AccordionSection from '$lib/prototype-components/change-areas/AccordionSection.svelte';
 	import AreaPanel from '$lib/prototype-components/AreaPanel.svelte';
@@ -16,15 +17,12 @@
 </script>
 
 <div class="button-container">
-	<Button
-		on:click={onClickEventOpen}
-		small={true}
-		icon="marker"
-		variant="secondary"
-		strokeWidth="1.5px"
-		stroke="currentcolor"
-		fill="none">Change areas</Button
-	>
+	<Button on:click={onClickEventOpen} small={true} variant="secondary">
+		<div slot="icon" style:display="contents">
+			<Icon type="marker" />
+		</div>
+		Change areas
+	</Button>
 </div>
 
 <Modal bind:showModal bind:accordionOpen>

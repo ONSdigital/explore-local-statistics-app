@@ -27,46 +27,39 @@
 
 <div class="row-container sticky">
 	<div class="visible-areas-key-container grid-container">
-		<div class="col1">
-			<span
-				>{selectionsObject['areas-rows-comparison-visible'] ||
-				selectionsObject['related-rows-visible'] ||
-				selectionsObject['areas-rows-additional-visible'].length > 0
-					? 'Comparing'
-					: 'Showing'}</span
-			>
-		</div>
-		<div class="col2">
-			<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
-		</div>
+		<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
 		{#if selectionsObject['areas-rows-comparison-visible']}
-			<div class="col1"><span>to</span></div>
-			<div class="col2">
-				<AreaPanel
-					area={selectionsObject['areas-rows-comparison-visible']}
-					markerRadius="8"
-					button={false}
-					fontWeight="bold"
-				></AreaPanel>
-			</div>
+			<AreaPanel
+				area={selectionsObject['areas-rows-comparison-visible']}
+				markerRadius="8"
+				button={false}
+				fontWeight="bold"
+				markerShape="diamond"
+			></AreaPanel>
 		{/if}
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
-			<div class="col1">
-				<span style="font-size: 16px;"
-					>{selectionsObject['areas-rows-comparison-visible'] ? 'Also showing' : 'to'}</span
-				>
-			</div>
-			<div class="col2">
+			<AreaPanel
+				area={selectionsObject['related-rows-visible']}
+				markerRadius="5"
+				button={false}
+				fontSize="16px"
+				backgroundColor="white"
+				textColor="#222"
+				borderColor="color"
+			></AreaPanel>
+			{#each visibleParentAreas as area, i}
 				<AreaPanel
-					area={selectionsObject['related-rows-visible']}
-					markerRadius="5"
+					{area}
 					button={false}
 					fontSize="16px"
-					backgroundColor="white"
-					textColor="#222"
+					{customLookup}
+					backgroundColor="color"
+					textColor="contrast"
 					borderColor="color"
 				></AreaPanel>
-				{#each visibleParentAreas as area, i}
+			{/each}
+			{#each visibleCustomAreas as area, i}
+				{#if visibleParentAreas.length + i < maxAdditionalAreasOnKey - 1 || (visibleParentAreas.length + i === maxAdditionalAreasOnKey - 1 && visibleParentAreas.length + visibleCustomAreas.length === maxAdditionalAreasOnKey)}
 					<AreaPanel
 						{area}
 						button={false}
@@ -76,29 +69,16 @@
 						textColor="contrast"
 						borderColor="color"
 					></AreaPanel>
-				{/each}
-				{#each visibleCustomAreas as area, i}
-					{#if visibleParentAreas.length + i < maxAdditionalAreasOnKey - 1 || (visibleParentAreas.length + i === maxAdditionalAreasOnKey - 1 && visibleParentAreas.length + visibleCustomAreas.length === maxAdditionalAreasOnKey)}
-						<AreaPanel
-							{area}
-							button={false}
-							fontSize="16px"
-							{customLookup}
-							backgroundColor="color"
-							textColor="contrast"
-							borderColor="color"
-						></AreaPanel>
-					{/if}
-				{/each}
-				{#if visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
-					<span style="font-size: 16px;"
-						>and {visibleParentAreas.length +
-							visibleCustomAreas.length -
-							(maxAdditionalAreasOnKey - 1)}
-						other areas</span
-					>
 				{/if}
-			</div>
+			{/each}
+			{#if visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
+				<span style="font-size: 16px;"
+					>and {visibleParentAreas.length +
+						visibleCustomAreas.length -
+						(maxAdditionalAreasOnKey - 1)}
+					other areas</span
+				>
+			{/if}
 		{/if}
 	</div>
 
@@ -134,9 +114,8 @@
 	}
 
 	.grid-container {
-		display: grid;
-		grid-template-columns: auto 1fr; /* First column auto, second column takes the remaining space */
-		gap: 4px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.col1 {

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
+	import { Button } from '@onsvisual/svelte-components';
+	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/prototype-components/layout/Modal.svelte';
 
 	let showModal = false;
@@ -12,15 +13,11 @@
 </script>
 
 <div class="button-container">
-	<Button
-		on:click={onClickEventOpen}
-		small={true}
-		icon="question-mark"
-		variant="secondary"
-		strokeWidth="1.5px"
-		stroke="currentcolor"
-		fill="none"
-	></Button>
+	<Button on:click={onClickEventOpen} small={true} variant="secondary">
+		<div slot="icon" style:display="contents">
+			<Icon type="question" title="About these charts" />
+		</div>
+	</Button>
 </div>
 
 <Modal bind:showModal bind:accordionOpen>
