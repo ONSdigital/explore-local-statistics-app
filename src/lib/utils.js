@@ -153,7 +153,6 @@ export function updateCustomLookup(currentLookup, updatedArray) {
 	for (var i = 0; i < currentKeys.length; i++) {
 		if (!updatedKeys.includes(currentKeys[i])) {
 			delete currentLookupFiltered[currentKeys[i]];
-		} else {
 		}
 	}
 
@@ -273,4 +272,9 @@ export function calculateBackgroundCirclesRadius(value, breakpoints) {
 	}
 
 	return result;
+}
+
+export function doLinesInOneDSpaceOverlap(x1, x2, y1, y2) {
+	console.log(x1, x2, y1, y2);
+	return x2 >= y1 && x1 <= y2;
 }

@@ -2,7 +2,13 @@
 	import { addThousandsSeparator, roundNumber, splitTextIntoRows } from '$lib/utils';
 	import { colorsLookup } from '$lib/config.js';
 
-	export let area, y, indicator, chartHeight, chartWidth, spaceForOutliers;
+	export let area,
+		y,
+		indicator,
+		chartHeight,
+		chartWidth,
+		spaceForOutliers,
+		adjustmentValue = 0;
 
 	let labelRect;
 
@@ -16,19 +22,26 @@
 	$: linePath =
 		area.x >= labelMidpoint - (3 * labelRectWidth - 10) / 8 &&
 		area.x <= labelMidpoint + (3 * labelRectWidth - 10) / 8
-			? 'M ' + area.x + ' ' + (y(area.y) - chartHeight) + ' L ' + area.x + ' ' + (-chartHeight - 35)
+			? 'M ' +
+				area.x +
+				' ' +
+				(y(area.y) - chartHeight + adjustmentValue) +
+				' L ' +
+				area.x +
+				' ' +
+				(-chartHeight - 35)
 			: 'M ' +
 				area.x +
 				' ' +
-				(y(area.y) - chartHeight) +
+				(y(area.y) - chartHeight + adjustmentValue) +
 				' L ' +
 				area.x +
 				' ' +
-				(y(area.y) - chartHeight - 20) +
+				(y(area.y) - chartHeight - 20 + adjustmentValue) +
 				' L ' +
 				labelMidpoint +
 				' ' +
-				(y(area.y) - chartHeight - 20) +
+				(y(area.y) - chartHeight - 20 + adjustmentValue) +
 				' L ' +
 				labelMidpoint +
 				' ' +

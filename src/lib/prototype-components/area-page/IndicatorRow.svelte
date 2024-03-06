@@ -12,7 +12,8 @@
 		customLookup,
 		selectedArea,
 		selectionsObject,
-		chosenXDomain;
+		chosenXDomain,
+		showConfidenceIntervals;
 
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
@@ -258,28 +259,15 @@
 					{additionalFilteredChartDataBeeswarm}
 					{customLookup}
 					{filteredChartDataBeeswarm}
+					{showConfidenceIntervals}
 				></BeeswarmRowContainer>
-				<!-- <BeeswarmRowContainer
-						{metadata}
-						{indicator}
-						{selectedIndicatorCalculations}
-						{backgroundChartDataBeeswarm}
-						timePeriod={latestTimePeriod}
-						{selectedAreaFilteredChartDataBeeswarm}
-						{comparisonAreaFilteredChartDataBeeswarm}
-						bind:hoverId={hoverAreaId}
-						bind:hoverIndicatorId
-						{selectionsObject}
-						{selectedArea}
-					></BeeswarmRowContainer> -->
 			</div>
 
 			<Divider orientation="vertical"></Divider>
 
-			<!-- <div class="line-chart-container">
-				{#if selectedAreaFilteredChartData || comparisonAreaFilteredChartData}
-					{#if xDomain[0] != xDomain[1] && (selectedAreaChartData.length > 1 || comparisonAreaFilteredChartData.length > 1)}
-						<LineChartRowContainer
+			<div class="line-chart-container">
+				{#if xDomain[0] != xDomain[1]}
+					<!-- <LineChartRowContainer
 							{metadata}
 							{indicator}
 							{selectionsObject}
@@ -292,12 +280,11 @@
 							{selectedAreaFilteredChartData}
 							{comparisonAreaFilteredChartData}
 							{backgroundChartData}
-						></LineChartRowContainer>
-					{:else}
-						<span>No historical<br />data</span>
-					{/if}
+						></LineChartRowContainer> -->
+				{:else}
+					<span>No data before<br />{latestTimePeriod.label}</span>
 				{/if}
-			</div> -->
+			</div>
 		</div>
 	{/if}
 </div>

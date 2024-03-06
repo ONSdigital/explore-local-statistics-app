@@ -120,12 +120,11 @@
 </g>
 
 {#if hoverArea}
-	<HoverCircle circle={hoverArea} {y} outline={true}></HoverCircle>
 	<HoverLabel area={hoverArea} {y} {indicator} {chartHeight} {chartWidth} {spaceForOutliers}
 	></HoverLabel>
 	{#if hoverIndicatorId === indicator.code}
 		<HoverLabelName {metadata} area={hoverArea} {y} {chartHeight} {chartWidth} {spaceForOutliers}
 		></HoverLabelName>
 	{/if}
-	<HoverCircle circle={hoverArea} {y} outline={false}></HoverCircle>
+	<HoverCircle circle={hoverArea} {y}></HoverCircle>
 {/if}

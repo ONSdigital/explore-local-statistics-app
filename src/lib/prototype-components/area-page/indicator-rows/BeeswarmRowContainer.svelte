@@ -14,6 +14,7 @@
 		comparisonFilteredChartDataBeeswarmWithRole,
 		additionalFilteredChartDataBeeswarm,
 		filteredChartDataBeeswarm,
+		showConfidenceIntervals,
 		customLookup;
 
 	let width = 1000;
@@ -187,6 +188,7 @@
 						{chartHeight}
 						{xDomain}
 						{customLookup}
+						{showConfidenceIntervals}
 					></BeeswarmRow>
 				{/if}
 			</g>
@@ -206,7 +208,7 @@
 				{/if}
 				<span style="font-weight: bold"
 					>{selectedComparisonDifference === 'No selected'
-						? selectedArea.areacd
+						? selectedArea.areanm
 						: 'label' in selectionsObject['areas-rows-comparison-visible']
 							? 'average'
 							: selectionsObject['areas-rows-comparison-visible'].areanm}
@@ -216,7 +218,7 @@
 				{:else}
 					in
 				{/if}
-			{:else}<span>Data for</span>{/if}
+			{:else}<span>Values for</span>{/if}
 
 			<span style="font-weight: bold;">{latestTimePeriod.label}</span>
 		</span>

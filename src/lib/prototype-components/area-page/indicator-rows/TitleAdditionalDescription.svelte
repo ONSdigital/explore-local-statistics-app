@@ -52,7 +52,7 @@
 <style>
 	button {
 		width: 100%;
-		text-align: justify;
+		text-align: left;
 		font-family: inherit;
 		border: none;
 		background: none;

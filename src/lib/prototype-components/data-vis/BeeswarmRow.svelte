@@ -14,7 +14,8 @@
 		selectedArea,
 		selectionsObject,
 		filteredChartDataBeeswarm,
-		customLookup;
+		customLookup,
+		showConfidenceIntervals;
 
 	export let hoverAreaId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
 
@@ -59,18 +60,20 @@
 	bind:hoverIndicatorId
 ></BackgroundCircles> -->
 
-<g opacity={hoverAreaId ? 0 : 1}>
-	<PrimaryCirclesAndLabels
-		{indicator}
-		{selectedFilteredChartDataBeeswarmWithRole}
-		{comparisonFilteredChartDataBeeswarmWithRole}
-		{additionalFilteredChartDataBeeswarm}
-		{x}
-		{xDomain}
-		{chartWidth}
-		{chartHeight}
-		{spaceForOutliers}
-		{customLookup}
-		{selectionsObject}
-	></PrimaryCirclesAndLabels>
-</g>
+<PrimaryCirclesAndLabels
+	{metadata}
+	{indicator}
+	{selectedFilteredChartDataBeeswarmWithRole}
+	{comparisonFilteredChartDataBeeswarmWithRole}
+	{additionalFilteredChartDataBeeswarm}
+	{x}
+	{xDomain}
+	{chartWidth}
+	{chartHeight}
+	{spaceForOutliers}
+	{customLookup}
+	{selectionsObject}
+	bind:hoverAreaId
+	bind:hoverIndicatorId
+	{showConfidenceIntervals}
+></PrimaryCirclesAndLabels>

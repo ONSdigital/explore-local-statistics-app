@@ -79,7 +79,7 @@ export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
 	lineChartRow: { markerRadius: { first: 4, last: 5, other: 3.5 } },
 	beeswarmRow: {
-		backgroundRadius: { 20: 8, 50: 7, 100: 6.5, 200: 5.5, default: 5 },
+		backgroundRadius: { 20: 6.4, 50: 6, 100: 5.5, 200: 5, default: 5 },
 		primaryRadius: 8
 	}
 };

@@ -51,6 +51,7 @@
 					isNaN(chosenXDomain[0]) ? 0 : chosenXDomain[0],
 					isNaN(chosenXDomain[1]) ? 9999 : chosenXDomain[1]
 				]}
+				{showConfidenceIntervals}
 			></TopicSection>
 			<!-- <TopicSection
 			{i}

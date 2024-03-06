@@ -2,7 +2,13 @@
 	import { addThousandsSeparator, roundNumber, splitTextIntoRows } from '$lib/utils';
 	import { colorsLookup } from '$lib/config.js';
 
-	export let metadata, area, y, chartHeight, chartWidth, spaceForOutliers;
+	export let metadata,
+		area,
+		y,
+		chartHeight,
+		chartWidth,
+		spaceForOutliers,
+		adjustmentValue = 0;
 
 	let labelRect;
 
@@ -19,6 +25,7 @@
 <g class="label-text-group">
 	<g
 		transform="translate({area.x + (labelPinPoint === 'start' ? 15 : -15)},{y(area.y) +
+			adjustmentValue +
 			7 +
 			(labelRect ? -labelRect.height / 2 : 0)})"
 	>

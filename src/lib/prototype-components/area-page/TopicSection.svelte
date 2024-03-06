@@ -12,7 +12,8 @@
 		selectionsObject,
 		customLookup,
 		chartData,
-		chosenXDomain;
+		chosenXDomain,
+		showConfidenceIntervals;
 
 	let topicUppercase = topic.name[0].toUpperCase() + topic.name.substring(1);
 
@@ -53,6 +54,7 @@
 									(el) => el.value
 								)}
 								{chosenXDomain}
+								{showConfidenceIntervals}
 							></IndicatorRow>
 							<!-- <IndicatorRow
 						topRow={i === 0 && j === 0}
