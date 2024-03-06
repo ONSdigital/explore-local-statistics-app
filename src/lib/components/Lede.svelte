@@ -20,4 +20,7 @@
 	.margin-bottom {
 		margin-bottom: 24px;
 	}
+	.balance {
+		text-wrap: balance;
+	}
 </style>

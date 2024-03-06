@@ -51,21 +51,21 @@
 	]}
 	background="#e9eff4"
 />
+
 <Titleblock title="Explore local statistics" background="#e9eff4">
 	<UKMap />
-	<Lede>Find, visualise, compare and download statistics for areas within the United Kingdom.</Lede>
+	<Lede>Find, compare and visualise statistics about places within the United Kingdom</Lede>
 	<div style:height="32px" />
 </Titleblock>
+
 <Cards marginTop>
-	<Card title="Find a local area">
-		<p>
-			Get information on areas including local authorities, wards, parishes and parliamentary
-			constituencies.
+	<Card title="Find an area">
+		<p style:margin-bottom="28px">
+			<label for="search"
+				>Search for a postcode, local authority, ward, parish or parliamentary constituency.</label
+			>
 		</p>
 
-		<label for="search" class="lbl-search">
-			<strong>Search by place name or postcode</strong>
-		</label>
 		<AreaSelect
 			id="search"
 			mode="search"
@@ -81,13 +81,12 @@
 			<AreaList {postcode} on:clear={() => (postcode = null)} />
 		{/if}
 	</Card>
-	<Card title="Find an indicator">
-		<p style:margin-bottom="36px">
-			Discover patterns and trends in {datasetsCount} indicators, including
-			<a href="{base}/datasets/employment-rate">employment rate</a>,
-			<a href="{base}/datasets/4g-coverage">4G coverage</a>
-			and
-			<a href="{base}/datasets/wellbeing-satisfaction">life satisfaction</a>.
+	<Card title="Browse indicators">
+		<p style:margin-bottom="28px">
+			Explore {datasetsCount} local indicators, including
+			<a href="{base}/datasets/wellbeing-satisfaction" class="no-wrap">life satisfaction</a>,
+			<a href="{base}/datasets/employment-rate">employment rate</a> and
+			<a href="{base}/datasets/4g-coverage">4G coverage</a>.
 		</p>
 		<Button icon="arrow" iconPosition="after" href="{base}/datasets">Explore indicators</Button>
 	</Card>
@@ -95,9 +94,8 @@
 
 <Section>
 	<p>
-		If you do not know the name or postcode of an area, you can explore all areas starting from <a
-			href="{base}/areas/E92000001-england">England</a
-		>, <a href="{base}/areas/W92000004-wales">Wales</a>,
+		You can also start from <a href="{base}/areas/E92000001-england">England</a>,
+		<a href="{base}/areas/W92000004-wales">Wales</a>,
 		<a href="{base}/areas/S92000003-scotland">Scotland</a>
 		or <a href="{base}/areas/N92000002-northern-ireland">Northern Ireland</a>.
 	</p>
@@ -106,10 +104,7 @@
 <Divider hr="full" />
 
 <Section title="Other sources of statistics">
-	<p>
-		Scotland and Northern Ireland have their own agencies who produce official statistics. View
-		facts and figures for areas in:
-	</p>
+	<p>Scotland and Northern Ireland have their own agencies who produce official statistics.</p>
 
 	<List mode="dash">
 		<li>
@@ -141,7 +136,13 @@
 		more timely, granular and harmonised way.
 	</p>
 	<p>
-		Specifically, ESS aims to provide one place for users to find, visualise, compare and download
+		The ESS service aims to provide one place for users to find, visualise, compare and download
 		subnational statistics by standardised geographies and customer-defined areas.
 	</p>
 </Section>
+
+<style>
+	.no-wrap {
+		white-space: nowrap;
+	}
+</style>

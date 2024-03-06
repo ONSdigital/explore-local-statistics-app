@@ -73,9 +73,10 @@
 	background="#eaeaea"
 />
 <Titleblock
-	title={`${getName(data.place)} <span class="title-subscript">(${data.place.areacd})</span>${data.place.end ? ' <span class="title-tag bg-warn">Inactive</span>' : ''}`}
+	title={`${getName(data.place)} ${data.place.end ? ' <span class="title-tag bg-warn">Inactive</span>' : ''}`}
 	background="#eaeaea"
 >
+	<!-- <span class="title-subscript">(${data.place.areacd})</span> -->
 	{#if data.place.areacd !== 'K02000001'}
 		<Lede>
 			{capitalise(data.place.typenm)}
@@ -124,7 +125,7 @@
 	{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
 		<Section theme="dark" background="#003c57" marginBottom={false}>
 			<div style:margin="24px 0">
-				<h3 style:margin="0 0 6px">Explore data for {getName(place, 'the')}</h3>
+				<h3 style:margin="0 0 6px">Local indicators for {getName(place, 'the')}</h3>
 				<p>
 					See how {getName(place, 'the')} compares to other areas on health, education, well-being and
 					the economy.
@@ -133,7 +134,7 @@
 					icon="arrow"
 					variant="ghost"
 					href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/insights"
-					small>Explore</Button
+					small>See local indicators</Button
 				>
 			</div>
 		</Section>
