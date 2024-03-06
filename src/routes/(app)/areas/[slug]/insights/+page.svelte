@@ -447,9 +447,12 @@
 <Breadcrumb
 	links={[
 		{ label: 'Home', href: '/' },
-		{ label: 'Explore subnational statistics', href: `${base}/` },
-		{ label: 'Find a local area', href: `${base}/areas` },
-		{ label: data.place.areanm }
+		{ label: 'Explore local statistics', href: `${base}/` },
+		...[...data.place.parents]
+			.reverse()
+			.map((p) => ({ label: getName(p), href: `${base}/areas/${p.areacd}` })),
+		{ label: data.place.areanm, href: `${base}/areas/${data.place.areacd}` },
+		{ label: 'Insights' }
 	]}
 	background="#eaeaea"
 />
