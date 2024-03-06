@@ -31,8 +31,6 @@
 			? madRangeLookup[indicator.code]['beeswarm-row']
 			: madRangeLookup.default['beeswarm-row'];
 
-	$: console.log(latestIndicatorCalculations);
-
 	$: indicatorCalculations =
 		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
 			? latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10

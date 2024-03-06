@@ -242,7 +242,6 @@ export function calculateLabelMidpoints(
 			};
 		} else {
 			if (boundedSelectedAreaX < boundedComparisonX) {
-				console.log(boundedComparisonX - comparisonLabelWidth / 2 - selectedAreaLabelWidth / 2);
 				return {
 					comparison: boundedComparisonX,
 					selectedArea: boundedComparisonX - comparisonLabelWidth / 2 - selectedAreaLabelWidth / 2

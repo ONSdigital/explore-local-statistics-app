@@ -18,8 +18,6 @@
 		(el) => el.code === indicator.code
 	);
 
-	$: console.log(indicatorCalculationsArray, indicator.code);
-
 	$: selectedChartData = indicatorChartData
 		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd && el.value)
 		: null;
@@ -81,7 +79,8 @@
 		Math.min(selectedXDomain[0], comparisonXDomain[0]),
 		Math.max(selectedXDomain[1], comparisonXDomain[1])
 	];
-	$: xDomain = [
+
+	$: xDomainInit = [
 		Math.min(
 			chosenXDomain[1],
 			chosenXDomain[0] > selectedAndComparisonXDomain[0]
@@ -94,6 +93,11 @@
 				? chosenXDomain[1]
 				: selectedAndComparisonXDomain[1]
 		)
+	];
+
+	$: xDomain = [
+		Math.min(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el >= xDomainInit[0])),
+		Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
 	];
 
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
@@ -156,6 +160,18 @@
 
 	$: showVisuals =
 		(selectedFilteredChartDataBeeswarm || comparisonFilteredChartDataBeeswarm) && latestTimePeriod;
+
+	$: {
+		if (indicator.code === 'average-travel-time-long-cycling') {
+			console.log(
+				indicator.code,
+				chosenXDomain,
+				selectedAndComparisonXDomain,
+				xDomain,
+				selectedFilteredChartDataBeeswarmWithRole
+			);
+		}
+	}
 
 	/*$: selectedIndicatorCalculations = xDomain[1] ?
 						metadata.*/
