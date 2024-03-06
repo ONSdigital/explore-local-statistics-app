@@ -43,12 +43,13 @@
 	links={[
 		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Find an indicator' }
+		{ label: 'Local indicators' }
 	]}
 />
-<Titleblock title="Find an indicator">
+<Titleblock title="Local indicators">
 	<Lede
-		>Explore our {datasetsCount} indicators, including <b>life satisfaction</b>, <b>4G coverage</b>
+		>Explore our {datasetsCount} local indicators, including <b>life satisfaction</b>,
+		<b>4G coverage</b>
 		and
 		<b>employment rate</b>.
 	</Lede>
@@ -58,7 +59,7 @@
 	<Input label="Type to filter indicators" bind:value={filterText} />
 </Section> -->
 
-<NavSections contentsLabel="Explore topics" cls="bah">
+<NavSections contentsLabel="Topics">
 	{#each filteredTopics as topic}
 		<NavSection title={capitalise(topic.name)}>
 			{#each topic.subTopics as subTopic}
@@ -83,8 +84,5 @@
 		position: -webkit-sticky; /* For Safari */
 		position: sticky;
 		top: 0; /* Value that defines the threshold at which the element becomes sticky */
-	}
-	.bah {
-		color: red;
 	}
 </style>

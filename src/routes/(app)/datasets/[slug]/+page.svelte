@@ -129,7 +129,7 @@
 	links={[
 		{ label: 'Home', href: '/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Find an indicator', href: `${base}/datasets` },
+		{ label: 'Local indicators', href: `${base}/datasets` },
 		{ label: data.indicator.metadata.label }
 	]}
 	background="#eaeaea"
@@ -250,9 +250,9 @@
 		</NavSection>
 		<NavSection title="Other indicators">
 			<p>
-				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} indicators
-				you can explore on the ONS <a href="{base}/">Explore local statistics</a> service. See the
-				full list of indicators on the <a href="{base}/datasets">Find an indicator page</a>.
+				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} local
+				indicators on the <a href="{base}/">Explore local statistics</a> service. See the
+				<a href="{base}/datasets">full list of local indicators</a>.
 			</p>
 		</NavSection>
 	</NavSections>

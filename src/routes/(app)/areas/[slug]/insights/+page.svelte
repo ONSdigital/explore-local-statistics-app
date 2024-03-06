@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import {
@@ -448,22 +449,27 @@
 	links={[
 		{ label: 'Home', href: '/' },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		...[...data.place.parents]
-			.reverse()
-			.map((p) => ({ label: getName(p), href: `${base}/areas/${p.areacd}` })),
-		{ label: data.place.areanm, href: `${base}/areas/${data.place.areacd}` },
-		{ label: 'Insights' }
+		...[...data.place.parents].reverse().map((p) => ({
+			label: getName(p),
+			href: `${base}/areas/${makeCanonicalSlug(p.areacd, p.areanm)}`
+		})),
+
+		{
+			label: getName(data.place),
+			href: `${base}/areas/${makeCanonicalSlug(data.place.areacd, data.place.areanm)}`
+		},
+		{ label: `Local indictators` }
 	]}
 	background="#eaeaea"
 />
-<Titleblock title="{data.place.areanm} insights" background="#eaeaea">
-	<Lede
-		>Explore local data and trends for <a
-			href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
-			>{getName(data.place, 'the')}</a
-		></Lede
-	>
+
+<Titleblock title="Local indicators for {data.place.areanm}" background="#eaeaea">
+	<Lede>Visualise local indicators and trends for {getName(data.place, 'the')}</Lede>
 </Titleblock>
+
+<!-- <a href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+	>{getName(data.place, 'the')}</a
+> -->
 
 <Cards marginTop>
 	<Card noBackground>
@@ -493,7 +499,7 @@
 			small>Read more</Button
 		>
 	</Card>
-	<Card title="Data for other areas">
+	<Card title="Other areas">
 		<AreaSelect
 			id="search"
 			mode="search"
@@ -512,7 +518,7 @@
 	</Card>
 </Cards>
 
-<NavSections contentsLabel="Explore this area">
+<NavSections contentsLabel="Contents">
 	<TopicSections
 		{selectedArea}
 		{metadata}
