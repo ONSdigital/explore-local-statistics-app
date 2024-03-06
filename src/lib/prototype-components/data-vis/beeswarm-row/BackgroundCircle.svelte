@@ -1,13 +1,13 @@
 <script lang="ts">
-	export let circle, y, backgroundRadius, indicator, hoverId, hoverIndicatorId;
+	export let circle, y, backgroundRadius, indicator, hoverAreaId, hoverIndicatorId;
 
 	function mouseEnterEvent() {
-		hoverId = circle.datum.areacd;
+		hoverAreaId = circle.datum.areacd;
 		hoverIndicatorId = indicator.code;
 	}
 
 	function mouseLeaveEvent() {
-		hoverId = null;
+		hoverAreaId = null;
 		hoverIndicatorId = null;
 	}
 </script>

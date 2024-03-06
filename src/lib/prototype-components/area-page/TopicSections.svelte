@@ -14,14 +14,11 @@
 		selectionsObject,
 		accordionArray,
 		customLookup;
-	let startXDomainNumb = 'Earliest available data',
-		endXDomainNumb = 'Latest available data';
+	let chosenXDomain = ['Earliest available data', 'Latest available data'];
 
 	let showConfidenceIntervals = false;
 
 	let hoverAreaId, hoverIndicatorId;
-
-	$: console.log(startXDomainNumb, endXDomainNumb, showConfidenceIntervals);
 </script>
 
 <div class="sticky-container">
@@ -34,8 +31,8 @@
 		{accordionArray}
 		bind:selectionsObject
 		{customLookup}
-		bind:startXDomainNumb
-		bind:endXDomainNumb
+		bind:startXDomainNumb={chosenXDomain[0]}
+		bind:endXDomainNumb={chosenXDomain[1]}
 		bind:showConfidenceIntervals
 	></StickyHeader>
 
@@ -50,8 +47,11 @@
 				{selectedArea}
 				{selectionsObject}
 				{chartData}
-				{startXDomainNumb}
-				{endXDomainNumb}
+				{customLookup}
+				chosenXDomain={[
+					isNaN(chosenXDomain[0]) ? 0 : chosenXDomain[0],
+					isNaN(chosenXDomain[1]) ? 9999 : chosenXDomain[1]
+				]}
 			></TopicSection>
 			<!-- <TopicSection
 			{i}

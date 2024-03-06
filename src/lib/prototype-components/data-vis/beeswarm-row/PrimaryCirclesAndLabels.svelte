@@ -9,17 +9,21 @@
 	import PrimaryLine from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryLine.svelte';
 
 	export let indicator,
-		comparisonAreaFilteredChartDataBeeswarm,
-		selectedAreaFilteredChartDataBeeswarm,
+		comparisonFilteredChartDataBeeswarmWithRole,
+		selectedFilteredChartDataBeeswarmWithRole,
+		additionalFilteredChartDataBeeswarm,
 		x,
 		xDomain,
 		chartWidth,
 		chartHeight,
-		spaceForOutliers;
+		spaceForOutliers,
+		customLookup,
+		selectionsObject;
 
 	$: primaryCircleDataStep1 = [
-		comparisonAreaFilteredChartDataBeeswarm,
-		selectedAreaFilteredChartDataBeeswarm
+		selectedFilteredChartDataBeeswarmWithRole,
+		comparisonFilteredChartDataBeeswarmWithRole,
+		...additionalFilteredChartDataBeeswarm
 	]
 		.filter((el) => el)
 		.map((el) => ({
@@ -32,24 +36,30 @@
 						: x(el.value)
 		}));
 
-	$: primaryCircleDataStep2 = new AccurateBeeswarm(
-		primaryCircleDataStep1,
-		chartConfigurations.beeswarmRow.primaryRadius / 2,
-		(d) => d.xPosition
-	)
-		.oneSided()
-		.calculateYPositions();
+	$: primaryCircleDataStep2 = [
+		...new AccurateBeeswarm(
+			primaryCircleDataStep1,
+			chartConfigurations.beeswarmRow.primaryRadius / 2,
+			(d) => d.xPosition
+		)
+			.oneSided()
+			.calculateYPositions()
+	].reverse();
 
-	$: comparisonAreaOrMeasure = primaryCircleDataStep2.find((el) => 'role' in el.datum);
-	$: selectedArea = primaryCircleDataStep2.find((el) => !('role' in el.datum));
+	//$: console.log(primaryCircleDataStep2);
 
-	$: y = scaleLinear().domain([0, chartHeight]).range([0, -chartHeight]);
+	$: comparison = primaryCircleDataStep2.find((el) => el.datum.priority && el.datum.role != 'main');
+	$: selected = primaryCircleDataStep2.find((el) => el.datum.priority && el.datum.role === 'main');
+
+	$: y = scaleLinear()
+		.domain([0, Math.max(chartHeight, ...primaryCircleDataStep2.map((el) => el.y))])
+		.range([0, -chartHeight + 15]);
 
 	let comparisonLabelWidth, selectedAreaLabelWidth;
 
 	$: labelMidpoints = calculateLabelMidpoints(
-		comparisonAreaOrMeasure ? comparisonAreaOrMeasure.x : null,
-		selectedArea ? selectedArea.x : null,
+		comparison ? comparison.x : null,
+		selected ? selected.x : null,
 		comparisonLabelWidth,
 		selectedAreaLabelWidth,
 		chartWidth,
@@ -59,15 +69,15 @@
 
 <g class="primary-circles-group" transform="translate(0,{chartHeight})">
 	{#each primaryCircleDataStep2 as circle}
-		<PrimaryCircle {circle} {y} outline={true}></PrimaryCircle>
+		<PrimaryCircle {circle} {y} outline={true} {customLookup}></PrimaryCircle>
 	{/each}
 </g>
 
 <g class="labels-outline-group">
-	{#if comparisonAreaOrMeasure}
+	{#if comparison}
 		<g class="comparison-label-group">
 			<PrimaryLine
-				label={comparisonAreaOrMeasure}
+				label={comparison}
 				labelMidpoint={labelMidpoints.comparison}
 				{y}
 				{indicator}
@@ -76,10 +86,10 @@
 			></PrimaryLine>
 		</g>
 	{/if}
-	{#if selectedArea}
+	{#if selected}
 		<g class="comparison-label-group">
 			<PrimaryLine
-				label={selectedArea}
+				label={selected}
 				labelMidpoint={labelMidpoints.selectedArea}
 				{y}
 				{indicator}
@@ -92,15 +102,15 @@
 
 <g class="primary-circles-group" transform="translate(0,{chartHeight})">
 	{#each primaryCircleDataStep2 as circle}
-		<PrimaryCircle {circle} {y}></PrimaryCircle>
+		<PrimaryCircle {circle} {y} {customLookup}></PrimaryCircle>
 	{/each}
 </g>
 
 <g class="labels-group">
-	{#if comparisonAreaOrMeasure}
+	{#if comparison}
 		<g class="comparison-label-group">
 			<PrimaryLabel
-				label={comparisonAreaOrMeasure}
+				label={comparison}
 				labelMidpoint={labelMidpoints.comparison}
 				{y}
 				{indicator}
@@ -109,10 +119,10 @@
 			></PrimaryLabel>
 		</g>
 	{/if}
-	{#if selectedArea}
+	{#if selected}
 		<g class="comparison-label-group">
 			<PrimaryLabel
-				label={selectedArea}
+				label={selected}
 				labelMidpoint={labelMidpoints.selectedArea}
 				{y}
 				{indicator}

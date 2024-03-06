@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { NavSection } from '@onsvisual/svelte-components';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
-	import IndicatorRow from './IndicatorRow.svelte';
+	import IndicatorRow from '$lib/prototype-components/area-page/IndicatorRow.svelte';
 
 	export let metadata,
 		topic,
@@ -10,9 +10,9 @@
 		hoverIndicatorId,
 		selectedArea,
 		selectionsObject,
+		customLookup,
 		chartData,
-		startXDomainNumb,
-		endXDomainNumb;
+		chosenXDomain;
 
 	let topicUppercase = topic.name[0].toUpperCase() + topic.name.substring(1);
 
@@ -45,14 +45,14 @@
 								bind:hoverAreaId
 								bind:hoverIndicatorId
 								{indicator}
+								{customLookup}
 								{metadata}
 								{selectedArea}
 								{selectionsObject}
 								indicatorChartData={chartData.combinedDataObject[indicator.code].filter(
 									(el) => el.value
 								)}
-								{startXDomainNumb}
-								{endXDomainNumb}
+								{chosenXDomain}
 							></IndicatorRow>
 							<!-- <IndicatorRow
 						topRow={i === 0 && j === 0}
