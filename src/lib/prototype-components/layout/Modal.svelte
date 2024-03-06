@@ -1,6 +1,7 @@
 <script lang="ts">
 	//based on https://svelte.dev/examples/modal
-	import Button from '$lib/prototype-components/modified-svelte-components/button/Button.svelte';
+	import { Button } from '@onsvisual/svelte-components';
+	import Icon from '$lib/components/Icon.svelte';
 
 	export let showModal, accordionOpen;
 
@@ -19,15 +20,11 @@
 	<div on:click|stopPropagation>
 		<div class="row-container title-exit-button-container">
 			<slot name="title" />
-			<Button
-				on:click={() => dialog.close()}
-				small={true}
-				icon="cross"
-				variant="secondary"
-				stroke="currentcolor"
-				fill="none"
-				strokeWidth="2.5px"
-			></Button>
+			<Button on:click={() => dialog.close()} small={true} variant="secondary">
+				<div slot="icon" style:display="contents">
+					<Icon type="close" />
+				</div>
+			</Button>
 		</div>
 		<slot name="content" />
 	</div>
