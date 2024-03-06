@@ -15,7 +15,8 @@
 		additionalFilteredChartDataBeeswarm,
 		filteredChartDataBeeswarm,
 		showConfidenceIntervals,
-		customLookup;
+		customLookup,
+		indicatorCalculations;
 
 	let width = 1000;
 	$: height = 80;
@@ -35,19 +36,6 @@
 	$: includeComparisonText =
 		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel &&
 		latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10;
-
-	$: indicatorCalculations =
-		latestIndicatorCalculations.calcsByGeogLevel[
-			selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
-				? selectedArea.geogLevel
-				: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
-					? 'lower'
-					: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
-						? 'upper'
-						: 'region' in latestIndicatorCalculations.calcsByGeogLevel
-							? 'region'
-							: 'country'
-		];
 
 	$: furtherDistanceFromMedian =
 		madRange != 'minMax'

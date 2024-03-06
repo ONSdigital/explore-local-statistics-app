@@ -66,16 +66,16 @@
 			? doLinesInOneDSpaceOverlap(
 					primaryCircleDataStep1[0][
 						primaryCircleDataStep1[0].lciXPosition ? 'lciXPosition' : 'xPosition'
-					] - 10,
+					] - 2,
 					primaryCircleDataStep1[0][
 						primaryCircleDataStep1[0].uciXPosition ? 'uciXPosition' : 'xPosition'
-					] + 10,
+					] + 2,
 					primaryCircleDataStep1[1][
 						primaryCircleDataStep1[1].lciXPosition ? 'lciXPosition' : 'xPosition'
-					] - 10,
+					] - 2,
 					primaryCircleDataStep1[1][
 						primaryCircleDataStep1[1].uciXPosition ? 'uciXPosition' : 'xPosition'
-					] + 10
+					] + 2
 				)
 			: false;
 

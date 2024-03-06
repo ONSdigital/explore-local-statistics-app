@@ -10,6 +10,33 @@
 	export let indicator,
 		xDomain,
 		yDomain,
+		selectedFilteredChartData,
+		comparisonFilteredChartData,
+		chartWidth,
+		chartHeight,
+		hoverChartData,
+		yAxisMaxTickWidth,
+		xAxisFinalTickWidth,
+		maxLabelWidth,
+		filteredChartData,
+		timePeriodsArray,
+		selectionsObject;
+
+	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
+
+	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
+
+	$: linesArray = [
+		{
+			role: selectionsObject['areas-rows-comparison-visible'].role,
+			data: comparisonFilteredChartData
+		},
+		{ role: 'main', data: selectedFilteredChartData }
+	];
+
+	/*export let indicator,
+		xDomain,
+		yDomain,
 		chartHeight,
 		chartWidth,
 		hoverChartData,
@@ -31,10 +58,24 @@
 			data: comparisonAreaFilteredChartData
 		},
 		{ role: 'main', data: selectedAreaFilteredChartData }
-	];
+	];*/
 </script>
 
 <AxisY selectedIndicator={indicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>
+<AxisX {timePeriodsArray} {chartHeight} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
+
+<g class="lines-container">
+	<g class="primary-lines" style="opacity :{hoverChartData.length > 0 ? 0.2 : 1}">
+		{#each linesArray as area, i}
+			<Line {area} {xDomain} {x} {y}></Line>
+		{/each}
+	</g>
+	{#if hoverChartData.length > 0}
+		<Line area={{ role: 'selected', data: hoverChartData }} {xDomain} {x} {y}></Line>
+	{/if}
+</g>
+
+<!-- <AxisY selectedIndicator={indicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>
 <AxisX {timePeriodsArray} {chartHeight} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
 
 <g class="lines-container">
@@ -62,7 +103,7 @@
 			role="main"
 		></Label>
 	{/if}
-</g>
+</g> -->
 
 <!-- {#if hoverId}
 	<ConfidenceIntervals

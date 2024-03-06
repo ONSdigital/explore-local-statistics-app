@@ -3,6 +3,7 @@
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 	import BeeswarmRowContainer from '$lib/prototype-components/area-page/indicator-rows/BeeswarmRowContainer.svelte';
 	import LineChartRowContainer from '$lib/prototype-components/area-page/indicator-rows/LineChartRowContainer.svelte';
+	import { onMount } from 'svelte';
 
 	export let hoverAreaId,
 		hoverIndicatorId,
@@ -162,17 +163,26 @@
 	$: showVisuals =
 		(selectedFilteredChartDataBeeswarm || comparisonFilteredChartDataBeeswarm) && latestTimePeriod;
 
-	$: {
-		if (indicator.code === 'average-travel-time-long-cycling') {
-			console.log(
-				indicator.code,
-				chosenXDomain,
-				selectedAndComparisonXDomain,
-				xDomain,
-				selectedFilteredChartDataBeeswarmWithRole
-			);
-		}
-	}
+	$: indicatorCalculations =
+		latestIndicatorCalculations.calcsByGeogLevel[
+			selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
+				? selectedArea.geogLevel
+				: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
+					? 'lower'
+					: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'upper'
+						: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'region'
+							: 'country'
+		];
+
+	let mounted = false;
+
+	onMount(() => {
+		setTimeout(function () {
+			mounted = true;
+		}, 500);
+	});
 
 	/*$: selectedIndicatorCalculations = xDomain[1] ?
 						metadata.*/
@@ -260,14 +270,28 @@
 					{customLookup}
 					{filteredChartDataBeeswarm}
 					{showConfidenceIntervals}
+					{indicatorCalculations}
 				></BeeswarmRowContainer>
 			</div>
 
 			<Divider orientation="vertical"></Divider>
 
-			<div class="line-chart-container">
-				{#if xDomain[0] != xDomain[1]}
-					<!-- <LineChartRowContainer
+			{#if mounted}
+				<div class="line-chart-container">
+					{#if xDomain[0] != xDomain[1]}
+						<LineChartRowContainer
+							{filteredChartData}
+							{metadata}
+							{indicator}
+							{selectionsObject}
+							{hoverAreaId}
+							{timePeriodsArray}
+							{xDomain}
+							{selectedFilteredChartData}
+							{comparisonFilteredChartData}
+							{indicatorCalculations}
+						></LineChartRowContainer>
+						<!-- <LineChartRowContainer
 							{metadata}
 							{indicator}
 							{selectionsObject}
@@ -281,10 +305,11 @@
 							{comparisonAreaFilteredChartData}
 							{backgroundChartData}
 						></LineChartRowContainer> -->
-				{:else}
-					<span>No data before<br />{latestTimePeriod.label}</span>
-				{/if}
-			</div>
+					{:else}
+						<span>No data before<br />{latestTimePeriod.label}</span>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>

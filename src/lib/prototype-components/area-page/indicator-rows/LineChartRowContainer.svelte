@@ -4,6 +4,70 @@
 	import { madRangeLookup } from '$lib/config';
 	import { roundNumber } from '$lib/utils';
 
+	export let metadata,
+		indicator,
+		timePeriodsArray,
+		xDomain,
+		selectedFilteredChartData,
+		comparisonFilteredChartData,
+		indicatorCalculations,
+		hoverChartData,
+		filteredChartData,
+		hoverAreaId,
+		selectionsObject;
+
+	let width = 1000,
+		height = 80;
+
+	let yAxisMaxTickWidth = 0,
+		xAxisFinalTickWidth = 0,
+		maxLabelWidth = 80;
+
+	$: padding = {
+		top: 5,
+		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 10),
+		bottom: 25,
+		left: 10 + yAxisMaxTickWidth
+	};
+
+	$: chartWidth = width - padding.left - padding.right;
+	$: chartHeight = height - padding.top - padding.bottom;
+
+	$: madRange = madRangeLookup.default['line-chart-row'];
+
+	$: hoverChartData =
+		hoverAreaId && filteredChartData
+			? filteredChartData.filter((el) => el.areacd === hoverAreaId)
+			: [];
+
+	$: values = [
+		...hoverChartData,
+		...(selectedFilteredChartData ? selectedFilteredChartData : []),
+		...(comparisonFilteredChartData ? comparisonFilteredChartData : [])
+	].map((el) => [el.value, 'lci' in el ? el.lci : null, 'uci' in el ? el.uci : null]);
+
+	$: flattenedValues = [].concat(...values).filter((el) => el);
+
+	$: yDomainRaw = [0.95 * Math.min(...flattenedValues), 1.05 * Math.max(...flattenedValues)];
+
+	$: yDomain =
+		yDomainRaw[1] - yDomainRaw[0] > madRange * indicatorCalculations.mad
+			? yDomainRaw
+			: [
+					yDomainRaw[0] -
+						(madRange * indicatorCalculations.mad - (yDomainRaw[1] - yDomainRaw[0])) / 2,
+					yDomainRaw[1] +
+						(madRange * indicatorCalculations.mad - (yDomainRaw[1] - yDomainRaw[0])) / 2
+				];
+
+	$: initialValue = selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[0]);
+	$: latestValue = selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[1]);
+
+	$: changeValue =
+		latestValue && initialValue
+			? roundNumber(latestValue.value - initialValue.value, indicator.metadata.decimalPlaces)
+			: null;
+
 	/*export let metadata,
 		indicator,
 		areasGroupsObject,
@@ -18,7 +82,7 @@
 		backgroundChartData,
 		chosenComparisonMeasureOrArea;*/
 
-	export let metadata,
+	/*export let metadata,
 		indicator,
 		selectionsObject,
 		hoverId,
@@ -76,7 +140,7 @@
 	$: changeValue =
 		latestValue && initialValue
 			? roundNumber(latestValue.value - initialValue.value, indicator.metadata.decimalPlaces)
-			: null;
+			: null;*/
 
 	/*$: selectedComparisonDifference =
 		changeValue == 0 ? 'No change' : changeValue > 0 ? 'Increased' : 'Decreased';
@@ -113,6 +177,22 @@
 					{indicator}
 					{xDomain}
 					{yDomain}
+					{selectedFilteredChartData}
+					{comparisonFilteredChartData}
+					{chartWidth}
+					{chartHeight}
+					{hoverChartData}
+					bind:yAxisMaxTickWidth
+					bind:xAxisFinalTickWidth
+					bind:maxLabelWidth
+					{filteredChartData}
+					{timePeriodsArray}
+					{selectionsObject}
+				></LineChartRow>
+				<!-- <LineChartRow
+					{indicator}
+					{xDomain}
+					{yDomain}
 					{selectedAreaFilteredChartData}
 					{chartWidth}
 					{chartHeight}
@@ -124,7 +204,8 @@
 					bind:yAxisMaxTickWidth
 					bind:xAxisFinalTickWidth
 					bind:maxLabelWidth
-				></LineChartRow>{/if}
+				></LineChartRow> -->
+			{/if}
 		</g>
 	</svg>
 </div>
