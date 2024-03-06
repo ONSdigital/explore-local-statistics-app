@@ -215,13 +215,20 @@ function generateAreaDetails(outConfig, combinedData) {
 	const deomgraphicClustersLookup = getDemographicClustersLookup(outConfig.clustersLookup);
 	for (const areacd of Object.keys(areaDetails)) {
 		if (areacd in deomgraphicClustersLookup) {
-			areaDetails[areacd].demographicCluster = deomgraphicClustersLookup[areacd];
+			areaDetails[areacd].demographicCluster = deomgraphicClustersLookup[areacd].filter(
+				(d) => d !== areacd
+			);
 		}
 	}
 
 	for (const areaDatum of Object.values(areaDetails)) {
 		areaDatum.areasWithSameParent = outConfig.areasArray
-			.filter((d) => d.parentcd === areaDatum.parentcd && d.geogLevel === areaDatum.geogLevel)
+			.filter(
+				(d) =>
+					d.parentcd === areaDatum.parentcd &&
+					d.geogLevel === areaDatum.geogLevel &&
+					d.areacd !== areaDatum.areacd
+			)
 			.map((d) => d.areacd);
 	}
 
