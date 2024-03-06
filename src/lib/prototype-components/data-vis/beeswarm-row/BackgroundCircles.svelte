@@ -22,8 +22,6 @@
 		hoverAreaId,
 		hoverIndicatorId;
 
-	$: console.log(selectionsObject);
-
 	$: backgroundChartDataBeeswarm = filteredChartDataBeeswarm.filter(
 		(el) =>
 			selectionsObject['related-rows-visible'].codes.includes(el.areacd) &&
@@ -64,8 +62,6 @@
 	$: hoverArea = hoverAreaId
 		? backgroundCircleDataStep2.find((el) => el.datum.areacd === hoverAreaId)
 		: null;
-
-	$: console.log(backgroundCircleDataStep1);
 
 	/*export let metadata,
 		backgroundChartDataBeeswarm,

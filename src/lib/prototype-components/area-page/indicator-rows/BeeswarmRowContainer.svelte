@@ -31,19 +31,17 @@
 			? madRangeLookup[indicator.code]['beeswarm-row']
 			: madRangeLookup.default['beeswarm-row'];
 
+	$: console.log(latestIndicatorCalculations);
+
 	$: indicatorCalculations =
-		latestIndicatorCalculations.calcsByGeogLevel[
-			'lower' in latestIndicatorCalculations.calcsByGeogLevel
-				? 'lower'
-				: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
-					? 'upper'
-					: 'region' in latestIndicatorCalculations.calcsByGeogLevel
-						? 'region'
-						: 'country'
-		];
+		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
+			? latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10
+				? latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel]
+				: null
+			: null;
 
 	$: furtherDistanceFromMedian =
-		madRange === 'minMax'
+		madRange === 'minMax' || !indicatorCalculations
 			? Math.max(
 					indicatorCalculations.med - indicatorCalculations.min,
 					indicatorCalculations.max - indicatorCalculations.med
@@ -51,7 +49,7 @@
 			: null;
 
 	$: xDomain =
-		madRange === 'minMax'
+		madRange === 'minMax' || !indicatorCalculations
 			? [
 					indicatorCalculations.med - furtherDistanceFromMedian,
 					indicatorCalculations.med + furtherDistanceFromMedian
@@ -61,19 +59,20 @@
 					indicatorCalculations.med + madRange * indicatorCalculations.mad
 				];
 
-	$: selectedComparisonDifference = !comparisonFilteredChartDataBeeswarmWithRole
-		? 'No comparison'
-		: !selectedFilteredChartDataBeeswarmWithRole
-			? 'No selected'
-			: selectedFilteredChartDataBeeswarmWithRole.value -
-						comparisonFilteredChartDataBeeswarmWithRole.value >
-				  indicatorCalculations.mad
-				? 'Higher'
+	$: selectedComparisonDifference =
+		!comparisonFilteredChartDataBeeswarmWithRole || !indicatorCalculations
+			? 'No comparison'
+			: !selectedFilteredChartDataBeeswarmWithRole
+				? 'No selected'
 				: selectedFilteredChartDataBeeswarmWithRole.value -
-							comparisonFilteredChartDataBeeswarmWithRole.value <
-					  -indicatorCalculations.mad
-					? 'Lower'
-					: 'Similar';
+							comparisonFilteredChartDataBeeswarmWithRole.value >
+					  indicatorCalculations.mad
+					? 'Higher'
+					: selectedFilteredChartDataBeeswarmWithRole.value -
+								comparisonFilteredChartDataBeeswarmWithRole.value <
+						  -indicatorCalculations.mad
+						? 'Lower'
+						: 'Similar';
 
 	/*export let metadata,
 		indicator,
@@ -188,7 +187,7 @@
 	</svg>
 </div>
 
-{#if selectionsObject['areas-rows-comparison-visible']}
+{#if selectionsObject['areas-rows-comparison-visible'] && indicatorCalculations}
 	<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
 		<div class="robo-text-inline" style={backgroundStyle}>
 			<span>
