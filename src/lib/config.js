@@ -72,8 +72,7 @@ export const colorsLookup = {
 
 export const madRangeLookup = {
 	default: { 'line-chart': 1, 'beeswarm-row': 3, 'line-chart-row': 1 },
-	'4g-coverage': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' },
-	'gross-median-weekly-pay': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' }
+	'4g-coverage': { 'line-chart': 'minMax', 'beeswarm-row': 'minMax' }
 };
 
 export const chartConfigurations = {

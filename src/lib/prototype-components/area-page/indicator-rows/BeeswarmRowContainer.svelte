@@ -31,48 +31,55 @@
 			? madRangeLookup[indicator.code]['beeswarm-row']
 			: madRangeLookup.default['beeswarm-row'];
 
-	$: indicatorCalculations =
-		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
-			? latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10
-				? latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel]
-				: null
-			: null;
+	$: includeComparisonText =
+		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel &&
+		latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10;
 
-	$: useCalculations = madRange != 'minMax' && indicatorCalculations;
+	$: indicatorCalculations =
+		latestIndicatorCalculations.calcsByGeogLevel[
+			selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
+				? selectedArea.geogLevel
+				: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
+					? 'lower'
+					: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'upper'
+						: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'region'
+							: 'country'
+		];
 
 	$: furtherDistanceFromMedian =
-		madRange === 'minMax' || !indicatorCalculations
-			? Math.max(
+		madRange != 'minMax'
+			? null
+			: Math.max(
 					indicatorCalculations.med - indicatorCalculations.min,
 					indicatorCalculations.max - indicatorCalculations.med
-				)
-			: null;
+				);
 
 	$: xDomain =
-		madRange === 'minMax' || !indicatorCalculations
+		madRange != 'minMax'
 			? [
-					indicatorCalculations.med - furtherDistanceFromMedian,
-					indicatorCalculations.med + furtherDistanceFromMedian
-				]
-			: [
 					indicatorCalculations.med - madRange * indicatorCalculations.mad,
 					indicatorCalculations.med + madRange * indicatorCalculations.mad
+				]
+			: [
+					indicatorCalculations.med - furtherDistanceFromMedian,
+					indicatorCalculations.med + furtherDistanceFromMedian
 				];
 
-	$: selectedComparisonDifference =
-		!comparisonFilteredChartDataBeeswarmWithRole || !indicatorCalculations
-			? 'No comparison'
-			: !selectedFilteredChartDataBeeswarmWithRole
-				? 'No selected'
+	$: selectedComparisonDifference = !comparisonFilteredChartDataBeeswarmWithRole
+		? 'No comparison'
+		: !selectedFilteredChartDataBeeswarmWithRole
+			? 'No selected'
+			: selectedFilteredChartDataBeeswarmWithRole.value -
+						comparisonFilteredChartDataBeeswarmWithRole.value >
+				  indicatorCalculations.mad
+				? 'Higher'
 				: selectedFilteredChartDataBeeswarmWithRole.value -
-							comparisonFilteredChartDataBeeswarmWithRole.value >
-					  indicatorCalculations.mad
-					? 'Higher'
-					: selectedFilteredChartDataBeeswarmWithRole.value -
-								comparisonFilteredChartDataBeeswarmWithRole.value <
-						  -indicatorCalculations.mad
-						? 'Lower'
-						: 'Similar';
+							comparisonFilteredChartDataBeeswarmWithRole.value <
+					  -indicatorCalculations.mad
+					? 'Lower'
+					: 'Similar';
 
 	/*export let metadata,
 		indicator,
@@ -187,10 +194,10 @@
 	</svg>
 </div>
 
-{#if selectionsObject['areas-rows-comparison-visible'] && indicatorCalculations}
-	<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
-		<div class="robo-text-inline" style={backgroundStyle}>
-			<span>
+<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
+	<div class="robo-text-inline" style={backgroundStyle}>
+		<span>
+			{#if selectionsObject['areas-rows-comparison-visible'] && includeComparisonText}
 				{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
 					No
 				{:else}
@@ -209,12 +216,12 @@
 				{:else}
 					in
 				{/if}
+			{:else}<span>Data for</span>{/if}
 
-				<span style="font-weight: bold;">{latestTimePeriod.label}</span>
-			</span>
-		</div>
+			<span style="font-weight: bold;">{latestTimePeriod.label}</span>
+		</span>
 	</div>
-{/if}
+</div>
 
 <style>
 	svg {
