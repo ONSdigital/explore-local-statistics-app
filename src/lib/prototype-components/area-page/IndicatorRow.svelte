@@ -9,63 +9,156 @@
 		indicator,
 		metadata,
 		indicatorChartData,
+		customLookup,
 		selectedArea,
 		selectionsObject,
-		startXDomainNumb,
-		endXDomainNumb;
+		chosenXDomain;
 
-	$: selectedAreaChartData = indicatorChartData
-		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd)
+	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
+		(el) => el.code === indicator.code
+	);
+
+	$: selectedChartData = indicatorChartData
+		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd && el.value)
 		: null;
-	$: selectedAreaPeriods = selectedAreaChartData
-		? selectedAreaChartData.map((el) => el.xDomainNumb)
-		: [];
+	$: selectedPeriods = selectedChartData ? selectedChartData.map((el) => el.xDomainNumb) : [];
+	$: selectedXDomain = [Math.min(...selectedPeriods), Math.max(...selectedPeriods)];
 
-	$: comparisonAreaChartData =
-		indicatorChartData && selectionsObject['areas-rows-comparison-visible']
+	$: comparisonChartData = indicatorChartData
+		? selectionsObject['areas-rows-comparison-visible']
 			? 'label' in selectionsObject['areas-rows-comparison-visible']
-				? metadata.indicatorsCalculationsArray
-						.filter((el) => el.code === indicator.code && el.geog_level === selectedArea.geogLevel)
-						.map((el) => ({
-							xDomainNumb: el.period,
-							value: el.med
-						}))
-						.sort((a, b) => a.xDomainNumb - b.xDomainNumb)
+				? indicatorCalculationsArray
+						.map((el) => {
+							let allSiblingsCalc =
+								selectedArea.geogLevel in el.calcsByGeogLevel
+									? el.calcsByGeogLevel[selectedArea.geogLevel].med
+									: null;
+
+							let similarCalc =
+								selectedArea.geogLevel === 'lower'
+									? 'demographic' in el.clustersCalculations
+										? el.clustersCalculations.demographic[selectedArea.similarCluster].median
+										: null
+									: null;
+
+							let xDomainNumb = el.period;
+							let value =
+								selectionsObject['areas-rows-comparison-visible'].group === 'all-siblings'
+									? allSiblingsCalc
+									: selectionsObject['areas-rows-comparison-visible'].group ===
+										  'same-parent-siblings'
+										? el.sameParentGeogCalculations[
+												selectedArea.parentcd + '-' + selectedArea.geogLevel
+											].median
+										: selectionsObject['areas-rows-comparison-visible'].group === 'similar-siblings'
+											? similarCalc
+											: selectionsObject['areas-rows-comparison-visible'].group ===
+												  'region-children'
+												? el.sameParentGeogCalculations['regions_and_countries'].med
+												: selectionsObject['areas-rows-comparison-visible'].group ===
+													  'upper-tier-local-authority-children'
+													? el.sameParentGeogCalculations[selectedArea.areacd + '-upper'].med
+													: selectionsObject['areas-rows-comparison-visible'].group ===
+														  'lower-tier-local-authority-children'
+														? el.sameParentGeogCalculations[selectedArea.areacd + '-lower'].med
+														: null;
+
+							return { xDomainNumb: xDomainNumb, value: value };
+						})
+						.filter((el) => el.value)
 				: indicatorChartData.filter(
 						(el) => el.areacd === selectionsObject['areas-rows-comparison-visible'].areacd
 					)
-			: null;
+			: []
+		: null;
 
-	$: comparisonAreaPeriods = comparisonAreaChartData
-		? comparisonAreaChartData.map((el) => el.xDomainNumb)
-		: [];
+	$: comparisonPeriods = comparisonChartData ? comparisonChartData.map((el) => el.xDomainNumb) : [];
+	$: comparisonXDomain = [Math.min(...comparisonPeriods), Math.max(...comparisonPeriods)];
 
-	$: selectedAreaAndComparisonMinXDomain =
-		selectedAreaPeriods || comparisonAreaPeriods
-			? Math.min(...selectedAreaPeriods, ...comparisonAreaPeriods)
-			: null;
-	$: selectedAreaAndComparisonMaxXDomain =
-		selectedAreaPeriods || comparisonAreaPeriods
-			? Math.max(...selectedAreaPeriods, ...comparisonAreaPeriods)
-			: null;
+	$: selectedAndComparisonXDomain = [
+		Math.min(selectedXDomain[0], comparisonXDomain[0]),
+		Math.max(selectedXDomain[1], comparisonXDomain[1])
+	];
+	$: xDomain = [
+		Math.min(
+			chosenXDomain[1],
+			chosenXDomain[0] > selectedAndComparisonXDomain[0]
+				? chosenXDomain[0]
+				: selectedAndComparisonXDomain[0]
+		),
+		Math.max(
+			chosenXDomain[0],
+			chosenXDomain[1] < selectedAndComparisonXDomain[1]
+				? chosenXDomain[1]
+				: selectedAndComparisonXDomain[1]
+		)
+	];
 
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
 		(el) =>
 			el.periodGroup === indicator.periodGroup &&
-			(isNaN(startXDomainNumb)
-				? el.xDomainNumb >= selectedAreaAndComparisonMinXDomain
-				: el.xDomainNumb >= Math.max(selectedAreaAndComparisonMinXDomain, startXDomainNumb)) &&
-			(isNaN(endXDomainNumb)
-				? el.xDomainNumb <= selectedAreaAndComparisonMaxXDomain
-				: el.xDomainNumb <= Math.min(selectedAreaAndComparisonMaxXDomain, endXDomainNumb))
+			el.xDomainNumb >= xDomain[0] &&
+			el.xDomainNumb <= xDomain[1]
 	);
 
-	$: xDomain = [
-		timePeriodsArray.length > 0 ? Math.min(...timePeriodsArray.map((el) => el.xDomainNumb)) : null,
-		timePeriodsArray.length > 0 ? Math.max(...timePeriodsArray.map((el) => el.xDomainNumb)) : null
-	];
+	$: filteredChartData =
+		xDomain[1] && xDomain[0]
+			? indicatorChartData.filter(
+					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+				)
+			: null;
+	$: filteredChartDataBeeswarm = filteredChartData.filter((el) => el.xDomainNumb === xDomain[1]);
 
-	$: selectedIndicatorCalculations = xDomain[1]
+	$: additionalFilteredChartDataBeeswarm = filteredChartDataBeeswarm
+		.filter((el) => selectionsObject['areas-rows-additional-chosen'].includes(el.areacd))
+		.map((el) => ({
+			...el,
+			role: selectionsObject['areas-rows-additional-visible'].find(
+				(elm) => elm.areacd === el.areacd
+			).role,
+			priority: false
+		}));
+
+	$: selectedFilteredChartData = selectedChartData
+		? selectedChartData.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1])
+		: null;
+	$: selectedFilteredChartDataBeeswarm = selectedFilteredChartData
+		? selectedFilteredChartData.find((el) => el.xDomainNumb === xDomain[1])
+		: null;
+
+	$: selectedFilteredChartDataBeeswarmWithRole = selectedFilteredChartDataBeeswarm
+		? { ...selectedFilteredChartDataBeeswarm, role: 'main', priority: true }
+		: null;
+
+	$: comparisonFilteredChartData = comparisonChartData
+		? comparisonChartData.filter(
+				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+			)
+		: null;
+	$: comparisonFilteredChartDataBeeswarm = comparisonFilteredChartData
+		? comparisonFilteredChartData.find((el) => parseFloat(el.xDomainNumb) === xDomain[1])
+		: null;
+
+	$: comparisonFilteredChartDataBeeswarmWithRole = comparisonFilteredChartDataBeeswarm
+		? {
+				...comparisonFilteredChartDataBeeswarm,
+				role: selectionsObject['areas-rows-comparison-visible'].role,
+				priority: true
+			}
+		: null;
+
+	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === xDomain[1]
+	);
+
+	$: showVisuals =
+		(selectedFilteredChartDataBeeswarm || comparisonFilteredChartDataBeeswarm) && latestTimePeriod;
+
+	/*$: selectedIndicatorCalculations = xDomain[1] ?
+						metadata.*/
+
+	/*$: selectedIndicatorCalculations = xDomain[1]
 		? metadata.indicatorsCalculationsArray.find(
 				(el) =>
 					el.code === indicator.code &&
@@ -121,31 +214,34 @@
 	$: hoverChartData =
 		hoverAreaId && filteredChartData
 			? filteredChartData.filter((el) => el.areacd === hoverAreaId)
-			: [];
+			: [];*/
 </script>
 
 <div class="indicator-row-container">
-	<TitleAdditionalDescription
-		showVisuals={selectedAreaFilteredChartDataBeeswarm || comparisonAreaFilteredChartDataBeeswarm}
-		titleText={indicator.metadata.label}
-		{xDomain}
-		{selectedAreaAndComparisonMinXDomain}
-		{selectedAreaAndComparisonMaxXDomain}
-		unitDescriptionText={indicator.metadata.subText}
-		additionalText={(
-			indicator.metadata.subtitle +
-			'|' +
-			indicator.metadata.additionalDescription
-		).split('|')}
+	<TitleAdditionalDescription {showVisuals} {indicator} {xDomain} {selectedAndComparisonXDomain}
 	></TitleAdditionalDescription>
 </div>
 
 <div class="indicator-row-container">
-	{#if selectedAreaFilteredChartDataBeeswarm || comparisonAreaFilteredChartDataBeeswarm}
+	{#if showVisuals}
 		<div class="visuals-container">
 			<div class="beeswarm-container">
-				{#if backgroundChartDataBeeswarm}
-					<BeeswarmRowContainer
+				<BeeswarmRowContainer
+					{metadata}
+					{indicator}
+					{latestTimePeriod}
+					{latestIndicatorCalculations}
+					{selectionsObject}
+					{selectedArea}
+					bind:hoverAreaId
+					bind:hoverIndicatorId
+					{selectedFilteredChartDataBeeswarmWithRole}
+					{comparisonFilteredChartDataBeeswarmWithRole}
+					{additionalFilteredChartDataBeeswarm}
+					{customLookup}
+					{filteredChartDataBeeswarm}
+				></BeeswarmRowContainer>
+				<!-- <BeeswarmRowContainer
 						{metadata}
 						{indicator}
 						{selectedIndicatorCalculations}
@@ -157,13 +253,12 @@
 						bind:hoverIndicatorId
 						{selectionsObject}
 						{selectedArea}
-					></BeeswarmRowContainer>
-				{/if}
+					></BeeswarmRowContainer> -->
 			</div>
 
 			<Divider orientation="vertical"></Divider>
 
-			<div class="line-chart-container">
+			<!-- <div class="line-chart-container">
 				{#if selectedAreaFilteredChartData || comparisonAreaFilteredChartData}
 					{#if xDomain[0] != xDomain[1] && (selectedAreaChartData.length > 1 || comparisonAreaFilteredChartData.length > 1)}
 						<LineChartRowContainer
@@ -184,7 +279,7 @@
 						<span>No historical<br />data</span>
 					{/if}
 				{/if}
-			</div>
+			</div> -->
 		</div>
 	{/if}
 </div>

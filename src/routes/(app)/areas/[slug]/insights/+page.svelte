@@ -38,10 +38,15 @@
 	let postcode;
 
 	//////// defining initial area data ///////
+	$: selectedAreaDemographicCluster =
+		metadata.clustersLookup.data.demographic[
+			metadata.clustersLookup.data.areacd.indexOf(data.place.areacd)
+		];
 
 	$: selectedArea = {
 		...metadata.areasObject[data.place.areacd],
-		role: 'main'
+		role: 'main',
+		similarCluster: selectedAreaDemographicCluster
 	};
 
 	// filter indicators to exclude any where there is no data for the selected area
@@ -77,16 +82,12 @@
 		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
 
-	$: sameParentSameGeogCodes = sameGeogLevelCodes.filter(
-		(el) => (el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
+	$: sameParentSameGeogAreas = sameGeogLevelAreas.filter(
+		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
-	$: sameParentSameGeogAreas = sameParentSameGeogCodes.map((el) => metadata.areasObject[el]);
+	$: sameParentSameGeogCodes = sameParentSameGeogAreas.map((el) => el.areacd);
 
-	// determine the codes for similar areas to the selected area
-	$: selectedAreaDemographicCluster =
-		metadata.clustersLookup.data.demographic[
-			metadata.clustersLookup.data.areacd.indexOf(selectedArea.areacd)
-		];
+	$: console.log(sameGeogLevelAreas);
 
 	$: similarCodes = metadata.clustersLookup.data.areacd.filter(
 		(el, i) =>

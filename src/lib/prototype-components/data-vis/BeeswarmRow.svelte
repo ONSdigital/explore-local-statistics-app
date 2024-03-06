@@ -4,25 +4,19 @@
 
 	import { onMount } from 'svelte';
 	import { scaleLinear } from 'd3-scale';
+	import BackgroundCircle from './beeswarm-row/BackgroundCircle.svelte';
 
 	export let metadata,
 		indicator,
-		selectedAreaFilteredChartDataBeeswarm,
-		comparisonAreaFilteredChartDataBeeswarm,
-		backgroundChartDataBeeswarm,
-		selectionsObject;
+		selectedFilteredChartDataBeeswarmWithRole,
+		comparisonFilteredChartDataBeeswarmWithRole,
+		additionalFilteredChartDataBeeswarm,
+		selectedArea,
+		selectionsObject,
+		filteredChartDataBeeswarm,
+		customLookup;
 
-	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
-
-	/*export let topRow,
-		metadata,
-		indicator,
-		selectedAreaFilteredChartDataBeeswarm,
-		comparisonAreaFilteredChartDataBeeswarm,
-		areasGroupsObject,
-		chosenComparisonMeasureOrArea,
-		backgroundChartDataBeeswarm;
-	export let hoverId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;*/
+	export let hoverAreaId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
 
 	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
 
@@ -35,7 +29,24 @@
 	});
 </script>
 
-<BackgroundCircles
+{#if mounted && selectionsObject['related-rows-visible']}
+	<BackgroundCircles
+		{metadata}
+		{x}
+		{xDomain}
+		{chartWidth}
+		{chartHeight}
+		{spaceForOutliers}
+		{indicator}
+		{filteredChartDataBeeswarm}
+		{selectionsObject}
+		{selectedArea}
+		bind:hoverAreaId
+		bind:hoverIndicatorId
+	></BackgroundCircles>
+{/if}
+
+<!-- <BackgroundCircles
 	{metadata}
 	{backgroundChartDataBeeswarm}
 	{x}
@@ -46,17 +57,20 @@
 	{indicator}
 	bind:hoverId
 	bind:hoverIndicatorId
-></BackgroundCircles>
+></BackgroundCircles> -->
 
-<g opacity={hoverId ? 0 : 1}>
+<g opacity={hoverAreaId ? 0 : 1}>
 	<PrimaryCirclesAndLabels
 		{indicator}
-		{comparisonAreaFilteredChartDataBeeswarm}
-		{selectedAreaFilteredChartDataBeeswarm}
+		{selectedFilteredChartDataBeeswarmWithRole}
+		{comparisonFilteredChartDataBeeswarmWithRole}
+		{additionalFilteredChartDataBeeswarm}
 		{x}
 		{xDomain}
 		{chartWidth}
 		{chartHeight}
 		{spaceForOutliers}
+		{customLookup}
+		{selectionsObject}
 	></PrimaryCirclesAndLabels>
 </g>

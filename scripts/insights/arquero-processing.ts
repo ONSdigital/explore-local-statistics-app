@@ -107,14 +107,20 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 					const values = filteredIndicatorDataSingleGeog.array('value');
 					allCalcsForIndicatorAndPeriod.calcsByGeogLevel[geogLevel] = {
 						med: median(values),
-						mad: mad(values)
+						mad: mad(values),
+						min: Math.min(...values),
+						max: Math.max(...values),
+						count: values.length
 					};
 					_oldStyleIndicatorsCalculations.push({
 						code: indicator.code,
 						geog_level: geogLevel,
 						period,
 						med: median(values),
-						mad: mad(values)
+						mad: mad(values),
+						min: Math.min(...values),
+						max: Math.max(...values),
+						count: values.length
 					});
 				}
 			}

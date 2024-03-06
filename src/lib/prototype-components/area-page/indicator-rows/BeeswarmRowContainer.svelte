@@ -1,9 +1,81 @@
 <script lang="ts">
 	import { madRangeLookup, colorsLookup } from '$lib/config';
-	import { roundNumber } from '$lib/utils';
 	import BeeswarmRow from '$lib/prototype-components/data-vis/BeeswarmRow.svelte';
 
 	export let metadata,
+		indicator,
+		latestTimePeriod,
+		latestIndicatorCalculations,
+		selectionsObject,
+		selectedArea,
+		hoverAreaId,
+		hoverIndicatorId,
+		selectedFilteredChartDataBeeswarmWithRole,
+		comparisonFilteredChartDataBeeswarmWithRole,
+		additionalFilteredChartDataBeeswarm,
+		filteredChartDataBeeswarm,
+		customLookup;
+
+	let width = 1000;
+	$: height = 80;
+
+	$: padding = { top: 45, right: 0, bottom: 5, left: 0 };
+
+	$: spaceForOutliers = 40;
+
+	$: chartWidth = width - padding.left - padding.right - spaceForOutliers * 2;
+	$: chartHeight = height - padding.top - padding.bottom;
+
+	$: madRange =
+		indicator.code in madRangeLookup
+			? madRangeLookup[indicator.code]['beeswarm-row']
+			: madRangeLookup.default['beeswarm-row'];
+
+	$: indicatorCalculations =
+		latestIndicatorCalculations.calcsByGeogLevel[
+			'lower' in latestIndicatorCalculations.calcsByGeogLevel
+				? 'lower'
+				: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+					? 'upper'
+					: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'region'
+						: 'country'
+		];
+
+	$: furtherDistanceFromMedian =
+		madRange === 'minMax'
+			? Math.max(
+					indicatorCalculations.med - indicatorCalculations.min,
+					indicatorCalculations.max - indicatorCalculations.med
+				)
+			: null;
+
+	$: xDomain =
+		madRange === 'minMax'
+			? [
+					indicatorCalculations.med - furtherDistanceFromMedian,
+					indicatorCalculations.med + furtherDistanceFromMedian
+				]
+			: [
+					indicatorCalculations.med - madRange * indicatorCalculations.mad,
+					indicatorCalculations.med + madRange * indicatorCalculations.mad
+				];
+
+	$: selectedComparisonDifference = !comparisonFilteredChartDataBeeswarmWithRole
+		? 'No comparison'
+		: !selectedFilteredChartDataBeeswarmWithRole
+			? 'No selected'
+			: selectedFilteredChartDataBeeswarmWithRole.value -
+						comparisonFilteredChartDataBeeswarmWithRole.value >
+				  indicatorCalculations.mad
+				? 'Higher'
+				: selectedFilteredChartDataBeeswarmWithRole.value -
+							comparisonFilteredChartDataBeeswarmWithRole.value <
+					  -indicatorCalculations.mad
+					? 'Lower'
+					: 'Similar';
+
+	/*export let metadata,
 		indicator,
 		selectedIndicatorCalculations,
 		backgroundChartDataBeeswarm,
@@ -78,7 +150,7 @@
 						: 'Neither'
 				: 'Neither';
 
-	/*$: backgroundStyle =
+	$: backgroundStyle =
 		goodBad === 'Good'
 			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
 			: goodBad === 'Bad'
@@ -86,89 +158,6 @@
 				: '';*/
 
 	$: backgroundStyle = '';
-
-	/*export let metadata,
-		indicator,
-		areasGroupsObject,
-		timePeriod,
-		selectedAreaFilteredChartDataBeeswarm,
-		comparisonAreaFilteredChartDataBeeswarm,
-		backgroundChartDataBeeswarm,
-		chosenComparisonMeasureOrArea;
-	export let hoverId, hoverIndicatorId, selectedIndicatorCalculations;
-
-	/let width = 1000;
-	$: height = 80;
-
-	$: padding = { top: 45, right: 0, bottom: 5, left: 0 };
-
-	$: spaceForOutliers = 40;
-
-	$: chartWidth = width - padding.left - padding.right - spaceForOutliers * 2;
-	$: chartHeight = height - padding.top - padding.bottom;
-
-	$: madRange =
-		indicator.code in madRangeLookup
-			? madRangeLookup[indicator.code]['beeswarm-row']
-			: madRangeLookup.default['beeswarm-row'];
-
-	$: values = madRange === 'minMax' ? backgroundChartDataBeeswarm.map((el) => [el.value]) : null;
-
-	$: furtherDistanceFromMedian =
-		madRange === 'minMax'
-			? Math.max(...values.map((el) => Math.abs(el - selectedIndicatorCalculations.med)))
-			: null;
-
-	$: xDomain =
-		madRange === 'minMax'
-			? [
-					selectedIndicatorCalculations.med - furtherDistanceFromMedian,
-					parseFloat(selectedIndicatorCalculations.med) + furtherDistanceFromMedian
-				]
-			: [
-					selectedIndicatorCalculations.med - madRange * selectedIndicatorCalculations.mad,
-					parseFloat(selectedIndicatorCalculations.med) +
-						madRange * selectedIndicatorCalculations.mad
-				];
-
-	$: selectedComparisonDifference = !comparisonAreaFilteredChartDataBeeswarm
-		? 'No comparison'
-		: !selectedAreaFilteredChartDataBeeswarm
-			? 'No selected'
-			: selectedAreaFilteredChartDataBeeswarm.value -
-						comparisonAreaFilteredChartDataBeeswarm.value >
-				  selectedIndicatorCalculations.mad
-				? 'Higher'
-				: selectedAreaFilteredChartDataBeeswarm.value -
-							comparisonAreaFilteredChartDataBeeswarm.value <
-					  -selectedIndicatorCalculations.mad
-					? 'Lower'
-					: 'Similar';
-
-	$: goodBad =
-		indicator.metadata.polarity == 1
-			? selectedComparisonDifference === 'Higher'
-				? 'Good'
-				: selectedComparisonDifference === 'Lower'
-					? 'Bad'
-					: 'Neither'
-			: indicator.metadata.polarity == -1
-				? selectedComparisonDifference === 'Higher'
-					? 'Bad'
-					: selectedComparisonDifference === 'Lower'
-						? 'Good'
-						: 'Neither'
-				: 'Neither';
-	$: backgroundStyle =
-		goodBad === 'Good'
-			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
-			: goodBad === 'Bad'
-				? 'background-color: #FDE0EF; box-shadow: 0 0 4px 3px #FDE0EF'
-				: '';
-
-	$: backgroundStyle = '';*/
-
-	$: console.log('helloWi');
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
@@ -179,16 +168,19 @@
 					<BeeswarmRow
 						{metadata}
 						{indicator}
-						{selectedAreaFilteredChartDataBeeswarm}
-						{comparisonAreaFilteredChartDataBeeswarm}
-						{backgroundChartDataBeeswarm}
+						{selectedFilteredChartDataBeeswarmWithRole}
+						{comparisonFilteredChartDataBeeswarmWithRole}
+						{additionalFilteredChartDataBeeswarm}
+						{filteredChartDataBeeswarm}
+						{selectedArea}
 						{selectionsObject}
-						bind:hoverId
+						bind:hoverAreaId
 						bind:hoverIndicatorId
 						{spaceForOutliers}
 						{chartWidth}
 						{chartHeight}
 						{xDomain}
+						{customLookup}
 					></BeeswarmRow>
 				{/if}
 			</g>
@@ -196,32 +188,34 @@
 	</svg>
 </div>
 
-<div class="robo-text-container" style="opacity: {hoverId ? 0 : 1};">
-	<div class="robo-text-inline" style={backgroundStyle}>
-		<span>
-			{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
-				No
-			{:else}
-				<span style="font-weight: bold">{selectedComparisonDifference}</span>
-				{selectedComparisonDifference === 'Similar' ? 'to' : 'than'}
-			{/if}
-			<span style="font-weight: bold"
-				>{selectedComparisonDifference === 'No selected'
-					? selectedArea.areacd
-					: 'label' in selectionsObject['areas-rows-comparison-visible']
-						? 'average'
-						: selectionsObject['areas-rows-comparison-visible'].areanm}
-			</span>
-			{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
-				data for
-			{:else}
-				in
-			{/if}
+{#if selectionsObject['areas-rows-comparison-visible']}
+	<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
+		<div class="robo-text-inline" style={backgroundStyle}>
+			<span>
+				{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
+					No
+				{:else}
+					<span style="font-weight: bold">{selectedComparisonDifference}</span>
+					{selectedComparisonDifference === 'Similar' ? 'to' : 'than'}
+				{/if}
+				<span style="font-weight: bold"
+					>{selectedComparisonDifference === 'No selected'
+						? selectedArea.areacd
+						: 'label' in selectionsObject['areas-rows-comparison-visible']
+							? 'average'
+							: selectionsObject['areas-rows-comparison-visible'].areanm}
+				</span>
+				{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
+					value for
+				{:else}
+					in
+				{/if}
 
-			<span style="font-weight: bold;">{timePeriod.label}</span>
-		</span>
+				<span style="font-weight: bold;">{latestTimePeriod.label}</span>
+			</span>
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	svg {

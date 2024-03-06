@@ -1,13 +1,7 @@
 <script>
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let showVisuals,
-		xDomain,
-		selectedAreaAndComparisonMinXDomain,
-		selectedAreaAndComparisonMaxXDomain,
-		titleText,
-		unitDescriptionText,
-		additionalText;
+	export let showVisuals, indicator, xDomain, selectedAndComparisonXDomain;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -28,19 +22,20 @@
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
 	{#if showVisuals}
 		<span style="font-weight: bold"
-			>{titleText}<span style="font-weight: normal"
-				>{unitDescriptionText ? ', ' + unitDescriptionText : ''}</span
+			>{indicator.metadata.label}<span style="font-weight: normal"
+				>{indicator.metadata.subText ? ', ' + indicator.metadata.subText : ''}</span
 			><InfoButton {expandIcon}></InfoButton></span
 		>
 	{:else}
 		<span style="text-align: left;">
 			<span>No data for</span>
-			<span style="font-weight: bold">{titleText}</span>
+			<span style="font-weight: bold">{indicator.metadata.label}</span>
 			<span
-				>{xDomain[1] < selectedAreaAndComparisonMinXDomain
-					? 'before ' + selectedAreaAndComparisonMinXDomain
-					: 'after ' + selectedAreaAndComparisonMaxXDomain}</span
-			><InfoButton {expandIcon}></InfoButton>
+				>{xDomain[1] > selectedAndComparisonXDomain[1]
+					? 'after ' + selectedAndComparisonXDomain[1]
+					: 'before ' + selectedAndComparisonXDomain[0]}</span
+			>
+			<InfoButton {expandIcon}></InfoButton>
 		</span>
 	{/if}
 </button>
