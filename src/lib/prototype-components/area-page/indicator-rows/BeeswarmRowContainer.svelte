@@ -40,6 +40,8 @@
 				: null
 			: null;
 
+	$: useCalculations = madRange != 'minMax' && indicatorCalculations;
+
 	$: furtherDistanceFromMedian =
 		madRange === 'minMax' || !indicatorCalculations
 			? Math.max(
