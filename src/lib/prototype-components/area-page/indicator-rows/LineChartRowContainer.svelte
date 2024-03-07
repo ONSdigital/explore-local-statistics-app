@@ -46,6 +46,8 @@
 		selectionsObject['areas-rows-additional-chosen'].includes(el.areacd)
 	);
 
+	$: console.log(madRange);
+
 	$: values = [
 		...additionalFilteredChartData,
 		...hoverChartData,
