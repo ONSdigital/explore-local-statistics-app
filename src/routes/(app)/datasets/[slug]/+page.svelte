@@ -21,7 +21,7 @@
 
 	export let data;
 
-	let geoGroup, year, columns;
+	let geoGroup, prevGeoGroup, year, columns;
 	let pivotedData, mapData;
 	let selected = [];
 
@@ -35,6 +35,13 @@
 		else if (selected.length < maxSelection) selected = [...selected, area];
 	};
 	const refreshData = () => {
+		if (geoGroup.key !== prevGeoGroup.key) {
+			selectionsObject = {
+				'indicator-additional-chosen': new Array(0),
+				'indicator-additional-visible': new Array(0)
+			};
+			prevGeoGroup = geoGroup;
+		}
 		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
 		mapData =
 			geoGroup?.codes && year
@@ -44,6 +51,7 @@
 
 	afterNavigate(() => {
 		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
+		prevGeoGroup = geoGroup;
 		year = data.indicator.years[data.indicator.years.length - 1];
 		columns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
@@ -82,9 +90,6 @@
 			metadata.areasObject
 		);
 	}
-
-	$: console.log('selectionsObject', selectionsObject);
-	$: console.log('geoGroup', geoGroup);
 
 	$: accordionArray = [
 		{
