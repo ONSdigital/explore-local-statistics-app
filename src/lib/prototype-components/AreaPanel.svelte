@@ -60,10 +60,6 @@
 				<Icon type="close" margin="0 0 0 4px" /></span
 			>
 		</button>
-		<!-- {:else}
-		<div class="none-selected">
-			<span>None</span>
-		</div> -->
 	{/if}
 {:else if area}
 	<div

@@ -16,6 +16,7 @@
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
+	import AreaPanel from '$lib/prototype-components/AreaPanel.svelte';
 	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
 
 	export let data;
@@ -82,34 +83,41 @@
 		);
 	}
 
+	$: console.log('selectionsObject', selectionsObject);
+	$: console.log('geoGroup', geoGroup);
+
 	$: accordionArray = [
 		{
-			label: 'Selected areas:',
+			label: '',
 			type: 'checkbox',
 			chosenKey: 'indicator-additional',
 			accordion: false,
 			options: [
 				{
+					key: 'ctry',
 					label: 'Countries',
 					data: changeAreasOptionsObject.country,
 					accordion: true
 				},
 				{
-					label: 'Regions',
+					key: 'rgn',
+					label: 'Countries and regions',
 					data: changeAreasOptionsObject.region,
 					accordion: true
 				},
 				{
+					key: 'utla',
 					label: 'Upper-tier local authorities',
 					data: changeAreasOptionsObject.upper,
 					accordion: true
 				},
 				{
+					key: 'ltla',
 					label: 'Lower-tier local authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
 				}
-			]
+			].filter((op) => op.key === geoGroup?.key)
 		}
 	];
 
@@ -155,11 +163,30 @@
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this indicator" marginTop>
-		<ChangeAreas
-			{accordionArray}
-			bind:selectionsObject
-			customLookup={customLookup['indicator-additional-visible']}
-		></ChangeAreas>
+		<strong class="selected-areas">Selected areas</strong>
+		<div class="row-container sticky">
+			<div class="visible-areas-key-container">
+				{#each selectionsObject['indicator-additional-visible'] as area}
+					<AreaPanel
+						{area}
+						bind:chosen={selectionsObject['indicator-additional-chosen']}
+						{customLookup}
+						backgroundColor="color"
+						color="contrast"
+					/>
+				{/each}
+				{#if selectionsObject['indicator-additional-visible'].length === 0}
+					<span class="no-selection">No areas selected</span>
+				{/if}
+			</div>
+			<div class="row-container buttons-container">
+				<ChangeAreas
+					{accordionArray}
+					bind:selectionsObject
+					customLookup={customLookup['indicator-additional-visible']}
+				></ChangeAreas>
+			</div>
+		</div>
 		<NavSection title="Map">
 			<ContentBlock
 				type="map"
@@ -189,36 +216,11 @@
 					prefix={data.indicator.metadata.prefix}
 					suffix={data.indicator.metadata.suffix}
 					dp={+data.indicator.metadata.decimalPlaces}
-					{selected}
+					selected={selectionsObject['indicator-additional-visible']}
 					on:select={doSelect}
 				/>
 			</ContentBlock>
 		</NavSection>
-		<!-- <NavSection title="Beeswarm">
-    <ContentBlock type="chart" title={data.indicator.label} unit={getUnit(data.indicator)} data={mapData.data}>
-      <div class="content-dropdowns" data-html2canvas-ignore>
-        <Dropdown options={data.geos.groups} bind:value={geoGroup} on:change={refreshData}/>
-        <Dropdown id="year" options={data.years} bind:value={year} on:change={refreshData}/>
-      </div>
-      {#key mapData}
-      <ScatterChart data={mapData.data} xKey="value" idKey="areacd" labelKey="areanm" color="lightgrey" colorSelect="#206095" height={500} yFitBeeswarm overlayFill hover labels select {selected} on:select={doSelect}/>
-      {/key}
-    </ContentBlock>
-  </NavSection>
-  <NavSection title="Timeseries">
-    <ContentBlock type="chart" title={data.indicator.label} unit={getUnit(data.indicator)} data={pivotedData}>
-      {#if data.years.length > 1}
-        <div class="content-dropdowns" data-html2canvas-ignore>
-          <Dropdown options={data.geos.groups} bind:value={geoGroup} on:change={refreshData}/>
-        </div>
-        {#key filteredData}
-        <LineChart data={filteredData} xKey="year" yKey="value" zKey="areacd" idKey="areacd" labelKey="areanm" color={pivotedData.length > 40 ? 'rgba(0,0,0,.1)' : 'rgba(0,0,0,.4)'} lineWidth={0.5} height={500} padding={{ top: 20, bottom: 28, left: 35, right: 100 }} yMin={null} hover labels select {selected} on:select={doSelect}/>
-        {/key}
-      {:else}
-        <p>Only one year of data is available for this indicator, therefore no timeseries can be displayed.</p>
-      {/if}
-    </ContentBlock>
-  </NavSection> -->
 		<NavSection title="Table">
 			<ContentBlock
 				type="table"
@@ -276,5 +278,55 @@
 	}
 	:global(section#map > h2) {
 		margin-top: -6px !important;
+	}
+
+	/* Sticky header CSS */
+	.selected-areas {
+		color: #999;
+		text-transform: uppercase;
+	}
+
+	.no-selection {
+		color: #222;
+		background: #ddd;
+		padding: 6px;
+		border-radius: 3px;
+	}
+
+	.sticky {
+		margin: 0 0 24px;
+		width: 100%;
+		background-color: white;
+		padding: 10px 0px;
+		position: sticky;
+		top: 0px;
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		justify-content: space-between;
+	}
+
+	.row-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 4px;
+	}
+
+	.col1 {
+		white-space: nowrap; /* Prevent text in the first column from wrapping */
+		text-align: end;
+	}
+
+	.col2 {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.button-container {
+		justify-content: flex-end;
 	}
 </style>

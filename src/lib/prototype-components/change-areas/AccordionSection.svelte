@@ -2,7 +2,7 @@
 	import OptionsBlock from '$lib/prototype-components/change-areas/OptionsBlock.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 	import Select from '$lib/prototype-components/modified-svelte-components/Select.svelte';
-	import { Twisty } from '@onsvisual/svelte-components';
+	import AccordionInner from './AccordionInner.svelte';
 
 	export let accordionSection, accordionOpen, index, chosen, visibleAreas, customLookup;
 
@@ -25,7 +25,7 @@
 	let isSearchTextFilled = false;
 </script>
 
-<Twisty title={accordionSection.label}>
+<AccordionInner title={accordionSection.label}>
 	{#each unaccordionedOptions as option, i}
 		<div class="options-container">
 			<OptionsBlock {accordionSection} {option} bind:chosen></OptionsBlock>
@@ -47,50 +47,7 @@
 			{/each}
 		</div>
 	{/if}
-</Twisty>
-
-<!-- <div class="accordion-section-container">
-	<div class="row-container">
-		{#if accordionSection.accordion}
-			<button class="accordion-button row-container" on:click={onClickEventOpen}>
-				<svg width="30" height="30" viewBox="0 0 24 24">
-					<g transform={accordionOpen === index ? 'translate(24,0)rotate(90)' : null}>
-						<path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-					</g>
-				</svg>
-				<span>{accordionSection.label}</span>
-			</button>
-		{:else}
-			<span style="font-weight: bold;">{accordionSection.label}</span>
-		{/if}
-	</div>
-
-	{#if accordionOpen === index || !accordionSection.accordion}
-		<div class="options-container">
-			{#each unaccordionedOptions as option, i}
-				<div class="options-container">
-					<OptionsBlock {accordionSection} {option} bind:chosen></OptionsBlock>
-				</div>
-
-				<Divider orientation="horizontal"></Divider>
-			{/each}
-
-			{#if accordionedOptions.length > 0}
-				<div class="sticky-container">
-					<div class="sticky">
-						<Select bind:searchText bind:isSearchTextFilled></Select>
-					</div>
-
-					{#each accordionedOptions as option, i}
-						<div class="options-container">
-							<OptionsBlock {accordionSection} {option} bind:chosen {regex}></OptionsBlock>
-						</div>
-					{/each}
-				</div>
-			{/if}
-		</div>
-	{/if}
-</div> -->
+</AccordionInner>
 
 <style>
 	.row-container {

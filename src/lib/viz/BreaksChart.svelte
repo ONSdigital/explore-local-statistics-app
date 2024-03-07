@@ -246,7 +246,7 @@
 	}
 	.value {
 		position: absolute;
-		z-index: 100;
+		z-index: 50;
 		top: -24px;
 		text-align: center;
 		background-color: rgba(255, 255, 255, 0.8);
