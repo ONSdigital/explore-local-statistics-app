@@ -225,6 +225,7 @@
 					suffix={data.indicator.metadata.suffix}
 					dp={+data.indicator.metadata.decimalPlaces}
 					selected={selectionsObject['indicator-additional-visible']}
+					customLookup={customLookup['indicator-additional-visible']}
 					on:select={doSelect}
 				/>
 			</ContentBlock>
@@ -295,10 +296,12 @@
 	}
 
 	.no-selection {
+		display: inline-block;
 		color: #222;
 		background: #ddd;
 		padding: 6px;
 		border-radius: 3px;
+		line-height: 20px;
 	}
 
 	.sticky {

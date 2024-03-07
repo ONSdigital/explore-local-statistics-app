@@ -19,8 +19,8 @@
 	export let prefix = '';
 	export let suffix = '';
 	export let snapTicks = true;
-	export let markerColors = ['#003c57', '#871a5b', '#f66068', '#746cb1', '#a8bd3a'];
 	export let markerPadding = 4;
+	export let getColor = () => ({ color: null, contrast: null });
 
 	let container, width;
 	let labels = [];
@@ -122,7 +122,7 @@
 	}
 
 	$: cells = makeCells(data.map((d) => d.value));
-	$: selectedData = selected.map((s) => data.find((d) => d.areacd === s.areacd));
+	$: selectedData = selected.map((s) => ({ ...s, ...data.find((d) => d.areacd === s.areacd) }));
 	$: positionedData = positionLabels(selectedData, labels, container, width);
 </script>
 
@@ -164,7 +164,7 @@
 					style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
 					style:top="{-20 - (d.offset || 0) * 20}px"
 					style:height="calc(100% + {20 + (d.offset || 0) * 20}px)"
-					style:background-color={d.areacd === hovered ? 'orange' : markerColors[i] || 'grey'}
+					style:background-color={d.areacd === hovered ? 'orange' : getColor(d)?.color || 'grey'}
 				/>
 				<div
 					class="value"
@@ -172,7 +172,7 @@
 					style:transform={d.align === 'left'
 						? `translateX(-100%) translateX(-${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`
 						: `translateX(${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`}
-					style:color={d.areacd === hovered ? 'orange' : markerColors[i] || 'grey'}
+					style:color={d.areacd === hovered ? 'orange' : getColor(d)?.color || 'grey'}
 					bind:this={labels[i]}
 				>
 					{#if d.align === 'left'}

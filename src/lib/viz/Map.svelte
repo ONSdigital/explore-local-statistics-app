@@ -6,6 +6,7 @@
 	import { makeFeatures } from '$lib/util/geo/makeFeatures';
 	import { countryLookup } from '$lib/config/geoConfig';
 	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
+	import { colorsLookup } from '$lib/config';
 	import BreaksChart from './BreaksChart.svelte';
 
 	export let data;
@@ -23,8 +24,8 @@
 		'rgb(0, 78, 166)',
 		'rgb(0, 13, 84)'
 	];
-	export let markerColors = ['#003c57', '#871a5b', '#f66068', '#746cb1', '#a8bd3a'];
 	export let topoPath = `${base}/data/topo.json`;
+	export let customLookup;
 
 	let features, bounds;
 
@@ -47,11 +48,22 @@
 			const feature = features[d.areacd];
 			feature.properties = {
 				...d,
-				color: options.boundary ? markerColors[i] || 'grey' : colors[d.cluster]
+				color: options.boundary ? getColor(d)?.color || 'grey' : colors[d.cluster]
 			};
 			return feature;
 		})
 	});
+
+	function getColor(area) {
+		console.log('getColor', area, customLookup, colorsLookup);
+		return area
+			? area.role === 'custom'
+				? Object.keys(customLookup).length > colorsLookup.custom.length
+					? colorsLookup.customExceedThreshold
+					: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
+				: colorsLookup[area.role]
+			: { color: null, constrast: null };
+	}
 
 	onMount(async () => {
 		features = await makeFeatures(topoPath);
@@ -160,6 +172,7 @@
 			minimumFractionDigits: dp,
 			maximumFractionDigits: dp
 		})}
+	{getColor}
 	on:select={doSelect}
 	on:hover={doHover}
 />
