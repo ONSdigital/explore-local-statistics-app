@@ -35,7 +35,7 @@
 <style>
 	.input-container-focused-border {
 		width: 400px;
-		border-radius: 4px;
+		border-radius: 6px;
 		border: solid 3px transparent;
 	}
 
@@ -44,8 +44,8 @@
 	}
 
 	.input-container {
-		border-radius: 2px;
-		padding: 5px 5px;
+		border-radius: 3px;
+		padding: 8px 5px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
