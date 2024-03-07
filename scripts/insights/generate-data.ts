@@ -216,6 +216,7 @@ function generateAreaDetails(outConfig, combinedData) {
 	for (const areacd of Object.keys(areaDetails)) {
 		if (areacd in deomgraphicClustersLookup) {
 			areaDetails[areacd].demographicCluster = deomgraphicClustersLookup[areacd].filter(
+				// Don't include this area in the list of area codes in the cluster.
 				(d) => d !== areacd
 			);
 		}
@@ -324,16 +325,14 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 			.dedupe()
 			.array('cluster')
 			.sort((a, b) => a.localeCompare(b));
+
 		const codeAndYear = joinedTable.select('code', 'xDomainNumb').dedupe().objects();
+		const lookup = toNestedLookup(joinedTable.objects(), ['code', 'xDomainNumb', 'cluster']);
 		for (const { code, xDomainNumb } of codeAndYear) {
-			const filteredTable = joinedTable.filter(
-				aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
-			);
 			const filteredResults = {};
 			for (const cluster of clusters) {
-				const clusterValues = filteredTable
-					.filter(aq.escape((d) => d.cluster === cluster))
-					.array('value');
+				const clusterItems = lookup.get(code).get(xDomainNumb).get(cluster);
+				const clusterValues = clusterItems === undefined ? [] : clusterItems.map((d) => d.value);
 				filteredResults[cluster] = {
 					median: clusterValues.length === 0 ? null : median(clusterValues),
 					mad: clusterValues.length === 0 ? null : mad(clusterValues)
@@ -360,15 +359,14 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 
 	const combinedDataWithoutNulls = combinedData.filter((d) => d.value !== null);
 	const codeAndYear = combinedDataWithoutNulls.select('code', 'xDomainNumb').dedupe().objects();
+	const lookup = toNestedLookup(combinedDataWithoutNulls.objects(), ['code', 'xDomainNumb']);
 	for (const { code, xDomainNumb } of codeAndYear) {
-		const filteredTable = combinedDataWithoutNulls.filter(
-			aq.escape((d) => d.code === code && d.xDomainNumb === xDomainNumb)
-		);
+		const filteredTable = lookup.get(code).get(xDomainNumb);
 		const filteredResults = {};
 		for (const geogGroup of geogGroups) {
 			const geogGroupValues = filteredTable
-				.filter(aq.escape((d) => geogGroup.areaCodes.has(d.areacd)))
-				.array('value');
+				.filter((d) => geogGroup.areaCodes.has(d.areacd))
+				.map((d) => d.value);
 			filteredResults[geogGroup.parentCode] = {
 				median: geogGroupValues.length === 0 ? null : median(geogGroupValues),
 				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues)
@@ -507,6 +505,25 @@ function toLookup(data, keyName: string, valueName: string | null = null) {
 		} else {
 			lookup[item[keyName]] = item[valueName];
 		}
+	}
+	return lookup;
+}
+
+function toNestedLookup(data, keys) {
+	const lookup = new Map();
+	for (const item of data) {
+		let map = lookup;
+		for (const key of keys.slice(0, -1)) {
+			if (!map.has(item[key])) {
+				map.set(item[key], new Map());
+			}
+			map = map.get(item[key]);
+		}
+		const lastKey = keys[keys.length - 1];
+		if (!map.has(item[lastKey])) {
+			map.set(item[lastKey], []);
+		}
+		map.get(item[lastKey]).push(item);
 	}
 	return lookup;
 }
