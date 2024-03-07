@@ -34,7 +34,7 @@
 	$: markerStrokeWidthFactor =
 		area.role === 'main' || linesCount === 1 ? 1 : linesCount === 2 ? 0.3 : 0.15;
 
-	$: opacity = area.role === 'main' || linesCount === 1 ? 1 : linesCount === 2 ? 0.5 : 0.25;
+	$: opacity = area.role === 'main' || linesCount === 1 ? 1 : linesCount === 2 ? 0.75 : 0.5;
 </script>
 
 <g class="line-group" {opacity}>
