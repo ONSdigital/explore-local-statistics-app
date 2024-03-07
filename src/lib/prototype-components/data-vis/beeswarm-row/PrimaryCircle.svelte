@@ -41,9 +41,9 @@
 			class="ci-rect"
 			transform="translate(0,{2 * y(circle.y)})"
 			x={circle.datum.lciXPosition}
-			y={-4}
+			y={-5}
 			width={circle.datum.uciXPosition - circle.datum.lciXPosition}
-			height="8"
+			height="10"
 			fill="white"
 			stroke="none"
 			stroke-width="1px"
@@ -59,7 +59,7 @@
 			fill={color.color}
 			stroke="white"
 			stroke-width="1px"
-			fill-opacity="0.6"
+			fill-opacity="0.4"
 		></rect>
 	{/if}
 

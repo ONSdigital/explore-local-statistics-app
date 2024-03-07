@@ -77,7 +77,7 @@ export const madRangeLookup = {
 
 export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
-	lineChartRow: { markerRadius: { first: 4, last: 5, other: 3.5 } },
+	lineChartRow: { markerRadius: { first: 3.5, last: 5, other: 3.25 } },
 	beeswarmRow: {
 		backgroundRadius: { 20: 6.4, 50: 6, 100: 5.5, 200: 5, default: 5 },
 		primaryRadius: 8

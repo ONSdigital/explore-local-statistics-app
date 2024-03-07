@@ -29,7 +29,7 @@
 
 	$: primaryCircleDataStep1 = (
 		showConfidenceIntervals
-			? [selectedFilteredChartDataBeeswarmWithRole, comparisonFilteredChartDataBeeswarmWithRole]
+			? [selectedFilteredChartDataBeeswarmWithRole]
 			: [
 					selectedFilteredChartDataBeeswarmWithRole,
 					comparisonFilteredChartDataBeeswarmWithRole,
@@ -61,7 +61,7 @@
 						: x(el.uci)
 		}));
 
-	$: doConfidenceIntervalsOverlap =
+	/*$: doConfidenceIntervalsOverlap =
 		primaryCircleDataStep1.length === 2 && showConfidenceIntervals
 			? doLinesInOneDSpaceOverlap(
 					primaryCircleDataStep1[0][
@@ -77,7 +77,9 @@
 						primaryCircleDataStep1[1].uciXPosition ? 'uciXPosition' : 'xPosition'
 					] + 2
 				)
-			: false;
+			: false;*/
+
+	let doConfidenceIntervalsOverlap = false;
 
 	$: primaryCircleDataStep2 = showConfidenceIntervals
 		? primaryCircleDataStep1.map((el, i) => ({

@@ -16,6 +16,8 @@
 		chosenXDomain,
 		showConfidenceIntervals;
 
+	let width;
+
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
 	);
@@ -139,9 +141,9 @@
 		: null;
 
 	$: comparisonFilteredChartData = comparisonChartData
-		? comparisonChartData.filter(
-				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-			)
+		? comparisonChartData
+				.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1])
+				.sort((a, b) => a.xDomainNumb - b.xDomainNumb)
 		: null;
 	$: comparisonFilteredChartDataBeeswarm = comparisonFilteredChartData
 		? comparisonFilteredChartData.find((el) => parseFloat(el.xDomainNumb) === xDomain[1])
@@ -156,25 +158,29 @@
 		: null;
 
 	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
-	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
-		(el) => el.period === xDomain[1]
-	);
 
 	$: showVisuals =
 		(selectedFilteredChartDataBeeswarm || comparisonFilteredChartDataBeeswarm) && latestTimePeriod;
 
-	$: indicatorCalculations =
-		latestIndicatorCalculations.calcsByGeogLevel[
-			selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
-				? selectedArea.geogLevel
-				: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
-					? 'lower'
-					: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
-						? 'upper'
-						: 'region' in latestIndicatorCalculations.calcsByGeogLevel
-							? 'region'
-							: 'country'
-		];
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === xDomain[1]
+	);
+
+	$: console.log(latestIndicatorCalculations);
+
+	$: indicatorCalculations = latestIndicatorCalculations
+		? latestIndicatorCalculations.calcsByGeogLevel[
+				selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
+					? selectedArea.geogLevel
+					: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'lower'
+						: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'upper'
+							: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+								? 'region'
+								: 'country'
+			]
+		: null;
 
 	let mounted = false;
 
@@ -290,6 +296,8 @@
 							{selectedFilteredChartData}
 							{comparisonFilteredChartData}
 							{indicatorCalculations}
+							{customLookup}
+							{showConfidenceIntervals}
 						></LineChartRowContainer>
 						<!-- <LineChartRowContainer
 							{metadata}
@@ -338,7 +346,17 @@
 		flex-direction: column;
 		flex-wrap: nowrap;
 		justify-content: center;
-		width: 34%;
+		width: 32%;
+	}
+
+	@media (max-width: 800px) {
+		.beeswarm-container {
+			width: 100%;
+		}
+
+		.line-chart-container {
+			display: none;
+		}
 	}
 
 	span {

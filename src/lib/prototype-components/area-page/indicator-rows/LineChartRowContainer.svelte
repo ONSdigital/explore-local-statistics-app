@@ -14,18 +14,20 @@
 		hoverChartData,
 		filteredChartData,
 		hoverAreaId,
-		selectionsObject;
+		selectionsObject,
+		customLookup,
+		showConfidenceIntervals;
 
 	let width = 1000,
 		height = 80;
 
 	let yAxisMaxTickWidth = 0,
 		xAxisFinalTickWidth = 0,
-		maxLabelWidth = 80;
+		maxLabelWidth = 100;
 
 	$: padding = {
 		top: 5,
-		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 10),
+		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth),
 		bottom: 25,
 		left: 10 + yAxisMaxTickWidth
 	};
@@ -40,7 +42,12 @@
 			? filteredChartData.filter((el) => el.areacd === hoverAreaId)
 			: [];
 
+	$: additionalFilteredChartData = filteredChartData.filter((el) =>
+		selectionsObject['areas-rows-additional-chosen'].includes(el.areacd)
+	);
+
 	$: values = [
+		...additionalFilteredChartData,
 		...hoverChartData,
 		...(selectedFilteredChartData ? selectedFilteredChartData : []),
 		...(comparisonFilteredChartData ? comparisonFilteredChartData : [])
@@ -185,9 +192,11 @@
 					bind:yAxisMaxTickWidth
 					bind:xAxisFinalTickWidth
 					bind:maxLabelWidth
-					{filteredChartData}
 					{timePeriodsArray}
 					{selectionsObject}
+					{additionalFilteredChartData}
+					{customLookup}
+					{showConfidenceIntervals}
 				></LineChartRow>
 				<!-- <LineChartRow
 					{indicator}
