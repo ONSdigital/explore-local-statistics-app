@@ -29,10 +29,13 @@
 
 	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 	const doSelect = (e) => {
+		const chosen = selectionsObject['indicator-additional-chosen'];
 		const area = e.detail?.area;
-		if (selected.map((s) => s.areacd).includes(area.areacd))
-			selected = selected.filter((s) => s.areacd !== area.areacd);
-		else if (selected.length < maxSelection) selected = [...selected, area];
+		if (chosen.includes(area.areacd))
+			selectionsObject['indicator-additional-chosen'] = chosen.filter((s) => s !== area.areacd);
+		else if (chosen.length < maxSelection)
+			selectionsObject['indicator-additional-chosen'] = [...chosen, area.areacd];
+		console.log(selectionsObject);
 	};
 	const refreshData = () => {
 		if (geoGroup.key !== prevGeoGroup.key) {
@@ -175,7 +178,7 @@
 					<AreaPanel
 						{area}
 						bind:chosen={selectionsObject['indicator-additional-chosen']}
-						{customLookup}
+						customLookup={customLookup['indicator-additional-visible']}
 						backgroundColor="color"
 						color="contrast"
 					/>
