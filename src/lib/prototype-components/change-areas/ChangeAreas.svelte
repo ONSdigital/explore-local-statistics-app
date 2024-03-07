@@ -52,7 +52,6 @@
 						{customLookup}
 						backgroundColor="color"
 						color="contrast"
-						borderColor="color"
 					></AreaPanel>
 				{/each}
 			{/each}
