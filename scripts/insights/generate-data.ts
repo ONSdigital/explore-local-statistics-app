@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import aq from 'arquero';
 import arqueroProcessing from './arquero-processing.js';
 import { readCsvAutoType } from './io.ts';
@@ -292,7 +292,8 @@ function combineIndicatorCalculations(
 function makeClustersLookup(clustersLookupRaw) {
 	const clustersLookup = {
 		data: { areacd: clustersLookupRaw.map((row) => row['Local Authority Code']) },
-		types: []
+		types: [],
+		descriptions: getClusterDescriptions()
 	};
 	for (const columnName of clustersLookupRaw.columns) {
 		if (!columnName.startsWith('Local Authority')) {
@@ -305,6 +306,29 @@ function makeClustersLookup(clustersLookupRaw) {
 		}
 	}
 	return clustersLookup;
+}
+
+function getClusterDescriptions() {
+	let clusterDescriptions = readFileSync(CONFIG.CONFIG_DIR + '/clusters/Cluster-descriptions.txt')
+		.toString()
+		.split('\n')
+		.filter((s) => new RegExp('^[A-Za-z]*_[A-D]:').test(s));
+
+	const clusterTypesLookup = {
+		Glob: 'global',
+		Econ: 'economic',
+		Demo: 'demographic',
+		Health: 'health',
+		Con: 'connectivity'
+	};
+
+	clusterDescriptions = clusterDescriptions.map((d) => ({
+		type: clusterTypesLookup[d.split('_')[0]],
+		letter: d.split('_')[1].slice(0, 1).toLowerCase(),
+		text: d.replace(new RegExp('^[^:]*: *'), '')
+	}));
+
+	return clusterDescriptions;
 }
 
 function makeClustersCalculations(clustersLookup, combinedData) {
@@ -509,7 +533,7 @@ function toLookup(data, keyName: string, valueName: string | null = null) {
 	return lookup;
 }
 
-function toNestedLookup(data, keys) {
+function toNestedLookup(data, keys, valueName) {
 	const lookup = new Map();
 	for (const item of data) {
 		let map = lookup;
@@ -523,7 +547,7 @@ function toNestedLookup(data, keys) {
 		if (!map.has(item[lastKey])) {
 			map.set(item[lastKey], []);
 		}
-		map.get(item[lastKey]).push(item);
+		map.get(item[lastKey]).push(valueName == null ? item : item[valueName]);
 	}
 	return lookup;
 }
