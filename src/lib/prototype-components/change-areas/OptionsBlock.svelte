@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Radio from '$lib/prototype-components/modified-svelte-components/Radio.svelte';
 	import Checkbox from '$lib/prototype-components/modified-svelte-components/Checkbox.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 
 	export let accordionSection, option, chosen, regex;
 
@@ -25,11 +26,7 @@
 {#if optionsArray.length > 0}
 	{#if option.accordion}
 		<button class="row-container accordion-button" on:click={onClickEventOpen}>
-			<svg width="20" height="20" viewBox="0 0 24 24">
-				<g transform={accordionOpen ? 'translate(24,0)rotate(90)' : null}>
-					<path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-				</g>
-			</svg>
+			<Icon type="chevron" rotation={accordionOpen ? -90 : 0} />
 			<span>{option.label}</span>
 		</button>
 	{:else if 'label' in option}
@@ -61,7 +58,7 @@
 
 <style>
 	.column-container {
-		margin: 0px 20px;
+		margin: 0 3px;
 		display: flex;
 		flex-direction: column;
 	}
@@ -88,5 +85,10 @@
 
 	.accordion-button span {
 		padding: 0px 4px 0px 0px;
+	}
+
+	button.accordion-button > span {
+		display: inline-block;
+		transform: translateY(2px);
 	}
 </style>

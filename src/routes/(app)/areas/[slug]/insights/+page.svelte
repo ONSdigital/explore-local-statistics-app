@@ -282,17 +282,11 @@
 
 	$: rowsAccordionArray = [
 		{
-			label: 'Primary comparison area/measure',
+			label: 'Primary comparison',
 			type: 'radio',
 			chosenKey: 'areas-rows-comparison',
 			accordion: true,
 			options: [
-				{
-					data: [{ label: 'None', key: 'none' }],
-					accordion: false,
-					labelKey: 'label',
-					idKey: 'key'
-				},
 				{
 					data: changeAreasOptionsObject.median,
 					accordion: false,
@@ -302,6 +296,12 @@
 				{
 					data: changeAreasOptionsObject.parents,
 					accordion: false
+				},
+				{
+					data: [{ label: 'None', key: 'none' }],
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
 				},
 				{
 					label: 'Other areas in ' + formatName(parentArea.areanm),
@@ -329,20 +329,20 @@
 			]
 		},
 		{
-			label: 'Related areas',
+			label: 'Related area groups',
 			type: 'radio',
 			search: null,
 			chosenKey: 'related-rows',
 			accordion: true,
 			options: [
 				{
-					data: [{ label: 'None', key: 'none' }],
+					data: changeAreasOptionsObject.related,
 					accordion: false,
 					labelKey: 'label',
 					idKey: 'key'
 				},
 				{
-					data: changeAreasOptionsObject.related,
+					data: [{ label: 'None', key: 'none' }],
 					accordion: false,
 					labelKey: 'label',
 					idKey: 'key'
@@ -350,7 +350,7 @@
 			]
 		},
 		{
-			label: 'Additional areas',
+			label: 'Add more areas',
 			type: 'checkbox',
 			chosenKey: 'areas-rows-additional',
 			dependency: 'areas-rows-comparison',

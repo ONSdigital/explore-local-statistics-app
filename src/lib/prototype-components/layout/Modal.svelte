@@ -66,15 +66,16 @@
 		}
 	}
 
-	.title-exit-button-container {
-		justify-content: space-between;
-		align-items: center;
-	}
-
 	.row-container {
 		margin: 0px 0px 20px 0px;
 		padding: 0px;
 		display: flex;
+	}
+
+	.title-exit-button-container {
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 12px;
 	}
 
 	.modal-title {

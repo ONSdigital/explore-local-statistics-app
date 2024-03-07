@@ -8,7 +8,7 @@
 
 <div class="input-container-focused-border">
 	<div class="input-container">
-		<input placeholder="Type to search areas" bind:value={searchText} />
+		<input placeholder="Type to filter areas" bind:value={searchText} />
 
 		{#if searchText === ''}
 			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 14 14" width="20"
@@ -36,11 +36,11 @@
 	.input-container-focused-border {
 		width: 400px;
 		border-radius: 4px;
-		border: solid 2px transparent;
+		border: solid 3px transparent;
 	}
 
 	.input-container-focused-border:focus-within {
-		border: solid 2px orange;
+		border: solid 3px var(--ons-color-sun-yellow, #fbc900);
 	}
 
 	.input-container {

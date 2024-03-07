@@ -74,7 +74,7 @@
 	.title-container span {
 		display: inline-block;
 		font-weight: bold;
-		transform: translateY(-3px);
+		transform: translateY(-2px);
 		/* font-size: 20px; */
 	}
 

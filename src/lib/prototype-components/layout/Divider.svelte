@@ -1,13 +1,18 @@
 <script lang="ts">
-	export let orientation, margin;
+	export let orientation = 'horizontal';
+	export let margin = null;
+
+	$: _margin =
+		typeof margin === 'string'
+			? margin
+			: typeof margin === 'number'
+				? `${margin}px`
+				: Array.isArray(margin)
+					? margin.map((m) => `${m}px`).join(' ')
+					: null;
 </script>
 
-<div
-	class="divider-{orientation}"
-	style={margin
-		? 'margin: ' + margin[0] + 'px ' + margin[1] + 'px ' + margin[2] + 'px ' + margin[3] + 'px;'
-		: null}
-></div>
+<div class="divider-{orientation}" style:margin={_margin}></div>
 
 <style>
 	.divider-vertical {

@@ -2,7 +2,7 @@
 	import OptionsBlock from '$lib/prototype-components/change-areas/OptionsBlock.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 	import Select from '$lib/prototype-components/modified-svelte-components/Select.svelte';
-	import AreaPanel from '$lib/prototype-components/AreaPanel.svelte';
+	import { Twisty } from '@onsvisual/svelte-components';
 
 	export let accordionSection, accordionOpen, index, chosen, visibleAreas, customLookup;
 
@@ -25,7 +25,31 @@
 	let isSearchTextFilled = false;
 </script>
 
-<div class="accordion-section-container">
+<Twisty title={accordionSection.label}>
+	{#each unaccordionedOptions as option, i}
+		<div class="options-container">
+			<OptionsBlock {accordionSection} {option} bind:chosen></OptionsBlock>
+		</div>
+
+		<Divider orientation="horizontal" margin={[8, 0]}></Divider>
+	{/each}
+
+	{#if accordionedOptions.length > 0}
+		<div class="sticky-container">
+			<div class="sticky">
+				<Select bind:searchText bind:isSearchTextFilled></Select>
+			</div>
+
+			{#each accordionedOptions as option, i}
+				<div class="options-container">
+					<OptionsBlock {accordionSection} {option} bind:chosen {regex}></OptionsBlock>
+				</div>
+			{/each}
+		</div>
+	{/if}
+</Twisty>
+
+<!-- <div class="accordion-section-container">
 	<div class="row-container">
 		{#if accordionSection.accordion}
 			<button class="accordion-button row-container" on:click={onClickEventOpen}>
@@ -39,19 +63,6 @@
 		{:else}
 			<span style="font-weight: bold;">{accordionSection.label}</span>
 		{/if}
-
-		<!-- <div class="visible-areas-container">
-			{#each Array.isArray(visibleAreas) ? (visibleAreas.length > 0 ? visibleAreas : [null]) : [visibleAreas] as area}
-				<AreaPanel
-					{area}
-					bind:chosen
-					{customLookup}
-					backgroundColor="color"
-					textColor="contrast"
-					borderColor="color"
-				></AreaPanel>
-			{/each}
-		</div> -->
 	</div>
 
 	{#if accordionOpen === index || !accordionSection.accordion}
@@ -79,7 +90,7 @@
 			{/if}
 		</div>
 	{/if}
-</div>
+</div> -->
 
 <style>
 	.row-container {
@@ -110,10 +121,9 @@
 	}
 
 	.options-container {
-		margin: 10px 20px;
+		/* margin: 10px 20px; */
 		display: flex;
 		flex-direction: column;
-		background-color: #fafafa;
 		border-radius: 2px;
 	}
 
@@ -126,7 +136,8 @@
 		padding: 5px 0px;
 		position: sticky;
 		top: 0px;
-		background-color: #fafafa;
+		background: white;
+		z-index: 1;
 	}
 
 	.visible-areas-container {

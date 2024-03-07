@@ -1,5 +1,6 @@
 <script>
 	import { colorsLookup } from '$lib/config';
+	import Icon from '$lib/components/Icon.svelte';
 
 	export let area,
 		chosen,
@@ -42,16 +43,9 @@
 			class="visible-area-container"
 			style="background-color: {bgColor}; font-weight: {fontWeight}; font-size: {fontSize};"
 		>
-			<span style="color: {txtColor}">{label}</span>
-
-			<svg
-				cursor="pointer"
-				xmlns="http://www.w3.org/2000/svg"
-				aria-hidden="true"
-				viewBox="0 0 36 24"
-				width="20"
-				><path stroke={txtColor} fill="none" stroke-width="3px" d="M 1 1 l22 22 M23 1 l-22 22"
-				></path></svg
+			<span style="color: {txtColor}"
+				>{label}
+				<Icon type="close" margin="0 0 0 4px" /></span
 			>
 		</button>
 		<!-- {:else}
@@ -97,7 +91,8 @@
 		font-family: inherit;
 		background: none;
 		border: none;
-		padding: 4px 6px !important;
+		padding: 6px !important;
+		border-radius: 3px;
 	}
 
 	.visible-area-container {
