@@ -55,11 +55,11 @@
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
 			<AreaPanel
 				area={selectionsObject['related-rows-visible']}
-				markerRadius="5"
+				markerRadius="6"
 				button={false}
-				fontSize="16px"
 				backgroundColor="white"
-				textColor="#222"
+				color="#ddd"
+				borderColor="#707070"
 			></AreaPanel>
 			{#if visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
 				<span style="font-size: 16px;"

@@ -51,7 +51,7 @@
 						bind:chosen={selectionsObject[accordionSection.chosenKey + '-chosen']}
 						{customLookup}
 						backgroundColor="color"
-						textColor="contrast"
+						color="contrast"
 						borderColor="color"
 					></AreaPanel>
 				{/each}

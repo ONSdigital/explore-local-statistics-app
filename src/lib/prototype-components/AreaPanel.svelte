@@ -11,14 +11,14 @@
 		fontSize = '18px',
 		fontWeight = 'normal',
 		backgroundColor = 'contrast',
-		textColor = 'color',
-		borderColor = 'color';
+		color = 'color',
+		borderColor = null;
 
 	const onClickEvent = () => {
 		chosen = Array.isArray(chosen) ? chosen.filter((el) => el != area.areacd) : null;
 	};
 
-	$: color = area
+	$: col = area
 		? area.role === 'custom'
 			? Object.keys(customLookup).length > colorsLookup.custom.length
 				? colorsLookup.customExceedThreshold
@@ -27,13 +27,25 @@
 		: { color: null, constrast: null };
 
 	$: bgColor = ['color', 'contrast'].includes(backgroundColor)
-		? color[backgroundColor]
+		? col[backgroundColor]
 		: backgroundColor;
-	$: txtColor = ['color', 'contrast'].includes(textColor) ? color[textColor] : textColor;
+	$: txtColor =
+		borderColor && ['color', 'contrast'].includes(borderColor)
+			? col[borderColor]
+			: borderColor
+				? borderColor
+				: ['color', 'contrast'].includes(color)
+					? col[color]
+					: color;
+	$: fillColor = !borderColor
+		? txtColor
+		: ['color', 'contrast'].includes(color)
+			? col[color]
+			: color;
 
 	$: label = area ? ('label' in area ? area.label : area.areanm) : null;
 
-	$: console.log('area-color', area, color);
+	$: console.log('area-color', area, col);
 </script>
 
 {#if button}
@@ -66,18 +78,27 @@
 						y={10 - markerRadius * 0.8}
 						width={markerRadius * 1.6}
 						height={markerRadius * 1.6}
-						stroke="none"
-						fill={txtColor}
+						stroke={borderColor}
+						stroke-width={borderColor ? 1 : null}
+						fill={fillColor}
 					/>
 				{:else if markerShape === 'diamond'}
 					<polygon
 						points="{10 - markerRadius},10 10,{10 - markerRadius} {10 + +markerRadius},10 10,{10 +
 							+markerRadius} {10 - markerRadius},10"
-						stroke="none"
-						fill={txtColor}
+						stroke={borderColor}
+						stroke-width={borderColor ? 1 : null}
+						fill={fillColor}
 					/>
 				{:else}
-					<circle cx="10" cy="10" r={markerRadius} stroke="none" fill={txtColor} />
+					<circle
+						cx="10"
+						cy="10"
+						r={markerRadius}
+						stroke={borderColor}
+						stroke-width={borderColor ? 1 : null}
+						fill={fillColor}
+					/>
 				{/if}
 			</svg>
 		{/if}
