@@ -22,7 +22,7 @@
 </script>
 
 <div class="sticky-container">
-	<NavSection title="Topics"></NavSection>
+	<NavSection title="Topics" hideTitle></NavSection>
 	<strong class="selected-areas">Selected areas</strong>
 
 	<StickyHeader
