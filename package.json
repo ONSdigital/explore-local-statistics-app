@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "npm run test:integration && npm run test:unit",
+		"test": "npm run test:integration && npm run test:unit && npm run data:test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
@@ -15,7 +15,7 @@
 		"test:unit": "vitest",
 		"data:generate": "tsx scripts/insights/generate-data.ts",
 		"data:check-parsing-speed": "tsx scripts/insights/check-parsing-speed.ts",
-		"data:test-stats": "tsx scripts/insights/test-stats.ts"
+		"data:test": "tsx scripts/insights/tests.ts"
 	},
 	"devDependencies": {
 		"@onsvisual/robo-utils": "^0.2.20",
