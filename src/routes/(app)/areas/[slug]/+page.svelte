@@ -179,7 +179,7 @@
 			labelKey="areanm"
 			groupKey="group"
 			label="Type a place name or postcode"
-			placeholder="Eg. Titchfield or PO15 5RR"
+			placeholder="Eg. Fareham or PO15 5RR"
 			autoClear
 			on:select={navTo}
 		/>
