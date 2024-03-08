@@ -31,17 +31,21 @@
 
 {#if filteredTopicIndicators.length > 0}
 	<div class="topic-section-container">
-		<NavSection title={topicUppercase} subsection>
+		<NavSection title={topicUppercase} hideTitle subsection>
+			<h2 class="">{topicUppercase}</h2>
+
 			{#each subTopics as subTopic, i}
-				<div class="sub-topic-container">
-					<h2 class="sub-topic-header">
+				<div class="sub-topic-container" style="margin-bottom: 10px;">
+					<h3 class="sub-topic-header" style="margin-bottom: 20px;">
 						{subTopic.name[0].toUpperCase() + subTopic.name.substring(1)}
-					</h2>
+					</h3>
+
+					<!-- <div class="divider" style="margin-bottom: 20px;"></div> -->
 
 					{#each subTopic.filteredIndicators as indicator, j}
-						<Divider orientation="horizontal" margin={[0, 0, 0, 0]}></Divider>
+						<!-- <Divider orientation="horizontal" margin={[0, 0, 0, 0]}></Divider> -->
 
-						<div style="background-color: {j % 2 === 0 ? '#fafafa' : 'white'}">
+						<div style="margin-bottom: 20px;">
 							<IndicatorRow
 								bind:hoverAreaId
 								bind:hoverIndicatorId
@@ -73,6 +77,8 @@
 						{backgroundAreasCodes}
 					></IndicatorRow> -->
 						</div>
+
+						<div class="divider" style="margin-bottom: 20px;"></div>
 					{/each}
 				</div>
 			{/each}
@@ -91,5 +97,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+	}
+	.divider {
+		border-bottom: 1px solid var(--ons-color-grey-15);
 	}
 </style>

@@ -10,7 +10,8 @@
 		selectionsObject,
 		customLookup,
 		chosenXDomain,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		backgroundColor = 'white';
 
 	$: visibleParentAreas = selectionsObject['areas-rows-additional-visible'].filter(
 		(el) => el.role != 'custom'
@@ -24,7 +25,7 @@
 
 <div></div>
 
-<div class="row-container sticky">
+<div class="row-container sticky control-panel">
 	<div class="visible-areas-key-container grid-container">
 		<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
 		{#each visibleParentAreas as area, i}
@@ -81,11 +82,14 @@
 </div>
 
 <style>
+	.control-panel {
+		border-bottom: 1px solid var(--ons-color-grey-15);
+	}
 	.sticky {
 		margin: 0px;
 		width: 100%;
 		background-color: white;
-		padding: 10px 0px;
+		padding: 20px 0 30px 0;
 		position: sticky;
 		top: 0px;
 		z-index: 10;

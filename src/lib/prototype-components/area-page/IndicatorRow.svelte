@@ -254,7 +254,7 @@
 			: [];*/
 </script>
 
-<div class="indicator-row-container">
+<div class="indicator-row-container" style="margin-bottom: 20px;">
 	<TitleAdditionalDescription {showVisuals} {indicator} {xDomain} {selectedAndComparisonXDomain}
 	></TitleAdditionalDescription>
 </div>

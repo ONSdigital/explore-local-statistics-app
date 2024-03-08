@@ -23,7 +23,6 @@
 
 <div class="sticky-container">
 	<NavSection title="Topics" hideTitle></NavSection>
-	<strong class="selected-areas">Selected areas</strong>
 
 	<StickyHeader
 		{metadata}
@@ -34,7 +33,6 @@
 		bind:chosenXDomain
 		bind:showConfidenceIntervals
 	></StickyHeader>
-
 	<div class="topic-sections-container">
 		{#each metadata.topicsArray as topic, i}
 			<TopicSection
@@ -71,11 +69,13 @@
 </div>
 
 <style>
+	.control-panel {
+		background-color: #e2e2e3;
+	}
 	.topic-sections-container {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		margin-top: 24px;
 	}
 	.selected-areas {
 		color: #999;
