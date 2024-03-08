@@ -3,9 +3,10 @@
 		fill = 'black';
 </script>
 
-<div class="infoCell">
+<div class="info-cell">
 	<svg
-		style="width: 20; height: 20;"
+		style:width="24px"
+		style:height="24px"
 		class="c h-16 w-16 inline svelte-nloqxl"
 		viewBox={expandIcon ? '4 6 40 40' : '0 2 48 48'}
 		><path
@@ -16,11 +17,12 @@
 </div>
 
 <style>
-	.infoCell {
-		padding: 0px 5px;
-		margin: 0px;
+	.info-cell {
+		padding: 0 5px;
+		margin: 0;
 		display: inline-block;
 		position: relative;
+		transform: translateY(-1px);
 	}
 
 	svg {
