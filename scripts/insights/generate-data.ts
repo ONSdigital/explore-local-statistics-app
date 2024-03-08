@@ -468,8 +468,9 @@ function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 }
 
 function findGlobalXDomainExtent(indicatorsArray) {
-	const xDomainNumbers = indicatorsArray.map((e) => parseInt(e.minXDomainNumb));
-	return [Math.min(...xDomainNumbers), Math.max(...xDomainNumbers)];
+	const minXDomainNumbers = indicatorsArray.map((e) => parseInt(e.minXDomainNumb));
+	const maxXDomainNumbers = indicatorsArray.map((e) => parseInt(e.maxXDomainNumb));
+	return [Math.min(...minXDomainNumbers), Math.max(...maxXDomainNumbers)];
 }
 
 function readConfigFromCsvs() {
