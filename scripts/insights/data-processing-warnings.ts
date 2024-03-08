@@ -89,3 +89,17 @@ export async function abortIfNewFilesExist(previous_file_paths, csv_preprocess_d
 		throw new Error(CONFIG.MISSING_FILES_WARNING);
 	}
 }
+export function checkSlugs(slugs) {
+	const slugsSet = new Set(slugs);
+	if (slugsSet.size !== slugs.length) {
+		throw new Error('Error: At least one indicator slug is duplicated!');
+	}
+	const slugRegExp = new RegExp('^[a-z0-9-]*$');
+	for (const slug of slugs) {
+		if (!slugRegExp.test(slug)) {
+			throw new Error(
+				`Error: Slug ${slug} should only contain lowercase letters, numbers, and hyphens!`
+			);
+		}
+	}
+}

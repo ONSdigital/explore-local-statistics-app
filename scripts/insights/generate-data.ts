@@ -7,6 +7,7 @@ import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
 import { toLookup, uniqueValues, toNestedLookup } from './data-utils.ts';
 import { writeJson } from './io.ts';
+import { checkSlugs } from './data-processing-warnings.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
@@ -17,50 +18,29 @@ async function main() {
 	const [combinedData, indicators, indicatorsCalculations, _oldStyleIndicatorsCalculations] =
 		await arqueroProcessing();
 
-	const data = {
-		beeswarmKeyData: readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`),
-		combinedData: combinedData.objects()
-	};
 	const config = readConfigFromCsvs();
 	config.indicators = indicators.objects();
 	config.indicatorsCalculations = indicatorsCalculations;
 	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
 
-	checkSlugs(config.indicatorsMetadata);
+	checkSlugs(config.indicatorsMetadata.map((d) => d.slug));
 
-	const outData = generateOutData(data, config.indicators);
-	writeJson(COLUMN_ORIENTED_DATA_OUTPUT_PATH, {
-		combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
-		beeswarmKeyData: outData.beeswarmKeyData
-	});
-
-	const outConfig = generateOutConfig(
-		config,
-		combinedData,
-		outData.combinedDataObjectColumnOriented
+	const combinedDataObjectColumnOriented = generateOutData(
+		combinedData.objects(),
+		config.indicators
 	);
 
+	const outConfig = generateOutConfig(config, combinedData, combinedDataObjectColumnOriented);
+
+	writeJson(COLUMN_ORIENTED_DATA_OUTPUT_PATH, {
+		combinedDataObjectColumnOriented,
+		beeswarmKeyData: readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`)
+	});
 	writeJson(CONFIG_OUTPUT_PATH, outConfig);
 }
 
-function checkSlugs(indicatorsMetadata) {
-	const slugs = indicatorsMetadata.map((d) => d.slug);
-	const slugsSet = new Set(slugs);
-	if (slugsSet.size !== slugs.length) {
-		throw new Error('Error: At least one indicator slug is duplicated!');
-	}
-	const slugRegExp = new RegExp('^[a-z0-9-]*$');
-	for (const slug of slugs) {
-		if (!slugRegExp.test(slug)) {
-			throw new Error(
-				`Error: Slug ${slug} should only contain lowercase letters, numbers, and hyphens!`
-			);
-		}
-	}
-}
-
-function generateOutData(data, indicatorsArray) {
-	const combinedDataArray = [...data.combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
+function generateOutData(combinedData, indicatorsArray) {
+	const combinedDataArray = [...combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 
 	// combinedDataObjectColumnOriented stores an array for each column to save space.
 	const combinedDataObjectColumnOriented = {};
@@ -83,10 +63,7 @@ function generateOutData(data, indicatorsArray) {
 		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
 	}
 
-	return {
-		combinedDataObjectColumnOriented,
-		beeswarmKeyData: data.beeswarmKeyData
-	};
+	return combinedDataObjectColumnOriented;
 }
 
 function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented) {
