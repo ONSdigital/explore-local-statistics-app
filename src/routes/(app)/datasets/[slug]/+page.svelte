@@ -219,25 +219,6 @@
 				/>
 			</ContentBlock>
 		</NavSection>
-		<NavSection title="Table">
-			<ContentBlock
-				type="table"
-				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
-				data={pivotedData}
-			>
-				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown
-						options={data.indicator.inferredGeos.groups}
-						bind:value={geoGroup}
-						on:change={refreshData}
-					/>
-				</div>
-				{#key pivotedData}
-					<Table data={pivotedData} {columns} height={500} stickyHeader compact />
-				{/key}
-			</ContentBlock>
-		</NavSection>
 
 		<NavSection title="Line chart">
 			<ContentBlock
@@ -270,6 +251,26 @@
 					customLookup={customLookup['indicator-additional-visible']}
 					{metadata}
 				></BarChartContainerIndicatorPage>
+			</ContentBlock>
+		</NavSection>
+
+		<NavSection title="Table">
+			<ContentBlock
+				type="table"
+				title={data.indicator.metadata.label}
+				unit={getUnit(data.indicator.metadata)}
+				data={pivotedData}
+			>
+				<div class="content-dropdowns" data-html2canvas-ignore>
+					<Dropdown
+						options={data.indicator.inferredGeos.groups}
+						bind:value={geoGroup}
+						on:change={refreshData}
+					/>
+				</div>
+				{#key pivotedData}
+					<Table data={pivotedData} {columns} height={500} stickyHeader compact />
+				{/key}
 			</ContentBlock>
 		</NavSection>
 
