@@ -5,7 +5,7 @@
 		generateDivisibleNumbersWithinRange
 	} from '$lib/utils';
 
-	export let selectedIndicator, chartWidth, y, yDomain;
+	export let indicator, chartWidth, y, yDomain;
 
 	$: yDistance = Math.abs(yDomain[1] - yDomain[0]);
 	$: yDistancePowerBelow = 10 ** Math.floor(Math.log10(yDistance));
@@ -28,9 +28,7 @@
 			<line y1="0" y2="-8"></line>
 
 			<text text-anchor="middle" x="0" y="-10"
-				>{selectedIndicator.metadata.prefix +
-					addThousandsSeparator(d) +
-					selectedIndicator.metadata.suffix}</text
+				>{indicator.metadata.prefix + addThousandsSeparator(d) + indicator.metadata.suffix}</text
 			>
 		</g>
 	{/each}

@@ -4,7 +4,60 @@
 
 	import { scaleLinear } from 'd3-scale';
 
-	export let selectedIndicator,
+	export let indicator,
+		latestPeriod,
+		chartWidth,
+		chartHeight,
+		yDomain,
+		isHoverLabelVisible,
+		hoverId,
+		hoverAreaWithDataAdded,
+		maxLabelWidth,
+		filteredChartDataSelected,
+		filteredChartDataAdditionals,
+		filteredChartDataAreaGroup,
+		selectionsObject,
+		selectedArea,
+		customLookup,
+		showConfidenceIntervals,
+		additionalID,
+		relatedID,
+		dataArray;
+
+	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
+
+	$: selectedBar = selectedArea
+		? {
+				areacd: selectedArea.areacd,
+				areanm: selectedArea.areanm,
+				role: 'main',
+				data: filteredChartDataSelected[0]
+			}
+		: null;
+
+	$: additionalBars = selectionsObject[additionalID + '-visible']
+		.map((el) => ({
+			areacd: el.areacd,
+			areanm: el.areanm,
+			role: el.role,
+			data: filteredChartDataAdditionals.find((elm) => elm.areacd === el.areacd)
+		}))
+		.filter((el) => el.data);
+
+	//$: data = .sort((a, b) => b.data[0].value - a.data[0].value);
+
+	let labelRectArray = [];
+
+	$: maxLabelWidth =
+		labelRectArray.length > 0
+			? Math.max(120, ...labelRectArray.map((el, i) => (i < labelRectArray.length ? el.width : 0)))
+			: maxLabelWidth;
+
+	$: dataArray = [selectedBar, ...additionalBars]
+		.filter((el) => el)
+		.sort((a, b) => b.data.value - a.data.value);
+
+	/*export let selectedIndicator,
 		timePeriodsArray,
 		chartWidth,
 		chartHeight,
@@ -22,9 +75,9 @@
 
 	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
 
-	/*$: hoverAreaWithDataAdded = hoverId
+	$: hoverAreaWithDataAdded = hoverId
 		? visibleAreasWithDataAdded[1].find((el) => el.areacd === hoverId)
-		: undefined;*/
+		: undefined;
 
 	$: data = [...visibleAreasWithDataAdded[0], ...visibleAreasWithDataAdded[1]].sort(
 		(a, b) => b.data[0].value - a.data[0].value
@@ -35,16 +88,23 @@
 	$: maxLabelWidth =
 		labelRectArray.length > 0
 			? Math.max(120, ...labelRectArray.map((el, i) => (i < labelRectArray.length ? el.width : 0)))
-			: maxLabelWidth;
+			: maxLabelWidth;*/
 </script>
 
-<AxisX {selectedIndicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
+<AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
 
 <line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
 
-{#each data as area, index}
-	<g transform="translate(0,{50 + (chartHeight - 100) * (index / (data.length - 1))})">
-		<Bar {area} {data} {y} {chartHeight} bind:labelBBox={labelRectArray[index]}></Bar>
+{#each dataArray as area, index}
+	<g transform="translate(0,{(index + 1) * 50})">
+		<Bar
+			{area}
+			{y}
+			{chartHeight}
+			bind:labelBBox={labelRectArray[index]}
+			{customLookup}
+			{showConfidenceIntervals}
+		></Bar>
 	</g>
 {/each}
 

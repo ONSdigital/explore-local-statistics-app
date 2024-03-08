@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let selectedIndicator, timePeriodsArray, selectedChartType;
+	export let selectedIndicator, xDomain, selectedChartType, timePeriodsArray;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -20,11 +20,15 @@
 
 	$: subtitleText =
 		selectedIndicator.metadata.subtitle +
-		', ' +
-		(selectedChartType.multiYear === 'Yes' ||
-		(selectedChartType.multiYear === 'Either' && timePeriodsArray.length > 1)
-			? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
-			: timePeriodsArray[0].label);
+		(timePeriodsArray.length > 0
+			? ', ' +
+				((selectedChartType.multiYear === 'Yes' || selectedChartType.multiYear === 'Either') &&
+				xDomain[1] != xDomain[0] &&
+				isFinite(xDomain[0]) &&
+				isFinite(xDomain[1])
+					? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
+					: timePeriodsArray[0].label)
+			: '');
 	$: additionalText = '';
 </script>
 

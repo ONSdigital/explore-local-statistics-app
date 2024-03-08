@@ -6,14 +6,24 @@
 	import { Textarea, Button } from '@onsvisual/svelte-components';
 	import Icon from '$lib/components/Icon.svelte';
 
-	let showEmbed = false,
-		embedCode = '',
-		type = '',
-		data = [];
-
 	import { onMount } from 'svelte';
 
-	export let combinedSelectableAreaTypesObject,
+	export let customLookup,
+		selectionsObject,
+		filteredIndicators,
+		chartData,
+		metadata,
+		selectedArea,
+		accordionArray;
+
+	let chosenIndicatorId;
+
+	/*let showEmbed = false,
+		embedCode = '',
+		type = '',
+		data = [];*/
+
+	/*export let combinedSelectableAreaTypesObject,
 		chartData,
 		metadata,
 		visibleAreas,
@@ -25,16 +35,26 @@
 		chosenRegionsArray,
 		chosenAllOtherArray;
 
-	let chosenIndicatorId;
+	let chosenIndicatorId;*/
 
 	onMount(() => {
-		chosenIndicatorId = filteredIndicators[6];
+		chosenIndicatorId = filteredIndicators[0];
 	});
 </script>
 
 <div class="main-chart-section-container">
 	{#if chosenIndicatorId}
 		<MainChart
+			{customLookup}
+			bind:selectionsObject
+			{filteredIndicators}
+			{chartData}
+			{metadata}
+			{selectedArea}
+			{accordionArray}
+			bind:chosenIndicatorId
+		></MainChart>
+		<!-- <MainChart
 			{combinedSelectableAreaTypesObject}
 			{chartData}
 			{metadata}
@@ -47,9 +67,9 @@
 			bind:chosenCountriesArray
 			bind:chosenRegionsArray
 			bind:chosenAllOtherArray
-		></MainChart>
+		></MainChart> -->
 	{/if}
-	<div class="content-actions">
+	<!-- <div class="content-actions">
 		<h4>Use and share</h4>
 		<ul>
 			{#if type !== 'table'}<li>
@@ -80,7 +100,7 @@
 				>
 			</div>
 		{/if}
-	</div>
+	</div> -->
 </div>
 
 <style>

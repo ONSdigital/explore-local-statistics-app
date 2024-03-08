@@ -20,7 +20,7 @@ export const regions = [
 export let mainChartOptionsArray = [
 	{ id: 0, label: 'Time series', multiYear: 'Yes' },
 	{ id: 1, label: 'Bar chart', multiYear: 'No' },
-	{ id: 2, label: 'Beeswarm', multiYear: 'No' },
+	//{ id: 2, label: 'Beeswarm', multiYear: 'No' },
 	{ id: 3, label: 'Map', multiYear: 'No' },
 	{ id: 4, label: 'Table', multiYear: 'Either' }
 ];
@@ -76,7 +76,7 @@ export const madRangeLookup = {
 };
 
 export const chartConfigurations = {
-	lineChart: { markerRadius: { first: 4, last: 5, other: 3.5 } },
+	lineChart: { markerRadius: { first: 4.5, last: 5, other: 4.5 } },
 	lineChartRow: { markerRadius: { first: 3.5, last: 5, other: 3.25 } },
 	beeswarmRow: {
 		backgroundRadius: { 20: 6.4, 50: 6, 100: 5.5, 200: 5, default: 5 },

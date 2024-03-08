@@ -4,17 +4,18 @@
 
 	import labelplacer from 'labelplacer';
 
-	export let visibleAreasWithDataAdded,
+	export let lines,
 		isHoverLabelVisible,
 		hoverId,
 		hoverAreaWithDataAdded,
 		maxLabelWidth,
 		chartWidth,
 		chartHeight,
-		y;
+		y,
+		customLookup;
 
 	$: permanentLabels = labelplacer(
-		visibleAreasWithDataAdded[0],
+		lines,
 		[0, chartHeight],
 		(d) => y(d.data[0].value) + 6,
 		(d) => (d.areanm.length > 25 ? 52 : 26)
@@ -29,14 +30,16 @@
 					...permanentLabelsBBoxArray.map((el, i) => (i < permanentLabels.length ? el.width : 0))
 				)
 			: maxLabelWidth;
+
+	$: linesCodes = lines.map((el) => el.areacd);
 </script>
 
 <g class="labels-container" transform="translate({chartWidth + 13},0)">
 	{#each permanentLabels as label, i}
-		<Label {label} bind:hoverId bind:labelBBox={permanentLabelsBBoxArray[i]}></Label>
+		<Label {label} bind:hoverId bind:labelBBox={permanentLabelsBBoxArray[i]} {customLookup}></Label>
 	{/each}
 
-	{#if hoverAreaWithDataAdded}
+	{#if hoverAreaWithDataAdded && !linesCodes.includes(hoverAreaWithDataAdded.areacd)}
 		<HoverLabel label={hoverAreaWithDataAdded} bind:isHoverLabelVisible {maxLabelWidth} {y}
 		></HoverLabel>
 	{/if}

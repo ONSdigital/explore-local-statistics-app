@@ -93,18 +93,19 @@
 		{/each}
 	</g>
 	{#if hoverChartData.length > 0}
-		<!-- <ConfidenceIntervals area={{ role: 'selected', data: hoverChartData }} {xDomain} {x} {y}
-		></ConfidenceIntervals> -->
 		{#if showConfidenceIntervals}
-			<Line
-				area={{ role: 'selected', data: hoverChartData }}
-				{xDomain}
-				{x}
-				{y}
-				{customLookup}
-				linesCount={1}
-			></Line>
+			<ConfidenceIntervals area={{ role: 'selected', data: hoverChartData }} {xDomain} {x} {y}
+			></ConfidenceIntervals>
 		{/if}
+
+		<Line
+			area={{ role: 'selected', data: hoverChartData }}
+			{xDomain}
+			{x}
+			{y}
+			{customLookup}
+			linesCount={1}
+		></Line>
 	{/if}
 </g>
 

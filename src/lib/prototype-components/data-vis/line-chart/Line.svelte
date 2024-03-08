@@ -2,7 +2,15 @@
 	import { colorsLookup, chartConfigurations } from '$lib/config';
 	import { line } from 'd3-shape';
 
-	export let area, x, y, xDomain, hoverId;
+	export let area,
+		x,
+		y,
+		xDomain,
+		hoverId,
+		customLookup,
+		background,
+		linesCount = 0,
+		hover = false;
 
 	$: pathFunction = line()
 		.x((d) => {
@@ -12,8 +20,15 @@
 			return y(d.value);
 		});
 
-	$: backgroundColor = colorsLookup[hoverId === area.areacd ? 'selected' : area.role].color;
-	$: textColor = colorsLookup[hoverId === area.areacd ? 'selected' : area.role].contrast;
+	$: color = hover
+		? colorsLookup.selected
+		: area
+			? area.role === 'custom'
+				? Object.keys(customLookup).length > colorsLookup.custom.length
+					? colorsLookup.customExceedThreshold
+					: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
+				: colorsLookup[area.role]
+			: { color: null, constrast: null };
 
 	const onMouseEnterEvent = () => {
 		hoverId = area.areacd;
@@ -29,43 +44,48 @@
 	opacity={hoverId
 		? hoverId === area.areacd
 			? 1
-			: 0.1
-		: ['similar', 'sameRegion'].includes(area.role)
-			? 0.75
-			: 1}
+			: 0
+		: !background
+			? 1
+			: linesCount < 30
+				? 0.5
+				: linesCount < 100
+					? 0.35
+					: 0.2}
 >
+	{#if !background}
+		<path
+			class="primary-line"
+			d={pathFunction(area.data)}
+			fill="none"
+			stroke={'white'}
+			stroke-width={'4px'}
+			pointer-events="none"
+		></path>
+	{/if}
 	<path
+		pointer-events="none"
 		class="primary-line"
 		d={pathFunction(area.data)}
 		fill="none"
-		stroke={backgroundColor}
-		stroke-width={!['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd
+		stroke={color.color}
+		stroke-width={!background
 			? '3px'
-			: '2px'}
+			: linesCount < 30
+				? '2px'
+				: linesCount < 100
+					? '1.75px'
+					: '1.5px'}
 	></path>
 
-	{#if !['similar', 'sameRegion'].includes(area.role) || hoverId === area.areacd}
+	{#if !background}
 		<g class="markers-group">
 			{#each area.data as point}
 				<g transform="translate({x(point.xDomainNumb)},{y(point.value)})">
 					{#if ['parent', 'country', 'uk'].includes(area.role)}
 						<rect
 							transform={['country', 'uk'].includes(area.role) ? 'rotate(45)' : null}
-							x={-chartConfigurations.lineChart.markerRadius[
-								point.xDomainNumb === xDomain[0]
-									? 'first'
-									: point.xDomainNumb === xDomain[1]
-										? 'last'
-										: 'other'
-							]}
-							y={-chartConfigurations.lineChart.markerRadius[
-								point.xDomainNumb === xDomain[0]
-									? 'first'
-									: point.xDomainNumb === xDomain[1]
-										? 'last'
-										: 'other'
-							]}
-							width={2 *
+							x={-0.75 *
 								chartConfigurations.lineChart.markerRadius[
 									point.xDomainNumb === xDomain[0]
 										? 'first'
@@ -73,7 +93,7 @@
 											? 'last'
 											: 'other'
 								]}
-							height={2 *
+							y={-0.75 *
 								chartConfigurations.lineChart.markerRadius[
 									point.xDomainNumb === xDomain[0]
 										? 'first'
@@ -81,9 +101,26 @@
 											? 'last'
 											: 'other'
 								]}
-							fill={backgroundColor}
+							width={1.5 *
+								chartConfigurations.lineChart.markerRadius[
+									point.xDomainNumb === xDomain[0]
+										? 'first'
+										: point.xDomainNumb === xDomain[1]
+											? 'last'
+											: 'other'
+								]}
+							height={1.5 *
+								chartConfigurations.lineChart.markerRadius[
+									point.xDomainNumb === xDomain[0]
+										? 'first'
+										: point.xDomainNumb === xDomain[1]
+											? 'last'
+											: 'other'
+								]}
+							fill={color.color}
 							stroke="white"
-							stroke-width="1.5px"
+							stroke-width={linesCount < 30 ? '1.5px' : '0.5px'}
+							pointer-events="none"
 						></rect>
 					{:else}
 						<circle
@@ -95,8 +132,9 @@
 										: 'other'
 							]}
 							stroke="white"
-							stroke-width="1.5px"
-							fill={backgroundColor}
+							stroke-width={linesCount < 30 ? '1.5px' : '0.5px'}
+							fill={color.color}
+							pointer-events="none"
 						></circle>
 					{/if}
 				</g>
@@ -104,14 +142,16 @@
 		</g>
 	{/if}
 
-	<path
-		class="overlay-line"
-		on:mouseenter={onMouseEnterEvent}
-		on:mouseleave={onMouseLeaveEvent}
-		d={pathFunction(area.data)}
-		fill="none"
-		stroke={'black'}
-		stroke-width={'20px'}
-		opacity={0}
-	></path>
+	{#if !hover}
+		<path
+			class="overlay-line"
+			on:mouseenter={onMouseEnterEvent}
+			on:mouseleave={onMouseLeaveEvent}
+			d={pathFunction(area.data)}
+			fill="none"
+			stroke={'black'}
+			stroke-width={'20px'}
+			opacity={0}
+		></path>
+	{/if}
 </g>

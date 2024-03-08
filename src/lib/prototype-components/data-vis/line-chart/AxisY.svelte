@@ -5,7 +5,7 @@
 		generateDivisibleNumbersWithinRange
 	} from '$lib/utils';
 
-	export let selectedIndicator, chartHeight, yAxisMaxTickWidth, y, yDomain;
+	export let indicator, chartHeight, yAxisMaxTickWidth, y, yDomain;
 
 	$: yDistance = Math.abs(yDomain[1] - yDomain[0]);
 	$: yDistancePowerBelow = 10 ** Math.floor(Math.log10(yDistance));
@@ -35,9 +35,7 @@
 			<line x1="0" x2="-8"></line>
 
 			<text bind:contentRect={ticksWidthArray[i]} text-anchor="end" x="-10" y="5"
-				>{selectedIndicator.metadata.prefix +
-					addThousandsSeparator(d) +
-					selectedIndicator.metadata.suffix}</text
+				>{indicator.metadata.prefix + addThousandsSeparator(d) + indicator.metadata.suffix}</text
 			>
 		</g>
 	{/each}

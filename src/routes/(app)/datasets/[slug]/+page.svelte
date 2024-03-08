@@ -17,6 +17,8 @@
 	import Map from '$lib/viz/Map.svelte';
 	import StickyHeaderIndicators from '$lib/prototype-components/sticky-header/StickyHeaderIndicators.svelte';
 	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
+	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
+	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
 
 	export let data;
 
@@ -230,6 +232,41 @@
 				{/key}
 			</ContentBlock>
 		</NavSection>
+
+		<NavSection title="Line chart">
+			<ContentBlock
+				type="line-chart"
+				title={data.indicator.metadata.label}
+				unit={getUnit(data.indicator.metadata)}
+				data={[]}
+			>
+				<LineChartContainerIndicatorPage
+					indicator={data.indicator}
+					chartData={data.chartData}
+					{selectionsObject}
+					customLookup={customLookup['indicator-additional-visible']}
+					{metadata}
+				></LineChartContainerIndicatorPage>
+			</ContentBlock>
+		</NavSection>
+
+		<NavSection title="Bar chart">
+			<ContentBlock
+				type="bar-chart"
+				title={data.indicator.metadata.label}
+				unit={getUnit(data.indicator.metadata)}
+				data={[]}
+			>
+				<BarChartContainerIndicatorPage
+					indicator={data.indicator}
+					chartData={data.chartData}
+					{selectionsObject}
+					customLookup={customLookup['indicator-additional-visible']}
+					{metadata}
+				></BarChartContainerIndicatorPage>
+			</ContentBlock>
+		</NavSection>
+
 		<NavSection title="Get the data">
 			<p>
 				This indicator was produced by the Office for National Statistics. The original source data

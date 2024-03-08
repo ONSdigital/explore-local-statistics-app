@@ -279,6 +279,20 @@
 			parentAndRelatedAreasObject,
 			metadata.areasObject
 		);
+
+		selectionsObject['areas-single-additional-visible'] = constructVisibleAreasArray(
+			selectionsObject['areas-single-additional-chosen'],
+			false,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
+
+		selectionsObject['related-single-visible'] = constructVisibleAreasArray(
+			selectionsObject['related-single-chosen'],
+			true,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
 	}
 
 	$: rowsAccordionArray = [
@@ -392,6 +406,64 @@
 		}
 	];
 
+	$: singleAccordionArray = [
+		{
+			label: 'Related area groups',
+			type: 'radio',
+			search: null,
+			chosenKey: 'related-single',
+			accordion: true,
+			options: [
+				{
+					data: changeAreasOptionsObject.related,
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				},
+				{
+					data: [{ label: 'None', key: 'none' }],
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				}
+			]
+		},
+		{
+			label: 'Add more areas',
+			type: 'checkbox',
+			chosenKey: 'areas-single-additional',
+			accordion: true,
+			options: [
+				{
+					data: changeAreasOptionsObject.parents,
+					accordion: false
+				},
+				{
+					label: 'Other areas in ' + formatName(parentArea.areanm),
+					data: changeAreasOptionsObject.sameParent,
+					accordion: true,
+					include: ['lower', 'upper'].includes(selectedArea.geogLevel)
+				},
+				{
+					label: 'Countries',
+					data: changeAreasOptionsObject.country,
+					accordion: true
+				},
+				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{
+					label: 'Upper-tier local authorities',
+					data: changeAreasOptionsObject.upper,
+					accordion: true
+				},
+				{
+					label: 'Lower-tier local authorities',
+					data: changeAreasOptionsObject.lower,
+					accordion: true
+				}
+			]
+		}
+	];
+
 	$: {
 		selectionsObject['areas-rows-additional-chosen'] = selectionsObject[
 			'areas-rows-additional-chosen'
@@ -408,7 +480,14 @@
 			customLookup['areas-rows-additional-visible'],
 			selectionsObject['areas-rows-additional-visible'].filter((el) => el.role === 'custom')
 		);
+
+		customLookup['areas-single-additional-visible'] = updateCustomLookup(
+			customLookup['areas-single-additional-visible'],
+			selectionsObject['areas-single-additional-visible'].filter((el) => el.role === 'custom')
+		);
 	}
+
+	$: console.log(customLookup);
 
 	onMount(() => {
 		selectionsObject['areas-rows-comparison-chosen'] = {
@@ -423,6 +502,13 @@
 			upper: 'all-siblings',
 			region: 'all-siblings',
 			country: 'all-siblings'
+		}[selectedArea.geogLevel];
+
+		selectionsObject['areas-single-additional-chosen'] = {
+			lower: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
+			upper: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
+			region: ['E92000001', 'K02000001'],
+			country: ['K02000001']
 		}[selectedArea.geogLevel];
 	});
 
@@ -530,6 +616,15 @@
 	></TopicSections>
 
 	<NavSection title="Select an indicator">
+		<MainChartSection
+			customLookup={customLookup['areas-single-additional-visible']}
+			bind:selectionsObject
+			accordionArray={singleAccordionArray}
+			{filteredIndicators}
+			{chartData}
+			{metadata}
+			{selectedArea}
+		></MainChartSection>
 		<!-- <MainChartSection
 			combinedSelectableAreaTypesObject={areasGroupsObject}
 			{chartData}

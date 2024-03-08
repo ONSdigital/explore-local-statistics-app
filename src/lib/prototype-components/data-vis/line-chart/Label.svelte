@@ -2,12 +2,20 @@
 	import { splitTextIntoRows } from '$lib/utils.js';
 	import { colorsLookup } from '$lib/config';
 
-	export let label, hoverId, labelBBox;
+	export let label, hoverId, labelBBox, customLookup;
 
-	$: backgroundColor =
-		colorsLookup[hoverId === label.datum.areacd ? 'selected' : label.datum.role].color;
-	$: textColor =
-		colorsLookup[hoverId === label.datum.areacd ? 'selected' : label.datum.role].contrast;
+	$: color =
+		hoverId === label.datum.areacd
+			? colorsLookup.selected
+			: label
+				? label.datum.role === 'custom'
+					? Object.keys(customLookup).length > colorsLookup.custom.length
+						? colorsLookup.customExceedThreshold
+						: colorsLookup.custom[
+								label.datum.areacd in customLookup ? customLookup[label.datum.areacd] : 0
+							]
+					: colorsLookup[label.datum.role]
+				: { color: null, constrast: null };
 
 	$: labelArray =
 		label.datum.areanm.length > 25
@@ -38,13 +46,13 @@
 				height={labelBBox.height}
 				rx="2px"
 				stroke="none"
-				fill={backgroundColor}
+				fill={color.color}
 			></rect>
 		{/if}
 
 		<g bind:contentRect={labelBBox}>
 			{#each labelArray as line, i}
-				<text y={18 * i} fill={textColor}>{line}</text>
+				<text y={18 * i} fill={color.contrast}>{line}</text>
 			{/each}
 		</g>
 	</g>

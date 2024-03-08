@@ -45,7 +45,7 @@
 
 	$: label = area ? ('label' in area ? area.label : area.areanm) : null;
 
-	$: console.log('area-color', area, col);
+	//$: console.log('area-color', area, col);
 </script>
 
 {#if button}

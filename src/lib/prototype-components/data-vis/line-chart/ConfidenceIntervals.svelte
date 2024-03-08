@@ -2,7 +2,12 @@
 	import { colorsLookup } from '$lib/config';
 	import { line } from 'd3-shape';
 
-	export let area, xDomain, x, y;
+	export let area,
+		xDomain,
+		x,
+		y,
+		customLookup,
+		hover = false;
 
 	$: pathFunction = line()
 		.x((d) => {
@@ -23,14 +28,22 @@
 		}))
 	].filter((e) => e.value != 'NA');
 
-	$: console.log(wrappedConfidenceIntervalArray);
+	$: color = hover
+		? colorsLookup.selected
+		: area
+			? area.role === 'custom'
+				? Object.keys(customLookup).length > colorsLookup.custom.length
+					? colorsLookup.customExceedThreshold
+					: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
+				: colorsLookup[area.role]
+			: { color: null, constrast: null };
 </script>
 
 {#if wrappedConfidenceIntervalArray}
 	<path
 		d={pathFunction(wrappedConfidenceIntervalArray)}
 		stroke="none"
-		fill={colorsLookup.selected.color}
+		fill={color.color}
 		pointer-events="none"
 		opacity="0.25"
 	></path>

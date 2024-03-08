@@ -111,6 +111,8 @@
 			el.xDomainNumb <= xDomain[1]
 	);
 
+	$: console.log(selectedPeriods, xDomain, xDomainInit);
+
 	$: filteredChartData =
 		xDomain[1] && xDomain[0]
 			? indicatorChartData.filter(
