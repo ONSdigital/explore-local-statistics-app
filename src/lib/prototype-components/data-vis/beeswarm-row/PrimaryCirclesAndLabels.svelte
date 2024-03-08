@@ -93,6 +93,7 @@
 					chartConfigurations.beeswarmRow.primaryRadius * 0.5,
 					(d) => d.xPosition
 				)
+					.withTiesBrokenByArrayOrder()
 					.oneSided()
 					.calculateYPositions()
 			].reverse();
