@@ -6,7 +6,7 @@
 
 	let labelRect;
 
-	$: labelRectWidth = labelRect ? labelRect.width + 10 : 0;
+	$: labelRectWidth = labelRect ? labelRect.width + 15 : 0;
 
 	$: role = 'role' in label.datum ? label.datum.role : 'main';
 </script>
