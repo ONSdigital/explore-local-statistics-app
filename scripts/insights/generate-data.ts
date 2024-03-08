@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import aq from 'arquero';
 import arqueroProcessing from './arquero-processing.js';
 import { readCsvAutoType } from './io.ts';
@@ -6,6 +6,7 @@ import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
 import { toLookup, uniqueValues, toNestedLookup } from './data-utils.ts';
+import { writeJson } from './io.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
@@ -16,8 +17,10 @@ async function main() {
 	const [combinedData, indicators, indicatorsCalculations, _oldStyleIndicatorsCalculations] =
 		await arqueroProcessing();
 
-	const data = readDataFromCsvs();
-	data.combinedData = combinedData.objects();
+	const data = {
+		beeswarmKeyData: readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`),
+		combinedData: combinedData.objects()
+	};
 	const config = readConfigFromCsvs();
 	config.indicators = indicators.objects();
 	config.indicatorsCalculations = indicatorsCalculations;
@@ -30,9 +33,6 @@ async function main() {
 		combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
 		beeswarmKeyData: outData.beeswarmKeyData
 	});
-	console.log(
-		`Insights data JSON file in column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
-	);
 
 	const outConfig = generateOutConfig(
 		config,
@@ -40,11 +40,7 @@ async function main() {
 		outData.combinedDataObjectColumnOriented
 	);
 
-	const areaDetails = generateAreaDetails(outConfig, combinedData);
-	outConfig.areaDetails = areaDetails;
-
 	writeJson(CONFIG_OUTPUT_PATH, outConfig);
-	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
 
 function checkSlugs(indicatorsMetadata) {
@@ -165,6 +161,8 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		clustersLookup.types
 	);
 
+	const areaDetails = generateAreaDetails(clustersLookup, areasArray, combinedData);
+
 	return {
 		clustersLookup,
 		areasGeogInfoObject,
@@ -178,13 +176,14 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
-		globalXDomainExtent
+		globalXDomainExtent,
+		areaDetails
 	};
 }
 
-function generateAreaDetails(outConfig, combinedData) {
+function generateAreaDetails(clustersLookup, areasArray, combinedData) {
 	const areaDetails = Object.fromEntries(
-		outConfig.areasArray.map((d) => [d.areacd, { ...d, filteredIndicators: {} }])
+		areasArray.map((d) => [d.areacd, { ...d, filteredIndicators: {} }])
 	);
 
 	for (const { code, areacd, xDomainNumb } of combinedData) {
@@ -199,7 +198,7 @@ function generateAreaDetails(outConfig, combinedData) {
 		).map(([code, xDomainNumb]) => ({ code, xDomainNumb: [...xDomainNumb].sort((a, b) => a - b) }));
 	}
 
-	const deomgraphicClustersLookup = getDemographicClustersLookup(outConfig.clustersLookup);
+	const deomgraphicClustersLookup = getDemographicClustersLookup(clustersLookup);
 	for (const areacd of Object.keys(areaDetails)) {
 		if (areacd in deomgraphicClustersLookup) {
 			areaDetails[areacd].demographicCluster = deomgraphicClustersLookup[areacd].filter(
@@ -210,7 +209,7 @@ function generateAreaDetails(outConfig, combinedData) {
 	}
 
 	for (const areaDatum of Object.values(areaDetails)) {
-		areaDatum.areasWithSameParent = outConfig.areasArray
+		areaDatum.areasWithSameParent = areasArray
 			.filter(
 				(d) =>
 					d.parentcd === areaDatum.parentcd &&
@@ -473,38 +472,19 @@ function findGlobalXDomainExtent(indicatorsArray) {
 	return [Math.min(...xDomainNumbers), Math.max(...xDomainNumbers)];
 }
 
-function readDataFromCsvs() {
-	const beeswarmKeyData = readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`);
-
-	return {
-		beeswarmKeyData
-	};
-}
-
 function readConfigFromCsvs() {
-	const clustersLookup = readCsvAutoType(`${CONFIG.CONFIG_DIR}/clusters/Cluster_allocation.csv`);
-	const areasGeogInfo = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-info.csv`);
-	const areasGeogLevel = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas-geog-level.csv`);
-	const areasParentsLookup = readCsvAutoType(
-		`${CONFIG.CONFIG_DIR}/geography/areas-parents-lookup.csv`
-	);
-	const areas = readCsvAutoType(`${CONFIG.CONFIG_DIR}/geography/areas.csv`);
-	const indicatorsMetadata = readCsvAutoType(
-		`${CONFIG.CONFIG_DIR}/indicators/indicators-metadata.csv`
-	);
-	const periodsLookup = readCsvAutoType(`${CONFIG.CONFIG_DIR}/periods/unique-periods-lookup.csv`);
+	const clustersDir = `${CONFIG.CONFIG_DIR}/clusters`;
+	const periodsDir = `${CONFIG.CONFIG_DIR}/periods`;
+	const geogDir = `${CONFIG.CONFIG_DIR}/geography`;
+	const indicatorsDir = `${CONFIG.CONFIG_DIR}/indicators`;
 
 	return {
-		clustersLookup,
-		areasGeogInfo,
-		areasGeogLevel,
-		areasParentsLookup,
-		areas,
-		indicatorsMetadata,
-		periodsLookup
+		clustersLookup: readCsvAutoType(`${clustersDir}/Cluster_allocation.csv`),
+		areasGeogInfo: readCsvAutoType(`${geogDir}/areas-geog-info.csv`),
+		areasGeogLevel: readCsvAutoType(`${geogDir}/areas-geog-level.csv`),
+		areasParentsLookup: readCsvAutoType(`${geogDir}/areas-parents-lookup.csv`),
+		areas: readCsvAutoType(`${geogDir}/areas.csv`),
+		indicatorsMetadata: readCsvAutoType(`${indicatorsDir}/indicators-metadata.csv`),
+		periodsLookup: readCsvAutoType(`${periodsDir}/unique-periods-lookup.csv`)
 	};
-}
-
-function writeJson(filename, data) {
-	writeFileSync(filename, JSON.stringify(data, null, '\t'));
 }

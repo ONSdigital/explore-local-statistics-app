@@ -1,5 +1,5 @@
 import aq from 'arquero';
-import fs from 'fs';
+import fs, { writeFileSync } from 'fs';
 import { csvParse } from 'd3-dsv';
 
 export function loadCsvWithoutBom(filename: string) {
@@ -28,6 +28,11 @@ function autoTypeWithoutDates(object: { [key: string]: any }) {
 
 export function readJsonSync(filename: string) {
 	return JSON.parse(fs.readFileSync(filename).toString());
+}
+
+export function writeJson(filename, data) {
+	writeFileSync(filename, JSON.stringify(data, null, '\t'));
+	console.log(`Wrote ${filename}.`);
 }
 
 function stripBom(string: string): string {
