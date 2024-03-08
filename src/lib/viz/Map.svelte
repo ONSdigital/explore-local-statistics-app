@@ -10,22 +10,28 @@
 	import BreaksChart from './BreaksChart.svelte';
 
 	export let data;
-	export let breaks;
-	export let geos;
+	export let breaks = null;
+	export let geos = null;
 	export let prefix = '';
 	export let suffix = '';
 	export let selected = [];
 	export let hovered = null;
 	export let dp = 0;
-	export let colors = [
-		'rgb(234, 236, 177)',
-		'rgb(169, 216, 145)',
-		'rgb(0, 167, 186)',
-		'rgb(0, 78, 166)',
-		'rgb(0, 13, 84)'
-	];
+	export const colors = {
+		0: 'rgb(234, 236, 177)',
+		1: 'rgb(169, 216, 145)',
+		2: 'rgb(0, 167, 186)',
+		3: 'rgb(0, 78, 166)',
+		4: 'rgb(0, 13, 84)',
+		a: '#206095',
+		b: '#27A0CC',
+		c: '#871A5B',
+		d: '#A8BD3A'
+	};
 	export let topoPath = `${base}/data/topo.json`;
-	export let customLookup;
+	export let customLookup = null;
+	export let legendType = 'choropleth';
+	export let clusterKey = 'cluster';
 
 	let features, bounds;
 
@@ -48,14 +54,14 @@
 			const feature = features[d.areacd];
 			feature.properties = {
 				...d,
-				color: options.boundary ? getColor(d)?.color || 'grey' : colors[d.cluster]
+				color: options.boundary ? getColor(d)?.color || 'grey' : colors[d[clusterKey]] || 'grey'
 			};
 			return feature;
 		})
 	});
 
 	function getColor(area) {
-		console.log('getColor', area, customLookup, colorsLookup);
+		if (!customLookup) return { color: 'black', contrast: null };
 		return area
 			? area.role === 'custom'
 				? Object.keys(customLookup).length > colorsLookup.custom.length
@@ -67,7 +73,9 @@
 
 	onMount(async () => {
 		features = await makeFeatures(topoPath);
-		const countryCodes = Object.keys(countryLookup).filter((c) => geos.ctrys.includes(c[0]));
+		const countryCodes = Object.keys(countryLookup).filter((c) =>
+			geos ? geos.ctrys.includes(c[0]) : true
+		);
 		const geojson = featureCollection(
 			features,
 			countryCodes.map((c) => ({ areacd: c }))
@@ -89,47 +97,49 @@
 			}}
 			controls
 		>
-			<MapSource
-				id="features"
-				type="geojson"
-				data={featureCollection(features, data)}
-				promoteId="areacd"
-			>
-				<MapLayer
-					id="fills"
-					type="fill"
-					paint={{ 'fill-color': ['get', 'color'], 'fill-opacity': 0.7 }}
-					order="place_other"
-					hover
-					{hovered}
-					let:hovered
-					on:hover={doHover}
-					select
-					on:select={doSelect}
-					highlight
-					highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
-				/>
-				<MapLayer
-					id="lines"
-					type="line"
-					paint={{ 'line-color': 'white', 'line-width': 0.5 }}
-					order="place_other"
-				/>
-				<MapLayer
-					id="highlight"
-					type="line"
-					paint={{
-						'line-color': [
-							'case',
-							['==', ['feature-state', 'hovered'], true],
-							'orange',
-							'rgba(255,255,255,0)'
-						],
-						'line-width': 2
-					}}
-					order="place_suburb"
-				/>
-			</MapSource>
+			{#key clusterKey}
+				<MapSource
+					id="features"
+					type="geojson"
+					data={featureCollection(features, data)}
+					promoteId="areacd"
+				>
+					<MapLayer
+						id="fills"
+						type="fill"
+						paint={{ 'fill-color': ['get', 'color'], 'fill-opacity': 0.7 }}
+						order="place_other"
+						hover
+						{hovered}
+						let:hovered
+						on:hover={doHover}
+						select
+						on:select={doSelect}
+						highlight
+						highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
+					/>
+					<MapLayer
+						id="lines"
+						type="line"
+						paint={{ 'line-color': 'white', 'line-width': 0.5 }}
+						order="place_other"
+					/>
+					<MapLayer
+						id="highlight"
+						type="line"
+						paint={{
+							'line-color': [
+								'case',
+								['==', ['feature-state', 'hovered'], true],
+								'orange',
+								'rgba(255,255,255,0)'
+							],
+							'line-width': 2
+						}}
+						order="place_suburb"
+					/>
+				</MapSource>
+			{/key}
 			{#if selected[0]}
 				<MapSource
 					id="selected"
@@ -160,27 +170,52 @@
 		</Map>
 	{/if}
 </div>
-<BreaksChart
-	{data}
-	{breaks}
-	{hovered}
-	{selected}
-	{prefix}
-	{suffix}
-	formatTick={(d) =>
-		d.toLocaleString(undefined, {
-			minimumFractionDigits: dp,
-			maximumFractionDigits: dp
-		})}
-	{getColor}
-	on:select={doSelect}
-	on:hover={doHover}
-/>
+{#if legendType === 'choropleth'}
+	<BreaksChart
+		{data}
+		{breaks}
+		{hovered}
+		{selected}
+		{prefix}
+		{suffix}
+		formatTick={(d) =>
+			d.toLocaleString(undefined, {
+				minimumFractionDigits: dp,
+				maximumFractionDigits: dp
+			})}
+		{getColor}
+		on:select={doSelect}
+		on:hover={doHover}
+	/>
+{:else if legendType === 'categorical'}
+	<ul class="legend-list">
+		{#each ['a', 'b', 'c', 'd'] as cluster}
+			<li class="legend-chip" style:background={colors[cluster]}>
+				Cluster {cluster.toUpperCase()}
+			</li>
+		{/each}
+	</ul>
+{/if}
 
 <style>
 	.map-container {
 		display: block;
 		width: 100%;
 		height: 500px;
+	}
+	ul.legend-list {
+		list-style: none;
+		margin: 12px 0 0;
+		padding: 0;
+	}
+	ul.legend-list > li {
+		display: inline-block;
+		margin-right: 6px;
+	}
+	.legend-chip {
+		font-weight: bold;
+		color: white;
+		padding: 0 6px;
+		border-radius: 3px;
 	}
 </style>

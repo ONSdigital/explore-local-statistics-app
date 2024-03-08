@@ -20,6 +20,7 @@
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
+	import Map from '$lib/viz/Map.svelte';
 	import type { PageData } from './$types';
 	import { derived, writable } from 'svelte/store';
 
@@ -40,6 +41,7 @@
 	let metadata = data.metadata;
 	let chartData = data.chartData;
 	let postcode;
+	let mapColors = null;
 
 	//////// defining initial area data ///////
 	$: selectedAreaDemographicCluster =
@@ -679,12 +681,22 @@
 					options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
 					bind:value={clusterGroup}
 				/>
-				{#if areaClusters[clusterGroup.id]}
+				<Map
+					data={data.chartData.clusterData}
+					clusterKey={clusterGroup.id}
+					legendType="categorical"
+					selected={[data.place]}
+					bind:colors={mapColors}
+				/>
+				{#if areaClusters[clusterGroup.id] && mapColors}
 					<p style:margin-top="12px">
 						<strong
-							>{capitalizeFirstLetter(getName(data.place, 'the'))} is in
-							{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}</strong
-						>. {clusterDescription || ''}
+							class="cluster-highlight"
+							style:background={mapColors[areaClusters[clusterGroup.id]]}
+						>
+							{capitalizeFirstLetter(getName(data.place, 'the'))} is in
+							{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}
+						</strong>. {clusterDescription || ''}
 					</p>
 					<Twisty
 						title="All areas in {clusterGroup.id} cluster {areaClusters[
@@ -721,5 +733,12 @@
 <style>
 	:global(.select-wrapper label.ons-label) {
 		font-weight: normal;
+	}
+	.cluster-highlight {
+		display: inline-block;
+		font-weight: bold;
+		color: white;
+		padding: 0 6px;
+		border-radius: 3px;
 	}
 </style>
