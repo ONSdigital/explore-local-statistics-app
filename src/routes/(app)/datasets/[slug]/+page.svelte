@@ -158,10 +158,11 @@
 <Titleblock
 	title={data.indicator.metadata.label}
 	meta={[
-		{ key: 'Description', value: data.indicator.metadata.longDescription },
 		{
 			key: sourceOrgs.length === 1 ? 'Data source' : 'Data sources',
-			value: sourceOrgs.join(', ')
+			value: Array.from(sourceOrgs.keys())
+				.map((i) => `<a href="${sourceLinks[i]}" target="_blank">${sourceOrgs[i]}</a>`)
+				.join(', ')
 		},
 		{
 			key: 'Published on',
@@ -171,7 +172,7 @@
 	background="#eaeaea"
 >
 	<Lede marginBottom>
-		{data.indicator.metadata.subtitle}.
+		{data.indicator.metadata.longDescription}
 	</Lede>
 </Titleblock>
 
