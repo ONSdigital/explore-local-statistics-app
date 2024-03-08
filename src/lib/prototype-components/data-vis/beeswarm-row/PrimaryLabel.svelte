@@ -6,7 +6,7 @@
 
 	let labelRect;
 
-	$: labelRectWidth = labelRect ? labelRect.width + 15 : 0;
+	$: labelRectWidth = labelRect ? labelRect.width + 30 : 0;
 
 	$: role = 'role' in label.datum ? label.datum.role : 'main';
 </script>
@@ -21,7 +21,7 @@
 				height={role === 'main' ? 35 : 24}
 				fill="white"
 				stroke={colorsLookup[role].color}
-				stroke-width={role === 'main' ? '2.5px' : '1.5px'}
+				stroke-width={role === 'main' ? '3px' : '1.5px'}
 				rx="2px"
 			></rect>
 		{/if}
