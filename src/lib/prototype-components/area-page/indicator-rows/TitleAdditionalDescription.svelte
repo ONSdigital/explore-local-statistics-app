@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
 	export let showVisuals, indicator, xDomain, selectedAndComparisonXDomain;
@@ -17,6 +18,9 @@
 	const onClickEvent = () => {
 		displayAdditional = !displayAdditional;
 	};
+
+	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
+	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 </script>
 
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
@@ -43,8 +47,35 @@
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">
 		<p>
-			Placeholder text: this section will include the indicator metadata and a link to the indicator
-			page
+			<span style="font-weight: bold">Definition:</span>
+			{indicator.metadata.longDescription}
+		</p>
+		<p>
+			<span style="font-weight: bold">Coverage:</span>
+			{indicator.metadata.coverageLevel}
+		</p>
+
+		{#if indicator.metadata.experimentalStatistic === 'T'}
+			<p>Note that this dataset is an official statisitc in development.</p>
+		{/if}
+
+		<p>
+			<span style="font-weight: bold">Published by:</span>
+			{#each sourceOrgs as org, i}
+				<a href={sourceLinks[i]}>{org}</a>
+
+				{#if i < sourceOrgs.length - 2}
+					,
+				{:else if i === sourceOrgs.length - 2}
+					{'and '}
+				{/if}
+			{/each}
+		</p>
+
+		<p>
+			Further
+			<a href="{base}/datasets/{indicator.metadata.slug}">{indicator.metadata.label}</a> data is available
+			here.
 		</p>
 	</div>
 {/if}

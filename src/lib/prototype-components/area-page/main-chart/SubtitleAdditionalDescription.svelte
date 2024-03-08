@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
 	export let selectedIndicator, xDomain, selectedChartType, timePeriodsArray;
@@ -29,7 +30,6 @@
 					? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
 					: timePeriodsArray[0].label)
 			: '');
-	$: additionalText = '';
 </script>
 
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
@@ -38,9 +38,25 @@
 
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">
-		{#each additionalText as paragraph}
-			<p>{paragraph}</p>
-		{/each}
+		<p>
+			<span style="font-weight: bold">Definition:</span>
+			{selectedIndicator.metadata.longDescription}
+		</p>
+		<p>
+			<span style="font-weight: bold">Coverage:</span>
+			{selectedIndicator.metadata.coverageLevel}
+		</p>
+
+		{#if selectedIndicator.metadata.experimentalStatistic === 'T'}
+			<p>Note that this dataset is an official statisitc in development.</p>
+		{/if}
+
+		<p>
+			Further
+			<a href="{base}/datasets/{selectedIndicator.metadata.slug}"
+				>{selectedIndicator.metadata.label}</a
+			> data is available here.
+		</p>
 	</div>
 {/if}
 
