@@ -140,6 +140,10 @@
 			selectionsObject['indicator-additional-visible'].filter((el) => el.role === 'custom')
 		);
 	}
+
+	$: sourceOrgs = data.indicator.metadata.sourceOrg.split('|');
+	$: sourceLinks = data.indicator.metadata.sourceURL.split('|');
+	$: sourceDate = data.indicator.metadata.sourceDate.split('|');
 </script>
 
 <Breadcrumb
@@ -154,13 +158,14 @@
 <Titleblock
 	title={data.indicator.metadata.label}
 	meta={[
+		{ key: 'Description', value: data.indicator.metadata.longDescription },
 		{
-			key: 'Data source',
-			value: 'Organisation name'
+			key: sourceOrgs.length === 1 ? 'Data source' : 'Data sources',
+			value: sourceOrgs.join(', ')
 		},
 		{
-			key: 'Last updated',
-			value: 'DD MMM YYYY'
+			key: 'Published on',
+			value: sourceDate.join(', ')
 		}
 	]}
 	background="#eaeaea"

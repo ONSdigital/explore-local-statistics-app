@@ -50,10 +50,10 @@
 			<span style="font-weight: bold">Definition:</span>
 			{indicator.metadata.longDescription}
 		</p>
-		<p>
+		<!-- <p>
 			<span style="font-weight: bold">Coverage:</span>
 			{indicator.metadata.coverageLevel}
-		</p>
+		</p> -->
 
 		{#if indicator.metadata.experimentalStatistic === 'T'}
 			<p>Note that this dataset is an official statisitc in development.</p>

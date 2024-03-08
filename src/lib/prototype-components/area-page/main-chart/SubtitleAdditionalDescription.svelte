@@ -42,10 +42,10 @@
 			<span style="font-weight: bold">Definition:</span>
 			{selectedIndicator.metadata.longDescription}
 		</p>
-		<p>
+		<!-- <p>
 			<span style="font-weight: bold">Coverage:</span>
 			{selectedIndicator.metadata.coverageLevel}
-		</p>
+		</p> -->
 
 		{#if selectedIndicator.metadata.experimentalStatistic === 'T'}
 			<p>Note that this dataset is an official statisitc in development.</p>
