@@ -490,6 +490,24 @@
 		);
 	}
 
+	function getSimilarAreas(areaClusters, clusterGroup) {
+		if (!areaClusters?.[clusterGroup.id]) return { region: [], other: [] };
+		const all = data.chartData.clusterData
+			.filter(
+				(d) =>
+					d[clusterGroup.id] === areaClusters[clusterGroup.id] &&
+					data.metadata.areasObject[d.areacd]
+			)
+			.map((d) => data.metadata.areasObject[d.areacd]);
+		const region = [];
+		const other = [];
+		for (const d of all) {
+			if (d.parentcd === parentArea.areacd) region.push(d);
+			else other.push(d);
+		}
+		return { region, other };
+	}
+
 	const clusterGroupsArray = metadata.clustersLookup.types.map((t) => ({
 		id: t,
 		label: `${capitalizeFirstLetter(t)} measures`
@@ -501,15 +519,7 @@
 				(d) => d.type === clusterGroup.id && d.letter === areaClusters[clusterGroup.id]
 			)?.text
 		: '';
-	$: similarAreas = areaClusters?.[clusterGroup.id]
-		? data.chartData.clusterData
-				.filter(
-					(d) =>
-						d[clusterGroup.id] === areaClusters[clusterGroup.id] &&
-						data.metadata.areasObject[d.areacd]
-				)
-				.map((d) => data.metadata.areasObject[d.areacd])
-		: [];
+	$: similarAreas = getSimilarAreas(areaClusters, clusterGroup);
 
 	onMount(() => {
 		selectionsObject['areas-rows-comparison-chosen'] = {
@@ -582,7 +592,7 @@
 <Cards marginTop>
 	<Card noBackground>
 		<div style:height="200px">
-			{#key data.geometry}
+			{#key data}
 				<AreaLocMap geometry={data.geometry} bounds={data.place.bounds} />
 			{/key}
 		</div>
@@ -671,20 +681,32 @@
 				/>
 				{#if areaClusters[clusterGroup.id]}
 					<p style:margin-top="12px">
-						{capitalizeFirstLetter(getName(data.place, 'the'))} is in
-						<strong>{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}</strong
+						<strong
+							>{capitalizeFirstLetter(getName(data.place, 'the'))} is in
+							{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}</strong
 						>. {clusterDescription || ''}
 					</p>
 					<Twisty
-						title="Other areas in {clusterGroup.id} cluster {areaClusters[
+						title="All areas in {clusterGroup.id} cluster {areaClusters[
 							clusterGroup.id
 						].toUpperCase()}"
 					>
-						{#each similarAreas as area, i}
-							<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
-								>{area.areanm}</a
-							>{i < similarAreas.length - 1 ? `, ` : '.'}
-						{/each}
+						<p>
+							Areas {getName(parentArea, 'in')}<br />
+							{#each similarAreas.region as area, i}
+								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
+									>{area.areanm}</a
+								>{i < similarAreas.region.length - 1 ? `, ` : '.'}
+							{/each}
+						</p>
+						<p>
+							Other areas<br />
+							{#each similarAreas.other as area, i}
+								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
+									>{area.areanm}</a
+								>{i < similarAreas.other.length - 1 ? `, ` : '.'}
+							{/each}
+						</p>
 					</Twisty>
 				{/if}
 			</ContentBlock>

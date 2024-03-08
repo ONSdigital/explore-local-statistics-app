@@ -12,16 +12,18 @@
 	interactive={false}
 	options={{ fitBoundsOptions: { padding: 20 } }}
 >
-	<MapSource id="boundary" type="geojson" data={geometry}>
-		<MapLayer
-			id="boundary-fill"
-			type="fill"
-			paint={{ 'fill-color': 'rgb(17,140,123)', 'fill-opacity': 0.2 }}
-		/>
-		<MapLayer
-			id="boundary-line"
-			type="line"
-			paint={{ 'line-color': 'rgb(17,140,123)', 'line-width': 2 }}
-		/>
-	</MapSource>
+	{#key geometry}
+		<MapSource id="boundary" type="geojson" data={geometry}>
+			<MapLayer
+				id="boundary-fill"
+				type="fill"
+				paint={{ 'fill-color': 'rgb(17,140,123)', 'fill-opacity': 0.2 }}
+			/>
+			<MapLayer
+				id="boundary-line"
+				type="line"
+				paint={{ 'line-color': 'rgb(17,140,123)', 'line-width': 2 }}
+			/>
+		</MapSource>
+	{/key}
 </Map>

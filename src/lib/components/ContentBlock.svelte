@@ -67,7 +67,7 @@
 		border: 1px solid #222;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
-		padding: 8px;
+		padding: 12px;
 	}
 	.hide-actions {
 		border-bottom-left-radius: 4px;
