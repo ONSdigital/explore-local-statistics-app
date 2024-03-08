@@ -323,11 +323,17 @@ function getClusterDescriptions() {
 		Con: 'connectivity'
 	};
 
-	clusterDescriptions = clusterDescriptions.map((d) => ({
-		type: clusterTypesLookup[d.split('_')[0]],
-		letter: d.split('_')[1].slice(0, 1).toLowerCase(),
-		text: d.replace(new RegExp('^[^:]*: *'), '')
-	}));
+	clusterDescriptions = clusterDescriptions.map((d) => {
+		const type = clusterTypesLookup[d.split('_')[0]];
+		if (type == null) {
+			throw new Error(`Unknown cluster type: ${d.split('_')[0]}.`);
+		}
+		return {
+			type,
+			letter: d.split('_')[1].slice(0, 1).toLowerCase(),
+			text: d.replace(new RegExp('^[^:]*: *'), '')
+		};
+	});
 
 	return clusterDescriptions;
 }
