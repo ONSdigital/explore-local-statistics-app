@@ -8,12 +8,28 @@
 
 	let showConfidenceIntervals = false;
 
-	$: indicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) =>
-			el.code === indicator.code &&
-			el.period === indicator.maxXDomainNumb &&
-			el.geog_level === 'lower'
+	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
+		(el) => el.code === indicator.code
 	);
+
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === indicator.maxXDomainNumb
+	);
+
+	$: console.log(latestIndicatorCalculations);
+
+	$: indicatorCalculations =
+		latestIndicatorCalculations && 'calcsByGeogLevel' in latestIndicatorCalculations
+			? latestIndicatorCalculations.calcsByGeogLevel[
+					'lower' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'lower'
+						: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'upper'
+							: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+								? 'region'
+								: 'country'
+				]
+			: null;
 
 	$: filteredChartData = chartData.filter((el) => el.value);
 
@@ -99,28 +115,6 @@
 		additionalID="indicator-additional"
 		relatedID="indicator-related"
 	></BarChartContainer>
-	<!-- <LineChartContainer
-		{indicator}
-		{metadata}
-		{timePeriodsArray}
-		filteredChartDataSelected={filteredChartDataSelected.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		{selectionsObject}
-		selectedArea={null}
-		additionalID="indicator-additional"
-		relatedID="indicator-related"
-		{indicatorCalculations}
-		{xDomain}
-		{customLookup}
-		{showConfidenceIntervals}
-	></LineChartContainer> -->
 {:else}
 	<div class="no-chart-container">
 		<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>

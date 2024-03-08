@@ -8,12 +8,26 @@
 
 	let showConfidenceIntervals = false;
 
-	$: indicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) =>
-			el.code === indicator.code &&
-			el.period === indicator.maxXDomainNumb &&
-			el.geog_level === 'lower'
+	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
+		(el) => el.code === indicator.code
 	);
+
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === indicator.maxXDomainNumb
+	);
+
+	$: indicatorCalculations =
+		latestIndicatorCalculations && 'calcsByGeogLevel' in latestIndicatorCalculations
+			? latestIndicatorCalculations.calcsByGeogLevel[
+					'lower' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'lower'
+						: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'upper'
+							: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+								? 'region'
+								: 'country'
+				]
+			: null;
 
 	$: filteredChartData = chartData.filter((el) => el.value);
 

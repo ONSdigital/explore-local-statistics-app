@@ -23,14 +23,23 @@
 	let showConfidenceIntervals = false;
 
 	$: indicator = metadata.indicatorsObject[chosenIndicatorId.code];
-	$: indicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) =>
-			el.code === indicator.code &&
-			el.period === indicator.maxXDomainNumb &&
-			el.geog_level === 'lower'
+	$: latestIndicatorCalculations = metadata.indicatorsCalculationsArray.find(
+		(el) => el.code === indicator.code && el.period === indicator.maxXDomainNumb
 	);
 
-	$: console.log(indicator);
+	$: indicatorCalculations = latestIndicatorCalculations
+		? latestIndicatorCalculations.calcsByGeogLevel[
+				selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel
+					? selectedArea.geogLevel
+					: 'lower' in latestIndicatorCalculations.calcsByGeogLevel
+						? 'lower'
+						: 'upper' in latestIndicatorCalculations.calcsByGeogLevel
+							? 'upper'
+							: 'region' in latestIndicatorCalculations.calcsByGeogLevel
+								? 'region'
+								: 'country'
+			]
+		: null;
 
 	/*$: chartOptionsArray = mainChartOptionsArray.filter(
 		(el) => indicator.minXDomainNumb != indicator.maxXDomainNumb || el.multiYear != 'Yes'
@@ -59,8 +68,6 @@
 					el.areacd != selectedArea.areacd
 			)
 		: [];
-
-	$: console.log(filteredChartDataAreaGroup);
 
 	$: visibleAreasPeriods = [
 		...new Set(
@@ -95,6 +102,9 @@
 			el.xDomainNumb >= xDomain[0] &&
 			el.xDomainNumb <= xDomain[1]
 	);
+
+	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
+	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 
 	/*export let combinedSelectableAreaTypesObject,
 		chartData,
@@ -285,6 +295,19 @@
 					></BarChartContainer> -->
 				{/if}
 			</div>
+
+			<p class="source-container">
+				<span style="font-weight: bold">Source:</span>
+				{#each sourceOrgs as org, i}
+					<a href={sourceLinks[i]}>{org}</a>
+
+					{#if i < sourceOrgs.length - 2}
+						,
+					{:else if i === sourceOrgs.length - 2}
+						{'and '}
+					{/if}
+				{/each}
+			</p>
 		</Tab>
 	{/each}
 </Tabs>
@@ -377,5 +400,10 @@
 		justify-content: center;
 		align-items: center;
 		font-weight: bold;
+	}
+
+	.source-container {
+		padding: 0px;
+		margin: 0px;
 	}
 </style>
