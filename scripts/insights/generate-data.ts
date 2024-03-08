@@ -5,6 +5,7 @@ import { readCsvAutoType } from './io.ts';
 import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
+import { toLookup, uniqueValues, toNestedLookup } from './data-utils.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
@@ -518,44 +519,4 @@ function readConfigFromCsvs() {
 		indicatorsMetadata,
 		periodsLookup
 	};
-}
-
-function toLookup(data, keyName: string, valueName: string | null = null) {
-	const lookup = {};
-
-	for (const item of data) {
-		if (valueName == null) {
-			lookup[item[keyName]] = item;
-		} else {
-			lookup[item[keyName]] = item[valueName];
-		}
-	}
-	return lookup;
-}
-
-function toNestedLookup(data, keys, valueName) {
-	const lookup = new Map();
-	for (const item of data) {
-		let map = lookup;
-		for (const key of keys.slice(0, -1)) {
-			if (!map.has(item[key])) {
-				map.set(item[key], new Map());
-			}
-			map = map.get(item[key]);
-		}
-		const lastKey = keys[keys.length - 1];
-		if (!map.has(item[lastKey])) {
-			map.set(item[lastKey], []);
-		}
-		map.get(item[lastKey]).push(valueName == null ? item : item[valueName]);
-	}
-	return lookup;
-}
-
-function uniqueValues(arr) {
-	const set = new Set();
-	for (const item of arr) {
-		set.add(item);
-	}
-	return Array.from(set);
 }

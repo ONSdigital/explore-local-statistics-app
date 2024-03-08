@@ -1,8 +1,14 @@
 import { median, mad } from './stats.ts';
+import { toLookup, toNestedLookup, uniqueValues } from './data-utils.ts';
 
 runTests();
 
 function runTests() {
+	testStats();
+	testDataUtils();
+}
+
+function testStats() {
 	assertEqual(median([5]), 5, 'Correct median of one number.');
 	assertEqual(median([14, 15]), 14.5, 'Correct median of 2 numbers.');
 	assertEqual(median([14, 16]), 15, 'Correct median of 2 numbers.');
@@ -19,6 +25,48 @@ function runTests() {
 	assertEqual(mad([1, 2, 3], 2), 2, 'Correct MAD with constant.');
 	assertEqual(mad([1, 4, 9]), 4.4478, 'Correct MAD.');
 	assertEqual(mad([1, 4, 9, 16]), 5.9304, 'Correct MAD.');
+}
+
+function testDataUtils() {
+	const arr1 = [1, 2, 3, 2, 1];
+	assertEqual(uniqueValues(arr1).length, 3, 'Correct number of unique values: numbers.');
+	const arr2 = ['a', 'b', 'c', 'b', 'a'];
+	assertEqual(uniqueValues(arr2).length, 3, 'Correct number of unique values: numbers.');
+
+	const data1 = [
+		{ code: 'a', value: 1 },
+		{ code: 'b', value: 2 }
+	];
+	const lookup1 = toLookup(data1, 'code', 'value');
+	assertEqual(lookup1['a'], 1, 'Lookup has correct value.');
+	assertEqual(lookup1['b'], 2, 'Lookup has correct value.');
+
+	const data2 = [
+		{ code: 'a', value: 1 },
+		{ code: 'b', value: 2 },
+		{ code: 'b', value: 3 }
+	];
+	assertThrows(
+		() => toLookup(data2, 'code', 'value'),
+		"Don't allow duplicate key when creating lookup."
+	);
+
+	const lookup3 = toLookup(data1, 'code');
+	assertEqual(lookup3['a'].code, 'a', 'Lookup has correct value.');
+	assertEqual(lookup3['a'].value, 1, 'Lookup has correct value.');
+
+	const data3 = [
+		{ code: 'a', code2: 'x', value: 1 },
+		{ code: 'b', code2: 'x', value: 2 },
+		{ code: 'b', code2: 'y', value: 3 }
+	];
+	const nestedLookup1 = toNestedLookup(data3, ['code'], 'value');
+	assertEqual(nestedLookup1.get('a').length, 1, 'Correct nested lookup.');
+	assertEqual(nestedLookup1.get('b').length, 2, 'Correct nested lookup.');
+	const nestedLookup2 = toNestedLookup(data3, ['code', 'code2'], 'value');
+	assertEqual(nestedLookup2.get('a').get('x')[0], 1, 'Correct nested lookup.');
+	assertEqual(nestedLookup2.get('b').get('x')[0], 2, 'Correct nested lookup.');
+	assertEqual(nestedLookup2.get('b').get('y')[0], 3, 'Correct nested lookup.');
 }
 
 function assertEqual(x, y, message) {
