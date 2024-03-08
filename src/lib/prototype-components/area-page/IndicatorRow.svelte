@@ -168,7 +168,7 @@
 		(el) => el.period === xDomain[1]
 	);
 
-	$: console.log(latestIndicatorCalculations);
+	$: console.log();
 
 	$: indicatorCalculations = latestIndicatorCalculations
 		? latestIndicatorCalculations.calcsByGeogLevel[

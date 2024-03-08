@@ -23,8 +23,11 @@
 	let showConfidenceIntervals = false;
 
 	$: indicator = metadata.indicatorsObject[chosenIndicatorId.code];
-	$: latestIndicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) => el.code === indicator.code && el.period === indicator.maxXDomainNumb
+	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
+		(el) => el.code === indicator.code
+	);
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === indicator.maxXDomainNumb
 	);
 
 	$: indicatorCalculations = latestIndicatorCalculations
@@ -40,6 +43,7 @@
 								: 'country'
 			]
 		: null;
+	$: console.log(metadata);
 
 	/*$: chartOptionsArray = mainChartOptionsArray.filter(
 		(el) => indicator.minXDomainNumb != indicator.maxXDomainNumb || el.multiYear != 'Yes'
