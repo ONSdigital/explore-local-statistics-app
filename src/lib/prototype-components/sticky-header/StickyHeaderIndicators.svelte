@@ -21,7 +21,14 @@
 		{/if}
 	</div>
 	<div class="row-container buttons-container">
-		<ChangeAreas {accordionArray} bind:selectionsObject {customLookup}></ChangeAreas>
+		<ChangeAreas
+			{accordionArray}
+			bind:selectionsObject
+			{customLookup}
+			label={selectionsObject['indicator-additional-visible'].length === 0
+				? 'Select areas'
+				: 'Change areas'}
+		></ChangeAreas>
 	</div>
 </div>
 

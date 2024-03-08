@@ -6,6 +6,7 @@
 	import AreaPanel from '$lib/prototype-components/AreaPanel.svelte';
 
 	export let selectedArea, accordionArray, selectionsObject, customLookup;
+	export let label = 'Change areas';
 
 	let showModal = false;
 
@@ -21,7 +22,7 @@
 		<div slot="icon" style:display="contents">
 			<Icon type="marker" />
 		</div>
-		Change areas
+		{label}
 	</Button>
 </div>
 
