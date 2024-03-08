@@ -5,10 +5,11 @@
 	import { Textarea, Button } from '@onsvisual/svelte-components';
 	import Icon from './Icon.svelte';
 
-	export let title;
-	export let unit;
+	export let title = null;
+	export let unit = null;
 	export let type = 'chart'; // chart, map or table
 	export let data = null;
+	export let showActions = true;
 
 	let el;
 	let showEmbed = false;
@@ -20,49 +21,57 @@
 <scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?type=${type}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
-<div class="content-block" bind:this={el}>
-	<h3 class="content-subhead">{title}<span>, {unit}</span></h3>
+<div class="content-block" class:hide-actions={!showActions} bind:this={el}>
+	{#if title}
+		<h3 class="content-subhead">{title}<span>{unit ? `, ${unit}` : ''}</span></h3>
+	{/if}
 	<slot />
 </div>
-<div class="content-actions">
-	<h4>Use and share</h4>
-	<ul>
-		{#if type !== 'table'}<li>
-				<Icon type="chart" /><span
-					><button class="btn-link" on:click={() => downloadPNG(el)}>Download {type} (PNG)</button
+{#if showActions}
+	<div class="content-actions">
+		<h4>Use and share</h4>
+		<ul>
+			{#if type !== 'table'}<li>
+					<Icon type="chart" /><span
+						><button class="btn-link" on:click={() => downloadPNG(el)}>Download {type} (PNG)</button
+						></span
+					>
+				</li>{/if}
+			{#if data}<li>
+					<Icon type="download" /><span
+						><button class="btn-link" on:click={() => downloadCSV(data)}>Download data (CSV)</button
+						></span
+					>
+				</li>{/if}
+			<li>
+				<Icon type="code" /><span
+					><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
+						>{showEmbed ? 'Hide embed code' : `Embed ${type}`}</button
 					></span
 				>
-			</li>{/if}
-		{#if data}<li>
-				<Icon type="download" /><span
-					><button class="btn-link" on:click={() => downloadCSV(data)}>Download data (CSV)</button
-					></span
+			</li>
+		</ul>
+		{#if showEmbed}
+			<div class="content-embed">
+				<Textarea value={embedCode} rows={4} width={30} hideLabel />
+				<Button small on:click={() => clip(embedCode, 'Copied to clipboard!')}
+					>Copy to clipboard</Button
 				>
-			</li>{/if}
-		<li>
-			<Icon type="code" /><span
-				><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
-					>{showEmbed ? 'Hide embed code' : `Embed ${type}`}</button
-				></span
-			>
-		</li>
-	</ul>
-	{#if showEmbed}
-		<div class="content-embed">
-			<Textarea value={embedCode} rows={4} width={30} hideLabel />
-			<Button small on:click={() => clip(embedCode, 'Copied to clipboard!')}
-				>Copy to clipboard</Button
-			>
-		</div>
-	{/if}
-</div>
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.content-block {
-		border: 1px solid #999;
+		border: 1px solid #222;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
 		padding: 8px;
+	}
+	.hide-actions {
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
 	}
 	h3.content-subhead {
 		font-size: 18px;

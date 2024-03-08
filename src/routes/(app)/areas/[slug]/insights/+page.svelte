@@ -9,7 +9,9 @@
 		NavSection,
 		Cards,
 		Card,
-		Button
+		Button,
+		Dropdown,
+		Twisty
 	} from '@onsvisual/svelte-components';
 	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
@@ -17,6 +19,7 @@
 	import MainChartSection from '$lib/prototype-components/area-page/MainChartSection.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
+	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import type { PageData } from './$types';
 	import { derived, writable } from 'svelte/store';
 
@@ -487,7 +490,26 @@
 		);
 	}
 
-	$: console.log(customLookup);
+	const clusterGroupsArray = metadata.clustersLookup.types.map((t) => ({
+		id: t,
+		label: `${capitalizeFirstLetter(t)} measures`
+	}));
+	let clusterGroup = clusterGroupsArray[0];
+	$: areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
+	$: clusterDescription = areaClusters?.[clusterGroup.id]
+		? data.metadata.clustersLookup.descriptions.find(
+				(d) => d.type === clusterGroup.id && d.letter === areaClusters[clusterGroup.id]
+			)?.text
+		: '';
+	$: similarAreas = areaClusters?.[clusterGroup.id]
+		? data.chartData.clusterData
+				.filter(
+					(d) =>
+						d[clusterGroup.id] === areaClusters[clusterGroup.id] &&
+						data.metadata.areasObject[d.areacd]
+				)
+				.map((d) => data.metadata.areasObject[d.areacd])
+		: [];
 
 	onMount(() => {
 		selectionsObject['areas-rows-comparison-chosen'] = {
@@ -639,11 +661,35 @@
 		></MainChartSection> -->
 	</NavSection>
 
-	<NavSection title="Similar areas">
-		<p>
-			Here you can find information relating to {data.place.areanm} based on the ONS's clustering analysis.
-		</p>
-	</NavSection>
+	{#if areaClusters}
+		<NavSection title="Similar areas">
+			<ContentBlock showActions={false}>
+				<Dropdown
+					label="Show areas similar to {getName(data.place, 'the')} based on:"
+					options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
+					bind:value={clusterGroup}
+				/>
+				{#if areaClusters[clusterGroup.id]}
+					<p style:margin-top="12px">
+						{capitalizeFirstLetter(getName(data.place, 'the'))} is in
+						<strong>{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}</strong
+						>. {clusterDescription || ''}
+					</p>
+					<Twisty
+						title="Other areas in {clusterGroup.id} cluster {areaClusters[
+							clusterGroup.id
+						].toUpperCase()}"
+					>
+						{#each similarAreas as area, i}
+							<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
+								>{area.areanm}</a
+							>{i < similarAreas.length - 1 ? `, ` : '.'}
+						{/each}
+					</Twisty>
+				{/if}
+			</ContentBlock>
+		</NavSection>
+	{/if}
 
 	<NavSection title="Get the data">
 		<p>Here you can find information and links to the data.</p>
