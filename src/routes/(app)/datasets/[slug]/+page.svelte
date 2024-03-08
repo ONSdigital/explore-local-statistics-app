@@ -274,8 +274,14 @@
 
 		<NavSection title="Get the data">
 			<p>
-				This indicator was produced by the Office for National Statistics. The original source data
-				can be <a href="#0">found here</a>.
+				This indicator was produced by the {sourceOrgs.join(' and ')}. The original source data can
+				be found {#each sourceOrgs as org, i}
+					<a href={sourceLinks[i]}>{i === sourceOrgs.length - 1 ? 'here.' : 'here'}</a>
+					{#if i < sourceOrgs.length - 2}
+						{','}
+					{:else if i === sourceOrgs.length - 2}
+						{'and '}
+					{/if}{/each}
 			</p>
 			<p>
 				If you would like a CSV of the data displayed in one of the above charts, you can click the
