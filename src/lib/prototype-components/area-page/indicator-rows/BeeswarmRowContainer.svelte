@@ -221,12 +221,12 @@
 	}
 
 	.robo-text-container {
-		margin: 2px 0px 2px 0px;
+		margin: 15px 0px 0 0px;
 		padding: 0px;
 		text-align: center;
 		font-size: 16px;
 		line-height: 16px;
-		color: #222;
+		color: #414042;
 	}
 
 	.robo-text-inline {
