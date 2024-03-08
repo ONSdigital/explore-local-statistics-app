@@ -34,6 +34,14 @@ const AREA_CODE_MAP = {
 	TLN: 'N92000002'
 };
 
+const CLUSTER_TYPES_LOOKUP = {
+	Glob: 'global',
+	Econ: 'economic',
+	Demo: 'demographic',
+	Health: 'health',
+	Con: 'connectivity'
+};
+
 export const NEW_FILES_WARNING =
 	`The script has been aborted because the list of file paths read in from ` +
 	`the ${CSV_PREPROCESS_DIR} folder includes files which are not listed in ` +
@@ -58,6 +66,7 @@ const CONFIG = {
 	DEFAULT_VALUE_FIELD_NAME,
 	COMBINED_DATA_COLUMN_NAMES,
 	AREA_CODE_MAP,
+	CLUSTER_TYPES_LOOKUP,
 	NEW_FILES_WARNING,
 	MISSING_FILES_WARNING,
 	CONFIG_DIR,

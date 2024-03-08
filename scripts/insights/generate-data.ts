@@ -26,17 +26,10 @@ async function main() {
 	checkSlugs(config.indicatorsMetadata);
 
 	const outData = generateOutData(data, config.indicators);
-	writeFileSync(
-		COLUMN_ORIENTED_DATA_OUTPUT_PATH,
-		JSON.stringify(
-			{
-				combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
-				beeswarmKeyData: outData.beeswarmKeyData
-			},
-			null,
-			'\t'
-		)
-	);
+	writeJson(COLUMN_ORIENTED_DATA_OUTPUT_PATH, {
+		combinedDataObjectColumnOriented: outData.combinedDataObjectColumnOriented,
+		beeswarmKeyData: outData.beeswarmKeyData
+	});
 	console.log(
 		`Insights data JSON file in column-oriented format has been generated at: ${COLUMN_ORIENTED_DATA_OUTPUT_PATH}`
 	);
@@ -50,7 +43,7 @@ async function main() {
 	const areaDetails = generateAreaDetails(outConfig, combinedData);
 	outConfig.areaDetails = areaDetails;
 
-	writeFileSync(CONFIG_OUTPUT_PATH, JSON.stringify(outConfig, null, '\t'));
+	writeJson(CONFIG_OUTPUT_PATH, outConfig);
 	console.log(`Insights config JSON file has been generated at: ${CONFIG_OUTPUT_PATH}`);
 }
 
@@ -117,8 +110,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 	const areasArray = makeAreasArray(config);
 	const areasObject = toLookup(areasArray, 'areacd');
 
-	//////////////
-
 	config.indicatorsMetadata.forEach((e) => {
 		e.prefix = e.prefix == null ? '' : e.prefix.replace('GBPSign', '£');
 		e.suffix = e.suffix == null ? '' : e.suffix;
@@ -141,8 +132,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		label: el.metadata.label
 	}));
 
-	//////////////
-
 	const topicsArray = [...new Set(indicatorsArray.map((e) => e.topic))]
 		.map((e) => {
 			const listOfIndicators = indicatorsArray.filter((el) => el.topic === e);
@@ -157,8 +146,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 			};
 		})
 		.sort((a, b) => a.name.localeCompare(b.name));
-
-	//////////////
 
 	const periodsLookupArray = config.periodsLookup.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 	const periodsLookupObject = [...new Set(indicatorsArray.map((e) => e.periodGroup))].reduce(
@@ -175,8 +162,7 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		config.indicatorsCalculations,
 		sameParentGeogCalculations,
 		clustersCalculations,
-		clustersLookup.types,
-		indicatorsObject
+		clustersLookup.types
 	);
 
 	return {
@@ -315,16 +301,8 @@ function getClusterDescriptions() {
 		.split('\n')
 		.filter((s) => new RegExp('^[A-Za-z]*_[A-D]:').test(s));
 
-	const clusterTypesLookup = {
-		Glob: 'global',
-		Econ: 'economic',
-		Demo: 'demographic',
-		Health: 'health',
-		Con: 'connectivity'
-	};
-
 	clusterDescriptions = clusterDescriptions.map((d) => {
-		const type = clusterTypesLookup[d.split('_')[0]];
+		const type = CONFIG.CLUSTER_TYPES_LOOKUP[d.split('_')[0]];
 		if (type == null) {
 			throw new Error(`Unknown cluster type: ${d.split('_')[0]}.`);
 		}
@@ -525,4 +503,8 @@ function readConfigFromCsvs() {
 		indicatorsMetadata,
 		periodsLookup
 	};
+}
+
+function writeJson(filename, data) {
+	writeFileSync(filename, JSON.stringify(data, null, '\t'));
 }
