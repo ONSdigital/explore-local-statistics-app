@@ -296,9 +296,19 @@
 		</NavSection>
 		<NavSection title="Other indicators">
 			<p>
-				{data.indicator.metadata.label} is one of {data.metadata.indicatorsCodeLabelArray.length} local
-				indicators on the <a href="{base}/">Explore local statistics</a> service. See the
+				{data.indicator.metadata.label} is one of
+				<span style="font-weight:bold"
+					>{data.metadata.indicatorsCodeLabelArray.length} local indicators</span
+				>
+				on the <a href="{base}/">Explore local statistics</a> service. See the
 				<a href="{base}/datasets">full list of local indicators</a>.
+			</p>
+
+			<p>
+				Please note that these indicators are <a
+					href="https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
+					class="">official statistics in development</a
+				>.
 			</p>
 		</NavSection>
 	</NavSections>
