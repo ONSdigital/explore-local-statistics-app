@@ -194,7 +194,7 @@
 					<span style="font-weight: bold">{selectedComparisonDifference}</span>
 					{selectedComparisonDifference === 'Similar' ? 'to' : 'than'}
 				{/if}
-				<span style="font-weight: bold"
+				<span
 					>{selectedComparisonDifference === 'No selected'
 						? selectedArea.areanm
 						: 'label' in selectionsObject['areas-rows-comparison-visible']
@@ -208,7 +208,7 @@
 				{/if}
 			{:else}<span>Values for</span>{/if}
 
-			<span style="font-weight: bold;">{latestTimePeriod.label}</span>
+			<span>{latestTimePeriod.label}</span>
 		</span>
 	</div>
 </div>
