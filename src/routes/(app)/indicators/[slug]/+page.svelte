@@ -171,6 +171,10 @@
 	]}
 	background="#eaeaea"
 >
+	<div class="stat-in-dev">
+		<div>Official statistics in development</div>
+	</div>
+
 	<Lede marginBottom>
 		{data.indicator.metadata.longDescription}
 	</Lede>
@@ -322,5 +326,16 @@
 	.selected-areas {
 		color: #999;
 		text-transform: uppercase;
+	}
+	.stat-in-dev {
+		display: flex;
+		margin-bottom: 28px;
+	}
+	.stat-in-dev > div {
+		font-weight: bold;
+		color: white;
+		background-color: #003c57;
+		padding: 2px 8px;
+		border-radius: 4px;
 	}
 </style>
