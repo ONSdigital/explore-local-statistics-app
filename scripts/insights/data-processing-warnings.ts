@@ -103,3 +103,11 @@ export function checkSlugs(slugs) {
 		}
 	}
 }
+export function abortIfAnyAreaHasUnrecognisedPrefix(areaCodes, areaCodePrefixes) {
+	for (const areacd of areaCodes) {
+		const prefix = areacd.slice(0, 3);
+		if (!areaCodePrefixes.includes(prefix)) {
+			throw new Error(`Area ${areacd} has unknown prefix ${prefix}.`);
+		}
+	}
+}

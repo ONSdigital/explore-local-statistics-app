@@ -12,6 +12,7 @@ import {
 } from './data-processing-warnings.ts';
 import { checkedJoin } from './table-utils.ts';
 import CONFIG from './config.ts';
+import { abortIfAnyAreaHasUnrecognisedPrefix } from './data-processing-warnings.ts';
 
 export default async function main() {
 	const nodeVersion = process.version
@@ -30,7 +31,11 @@ export default async function main() {
 
 	const file_paths = previous_file_paths.filter((f) => f.include === 'Y');
 
-	let [combined_data, combined_metadata] = processFiles(file_paths, excludedIndicators);
+	let [combined_data, combined_metadata] = processFiles(
+		file_paths,
+		excludedIndicators,
+		areas_geog_level
+	);
 
 	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
 	const periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
@@ -131,14 +136,18 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 	return [aq.from(indicatorsObjects), indicators_calculations, _oldStyleIndicatorsCalculations];
 }
 
-function processFiles(file_paths, excludedIndicators: string[]) {
+function processFiles(file_paths, excludedIndicators: string[], areas_geog_level: ColumnTable) {
 	const areas = loadCsvWithoutBom(CONFIG.AREAS_CSV);
 	const areaCodes = new Set(areas.array('areacd'));
+	abortIfAnyAreaHasUnrecognisedPrefix(areaCodes, areas_geog_level.array('areacd_prefix'));
 
 	let combined_data = aq.table(
 		Object.fromEntries(CONFIG.COMBINED_DATA_COLUMN_NAMES.map((d) => [d, []]))
 	);
 	let combined_metadata = aq.table({});
+
+	// Keep track of area codes that appear in the data but that we don't have listed in the metadata.
+	const unknownAreaCodes = new Set();
 
 	for (const f of file_paths.objects()) {
 		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
@@ -148,16 +157,32 @@ function processFiles(file_paths, excludedIndicators: string[]) {
 				f,
 				code,
 				areaCodes,
+				areas_geog_level,
 				combined_data,
-				combined_metadata
+				combined_metadata,
+				unknownAreaCodes
 			);
 		}
+	}
+
+	if (unknownAreaCodes.size > 0) {
+		console.warn(
+			`Warning: there were ${unknownAreaCodes.size} unknown area codes: ${[...unknownAreaCodes].join(', ')}`
+		);
 	}
 
 	return [combined_data, combined_metadata];
 }
 
-function processFile(f, code, areaCodes, combined_data, combined_metadata) {
+function processFile(
+	f,
+	code,
+	areaCodes,
+	areas_geog_level,
+	combined_data,
+	combined_metadata,
+	unknownAreaCodes
+) {
 	let indicator_data = loadCsvWithoutBom(f.filePath);
 	indicator_data = indicator_data.rename(
 		Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))
@@ -180,7 +205,7 @@ function processFile(f, code, areaCodes, combined_data, combined_metadata) {
 		throw new Error(`"value" field is unexpectedly missing in data for code ${code}!`);
 	}
 
-	indicator_data = tidyAreaCodes(indicator_data, areaCodes);
+	indicator_data = tidyAreaCodes(indicator_data, areaCodes, areas_geog_level, unknownAreaCodes);
 
 	const metadata_columns = getMetadataColNames(indicator_data, f.multiIndicatorCategory);
 
@@ -237,14 +262,30 @@ function renameColumns(table, nameChanges) {
 	return table.rename(renameMap);
 }
 
-function tidyAreaCodes(indicator_data, areaCodes) {
+function tidyAreaCodes(indicator_data, areaCodes, areas_geog_level, unknownAreaCodes) {
 	// convert codes like "TLB" to GSS codes
 	const mapAreaCode = (areacd) =>
 		areacd in CONFIG.AREA_CODE_MAP ? CONFIG.AREA_CODE_MAP[areacd] : areacd;
 	indicator_data = indicator_data.derive({ areacd: aq.escape((d) => mapAreaCode(d.areacd)) });
 
 	// only include areas that are in areas$areacd
-	return indicator_data.filter(aq.escape((d) => areaCodes.has(d.areacd)));
+	indicator_data = indicator_data.derive({
+		areacd_prefix: (d) => aq.op.substring(d.areacd, 0, 3)
+	});
+
+	const validAreacdPrefixes = new Set(areas_geog_level.array('areacd_prefix'));
+	for (const row of indicator_data.objects()) {
+		const areacd_prefix = row.areacd.substring(0, 3);
+		if (!areaCodes.has(row.areacd) && validAreacdPrefixes.has(areacd_prefix)) {
+			unknownAreaCodes.add(row.areacd);
+		}
+	}
+
+	indicator_data = indicator_data
+		.filter(aq.escape((d) => validAreacdPrefixes.has(d.areacd_prefix)))
+		.select(aq.not('areacd_prefix'));
+
+	return indicator_data;
 }
 
 function getMetadataColNames(indicator_data, multiIndicatorCategory) {
