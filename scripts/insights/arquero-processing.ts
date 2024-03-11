@@ -133,7 +133,7 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 
 function processFiles(file_paths, excludedIndicators: string[]) {
 	const areas = loadCsvWithoutBom(CONFIG.AREAS_CSV);
-	const areaCodes = areas.array('areacd');
+	const areaCodes = new Set(areas.array('areacd'));
 
 	let combined_data = aq.table(
 		Object.fromEntries(CONFIG.COMBINED_DATA_COLUMN_NAMES.map((d) => [d, []]))
@@ -244,7 +244,7 @@ function tidyAreaCodes(indicator_data, areaCodes) {
 	indicator_data = indicator_data.derive({ areacd: aq.escape((d) => mapAreaCode(d.areacd)) });
 
 	// only include areas that are in areas$areacd
-	return indicator_data.filter(aq.escape((d) => aq.op.includes(areaCodes, d.areacd)));
+	return indicator_data.filter(aq.escape((d) => areaCodes.has(d.areacd)));
 }
 
 function getMetadataColNames(indicator_data, multiIndicatorCategory) {
