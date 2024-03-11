@@ -36,7 +36,6 @@
 			selectionsObject['indicator-additional-chosen'] = chosen.filter((s) => s !== area.areacd);
 		else if (chosen.length < maxSelection)
 			selectionsObject['indicator-additional-chosen'] = [...chosen, area.areacd];
-		console.log(selectionsObject);
 	};
 	const refreshData = () => {
 		if (geoGroup.key !== prevGeoGroup.key) {
@@ -144,6 +143,7 @@
 	$: sourceOrgs = data.indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = data.indicator.metadata.sourceURL.split('|');
 	$: sourceDate = data.indicator.metadata.sourceDate.split('|');
+	$: experimental = data.indicator.metadata.experimentalStatistic === 'T';
 </script>
 
 <Breadcrumb
@@ -171,10 +171,11 @@
 	]}
 	background="#eaeaea"
 >
-	<div class="stat-in-dev">
-		<div>Official statistics in development</div>
-	</div>
-
+	{#if experimental}
+		<div class="stat-in-dev">
+			<div>Official statistics in development</div>
+		</div>
+	{/if}
 	<Lede marginBottom>
 		{data.indicator.metadata.longDescription}
 	</Lede>
@@ -304,12 +305,14 @@
 				<a href="{base}/datasets">full list of local indicators</a>.
 			</p>
 
-			<p>
-				Please note that these indicators are <a
-					href="https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
-					class="">official statistics in development</a
-				>.
-			</p>
+			{#if experimental}
+				<p>
+					Please note that these indicators are <a
+						href="https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
+						class="">official statistics in development</a
+					>.
+				</p>
+			{/if}
 		</NavSection>
 	</NavSections>
 {/if}
