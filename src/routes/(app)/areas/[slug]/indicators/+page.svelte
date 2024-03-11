@@ -88,6 +88,7 @@
 		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
 
+	///HERE - NEED TO CHECK///
 	$: sameParentSameGeogAreas = sameGeogLevelAreas.filter(
 		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
