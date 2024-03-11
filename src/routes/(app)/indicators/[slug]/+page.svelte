@@ -59,10 +59,17 @@
 		columns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
 			{ key: 'areanm', label: 'Area name', sortable: true },
-			...data.indicator.years.map((y) => ({ key: y, label: y, sortable: true }))
+			...data.indicator.years.map((y) => ({
+				key: y,
+				label: y,
+				sortable: true,
+				numeric: true,
+				dp: +data.indicator.metadata.decimalPlaces
+			}))
 		];
 		refreshData();
 	});
+	$: console.log('columns', columns);
 
 	let metadata = data.metadata;
 
