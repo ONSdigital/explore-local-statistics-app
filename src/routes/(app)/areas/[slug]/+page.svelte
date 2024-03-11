@@ -133,7 +133,7 @@
 				<Button
 					icon="arrow"
 					variant="ghost"
-					href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/insights"
+					href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
 					small>See local indicators</Button
 				>
 			</div>

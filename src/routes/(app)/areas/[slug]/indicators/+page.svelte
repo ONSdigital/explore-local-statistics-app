@@ -558,7 +558,7 @@
 			// 	areaType: geoCodesLookup[e.detail.areacd.slice(0, 3)].label
 			// });
 			goto(
-				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/insights`,
+				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
 				options
 			);
 		}
@@ -633,7 +633,7 @@
 			on:select={navTo}
 		/>
 		{#if postcode}
-			<AreaList {postcode} on:clear={() => (postcode = null)} urlSuffix="/insights" />
+			<AreaList {postcode} on:clear={() => (postcode = null)} urlSuffix="/indicators" />
 		{/if}
 	</Card>
 </Cards>
@@ -706,7 +706,7 @@
 						<p>
 							Areas {getName(parentArea, 'in')}<br />
 							{#each similarAreas.region as area, i}
-								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
+								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
 									>{area.areanm}</a
 								>{i < similarAreas.region.length - 1 ? `, ` : '.'}
 							{/each}
@@ -714,7 +714,7 @@
 						<p>
 							Other areas<br />
 							{#each similarAreas.other as area, i}
-								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/insights"
+								<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
 									>{area.areanm}</a
 								>{i < similarAreas.other.length - 1 ? `, ` : '.'}
 							{/each}
