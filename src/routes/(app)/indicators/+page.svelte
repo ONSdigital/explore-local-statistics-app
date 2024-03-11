@@ -66,7 +66,8 @@
 				<h3>{capitalise(subTopic.name)}</h3>
 				{#each subTopic.indicators as indicator}
 					<p>
-						<a href="{base}/datasets/{indicator.metadata.slug}">{indicator.metadata.label}</a><br />
+						<a href="{base}/indicators/{indicator.metadata.slug}">{indicator.metadata.label}</a><br
+						/>
 						{indicator.metadata.subtitle}
 					</p>
 				{/each}

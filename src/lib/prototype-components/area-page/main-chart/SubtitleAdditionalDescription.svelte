@@ -53,7 +53,7 @@
 
 		<p>
 			Further
-			<a href="{base}/datasets/{selectedIndicator.metadata.slug}"
+			<a href="{base}/indicators/{selectedIndicator.metadata.slug}"
 				>{selectedIndicator.metadata.label}</a
 			> data is available here.
 		</p>

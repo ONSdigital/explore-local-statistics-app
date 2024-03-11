@@ -150,7 +150,7 @@
 	links={[
 		{ label: 'Home', href: '/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Local indicators', href: `${base}/datasets` },
+		{ label: 'Local indicators', href: `${base}/indicators` },
 		{ label: data.indicator.metadata.label }
 	]}
 	background="#eaeaea"

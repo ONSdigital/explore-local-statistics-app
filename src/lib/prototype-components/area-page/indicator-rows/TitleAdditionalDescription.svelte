@@ -74,7 +74,7 @@
 
 		<p>
 			Further
-			<a href="{base}/datasets/{indicator.metadata.slug}">{indicator.metadata.label}</a> data is available
+			<a href="{base}/indicators/{indicator.metadata.slug}">{indicator.metadata.label}</a> data is available
 			here.
 		</p>
 	</div>

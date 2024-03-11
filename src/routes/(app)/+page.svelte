@@ -84,11 +84,11 @@
 	<Card title="Browse indicators">
 		<p style:margin-bottom="28px">
 			Explore {datasetsCount} local indicators, including
-			<a href="{base}/datasets/wellbeing-satisfaction" class="no-wrap">life satisfaction</a>,
-			<a href="{base}/datasets/employment-rate">employment rate</a> and
-			<a href="{base}/datasets/4g-coverage">4G coverage</a>.
+			<a href="{base}/indicators/wellbeing-satisfaction" class="no-wrap">life satisfaction</a>,
+			<a href="{base}/indicators/employment-rate">employment rate</a> and
+			<a href="{base}/indicators/4g-coverage">4G coverage</a>.
 		</p>
-		<Button icon="arrow" iconPosition="after" href="{base}/datasets">Explore indicators</Button>
+		<Button icon="arrow" iconPosition="after" href="{base}/indicators">Explore indicators</Button>
 	</Card>
 </Cards>
 
