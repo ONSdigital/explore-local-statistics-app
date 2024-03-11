@@ -4,10 +4,13 @@ import ckmeans from 'ckmeans';
 
 const yearKey = 'xDomainNumb';
 
+const isNumeric = (val) => isFinite(val) && val !== null;
+
 export function filterData(data, types, year = null) {
 	return data
 		.filter(
-			(d) => d.value && (!year || d[yearKey] === year) && types.includes(d.areacd.slice(0, 3))
+			(d) =>
+				isNumeric(d.value) && (!year || d[yearKey] === year) && types.includes(d.areacd.slice(0, 3))
 		)
 		.sort((a, b) => a[yearKey] - b[yearKey]);
 }
@@ -36,7 +39,7 @@ function getBreak(breaks, value) {
 
 export function makeMapData(data, types, year) {
 	const filtered = data.filter(
-		(d) => d.value && d[yearKey] === year && types.includes(d.areacd.slice(0, 3))
+		(d) => isNumeric(d.value) && d[yearKey] === year && types.includes(d.areacd.slice(0, 3))
 	);
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
 	const breaks = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]];
