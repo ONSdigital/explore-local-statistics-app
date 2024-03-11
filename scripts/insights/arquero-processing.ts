@@ -282,7 +282,7 @@ function tidyAreaCodes(indicator_data, areaCodes, areas_geog_level, unknownAreaC
 	}
 
 	indicator_data = indicator_data
-		.filter(aq.escape((d) => validAreacdPrefixes.has(d.areacd_prefix)))
+		.filter(aq.escape((d) => areaCodes.has(d.areacd)))
 		.select(aq.not('areacd_prefix'));
 
 	return indicator_data;
