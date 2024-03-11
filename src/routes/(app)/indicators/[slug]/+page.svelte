@@ -225,22 +225,24 @@
 			</ContentBlock>
 		</NavSection>
 
-		<NavSection title="Line chart">
-			<ContentBlock
-				type="line-chart"
-				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
-				data={[]}
-			>
-				<LineChartContainerIndicatorPage
-					indicator={data.indicator}
-					chartData={data.chartData}
-					{selectionsObject}
-					customLookup={customLookup['indicator-additional-visible']}
-					{metadata}
-				></LineChartContainerIndicatorPage>
-			</ContentBlock>
-		</NavSection>
+		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb}
+			<NavSection title="Line chart">
+				<ContentBlock
+					type="line-chart"
+					title={data.indicator.metadata.label}
+					unit={getUnit(data.indicator.metadata)}
+					data={[]}
+				>
+					<LineChartContainerIndicatorPage
+						indicator={data.indicator}
+						chartData={data.chartData}
+						{selectionsObject}
+						customLookup={customLookup['indicator-additional-visible']}
+						{metadata}
+					></LineChartContainerIndicatorPage>
+				</ContentBlock>
+			</NavSection>
+		{/if}
 
 		<NavSection title="Bar chart">
 			<ContentBlock
