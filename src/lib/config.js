@@ -86,18 +86,26 @@ export const chartConfigurations = {
 
 export const geogLevelToNameLookup = {
 	lower: {
-		singular: { short: 'LTLA', full: 'lower tier local authority', simplified: 'local authority' },
+		singular: {
+			short: 'LTLA',
+			full: 'lower tier/unitary authority',
+			simplified: 'local authority'
+		},
 		plural: {
 			short: 'LTLAs',
-			full: 'lower tier local authorities',
+			full: 'lower tier/unitary authorities',
 			simplified: 'local authorities'
 		}
 	},
 	upper: {
-		singular: { short: 'UTLA', full: 'upper tier local authority', simplified: 'local authority' },
+		singular: {
+			short: 'UTLA',
+			full: 'upper tier/unitary authority',
+			simplified: 'local authority'
+		},
 		plural: {
 			short: 'UTLAs',
-			full: 'upper tier local authorities',
+			full: 'upper tier/unitary authorities',
 			simplified: 'local authorities'
 		}
 	},

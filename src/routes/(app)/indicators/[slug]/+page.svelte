@@ -122,13 +122,13 @@
 				},
 				{
 					key: 'utla',
-					label: 'Upper-tier local authorities',
+					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
 					accordion: true
 				},
 				{
 					key: 'ltla',
-					label: 'Lower-tier local authorities',
+					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
 				}
@@ -196,6 +196,7 @@
 			{accordionArray}
 			customLookup={customLookup['indicator-additional-visible']}
 		/>
+
 		<NavSection title="Map">
 			<ContentBlock
 				type="map"

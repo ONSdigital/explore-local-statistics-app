@@ -338,12 +338,12 @@
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
 				{
-					label: 'Upper-tier local authorities',
+					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
 					accordion: true
 				},
 				{
-					label: 'Lower-tier local authorities',
+					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
 				}
@@ -394,12 +394,12 @@
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
 				{
-					label: 'Upper-tier local authorities',
+					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
 					accordion: true
 				},
 				{
-					label: 'Lower-tier local authorities',
+					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
 				}
@@ -457,12 +457,12 @@
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
 				{
-					label: 'Upper-tier local authorities',
+					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
 					accordion: true
 				},
 				{
-					label: 'Lower-tier local authorities',
+					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
 				}
