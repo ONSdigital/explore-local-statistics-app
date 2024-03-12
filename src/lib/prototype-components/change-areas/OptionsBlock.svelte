@@ -15,8 +15,6 @@
 		accordionOpen = regex;
 	}
 
-	$: console.log(regex);
-
 	$: labelKey = 'labelKey' in option ? option.labelKey : 'areanm';
 	$: idKey = 'idKey' in option ? option.idKey : 'areacd';
 

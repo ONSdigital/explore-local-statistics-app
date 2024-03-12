@@ -39,7 +39,7 @@
 									: null;
 
 							let similarCalc =
-								selectedArea.geogLevel === 'lower'
+								selectedArea.geogLevel === 'lower' && selectedArea.similarCluster
 									? 'demographic' in el.clustersCalculations
 										? el.clustersCalculations.demographic[selectedArea.similarCluster].median
 										: null
@@ -111,8 +111,6 @@
 			el.xDomainNumb <= xDomain[1]
 	);
 
-	$: console.log(selectedPeriods, xDomain, xDomainInit);
-
 	$: filteredChartData =
 		xDomain[1] && xDomain[0]
 			? indicatorChartData.filter(
@@ -167,8 +165,6 @@
 	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
 		(el) => el.period === xDomain[1]
 	);
-
-	$: console.log();
 
 	$: indicatorCalculations = latestIndicatorCalculations
 		? latestIndicatorCalculations.calcsByGeogLevel[

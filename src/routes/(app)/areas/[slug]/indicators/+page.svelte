@@ -94,14 +94,21 @@
 	);
 	$: sameParentSameGeogCodes = sameParentSameGeogAreas.map((el) => el.areacd);
 
+	$: console.log(sameParentSameGeogAreas, sameParentSameGeogCodes);
+
 	$: console.log(sameGeogLevelAreas);
 
-	$: similarCodes = metadata.clustersLookup.data.areacd.filter(
+	$: console.log(metadata.clustersLookup.data.areacd);
+	$: console.log(similarAreas);
+
+	$: similarCodesForIndicatorRows = metadata.clustersLookup.data.areacd.filter(
 		(el, i) =>
 			metadata.clustersLookup.data.demographic[i] === selectedAreaDemographicCluster &&
 			el != selectedArea.areacd
 	);
-	$: similarAreas = similarCodes.map((el) => metadata.areasObject[el]).filter((el) => el);
+	$: similarAreasForIndicatorRows = similarCodesForIndicatorRows
+		.map((el) => metadata.areasObject[el])
+		.filter((el) => el);
 
 	$: regionChildrenAreas = {
 		lower: [],
@@ -179,8 +186,8 @@
 					related:
 						'Demographically similar ' + getGeogName(selectedArea.geogLevel, false, 'simplified')
 				},
-				areas: similarAreas,
-				codes: similarCodes
+				areas: similarAreasForIndicatorRows,
+				codes: similarCodesForIndicatorRows
 			},
 			'region-children': {
 				labels: {

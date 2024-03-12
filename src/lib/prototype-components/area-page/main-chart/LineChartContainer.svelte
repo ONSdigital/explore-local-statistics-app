@@ -53,8 +53,6 @@
 		.concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci]))
 		.filter((el) => el);
 
-	$: console.log(values);
-
 	$: yDomainRaw = [0.95 * Math.min(...values), 1.05 * Math.max(...values)];
 
 	$: yDomainAdj =

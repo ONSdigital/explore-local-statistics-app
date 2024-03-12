@@ -6,8 +6,6 @@
 
 	$: labelArray = area.areanm.length > 25 ? splitTextIntoRows(area.areanm, 2) : [area.areanm];
 
-	$: console.log(area);
-
 	$: color = area
 		? area.role === 'custom'
 			? Object.keys(customLookup).length > colorsLookup.custom.length

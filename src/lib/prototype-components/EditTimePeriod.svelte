@@ -20,8 +20,6 @@
 		}
 		chosenXDomain = [min, max];
 	}
-
-	$: console.log('start-end', chosenXDomain[0], chosenXDomain[1]);
 </script>
 
 <Slider

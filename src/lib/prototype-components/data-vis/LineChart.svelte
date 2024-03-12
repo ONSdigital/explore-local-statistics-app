@@ -45,8 +45,6 @@
 			}
 		: null;
 
-	$: console.log(additionalID);
-
 	$: additionalLines = selectionsObject[additionalID + '-visible']
 		.map((el) => ({
 			areacd: el.areacd,
