@@ -63,7 +63,9 @@
 	{#each filteredTopics as topic}
 		<NavSection title={capitalise(topic.name)}>
 			{#each topic.subTopics as subTopic}
-				<h3>{capitalise(subTopic.name)}</h3>
+				{#if topic.name != subTopic.name}
+					<h3>{capitalise(subTopic.name)}</h3>
+				{/if}
 				{#each subTopic.indicators as indicator}
 					<p>
 						<a href="{base}/indicators/{indicator.metadata.slug}">{indicator.metadata.label}</a><br

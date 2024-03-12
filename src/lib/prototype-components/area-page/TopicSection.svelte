@@ -36,9 +36,11 @@
 
 			{#each subTopics as subTopic, i}
 				<div class="sub-topic-container" style="margin-bottom: 10px;">
-					<h3 class="sub-topic-header" style="margin-bottom: 20px;">
-						{subTopic.name[0].toUpperCase() + subTopic.name.substring(1)}
-					</h3>
+					{#if topic.name != subTopic.name}
+						<h3 class="sub-topic-header" style="margin-bottom: 20px;">
+							{subTopic.name[0].toUpperCase() + subTopic.name.substring(1)}
+						</h3>
+					{/if}
 
 					<!-- <div class="divider" style="margin-bottom: 20px;"></div> -->
 

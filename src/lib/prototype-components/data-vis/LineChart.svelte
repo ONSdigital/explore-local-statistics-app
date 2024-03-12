@@ -54,8 +54,6 @@
 		}))
 		.filter((el) => el.data.length > 0);
 
-	$: console.log(relatedID);
-
 	$: groupLines = selectionsObject[relatedID + '-visible']
 		? selectionsObject[relatedID + '-visible'].areas
 				.map((el) => ({

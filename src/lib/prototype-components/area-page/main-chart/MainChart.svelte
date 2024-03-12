@@ -61,6 +61,8 @@
 		...new Set(filteredChartData.filter((el) => el.areacd === selectedArea.areacd))
 	];
 
+	$: console.log(filteredChartData);
+
 	$: filteredChartDataAdditionals = filteredChartData.filter((el) =>
 		selectionsObject['areas-single-additional-chosen'].includes(el.areacd)
 	);
