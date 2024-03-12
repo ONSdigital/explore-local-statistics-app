@@ -105,20 +105,18 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		label: el.metadata.label
 	}));
 
-	const topicsArray = [...new Set(indicatorsArray.map((e) => e.topic))]
-		.map((e) => {
-			const listOfIndicators = indicatorsArray.filter((el) => el.topic === e);
-			const subTopics = [...new Set(listOfIndicators.map((el) => el.subTopic))];
+	const topicsArray = [...new Set(indicatorsArray.map((e) => e.topic))].map((e) => {
+		const listOfIndicators = indicatorsArray.filter((el) => el.topic === e);
+		const subTopics = [...new Set(listOfIndicators.map((el) => el.subTopic))];
 
-			return {
-				name: e,
-				subTopics: subTopics.map((el) => ({
-					name: el,
-					indicators: indicatorsArray.filter((elm) => elm.subTopic === el)
-				}))
-			};
-		})
-		.sort((a, b) => a.name.localeCompare(b.name));
+		return {
+			name: e,
+			subTopics: subTopics.map((el) => ({
+				name: el,
+				indicators: indicatorsArray.filter((elm) => elm.subTopic === el)
+			}))
+		};
+	});
 
 	const periodsLookupArray = config.periodsLookup.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 	const periodsLookupObject = [...new Set(indicatorsArray.map((e) => e.periodGroup))].reduce(
