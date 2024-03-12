@@ -584,7 +584,7 @@
 	background="#eaeaea"
 />
 
-<Titleblock title="Local indicators for {data.place.areanm}" background="#eaeaea">
+<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
 	<Lede>Visualise local indicators and trends for {getName(data.place, 'the')}</Lede>
 </Titleblock>
 
