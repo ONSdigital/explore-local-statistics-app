@@ -88,20 +88,13 @@
 		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
 
-	$: console.log(chartData);
+	$: console.log(metadata);
 
 	///HERE - NEED TO CHECK///
 	$: sameParentSameGeogAreas = sameGeogLevelAreas.filter(
 		(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
 	);
 	$: sameParentSameGeogCodes = sameParentSameGeogAreas.map((el) => el.areacd);
-
-	$: console.log(sameParentSameGeogAreas, sameParentSameGeogCodes);
-
-	$: console.log(sameGeogLevelAreas);
-
-	$: console.log(metadata.clustersLookup.data.areacd);
-	$: console.log(similarAreas);
 
 	$: similarCodesForIndicatorRows = metadata.clustersLookup.data.areacd.filter(
 		(el, i) =>
@@ -270,8 +263,6 @@
 		'related-single-chosen': null,
 		'related-single-visible': null
 	};
-
-	$: console.log(selectionsObject);
 
 	$: {
 		selectionsObject['areas-rows-comparison-visible'] = constructVisibleAreasArray(

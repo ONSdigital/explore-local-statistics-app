@@ -190,7 +190,9 @@ function processFile(
 
 	indicator_data = renameColumns(indicator_data, [
 		{ old: 'lower confidence interval (95%)', new: 'lci' },
-		{ old: 'upper confidence interval (95%)', new: 'uci' }
+		{ old: 'upper confidence interval (95%)', new: 'uci' },
+		{ old: 'lower_confidence_interval_95', new: 'lci' },
+		{ old: 'upper_confidence_interval_95', new: 'uci' }
 	]);
 
 	if (f.valueField) {
