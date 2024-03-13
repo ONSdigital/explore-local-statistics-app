@@ -25,6 +25,7 @@ npm run data:generate
 - Lots of metadata such as `unit,measure,polarity` for each indicator: `scripts/insights/raw/config-data/indicators/indicators-metadata.csv`
 - Dummy data for the beeswarm key: `scripts/insights/cooked/csv/beeswarm-key-data.csv`
 - Clusters lookup: `scripts/insights/raw/config-data/clusters/clustersLookup.csv`
+- Cluster descriptions: `scripts/insights/raw/config-data/clusters/Cluster-descriptions.txt`. This is the content of `Cluster-descriptions.docx`, converted to `.txt` format using Microsoft Word.
 - Urban/rural, IMD, coastal: `scripts/insights/raw/config-data/geography/areas-geog-info.csv`
 - Parent geographies: `scripts/insights/raw/config-data/geography/areas-parents-lookup.csv`
 
