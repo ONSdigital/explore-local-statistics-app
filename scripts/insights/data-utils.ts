@@ -30,7 +30,7 @@ export function toLookupWithMultipleValues(data, keyName: string, valueName: str
 	return lookup;
 }
 
-export function toNestedLookup(data, keys, valueName) {
+export function toNestedLookup(data, keys: string[], valueName: string | null = null) {
 	const lookup = new Map();
 	for (const item of data) {
 		let map = lookup;

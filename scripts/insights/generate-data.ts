@@ -45,12 +45,15 @@ async function main() {
 }
 
 function generateOutData(combinedData, indicatorsArray) {
-	const combinedDataArray = [...combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb);
+	const combinedDataLookup = toNestedLookup(
+		[...combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb),
+		['code']
+	);
 
 	// combinedDataObjectColumnOriented stores an array for each column to save space.
 	const combinedDataObjectColumnOriented = {};
 	for (const indicator of indicatorsArray) {
-		const rows = combinedDataArray.filter((e) => e.code === indicator.code);
+		const rows = combinedDataLookup.get(indicator.code);
 		if (rows.length === 0) {
 			throw new Error('Unexpectedly empty `rows` array.');
 		}
