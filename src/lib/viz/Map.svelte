@@ -58,12 +58,13 @@
 			features: data.map((d, i) => {
 				const feature = features[d.areacd];
 				feature.properties = {
+					...feature.properties,
 					...d,
 					color: options.boundary
-						? getColor(d)?.color || 'grey'
+						? getColor(d)?.color || 'lightgrey'
 						: clusterKey !== 'cluster'
 							? getClusterColor(d, selectedArea)
-							: colors[d[clusterKey]] || 'grey'
+							: colors[d[clusterKey]] || 'lightgrey'
 				};
 				return feature;
 			})
