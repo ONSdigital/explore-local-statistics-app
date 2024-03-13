@@ -415,12 +415,9 @@ function makeAreasArray(config) {
 function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 	const result = {};
 	for (const item of areasGeogLevel) {
-		result[item.level] = [];
-	}
-	for (const place of areas) {
-		const areacd_prefix = place.areacd.slice(0, 3);
-		for (const item of areasGeogLevel) {
-			if (areacd_prefix === item.areacd_prefix) {
+		result[item.level] ||= [];
+		for (const place of areas) {
+			if (place.areacd.slice(0, 3) === item.areacd_prefix) {
 				result[item.level].push(place.areacd);
 			}
 		}
