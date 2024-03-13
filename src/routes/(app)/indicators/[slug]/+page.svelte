@@ -10,6 +10,7 @@
 		Dropdown,
 		Table
 	} from '@onsvisual/svelte-components';
+	import { capitalise } from '@onsvisual/robo-utils';
 	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import Lede from '$lib/components/Lede.svelte';
 	// import Indicators from '$lib/components/Indicators.svelte';
@@ -177,6 +178,8 @@
 		}
 	]}
 	background="#eaeaea"
+	titleBadge={!experimental ? capitalise(data.indicator.topic) : null}
+	titleBadgeAriaLabel="Topic: {capitalise(data.indicator.topic)}"
 >
 	{#if experimental}
 		<div class="stat-in-dev">
