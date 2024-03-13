@@ -57,8 +57,14 @@ function generateOutData(combinedData, indicatorsArray) {
 		if (rows.length === 0) {
 			throw new Error('Unexpectedly empty `rows` array.');
 		}
+		const keys = Object.keys(rows[0]);
+		for (const row of rows) {
+			if (Object.keys(row).length !== keys.length) {
+				throw new Error('Unexpected number of keys in a data row.');
+			}
+		}
 		const dataByColumn = {};
-		for (const columnName of Object.keys(rows[0])) {
+		for (const columnName of keys) {
 			dataByColumn[columnName] = rows.map((row) => row[columnName]);
 		}
 
