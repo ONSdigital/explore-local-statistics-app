@@ -32,6 +32,8 @@
 			: '');
 </script>
 
+<h3 class="indicator-title">{selectedIndicator.metadata.label}</h3>
+
 <button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
 	<span>{subtitleText}<InfoButton {expandIcon}></InfoButton></span>
 </button>
@@ -67,10 +69,14 @@
 		font-family: inherit;
 		border: none;
 		background: none;
-		margin: 10px 0px;
-		padding: 0px 5px;
+		margin: 0px 0px;
+		padding: 0px;
 		font-size: 18px;
 		line-height: 24px;
+	}
+
+	.indicator-title {
+		margin: 0;
 	}
 
 	.indicator-additional-description-text-container {

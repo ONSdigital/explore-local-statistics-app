@@ -61,8 +61,6 @@
 		...new Set(filteredChartData.filter((el) => el.areacd === selectedArea.areacd))
 	];
 
-	$: console.log(filteredChartData);
-
 	$: filteredChartDataAdditionals = filteredChartData.filter((el) =>
 		selectionsObject['areas-single-additional-chosen'].includes(el.areacd)
 	);
@@ -111,281 +109,135 @@
 
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
-
-	/*export let combinedSelectableAreaTypesObject,
-		chartData,
-		metadata,
-		chosenIndicatorId,
-		filteredIndicators;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasId,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
-
-	$: selectedIndicator = metadata.indicatorsObject[chosenIndicatorId.code];
-	$: selectedIndicatorCalculations = metadata.indicatorsCalculationsArray.find(
-		(el) =>
-			el.code === selectedIndicator.code &&
-			el.period === selectedIndicator.maxXDomainNumb &&
-			el.geog_level === 'lower'
-	);
-
-	////
-
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
-		(el) =>
-			el.periodGroup === selectedIndicator.periodGroup &&
-			el.xDomainNumb >= selectedIndicator.minXDomainNumb &&
-			el.xDomainNumb <= selectedIndicator.maxXDomainNumb
-	);
-
-	////
-
-	$: chartOptionsArray = mainChartOptionsArray.filter(
-		(el) => timePeriodsArray.length > 1 || el.multiYear != 'Yes'
-	);
-	$: chosenChartId =
-		chartOptionsArray.find((el) => el.id === chosenChartId) === undefined
-			? chartOptionsArray[0].id
-			: chosenChartId;
-	$: selectedChartType = chartOptionsArray.find((el) => el.id === chosenChartId);
-
-	$: filteredChartData = chartData.combinedDataObject[selectedIndicator.code].filter(
-		(el) => el.value != 'NA'
-	);
-
-	////
-
-	$: areasCodesForAreasWithData = [...new Set(filteredChartData.map((el) => el.areacd))];
-
-	$: visibleAreasWithData = [
-		combinedSelectableAreaTypesObject.visible.primaryAreas,
-		combinedSelectableAreaTypesObject.visible.relatedAreas
-	].map((el) => el.filter((elm) => areasCodesForAreasWithData.includes(elm.areacd)));
-
-	$: visibleAreasWithDataCodes = [...visibleAreasWithData[0], ...visibleAreasWithData[1]].map(
-		(el) => el.areacd
-	);
-
-	////
-
-	$: filteredChartDataForVisibleAreas = filteredChartData.filter((el) =>
-		visibleAreasWithDataCodes.includes(el.areacd)
-	);*/
 </script>
 
-<Tabs border bind:selected={chosenChartId}>
-	{#each chartOptionsArray as chart}
-		<Tab title={chart.label} id={chart.id} hideTitle>
-			<div class="row-container title-buttons-container">
-				<Select
-					id="select-indicator"
-					options={filteredIndicators}
-					idKey="code"
-					labelKey="label"
-					groupKey="topic"
-					clusterByGroup
-					clearable={false}
-					bind:value={chosenIndicatorId}
-				></Select>
+<div class="main-chart-column-container">
+	<div class="row-container title-buttons-container">
+		<Select
+			id="select-indicator"
+			options={filteredIndicators}
+			idKey="code"
+			labelKey="label"
+			groupKey="topic"
+			clusterByGroup
+			clearable={false}
+			bind:value={chosenIndicatorId}
+		></Select>
 
-				<div class="row-container buttons-container">
-					<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}
-					></ChangeAreas>
+		<div class="row-container buttons-container">
+			<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}
+			></ChangeAreas>
 
-					<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
-				</div>
-			</div>
+			<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
+		</div>
+	</div>
 
-			<SubtitleAdditionalDescription
-				selectedIndicator={indicator}
-				{xDomain}
-				{timePeriodsArray}
-				selectedChartType={chart}
-			></SubtitleAdditionalDescription>
-
-			<div class="chart-container">
-				{#if timePeriodsArray.length === 0}
-					<div class="no-chart-container">
-						<p>No data for selected areas over time period</p>
-					</div>
-				{:else if chart.label === 'Time series'}
-					{#if timePeriodsArray.length > 1}
-						<LineChartContainer
-							{indicator}
-							{metadata}
-							{timePeriodsArray}
-							filteredChartDataSelected={filteredChartDataSelected.filter(
-								(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-							)}
-							filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-								(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-							)}
-							filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-								(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-							)}
-							{selectionsObject}
-							{selectedArea}
-							{indicatorCalculations}
+	<Tabs border bind:selected={chosenChartId}>
+		{#each chartOptionsArray as chart}
+			<Tab title={chart.label} id={chart.id} hideTitle>
+				<div class="title-and-chart-container">
+					<div class="title-container">
+						<SubtitleAdditionalDescription
+							selectedIndicator={indicator}
 							{xDomain}
-							{customLookup}
-							{showConfidenceIntervals}
-							additionalID="areas-single-additional"
-							relatedID="related-single"
-						></LineChartContainer>
-					{:else}
-						<div class="no-chart-container">
-							<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>
-						</div>
-					{/if}
+							{timePeriodsArray}
+							selectedChartType={chart}
+						></SubtitleAdditionalDescription>
+					</div>
 
-					<!-- <LineChartContainer
-						{selectedIndicator}
-						{metadata}
-						{combinedSelectableAreaTypesObject}
-						{areasCodesForAreasWithData}
-						{visibleAreasWithData}
-						{timePeriodsArray}
-						{filteredChartDataForVisibleAreas}
-						{selectedIndicatorCalculations}
-						bind:chosenParentAreasArray
-						bind:chosenRelatedAreasId
-						bind:chosenSameRegionArray
-						bind:chosenCountriesArray
-						bind:chosenRegionsArray
-						bind:chosenAllOtherArray
-					></LineChartContainer> -->
-				{:else if chart.label === 'Bar chart'}
-					<BarChartContainer
-						{indicator}
-						{metadata}
-						latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
-						filteredChartDataSelected={filteredChartDataSelected.filter(
-							(el) => el.xDomainNumb === xDomain[1]
-						)}
-						filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-							(el) => el.xDomainNumb === xDomain[1]
-						)}
-						filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-							(el) => el.xDomainNumb === xDomain[1]
-						)}
-						{selectionsObject}
-						{selectedArea}
-						{indicatorCalculations}
-						{xDomain}
-						{customLookup}
-						{showConfidenceIntervals}
-						additionalID="areas-single-additional"
-						relatedID="related-single"
-					></BarChartContainer>
+					<div class="chart-container">
+						{#if timePeriodsArray.length === 0}
+							<div class="no-chart-container">
+								<p>No data for selected areas over time period</p>
+							</div>
+						{:else if chart.label === 'Time series'}
+							{#if timePeriodsArray.length > 1}
+								<LineChartContainer
+									{indicator}
+									{metadata}
+									{timePeriodsArray}
+									filteredChartDataSelected={filteredChartDataSelected.filter(
+										(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+									)}
+									filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
+										(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+									)}
+									filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
+										(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+									)}
+									{selectionsObject}
+									{selectedArea}
+									{indicatorCalculations}
+									{xDomain}
+									{customLookup}
+									{showConfidenceIntervals}
+									additionalID="areas-single-additional"
+									relatedID="related-single"
+								></LineChartContainer>
+							{:else}
+								<div class="no-chart-container">
+									<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>
+								</div>
+							{/if}
+						{:else if chart.label === 'Bar chart'}
+							<BarChartContainer
+								{indicator}
+								{metadata}
+								latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
+								filteredChartDataSelected={filteredChartDataSelected.filter(
+									(el) => el.xDomainNumb === xDomain[1]
+								)}
+								filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
+									(el) => el.xDomainNumb === xDomain[1]
+								)}
+								filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
+									(el) => el.xDomainNumb === xDomain[1]
+								)}
+								{selectionsObject}
+								{selectedArea}
+								{indicatorCalculations}
+								{xDomain}
+								{customLookup}
+								{showConfidenceIntervals}
+								additionalID="areas-single-additional"
+								relatedID="related-single"
+							></BarChartContainer>
+						{/if}
+					</div>
 
-					<!-- <BarChartContainer
-						{selectedIndicator}
-						{metadata}
-						{combinedSelectableAreaTypesObject}
-						{areasCodesForAreasWithData}
-						{visibleAreasWithData}
-						{timePeriodsArray}
-						filteredChartDataForVisibleAreas={filteredChartDataForVisibleAreas.filter(
-							(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
-						)}
-						{selectedIndicatorCalculations}
-						bind:chosenParentAreasArray
-						bind:chosenRelatedAreasId
-						bind:chosenSameRegionArray
-						bind:chosenCountriesArray
-						bind:chosenRegionsArray
-						bind:chosenAllOtherArray
-					></BarChartContainer> -->
-				{/if}
-			</div>
+					<p class="source-container">
+						<span style="font-weight: bold">Source:</span>
+						{#each sourceOrgs as org, i}
+							<a href={sourceLinks[i]}>{org}</a>
 
-			<p class="source-container">
-				<span style="font-weight: bold">Source:</span>
-				{#each sourceOrgs as org, i}
-					<a href={sourceLinks[i]}>{org}</a>
-
-					{#if i < sourceOrgs.length - 2}
-						,
-					{:else if i === sourceOrgs.length - 2}
-						{'and '}
-					{/if}
-				{/each}
-			</p>
-		</Tab>
-	{/each}
-</Tabs>
-
-<!-- <Tabs border bind:selected={chosenChartId}>
-	{#each chartOptionsArray as chart}
-		<Tab title={chart.label} id={chart.id} hideTitle>
-			<Select
-				id="select-indicator"
-				options={filteredIndicators}
-				idKey="code"
-				labelKey="label"
-				groupKey="topic"
-				clusterByGroup
-				clearable={false}
-				bind:value={chosenIndicatorId}
-			></Select>
-
-			<SubtitleAdditionalDescription
-				{selectedIndicator}
-				{timePeriodsArray}
-				selectedChartType={chart}
-			></SubtitleAdditionalDescription>
-
-			<div class="chart-container">
-				{#if chart.label === 'Time series'}
-					<LineChartContainer
-						{selectedIndicator}
-						{metadata}
-						{combinedSelectableAreaTypesObject}
-						{areasCodesForAreasWithData}
-						{visibleAreasWithData}
-						{timePeriodsArray}
-						{filteredChartDataForVisibleAreas}
-						{selectedIndicatorCalculations}
-						bind:chosenParentAreasArray
-						bind:chosenRelatedAreasId
-						bind:chosenSameRegionArray
-						bind:chosenCountriesArray
-						bind:chosenRegionsArray
-						bind:chosenAllOtherArray
-					></LineChartContainer>
-				{:else if chart.label === 'Bar chart'}
-					<BarChartContainer
-						{selectedIndicator}
-						{metadata}
-						{combinedSelectableAreaTypesObject}
-						{areasCodesForAreasWithData}
-						{visibleAreasWithData}
-						{timePeriodsArray}
-						filteredChartDataForVisibleAreas={filteredChartDataForVisibleAreas.filter(
-							(el) => el.xDomainNumb === timePeriodsArray[0].xDomainNumb
-						)}
-						{selectedIndicatorCalculations}
-						bind:chosenParentAreasArray
-						bind:chosenRelatedAreasId
-						bind:chosenSameRegionArray
-						bind:chosenCountriesArray
-						bind:chosenRegionsArray
-						bind:chosenAllOtherArray
-					></BarChartContainer>
-				{:else}
-					{chart.label} not currently available.
-				{/if}
-			</div>
-		</Tab>
-	{/each}
-</Tabs> -->
+							{#if i < sourceOrgs.length - 2}
+								,
+							{:else if i === sourceOrgs.length - 2}
+								{'and '}
+							{/if}
+						{/each}
+					</p>
+				</div>
+			</Tab>
+		{/each}
+	</Tabs>
+</div>
 
 <style>
 	:global(.ons-tabs) {
 		margin-bottom: 0;
+	}
+
+	.main-chart-column-container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.title-and-chart-container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
 	}
 
 	.row-container {
