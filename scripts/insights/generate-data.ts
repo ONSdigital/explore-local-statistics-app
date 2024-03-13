@@ -5,7 +5,12 @@ import { readCsvAutoType } from './io.ts';
 import { inferGeos } from './inferGeos.ts';
 import CONFIG from './config.ts';
 import { median, mad } from './stats.ts';
-import { toLookup, uniqueValues, toNestedLookup } from './data-utils.ts';
+import {
+	toLookup,
+	uniqueValues,
+	toNestedLookup,
+	toLookupWithMultipleValues
+} from './data-utils.ts';
 import { writeJson } from './io.ts';
 import { checkSlugs } from './data-processing-warnings.ts';
 
@@ -76,19 +81,9 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		combinedData
 	);
 
-	const areasGeogInfoObject = toLookup(config.areasGeogInfo, 'areacd');
-
-	const areasGeogLevelObject = makeAreasGeogLevelObject(config.areas, config.areasGeogLevel);
-
 	const areasArray = makeAreasArray(config);
-	const areasObject = toLookup(areasArray, 'areacd');
 
-	config.indicatorsMetadata.forEach((e) => {
-		e.prefix = e.prefix == null ? '' : e.prefix.replace('GBPSign', '£');
-		e.suffix = e.suffix == null ? '' : e.suffix;
-	});
-
-	const indicatorsMetadataObject = toLookup(config.indicatorsMetadata, 'code');
+	const indicatorsMetadataObject = makeIndicatorsMetadataObject(config.indicatorsMetadata);
 
 	const indicatorsArray = config.indicators;
 	indicatorsArray.forEach((el) => {
@@ -97,8 +92,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		el.inferredGeos = inferGeos(indicatorData.areacd);
 		el.years = uniqueValues(indicatorData.xDomainNumb).sort((a, b) => a - b);
 	});
-
-	const indicatorsObject = toLookup(indicatorsArray, 'code');
 
 	const indicatorsCodeLabelArray = indicatorsArray.map((el) => ({
 		code: el.code,
@@ -119,12 +112,10 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 	});
 
 	const periodsLookupArray = config.periodsLookup.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
-	const periodsLookupObject = [...new Set(indicatorsArray.map((e) => e.periodGroup))].reduce(
-		(obj, el) => {
-			obj[el] = periodsLookupArray.filter((elm) => elm.periodGroup === el);
-			return obj;
-		},
-		{}
+	const usedPeriodGroups = new Set(indicatorsArray.map((d) => d.periodGroup));
+	const periodsLookupObject = toLookupWithMultipleValues(
+		periodsLookupArray.filter((d) => usedPeriodGroups.has(d.periodGroup)),
+		'periodGroup'
 	);
 
 	const indicatorsCalculationsArray = combineIndicatorCalculations(
@@ -134,24 +125,33 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		clustersLookup.types
 	);
 
-	const areaDetails = generateAreaDetails(clustersLookup, areasArray, combinedData);
-
 	return {
 		clustersLookup,
-		areasGeogInfoObject,
-		areasGeogLevelObject,
+		areasGeogInfoObject: toLookup(config.areasGeogInfo, 'areacd'),
+		areasGeogLevelObject: makeAreasGeogLevelObject(config.areas, config.areasGeogLevel),
 		areasArray,
-		areasObject,
+		areasObject: toLookup(areasArray, 'areacd'),
 		indicatorsCodeLabelArray,
-		indicatorsObject,
+		indicatorsObject: toLookup(indicatorsArray, 'code'),
 		_newStyleIndicatorsCalculationsArray: indicatorsCalculationsArray,
 		indicatorsCalculationsArray: config._oldStyleIndicatorsCalculations,
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
 		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray),
-		areaDetails
+		areaDetails: generateAreaDetails(clustersLookup, areasArray, combinedData)
 	};
+}
+
+function makeIndicatorsMetadataObject(indicatorsMetadata) {
+	indicatorsMetadata = indicatorsMetadata.map((d) => {
+		d = { ...d };
+		d.prefix = d.prefix == null ? '' : d.prefix.replace('GBPSign', '£');
+		d.suffix = d.suffix == null ? '' : d.suffix;
+		return d;
+	});
+
+	return toLookup(indicatorsMetadata, 'code');
 }
 
 function generateAreaDetails(clustersLookup, areasArray, combinedData) {

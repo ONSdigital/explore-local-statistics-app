@@ -14,6 +14,22 @@ export function toLookup(data, keyName: string, valueName: string | null = null)
 	return lookup;
 }
 
+export function toLookupWithMultipleValues(data, keyName: string, valueName: string | null = null) {
+	const lookup = {};
+
+	for (const item of data) {
+		if (!(item[keyName] in lookup)) {
+			lookup[item[keyName]] = [];
+		}
+		if (valueName == null) {
+			lookup[item[keyName]].push(item);
+		} else {
+			lookup[item[keyName]].push(item[valueName]);
+		}
+	}
+	return lookup;
+}
+
 export function toNestedLookup(data, keys, valueName) {
 	const lookup = new Map();
 	for (const item of data) {
