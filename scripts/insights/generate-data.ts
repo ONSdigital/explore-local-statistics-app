@@ -392,31 +392,24 @@ function makeGeogGroups(
 function makeAreasArray(config) {
 	const areasParentsLookupObject = toLookup(config.areasParentsLookup, 'areacd');
 
-	const areasArray = [...config.areas].sort((a, b) =>
-		a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
-	);
-	areasArray.forEach((el) => {
-		const areaParentObject = areasParentsLookupObject[el.areacd];
+	return [...config.areas]
+		.sort((a, b) => (a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0))
+		.map((el) => {
+			el = { ...el, ...areasParentsLookupObject[el.areacd] };
 
-		el.parentcd = areaParentObject.parentcd;
-		el.parentnm = areaParentObject.parentnm;
-		el.countrycd = areaParentObject.countrycd;
-		el.countrynm = areaParentObject.countrynm;
+			const areaGeogLevel = config.areasGeogLevel
+				.filter((elm) => elm.areacd_prefix === el.areacd.slice(0, 3))
+				.map((elm) => elm.level);
 
-		const areacd_prefix = el.areacd.slice(0, 3);
+			el.geogLevel =
+				areaGeogLevel.length === 1
+					? areaGeogLevel[0]
+					: areaGeogLevel.includes('lower')
+						? 'lower'
+						: 'country';
 
-		const areaGeogLevel = config.areasGeogLevel
-			.filter((elm) => elm.areacd_prefix === areacd_prefix)
-			.map((elm) => elm.level);
-
-		el.geogLevel =
-			areaGeogLevel.length === 1
-				? areaGeogLevel[0]
-				: areaGeogLevel.includes('lower')
-					? 'lower'
-					: 'country';
-	});
-	return areasArray;
+			return el;
+		});
 }
 
 function makeAreasGeogLevelObject(areas, areasGeogLevel) {
