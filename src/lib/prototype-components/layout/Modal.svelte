@@ -14,7 +14,8 @@
 <dialog
 	bind:this={dialog}
 	on:close={() => ((showModal = false), (accordionOpen = false))}
-	on:click|self={() => dialog.close()}
+	on:mousedown|self={() => dialog.close()}
+	on:touchstart|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation>
