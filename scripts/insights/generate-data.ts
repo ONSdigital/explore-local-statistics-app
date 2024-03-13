@@ -127,8 +127,6 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		{}
 	);
 
-	const globalXDomainExtent = findGlobalXDomainExtent(indicatorsArray);
-
 	const indicatorsCalculationsArray = combineIndicatorCalculations(
 		config.indicatorsCalculations,
 		sameParentGeogCalculations,
@@ -151,7 +149,7 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
-		globalXDomainExtent,
+		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray),
 		areaDetails
 	};
 }
@@ -443,8 +441,8 @@ function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 }
 
 function findGlobalXDomainExtent(indicatorsArray) {
-	const minXDomainNumbers = indicatorsArray.map((e) => parseInt(e.minXDomainNumb));
-	const maxXDomainNumbers = indicatorsArray.map((e) => parseInt(e.maxXDomainNumb));
+	const minXDomainNumbers = indicatorsArray.map((e) => e.minXDomainNumb);
+	const maxXDomainNumbers = indicatorsArray.map((e) => e.maxXDomainNumb);
 	return [Math.min(...minXDomainNumbers), Math.max(...maxXDomainNumbers)];
 }
 
