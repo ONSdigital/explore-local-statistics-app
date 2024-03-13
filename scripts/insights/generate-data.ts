@@ -362,11 +362,7 @@ function makeGeogGroups(
 	areasParentsLookup: any,
 	areasGeogLevel
 ) {
-	const geogLevelToPrefixes = {};
-	for (const item of areasGeogLevel) {
-		geogLevelToPrefixes[item.level] ||= new Set();
-		geogLevelToPrefixes[item.level].add(item.areacd_prefix);
-	}
+	const geogLevelToPrefixes = toLookupWithMultipleValues(areasGeogLevel, 'level', 'areacd_prefix');
 
 	const geogGroups = [
 		{
@@ -382,7 +378,8 @@ function makeGeogGroups(
 				areaCodes: new Set(
 					areasParentsLookup
 						.filter(
-							(d) => d.parentcd === parentcd && geogLevelToPrefixes[level].has(d.areacd.slice(0, 3))
+							(d) =>
+								d.parentcd === parentcd && geogLevelToPrefixes[level].includes(d.areacd.slice(0, 3))
 						)
 						.map((d) => d.areacd)
 				)
