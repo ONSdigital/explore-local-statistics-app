@@ -266,12 +266,12 @@ function makeClustersLookup(clustersLookupRaw) {
 }
 
 function getClusterDescriptions() {
-	let clusterDescriptions = readFileSync(CONFIG.CONFIG_DIR + '/clusters/Cluster-descriptions.txt')
+	const clusterDescriptions = readFileSync(CONFIG.CONFIG_DIR + '/clusters/Cluster-descriptions.txt')
 		.toString()
 		.split('\n')
 		.filter((s) => new RegExp('^[A-Za-z]*_[A-D]:').test(s));
 
-	clusterDescriptions = clusterDescriptions.map((d) => {
+	return clusterDescriptions.map((d) => {
 		const type = CONFIG.CLUSTER_TYPES_LOOKUP[d.split('_')[0]];
 		if (type == null) {
 			throw new Error(`Unknown cluster type: ${d.split('_')[0]}.`);
@@ -282,8 +282,6 @@ function getClusterDescriptions() {
 			text: d.replace(new RegExp('^[^:]*: *'), '')
 		};
 	});
-
-	return clusterDescriptions;
 }
 
 function makeClustersCalculations(clustersLookup, combinedData) {
