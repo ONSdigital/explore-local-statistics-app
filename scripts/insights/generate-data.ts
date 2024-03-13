@@ -426,9 +426,8 @@ function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 }
 
 function findGlobalXDomainExtent(indicatorsArray) {
-	const minXDomainNumbers = indicatorsArray.map((e) => e.minXDomainNumb);
-	const maxXDomainNumbers = indicatorsArray.map((e) => e.maxXDomainNumb);
-	return [Math.min(...minXDomainNumbers), Math.max(...maxXDomainNumbers)];
+	const years = indicatorsArray.flatMap((e) => e.years);
+	return [Math.min(...years), Math.max(...years)];
 }
 
 function readConfigFromCsvs() {
