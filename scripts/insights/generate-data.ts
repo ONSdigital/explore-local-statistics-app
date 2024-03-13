@@ -58,10 +58,8 @@ function generateOutData(combinedData, indicatorsArray) {
 			throw new Error('Unexpectedly empty `rows` array.');
 		}
 		const dataByColumn = {};
-		for (const columnName in rows[0]) {
-			if (Object.getOwnPropertyDescriptor(rows[0], columnName)) {
-				dataByColumn[columnName] = rows.map((row) => row[columnName]);
-			}
+		for (const columnName of Object.keys(rows[0])) {
+			dataByColumn[columnName] = rows.map((row) => row[columnName]);
 		}
 
 		// We don't need arrays for id and code, because all array elements are the same
@@ -229,10 +227,6 @@ function combineIndicatorCalculations(
 		}
 	}
 
-	for (const item of indicatorsCalculationsArray) {
-		item.clustersCalculations = {};
-	}
-
 	for (const clusterType of clusterTypes) {
 		const clustersLookup = Object.fromEntries(
 			clustersCalculations[clusterType].map((d) => [
@@ -242,6 +236,7 @@ function combineIndicatorCalculations(
 		);
 
 		for (const item of indicatorsCalculationsArray) {
+			item.clustersCalculations ||= {};
 			if (`${item.code};;;${item.period}` in clustersLookup) {
 				item.clustersCalculations[clusterType] = clustersLookup[`${item.code};;;${item.period}`];
 			}
