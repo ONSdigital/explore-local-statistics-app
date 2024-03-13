@@ -5,7 +5,7 @@
 	import bbox from '@turf/bbox';
 	import { makeFeatures } from '$lib/util/geo/makeFeatures';
 	import { countryLookup } from '$lib/config/geoConfig';
-	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
+	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import { colorsLookup } from '$lib/config';
 	import BreaksChart from './BreaksChart.svelte';
 
@@ -48,17 +48,27 @@
 		dispatch('select', { id: area?.areacd, area, e });
 	}
 
-	const featureCollection = (features, data, options = {}) => ({
-		type: 'FeatureCollection',
-		features: data.map((d, i) => {
-			const feature = features[d.areacd];
-			feature.properties = {
-				...d,
-				color: options.boundary ? getColor(d)?.color || 'grey' : colors[d[clusterKey]] || 'grey'
-			};
-			return feature;
-		})
-	});
+	const featureCollection = (features, data, options = {}) => {
+		const selectedArea =
+			!options.boundary && clusterKey !== 'cluster' && selected.length === 1
+				? data.find((d) => d.areacd === selected[0].areacd)
+				: null;
+		return {
+			type: 'FeatureCollection',
+			features: data.map((d, i) => {
+				const feature = features[d.areacd];
+				feature.properties = {
+					...d,
+					color: options.boundary
+						? getColor(d)?.color || 'grey'
+						: clusterKey !== 'cluster'
+							? getClusterColor(d, selectedArea)
+							: colors[d[clusterKey]] || 'grey'
+				};
+				return feature;
+			})
+		};
+	};
 
 	function getColor(area) {
 		if (!customLookup) return { color: 'black', contrast: null };
@@ -69,6 +79,11 @@
 					: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
 				: colorsLookup[area.role]
 			: { color: null, constrast: null };
+	}
+
+	function getClusterColor(area, selectedArea) {
+		if (area[clusterKey] === selectedArea?.[clusterKey]) return colors[area[clusterKey]];
+		return 'lightgrey';
 	}
 
 	onMount(async () => {
@@ -117,7 +132,9 @@
 						on:select={doSelect}
 						highlight
 						highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
-					/>
+					>
+						<MapTooltip content={features?.[hovered]?.properties?.areanm || ''} />
+					</MapLayer>
 					<MapLayer
 						id="lines"
 						type="line"

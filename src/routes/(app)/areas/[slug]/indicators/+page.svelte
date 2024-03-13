@@ -513,7 +513,7 @@
 
 	const clusterGroupsArray = metadata.clustersLookup.types.map((t) => ({
 		id: t,
-		label: `${capitalizeFirstLetter(t)} measures`
+		label: `${capitalizeFirstLetter(t.replace('global', 'all'))} indicators`
 	}));
 	let clusterGroup = clusterGroupsArray[0];
 	$: areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
@@ -676,16 +676,24 @@
 
 	{#if areaClusters}
 		<NavSection title="Similar areas">
+			<p>
+				See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
+				These clusters of areas are based on
+				<a
+					href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+					target="_blank">an analysis carried out by the ONS</a
+				>.
+			</p>
 			<ContentBlock showActions={false}>
 				<Dropdown
-					label="Show areas similar to {getName(data.place, 'the')} based on:"
+					label="Select a group of indicators:"
 					options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
 					bind:value={clusterGroup}
 				/>
 				<Map
 					data={data.chartData.clusterData}
 					clusterKey={clusterGroup.id}
-					legendType="categorical"
+					legendType={null}
 					selected={[data.place]}
 					bind:colors={mapColors}
 				/>
@@ -697,10 +705,10 @@
 						>
 							{capitalizeFirstLetter(getName(data.place, 'the'))} is in
 							{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}
-						</strong>. {clusterDescription || ''}
+						</strong>
 					</p>
 					<Twisty
-						title="All areas in {clusterGroup.id} cluster {areaClusters[
+						title="Show all areas in {clusterGroup.id} cluster {areaClusters[
 							clusterGroup.id
 						].toUpperCase()}"
 					>
@@ -721,6 +729,9 @@
 							{/each}
 						</p>
 					</Twisty>
+					<p style:margin-top="12px">
+						{clusterDescription || ''}
+					</p>
 				{/if}
 			</ContentBlock>
 		</NavSection>
