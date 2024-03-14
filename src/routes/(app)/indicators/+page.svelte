@@ -48,10 +48,10 @@
 />
 <Titleblock title="Local indicators">
 	<Lede
-		>Explore our {datasetsCount} local indicators, including <b>life satisfaction</b>,
-		<b>4G coverage</b>
+		>Explore our {datasetsCount} local indicators, including <b>disposable household income</b>,
+		<b>participation in further education</b>
 		and
-		<b>employment rate</b>.
+		<b>life satisfaction</b>.
 	</Lede>
 </Titleblock>
 
