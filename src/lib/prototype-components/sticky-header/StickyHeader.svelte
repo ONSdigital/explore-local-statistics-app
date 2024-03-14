@@ -73,7 +73,7 @@
 		{/if}
 	</div>
 
-	<div class="row-container buttons-container">
+	<div class="buttons-container">
 		<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}></ChangeAreas>
 
 		<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
@@ -102,28 +102,22 @@
 	.row-container {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 		gap: 4px;
 	}
 
 	.grid-container {
 		display: flex;
 		flex-direction: column;
+		flex-grow: 1;
+		min-width: 200px;
 	}
 
-	.col1 {
-		white-space: nowrap; /* Prevent text in the first column from wrapping */
-		text-align: end;
-	}
-
-	.col2 {
+	.buttons-container {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-	}
-
-	.button-container {
+		flex-wrap: nowrap;
 		justify-content: flex-end;
+		gap: 4px;
 	}
 </style>

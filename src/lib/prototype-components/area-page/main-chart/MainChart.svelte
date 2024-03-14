@@ -113,18 +113,20 @@
 
 <div class="main-chart-column-container">
 	<div class="row-container title-buttons-container">
-		<Select
-			id="select-indicator"
-			options={filteredIndicators}
-			idKey="code"
-			labelKey="label"
-			groupKey="topic"
-			clusterByGroup
-			clearable={false}
-			bind:value={chosenIndicatorId}
-		></Select>
+		<div class="select-container">
+			<Select
+				id="select-indicator"
+				options={filteredIndicators}
+				idKey="code"
+				labelKey="label"
+				groupKey="topic"
+				clusterByGroup
+				clearable={false}
+				bind:value={chosenIndicatorId}
+			></Select>
+		</div>
 
-		<div class="row-container buttons-container">
+		<div class="buttons-container">
 			<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}
 			></ChangeAreas>
 
@@ -243,7 +245,23 @@
 	.row-container {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		width: 100%;
+		gap: 4px;
+	}
+
+	.select-container {
+		width: 100%;
+		max-width: 450px;
+		flex-grow: 1;
+	}
+
+	.buttons-container {
+		display: flex;
+		flex-direction: row;
 		flex-wrap: nowrap;
+		justify-content: flex-end;
 		gap: 4px;
 	}
 
