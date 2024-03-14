@@ -1,5 +1,6 @@
 <script lang="ts">
 	//@ts-nocheck
+	import MarkdownIt from 'markdown-it';
 	import { base } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
@@ -70,7 +71,6 @@
 		];
 		refreshData();
 	});
-	$: console.log('columns', columns);
 
 	let metadata = data.metadata;
 
@@ -152,6 +152,9 @@
 	$: sourceLinks = data.indicator.metadata.sourceURL.split('|');
 	$: sourceDate = data.indicator.metadata.sourceDate.split('|');
 	$: experimental = data.indicator.metadata.experimentalStatistic === 'T';
+	$: caveats = data.indicator.metadata.caveats
+		? new MarkdownIt().render(data.indicator.metadata.caveats)
+		: null;
 </script>
 
 <Breadcrumb
@@ -291,6 +294,12 @@
 				{/key}
 			</ContentBlock>
 		</NavSection>
+
+		{#if caveats}
+			<NavSection title="Interpretation">
+				{@html caveats}
+			</NavSection>
+		{/if}
 
 		<NavSection title="Get the data">
 			<p>
