@@ -78,7 +78,8 @@
 			const sortedData = sortIndex.map((i) => selectedData[i]);
 			const sortedLabels = sortIndex.map((i) => filteredLabels[i]);
 			let labs = [];
-			const containerLeft = container.offsetLeft;
+			// const containerLeft = container.offsetLeft;
+			const containerLeft = 0;
 			const containerRight = containerLeft + container.offsetWidth;
 			for (let i = 0; i < sortedLabels.length; i++) {
 				const lab = {
@@ -130,7 +131,7 @@
 <div
 	class="container"
 	style:height="{height}px"
-	style:margin-top="{32 + maxOffset * 20}px"
+	style:margin-bottom="{24 + maxOffset * 26}px"
 	on:mouseleave={doHover}
 	bind:this={container}
 	bind:clientWidth={width}
@@ -162,17 +163,19 @@
 					class="marker"
 					style:width="{lineWidth}px"
 					style:left="calc({pos(d.value, breaks)}% - {lineWidth / 2}px)"
-					style:top="{-20 - (d.offset || 0) * 20}px"
-					style:height="calc(100% + {20 + (d.offset || 0) * 20}px)"
+					style:bottom="{-20 - (d.offset || 0) * 26}px"
+					style:height="calc(100% + {20 + (d.offset || 0) * 26}px)"
 					style:background-color={d.areacd === hovered ? 'orange' : getColor(d)?.color || 'grey'}
 				/>
 				<div
 					class="value"
 					style:left="{pos(d.value, breaks)}%"
 					style:transform={d.align === 'left'
-						? `translateX(-100%) translateX(-${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`
-						: `translateX(${markerPadding}px) translateY(-${(d.offset || 0) * 20}px)`}
-					style:color={d.areacd === hovered ? 'orange' : getColor(d)?.color || 'grey'}
+						? `translateX(-100%) translateX(1.5px) translateY(${(d.offset || 0) * 26}px)`
+						: `translateX(-1.5px) translateY(${(d.offset || 0) * 26}px)`}
+					style:color={d.areacd === hovered ? 'black' : getColor(d)?.contrast || 'white'}
+					style:background={d.areacd === hovered ? 'orange' : getColor(d)?.color || 'grey'}
+					style:padding="0 {markerPadding}px"
 					bind:this={labels[i]}
 				>
 					{#if d.align === 'left'}
@@ -201,7 +204,7 @@
 			<div
 				class="value value-hovered"
 				style:left="{pos(d.value, breaks)}%"
-				style:transform="translateX({markerPadding}px)"
+				style:transform="translateX(-1.5px)"
 			>
 				{prefix}{d.value}{suffix}
 				{d.areanm}
@@ -212,7 +215,7 @@
 
 <style>
 	.container {
-		margin: 0 0 24px 0;
+		margin: 32px 0 0 0;
 		box-sizing: border-box;
 		position: relative;
 		width: 100%;
@@ -225,14 +228,14 @@
 	}
 	.line {
 		position: absolute;
-		top: 0;
+		bottom: 0;
 		height: calc(100% + 10px);
 		border-left: solid 1px black;
 	}
 	.tick {
 		position: absolute;
 		z-index: 1;
-		top: calc(100% + 8px);
+		bottom: calc(100% + 8px);
 		text-align: center;
 		transform: translateX(-50%);
 	}
@@ -241,21 +244,22 @@
 		z-index: 2;
 		background-color: black;
 		pointer-events: none;
-		top: -20px;
-		height: calc(100% + 20px);
+		bottom: -22px;
+		height: calc(100% + 22px);
 	}
 	.value {
 		position: absolute;
 		z-index: 50;
-		top: -24px;
+		bottom: -26px;
 		text-align: center;
-		background-color: rgba(255, 255, 255, 0.8);
 		white-space: nowrap;
+		border-radius: 3px;
 	}
 	.marker-hovered {
 		background-color: orange;
 	}
 	.value-hovered {
-		color: orange;
+		color: black;
+		background-color: orange;
 	}
 </style>
