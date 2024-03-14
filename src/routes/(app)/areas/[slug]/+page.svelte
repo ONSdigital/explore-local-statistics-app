@@ -188,38 +188,44 @@
 		{/if}
 	</Card>
 	<Card colspan={3} title="Areas {getName(data.place, 'in')}">
-		{#if childType}
-			<Tabs compact>
-				{#each data.childTypes as type, i}
-					<Tab title={capitalise(type.plural)} hideTitle>
-						<ul
-							bind:clientHeight={childrenHeight[type.key]}
-							style:max-height={childrenExpanded ? 'none' : '144px'}
-							class="list-columns"
+		{#key childType}
+			{#if childType}
+				<Tabs
+					selected={childType.key}
+					compact
+					on:change={(e) => (childType = data.childTypes.find((c) => c.key === e.detail.id))}
+				>
+					{#each data.childTypes as type, i}
+						<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
+							<ul
+								bind:clientHeight={childrenHeight[type.key]}
+								style:max-height={childrenExpanded ? 'none' : '144px'}
+								class="list-columns"
+							>
+								{#each filterChildren(data.place, type) as child, i}
+									<li>
+										<a
+											href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
+											data-sveltekit-noscroll
+											rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+											>{getName(child)}</a
+										>
+									</li>
+								{/each}
+							</ul>
+						</Tab>
+					{/each}
+					{#if childrenHeight[childType.key] >= 144}
+						<button class="btn-link" on:click={() => (childrenExpanded = !childrenExpanded)}
+							><Icon type="chevron" rotation={childrenExpanded ? 90 : -90} />
+							{childrenExpanded ? 'Show fewer' : 'Show more'}</button
 						>
-							{#each filterChildren(data.place, type) as child, i}
-								<li>
-									<a
-										href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
-										data-sveltekit-noscroll
-										rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
-										>{getName(child)}</a
-									>
-								</li>
-							{/each}
-						</ul>
-					</Tab>
-				{/each}
-				{#if childrenHeight[childType.key] >= 144}
-					<button class="btn-link" on:click={() => (childrenExpanded = !childrenExpanded)}
-						><Icon type="chevron" rotation={childrenExpanded ? 90 : -90} />
-						{childrenExpanded ? 'Show fewer' : 'Show more'}</button
-					>
-				{/if}
-			</Tabs>
-		{:else}
-			<span class="muted">No areas available within {getName(data.place, 'the')}</span>
-		{/if}
+					{/if}
+				</Tabs>
+			{:else}
+				<span class="muted">No areas available within {getName(data.place, 'the')}</span>
+			{/if}
+		{/key}
 	</Card>
 </Cards>
 
