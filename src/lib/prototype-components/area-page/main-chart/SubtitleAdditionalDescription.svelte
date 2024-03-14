@@ -40,18 +40,16 @@
 
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">
+		{#if selectedIndicator.metadata.experimentalStatistic === 'T'}
+			<div class="stat-in-dev">
+				<div>Official statistics in development</div>
+			</div>
+		{/if}
+
 		<p>
 			<span style="font-weight: bold">Definition:</span>
 			{selectedIndicator.metadata.longDescription}
 		</p>
-		<!-- <p>
-			<span style="font-weight: bold">Coverage:</span>
-			{selectedIndicator.metadata.coverageLevel}
-		</p> -->
-
-		{#if selectedIndicator.metadata.experimentalStatistic === 'T'}
-			<p>Note that this dataset is an official statisitc in development.</p>
-		{/if}
 
 		<p>
 			Further
@@ -63,6 +61,18 @@
 {/if}
 
 <style>
+	.stat-in-dev {
+		margin: 0px 10px;
+		display: flex;
+	}
+	.stat-in-dev > div {
+		font-weight: bold;
+		color: white;
+		background-color: #003c57;
+		padding: 2px 8px;
+		border-radius: 4px;
+	}
+
 	button {
 		width: 100%;
 		text-align: left;
@@ -80,7 +90,7 @@
 	}
 
 	.indicator-additional-description-text-container {
-		margin: 10px 5px 20px 5px;
+		margin: 10px 5px 20px 0px;
 		padding: 10px 5px 10px 5px;
 		background-color: #f5f5f5;
 		border-left: solid;
@@ -89,12 +99,12 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		font-size: 16px;
+		line-height: 20px;
 	}
 
 	.indicator-additional-description-text-container p {
 		padding: 0px 10px 0px 10px;
 		margin: 0px;
-		font-size: 16px;
-		line-height: 20px;
 	}
 </style>
