@@ -14,10 +14,10 @@
 	function setChosenXDomain(e) {
 		let min = Math.min(...e.detail);
 		let max = Math.max(...e.detail);
-		if (min === max) {
-			if (min === metadata.globalXDomainExtent[0]) max += 1;
-			else min -= 1;
-		}
+		// if (min === max) {
+		// 	if (min === metadata.globalXDomainExtent[0]) max += 1;
+		// 	else min -= 1;
+		// }
 		chosenXDomain = [min, max];
 	}
 </script>
