@@ -54,7 +54,7 @@
 
 <Titleblock title="Explore local statistics" background="#e9eff4">
 	<UKMap />
-	<Lede>Find, compare and visualise statistics about places within the United Kingdom</Lede>
+	<Lede>Find, compare and visualise statistics about places within the United Kingdom.</Lede>
 	<div style:height="32px" />
 </Titleblock>
 
