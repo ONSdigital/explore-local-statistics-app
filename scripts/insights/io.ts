@@ -30,8 +30,9 @@ export function readJsonSync(filename: string) {
 	return JSON.parse(fs.readFileSync(filename).toString());
 }
 
-export function writeJson(filename, data) {
-	writeFileSync(filename, JSON.stringify(data, null, '\t'));
+export function writeJson(filename, data, { minify = false } = {}) {
+	const jsonString = minify ? JSON.stringify(data) : JSON.stringify(data, null, '\t');
+	writeFileSync(filename, jsonString);
 	console.log(`Wrote ${filename}.`);
 }
 

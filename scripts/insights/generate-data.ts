@@ -16,6 +16,8 @@ import { checkSlugs } from './data-processing-warnings.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
+const UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data-unminified.json`;
+const UNMINIFIED_CONFIG_OUTPUT_PATH = `static/insights/config-unminified.json`;
 
 await main();
 
@@ -37,11 +39,15 @@ async function main() {
 
 	const outConfig = generateOutConfig(config, combinedData, combinedDataObjectColumnOriented);
 
-	writeJson(COLUMN_ORIENTED_DATA_OUTPUT_PATH, {
+	const data = {
 		combinedDataObjectColumnOriented,
 		beeswarmKeyData: readCsvAutoType(`${CONFIG.CSV_DIR}/beeswarm-key-data.csv`)
-	});
-	writeJson(CONFIG_OUTPUT_PATH, outConfig);
+	};
+	writeJson(COLUMN_ORIENTED_DATA_OUTPUT_PATH, data, { minify: true });
+	writeJson(CONFIG_OUTPUT_PATH, outConfig, { minify: true });
+	// Also write unminified versions to make git diffs more useful
+	writeJson(UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH, data);
+	writeJson(UNMINIFIED_CONFIG_OUTPUT_PATH, outConfig);
 }
 
 function generateOutData(combinedData, indicatorsArray) {
