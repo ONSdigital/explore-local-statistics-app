@@ -329,8 +329,6 @@
 	</NavSections>
 {/if}
 
-{JSON.stringify(data.indicator.metadata.caveats)}
-
 <style>
 	:global(div.ons-grid__col > section:first-of-type > h2) {
 		margin-top: 0 !important;
