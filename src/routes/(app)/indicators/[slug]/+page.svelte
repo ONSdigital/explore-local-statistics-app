@@ -307,6 +307,14 @@
 				If you would like a CSV of the data displayed in one of the above charts, you can click the
 				"download data" link immediately below it.
 			</p>
+			{#if experimental}
+				<p>
+					Please note that these are <a
+						href="https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
+						class="">official statistics in development</a
+					>.
+				</p>
+			{/if}
 		</NavSection>
 		<NavSection title="Other indicators">
 			<p>
@@ -317,18 +325,11 @@
 				on the <a href="{base}/">Explore local statistics</a> service. See the
 				<a href="{base}/datasets">full list of local indicators</a>.
 			</p>
-
-			{#if experimental}
-				<p>
-					Please note that these indicators are <a
-						href="https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
-						class="">official statistics in development</a
-					>.
-				</p>
-			{/if}
 		</NavSection>
 	</NavSections>
 {/if}
+
+{JSON.stringify(data.indicator.metadata.caveats)}
 
 <style>
 	:global(div.ons-grid__col > section:first-of-type > h2) {
