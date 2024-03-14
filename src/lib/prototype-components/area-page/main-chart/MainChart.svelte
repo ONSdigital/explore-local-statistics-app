@@ -257,6 +257,22 @@
 		flex-grow: 1;
 	}
 
+	/* :global(.list-item, .item) {
+		white-space: normal !important;
+		height: auto !important;
+		overflow: visible !important;
+	} */
+
+	.select-container :global(.list-item div) {
+		white-space: normal !important;
+		height: auto !important;
+		overflow: visible !important;
+		line-height: 1.4;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		padding-right: 6px;
+	}
+
 	.buttons-container {
 		display: flex;
 		flex-direction: row;
