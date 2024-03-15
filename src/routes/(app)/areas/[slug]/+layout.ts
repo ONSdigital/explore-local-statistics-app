@@ -21,9 +21,9 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 
 	if (result.kind === 'Failure') {
 		if (result.status === 404) {
-			error(404);
+			error(404, { message: 'Page not found' });
 		} else {
-			error(500);
+			error(500, { message: 'Sorry, there was an error with this page' });
 		}
 	} else {
 		const canonicalSlug = makeCanonicalSlug(result.place.areacd, result.place.areanm);
