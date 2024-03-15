@@ -55,19 +55,22 @@
 				: null;
 		return {
 			type: 'FeatureCollection',
-			features: data.map((d, i) => {
-				const feature = features[d.areacd];
-				feature.properties = {
-					...feature.properties,
-					...d,
-					color: options.boundary
-						? getColor(d)?.color || 'lightgrey'
-						: clusterKey !== 'cluster'
-							? getClusterColor(d, selectedArea)
-							: colors[d[clusterKey]] || 'lightgrey'
-				};
-				return feature;
-			})
+			features: data
+				.map((d, i) => {
+					const feature = features[d.areacd];
+					if (!feature) return null;
+					feature.properties = {
+						...feature.properties,
+						...d,
+						color: options.boundary
+							? getColor(d)?.color || 'lightgrey'
+							: clusterKey !== 'cluster'
+								? getClusterColor(d, selectedArea)
+								: colors[d[clusterKey]] || 'lightgrey'
+					};
+					return feature;
+				})
+				.filter((f) => f !== null)
 		};
 	};
 
