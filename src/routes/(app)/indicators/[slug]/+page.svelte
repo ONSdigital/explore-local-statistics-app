@@ -234,7 +234,7 @@
 				<div class="row-container">
 					<div class="content-dropdowns" data-html2canvas-ignore>
 						<Dropdown
-							options={data.indicator.inferredGeos.groups}
+							options={data.indicator.inferredGeos.groups.filter((g) => g.key !== 'uk')}
 							bind:value={geoGroup}
 							on:change={refreshData}
 						/>
