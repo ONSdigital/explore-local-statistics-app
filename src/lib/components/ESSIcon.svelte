@@ -1,10 +1,4 @@
-<svg
-	version="1.1"
-	xmlns="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	viewBox="0 0 156 156"
-	class="svg-icon"
->
+<svg viewBox="0 0 156 156" class="svg-icon">
 	<g>
 		<g id="Circle">
 			<circle fill="#FFFFFF" cx="78" cy="78" r="75.5" />
