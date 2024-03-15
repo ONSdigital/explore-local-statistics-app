@@ -70,8 +70,6 @@
 				.filter((el) => el)
 				.find((el) => el.areacd === hoverId)
 		: null;
-
-	$: console.log(hoverAreaWithDataAdded);
 </script>
 
 <AxisY {indicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>

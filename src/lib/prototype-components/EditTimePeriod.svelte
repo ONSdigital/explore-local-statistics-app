@@ -9,8 +9,6 @@
 	// 	(_, index) => metadata.globalXDomainExtent[0] + index
 	// );
 
-	// $: console.log(timePeriodOptionsArray);
-
 	function setChosenXDomain(e) {
 		let min = Math.min(...e.detail);
 		let max = Math.max(...e.detail);

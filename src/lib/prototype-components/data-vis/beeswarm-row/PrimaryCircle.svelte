@@ -23,8 +23,6 @@
 	$: radius = chartConfigurations.beeswarmRow.primaryRadius * (circle.datum.priority ? 1 : 0.9);
 
 	function mouseEnterEvent() {
-		console.log(circle.datum.areacd);
-
 		hoverAreaId = circle.datum.areacd;
 		hoverIndicatorId = indicator.code;
 	}

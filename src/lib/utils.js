@@ -85,32 +85,32 @@ export function constructVisibleAreasArray(
 	if (relatedAreasBoolean) {
 		return chosen && chosen != 'none'
 			? {
-					group: chosen,
-					label: parentAndRelatedAreasObject.groups[chosen].labels.related,
-					role: 'related',
-					areas: parentAndRelatedAreasObject.groups[chosen].areas,
-					codes: parentAndRelatedAreasObject.groups[chosen].codes
-				}
+				group: chosen,
+				label: parentAndRelatedAreasObject.groups[chosen].labels.related,
+				role: 'related',
+				areas: parentAndRelatedAreasObject.groups[chosen].areas,
+				codes: parentAndRelatedAreasObject.groups[chosen].codes
+			}
 			: null;
 	} else {
 		return chosen
 			? Array.isArray(chosen)
 				? chosen.map((el) =>
-						assignRole(el, relatedAreasBoolean, parentAndRelatedAreasObject, areasObject, 'custom')
-					)
+					assignRole(el, relatedAreasBoolean, parentAndRelatedAreasObject, areasObject, 'custom')
+				)
 				: Object.keys(parentAndRelatedAreasObject.groups).includes(chosen)
 					? {
-							group: chosen,
-							label: parentAndRelatedAreasObject.groups[chosen].labels.comparison,
-							role: 'comparison'
-						}
+						group: chosen,
+						label: parentAndRelatedAreasObject.groups[chosen].labels.comparison,
+						role: 'comparison'
+					}
 					: assignRole(
-							chosen,
-							relatedAreasBoolean,
-							parentAndRelatedAreasObject,
-							areasObject,
-							'comparison'
-						)
+						chosen,
+						relatedAreasBoolean,
+						parentAndRelatedAreasObject,
+						areasObject,
+						'comparison'
+					)
 			: null;
 	}
 }
@@ -129,7 +129,7 @@ function assignRole(
 			parentAndRelatedAreasObject.parent && parentAndRelatedAreasObject.parent.areacd === element
 				? 'parent'
 				: parentAndRelatedAreasObject.country &&
-					  parentAndRelatedAreasObject.country.areacd === element
+					parentAndRelatedAreasObject.country.areacd === element
 					? 'country'
 					: parentAndRelatedAreasObject.uk && parentAndRelatedAreasObject.uk.areacd === element
 						? 'uk'
@@ -215,11 +215,11 @@ export function calculateLabelMidpoints(
 		(boundedComparisonX - comparisonLabelWidth / 2 <=
 			boundedSelectedAreaX + selectedAreaLabelWidth / 2 &&
 			boundedComparisonX + comparisonLabelWidth / 2 >=
-				boundedSelectedAreaX - selectedAreaLabelWidth / 2) ||
+			boundedSelectedAreaX - selectedAreaLabelWidth / 2) ||
 		(boundedSelectedAreaX - selectedAreaLabelWidth / 2 <=
 			boundedComparisonX + comparisonLabelWidth / 2 &&
 			boundedSelectedAreaX + selectedAreaLabelWidth / 2 >=
-				boundedComparisonX - comparisonLabelWidth / 2)
+			boundedComparisonX - comparisonLabelWidth / 2)
 	) {
 		if (
 			selectedAreaX <= comparisonX &&
@@ -232,7 +232,7 @@ export function calculateLabelMidpoints(
 		} else if (
 			selectedAreaX >= comparisonX &&
 			boundedComparisonX + comparisonLabelWidth / 2 + selectedAreaLabelWidth >
-				chartWidth + spaceForOutliers / 2
+			chartWidth + spaceForOutliers / 2
 		) {
 			return {
 				comparison:
@@ -275,6 +275,5 @@ export function calculateBackgroundCirclesRadius(value, breakpoints) {
 }
 
 export function doLinesInOneDSpaceOverlap(x1, x2, y1, y2) {
-	console.log(x1, x2, y1, y2);
 	return x2 >= y1 && x1 <= y2;
 }

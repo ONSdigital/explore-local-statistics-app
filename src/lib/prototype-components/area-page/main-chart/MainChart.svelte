@@ -43,7 +43,6 @@
 								: 'country'
 			]
 		: null;
-	$: console.log(metadata);
 
 	/*$: chartOptionsArray = mainChartOptionsArray.filter(
 		(el) => indicator.minXDomainNumb != indicator.maxXDomainNumb || el.multiYear != 'Yes'

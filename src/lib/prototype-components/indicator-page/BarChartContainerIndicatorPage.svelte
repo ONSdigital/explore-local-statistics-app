@@ -16,8 +16,6 @@
 		(el) => el.period === indicator.maxXDomainNumb
 	);
 
-	$: console.log(latestIndicatorCalculations);
-
 	$: indicatorCalculations =
 		latestIndicatorCalculations && 'calcsByGeogLevel' in latestIndicatorCalculations
 			? latestIndicatorCalculations.calcsByGeogLevel[
@@ -46,8 +44,6 @@
 					el.areacd != selectedArea.areacd
 			)
 		: [];
-
-	$: console.log(filteredChartDataAreaGroup);
 
 	$: visibleAreasPeriods = [
 		...new Set(

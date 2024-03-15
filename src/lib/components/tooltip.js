@@ -18,8 +18,6 @@ const tooltip = (element, options = { pos: 'middle' }) => {
 		let y = middle ? (pos.bottom + pos.top) / 2 : top ? pos.top : pos.bottom;
 		let x = (pos.left + pos.right) / 2;
 
-		console.log(body, pos);
-
 		tooltipComponent = new Tooltip({
 			props: {
 				title: title,

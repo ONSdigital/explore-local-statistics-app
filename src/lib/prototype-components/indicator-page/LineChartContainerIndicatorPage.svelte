@@ -45,8 +45,6 @@
 			)
 		: [];
 
-	$: console.log(filteredChartDataAreaGroup);
-
 	$: visibleAreasPeriods = [
 		...new Set(
 			[

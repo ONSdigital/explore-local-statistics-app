@@ -9,8 +9,6 @@
 		chosenCountriesArray,
 		chosenRegionsArray,
 		chosenAllOtherArray;
-
-	$: console.log(visibleAreasWithData);
 </script>
 
 <div class="visible-areas-container">
