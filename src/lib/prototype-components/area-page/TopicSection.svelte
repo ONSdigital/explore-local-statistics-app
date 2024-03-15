@@ -31,8 +31,8 @@
 
 {#if filteredTopicIndicators.length > 0}
 	<div class="topic-section-container">
-		<NavSection title={topicUppercase} hideTitle subsection>
-			<h2 class="">{topicUppercase}</h2>
+		<NavSection title={topicUppercase} hideTitle subsection cls="topic-section">
+			<h2>{topicUppercase}</h2>
 
 			{#each subTopics as subTopic, i}
 				<div class="sub-topic-container" style="margin-bottom: 10px;">
@@ -102,5 +102,8 @@
 	}
 	.divider {
 		border-bottom: 1px solid var(--ons-color-grey-15);
+	}
+	:global(section.topic-section) {
+		scroll-margin-top: 150px;
 	}
 </style>
