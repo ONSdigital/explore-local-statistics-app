@@ -2,6 +2,7 @@
 // @ts-nocheck
 import { geoCodesLookup } from '$lib/config/geoConfig';
 import { getName } from '@onsvisual/robo-utils';
+import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 
 const validYear = (place, year) =>
 	!year || ((!place.start || year > place.start) && (!place.end || year <= place.end));
@@ -55,6 +56,8 @@ export function parseTemplate(template, place) {
 					s,
 					`${getName(place, context, 'prefix')} <strong>${getName(place)}</strong>`
 				);
+			} else if (s.includes('slug')) {
+				output = output.replace(s, makeCanonicalSlug(place.areacd, place.areanm));
 			} else {
 				output = output.replace(s, getProp(s.slice(1, -1)));
 			}

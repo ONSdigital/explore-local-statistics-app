@@ -10,7 +10,9 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
 	const links = await getCSV(`${base}/data/links.csv`, fetch);
 	for (const link of links) {
-		if (link.image && !link.image.startsWith('http')) link.image = base + link.image;
+		for (const key of ['url', 'image']) {
+			if (link[key] && !link[key].startsWith('http')) link[key] = base + link[key];
+		}
 	}
 
 	if (code.kind === 'Failure') {

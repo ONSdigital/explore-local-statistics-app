@@ -23,6 +23,7 @@
 	import AreaNavMap from '$lib/components/AreaNavMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import ESSIcon from '$lib/components/ESSIcon.svelte';
 
 	export let data: PageData;
 
@@ -124,6 +125,7 @@
 {#if data.place.areacd !== 'K02000001'}
 	{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
 		<Section theme="dark" background="#003c57" marginBottom={false}>
+			<ESSIcon />
 			<div style:margin="24px 0">
 				<h3 style:margin="0 0 6px">Local indicators for {getName(place, 'the')}</h3>
 				<p>
