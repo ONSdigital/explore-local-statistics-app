@@ -56,7 +56,7 @@
 		return {
 			type: 'FeatureCollection',
 			features: data
-				.map((d, i) => {
+				.map((d) => {
 					const feature = features[d.areacd];
 					if (!feature) return null;
 					feature.properties = {

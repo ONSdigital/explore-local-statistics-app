@@ -2,6 +2,7 @@
 //@ts-nocheck
 import { makeGeoJSON } from './makeGeoJSON';
 import { groups } from './inferGeos';
+import { oldGeoCodesLookup } from '$lib/config/geoConfig';
 
 export async function makeFeatures(url, fetch = window.fetch) {
 	const features = {};
@@ -13,6 +14,8 @@ export async function makeFeatures(url, fetch = window.fetch) {
 			features[f.properties.areacd] = f;
 		}
 	}
+	for (const code of Object.keys(oldGeoCodesLookup))
+		features[code] = features[oldGeoCodesLookup[code]];
 
 	return features;
 }

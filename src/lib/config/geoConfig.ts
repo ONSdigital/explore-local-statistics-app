@@ -216,6 +216,15 @@ export const geoTypes = [
 	}
 ];
 
+export const oldGeoCodesLookup = {
+	E06000048: 'E06000057',
+	E08000020: 'E08000037',
+	E07000097: 'E07000242',
+	E07000100: 'E07000240',
+	E07000101: 'E07000243',
+	E07000104: 'E07000241'
+};
+
 export const noIndex = Array.from(
 	new Set(
 		geoTypes
