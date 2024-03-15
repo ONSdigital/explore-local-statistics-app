@@ -17,10 +17,11 @@
 	// import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
-	import StickyHeaderIndicators from '$lib/prototype-components/sticky-header/StickyHeaderIndicators.svelte';
+	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
 	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -113,25 +114,29 @@
 					key: 'ctry',
 					label: 'Countries',
 					data: changeAreasOptionsObject.country,
-					accordion: true
+					accordion: true,
+					include: true
 				},
 				{
 					key: 'rgn',
 					label: 'Countries and regions',
 					data: changeAreasOptionsObject.region,
-					accordion: true
+					accordion: true,
+					include: true
 				},
 				{
 					key: 'utla',
 					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
-					accordion: true
+					accordion: true,
+					include: true
 				},
 				{
 					key: 'ltla',
 					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
-					accordion: true
+					accordion: true,
+					include: true
 				}
 			].filter((op) => op.key === geoGroup?.key)
 		}
@@ -147,6 +152,27 @@
 			selectionsObject['indicator-additional-visible'].filter((el) => el.role === 'custom')
 		);
 	}
+
+	$: timePeriodsArray = metadata.periodsLookupArray.filter(
+		(el) =>
+			el.periodGroup === data.indicator.periodGroup &&
+			el.xDomainNumb >= data.indicator.minXDomainNumb &&
+			el.xDomainNumb <= data.indicator.maxXDomainNumb
+	);
+
+	let timePeriodLabels;
+
+	onMount(() => {
+		timePeriodLabels = [
+			timePeriodsArray[timePeriodsArray.length - 1].label,
+			timePeriodsArray[0].label
+		];
+	});
+
+	$: year =
+		timePeriodLabels && timePeriodsArray
+			? timePeriodsArray.find((el) => el.label === timePeriodLabels[1]).xDomainNumb
+			: null;
 
 	$: sourceOrgs = data.indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = data.indicator.metadata.sourceURL.split('|');
@@ -196,51 +222,79 @@
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Explore this indicator" marginTop>
-		<strong class="selected-areas">Selected areas</strong>
+		<!-- <strong class="selected-areas">Selected areas</strong>
 		<StickyHeaderIndicators
 			bind:selectionsObject
 			{accordionArray}
 			customLookup={customLookup['indicator-additional-visible']}
-		/>
+		/> -->
 
-		<NavSection title="Map">
-			<ContentBlock
-				type="map"
-				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
-				data={mapData.data}
-			>
-				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown
-						options={data.indicator.inferredGeos.groups}
-						bind:value={geoGroup}
-						on:change={refreshData}
-					/>
-					<Dropdown
-						id="year"
-						options={data.indicator.years}
-						width={10}
-						bind:value={year}
-						on:change={refreshData}
-					/>
+		{#if data.indicator.metadata.standardised === 'T'}
+			<NavSection title="Map">
+				<div class="row-container">
+					<div class="content-dropdowns" data-html2canvas-ignore>
+						<Dropdown
+							options={data.indicator.inferredGeos.groups}
+							bind:value={geoGroup}
+							on:change={refreshData}
+						/>
+						<Dropdown
+							id="year"
+							options={timePeriodsArray.map((el) => el.label)}
+							width={10}
+							bind:value={timePeriodLabels[1]}
+							on:change={refreshData}
+						/>
+					</div>
+					<div class="buttons-container">
+						<ChangeAreas
+							{accordionArray}
+							bind:selectionsObject
+							customLookup={customLookup['indicator-additional-visible']}
+							label={selectionsObject['indicator-additional-visible'].length === 0
+								? 'Select areas'
+								: 'Change areas'}
+						></ChangeAreas>
+					</div>
 				</div>
 
-				<Map
+				<ContentBlock
+					type="map"
+					title={data.indicator.metadata.label}
+					unit={getUnit(data.indicator.metadata)}
 					data={mapData.data}
-					breaks={mapData.breaks}
-					geos={data.indicator.inferredGeos}
-					prefix={data.indicator.metadata.prefix}
-					suffix={data.indicator.metadata.suffix}
-					dp={+data.indicator.metadata.decimalPlaces}
-					selected={selectionsObject['indicator-additional-visible']}
-					customLookup={customLookup['indicator-additional-visible']}
-					on:select={doSelect}
-				/>
-			</ContentBlock>
-		</NavSection>
+				>
+					<p class="subtitle">{data.indicator.metadata.subtitle}, {year}</p>
+					<Map
+						data={mapData.data}
+						breaks={mapData.breaks}
+						geos={data.indicator.inferredGeos}
+						prefix={data.indicator.metadata.prefix}
+						suffix={data.indicator.metadata.suffix}
+						dp={+data.indicator.metadata.decimalPlaces}
+						selected={selectionsObject['indicator-additional-visible']}
+						customLookup={customLookup['indicator-additional-visible']}
+						on:select={doSelect}
+					/>
+				</ContentBlock>
+			</NavSection>
+		{/if}
 
 		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb}
 			<NavSection title="Line chart">
+				<div class="row-container">
+					<div class="buttons-container">
+						<ChangeAreas
+							{accordionArray}
+							bind:selectionsObject
+							customLookup={customLookup['indicator-additional-visible']}
+							label={selectionsObject['indicator-additional-visible'].length === 0
+								? 'Select areas'
+								: 'Change areas'}
+						></ChangeAreas>
+					</div>
+				</div>
+
 				<ContentBlock
 					type="line-chart"
 					title={data.indicator.metadata.label}
@@ -352,7 +406,7 @@
 		max-width: 300px !important;
 	}
 	:global(select#year) {
-		width: 90px !important;
+		width: 120px !important;
 	}
 	:global(section#map > h2) {
 		margin-top: -6px !important;
@@ -371,5 +425,18 @@
 		background-color: #003c57;
 		padding: 2px 8px;
 		border-radius: 4px;
+	}
+
+	.row-container {
+		margin: 20px 0px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.subtitle {
+		margin: 0px;
+		padding: 0px;
 	}
 </style>
