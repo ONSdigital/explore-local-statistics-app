@@ -62,48 +62,6 @@
 	$: hoverArea = hoverAreaId
 		? backgroundCircleDataStep2.find((el) => el.datum.areacd === hoverAreaId)
 		: null;
-
-	/*export let metadata,
-		backgroundChartDataBeeswarm,
-		x,
-		xDomain,
-		chartWidth,
-		chartHeight,
-		spaceForOutliers,
-		indicator,
-		hoverId,
-		hoverIndicatorId;
-
-	$: backgroundRadius = calculateBackgroundCirclesRadius(
-		backgroundChartDataBeeswarm.length,
-		chartConfigurations.beeswarmRow.backgroundRadius
-	);
-
-	$: backgroundCircleDataStep1 = backgroundChartDataBeeswarm.map((el) => ({
-		...el,
-		xPosition:
-			el.value < xDomain[0]
-				? -spaceForOutliers / 2
-				: el.value > xDomain[1]
-					? chartWidth + spaceForOutliers / 2
-					: x(el.value)
-	}));
-
-	$: backgroundCircleDataStep2 = new AccurateBeeswarm(
-		backgroundCircleDataStep1,
-		backgroundRadius / 2,
-		(d) => d.xPosition
-	)
-		.oneSided()
-		.calculateYPositions();
-
-	$: yDomain = [0, Math.max(chartHeight, ...backgroundCircleDataStep2.map((el) => el.y))];
-
-	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
-
-	$: hoverArea = hoverId
-		? backgroundCircleDataStep2.find((el) => el.datum.areacd === hoverId)
-		: null;*/
 </script>
 
 <g class="background-circles-group" opacity="0.5">

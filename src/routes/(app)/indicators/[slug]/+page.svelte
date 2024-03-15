@@ -264,7 +264,7 @@
 					unit={getUnit(data.indicator.metadata)}
 					data={mapData.data}
 				>
-					<p class="subtitle">{data.indicator.metadata.subtitle}, {year}</p>
+					<p class="subtitle">{data.indicator.metadata.subtitle}, {timePeriodLabels[1]}</p>
 					<Map
 						data={mapData.data}
 						breaks={mapData.breaks}
