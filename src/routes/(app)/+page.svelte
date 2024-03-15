@@ -23,7 +23,7 @@
 
 	export let data;
 
-	const datasetsCount = data.metadata.indicatorsCodeLabelArray.length;
+	const datasetsCount = data.coreMetadata.indicatorsCodeLabelArray.length;
 
 	let postcode = null;
 

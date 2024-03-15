@@ -7,19 +7,19 @@
 
 	export let data;
 
-	let datasetsCount = data.metadata.indicatorsCodeLabelArray.length;
+	let datasetsCount = data.coreMetadata.indicatorsCodeLabelArray.length;
 	let filteredCount = datasetsCount;
 
 	let filterText;
 
 	function filterTopics(filterText) {
 		if (!filterText) {
-			filteredCount = data.metadata.indicatorsCodeLabelArray.length;
-			return data.metadata.topicsArray;
+			filteredCount = data.coreMetadata.indicatorsCodeLabelArray.length;
+			return data.coreMetadata.topicsArray;
 		}
 
 		const regex = new RegExp(`\\b${filterText}`, 'i');
-		const newTopics = JSON.parse(JSON.stringify(data.metadata.topicsArray));
+		const newTopics = JSON.parse(JSON.stringify(data.coreMetadata.topicsArray));
 
 		let count = 0;
 

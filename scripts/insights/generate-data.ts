@@ -18,6 +18,7 @@ const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.j
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 const UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data-unminified.json`;
 const UNMINIFIED_CONFIG_OUTPUT_PATH = `static/insights/config-unminified.json`;
+const CORE_METADATA_OUTPUT_PATH = `static/insights/core-metadata.json`;
 const AREA_DETAILS_OUTPUT_DIR = `static/insights/area-details`;
 
 await main();
@@ -49,6 +50,13 @@ async function main() {
 	// Also write unminified versions to make git diffs more useful
 	writeJson(UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH, data);
 	writeJson(UNMINIFIED_CONFIG_OUTPUT_PATH, outConfig);
+
+	//indicatorsCodeLabelArray, topicsArray
+	const coreMetadata = {
+		indicatorsCodeLabelArray: outConfig.indicatorsCodeLabelArray,
+		topicsArray: outConfig.topicsArray
+	};
+	writeJson(CORE_METADATA_OUTPUT_PATH, coreMetadata);
 
 	const areaDetails = generateAreaDetails(
 		outConfig.clustersLookup,
