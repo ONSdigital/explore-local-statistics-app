@@ -18,6 +18,7 @@ const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.j
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 const UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data-unminified.json`;
 const UNMINIFIED_CONFIG_OUTPUT_PATH = `static/insights/config-unminified.json`;
+const AREA_DETAILS_OUTPUT_DIR = `static/insights/area-details`;
 
 await main();
 
@@ -48,6 +49,16 @@ async function main() {
 	// Also write unminified versions to make git diffs more useful
 	writeJson(UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH, data);
 	writeJson(UNMINIFIED_CONFIG_OUTPUT_PATH, outConfig);
+
+	const areaDetails = generateAreaDetails(
+		outConfig.clustersLookup,
+		outConfig.areasArray,
+		combinedData
+	);
+
+	for (const areacd of Object.keys(areaDetails)) {
+		writeJson(`${AREA_DETAILS_OUTPUT_DIR}/${areacd}.json`, areaDetails[areacd]);
+	}
 }
 
 function generateOutData(combinedData, indicatorsArray) {
@@ -151,8 +162,7 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
-		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray),
-		areaDetails: generateAreaDetails(clustersLookup, areasArray, combinedData)
+		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray)
 	};
 }
 
