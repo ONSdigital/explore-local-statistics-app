@@ -221,7 +221,7 @@
 </Titleblock>
 
 {#if mapData && pivotedData}
-	<NavSections contentsLabel="Explore this indicator" marginTop>
+	<NavSections contentsLabel="Contents" marginTop>
 		<!-- <strong class="selected-areas">Selected areas</strong>
 		<StickyHeaderIndicators
 			bind:selectionsObject

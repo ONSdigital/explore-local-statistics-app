@@ -232,7 +232,7 @@
 </Cards>
 
 {#if productLinks[0]}
-	<Cards title="Facts and figures for {getName(data.place, 'the')}" id="interactive">
+	<Cards title="Explore statistics about {getName(data.place, 'the')}" id="interactive">
 		{#each productLinks as link}
 			<Card
 				title={link.title}
