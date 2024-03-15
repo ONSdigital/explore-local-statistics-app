@@ -29,6 +29,7 @@
 
 	// Functions etc
 	function navTo(e) {
+		if (!e.detail) return;
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
@@ -58,7 +59,7 @@
 	<div style:height="32px" />
 </Titleblock>
 
-<Cards marginTop>
+<Cards marginTop id="nav-cards">
 	<Card title="Find an area">
 		<p style:margin-bottom="28px">
 			<label for="search"
@@ -73,8 +74,7 @@
 			labelKey="areanm"
 			groupKey="group"
 			placeholder="Eg. Fareham, or PO15 5RR"
-			autoClear
-			on:select={navTo}
+			on:submit={navTo}
 		/>
 
 		{#if postcode}
@@ -88,7 +88,9 @@
 			<a href="{base}/indicators/employment-rate">employment rate</a> and
 			<a href="{base}/indicators/4g-coverage">4G coverage</a>.
 		</p>
-		<Button icon="arrow" iconPosition="after" href="{base}/indicators">Explore indicators</Button>
+		<Button icon="arrow" iconPosition="after" href="{base}/indicators" small
+			>Explore indicators</Button
+		>
 	</Card>
 </Cards>
 
@@ -144,5 +146,8 @@
 <style>
 	.no-wrap {
 		white-space: nowrap;
+	}
+	:global(#nav-cards .ons-btn__inner) {
+		height: 40px;
 	}
 </style>

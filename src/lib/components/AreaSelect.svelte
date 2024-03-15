@@ -11,7 +11,7 @@
 	} from '$lib/config/geoConfig';
 	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { Select } from '@onsvisual/svelte-components';
+	import { Select, Button } from '@onsvisual/svelte-components';
 
 	const dispatch = createEventDispatcher();
 
@@ -30,6 +30,9 @@
 	export let multiple = false;
 	export let maxSelected = 4;
 	export let essOnly = false;
+
+	let _placeholder = placeholder;
+	let selectedObject;
 
 	const startsWithFilter = (str, filter) => str.toLowerCase().startsWith(filter.toLowerCase());
 	const filterSort = (a, b) =>
@@ -75,23 +78,30 @@
 						}
 					});
 				if (places[0]) {
-					placeholder = 'Type a place name or postcode';
-					dispatch('select', {
+					_placeholder = placeholder;
+					selectedObject = {
 						type: 'postcode',
 						areacd: null,
 						postcd: json.result.postcode,
 						places
-					});
+					};
+					dispatch('select', selectedObject);
 				} else {
-					placeholder = 'Must be a valid postcode';
+					selectedObject = null;
+					_placeholder = 'Invalid postcode';
 				}
 			}
 		} else {
 			let areacd = e.detail[idKey];
 			let areanm = e.detail[labelKey];
-			dispatch('select', { type: 'place', areacd, areanm });
-			placeholder = 'Type a place name or postcode';
+			selectedObject = { type: 'place', areacd, areanm };
+			dispatch('select', selectedObject);
+			_placeholder = placeholder;
 		}
+	}
+
+	function doSubmit() {
+		dispatch('submit', selectedObject);
 	}
 
 	$: itemFilter =
@@ -134,37 +144,55 @@
 </script>
 
 {#if items}
-	<div class="select-wrapper">
-		<Select
-			{id}
-			{mode}
-			options={items}
-			bind:value
-			bind:filterText
-			{idKey}
-			{labelKey}
-			{groupKey}
-			{placeholder}
-			{label}
-			{hideLabel}
-			{multiple}
-			{autoClear}
-			{loadOptions}
-			{itemFilter}
-			on:change={handleSelect}
-			on:input
-			on:focus
-			on:blur
-			on:clear
-			clearable={!clearable ? false : !multiple}
-		/>
-	</div>
+	<form class="select-container" on:submit|preventDefault={doSubmit}>
+		<div class="select-wrapper">
+			<Select
+				{id}
+				{mode}
+				options={items}
+				bind:value
+				bind:filterText
+				{idKey}
+				{labelKey}
+				{groupKey}
+				{label}
+				{hideLabel}
+				{multiple}
+				{autoClear}
+				{loadOptions}
+				{itemFilter}
+				on:change={handleSelect}
+				on:input
+				on:focus
+				on:blur
+				on:clear
+				placeholder={_placeholder}
+				clearable={!clearable ? false : !multiple}
+				hideIcon
+			/>
+		</div>
+		<Button icon="search" type="submit" small hideLabel>Search</Button>
+	</form>
 {/if}
 
 <style>
+	.select-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 6px;
+	}
+	.select-container :global(.ons-btn__inner) {
+		height: 40px;
+		transform: translateY(-1px);
+	}
+	.select-container :global(.ons-field) {
+		margin: 0 !important;
+	}
 	.select-wrapper {
 		--background: white;
 		--text: #222;
 		color: var(--text);
+		width: 100%;
 	}
 </style>

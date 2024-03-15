@@ -172,16 +172,18 @@
 		{/if}
 	</Card>
 	<Card title="Find another area">
+		<label for="search" style:display="block" style:margin-bottom="8px"
+			>Type a place name or postcode</label
+		>
 		<AreaSelect
 			id="search"
 			mode="search"
 			idKey="areacd"
 			labelKey="areanm"
 			groupKey="group"
-			label="Type a place name or postcode"
 			placeholder="Eg. Fareham or PO15 5RR"
-			autoClear
-			on:select={navTo}
+			hideIcon
+			on:submit={navTo}
 		/>
 		{#if postcode}
 			<AreaList {postcode} on:clear={() => (postcode = null)} />
