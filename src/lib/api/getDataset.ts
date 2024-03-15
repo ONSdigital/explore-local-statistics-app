@@ -9,12 +9,6 @@ type GetDatasetResult =
 	  }
 	| { kind: 'Failure' };
 
-const round = (num: number, dp = 0): number => {
-	const p = Math.pow(10, dp);
-	const n = num * p * (1 + Number.EPSILON);
-	return Math.round(n) / p;
-};
-
 export const getDataset = async (
 	fetch: typeof window.fetch,
 	slug: string
@@ -44,7 +38,6 @@ export const getDataset = async (
 			for (const col of cols) {
 				row[col] = colData[col][i];
 			}
-			row.value = round(row.value, +indicator.metadata.decimalPlaces);
 			row.areanm = metadata.areasObject[row.areacd]?.areanm || 'Unnamed area';
 			chartData.push(row);
 		}
