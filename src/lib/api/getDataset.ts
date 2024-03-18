@@ -14,15 +14,13 @@ export const getDataset = async (
 	slug: string
 ): Promise<GetDatasetResult> => {
 	const metadataResult = await fetch(`${base}/insights/config.json`);
+	if (!metadataResult) return { kind: 'Failure' };
 
-	let metadata;
-	let indicator;
-
-	if (metadataResult) {
-		metadata = await metadataResult.json();
-		indicator = Object.values(metadata.indicatorsObject).find((ind) => ind.metadata.slug === slug);
-		if (!indicator) return { kind: 'Failure' };
-	}
+	const metadata = await metadataResult.json();
+	const indicator = Object.values(metadata.indicatorsObject).find(
+		(ind) => ind.metadata.slug === slug
+	);
+	if (!indicator) return { kind: 'Failure' };
 
 	const dataResult = await fetch(`${base}/insights/column-oriented-data.json`);
 
