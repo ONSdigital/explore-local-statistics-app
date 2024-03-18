@@ -6,7 +6,7 @@
 	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import Map from '$lib/viz/Map.svelte';
-	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
+	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
 
 	import { mainChartOptionsArray } from '$lib/config';
 
@@ -35,8 +35,6 @@
 		geoGroup = indicator.inferredGeos.groups[3];
 	};
 
-	$: console.log(geoGroup);
-
 	const doSelect = (e) => {
 		const chosen = selectionsObject['areas-single-additional-chosen'];
 		const area = e.detail?.area;
@@ -47,7 +45,7 @@
 	};
 
 	$: mapData =
-		geoGroup?.codes && chosenXDomainNumbEnd
+		geoGroup?.codes && chosenXDomainNumbEnd && indicator.years.includes(chosenXDomainNumbEnd)
 			? makeMapData(
 					chartData.combinedDataObject[indicator.code],
 					geoGroup?.codes,
@@ -94,6 +92,8 @@
 		chartOptionsArray.find((el) => el.id === chosenChartId) === undefined
 			? chartOptionsArray[0].id
 			: chosenChartId;
+
+	$: console.log(chosenChartId);
 
 	$: filteredChartData = chartData.combinedDataObject[indicator.code].filter((el) => el.value);
 
@@ -143,8 +143,23 @@
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
 		(el) =>
 			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= xDomain[0] &&
-			el.xDomainNumb <= xDomain[1]
+			el.xDomainNumb >= indicator.minXDomainNumb &&
+			el.xDomainNumb <= indicator.maxXDomainNumb
+	);
+
+	$: chosenTimePeriodsArray = timePeriodsArray.filter(
+		(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+	);
+
+	$: filteredChartDataSelectedLatest = filteredChartDataSelected.filter(
+		(el) => el.xDomainNumb === xDomain[1]
+	);
+
+	$: filteredChartDataAdditionalsLatest = filteredChartDataAdditionals.filter(
+		(el) => el.xDomainNumb === xDomain[1]
+	);
+	$: filteredChartDataAreaGroupLatest = filteredChartDataAreaGroup.filter(
+		(el) => el.xDomainNumb === xDomain[1]
 	);
 
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
@@ -178,7 +193,7 @@
 				bind:chosenXDomainNumbStart
 				bind:chosenXDomainNumbEnd
 				bind:showConfidenceIntervals
-				timePeriodsArray={null}
+				{timePeriodsArray}
 				chosenTimePeriodDropdownLabel={null}
 				showSlider={indicator.maxXDomainNumb != indicator.minXDomainNumb}
 			></ChartOptions>
@@ -187,14 +202,14 @@
 
 	<Tabs border bind:selected={chosenChartId}>
 		{#each chartOptionsArray as chart}
-			{#if indicator.minXDomainNumb != indicator.maxXDomainNumb || chart.multiYear != 'Yes'}
+			{#if true}
 				<Tab title={chart.label} id={chart.id} hideTitle>
 					<div class="title-and-chart-container">
 						<div class="title-container">
 							<SubtitleAdditionalDescription
 								selectedIndicator={indicator}
 								{xDomain}
-								{timePeriodsArray}
+								timePeriodsArray={chosenTimePeriodsArray}
 								selectedChartType={chart}
 							></SubtitleAdditionalDescription>
 						</div>
@@ -209,7 +224,7 @@
 									<LineChartContainer
 										{indicator}
 										{metadata}
-										{timePeriodsArray}
+										timePeriodsArray={chosenTimePeriodsArray}
 										filteredChartDataSelected={filteredChartDataSelected.filter(
 											(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 										)}
@@ -230,49 +245,59 @@
 									></LineChartContainer>
 								{:else}
 									<div class="no-chart-container">
-										<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>
+										<p>No data for selected areas prior to {chosenTimePeriodsArray[0].label}</p>
 									</div>
 								{/if}
 							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Bar chart'}
-								<BarChartContainer
-									{indicator}
-									{metadata}
-									latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
-									filteredChartDataSelected={filteredChartDataSelected.filter(
-										(el) => el.xDomainNumb === xDomain[1]
-									)}
-									filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-										(el) => el.xDomainNumb === xDomain[1]
-									)}
-									filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-										(el) => el.xDomainNumb === xDomain[1]
-									)}
-									{selectionsObject}
-									{selectedArea}
-									{indicatorCalculations}
-									{xDomain}
-									{customLookup}
-									{showConfidenceIntervals}
-									additionalID="areas-single-additional"
-									relatedID="related-single"
-								></BarChartContainer>
+								{#if !indicator.years.includes(chosenXDomainNumbEnd)}
+									<div class="no-chart-container">
+										<p>
+											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+											display for
+											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+										</p>
+									</div>
+								{:else if false}{:else}
+									<BarChartContainer
+										{indicator}
+										{metadata}
+										latestPeriod={chosenTimePeriodsArray.find(
+											(el) => el.xDomainNumb === xDomain[1]
+										)}
+										filteredChartDataSelected={filteredChartDataSelectedLatest}
+										filteredChartDataAdditionals={filteredChartDataAdditionalsLatest}
+										filteredChartDataAreaGroup={filteredChartDataAreaGroupLatest}
+										{selectionsObject}
+										{selectedArea}
+										{indicatorCalculations}
+										{xDomain}
+										{customLookup}
+										{showConfidenceIntervals}
+										additionalID="areas-single-additional"
+										relatedID="related-single"
+									></BarChartContainer>
+								{/if}
 							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Map'}
-								<Map
-									data={mapData.data}
-									breaks={mapData.breaks}
-									geos={indicator.inferredGeos}
-									prefix={indicator.metadata.prefix}
-									suffix={indicator.metadata.suffix}
-									dp={indicator.metadata.decimalPlaces}
-									selected={[
-										selectedArea,
-										...selectionsObject['areas-single-additional-visible'].filter((el) =>
-											mapData.data.map((elm) => elm.areacd).includes(el.areacd)
-										)
-									]}
-									{customLookup}
-									on:select={doSelect}
-								/>
+								{#if mapData.data.length > 0 && mapData.breaks.length > 0}
+									<Map
+										data={mapData.data}
+										breaks={mapData.breaks}
+										geos={indicator.inferredGeos}
+										prefix={indicator.metadata.prefix}
+										suffix={indicator.metadata.suffix}
+										dp={indicator.metadata.decimalPlaces}
+										selected={[
+											selectedArea,
+											...selectionsObject['areas-single-additional-visible'].filter((el) =>
+												mapData.data.map((elm) => elm.areacd).includes(el.areacd)
+											)
+										]}
+										{customLookup}
+										on:select={doSelect}
+									/>
+								{:else}
+									<p>No data</p>
+								{/if}
 							{/if}
 						</div>
 
@@ -361,7 +386,6 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-weight: bold;
 	}
 
 	.source-container {

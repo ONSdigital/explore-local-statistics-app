@@ -66,7 +66,7 @@
 	};
 
 	$: mapData =
-		geoGroup?.codes && chosenXDomainNumbEnd
+		geoGroup?.codes && chosenXDomainNumbEnd && indicator.years.includes(chosenXDomainNumbEnd)
 			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
 			: { data: [], breaks: [] };
 
@@ -441,22 +441,24 @@
 					unit={getUnit(data.indicator.metadata)}
 					data={mapData.data}
 				>
-					<p class="subtitle">
-						{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
-					</p>
-					<Map
-						data={mapData.data}
-						breaks={mapData.breaks}
-						geos={data.indicator.inferredGeos}
-						prefix={data.indicator.metadata.prefix}
-						suffix={data.indicator.metadata.suffix}
-						dp={+data.indicator.metadata.decimalPlaces}
-						selected={selectionsObject['indicator-additional-visible'].filter((el) =>
-							mapData.data.map((elm) => elm.areacd).includes(el.areacd)
-						)}
-						customLookup={customLookup['indicator-additional-visible']}
-						on:select={doSelect}
-					/>
+					{#if mapData.data.length > 0 && mapData.breaks.length > 0}
+						<p class="subtitle">
+							{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
+						</p>
+						<Map
+							data={mapData.data}
+							breaks={mapData.breaks}
+							geos={data.indicator.inferredGeos}
+							prefix={data.indicator.metadata.prefix}
+							suffix={data.indicator.metadata.suffix}
+							dp={+data.indicator.metadata.decimalPlaces}
+							selected={selectionsObject['indicator-additional-visible'].filter((el) =>
+								mapData.data.map((elm) => elm.areacd).includes(el.areacd)
+							)}
+							customLookup={customLookup['indicator-additional-visible']}
+							on:select={doSelect}
+						/>
+					{:else}{/if}
 				</ContentBlock>
 			</NavSection>
 		{/if}

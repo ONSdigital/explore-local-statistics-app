@@ -54,20 +54,6 @@
 			{accordionArray}
 			bind:chosenIndicatorId
 		></MainChart>
-		<!-- <MainChart
-			{combinedSelectableAreaTypesObject}
-			{chartData}
-			{metadata}
-			{filteredIndicators}
-			{visibleAreas}
-			bind:chosenIndicatorId
-			bind:chosenParentAreasArray
-			bind:chosenRelatedAreasId
-			bind:chosenSameRegionArray
-			bind:chosenCountriesArray
-			bind:chosenRegionsArray
-			bind:chosenAllOtherArray
-		></MainChart> -->
 	{/if}
 	<!-- <div class="content-actions">
 		<h4>Use and share</h4>
