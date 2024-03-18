@@ -2,11 +2,13 @@
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 
-	export let metadata, indicator, chartData, customLookup, selectionsObject;
-
-	let chosenXDomain = [metadata.globalXDomainExtent[0], metadata.globalXDomainExtent[1]];
-
-	let showConfidenceIntervals = false;
+	export let metadata,
+		indicator,
+		chartData,
+		customLookup,
+		selectionsObject,
+		showConfidenceIntervals,
+		chosenXDomain;
 
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
@@ -36,12 +38,11 @@
 	$: filteredChartDataAdditionals = filteredChartData.filter((el) =>
 		selectionsObject['indicator-additional-chosen'].includes(el.areacd)
 	);
-	$: filteredChartDataAreaGroup = selectionsObject['related-single-visible']
+	$: filteredChartDataAreaGroup = selectionsObject['indicator-related-visible']
 		? filteredChartData.filter(
 				(el) =>
-					selectionsObject['related-single-visible'].codes.includes(el.areacd) &&
-					!selectionsObject['indicator-additional-chosen'].includes(el.areacd) &&
-					el.areacd != selectedArea.areacd
+					selectionsObject['indicator-related-visible'].codes.includes(el.areacd) &&
+					!selectionsObject['indicator-additional-chosen'].includes(el.areacd)
 			)
 		: [];
 
@@ -79,10 +80,6 @@
 			el.xDomainNumb <= xDomain[1]
 	);
 </script>
-
-<div class="row-container align-right-container">
-	<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
-</div>
 
 {#if timePeriodsArray.length === 0}
 	<div class="no-chart-container">

@@ -4,6 +4,7 @@
 	import Thumb from './Thumb.svelte';
 	const dispatch = createEventDispatcher();
 
+	export let timePeriodsArray;
 	export let range = true;
 	export let min = 0;
 	export let max = 100;
@@ -54,17 +55,28 @@
 
 {#if range}
 	<span
-		>Selected date range <strong>{format(Math.min(...value))}</strong> to
-		<strong>{format(Math.max(...value))}</strong></span
+		>Selected date range <strong
+			>{timePeriodsArray
+				? timePeriodsArray.find((el) => el.xDomainNumb === Math.min(...value)).label
+				: format(Math.min(...value))}</strong
+		>
+		to
+		<strong
+			>{timePeriodsArray
+				? timePeriodsArray.find((el) => el.xDomainNumb === Math.max(...value)).label
+				: format(Math.max(...value))}</strong
+		></span
 	>
 {/if}
 <div class="track">
 	<div class="ticks">
-		<div class="tick tick-left">{min}</div>
+		<div class="tick tick-left">
+			{timePeriodsArray ? timePeriodsArray[timePeriodsArray.length - 1].label : min}
+		</div>
 		{#each Array.from(Array(ticksCount).keys()) as i}
 			<div class="tick tick-mid" style:left="{100 * (i / ticksCount)}%" />
 		{/each}
-		<div class="tick tick-right">{max}</div>
+		<div class="tick tick-right">{timePeriodsArray ? timePeriodsArray[0].label : max}</div>
 	</div>
 	{#if showBar}
 		<div class="progress" style={progress} />

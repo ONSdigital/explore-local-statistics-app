@@ -5,7 +5,13 @@
 	import EditTimePeriod from '$lib/prototype-components/EditTimePeriod.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 
-	export let metadata, chosenXDomain, showConfidenceIntervals;
+	export let metadata,
+		chosenXDomainNumbStart,
+		chosenXDomainNumbEnd,
+		showConfidenceIntervals,
+		timePeriodsArray,
+		chosenTimePeriodDropdownLabel,
+		showSlider = true;
 
 	let showModal = false;
 
@@ -33,9 +39,17 @@
 	<div slot="content" class="column-container">
 		<Checkbox bind:checked={showConfidenceIntervals} label="Show confidence intervals" compact />
 
-		<Divider orientation="horizontal"></Divider>
+		{#if showSlider}
+			<Divider orientation="horizontal"></Divider>
 
-		<EditTimePeriod {metadata} bind:chosenXDomain></EditTimePeriod>
+			<EditTimePeriod
+				{metadata}
+				bind:chosenXDomainNumbStart
+				bind:chosenXDomainNumbEnd
+				{timePeriodsArray}
+				{chosenTimePeriodDropdownLabel}
+			></EditTimePeriod>
+		{/if}
 	</div>
 </Modal>
 

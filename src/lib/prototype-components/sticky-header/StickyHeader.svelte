@@ -9,7 +9,8 @@
 		accordionArray,
 		selectionsObject,
 		customLookup,
-		chosenXDomain,
+		chosenXDomainNumbStart,
+		chosenXDomainNumbEnd,
 		showConfidenceIntervals,
 		backgroundColor = 'white';
 
@@ -76,7 +77,12 @@
 	<div class="buttons-container">
 		<ChangeAreas {selectedArea} {accordionArray} bind:selectionsObject {customLookup}></ChangeAreas>
 
-		<ChartOptions {metadata} bind:chosenXDomain bind:showConfidenceIntervals></ChartOptions>
+		<ChartOptions
+			{metadata}
+			bind:showConfidenceIntervals
+			bind:chosenXDomainNumbStart
+			bind:chosenXDomainNumbEnd
+		></ChartOptions>
 		<ChartInfo></ChartInfo>
 	</div>
 </div>

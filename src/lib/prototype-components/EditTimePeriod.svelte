@@ -2,7 +2,11 @@
 	import Slider from '$lib/components/Slider.svelte';
 	import debounce from 'debounce';
 
-	export let metadata, chosenXDomain;
+	export let metadata,
+		chosenXDomainNumbStart,
+		chosenXDomainNumbEnd,
+		timePeriodsArray,
+		chosenTimePeriodDropdownLabel;
 
 	// $: timePeriodOptionsArray = Array.from(
 	// 	{ length: metadata.globalXDomainExtent[1] - metadata.globalXDomainExtent[0] + 1 },
@@ -16,15 +20,25 @@
 		// 	if (min === metadata.globalXDomainExtent[0]) max += 1;
 		// 	else min -= 1;
 		// }
-		chosenXDomain = [min, max];
+		chosenXDomainNumbStart = min;
+		chosenXDomainNumbEnd = max;
+
+		if (chosenTimePeriodDropdownLabel) {
+			chosenTimePeriodDropdownLabel = timePeriodsArray.find((el) => el.xDomainNumb === max).label;
+		}
 	}
+
+	$: console.log(chosenXDomainNumbStart, chosenXDomainNumbEnd);
 </script>
 
 <Slider
-	value={chosenXDomain}
-	min={metadata.globalXDomainExtent[0]}
-	max={metadata.globalXDomainExtent[1]}
+	value={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
+	min={timePeriodsArray
+		? timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb
+		: metadata.globalXDomainExtent[0]}
+	max={timePeriodsArray ? timePeriodsArray[0].xDomainNumb : metadata.globalXDomainExtent[1]}
 	on:input={debounce(setChosenXDomain, 100)}
+	{timePeriodsArray}
 />
 
 <span class="small-note"

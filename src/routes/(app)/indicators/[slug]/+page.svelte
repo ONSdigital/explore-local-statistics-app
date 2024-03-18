@@ -21,13 +21,20 @@
 	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
+	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import { onMount } from 'svelte';
 
 	export let data;
 
-	let geoGroup, prevGeoGroup, year, columns;
+	let geoGroup, prevGeoGroup, columns;
 	let pivotedData, mapData;
 	let selected = [];
+	let chosenXDomainNumbStart,
+		chosenXDomainNumbEnd,
+		timePeriodsArray,
+		chosenTimePeriodDropdownLabel,
+		chosenStartTimePeriod;
+	let showConfidenceIntervals = false;
 
 	const maxSelection = 10;
 
@@ -41,24 +48,45 @@
 			selectionsObject['indicator-additional-chosen'] = [...chosen, area.areacd];
 	};
 	const refreshData = () => {
-		if (geoGroup.key !== prevGeoGroup.key) {
+		/*if (geoGroup.key !== prevGeoGroup.key) {
 			selectionsObject = {
 				'indicator-additional-chosen': new Array(0),
 				'indicator-additional-visible': new Array(0)
 			};
 			prevGeoGroup = geoGroup;
-		}
+		}*/
+
+		chosenXDomainNumbEnd = timePeriodsArray.find(
+			(el) => el.label === chosenTimePeriodDropdownLabel
+		).xDomainNumb;
+		chosenXDomainNumbStart = Math.min(chosenXDomainNumbStart, chosenXDomainNumbEnd);
+
 		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
-		mapData =
-			geoGroup?.codes && year
-				? makeMapData(data.chartData, geoGroup?.codes, year)
-				: { data: [], breaks: [] };
 	};
+
+	$: mapData =
+		geoGroup?.codes && chosenXDomainNumbEnd
+			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
+			: { data: [], breaks: [] };
 
 	afterNavigate(() => {
 		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
 		prevGeoGroup = geoGroup;
-		year = data.indicator.years[data.indicator.years.length - 1];
+
+		timePeriodsArray = metadata.periodsLookupArray.filter(
+			(el) =>
+				el.periodGroup === data.indicator.periodGroup &&
+				el.xDomainNumb >= data.indicator.minXDomainNumb &&
+				el.xDomainNumb <= data.indicator.maxXDomainNumb
+		);
+
+		console.log(timePeriodsArray);
+		chosenXDomainNumbStart = data.indicator.minXDomainNumb;
+		chosenXDomainNumbEnd = data.indicator.maxXDomainNumb;
+		chosenTimePeriodDropdownLabel = timePeriodsArray.find(
+			(el) => el.xDomainNumb === chosenXDomainNumbEnd
+		).label;
+
 		columns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
 			{ key: 'areanm', label: 'Area name', sortable: true },
@@ -75,23 +103,86 @@
 
 	let metadata = data.metadata;
 
+	$: codesForAreasWithData = [...new Set(data.chartData.map((el) => el.areacd))];
+
+	$: lowerTierLocalAuthoritiesWithDataCodes = metadata.areasGeogLevelObject.lower.filter((el) =>
+		codesForAreasWithData.includes(el)
+	);
+	$: lowerTierLocalAuthoritiesWithDataAreas = lowerTierLocalAuthoritiesWithDataCodes.map(
+		(el) => metadata.areasObject[el]
+	);
+
+	$: upperTierLocalAuthoritiesWithDataCodes = metadata.areasGeogLevelObject.upper.filter((el) =>
+		codesForAreasWithData.includes(el)
+	);
+	$: upperTierLocalAuthoritiesWithDataAreas = upperTierLocalAuthoritiesWithDataCodes.map(
+		(el) => metadata.areasObject[el]
+	);
+
+	$: regionsWithDataCodes = metadata.areasGeogLevelObject.region.filter((el) =>
+		codesForAreasWithData.includes(el)
+	);
+	$: regionsWithDataAreas = regionsWithDataCodes.map((el) => metadata.areasObject[el]);
+
+	$: countriesWithDataCodes = metadata.areasGeogLevelObject.country.filter((el) =>
+		codesForAreasWithData.includes(el)
+	);
+	$: countriesWithDataAreas = countriesWithDataCodes.map((el) => metadata.areasObject[el]);
+
 	$: parentAndRelatedAreasObject = {
 		parent: null,
 		country: null,
 		uk: null,
-		groups: {}
+		groups: {
+			country: {
+				labels: {
+					related: 'All countries'
+				},
+				areas: countriesWithDataAreas,
+				codes: countriesWithDataCodes
+			},
+			region: {
+				labels: {
+					related: 'All regions'
+				},
+				areas: regionsWithDataAreas,
+				codes: regionsWithDataCodes
+			},
+			utla: {
+				labels: {
+					related: 'All upper-tier/unitary authorities'
+				},
+				areas: upperTierLocalAuthoritiesWithDataAreas,
+				codes: upperTierLocalAuthoritiesWithDataCodes
+			},
+			ltla: {
+				labels: {
+					related: 'All lower-tier/unitary authorities'
+				},
+				areas: lowerTierLocalAuthoritiesWithDataAreas,
+				codes: lowerTierLocalAuthoritiesWithDataCodes
+			}
+		}
 	};
 
-	let changeAreasOptionsObject = {
+	$: changeAreasOptionsObject = {
 		country: metadata.areasGeogLevelObject.country.map((el) => metadata.areasObject[el]),
 		region: metadata.areasGeogLevelObject.region.map((el) => metadata.areasObject[el]),
 		upper: metadata.areasGeogLevelObject.upper.map((el) => metadata.areasObject[el]),
-		lower: metadata.areasGeogLevelObject.lower.map((el) => metadata.areasObject[el])
+		lower: lowerTierLocalAuthoritiesWithDataAreas,
+		related: Object.keys(parentAndRelatedAreasObject.groups)
+			.filter((el) => parentAndRelatedAreasObject.groups[el].areas.length > 0)
+			.map((el) => ({
+				key: el,
+				label: parentAndRelatedAreasObject.groups[el].labels.related
+			}))
 	};
 
 	let selectionsObject = {
 		'indicator-additional-chosen': new Array(0),
-		'indicator-additional-visible': new Array(0)
+		'indicator-additional-visible': new Array(0),
+		'indicator-related-chosen': null,
+		'indicator-related-visible': null
 	};
 
 	$: {
@@ -101,9 +192,16 @@
 			parentAndRelatedAreasObject,
 			metadata.areasObject
 		);
+
+		selectionsObject['indicator-related-visible'] = constructVisibleAreasArray(
+			selectionsObject['indicator-related-chosen'],
+			true,
+			parentAndRelatedAreasObject,
+			metadata.areasObject
+		);
 	}
 
-	$: accordionArray = [
+	$: accordionArrayMap = [
 		{
 			label: '',
 			type: 'checkbox',
@@ -142,6 +240,66 @@
 		}
 	];
 
+	$: accordionArrayLineBarBeeswarm = [
+		{
+			label: 'Additional areas',
+			type: 'checkbox',
+			chosenKey: 'indicator-additional',
+			accordion: true,
+			options: [
+				{
+					key: 'ctry',
+					label: 'Countries',
+					data: changeAreasOptionsObject.country,
+					accordion: true,
+					include: true
+				},
+				{
+					key: 'rgn',
+					label: 'Countries and regions',
+					data: changeAreasOptionsObject.region,
+					accordion: true,
+					include: true
+				},
+				{
+					key: 'utla',
+					label: 'Upper-tier/unitary authorities',
+					data: changeAreasOptionsObject.upper,
+					accordion: true,
+					include: true
+				},
+				{
+					key: 'ltla',
+					label: 'Lower-tier/unitary authorities',
+					data: changeAreasOptionsObject.lower,
+					accordion: true,
+					include: true
+				}
+			]
+		},
+		{
+			label: 'Geography level',
+			type: 'radio',
+			search: null,
+			chosenKey: 'indicator-related',
+			accordion: true,
+			options: [
+				{
+					data: changeAreasOptionsObject.related,
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				},
+				{
+					data: [{ label: 'None', key: 'none' }],
+					accordion: false,
+					labelKey: 'label',
+					idKey: 'key'
+				}
+			]
+		}
+	];
+
 	$: customLookup = {
 		'indicator-additional-visible': {}
 	};
@@ -153,27 +311,6 @@
 		);
 	}
 
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
-		(el) =>
-			el.periodGroup === data.indicator.periodGroup &&
-			el.xDomainNumb >= data.indicator.minXDomainNumb &&
-			el.xDomainNumb <= data.indicator.maxXDomainNumb
-	);
-
-	let timePeriodLabels;
-
-	onMount(() => {
-		timePeriodLabels = [
-			timePeriodsArray[timePeriodsArray.length - 1].label,
-			timePeriodsArray[0].label
-		];
-	});
-
-	$: year =
-		timePeriodLabels && timePeriodsArray
-			? timePeriodsArray.find((el) => el.label === timePeriodLabels[1]).xDomainNumb
-			: null;
-
 	$: sourceOrgs = data.indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = data.indicator.metadata.sourceURL.split('|');
 	$: sourceDate = data.indicator.metadata.sourceDate.split('|');
@@ -181,6 +318,19 @@
 	$: caveats = data.indicator.metadata.caveats
 		? new MarkdownIt().render(data.indicator.metadata.caveats)
 		: null;
+
+	$: chosenStartTimePeriod = timePeriodsArray
+		? timePeriodsArray.find((el) => el.xDomainNumb === chosenXDomainNumbStart)
+		: null;
+
+	onMount(() => {
+		selectionsObject['indicator-related-chosen'] = 'ltla';
+		selectionsObject['indicator-additional-chosen'] = codesForAreasWithData.includes('K02000001')
+			? ['K02000001']
+			: countriesWithDataCodes;
+	});
+
+	$: console.log(mapData.data);
 </script>
 
 <Breadcrumb
@@ -242,13 +392,13 @@
 							id="year"
 							options={timePeriodsArray.map((el) => el.label)}
 							width={10}
-							bind:value={timePeriodLabels[1]}
+							bind:value={chosenTimePeriodDropdownLabel}
 							on:change={refreshData}
 						/>
 					</div>
 					<div class="buttons-container">
 						<ChangeAreas
-							{accordionArray}
+							accordionArray={accordionArrayMap}
 							bind:selectionsObject
 							customLookup={customLookup['indicator-additional-visible']}
 							label={selectionsObject['indicator-additional-visible'].length === 0
@@ -264,7 +414,9 @@
 					unit={getUnit(data.indicator.metadata)}
 					data={mapData.data}
 				>
-					<p class="subtitle">{data.indicator.metadata.subtitle}, {timePeriodLabels[1]}</p>
+					<p class="subtitle">
+						{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
+					</p>
 					<Map
 						data={mapData.data}
 						breaks={mapData.breaks}
@@ -272,7 +424,9 @@
 						prefix={data.indicator.metadata.prefix}
 						suffix={data.indicator.metadata.suffix}
 						dp={+data.indicator.metadata.decimalPlaces}
-						selected={selectionsObject['indicator-additional-visible']}
+						selected={selectionsObject['indicator-additional-visible'].filter((el) =>
+							mapData.data.map((elm) => elm.areacd).includes(el.areacd)
+						)}
 						customLookup={customLookup['indicator-additional-visible']}
 						on:select={doSelect}
 					/>
@@ -285,13 +439,21 @@
 				<div class="row-container">
 					<div class="buttons-container">
 						<ChangeAreas
-							{accordionArray}
+							accordionArray={accordionArrayLineBarBeeswarm}
 							bind:selectionsObject
 							customLookup={customLookup['indicator-additional-visible']}
 							label={selectionsObject['indicator-additional-visible'].length === 0
 								? 'Select areas'
 								: 'Change areas'}
 						></ChangeAreas>
+						<ChartOptions
+							{metadata}
+							bind:chosenXDomainNumbStart
+							bind:chosenXDomainNumbEnd
+							bind:showConfidenceIntervals
+							{timePeriodsArray}
+							bind:chosenTimePeriodDropdownLabel
+						></ChartOptions>
 					</div>
 				</div>
 
@@ -301,41 +463,76 @@
 					unit={getUnit(data.indicator.metadata)}
 					data={[]}
 				>
+					<p class="subtitle">
+						{data.indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
+					</p>
 					<LineChartContainerIndicatorPage
 						indicator={data.indicator}
 						chartData={data.chartData}
 						{selectionsObject}
 						customLookup={customLookup['indicator-additional-visible']}
 						{metadata}
+						chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
+						{showConfidenceIntervals}
 					></LineChartContainerIndicatorPage>
 				</ContentBlock>
 			</NavSection>
 		{/if}
 
 		<NavSection title="Bar chart">
+			<div class="row-container">
+				<div class="content-dropdowns" data-html2canvas-ignore>
+					<Dropdown
+						id="year"
+						options={timePeriodsArray.map((el) => el.label)}
+						width={10}
+						bind:value={chosenTimePeriodDropdownLabel}
+						on:change={refreshData}
+					/>
+				</div>
+				<div class="buttons-container">
+					<ChangeAreas
+						accordionArray={accordionArrayMap}
+						bind:selectionsObject
+						customLookup={customLookup['indicator-additional-visible']}
+						label={selectionsObject['indicator-additional-visible'].length === 0
+							? 'Select areas'
+							: 'Change areas'}
+					></ChangeAreas>
+					<ChartOptions
+						{metadata}
+						bind:chosenXDomainNumbStart
+						bind:chosenXDomainNumbEnd
+						bind:showConfidenceIntervals
+						{timePeriodsArray}
+						bind:chosenTimePeriodDropdownLabel
+						showSlider={false}
+					></ChartOptions>
+				</div>
+			</div>
 			<ContentBlock
 				type="bar-chart"
 				title={data.indicator.metadata.label}
 				unit={getUnit(data.indicator.metadata)}
 				data={[]}
 			>
+				<p class="subtitle">
+					{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
+				</p>
 				<BarChartContainerIndicatorPage
 					indicator={data.indicator}
 					chartData={data.chartData}
 					{selectionsObject}
 					customLookup={customLookup['indicator-additional-visible']}
 					{metadata}
+					chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
+					{showConfidenceIntervals}
 				></BarChartContainerIndicatorPage>
 			</ContentBlock>
 		</NavSection>
 
 		<NavSection title="Table">
-			<ContentBlock
-				type="table"
-				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
-				data={pivotedData}
-			>
+			<div class="row-container">
 				<div class="content-dropdowns" data-html2canvas-ignore>
 					<Dropdown
 						options={data.indicator.inferredGeos.groups}
@@ -343,6 +540,22 @@
 						on:change={refreshData}
 					/>
 				</div>
+			</div>
+			<ContentBlock
+				type="table"
+				title={data.indicator.metadata.label}
+				unit={getUnit(data.indicator.metadata)}
+				data={pivotedData}
+			>
+				<p class="subtitle">
+					{#if timePeriodsArray.length > 1}
+						{data.indicator.metadata.subtitle}, {timePeriodsArray[timePeriodsArray.length - 1]
+							.label} to {timePeriodsArray[0].label}
+					{:else}
+						{data.indicator.metadata.subtitle}, {timePeriodsArray[0].label}
+					{/if}
+				</p>
+
 				{#key pivotedData}
 					<Table data={pivotedData} {columns} height={500} stickyHeader compact />
 				{/key}
@@ -435,8 +648,17 @@
 		justify-content: space-between;
 	}
 
+	.buttons-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 10px;
+	}
+
 	.subtitle {
-		margin: 0px;
+		margin: 0px 0px 10px 0px;
 		padding: 0px;
+		line-height: 24px;
+		font-size: 18px;
 	}
 </style>
