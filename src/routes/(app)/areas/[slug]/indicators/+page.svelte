@@ -591,7 +591,7 @@
 />
 
 <Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
-	<Lede>Visualise local indicators and trends for {getName(data.place, 'the')}</Lede>
+	<Lede>Explore local indicators, trends and get data for {getName(data.place, 'the')}</Lede>
 </Titleblock>
 
 <!-- <a href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
