@@ -72,15 +72,13 @@
 			.map((p) => ({ label: getName(p), href: `${base}/areas/${p.areacd}` })),
 		{ label: getName(data.place) }
 	]}
-	background="#eaeaea"
 />
 <Titleblock
 	title={getName(data.place)}
-	background="#eaeaea"
-	titleBadge={data.place.end ? 'Inactive' : ''}
-	titleBadgeColor="#ff7b24"
+	titleBadge={data.place.end ? 'Inactive' : data.place.areacd}
+	titleBadgeAriaLabel={data.place.end ? null : 'Area code: {data.place.areacd}'}
+	titleBadgeColor={data.place.end ? '#ff7b24' : null}
 >
-	<!-- <span class="title-subscript">(${data.place.areacd})</span> -->
 	<Lede>
 		{#if data.place.areacd === 'K02000001'}
 			Explore areas within the United Kingdom.
@@ -127,58 +125,31 @@
 	</Lede>
 </Titleblock>
 
-{#if data.place.areacd !== 'K02000001'}
-	{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
-		<Section theme="dark" background="#003c57" marginBottom={false}>
-			<!-- <ESSIcon /> -->
-			<ESSMap geometry={data.geometry} />
-			<div style:margin="24px 0">
-				<h3 style:margin="0 0 6px">Local indicators for {getName(place, 'the')}</h3>
-				<p>
-					See how {getName(place, 'the')} compares to other areas on health, education, well-being and
-					the economy.
-				</p>
-				<Button
-					icon="arrow"
-					variant="ghost"
-					href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
-					small>See local indicators</Button
-				>
-			</div>
-		</Section>
-	{/each}
-{/if}
-
-<Cards
-	title="Areas in {['K02', 'E92', 'N92', 'S92', 'W92'].includes(data.place.typecd)
-		? ''
-		: 'and around'} {getName(data.place, 'the')}"
-	id="related-areas"
-	height="auto"
-	marginTop
->
+<Cards id="related-areas" height="auto">
 	<Card colspan={2} rowspan={2} noBackground>
 		<AreaNavMap {data} {childType} on:select={mapSelect} />
 	</Card>
-	<Card title="Choose a larger area">
-		{#if data.place.parents[0]}
-			{#each [...data.place.parents].reverse() as parent, i}
-				<span class="link-parent" style:margin-left={i === 0 ? 0 : `${(i - 1) * 20}px`}>
-					{#if i != 0}<Icon type="subdir" />{/if}
-					<a
-						href="{base}/areas/{makeCanonicalSlug(parent.areacd, parent.areanm)}"
-						data-sveltekit-noscroll>{getName(parent)}</a
-					>
-				</span>
+
+	<div class="local-indicators-card">
+		{#if data.place.areacd !== 'K02000001'}
+			{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
+				<Section theme="dark" background="#003c57" marginBottom={false}>
+					<div style:margin="24px 0">
+						<h3 style:margin-bottom="12px">Local indicators for {getName(place, 'the')}</h3>
+						<p style:margin-bottom="20px">
+							Health, education, economy, life satisfaction and more.
+						</p>
+						<Button
+							icon="arrow"
+							variant="ghost"
+							href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
+							small>Explore local indicators</Button
+						>
+					</div>
+				</Section>
 			{/each}
-			<span class="link-parent" style:margin-left={`${data.place.parents.length * 20}px`}>
-				{#if data.place.parents[0]}<Icon type="subdir" />{/if}
-				<span>{getName(data.place)}</span>
-			</span>
-		{:else}
-			<span class="muted">No parent areas</span>
 		{/if}
-	</Card>
+	</div>
 	<Card title="Find another area">
 		<label for="search" style:display="block" style:margin-bottom="8px"
 			>Type a place name or postcode</label
@@ -197,45 +168,47 @@
 			<AreaList {postcode} on:clear={() => (postcode = null)} />
 		{/if}
 	</Card>
-	<Card colspan={3} title="Areas {getName(data.place, 'in')}">
-		{#key childType}
-			{#if childType}
-				<Tabs
-					selected={childType.key}
-					compact
-					on:change={(e) => (childType = data.childTypes.find((c) => c.key === e.detail.id))}
-				>
-					{#each data.childTypes as type, i}
-						<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
-							<ul
-								bind:clientHeight={childrenHeight[type.key]}
-								style:max-height={childrenExpanded ? 'none' : '144px'}
-								class="list-columns"
-							>
-								{#each filterChildren(data.place, type) as child, i}
-									<li>
-										<a
-											href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
-											data-sveltekit-noscroll
-											rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
-											>{getName(child)}</a
-										>
-									</li>
-								{/each}
-							</ul>
-						</Tab>
-					{/each}
-					<!-- {#if childrenHeight[childType.key] >= 144}
+	<Card colspan={3} noBackground>
+		<div style:margin-top="10px">
+			{#key childType}
+				{#if childType}
+					<Tabs
+						selected={childType.key}
+						compact
+						on:change={(e) => (childType = data.childTypes.find((c) => c.key === e.detail.id))}
+					>
+						{#each data.childTypes as type, i}
+							<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
+								<ul
+									bind:clientHeight={childrenHeight[type.key]}
+									style:max-height={childrenExpanded ? 'none' : '144px'}
+									class="list-columns"
+								>
+									{#each filterChildren(data.place, type) as child, i}
+										<li>
+											<a
+												href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
+												data-sveltekit-noscroll
+												rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+												>{getName(child)}</a
+											>
+										</li>
+									{/each}
+								</ul>
+							</Tab>
+						{/each}
+						<!-- {#if childrenHeight[childType.key] >= 144}
 						<button class="btn-link" on:click={() => (childrenExpanded = !childrenExpanded)}
 							><Icon type="chevron" rotation={childrenExpanded ? 90 : -90} />
 							{childrenExpanded ? 'Show fewer' : 'Show more'}</button
 						>
 					{/if} -->
-				</Tabs>
-			{:else}
-				<span class="muted">No areas available within {getName(data.place, 'the')}</span>
-			{/if}
-		{/key}
+					</Tabs>
+				{:else}
+					<span class="muted">No areas available within {getName(data.place, 'the')}</span>
+				{/if}
+			{/key}
+		</div>
 	</Card>
 </Cards>
 
@@ -271,7 +244,7 @@
 		margin: 0;
 		padding: 0;
 	}
-	:global(#related-areas .ons-tab[aria-selected='true']:not(:focus)) {
+	/* :global(#related-areas .ons-tab[aria-selected='true']:not(:focus)) {
 		background: #f3f3f3 !important;
 	}
 	:global(#related-areas .ons-tab[aria-selected='true']:focus) {
@@ -280,7 +253,7 @@
 			inset 12px 0 0 0 #f3f3f3,
 			inset -12px 0 0 0 #f3f3f3,
 			inset 0 -8px 0 0 #222 !important;
-	}
+	} */
 	:global(.select-wrapper label.ons-label) {
 		font-weight: normal;
 	}
@@ -290,5 +263,9 @@
 		font-weight: normal;
 		margin: 0 -2px 0 -5px;
 		transform: translateY(-3px);
+	}
+
+	.local-indicators-card {
+		background-color: #003c57;
 	}
 </style>
