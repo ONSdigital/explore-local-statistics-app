@@ -75,9 +75,9 @@
 />
 <Titleblock
 	title={getName(data.place)}
-	titleBadge={data.place.end ? 'Inactive' : data.place.areacd}
-	titleBadgeAriaLabel={data.place.end ? null : 'Area code: {data.place.areacd}'}
-	titleBadgeColor={data.place.end ? '#ff7b24' : null}
+	titleBadge={data.place.end ? `${data.place.areacd} - inactive` : data.place.areacd}
+	titleBadgeAriaLabel={data.place.end ? null : `Area code: ${data.place.areacd}`}
+	titleBadgeColor={data.place.end ? '#ff7b24' : '#003C57'}
 >
 	<Lede>
 		{#if data.place.areacd === 'K02000001'}
@@ -130,8 +130,8 @@
 		<AreaNavMap {data} {childType} on:select={mapSelect} />
 	</Card>
 
-	<div class="local-indicators-card">
-		{#if data.place.areacd !== 'K02000001'}
+	{#if data.place.areacd !== 'K02000001'}
+		<div class="local-indicators-card">
 			{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
 				<Section theme="dark" background="#003c57" marginBottom={false}>
 					<div style:margin="24px 0">
@@ -148,8 +148,8 @@
 					</div>
 				</Section>
 			{/each}
-		{/if}
-	</div>
+		</div>
+	{/if}
 	<Card title="Find another area">
 		<label for="search" style:display="block" style:margin-bottom="8px"
 			>Type a place name or postcode</label
