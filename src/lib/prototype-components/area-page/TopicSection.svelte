@@ -17,24 +17,22 @@
 
 	let topicUppercase = topic.name[0].toUpperCase() + topic.name.substring(1);
 
-	$: filteredTopicIndicators = []
-		.concat(...topic.subTopics.map((el) => el.indicators))
-		.filter((el) => filteredIndicatorsCodes.includes(el.code));
-
 	$: subTopics = topic.subTopics
 		.map((el) => ({
 			...el,
-			filteredIndicators: el.indicators.filter((elm) => filteredIndicatorsCodes.includes(elm.code))
+			filteredIndicatorCodes: el.indicatorCodes.filter((code) =>
+				filteredIndicatorsCodes.includes(code)
+			)
 		}))
-		.filter((el) => el.filteredIndicators.length > 0);
+		.filter((el) => el.filteredIndicatorCodes.length > 0);
 </script>
 
-{#if filteredTopicIndicators.length > 0}
+{#if subTopics.length > 0}
 	<div class="topic-section-container">
 		<NavSection title={topicUppercase} hideTitle subsection cls="topic-section">
 			<h2>{topicUppercase}</h2>
 
-			{#each subTopics as subTopic, i}
+			{#each subTopics as subTopic}
 				<div class="sub-topic-container" style="margin-bottom: 10px;">
 					{#if topic.name != subTopic.name}
 						<h3 class="sub-topic-header" style="margin-bottom: 20px;">
@@ -44,7 +42,7 @@
 
 					<!-- <div class="divider" style="margin-bottom: 20px;"></div> -->
 
-					{#each subTopic.filteredIndicators as indicator, j}
+					{#each subTopic.filteredIndicatorCodes.map((code) => metadata.indicatorsObject[code]) as indicator}
 						<!-- <Divider orientation="horizontal" margin={[0, 0, 0, 0]}></Divider> -->
 
 						<div style="margin-bottom: 20px;">

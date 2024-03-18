@@ -9,6 +9,7 @@
 
 	let datasetsCount = data.coreMetadata.indicatorsCodeLabelArray.length;
 	let filteredCount = datasetsCount;
+	const indicatorsObject = data.coreMetadata.indicatorsObject;
 
 	let filterText;
 
@@ -66,7 +67,7 @@
 				{#if topic.name != subTopic.name}
 					<h3>{capitalise(subTopic.name)}</h3>
 				{/if}
-				{#each subTopic.indicators as indicator}
+				{#each subTopic.indicatorCodes.map((code) => indicatorsObject[code]) as indicator}
 					<p>
 						<a href="{base}/indicators/{indicator.metadata.slug}">{indicator.metadata.label}</a><br
 						/>

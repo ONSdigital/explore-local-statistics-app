@@ -62,6 +62,7 @@ async function main() {
 
 	const coreMetadata = {
 		indicatorsCodeLabelArray: outConfig.indicatorsCodeLabelArray,
+		indicatorsObject: outConfig.indicatorsObject,
 		topicsArray: outConfig.topicsArray
 	};
 	writeJson(CORE_METADATA_OUTPUT_PATH, coreMetadata);
@@ -146,7 +147,7 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 			name: e,
 			subTopics: subTopics.map((el) => ({
 				name: el,
-				indicators: indicatorsArray.filter((elm) => elm.subTopic === el)
+				indicatorCodes: indicatorsArray.filter((elm) => elm.subTopic === el).map((d) => d.code)
 			}))
 		};
 	});
