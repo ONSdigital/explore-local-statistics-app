@@ -16,7 +16,8 @@
 		xDomain,
 		showConfidenceIntervals,
 		additionalID,
-		relatedID;
+		relatedID,
+		combinedChartData;
 
 	let dataArray = [];
 	let width = 1000;
@@ -32,6 +33,8 @@
 		left: 10 + maxLabelWidth
 	};
 
+	$: console.log(combinedChartData);
+
 	$: chartWidth = width - padding.left - padding.right;
 	$: chartHeight = height - padding.top - padding.bottom;
 
@@ -39,12 +42,6 @@
 		indicator.code in madRangeLookup
 			? madRangeLookup[indicator.code]['line-chart']
 			: madRangeLookup.default['line-chart'];
-
-	$: combinedChartData = [
-		...filteredChartDataSelected,
-		...filteredChartDataAdditionals,
-		...filteredChartDataAreaGroup
-	];
 
 	$: values = []
 		.concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci]))

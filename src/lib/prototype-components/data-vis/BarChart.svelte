@@ -54,41 +54,8 @@
 			: maxLabelWidth;
 
 	$: dataArray = [selectedBar, ...additionalBars]
-		.filter((el) => el)
+		.filter((el) => el && el.data)
 		.sort((a, b) => b.data.value - a.data.value);
-
-	/*export let selectedIndicator,
-		timePeriodsArray,
-		chartWidth,
-		chartHeight,
-		visibleAreasWithDataAdded,
-		xDomain,
-		yDomain,
-		isHoverLabelVisible,
-		hoverId,
-		hoverAreaWithDataAdded,
-		yAxisMaxTickWidth,
-		xAxisFinalTickWidth,
-		maxLabelWidth;
-
-	//$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
-
-	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
-
-	$: hoverAreaWithDataAdded = hoverId
-		? visibleAreasWithDataAdded[1].find((el) => el.areacd === hoverId)
-		: undefined;
-
-	$: data = [...visibleAreasWithDataAdded[0], ...visibleAreasWithDataAdded[1]].sort(
-		(a, b) => b.data[0].value - a.data[0].value
-	);
-
-	let labelRectArray = [];
-
-	$: maxLabelWidth =
-		labelRectArray.length > 0
-			? Math.max(120, ...labelRectArray.map((el, i) => (i < labelRectArray.length ? el.width : 0)))
-			: maxLabelWidth;*/
 </script>
 
 <AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>

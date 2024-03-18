@@ -88,10 +88,7 @@
 		(el) => indicator.minXDomainNumb != indicator.maxXDomainNumb || el.multiYear != 'Yes'
 	);*/
 	$: chartOptionsArray = mainChartOptionsArray;
-	$: chosenChartId =
-		chartOptionsArray.find((el) => el.id === chosenChartId) === undefined
-			? chartOptionsArray[0].id
-			: chosenChartId;
+	let chosenChartId = 0;
 
 	$: console.log(chosenChartId);
 
@@ -161,6 +158,12 @@
 	$: filteredChartDataAreaGroupLatest = filteredChartDataAreaGroup.filter(
 		(el) => el.xDomainNumb === xDomain[1]
 	);
+
+	$: combinedChartDataLatest = [
+		...filteredChartDataSelectedLatest,
+		...filteredChartDataAdditionalsLatest,
+		...filteredChartDataAreaGroupLatest
+	];
 
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
@@ -257,9 +260,27 @@
 											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
 										</p>
 									</div>
-								{:else if false}{:else}
+								{:else if filteredChartDataSelectedLatest.length === 0}
+									<div class="no-chart-container">
+										<p>
+											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data for
+											<span style="font-weight: bold;">{selectedArea.areanm}</span>
+											to display for
+											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+										</p>
+									</div>
+								{:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
+									<div class="no-chart-container">
+										<p>
+											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+											display for selected areas
+											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+										</p>
+									</div>
+								{:else}
 									<BarChartContainer
 										{indicator}
+										combinedChartData={combinedChartDataLatest}
 										{metadata}
 										latestPeriod={chosenTimePeriodsArray.find(
 											(el) => el.xDomainNumb === xDomain[1]
@@ -386,6 +407,8 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
+		text-wrap: balance;
+		text-align: center;
 	}
 
 	.source-container {
