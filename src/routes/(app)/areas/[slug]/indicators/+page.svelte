@@ -241,6 +241,9 @@
 		region: metadata.areasGeogLevelObject.region
 			.filter((el) => el != selectedArea.areacd)
 			.map((el) => metadata.areasObject[el]),
+		combined: metadata.areasGeogLevelObject.combined
+			.filter((el) => el != selectedArea.areacd)
+			.map((el) => metadata.areasObject[el]),
 		upper: metadata.areasGeogLevelObject.upper
 			.filter((el) => el != selectedArea.areacd)
 			.map((el) => metadata.areasObject[el]),
@@ -248,6 +251,8 @@
 			.filter((el) => el != selectedArea.areacd)
 			.map((el) => metadata.areasObject[el])
 	};
+
+	console.log(metadata.areasGeogLevelObject);
 
 	let selectionsObject = {
 		'areas-rows-comparison-chosen': new Array(0),
@@ -335,6 +340,7 @@
 					include: true
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{ label: 'Combined authorities', data: changeAreasOptionsObject.combined, accordion: true },
 				{
 					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
@@ -391,6 +397,7 @@
 					accordion: true
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{ label: 'Combined authorities', data: changeAreasOptionsObject.combined, accordion: true },
 				{
 					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
@@ -454,6 +461,7 @@
 					accordion: true
 				},
 				{ label: 'Regions', data: changeAreasOptionsObject.region, accordion: true },
+				{ label: 'Combined authorities', data: changeAreasOptionsObject.combined, accordion: true },
 				{
 					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,

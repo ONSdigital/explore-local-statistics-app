@@ -5,7 +5,8 @@
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
 	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
-	import ChartInfo from '$lib/prototype-components/area-page/indicator-rows/ChartInfo.svelte';
+	import Map from '$lib/viz/Map.svelte';
+	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
 
 	import { mainChartOptionsArray } from '$lib/config';
 
@@ -20,6 +21,8 @@
 
 	let indicator;
 
+	const maxSelection = 10;
+
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
 	let chosenXDomainNumbEnd = metadata.globalXDomainExtent[1];
 	$: chosenXDomain = [chosenXDomainNumbStart, chosenXDomainNumbEnd];
@@ -28,9 +31,34 @@
 		indicator = metadata.indicatorsObject[chosenIndicatorId.code];
 		chosenXDomainNumbStart = indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = indicator.maxXDomainNumb;
+
+		geoGroup = indicator.inferredGeos.groups[3];
 	};
 
+	$: console.log(geoGroup);
+
+	const doSelect = (e) => {
+		const chosen = selectionsObject['areas-single-additional-chosen'];
+		const area = e.detail?.area;
+		if (chosen.includes(area.areacd))
+			selectionsObject['areas-single-additional-chosen'] = chosen.filter((s) => s !== area.areacd);
+		else if (chosen.length < maxSelection)
+			selectionsObject['areas-single-additional-chosen'] = [...chosen, area.areacd];
+	};
+
+	$: mapData =
+		geoGroup?.codes && chosenXDomainNumbEnd
+			? makeMapData(
+					chartData.combinedDataObject[indicator.code],
+					geoGroup?.codes,
+					chosenXDomainNumbEnd
+				)
+			: { data: [], breaks: [] };
+
 	indicator = metadata.indicatorsObject[chosenIndicatorId.code];
+
+	$: geoGroup = indicator.inferredGeos.groups.find((el) => el.key === 'ltla');
+
 	chosenXDomainNumbStart = indicator.minXDomainNumb;
 	chosenXDomainNumbEnd = indicator.maxXDomainNumb;
 
@@ -228,6 +256,23 @@
 									additionalID="areas-single-additional"
 									relatedID="related-single"
 								></BarChartContainer>
+							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Map'}
+								<Map
+									data={mapData.data}
+									breaks={mapData.breaks}
+									geos={indicator.inferredGeos}
+									prefix={indicator.metadata.prefix}
+									suffix={indicator.metadata.suffix}
+									dp={indicator.metadata.decimalPlaces}
+									selected={[
+										selectedArea,
+										...selectionsObject['areas-single-additional-visible'].filter((el) =>
+											mapData.data.map((elm) => elm.areacd).includes(el.areacd)
+										)
+									]}
+									{customLookup}
+									on:select={doSelect}
+								/>
 							{/if}
 						</div>
 

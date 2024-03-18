@@ -47,6 +47,7 @@
 		else if (chosen.length < maxSelection)
 			selectionsObject['indicator-additional-chosen'] = [...chosen, area.areacd];
 	};
+
 	const refreshData = () => {
 		/*if (geoGroup.key !== prevGeoGroup.key) {
 			selectionsObject = {
@@ -80,7 +81,6 @@
 				el.xDomainNumb <= data.indicator.maxXDomainNumb
 		);
 
-		console.log(timePeriodsArray);
 		chosenXDomainNumbStart = data.indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = data.indicator.maxXDomainNumb;
 		chosenTimePeriodDropdownLabel = timePeriodsArray.find(
@@ -119,6 +119,13 @@
 		(el) => metadata.areasObject[el]
 	);
 
+	$: combinedAuthoritiesWithDataCodes = metadata.areasGeogLevelObject.combined.filter((el) =>
+		codesForAreasWithData.includes(el)
+	);
+	$: combinedAuthoritiesWithDataAreas = combinedAuthoritiesWithDataCodes.map(
+		(el) => metadata.areasObject[el]
+	);
+
 	$: regionsWithDataCodes = metadata.areasGeogLevelObject.region.filter((el) =>
 		codesForAreasWithData.includes(el)
 	);
@@ -148,6 +155,13 @@
 				areas: regionsWithDataAreas,
 				codes: regionsWithDataCodes
 			},
+			combined: {
+				labels: {
+					related: 'All combined authorities'
+				},
+				areas: combinedAuthoritiesWithDataAreas,
+				codes: combinedAuthoritiesWithDataCodes
+			},
 			utla: {
 				labels: {
 					related: 'All upper-tier/unitary authorities'
@@ -168,6 +182,7 @@
 	$: changeAreasOptionsObject = {
 		country: metadata.areasGeogLevelObject.country.map((el) => metadata.areasObject[el]),
 		region: metadata.areasGeogLevelObject.region.map((el) => metadata.areasObject[el]),
+		combined: metadata.areasGeogLevelObject.combined.map((el) => metadata.areasObject[el]),
 		upper: metadata.areasGeogLevelObject.upper.map((el) => metadata.areasObject[el]),
 		lower: lowerTierLocalAuthoritiesWithDataAreas,
 		related: Object.keys(parentAndRelatedAreasObject.groups)
@@ -223,6 +238,13 @@
 					include: true
 				},
 				{
+					key: 'combined',
+					label: 'Combined authorities',
+					data: changeAreasOptionsObject.combined,
+					accordion: true,
+					include: true
+				},
+				{
 					key: 'utla',
 					label: 'Upper-tier/unitary authorities',
 					data: changeAreasOptionsObject.upper,
@@ -258,6 +280,13 @@
 					key: 'rgn',
 					label: 'Countries and regions',
 					data: changeAreasOptionsObject.region,
+					accordion: true,
+					include: true
+				},
+				{
+					key: 'combined',
+					label: 'Combined authorities',
+					data: changeAreasOptionsObject.combined,
 					accordion: true,
 					include: true
 				},
@@ -329,8 +358,6 @@
 			? ['K02000001']
 			: countriesWithDataCodes;
 	});
-
-	$: console.log(mapData.data);
 </script>
 
 <Breadcrumb
