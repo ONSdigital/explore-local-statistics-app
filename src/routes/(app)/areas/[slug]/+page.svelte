@@ -22,14 +22,9 @@
 	import AreaList from '$lib/components/AreaList.svelte';
 	import AreaNavMap from '$lib/components/AreaNavMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import ESSIcon from '$lib/components/ESSIcon.svelte';
-	import ESSMap from '$lib/components/ESSMap.svelte';
 
 	export let data: PageData;
 
-	let childrenHeight = {};
-	let childrenExpanded = true;
 	let childType = data?.childTypes?.[0];
 	let postcode;
 
@@ -75,14 +70,17 @@
 />
 <Titleblock
 	title={getName(data.place)}
-	titleBadge={data.place.end ? `${data.place.areacd} - inactive` : data.place.areacd}
-	titleBadgeAriaLabel={data.place.end ? null : `Area code: ${data.place.areacd}`}
-	titleBadgeColor={data.place.end ? '#ff7b24' : '#003C57'}
+	titleBadge={data.place.areacd}
+	titleBadgeAriaLabel="Area code: {data.place.areacd}"
 >
 	<Lede>
 		{#if data.place.areacd === 'K02000001'}
 			Explore areas within the United Kingdom.
 		{:else}
+			{#if data.place.end}
+				<span class="inactive-badge">Inactive</span>
+			{/if}
+
 			{capitalise(data.place.typenm)}
 			{getName(data.place.parents[0], 'in', 'prefix')}
 			<a
@@ -93,33 +91,46 @@
 				data-sveltekit-noscroll>{getName(data.place.parents[0])}</a
 			>.
 			{#if ['E02', 'W02'].includes(data.place.typecd)}
-				Also known as {data.place.areanm}.
+				<p class="ons-u-fs-s additional-area-info">
+					Also known as {data.place.areanm}.
+				</p>
 			{/if}
 			{#if data.place.start && data.place.replaces?.[0]?.areacd}
-				In {data.place.start}, it replaced
-				{#each data.place.replaces as rep, i}
-					{getName(rep, 'the', 'prefix')}
-					<a href="{base}/areas/{makeCanonicalSlug(rep.areacd, rep.areanm)}" data-sveltekit-noscroll
-						>{getName(rep)}</a
-					>{i === data.place.replaces.length - 1
-						? '.'
-						: i === data.place.replaces.length - 2
-							? ' and '
-							: ', '}
-				{/each}
+				<p class="ons-u-fs-s additional-area-info">
+					In {data.place.start}, it replaced
+					{#each data.place.replaces as rep, i}
+						{getName(rep, 'the', 'prefix')}
+						<a
+							href="{base}/areas/{makeCanonicalSlug(rep.areacd, rep.areanm)}"
+							data-sveltekit-noscroll>{getName(rep)}</a
+						>{i === data.place.replaces.length - 1
+							? '.'
+							: i === data.place.replaces.length - 2
+								? ' and '
+								: ', '}
+					{/each}
+				</p>
 			{/if}
 			{#if data.place.end && data.place.successor?.areacd}
-				In {data.place.end + 1}, it was replaced by {getName(data.place.successor, 'the', 'prefix')}
-				<a
-					href="{base}/areas/{makeCanonicalSlug(
-						data.place.successor.areacd,
-						data.place.successor.areanm
-					)}"
-					data-sveltekit-noscroll>{getName(data.place.successor)}</a
-				>
-				({data.place.successor.areacd}).
+				<p class="ons-u-fs-s additional-area-info">
+					In {data.place.end + 1}, it was replaced by {getName(
+						data.place.successor,
+						'the',
+						'prefix'
+					)}
+					<a
+						href="{base}/areas/{makeCanonicalSlug(
+							data.place.successor.areacd,
+							data.place.successor.areanm
+						)}"
+						data-sveltekit-noscroll>{getName(data.place.successor)}</a
+					>
+					({data.place.successor.areacd}).
+				</p>
 			{:else if data.place.end}
-				It ceased to be an official geography in {data.place.end + 1}.
+				<p class="ons-u-fs-s additional-area-info">
+					It ceased to be an official geography in {data.place.end + 1}.
+				</p>
 			{/if}
 		{/if}
 	</Lede>
@@ -179,11 +190,7 @@
 					>
 						{#each data.childTypes as type, i}
 							<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
-								<ul
-									bind:clientHeight={childrenHeight[type.key]}
-									style:max-height={childrenExpanded ? 'none' : '144px'}
-									class="list-columns"
-								>
+								<ul class="list-columns">
 									{#each filterChildren(data.place, type) as child, i}
 										<li>
 											<a
@@ -197,15 +204,9 @@
 								</ul>
 							</Tab>
 						{/each}
-						<!-- {#if childrenHeight[childType.key] >= 144}
-						<button class="btn-link" on:click={() => (childrenExpanded = !childrenExpanded)}
-							><Icon type="chevron" rotation={childrenExpanded ? 90 : -90} />
-							{childrenExpanded ? 'Show fewer' : 'Show more'}</button
-						>
-					{/if} -->
 					</Tabs>
 				{:else}
-					<span class="muted">No areas available within {getName(data.place, 'the')}</span>
+					<p>No further areas available within {getName(data.place, 'the')}</p>
 				{/if}
 			{/key}
 		</div>
@@ -267,5 +268,17 @@
 
 	.local-indicators-card {
 		background-color: #003c57;
+	}
+	.additional-area-info {
+		margin-top: 6px;
+		margin-bottom: 0;
+	}
+	.inactive-badge {
+		font-weight: bold;
+		color: white;
+		padding: 0 8px 2px 8px;
+		border-radius: 4px;
+		background-color: #fa6401;
+		margin-right: 2px;
 	}
 </style>
