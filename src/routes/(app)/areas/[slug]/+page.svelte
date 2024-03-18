@@ -75,7 +75,7 @@
 	background="#eaeaea"
 />
 <Titleblock
-	title={`${getName(data.place)} ${data.place.end ? ' <span class="title-tag bg-warn">Inactive</span>' : ''}`}
+	title={getName(data.place)}
 	background="#eaeaea"
 	titleBadge={data.place.end ? 'Inactive' : ''}
 	titleBadgeColor="#ff7b24"
