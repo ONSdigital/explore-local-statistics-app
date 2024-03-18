@@ -81,9 +81,9 @@
 			<AreaList {postcode} on:clear={() => (postcode = null)} />
 		{/if}
 	</Card>
-	<Card title="Browse indicators">
+	<Card title="Local indicators">
 		<p style:margin-bottom="28px">
-			Explore {datasetsCount} local indicators, including
+			Explore {datasetsCount} indicators, including
 			<a href="{base}/indicators/wellbeing-satisfaction" class="no-wrap">life satisfaction</a>,
 			<a href="{base}/indicators/employment-rate">employment rate</a> and
 			<a href="{base}/indicators/4g-coverage">4G coverage</a>.
