@@ -66,7 +66,7 @@
 	};
 
 	$: mapData =
-		geoGroup?.codes && chosenXDomainNumbEnd && indicator.years.includes(chosenXDomainNumbEnd)
+		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
 			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
 			: { data: [], breaks: [] };
 
@@ -548,7 +548,7 @@
 				<p class="subtitle">
 					{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 				</p>
-				<BarChartContainerIndicatorPage
+				<!-- <BarChartContainerIndicatorPage
 					indicator={data.indicator}
 					chartData={data.chartData}
 					{selectionsObject}
@@ -556,7 +556,7 @@
 					{metadata}
 					chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
 					{showConfidenceIntervals}
-				></BarChartContainerIndicatorPage>
+				></BarChartContainerIndicatorPage> -->
 			</ContentBlock>
 		</NavSection>
 
