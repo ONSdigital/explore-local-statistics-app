@@ -77,10 +77,14 @@
 <Titleblock
 	title={`${getName(data.place)} ${data.place.end ? ' <span class="title-tag bg-warn">Inactive</span>' : ''}`}
 	background="#eaeaea"
+	titleBadge={data.place.end ? 'Inactive' : ''}
+	titleBadgeColor="#ff7b24"
 >
 	<!-- <span class="title-subscript">(${data.place.areacd})</span> -->
-	{#if data.place.areacd !== 'K02000001'}
-		<Lede>
+	<Lede>
+		{#if data.place.areacd === 'K02000001'}
+			Explore areas within the United Kingdom.
+		{:else}
 			{capitalise(data.place.typenm)}
 			{getName(data.place.parents[0], 'in', 'prefix')}
 			<a
@@ -119,8 +123,8 @@
 			{:else if data.place.end}
 				It ceased to be an official geography in {data.place.end + 1}.
 			{/if}
-		</Lede>
-	{/if}
+		{/if}
+	</Lede>
 </Titleblock>
 
 {#if data.place.areacd !== 'K02000001'}
