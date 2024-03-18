@@ -57,10 +57,10 @@
 			type: 'FeatureCollection',
 			features: data
 				.map((d) => {
-					const feature = features[d.areacd];
-					if (!feature) return null;
-					feature.properties = {
-						...feature.properties,
+					const ft = features[d.areacd] ? { ...features[d.areacd] } : null;
+					if (!ft) return null;
+					ft.properties = {
+						...ft.properties,
 						...d,
 						color: options.boundary
 							? getColor(d)?.color || 'lightgrey'
@@ -68,7 +68,7 @@
 								? getClusterColor(d, selectedArea)
 								: colors[d[clusterKey]] || 'lightgrey'
 					};
-					return feature;
+					return ft;
 				})
 				.filter((f) => f !== null)
 		};
@@ -101,6 +101,8 @@
 		);
 		bounds = bbox(geojson);
 	});
+
+	$: console.log('dp', dp);
 </script>
 
 <div class="map-container">
@@ -199,8 +201,8 @@
 		{selected}
 		{prefix}
 		{suffix}
-		formatTick={(d) =>
-			d.toLocaleString(undefined, {
+		format={(d) =>
+			d.toLocaleString('en-GB', {
 				minimumFractionDigits: dp,
 				maximumFractionDigits: dp
 			})}

@@ -15,14 +15,14 @@
 		'rgba(0,78,166,.8)',
 		'rgba(0,13,84,.8)'
 	];
-	export let formatTick = (d) => d.toFixed(0);
+	export let format = (d) => d.toFixed(0);
 	export let prefix = '';
 	export let suffix = '';
 	export let snapTicks = true;
 	export let markerPadding = 4;
 	export let getColor = () => ({ color: null, contrast: null });
 
-	let container, width;
+	let container, width, hoveredLabel, hoverLeft;
 	let labels = [];
 	let maxOffset = 0;
 
@@ -38,8 +38,14 @@
 
 	const doHover = (e, d = null) => {
 		if (d === null) hovered = null;
-		else hovered = d.areacd;
+		else {
+			hovered = d.areacd;
+		}
 		dispatch('hover', { id: hovered, d, e });
+	};
+
+	const hoverLeftCheck = (el) => {
+		hoverLeft = +el?.offsetLeft + +el?.offsetWidth > width;
 	};
 
 	const doSelect = (e, d) => {
@@ -149,12 +155,12 @@
 				? '-2px'
 				: '-50%'});"
 		>
-			{formatTick(breaks[i])}
+			{format(breaks[i])}
 		</div>
 	{/each}
 	<div class="line" style="right: 0;" />
 	<div class="tick" style="right: 0; transform: translateX({snapTicks ? '2px' : '50%'});">
-		{prefix}{formatTick(breaks[breaks.length - 1])}{suffix}
+		{prefix}{format(breaks[breaks.length - 1])}{suffix}
 	</div>
 	{#if Array.isArray(positionedData)}
 		{#each positionedData as d, i}
@@ -179,9 +185,9 @@
 					bind:this={labels[i]}
 				>
 					{#if d.align === 'left'}
-						{d.areanm} {prefix}{d.value}{suffix}
+						{d.areanm} {prefix}{format(d.value)}{suffix}
 					{:else}
-						{prefix}{d.value}{suffix} {d.areanm}
+						{prefix}{format(d.value)}{suffix} {d.areanm}
 					{/if}
 				</div>
 			</div>
@@ -204,9 +210,10 @@
 			<div
 				class="value value-hovered"
 				style:left="{pos(d.value, breaks)}%"
-				style:transform="translateX(-1.5px)"
+				style:transform={hoverLeft ? 'translateX(-100%) translateX(1.5px)' : 'translateX(-1.5px)'}
+				use:hoverLeftCheck
 			>
-				{prefix}{d.value}{suffix}
+				{prefix}{format(d.value)}{suffix}
 				{d.areanm}
 			</div>
 		{/if}
