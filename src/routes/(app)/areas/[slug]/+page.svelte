@@ -169,7 +169,7 @@
 		{/if}
 	</Card>
 	<Card colspan={3} noBackground>
-		<div style:margin-top="10px">
+		<div style:margin-top="10px" class="ons-u-d-no ons-u-d-b@s">
 			{#key childType}
 				{#if childType}
 					<Tabs
