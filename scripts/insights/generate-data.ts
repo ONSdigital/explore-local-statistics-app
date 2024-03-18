@@ -20,6 +20,7 @@ const UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-orie
 const UNMINIFIED_CONFIG_OUTPUT_PATH = `static/insights/config-unminified.json`;
 const CORE_METADATA_OUTPUT_PATH = `static/insights/core-metadata.json`;
 const AREA_DETAILS_OUTPUT_DIR = `static/insights/area-details`;
+const INDIVIDUAL_DATASETS_OUTPUT_DIR = `static/insights/individual-datasets`;
 
 await main();
 
@@ -51,7 +52,14 @@ async function main() {
 	writeJson(UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH, data);
 	writeJson(UNMINIFIED_CONFIG_OUTPUT_PATH, outConfig);
 
-	//indicatorsCodeLabelArray, topicsArray
+	for (const datasetCode of Object.keys(combinedDataObjectColumnOriented)) {
+		const slug = outConfig.indicatorsObject[datasetCode].metadata.slug;
+		writeJson(
+			`${INDIVIDUAL_DATASETS_OUTPUT_DIR}/${slug}.json`,
+			combinedDataObjectColumnOriented[datasetCode]
+		);
+	}
+
 	const coreMetadata = {
 		indicatorsCodeLabelArray: outConfig.indicatorsCodeLabelArray,
 		topicsArray: outConfig.topicsArray
