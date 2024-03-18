@@ -18,8 +18,8 @@ export const groups = [
 	},
 	{
 		key: 'cauth',
-		codes: ['E06', 'E09', 'E10', 'E47', 'N09', 'S12', 'W06'],
-		label: 'Upper-tier/combined authorities'
+		codes: ['E47'],
+		label: 'Combined authorities'
 	},
 	{
 		key: 'utla',
