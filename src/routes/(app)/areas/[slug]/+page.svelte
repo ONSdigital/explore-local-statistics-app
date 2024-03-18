@@ -29,7 +29,7 @@
 	export let data: PageData;
 
 	let childrenHeight = {};
-	let childrenExpanded = false;
+	let childrenExpanded = true;
 	let childType = data?.childTypes?.[0];
 	let postcode;
 
@@ -221,12 +221,12 @@
 							</ul>
 						</Tab>
 					{/each}
-					{#if childrenHeight[childType.key] >= 144}
+					<!-- {#if childrenHeight[childType.key] >= 144}
 						<button class="btn-link" on:click={() => (childrenExpanded = !childrenExpanded)}
 							><Icon type="chevron" rotation={childrenExpanded ? 90 : -90} />
 							{childrenExpanded ? 'Show fewer' : 'Show more'}</button
 						>
-					{/if}
+					{/if} -->
 				</Tabs>
 			{:else}
 				<span class="muted">No areas available within {getName(data.place, 'the')}</span>
