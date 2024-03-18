@@ -126,7 +126,8 @@ export const geoTypes = [
 		plural: 'upper-tier/combined authorities',
 		source: 'la',
 		filter: ['all', ...notInTypes(['E07', 'E08']), ['!', ['==', ['get', 'cauth'], 'true']]],
-		index: true
+		index: true,
+		ess: true
 	},
 	{
 		key: 'utla',
