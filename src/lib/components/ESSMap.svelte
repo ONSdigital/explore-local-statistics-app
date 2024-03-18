@@ -240,7 +240,6 @@
 
 		let filtered = points.features.filter((ft) => inPoly(ft, bbPoly) && inPoly(ft, polygon));
 
-		console.log(bb, bbPoly, filtered);
 		if (filtered.length === 0) {
 			filtered = [nearestPoint(points, bb)];
 		}
