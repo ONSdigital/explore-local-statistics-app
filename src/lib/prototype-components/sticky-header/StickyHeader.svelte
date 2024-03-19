@@ -21,7 +21,8 @@
 		(el) => el.role === 'custom'
 	);
 
-	let maxAdditionalAreasOnKey = 4;
+	let maxAdditionalAreasOnKey = 1;
+	let showAllAreas = false;
 </script>
 
 <div></div>
@@ -38,7 +39,7 @@
 				markerShape="diamond"
 			></AreaPanel>
 		{/if}
-		{#each visibleParentAreas as area, i}
+		{#each showAllAreas ? visibleParentAreas : visibleParentAreas.slice(0, maxAdditionalAreasOnKey) as area, i}
 			<AreaPanel
 				{area}
 				markerShape={area.areacd === selectedArea.parentcd ? 'square' : 'diamond'}
@@ -48,11 +49,9 @@
 				{customLookup}
 			></AreaPanel>
 		{/each}
-		{#each visibleCustomAreas as area, i}
-			{#if visibleParentAreas.length + i < maxAdditionalAreasOnKey - 1 || (visibleParentAreas.length + i === maxAdditionalAreasOnKey - 1 && visibleParentAreas.length + visibleCustomAreas.length === maxAdditionalAreasOnKey)}
-				<AreaPanel {area} markerRadius="8" button={false} fontWeight="bold" {customLookup}
-				></AreaPanel>
-			{/if}
+		{#each showAllAreas ? visibleCustomAreas : visibleCustomAreas.slice(0, Math.max(0, maxAdditionalAreasOnKey - visibleParentAreas.length)) as area, i}
+			<AreaPanel {area} markerRadius="8" button={false} fontWeight="bold" {customLookup}
+			></AreaPanel>
 		{/each}
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
 			<AreaPanel
@@ -63,13 +62,15 @@
 				color="#ddd"
 				borderColor="#707070"
 			></AreaPanel>
-			{#if visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
-				<span style="font-size: 16px;"
-					>and {visibleParentAreas.length +
-						visibleCustomAreas.length -
-						(maxAdditionalAreasOnKey - 1)}
-					other areas</span
+			{#if !showAllAreas && visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
+				<button class="btn-link" on:click={() => (showAllAreas = true)}
+					>Show {visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey} more
+					{visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey === 1
+						? 'area'
+						: 'areas'}</button
 				>
+			{:else if showAllAreas}
+				<button class="btn-link" on:click={() => (showAllAreas = false)}>Show fewer areas</button>
 			{/if}
 		{/if}
 	</div>
@@ -125,5 +126,11 @@
 		flex-wrap: nowrap;
 		justify-content: flex-end;
 		gap: 4px;
+	}
+
+	.btn-link {
+		text-align: left;
+		font-size: 16px;
+		padding-left: 24px;
 	}
 </style>
