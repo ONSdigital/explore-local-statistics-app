@@ -548,7 +548,7 @@
 				<p class="subtitle">
 					{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 				</p>
-				<!-- <BarChartContainerIndicatorPage
+				<BarChartContainerIndicatorPage
 					indicator={data.indicator}
 					chartData={data.chartData}
 					{selectionsObject}
@@ -556,7 +556,7 @@
 					{metadata}
 					chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
 					{showConfidenceIntervals}
-				></BarChartContainerIndicatorPage> -->
+				></BarChartContainerIndicatorPage>
 			</ContentBlock>
 		</NavSection>
 
