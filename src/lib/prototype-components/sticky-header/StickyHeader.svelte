@@ -29,6 +29,15 @@
 <div class="row-container sticky control-panel">
 	<div class="visible-areas-key-container grid-container">
 		<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
+		{#if selectionsObject['areas-rows-comparison-visible']}
+			<AreaPanel
+				area={selectionsObject['areas-rows-comparison-visible']}
+				markerRadius="8"
+				button={false}
+				fontWeight="bold"
+				markerShape="diamond"
+			></AreaPanel>
+		{/if}
 		{#each visibleParentAreas as area, i}
 			<AreaPanel
 				{area}
@@ -45,15 +54,6 @@
 				></AreaPanel>
 			{/if}
 		{/each}
-		{#if selectionsObject['areas-rows-comparison-visible']}
-			<AreaPanel
-				area={selectionsObject['areas-rows-comparison-visible']}
-				markerRadius="8"
-				button={false}
-				fontWeight="bold"
-				markerShape="diamond"
-			></AreaPanel>
-		{/if}
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
 			<AreaPanel
 				area={selectionsObject['related-rows-visible']}
