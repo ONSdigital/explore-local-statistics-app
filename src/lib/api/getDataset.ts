@@ -22,11 +22,10 @@ export const getDataset = async (
 	);
 	if (!indicator) return { kind: 'Failure' };
 
-	const dataResult = await fetch(`${base}/insights/column-oriented-data.json`);
+	const dataResult = await fetch(`${base}/insights/individual-datasets/${slug}.json`);
 
 	if (dataResult) {
-		const allData = await dataResult.json();
-		const colData = allData.combinedDataObjectColumnOriented[indicator.code];
+		const colData = await dataResult.json();
 		const cols = Object.keys(colData).filter((d) => d !== 'id' && d !== 'code');
 		const chartData = [];
 		for (let i = 0; i < colData.value.length; i++) {
