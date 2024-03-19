@@ -88,9 +88,9 @@
 		(el) => indicator.minXDomainNumb != indicator.maxXDomainNumb || el.multiYear != 'Yes'
 	);*/
 	$: chartOptionsArray = mainChartOptionsArray;
-	let chosenChartId = 0;
+	let chosenChartId = 'line';
 
-	$: console.log(chosenChartId);
+	$: console.log('chosenChartId', chosenChartId);
 
 	$: filteredChartData = chartData.combinedDataObject[indicator.code].filter((el) => el.value);
 
