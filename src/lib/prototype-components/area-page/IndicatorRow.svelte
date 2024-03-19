@@ -326,9 +326,6 @@
 		display: flex;
 		flex-direction: column;
 	}
-	.indicator-row-container button {
-		margin: 0;
-	}
 
 	.visuals-container {
 		margin: 0px 0px 5px 0px;

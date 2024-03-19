@@ -23,7 +23,12 @@
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 </script>
 
-<button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
+<button
+	on:mouseenter={onMouseenterEvent}
+	on:mouseleave={onMouseleaveEvent}
+	on:click={onClickEvent}
+	style:margin="0 0 8px 0"
+>
 	{#if showVisuals}
 		<span style="font-weight: bold"
 			>{indicator.metadata.label}<span style="font-weight: normal"
