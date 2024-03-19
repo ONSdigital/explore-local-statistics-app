@@ -6,9 +6,9 @@
 
 	export let geometry = null;
 
-	const w = 300;
-	const h = 400;
-	const pointSpacing = 13;
+	const w = 800;
+	const h = 492;
+	const pointSpacing = 15;
 
 	const coords = [
 		[-1.579, 59.358],
@@ -214,8 +214,8 @@
 
 	const proj = geoMercator().fitExtent(
 		[
-			[0, 0],
-			[w, h]
+			[0, 20],
+			[w, h - 20]
 		],
 		points
 	);
@@ -249,27 +249,23 @@
 
 <svg viewBox="0 0 {w} {h}" class="svg-icon">
 	{#each points.features.map((pt) => proj(pt.geometry.coordinates)) as pt}
-		<circle cx={pt[0]} cy={pt[1]} r={pointSpacing / 2 - 1} fill-opacity="0.2" fill="white" />
+		<circle cx={pt[0]} cy={pt[1]} r={pointSpacing / 2 - 1} fill-opacity="0.25" />
 	{/each}
 	{#if geometry}
 		{#each filterPoints(points, geometry).features.map((pt) => proj(pt.geometry.coordinates)) as pt}
-			<circle cx={pt[0]} cy={pt[1]} r={pointSpacing / 2 - 1} fill="white" />
+			<circle cx={pt[0]} cy={pt[1]} r={pointSpacing / 2 - 1} />
 		{/each}
 	{/if}
 </svg>
 
 <style>
 	.svg-icon {
-		position: absolute;
-		top: 50%;
-		right: 30px;
-		height: 180px;
-		transform: translateY(-50%);
+		width: 100%;
+		margin-bottom: 12px !important;
+		background: #003c57;
 		overflow: visible;
 	}
-	@media (max-width: 800px) {
-		.svg-icon {
-			display: none;
-		}
+	.svg-icon > circle {
+		fill: white;
 	}
 </style>

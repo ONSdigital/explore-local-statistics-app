@@ -22,6 +22,7 @@
 	import AreaList from '$lib/components/AreaList.svelte';
 	import AreaNavMap from '$lib/components/AreaNavMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
+	import ESSMap from '$lib/components/ESSMap.svelte';
 
 	export let data: PageData;
 
@@ -216,14 +217,21 @@
 {#if productLinks[0]}
 	<Cards title="Explore statistics about {getName(data.place, 'the')}" id="interactive">
 		{#each productLinks as link}
-			<Card
-				title={link.title}
-				href={parseTemplate(link.url, link.place)}
-				image={link.image}
-				bgcolor={link.bgcolor}
-			>
-				{@html parseTemplate(link.description, link.place)}
-			</Card>
+			{#if link.title === 'Local indicators'}
+				<Card title={link.title} href={parseTemplate(link.url, link.place)} bgcolor={link.bgcolor}>
+					<div slot="image" style:display="contents"><ESSMap geometry={data.geometry} /></div>
+					{@html parseTemplate(link.description, link.place)}
+				</Card>
+			{:else}
+				<Card
+					title={link.title}
+					href={parseTemplate(link.url, link.place)}
+					image={link.image}
+					bgcolor={link.bgcolor}
+				>
+					{@html parseTemplate(link.description, link.place)}
+				</Card>
+			{/if}
 		{/each}
 	</Cards>
 {/if}
@@ -265,7 +273,14 @@
 		margin: 0 -2px 0 -5px;
 		transform: translateY(-3px);
 	}
-
+	:global(a.ons-card__link) {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	:global(a.ons-card__link > h3) {
+		padding-top: 0 !important;
+	}
 	.local-indicators-card {
 		background-color: #003c57;
 	}
