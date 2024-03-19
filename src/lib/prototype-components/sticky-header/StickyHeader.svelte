@@ -45,12 +45,19 @@
 				markerShape={area.areacd === selectedArea.parentcd ? 'square' : 'diamond'}
 				markerRadius="8"
 				button={false}
+				backgroundColor="white"
 				fontWeight="bold"
 				{customLookup}
 			></AreaPanel>
 		{/each}
 		{#each showAllAreas ? visibleCustomAreas : visibleCustomAreas.slice(0, Math.max(0, maxAdditionalAreasOnKey - visibleParentAreas.length)) as area, i}
-			<AreaPanel {area} markerRadius="8" button={false} fontWeight="bold" {customLookup}
+			<AreaPanel
+				{area}
+				markerRadius="8"
+				button={false}
+				backgroundColor="white"
+				fontWeight="bold"
+				{customLookup}
 			></AreaPanel>
 		{/each}
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
