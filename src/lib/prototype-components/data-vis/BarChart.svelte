@@ -44,6 +44,17 @@
 		}))
 		.filter((el) => el.data);
 
+	$: relatedBars = selectionsObject[relatedID + '-visible']
+		? selectionsObject[relatedID + '-visible'].areas.map((el) => ({
+				areacd: el.areacd,
+				areanm: el.areanm,
+				role: 'related',
+				data: filteredChartDataAreaGroup.find((elm) => elm.areacd === el.areacd)
+			}))
+		: [];
+
+	$: console.log(relatedBars);
+
 	//$: data = .sort((a, b) => b.data[0].value - a.data[0].value);
 
 	let labelRectArray = [];
@@ -53,21 +64,52 @@
 			? Math.max(120, ...labelRectArray.map((el, i) => (i < labelRectArray.length ? el.width : 0)))
 			: maxLabelWidth;
 
-	$: dataArray = [selectedBar, ...additionalBars]
+	$: dataArrayStep1 = [selectedBar, ...additionalBars, ...relatedBars]
 		.filter((el) => el && el.data)
 		.sort((a, b) => b.data.value - a.data.value);
+
+	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
+		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
+
+		return {
+			...el,
+			position:
+				index === 0
+					? 10 + (el.role === 'related' ? 10 : 50)
+					: previousBars.length * 10 +
+						10 +
+						previousBars.filter((elm) => elm.role === 'related').length * 20 +
+						previousBars.filter((elm) => elm.role != 'related').length * 100 +
+						(el.role === 'related' ? 10 : 50),
+			height: el.role === 'related' ? 20 : 100
+		};
+	});
+
+	$: totalHeight =
+		dataArrayStep2[dataArrayStep2.length - 1].position +
+		dataArrayStep2[dataArrayStep2.length - 1].height / 2 +
+		10;
+
+	$: dataArrayStep3 = dataArrayStep2.map((el) => ({
+		...el,
+		position: el.position / (totalHeight / chartHeight),
+		height: el.height / (totalHeight / chartHeight)
+	}));
+
+	$: console.log(dataArrayStep2);
 </script>
 
 <AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
 
 <line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
 
-{#each dataArray as area, index}
-	<g transform="translate(0,{(index + 1) * 50})">
+{#each dataArrayStep3 as area, index}
+	<g transform="translate(0,{area.position})">
 		<Bar
 			{area}
 			{y}
 			{chartHeight}
+			{totalHeight}
 			bind:labelBBox={labelRectArray[index]}
 			{customLookup}
 			{showConfidenceIntervals}

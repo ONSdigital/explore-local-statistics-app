@@ -79,6 +79,23 @@
 			el.xDomainNumb >= xDomain[0] &&
 			el.xDomainNumb <= xDomain[1]
 	);
+
+	$: filteredChartDataSelectedLatest = filteredChartDataSelected.filter(
+		(el) => el.xDomainNumb === xDomain[1]
+	);
+
+	$: filteredChartDataAdditionalsLatest = filteredChartDataAdditionals.filter(
+		(el) => el.xDomainNumb === xDomain[1]
+	);
+	$: filteredChartDataAreaGroupLatest = filteredChartDataAreaGroup.filter(
+		(el) => el.xDomainNumb === xDomain[1]
+	);
+
+	$: combinedChartDataLatest = [
+		...filteredChartDataSelectedLatest,
+		...filteredChartDataAdditionalsLatest,
+		...filteredChartDataAreaGroupLatest
+	];
 </script>
 
 {#if timePeriodsArray.length === 0}
@@ -90,21 +107,16 @@
 		{indicator}
 		{metadata}
 		latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
-		filteredChartDataSelected={filteredChartDataSelected.filter(
-			(el) => el.xDomainNumb === xDomain[1]
-		)}
-		filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-			(el) => el.xDomainNumb === xDomain[1]
-		)}
-		filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-			(el) => el.xDomainNumb === xDomain[1]
-		)}
+		filteredChartDataSelected={filteredChartDataSelectedLatest}
+		filteredChartDataAdditionals={filteredChartDataAdditionalsLatest}
+		filteredChartDataAreaGroup={filteredChartDataAreaGroupLatest}
 		{selectionsObject}
 		selectedArea={null}
 		{indicatorCalculations}
 		{xDomain}
 		{customLookup}
 		{showConfidenceIntervals}
+		combinedChartData={combinedChartDataLatest}
 		additionalID="indicator-additional"
 		relatedID="indicator-related"
 	></BarChartContainer>

@@ -21,7 +21,11 @@
 
 	let dataArray = [];
 	let width = 1000;
-	$: height = 110 + dataArray.length * 50;
+	$: height = Math.max(
+		500,
+		(filteredChartDataAdditionals.length + filteredChartDataSelected.length) * 20 +
+			filteredChartDataAreaGroup.length * 1.5
+	);
 
 	let xAxisFinalTickWidth = null,
 		maxLabelWidth = null;
@@ -32,8 +36,6 @@
 		bottom: 30,
 		left: 10 + maxLabelWidth
 	};
-
-	$: console.log(combinedChartData);
 
 	$: chartWidth = width - padding.left - padding.right;
 	$: chartHeight = height - padding.top - padding.bottom;

@@ -309,10 +309,8 @@
 										dp={indicator.metadata.decimalPlaces}
 										selected={[
 											selectedArea,
-											...selectionsObject['areas-single-additional-visible'].filter((el) =>
-												mapData.data.map((elm) => elm.areacd).includes(el.areacd)
-											)
-										]}
+											...selectionsObject['areas-single-additional-visible']
+										].filter((el) => mapData.data.map((elm) => elm.areacd).includes(el.areacd))}
 										{customLookup}
 										on:select={doSelect}
 									/>

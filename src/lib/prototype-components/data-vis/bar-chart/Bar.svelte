@@ -2,7 +2,7 @@
 	import { colorsLookup } from '$lib/config';
 	import { splitTextIntoRows } from '$lib/utils.js';
 
-	export let area, y, chartHeight, labelBBox, customLookup, showConfidenceIntervals;
+	export let area, y, chartHeight, labelBBox, customLookup, showConfidenceIntervals, totalHeight;
 
 	$: labelArray = area.areanm.length > 25 ? splitTextIntoRows(area.areanm, 2) : [area.areanm];
 
@@ -15,7 +15,13 @@
 		: { color: null, constrast: null };
 </script>
 
-<rect width={y(area.data.value)} y="-20" height="40" fill={color.color} stroke="none"></rect>
+<rect
+	width={Math.max(0, y(area.data.value))}
+	y={-area.height / 2}
+	height={area.height}
+	fill={color.color}
+	stroke="none"
+></rect>
 
 {#if showConfidenceIntervals && area.data.lci && area.data.uci}
 	<rect
@@ -31,7 +37,7 @@
 	<rect
 		x={y(area.data.lci)}
 		width={y(area.data.uci) - y(area.data.lci)}
-		y="-10"
+		y={-10}
 		height="20"
 		fill={color.color}
 		stroke="none"
@@ -39,7 +45,7 @@
 	></rect>
 {/if}
 
-<g transform="translate(-5,10)">
+<!-- <g transform="translate(-5,10)">
 	{#if labelBBox}
 		<rect
 			x={-7 - labelBBox.width}
@@ -64,7 +70,7 @@
 			>
 		{/each}
 	</g>
-</g>
+</g> -->
 
 <!-- <rect
 	y={-(chartHeight - 100)}

@@ -521,7 +521,7 @@
 				</div>
 				<div class="buttons-container">
 					<ChangeAreas
-						accordionArray={accordionArrayMap}
+						accordionArray={accordionArrayLineBarBeeswarm}
 						bind:selectionsObject
 						customLookup={customLookup['indicator-additional-visible']}
 						label={selectionsObject['indicator-additional-visible'].length === 0
