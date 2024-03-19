@@ -57,11 +57,10 @@
 
 	// filter indicators to exclude any where there is no data for the selected area
 	$: filteredIndicators = metadata.indicatorsCodeLabelArray
-		.filter(
-			(el) =>
-				chartData.combinedDataObject[el.code].filter(
-					(elm) => elm.areacd === selectedArea.areacd && elm.value
-				).length > 0
+		.filter((el) =>
+			chartData.combinedDataObject[el.code].find(
+				(elm) => elm.areacd === selectedArea.areacd && elm.value
+			)
 		)
 		.map((ind) => ({ ...ind, topic: metadata.indicatorsObject[ind.code].topic }));
 	$: filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
@@ -601,7 +600,7 @@
 <Cards marginTop>
 	<Card noBackground>
 		<div style:height="200px">
-			{#key data}
+			{#key data.geometry}
 				<AreaLocMap geometry={data.geometry} bounds={data.place.bounds} />
 			{/key}
 		</div>
