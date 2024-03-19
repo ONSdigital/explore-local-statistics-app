@@ -211,6 +211,13 @@
 		}
 	};
 
+	function makeGeoArray(areacd, level) {
+		const allAreas = metadata.areasGeogLevelObject[level];
+		const filter = metadata.areasObject[selectedArea.areacd].geogLevel === level;
+		const areas = filter ? allAreas.filter((cd) => cd !== areacd) : allAreas;
+		return areas.map((cd) => metadata.areasObject[cd]);
+	}
+
 	$: changeAreasOptionsObject = {
 		median: Object.keys(parentAndRelatedAreasObject.groups)
 			.filter(
@@ -234,21 +241,11 @@
 			})),
 		parents: [parentArea, countryArea, ukArea].filter((el) => el),
 		sameParent: sameParentAreas,
-		country: metadata.areasGeogLevelObject.country
-			.filter((el) => el != selectedArea.areacd)
-			.map((el) => metadata.areasObject[el]),
-		region: metadata.areasGeogLevelObject.region
-			.filter((el) => el != selectedArea.areacd)
-			.map((el) => metadata.areasObject[el]),
-		combined: metadata.areasGeogLevelObject.combined
-			.filter((el) => el != selectedArea.areacd)
-			.map((el) => metadata.areasObject[el]),
-		upper: metadata.areasGeogLevelObject.upper
-			.filter((el) => el != selectedArea.areacd)
-			.map((el) => metadata.areasObject[el]),
-		lower: metadata.areasGeogLevelObject.lower
-			.filter((el) => el != selectedArea.areacd)
-			.map((el) => metadata.areasObject[el])
+		country: makeGeoArray(selectedArea.areacd, 'country'),
+		region: makeGeoArray(selectedArea.areacd, 'region'),
+		combined: makeGeoArray(selectedArea.areacd, 'combined'),
+		upper: makeGeoArray(selectedArea.areacd, 'upper'),
+		lower: makeGeoArray(selectedArea.areacd, 'lower')
 	};
 
 	console.log(metadata.areasGeogLevelObject);
