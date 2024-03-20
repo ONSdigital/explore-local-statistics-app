@@ -106,9 +106,13 @@
 <Divider hr="full" />
 
 <Section title="Other sources of local statistics">
-	<p>Scotland and Northern Ireland have their own producers of official statistics.</p>
+	<p>Wales, Scotland and Northern Ireland have their own producers of official statistics.</p>
 
 	<List mode="dash">
+		<li>
+			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer">Wales</a>
+			<span class="inline-icon"><Icon type="launch" /></span>
+		</li>
 		<li>
 			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">Scotland</a>
 			<span class="inline-icon"><Icon type="launch" /></span>
@@ -121,14 +125,6 @@
 			> <span class="inline-icon"><Icon type="launch" /></span>
 		</li>
 	</List>
-
-	<p>
-		Some data about Wales is also published on the <a
-			href="https://statswales.gov.wales/Catalogue"
-			target="_blank"
-			rel="noreferrer">Stats Wales website</a
-		> <span class="inline-icon"><Icon type="launch" /> </span>
-	</p>
 </Section>
 <Section title="About these pages">
 	<p>These pages are part of the Explore Subnational Statistics (ESS) service.</p>
