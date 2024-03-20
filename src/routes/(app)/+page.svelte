@@ -118,11 +118,8 @@
 			<span class="inline-icon"><Icon type="launch" /></span>
 		</li>
 		<li>
-			<a
-				href="https://datavis.nisra.gov.uk/dissemination/NINIS-redirect.html"
-				target="_blank"
-				rel="noreferrer">Northern Ireland</a
-			> <span class="inline-icon"><Icon type="launch" /></span>
+			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">Northern Ireland</a>
+			<span class="inline-icon"><Icon type="launch" /></span>
 		</li>
 	</List>
 </Section>
