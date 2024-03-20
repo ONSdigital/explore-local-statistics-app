@@ -59,6 +59,12 @@
 	});
 </script>
 
+<svelte:head>
+	{#if noIndex.includes(data?.place?.typecd)}
+		<meta name="robots" content="noindex" />
+	{/if}
+</svelte:head>
+
 <Breadcrumb
 	links={[
 		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
@@ -207,7 +213,7 @@
 						{/each}
 					</Tabs>
 				{:else}
-					<p>No further areas available within {getName(data.place, 'the')}</p>
+					<p>No smaller areas available within {getName(data.place, 'the')}.</p>
 				{/if}
 			{/key}
 		</div>
