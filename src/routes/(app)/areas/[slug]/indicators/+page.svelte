@@ -548,13 +548,21 @@
 			combined: 'all-siblings'
 		}[selectedArea.geogLevel];
 
-		selectionsObject['areas-single-additional-chosen'] = {
+		selectionsObject['related-single-chosen'] = {
+			lower: 'all-siblings',
+			upper: 'all-siblings',
+			region: 'all-siblings',
+			country: 'all-siblings',
+			combined: 'all-siblings'
+		}[selectedArea.geogLevel];
+
+		/*selectionsObject['areas-single-additional-chosen'] = {
 			lower: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
 			upper: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
 			combined: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
 			region: ['E92000001', 'K02000001'],
 			country: ['K02000001']
-		}[selectedArea.geogLevel];
+		}[selectedArea.geogLevel];*/
 	});
 
 	function navTo(e, options = {}, type = 'search') {
