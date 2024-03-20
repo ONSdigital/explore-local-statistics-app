@@ -27,16 +27,28 @@
 				</div>
 			</Button>
 		</div>
-		<slot name="content" />
+		<div class="dialog-content">
+			<slot name="content" />
+		</div>
 	</div>
 </dialog>
 
 <style>
 	dialog {
 		width: 760px;
+		margin-top: 40px;
+		min-height: 350px;
+		max-height: calc(100vh - 80px);
 		border-radius: 5px;
 		border: none;
 		padding: 0;
+	}
+	.dialog-content {
+		max-height: calc(100vh - 175px);
+		overflow-x: hidden;
+		overflow-y: auto;
+		padding: 0 12px;
+		margin: 0 -12px;
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);

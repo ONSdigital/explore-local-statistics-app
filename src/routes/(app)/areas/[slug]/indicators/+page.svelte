@@ -307,7 +307,7 @@
 
 	$: rowsAccordionArray = [
 		{
-			label: 'Primary comparison',
+			label: 'Primary comparison area',
 			type: 'radio',
 			chosenKey: 'areas-rows-comparison',
 			accordion: true,
@@ -355,7 +355,7 @@
 			]
 		},
 		{
-			label: 'Related area groups',
+			label: 'Related area group',
 			type: 'radio',
 			search: null,
 			chosenKey: 'related-rows',
@@ -376,7 +376,7 @@
 			]
 		},
 		{
-			label: 'Add more areas',
+			label: 'Additional areas',
 			type: 'checkbox',
 			chosenKey: 'areas-rows-additional',
 			dependency: 'areas-rows-comparison',
@@ -420,7 +420,7 @@
 
 	$: singleAccordionArray = [
 		{
-			label: 'Related area groups',
+			label: 'Related area group',
 			type: 'radio',
 			search: null,
 			chosenKey: 'related-single',
@@ -441,7 +441,7 @@
 			]
 		},
 		{
-			label: 'Add more areas',
+			label: 'Additional areas',
 			type: 'checkbox',
 			chosenKey: 'areas-single-additional',
 			accordion: true,

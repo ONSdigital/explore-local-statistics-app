@@ -14,6 +14,16 @@
 		showModal = true;
 	};
 
+	const getSelectedAreas = (selectionsObject, accordionSection) => {
+		return (
+			Array.isArray(selectionsObject[accordionSection.chosenKey + '-visible'])
+				? selectionsObject[accordionSection.chosenKey + '-visible'].length > 0
+					? selectionsObject[accordionSection.chosenKey + '-visible']
+					: []
+				: [selectionsObject[accordionSection.chosenKey + '-visible']]
+		).filter((d) => d);
+	};
+
 	let accordionOpen = null;
 </script>
 
@@ -44,20 +54,27 @@
 	</div>
 
 	<div slot="content" class="column-container">
-		<div style:display="block">
-			{#each accordionArray as accordionSection, index}
-				{#each Array.isArray(selectionsObject[accordionSection.chosenKey + '-visible']) ? (selectionsObject[accordionSection.chosenKey + '-visible'].length > 0 ? selectionsObject[accordionSection.chosenKey + '-visible'] : [null]) : [selectionsObject[accordionSection.chosenKey + '-visible']] as area}
-					<AreaPanel
-						{area}
-						bind:chosen={selectionsObject[accordionSection.chosenKey + '-chosen']}
-						{customLookup}
-						backgroundColor="color"
-						color="contrast"
-					></AreaPanel>
-				{/each}
-			{/each}
-		</div>
 		{#each accordionArray as accordionSection, index}
+			<div
+				style:display="block"
+				style:margin="-2px 0 -10px"
+				style:padding-top={index !== 0 ? '12px' : ''}
+				style:border-top={index !== 0 ? '1px solid #cbd5e1' : ''}
+			>
+				{#if getSelectedAreas(selectionsObject, accordionSection).length > 0}
+					{#each getSelectedAreas(selectionsObject, accordionSection) as area}
+						<AreaPanel
+							{area}
+							bind:chosen={selectionsObject[accordionSection.chosenKey + '-chosen']}
+							{customLookup}
+							backgroundColor="color"
+							color="contrast"
+						></AreaPanel>
+					{/each}
+				{:else}
+					<div class="no-selection">None selected</div>
+				{/if}
+			</div>
 			<AccordionSection
 				{accordionSection}
 				{index}
@@ -108,5 +125,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.no-selection {
+		display: inline-flex;
+		background: #eee;
+		margin: 0 4px 4px 0;
+		line-height: 20px;
+		padding: 7px 6px 6px;
+		border-radius: 3px;
 	}
 </style>
