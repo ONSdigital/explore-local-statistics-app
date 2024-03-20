@@ -10,8 +10,8 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	}
 
 	return {
-		title: result.indicator.metadata.label,
-		description: result.indicator.metadata.subtitle,
-		...result
+		...result,
+		title: `${result.indicator.metadata.label} - ONS`,
+		description: result.indicator.metadata.subtitle
 	};
 };

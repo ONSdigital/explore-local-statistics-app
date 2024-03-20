@@ -5,8 +5,8 @@ export const load: LayoutLoad = async ({ fetch }) => {
 	const coreMetadata = await (await fetch(`${base}/insights/core-metadata.json`)).json();
 
 	return {
+		coreMetadata,
 		title: `Explore local statistics - ONS`,
-		description: `Explore local statistics from the ONS about people and the communities they live in. Includes topics such as population, economy and health.`,
-		coreMetadata
+		description: `Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.`
 	};
 };

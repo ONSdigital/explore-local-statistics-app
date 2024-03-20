@@ -5,6 +5,7 @@ import { getArea } from '$lib/api/getArea';
 import { getCSV } from '$lib/api/getCSV';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
+import { getName } from '@onsvisual/robo-utils';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
@@ -35,10 +36,10 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 		}
 
 		return {
-			title: `${result.place.areanm} (${result.place.groupnm}) - local statistics from the ONS`,
-			description: `Explore local statistics from the ONS for ${result.place.areanm} (${result.place.groupnm}).`,
+			...result,
 			links,
-			...result
+			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
+			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`
 		};
 	}
 };

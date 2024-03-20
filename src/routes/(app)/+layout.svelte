@@ -10,8 +10,6 @@
 		contentType: 'exploratory',
 		outputSeries: 'localstatistics'
 	};
-
-	$: console.log($page.url);
 </script>
 
 <svelte:head>
