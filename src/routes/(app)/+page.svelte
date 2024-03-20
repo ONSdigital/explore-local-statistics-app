@@ -55,7 +55,7 @@
 
 <Titleblock title="Explore local statistics" background="#e9eff4">
 	<UKMap />
-	<Lede>Find, compare and visualise statistics about places within the United Kingdom.</Lede>
+	<Lede>Find, compare and visualise statistics about places in the United Kingdom.</Lede>
 	<div style:height="32px" />
 </Titleblock>
 
@@ -63,7 +63,8 @@
 	<Card title="Find an area">
 		<p style:margin-bottom="28px">
 			<label for="search"
-				>Search for a postcode, local authority, ward, parish or parliamentary constituency.</label
+				>Search for a postcode, local authority, region, parliamentary constituency or other named
+				area.</label
 			>
 		</p>
 
