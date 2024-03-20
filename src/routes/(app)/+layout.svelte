@@ -10,13 +10,16 @@
 		contentType: 'exploratory',
 		outputSeries: 'localstatistics'
 	};
+
+	$: console.log($page.url);
 </script>
 
 <svelte:head>
 	<title>{$page.data.title}</title>
+	<link rel="canonical" href={$page.url.origin + $page.url.pathname} />
 	<meta property="og:title" content={$page.data.title} />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content={$page.url.toString()} />
+	<meta property="og:url" content={$page.url.origin + $page.url.pathname} />
 	<meta name="description" content={$page.data.description} />
 	<meta property="og:description" content={$page.data.description} />
 </svelte:head>
