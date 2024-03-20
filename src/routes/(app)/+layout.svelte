@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 
 	import { AnalyticsBanner, PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
 
@@ -20,6 +21,9 @@
 	<meta property="og:url" content={$page.url.origin + $page.url.pathname} />
 	<meta name="description" content={$page.data.description} />
 	<meta property="og:description" content={$page.data.description} />
+	<meta property="og:description" content={$page.data.description} />
+	<meta property="og:image" content="{$page.url.origin}{base}/img/og.png" />
+	<meta property="og:image:type" content="image/png" />
 </svelte:head>
 
 <div class="flex flex-col min-h-screen">
