@@ -60,22 +60,6 @@
 								{chosenXDomain}
 								{showConfidenceIntervals}
 							></IndicatorRow>
-							<!-- <IndicatorRow
-						topRow={i === 0 && j === 0}
-						{indicator}
-						{metadata}
-						indicatorChartData={chartData.combinedDataObject[indicator.code].filter(
-							(el) => el.value
-						)}
-						{areasGroupsObject}
-						bind:hoverId
-						bind:hoverIndicatorId
-						{chosenComparisonMeasureOrArea}
-						{chosenAdditionalComparisonAreasGroup}
-						{startXDomainNumb}
-						{endXDomainNumb}
-						{backgroundAreasCodes}
-					></IndicatorRow> -->
 						</div>
 
 						<div class="divider" style="margin-bottom: 20px;"></div>

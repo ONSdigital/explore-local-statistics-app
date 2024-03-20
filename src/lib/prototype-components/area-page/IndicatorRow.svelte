@@ -297,22 +297,8 @@
 							{customLookup}
 							{showConfidenceIntervals}
 						></LineChartRowContainer>
-						<!-- <LineChartRowContainer
-							{metadata}
-							{indicator}
-							{selectionsObject}
-							bind:hoverId={hoverAreaId}
-							bind:hoverIndicatorId
-							{timePeriodsArray}
-							{hoverChartData}
-							{xDomain}
-							{selectedIndicatorCalculations}
-							{selectedAreaFilteredChartData}
-							{comparisonAreaFilteredChartData}
-							{backgroundChartData}
-						></LineChartRowContainer> -->
 					{:else}
-						<span>No data before<br />{latestTimePeriod.label}</span>
+						<span>No time series data to display</span>
 					{/if}
 				</div>
 			{/if}
