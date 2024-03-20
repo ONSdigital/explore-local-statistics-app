@@ -105,8 +105,8 @@
 
 <Divider hr="full" />
 
-<Section title="Other sources of statistics">
-	<p>Scotland and Northern Ireland have their own agencies who produce official statistics.</p>
+<Section title="Other sources of local statistics">
+	<p>Scotland and Northern Ireland have their own producers of official statistics.</p>
 
 	<List mode="dash">
 		<li>
@@ -115,7 +115,7 @@
 		</li>
 		<li>
 			<a
-				href="https://www.ninis2.nisra.gov.uk/public/AreaProfile.aspx?Menu=True"
+				href="https://datavis.nisra.gov.uk/dissemination/NINIS-redirect.html"
 				target="_blank"
 				rel="noreferrer">Northern Ireland</a
 			> <span class="inline-icon"><Icon type="launch" /></span>
@@ -131,11 +131,14 @@
 	</p>
 </Section>
 <Section title="About these pages">
+	<p>These pages are part of the Explore Subnational Statistics (ESS) service.</p>
+
 	<p>
-		These pages are maintained by the Explore Subnational Statistics (ESS) service. The ESS service
-		is part of the GSS subnational data strategy, which provides a framework to guide the UK
-		Government Statistical Service (GSS) in producing and disseminating subnational statistics in a
-		more timely, granular and harmonised way.
+		The vision for the ESS service was launched in the <a
+			href="https://analysisfunction.civilservice.gov.uk/policy-store/gss-subnational-data-strategy/"
+			>GSS subnational data strategy</a
+		>, which provides a framework to guide the UK Government Statistical Service (GSS) in producing
+		and disseminating subnational statistics in a more timely, granular and harmonised way.
 	</p>
 	<p>
 		The ESS service aims to provide one place for users to find, visualise, compare and download
