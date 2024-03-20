@@ -578,7 +578,7 @@
 
 <Breadcrumb
 	links={[
-		{ label: 'Home', href: '/' },
+		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
 		{ label: 'Explore local statistics', href: `${base}/` },
 		...[...data.place.parents].reverse().map((p) => ({
 			label: getName(p),
