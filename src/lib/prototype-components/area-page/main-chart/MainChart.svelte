@@ -90,9 +90,10 @@
 	$: chartOptionsArray = mainChartOptionsArray;
 	let chosenChartId = 'line';
 
-	$: console.log('chosenChartId', chosenChartId);
-
-	$: filteredChartData = chartData.combinedDataObject[indicator.code].filter((el) => el.value);
+	$: filteredChartData = chartData.combinedDataObject[indicator.code].filter(
+		(el) =>
+			el.value && el.xDomainNumb >= chosenXDomainNumbStart && el.xDomainNumb <= chosenXDomainNumbEnd
+	);
 
 	$: filteredChartDataSelected = [
 		...new Set(filteredChartData.filter((el) => el.areacd === selectedArea.areacd))
@@ -109,6 +110,12 @@
 					el.areacd != selectedArea.areacd
 			)
 		: [];
+
+	$: combinedChartData = [
+		...filteredChartDataSelected,
+		...filteredChartDataAdditionals,
+		...filteredChartDataAreaGroup
+	];
 
 	$: visibleAreasPeriods = [
 		...new Set(
@@ -169,6 +176,17 @@
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 
 	let chosenTimePeriodDropdownLabel;
+
+	$: unselectedAreasLatest = [
+		selectedArea,
+		...selectionsObject['areas-single-additional-visible']
+	].filter((el) => combinedChartDataLatest.find((elm) => elm.areacd === el.areacd) === undefined);
+	$: unselectedAreas = [
+		selectedArea,
+		...selectionsObject['areas-single-additional-visible']
+	].filter((el) => combinedChartData.find((elm) => elm.areacd === el.areacd) === undefined);
+
+	$: console.log(unselectedAreas);
 </script>
 
 <div class="main-chart-column-container">
@@ -208,22 +226,62 @@
 			{#if true}
 				<Tab title={chart.label} id={chart.id} hideTitle>
 					<div class="title-and-chart-container">
-						<div class="title-container">
-							<SubtitleAdditionalDescription
-								selectedIndicator={indicator}
-								{xDomain}
-								timePeriodsArray={chosenTimePeriodsArray}
-								selectedChartType={chart}
-							></SubtitleAdditionalDescription>
-						</div>
-
-						<div class="chart-container">
-							{#if timePeriodsArray.length === 0}
+						{#if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Time series'}
+							{#if timePeriodsArray.length <= 1}
 								<div class="no-chart-container">
-									<p>No data for selected areas over time period</p>
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> time series
+										data to display.
+									</p>
 								</div>
-							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Time series'}
-								{#if timePeriodsArray.length > 1}
+							{:else if chosenTimePeriodsArray.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for {chosenXDomainNumbEnd}.
+									</p>
+								</div>
+							{:else if chosenTimePeriodsArray.length === 1}
+								<div class="no-chart-container">
+									<p>
+										Time series not displayed as selected date range includes only one time period
+										with <span style="font-weight: bold;">{indicator.metadata.label}</span> data.
+									</p>
+								</div>
+								<!-- {:else if filteredChartDataSelected.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for
+										<span style="font-weight: bold;">{selectedArea.areanm}</span>
+										between
+										<span style="font-weight: bold;"
+											>{chosenTimePeriodsArray[chosenTimePeriodsArray.length - 1].label}</span
+										>
+										and <span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div> -->
+							{:else if !combinedChartData || combinedChartData.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for selected areas between
+										<span style="font-weight: bold;"
+											>{chosenTimePeriodsArray[chosenTimePeriodsArray.length - 1].label}</span
+										>
+										and <span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div>
+							{:else}
+								<div class="title-container">
+									<SubtitleAdditionalDescription
+										selectedIndicator={indicator}
+										{xDomain}
+										timePeriodsArray={chosenTimePeriodsArray}
+										selectedChartType={chart}
+									></SubtitleAdditionalDescription>
+								</div>
+								<div class="chart-container">
 									<LineChartContainer
 										{indicator}
 										{metadata}
@@ -246,38 +304,74 @@
 										additionalID="areas-single-additional"
 										relatedID="related-single"
 									></LineChartContainer>
-								{:else}
-									<div class="no-chart-container">
-										<p>No data for selected areas prior to {chosenTimePeriodsArray[0].label}</p>
-									</div>
-								{/if}
-							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Bar chart'}
-								{#if !indicator.years.includes(chosenXDomainNumbEnd)}
-									<div class="no-chart-container">
-										<p>
-											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
-											display for
-											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+								</div>
+								<div class="source-notes-container">
+									<p class="source-container">
+										<span style="font-weight: bold">Source:</span>
+										{#each sourceOrgs as org, i}
+											<a href={sourceLinks[i]}>{org}</a>
+
+											{#if i < sourceOrgs.length - 2}
+												,
+											{:else if i === sourceOrgs.length - 2}
+												{'and '}
+											{/if}
+										{/each}
+									</p>
+									{#if unselectedAreas.length > 0}
+										<p class="notes-container">
+											<span style="font-weight: bold">Note:</span>
+											No data to display for{#each unselectedAreas as area, i}
+												{' ' +
+													area.areanm +
+													(i === unselectedAreas.length - 2 && unselectedAreas.length > 1
+														? ' and'
+														: i != unselectedAreas.length - 1
+															? ','
+															: '')}{/each} between {chosenTimePeriodsArray[
+												chosenTimePeriodsArray.length - 1
+											].label} and {chosenTimePeriodsArray[0].label}.
 										</p>
-									</div>
-								{:else if filteredChartDataSelectedLatest.length === 0}
-									<div class="no-chart-container">
-										<p>
-											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data for
-											<span style="font-weight: bold;">{selectedArea.areanm}</span>
-											to display for
-											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
-										</p>
-									</div>
-								{:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
-									<div class="no-chart-container">
-										<p>
-											No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
-											display for selected areas
-											<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
-										</p>
-									</div>
-								{:else}
+									{/if}
+								</div>
+							{/if}
+						{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Bar chart'}
+							{#if !indicator.years.includes(chosenXDomainNumbEnd)}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for
+										<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div>
+								<!-- {:else if filteredChartDataSelectedLatest.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for
+										<span style="font-weight: bold;">{selectedArea.areanm}</span>
+										for
+										<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div> -->
+							{:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for selected areas for
+										<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div>
+							{:else}
+								<div class="title-container">
+									<SubtitleAdditionalDescription
+										selectedIndicator={indicator}
+										{xDomain}
+										timePeriodsArray={chosenTimePeriodsArray}
+										selectedChartType={chart}
+									></SubtitleAdditionalDescription>
+								</div>
+								<div class="chart-container">
 									<BarChartContainer
 										{indicator}
 										combinedChartData={combinedChartDataLatest}
@@ -297,9 +391,63 @@
 										additionalID="areas-single-additional"
 										relatedID="related-single"
 									></BarChartContainer>
-								{/if}
-							{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Map'}
-								{#if mapData.data.length > 0 && mapData.breaks.length > 0}
+								</div>
+								<div class="source-notes-container">
+									<p class="source-container">
+										<span style="font-weight: bold">Source:</span>
+										{#each sourceOrgs as org, i}
+											<a href={sourceLinks[i]}>{org}</a>
+
+											{#if i < sourceOrgs.length - 2}
+												,
+											{:else if i === sourceOrgs.length - 2}
+												{'and '}
+											{/if}
+										{/each}
+									</p>
+									{#if unselectedAreasLatest.length > 0}
+										<p class="notes-container">
+											<span style="font-weight: bold">Note:</span>
+											No data to display for{#each unselectedAreasLatest as area, i}
+												{' ' +
+													area.areanm +
+													(i === unselectedAreasLatest.length - 2 &&
+													unselectedAreasLatest.length > 1
+														? ' and'
+														: i != unselectedAreasLatest.length - 1
+															? ','
+															: '')}{/each} for {chosenTimePeriodsArray[0].label}.
+										</p>
+									{/if}
+								</div>
+							{/if}
+						{:else if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Map'}
+							{#if indicator.metadata.standardised === 'F'}
+								<div class="no-chart-container">
+									<p>
+										Map unavaliable for <span style="font-weight: bold;"
+											>{indicator.metadata.label}</span
+										> as available data is not standardised.
+									</p>
+								</div>
+							{:else if mapData.data.length === 0 || mapData.breaks.length === 0}
+								<div class="no-chart-container">
+									<p>
+										No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to
+										display for
+										<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+									</p>
+								</div>
+							{:else}
+								<div class="title-container">
+									<SubtitleAdditionalDescription
+										selectedIndicator={indicator}
+										{xDomain}
+										timePeriodsArray={chosenTimePeriodsArray}
+										selectedChartType={chart}
+									></SubtitleAdditionalDescription>
+								</div>
+								<div class="chart-container">
 									<Map
 										data={mapData.data}
 										breaks={mapData.breaks}
@@ -314,24 +462,37 @@
 										{customLookup}
 										on:select={doSelect}
 									/>
-								{:else}
-									<p>No data</p>
-								{/if}
+								</div>
+								<div class="source-notes-container">
+									<p class="source-container">
+										<span style="font-weight: bold">Source:</span>
+										{#each sourceOrgs as org, i}
+											<a href={sourceLinks[i]}>{org}</a>
+
+											{#if i < sourceOrgs.length - 2}
+												,
+											{:else if i === sourceOrgs.length - 2}
+												{'and '}
+											{/if}
+										{/each}
+									</p>
+									{#if unselectedAreasLatest.length > 0}
+										<p class="notes-container">
+											<span style="font-weight: bold">Note:</span>
+											No data to display for{#each unselectedAreasLatest as area, i}
+												{' ' +
+													area.areanm +
+													(i === unselectedAreasLatest.length - 2 &&
+													unselectedAreasLatest.length > 1
+														? ' and'
+														: i != unselectedAreasLatest.length - 1
+															? ','
+															: '')}{/each} for {chosenTimePeriodsArray[0].label}.
+										</p>
+									{/if}
+								</div>
 							{/if}
-						</div>
-
-						<p class="source-container">
-							<span style="font-weight: bold">Source:</span>
-							{#each sourceOrgs as org, i}
-								<a href={sourceLinks[i]}>{org}</a>
-
-								{#if i < sourceOrgs.length - 2}
-									,
-								{:else if i === sourceOrgs.length - 2}
-									{'and '}
-								{/if}
-							{/each}
-						</p>
+						{/if}
 					</div>
 				</Tab>
 			{/if}
@@ -400,6 +561,7 @@
 	}
 
 	.no-chart-container {
+		margin: 0px 10px;
 		height: 500px;
 		display: flex;
 		flex-direction: row;
@@ -409,8 +571,23 @@
 		text-align: center;
 	}
 
+	.source-notes-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
 	.source-container {
 		padding: 0px;
 		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
 	}
 </style>

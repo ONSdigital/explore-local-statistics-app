@@ -105,6 +105,7 @@
 	$: regionChildrenAreas = {
 		lower: [],
 		upper: [],
+		combined: [],
 		region: [],
 		country: metadata.areasGeogLevelObject.region
 			.map((el) => metadata.areasObject[el])
@@ -115,6 +116,7 @@
 	$: upperTierLocalAuthorityChildrenAreas = {
 		lower: [],
 		upper: [],
+		combined: [],
 		region: metadata.areasGeogLevelObject.upper
 			.map((el) => metadata.areasObject[el])
 			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd)),
@@ -129,6 +131,7 @@
 	$: lowerTierLocalAuthorityChildrenAreas = {
 		lower: [],
 		upper: [],
+		combined: [],
 		region: metadata.areasGeogLevelObject.lower
 			.map((el) => metadata.areasObject[el])
 			.filter((el) => [el.parentcd, el.countrycd].includes(selectedArea.areacd)),
@@ -262,6 +265,8 @@
 		'related-single-chosen': null,
 		'related-single-visible': null
 	};
+
+	$: console.log(selectionsObject);
 
 	$: {
 		selectionsObject['areas-rows-comparison-visible'] = constructVisibleAreasArray(
@@ -531,19 +536,22 @@
 			lower: 'all-siblings',
 			upper: 'all-siblings',
 			region: 'E92000001',
-			country: 'K02000001'
+			country: 'K02000001',
+			combined: 'all-siblings'
 		}[selectedArea.geogLevel];
 
 		selectionsObject['related-rows-chosen'] = {
 			lower: 'all-siblings',
 			upper: 'all-siblings',
 			region: 'all-siblings',
-			country: 'all-siblings'
+			country: 'all-siblings',
+			combined: 'all-siblings'
 		}[selectedArea.geogLevel];
 
 		selectionsObject['areas-single-additional-chosen'] = {
 			lower: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
 			upper: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
+			combined: [...new Set([selectedArea.parentcd, 'E92000001', 'K02000001'])],
 			region: ['E92000001', 'K02000001'],
 			country: ['K02000001']
 		}[selectedArea.geogLevel];

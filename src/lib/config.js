@@ -109,6 +109,7 @@ export const geogLevelToNameLookup = {
 			simplified: 'local authorities'
 		}
 	},
+	combined: { singular: 'combined authority', plural: 'combined authorities' },
 	region: { singular: 'region', plural: 'regions' },
 	country: { singular: 'country', plural: 'countries' }
 };
@@ -148,6 +149,24 @@ export const changeAreasIncludeExcludeObject = {
 			'region-children': false,
 			'upper-tier-local-authority-children': false,
 			'lower-tier-local-authority-children': false
+		}
+	},
+	combined: {
+		median: {
+			'all-siblings': false,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': false,
+			'lower-tier-local-authority-children': false
+		},
+		related: {
+			'all-siblings': true,
+			'same-parent-siblings': false,
+			'similar-siblings': false,
+			'region-children': false,
+			'upper-tier-local-authority-children': true,
+			'lower-tier-local-authority-children': true
 		}
 	},
 	region: {
