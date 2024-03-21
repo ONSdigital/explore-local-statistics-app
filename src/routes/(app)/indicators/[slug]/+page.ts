@@ -12,6 +12,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	return {
 		...result,
 		title: `${result.indicator.metadata.label} - ONS`,
-		description: result.indicator.metadata.subtitle
+		description: result.indicator.metadata.subtitle,
+		pageType: `indicator data page`
 	};
 };

@@ -7,6 +7,7 @@ export const load: LayoutLoad = async ({ fetch }) => {
 	return {
 		coreMetadata,
 		title: `Explore local statistics - ONS`,
-		description: `Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.`
+		description: `Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.`,
+		pageType: `home page`
 	};
 };

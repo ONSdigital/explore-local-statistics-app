@@ -6,6 +6,7 @@ export const load: PageLoad = async ({ parent }) => {
 	return {
 		coreMetadata,
 		title: `Explore local indicators - ONS`,
-		description: `Explore ${coreMetadata.indicatorsCodeLabelArray.length} local datasets from the ONS, including disposable household income, participation in further education and life satisfaction.`
+		description: `Explore ${coreMetadata.indicatorsCodeLabelArray.length} local datasets from the ONS, including disposable household income, participation in further education and life satisfaction.`,
+		pageType: `indicators page`
 	};
 };

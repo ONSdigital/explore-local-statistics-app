@@ -39,7 +39,8 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 			...result,
 			links,
 			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
-			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`
+			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`,
+			pageType: `area page`
 		};
 	}
 };

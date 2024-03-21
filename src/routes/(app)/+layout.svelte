@@ -1,8 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
-
-	import { AnalyticsBanner, PhaseBanner, Header, Footer } from '@onsvisual/svelte-components';
+	import { afterNavigate } from '$app/navigation';
+	import {
+		AnalyticsBanner,
+		analyticsEvent,
+		PhaseBanner,
+		Header,
+		Footer
+	} from '@onsvisual/svelte-components';
 
 	const analyticsId = 'GTM-P8JVL5X5';
 	const analyticsProps = {
@@ -11,6 +17,27 @@
 		contentType: 'exploratory',
 		outputSeries: 'localstatistics'
 	};
+
+	afterNavigate(() => {
+		const eventData = {
+			event: 'pageView',
+			pageUrl: $page.url.href,
+			pageType: $page.data.pageType,
+			contentType: 'exploratory'
+		};
+		if ($page.data.place) {
+			eventData.areaCode = $page.data.place.areacd;
+			eventData.areaName = $page.data.place.areanm || $page.data.place.areacd;
+			eventData.areaType = $page.data.place.typenm;
+		}
+		if ($page.data.indicator) {
+			eventData.indicatorCode = $page.data.indicator.metadata.slug;
+			eventData.indicatorName = $page.data.indicator.metadata.label;
+			eventData.indicatorTopic = $page.data.indicator.topic;
+			eventData.indicatorSubtopic = $page.data.indicator.subTopic;
+		}
+		console.log(eventData);
+	});
 </script>
 
 <svelte:head>

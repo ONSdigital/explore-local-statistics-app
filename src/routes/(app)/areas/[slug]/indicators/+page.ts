@@ -9,6 +9,7 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 	return {
 		...result,
 		title: `Local indicators for ${getName(place, 'the')} (${place.areacd}) - ONS`,
-		description: `Explore local statistics from the ONS on ${getName(place, 'the')} (${place.typenm}). Includes data on population, economy and health.`
+		description: `Explore local statistics from the ONS on ${getName(place, 'the')} (${place.typenm}). Includes data on population, economy and health.`,
+		pageType: `area data page`
 	};
 };
