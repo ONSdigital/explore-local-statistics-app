@@ -25,7 +25,7 @@
 
 	export let data;
 
-	let geoGroup, prevGeoGroup, columns;
+	let geoGroups, geoGroup, prevGeoGroup, columns;
 	let pivotedData, mapData;
 	let selected = [];
 	let chosenXDomainNumbStart,
@@ -56,8 +56,16 @@
 		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
 	};
 
+	const filterGeoGroups = (geos) => {
+		let groups = [...geos.groups];
+		if (!geos.ctrys.includes('E')) groups = groups.filter((g) => !['rgn', 'ltla'].includes(g.key));
+		if (geos.ctrys.length < 2) groups = groups.filter((g) => g.key !== 'ctry');
+		return groups;
+	};
+
 	afterNavigate(() => {
-		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
+		geoGroups = filterGeoGroups(data.indicator.inferredGeos);
+		geoGroup = geoGroups[geoGroups.length - 1];
 		prevGeoGroup = geoGroup;
 
 		timePeriodsArray = metadata.periodsLookupArray.filter(
@@ -414,7 +422,7 @@
 				<div class="row-container">
 					<div class="content-dropdowns" data-html2canvas-ignore>
 						<Dropdown
-							options={data.indicator.inferredGeos.groups.filter((g) => g.key !== 'uk')}
+							options={geoGroups.filter((g) => g.key !== 'uk')}
 							bind:value={geoGroup}
 							on:change={refreshData}
 						/>
@@ -563,11 +571,7 @@
 		<NavSection title="Table">
 			<div class="row-container">
 				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown
-						options={data.indicator.inferredGeos.groups}
-						bind:value={geoGroup}
-						on:change={refreshData}
-					/>
+					<Dropdown options={geoGroups} bind:value={geoGroup} on:change={refreshData} />
 				</div>
 			</div>
 			<ContentBlock
