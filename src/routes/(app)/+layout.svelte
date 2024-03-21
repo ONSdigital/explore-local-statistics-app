@@ -36,7 +36,7 @@
 			eventData.indicatorTopic = $page.data.indicator.topic;
 			eventData.indicatorSubtopic = $page.data.indicator.subTopic;
 		}
-		console.log(eventData);
+		analyticsEvent(eventData);
 	});
 </script>
 
