@@ -278,7 +278,7 @@
 
 	$: accordionArrayLineBarBeeswarm = [
 		{
-			label: 'Additional areas',
+			label: 'Selected areas',
 			type: 'checkbox',
 			chosenKey: 'indicator-additional',
 			accordion: true,
@@ -321,7 +321,7 @@
 			]
 		},
 		{
-			label: 'Group of related areas',
+			label: 'Other areas',
 			type: 'radio',
 			search: null,
 			chosenKey: 'indicator-related',

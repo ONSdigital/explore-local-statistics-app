@@ -32,7 +32,13 @@
 		chosenXDomainNumbStart = indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = indicator.maxXDomainNumb;
 
-		geoGroup = indicator.inferredGeos.groups[3];
+		geoGroup = indicator.inferredGeos.groups.find(
+			(el) =>
+				el.key ===
+				{ lower: 'ltla', upper: 'utla', region: 'rgn', country: 'ctry', combined: 'cauth' }[
+					selectedArea.geogLevel
+				]
+		);
 	};
 
 	const doSelect = (e) => {
@@ -53,9 +59,17 @@
 				)
 			: { data: [], breaks: [] };
 
+	$: console.log(indicator.inferredGeos);
+
 	indicator = metadata.indicatorsObject[chosenIndicatorId.code];
 
-	$: geoGroup = indicator.inferredGeos.groups.find((el) => el.key === 'ltla');
+	$: geoGroup = indicator.inferredGeos.groups.find(
+		(el) =>
+			el.key ===
+			{ lower: 'ltla', upper: 'utla', region: 'rgn', country: 'ctry', combined: 'cauth' }[
+				selectedArea.geogLevel
+			]
+	);
 
 	chosenXDomainNumbStart = indicator.minXDomainNumb;
 	chosenXDomainNumbEnd = indicator.maxXDomainNumb;
@@ -185,8 +199,6 @@
 		selectedArea,
 		...selectionsObject['areas-single-additional-visible']
 	].filter((el) => combinedChartData.find((elm) => elm.areacd === el.areacd) === undefined);
-
-	$: console.log(unselectedAreas);
 </script>
 
 <div class="main-chart-column-container">
