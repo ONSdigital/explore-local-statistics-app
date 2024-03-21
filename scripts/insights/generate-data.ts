@@ -13,6 +13,7 @@ import {
 } from './data-utils.ts';
 import { writeJson } from './io.ts';
 import { checkSlugs } from './data-processing-warnings.ts';
+import { createSpreadsheet } from './create-spreadsheet.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
@@ -76,6 +77,8 @@ async function main() {
 	for (const areacd of Object.keys(areaDetails)) {
 		writeJson(`${AREA_DETAILS_OUTPUT_DIR}/${areacd}.json`, areaDetails[areacd]);
 	}
+
+	createSpreadsheet(combinedDataObjectColumnOriented, outConfig, 'static/insights/ess-data.ods');
 }
 
 function generateOutData(combinedData, indicatorsArray) {
