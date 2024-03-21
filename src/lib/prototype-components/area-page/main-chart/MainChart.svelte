@@ -19,7 +19,7 @@
 		chosenIndicatorId,
 		accordionArray;
 
-	let indicator;
+	let indicator, geoGroup;
 
 	const maxSelection = 10;
 

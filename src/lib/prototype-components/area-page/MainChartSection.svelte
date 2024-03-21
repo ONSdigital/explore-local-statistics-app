@@ -6,21 +6,14 @@
 	import { Textarea, Button } from '@onsvisual/svelte-components';
 	import Icon from '$lib/components/Icon.svelte';
 
-	import { onMount } from 'svelte';
-
 	export let customLookup,
 		selectionsObject,
 		filteredIndicators,
 		chartData,
 		metadata,
 		selectedArea,
-		accordionArray;
-
-	let chosenIndicatorId;
-
-	onMount(() => {
-		chosenIndicatorId = filteredIndicators[0];
-	});
+		accordionArray,
+		chosenIndicatorId;
 </script>
 
 <div class="main-chart-section-container">

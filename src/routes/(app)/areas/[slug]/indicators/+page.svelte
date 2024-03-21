@@ -48,6 +48,7 @@
 		selectedArea,
 		filteredIndicators,
 		filteredIndicatorsCodes,
+		chosenIndicatorId,
 		parentAreaCode,
 		countryAreaCode,
 		ukAreaCode,
@@ -121,6 +122,8 @@
 			)
 			.map((ind) => ({ ...ind, topic: metadata.indicatorsObject[ind.code].topic }));
 		filteredIndicatorsCodes = filteredIndicators.map((el) => el.code);
+
+		chosenIndicatorId = filteredIndicators[0];
 
 		// determine codes for parent, country and uk areas
 		// country area is null if the the selected area or parent area is a country, uk area is set to null if the parent area is the uk
@@ -711,6 +714,7 @@
 				{chartData}
 				{metadata}
 				{selectedArea}
+				{chosenIndicatorId}
 			></MainChartSection>
 		</NavSection>
 
