@@ -274,6 +274,8 @@
 		}
 	];
 
+	$: console.log(accordionArrayMap);
+
 	$: accordionArrayLineBarBeeswarm = [
 		{
 			label: 'Additional areas',
