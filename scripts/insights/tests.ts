@@ -1,11 +1,13 @@
 import { median, mad } from './stats.ts';
 import { toLookup, toNestedLookup, uniqueValues } from './data-utils.ts';
+import { readCsvAutoType } from './io.ts';
 
 runTests();
 
 function runTests() {
 	testStats();
 	testDataUtils();
+	testIo();
 }
 
 function testStats() {
@@ -67,6 +69,15 @@ function testDataUtils() {
 	assertEqual(nestedLookup2.get('a').get('x')[0], 1, 'Correct nested lookup.');
 	assertEqual(nestedLookup2.get('b').get('x')[0], 2, 'Correct nested lookup.');
 	assertEqual(nestedLookup2.get('b').get('y')[0], 3, 'Correct nested lookup.');
+}
+
+function testIo() {
+	readCsvAutoType('scripts/insights/test-fixtures/one-type-per-column.csv'); // Shouldn't throw error
+
+	assertThrows(
+		() => readCsvAutoType('scripts/insights/test-fixtures/too-many-types-in-a-column.csv'),
+		'Throw error if more than one type exists in a CSV column.'
+	);
 }
 
 function assertEqual(x, y, message) {

@@ -8,7 +8,30 @@ export function loadCsvWithoutBom(filename: string) {
 
 export function readCsvAutoType(filename: string) {
 	const raw = fs.readFileSync(filename);
-	return csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
+	const result = csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
+
+	for (const columnName of result.columns) {
+		const typesSeen = { number: false, string: false, boolean: false, undefined: false };
+		let nullSeen = false;
+		for (const row of result) {
+			const value = row[columnName];
+			if (value === null) {
+				nullSeen = true;
+				continue;
+			}
+			const type = typeof value;
+			if (!(type in typesSeen)) {
+				throw new Error(`Unexpected type in CSV value ${value}: ${type} (in file ${filename}).`);
+			}
+			typesSeen[type] = true;
+		}
+		const numberOfTypesSeen = Object.values(typesSeen).reduce((a, b) => a + (b ? 1 : 0), 0);
+		if (numberOfTypesSeen > 1) {
+			throw new Error(`More than one type exists in column ${columnName} in file ${filename}.`);
+		}
+	}
+
+	return result;
 }
 
 // A modified version of
