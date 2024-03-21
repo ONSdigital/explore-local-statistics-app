@@ -61,18 +61,7 @@
 
 	$: console.log(indicator.inferredGeos);
 
-	indicator = metadata.indicatorsObject[chosenIndicatorId.code];
-
-	$: geoGroup = indicator.inferredGeos.groups.find(
-		(el) =>
-			el.key ===
-			{ lower: 'ltla', upper: 'utla', region: 'rgn', country: 'ctry', combined: 'cauth' }[
-				selectedArea.geogLevel
-			]
-	);
-
-	chosenXDomainNumbStart = indicator.minXDomainNumb;
-	chosenXDomainNumbEnd = indicator.maxXDomainNumb;
+	refreshData();
 
 	let showConfidenceIntervals = false;
 
