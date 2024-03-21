@@ -2,13 +2,22 @@ import aq from 'arquero';
 import fs, { writeFileSync } from 'fs';
 import { csvParse } from 'd3-dsv';
 
-export function loadCsvWithoutBom(filename: string) {
-	return aq.from(readCsvAutoType(filename));
+export function loadCsvWithoutBom(filename: string, options = {}) {
+	return aq.from(readCsvAutoType(filename, options));
 }
 
-export function readCsvAutoType(filename: string) {
+export function readCsvAutoType(filename: string, { stringColumns = [] } = {}) {
 	const raw = fs.readFileSync(filename);
 	const result = csvParse(stripBom(raw.toString()), autoTypeWithoutDates);
+
+	for (const columnName of stringColumns) {
+		if (!result.columns.includes(columnName)) continue;
+		for (const row of result) {
+			if (row[columnName] !== null) {
+				row[columnName] = String(row[columnName]);
+			}
+		}
+	}
 
 	for (const columnName of result.columns) {
 		const typesSeen = { number: false, string: false, boolean: false, undefined: false };
@@ -26,9 +35,9 @@ export function readCsvAutoType(filename: string) {
 			typesSeen[type] = true;
 		}
 		const numberOfTypesSeen = Object.values(typesSeen).reduce((a, b) => a + (b ? 1 : 0), 0);
-		//		if (numberOfTypesSeen > 1) {
-		//			throw new Error(`More than one type exists in column ${columnName} in file ${filename}.`);
-		//		}
+		if (numberOfTypesSeen > 1) {
+			throw new Error(`More than one type exists in column ${columnName} in file ${filename}.`);
+		}
 	}
 
 	return result;

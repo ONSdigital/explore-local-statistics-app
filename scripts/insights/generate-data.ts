@@ -480,6 +480,8 @@ function readConfigFromCsvs() {
 		areasParentsLookup: readCsvAutoType(`${geogDir}/areas-parents-lookup.csv`),
 		areas: readCsvAutoType(`${geogDir}/areas.csv`),
 		indicatorsMetadata: readCsvAutoType(`${indicatorsDir}/indicators-metadata.csv`),
-		periodsLookup: readCsvAutoType(`${periodsDir}/unique-periods-lookup.csv`)
+		periodsLookup: readCsvAutoType(`${periodsDir}/unique-periods-lookup.csv`, {
+			stringColumns: ['period', 'label', 'labelShort']
+		})
 	};
 }

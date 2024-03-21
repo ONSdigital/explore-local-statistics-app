@@ -38,7 +38,9 @@ export default async function main() {
 	);
 
 	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
-	const periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME);
+	const periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME, {
+		stringColumns: ['period', 'label', 'labelShort']
+	});
 
 	abortIfNewIndicatorCodesExist(previousIndicators, combined_metadata);
 	abortIfNewPeriodsExist(periods, combined_data);
@@ -185,7 +187,7 @@ function processFile(
 	combined_metadata,
 	unknownAreaCodes
 ) {
-	let indicator_data = loadCsvWithoutBom(f.filePath);
+	let indicator_data = loadCsvWithoutBom(f.filePath, { stringColumns: ['period', 'Period'] });
 	indicator_data = indicator_data.rename(
 		Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))
 	);
