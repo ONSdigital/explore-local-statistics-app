@@ -41,7 +41,7 @@
 										event: 'postcodeSelect',
 										areaCode: p.areacd,
 										areaName: p.areanm,
-										areaType: geoCodesLookup[p.areacd.slice(0, 3)].label
+										areaType: geoCodesLookup?.[p.areacd.slice(0, 3)]?.label
 									})}>{p.areanm}</a
 							></td
 						>

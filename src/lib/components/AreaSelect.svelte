@@ -11,7 +11,7 @@
 	} from '$lib/config/geoConfig';
 	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { Select, Button } from '@onsvisual/svelte-components';
+	import { Select, Button, analyticsEvent } from '@onsvisual/svelte-components';
 
 	const dispatch = createEventDispatcher();
 
@@ -101,6 +101,15 @@
 	}
 
 	function doSubmit() {
+		if (selectedObject.type === 'place') {
+			const eventData = {
+				event: 'searchSelect',
+				areaCode: selectedObject.areacd,
+				areaName: selectedObject.areanm,
+				areaType: geoCodesLookup?.[selectedObject.areacd.slice(0, 3)]?.label
+			};
+			analyticsEvent(eventData);
+		}
 		dispatch('submit', selectedObject);
 	}
 
