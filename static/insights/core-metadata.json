@@ -1,16 +1,16 @@
 {
 	"indicatorsCodeLabelArray": [
 		{
-			"code": "employment-rate-long-Employment Rate",
-			"label": "Employment rate (Great Britain)"
-		},
-		{
 			"code": "employment-rate-long-Economic Inactivity Rate",
 			"label": "Economic inactivity rate (Great Britain)"
 		},
 		{
 			"code": "ni-employment-rate-Economic Inactivity Rate",
 			"label": "Economic inactivity rate (Northern Ireland)"
+		},
+		{
+			"code": "employment-rate-long-Employment Rate",
+			"label": "Employment rate (Great Britain)"
 		},
 		{
 			"code": "ni-employment-rate-Employment Rate",
@@ -37,16 +37,20 @@
 			"label": "Gross value added per hour worked"
 		},
 		{
-			"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
-			"label": "Research and development expenditure"
-		},
-		{
 			"code": "foreign-direct-investment-Inward foreign direct investment (FDI)",
 			"label": "Inward foreign direct investment"
 		},
 		{
 			"code": "foreign-direct-investment-Outward foreign direct investment (FDI)",
 			"label": "Outward foreign direct investment"
+		},
+		{
+			"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+			"label": "Research and development expenditure"
+		},
+		{
+			"code": "business-demography-Active enterprises",
+			"label": "Active businesses"
 		},
 		{
 			"code": "business-demography-Births of new enterprises",
@@ -57,20 +61,12 @@
 			"label": "Business deaths"
 		},
 		{
-			"code": "business-demography-Active enterprises",
-			"label": "Active businesses"
-		},
-		{
 			"code": "business-demography-High growth enterprises",
 			"label": "High growth businesses"
 		},
 		{
 			"code": "additions-to-the-housing-stock",
 			"label": "Net additions to the housing stock"
-		},
-		{
-			"code": "aged-16-to-64-years-level-3-or-above-qualifications",
-			"label": "Level 3 or above qualifications (Great Britain)"
 		},
 		{
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
@@ -83,6 +79,10 @@
 		{
 			"code": "gcses-and-equivalent-in-english-and-maths-by-age-19",
 			"label": "GCSEs in English and Maths"
+		},
+		{
+			"code": "aged-16-to-64-years-level-3-or-above-qualifications",
+			"label": "Level 3 or above qualifications (Great Britain)"
 		},
 		{
 			"code": "aged-16-to-64-years-level3-or-above-qualifications-ni",
@@ -121,52 +121,52 @@
 			"label": "State-funded schools rated good or outstanding"
 		},
 		{
+			"code": "apprenticeship-Apprenticeships achievements",
+			"label": "Apprenticeship achievements"
+		},
+		{
 			"code": "apprenticeship-Apprenticeships starts",
 			"label": "Apprenticeship starts"
 		},
 		{
-			"code": "apprenticeship-Apprenticeships achievements",
-			"label": "Apprenticeship achievements"
+			"code": "adult-obesity-prevalence-aged-18-years-and-over",
+			"label": "Adult obesity prevalence"
 		},
 		{
 			"code": "cigarette-smokers",
 			"label": "Cigarette smokers"
 		},
 		{
-			"code": "child-obesity-Aged four to five years underweight",
-			"label": "Underweight prevalence in children at reception age"
-		},
-		{
 			"code": "child-obesity-Aged four to five years healthy weight",
 			"label": "Healthy weight prevalence in children at reception age"
-		},
-		{
-			"code": "child-obesity-Aged four to five years overweight",
-			"label": "Overweight prevalence in children at reception age"
-		},
-		{
-			"code": "child-obesity-Aged four to five years obese",
-			"label": "Obesity prevalence in children at reception age"
-		},
-		{
-			"code": "child-obesity-Aged 10 to 11 years underweight",
-			"label": "Underweight prevalence in children at Year 6 age"
 		},
 		{
 			"code": "child-obesity-Aged 10 to 11 years healthy weight",
 			"label": "Healthy weight prevalence in children at Year 6 age"
 		},
 		{
-			"code": "child-obesity-Aged 10 to 11 years overweight",
-			"label": "Overweight prevalence in children at Year 6 age"
+			"code": "child-obesity-Aged four to five years obese",
+			"label": "Obesity prevalence in children at reception age"
 		},
 		{
 			"code": "child-obesity-Aged 10 to 11 years obese",
 			"label": "Obesity prevalence in children at Year 6 age"
 		},
 		{
-			"code": "adult-obesity-prevalence-aged-18-years-and-over",
-			"label": "Adult obesity prevalence"
+			"code": "child-obesity-Aged four to five years overweight",
+			"label": "Overweight prevalence in children at reception age"
+		},
+		{
+			"code": "child-obesity-Aged 10 to 11 years overweight",
+			"label": "Overweight prevalence in children at Year 6 age"
+		},
+		{
+			"code": "child-obesity-Aged four to five years underweight",
+			"label": "Underweight prevalence in children at reception age"
+		},
+		{
+			"code": "child-obesity-Aged 10 to 11 years underweight",
+			"label": "Underweight prevalence in children at Year 6 age"
 		},
 		{
 			"code": "cancer-diagnosis-at-stage-1-and-2",
@@ -230,139 +230,13 @@
 		}
 	],
 	"indicatorsObject": {
-		"employment-rate-long-Employment Rate": {
-			"id": 12,
-			"topic": "economy",
-			"subTopic": "employment",
-			"code": "employment-rate-long-Employment Rate",
-			"periodGroup": 12,
-			"minXDomainNumb": 2004,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "employment-rate-long-Employment Rate",
-				"slug": "employment-rate",
-				"label": "Employment rate (Great Britain)",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of people aged 16 to 64 in employment",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2024-01-16",
-				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/li01regionallabourmarketlocalindicatorsforcountieslocalandunitaryauthorities",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from, in Great Britain (Northern Ireland national figure included), for periods 10/2004-09/2005 to 10/2022-09/2023.",
-				"standardised": "T",
-				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2021
-			},
-			"years": [
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
 		"employment-rate-long-Economic Inactivity Rate": {
 			"id": 13,
 			"topic": "economy",
 			"subTopic": "employment",
 			"code": "employment-rate-long-Economic Inactivity Rate",
 			"periodGroup": 13,
+			"": "Economic inactivity rate (Great Britain)",
 			"minXDomainNumb": 2004,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -490,6 +364,7 @@
 			"subTopic": "employment",
 			"code": "ni-employment-rate-Economic Inactivity Rate",
 			"periodGroup": 14,
+			"": "Economic inactivity rate (Northern Ireland)",
 			"minXDomainNumb": 2022,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -576,12 +451,141 @@
 				2022
 			]
 		},
+		"employment-rate-long-Employment Rate": {
+			"id": 12,
+			"topic": "economy",
+			"subTopic": "employment",
+			"code": "employment-rate-long-Employment Rate",
+			"periodGroup": 12,
+			"": "Employment rate (Great Britain)",
+			"minXDomainNumb": 2004,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "employment-rate-long-Employment Rate",
+				"slug": "employment-rate",
+				"label": "Employment rate (Great Britain)",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of people aged 16 to 64 in employment",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2024-01-16",
+				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/li01regionallabourmarketlocalindicatorsforcountieslocalandunitaryauthorities",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from, in Great Britain (Northern Ireland national figure included), for periods 10/2004-09/2005 to 10/2022-09/2023.",
+				"standardised": "T",
+				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"ni-employment-rate-Employment Rate": {
 			"id": 28,
 			"topic": "economy",
 			"subTopic": "employment",
 			"code": "ni-employment-rate-Employment Rate",
 			"periodGroup": 28,
+			"": "Employment rate (Northern Ireland)",
 			"minXDomainNumb": 2022,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -674,6 +678,7 @@
 			"subTopic": "employment",
 			"code": "aged-16-years-and-over-modelled-unemployment",
 			"periodGroup": 1,
+			"": "Modelled unemployment rate",
 			"minXDomainNumb": 2004,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -791,6 +796,7 @@
 			"subTopic": "pay and income",
 			"code": "gross-disposable-household-income-per-head",
 			"periodGroup": 2,
+			"": "Gross disposable household income",
 			"minXDomainNumb": 1997,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -917,6 +923,7 @@
 			"subTopic": "pay and income",
 			"code": "gross-median-weekly-pay",
 			"periodGroup": 21,
+			"": "Gross median weekly pay",
 			"minXDomainNumb": 2002,
 			"maxXDomainNumb": 2023,
 			"metadata": {
@@ -1054,6 +1061,7 @@
 			"subTopic": "trade",
 			"code": "total-value-of-uk-exports",
 			"periodGroup": 24,
+			"": "Value of UK exports",
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -1142,6 +1150,7 @@
 			"subTopic": "productivity",
 			"code": "gross-value-added-per-hour-worked",
 			"periodGroup": 29,
+			"": "Gross value added per hour worked",
 			"minXDomainNumb": 2004,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -1245,92 +1254,13 @@
 				2021
 			]
 		},
-		"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development": {
-			"id": 30,
-			"topic": "economy",
-			"subTopic": "spending and investment",
-			"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
-			"periodGroup": 30,
-			"minXDomainNumb": 2020,
-			"maxXDomainNumb": 2020,
-			"metadata": {
-				"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
-				"slug": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
-				"label": "Research and development expenditure",
-				"prefix": "£",
-				"suffix": "",
-				"subText": "million",
-				"decimalPlaces": 0,
-				"howToMeasureChange": "abs",
-				"subtitle": "Public-funded gross expenditure within this region",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "T",
-				"sourceDate": "2023-04-17",
-				"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/articles/ukpublicfundedgrossregionalcapitalandnoncapitalexpenditureonresearchanddevelopment/financialyearending2021/relateddata",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the total UK public-funded gross regional capital and non-capital expenditure on research and development (official statistics in development), in the UK, for financial year 2020 - 2021.",
-				"standardised": "F",
-				"caveats": "Research and development refers to any creative and systematic activity that contains certain amount of novelty – which includes the development of new concepts, products and processes – with the aim of increasing the stock of knowledge. Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "region"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E12",
-					"E92",
-					"K02",
-					"N92",
-					"S92",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					}
-				],
-				"year": 2018
-			},
-			"years": [
-				2020
-			]
-		},
 		"foreign-direct-investment-Inward foreign direct investment (FDI)": {
 			"id": 31,
 			"topic": "economy",
 			"subTopic": "spending and investment",
 			"code": "foreign-direct-investment-Inward foreign direct investment (FDI)",
 			"periodGroup": 31,
+			"": "Inward foreign direct investment",
 			"minXDomainNumb": 2015,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -1414,6 +1344,7 @@
 			"subTopic": "spending and investment",
 			"code": "foreign-direct-investment-Outward foreign direct investment (FDI)",
 			"periodGroup": 3,
+			"": "Outward foreign direct investment",
 			"minXDomainNumb": 2015,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -1491,12 +1422,216 @@
 				2021
 			]
 		},
+		"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development": {
+			"id": 30,
+			"topic": "economy",
+			"subTopic": "spending and investment",
+			"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+			"periodGroup": 30,
+			"": "Research and development expenditure",
+			"minXDomainNumb": 2020,
+			"maxXDomainNumb": 2020,
+			"metadata": {
+				"code": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+				"slug": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+				"label": "Research and development expenditure",
+				"prefix": "£",
+				"suffix": "",
+				"subText": "million",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Public-funded gross expenditure within this region",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "T",
+				"sourceDate": "2023-04-17",
+				"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/articles/ukpublicfundedgrossregionalcapitalandnoncapitalexpenditureonresearchanddevelopment/financialyearending2021/relateddata",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the total UK public-funded gross regional capital and non-capital expenditure on research and development (official statistics in development), in the UK, for financial year 2020 - 2021.",
+				"standardised": "F",
+				"caveats": "Research and development refers to any creative and systematic activity that contains certain amount of novelty – which includes the development of new concepts, products and processes – with the aim of increasing the stock of knowledge. Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "region"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E12",
+					"E92",
+					"K02",
+					"N92",
+					"S92",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2020
+			]
+		},
+		"business-demography-Active enterprises": {
+			"id": 27,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-Active enterprises",
+			"periodGroup": 27,
+			"": "Active businesses",
+			"minXDomainNumb": 2017,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "business-demography-Active enterprises",
+				"slug": "active-enterprises",
+				"label": "Active businesses",
+				"prefix": "",
+				"suffix": "",
+				"subText": "number of enterprises",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Businesses with turnover or employment in current year",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-22",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2017 to 2022.",
+				"standardised": "F",
+				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Births and deaths are then identified by comparing active populations for different years.",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"business-demography-Births of new enterprises": {
 			"id": 4,
 			"topic": "economy",
 			"subTopic": "business",
 			"code": "business-demography-Births of new enterprises",
 			"periodGroup": 4,
+			"": "Business births",
 			"minXDomainNumb": 2017,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -1618,6 +1753,7 @@
 			"subTopic": "business",
 			"code": "business-demography-Deaths of enterprises",
 			"periodGroup": 5,
+			"": "Business deaths",
 			"minXDomainNumb": 2017,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -1733,133 +1869,13 @@
 				2022
 			]
 		},
-		"business-demography-Active enterprises": {
-			"id": 27,
-			"topic": "economy",
-			"subTopic": "business",
-			"code": "business-demography-Active enterprises",
-			"periodGroup": 27,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "business-demography-Active enterprises",
-				"slug": "active-enterprises",
-				"label": "Active businesses",
-				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
-				"howToMeasureChange": "abs",
-				"subtitle": "Businesses with turnover or employment in current year",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-22",
-				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Births and deaths are then identified by comparing active populations for different years.",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2021
-			},
-			"years": [
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
 		"business-demography-High growth enterprises": {
 			"id": 37,
 			"topic": "economy",
 			"subTopic": "business",
 			"code": "business-demography-High growth enterprises",
 			"periodGroup": 37,
+			"": "High growth businesses",
 			"minXDomainNumb": 2017,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -1981,6 +1997,7 @@
 			"subTopic": "housing",
 			"code": "additions-to-the-housing-stock",
 			"periodGroup": 38,
+			"": "Net additions to the housing stock",
 			"minXDomainNumb": 2022,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2072,12 +2089,306 @@
 				2022
 			]
 		},
+		"aged-19-years-and-over-further-education-and-skills-learner-achievements": {
+			"id": 40,
+			"topic": "education and skills",
+			"subTopic": "attainment and participation",
+			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
+			"periodGroup": 40,
+			"": "Further education and skills learner achievements",
+			"minXDomainNumb": 2016,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
+				"slug": "further-education-and-skills-learner-achievements",
+				"label": "Further education and skills learner achievements",
+				"prefix": "",
+				"suffix": "",
+				"subText": "number of learners",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Count of learners aged 19 years and over achieving a funded further education and skills learning aim (with the exception of community learning and non-regulated Multiply aims)",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2022-11-24",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills/2021-22",
+				"sourceOrg": "Department for Education",
+				"longDescription": "This indicator shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2016/17 to 2021/22.",
+				"standardised": "F",
+				"caveats": "Only national level data is available for academic years 2016/17 and 2017/18.",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E08",
+					"E09",
+					"E10",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"aged-19-years-and-over-further-education-and-skills-participation": {
+			"id": 41,
+			"topic": "education and skills",
+			"subTopic": "attainment and participation",
+			"code": "aged-19-years-and-over-further-education-and-skills-participation",
+			"periodGroup": 41,
+			"": "Further education and skills participation",
+			"minXDomainNumb": 2017,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "aged-19-years-and-over-further-education-and-skills-participation",
+				"slug": "further-education-and-skills-participation",
+				"label": "Further education and skills participation",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 100,000 population",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "People aged 19 and above participating in further education and skills learning (including apprenticeships), per 100,000 people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-30",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/data-catalogue/further-education-and-skills/2022-23",
+				"sourceOrg": "Department for Education",
+				"longDescription": "This indicator shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+				"standardised": "T",
+				"caveats": "Participation is the count of learners that participated at any point during the stated academic period. Learners undertaking more than one course will be counted only once. \nGeography is based upon the home postcode of the learner.",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"gcses-and-equivalent-in-english-and-maths-by-age-19": {
+			"id": 15,
+			"topic": "education and skills",
+			"subTopic": "attainment and participation",
+			"code": "gcses-and-equivalent-in-english-and-maths-by-age-19",
+			"periodGroup": 15,
+			"": "GCSEs in English and Maths",
+			"minXDomainNumb": 2016,
+			"maxXDomainNumb": 2021,
+			"metadata": {
+				"code": "gcses-and-equivalent-in-english-and-maths-by-age-19",
+				"slug": "gcses-and-equivalent-in-english-and-maths",
+				"label": "GCSEs in English and Maths",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of people achieving GCSEs in both subjects by age 19",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-04-27",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/level-2-and-3-attainment-by-young-people-aged-19",
+				"sourceOrg": "Department for Education",
+				"longDescription": "This indicator shows GCSEs (and equivalent) in English and maths by age 19, in England, for academic years 2016/17 to 2021/22.",
+				"standardised": "T",
+				"caveats": null,
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021
+			]
+		},
 		"aged-16-to-64-years-level-3-or-above-qualifications": {
 			"id": 39,
 			"topic": "education and skills",
 			"subTopic": "attainment and participation",
 			"code": "aged-16-to-64-years-level-3-or-above-qualifications",
 			"periodGroup": 39,
+			"": "Level 3 or above qualifications (Great Britain)",
 			"minXDomainNumb": 2004,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -2212,301 +2523,13 @@
 				2021
 			]
 		},
-		"aged-19-years-and-over-further-education-and-skills-learner-achievements": {
-			"id": 40,
-			"topic": "education and skills",
-			"subTopic": "attainment and participation",
-			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
-			"periodGroup": 40,
-			"minXDomainNumb": 2016,
-			"maxXDomainNumb": 2021,
-			"metadata": {
-				"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
-				"slug": "further-education-and-skills-learner-achievements",
-				"label": "Further education and skills learner achievements",
-				"prefix": "",
-				"suffix": "",
-				"subText": "number of learners",
-				"decimalPlaces": 0,
-				"howToMeasureChange": "abs",
-				"subtitle": "Count of learners aged 19 years and over achieving a funded further education and skills learning aim (with the exception of community learning and non-regulated Multiply aims)",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2022-11-24",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills/2021-22",
-				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2016/17 to 2021/22.",
-				"standardised": "F",
-				"caveats": "Only national level data is available for academic years 2016/17 and 2017/18.",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E08",
-					"E09",
-					"E10",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					}
-				],
-				"year": 2021
-			},
-			"years": [
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021
-			]
-		},
-		"aged-19-years-and-over-further-education-and-skills-participation": {
-			"id": 41,
-			"topic": "education and skills",
-			"subTopic": "attainment and participation",
-			"code": "aged-19-years-and-over-further-education-and-skills-participation",
-			"periodGroup": 41,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "aged-19-years-and-over-further-education-and-skills-participation",
-				"slug": "further-education-and-skills-participation",
-				"label": "Further education and skills participation",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per 100,000 population",
-				"decimalPlaces": 0,
-				"howToMeasureChange": "abs",
-				"subtitle": "People aged 19 and above participating in further education and skills learning (including apprenticeships), per 100,000 people",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-30",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/data-catalogue/further-education-and-skills/2022-23",
-				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
-				"standardised": "T",
-				"caveats": "Participation is the count of learners that participated at any point during the stated academic period. Learners undertaking more than one course will be counted only once. \nGeography is based upon the home postcode of the learner.",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
-		"gcses-and-equivalent-in-english-and-maths-by-age-19": {
-			"id": 15,
-			"topic": "education and skills",
-			"subTopic": "attainment and participation",
-			"code": "gcses-and-equivalent-in-english-and-maths-by-age-19",
-			"periodGroup": 15,
-			"minXDomainNumb": 2016,
-			"maxXDomainNumb": 2021,
-			"metadata": {
-				"code": "gcses-and-equivalent-in-english-and-maths-by-age-19",
-				"slug": "gcses-and-equivalent-in-english-and-maths",
-				"label": "GCSEs in English and Maths",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of people achieving GCSEs in both subjects by age 19",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-04-27",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/level-2-and-3-attainment-by-young-people-aged-19",
-				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows GCSEs (and equivalent) in English and maths by age 19, in England, for academic years 2016/17 to 2021/22.",
-				"standardised": "T",
-				"caveats": null,
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2021
-			},
-			"years": [
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021
-			]
-		},
 		"aged-16-to-64-years-level3-or-above-qualifications-ni": {
 			"id": 16,
 			"topic": "education and skills",
 			"subTopic": "attainment and participation",
 			"code": "aged-16-to-64-years-level3-or-above-qualifications-ni",
 			"periodGroup": 16,
+			"": "Level 3 or above qualifications (Northern Ireland)",
 			"minXDomainNumb": 2016,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2605,6 +2628,7 @@
 			"subTopic": "attainment and participation",
 			"code": "pupils-at-expected-standards-by-end-of-primary-school",
 			"periodGroup": 20,
+			"": "Pupils meeting the expected standard in reading, writing and maths at the end of Key Stage 2",
 			"minXDomainNumb": 2015,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2695,6 +2719,7 @@
 			"subTopic": "early-years learning",
 			"code": "early-years-Communication and Language",
 			"periodGroup": 25,
+			"": "Communication and language skills by end of Early years foundation stage",
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2793,6 +2818,7 @@
 			"subTopic": "early-years learning",
 			"code": "early-years-Literacy",
 			"periodGroup": 26,
+			"": "Literacy skills by end of Early years foundation stage",
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2891,6 +2917,7 @@
 			"subTopic": "early-years learning",
 			"code": "early-years-Mathematics",
 			"periodGroup": 6,
+			"": "Maths skills by end of Early years foundation stage",
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -2989,6 +3016,7 @@
 			"subTopic": "school attendance",
 			"code": "persistent-absences-for-all-pupils",
 			"periodGroup": 7,
+			"": "Persistent absences for all pupils",
 			"minXDomainNumb": 2008,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -3084,6 +3112,7 @@
 			"subTopic": "school attendance",
 			"code": "persistent-absences-for-pupils-eligible-for-free-school-meals",
 			"periodGroup": 8,
+			"": "Persistent absences for pupils eligible for free school meals",
 			"minXDomainNumb": 2017,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -3170,6 +3199,7 @@
 			"subTopic": "school attendance",
 			"code": "persistent-absences-for-pupils-looked-after-by-local-authorities",
 			"periodGroup": 9,
+			"": "Persistent absences for pupils looked after by local authorities",
 			"minXDomainNumb": 2016,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -3258,6 +3288,7 @@
 			"subTopic": "school performance",
 			"code": "schools-and-nursery-schools-rated-good-or-outstanding",
 			"periodGroup": 42,
+			"": "State-funded schools rated good or outstanding",
 			"minXDomainNumb": 2024,
 			"maxXDomainNumb": 2024,
 			"metadata": {
@@ -3335,122 +3366,13 @@
 				2024
 			]
 		},
-		"apprenticeship-Apprenticeships starts": {
-			"id": 43,
-			"topic": "education and skills",
-			"subTopic": "apprenticeships",
-			"code": "apprenticeship-Apprenticeships starts",
-			"periodGroup": 43,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "apprenticeship-Apprenticeships starts",
-				"slug": "apprenticeships-starts-new",
-				"label": "Apprenticeship starts",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per 100,000 population",
-				"decimalPlaces": 0,
-				"howToMeasureChange": "abs",
-				"subtitle": "Apprenticeship programme starts by people aged 16 or above, per 100,000 people",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-30",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills",
-				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
-				"standardised": "T",
-				"caveats": "Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.\nGeography is based upon the home postcode of the learner.",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
 		"apprenticeship-Apprenticeships achievements": {
 			"id": 44,
 			"topic": "education and skills",
 			"subTopic": "apprenticeships",
 			"code": "apprenticeship-Apprenticeships achievements",
 			"periodGroup": 44,
+			"": "Apprenticeship achievements",
 			"minXDomainNumb": 2017,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -3555,12 +3477,236 @@
 				2022
 			]
 		},
+		"apprenticeship-Apprenticeships starts": {
+			"id": 43,
+			"topic": "education and skills",
+			"subTopic": "apprenticeships",
+			"code": "apprenticeship-Apprenticeships starts",
+			"periodGroup": 43,
+			"": "Apprenticeship starts",
+			"minXDomainNumb": 2017,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "apprenticeship-Apprenticeships starts",
+				"slug": "apprenticeships-starts-new",
+				"label": "Apprenticeship starts",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 100,000 population",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Apprenticeship programme starts by people aged 16 or above, per 100,000 people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-30",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills",
+				"sourceOrg": "Department for Education",
+				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+				"standardised": "T",
+				"caveats": "Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.\nGeography is based upon the home postcode of the learner.",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"adult-obesity-prevalence-aged-18-years-and-over": {
+			"id": 54,
+			"topic": "health and wellbeing",
+			"subTopic": "healthy living",
+			"code": "adult-obesity-prevalence-aged-18-years-and-over",
+			"periodGroup": 54,
+			"": "Adult obesity prevalence",
+			"minXDomainNumb": 2015,
+			"maxXDomainNumb": 2021,
+			"metadata": {
+				"code": "adult-obesity-prevalence-aged-18-years-and-over",
+				"slug": "overweight-adults",
+				"label": "Adult obesity prevalence",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of adults aged 18 and over classified as living with obesity",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-05-03",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
+				"sourceOrg": "Office for Health Improvement and Disparities",
+				"longDescription": "This indicator shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
+				"standardised": "T",
+				"caveats": "Adults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².\nEstimates for adults (aged 18 years and over) classified as living with obesity were fully revised by the Office for Health Improvement and Disparities in May 2023 with all previously published data overwritten. The replacement of all previously published data was required as the adjustments applied to the self-reported height and weight data have been updated and published by NHS England in the [Health Survey for England predicting height, weight and body mass index from self-reported data](https://digital.nhs.uk/data-and-information/areas-of-interest/public-health/health-survey-for-england-predicting-height-weight-and-body-mass-index-from-self-reported-data) report. The updated adjustments for height and weight have been applied to the new data point (November 2021 to 2022) and the whole back series (November 2015 to 2016 to November 2020 to 2021). ",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021
+			]
+		},
 		"cigarette-smokers": {
 			"id": 45,
 			"topic": "health and wellbeing",
 			"subTopic": "healthy living",
 			"code": "cigarette-smokers",
 			"periodGroup": 45,
+			"": "Cigarette smokers",
 			"minXDomainNumb": 2012,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -3679,133 +3825,13 @@
 				2022
 			]
 		},
-		"child-obesity-Aged four to five years underweight": {
-			"id": 46,
-			"topic": "health and wellbeing",
-			"subTopic": "healthy living",
-			"code": "child-obesity-Aged four to five years underweight",
-			"periodGroup": 46,
-			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "child-obesity-Aged four to five years underweight",
-				"slug": "underweight-children-reception",
-				"label": "Underweight prevalence in children at reception age",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of children aged 4-5 classified as underweight",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-07",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
-				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
-				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
 		"child-obesity-Aged four to five years healthy weight": {
 			"id": 47,
 			"topic": "health and wellbeing",
 			"subTopic": "healthy living",
 			"code": "child-obesity-Aged four to five years healthy weight",
 			"periodGroup": 47,
+			"": "Healthy weight prevalence in children at reception age",
 			"minXDomainNumb": 2006,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -3921,375 +3947,13 @@
 				2022
 			]
 		},
-		"child-obesity-Aged four to five years overweight": {
-			"id": 48,
-			"topic": "health and wellbeing",
-			"subTopic": "healthy living",
-			"code": "child-obesity-Aged four to five years overweight",
-			"periodGroup": 48,
-			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "child-obesity-Aged four to five years overweight",
-				"slug": "overweight-children-reception",
-				"label": "Overweight prevalence in children at reception age",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of children aged 4-5 classified as overweight",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-07",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
-				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
-				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
-		"child-obesity-Aged four to five years obese": {
-			"id": 49,
-			"topic": "health and wellbeing",
-			"subTopic": "healthy living",
-			"code": "child-obesity-Aged four to five years obese",
-			"periodGroup": 49,
-			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "child-obesity-Aged four to five years obese",
-				"slug": "obese-children-reception",
-				"label": "Obesity prevalence in children at reception age",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of children aged 4-5 classified as living with obesity",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-07",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
-				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
-				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
-		"child-obesity-Aged 10 to 11 years underweight": {
-			"id": 50,
-			"topic": "health and wellbeing",
-			"subTopic": "healthy living",
-			"code": "child-obesity-Aged 10 to 11 years underweight",
-			"periodGroup": 50,
-			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "child-obesity-Aged 10 to 11 years underweight",
-				"slug": "underweight-children-year-6",
-				"label": "Underweight prevalence in children at Year 6 age",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of children aged 10-11 classified as underweight",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "2023-11-07",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
-				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
-				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
-				"confidenceIntervals": null,
-				"initialGeographyLevel": "ltla"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
-			]
-		},
 		"child-obesity-Aged 10 to 11 years healthy weight": {
 			"id": 51,
 			"topic": "health and wellbeing",
 			"subTopic": "healthy living",
 			"code": "child-obesity-Aged 10 to 11 years healthy weight",
 			"periodGroup": 51,
+			"": "Healthy weight prevalence in children at Year 6 age",
 			"minXDomainNumb": 2006,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -4405,31 +4069,32 @@
 				2022
 			]
 		},
-		"child-obesity-Aged 10 to 11 years overweight": {
-			"id": 52,
+		"child-obesity-Aged four to five years obese": {
+			"id": 49,
 			"topic": "health and wellbeing",
 			"subTopic": "healthy living",
-			"code": "child-obesity-Aged 10 to 11 years overweight",
-			"periodGroup": 52,
+			"code": "child-obesity-Aged four to five years obese",
+			"periodGroup": 49,
+			"": "Obesity prevalence in children at reception age",
 			"minXDomainNumb": 2006,
 			"maxXDomainNumb": 2022,
 			"metadata": {
-				"code": "child-obesity-Aged 10 to 11 years overweight",
-				"slug": "overweight-children-year-6",
-				"label": "Overweight prevalence in children at Year 6 age",
+				"code": "child-obesity-Aged four to five years obese",
+				"slug": "obese-children-reception",
+				"label": "Obesity prevalence in children at reception age",
 				"prefix": "",
 				"suffix": "%",
 				"subText": null,
 				"decimalPlaces": 1,
 				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of children aged 10-11 classified as overweight",
+				"subtitle": "Percentage of children aged 4-5 classified as living with obesity",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
 				"sourceDate": "2023-11-07",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
 				"confidenceIntervals": null,
@@ -4532,6 +4197,7 @@
 			"subTopic": "healthy living",
 			"code": "child-obesity-Aged 10 to 11 years obese",
 			"periodGroup": 53,
+			"": "Obesity prevalence in children at Year 6 age",
 			"minXDomainNumb": 2006,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -4647,33 +4313,34 @@
 				2022
 			]
 		},
-		"adult-obesity-prevalence-aged-18-years-and-over": {
-			"id": 54,
+		"child-obesity-Aged four to five years overweight": {
+			"id": 48,
 			"topic": "health and wellbeing",
 			"subTopic": "healthy living",
-			"code": "adult-obesity-prevalence-aged-18-years-and-over",
-			"periodGroup": 54,
-			"minXDomainNumb": 2015,
-			"maxXDomainNumb": 2021,
+			"code": "child-obesity-Aged four to five years overweight",
+			"periodGroup": 48,
+			"": "Overweight prevalence in children at reception age",
+			"minXDomainNumb": 2006,
+			"maxXDomainNumb": 2022,
 			"metadata": {
-				"code": "adult-obesity-prevalence-aged-18-years-and-over",
-				"slug": "overweight-adults",
-				"label": "Adult obesity prevalence",
+				"code": "child-obesity-Aged four to five years overweight",
+				"slug": "overweight-children-reception",
+				"label": "Overweight prevalence in children at reception age",
 				"prefix": "",
 				"suffix": "%",
 				"subText": null,
 				"decimalPlaces": 1,
 				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of adults aged 18 and over classified as living with obesity",
+				"subtitle": "Percentage of children aged 4-5 classified as overweight",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "2023-05-03",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
+				"sourceDate": "2023-11-07",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
+				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
 				"standardised": "T",
-				"caveats": "Adults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².\nEstimates for adults (aged 18 years and over) classified as living with obesity were fully revised by the Office for Health Improvement and Disparities in May 2023 with all previously published data overwritten. The replacement of all previously published data was required as the adjustments applied to the self-reported height and weight data have been updated and published by NHS England in the [Health Survey for England predicting height, weight and body mass index from self-reported data](https://digital.nhs.uk/data-and-information/areas-of-interest/public-health/health-survey-for-england-predicting-height-weight-and-body-mass-index-from-self-reported-data) report. The updated adjustments for height and weight have been applied to the new data point (November 2021 to 2022) and the whole back series (November 2015 to 2016 to November 2020 to 2021). ",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
 				"confidenceIntervals": null,
 				"initialGeographyLevel": "ltla"
 			},
@@ -4746,16 +4413,392 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
 				2015,
 				2016,
 				2017,
 				2018,
 				2019,
 				2020,
-				2021
+				2021,
+				2022
+			]
+		},
+		"child-obesity-Aged 10 to 11 years overweight": {
+			"id": 52,
+			"topic": "health and wellbeing",
+			"subTopic": "healthy living",
+			"code": "child-obesity-Aged 10 to 11 years overweight",
+			"periodGroup": 52,
+			"": "Overweight prevalence in children at Year 6 age",
+			"minXDomainNumb": 2006,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "child-obesity-Aged 10 to 11 years overweight",
+				"slug": "overweight-children-year-6",
+				"label": "Overweight prevalence in children at Year 6 age",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of children aged 10-11 classified as overweight",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-07",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
+				"sourceOrg": "Office for Health Improvement and Disparities",
+				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
+				"standardised": "T",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"child-obesity-Aged four to five years underweight": {
+			"id": 46,
+			"topic": "health and wellbeing",
+			"subTopic": "healthy living",
+			"code": "child-obesity-Aged four to five years underweight",
+			"periodGroup": 46,
+			"": "Underweight prevalence in children at reception age",
+			"minXDomainNumb": 2006,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "child-obesity-Aged four to five years underweight",
+				"slug": "underweight-children-reception",
+				"label": "Underweight prevalence in children at reception age",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of children aged 4-5 classified as underweight",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-07",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
+				"sourceOrg": "Office for Health Improvement and Disparities",
+				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
+				"standardised": "T",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"child-obesity-Aged 10 to 11 years underweight": {
+			"id": 50,
+			"topic": "health and wellbeing",
+			"subTopic": "healthy living",
+			"code": "child-obesity-Aged 10 to 11 years underweight",
+			"periodGroup": 50,
+			"": "Underweight prevalence in children at Year 6 age",
+			"minXDomainNumb": 2006,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "child-obesity-Aged 10 to 11 years underweight",
+				"slug": "underweight-children-year-6",
+				"label": "Underweight prevalence in children at Year 6 age",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of children aged 10-11 classified as underweight",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "2023-11-07",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
+				"sourceOrg": "Office for Health Improvement and Disparities",
+				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
+				"standardised": "T",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n - Underweight if their body mass index (BMI) is less than the 2nd centile.\n - Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n - Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n - Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nValues for Cornwall and Isles of Scilly are in a combined code (E67000002). Values for Hackney and City of London are in a combined code (E67000001).",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": "ltla"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
 			]
 		},
 		"cancer-diagnosis-at-stage-1-and-2": {
@@ -4764,6 +4807,7 @@
 			"subTopic": "disease and preventable mortality",
 			"code": "cancer-diagnosis-at-stage-1-and-2",
 			"periodGroup": 55,
+			"": "Cancer diagnosis at stage 1 and 2",
 			"minXDomainNumb": 2013,
 			"maxXDomainNumb": 2021,
 			"metadata": {
@@ -4877,6 +4921,7 @@
 			"subTopic": "disease and preventable mortality",
 			"code": "cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates",
 			"periodGroup": 56,
+			"": "Preventable circulatory mortality (England)",
 			"minXDomainNumb": 2001,
 			"maxXDomainNumb": 2020,
 			"metadata": {
@@ -4993,6 +5038,7 @@
 			"subTopic": "disease and preventable mortality",
 			"code": "cardiovascular-mortality-persons-aged-under-75-ni",
 			"periodGroup": 57,
+			"": "Preventable circulatory mortality (Northern Ireland)",
 			"minXDomainNumb": 2001,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -5106,6 +5152,7 @@
 			"subTopic": "life expectancy",
 			"code": "healthy-life-expectancy-Female healthy life expectancy",
 			"periodGroup": 58,
+			"": "Female healthy life expectancy",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2018,
 			"metadata": {
@@ -5221,6 +5268,7 @@
 			"subTopic": "life expectancy",
 			"code": "healthy-life-expectancy-Male healthy life expectancy",
 			"periodGroup": 59,
+			"": "Male healthy life expectancy",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2018,
 			"metadata": {
@@ -5336,6 +5384,7 @@
 			"subTopic": "self-reported wellbeing",
 			"code": "annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious')",
 			"periodGroup": 60,
+			"": "Anxiety",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -5461,6 +5510,7 @@
 			"subTopic": "self-reported wellbeing",
 			"code": "annual-personal-wellbeing-estimates-Worthwhile mean score (where 10 is 'completely worthwhile')",
 			"periodGroup": 61,
+			"": "Feeling life is worthwhile",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -5586,6 +5636,7 @@
 			"subTopic": "self-reported wellbeing",
 			"code": "annual-personal-wellbeing-estimates-Happiness mean score (where 10 is 'completely happy')",
 			"periodGroup": 62,
+			"": "Happiness",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -5711,6 +5762,7 @@
 			"subTopic": "self-reported wellbeing",
 			"code": "annual-personal-wellbeing-estimates-Satisfaction mean score (where 10 is 'completely satisfied')",
 			"periodGroup": 63,
+			"": "Life satisfaction",
 			"minXDomainNumb": 2011,
 			"maxXDomainNumb": 2022,
 			"metadata": {
@@ -5836,6 +5888,7 @@
 			"subTopic": "digital connectivity",
 			"code": "gigabit-capable-broadband",
 			"periodGroup": 64,
+			"": "Gigabit capable broadband",
 			"minXDomainNumb": 2023,
 			"maxXDomainNumb": 2023,
 			"metadata": {
@@ -5903,6 +5956,7 @@
 			"subTopic": "digital connectivity",
 			"code": "4g-coverage",
 			"periodGroup": 65,
+			"": "4G coverage",
 			"minXDomainNumb": 2023,
 			"maxXDomainNumb": 2023,
 			"metadata": {
@@ -5970,6 +6024,7 @@
 			"subTopic": "travel and transport",
 			"code": "average-travel-time-long-cycling",
 			"periodGroup": 66,
+			"": "Travel time to employment centre by bicycle",
 			"minXDomainNumb": 2014,
 			"maxXDomainNumb": 2019,
 			"metadata": {
@@ -6071,6 +6126,7 @@
 			"subTopic": "travel and transport",
 			"code": "average-travel-time-long-driving",
 			"periodGroup": 67,
+			"": "Travel time to employment centre by car",
 			"minXDomainNumb": 2014,
 			"maxXDomainNumb": 2019,
 			"metadata": {
@@ -6172,6 +6228,7 @@
 			"subTopic": "travel and transport",
 			"code": "average-travel-time-long-public transport or walking",
 			"periodGroup": 68,
+			"": "Travel time to employment centre by public transport and walking",
 			"minXDomainNumb": 2014,
 			"maxXDomainNumb": 2019,
 			"metadata": {
@@ -6273,6 +6330,7 @@
 			"subTopic": "crime",
 			"code": "homicide-offences",
 			"periodGroup": 69,
+			"": "Homicide Offences",
 			"minXDomainNumb": 2020,
 			"maxXDomainNumb": 2020,
 			"metadata": {
@@ -6344,9 +6402,9 @@
 				{
 					"name": "employment",
 					"indicatorCodes": [
-						"employment-rate-long-Employment Rate",
 						"employment-rate-long-Economic Inactivity Rate",
 						"ni-employment-rate-Economic Inactivity Rate",
+						"employment-rate-long-Employment Rate",
 						"ni-employment-rate-Employment Rate",
 						"aged-16-years-and-over-modelled-unemployment"
 					]
@@ -6373,17 +6431,17 @@
 				{
 					"name": "spending and investment",
 					"indicatorCodes": [
-						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
 						"foreign-direct-investment-Inward foreign direct investment (FDI)",
-						"foreign-direct-investment-Outward foreign direct investment (FDI)"
+						"foreign-direct-investment-Outward foreign direct investment (FDI)",
+						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development"
 					]
 				},
 				{
 					"name": "business",
 					"indicatorCodes": [
+						"business-demography-Active enterprises",
 						"business-demography-Births of new enterprises",
 						"business-demography-Deaths of enterprises",
-						"business-demography-Active enterprises",
 						"business-demography-High growth enterprises"
 					]
 				}
@@ -6406,10 +6464,10 @@
 				{
 					"name": "attainment and participation",
 					"indicatorCodes": [
-						"aged-16-to-64-years-level-3-or-above-qualifications",
 						"aged-19-years-and-over-further-education-and-skills-learner-achievements",
 						"aged-19-years-and-over-further-education-and-skills-participation",
 						"gcses-and-equivalent-in-english-and-maths-by-age-19",
+						"aged-16-to-64-years-level-3-or-above-qualifications",
 						"aged-16-to-64-years-level3-or-above-qualifications-ni",
 						"pupils-at-expected-standards-by-end-of-primary-school"
 					]
@@ -6439,8 +6497,8 @@
 				{
 					"name": "apprenticeships",
 					"indicatorCodes": [
-						"apprenticeship-Apprenticeships starts",
-						"apprenticeship-Apprenticeships achievements"
+						"apprenticeship-Apprenticeships achievements",
+						"apprenticeship-Apprenticeships starts"
 					]
 				}
 			]
@@ -6451,16 +6509,16 @@
 				{
 					"name": "healthy living",
 					"indicatorCodes": [
+						"adult-obesity-prevalence-aged-18-years-and-over",
 						"cigarette-smokers",
-						"child-obesity-Aged four to five years underweight",
 						"child-obesity-Aged four to five years healthy weight",
-						"child-obesity-Aged four to five years overweight",
-						"child-obesity-Aged four to five years obese",
-						"child-obesity-Aged 10 to 11 years underweight",
 						"child-obesity-Aged 10 to 11 years healthy weight",
-						"child-obesity-Aged 10 to 11 years overweight",
+						"child-obesity-Aged four to five years obese",
 						"child-obesity-Aged 10 to 11 years obese",
-						"adult-obesity-prevalence-aged-18-years-and-over"
+						"child-obesity-Aged four to five years overweight",
+						"child-obesity-Aged 10 to 11 years overweight",
+						"child-obesity-Aged four to five years underweight",
+						"child-obesity-Aged 10 to 11 years underweight"
 					]
 				},
 				{

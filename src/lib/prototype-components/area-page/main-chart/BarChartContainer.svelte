@@ -45,9 +45,9 @@
 			? madRangeLookup[indicator.code]['line-chart']
 			: madRangeLookup.default['line-chart'];
 
-	$: values = []
-		.concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci]))
-		.filter((el) => el);
+	$: values = showConfidenceIntervals
+		? [].concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci])).filter((el) => el)
+		: combinedChartData.map((el) => el.value).filter((el) => el);
 
 	$: yDomainRaw = [0.95 * Math.min(...values), 1.05 * Math.max(...values)];
 
