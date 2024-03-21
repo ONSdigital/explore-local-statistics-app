@@ -1,11 +1,15 @@
 <script lang="ts">
 	// @ts-nocheck
+	import { createEventDispatcher } from 'svelte';
 	import { base } from '$app/paths';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
+	import { analyticsEvent } from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
-	import { mapSources } from '$lib/config/geoConfig';
+	import { mapSources, geoCodesLookup } from '$lib/config/geoConfig';
 	import { makeGeoJSON } from '$lib/util/geo/makeGeoJSON';
 	import topojson from '$lib/data/uk-ctry-rgn.json';
+
+	const dispatch = createEventDispatcher();
 
 	export let data;
 	export let childType;
@@ -13,6 +17,18 @@
 	let map;
 	let hovered;
 	let areacd = data.place.areacd;
+
+	function doSelect(e) {
+		const props = e.detail.feature.properties;
+		const eventData = {
+			event: 'mapSelect',
+			areaCode: props.areacd,
+			areaName: props.areanm || props.areacd,
+			areaType: geoCodesLookup[props.areacd.slice(0, 3)]?.label
+		};
+		analyticsEvent(eventData);
+		dispatch('select', e.detail);
+	}
 
 	function fitBounds(data) {
 		if (map && areacd !== data.place.areacd) {
@@ -70,7 +86,7 @@
 						on:hover={(e) => (hovered = e.detail.feature)}
 						select
 						selected={data.place.areacd}
-						on:select
+						on:select={doSelect}
 					>
 						<MapTooltip content={hovered ? getName(hovered.properties) : ''} />
 					</MapLayer>
