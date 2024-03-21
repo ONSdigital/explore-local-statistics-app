@@ -45,7 +45,7 @@ export function readCsvAutoType(filename: string, { stringColumns = [] } = {}) {
 
 // A modified version of
 // https://github.com/d3/d3-dsv/blob/main/src/autoType.js
-// , which always leaves dates as strings.
+// that always leaves dates as strings.
 function autoTypeWithoutDates(object: { [key: string]: any }) {
 	for (const key in object) {
 		const value = object[key].trim();
