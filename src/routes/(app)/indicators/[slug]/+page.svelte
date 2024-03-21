@@ -75,6 +75,8 @@
 				el.xDomainNumb <= data.indicator.maxXDomainNumb
 		);
 
+		console.log(timePeriodsArray, data.indicator.maxXDomainNumb, data.indicator.minXDomainNumb);
+
 		chosenXDomainNumbStart = data.indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = data.indicator.maxXDomainNumb;
 		chosenTimePeriodDropdownLabel = timePeriodsArray.find(
