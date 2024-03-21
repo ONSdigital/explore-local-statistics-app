@@ -107,7 +107,7 @@
 <Divider hr="full" />
 
 <Section title="Other sources of local statistics">
-	<p>Wales, Scotland and Northern Ireland have their own producers of official statistics.</p>
+	<p>Wales, Scotland and Northern Ireland also have their own producers of official statistics.</p>
 
 	<List mode="dash">
 		<li>
