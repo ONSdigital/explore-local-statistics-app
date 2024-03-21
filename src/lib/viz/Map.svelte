@@ -193,9 +193,9 @@
 		</Map>
 	{/if}
 </div>
-{#if legendType === 'choropleth'}
+{#if features && legendType === 'choropleth'}
 	<BreaksChart
-		{data}
+		data={data.map((d) => ({ ...d, areanm: features[d.areacd]?.properties?.areanm }))}
 		{breaks}
 		{hovered}
 		{selected}
