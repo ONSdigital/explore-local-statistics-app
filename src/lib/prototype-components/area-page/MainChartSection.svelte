@@ -18,25 +18,6 @@
 
 	let chosenIndicatorId;
 
-	/*let showEmbed = false,
-		embedCode = '',
-		type = '',
-		data = [];*/
-
-	/*export let combinedSelectableAreaTypesObject,
-		chartData,
-		metadata,
-		visibleAreas,
-		filteredIndicators;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasId,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
-
-	let chosenIndicatorId;*/
-
 	onMount(() => {
 		chosenIndicatorId = filteredIndicators[0];
 	});
@@ -55,38 +36,6 @@
 			bind:chosenIndicatorId
 		></MainChart>
 	{/if}
-	<!-- <div class="content-actions">
-		<h4>Use and share</h4>
-		<ul>
-			{#if type !== 'table'}<li>
-					<Icon type="chart" /><span
-						><button class="btn-link" on:click={() => downloadPNG(el)}>Download {type} (PNG)</button
-						></span
-					>
-				</li>{/if}
-			{#if data}<li>
-					<Icon type="download" /><span
-						><button class="btn-link" on:click={() => downloadCSV(data)}>Download data (CSV)</button
-						></span
-					>
-				</li>{/if}
-			<li>
-				<Icon type="code" /><span
-					><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
-						>{showEmbed ? 'Hide embed code' : `Embed ${type}`}</button
-					></span
-				>
-			</li>
-		</ul>
-		{#if showEmbed}
-			<div class="content-embed">
-				<Textarea value={embedCode} rows={4} width={30} hideLabel />
-				<Button small on:click={() => clip(embedCode, 'Copied to clipboard!')}
-					>Copy to clipboard</Button
-				>
-			</div>
-		{/if}
-	</div> -->
 </div>
 
 <style>

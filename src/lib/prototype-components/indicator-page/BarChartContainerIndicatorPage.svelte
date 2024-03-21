@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
+	import ContentBlock from '$lib/components/ContentBlock.svelte';
 
 	export let metadata,
 		indicator,
@@ -8,7 +9,12 @@
 		customLookup,
 		selectionsObject,
 		chosenXDomain,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		chosenTimePeriodDropdownLabel,
+		timePeriodsArray,
+		chosenTimePeriodsArray;
+
+	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
@@ -73,13 +79,6 @@
 		Math.max(...visibleAreasPeriods.filter((el) => el <= xDomainInit[1]))
 	];
 
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
-		(el) =>
-			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= xDomain[0] &&
-			el.xDomainNumb <= xDomain[1]
-	);
-
 	$: filteredChartDataSelectedLatest = filteredChartDataSelected.filter(
 		(el) => el.xDomainNumb === xDomain[1]
 	);
@@ -96,34 +95,80 @@
 		...filteredChartDataAdditionalsLatest,
 		...filteredChartDataAreaGroupLatest
 	];
+
+	$: unselectedAreasLatest = selectionsObject['indicator-additional-visible'].filter(
+		(el) => combinedChartDataLatest.find((elm) => elm.areacd === el.areacd) === undefined
+	);
 </script>
 
-{#if timePeriodsArray.length === 0}
-	<div class="no-chart-container">
-		<p>No data for selected areas over time period</p>
-	</div>
-{:else if timePeriodsArray.length > 0}
-	<BarChartContainer
-		{indicator}
-		{metadata}
-		latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
-		filteredChartDataSelected={filteredChartDataSelectedLatest}
-		filteredChartDataAdditionals={filteredChartDataAdditionalsLatest}
-		filteredChartDataAreaGroup={filteredChartDataAreaGroupLatest}
-		{selectionsObject}
-		selectedArea={null}
-		{indicatorCalculations}
-		{xDomain}
-		{customLookup}
-		{showConfidenceIntervals}
-		combinedChartData={combinedChartDataLatest}
-		additionalID="indicator-additional"
-		relatedID="indicator-related"
-	></BarChartContainer>
+{#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>No areas selected. Select areas to view time series data.</p>
+		</div>
+	</ContentBlock>
+{:else if !indicator.years.includes(chosenXDomain[1])}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
+				<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+			</p>
+		</div>
+	</ContentBlock>
+{:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
+				selected areas for
+				<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+			</p>
+		</div>
+	</ContentBlock>
 {:else}
-	<div class="no-chart-container">
-		<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>
-	</div>
+	<ContentBlock
+		type="bar-chart"
+		title={indicator.metadata.label}
+		unit={getUnit(indicator.metadata)}
+		data={[]}
+	>
+		<p class="subtitle">
+			{indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
+		</p>
+		<BarChartContainer
+			{indicator}
+			{metadata}
+			latestPeriod={timePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
+			filteredChartDataSelected={filteredChartDataSelectedLatest}
+			filteredChartDataAdditionals={filteredChartDataAdditionalsLatest}
+			filteredChartDataAreaGroup={filteredChartDataAreaGroupLatest}
+			{selectionsObject}
+			selectedArea={null}
+			{indicatorCalculations}
+			{xDomain}
+			{customLookup}
+			{showConfidenceIntervals}
+			combinedChartData={combinedChartDataLatest}
+			additionalID="indicator-additional"
+			relatedID="indicator-related"
+		></BarChartContainer>
+		<div class="source-notes-container">
+			{#if unselectedAreasLatest.length > 0}
+				<p class="notes-container">
+					<span style="font-weight: bold">Note:</span>
+					No data to display for{#each unselectedAreasLatest as area, i}
+						{' ' +
+							area.areanm +
+							(i === unselectedAreasLatest.length - 2 && unselectedAreasLatest.length > 1
+								? ' and'
+								: i != unselectedAreasLatest.length - 1
+									? ','
+									: '')}{/each} for {chosenTimePeriodsArray[0].label}.
+				</p>
+			{/if}
+		</div>
+	</ContentBlock>
 {/if}
 
 <style>
@@ -138,11 +183,33 @@
 	}
 
 	.no-chart-container {
+		margin: 0px 10px;
 		height: 500px;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-weight: bold;
+		text-wrap: balance;
+		text-align: center;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
+	}
+
+	.source-notes-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
 	}
 </style>

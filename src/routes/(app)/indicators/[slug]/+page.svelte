@@ -22,7 +22,6 @@
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
-	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -49,14 +48,6 @@
 	};
 
 	const refreshData = () => {
-		/*if (geoGroup.key !== prevGeoGroup.key) {
-			selectionsObject = {
-				'indicator-additional-chosen': new Array(0),
-				'indicator-additional-visible': new Array(0)
-			};
-			prevGeoGroup = geoGroup;
-		}*/
-
 		chosenXDomainNumbEnd = timePeriodsArray.find(
 			(el) => el.label === chosenTimePeriodDropdownLabel
 		).xDomainNumb;
@@ -64,11 +55,6 @@
 
 		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
 	};
-
-	$: mapData =
-		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
-			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
-			: { data: [], breaks: [] };
 
 	afterNavigate(() => {
 		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
@@ -99,7 +85,30 @@
 			}))
 		];
 		refreshData();
+
+		selectionsObject['indicator-related-chosen'] = data.indicator.metadata.initialGeographyLevel;
+		selectionsObject['indicator-additional-chosen'] =
+			data.indicator.metadata.standardised === 'F'
+				? []
+				: codesForAreasWithData.includes('K02000001')
+					? ['K02000001']
+					: countriesWithDataCodes;
 	});
+
+	$: mapData =
+		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
+			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
+			: { data: [], breaks: [] };
+
+	$: chosenTimePeriodsArray = timePeriodsArray
+		? timePeriodsArray.filter(
+				(el) => el.xDomainNumb >= chosenXDomainNumbStart && el.xDomainNumb <= chosenXDomainNumbEnd
+			)
+		: null;
+
+	$: chosenStartTimePeriod = timePeriodsArray
+		? timePeriodsArray.find((el) => el.xDomainNumb === chosenXDomainNumbStart)
+		: null;
 
 	let metadata = data.metadata;
 
@@ -180,10 +189,10 @@
 	};
 
 	$: changeAreasOptionsObject = {
-		country: metadata.areasGeogLevelObject.country.map((el) => metadata.areasObject[el]),
-		region: metadata.areasGeogLevelObject.region.map((el) => metadata.areasObject[el]),
-		combined: metadata.areasGeogLevelObject.combined.map((el) => metadata.areasObject[el]),
-		upper: metadata.areasGeogLevelObject.upper.map((el) => metadata.areasObject[el]),
+		country: countriesWithDataAreas,
+		region: regionsWithDataAreas,
+		combined: combinedAuthoritiesWithDataAreas,
+		upper: upperTierLocalAuthoritiesWithDataAreas,
 		lower: lowerTierLocalAuthoritiesWithDataAreas,
 		related: Object.keys(parentAndRelatedAreasObject.groups)
 			.filter((el) => parentAndRelatedAreasObject.groups[el].areas.length > 0)
@@ -200,28 +209,31 @@
 		'indicator-related-visible': null
 	};
 
-	$: {
-		selectionsObject['indicator-additional-visible'] = constructVisibleAreasArray(
-			selectionsObject['indicator-additional-chosen'],
-			false,
-			parentAndRelatedAreasObject,
-			metadata.areasObject
-		);
-
-		selectionsObject['indicator-related-visible'] = constructVisibleAreasArray(
-			selectionsObject['indicator-related-chosen'],
-			true,
+	function updateSelections(chosenElement, related) {
+		return constructVisibleAreasArray(
+			chosenElement,
+			related,
 			parentAndRelatedAreasObject,
 			metadata.areasObject
 		);
 	}
+
+	$: selectionsObject['indicator-additional-visible'] = updateSelections(
+		selectionsObject['indicator-additional-chosen'],
+		false
+	);
+
+	$: selectionsObject['indicator-related-visible'] = updateSelections(
+		selectionsObject['indicator-related-chosen'],
+		true
+	);
 
 	$: accordionArrayMap = [
 		{
 			label: '',
 			type: 'checkbox',
 			chosenKey: 'indicator-additional',
-			accordion: false,
+			accordion: true,
 			options: [
 				{
 					key: 'ctry',
@@ -307,7 +319,7 @@
 			]
 		},
 		{
-			label: 'Geography level',
+			label: 'Group of related areas',
 			type: 'radio',
 			search: null,
 			chosenKey: 'indicator-related',
@@ -347,17 +359,6 @@
 	$: caveats = data.indicator.metadata.caveats
 		? new MarkdownIt().render(data.indicator.metadata.caveats)
 		: null;
-
-	$: chosenStartTimePeriod = timePeriodsArray
-		? timePeriodsArray.find((el) => el.xDomainNumb === chosenXDomainNumbStart)
-		: null;
-
-	onMount(() => {
-		selectionsObject['indicator-related-chosen'] = 'ltla';
-		selectionsObject['indicator-additional-chosen'] = codesForAreasWithData.includes('K02000001')
-			? ['K02000001']
-			: countriesWithDataCodes;
-	});
 </script>
 
 <Breadcrumb
@@ -435,13 +436,23 @@
 					</div>
 				</div>
 
-				<ContentBlock
-					type="map"
-					title={data.indicator.metadata.label}
-					unit={getUnit(data.indicator.metadata)}
-					data={mapData.data}
-				>
-					{#if mapData.data.length > 0 && mapData.breaks.length > 0}
+				{#if mapData.data.length === 0 || mapData.breaks.length === 0}
+					<ContentBlock>
+						<div class="no-chart-container">
+							<p>
+								No <span style="font-weight: bold;">{data.indicator.metadata.label}</span> data to
+								display for
+								<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+							</p>
+						</div>
+					</ContentBlock>
+				{:else}
+					<ContentBlock
+						type="map"
+						title={data.indicator.metadata.label}
+						unit={getUnit(data.indicator.metadata)}
+						data={mapData.data}
+					>
 						<p class="subtitle">
 							{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 						</p>
@@ -458,8 +469,8 @@
 							customLookup={customLookup['indicator-additional-visible']}
 							on:select={doSelect}
 						/>
-					{:else}{/if}
-				</ContentBlock>
+					</ContentBlock>
+				{/if}
 			</NavSection>
 		{/if}
 
@@ -486,25 +497,19 @@
 					</div>
 				</div>
 
-				<ContentBlock
-					type="line-chart"
-					title={data.indicator.metadata.label}
-					unit={getUnit(data.indicator.metadata)}
-					data={[]}
-				>
-					<p class="subtitle">
-						{data.indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
-					</p>
-					<LineChartContainerIndicatorPage
-						indicator={data.indicator}
-						chartData={data.chartData}
-						{selectionsObject}
-						customLookup={customLookup['indicator-additional-visible']}
-						{metadata}
-						chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
-						{showConfidenceIntervals}
-					></LineChartContainerIndicatorPage>
-				</ContentBlock>
+				<LineChartContainerIndicatorPage
+					indicator={data.indicator}
+					chartData={data.chartData}
+					{selectionsObject}
+					customLookup={customLookup['indicator-additional-visible']}
+					{metadata}
+					chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
+					{showConfidenceIntervals}
+					{chosenTimePeriodDropdownLabel}
+					{chosenStartTimePeriod}
+					{chosenTimePeriodsArray}
+					{timePeriodsArray}
+				></LineChartContainerIndicatorPage>
 			</NavSection>
 		{/if}
 
@@ -539,25 +544,18 @@
 					></ChartOptions>
 				</div>
 			</div>
-			<ContentBlock
-				type="bar-chart"
-				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
-				data={[]}
-			>
-				<p class="subtitle">
-					{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
-				</p>
-				<BarChartContainerIndicatorPage
-					indicator={data.indicator}
-					chartData={data.chartData}
-					{selectionsObject}
-					customLookup={customLookup['indicator-additional-visible']}
-					{metadata}
-					chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
-					{showConfidenceIntervals}
-				></BarChartContainerIndicatorPage>
-			</ContentBlock>
+			<BarChartContainerIndicatorPage
+				indicator={data.indicator}
+				chartData={data.chartData}
+				{selectionsObject}
+				customLookup={customLookup['indicator-additional-visible']}
+				{metadata}
+				chosenXDomain={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
+				{showConfidenceIntervals}
+				{chosenTimePeriodDropdownLabel}
+				{timePeriodsArray}
+				{chosenTimePeriodsArray}
+			></BarChartContainerIndicatorPage>
 		</NavSection>
 
 		<NavSection title="Table">
@@ -689,5 +687,29 @@
 		padding: 0px;
 		line-height: 24px;
 		font-size: 18px;
+	}
+
+	.source-notes-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
+	}
+
+	.no-chart-container {
+		margin: 0px 10px;
+		height: 500px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		text-wrap: balance;
+		text-align: center;
 	}
 </style>

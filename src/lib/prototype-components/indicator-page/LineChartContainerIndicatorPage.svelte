@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
+	import ContentBlock from '$lib/components/ContentBlock.svelte';
 
 	export let metadata,
 		indicator,
@@ -8,7 +9,13 @@
 		customLookup,
 		selectionsObject,
 		showConfidenceIntervals,
-		chosenXDomain;
+		chosenXDomain,
+		chosenTimePeriodDropdownLabel,
+		chosenStartTimePeriod,
+		chosenTimePeriodsArray,
+		timePeriodsArray;
+
+	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
@@ -73,45 +80,95 @@
 		Math.max(...visibleAreasPeriods.filter((el) => el <= xDomainInit[1]))
 	];
 
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
-		(el) =>
-			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= xDomain[0] &&
-			el.xDomainNumb <= xDomain[1]
+	$: combinedChartData = [
+		...filteredChartDataSelected,
+		...filteredChartDataAdditionals,
+		...filteredChartDataAreaGroup
+	];
+
+	$: unselectedAreas = selectionsObject['indicator-additional-visible'].filter(
+		(el) => combinedChartData.find((elm) => elm.areacd === el.areacd) === undefined
 	);
 </script>
 
-{#if timePeriodsArray.length === 0}
-	<div class="no-chart-container">
-		<p>No data for selected areas over time period</p>
-	</div>
-{:else if timePeriodsArray.length > 1}
-	<LineChartContainer
-		{indicator}
-		{metadata}
-		{timePeriodsArray}
-		filteredChartDataSelected={filteredChartDataSelected.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
-			(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-		)}
-		{selectionsObject}
-		selectedArea={null}
-		additionalID="indicator-additional"
-		relatedID="indicator-related"
-		{indicatorCalculations}
-		{xDomain}
-		{customLookup}
-		{showConfidenceIntervals}
-	></LineChartContainer>
+{#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>No areas selected. Select areas to view time series data.</p>
+		</div>
+	</ContentBlock>
+{:else if timePeriodsArray.length <= 1}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				No <span style="font-weight: bold;">{indicator.metadata.label}</span> time series data to display.
+			</p>
+		</div>
+	</ContentBlock>
+{:else if chosenTimePeriodsArray.length === 0}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for {chosenXDomainNumbEnd}.
+			</p>
+		</div>
+	</ContentBlock>
+{:else if chosenTimePeriodsArray.length === 1}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				Time series not displayed as selected date range includes only one time period with <span
+					style="font-weight: bold;">{indicator.metadata.label}</span
+				> data.
+			</p>
+		</div>
+	</ContentBlock>
+{:else if !combinedChartData || combinedChartData.length === 0}
+	<ContentBlock>
+		<div class="no-chart-container">
+			<p>
+				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
+				selected areas between
+				<span style="font-weight: bold;"
+					>{chosenTimePeriodsArray[chosenTimePeriodsArray.length - 1].label}</span
+				>
+				and <span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+			</p>
+		</div>
+	</ContentBlock>
 {:else}
-	<div class="no-chart-container">
-		<p>No data for selected areas prior to {timePeriodsArray[0].label}</p>
-	</div>
+	<ContentBlock
+		type="line-chart"
+		title={indicator.metadata.label}
+		unit={getUnit(indicator.metadata)}
+		data={[]}
+	>
+		<p class="subtitle">
+			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
+		</p>
+		<LineChartContainer
+			{indicator}
+			{metadata}
+			{timePeriodsArray}
+			filteredChartDataSelected={filteredChartDataSelected.filter(
+				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+			)}
+			filteredChartDataAdditionals={filteredChartDataAdditionals.filter(
+				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+			)}
+			filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
+				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+			)}
+			{selectionsObject}
+			selectedArea={null}
+			additionalID="indicator-additional"
+			relatedID="indicator-related"
+			{indicatorCalculations}
+			{xDomain}
+			{customLookup}
+			{showConfidenceIntervals}
+		></LineChartContainer>
+	</ContentBlock>
 {/if}
 
 <style>
@@ -126,11 +183,26 @@
 	}
 
 	.no-chart-container {
+		margin: 0px 10px;
 		height: 500px;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-weight: bold;
+		text-wrap: balance;
+		text-align: center;
+	}
+
+	.source-notes-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 24px;
+		font-size: 18px;
 	}
 </style>

@@ -47,7 +47,7 @@
 				bind:chosenXDomainNumbStart
 				bind:chosenXDomainNumbEnd
 				{timePeriodsArray}
-				{chosenTimePeriodDropdownLabel}
+				bind:chosenTimePeriodDropdownLabel
 			></EditTimePeriod>
 		{/if}
 	</div>

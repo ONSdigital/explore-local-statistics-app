@@ -48,6 +48,8 @@ export default async function main() {
 		expectAllOnLeft: false
 	}).select(aq.not('period'));
 
+	combined_data = combined_data.dedupe('xDomainNumb', 'code', 'areacd');
+
 	const [indicators, indicators_calculations, _oldStyleIndicatorsCalculations] =
 		getIndicatorsCalculations(previousIndicators, combined_data, areas_geog_level);
 

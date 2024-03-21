@@ -61,7 +61,7 @@
 		{#if labelRect}
 			<rect
 				x={-labelRect.width / 2 - 3}
-				y={-45}
+				y={-43}
 				width={labelRect.width + 6}
 				height="24"
 				fill="white"
@@ -74,7 +74,7 @@
 		<g>
 			<text
 				style="font-size: 20px; stroke-width: 0.5px"
-				y="-26"
+				y="-24"
 				bind:contentRect={labelRect}
 				text-anchor="middle"
 				fill={colorsLookup['selected'].color}

@@ -17,7 +17,9 @@
 				? yDistancePowerBelow
 				: yDistancePowerBelow / 2;
 
-	$: ticks = generateDivisibleNumbersWithinRange(yDomain, tickInterval);
+	$: ticks = yDomain;
+
+	$: maxValue = ticks ? Math.max(...ticks) : 0;
 
 	let ticksWidthArray = [];
 
@@ -36,7 +38,11 @@
 
 			<text bind:contentRect={ticksWidthArray[i]} text-anchor="end" x="-10" y="5" font-size="16px"
 				>{selectedIndicator.metadata.prefix +
-					addThousandsSeparator(d) +
+					(maxValue >= 1000000
+						? addThousandsSeparator(d / 1000000) + 'm'
+						: maxValue >= 100000
+							? addThousandsSeparator(d / 1000) + 'k'
+							: addThousandsSeparator(d.toFixed(0))) +
 					selectedIndicator.metadata.suffix}</text
 			>
 		</g>

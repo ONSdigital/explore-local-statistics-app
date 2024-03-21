@@ -15,7 +15,7 @@
 		borderColor = null;
 
 	const onClickEvent = () => {
-		chosen = Array.isArray(chosen) ? chosen.filter((el) => el != area.areacd) : null;
+		chosen = Array.isArray(chosen) ? chosen.filter((el) => el != area.areacd) : 'none';
 	};
 
 	$: col = area

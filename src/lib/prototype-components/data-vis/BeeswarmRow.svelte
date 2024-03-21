@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BackgroundCircles from '$lib/prototype-components/data-vis/beeswarm-row/BackgroundCircles.svelte';
 	import PrimaryCirclesAndLabels from '$lib/prototype-components/data-vis/beeswarm-row/PrimaryCirclesAndLabels.svelte';
+	import { Observe } from '@onsvisual/svelte-components';
 
 	import { onMount } from 'svelte';
 	import { scaleLinear } from 'd3-scale';
@@ -15,7 +16,8 @@
 		selectionsObject,
 		filteredChartDataBeeswarm,
 		customLookup,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		observed;
 
 	export let hoverAreaId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
 
@@ -30,7 +32,7 @@
 	});
 </script>
 
-{#if mounted && selectionsObject['related-rows-visible']}
+{#if mounted && selectionsObject['related-rows-visible'] && observed}
 	<BackgroundCircles
 		{metadata}
 		{x}

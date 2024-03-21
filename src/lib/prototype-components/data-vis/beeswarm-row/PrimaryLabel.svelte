@@ -16,7 +16,7 @@
 		{#if labelRect}
 			<rect
 				x={-labelRect.width / 2 - 3}
-				y={-45}
+				y={-43}
 				width={labelRect.width + 6}
 				height={role === 'main' ? 35 : 24}
 				fill="white"
@@ -31,7 +31,7 @@
 				style="font-size: {role === 'main' ? '30px' : '20px'}; stroke-width: {role === 'main'
 					? '1px'
 					: '0.5px'}"
-				y={role === 'main' ? -17 : -26}
+				y={role === 'main' ? -15 : -24}
 				bind:contentRect={labelRect}
 				text-anchor="middle"
 				fill={colorsLookup[role].color}

@@ -16,7 +16,8 @@
 		filteredChartDataBeeswarm,
 		showConfidenceIntervals,
 		customLookup,
-		indicatorCalculations;
+		indicatorCalculations,
+		observed;
 
 	let width = 1000;
 	$: height = 80;
@@ -177,6 +178,7 @@
 						{xDomain}
 						{customLookup}
 						{showConfidenceIntervals}
+						{observed}
 					></BeeswarmRow>
 				{/if}
 			</g>
@@ -221,7 +223,7 @@
 	}
 
 	.robo-text-container {
-		margin: 15px 0px 0 0px;
+		margin: 15px 0px 2px 0px;
 		padding: 0px;
 		text-align: center;
 		font-size: 16px;

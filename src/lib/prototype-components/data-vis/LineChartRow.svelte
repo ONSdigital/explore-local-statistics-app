@@ -6,6 +6,7 @@
 	import ConfidenceIntervals from '$lib/prototype-components/data-vis/line-chart-row/ConfidenceIntervals.svelte';
 
 	import { scaleLinear } from 'd3-scale';
+	import { tick } from 'svelte';
 
 	export let indicator,
 		xDomain,
@@ -26,7 +27,62 @@
 
 	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
 
-	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
+	$: yDistance = Math.abs(yDomain[1] - yDomain[0]);
+	$: yDistancePowerBelow = 10 ** Math.floor(Math.log10(yDistance));
+
+	$: tickInterval =
+		yDistance / yDistancePowerBelow > 5
+			? yDistancePowerBelow * 2
+			: yDistance / yDistancePowerBelow > 2
+				? yDistancePowerBelow
+				: yDistancePowerBelow / 2;
+
+	function findHighestDivisibleAbove(targetNumber, divisor) {
+		// Calculate the remainder when dividing the target number by the divisor
+		let remainder = targetNumber % divisor;
+
+		// If the remainder is 0, the target number is already divisible by the divisor
+		if (remainder === 0) {
+			return targetNumber;
+		}
+
+		// Calculate the difference needed to reach the next multiple of the divisor
+		let difference = divisor - remainder;
+
+		// Calculate the highest number above the target number that is divisible by the divisor
+		let highestDivisibleAbove = targetNumber + difference;
+
+		return highestDivisibleAbove;
+	}
+
+	function findSmallestDivisibleBelow(targetNumber, divisor) {
+		// Calculate the remainder when dividing the target number by the divisor
+		let remainder = targetNumber % divisor;
+
+		// If the remainder is 0, the target number is already divisible by the divisor
+		if (remainder === 0) {
+			return targetNumber;
+		}
+
+		// Calculate the difference needed to reach the previous multiple of the divisor
+		let difference = remainder;
+
+		// Calculate the smallest number below the target number that is divisible by the divisor
+		let smallestDivisibleBelow = targetNumber - difference;
+
+		return smallestDivisibleBelow;
+	}
+
+	$: yDomainAdjusted = [
+		indicator.metadata.canBeNegative === 'F'
+			? Math.max(0, findSmallestDivisibleBelow(yDomain[0], tickInterval))
+			: findSmallestDivisibleBelow(yDomain[0], tickInterval),
+		indicator.metadata.suffix === '%'
+			? Math.min(100, findHighestDivisibleAbove(yDomain[1], tickInterval))
+			: findHighestDivisibleAbove(yDomain[1], tickInterval)
+	];
+
+	$: y = scaleLinear().domain(yDomainAdjusted).range([chartHeight, 0]);
 
 	$: additionalLines = showConfidenceIntervals
 		? []
@@ -78,8 +134,14 @@
 	];*/
 </script>
 
-<AxisY selectedIndicator={indicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>
-<AxisX {timePeriodsArray} {chartHeight} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
+<AxisY
+	selectedIndicator={indicator}
+	{chartHeight}
+	bind:yAxisMaxTickWidth
+	{y}
+	yDomain={yDomainAdjusted}
+></AxisY>
+<AxisX {timePeriodsArray} {chartHeight} {chartWidth} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
 
 <g class="lines-container">
 	<g class="primary-lines" style="opacity :{hoverChartData.length > 0 ? 0.2 : 1}">
@@ -110,7 +172,7 @@
 </g>
 
 <g class="label-container" transform="translate({chartWidth},0)">
-	{#if hoverChartData.length > 0}
+	{#if hoverChartData.length > 1}
 		<Label
 			{indicator}
 			{xDomain}
@@ -119,8 +181,9 @@
 			bind:maxLabelWidth
 			role="selected"
 			hover={true}
+			{chartHeight}
 		></Label>
-	{:else}
+	{:else if selectedFilteredChartData.length > 1}
 		<Label
 			{indicator}
 			{xDomain}
@@ -129,6 +192,7 @@
 			bind:maxLabelWidth
 			role="main"
 			hover={false}
+			{chartHeight}
 		></Label>
 	{/if}
 </g>

@@ -103,7 +103,7 @@
 		margin: 0px;
 		width: 100%;
 		background-color: white;
-		padding: 20px 0 30px 0;
+		padding: 10px 0;
 		position: sticky;
 		top: 0px;
 		z-index: 10;
@@ -117,7 +117,7 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		gap: 4px;
+		gap: 10px;
 	}
 
 	.grid-container {

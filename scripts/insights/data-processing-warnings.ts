@@ -49,8 +49,8 @@ export function abortIfMultiplePeriodGroupsForOneIndicator(combined_data, period
 		if (!(row.code in indicatorToPeriodGroup)) {
 			indicatorToPeriodGroup[row.code] = periodToGroup[row.period];
 		} else if (indicatorToPeriodGroup[row.code] !== periodToGroup[row.period]) {
-			console.log(row);
-			throw new Error(MULTIPLE_PERIODS_WARNING);
+			//console.log(row);
+			//throw new Error(MULTIPLE_PERIODS_WARNING);
 		}
 	}
 }

@@ -4,6 +4,7 @@
 	import BeeswarmRowContainer from '$lib/prototype-components/area-page/indicator-rows/BeeswarmRowContainer.svelte';
 	import LineChartRowContainer from '$lib/prototype-components/area-page/indicator-rows/LineChartRowContainer.svelte';
 	import { onMount } from 'svelte';
+	import { Observe } from '@onsvisual/svelte-components';
 
 	export let hoverAreaId,
 		hoverIndicatorId,
@@ -185,128 +186,85 @@
 	onMount(() => {
 		setTimeout(function () {
 			mounted = true;
-		}, 500);
+		}, 200);
 	});
 
-	/*$: selectedIndicatorCalculations = xDomain[1] ?
-						metadata.*/
-
-	/*$: selectedIndicatorCalculations = xDomain[1]
-		? metadata.indicatorsCalculationsArray.find(
-				(el) =>
-					el.code === indicator.code &&
-					parseFloat(el.period) === xDomain[1] &&
-					el.geog_level === 'lower'
-			)
-		: null;
-
-	$: filteredChartData =
-		xDomain[1] && xDomain[0]
-			? indicatorChartData.filter(
-					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-				)
-			: null;
-
-	$: selectedAreaFilteredChartData = selectedAreaChartData
-		? selectedAreaChartData.filter(
-				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-			)
-		: null;
-	$: selectedAreaFilteredChartDataBeeswarm = selectedAreaFilteredChartData
-		? selectedAreaFilteredChartData.find((el) => el.xDomainNumb === xDomain[1])
-		: null;
-
-	$: comparisonAreaFilteredChartData = comparisonAreaChartData
-		? comparisonAreaChartData.filter(
-				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-			)
-		: null;
-	$: comparisonAreaFilteredChartDataBeeswarm =
-		comparisonAreaFilteredChartData &&
-		comparisonAreaFilteredChartData.find((el) => parseFloat(el.xDomainNumb) === xDomain[1])
-			? {
-					...comparisonAreaFilteredChartData.find(
-						(el) => parseFloat(el.xDomainNumb) === xDomain[1]
-					),
-					role: selectionsObject['areas-rows-comparison-visible'].role
-				}
-			: null;
-
-	$: backgroundChartData =
-		filteredChartData && selectionsObject['related-rows-visible']
-			? filteredChartData.filter((el) =>
-					selectionsObject['related-rows-visible'].codes.includes(el.areacd)
-				)
-			: null;
-	$: backgroundChartDataBeeswarm = backgroundChartData
-		? backgroundChartData.filter((el) => el.xDomainNumb === xDomain[1])
-		: null;
-
-	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
-
-	$: hoverChartData =
-		hoverAreaId && filteredChartData
-			? filteredChartData.filter((el) => el.areacd === hoverAreaId)
-			: [];*/
+	let observed = false;
 </script>
 
 <div class="indicator-row-container" style="margin-bottom: 20px;">
-	<TitleAdditionalDescription {showVisuals} {indicator} {xDomain} {selectedAndComparisonXDomain}
+	<TitleAdditionalDescription
+		{showVisuals}
+		{indicator}
+		{xDomain}
+		{selectedAndComparisonXDomain}
+		{timePeriodsArray}
 	></TitleAdditionalDescription>
 </div>
 
-<div class="indicator-row-container">
-	{#if showVisuals}
-		<div class="visuals-container">
-			<div class="beeswarm-container">
-				<BeeswarmRowContainer
-					{metadata}
-					{indicator}
-					{latestTimePeriod}
-					{latestIndicatorCalculations}
-					{selectionsObject}
-					{selectedArea}
-					bind:hoverAreaId
-					bind:hoverIndicatorId
-					{selectedFilteredChartDataBeeswarmWithRole}
-					{comparisonFilteredChartDataBeeswarmWithRole}
-					{additionalFilteredChartDataBeeswarm}
-					{customLookup}
-					{filteredChartDataBeeswarm}
-					{showConfidenceIntervals}
-					{indicatorCalculations}
-				></BeeswarmRowContainer>
-			</div>
-
-			<Divider orientation="vertical"></Divider>
-
-			{#if mounted}
-				<div class="line-chart-container">
-					{#if xDomain[0] != xDomain[1]}
-						<LineChartRowContainer
-							{filteredChartData}
-							{metadata}
-							{indicator}
-							{selectionsObject}
-							{hoverAreaId}
-							{timePeriodsArray}
-							{xDomain}
-							{selectedFilteredChartData}
-							{comparisonFilteredChartData}
-							{indicatorCalculations}
-							{customLookup}
-							{showConfidenceIntervals}
-						></LineChartRowContainer>
-					{:else}
-						<span>No time series data to display</span>
-					{/if}
+<Observe bind:visible={observed}>
+	<div class="indicator-row-container">
+		{#if showVisuals}
+			<div class="visuals-container">
+				<div class="beeswarm-container">
+					<BeeswarmRowContainer
+						{observed}
+						{metadata}
+						{indicator}
+						{latestTimePeriod}
+						{latestIndicatorCalculations}
+						{selectionsObject}
+						{selectedArea}
+						bind:hoverAreaId
+						bind:hoverIndicatorId
+						{selectedFilteredChartDataBeeswarmWithRole}
+						{comparisonFilteredChartDataBeeswarmWithRole}
+						{additionalFilteredChartDataBeeswarm}
+						{customLookup}
+						{filteredChartDataBeeswarm}
+						{showConfidenceIntervals}
+						{indicatorCalculations}
+					></BeeswarmRowContainer>
 				</div>
-			{/if}
-		</div>
-	{/if}
-</div>
+
+				<div class="divider-vertical"></div>
+
+				{#if mounted}
+					<div class="line-chart-container">
+						{#if xDomain[0] != xDomain[1]}
+							<LineChartRowContainer
+								{filteredChartData}
+								{metadata}
+								{indicator}
+								{selectionsObject}
+								{hoverAreaId}
+								{timePeriodsArray}
+								{xDomain}
+								{selectedFilteredChartData}
+								{comparisonFilteredChartData}
+								{indicatorCalculations}
+								{customLookup}
+								{showConfidenceIntervals}
+							></LineChartRowContainer>
+						{:else}
+							<span>No time series data to display</span>
+						{/if}
+					</div>
+				{/if}
+			</div>
+		{/if}
+	</div>
+</Observe>
 
 <style>
+	.divider-vertical {
+		border-right-style: solid;
+		border-right-color: #cbd5e1;
+		border-right-width: 1px;
+		margin: 0px 15px 0px 5px;
+		width: 0px;
+	}
+
 	.indicator-row-container {
 		padding: 0px;
 		display: flex;
@@ -314,15 +272,17 @@
 	}
 
 	.visuals-container {
-		margin: 0px 0px 5px 0px;
+		margin: 0px;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		gap: 2%;
+		justify-content: space-between;
+		width: 100%;
 	}
 
 	.beeswarm-container {
-		width: 64%;
+		flex-grow: 1;
+		overflow: hidden;
 	}
 
 	.line-chart-container {
@@ -330,16 +290,21 @@
 		flex-direction: column;
 		flex-wrap: nowrap;
 		justify-content: center;
-		width: 32%;
+		width: 225px;
+		overflow: hidden;
 	}
 
-	@media (max-width: 800px) {
-		.beeswarm-container {
-			width: 100%;
-		}
-
+	@media (max-width: 950px) {
 		.line-chart-container {
 			display: none;
+		}
+
+		.divider-vertical {
+			display: none;
+		}
+
+		.beeswarm-container {
+			margin: 0px 10px;
 		}
 	}
 
