@@ -26,9 +26,9 @@ export function readCsvAutoType(filename: string) {
 			typesSeen[type] = true;
 		}
 		const numberOfTypesSeen = Object.values(typesSeen).reduce((a, b) => a + (b ? 1 : 0), 0);
-		if (numberOfTypesSeen > 1) {
-			throw new Error(`More than one type exists in column ${columnName} in file ${filename}.`);
-		}
+		//		if (numberOfTypesSeen > 1) {
+		//			throw new Error(`More than one type exists in column ${columnName} in file ${filename}.`);
+		//		}
 	}
 
 	return result;
