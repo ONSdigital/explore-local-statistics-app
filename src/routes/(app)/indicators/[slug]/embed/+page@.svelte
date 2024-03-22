@@ -3,7 +3,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { Embed, Container } from '@onsvisual/svelte-components';
 	import MainChartEmbed from '$lib/prototype-components/area-page/main-chart/MainChartEmbed.svelte';
-	import { geoTypes } from '$lib/config/geoConfig.js';
+	import { filterGeoGroups } from '$lib/util/geo/filterGeoGroups.js';
 
 	export let data;
 
@@ -16,10 +16,13 @@
 		opts.chartData = { combinedDataObject };
 
 		opts.selectedArea =
-			data.areas.length > 0 ? { ...data.metadata.areasObject[data.areas[0]], role: 'main' } : null;
+			data.areas.length > 0 ? { ...data.metadata.areasObject[data.areas[0]], role: 'main' } : {};
 		const otherAreas = data.areas.slice(1);
 
-		const geoGroup = data.geo ? geoTypes.find((t) => t.key === data.geo) : null;
+		const geoGroups = filterGeoGroups(data.indicator.inferredGeos);
+		const geoGroup = data.geo
+			? geoGroups.find((t) => t.key === data.geo)
+			: geoGroups[geoGroups.length - 1];
 		const geoCodes = geoGroup
 			? [...new Set(data.chartData.map((d) => d.areacd))].filter((d) =>
 					geoGroup.codes.includes(d.slice(0, 3))
