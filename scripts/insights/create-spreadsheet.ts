@@ -2,10 +2,18 @@ import fs from 'node:fs';
 import JSZip from 'jszip';
 import accessibleSpreadsheetCreator from 'accessible-spreadsheet-creator';
 
+const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
+
 export function createSpreadsheet(data, metadata, filename) {
 	const odsData = {
-		coverSheetTitle: 'Explore Subnational Statistics',
-		coverSheetContents: ['## Source', '[Office for National Statistics](https://www.ons.gov.uk)'],
+		coverSheetTitle: 'Explore local statistics',
+		coverSheetContents: [
+			'## Source',
+			'[Office for National Statistics](https://www.ons.gov.uk)',
+			'[Visit Explore Local Statistics on the ONS website](http://explore-local-statistics.beta.ons.gov.uk/)',
+			'## Note on blank cells',
+			'Some cells are blank, indicating unavailable data.'
+		],
 		notes: [],
 		sheets: []
 	};
@@ -17,46 +25,66 @@ export function createSpreadsheet(data, metadata, filename) {
 			for (const indicatorCode of subTopic.indicatorCodes) {
 				const { label, slug, decimalPlaces, subtitle, sourceURL, longDescription, subText } =
 					metadata.indicatorsObject[indicatorCode].metadata;
+				const unit = getUnit(metadata.indicatorsObject[indicatorCode].metadata);
 				const periodGroup = metadata.indicatorsObject[indicatorCode].periodGroup;
 				const { id, code, areacd, value, lci, uci, xDomainNumb } = data[indicatorCode];
 				if (![0, 1].includes(decimalPlaces)) {
 					throw new Error('Unexpected number of decimal places.');
 				}
 				const numberStyle = decimalPlaces === 0 ? 'number_with_commas' : 'number_1dp';
-				const nonNulls = value
+				const values = value
 					.map((v, i) => ({
 						value: v,
+						lci: lci[i],
+						uci: uci[i],
 						areacd: areacd[i],
 						areanm: metadata.areasObject[areacd[i]].areanm,
+						xDomainNumb: xDomainNumb[i],
 						period: periodsMap.get(`${periodGroup};${xDomainNumb[i]}`)
 					}))
-					.filter((d) => d.value != null);
+					.sort((a, b) => {
+						if (a.areacd < b.areacd) return -1;
+						if (a.areacd > b.areacd) return 1;
+						return a.xDomainNumb - b.xDomainNumb;
+					});
 				const columns = [
 					{
 						style: 'text',
 						heading: 'Area code',
-						values: nonNulls.map((d) => d.areacd)
+						values: values.map((d) => d.areacd)
 					},
 					{
 						style: 'text',
 						heading: 'Area name',
-						values: nonNulls.map((d) => d.areanm)
+						values: values.map((d) => d.areanm)
 					},
 					{
 						style: 'text',
 						heading: 'Period',
-						values: nonNulls.map((d) => d.period)
+						values: values.map((d) => d.period)
 					},
 					{
 						style: numberStyle,
-						heading: 'Value',
-						values: nonNulls.map((d) => d.value)
+						allowNulls: true,
+						heading: unit ? `Value (${unit})` : 'Value',
+						values: values.map((d) => d.value)
 					}
 				];
-				const sheetIntroText = [subtitle];
-				if (subText != null) {
-					sheetIntroText.push(subText);
+				if (lci.some((d) => d != null) || uci.some((d) => d != null)) {
+					columns.push({
+						style: numberStyle,
+						allowNulls: true,
+						heading: 'Confidence interval lower',
+						values: values.map((d) => d.lci)
+					});
+					columns.push({
+						style: numberStyle,
+						allowNulls: true,
+						heading: 'Confidence interval upper',
+						values: values.map((d) => d.uci)
+					});
 				}
+				const sheetIntroText = [subtitle];
 				odsData.sheets.push({
 					sheetName: `${label} [[note-${slug}]]`,
 					tableName: slug.replaceAll('-', '_'),
