@@ -135,7 +135,13 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock title={indicator.metadata.label} {indicator} {metadata} data={[]} {embedProps}>
+	<ContentBlock
+		title={indicator.metadata.label}
+		{indicator}
+		{metadata}
+		data={chartData.filter((d) => d.xDomainNumb === chosenXDomain[1])}
+		{embedProps}
+	>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 		</p>

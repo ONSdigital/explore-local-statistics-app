@@ -17,6 +17,8 @@
 
 	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
+	$: console.log('chartData', chartData);
+
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
 	);
@@ -145,7 +147,15 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock title={indicator.metadata.label} {indicator} {metadata} data={[]} {embedProps}>
+	<ContentBlock
+		title={indicator.metadata.label}
+		{indicator}
+		{metadata}
+		data={chartData.filter(
+			(d) => d.xDomainNumb >= chosenXDomain[0] && d.xDomainNumb <= chosenXDomain[1]
+		)}
+		{embedProps}
+	>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
 		</p>
