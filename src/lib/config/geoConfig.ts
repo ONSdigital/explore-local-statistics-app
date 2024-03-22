@@ -101,6 +101,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'ctry',
+		alt: 'country',
 		codes: ['E92', 'S92', 'N92', 'W92'],
 		pcio: 'country',
 		label: 'country',
@@ -111,6 +112,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'rgn',
+		alt: 'region',
 		codes: ['E12'],
 		pcio: 'region',
 		label: 'region',
@@ -121,6 +123,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'cauth',
+		alt: 'combined',
 		codes: ['E06', 'E09', 'E10', 'E47', 'N09', 'S12', 'W06'],
 		label: 'upper-tier/combined authority',
 		plural: 'upper-tier/combined authorities',
@@ -131,6 +134,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'utla',
+		alt: 'upper',
 		codes: ['E06', 'E08', 'E09', 'E10', 'N09', 'S12', 'W06'],
 		pcio: 'admin_county',
 		label: 'upper-tier/unitary authority',
@@ -142,6 +146,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'ltla',
+		alt: 'lower',
 		codes: ['E06', 'E07', 'E08', 'E09', 'N09', 'S12', 'W06'],
 		pcio: 'admin_district',
 		label: 'lower-tier/unitary authority',

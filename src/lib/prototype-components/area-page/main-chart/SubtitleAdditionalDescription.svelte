@@ -2,7 +2,11 @@
 	import { base } from '$app/paths';
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let selectedIndicator, xDomain, selectedChartType, timePeriodsArray;
+	export let selectedIndicator,
+		xDomain,
+		selectedChartType,
+		timePeriodsArray,
+		showInfo = true;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -34,9 +38,17 @@
 
 <h3 class="indicator-title">{selectedIndicator.metadata.label}</h3>
 
-<button on:mouseenter={onMouseenterEvent} on:mouseleave={onMouseleaveEvent} on:click={onClickEvent}>
-	<span>{subtitleText}<InfoButton {expandIcon}></InfoButton></span>
-</button>
+{#if showInfo}
+	<button
+		on:mouseenter={onMouseenterEvent}
+		on:mouseleave={onMouseleaveEvent}
+		on:click={onClickEvent}
+	>
+		<span>{subtitleText}<InfoButton {expandIcon}></InfoButton></span>
+	</button>
+{:else}
+	<span>{subtitleText}</span>
+{/if}
 
 {#if displayAdditional}
 	<div class="indicator-additional-description-text-container">

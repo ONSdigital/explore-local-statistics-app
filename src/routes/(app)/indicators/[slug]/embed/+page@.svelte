@@ -1,86 +1,76 @@
 <script lang="ts">
 	//@ts-nocheck
-	import { Embed, Container, Dropdown, Table } from '@onsvisual/svelte-components';
-	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import { afterNavigate } from '$app/navigation';
-	import Map from '$lib/viz/Map.svelte';
+	import { Embed, Container } from '@onsvisual/svelte-components';
+	import MainChartEmbed from '$lib/prototype-components/area-page/main-chart/MainChartEmbed.svelte';
+	import { geoTypes } from '$lib/config/geoConfig.js';
 
 	export let data;
 
-	let geoGroup, year, columns;
-	let pivotedData, mapData;
-	let selected = [];
-
-	const maxSelection = 10;
-
-	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
-	const doSelect = (e) => {
-		const area = e.detail?.area;
-		if (selected.map((s) => s.areacd).includes(area.areacd))
-			selected = selected.filter((s) => s.areacd !== area.areacd);
-		else if (selected.length < maxSelection) selected = [...selected, area];
-	};
-	const refreshData = () => {
-		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
-		mapData =
-			geoGroup?.codes && year
-				? makeMapData(data.chartData, geoGroup?.codes, year)
-				: { data: [], breaks: [] };
-	};
+	let options;
 
 	afterNavigate(() => {
-		geoGroup = data.indicator.inferredGeos.groups[data.indicator.inferredGeos.groups.length - 1];
-		year = data.indicator.years[data.indicator.years.length - 1];
-		columns = [
-			{ key: 'areacd', label: 'Area code', sortable: true },
-			{ key: 'areanm', label: 'Area name', sortable: true },
-			...data.indicator.years.map((y) => ({ key: y, label: y, sortable: true }))
-		];
-		refreshData();
+		const opts = {};
+		const combinedDataObject = {};
+		combinedDataObject[data.indicator.code] = data.chartData;
+		opts.chartData = { combinedDataObject };
+
+		opts.selectedArea =
+			data.areas.length > 0 ? { ...data.metadata.areasObject[data.areas[0]], role: 'main' } : null;
+		const otherAreas = data.areas.slice(1);
+
+		const geoGroup = data.geo ? geoTypes.find((t) => t.key === data.geo) : null;
+		const geoCodes = geoGroup
+			? [...new Set(data.chartData.map((d) => d.areacd))].filter((d) =>
+					geoGroup.codes.includes(d.slice(0, 3))
+				)
+			: [];
+		const relatedVisible = geoGroup
+			? {
+					codes: geoCodes,
+					areas: geoCodes.map((cd) => data.metadata.areasObject[cd]),
+					group: geoGroup.key,
+					label: geoGroup.label,
+					role: 'related'
+				}
+			: null;
+		opts.selectionsObject = {
+			'indicator-additional-chosen': [],
+			'indicator-additional-visible': [],
+			'indicator-related-chosen': data.geo,
+			'indicator-related-visible': relatedVisible,
+			'areas-single-additional-chosen': otherAreas,
+			'areas-single-additional-visible': otherAreas.map((cd) => ({
+				...data.metadata.areasObject[cd],
+				role: 'custom'
+			})),
+			'related-single-chosen': data.geo,
+			'related-single-visible': relatedVisible
+		};
+		opts.customLookup = (() => {
+			const lkp = {};
+			otherAreas.forEach((d, i) => (lkp[d] = i));
+			return lkp;
+		})();
+		opts.geoGroup = geoGroup;
+
+		options = opts;
+		console.log(options);
 	});
 </script>
 
 <Embed>
 	<Container width="medium">
-		<h3 class="content-subhead">
-			{data.indicator.metadata.label}<span>, {getUnit(data.indicator.metadata)}</span>
-		</h3>
-		{#if mapData && pivotedData}
-			{#if data.chartType === 'map'}
-				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown
-						options={data.indicator.inferredGeos.groups}
-						bind:value={geoGroup}
-						on:change={refreshData}
-					/>
-					<Dropdown
-						id="year"
-						options={data.indicator.years}
-						width={10}
-						bind:value={year}
-						on:change={refreshData}
-					/>
-				</div>
-				<Map
-					data={mapData.data}
-					breaks={mapData.breaks}
-					geos={data.indicator.inferredGeos}
-					prefix={data.indicator.metadata.prefix}
-					suffix={data.indicator.metadata.suffix}
-					dp={+data.indicator.metadata.decimalPlaces}
-					{selected}
-					on:select={doSelect}
-				/>
-			{:else if data.chartType === 'table'}
-				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown
-						options={data.indicator.inferredGeos.groups}
-						bind:value={geoGroup}
-						on:change={refreshData}
-					/>
-				</div>
-				<Table data={pivotedData} {columns} height={500} stickyHeader compact />
-			{/if}
+		{#if options}
+			<MainChartEmbed
+				chartType={data.chart}
+				metadata={data.metadata}
+				indicator={data.indicator}
+				showConfidenceIntervals={data.intervals}
+				chosenXDomainNumbStart={data.years[0]}
+				chosenXDomainNumbEnd={data.years[1]}
+				{...options}
+			/>
 		{/if}
 	</Container>
 </Embed>
