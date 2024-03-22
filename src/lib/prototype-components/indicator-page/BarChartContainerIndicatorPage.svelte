@@ -135,12 +135,7 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock
-		title={indicator.metadata.label}
-		unit={getUnit(indicator.metadata)}
-		data={[]}
-		{embedProps}
-	>
+	<ContentBlock title={indicator.metadata.label} {indicator} data={[]} {embedProps}>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 		</p>
@@ -201,14 +196,8 @@
 		text-align: center;
 	}
 
-	.notes-container {
-		padding: 0px;
-		margin: 0px;
-		line-height: 24px;
-		font-size: 18px;
-	}
-
 	.source-notes-container {
+		font-size: 16px;
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -217,7 +206,6 @@
 	.notes-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 24px;
-		font-size: 18px;
+		line-height: 1;
 	}
 </style>

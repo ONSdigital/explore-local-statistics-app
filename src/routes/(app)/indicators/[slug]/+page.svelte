@@ -458,7 +458,7 @@
 				{:else}
 					<ContentBlock
 						title={data.indicator.metadata.label}
-						unit={getUnit(data.indicator.metadata)}
+						indicator={data.indicator}
 						data={mapData.data}
 						embedProps={{
 							type: 'map',
@@ -586,7 +586,7 @@
 			</div>
 			<ContentBlock
 				title={data.indicator.metadata.label}
-				unit={getUnit(data.indicator.metadata)}
+				indicator={data.indicator}
 				data={pivotedData}
 				embedProps={{ type: 'table', geo: geoGroup.key }}
 			>
@@ -706,6 +706,7 @@
 	}
 
 	.source-notes-container {
+		font-size: 16px;
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -714,8 +715,7 @@
 	.notes-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 24px;
-		font-size: 18px;
+		line-height: 1;
 	}
 
 	.no-chart-container {

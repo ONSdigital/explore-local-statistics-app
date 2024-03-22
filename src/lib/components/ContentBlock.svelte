@@ -7,7 +7,7 @@
 
 	export let embedProps = {};
 	export let title = null;
-	export let unit = null;
+	export let indicator = null;
 	export let type = embedProps?.type || 'chart';
 	export let data = null;
 	export let showActions = true;
@@ -17,6 +17,8 @@
 
 	const clip = (str, msg) => navigator.clipboard.writeText(str).then(() => alert(msg));
 
+	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
+	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 	$: embedCode = `<div id="${type}"></div>
 <scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
 <scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?${Object.keys(
@@ -35,6 +37,19 @@
 			</h3>
 		{/if}
 		<slot />
+		<div class="source-notes-container">
+			<p class="source-container">
+				<span style="font-weight: bold">Source:</span>
+				{#each sourceOrgs as org, i}
+					<a href={sourceLinks[i]} target="_blank">{org}</a>
+					{#if i < sourceOrgs.length - 2}
+						,
+					{:else if i === sourceOrgs.length - 2}
+						{'and '}
+					{/if}
+				{/each}
+			</p>
+		</div>
 	</div>
 </div>
 {#if showActions}
@@ -153,5 +168,17 @@
 		outline: 3px solid transparent;
 		outline-offset: 1px;
 		text-decoration: none;
+	}
+	.source-notes-container {
+		padding: 8px 0 4px;
+		font-size: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+	.source-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 1;
 	}
 </style>

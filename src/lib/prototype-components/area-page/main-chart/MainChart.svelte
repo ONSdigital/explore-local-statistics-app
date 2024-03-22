@@ -311,7 +311,7 @@
 									<p class="source-container">
 										<span style="font-weight: bold">Source:</span>
 										{#each sourceOrgs as org, i}
-											<a href={sourceLinks[i]}>{org}</a>
+											<a href={sourceLinks[i]} target="_blank">{org}</a>
 
 											{#if i < sourceOrgs.length - 2}
 												,
@@ -398,7 +398,7 @@
 									<p class="source-container">
 										<span style="font-weight: bold">Source:</span>
 										{#each sourceOrgs as org, i}
-											<a href={sourceLinks[i]}>{org}</a>
+											<a href={sourceLinks[i]} target="_blank">{org}</a>
 
 											{#if i < sourceOrgs.length - 2}
 												,
@@ -469,7 +469,7 @@
 									<p class="source-container">
 										<span style="font-weight: bold">Source:</span>
 										{#each sourceOrgs as org, i}
-											<a href={sourceLinks[i]}>{org}</a>
+											<a href={sourceLinks[i]} target="_blank">{org}</a>
 
 											{#if i < sourceOrgs.length - 2}
 												,
@@ -574,6 +574,7 @@
 	}
 
 	.source-notes-container {
+		font-size: 16px;
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -582,14 +583,12 @@
 	.source-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 24px;
-		font-size: 18px;
+		line-height: 1;
 	}
 
 	.notes-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 24px;
-		font-size: 18px;
+		line-height: 1;
 	}
 </style>
