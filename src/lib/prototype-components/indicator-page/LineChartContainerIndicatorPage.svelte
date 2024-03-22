@@ -145,7 +145,7 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock title={indicator.metadata.label} {indicator} data={[]} {embedProps}>
+	<ContentBlock title={indicator.metadata.label} {indicator} {metadata} data={[]} {embedProps}>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
 		</p>

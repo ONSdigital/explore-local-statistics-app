@@ -459,6 +459,7 @@
 					<ContentBlock
 						title={data.indicator.metadata.label}
 						indicator={data.indicator}
+						metadata={data.metadata}
 						data={mapData.data}
 						embedProps={{
 							type: 'map',
@@ -587,6 +588,7 @@
 			<ContentBlock
 				title={data.indicator.metadata.label}
 				indicator={data.indicator}
+				metadata={data.metadata}
 				data={pivotedData}
 				embedProps={{ type: 'table', geo: geoGroup.key }}
 			>

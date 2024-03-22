@@ -7,6 +7,7 @@
 
 	export let embedProps = {};
 	export let title = null;
+	export let metadata = null;
 	export let indicator = null;
 	export let type = embedProps?.type || 'chart';
 	export let data = null;
@@ -17,8 +18,8 @@
 
 	const clip = (str, msg) => navigator.clipboard.writeText(str).then(() => alert(msg));
 
-	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
-	$: sourceLinks = indicator.metadata.sourceURL.split('|');
+	$: sourceOrgs = indicator ? indicator.metadata.sourceOrg.split('|') : [];
+	$: sourceLinks = indicator ? indicator.metadata.sourceURL.split('|') : [];
 	$: embedCode = `<div id="${type}"></div>
 <scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
 <scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?${Object.keys(
@@ -64,7 +65,8 @@
 				</li>{/if}
 			{#if data}<li>
 					<Icon type="download" /><span
-						><button class="btn-link" on:click={() => downloadCSV(data)}>Download data (CSV)</button
+						><button class="btn-link" on:click={() => downloadCSV(data, metadata, indicator)}
+							>Download data (CSV)</button
 						></span
 					>
 				</li>{/if}
