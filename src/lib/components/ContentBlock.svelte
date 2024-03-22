@@ -26,11 +26,16 @@
 		.join('&')}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
-<div class="content-block" class:hide-actions={!showActions} bind:this={el}>
-	{#if title}
-		<h3 class="content-subhead">{title}<span>{unit ? `, ${unit}` : ''}</span></h3>
-	{/if}
-	<slot />
+<div class="content-block-wrapper">
+	<div class="content-block" class:hide-actions={!showActions} bind:this={el}>
+		{#if title}
+			<h3 class="content-subhead">
+				{title}
+				<!-- <span>{unit ? `, ${unit}` : ''}</span> -->
+			</h3>
+		{/if}
+		<slot />
+	</div>
 </div>
 {#if showActions}
 	<div class="content-actions">
@@ -68,10 +73,12 @@
 {/if}
 
 <style>
-	.content-block {
+	.content-block-wrapper {
 		border: 1px solid #222;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
+	}
+	.content-block {
 		padding: 12px;
 	}
 	.hide-actions {
@@ -79,8 +86,8 @@
 		border-bottom-right-radius: 4px;
 	}
 	h3.content-subhead {
-		font-size: 18px;
-		margin-bottom: 8px;
+		font-size: 1.222em;
+		margin: 0;
 	}
 	h3.content-subhead > span {
 		font-size: 16px;
