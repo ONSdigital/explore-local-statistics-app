@@ -367,6 +367,16 @@
 		);
 	}
 
+	$: {
+		selectionsObject['areas-rows-additional-chosen'] = selectionsObject[
+			'areas-rows-comparison-chosen'
+		]
+			? selectionsObject['areas-rows-additional-chosen'].filter(
+					(el) => el != selectionsObject['areas-rows-comparison-chosen']
+				)
+			: selectionsObject['areas-rows-additional-chosen'];
+	}
+
 	$: selectionsObject['areas-rows-comparison-visible'] = updateSelections(
 		selectionsObject['areas-rows-comparison-chosen'],
 		false
