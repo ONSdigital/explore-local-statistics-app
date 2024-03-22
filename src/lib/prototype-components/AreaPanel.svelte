@@ -110,7 +110,7 @@
 			</svg>
 		{/if}
 		<span style="color: {txtColor}"
-			>{label} {showConfidenceIntervals ? ' (with 95% confidence intervals' : ''}</span
+			>{label} {showConfidenceIntervals ? ' (with 95% confidence intervals)' : ''}</span
 		>
 	</div>
 {/if}
