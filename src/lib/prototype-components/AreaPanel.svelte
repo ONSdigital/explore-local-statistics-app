@@ -12,7 +12,8 @@
 		fontWeight = 'normal',
 		backgroundColor = 'contrast',
 		color = 'color',
-		borderColor = null;
+		borderColor = null,
+		showConfidenceIntervals = false;
 
 	const onClickEvent = () => {
 		chosen = Array.isArray(chosen) ? chosen.filter((el) => el != area.areacd) : 'none';
@@ -66,7 +67,19 @@
 	>
 		{#if markerRadius}
 			<svg width="20" height="20">
-				{#if markerShape === 'square'}
+				{#if showConfidenceIntervals}
+					<line
+						x1="4"
+						x2="16"
+						y1="10"
+						y2="10"
+						stroke={fillColor}
+						stroke-width="12px"
+						opacity="0.4"
+					/>
+					<line x1="10" x2="10" y1="2" y2="18" stroke="white" stroke-width="6px" />
+					<line x1="10" x2="10" y1="2" y2="18" stroke={fillColor} stroke-width="4px" />
+				{:else if markerShape === 'square'}
 					<rect
 						x={10 - markerRadius * 0.8}
 						y={10 - markerRadius * 0.8}
@@ -96,7 +109,9 @@
 				{/if}
 			</svg>
 		{/if}
-		<span style="color: {txtColor}">{label}</span>
+		<span style="color: {txtColor}"
+			>{label} {showConfidenceIntervals ? ' (with 95% confidence intervals' : ''}</span
+		>
 	</div>
 {/if}
 

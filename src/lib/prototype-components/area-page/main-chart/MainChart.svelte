@@ -218,6 +218,7 @@
 				{timePeriodsArray}
 				chosenTimePeriodDropdownLabel={null}
 				showSlider={indicator.maxXDomainNumb != indicator.minXDomainNumb}
+				disableConfidenceIntervals={indicator.metadata.confidenceIntervals === 'F'}
 			></ChartOptions>
 		</div>
 	</div>

@@ -505,6 +505,7 @@
 							bind:showConfidenceIntervals
 							{timePeriodsArray}
 							bind:chosenTimePeriodDropdownLabel
+							disableConfidenceIntervals={data.indicator.metadata.confidenceIntervals === 'F'}
 						></ChartOptions>
 					</div>
 				</div>
@@ -545,15 +546,17 @@
 							? 'Select areas'
 							: 'Change areas'}
 					></ChangeAreas>
-					<ChartOptions
-						{metadata}
-						bind:chosenXDomainNumbStart
-						bind:chosenXDomainNumbEnd
-						bind:showConfidenceIntervals
-						{timePeriodsArray}
-						bind:chosenTimePeriodDropdownLabel
-						showSlider={false}
-					></ChartOptions>
+					{#if data.indicator.metadata.confidenceIntervals != 'F'}
+						<ChartOptions
+							{metadata}
+							bind:chosenXDomainNumbStart
+							bind:chosenXDomainNumbEnd
+							bind:showConfidenceIntervals
+							{timePeriodsArray}
+							bind:chosenTimePeriodDropdownLabel
+							showSlider={false}
+						></ChartOptions>
+					{/if}
 				</div>
 			</div>
 			<BarChartContainerIndicatorPage

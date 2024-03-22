@@ -17,7 +17,8 @@
 		filteredChartDataBeeswarm,
 		customLookup,
 		showConfidenceIntervals,
-		observed;
+		observed,
+		width;
 
 	export let hoverAreaId, hoverIndicatorId, spaceForOutliers, chartWidth, chartHeight, xDomain;
 
@@ -46,6 +47,7 @@
 		{selectedArea}
 		bind:hoverAreaId
 		bind:hoverIndicatorId
+		{width}
 	></BackgroundCircles>
 {/if}
 
@@ -78,4 +80,5 @@
 	bind:hoverAreaId
 	bind:hoverIndicatorId
 	{showConfidenceIntervals}
+	{width}
 ></PrimaryCirclesAndLabels>

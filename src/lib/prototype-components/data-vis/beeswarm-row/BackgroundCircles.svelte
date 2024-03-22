@@ -20,7 +20,8 @@
 		selectionsObject,
 		selectedArea,
 		hoverAreaId,
-		hoverIndicatorId;
+		hoverIndicatorId,
+		width;
 
 	$: backgroundChartDataBeeswarm = filteredChartDataBeeswarm.filter(
 		(el) =>
@@ -81,7 +82,14 @@
 	<HoverLabel area={hoverArea} {y} {indicator} {chartHeight} {chartWidth} {spaceForOutliers}
 	></HoverLabel>
 	{#if hoverIndicatorId === indicator.code}
-		<HoverLabelName {metadata} area={hoverArea} {y} {chartHeight} {chartWidth} {spaceForOutliers}
+		<HoverLabelName
+			{metadata}
+			area={hoverArea}
+			{y}
+			{chartHeight}
+			{chartWidth}
+			{spaceForOutliers}
+			{width}
 		></HoverLabelName>
 	{/if}
 	<HoverCircle circle={hoverArea} {y}></HoverCircle>

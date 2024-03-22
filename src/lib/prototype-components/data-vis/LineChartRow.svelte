@@ -106,32 +106,6 @@
 			? { role: 'main', data: selectedFilteredChartData }
 			: null
 	].filter((el) => el);
-
-	/*export let indicator,
-		xDomain,
-		yDomain,
-		chartHeight,
-		chartWidth,
-		hoverChartData,
-		hoverId,
-		selectionsObject,
-		selectedAreaFilteredChartData,
-		comparisonAreaFilteredChartData,
-		timePeriodsArray,
-		chosenComparisonMeasureOrArea;
-	export let yAxisMaxTickWidth, xAxisFinalTickWidth, maxLabelWidth;
-
-	$: x = scaleLinear().domain(xDomain).range([0, chartWidth]);
-
-	$: y = scaleLinear().domain(yDomain).range([chartHeight, 0]);
-
-	$: linesArray = [
-		{
-			role: selectionsObject['areas-rows-comparison-visible'].role,
-			data: comparisonAreaFilteredChartData
-		},
-		{ role: 'main', data: selectedAreaFilteredChartData }
-	];*/
 </script>
 
 <AxisY

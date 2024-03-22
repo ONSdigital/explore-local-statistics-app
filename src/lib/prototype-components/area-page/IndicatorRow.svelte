@@ -105,11 +105,16 @@
 		Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
 	];
 
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
+	$: timePeriodsArrayGlobal = metadata.periodsLookupArray.filter(
 		(el) =>
 			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= xDomain[0] &&
-			el.xDomainNumb <= xDomain[1]
+			indicator.years.includes(el.xDomainNumb) &&
+			el.xDomainNumb >= chosenXDomain[0] &&
+			el.xDomainNumb <= chosenXDomain[1]
+	);
+
+	$: timePeriodsArray = timePeriodsArrayGlobal.filter(
+		(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 	);
 
 	$: filteredChartData =
@@ -224,6 +229,8 @@
 						{filteredChartDataBeeswarm}
 						{showConfidenceIntervals}
 						{indicatorCalculations}
+						noMoreRecentDataForSelectedArea={timePeriodsArrayGlobal[0].xDomainNumb !=
+							timePeriodsArray[0].xDomainNumb}
 					></BeeswarmRowContainer>
 				</div>
 

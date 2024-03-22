@@ -25,7 +25,8 @@
 		selectionsObject,
 		hoverAreaId,
 		hoverIndicatorId,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		width;
 
 	$: primaryCircleDataStep1 = (
 		showConfidenceIntervals
@@ -212,7 +213,6 @@
 		{chartHeight}
 		{chartWidth}
 		{spaceForOutliers}
-		priority={true}
 		adjustmentValue={chartHeight + y(hoverArea.y)}
 	></HoverLabel>
 	{#if hoverIndicatorId === indicator.code}
@@ -224,12 +224,8 @@
 			{chartWidth}
 			{spaceForOutliers}
 			adjustmentValue={chartHeight + y(hoverArea.y)}
+			{width}
 		></HoverLabelName>
 	{/if}
-	<HoverCircle
-		circle={hoverArea}
-		{y}
-		outline="{false}}"
-		adjustmentValue={chartHeight + y(hoverArea.y)}
-	></HoverCircle>
+	<HoverCircle circle={hoverArea} {y} adjustmentValue={chartHeight + y(hoverArea.y)}></HoverCircle>
 {/if}

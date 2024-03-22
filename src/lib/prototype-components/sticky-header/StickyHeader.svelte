@@ -25,41 +25,47 @@
 	let showAllAreas = false;
 </script>
 
-<div></div>
-
 <div class="row-container sticky control-panel">
 	<div class="visible-areas-key-container grid-container">
-		<AreaPanel area={selectedArea} markerRadius="8" button={false} fontWeight="bold"></AreaPanel>
-		{#if selectionsObject['areas-rows-comparison-visible']}
-			<AreaPanel
-				area={selectionsObject['areas-rows-comparison-visible']}
-				markerRadius="8"
-				button={false}
-				fontWeight="bold"
-				markerShape="diamond"
-			></AreaPanel>
+		<AreaPanel
+			area={selectedArea}
+			markerRadius="8"
+			button={false}
+			fontWeight="bold"
+			{showConfidenceIntervals}
+		></AreaPanel>
+		{#if !showConfidenceIntervals}
+			{#if selectionsObject['areas-rows-comparison-visible']}
+				<AreaPanel
+					area={selectionsObject['areas-rows-comparison-visible']}
+					markerRadius="8"
+					button={false}
+					fontWeight="bold"
+					markerShape="diamond"
+				></AreaPanel>
+			{/if}
+			{#each showAllAreas ? visibleParentAreas : visibleParentAreas.slice(0, maxAdditionalAreasOnKey) as area, i}
+				<AreaPanel
+					{area}
+					markerShape={area.areacd === selectedArea.parentcd ? 'square' : 'diamond'}
+					markerRadius="8"
+					button={false}
+					backgroundColor="white"
+					fontWeight="bold"
+					{customLookup}
+				></AreaPanel>
+			{/each}
+			{#each showAllAreas ? visibleCustomAreas : visibleCustomAreas.slice(0, Math.max(0, maxAdditionalAreasOnKey - visibleParentAreas.length)) as area, i}
+				<AreaPanel
+					{area}
+					markerRadius="8"
+					button={false}
+					backgroundColor="white"
+					fontWeight="bold"
+					{customLookup}
+				></AreaPanel>
+			{/each}
 		{/if}
-		{#each showAllAreas ? visibleParentAreas : visibleParentAreas.slice(0, maxAdditionalAreasOnKey) as area, i}
-			<AreaPanel
-				{area}
-				markerShape={area.areacd === selectedArea.parentcd ? 'square' : 'diamond'}
-				markerRadius="8"
-				button={false}
-				backgroundColor="white"
-				fontWeight="bold"
-				{customLookup}
-			></AreaPanel>
-		{/each}
-		{#each showAllAreas ? visibleCustomAreas : visibleCustomAreas.slice(0, Math.max(0, maxAdditionalAreasOnKey - visibleParentAreas.length)) as area, i}
-			<AreaPanel
-				{area}
-				markerRadius="8"
-				button={false}
-				backgroundColor="white"
-				fontWeight="bold"
-				{customLookup}
-			></AreaPanel>
-		{/each}
 		{#if selectionsObject['related-rows-visible'] || selectionsObject['areas-rows-additional-visible'].length > 0}
 			<AreaPanel
 				area={selectionsObject['related-rows-visible']}
@@ -69,15 +75,17 @@
 				color="#ddd"
 				borderColor="#707070"
 			></AreaPanel>
-			{#if !showAllAreas && visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
-				<button class="btn-link" on:click={() => (showAllAreas = true)}
-					>Show {visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey} more
-					{visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey === 1
-						? 'area'
-						: 'areas'}</button
-				>
-			{:else if showAllAreas}
-				<button class="btn-link" on:click={() => (showAllAreas = false)}>Show fewer areas</button>
+			{#if !showConfidenceIntervals}
+				{#if !showAllAreas && visibleParentAreas.length + visibleCustomAreas.length > maxAdditionalAreasOnKey}
+					<button class="btn-link" on:click={() => (showAllAreas = true)}
+						>Show {visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey} more
+						{visibleParentAreas.length + visibleCustomAreas.length - maxAdditionalAreasOnKey === 1
+							? 'area'
+							: 'areas'}</button
+					>
+				{:else if showAllAreas}
+					<button class="btn-link" on:click={() => (showAllAreas = false)}>Show fewer areas</button>
+				{/if}
 			{/if}
 		{/if}
 	</div>
@@ -90,6 +98,7 @@
 			bind:showConfidenceIntervals
 			bind:chosenXDomainNumbStart
 			bind:chosenXDomainNumbEnd
+			includeNotes={true}
 		></ChartOptions>
 		<ChartInfo></ChartInfo>
 	</div>
@@ -99,6 +108,7 @@
 	.control-panel {
 		border-bottom: 1px solid var(--ons-color-grey-15);
 	}
+
 	.sticky {
 		margin: 0px;
 		width: 100%;

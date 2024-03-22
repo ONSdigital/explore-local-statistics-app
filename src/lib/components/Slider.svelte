@@ -51,22 +51,27 @@
 		setPos(value);
 		setValue(pos);
 	}
+
+	$: multipleTimePeriodsSelected = Math.min(...value) != Math.max(...value);
 </script>
 
 {#if range}
 	<span
-		>Selected date range <strong
+		>{multipleTimePeriodsSelected ? 'Selected time periods range:' : 'Selected time period:'}
+		<strong
 			>{timePeriodsArray
 				? timePeriodsArray.find((el) => el.xDomainNumb === Math.min(...value)).label
 				: format(Math.min(...value))}</strong
 		>
-		to
-		<strong
-			>{timePeriodsArray
-				? timePeriodsArray.find((el) => el.xDomainNumb === Math.max(...value)).label
-				: format(Math.max(...value))}</strong
-		></span
-	>
+		{#if multipleTimePeriodsSelected}
+			to
+			<strong
+				>{timePeriodsArray
+					? timePeriodsArray.find((el) => el.xDomainNumb === Math.max(...value)).label
+					: format(Math.max(...value))}</strong
+			>
+		{/if}
+	</span>
 {/if}
 <div class="track">
 	<div class="ticks">

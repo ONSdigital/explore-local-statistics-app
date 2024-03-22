@@ -42,18 +42,6 @@
 			y={-5}
 			width={circle.datum.uciXPosition - circle.datum.lciXPosition}
 			height="10"
-			fill="white"
-			stroke="none"
-			stroke-width="1px"
-			fill-opacity="1"
-		></rect>
-		<rect
-			class="ci-rect"
-			transform="translate(0,{2 * y(circle.y)})"
-			x={circle.datum.lciXPosition}
-			y={-5}
-			width={circle.datum.uciXPosition - circle.datum.lciXPosition}
-			height="10"
 			fill={color.color}
 			stroke="white"
 			stroke-width="1px"
@@ -62,6 +50,16 @@
 	{/if}
 
 	{#if showConfidenceIntervals}
+		{#if circle.datum.lciXPosition && circle.datum.uciXPosition}
+			<g transform="translate({circle.datum.lciXPosition},{2 * y(circle.y)})">
+				<line y1={-radius + 2} y2={radius - 2} stroke={'white'} stroke-width="4px"></line>
+				<line y1={-radius + 3} y2={radius - 3} stroke={color.color} stroke-width="2px"></line>
+			</g>
+			<g transform="translate({circle.datum.uciXPosition},{2 * y(circle.y)})">
+				<line y1={-radius + 2} y2={radius - 2} stroke={'white'} stroke-width="4px"></line>
+				<line y1={-radius + 3} y2={radius - 3} stroke={color.color} stroke-width="2px"></line>
+			</g>
+		{/if}
 		<g transform="translate({circle.x},{2 * y(circle.y)})">
 			<line y1={-radius - 2} y2={radius + 2} stroke={'white'} stroke-width="6px"></line>
 			<line y1={-radius} y2={radius} stroke={color.color} stroke-width="4px"></line>
@@ -100,10 +98,6 @@
 </g>
 
 <style>
-	.priority-area {
-		pointer-events: none;
-	}
-
 	.ci-rect {
 		pointer-events: none;
 	}

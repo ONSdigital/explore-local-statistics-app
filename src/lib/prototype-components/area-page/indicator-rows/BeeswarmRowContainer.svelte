@@ -17,7 +17,8 @@
 		showConfidenceIntervals,
 		customLookup,
 		indicatorCalculations,
-		observed;
+		observed,
+		noMoreRecentDataForSelectedArea;
 
 	let width = 1000;
 	$: height = 80;
@@ -35,6 +36,7 @@
 			: madRangeLookup.default['beeswarm-row'];
 
 	$: includeComparisonText =
+		!['country', 'region', 'combined'].includes(selectedArea.geogLevel) &&
 		selectedArea.geogLevel in latestIndicatorCalculations.calcsByGeogLevel &&
 		latestIndicatorCalculations.calcsByGeogLevel[selectedArea.geogLevel].count >= 10;
 
@@ -71,88 +73,6 @@
 					? 'Lower'
 					: 'Similar';
 
-	/*export let metadata,
-		indicator,
-		selectedIndicatorCalculations,
-		backgroundChartDataBeeswarm,
-		timePeriod,
-		selectedAreaFilteredChartDataBeeswarm,
-		comparisonAreaFilteredChartDataBeeswarm,
-		hoverId,
-		hoverIndicatorId,
-		selectionsObject,
-		selectedArea;
-
-	let width = 1000;
-	$: height = 80;
-
-	$: padding = { top: 45, right: 0, bottom: 5, left: 0 };
-
-	$: spaceForOutliers = 40;
-
-	$: chartWidth = width - padding.left - padding.right - spaceForOutliers * 2;
-	$: chartHeight = height - padding.top - padding.bottom;
-
-	$: madRange =
-		indicator.code in madRangeLookup
-			? madRangeLookup[indicator.code]['beeswarm-row']
-			: madRangeLookup.default['beeswarm-row'];
-
-	$: values = madRange === 'minMax' ? backgroundChartDataBeeswarm.map((el) => [el.value]) : null;
-
-	$: furtherDistanceFromMedian =
-		madRange === 'minMax'
-			? Math.max(...values.map((el) => Math.abs(el - selectedIndicatorCalculations.med)))
-			: null;
-
-	$: xDomain =
-		madRange === 'minMax'
-			? [
-					selectedIndicatorCalculations.med - furtherDistanceFromMedian,
-					parseFloat(selectedIndicatorCalculations.med) + furtherDistanceFromMedian
-				]
-			: [
-					selectedIndicatorCalculations.med - madRange * selectedIndicatorCalculations.mad,
-					parseFloat(selectedIndicatorCalculations.med) +
-						madRange * selectedIndicatorCalculations.mad
-				];
-
-	$: selectedComparisonDifference = !comparisonAreaFilteredChartDataBeeswarm
-		? 'No comparison'
-		: !selectedAreaFilteredChartDataBeeswarm
-			? 'No selected'
-			: selectedAreaFilteredChartDataBeeswarm.value -
-						comparisonAreaFilteredChartDataBeeswarm.value >
-				  selectedIndicatorCalculations.mad
-				? 'Higher'
-				: selectedAreaFilteredChartDataBeeswarm.value -
-							comparisonAreaFilteredChartDataBeeswarm.value <
-					  -selectedIndicatorCalculations.mad
-					? 'Lower'
-					: 'Similar';
-
-	$: goodBad =
-		indicator.metadata.polarity == 1
-			? selectedComparisonDifference === 'Higher'
-				? 'Good'
-				: selectedComparisonDifference === 'Lower'
-					? 'Bad'
-					: 'Neither'
-			: indicator.metadata.polarity == -1
-				? selectedComparisonDifference === 'Higher'
-					? 'Bad'
-					: selectedComparisonDifference === 'Lower'
-						? 'Good'
-						: 'Neither'
-				: 'Neither';
-
-	$: backgroundStyle =
-		goodBad === 'Good'
-			? 'background-color: #E6F5D0; box-shadow: 0 0 4px 3px #E6F5D0'
-			: goodBad === 'Bad'
-				? 'background-color: #FDE0EF; box-shadow: 0 0 4px 3px #FDE0EF'
-				: '';*/
-
 	$: backgroundStyle = '';
 </script>
 
@@ -179,6 +99,7 @@
 						{customLookup}
 						{showConfidenceIntervals}
 						{observed}
+						{width}
 					></BeeswarmRow>
 				{/if}
 			</g>
@@ -213,6 +134,11 @@
 			<span>{latestTimePeriod.label}</span>
 		</span>
 	</div>
+	<!-- {#if noMoreRecentDataForSelectedArea}
+		<div class="robo-text-inline">
+			<span>(No {selectedArea.areanm} data for more recent time periods)</span>
+		</div>
+	{/if} -->
 </div>
 
 <style>
@@ -229,6 +155,9 @@
 		font-size: 16px;
 		line-height: 16px;
 		color: #414042;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
 	}
 
 	.robo-text-inline {

@@ -11,7 +11,9 @@
 		showConfidenceIntervals,
 		timePeriodsArray,
 		chosenTimePeriodDropdownLabel,
-		showSlider = true;
+		showSlider = true,
+		includeNotes = false,
+		disableConfidenceIntervals = false;
 
 	let showModal = false;
 
@@ -37,7 +39,29 @@
 	</div>
 
 	<div slot="content" class="column-container">
-		<Checkbox bind:checked={showConfidenceIntervals} label="Show confidence intervals" compact />
+		<div class="confidence-intervals-container">
+			<Checkbox
+				bind:checked={showConfidenceIntervals}
+				label="Show confidence intervals"
+				compact
+				disabled={disableConfidenceIntervals}
+			/>
+
+			{#if disableConfidenceIntervals}
+				<span class="note"
+					>Confidence interval data is not available for the selected indicator.</span
+				>
+			{/if}
+
+			{#if includeNotes}
+				<span class="note">Note: Confidence interval data is not available for all indicators.</span
+				>
+				<span class="note"
+					>Comparison areas are hidden when 'Show confidence intervals' is selected. Confidence
+					intervals for multiple areas can be viewed in the 'Select an indicator' section below.</span
+				>
+			{/if}
+		</div>
 
 		{#if showSlider}
 			<Divider orientation="horizontal"></Divider>
@@ -48,12 +72,18 @@
 				bind:chosenXDomainNumbEnd
 				{timePeriodsArray}
 				bind:chosenTimePeriodDropdownLabel
+				{includeNotes}
 			></EditTimePeriod>
 		{/if}
 	</div>
 </Modal>
 
 <style>
+	.note {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
 	.title-container span {
 		font-weight: bold;
 		font-size: 20px;
@@ -72,5 +102,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.confidence-intervals-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
 	}
 </style>

@@ -6,7 +6,8 @@
 		chosenXDomainNumbStart,
 		chosenXDomainNumbEnd,
 		timePeriodsArray,
-		chosenTimePeriodDropdownLabel;
+		chosenTimePeriodDropdownLabel,
+		includeNotes;
 
 	// $: timePeriodOptionsArray = Array.from(
 	// 	{ length: metadata.globalXDomainExtent[1] - metadata.globalXDomainExtent[0] + 1 },
@@ -27,8 +28,6 @@
 			chosenTimePeriodDropdownLabel = timePeriodsArray.find((el) => el.xDomainNumb === max).label;
 		}
 	}
-
-	$: console.log(chosenXDomainNumbStart, chosenXDomainNumbEnd);
 </script>
 
 <Slider
@@ -40,10 +39,11 @@
 	on:input={debounce(setChosenXDomain, 100)}
 	{timePeriodsArray}
 />
-
-<span class="small-note"
-	>Note: Charts will show the earliest/latest available dates within this range.</span
->
+{#if includeNotes}
+	<span class="small-note"
+		>Note: Charts will show the earliest/latest available dates within this range.</span
+	>
+{/if}
 
 <style>
 	.button-container {

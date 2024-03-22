@@ -2,7 +2,8 @@
 	import { addThousandsSeparator, roundNumber, splitTextIntoRows } from '$lib/utils';
 	import { colorsLookup } from '$lib/config.js';
 
-	export let metadata,
+	export let width,
+		metadata,
 		area,
 		y,
 		chartHeight,

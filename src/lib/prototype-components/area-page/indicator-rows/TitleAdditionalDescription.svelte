@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import InfoButton from '$lib/prototype-components/modified-svelte-components/InfoButton.svelte';
 
-	export let showVisuals, indicator, xDomain, selectedAndComparisonXDomain, timePeriodsArray;
+	export let showVisuals, indicator;
 
 	let expandIcon = false;
 	let displayAdditional = false;
@@ -39,7 +39,7 @@
 		<span style="text-align: left;">
 			<span>No data to display for</span>
 			<span style="font-weight: bold">{indicator.metadata.label}</span>
-			<span> for selected time period</span>
+			<span> for selected time periods</span>
 			<InfoButton {expandIcon}></InfoButton>
 		</span>
 	{/if}
