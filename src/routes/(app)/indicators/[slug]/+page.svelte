@@ -86,9 +86,9 @@
 		columns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
 			{ key: 'areanm', label: 'Area name', sortable: true },
-			...data.indicator.years.map((y) => ({
-				key: y,
-				label: y,
+			...timePeriodsArray.map((t) => ({
+				key: t.xDomainNumb,
+				label: t.label,
 				sortable: true,
 				numeric: true,
 				dp: +data.indicator.metadata.decimalPlaces

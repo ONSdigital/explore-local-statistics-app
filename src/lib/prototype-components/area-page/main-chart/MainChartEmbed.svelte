@@ -17,6 +17,8 @@
 		geoGroup,
 		chosenXDomainNumbStart,
 		chosenXDomainNumbEnd,
+		timePeriodsArray,
+		chosenTimePeriodsArray,
 		tableColumns,
 		showConfidenceIntervals = false;
 
@@ -113,17 +115,6 @@
 		Math.min(...visibleAreasPeriods.filter((el) => el >= xDomainInit[0])),
 		Math.max(...visibleAreasPeriods.filter((el) => el <= xDomainInit[1]))
 	];
-
-	$: timePeriodsArray = metadata.periodsLookupArray.filter(
-		(el) =>
-			el.periodGroup === indicator.periodGroup &&
-			el.xDomainNumb >= indicator.minXDomainNumb &&
-			el.xDomainNumb <= indicator.maxXDomainNumb
-	);
-
-	$: chosenTimePeriodsArray = timePeriodsArray.filter(
-		(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
-	);
 
 	$: filteredChartDataSelectedLatest = filteredChartDataSelected.filter(
 		(el) => el.xDomainNumb === xDomain[1]

@@ -57,18 +57,25 @@
 		})();
 		opts.geoGroup = geoGroup;
 
+		opts.timePeriodsArray = data.metadata.periodsLookupArray.filter(
+			(t) =>
+				t.periodGroup === data.indicator.periodGroup &&
+				t.xDomainNumb >= data.indicator.minXDomainNumb &&
+				t.xDomainNumb <= data.indicator.maxXDomainNumb
+		);
+		opts.chosenTimePeriodsArray = opts.timePeriodsArray.filter(
+			(t) => t.xDomainNumb >= data.years[0] && t.xDomainNumb <= data.years[1]
+		);
 		opts.tableColumns = [
 			{ key: 'areacd', label: 'Area code', sortable: true },
 			{ key: 'areanm', label: 'Area name', sortable: true },
-			...data.indicator.years
-				.filter((y) => y >= data.years[0] && y <= data.years[1])
-				.map((y) => ({
-					key: y,
-					label: y,
-					sortable: true,
-					numeric: true,
-					dp: +data.indicator.metadata.decimalPlaces
-				}))
+			...opts.chosenTimePeriodsArray.map((t) => ({
+				key: t.xDomainNumb,
+				label: t.label,
+				sortable: true,
+				numeric: true,
+				dp: +data.indicator.metadata.decimalPlaces
+			}))
 		];
 
 		options = opts;
