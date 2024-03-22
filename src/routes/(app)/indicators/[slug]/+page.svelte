@@ -74,9 +74,6 @@
 				el.xDomainNumb >= data.indicator.minXDomainNumb &&
 				el.xDomainNumb <= data.indicator.maxXDomainNumb
 		);
-
-		console.log(timePeriodsArray, data.indicator.maxXDomainNumb, data.indicator.minXDomainNumb);
-
 		chosenXDomainNumbStart = data.indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = data.indicator.maxXDomainNumb;
 		chosenTimePeriodDropdownLabel = timePeriodsArray.find(
@@ -460,10 +457,18 @@
 					</ContentBlock>
 				{:else}
 					<ContentBlock
-						type="map"
 						title={data.indicator.metadata.label}
 						unit={getUnit(data.indicator.metadata)}
 						data={mapData.data}
+						embedProps={{
+							type: 'map',
+							geo: geoGroup.key,
+							years: chosenTimePeriodDropdownLabel.split('-')[0],
+							areas: selectionsObject['indicator-additional-visible']
+								.filter((el) => mapData.data.map((elm) => elm.areacd).includes(el.areacd))
+								.map((el) => el.areacd)
+								.join(',')
+						}}
 					>
 						<p class="subtitle">
 							{data.indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
@@ -580,10 +585,10 @@
 				</div>
 			</div>
 			<ContentBlock
-				type="table"
 				title={data.indicator.metadata.label}
 				unit={getUnit(data.indicator.metadata)}
 				data={pivotedData}
+				embedProps={{ type: 'table', geo: geoGroup.key }}
 			>
 				<p class="subtitle">
 					{#if timePeriodsArray.length > 1}

@@ -5,9 +5,10 @@
 	import { Textarea, Button } from '@onsvisual/svelte-components';
 	import Icon from './Icon.svelte';
 
+	export let embedProps = {};
 	export let title = null;
 	export let unit = null;
-	export let type = 'chart'; // chart, map or table
+	export let type = embedProps?.type || 'chart';
 	export let data = null;
 	export let showActions = true;
 
@@ -18,7 +19,11 @@
 
 	$: embedCode = `<div id="${type}"></div>
 <scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
-<scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?type=${type}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
+<scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?${Object.keys(
+		embedProps
+	)
+		.map((key) => `${key}=${embedProps[key]}`)
+		.join('&')}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
 <div class="content-block" class:hide-actions={!showActions} bind:this={el}>
@@ -33,7 +38,7 @@
 		<ul>
 			{#if type !== 'table'}<li>
 					<Icon type="chart" /><span
-						><button class="btn-link" on:click={() => downloadPNG(el)}>Download {type} (PNG)</button
+						><button class="btn-link" on:click={() => downloadPNG(el)}>Download image (PNG)</button
 						></span
 					>
 				</li>{/if}
@@ -46,7 +51,7 @@
 			<li>
 				<Icon type="code" /><span
 					><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
-						>{showEmbed ? 'Hide embed code' : `Embed ${type}`}</button
+						>{showEmbed ? 'Hide embed code' : `Embed code`}</button
 					></span
 				>
 			</li>

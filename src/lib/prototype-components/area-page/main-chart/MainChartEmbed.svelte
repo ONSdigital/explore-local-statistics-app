@@ -227,20 +227,6 @@
 					{/if}
 				{/each}
 			</p>
-			{#if unselectedAreas.length > 0}
-				<p class="notes-container">
-					<span style="font-weight: bold">Note:</span>
-					No data to display for{#each unselectedAreas as area, i}
-						{' ' +
-							area.areanm +
-							(i === unselectedAreas.length - 2 && unselectedAreas.length > 1
-								? ' and'
-								: i != unselectedAreas.length - 1
-									? ','
-									: '')}{/each} between {chosenTimePeriodsArray[chosenTimePeriodsArray.length - 1]
-						.label} and {chosenTimePeriodsArray[0].label}.
-				</p>
-			{/if}
 		</div>
 	{/if}
 {:else if chartType === 'bar'}
@@ -301,19 +287,6 @@
 					{/if}
 				{/each}
 			</p>
-			{#if unselectedAreasLatest.length > 0}
-				<p class="notes-container">
-					<span style="font-weight: bold">Note:</span>
-					No data to display for{#each unselectedAreasLatest as area, i}
-						{' ' +
-							area.areanm +
-							(i === unselectedAreasLatest.length - 2 && unselectedAreasLatest.length > 1
-								? ' and'
-								: i != unselectedAreasLatest.length - 1
-									? ','
-									: '')}{/each} for {chosenTimePeriodsArray[0].label}.
-				</p>
-			{/if}
 		</div>
 	{/if}
 {:else if chartType === 'map'}
@@ -368,19 +341,6 @@
 					{/if}
 				{/each}
 			</p>
-			{#if unselectedAreasLatest.length > 0}
-				<p class="notes-container">
-					<span style="font-weight: bold">Note:</span>
-					No data to display for{#each unselectedAreasLatest as area, i}
-						{' ' +
-							area.areanm +
-							(i === unselectedAreasLatest.length - 2 && unselectedAreasLatest.length > 1
-								? ' and'
-								: i != unselectedAreasLatest.length - 1
-									? ','
-									: '')}{/each} for {chosenTimePeriodsArray[0].label}.
-				</p>
-			{/if}
 		</div>
 	{/if}
 {:else if chartType === 'table'}

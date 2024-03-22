@@ -89,6 +89,14 @@
 	$: unselectedAreas = selectionsObject['indicator-additional-visible'].filter(
 		(el) => combinedChartData.find((elm) => elm.areacd === el.areacd) === undefined
 	);
+
+	$: embedProps = {
+		type: 'line',
+		geo: selectionsObject['indicator-related-chosen'],
+		years: chosenXDomain.join('-'),
+		areas: selectionsObject['indicator-additional-chosen'].join(','),
+		intervals: showConfidenceIntervals
+	};
 </script>
 
 {#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
@@ -138,10 +146,10 @@
 	</ContentBlock>
 {:else}
 	<ContentBlock
-		type="line-chart"
 		title={indicator.metadata.label}
 		unit={getUnit(indicator.metadata)}
 		data={[]}
+		{embedProps}
 	>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
