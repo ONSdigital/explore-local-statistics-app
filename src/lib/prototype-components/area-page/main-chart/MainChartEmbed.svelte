@@ -3,7 +3,8 @@
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
 	import Map from '$lib/viz/Map.svelte';
-	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
+	import { Table } from '@onsvisual/svelte-components';
+	import { makeMapData, pivotData } from '$lib/util/datasets/datasetsHelpers';
 	import { mainChartOptionsArray } from '$lib/config';
 
 	export let customLookup,
@@ -16,6 +17,7 @@
 		geoGroup,
 		chosenXDomainNumbStart,
 		chosenXDomainNumbEnd,
+		tableColumns,
 		showConfidenceIntervals = false;
 
 	$: selectedChartType =
@@ -32,6 +34,9 @@
 					chosenXDomainNumbEnd
 				)
 			: { data: [], breaks: [] };
+	$: pivotedData = geoGroup?.codes
+		? pivotData(chartData.combinedDataObject[indicator.code], geoGroup?.codes)
+		: [];
 
 	$: indicatorCalculationsArray = indicator
 		? metadata['_newStyleIndicatorsCalculationsArray'].filter((el) => el.code === indicator.code)
@@ -397,6 +402,7 @@
 			showInfo={false}
 		></SubtitleAdditionalDescription>
 	</div>
+	<Table data={pivotedData} columns={tableColumns} height={500} stickyHeader compact />
 {/if}
 
 <style>

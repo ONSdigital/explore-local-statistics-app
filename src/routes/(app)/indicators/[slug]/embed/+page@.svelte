@@ -57,8 +57,21 @@
 		})();
 		opts.geoGroup = geoGroup;
 
+		opts.tableColumns = [
+			{ key: 'areacd', label: 'Area code', sortable: true },
+			{ key: 'areanm', label: 'Area name', sortable: true },
+			...data.indicator.years
+				.filter((y) => y >= data.years[0] && y <= data.years[1])
+				.map((y) => ({
+					key: y,
+					label: y,
+					sortable: true,
+					numeric: true,
+					dp: +data.indicator.metadata.decimalPlaces
+				}))
+		];
+
 		options = opts;
-		console.log(options);
 	});
 </script>
 
