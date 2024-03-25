@@ -795,7 +795,7 @@
 
 		<NavSection title="Get the data">
 			<p>
-				You can download the source data for these charts by exploring our full <a
+				You can download the data source for these charts by exploring our full <a
 					href="{base}/indicators"
 				>
 					list of indicators</a
