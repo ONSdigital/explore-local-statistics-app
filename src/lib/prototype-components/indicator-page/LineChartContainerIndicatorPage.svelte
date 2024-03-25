@@ -2,7 +2,7 @@
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
-	import { geoTypeMap } from '$lib/config/geoConfig';
+	import { geoTypeMap, geoTypesLookup } from '$lib/config/geoConfig';
 
 	export let metadata,
 		indicator,
@@ -95,11 +95,30 @@
 
 	$: embedProps = {
 		type: 'line',
-		geo: geoTypeMap[selectionsObject['indicator-related-chosen']] || 'none',
+		geo:
+			geoTypeMap[selectionsObject['indicator-related-chosen']] ||
+			selectionsObject['indicator-related-chosen'],
 		years: chosenXDomain.join('-'),
 		areas: selectionsObject['indicator-additional-chosen'].join(','),
 		intervals: showConfidenceIntervals
 	};
+	$: geoCodes =
+		embedProps.geo && embedProps.geo !== 'none' ? geoTypesLookup[embedProps.geo].codes : [];
+	$: csvData =
+		embedProps.geo === 'none'
+			? chartData.filter(
+					(d) =>
+						selectionsObject['indicator-additional-chosen'].includes(d.areacd) &&
+						d.xDomainNumb >= chosenXDomain[0] &&
+						d.xDomainNumb <= chosenXDomain[1]
+				)
+			: chartData.filter(
+					(d) =>
+						(selectionsObject['indicator-additional-chosen'].includes(d.areacd) ||
+							geoCodes.includes(d.areacd.slice(0, 3))) &&
+						d.xDomainNumb >= chosenXDomain[0] &&
+						d.xDomainNumb <= chosenXDomain[1]
+				);
 </script>
 
 {#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
@@ -148,15 +167,7 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock
-		title={indicator.metadata.label}
-		{indicator}
-		{metadata}
-		data={chartData.filter(
-			(d) => d.xDomainNumb >= chosenXDomain[0] && d.xDomainNumb <= chosenXDomain[1]
-		)}
-		{embedProps}
-	>
+	<ContentBlock title={indicator.metadata.label} {indicator} {metadata} data={csvData} {embedProps}>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
 		</p>
