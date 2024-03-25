@@ -49,7 +49,7 @@
 	<meta name="description" content={$page.data.description} />
 	<meta property="og:description" content={$page.data.description} />
 	<meta property="og:description" content={$page.data.description} />
-	<meta property="og:image" content="{$page.url.origin}{base}/img/og.png" />
+	<meta property="og:image" content="{$page.url.origin}/img/og.png" />
 	<meta property="og:image:type" content="image/png" />
 </svelte:head>
 
