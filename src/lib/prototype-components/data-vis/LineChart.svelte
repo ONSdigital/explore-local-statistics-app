@@ -101,7 +101,9 @@
 					areacd: 'related',
 					areanm: selectionsObject[relatedID + '-visible'].label,
 					role: 'related',
-					labelPosition: chooseGroupLabelValue === 'min' ? minGroupValueLatest : maxGroupValueLatest
+					labelPosition:
+						chooseGroupLabelValue === 'min' ? minGroupValueLatest : maxGroupValueLatest,
+					groupLabel: true
 				}
 			: undefined;
 
