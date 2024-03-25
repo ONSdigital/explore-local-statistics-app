@@ -39,6 +39,7 @@
 		display: flex;
 		flex-direction: row;
 		gap: 8px;
+		min-width: 250px;
 	}
 
 	.option-label {

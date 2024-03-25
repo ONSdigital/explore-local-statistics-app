@@ -74,6 +74,7 @@
 		flex-direction: row;
 		align-items: center;
 		margin: 0;
+		min-width: 200px;
 	}
 
 	input {

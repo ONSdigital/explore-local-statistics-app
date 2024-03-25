@@ -35,6 +35,7 @@
 <style>
 	.input-container-focused-border {
 		width: 400px;
+		max-width: 100%;
 		border-radius: 6px;
 		border: solid 3px transparent;
 	}
