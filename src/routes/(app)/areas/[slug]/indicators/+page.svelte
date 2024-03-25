@@ -792,7 +792,13 @@
 		{/if}
 
 		<NavSection title="Get the data">
-			<p>Here you can find information and links to the data.</p>
+			<p>
+				You can download the source data for these charts by exploring our full <a
+					href="{base}/indicators"
+				>
+					list of indicators</a
+				>.
+			</p>
 		</NavSection>
 	</NavSections>
 {/if}
