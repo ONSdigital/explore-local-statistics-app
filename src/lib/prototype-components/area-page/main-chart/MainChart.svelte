@@ -9,7 +9,7 @@
 	import Map from '$lib/viz/Map.svelte';
 	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import { mainChartOptionsArray } from '$lib/config';
-	import { geoTypeMap } from '$lib/config/geoConfig';
+	import { geoTypesLookup, geoTypeMap } from '$lib/config/geoConfig';
 	import ContentActions from '$lib/components/ContentActions.svelte';
 	import { base } from '$app/paths';
 
@@ -208,18 +208,37 @@
 		related_label: selectionsObject['related-single-visible']?.label,
 		intervals: showConfidenceIntervals
 	};
-	$: console.log('selectionsObject', selectionsObject);
+
+	$: geoCodes =
+		embedProps.geo && embedProps.geo !== 'none' ? geoTypesLookup[embedProps.geo].codes : [];
 
 	$: csvData = (
-		chosenChartId === 'bar'
+		chosenChartId === 'bar' && embedProps.geo === 'none'
 			? chartData.combinedDataObject[indicator.code].filter(
-					(d) => d.xDomainNumb === chosenXDomain[1]
+					(d) => embedProps.areas.includes(d.areacd) && d.xDomainNumb === chosenXDomain[1]
 				)
-			: chosenChartId === 'line'
+			: chosenChartId === 'bar'
 				? chartData.combinedDataObject[indicator.code].filter(
-						(d) => d.xDomainNumb >= chosenXDomain[0] && d.xDomainNumb <= chosenXDomain[1]
+						(d) =>
+							(embedProps.areas.includes(d.areacd) || geoCodes.includes(d.areacd.slice(0, 3))) &&
+							d.xDomainNumb === chosenXDomain[1]
 					)
-				: mapData.data
+				: chosenChartId === 'line' && embedProps.geo === 'none'
+					? chartData.combinedDataObject[indicator.code].filter(
+							(d) =>
+								embedProps.areas.includes(d.areacd) &&
+								d.xDomainNumb >= chosenXDomain[0] &&
+								d.xDomainNumb <= chosenXDomain[1]
+						)
+					: chosenChartId === 'line'
+						? chartData.combinedDataObject[indicator.code].filter(
+								(d) =>
+									(embedProps.areas.includes(d.areacd) ||
+										geoCodes.includes(d.areacd.slice(0, 3))) &&
+									d.xDomainNumb >= chosenXDomain[0] &&
+									d.xDomainNumb <= chosenXDomain[1]
+							)
+						: mapData.data
 	).map((d) => ({ ...d, areanm: metadata.areasObject?.[d.areacd]?.areanm }));
 </script>
 
