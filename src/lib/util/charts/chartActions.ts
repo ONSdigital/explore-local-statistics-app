@@ -93,7 +93,10 @@ export async function downloadPNG(el, filename = 'chart.png') {
 	html2canvas(el, {
 		windowWidth: el.scrollWidth,
 		windowHeight: el.scrollHeight,
-		onclone: (document) => (document.querySelector('.ons-tabs__panel').style.border = 'none')
+		onclone: (document) => {
+			const panel = document.querySelector('.ons-tabs__panel');
+			if (panel) panel.style.border = 'none';
+		}
 	}).then((canvas) => doDownload(canvas.toDataURL(), filename));
 }
 
