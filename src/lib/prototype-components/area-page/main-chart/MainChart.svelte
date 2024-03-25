@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Tabs, Tab, Select } from '@onsvisual/svelte-components';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
@@ -7,8 +8,10 @@
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
-
 	import { mainChartOptionsArray } from '$lib/config';
+	import { geoTypeMap } from '$lib/config/geoConfig';
+	import ContentActions from '$lib/components/ContentActions.svelte';
+	import { base } from '$app/paths';
 
 	export let customLookup,
 		selectionsObject,
@@ -19,7 +22,9 @@
 		chosenIndicatorId,
 		accordionArray;
 
-	let indicator, geoGroup;
+	let el = {},
+		indicator,
+		geoGroup;
 
 	const maxSelection = 10;
 
@@ -188,6 +193,20 @@
 		selectedArea,
 		...selectionsObject['areas-single-additional-visible']
 	].filter((el) => combinedChartData.find((elm) => elm.areacd === el.areacd) === undefined);
+
+	$: embedProps = {
+		type: chosenChartId,
+		geo:
+			selectionsObject['related-single-chosen'] === 'none'
+				? 'none'
+				: geoTypeMap[selectedArea.geogLevel],
+		years: chosenXDomain.join('-'),
+		areas: [selectedArea.areacd, ...(selectionsObject?.['indicator-additional-chosen'] || [])].join(
+			','
+		),
+		intervals: showConfidenceIntervals
+	};
+	$: console.log('selectionsObject', selectedArea, selectionsObject);
 </script>
 
 <div class="main-chart-column-container">
@@ -227,7 +246,7 @@
 		{#each chartOptionsArray as chart}
 			{#if true}
 				<Tab title={chart.label} id={chart.id} hideTitle>
-					<div class="title-and-chart-container">
+					<div class="title-and-chart-container" bind:this={el[chart.id]}>
 						{#if chartOptionsArray.find((el) => el.id === chosenChartId).label === 'Time series'}
 							{#if timePeriodsArray.length <= 1}
 								<div class="no-chart-container">
@@ -501,6 +520,16 @@
 			{/if}
 		{/each}
 	</Tabs>
+	<ContentActions
+		el={el?.[chosenChartId]?.parentElement}
+		embedUrl="{$page.url.origin}{base}/indicators/{indicator.metadata.slug}/embed"
+		{embedProps}
+		title={indicator.metadata.label}
+		{metadata}
+		{indicator}
+		type={chosenChartId}
+		data={[]}
+	/>
 </div>
 
 <style>
@@ -511,13 +540,13 @@
 	.main-chart-column-container {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
 	}
 
 	.title-and-chart-container {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+		width: 100%;
 	}
 
 	.row-container {
@@ -527,6 +556,7 @@
 		justify-content: space-between;
 		width: 100%;
 		gap: 4px;
+		margin-bottom: 20px;
 	}
 
 	.select-container {
@@ -591,5 +621,10 @@
 		padding: 0px;
 		margin: 0px;
 		line-height: 1.2;
+	}
+
+	.main-chart-column-container :global(.ons-tabs__panel) {
+		border-bottom-left-radius: 0 !important;
+		border-bottom-right-radius: 0 !important;
 	}
 </style>

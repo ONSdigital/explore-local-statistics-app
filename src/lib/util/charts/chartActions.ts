@@ -90,9 +90,11 @@ https://explore-local-statistics.beta.ons.gov.uk/indicators/${indicator.metadata
 }
 
 export async function downloadPNG(el, filename = 'chart.png') {
-	html2canvas(el, { windowWidth: el.scrollWidth, windowHeight: el.scrollHeight }).then((canvas) =>
-		doDownload(canvas.toDataURL(), filename)
-	);
+	html2canvas(el, {
+		windowWidth: el.scrollWidth,
+		windowHeight: el.scrollHeight,
+		onclone: (document) => (document.querySelector('.ons-tabs__panel').style.border = 'none')
+	}).then((canvas) => doDownload(canvas.toDataURL(), filename));
 }
 
 export function clip(str, msg) {
