@@ -16,23 +16,25 @@
 		latestValue && initialValue
 			? roundNumber(latestValue.value - initialValue.value, indicator.metadata.decimalPlaces)
 			: null;
+
+	$: changeText =
+		indicator.metadata.prefix +
+		addThousandsSeparator(Math.abs(changeValue).toFixed(indicator.metadata.decimalPlaces));
+
+	$: fontSize = changeText.length > 7 ? 16 : changeText.length > 5 ? 18 : hover ? 20 : 24;
 </script>
 
 {#if changeValue}
 	{#if changeValue != 0}
 		<g>
 			<text
-				style="font-size: {hover ? 20 : 24}px; stroke-width: {hover ? 0.5 : 1}px;"
+				style="font-size: {fontSize}px; stroke-width: {fontSize > 20 ? 1 : 0.5}px;"
 				x="14000"
 				y={hover ? 8 : 10}
 				bind:contentRect={labelRectCheck}
 				text-anchor="start"
 				fill={colorsLookup[role].color}
-				stroke={colorsLookup[role].color}
-				>{indicator.metadata.prefix +
-					addThousandsSeparator(
-						Math.abs(changeValue).toFixed(indicator.metadata.decimalPlaces)
-					)}</text
+				stroke={colorsLookup[role].color}>{changeText}</text
 			>
 		</g>
 
@@ -47,9 +49,9 @@
 					{#if labelRect}
 						<rect
 							x={-3}
-							y={hover ? -11 : -13}
+							y={{ 16: -10, 18: -10, 20: -11, 24: -13 }[fontSize]}
 							width={labelRect.width + 20}
-							height={hover ? 25 : 29}
+							height={{ 16: 23, 18: 23, 20: 25, 24: 29 }[fontSize]}
 							fill="white"
 							stroke={colorsLookup[role].color}
 							stroke-width={hover ? '1.5' : '2px'}
@@ -59,17 +61,13 @@
 
 					<g>
 						<text
-							style="font-size: {hover ? 20 : 24}px; stroke-width: {hover ? 0.5 : 1}px;"
+							style="font-size: {fontSize}px; stroke-width: {fontSize > 20 ? 1 : 0.5}px;"
 							x="14"
-							y={hover ? 8 : 10}
+							y={{ 16: 7, 18: 8, 20: 8, 24: 10 }[fontSize]}
 							bind:contentRect={labelRect}
 							text-anchor="start"
 							fill={colorsLookup[role].color}
-							stroke={colorsLookup[role].color}
-							>{indicator.metadata.prefix +
-								addThousandsSeparator(
-									Math.abs(changeValue).toFixed(indicator.metadata.decimalPlaces)
-								)}</text
+							stroke={colorsLookup[role].color}>{changeText}</text
 						>
 					</g>
 

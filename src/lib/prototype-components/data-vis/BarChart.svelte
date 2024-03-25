@@ -26,7 +26,8 @@
 		relatedID,
 		dataArray,
 		labelSpace,
-		width;
+		width,
+		xAxisFinalTickWidth;
 
 	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
 
@@ -72,6 +73,7 @@
 
 	let relatedBarHeight = 20;
 	$: primaryBarHeight = relatedBars.length > 200 ? 140 : relatedBars.length > 40 ? 40 : 20;
+	$: yAxisPadding = relatedBars.length > 200 ? 30 : relatedBars.length > 40 ? 20 : 10;
 
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
 		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
@@ -80,9 +82,9 @@
 			...el,
 			position:
 				index === 0
-					? 10 + (el.role === 'related' ? relatedBarHeight / 2 : primaryBarHeight / 2)
+					? yAxisPadding + (el.role === 'related' ? relatedBarHeight / 2 : primaryBarHeight / 2)
 					: previousBars.length * 10 +
-						10 +
+						yAxisPadding +
 						previousBars.filter((elm) => elm.role === 'related').length * relatedBarHeight +
 						previousBars.filter((elm) => elm.role != 'related').length * primaryBarHeight +
 						(el.role === 'related' ? relatedBarHeight / 2 : primaryBarHeight / 2),
@@ -93,7 +95,7 @@
 	$: totalHeight =
 		dataArrayStep2[dataArrayStep2.length - 1].position +
 		dataArrayStep2[dataArrayStep2.length - 1].height / 2 +
-		10;
+		yAxisPadding;
 
 	$: dataArrayStep3 = dataArrayStep2.map((el) => ({
 		...el,
@@ -156,7 +158,7 @@
 	$: fontSize = width < 600 || labels.length > 12 ? 16 : 18;
 </script>
 
-<AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
+<AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]} bind:xAxisFinalTickWidth></AxisX>
 
 {#each dataArrayStep3 as area, index}
 	<g transform="translate(0,{area.position})">

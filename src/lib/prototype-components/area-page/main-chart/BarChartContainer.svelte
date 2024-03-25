@@ -195,6 +195,7 @@
 					bind:dataArray
 					{labelSpace}
 					{width}
+					bind:xAxisFinalTickWidth
 				></BarChart>
 			{/if}
 		</g>

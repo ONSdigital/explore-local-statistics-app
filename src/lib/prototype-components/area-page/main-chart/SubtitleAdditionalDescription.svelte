@@ -64,10 +64,10 @@
 		</p>
 
 		<p>
-			Further
-			<a href="{base}/indicators/{selectedIndicator.metadata.slug}"
-				>{selectedIndicator.metadata.label}</a
-			> data is available here.
+			For more data and charts, visit our page on <a
+				href="{base}/indicators/{selectedIndicator.metadata.slug}"
+				>{selectedIndicator.metadata.label}.</a
+			>
 		</p>
 	</div>
 {/if}
