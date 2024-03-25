@@ -68,6 +68,9 @@
 		.filter((el) => el && el.data)
 		.sort((a, b) => b.data.value - a.data.value);
 
+	let relatedBarHeight = 20;
+	$: primaryBarHeight = relatedBars.length > 200 ? 100 : 20;
+
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
 		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
 
@@ -75,13 +78,13 @@
 			...el,
 			position:
 				index === 0
-					? 10 + (el.role === 'related' ? 10 : 50)
+					? 10 + (el.role === 'related' ? relatedBarHeight / 2 : primaryBarHeight / 2)
 					: previousBars.length * 10 +
 						10 +
-						previousBars.filter((elm) => elm.role === 'related').length * 20 +
-						previousBars.filter((elm) => elm.role != 'related').length * 100 +
-						(el.role === 'related' ? 10 : 50),
-			height: el.role === 'related' ? 20 : 100
+						previousBars.filter((elm) => elm.role === 'related').length * relatedBarHeight +
+						previousBars.filter((elm) => elm.role != 'related').length * primaryBarHeight +
+						(el.role === 'related' ? relatedBarHeight / 2 : primaryBarHeight / 2),
+			height: el.role === 'related' ? relatedBarHeight : primaryBarHeight
 		};
 	});
 
