@@ -56,7 +56,10 @@
 <div class="flex flex-col min-h-screen">
 	<div class="flex-grow">
 		<AnalyticsBanner {analyticsId} {analyticsProps} />
-		<PhaseBanner phase="beta" />
+		<PhaseBanner
+			phase="beta"
+			href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
+		/>
 		<Header bilingual={false} />
 		<main>
 			<slot />
