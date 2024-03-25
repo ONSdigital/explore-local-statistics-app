@@ -644,7 +644,7 @@
 					>{data.metadata.indicatorsCodeLabelArray.length} local indicators</span
 				>
 				on the <a href="{base}/">Explore local statistics</a> service. See the
-				<a href="{base}/datasets">full list of local indicators</a>.
+				<a href="{base}/indicators">full list of local indicators</a>.
 			</p>
 		</NavSection>
 	</NavSections>
