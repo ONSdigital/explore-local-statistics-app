@@ -633,7 +633,7 @@
 		{/if}
 
 		<NavSection title="Get the data">
-			<p>This original source data for this indicator can be found here:</p>
+			<p>The original data source for this indicator can be found here:</p>
 			<ul>
 				{#each sourceOrgs as org, i}
 					<li>
