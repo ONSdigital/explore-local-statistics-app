@@ -15,14 +15,13 @@
 		isHoverLabelVisible,
 		labelSpace,
 		y,
-		fontSize = 16;
+		fontSize = 16,
+		minBarHeight;
 
-	$: linesWithLabelText = lines
-		.map((el, i) => ({
-			...el,
-			labelText: labelArray[i] ? labelArray[i] : ['']
-		}))
-		.filter((el) => (lines.length > 8 ? el.role != 'custom' && el.role != 'related' : true));
+	$: linesWithLabelText = lines.map((el, i) => ({
+		...el,
+		labelText: labelArray[i] ? labelArray[i] : ['']
+	}));
 
 	$: linesWithLabelTextCodes = linesWithLabelText.map((el) => el.areacd);
 

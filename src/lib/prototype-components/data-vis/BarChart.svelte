@@ -100,7 +100,10 @@
 		height: el.height / (totalHeight / chartHeight)
 	}));
 
-	$: primaryBars = dataArrayStep3.filter((el) => el.role != 'related');
+	$: minBarHeight = Math.min(...dataArrayStep3.map((el) => el.height));
+
+	$: primaryBars =
+		minBarHeight > 25 ? dataArrayStep3 : dataArrayStep3.filter((el) => el.role != 'related');
 
 	function findLastIndex(arr, condition) {
 		const reversedArray = arr.slice().reverse();
@@ -142,7 +145,7 @@
 			: undefined;
 
 	$: labels = [
-		...(relatedLabel ? [relatedLabel] : []),
+		...(relatedLabel && minBarHeight <= 25 ? [relatedLabel] : []),
 		...primaryBars.map((el) => ({ ...el, labelPosition: el.position }))
 	].sort((a, b) => a.labelPosition - b.labelPosition);
 
@@ -152,8 +155,6 @@
 </script>
 
 <AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
-
-<line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
 
 {#each dataArrayStep3 as area, index}
 	<g transform="translate(0,{area.position})">
@@ -168,6 +169,8 @@
 		></Bar>
 	</g>
 {/each}
+
+<line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
 
 <PlaceholderLabels lines={labels} {labelSpace} bind:labelArray {fontSize}></PlaceholderLabels>
 

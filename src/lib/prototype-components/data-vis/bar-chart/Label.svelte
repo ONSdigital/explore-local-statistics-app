@@ -21,15 +21,9 @@
 					: colorsLookup[label.datum.role]
 				: { color: null, constrast: null };
 
-	const onMouseEnterEvent = () => {
-		if (label.datum.role != 'related') {
-			hoverId = label.datum.areacd;
-		}
-	};
+	const onMouseEnterEvent = () => {};
 
-	const onMouseLeaveEvent = () => {
-		hoverId = undefined;
-	};
+	const onMouseLeaveEvent = () => {};
 
 	$: textArray = label.datum.labelText;
 </script>
@@ -39,7 +33,7 @@
 		<g>
 			{#if label.labelOffset === 'down'}
 				<path
-					transform="translate(-17,-6)"
+					transform="translate(2,-6)scale(-1,1)"
 					d="M5 {label.targetY} l{(10 *
 						(connectingLineInfo.groupLength - connectingLineInfo.groupPosition)) /
 						(connectingLineInfo.groupLength + 1)} 0 l0 {label.y - label.targetY} L15 {label.y}"
@@ -49,7 +43,7 @@
 				></path>
 			{:else if label.labelOffset === 'up'}
 				<path
-					transform="translate(-17,-6)"
+					transform="translate(2,-6)scale(-1,1)"
 					d="M5 {label.targetY} l{(10 * (connectingLineInfo.groupPosition + 1)) /
 						(connectingLineInfo.groupLength + 1)} 0 l0 {label.y - label.targetY} L15 {label.y}"
 					stroke={color.color}
@@ -58,7 +52,7 @@
 				></path>
 			{:else}
 				<path
-					transform="translate(-17,-6)"
+					transform="translate(2,-6)scale(-1,1)"
 					d="M5 {label.targetY} l10 0"
 					stroke={color.color}
 					fill="none"
