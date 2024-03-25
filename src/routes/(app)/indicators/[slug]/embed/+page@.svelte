@@ -63,7 +63,7 @@
 					codes: geoCodes,
 					areas: geoCodes.map((cd) => data.metadata.areasObject[cd]),
 					group: geoGroup.key,
-					label: data?.relatedLabel,
+					label: data?.relatedLabel || `All ${geoGroup.label}`,
 					role: 'related'
 				}
 			: { codes: [], areas: [] };
