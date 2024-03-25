@@ -62,12 +62,12 @@
 		</g>
 
 		<g
-			transform="translate(-20,{label.y}
+			transform="translate(-22,{label.y}
 			)"
 			on:mouseenter={onMouseEnterEvent}
 			on:mouseleave={onMouseLeaveEvent}
 		>
-			{#if labelRect}
+			{#if labelRect && (!['related'].includes(label.datum.role) || label.datum.groupLabel)}
 				<rect
 					x={-labelRect.width}
 					y={-labelRect.height / 2 - fontSize / 4.5}

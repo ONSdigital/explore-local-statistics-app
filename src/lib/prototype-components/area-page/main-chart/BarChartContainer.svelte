@@ -34,7 +34,7 @@
 		top: 30,
 		right: 20 + (xAxisFinalTickWidth ? xAxisFinalTickWidth : 0),
 		bottom: 30,
-		left: 15 + (maxLabelWidth ? maxLabelWidth : 0)
+		left: 18 + (maxLabelWidth ? maxLabelWidth : 0)
 	};
 
 	$: chartWidth = width - padding.left - padding.right;
@@ -75,9 +75,101 @@
 	let hoverId;
 	let isHoverLabelVisible;
 	let hoverAreaWithDataAdded;
+
+	function makeCurlyBrace(x1, y1, x2, y2, w, q) {
+		//Calculate unit vector
+		var dx = x1 - x2;
+		var dy = y1 - y2;
+		var len = Math.sqrt(dx * dx + dy * dy);
+		dx = dx / len;
+		dy = dy / len;
+
+		//Calculate Control Points of path,
+		var qx1 = x1 + q * w * dy;
+		var qy1 = y1 - q * w * dx;
+		var qx2 = x1 - 0.25 * len * dx + (1 - q) * w * dy;
+		var qy2 = y1 - 0.25 * len * dy - (1 - q) * w * dx;
+		var tx1 = x1 - 0.5 * len * dx + w * dy;
+		var ty1 = y1 - 0.5 * len * dy - w * dx;
+		var qx3 = x2 + q * w * dy;
+		var qy3 = y2 - q * w * dx;
+		var qx4 = x1 - 0.75 * len * dx + (1 - q) * w * dy;
+		var qy4 = y1 - 0.75 * len * dy - (1 - q) * w * dx;
+
+		return (
+			'M ' +
+			x1 +
+			' ' +
+			y1 +
+			' Q ' +
+			qx1 +
+			' ' +
+			qy1 +
+			' ' +
+			qx2 +
+			' ' +
+			qy2 +
+			' T ' +
+			tx1 +
+			' ' +
+			ty1 +
+			' M ' +
+			x2 +
+			' ' +
+			y2 +
+			' Q ' +
+			qx3 +
+			' ' +
+			qy3 +
+			' ' +
+			qx4 +
+			' ' +
+			qy4 +
+			' T ' +
+			tx1 +
+			' ' +
+			ty1
+		);
+	}
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
+	{#if showConfidenceIntervals && indicator.metadata.confidenceIntervals === 'T'}
+		<svg {width} height="90">
+			<line x1="10" y1="15" x2="170" y2="15" stroke="#222" opacity="0.75" stroke-width="3px"></line>
+			<rect x="8" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"></rect>
+			<rect x="168" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"
+			></rect>
+			<rect x="87" width="6" y="3" height="24" fill="#222" stroke="white" stroke-width="1.5px"
+			></rect>
+
+			<path
+				d={makeCurlyBrace(10, 30, 170, 30, 10, 0.5)}
+				stroke="#222"
+				fill="none"
+				stroke-width="1.5px"
+			></path>
+
+			<text
+				x="90"
+				y="60"
+				font-size="18px"
+				stroke="#222"
+				fill="#222"
+				stroke-width="0px"
+				text-anchor="middle">95% confidence</text
+			>
+			<text
+				x="90"
+				y="80"
+				font-size="18px"
+				stroke="#222"
+				fill="#222"
+				stroke-width="0px"
+				text-anchor="middle">interval range</text
+			>
+		</svg>
+	{/if}
 	<svg {width} {height}>
 		<g transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
@@ -102,6 +194,7 @@
 					{relatedID}
 					bind:dataArray
 					{labelSpace}
+					{width}
 				></BarChart>
 			{/if}
 		</g>

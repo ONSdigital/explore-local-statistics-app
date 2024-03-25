@@ -25,7 +25,8 @@
 		additionalID,
 		relatedID,
 		dataArray,
-		labelSpace;
+		labelSpace,
+		width;
 
 	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
 
@@ -70,7 +71,7 @@
 		.sort((a, b) => b.data.value - a.data.value);
 
 	let relatedBarHeight = 20;
-	$: primaryBarHeight = relatedBars.length > 200 ? 100 : 20;
+	$: primaryBarHeight = relatedBars.length > 200 ? 140 : relatedBars.length > 40 ? 40 : 20;
 
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
 		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
@@ -140,7 +141,8 @@
 					labelPosition:
 						chooseGroupLabelValue === 'min'
 							? dataArrayStep3[minGroupValueLatest].position
-							: dataArrayStep3[maxGroupValueLatest].position
+							: dataArrayStep3[maxGroupValueLatest].position,
+					groupLabel: true
 				}
 			: undefined;
 
@@ -151,7 +153,7 @@
 
 	let labelArray = [];
 
-	let fontSize = 16;
+	$: fontSize = width < 600 || labels.length > 12 ? 16 : 18;
 </script>
 
 <AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
