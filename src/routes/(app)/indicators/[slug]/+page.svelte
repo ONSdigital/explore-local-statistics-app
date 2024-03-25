@@ -22,6 +22,7 @@
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 
 	export let data;
 
@@ -614,16 +615,16 @@
 		{/if}
 
 		<NavSection title="Get the data">
-			<p>
-				This indicator was produced by the {sourceOrgs.join(' and ')}. The original source data can
-				be found {#each sourceOrgs as org, i}
-					<a href={sourceLinks[i]}>{i === sourceOrgs.length - 1 ? 'here.' : 'here'}</a>
-					{#if i < sourceOrgs.length - 2}
-						{','}
-					{:else if i === sourceOrgs.length - 2}
-						{'and '}
-					{/if}{/each}
-			</p>
+			<p>This original source data for this indicator can be found here:</p>
+			<ul>
+				{#each sourceOrgs as org, i}
+					<li>
+						<a href={sourceLinks[i]} rel="_blank">{org}</a><span class="ons-u-ml-xs"
+							><Icon type="launch" /></span
+						>
+					</li>
+				{/each}
+			</ul>
 			<p>
 				If you would like a CSV of the data displayed in one of the above charts, you can click the
 				"download data" link immediately below it.
