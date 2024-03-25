@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Label from '$lib/prototype-components/data-vis/line-chart/Label.svelte';
-	import HoverLabel from '$lib/prototype-components/data-vis/line-chart/HoverLabel.svelte';
+	import Label from '$lib/prototype-components/data-vis/bar-chart/Label.svelte';
+	import HoverLabel from '$lib/prototype-components/data-vis/bar-chart/HoverLabel.svelte';
 
 	import labelplacer from 'labelplacer';
 
@@ -30,7 +30,7 @@
 		? labelplacer(
 				linesWithLabelText,
 				[0, chartHeight],
-				(d) => d.labelPosition + 4,
+				(d) => d.labelPosition + 6,
 				(d) => d.labelText.length * fontSize + 8
 			).map((el) => ({
 				...el,
@@ -99,7 +99,7 @@
 	}
 </script>
 
-<g class="labels-container" transform="translate({chartWidth},0)">
+<g class="labels-container" transform="translate(0,0)">
 	{#each permanentLabels as label, i}
 		<Label
 			{label}

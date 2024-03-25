@@ -22,7 +22,7 @@
 	let dataArray = [];
 	let width = 1000;
 	$: height = Math.max(
-		500,
+		600,
 		(filteredChartDataAdditionals.length + filteredChartDataSelected.length) * 20 +
 			filteredChartDataAreaGroup.length * 1.5
 	);
@@ -32,13 +32,15 @@
 
 	$: padding = {
 		top: 30,
-		right: 20,
+		right: 20 + (xAxisFinalTickWidth ? xAxisFinalTickWidth : 0),
 		bottom: 30,
-		left: 10 + maxLabelWidth
+		left: 15 + (maxLabelWidth ? maxLabelWidth : 0)
 	};
 
 	$: chartWidth = width - padding.left - padding.right;
 	$: chartHeight = height - padding.top - padding.bottom;
+
+	$: labelSpace = Math.min(Math.max(200, width * 0.5), 250);
 
 	$: madRange =
 		indicator.code in madRangeLookup
@@ -73,102 +75,7 @@
 	let hoverId;
 	let isHoverLabelVisible;
 	let hoverAreaWithDataAdded;
-
-	/*export let indicator,
-		metadata,
-		combinedSelectableAreaTypesObject,
-		areasCodesForAreasWithData,
-		visibleAreasWithData,
-		timePeriodsArray,
-		filteredChartDataForVisibleAreas,
-		indicatorCalculations;
-	export let chosenParentAreasArray,
-		chosenRelatedAreasId,
-		chosenSameRegionArray,
-		chosenCountriesArray,
-		chosenRegionsArray,
-		chosenAllOtherArray;
-
-	let width = 1000;
-	$: height = filteredChartDataForVisibleAreas.length * 80 + 100;
-
-	let xAxisFinalTickWidth = null,
-		maxLabelWidth = null;
-
-	$: padding = {
-		top: 30,
-		right: 20,
-		bottom: 30,
-		left: 10 + maxLabelWidth
-	};
-
-	$: chartWidth = width - padding.left - padding.right;
-	$: chartHeight = height - padding.top - padding.bottom;
-
-	////
-
-	$: visibleAreasWithDataAdded = visibleAreasWithData.map((el) =>
-		el.map((elm) => ({
-			...elm,
-			data: filteredChartDataForVisibleAreas.filter((elmt) => elmt.areacd === elm.areacd)
-		}))
-	);
-
-	////
-
-	$: xDomain = [
-		timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb,
-		timePeriodsArray[0].xDomainNumb
-	];
-
-	////
-
-	$: madRange =
-		indicator.code in madRangeLookup
-			? madRangeLookup[indicator.code]['line-chart']
-			: madRangeLookup.default['line-chart'];
-
-	$: values = []
-		.concat(...filteredChartDataForVisibleAreas.map((el) => [el.value, el.lci, el.uci]))
-		.filter((el) => el);
-
-	$: yDomainRaw = [0.95 * Math.min(...values), 1.05 * Math.max(...values)];
-
-	$: yDomainAdj =
-		madRange === 'minMax'
-			? yDomainRaw
-			: [
-					Math.min(
-						yDomainRaw[0],
-						indicatorCalculations.med - madRange * indicatorCalculations.mad
-					),
-					Math.max(
-						yDomainRaw[1],
-						parseFloat(indicatorCalculations.med) +
-							madRange * indicatorCalculations.mad
-					)
-				];
-
-	$: yDomainFloorCeiling = [
-		indicator.metadata.canBeNegative === 'F' ? Math.max(0, yDomainAdj[0]) : yDomainAdj[0],
-		indicator.metadata.unit === '%' ? Math.min(100, yDomainAdj[1]) : yDomainAdj[1]
-	];
-
-	$: yDomainFinal =
-		indicator.metadata.zeroBaseline === 'T'
-			? [0, yDomainFloorCeiling[1]]
-			: yDomainFloorCeiling;
-
-	let hoverId;
-	let isHoverLabelVisible;
-	let hoverAreaWithDataAdded;*/
 </script>
-
-<!-- {#if !isHoverLabelVisible && hoverId}
-	<HoverKey {hoverAreaWithDataAdded}></HoverKey>
-{:else}
-	<RelatedAreasKey {visibleAreasWithData} {combinedSelectableAreaTypesObject}></RelatedAreasKey>
-{/if} -->
 
 <div class="svg-container" bind:clientWidth={width}>
 	<svg {width} {height}>
@@ -194,6 +101,7 @@
 					{additionalID}
 					{relatedID}
 					bind:dataArray
+					{labelSpace}
 				></BarChart>
 			{/if}
 		</g>

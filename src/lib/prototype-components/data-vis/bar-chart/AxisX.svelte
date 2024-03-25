@@ -25,7 +25,7 @@
 
 	{#each ticks as d, i}
 		<g class="tick" transform="translate({y(d)},0)">
-			<line y1="0" y2="-8"></line>
+			<line y1="0" y2="-4"></line>
 
 			<text text-anchor="middle" x="0" y="-10"
 				>{indicator.metadata.prefix + addThousandsSeparator(d) + indicator.metadata.suffix}</text

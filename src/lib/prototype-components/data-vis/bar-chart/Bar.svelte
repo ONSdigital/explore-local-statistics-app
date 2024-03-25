@@ -17,14 +17,14 @@
 
 <rect
 	width={Math.max(0, y(area.data.value))}
-	y={-area.height / 2}
-	height={area.height}
+	y={-Math.min(area.height / 2, 50)}
+	height={Math.min(area.height, 100)}
 	fill={color.color}
 	stroke="none"
 ></rect>
 
 {#if showConfidenceIntervals && area.data.lci && area.data.uci}
-	<rect
+	<!-- <rect
 		x={y(area.data.lci)}
 		width={y(area.data.uci) - y(area.data.lci)}
 		y="-10"
@@ -42,7 +42,7 @@
 		fill={color.color}
 		stroke="none"
 		opacity="0.25"
-	></rect>
+	></rect> -->
 {/if}
 
 <!-- <g transform="translate(-5,10)">

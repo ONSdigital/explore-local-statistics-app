@@ -6,8 +6,6 @@
 	let labelRectArray = [];
 	$: areaName = line.areanm;
 
-	$: console.log(line.labelPosition);
-
 	$: index = labelRectArray
 		? Array.from(Array(labelRectArray.length).keys()).find((i) => {
 				return (
@@ -31,7 +29,11 @@
 
 {#each textArrayOptions as textArray, i}
 	{#if i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace)}
-		<g transform="translate(9999,0)" opacity="0">
+		<g
+			transform="translate(9999,{line.labelPosition}
+			)"
+			opacity="0"
+		>
 			<!-- {#if labelRectArray[i]}
 				<rect
 					x={0}

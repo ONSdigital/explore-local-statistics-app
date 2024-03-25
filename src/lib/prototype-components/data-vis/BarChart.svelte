@@ -1,6 +1,8 @@
 <script lang="ts">
 	import AxisX from '$lib/prototype-components/data-vis/bar-chart/AxisX.svelte';
 	import Bar from '$lib/prototype-components/data-vis/bar-chart/Bar.svelte';
+	import PlaceholderLabels from '$lib/prototype-components/data-vis/bar-chart/PlaceholderLabels.svelte';
+	import Labels from '$lib/prototype-components/data-vis/bar-chart/Labels.svelte';
 
 	import { scaleLinear } from 'd3-scale';
 
@@ -22,7 +24,8 @@
 		showConfidenceIntervals,
 		additionalID,
 		relatedID,
-		dataArray;
+		dataArray,
+		labelSpace;
 
 	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
 
@@ -52,8 +55,6 @@
 				data: filteredChartDataAreaGroup.find((elm) => elm.areacd === el.areacd)
 			}))
 		: [];
-
-	$: console.log(relatedBars);
 
 	//$: data = .sort((a, b) => b.data[0].value - a.data[0].value);
 
@@ -99,7 +100,55 @@
 		height: el.height / (totalHeight / chartHeight)
 	}));
 
-	$: console.log(dataArrayStep2);
+	$: primaryBars = dataArrayStep3.filter((el) => el.role != 'related');
+
+	function findLastIndex(arr, condition) {
+		const reversedArray = arr.slice().reverse();
+		const reversedIndex = reversedArray.findIndex(condition);
+		return reversedIndex === -1 ? -1 : arr.length - 1 - reversedIndex;
+	}
+
+	function findIndexOfLowest(arr, condition) {
+		return arr.findIndex(condition);
+	}
+
+	$: maxGroupValueLatest = findLastIndex(dataArrayStep3, (el) => el.role === 'related');
+	$: minGroupValueLatest = findIndexOfLowest(dataArrayStep3, (el) => el.role === 'related');
+
+	$: maxPrimaryValueLatest = findLastIndex(dataArrayStep3, (el) => el.role != 'related');
+	$: minPrimaryValueLatest = findIndexOfLowest(dataArrayStep3, (el) => el.role != 'related');
+
+	$: chooseGroupLabelValue =
+		maxGroupValueLatest < maxPrimaryValueLatest && minGroupValueLatest < minPrimaryValueLatest
+			? 'min'
+			: minPrimaryValueLatest < minGroupValueLatest && maxPrimaryValueLatest < maxGroupValueLatest
+				? 'max'
+				: Math.abs(maxGroupValueLatest - maxPrimaryValueLatest) >
+					  Math.abs(minPrimaryValueLatest - minGroupValueLatest)
+					? 'max'
+					: 'min';
+
+	$: relatedLabel =
+		selectionsObject[relatedID + '-visible'] && filteredChartDataAreaGroup.length > 0
+			? {
+					areacd: 'related',
+					areanm: selectionsObject[relatedID + '-visible'].label,
+					role: 'related',
+					labelPosition:
+						chooseGroupLabelValue === 'min'
+							? dataArrayStep3[minGroupValueLatest].position
+							: dataArrayStep3[maxGroupValueLatest].position
+				}
+			: undefined;
+
+	$: labels = [
+		...(relatedLabel ? [relatedLabel] : []),
+		...primaryBars.map((el) => ({ ...el, labelPosition: el.position }))
+	].sort((a, b) => a.labelPosition - b.labelPosition);
+
+	let labelArray = [];
+
+	let fontSize = 16;
 </script>
 
 <AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]}></AxisX>
@@ -119,6 +168,36 @@
 		></Bar>
 	</g>
 {/each}
+
+<PlaceholderLabels lines={labels} {labelSpace} bind:labelArray {fontSize}></PlaceholderLabels>
+
+{#if labels && labelArray && labelArray.every((element) => element !== null) && labelArray.length > 0}
+	<Labels
+		lines={labels}
+		{labelArray}
+		{chartHeight}
+		{chartWidth}
+		{customLookup}
+		bind:hoverId
+		{fontSize}
+		bind:isHoverLabelVisible
+		bind:maxLabelWidth
+		{hoverAreaWithDataAdded}
+		{labelSpace}
+		{y}
+	></Labels>
+{/if}
+
+<!-- <Labels
+	{visibleAreasWithDataAdded}
+	bind:isHoverLabelVisible
+	bind:hoverId
+	{hoverAreaWithDataAdded}
+	bind:maxLabelWidth
+	{chartWidth}
+	{chartHeight}
+	{y}
+></Labels> -->
 
 <!-- <AxisY {selectedIndicator} {chartHeight} bind:yAxisMaxTickWidth {y} {yDomain}></AxisY>
 <AxisX {timePeriodsArray} {chartHeight} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
