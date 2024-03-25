@@ -39,6 +39,11 @@
 	const maxSelection = 10;
 
 	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
+	const parseDate = (str) => {
+		const intlString = str.split('/').reverse().join('-') + 'T12:00';
+		const date = new Date(intlString);
+		return date.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: '2-digit' });
+	};
 	const doSelect = (e) => {
 		const chosen = selectionsObject['indicator-additional-chosen'];
 		const area = e.detail?.area;
@@ -391,7 +396,9 @@
 		},
 		{
 			key: 'Published on',
-			value: sourceDate.join(', ')
+			value: sourceDate.every((d) => d === sourceDate[0])
+				? parseDate(sourceDate[0])
+				: sourceDate.map((d) => parseDate(d)).join(', ')
 		}
 	]}
 	background="#eaeaea"
