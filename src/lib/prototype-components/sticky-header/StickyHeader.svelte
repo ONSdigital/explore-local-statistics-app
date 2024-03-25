@@ -100,7 +100,7 @@
 			bind:chosenXDomainNumbEnd
 			includeNotes={true}
 		></ChartOptions>
-		<ChartInfo></ChartInfo>
+		<!-- <ChartInfo></ChartInfo> -->
 	</div>
 </div>
 
