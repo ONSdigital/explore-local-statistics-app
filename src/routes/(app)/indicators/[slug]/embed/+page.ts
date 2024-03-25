@@ -7,6 +7,8 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
 	const areas = url.searchParams.get('areas');
 	const geo = url.searchParams.get('geo');
 	const years = url.searchParams.get('years');
+	const related = url.searchParams.get('related');
+	const relatedLabel = url.searchParams.get('related_label');
 	const intervals = url.searchParams.get('intervals') === 'true';
 
 	if (!['line', 'bar', 'map', 'table'].includes(chart)) {
@@ -32,6 +34,8 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
 		areas: typeof areas === 'string' ? areas.split(',') : [],
 		years: xDomain,
 		geo,
+		related,
+		relatedLabel,
 		intervals
 	};
 };

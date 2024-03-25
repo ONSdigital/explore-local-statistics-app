@@ -9,6 +9,19 @@
 
 	let options;
 
+	function reshapeData(colData) {
+		const cols = Object.keys(colData);
+		const rowData = [];
+		for (let i = 0; i < colData[cols[0]].length; i++) {
+			const row: { [key: string]: string | number } = {};
+			for (const col of cols) {
+				row[col] = colData[col][i];
+			}
+			rowData.push(row);
+		}
+		return rowData;
+	}
+
 	afterNavigate(() => {
 		const opts = {};
 		const combinedDataObject = {};
@@ -19,19 +32,38 @@
 			data.areas.length > 0 ? { ...data.metadata.areasObject[data.areas[0]], role: 'main' } : {};
 		const otherAreas = data.areas.slice(1);
 
+		let clusters, cluster;
+		if (data.areas[0] && data.related === 'similar-siblings') {
+			const clustersArr = reshapeData(data.metadata.clustersLookup.data);
+			clusters = {};
+			clustersArr.forEach((d) => (clusters[d.areacd] = d.demographic));
+			cluster = clusters[data.areas[0]];
+		}
+
 		const geoGroups = filterGeoGroups(data.indicator.inferredGeos);
 		const geoGroup = geoGroups.find((t) => t.key === data?.geo) || null;
-		const geoCodes = geoGroup
-			? [...new Set(data.chartData.map((d) => d.areacd))].filter((d) =>
-					geoGroup.codes.includes(d.slice(0, 3))
-				)
-			: [];
+		const geoCodes =
+			geoGroup && (!data.related || data.related === 'all-siblings')
+				? [...new Set(data.chartData.map((d) => d.areacd))].filter((cd) =>
+						geoGroup.codes.includes(cd.slice(0, 3))
+					)
+				: geoGroup && data.related === 'same-parent-siblings'
+					? [...new Set(data.chartData.map((d) => d.areacd))].filter(
+							(cd) =>
+								data.metadata.areasObject[cd].parentcd ===
+								data.metadata.areasObject[data.areas[0]].parentcd
+						)
+					: geoGroup && data.related === 'similar-siblings'
+						? [...new Set(data.chartData.map((d) => d.areacd))].filter(
+								(cd) => clusters[cd] === cluster
+							)
+						: [];
 		const relatedVisible = geoGroup
 			? {
 					codes: geoCodes,
 					areas: geoCodes.map((cd) => data.metadata.areasObject[cd]),
 					group: geoGroup.key,
-					label: geoGroup.label,
+					label: data?.relatedLabel,
 					role: 'related'
 				}
 			: { codes: [], areas: [] };

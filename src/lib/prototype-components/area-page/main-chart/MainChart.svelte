@@ -204,9 +204,23 @@
 		areas: [selectedArea.areacd, ...(selectionsObject?.['indicator-additional-chosen'] || [])].join(
 			','
 		),
+		related: selectionsObject['related-single-chosen'],
+		related_label: selectionsObject['related-single-visible']?.label,
 		intervals: showConfidenceIntervals
 	};
-	$: console.log('selectionsObject', selectedArea, selectionsObject);
+	$: console.log('selectionsObject', selectionsObject);
+
+	$: csvData = (
+		chosenChartId === 'bar'
+			? chartData.combinedDataObject[indicator.code].filter(
+					(d) => d.xDomainNumb === chosenXDomain[1]
+				)
+			: chosenChartId === 'line'
+				? chartData.combinedDataObject[indicator.code].filter(
+						(d) => d.xDomainNumb >= chosenXDomain[0] && d.xDomainNumb <= chosenXDomain[1]
+					)
+				: mapData.data
+	).map((d) => ({ ...d, areanm: metadata.areasObject?.[d.areacd]?.areanm }));
 </script>
 
 <div class="main-chart-column-container">
@@ -528,7 +542,7 @@
 		{metadata}
 		{indicator}
 		type={chosenChartId}
-		data={[]}
+		data={csvData}
 	/>
 </div>
 
