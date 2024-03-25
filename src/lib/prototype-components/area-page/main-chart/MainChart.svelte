@@ -297,6 +297,7 @@
 										filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
 											(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 										)}
+										{filteredChartDataAreaGroupLatest}
 										{selectionsObject}
 										{selectedArea}
 										{indicatorCalculations}
@@ -516,7 +517,7 @@
 	.title-and-chart-container {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 10px;
 	}
 
 	.row-container {
@@ -583,12 +584,12 @@
 	.source-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 1;
+		line-height: 1.2;
 	}
 
 	.notes-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 1;
+		line-height: 1.2;
 	}
 </style>

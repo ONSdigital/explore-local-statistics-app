@@ -172,6 +172,9 @@
 			filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
 				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 			)}
+			filteredChartDataAreaGroupLatest={filteredChartDataAreaGroup.filter(
+				(el) => el.xDomainNumb === xDomain[1]
+			)}
 			{selectionsObject}
 			selectedArea={null}
 			additionalID="indicator-additional"

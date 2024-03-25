@@ -5,7 +5,7 @@
 		generateDivisibleNumbersWithinRange
 	} from '$lib/utils';
 
-	export let indicator, chartHeight, yAxisMaxTickWidth, y, yDomain;
+	export let indicator, chartHeight, yAxisMaxTickWidth, y, yDomain, fontSize;
 
 	$: yDistance = Math.abs(yDomain[1] - yDomain[0]);
 	$: yDistancePowerBelow = 10 ** Math.floor(Math.log10(yDistance));
@@ -34,7 +34,12 @@
 		<g class="tick" transform="translate(0,{y(d)})">
 			<line x1="0" x2="-8"></line>
 
-			<text bind:contentRect={ticksWidthArray[i]} text-anchor="end" x="-10" y="5"
+			<text
+				bind:contentRect={ticksWidthArray[i]}
+				text-anchor="end"
+				x="-10"
+				y="5"
+				font-size={fontSize}
 				>{indicator.metadata.prefix + addThousandsSeparator(d) + indicator.metadata.suffix}</text
 			>
 		</g>

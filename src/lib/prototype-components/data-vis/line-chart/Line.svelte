@@ -41,17 +41,7 @@
 
 <g
 	class="line-{area.areacd}"
-	opacity={hoverId
-		? hoverId === area.areacd
-			? 1
-			: 0
-		: !background
-			? 1
-			: linesCount < 30
-				? 0.5
-				: linesCount < 100
-					? 0.35
-					: 0.2}
+	opacity={!background ? 1 : linesCount < 30 ? 0.5 : linesCount < 100 ? 0.35 : 0.2}
 >
 	{#if !background}
 		<path

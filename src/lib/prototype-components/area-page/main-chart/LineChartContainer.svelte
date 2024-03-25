@@ -12,6 +12,7 @@
 		filteredChartDataSelected,
 		filteredChartDataAdditionals,
 		filteredChartDataAreaGroup,
+		filteredChartDataAreaGroupLatest,
 		selectionsObject,
 		selectedArea,
 		indicatorCalculations,
@@ -30,13 +31,15 @@
 
 	$: padding = {
 		top: 10,
-		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 17),
+		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 20),
 		bottom: 30,
 		left: 10 + yAxisMaxTickWidth
 	};
 
 	$: chartWidth = width - padding.left - padding.right;
 	$: chartHeight = height - padding.top - padding.bottom;
+
+	$: labelSpace = Math.min(Math.max(150, width * 0.3), 250);
 
 	$: madRange =
 		indicator.code in madRangeLookup
@@ -53,7 +56,13 @@
 		? [].concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci])).filter((el) => el)
 		: combinedChartData.map((el) => el.value).filter((el) => el);
 
-	$: yDomainRaw = [0.95 * Math.min(...values), 1.05 * Math.max(...values)];
+	$: minValue = Math.min(...values);
+	$: maxValue = Math.max(...values);
+
+	$: yDomainRaw = [
+		minValue - 0.05 * (maxValue - minValue),
+		maxValue + 0.05 * (maxValue - minValue)
+	];
 
 	$: yDomainAdj =
 		madRange === 'minMax'
@@ -76,13 +85,89 @@
 
 	let hoverId;
 	let isHoverLabelVisible;
+
+	function makeCurlyBrace(x1, y1, x2, y2, w, q) {
+		//Calculate unit vector
+		var dx = x1 - x2;
+		var dy = y1 - y2;
+		var len = Math.sqrt(dx * dx + dy * dy);
+		dx = dx / len;
+		dy = dy / len;
+
+		//Calculate Control Points of path,
+		var qx1 = x1 + q * w * dy;
+		var qy1 = y1 - q * w * dx;
+		var qx2 = x1 - 0.25 * len * dx + (1 - q) * w * dy;
+		var qy2 = y1 - 0.25 * len * dy - (1 - q) * w * dx;
+		var tx1 = x1 - 0.5 * len * dx + w * dy;
+		var ty1 = y1 - 0.5 * len * dy - w * dx;
+		var qx3 = x2 + q * w * dy;
+		var qy3 = y2 - q * w * dx;
+		var qx4 = x1 - 0.75 * len * dx + (1 - q) * w * dy;
+		var qy4 = y1 - 0.75 * len * dy - (1 - q) * w * dx;
+
+		return (
+			'M ' +
+			x1 +
+			' ' +
+			y1 +
+			' Q ' +
+			qx1 +
+			' ' +
+			qy1 +
+			' ' +
+			qx2 +
+			' ' +
+			qy2 +
+			' T ' +
+			tx1 +
+			' ' +
+			ty1 +
+			' M ' +
+			x2 +
+			' ' +
+			y2 +
+			' Q ' +
+			qx3 +
+			' ' +
+			qy3 +
+			' ' +
+			qx4 +
+			' ' +
+			qy4 +
+			' T ' +
+			tx1 +
+			' ' +
+			ty1
+		);
+	}
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
+	{#if showConfidenceIntervals && indicator.metadata.confidenceIntervals === 'T'}
+		<svg {width} height="50">
+			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
+			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
+			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
+			<circle cx="50" cy="30" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
+			<text x="70" y="35" font-size="18px" stroke="#222" fill="#222" stroke-width="0px"
+				>95% confidence interval range</text
+			>
+
+			<path
+				d={makeCurlyBrace(55, 15, 55, 45, -10, 0.5)}
+				stroke="#222"
+				fill="none"
+				stroke-width="1px"
+			></path>
+		</svg>
+	{/if}
+
 	<svg {width} {height}>
 		<g transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
 				<LineChart
+					{width}
 					{indicator}
 					{timePeriodsArray}
 					{chartWidth}
@@ -103,6 +188,8 @@
 					{showConfidenceIntervals}
 					{additionalID}
 					{relatedID}
+					{labelSpace}
+					{filteredChartDataAreaGroupLatest}
 				></LineChart>
 			{/if}
 		</g>
