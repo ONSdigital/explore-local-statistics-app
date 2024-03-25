@@ -94,3 +94,7 @@ export async function downloadPNG(el, filename = 'chart.png') {
 		doDownload(canvas.toDataURL(), filename)
 	);
 }
+
+export function clip(str, msg) {
+	navigator.clipboard.writeText(str).then(() => alert(msg));
+}

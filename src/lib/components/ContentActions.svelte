@@ -1,8 +1,8 @@
 <script lang="ts">
 	//@ts-nocheck
 	import { page } from '$app/stores';
-	import { downloadCSV, downloadPNG } from '$lib/util/charts/chartActions';
-	import { Textarea, Button } from '@onsvisual/svelte-components';
+	import { downloadCSV, downloadPNG, clip } from '$lib/util/charts/chartActions';
+	import { Textarea, Button, analyticsEvent } from '@onsvisual/svelte-components';
 	import Icon from './Icon.svelte';
 
 	export let el = null;
@@ -30,14 +30,41 @@
 	<ul>
 		{#if type !== 'table'}<li>
 				<Icon type="chart" /><span
-					><button class="btn-link" on:click={() => downloadPNG(el)}>Download image (PNG)</button
+					><button
+						class="btn-link"
+						on:click={() => {
+							downloadPNG(el);
+							const eventData = {
+								event: 'fileDownload',
+								extension: 'png',
+								chartType: type,
+								indicatorCode: indicator.metadata.slug,
+								indicatorName: indicator.metadata.label,
+								indicatorTopic: indicator.topic,
+								indicatorSubtopic: indicator.subTopic
+							};
+							analyticsEvent(eventData);
+						}}>Download image (PNG)</button
 					></span
 				>
 			</li>{/if}
 		{#if data}<li>
 				<Icon type="download" /><span
-					><button class="btn-link" on:click={() => downloadCSV(data, metadata, indicator)}
-						>Download data (CSV)</button
+					><button
+						class="btn-link"
+						on:click={() => {
+							downloadCSV(data, metadata, indicator);
+							const eventData = {
+								event: 'fileDownload',
+								extension: 'csv',
+								chartType: type,
+								indicatorCode: indicator.metadata.slug,
+								indicatorName: indicator.metadata.label,
+								indicatorTopic: indicator.topic,
+								indicatorSubtopic: indicator.subTopic
+							};
+							analyticsEvent(eventData);
+						}}>Download data (CSV)</button
 					></span
 				>
 			</li>{/if}
@@ -52,8 +79,20 @@
 	{#if showEmbed}
 		<div class="content-embed">
 			<Textarea value={embedCode} rows={4} width={30} hideLabel />
-			<Button small on:click={() => clip(embedCode, 'Copied to clipboard!')}
-				>Copy to clipboard</Button
+			<Button
+				small
+				on:click={() => {
+					clip(embedCode, 'Copied to clipboard!');
+					const eventData = {
+						event: 'embed',
+						chartType: type,
+						indicatorCode: indicator.metadata.slug,
+						indicatorName: indicator.metadata.label,
+						indicatorTopic: indicator.topic,
+						indicatorSubtopic: indicator.subTopic
+					};
+					analyticsEvent(eventData);
+				}}>Copy to clipboard</Button
 			>
 		</div>
 	{/if}
