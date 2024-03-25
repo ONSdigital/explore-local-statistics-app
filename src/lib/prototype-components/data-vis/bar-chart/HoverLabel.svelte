@@ -4,7 +4,7 @@
 
 	export let label, maxLabelWidth, y, isHoverLabelVisible, fontSize, labelSpace;
 
-	$: console.log(labelSpace);
+	$: console.log(label);
 
 	$: areaName = label.areanm;
 
@@ -16,95 +16,67 @@
 
 	let labelRectArray = [];
 
-	/*$: backgroundColor = colorsLookup['selected'].color;
-	$: textColor = colorsLookup['selected'].contrast;
-
-	$: oneLineLabelArray = [label.areanm];
-	let oneLineLabelBBox;
-	$: isOneLineLabelVisilble = oneLineLabelBBox ? oneLineLabelBBox.width <= maxLabelWidth : true;
-
-	$: twoLineLabelArray = splitTextIntoRows(label.areanm, 2);
-	let twoLineLabelBBox;
-	$: showTwoLineLabel =
-		oneLineLabelBBox &&
-		oneLineLabelBBox.width > maxLabelWidth &&
-		!twoLineLabelArray.some((el) => el === '');
-	$: isTwoLineLabelVisilble = showTwoLineLabel
-		? twoLineLabelBBox
-			? twoLineLabelBBox.width <= maxLabelWidth
-			: true
-		: false;
-
-	$: threeLineLabelArray = splitTextIntoRows(label.areanm, 3);
-	let threeLineLabelBBox;
-	$: showThreeLineLabel =
-		showTwoLineLabel &&
-		twoLineLabelBBox &&
-		twoLineLabelBBox.width > maxLabelWidth &&
-		!threeLineLabelArray.some((el) => el === '');
-	$: isThreeLineLabelVisilble = showThreeLineLabel
-		? threeLineLabelBBox
-			? threeLineLabelBBox.width <= maxLabelWidth
-			: true
-		: false;
-
-	$: isHoverLabelVisible =
-		isOneLineLabelVisilble || isTwoLineLabelVisilble || isThreeLineLabelVisilble;*/
-
-	$: console.log(labelRectArray);
+	let color = colorsLookup.selected;
+	let labelRect;
 </script>
 
 <g class="hover-label-container">
-	<path
-		transform="translate(2,0)"
-		d="M5 {y(label.data[0].value)} l10 0"
-		stroke={colorsLookup['selected'].color}
-		fill="none"
-		stroke-width="1px"
-	></path>
+	<g class="label-group" transform="translate(0,6)">
+		<g>
+			<path
+				transform="translate(2,-6)scale(-1,1)"
+				d="M5 {label.position} l10 0"
+				stroke={color.color}
+				fill="none"
+				stroke-width="1px"
+			></path>
+		</g>
 
-	{#each textArrayOptions as textArray, i}
-		{#if i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace)}
-			<g
-				transform="translate(20,{y(label.data[0].value) + 4})"
-				opacity={labelRectArray[i] &&
-				labelRectArray[i].width <= labelSpace &&
-				(i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace))
-					? 1
-					: 0}
-			>
-				{#if labelRectArray[i]}
-					<rect
-						x={0}
-						y={-labelRectArray[i].height / 2 - fontSize / 4.5}
-						width={labelRectArray[i].width + 6}
-						height={Math.max(
-							0,
-							labelRectArray[i].height -
-								fontSize / 4.5 +
-								(/[qgyp]/.test(textArray[textArray.length - 1]) ? 2 : 0)
-						)}
-						fill={colorsLookup['selected'].color}
-						stroke="none"
-						stroke-width="1.5px"
-						rx="2px"
-					></rect>
-				{/if}
+		<g transform="translate(-22,{label.position})">
+			{#each textArrayOptions as textArray, i}
+				<g
+					opacity={labelRectArray[i] &&
+					labelRectArray[i].width <= labelSpace &&
+					(i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace))
+						? 1
+						: 0}
+				>
+					{#if i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace)}
+						{#if labelRectArray[i]}
+							<rect
+								x={-labelRectArray[i].width}
+								y={-labelRectArray[i].height / 2 - fontSize / 4.5}
+								width={labelRectArray[i].width + 6}
+								height={Math.max(
+									0,
+									labelRectArray[i].height -
+										fontSize / 4.5 +
+										(/[qgyp]/.test(textArray[textArray.length - 1]) ? 2 : 0)
+								)}
+								fill={color.color}
+								stroke="none"
+								stroke-width="1.5px"
+								rx="2px"
+							></rect>
+						{/if}
 
-				<g bind:contentRect={labelRectArray[i]}>
-					{#each textArray as line, j}
-						<text
-							x="3"
-							style="font-size: {fontSize}px;"
-							y={-textArray.length * (fontSize / 2) + j * fontSize + fontSize / 2}
-							fill={colorsLookup['selected'].contrast}
-							stroke="none">{line}</text
-						>
-					{/each}
+						<g bind:contentRect={labelRectArray[i]}>
+							{#each textArray as line, j}
+								<text
+									x="3"
+									text-anchor="end"
+									style="font-size: {fontSize}px;"
+									y={-textArray.length * (fontSize / 2) + j * fontSize + fontSize / 2}
+									fill={color.contrast}
+									stroke="none">{line}</text
+								>
+							{/each}
+						</g>
+					{/if}
 				</g>
-			</g>
-		{/if}
-	{/each}
+			{/each}
+		</g>
+	</g>
 </g>
 
 <!-- <g class="label-group" transform="translate(0,{y(label.data[0].value) + 6})">

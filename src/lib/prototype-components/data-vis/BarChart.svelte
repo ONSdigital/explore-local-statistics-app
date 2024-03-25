@@ -58,8 +58,6 @@
 			}))
 		: [];
 
-	//$: data = .sort((a, b) => b.data[0].value - a.data[0].value);
-
 	let labelRectArray = [];
 
 	$: maxLabelWidth =
@@ -102,6 +100,10 @@
 		position: el.position / (totalHeight / chartHeight),
 		height: el.height / (totalHeight / chartHeight)
 	}));
+
+	$: hoverAreaWithDataAdded = hoverId
+		? dataArrayStep3.filter((el) => el).find((el) => el.areacd === hoverId)
+		: null;
 
 	$: minBarHeight = Math.min(...dataArrayStep3.map((el) => el.height));
 
@@ -170,6 +172,7 @@
 			bind:labelBBox={labelRectArray[index]}
 			{customLookup}
 			{showConfidenceIntervals}
+			bind:hoverId
 		></Bar>
 	</g>
 {/each}

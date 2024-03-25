@@ -21,9 +21,15 @@
 					: colorsLookup[label.datum.role]
 				: { color: null, constrast: null };
 
-	const onMouseEnterEvent = () => {};
+	const onMouseEnterEvent = () => {
+		if (label.datum.role != 'related') {
+			hoverId = label.datum.areacd;
+		}
+	};
 
-	const onMouseLeaveEvent = () => {};
+	const onMouseLeaveEvent = () => {
+		hoverId = undefined;
+	};
 
 	$: textArray = label.datum.labelText;
 </script>
