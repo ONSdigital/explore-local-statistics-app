@@ -29,7 +29,7 @@
 		.join('&')}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
-<div class="content-block-wrapper">
+<div class="content-block-wrapper" class:border-rounded={!showActions}>
 	<div class="content-block" class:hide-actions={!showActions} bind:this={el}>
 		{#if title}
 			<h3 class="content-subhead">
@@ -38,19 +38,21 @@
 			</h3>
 		{/if}
 		<slot />
-		<div class="source-notes-container">
-			<p class="source-container">
-				<span style="font-weight: bold">Source:</span>
-				{#each sourceOrgs as org, i}
-					<a href={sourceLinks[i]} target="_blank">{org}</a>
-					{#if i < sourceOrgs.length - 2}
-						,
-					{:else if i === sourceOrgs.length - 2}
-						{'and '}
-					{/if}
-				{/each}
-			</p>
-		</div>
+		{#if sourceOrgs.length > 0}
+			<div class="source-notes-container">
+				<p class="source-container">
+					<span style="font-weight: bold">Source:</span>
+					{#each sourceOrgs as org, i}
+						<a href={sourceLinks[i]} target="_blank">{org}</a>
+						{#if i < sourceOrgs.length - 2}
+							,
+						{:else if i === sourceOrgs.length - 2}
+							{'and '}
+						{/if}
+					{/each}
+				</p>
+			</div>
+		{/if}
 	</div>
 </div>
 {#if showActions}
@@ -94,6 +96,9 @@
 		border: 1px solid #222;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
+	}
+	.border-rounded {
+		border-radius: 4px;
 	}
 	.content-block {
 		padding: 12px;
