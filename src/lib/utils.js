@@ -277,3 +277,10 @@ export function calculateBackgroundCirclesRadius(value, breakpoints) {
 export function doLinesInOneDSpaceOverlap(x1, x2, y1, y2) {
 	return x2 >= y1 && x1 <= y2;
 }
+
+export function arrayJoin(arr, separators = [', ', ' and ']) {
+	if (arr.length < 2) return arr.join(separators[0]);
+	return arr.slice(0, -1).join(separators[0]) + separators[1] + arr.slice(-1);
+}
+
+export const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;

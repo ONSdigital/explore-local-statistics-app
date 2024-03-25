@@ -18,7 +18,7 @@
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
-	import { constructVisibleAreasArray, updateCustomLookup } from '$lib/utils.js';
+	import { constructVisibleAreasArray, updateCustomLookup, arrayJoin } from '$lib/utils.js';
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
@@ -38,7 +38,6 @@
 
 	const maxSelection = 10;
 
-	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 	const parseDate = (str) => {
 		const intlString = str.split('/').reverse().join('-') + 'T12:00';
 		const date = new Date(intlString);
@@ -390,15 +389,17 @@
 	meta={[
 		{
 			key: sourceOrgs.length === 1 ? 'Data source' : 'Data sources',
-			value: Array.from(sourceOrgs.keys())
-				.map((i) => `<a href="${sourceLinks[i]}" target="_blank">${sourceOrgs[i]}</a>`)
-				.join(', ')
+			value: arrayJoin(
+				Array.from(sourceOrgs.keys()).map(
+					(i) => `<a href="${sourceLinks[i]}" target="_blank">${sourceOrgs[i]}</a>`
+				)
+			)
 		},
 		{
 			key: 'Published on',
 			value: sourceDate.every((d) => d === sourceDate[0])
 				? parseDate(sourceDate[0])
-				: sourceDate.map((d) => parseDate(d)).join(', ')
+				: arrayJoin(sourceDate.map((d) => parseDate(d)))
 		}
 	]}
 	background="#eaeaea"
