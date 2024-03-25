@@ -126,6 +126,7 @@
 	$: filteredChartDataAreaGroupLatest = filteredChartDataAreaGroup.filter(
 		(el) => el.xDomainNumb === xDomain[1]
 	);
+	$: console.log('filteredChartDataAreaGroupLatest', filteredChartDataAreaGroupLatest);
 
 	$: combinedChartDataLatest = [
 		...filteredChartDataSelectedLatest,
@@ -204,6 +205,7 @@
 				filteredChartDataAreaGroup={filteredChartDataAreaGroup.filter(
 					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 				)}
+				{filteredChartDataAreaGroupLatest}
 				{selectionsObject}
 				{selectedArea}
 				{indicatorCalculations}

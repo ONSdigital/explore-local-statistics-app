@@ -20,9 +20,7 @@
 		const otherAreas = data.areas.slice(1);
 
 		const geoGroups = filterGeoGroups(data.indicator.inferredGeos);
-		const geoGroup = data.geo
-			? geoGroups.find((t) => t.key === data.geo)
-			: geoGroups[geoGroups.length - 1];
+		const geoGroup = geoGroups.find((t) => t.key === data?.geo) || null;
 		const geoCodes = geoGroup
 			? [...new Set(data.chartData.map((d) => d.areacd))].filter((d) =>
 					geoGroup.codes.includes(d.slice(0, 3))
@@ -36,7 +34,7 @@
 					label: geoGroup.label,
 					role: 'related'
 				}
-			: null;
+			: { codes: [], areas: [] };
 		opts.selectionsObject = {
 			'indicator-additional-chosen': [],
 			'indicator-additional-visible': [],
