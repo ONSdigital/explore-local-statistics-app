@@ -95,14 +95,15 @@
 					? 'max'
 					: 'min';
 
-	$: relatedLabel = selectionsObject[relatedID + '-visible']
-		? {
-				areacd: 'related',
-				areanm: selectionsObject[relatedID + '-visible'].label,
-				role: 'related',
-				labelPosition: chooseGroupLabelValue === 'min' ? minGroupValueLatest : maxGroupValueLatest
-			}
-		: undefined;
+	$: relatedLabel =
+		selectionsObject[relatedID + '-visible'] && filteredChartDataAreaGroupLatest.length > 0
+			? {
+					areacd: 'related',
+					areanm: selectionsObject[relatedID + '-visible'].label,
+					role: 'related',
+					labelPosition: chooseGroupLabelValue === 'min' ? minGroupValueLatest : maxGroupValueLatest
+				}
+			: undefined;
 
 	$: labels = [
 		...(relatedLabel ? [relatedLabel] : []),

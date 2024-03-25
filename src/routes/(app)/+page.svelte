@@ -85,9 +85,14 @@
 	<Card title="Local indicators">
 		<p style:margin-bottom="28px">
 			Explore {datasetsCount} indicators, including
-			<a href="{base}/indicators/wellbeing-satisfaction" class="no-wrap">life satisfaction</a>,
-			<a href="{base}/indicators/employment-rate">employment rate</a> and
-			<a href="{base}/indicators/4g-coverage">4G coverage</a>.
+			<a href="{base}/indicators/gross-disposable-household-income-per-head" class="no-wrap"
+				>household income</a
+			>,
+			<a href="{base}/indicators/further-education-and-skills-participation"
+				>participation in further education</a
+			>
+			and
+			<a href="{base}/indicators/wellbeing-satisfaction">life satisfaction</a>.
 		</p>
 		<Button icon="arrow" iconPosition="after" href="{base}/indicators" small
 			>Explore indicators</Button
