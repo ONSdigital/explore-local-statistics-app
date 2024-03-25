@@ -2,6 +2,7 @@
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
+	import { geoTypeMap } from '$lib/config/geoConfig';
 
 	export let metadata,
 		indicator,
@@ -102,7 +103,7 @@
 
 	$: embedProps = {
 		type: 'bar',
-		geo: selectionsObject['indicator-related-chosen'],
+		geo: geoTypeMap[selectionsObject['indicator-related-chosen']] || 'none',
 		years: chosenXDomain[1],
 		areas: selectionsObject['indicator-additional-chosen'].join(','),
 		intervals: showConfidenceIntervals

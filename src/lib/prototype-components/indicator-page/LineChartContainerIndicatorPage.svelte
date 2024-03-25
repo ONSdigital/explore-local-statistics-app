@@ -2,6 +2,7 @@
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import LineChartContainer from '$lib/prototype-components/area-page/main-chart/LineChartContainer.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
+	import { geoTypeMap } from '$lib/config/geoConfig';
 
 	export let metadata,
 		indicator,
@@ -94,7 +95,7 @@
 
 	$: embedProps = {
 		type: 'line',
-		geo: selectionsObject['indicator-related-chosen'],
+		geo: geoTypeMap[selectionsObject['indicator-related-chosen']] || 'none',
 		years: chosenXDomain.join('-'),
 		areas: selectionsObject['indicator-additional-chosen'].join(','),
 		intervals: showConfidenceIntervals

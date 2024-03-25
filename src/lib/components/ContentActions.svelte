@@ -20,6 +20,7 @@
 <scr${''}ipt>var pymParent = new pym.Parent("${type}", "${$page.url.href}/embed?${Object.keys(
 		embedProps
 	)
+		.filter((key) => embedProps[key] && embedProps[key] !== 'none')
 		.map((key) => `${key}=${embedProps[key]}`)
 		.join('&')}", {name: "${type}", title: "${title}"});</scr${''}ipt>`;
 </script>

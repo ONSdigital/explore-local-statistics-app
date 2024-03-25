@@ -222,6 +222,12 @@ export const geoTypes = [
 	}
 ];
 
+export const geoTypeMap = (() => {
+	const map = {};
+	geoTypes.filter((s) => s.alt).forEach((s) => (map[s.alt] = s.key));
+	return map;
+})();
+
 export const oldGeoCodesLookup = {
 	E06000048: 'E06000057',
 	E08000020: 'E08000037',
