@@ -41,6 +41,7 @@ export function makeMapData(data, types, year) {
 	const filtered = data.filter(
 		(d) => isNumeric(d.value) && d[yearKey] === year && types.includes(d.areacd.slice(0, 3))
 	);
+	if (filtered.length === 0) return { data: [], breaks: [] };
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
 	const breaks = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]];
 	const codes = [];
