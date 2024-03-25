@@ -46,7 +46,7 @@
 
 	$: maxLabelWidth =
 		labelRectArray.length > 0
-			? Math.max(80, ...labelRectArray.map((el, i) => (i < permanentLabels.length ? el.width : 0)))
+			? Math.max(100, ...labelRectArray.map((el, i) => (i < permanentLabels.length ? el.width : 0)))
 			: maxLabelWidth;
 
 	function groupAdjacentItemsWithPositions(arr) {

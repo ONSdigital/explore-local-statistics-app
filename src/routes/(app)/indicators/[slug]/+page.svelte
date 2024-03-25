@@ -272,7 +272,7 @@
 					include: true
 				},
 				{
-					key: 'combined',
+					key: 'cauth',
 					label: 'Combined authorities',
 					data: changeAreasOptionsObject.combined,
 					accordion: true,

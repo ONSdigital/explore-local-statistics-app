@@ -52,7 +52,7 @@
 		height={Math.min(area.height / 2, 40)}
 		fill={color.color}
 		stroke="white"
-		opacity="0.8"
+		opacity="0.6"
 		stroke-width={Math.min(area.height / 4, 20) > 4 ? '1px' : '0px'}
 	></rect>
 	<rect
