@@ -166,35 +166,45 @@
 				labels: {
 					related: 'All countries'
 				},
-				areas: countriesWithDataAreas,
+				areas: countriesWithDataAreas.sort((a, b) =>
+					a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
+				),
 				codes: countriesWithDataCodes
 			},
 			region: {
 				labels: {
 					related: 'All regions'
 				},
-				areas: regionsWithDataAreas,
+				areas: regionsWithDataAreas.sort((a, b) =>
+					a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
+				),
 				codes: regionsWithDataCodes
 			},
 			combined: {
 				labels: {
 					related: 'All combined authorities'
 				},
-				areas: combinedAuthoritiesWithDataAreas,
+				areas: combinedAuthoritiesWithDataAreas.sort((a, b) =>
+					a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
+				),
 				codes: combinedAuthoritiesWithDataCodes
 			},
 			utla: {
 				labels: {
 					related: 'All upper-tier/unitary authorities'
 				},
-				areas: upperTierLocalAuthoritiesWithDataAreas,
+				areas: upperTierLocalAuthoritiesWithDataAreas.sort((a, b) =>
+					a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
+				),
 				codes: upperTierLocalAuthoritiesWithDataCodes
 			},
 			ltla: {
 				labels: {
 					related: 'All lower-tier/unitary authorities'
 				},
-				areas: lowerTierLocalAuthoritiesWithDataAreas,
+				areas: lowerTierLocalAuthoritiesWithDataAreas.sort((a, b) =>
+					a.areanm > b.areanm ? 1 : b.areanm > a.areanm ? -1 : 0
+				),
 				codes: lowerTierLocalAuthoritiesWithDataCodes
 			}
 		}
