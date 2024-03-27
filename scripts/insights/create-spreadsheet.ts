@@ -6,12 +6,12 @@ const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
 export function createSpreadsheet(data, metadata, filename) {
 	const odsData = {
-		coverSheetTitle: 'Explore local statistics',
+		coverSheetTitle: 'Explore local statistics data',
 		coverSheetContents: [
 			'## Source',
-			'[Office for National Statistics](https://www.ons.gov.uk)',
+			'Office for National Statistics and other producers of official statistics',
 			'[Visit Explore Local Statistics on the ONS website](http://explore-local-statistics.beta.ons.gov.uk/)',
-			'## Note on blank cells',
+			'## Notes',
 			'Some cells are blank, indicating unavailable data.'
 		],
 		notes: [],
@@ -23,8 +23,17 @@ export function createSpreadsheet(data, metadata, filename) {
 	for (const topic of metadata.topicsArray) {
 		for (const subTopic of topic.subTopics) {
 			for (const indicatorCode of subTopic.indicatorCodes) {
-				const { label, slug, decimalPlaces, subtitle, sourceURL, longDescription, subText } =
-					metadata.indicatorsObject[indicatorCode].metadata;
+				const {
+					label,
+					slug,
+					decimalPlaces,
+					subtitle,
+					sourceOrg,
+					sourceDate,
+					sourceURL,
+					longDescription,
+					subText
+				} = metadata.indicatorsObject[indicatorCode].metadata;
 				const unit = getUnit(metadata.indicatorsObject[indicatorCode].metadata);
 				const periodGroup = metadata.indicatorsObject[indicatorCode].periodGroup;
 				const { id, code, areacd, value, lci, uci, xDomainNumb } = data[indicatorCode];
@@ -84,7 +93,16 @@ export function createSpreadsheet(data, metadata, filename) {
 						values: values.map((d) => d.uci)
 					});
 				}
-				const sheetIntroText = [subtitle];
+				const sources = sourceOrg
+					.split('|')
+					.map((s, i) => [`${s}, ${sourceDate.split('|')[i]}`, sourceURL.split('|')[i], ''])
+					.flat();
+				const sheetIntroText = [
+					subtitle,
+					'',
+					sources.length > 3 ? 'Sources:' : 'Source:',
+					...sources
+				];
 				odsData.sheets.push({
 					sheetName: `${label} [[note-${slug}]]`,
 					tableName: slug.replaceAll('-', '_'),
@@ -115,8 +133,8 @@ export function createSpreadsheet(data, metadata, filename) {
 
 function makePeriodsMap(metadata) {
 	const map = new Map();
-	for (const { periodGroup, xDomainNumb, label } of metadata.periodsLookupArray) {
-		map.set(`${periodGroup};${xDomainNumb}`, label);
+	for (const { periodGroup, xDomainNumb, period } of metadata.periodsLookupArray) {
+		map.set(`${periodGroup};${xDomainNumb}`, period);
 	}
 	return map;
 }
