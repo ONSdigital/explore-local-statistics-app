@@ -40,7 +40,7 @@
 
 	let metadata = data.metadata;
 	let chartData = data.chartData;
-	let postcode;
+	let postcode, searchValue;
 	let mapColors = null;
 
 	let navigated,
@@ -703,11 +703,19 @@
 				placeholder="Eg. Fareham or PO15 5RR"
 				essOnly
 				hideIcon
+				bind:value={searchValue}
 				on:submit={navTo}
 				on:clear={() => (postcode = null)}
 			/>
 			{#if postcode}
-				<AreaList {postcode} on:clear={() => (postcode = null)} urlSuffix="/indicators" />
+				<AreaList
+					{postcode}
+					on:clear={() => {
+						postcode = null;
+						searchValue = null;
+					}}
+					urlSuffix="/indicators"
+				/>
 			{/if}
 		</Card>
 	</Cards>

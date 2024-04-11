@@ -27,7 +27,7 @@
 	export let data: PageData;
 
 	let childType = data?.childTypes?.[0];
-	let postcode;
+	let postcode, searchValue;
 
 	$: productLinks = data.place ? filterLinks(data.links, data.place) : [];
 
@@ -180,11 +180,18 @@
 			groupKey="group"
 			placeholder="Eg. Fareham or PO15 5RR"
 			hideIcon
+			bind:value={searchValue}
 			on:submit={navTo}
 			on:clear={() => (postcode = null)}
 		/>
 		{#if postcode}
-			<AreaList {postcode} on:clear={() => (postcode = null)} />
+			<AreaList
+				{postcode}
+				on:clear={() => {
+					postcode = null;
+					searchValue = null;
+				}}
+			/>
 		{/if}
 	</Card>
 	<Card colspan={3} noBackground>

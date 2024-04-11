@@ -25,7 +25,7 @@
 
 	const datasetsCount = data.coreMetadata.indicatorsCodeLabelArray.length;
 
-	let postcode = null;
+	let postcode, searchValue;
 
 	// Functions etc
 	function navTo(e) {
@@ -75,12 +75,19 @@
 			labelKey="areanm"
 			groupKey="group"
 			placeholder="Eg. Fareham, or PO15 5RR"
+			bind:value={searchValue}
 			on:submit={navTo}
 			on:clear={() => (postcode = null)}
 		/>
 
 		{#if postcode}
-			<AreaList {postcode} on:clear={() => (postcode = null)} />
+			<AreaList
+				{postcode}
+				on:clear={() => {
+					postcode = null;
+					searchValue = null;
+				}}
+			/>
 		{/if}
 	</Card>
 	<Card title="Local indicators">
