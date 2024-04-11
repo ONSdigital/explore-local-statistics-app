@@ -73,7 +73,7 @@
 		clusterGroupsArray,
 		clusterGroup,
 		areaClusters,
-		clusterDescription,
+		clusterDescriptions,
 		similarAreas;
 
 	function makeGeoArray(areacd, level) {
@@ -101,6 +101,15 @@
 			else other.push(d);
 		}
 		return { region, other };
+	}
+
+	function makeClusterDescriptions(descriptions) {
+		const obj = {};
+		for (const d of descriptions) {
+			if (!obj[d.type]) obj[d.type] = {};
+			obj[d.type][d.letter] = d.text;
+		}
+		return obj;
 	}
 
 	afterNavigate(() => {
@@ -309,11 +318,7 @@
 		}));
 		clusterGroup = clusterGroupsArray[0];
 		areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
-		clusterDescription = areaClusters?.[clusterGroup.id]
-			? data.metadata.clustersLookup.descriptions.find(
-					(d) => d.type === clusterGroup.id && d.letter === areaClusters[clusterGroup.id]
-				)?.text
-			: '';
+		clusterDescriptions = makeClusterDescriptions(data.metadata.clustersLookup.descriptions);
 		similarAreas = getSimilarAreas(areaClusters, clusterGroup);
 
 		selectionsObject['areas-rows-comparison-chosen'] = {
@@ -786,7 +791,7 @@
 							</p>
 						</Twisty>
 						<p style:margin-top="12px">
-							{clusterDescription || ''}
+							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
 						</p>
 					{/if}
 				</ContentBlock>
