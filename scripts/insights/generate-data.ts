@@ -78,7 +78,11 @@ async function main() {
 		writeJson(`${AREA_DETAILS_OUTPUT_DIR}/${areacd}.json`, areaDetails[areacd]);
 	}
 
-	createSpreadsheet(combinedDataObjectColumnOriented, outConfig, 'static/insights/ess-data.ods');
+	createSpreadsheet(
+		combinedDataObjectColumnOriented,
+		outConfig,
+		'static/insights/datadownload.ods'
+	);
 }
 
 function generateOutData(combinedData, indicatorsArray) {

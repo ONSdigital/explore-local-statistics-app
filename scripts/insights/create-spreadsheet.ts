@@ -12,7 +12,8 @@ export function createSpreadsheet(data, metadata, filename) {
 			'Office for National Statistics and other producers of official statistics',
 			'[Visit Explore Local Statistics on the ONS website](http://explore-local-statistics.beta.ons.gov.uk/)',
 			'## Notes',
-			'Some cells are blank, indicating unavailable data.'
+			'Some cells are blank, indicating unavailable data.',
+			'Some indicators use custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day).'
 		],
 		notes: [],
 		sheets: []
@@ -93,16 +94,16 @@ export function createSpreadsheet(data, metadata, filename) {
 						values: values.map((d) => d.uci)
 					});
 				}
-				const sources = sourceOrg
-					.split('|')
-					.map((s, i) => [`${s}, ${sourceDate.split('|')[i]}`, sourceURL.split('|')[i], ''])
+				const sourceOrgs = sourceOrg.split('|');
+				const sourceDates = sourceDate.split('|');
+				const sourceURLs = sourceURL.split('|');
+				const sources = sourceOrgs
+					.map((s, i) => [
+						`Source${sourceOrgs.length > 1 ? ` ${i + 1}` : ''}: ${s}, ${sourceDates[i]}`,
+						sourceURLs[i]
+					])
 					.flat();
-				const sheetIntroText = [
-					subtitle,
-					'',
-					sources.length > 3 ? 'Sources:' : 'Source:',
-					...sources
-				];
+				const sheetIntroText = [`${subtitle.trim()}.`, ...sources];
 				odsData.sheets.push({
 					sheetName: `${label} [[note-${slug}]]`,
 					tableName: slug.replaceAll('-', '_'),
