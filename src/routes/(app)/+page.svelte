@@ -76,6 +76,7 @@
 			groupKey="group"
 			placeholder="Eg. Fareham, or PO15 5RR"
 			on:submit={navTo}
+			on:clear={() => (postcode = null)}
 		/>
 
 		{#if postcode}

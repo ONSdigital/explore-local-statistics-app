@@ -181,6 +181,7 @@
 			placeholder="Eg. Fareham or PO15 5RR"
 			hideIcon
 			on:submit={navTo}
+			on:clear={() => (postcode = null)}
 		/>
 		{#if postcode}
 			<AreaList {postcode} on:clear={() => (postcode = null)} />

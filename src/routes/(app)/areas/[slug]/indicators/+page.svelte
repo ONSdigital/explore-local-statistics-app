@@ -704,6 +704,7 @@
 				essOnly
 				hideIcon
 				on:submit={navTo}
+				on:clear={() => (postcode = null)}
 			/>
 			{#if postcode}
 				<AreaList {postcode} on:clear={() => (postcode = null)} urlSuffix="/indicators" />
