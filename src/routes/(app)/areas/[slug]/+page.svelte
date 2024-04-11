@@ -159,6 +159,7 @@
 						</p>
 						<Button
 							icon="arrow"
+							iconPosition="after"
 							variant="ghost"
 							href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
 							small>Explore local indicators</Button
