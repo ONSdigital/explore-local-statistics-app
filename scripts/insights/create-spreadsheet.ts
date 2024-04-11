@@ -9,7 +9,7 @@ export function createSpreadsheet(data, metadata, filename) {
 		coverSheetTitle: 'Explore local statistics data',
 		coverSheetContents: [
 			'## Source',
-			'Office for National Statistics and other producers of official statistics',
+			'Office for National Statistics (ONS) and other producers of official statistics.',
 			'[Visit Explore Local Statistics on the ONS website](http://explore-local-statistics.beta.ons.gov.uk/)',
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
