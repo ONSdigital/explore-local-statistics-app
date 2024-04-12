@@ -4,7 +4,7 @@
 	import { base } from '$app/paths';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { getName, capitalise } from '@onsvisual/robo-utils';
-	import { essGeocodes, noIndex } from '$lib/config/geoConfig';
+	import { essGeocodes, noIndex, geoCodesLookup } from '$lib/config/geoConfig';
 	import { getParent, parseTemplate, filterLinks } from '$lib/util/links/linksHelpers';
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 	import { filterChildren } from '$lib/util/geo/filterChildren';
@@ -36,12 +36,7 @@
 			postcode = e.detail;
 		} else {
 			postcode = null;
-			// analyticsEvent({
-			// 	event: type === 'map' ? 'mapSelect' : 'searchSelect',
-			// 	areaCode: e.detail.areacd,
-			// 	areaName: e.detail.areanm,
-			// 	areaType: geoCodesLookup[e.detail.areacd.slice(0, 3)].label
-			// });
+			searchValue = null;
 			goto(`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}`, options);
 		}
 	}
@@ -50,6 +45,12 @@
 		let place = e.detail.feature.properties;
 		e.detail.areacd = code;
 		e.detail.areanm = getName(place);
+		analyticsEvent({
+			event: 'mapSelect',
+			areaCode: e.detail.areacd,
+			areaName: e.detail.areanm,
+			areaType: geoCodesLookup?.[e.detail.areacd.slice(0, 3)]?.label
+		});
 		navTo(e, { noScroll: true }, 'map');
 	}
 

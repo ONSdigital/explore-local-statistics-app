@@ -625,12 +625,7 @@
 			postcode = e.detail;
 		} else {
 			postcode = null;
-			// analyticsEvent({
-			// 	event: type === 'map' ? 'mapSelect' : 'searchSelect',
-			// 	areaCode: e.detail.areacd,
-			// 	areaName: e.detail.areanm,
-			// 	areaType: geoCodesLookup[e.detail.areacd.slice(0, 3)].label
-			// });
+			searchValue = null;
 			goto(
 				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
 				options
