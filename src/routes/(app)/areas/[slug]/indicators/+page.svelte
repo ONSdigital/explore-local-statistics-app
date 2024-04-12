@@ -11,7 +11,8 @@
 		Card,
 		Button,
 		Dropdown,
-		Twisty
+		Twisty,
+		analyticsEvent
 	} from '@onsvisual/svelte-components';
 	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
@@ -805,11 +806,21 @@
 
 		<NavSection title="Get the data">
 			<p>
-				You can download the data source for these charts by exploring our full <a
-					href="{base}/indicators"
-				>
-					list of indicators</a
+				Download available indicators for all areas in our <a
+					href="{base}/insights/datadownload.ods"
+					rel="external"
+					on:click={() =>
+						analyticsEvent({
+							event: 'fileDownload',
+							extension: 'ods',
+							chartType: 'all'
+						})}>accompanying dataset (ODS, 4MB)</a
 				>.
+			</p>
+			<p>
+				If you would like a CSV of the data displayed in the <a href="#select-an-indicator"
+					>select an indicator</a
+				> chart above, you can click the "download data" link immediately below it.
 			</p>
 		</NavSection>
 	</NavSections>

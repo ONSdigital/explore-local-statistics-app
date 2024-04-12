@@ -9,7 +9,8 @@
 		NavSections,
 		NavSection,
 		Dropdown,
-		Table
+		Table,
+		analyticsEvent
 	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
@@ -644,8 +645,20 @@
 				{/each}
 			</ul>
 			<p>
-				If you would like a CSV of the data displayed in one of the above charts, you can click the
-				"download data" link immediately below it.
+				Download all available indicators in <a
+					href="{base}/insights/datadownload.ods"
+					rel="external"
+					on:click={() =>
+						analyticsEvent({
+							event: 'fileDownload',
+							extension: 'ods',
+							chartType: 'all'
+						})}>accompanying dataset (ODS, 4MB)</a
+				>.
+			</p>
+			<p>
+				If you would like a CSV of the data displayed in one of the individual charts above, you can
+				click the "download data" link immediately below it.
 			</p>
 			{#if experimental}
 				<p>
