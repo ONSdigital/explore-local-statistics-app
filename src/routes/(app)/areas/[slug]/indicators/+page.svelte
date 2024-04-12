@@ -113,6 +113,9 @@
 	}
 
 	afterNavigate(() => {
+		postcode = null;
+		searchValue = null;
+
 		selectedAreaDemographicCluster =
 			metadata.clustersLookup.data.demographic[
 				metadata.clustersLookup.data.areacd.indexOf(data.place.areacd)
@@ -624,8 +627,6 @@
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
-			postcode = null;
-			searchValue = null;
 			goto(
 				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
 				options

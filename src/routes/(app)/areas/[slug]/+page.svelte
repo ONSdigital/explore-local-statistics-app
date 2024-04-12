@@ -35,8 +35,6 @@
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
-			postcode = null;
-			searchValue = null;
 			goto(`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}`, options);
 		}
 	}
@@ -57,6 +55,7 @@
 	afterNavigate(() => {
 		childType = data?.childTypes?.[0];
 		postcode = null;
+		searchValue = null;
 	});
 </script>
 
