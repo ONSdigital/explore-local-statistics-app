@@ -2,14 +2,12 @@
 	// @ts-nocheck
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { geoCodesLookup } from '$lib/config/geoConfig.js';
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug.js';
 	import {
 		Breadcrumb,
 		Titleblock,
 		Section,
 		Divider,
-		analyticsEvent,
 		List,
 		Cards,
 		Card,

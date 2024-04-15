@@ -16,7 +16,8 @@
 		Cards,
 		Card,
 		Tabs,
-		Tab
+		Tab,
+		analyticsEvent
 	} from '@onsvisual/svelte-components';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
