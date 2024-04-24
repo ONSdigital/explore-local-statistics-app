@@ -34,9 +34,18 @@
 					? timePeriodsArray[timePeriodsArray.length - 1].label + ' to ' + timePeriodsArray[0].label
 					: timePeriodsArray[0].label)
 			: '');
+
+	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 </script>
 
-<h3 class="indicator-title">{selectedIndicator.metadata.label}</h3>
+<span class="indicator-title">
+	<h3>
+		{selectedIndicator.metadata.label}
+	</h3>
+	{#if selectedIndicator.metadata.subText === 'in millions'}
+		<span>, {selectedIndicator.metadata.subText}</span>
+	{/if}
+</span>
 
 {#if showInfo}
 	<button
@@ -99,6 +108,14 @@
 
 	.indicator-title {
 		margin: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: baseline;
+	}
+
+	h3 {
+		margin: 0px;
 	}
 
 	.indicator-additional-description-text-container {

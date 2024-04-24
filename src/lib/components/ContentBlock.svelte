@@ -9,6 +9,7 @@
 	export let type = embedProps?.type || 'chart';
 	export let data = null;
 	export let showActions = true;
+	export let unit = false;
 
 	let el;
 
@@ -19,10 +20,13 @@
 <div class="content-block-wrapper" class:border-rounded={!showActions}>
 	<div class="content-block" class:hide-actions={!showActions} bind:this={el}>
 		{#if title}
-			<h3 class="content-subhead">
-				{title}
+			<span class="content-subhead">
+				<h3>{title}</h3>
+				{#if unit}
+					<span>{unit ? `, ${unit}` : ''}</span>
+				{/if}
 				<!-- <span>{unit ? `, ${unit}` : ''}</span> -->
-			</h3>
+			</span>
 		{/if}
 		<slot />
 		{#if sourceOrgs.length > 0}
@@ -81,5 +85,17 @@
 		padding: 0px;
 		margin: 0px;
 		line-height: 1;
+	}
+
+	.content-subhead {
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: baseline;
+	}
+
+	h3 {
+		margin: 0px;
 	}
 </style>

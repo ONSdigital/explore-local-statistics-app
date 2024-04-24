@@ -27,6 +27,8 @@
 
 	export let data;
 
+	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
+
 	let geoGroups, geoGroup, prevGeoGroup, columns;
 	let pivotedData, mapData;
 	let selected = [];
@@ -480,6 +482,9 @@
 						title={data.indicator.metadata.label}
 						indicator={data.indicator}
 						metadata={data.metadata}
+						unit={getUnit(data.indicator.metadata) === 'in millions'
+							? getUnit(data.indicator.metadata)
+							: null}
 						data={mapData.data}
 						embedProps={{
 							type: 'map',
@@ -611,6 +616,9 @@
 				metadata={data.metadata}
 				data={pivotedData}
 				embedProps={{ type: 'table', geo: geoGroup.key }}
+				unit={getUnit(data.indicator.metadata) === 'in millions'
+					? getUnit(data.indicator.metadata)
+					: null}
 			>
 				<p class="subtitle">
 					{#if timePeriodsArray.length > 1}

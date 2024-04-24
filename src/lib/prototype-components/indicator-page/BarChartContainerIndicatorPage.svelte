@@ -153,7 +153,14 @@
 		</div>
 	</ContentBlock>
 {:else}
-	<ContentBlock title={indicator.metadata.label} {indicator} {metadata} data={csvData} {embedProps}>
+	<ContentBlock
+		title={indicator.metadata.label}
+		{indicator}
+		{metadata}
+		data={csvData}
+		{embedProps}
+		unit={getUnit(indicator.metadata) === 'in millions' ? getUnit(indicator.metadata) : null}
+	>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenTimePeriodDropdownLabel}
 		</p>
