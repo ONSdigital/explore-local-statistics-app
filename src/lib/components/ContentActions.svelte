@@ -17,13 +17,15 @@
 	let showEmbed = false;
 
 	$: embedCode = `<div id="${type}"></div>
-<scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
-<scr${''}ipt>var pymParent = new pym.Parent("${type}-${indicator.metadata.slug}", "${embedUrl}?${Object.keys(
+	<scr${''}ipt src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.min.js"></scr${''}ipt>
+	<scr${''}ipt>var pymParent = new pym.Parent("${type}-${indicator?.metadata?.slug}", "${embedUrl}?${Object.keys(
 		embedProps
 	)
 		.filter((key) => embedProps[key] && embedProps[key] !== 'none')
 		.map((key) => `${key}=${embedProps[key]}`)
-		.join('&')}", {name: "${type}-${indicator.metadata.slug}", title: "${title}"});</scr${''}ipt>`;
+		.join(
+			'&'
+		)}", {name: "${type}-${indicator?.metadata?.slug}", title: "${title}"});</scr${''}ipt>`;
 </script>
 
 <div class="content-actions">

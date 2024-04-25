@@ -122,13 +122,13 @@
 </script>
 
 {#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>No areas selected. Select areas to view time series data.</p>
 		</div>
 	</ContentBlock>
 {:else if timePeriodsArray.length <= 1}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				No <span style="font-weight: bold;">{indicator.metadata.label}</span> time series data to display.
@@ -136,7 +136,7 @@
 		</div>
 	</ContentBlock>
 {:else if chosenTimePeriodsArray.length === 0}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for {chosenXDomainNumbEnd}.
@@ -144,7 +144,7 @@
 		</div>
 	</ContentBlock>
 {:else if chosenTimePeriodsArray.length === 1}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				Time series not displayed as selected date range includes only one time period with <span
@@ -154,7 +154,7 @@
 		</div>
 	</ContentBlock>
 {:else if !combinedChartData || combinedChartData.length === 0}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for

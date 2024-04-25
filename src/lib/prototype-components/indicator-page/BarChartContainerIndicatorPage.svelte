@@ -128,13 +128,13 @@
 </script>
 
 {#if selectionsObject['indicator-additional-visible'].length === 0 && !selectionsObject['indicator-related-visible']}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>No areas selected. Select areas to view time series data.</p>
 		</div>
 	</ContentBlock>
 {:else if !indicator.years.includes(chosenXDomain[1])}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
@@ -143,7 +143,7 @@
 		</div>
 	</ContentBlock>
 {:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
-	<ContentBlock>
+	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
 				No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
