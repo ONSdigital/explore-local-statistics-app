@@ -7,6 +7,7 @@
 		analyticsEvent,
 		PhaseBanner,
 		Header,
+		Main,
 		Footer
 	} from '@onsvisual/svelte-components';
 
@@ -64,9 +65,9 @@
 				/>
 			</div>
 		</Header>
-		<main>
+		<Main>
 			<slot />
-		</main>
+		</Main>
 	</div>
 	<Footer theme="dark" />
 </div>
