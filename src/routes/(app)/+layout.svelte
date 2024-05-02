@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { base } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
 		AnalyticsBanner,
@@ -15,16 +14,15 @@
 	const analyticsProps = {
 		contentTitle: 'Explore local statistics',
 		releaseDate: '20240326',
-		contentType: 'exploratory',
-		outputSeries: 'localstatistics'
+		contentType: 'exploratory'
 	};
 
 	afterNavigate(() => {
 		const eventData = {
 			event: 'pageView',
 			pageUrl: $page.url.href,
-			pageType: $page.data.pageType,
-			contentType: 'exploratory'
+			contentTitle: $page.data.title,
+			contentType: $page.data.pageType
 		};
 		if ($page.data.place) {
 			eventData.areaCode = $page.data.place.areacd;
@@ -34,8 +32,8 @@
 		if ($page.data.indicator) {
 			eventData.indicatorCode = $page.data.indicator.metadata.slug;
 			eventData.indicatorName = $page.data.indicator.metadata.label;
-			eventData.indicatorTopic = $page.data.indicator.topic;
-			eventData.indicatorSubtopic = $page.data.indicator.subTopic;
+			eventData.contentGroup = $page.data.indicator.topic;
+			eventData.contentSubgroup = $page.data.indicator.subTopic;
 		}
 		analyticsEvent(eventData);
 	});
@@ -58,7 +56,7 @@
 	<div class="flex-grow">
 		<Header bilingual={false}>
 			<div slot="before">
-				<AnalyticsBanner {analyticsId} {analyticsProps} />
+				<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
 				<PhaseBanner
 					phase="beta"
 					href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
