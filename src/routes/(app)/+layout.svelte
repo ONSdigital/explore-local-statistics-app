@@ -24,12 +24,11 @@
 			contentTitle: $page.data.title,
 			contentType: $page.data.pageType
 		};
-		if ($page.data.place) {
+		if (['area page', 'area data page'].includes($page.data.pageType) && $page.data.place) {
 			eventData.areaCode = $page.data.place.areacd;
 			eventData.areaName = $page.data.place.areanm || $page.data.place.areacd;
 			eventData.areaType = $page.data.place.typenm;
-		}
-		if ($page.data.indicator) {
+		} else if ($page.data.pageType === 'indicator data page' && $page.data.indicator) {
 			eventData.indicatorCode = $page.data.indicator.metadata.slug;
 			eventData.indicatorName = $page.data.indicator.metadata.label;
 			eventData.contentGroup = $page.data.indicator.topic;
