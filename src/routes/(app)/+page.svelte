@@ -49,6 +49,7 @@
 <Titleblock title="Explore local statistics" background="#e9eff4">
 	<UKMap />
 	<Lede>Find, compare and visualise statistics about places in the United Kingdom.</Lede>
+	Base path is {base}
 	<div style:height="32px" />
 </Titleblock>
 
