@@ -32,20 +32,6 @@
 	};
 
 	$: textArray = label.datum.labelText;
-
-	$: console.log(
-		'M5 ' +
-			label.targetY +
-			' l' +
-			(20 * (connectingLineInfo.groupLength - connectingLineInfo.groupPosition)) /
-				(connectingLineInfo.groupLength + 1) +
-			' l0 ' +
-			(label.y - label.targetY) +
-			' L20 ' +
-			label.y
-	);
-
-	$: console.log(label);
 </script>
 
 {#if hoverId && hoverId != label.datum.areacd ? 0 : 1}

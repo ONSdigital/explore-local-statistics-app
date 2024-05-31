@@ -110,3 +110,35 @@
 		{/if}
 	</div>
 {/if}
+
+<style>
+	.no-chart-container {
+		margin: 0px 10px;
+		height: 500px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		text-wrap: balance;
+		text-align: center;
+	}
+
+	.source-notes-container {
+		font-size: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.source-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 1.2;
+	}
+
+	.notes-container {
+		padding: 0px;
+		margin: 0px;
+		line-height: 1.2;
+	}
+</style>

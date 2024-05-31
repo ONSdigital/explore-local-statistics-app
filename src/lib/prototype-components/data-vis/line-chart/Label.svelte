@@ -32,20 +32,6 @@
 	};
 
 	$: textArray = label.datum.labelText;
-
-	$: console.log(
-		'M5 ' +
-			label.targetY +
-			' l' +
-			(20 * (connectingLineInfo.groupLength - connectingLineInfo.groupPosition)) /
-				(connectingLineInfo.groupLength + 1) +
-			' l0 ' +
-			(label.y - label.targetY) +
-			' L20 ' +
-			label.y
-	);
-
-	$: console.log(label);
 </script>
 
 {#if hoverId && hoverId != label.datum.areacd ? 0 : 1}
@@ -119,29 +105,3 @@
 		</g>
 	</g>
 {/if}
-<!-- {#if hoverId === label.datum.areacd || !hoverId}
-	<g
-		on:mouseenter={onMouseEnterEvent}
-		on:mouseleave={onMouseLeaveEvent}
-		class="label-container"
-		transform="translate(0,{label.y})"
-	>
-		{#if labelBBox}
-			<rect
-				x={-3}
-				width={labelBBox.width + 6}
-				y={labelBBox.y - 18}
-				height={labelBBox.height}
-				rx="2px"
-				stroke="none"
-				fill={color.color}
-			></rect>
-		{/if}
-
-		<g bind:contentRect={labelBBox}>
-			{#each labelArray as line, i}
-				<text y={18 * i} fill={color.contrast}>{line}</text>
-			{/each}
-		</g>
-	</g>
-{/if} -->

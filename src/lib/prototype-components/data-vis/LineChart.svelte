@@ -69,8 +69,6 @@
 				.filter((el) => el.data.length > 0)
 		: [];
 
-	$: console.log(groupLines);
-
 	$: hoverAreaWithDataAdded = hoverId
 		? [selectedLine, ...additionalLines, ...groupLines]
 				.filter((el) => el)

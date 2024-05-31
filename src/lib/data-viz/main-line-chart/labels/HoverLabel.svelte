@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { splitString } from '$lib/segmentTextForLabels';
+	import { segmentTextForLabels } from '$lib/util/charts/segmentTextForLabels';
 	import { colorsLookup } from '$lib/config';
 
-	export let label, maxLabelWidth, y, isHoverLabelVisible, fontSize, labelSpace;
+	export let label, y, fontSize, labelSpace;
 
 	$: console.log(labelSpace);
 
@@ -10,8 +10,8 @@
 
 	$: textArrayOptions = [
 		[areaName],
-		...splitString(areaName, 4, 0),
-		...splitString(areaName, 4, 1)
+		...segmentTextForLabels(areaName, 4, 0),
+		...segmentTextForLabels(areaName, 4, 1)
 	];
 
 	let labelRectArray = [];

@@ -3,6 +3,7 @@
 	import HoverLabel from '$lib/prototype-components/data-vis/line-chart/HoverLabel.svelte';
 
 	import labelplacer from 'labelplacer';
+	import { groupAdjacentItemsWithPositions } from '$lib/util/charts/labels/groupAdjacentItemsWithPositions';
 
 	export let lines,
 		labelArray,
@@ -13,10 +14,10 @@
 		maxLabelWidth,
 		hoverAreaWithDataAdded,
 		isHoverLabelVisible,
-		labelSpace,
 		y,
 		fontSize = 16;
 
+	//add label data determined using dummy labels to the line data
 	$: linesWithLabelText = lines
 		.map((el, i) => ({
 			...el,
@@ -24,8 +25,10 @@
 		}))
 		.filter((el) => (lines.length > 8 ? el.role != 'custom' && el.role != 'related' : true));
 
+	//used to check for the hovered area
 	$: linesWithLabelTextCodes = linesWithLabelText.map((el) => el.areacd);
 
+	//uses James T's label placing algorithm to determine how to fit the labels together, based on the height of each label
 	$: permanentLabels = linesWithLabelText
 		? labelplacer(
 				linesWithLabelText,
@@ -38,65 +41,16 @@
 			}))
 		: null;
 
+	//calculates the information need to generate paths for the liens which connect labels to the final data point
 	$: connectingLineInfo = permanentLabels ? groupAdjacentItemsWithPositions(permanentLabels) : null;
-
-	$: console.log(connectingLineInfo);
 
 	let labelRectArray = [];
 
+	//maxLabelWidth is used to track how much space any labels that appear due to the user hovering can take up
 	$: maxLabelWidth =
 		labelRectArray.length > 0
 			? Math.max(100, ...labelRectArray.map((el, i) => (i < permanentLabels.length ? el.width : 0)))
 			: maxLabelWidth;
-
-	function groupAdjacentItemsWithPositions(arr) {
-		const result = {};
-		let currentGroup = [];
-		let currentGroupIndex = -1;
-
-		for (let i = 0; i < arr.length; i++) {
-			const currentItem = arr[i];
-			const previousItem = arr[i - 1];
-
-			// Start a new group if:
-			// - It's the first item
-			// - The current group is empty
-			// - The current item's groupIdentifier is different from the previous item's groupIdentifier
-			if (
-				!previousItem ||
-				currentGroup.length === 0 ||
-				currentItem.labelOffset !== previousItem.labelOffset
-			) {
-				// If currentGroup is not empty, add positions to result for items in the previous group
-				if (currentGroup.length > 0) {
-					currentGroup.forEach((itemId, index) => {
-						result[itemId] = {
-							groupLength: currentGroup.length,
-							groupPosition: index
-						};
-					});
-				}
-				// Start a new group
-				currentGroup = [currentItem.datum.areacd];
-				currentGroupIndex++;
-			} else {
-				// Add the item to the current group
-				currentGroup.push(currentItem.datum.areacd);
-			}
-		}
-
-		// Add positions to result for items in the last group
-		if (currentGroup.length > 0) {
-			currentGroup.forEach((itemId, index) => {
-				result[itemId] = {
-					groupLength: currentGroup.length,
-					groupPosition: index
-				};
-			});
-		}
-
-		return result;
-	}
 </script>
 
 <g class="labels-container" transform="translate({chartWidth},0)">
@@ -112,13 +66,7 @@
 	{/each}
 
 	{#if hoverAreaWithDataAdded && !linesWithLabelTextCodes.includes(hoverAreaWithDataAdded.areacd)}
-		<HoverLabel
-			label={hoverAreaWithDataAdded}
-			bind:isHoverLabelVisible
-			{maxLabelWidth}
-			{y}
-			{fontSize}
-			labelSpace={maxLabelWidth}
+		<HoverLabel label={hoverAreaWithDataAdded} {y} {fontSize} labelSpace={maxLabelWidth}
 		></HoverLabel>
 	{/if}
 </g>

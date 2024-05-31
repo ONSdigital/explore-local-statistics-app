@@ -1,44 +1,39 @@
 <script lang="ts">
-	import Map from '$lib/viz/Map.svelte';
+	import BarChartContainer from '$lib/prototype-components/area-page/main-chart/BarChartContainer.svelte';
 	import SubtitleAdditionalDescription from '$lib/prototype-components/area-page/main-chart/SubtitleAdditionalDescription.svelte';
-	import { selectAnIndicatorChartSettings } from '../config';
 
 	export let indicator,
-		mapData,
+		chosenXDomainNumbEnd,
 		chosenTimePeriodsArray,
+		combinedChartDataLatest,
 		xDomain,
 		chart,
-		selectedArea,
 		selectionsObject,
-		sourceOrgs,
+		filteredChartDataSelectedLatest,
+		filteredChartDataAdditionalsLatest,
+		filteredChartDataAreaGroupLatest,
+		selectedArea,
+		indicatorCalculations,
+		customLookup,
+		showConfidenceIntervals,
 		sourceLinks,
+		sourceOrgs,
 		unselectedAreasLatest,
-		customLookup;
-
-	const maxSelection = selectAnIndicatorChartSettings.maximumAdditionalAreas;
-
-	//this function handles updates when an area is selected or deselected by clicking on the map
-	const doSelect = (e) => {
-		const chosen = selectionsObject['areas-single-additional-chosen'];
-		const area = e.detail?.area;
-		if (chosen.includes(area.areacd))
-			selectionsObject['areas-single-additional-chosen'] = chosen.filter((s) => s !== area.areacd);
-		else if (chosen.length < maxSelection)
-			selectionsObject['areas-single-additional-chosen'] = [...chosen, area.areacd];
-	};
+		metadata;
 </script>
 
-{#if indicator.metadata.standardised === 'F'}
-	<div class="no-chart-container">
-		<p>
-			Map unavaliable for <span style="font-weight: bold;">{indicator.metadata.label}</span> as available
-			data is not standardised.
-		</p>
-	</div>
-{:else if mapData.data.length === 0 || mapData.breaks.length === 0}
+{#if !indicator.years.includes(chosenXDomainNumbEnd)}
 	<div class="no-chart-container">
 		<p>
 			No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
+			<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
+		</p>
+	</div>
+{:else if !combinedChartDataLatest || combinedChartDataLatest.length === 0}
+	<div class="no-chart-container">
+		<p>
+			No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for
+			selected areas for
 			<span style="font-weight: bold;">{chosenTimePeriodsArray[0].label}.</span>
 		</p>
 	</div>
@@ -52,19 +47,23 @@
 		></SubtitleAdditionalDescription>
 	</div>
 	<div class="chart-container">
-		<Map
-			data={mapData.data}
-			breaks={mapData.breaks}
-			geos={indicator.inferredGeos}
-			prefix={indicator.metadata.prefix}
-			suffix={indicator.metadata.suffix}
-			dp={indicator.metadata.decimalPlaces}
-			selected={[selectedArea, ...selectionsObject['areas-single-additional-visible']].filter(
-				(el) => mapData.data.map((elm) => elm.areacd).includes(el.areacd)
-			)}
+		<BarChartContainer
+			{indicator}
+			combinedChartData={combinedChartDataLatest}
+			{metadata}
+			latestPeriod={chosenTimePeriodsArray.find((el) => el.xDomainNumb === xDomain[1])}
+			filteredChartDataSelected={filteredChartDataSelectedLatest}
+			filteredChartDataAdditionals={filteredChartDataAdditionalsLatest}
+			filteredChartDataAreaGroup={filteredChartDataAreaGroupLatest}
+			{selectionsObject}
+			{selectedArea}
+			{indicatorCalculations}
+			{xDomain}
 			{customLookup}
-			on:select={doSelect}
-		/>
+			{showConfidenceIntervals}
+			additionalID="areas-single-additional"
+			relatedID="related-single"
+		></BarChartContainer>
 	</div>
 	<div class="source-notes-container">
 		<p class="source-container">

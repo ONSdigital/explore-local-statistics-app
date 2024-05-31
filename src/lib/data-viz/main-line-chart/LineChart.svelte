@@ -211,7 +211,6 @@
 		bind:isHoverLabelVisible
 		bind:maxLabelWidth
 		{hoverAreaWithDataAdded}
-		{labelSpace}
 		{y}
 	></Labels>
 {/if}
