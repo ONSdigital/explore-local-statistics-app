@@ -4,7 +4,7 @@ import accessibleSpreadsheetCreator from 'accessible-spreadsheet-creator';
 
 const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
-export function createSpreadsheet(data, metadata, filename) {
+export function createSpreadsheet(data, metadata, periods, filename) {
 	const odsData = {
 		coverSheetTitle: 'Explore local statistics data',
 		coverSheetContents: [
@@ -19,7 +19,7 @@ export function createSpreadsheet(data, metadata, filename) {
 		sheets: []
 	};
 
-	const periodsMap = makePeriodsMap(metadata);
+	const periodsMap = makePeriodsMap(periods);
 
 	for (const topic of metadata.topicsArray) {
 		for (const subTopic of topic.subTopics) {
@@ -36,7 +36,6 @@ export function createSpreadsheet(data, metadata, filename) {
 					subText
 				} = metadata.indicatorsObject[indicatorCode].metadata;
 				const unit = getUnit(metadata.indicatorsObject[indicatorCode].metadata);
-				const periodGroup = metadata.indicatorsObject[indicatorCode].periodGroup;
 				const { id, code, areacd, value, lci, uci, xDomainNumb } = data[indicatorCode];
 				if (![0, 1].includes(decimalPlaces)) {
 					throw new Error('Unexpected number of decimal places.');
@@ -50,7 +49,7 @@ export function createSpreadsheet(data, metadata, filename) {
 						areacd: areacd[i],
 						areanm: metadata.areasObject[areacd[i]].areanm,
 						xDomainNumb: xDomainNumb[i],
-						period: periodsMap.get(`${periodGroup};${xDomainNumb[i]}`)
+						period: periodsMap.get(`${id};${xDomainNumb[i]}`)
 					}))
 					.sort((a, b) => {
 						if (a.areacd < b.areacd) return -1;
@@ -128,14 +127,15 @@ export function createSpreadsheet(data, metadata, filename) {
 		.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
 		.pipe(fs.createWriteStream(filename))
 		.on('finish', () => {
-			console.log(`Spreadsheet file ${filename} written.`);
+			//console.log(`Spreadsheet file ${filename} written.`);
+			console.log('running of the generate-data script completed');
 		});
 }
 
-function makePeriodsMap(metadata) {
+function makePeriodsMap(periods) {
 	const map = new Map();
-	for (const { periodGroup, xDomainNumb, period } of metadata.periodsLookupArray) {
-		map.set(`${periodGroup};${xDomainNumb}`, period);
+	for (const { id, xDomainNumb, period } of periods) {
+		map.set(`${id};${xDomainNumb}`, period);
 	}
 	return map;
 }

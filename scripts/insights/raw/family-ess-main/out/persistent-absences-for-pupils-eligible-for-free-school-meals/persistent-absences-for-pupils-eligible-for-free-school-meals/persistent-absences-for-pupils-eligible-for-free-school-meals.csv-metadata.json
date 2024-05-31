@@ -9,19 +9,23 @@
                     {
                         "titles": "AREACD",
                         "name": "areacd",
-                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv#{+areacd}",
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
                         "required": true
                     },
                     {
                         "titles": "AREANM",
                         "name": "areanm",
-                        "suppressOutput": true
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
                     },
                     {
                         "titles": "Geography",
                         "name": "geography",
-                        "suppressOutput": true
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
                     },
                     {
                         "titles": "Variable Name",
@@ -53,7 +57,7 @@
                     {
                         "titles": "Observation",
                         "name": "observation",
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "datatype": "decimal",
                         "required": false
@@ -71,7 +75,7 @@
                     {
                         "titles": "Lower Confidence Interval (95%)",
                         "name": "lower_confidence_interval_95",
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -79,7 +83,7 @@
                     {
                         "titles": "Upper Confidence Interval (95%)",
                         "name": "upper_confidence_interval_95",
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -87,7 +91,7 @@
                     {
                         "titles": "Observation Status",
                         "name": "observation_status",
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status",
                         "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
                         "required": false
@@ -118,47 +122,61 @@
                         "name": "virt_obs_observation",
                         "virtual": true,
                         "propertyUrl": "qb:observation",
-                        "valueUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences"
+                        "valueUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences"
                     },
                     {
                         "name": "virt_obs_observation_meas",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "qb:measureType",
                         "valueUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
                     },
                     {
                         "name": "virt_obs_observation_unit",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#unit/percent"
                     },
                     {
                         "name": "virt_dim_observation_areacd",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
-                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv#{+areacd}"
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
                     },
                     {
                         "name": "virt_dim_observation_period",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval",
                         "valueUrl": "gregorian-time-interval.csv#{+period}"
                     },
                     {
                         "name": "virt_obs_observation_type",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
                         "name": "virt_dataSet_observation",
                         "virtual": true,
-                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
+                        "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#obs/{areacd},{areanm},{geography},{period}@pupils-eligible-for-free-school-meals-with-persistent-absences",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dataset"
                     }
@@ -167,7 +185,21 @@
                     {
                         "columnReference": "areacd",
                         "reference": {
-                            "resource": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv",
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
                             "columnReference": "uri_identifier"
                         }
                     },
@@ -181,14 +213,26 @@
                 ],
                 "primaryKey": [
                     "areacd",
+                    "areanm",
+                    "geography",
                     "period"
                 ],
-                "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/{areacd},{period}"
+                "aboutUrl": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/{areacd},{areanm},{geography},{period}"
             }
         },
         {
-            "url": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv",
-            "tableSchema": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.table.json",
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
             "suppressOutput": true
         },
         {
@@ -199,20 +243,297 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/statistical-geography",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/gregorian-time-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/observation-status"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/area-name"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/geography-type"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/measure-type"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/pupils-eligible-for-free-school-meals-with-persistent-absences"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/unit"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/pupils-eligible-for-free-school-meals-with-persistent-absences",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Pupils eligible for free school meals with persistent absences"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "gregorian-time-interval.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Gregorian Time Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -222,11 +543,66 @@
             ]
         },
         {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
             "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/unit",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -245,34 +621,18 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/cross-measures",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography"
+                    "@value": 6
                 }
             ]
         },
         {
             "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dataset",
             "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/ns/dcat#Resource",
                 "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -338,19 +698,15 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "children-out-of-school"
-                },
-                {
-                    "@language": "en",
-                    "@value": "state-funded-school"
-                },
-                {
-                    "@language": "en",
                     "@value": "county"
                 },
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "children-out-of-school"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -358,7 +714,11 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "state-funded-school"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -373,45 +733,20 @@
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Pupils eligible for free school meals with persistent absences"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/lower-confidence-interval",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/upper-confidence-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -421,51 +756,25 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 6
+                    "@value": 9
                 }
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Statistical Geography"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/statistical-geography"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/gregorian-time-interval",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/area-name",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -475,12 +784,57 @@
             ]
         },
         {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
             "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval",
             "@type": [
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -495,242 +849,46 @@
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/upper-confidence-interval",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "gregorian-time-interval.csv#code-list"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Gregorian Time Interval"
+                    "@value": "Geography Type"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/gregorian-time-interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/geography-type"
                 }
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/pupils-eligible-for-free-school-meals-with-persistent-absences",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/lower-confidence-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/observation-status"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/pupils-eligible-for-free-school-meals-with-persistent-absences"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/gregorian-time-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/measure-type"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/unit"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/statistical-geography"
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
                     "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#measure/pupils-eligible-for-free-school-meals-with-persistent-absences"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -745,41 +903,96 @@
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/gregorian-time-interval",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/area-name",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#class/statistical-geography",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#component/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
             ]
         },
         {
-            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dependency/ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals",
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
-                    "@id": "./ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv-metadata.json"
+                    "@id": "./ons-geography-code.csv-metadata.json"
                 }
             ],
             "http://rdfs.org/ns/void#uriSpace": [
                 {
-                    "@value": "ons-geography-code-list-for-persistent-absences-for-pupils-eligible-for-free-school-meals.csv#"
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
                 }
             ]
         },
         {
             "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#dependency/gregorian-time-interval",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -795,8 +1008,8 @@
         {
             "@id": "persistent-absences-for-pupils-eligible-for-free-school-meals.csv#unit/percent",
             "@type": [
-                "http://qudt.org/schema/qudt/Unit",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [

@@ -65,7 +65,7 @@ export function readJsonSync(filename: string) {
 export function writeJson(filename, data, { minify = false } = {}) {
 	const jsonString = minify ? JSON.stringify(data) : JSON.stringify(data, null, '\t');
 	writeFileSync(filename, jsonString);
-	console.log(`Wrote ${filename}.`);
+	//console.log(`Wrote ${filename}.`);
 }
 
 function stripBom(string: string): string {

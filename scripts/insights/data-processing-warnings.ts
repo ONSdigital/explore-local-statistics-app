@@ -2,9 +2,9 @@ import CONFIG from './config.ts';
 
 import { readdir } from 'fs/promises';
 
-const INDICATORS_LOOKUP_WARNING = `TODO: indicators-lookup warning.`;
-const UNIQUE_PERIODS_LOOKUP_WARNING = `TODO: unique-periods-lookup warning.`;
-const MULTIPLE_PERIODS_WARNING = `TODO: warning: multiple periods for one indicator.`;
+const INDICATORS_LOOKUP_WARNING = `indicators-lookup warning.`;
+const UNIQUE_PERIODS_LOOKUP_WARNING = `unique-periods-lookup warning - The data includes some periods which are not included in our list of unique periods. Please add these and give them a xDomainNumb and labels. The list of new periods is copied above.`;
+const MULTIPLE_PERIODS_WARNING = `warning: multiple periods for one indicator.`;
 const MISSING_METADATA_WARNING =
 	'This script finished executing, but noted that one or more of the indicators does not currently have associated metadata. This means that the app will error when looking for direction on how to plot data for this indicator. The data frame indicators_without_metadata contains the list of these indicators. Please add the corresponding metadata to the indicators-metadata.csv file in the config-data/indicators folder.';
 

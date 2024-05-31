@@ -2,7 +2,7 @@ import fs from 'fs';
 import { median, mad } from './stats.ts';
 import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
-import { loadCsvWithoutBom, readJsonSync } from './io.ts';
+import { loadCsvWithoutBom, readJsonSync, readCsvAutoType } from './io.ts';
 import {
 	abortIfMissingMetadata,
 	abortIfNewIndicatorCodesExist,
@@ -13,6 +13,8 @@ import {
 import { checkedJoin } from './table-utils.ts';
 import CONFIG from './config.ts';
 import { abortIfAnyAreaHasUnrecognisedPrefix } from './data-processing-warnings.ts';
+import { file } from 'jszip';
+import { json } from 'stream/consumers';
 
 export default async function main() {
 	const nodeVersion = process.version
@@ -37,18 +39,19 @@ export default async function main() {
 		areas_geog_level
 	);
 
+	let jsonAdditionalMetadata = processJSONs(file_paths, excludedIndicators);
+
 	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
-	const periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME, {
+	let periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME, {
 		stringColumns: ['period', 'label', 'labelShort']
 	});
 
 	abortIfNewIndicatorCodesExist(previousIndicators, combined_metadata);
 	abortIfNewPeriodsExist(periods, combined_data);
-	abortIfMultiplePeriodGroupsForOneIndicator(combined_data, periods);
 
 	combined_data = checkedJoin(combined_data, periods.select('period', 'xDomainNumb'), 'period', {
 		expectAllOnLeft: false
-	}).select(aq.not('period'));
+	});
 
 	combined_data = combined_data.dedupe('xDomainNumb', 'code', 'areacd');
 
@@ -57,12 +60,44 @@ export default async function main() {
 
 	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code');
 
+	const unique_periods_for_each_indicator = combined_data
+		.dedupe('id', 'period')
+		.select('id', 'period');
+
+	periods = checkedJoin(unique_periods_for_each_indicator, periods, 'period', {
+		expectAllOnLeft: false,
+		expectAllOnRight: false
+	}).orderby('id', aq.desc('xDomainNumb'));
+
+	fs.writeFileSync(`${CONFIG.CSV_DIR}/periods_for_each_indicator.csv`, periods.toCSV());
+
+	const periodsDir = `${CONFIG.CONFIG_DIR}/periods`;
+	const additional_periods_for_sliders = readCsvAutoType(
+		`${periodsDir}/unique-periods-lookup.csv`,
+		{
+			stringColumns: ['period', 'label', 'labelShort']
+		}
+	);
+
+	periods = [...periods.objects(), ...additional_periods_for_sliders].sort(
+		(a, b) => b.xDomainNumb - a.xDomainNumb
+	);
+
+	combined_data = combined_data.select(aq.not('period'));
+
 	fs.writeFileSync(`${CONFIG.CSV_DIR}/indicators-lookup.csv`, indicators.toCSV());
 
 	const indicators_metadata_for_js = loadCsvWithoutBom(CONFIG.INDICATORS_METADATA_CSV);
 	abortIfMissingMetadata(indicators_calculations, indicators_metadata_for_js);
 
-	return [combined_data, indicators, indicators_calculations, _oldStyleIndicatorsCalculations];
+	return [
+		combined_data,
+		indicators,
+		indicators_calculations,
+		_oldStyleIndicatorsCalculations,
+		periods,
+		jsonAdditionalMetadata
+	];
 }
 
 function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas_geog_level) {
@@ -140,6 +175,33 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 	return [aq.from(indicatorsObjects), indicators_calculations, _oldStyleIndicatorsCalculations];
 }
 
+function processJSONs(file_paths, excludedIndicators: string[]) {
+	let jsonObject = {};
+
+	for (const f of file_paths.objects()) {
+		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
+
+		let indicatorMetadata = JSON.parse(fs.readFileSync(f.filePath.replace(/.csv$/, '.json')));
+
+		if ('ess-beta-metadata' in indicatorMetadata) {
+			if ('shared' in indicatorMetadata['ess-beta-metadata']) {
+				Object.keys(indicatorMetadata['ess-beta-metadata'])
+					.filter((el) => el != 'shared')
+					.forEach((el) => {
+						jsonObject[code + '-' + el] = {
+							...indicatorMetadata['ess-beta-metadata'][el],
+							...indicatorMetadata['ess-beta-metadata'].shared
+						};
+					});
+			} else {
+				jsonObject[code] = indicatorMetadata['ess-beta-metadata'];
+			}
+		}
+	}
+
+	return jsonObject;
+}
+
 function processFiles(file_paths, excludedIndicators: string[], areas_geog_level: ColumnTable) {
 	const areas = loadCsvWithoutBom(CONFIG.AREAS_CSV);
 	const areaCodes = new Set(areas.array('areacd'));
@@ -187,6 +249,10 @@ function processFile(
 	combined_metadata,
 	unknownAreaCodes
 ) {
+	let jsonAdditionalMetadataForIndicator = JSON.parse(
+		fs.readFileSync(f.filePath.replace(/.csv$/, '.json'))
+	);
+
 	let indicator_data = loadCsvWithoutBom(f.filePath, { stringColumns: ['period', 'Period'] });
 	indicator_data = indicator_data.rename(
 		Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))

@@ -431,13 +431,6 @@
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Contents" marginTop>
-		<!-- <strong class="selected-areas">Selected areas</strong>
-		<StickyHeaderIndicators
-			bind:selectionsObject
-			{accordionArray}
-			customLookup={customLookup['indicator-additional-visible']}
-		/> -->
-
 		{#if data.indicator.metadata.standardised === 'T'}
 			<NavSection title="Map">
 				<div class="row-container">

@@ -3,7 +3,6 @@
 	import { line } from 'd3-shape';
 
 	export let area,
-		xDomain,
 		x,
 		y,
 		customLookup,

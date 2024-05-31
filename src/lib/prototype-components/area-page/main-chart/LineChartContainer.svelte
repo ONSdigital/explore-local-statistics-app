@@ -1,13 +1,9 @@
 <script lang="ts">
-	import AddRemoveComparisonAreas from '$lib/prototype-components/AddRemoveComparisonAreas.svelte';
 	import LineChart from '$lib/prototype-components/data-vis/LineChart.svelte';
-	import HoverKey from '$lib/prototype-components/data-vis/line-chart/HoverKey.svelte';
-	import RelatedAreasKey from '$lib/prototype-components/data-vis/line-chart/RelatedAreasKey.svelte';
 
 	import { madRangeLookup } from '$lib/config';
 
 	export let indicator,
-		metadata,
 		timePeriodsArray,
 		filteredChartDataSelected,
 		filteredChartDataAdditionals,
