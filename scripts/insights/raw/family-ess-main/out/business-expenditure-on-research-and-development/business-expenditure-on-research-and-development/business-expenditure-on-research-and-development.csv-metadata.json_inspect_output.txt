@@ -1,0 +1,119 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Business expenditure on research and development
+          - Label: Business expenditure on research and development
+          - Issued: 2024-05-15T16:25:11.468465
+          - Modified: 2024-05-15T16:25:11.468465
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes
+          - Keywords: 
+		-- research-and-development
+		-- subnational
+		-- expenditure
+		-- region
+          - Contact Point: None
+          - Identifier: Business expenditure on research and development
+          - Comment: Total UK business expenditure on research and development, UK, 2022.
+          - Description: This dataset shows the total UK business expenditure on research and development, in the UK, for 2022.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		International Territorial Level (ITL) 1,
+		Country (UK)
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases) 
+		
+		
+		### Source Notes and Caveats 
+		Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Business expenditure on research and development
+    - Columns: 
+                              Title         Type  Required                                                                                     Property URL Observations Column Titles
+                             AREACD    Dimension      True                business-expenditure-on-research-and-development.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                         business-expenditure-on-research-and-development.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                    business-expenditure-on-research-and-development.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                             None                           
+                          Indicator   Suppressed     False                                                                                             None                           
+                            Mission   Suppressed     False                                                                                             None                           
+                           Category   Suppressed     False                                                                                             None                           
+                             Period    Dimension      True                              business-expenditure-on-research-and-development.csv#dimension/year                Observation
+                        Observation Observations     False business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure                Observation
+                            Measure   Suppressed     False                                                                                             None                           
+                               Unit   Suppressed     False                                                                                             None                           
+    Lower Confidence Interval (95%)    Attribute     False         business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False         business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                business-expenditure-on-research-and-development.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                             None                           
+                              Notes   Suppressed     False                                                                                             None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 14
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD                   AREANM Geography                                               Variable Name                                        Indicator   Mission                                              Category  Period  Observation Measure      Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+k02000001           united-kingdom   country Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022      49942.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e92000001                  england    nation Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022      45341.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000001               north-east    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022        732.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000002               north-west    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       4831.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000003 yorkshire-and-the-humber    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       1964.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000004            east-midlands    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       2357.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000005            west-midlands    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       3833.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000006          east-of-england    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022      10690.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000007                   london    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       8959.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000008               south-east    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       8705.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+        - Last 10 Rows: 
+   AREACD                   AREANM Geography                                               Variable Name                                        Indicator   Mission                                              Category  Period  Observation Measure      Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+e12000003 yorkshire-and-the-humber    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       1964.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000004            east-midlands    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       2357.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000005            west-midlands    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       3833.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000006          east-of-england    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022      10690.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000007                   london    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       8959.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000008               south-east    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       8705.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+e12000009               south-west    region Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       3270.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+w92000004                    wales    nation Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022        959.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+s92000003                 scotland    nation Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022       2731.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+n92000002         northern-ireland    nation Business enterprise expenditure on research and development Business expenditure on research and development Mission 2 Boosting productivity, pay, jobs and living standards    2022        912.0  Pounds £ million                              NaN                              NaN                 NaN         1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                             Measure                      Unit  Count
+Capital and non-capital expenditure  Pounds Sterling, Millions     14
+        

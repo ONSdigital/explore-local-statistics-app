@@ -1,0 +1,1040 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "adult-obesity-prevalence.csv#dataset",
+    "tables": [
+        {
+            "url": "adult-obesity-prevalence.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "AREACD",
+                        "name": "areacd",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
+                        "required": true
+                    },
+                    {
+                        "titles": "AREANM",
+                        "name": "areanm",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Geography",
+                        "name": "geography",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Variable Name",
+                        "name": "variable_name",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Indicator",
+                        "name": "indicator",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Mission",
+                        "name": "mission",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Category",
+                        "name": "category",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Period",
+                        "name": "period",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Measure",
+                        "name": "measure",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Unit",
+                        "name": "unit",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Lower Confidence Interval (95%)",
+                        "name": "lower_confidence_interval_95",
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#attribute/lower-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Upper Confidence Interval (95%)",
+                        "name": "upper_confidence_interval_95",
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#attribute/upper-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Observation Status",
+                        "name": "observation_status",
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#attribute/observation-status",
+                        "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
+                        "required": false
+                    },
+                    {
+                        "titles": "Polarity",
+                        "name": "polarity",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Notes",
+                        "name": "notes",
+                        "suppressOutput": true
+                    },
+                    {
+                        "name": "virt_slice",
+                        "virtual": true,
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Slice"
+                    },
+                    {
+                        "name": "virt_slice_structure",
+                        "virtual": true,
+                        "propertyUrl": "qb:sliceStructure",
+                        "valueUrl": "adult-obesity-prevalence.csv#slice/cross-measures"
+                    },
+                    {
+                        "name": "virt_obs_observation",
+                        "virtual": true,
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese"
+                    },
+                    {
+                        "name": "virt_obs_observation_meas",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "qb:measureType",
+                        "valueUrl": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese"
+                    },
+                    {
+                        "name": "virt_obs_observation_unit",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "adult-obesity-prevalence.csv#unit/percent"
+                    },
+                    {
+                        "name": "virt_dim_observation_areacd",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}"
+                    },
+                    {
+                        "name": "virt_obs_observation_type",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Observation"
+                    },
+                    {
+                        "name": "virt_dataSet_observation",
+                        "virtual": true,
+                        "aboutUrl": "adult-obesity-prevalence.csv#obs/{areacd},{areanm},{geography},{period}@adults-aged-18-years-and-over-who-are-obese",
+                        "propertyUrl": "qb:dataSet",
+                        "valueUrl": "adult-obesity-prevalence.csv#dataset"
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "period",
+                        "reference": {
+                            "resource": "gregorian-time-interval.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    }
+                ],
+                "primaryKey": [
+                    "areacd",
+                    "areanm",
+                    "geography",
+                    "period"
+                ],
+                "aboutUrl": "adult-obesity-prevalence.csv#slice/{areacd},{areanm},{geography},{period}"
+            }
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "gregorian-time-interval.csv",
+            "tableSchema": "gregorian-time-interval.table.json",
+            "suppressOutput": true
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "adult-obesity-prevalence.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/area-name"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/measure-type"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/geography-type"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/observation-status"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/adults-aged-18-years-and-over-who-are-obese"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/unit"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#component/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/adults-aged-18-years-and-over-who-are-obese",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dataset",
+            "@type": [
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1) \n\n\n### Source Notes and Caveats \nAdults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m\u00b2. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Adult obesity prevalence"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-05-17T12:41:34.475144"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-05-30T14:27:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Adult obesity prevalence"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Adult obesity prevalence"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "obesity"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "adult-obesity-prevalence.csv#dimension/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Adults (aged 18 years and over) who are obese"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dimension/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "gregorian-time-interval.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Gregorian Time Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "adult-obesity-prevalence.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dependency/area-name",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dependency/geography-type",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#dependency/gregorian-time-interval",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./gregorian-time-interval.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "gregorian-time-interval.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "adult-obesity-prevalence.csv#unit/percent",
+            "@type": [
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "1.0"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "percent"
+                }
+            ]
+        }
+    ]
+}

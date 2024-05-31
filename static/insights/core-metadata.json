@@ -69,6 +69,10 @@
 			"label": "Net additions to the housing stock"
 		},
 		{
+			"code": "net-additions-to-the-housing-stock-wales",
+			"label": "Net additions to the housing stock (Wales)"
+		},
+		{
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
 			"label": "Further education and skills learner achievements"
 		},
@@ -129,10 +133,6 @@
 			"label": "Apprenticeship starts"
 		},
 		{
-			"code": "adult-obesity-prevalence-aged-18-years-and-over",
-			"label": "Adult obesity prevalence"
-		},
-		{
 			"code": "cigarette-smokers",
 			"label": "Cigarette smokers"
 		},
@@ -167,6 +167,10 @@
 		{
 			"code": "child-obesity-Aged 10 to 11 years underweight",
 			"label": "Underweight prevalence in children at Year 6 age"
+		},
+		{
+			"code": "adult-obesity-prevalence-aged-18-years-and-over",
+			"label": "Adult obesity prevalence"
 		},
 		{
 			"code": "cancer-diagnosis-at-stage-1-and-2",
@@ -717,13 +721,13 @@
 				"subtitle": "Modelled percentage of economically active people aged 16 years and over without a job and actively seeking work",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
+				"experimentalStatistic": false,
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/li01regionallabourmarketlocalindicatorsforcountieslocalandunitaryauthorities",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows modelled-based estimates for the proportion of economically active people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks, in Great Britain, for periods 2004 to 2023.",
-				"standardised": "T",
-				"caveats": "Unemployment rates are calculated as a percentage of aged 16 years and over economically active population. \nAs unemployed form a small percentage of the population, the Annual Population Survey (APS) unemployment estimates within local authorities are based on very small samples so for many areas are unreliable. To overcome this model-based estimates have been developed that provide better estimates of total unemployed for local authorities. \nThe model-based estimate improves on the APS estimate by borrowing strength from the claimant count to produce an estimate that is more precise i.e. has a smaller confidence interval. The claimant count is not itself a measure of unemployment but is strongly correlated with unemployment, and, as it is an administrative count, is known without sampling error. The gain in precision is greatest for areas with smaller sample sizes. \nRefer to the [user guide (pdf)](http://www.ons.gov.uk/ons/guide-method/method-quality/specific/labour-market/subnational-labour/model-based-estimates-of-ilo-unemployment-for-lad-uas-in-great-britain---guide-for-users.pdf) for further details.",
+				"standardised": true,
+				"caveats": "Unemployment rates are calculated as a percentage of aged 16 years and over economically active population. \n\nAs unemployed form a small percentage of the population, the Annual Population Survey (APS) unemployment estimates within local authorities are based on very small samples so for many areas are unreliable. To overcome this model-based estimates have been developed that provide better estimates of total unemployed for local authorities. \n\nThe model-based estimate improves on the APS estimate by borrowing strength from the claimant count to produce an estimate that is more precise i.e. has a smaller confidence interval. The claimant count is not itself a measure of unemployment but is strongly correlated with unemployment, and, as it is an administrative count, is known without sampling error. The gain in precision is greatest for areas with smaller sample sizes. \n\nRefer to the [user guide (pdf)](http://www.ons.gov.uk/ons/guide-method/method-quality/specific/labour-market/subnational-labour/model-based-estimates-of-ilo-unemployment-for-lad-uas-in-great-britain---guide-for-users.pdf) for further details.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2103,6 +2107,118 @@
 				2022
 			]
 		},
+		"net-additions-to-the-housing-stock-wales": {
+			"id": 71,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "net-additions-to-the-housing-stock-wales",
+			"minXDomainNumb": 2001,
+			"maxXDomainNumb": 2021,
+			"metadata": {
+				"code": "net-additions-to-the-housing-stock-wales",
+				"slug": "net-additions-to-the-housing-stock-wales",
+				"label": "Net additions to the housing stock (Wales)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 1,000 stock",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Net additions to the stock of dwellings per 1,000 dwellings",
+				"zeroBaseline": "F",
+				"canBeNegative": "T",
+				"experimentalStatistic": false,
+				"sourceDate": "01/09/2023",
+				"sourceURL": "https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure",
+				"sourceOrg": "Welsh Government",
+				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial years 2001/02 to 2021/22.",
+				"standardised": true,
+				"caveats": "In Wales, the approach to housing stock is very similar to that in England, using the Census and adding a measure of net supply for each intervening year. However, there may be a small negative bias in the net supply estimate for Wales compared to the rest of the UK since they do not include new builds certified by Approved Inspectors and they have no way of incorporating gains or losses due to Change of Use.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"W"
+				],
+				"types": [
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021
+			]
+		},
 		"aged-19-years-and-over-further-education-and-skills-learner-achievements": {
 			"id": 40,
 			"topic": "education and skills",
@@ -3309,12 +3425,12 @@
 				"subtitle": "Percentage of state-funded schools rated good or outstanding by Ofsted",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "12/03/2024",
+				"experimentalStatistic": false,
+				"sourceDate": "16/05/2024",
 				"sourceURL": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes",
 				"sourceOrg": "Ofsted",
-				"longDescription": "This indicator shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated ‘Good’ or ‘Outstanding’ by Ofsted, in England (state-funded schools), as at 29 February 2024.",
-				"standardised": "T",
+				"longDescription": "This indicator shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated ‘Good’ or ‘Outstanding’ by Ofsted, in England (state-funded schools), as at 30 April 2024.",
+				"standardised": true,
 				"caveats": "These figures cover all state-funded schools in England and are updated on a rolling basis.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
@@ -3591,117 +3707,6 @@
 				2020,
 				2021,
 				2022
-			]
-		},
-		"adult-obesity-prevalence-aged-18-years-and-over": {
-			"id": 54,
-			"topic": "health and wellbeing",
-			"subTopic": "healthy living",
-			"code": "adult-obesity-prevalence-aged-18-years-and-over",
-			"minXDomainNumb": 2015,
-			"maxXDomainNumb": 2021,
-			"metadata": {
-				"code": "adult-obesity-prevalence-aged-18-years-and-over",
-				"slug": "overweight-adults",
-				"label": "Adult obesity prevalence",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of adults aged 18 and over classified as living with obesity",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "03/05/2023",
-				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
-				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
-				"standardised": "T",
-				"caveats": "Adults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².\nEstimates for adults (aged 18 years and over) classified as living with obesity were fully revised by the Office for Health Improvement and Disparities in May 2023 with all previously published data overwritten. The replacement of all previously published data was required as the adjustments applied to the self-reported height and weight data have been updated and published by NHS England in the [Health Survey for England predicting height, weight and body mass index from self-reported data](https://digital.nhs.uk/data-and-information/areas-of-interest/public-health/health-survey-for-england-predicting-height-weight-and-body-mass-index-from-self-reported-data) report. The updated adjustments for height and weight have been applied to the new data point (November 2021 to 2022) and the whole back series (November 2015 to 2016 to November 2020 to 2021). ",
-				"confidenceIntervals": "T",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2021
-			},
-			"years": [
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021
 			]
 		},
 		"cigarette-smokers": {
@@ -4796,6 +4801,118 @@
 				2022
 			]
 		},
+		"adult-obesity-prevalence-aged-18-years-and-over": {
+			"id": 70,
+			"topic": "health and wellbeing",
+			"subTopic": "healthy living",
+			"code": "adult-obesity-prevalence-aged-18-years-and-over",
+			"minXDomainNumb": 2015,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "adult-obesity-prevalence-aged-18-years-and-over",
+				"slug": "overweight-adults",
+				"label": "Adult obesity prevalence",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": "pp",
+				"subtitle": "Percentage of adults aged 18 and over classified as living with obesity",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": false,
+				"sourceDate": "08/05/2024",
+				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
+				"sourceOrg": "Office for Health Improvement and Disparities",
+				"longDescription": "This indicator shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.",
+				"standardised": true,
+				"caveats": "Adults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².",
+				"confidenceIntervals": "T",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"cancer-diagnosis-at-stage-1-and-2": {
 			"id": 55,
 			"topic": "health and wellbeing",
@@ -5396,9 +5513,7 @@
 				"caveats": null,
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F",
-				"text2": 111,
-				"test": 999
+				"beeswarmRowUseMinMax": "F"
 			},
 			"inferredGeos": {
 				"ctrys": [
@@ -5523,9 +5638,7 @@
 				"caveats": null,
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F",
-				"text2": 222,
-				"test": 999
+				"beeswarmRowUseMinMax": "F"
 			},
 			"inferredGeos": {
 				"ctrys": [
@@ -5650,9 +5763,7 @@
 				"caveats": null,
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F",
-				"text2": 333,
-				"test": 999
+				"beeswarmRowUseMinMax": "F"
 			},
 			"inferredGeos": {
 				"ctrys": [
@@ -5777,9 +5888,7 @@
 				"caveats": null,
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F",
-				"text2": 444,
-				"test": 999
+				"beeswarmRowUseMinMax": "F"
 			},
 			"inferredGeos": {
 				"ctrys": [
@@ -6441,7 +6550,8 @@
 				{
 					"name": "housing",
 					"indicatorCodes": [
-						"additions-to-the-housing-stock"
+						"additions-to-the-housing-stock",
+						"net-additions-to-the-housing-stock-wales"
 					]
 				}
 			]
@@ -6497,7 +6607,6 @@
 				{
 					"name": "healthy living",
 					"indicatorCodes": [
-						"adult-obesity-prevalence-aged-18-years-and-over",
 						"cigarette-smokers",
 						"child-obesity-Aged four to five years healthy weight",
 						"child-obesity-Aged 10 to 11 years healthy weight",
@@ -6506,7 +6615,8 @@
 						"child-obesity-Aged four to five years overweight",
 						"child-obesity-Aged 10 to 11 years overweight",
 						"child-obesity-Aged four to five years underweight",
-						"child-obesity-Aged 10 to 11 years underweight"
+						"child-obesity-Aged 10 to 11 years underweight",
+						"adult-obesity-prevalence-aged-18-years-and-over"
 					]
 				},
 				{

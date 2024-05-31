@@ -1,9 +1,9 @@
 {
     "$schema": "https://purl.org/csv-cubed/qube-config/v1",
-    "title": "Adult obesity prevalence (aged 18 years and over)",
+    "title": "Adult obesity prevalence",
     "creator": "https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities",
-    "summary": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.",
-    "description": "This dataset shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2021-15/11/2022.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1) \n\n\n### Source Notes and Caveats \nAdults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².\n\nEstimates for adults (aged 18 years and over) classified as living with obesity were fully revised by the Office for Health Improvement and Disparities in May 2023 with all previously published data overwritten. The replacement of all previously published data was required as the adjustments applied to the self-reported height and weight data have been updated and published by NHS England in the [Health Survey for England predicting height, weight and body mass index from self-reported data](https://digital.nhs.uk/data-and-information/areas-of-interest/public-health/health-survey-for-england-predicting-height-weight-and-body-mass-index-from-self-reported-data) report. The updated adjustments for height and weight have been applied to the new data point (November 2021 to 2022) and the whole back series (November 2015 to 2016 to November 2020 to 2021).  \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "summary": "Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.",
+    "description": "This dataset shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England) \n\n### Source\n\n - England: [Office for Health Improvement and Disparities](https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1) \n\n\n### Source Notes and Caveats \nAdults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m². \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
     "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "keywords": [
         "obesity",
@@ -14,7 +14,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2023-05-17T12:41:34.475144",
-    "dataset_modified": "2024-02-05T09:01",
+    "dataset_modified": "2024-05-30T14:27",
     "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare",
     "columns": {
         "Period": {
@@ -75,6 +75,20 @@
         },
         "Polarity": false,
         "Notes": false
+    },
+    "ess-beta-metadata": {
+        "label": "Adult obesity prevalence",
+        "prefix": null,
+        "suffix": "%",
+        "subText": null,
+        "decimalPlaces": 1,
+        "subtitle": "Percentage of adults aged 18 and over classified as living with obesity",
+        "experimentalStatistic": false,
+        "sourceDate": "08/05/2024",
+        "sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data#page/1/gid/1938133368/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
+        "sourceOrg": "Office for Health Improvement and Disparities",
+        "longDescription": "This indicator shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.",
+        "caveats": "Adults are defined as living with obesity if their body mass index (BMI) is greater than or equal to 30kg/m².",
+        "standardised": true
     }
-
 }
