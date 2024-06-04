@@ -14179,6 +14179,10 @@
 			"label": "Research and development expenditure"
 		},
 		{
+			"code": "business-expenditure-on-research-and-development",
+			"label": "Business expenditure on research and development"
+		},
+		{
 			"code": "business-demography-Active enterprises",
 			"label": "Active businesses"
 		},
@@ -14201,6 +14205,10 @@
 		{
 			"code": "net-additions-to-the-housing-stock-wales",
 			"label": "Net additions to the housing stock (Wales)"
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"label": "Net additions to the housing stock (Northern Ireland)"
 		},
 		{
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
@@ -15656,6 +15664,86 @@
 				2020
 			]
 		},
+		"business-expenditure-on-research-and-development": {
+			"id": 73,
+			"topic": "economy",
+			"subTopic": "spending and investment",
+			"code": "business-expenditure-on-research-and-development",
+			"minXDomainNumb": 2022,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "business-expenditure-on-research-and-development",
+				"slug": "business-expenditure-on-research-and-development",
+				"label": "Business expenditure on research and development",
+				"prefix": "£",
+				"suffix": "",
+				"subText": "in millions",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Total UK business expenditure on research and development",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "15/05/2024",
+				"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the total UK business expenditure on research and development, in the UK, for 2022.",
+				"standardised": "F",
+				"caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "region",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E12",
+					"E92",
+					"K02",
+					"N92",
+					"S92",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2022
+			]
+		},
 		"business-demography-Active enterprises": {
 			"id": 27,
 			"topic": "economy",
@@ -16261,7 +16349,7 @@
 				"sourceURL": "https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure",
 				"sourceOrg": "Welsh Government",
 				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial years 2001/02 to 2021/22.",
-				"standardised": true,
+				"standardised": "T",
 				"caveats": "In Wales, the approach to housing stock is very similar to that in England, using the Census and adding a measure of net supply for each intervening year. However, there may be a small negative bias in the net supply estimate for Wales compared to the rest of the UK since they do not include new builds certified by Approved Inspectors and they have no way of incorporating gains or losses due to Change of Use.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
@@ -16347,6 +16435,108 @@
 				2019,
 				2020,
 				2021
+			]
+		},
+		"net-additions-to-the-housing-stock-northern-ireland": {
+			"id": 72,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"minXDomainNumb": 2012,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "net-additions-to-the-housing-stock-northern-ireland",
+				"slug": "net-additions-to-the-housing-stock-northern-ireland",
+				"label": "Net additions to the housing stock (Northern Ireland)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 1,000 stock",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Net additions to the stock of dwellings per 1,000 dwellings",
+				"zeroBaseline": "F",
+				"canBeNegative": "T",
+				"experimentalStatistic": false,
+				"sourceDate": "07/06/2023",
+				"sourceURL": "https://www.finance-ni.gov.uk/publications/annual-housing-stock-statistics",
+				"sourceOrg": "Northern Ireland Department of Finance",
+				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in Northern Ireland, for financial years 2012/13 to 2022/23.",
+				"standardised": "T",
+				"caveats": "In line with The Rates (Northern Ireland) Order 1977, Housing Stock is defined as a count of properties which are valued as domestic or mixed for the purposes of rating. This refers to properties in the Valuation List which are used for the purposes of a private dwelling. This excludes caravans, domestic garages, domestic stores and car parking spaces.\n\nPrivate refers to a self-contained dwelling and not the ownership or build type of the dwelling. Housing Stock includes both social sector and private sector dwellings in the Valuation List.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"N"
+				],
+				"types": [
+					"N09",
+					"N92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
 			]
 		},
 		"aged-19-years-and-over-further-education-and-skills-learner-achievements": {
@@ -57452,6 +57642,154 @@
 			"clustersCalculations": {}
 		},
 		{
+			"code": "business-expenditure-on-research-and-development",
+			"period": 2022,
+			"calcsByGeogLevel": {
+				"country": {
+					"med": 1845,
+					"mad": 1348.4247,
+					"min": 912,
+					"max": 45341,
+					"count": 4
+				},
+				"region": {
+					"med": 3000.5,
+					"mad": 2870.3136,
+					"min": 732,
+					"max": 10690,
+					"count": 12
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 3000.5,
+					"mad": 2870.3136,
+					"count": 12
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {}
+		},
+		{
 			"code": "business-demography-Active enterprises",
 			"period": 2017,
 			"calcsByGeogLevel": {
@@ -69704,6 +70042,2855 @@
 						"median": null,
 						"mad": null,
 						"count": 0
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2022,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 9,
+					"mad": 1.4826,
+					"min": 3,
+					"max": 11,
+					"count": 11
+				},
+				"upper": {
+					"med": 9,
+					"mad": 1.4826,
+					"min": 3,
+					"max": 11,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 8,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 9,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 9,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 9,
+						"mad": 1.4826,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 9,
+						"mad": 2.9652,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 9,
+						"mad": 1.4826,
+						"count": 4
+					},
+					"b": {
+						"median": 9.5,
+						"mad": 1.4826,
+						"count": 6
+					},
+					"c": {
+						"median": 3,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 5.5,
+						"mad": 3.7064999999999997,
+						"count": 2
+					},
+					"b": {
+						"median": 9,
+						"mad": 1.4826,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 6.5,
+						"mad": 3.7064999999999997,
+						"count": 2
+					},
+					"c": {
+						"median": 11,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 9,
+						"mad": 1.4826,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 9,
+						"mad": 1.4826,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 4,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2021,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 11,
+					"mad": 2.9652,
+					"min": 3,
+					"max": 16,
+					"count": 11
+				},
+				"upper": {
+					"med": 11,
+					"mad": 2.9652,
+					"min": 3,
+					"max": 16,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 10,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 11,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 11,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 11.5,
+						"mad": 2.9652,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 11,
+						"mad": 1.4826,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 9.5,
+						"mad": 2.9652,
+						"count": 4
+					},
+					"b": {
+						"median": 13,
+						"mad": 2.2239,
+						"count": 6
+					},
+					"c": {
+						"median": 8,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 8.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 7,
+						"mad": 5.9304,
+						"count": 2
+					},
+					"c": {
+						"median": 12,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 11.5,
+						"mad": 2.9652,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 11.5,
+						"mad": 2.2239,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 3,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2020,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 8,
+					"mad": 2.9652,
+					"min": 5,
+					"max": 12,
+					"count": 11
+				},
+				"upper": {
+					"med": 8,
+					"mad": 2.9652,
+					"min": 5,
+					"max": 12,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 8,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 8,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 8,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 8,
+						"mad": 2.2239,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 6,
+						"mad": 1.4826,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 6.5,
+						"mad": 1.4826,
+						"count": 4
+					},
+					"b": {
+						"median": 9.5,
+						"mad": 3.7064999999999997,
+						"count": 6
+					},
+					"c": {
+						"median": 8,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 7,
+						"mad": 1.4826,
+						"count": 2
+					},
+					"b": {
+						"median": 8,
+						"mad": 2.9652,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 5.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"c": {
+						"median": 8,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 8,
+						"mad": 2.2239,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 8,
+						"mad": 2.2239,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2018,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 12,
+					"mad": 4.4478,
+					"min": 4,
+					"max": 18,
+					"count": 11
+				},
+				"upper": {
+					"med": 12,
+					"mad": 4.4478,
+					"min": 4,
+					"max": 18,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 11,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 12,
+					"mad": 4.4478,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 12,
+					"mad": 4.4478,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 12,
+						"mad": 4.4478,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 12,
+						"mad": 0,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 10.5,
+						"mad": 2.2239,
+						"count": 4
+					},
+					"b": {
+						"median": 12,
+						"mad": 2.9652,
+						"count": 6
+					},
+					"c": {
+						"median": 15,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 13,
+						"mad": 2.9652,
+						"count": 2
+					},
+					"b": {
+						"median": 12,
+						"mad": 4.4478,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 8,
+						"mad": 5.9304,
+						"count": 2
+					},
+					"c": {
+						"median": 12,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 12,
+						"mad": 4.4478,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 12,
+						"mad": 2.9652,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 4,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2017,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 10,
+					"mad": 1.4826,
+					"min": 4,
+					"max": 14,
+					"count": 11
+				},
+				"upper": {
+					"med": 10,
+					"mad": 1.4826,
+					"min": 4,
+					"max": 14,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 9,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 10,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 10,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 10.5,
+						"mad": 2.2239,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 10,
+						"mad": 1.4826,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 9.5,
+						"mad": 1.4826,
+						"count": 4
+					},
+					"b": {
+						"median": 10.5,
+						"mad": 2.9652,
+						"count": 6
+					},
+					"c": {
+						"median": 12,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 9,
+						"mad": 4.4478,
+						"count": 2
+					},
+					"b": {
+						"median": 10,
+						"mad": 1.4826,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 7.5,
+						"mad": 5.1891,
+						"count": 2
+					},
+					"c": {
+						"median": 10,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 10.5,
+						"mad": 2.2239,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 10.5,
+						"mad": 1.4826,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 4,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2019,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 12,
+					"mad": 1.4826,
+					"min": 6,
+					"max": 15,
+					"count": 11
+				},
+				"upper": {
+					"med": 12,
+					"mad": 1.4826,
+					"min": 6,
+					"max": 15,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 11,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 12,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 12,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 11,
+						"mad": 2.2239,
+						"count": 4
+					},
+					"b": {
+						"median": 12.5,
+						"mad": 0.7413,
+						"count": 6
+					},
+					"c": {
+						"median": 11,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 11.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 9.5,
+						"mad": 5.1891,
+						"count": 2
+					},
+					"c": {
+						"median": 12,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 12,
+						"mad": 1.4826,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 6,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2015,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 7,
+					"mad": 1.4826,
+					"min": 4,
+					"max": 13,
+					"count": 11
+				},
+				"upper": {
+					"med": 7,
+					"mad": 1.4826,
+					"min": 4,
+					"max": 13,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 7,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 7,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 7,
+					"mad": 1.4826,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 6.5,
+						"mad": 1.4826,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 7,
+						"mad": 2.9652,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 6,
+						"mad": 1.4826,
+						"count": 4
+					},
+					"b": {
+						"median": 6.5,
+						"mad": 1.4826,
+						"count": 6
+					},
+					"c": {
+						"median": 7,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 6.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 7,
+						"mad": 2.9652,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 6,
+						"mad": 1.4826,
+						"count": 2
+					},
+					"c": {
+						"median": 11,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 6.5,
+						"mad": 1.4826,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 7,
+						"mad": 1.4826,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2014,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 5,
+					"mad": 2.9652,
+					"min": 0,
+					"max": 10,
+					"count": 11
+				},
+				"upper": {
+					"med": 5,
+					"mad": 2.9652,
+					"min": 0,
+					"max": 10,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 5,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 5,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 5,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 5.5,
+						"mad": 2.9652,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 5,
+						"mad": 2.9652,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 3.5,
+						"mad": 2.2239,
+						"count": 4
+					},
+					"b": {
+						"median": 6.5,
+						"mad": 2.9652,
+						"count": 6
+					},
+					"c": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 4.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 6,
+						"mad": 2.9652,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 3.5,
+						"mad": 2.2239,
+						"count": 2
+					},
+					"c": {
+						"median": 7,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 5.5,
+						"mad": 2.9652,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 5.5,
+						"mad": 2.2239,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 2,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2013,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 6,
+					"mad": 2.9652,
+					"min": 4,
+					"max": 13,
+					"count": 11
+				},
+				"upper": {
+					"med": 6,
+					"mad": 2.9652,
+					"min": 4,
+					"max": 13,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 7,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 6,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 6,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 6,
+						"mad": 2.9652,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 4,
+						"mad": 0,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 4,
+						"mad": 0,
+						"count": 4
+					},
+					"b": {
+						"median": 7,
+						"mad": 2.9652,
+						"count": 6
+					},
+					"c": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 5.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 6,
+						"mad": 2.9652,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 4,
+						"mad": 0,
+						"count": 2
+					},
+					"c": {
+						"median": 9,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 6,
+						"mad": 2.9652,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 6,
+						"mad": 2.9652,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 4,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2012,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 5,
+					"mad": 2.9652,
+					"min": 2,
+					"max": 11,
+					"count": 11
+				},
+				"upper": {
+					"med": 5,
+					"mad": 2.9652,
+					"min": 2,
+					"max": 11,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 5,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 5,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 5,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 5.5,
+						"mad": 3.7064999999999997,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 2,
+						"mad": 0,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 2.5,
+						"mad": 0.7413,
+						"count": 4
+					},
+					"b": {
+						"median": 7,
+						"mad": 2.9652,
+						"count": 6
+					},
+					"c": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 5.5,
+						"mad": 0.7413,
+						"count": 2
+					},
+					"b": {
+						"median": 5,
+						"mad": 4.4478,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 2,
+						"mad": 0,
+						"count": 2
+					},
+					"c": {
+						"median": 6,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 5.5,
+						"mad": 3.7064999999999997,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 5.5,
+						"mad": 3.7064999999999997,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 2,
+						"mad": 0,
+						"count": 1
+					}
+				}
+			}
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"period": 2016,
+			"calcsByGeogLevel": {
+				"lower": {
+					"med": 9,
+					"mad": 2.9652,
+					"min": 4,
+					"max": 16,
+					"count": 11
+				},
+				"upper": {
+					"med": 9,
+					"mad": 2.9652,
+					"min": 4,
+					"max": 16,
+					"count": 11
+				}
+			},
+			"sameParentGeogCalculations": {
+				"regions_and_countries": {
+					"median": 9,
+					"mad": 0,
+					"count": 1
+				},
+				"S92000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-upper": {
+					"median": 9,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-upper": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"S92000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000008-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000002-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"N92000002-lower": {
+					"median": 9,
+					"mad": 2.9652,
+					"count": 11
+				},
+				"E12000006-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000007-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000003-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000009-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000005-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"W92000004-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				},
+				"E12000001-lower": {
+					"median": null,
+					"mad": null,
+					"count": 0
+				}
+			},
+			"clustersCalculations": {
+				"global": {
+					"a": {
+						"median": 9.5,
+						"mad": 2.2239,
+						"count": 8
+					},
+					"b": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"c": {
+						"median": 9,
+						"mad": 0,
+						"count": 3
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"economic": {
+					"a": {
+						"median": 9,
+						"mad": 0,
+						"count": 4
+					},
+					"b": {
+						"median": 9.5,
+						"mad": 3.7064999999999997,
+						"count": 6
+					},
+					"c": {
+						"median": 10,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"demographic": {
+					"a": {
+						"median": 8,
+						"mad": 2.9652,
+						"count": 2
+					},
+					"b": {
+						"median": 9,
+						"mad": 2.9652,
+						"count": 9
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					}
+				},
+				"health": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 7,
+						"mad": 2.9652,
+						"count": 2
+					},
+					"c": {
+						"median": 9,
+						"mad": 0,
+						"count": 1
+					},
+					"d": {
+						"median": 9.5,
+						"mad": 2.2239,
+						"count": 8
+					}
+				},
+				"connectivity": {
+					"a": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"b": {
+						"median": 9,
+						"mad": 2.2239,
+						"count": 10
+					},
+					"c": {
+						"median": null,
+						"mad": null,
+						"count": 0
+					},
+					"d": {
+						"median": 5,
+						"mad": 0,
+						"count": 1
 					}
 				}
 			}
@@ -179509,6 +182696,26 @@
 			"count": 12
 		},
 		{
+			"code": "business-expenditure-on-research-and-development",
+			"geog_level": "country",
+			"period": 2022,
+			"med": 1845,
+			"mad": 1348.4247,
+			"min": 912,
+			"max": 45341,
+			"count": 4
+		},
+		{
+			"code": "business-expenditure-on-research-and-development",
+			"geog_level": "region",
+			"period": 2022,
+			"med": 3000.5,
+			"mad": 2870.3136,
+			"min": 732,
+			"max": 10690,
+			"count": 12
+		},
+		{
 			"code": "business-demography-Active enterprises",
 			"geog_level": "country",
 			"period": 2017,
@@ -180917,6 +184124,226 @@
 			"min": 2,
 			"max": 21,
 			"count": 22
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2022,
+			"med": 9,
+			"mad": 1.4826,
+			"min": 3,
+			"max": 11,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2022,
+			"med": 9,
+			"mad": 1.4826,
+			"min": 3,
+			"max": 11,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2021,
+			"med": 11,
+			"mad": 2.9652,
+			"min": 3,
+			"max": 16,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2021,
+			"med": 11,
+			"mad": 2.9652,
+			"min": 3,
+			"max": 16,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2020,
+			"med": 8,
+			"mad": 2.9652,
+			"min": 5,
+			"max": 12,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2020,
+			"med": 8,
+			"mad": 2.9652,
+			"min": 5,
+			"max": 12,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2018,
+			"med": 12,
+			"mad": 4.4478,
+			"min": 4,
+			"max": 18,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2018,
+			"med": 12,
+			"mad": 4.4478,
+			"min": 4,
+			"max": 18,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2017,
+			"med": 10,
+			"mad": 1.4826,
+			"min": 4,
+			"max": 14,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2017,
+			"med": 10,
+			"mad": 1.4826,
+			"min": 4,
+			"max": 14,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2019,
+			"med": 12,
+			"mad": 1.4826,
+			"min": 6,
+			"max": 15,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2019,
+			"med": 12,
+			"mad": 1.4826,
+			"min": 6,
+			"max": 15,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2015,
+			"med": 7,
+			"mad": 1.4826,
+			"min": 4,
+			"max": 13,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2015,
+			"med": 7,
+			"mad": 1.4826,
+			"min": 4,
+			"max": 13,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2014,
+			"med": 5,
+			"mad": 2.9652,
+			"min": 0,
+			"max": 10,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2014,
+			"med": 5,
+			"mad": 2.9652,
+			"min": 0,
+			"max": 10,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2013,
+			"med": 6,
+			"mad": 2.9652,
+			"min": 4,
+			"max": 13,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2013,
+			"med": 6,
+			"mad": 2.9652,
+			"min": 4,
+			"max": 13,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2012,
+			"med": 5,
+			"mad": 2.9652,
+			"min": 2,
+			"max": 11,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2012,
+			"med": 5,
+			"mad": 2.9652,
+			"min": 2,
+			"max": 11,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "lower",
+			"period": 2016,
+			"med": 9,
+			"mad": 2.9652,
+			"min": 4,
+			"max": 16,
+			"count": 11
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"geog_level": "upper",
+			"period": 2016,
+			"med": 9,
+			"mad": 2.9652,
+			"min": 4,
+			"max": 16,
+			"count": 11
 		},
 		{
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
@@ -194897,7 +198324,8 @@
 					"indicatorCodes": [
 						"foreign-direct-investment-Inward foreign direct investment (FDI)",
 						"foreign-direct-investment-Outward foreign direct investment (FDI)",
-						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development"
+						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+						"business-expenditure-on-research-and-development"
 					]
 				},
 				{
@@ -194918,7 +198346,8 @@
 					"name": "housing",
 					"indicatorCodes": [
 						"additions-to-the-housing-stock",
-						"net-additions-to-the-housing-stock-wales"
+						"net-additions-to-the-housing-stock-wales",
+						"net-additions-to-the-housing-stock-northern-ireland"
 					]
 				}
 			]
@@ -195456,6 +198885,22 @@
 			"labelVeryShort": 22
 		},
 		{
+			"id": 72,
+			"period": "2022-2023",
+			"xDomainNumb": 2022,
+			"label": "2022-23",
+			"labelShort": "22-23",
+			"labelVeryShort": 23
+		},
+		{
+			"id": 73,
+			"period": "2022",
+			"xDomainNumb": 2022,
+			"label": "2022",
+			"labelShort": "2022",
+			"labelVeryShort": 22
+		},
+		{
 			"period": "2022-2023",
 			"xDomainNumb": 2022,
 			"label": "2022-23",
@@ -195857,6 +199302,14 @@
 			"labelVeryShort": 22
 		},
 		{
+			"id": 72,
+			"period": "2021-2022",
+			"xDomainNumb": 2021,
+			"label": "2021-22",
+			"labelShort": "21-22",
+			"labelVeryShort": 22
+		},
+		{
 			"period": "2021",
 			"xDomainNumb": 2021,
 			"label": "2021",
@@ -196250,6 +199703,14 @@
 			"labelVeryShort": 21
 		},
 		{
+			"id": 72,
+			"period": "2020-2021",
+			"xDomainNumb": 2020,
+			"label": "2020-21",
+			"labelShort": "20-21",
+			"labelVeryShort": 21
+		},
+		{
 			"period": "2020",
 			"xDomainNumb": 2020,
 			"label": "2020",
@@ -196649,6 +200110,14 @@
 			"labelVeryShort": 20
 		},
 		{
+			"id": 72,
+			"period": "2019-2020",
+			"xDomainNumb": 2019,
+			"label": "2019-20",
+			"labelShort": "19-20",
+			"labelVeryShort": 20
+		},
+		{
 			"period": "2019",
 			"xDomainNumb": 2019,
 			"label": "2019",
@@ -197049,6 +200518,14 @@
 			"labelVeryShort": 19
 		},
 		{
+			"id": 72,
+			"period": "2018-2019",
+			"xDomainNumb": 2018,
+			"label": "2018-19",
+			"labelShort": "18-19",
+			"labelVeryShort": 19
+		},
+		{
 			"period": "2018",
 			"xDomainNumb": 2018,
 			"label": "2018",
@@ -197473,6 +200950,14 @@
 			"labelVeryShort": 18
 		},
 		{
+			"id": 72,
+			"period": "2017-2018",
+			"xDomainNumb": 2017,
+			"label": "2017-18",
+			"labelShort": "17-18",
+			"labelVeryShort": 18
+		},
+		{
 			"period": "2017",
 			"xDomainNumb": 2017,
 			"label": "2017",
@@ -197833,6 +201318,14 @@
 			"labelVeryShort": 17
 		},
 		{
+			"id": 72,
+			"period": "2016-2017",
+			"xDomainNumb": 2016,
+			"label": "2016-17",
+			"labelShort": "16-17",
+			"labelVeryShort": 17
+		},
+		{
 			"period": "2016",
 			"xDomainNumb": 2016,
 			"label": "2016",
@@ -198161,6 +201654,14 @@
 			"labelVeryShort": 16
 		},
 		{
+			"id": 72,
+			"period": "2015-2016",
+			"xDomainNumb": 2015,
+			"label": "2015-16",
+			"labelShort": "15-16",
+			"labelVeryShort": 16
+		},
+		{
 			"period": "2015",
 			"xDomainNumb": 2015,
 			"label": "2015",
@@ -198450,6 +201951,14 @@
 			"labelVeryShort": 15
 		},
 		{
+			"id": 72,
+			"period": "2014-2015",
+			"xDomainNumb": 2014,
+			"label": "2014-15",
+			"labelShort": "14-15",
+			"labelVeryShort": 15
+		},
+		{
 			"period": "2014",
 			"xDomainNumb": 2014,
 			"label": "2014",
@@ -198701,6 +202210,14 @@
 			"labelVeryShort": 14
 		},
 		{
+			"id": 72,
+			"period": "2013-2014",
+			"xDomainNumb": 2013,
+			"label": "2013-14",
+			"labelShort": "13-14",
+			"labelVeryShort": 14
+		},
+		{
 			"period": "2013",
 			"xDomainNumb": 2013,
 			"label": "2013",
@@ -198937,6 +202454,14 @@
 		},
 		{
 			"id": 71,
+			"period": "2012-2013",
+			"xDomainNumb": 2012,
+			"label": "2012-13",
+			"labelShort": "12-13",
+			"labelVeryShort": 13
+		},
+		{
+			"id": 72,
 			"period": "2012-2013",
 			"xDomainNumb": 2012,
 			"label": "2012-13",
@@ -205331,6 +208856,106 @@
 				"label": "2001-02",
 				"labelShort": "01-02",
 				"labelVeryShort": 2
+			}
+		],
+		"72": [
+			{
+				"id": 72,
+				"period": "2022-2023",
+				"xDomainNumb": 2022,
+				"label": "2022-23",
+				"labelShort": "22-23",
+				"labelVeryShort": 23
+			},
+			{
+				"id": 72,
+				"period": "2021-2022",
+				"xDomainNumb": 2021,
+				"label": "2021-22",
+				"labelShort": "21-22",
+				"labelVeryShort": 22
+			},
+			{
+				"id": 72,
+				"period": "2020-2021",
+				"xDomainNumb": 2020,
+				"label": "2020-21",
+				"labelShort": "20-21",
+				"labelVeryShort": 21
+			},
+			{
+				"id": 72,
+				"period": "2019-2020",
+				"xDomainNumb": 2019,
+				"label": "2019-20",
+				"labelShort": "19-20",
+				"labelVeryShort": 20
+			},
+			{
+				"id": 72,
+				"period": "2018-2019",
+				"xDomainNumb": 2018,
+				"label": "2018-19",
+				"labelShort": "18-19",
+				"labelVeryShort": 19
+			},
+			{
+				"id": 72,
+				"period": "2017-2018",
+				"xDomainNumb": 2017,
+				"label": "2017-18",
+				"labelShort": "17-18",
+				"labelVeryShort": 18
+			},
+			{
+				"id": 72,
+				"period": "2016-2017",
+				"xDomainNumb": 2016,
+				"label": "2016-17",
+				"labelShort": "16-17",
+				"labelVeryShort": 17
+			},
+			{
+				"id": 72,
+				"period": "2015-2016",
+				"xDomainNumb": 2015,
+				"label": "2015-16",
+				"labelShort": "15-16",
+				"labelVeryShort": 16
+			},
+			{
+				"id": 72,
+				"period": "2014-2015",
+				"xDomainNumb": 2014,
+				"label": "2014-15",
+				"labelShort": "14-15",
+				"labelVeryShort": 15
+			},
+			{
+				"id": 72,
+				"period": "2013-2014",
+				"xDomainNumb": 2013,
+				"label": "2013-14",
+				"labelShort": "13-14",
+				"labelVeryShort": 14
+			},
+			{
+				"id": 72,
+				"period": "2012-2013",
+				"xDomainNumb": 2012,
+				"label": "2012-13",
+				"labelShort": "12-13",
+				"labelVeryShort": 13
+			}
+		],
+		"73": [
+			{
+				"id": 73,
+				"period": "2022",
+				"xDomainNumb": 2022,
+				"label": "2022",
+				"labelShort": "2022",
+				"labelVeryShort": 22
 			}
 		]
 	},

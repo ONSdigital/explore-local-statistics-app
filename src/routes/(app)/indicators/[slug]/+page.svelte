@@ -78,7 +78,7 @@
 
 		timePeriodsArray = metadata.periodsLookupArray.filter(
 			(el) =>
-				el.periodGroup === data.indicator.periodGroup &&
+				el.id === data.indicator.id &&
 				el.xDomainNumb >= data.indicator.minXDomainNumb &&
 				el.xDomainNumb <= data.indicator.maxXDomainNumb
 		);

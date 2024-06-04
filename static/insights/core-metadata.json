@@ -49,6 +49,10 @@
 			"label": "Research and development expenditure"
 		},
 		{
+			"code": "business-expenditure-on-research-and-development",
+			"label": "Business expenditure on research and development"
+		},
+		{
 			"code": "business-demography-Active enterprises",
 			"label": "Active businesses"
 		},
@@ -71,6 +75,10 @@
 		{
 			"code": "net-additions-to-the-housing-stock-wales",
 			"label": "Net additions to the housing stock (Wales)"
+		},
+		{
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"label": "Net additions to the housing stock (Northern Ireland)"
 		},
 		{
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
@@ -1526,6 +1534,86 @@
 				2020
 			]
 		},
+		"business-expenditure-on-research-and-development": {
+			"id": 73,
+			"topic": "economy",
+			"subTopic": "spending and investment",
+			"code": "business-expenditure-on-research-and-development",
+			"minXDomainNumb": 2022,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "business-expenditure-on-research-and-development",
+				"slug": "business-expenditure-on-research-and-development",
+				"label": "Business expenditure on research and development",
+				"prefix": "£",
+				"suffix": "",
+				"subText": "in millions",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Total UK business expenditure on research and development",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "15/05/2024",
+				"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the total UK business expenditure on research and development, in the UK, for 2022.",
+				"standardised": "F",
+				"caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "region",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E12",
+					"E92",
+					"K02",
+					"N92",
+					"S92",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2022
+			]
+		},
 		"business-demography-Active enterprises": {
 			"id": 27,
 			"topic": "economy",
@@ -2131,7 +2219,7 @@
 				"sourceURL": "https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure",
 				"sourceOrg": "Welsh Government",
 				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial years 2001/02 to 2021/22.",
-				"standardised": true,
+				"standardised": "T",
 				"caveats": "In Wales, the approach to housing stock is very similar to that in England, using the Census and adding a measure of net supply for each intervening year. However, there may be a small negative bias in the net supply estimate for Wales compared to the rest of the UK since they do not include new builds certified by Approved Inspectors and they have no way of incorporating gains or losses due to Change of Use.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
@@ -2217,6 +2305,108 @@
 				2019,
 				2020,
 				2021
+			]
+		},
+		"net-additions-to-the-housing-stock-northern-ireland": {
+			"id": 72,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "net-additions-to-the-housing-stock-northern-ireland",
+			"minXDomainNumb": 2012,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "net-additions-to-the-housing-stock-northern-ireland",
+				"slug": "net-additions-to-the-housing-stock-northern-ireland",
+				"label": "Net additions to the housing stock (Northern Ireland)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 1,000 stock",
+				"decimalPlaces": 0,
+				"howToMeasureChange": "abs",
+				"subtitle": "Net additions to the stock of dwellings per 1,000 dwellings",
+				"zeroBaseline": "F",
+				"canBeNegative": "T",
+				"experimentalStatistic": false,
+				"sourceDate": "07/06/2023",
+				"sourceURL": "https://www.finance-ni.gov.uk/publications/annual-housing-stock-statistics",
+				"sourceOrg": "Northern Ireland Department of Finance",
+				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in Northern Ireland, for financial years 2012/13 to 2022/23.",
+				"standardised": "T",
+				"caveats": "In line with The Rates (Northern Ireland) Order 1977, Housing Stock is defined as a count of properties which are valued as domestic or mixed for the purposes of rating. This refers to properties in the Valuation List which are used for the purposes of a private dwelling. This excludes caravans, domestic garages, domestic stores and car parking spaces.\n\nPrivate refers to a self-contained dwelling and not the ownership or build type of the dwelling. Housing Stock includes both social sector and private sector dwellings in the Valuation List.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"N"
+				],
+				"types": [
+					"N09",
+					"N92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
 			]
 		},
 		"aged-19-years-and-over-further-education-and-skills-learner-achievements": {
@@ -6530,7 +6720,8 @@
 					"indicatorCodes": [
 						"foreign-direct-investment-Inward foreign direct investment (FDI)",
 						"foreign-direct-investment-Outward foreign direct investment (FDI)",
-						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development"
+						"public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development",
+						"business-expenditure-on-research-and-development"
 					]
 				},
 				{
@@ -6551,7 +6742,8 @@
 					"name": "housing",
 					"indicatorCodes": [
 						"additions-to-the-housing-stock",
-						"net-additions-to-the-housing-stock-wales"
+						"net-additions-to-the-housing-stock-wales",
+						"net-additions-to-the-housing-stock-northern-ireland"
 					]
 				}
 			]
