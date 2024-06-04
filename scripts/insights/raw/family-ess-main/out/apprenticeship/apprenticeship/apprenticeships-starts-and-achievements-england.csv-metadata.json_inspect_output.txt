@@ -1,0 +1,120 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Apprenticeships starts and achievements (England)
+          - Label: Apprenticeships starts and achievements (England)
+          - Issued: 2023-05-17T12:25:28.117899
+          - Modified: 2024-02-12T09:26:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-education
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- subnational
+		-- local-authority
+		-- education-and-training
+		-- county
+		-- community-learning
+		-- apprenticeship
+          - Contact Point: None
+          - Identifier: Apprenticeships starts and achievements (England)
+          - Comment: Apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23
+          - Description: This dataset shows apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.
+		
+		### Coverage 
+		
+		England
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Regions,
+		Combined Authorities,
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills) 
+		
+		
+		### Source Notes and Caveats 
+		- Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.
+		- Achievements are the count of apprenticeships achieved at any point during the stated academic period. Learners achieving more than one apprenticeship will appear more than once.
+		- Geography is based upon the home postcode of the learner.
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Apprenticeships starts and achievements (England)
+    - Columns: 
+                           Title         Type  Required                                                                            Property URL Observations Column Titles
+                       indicator    Dimension      True                 apprenticeships-starts-and-achievements-england.csv#dimension/indicator                observation
+                          areacd    Dimension      True        apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code                observation
+                          areanm    Dimension      True                 apprenticeships-starts-and-achievements-england.csv#dimension/area-name                observation
+                       geography    Dimension      True            apprenticeships-starts-and-achievements-england.csv#dimension/geography-type                observation
+                     observation Observations     False   apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships                observation
+                            unit   Suppressed     False                                                                                    None                           
+                         measure   Suppressed     False                                                                                    None                           
+                          period    Dimension      True   apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval                observation
+    lower_confidence_interval_95    Attribute     False apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval                observation
+    upper_confidence_interval_95    Attribute     False apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval                observation
+              observation_status    Attribute     False        apprenticeships-starts-and-achievements-england.csv#attribute/observation-status                observation
+    - Columns where suppress output is true: 
+    		-- unit
+    		-- measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          areanm
+         geography-type.csv#code-list          Geography Type       geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          period
+              indicator.csv#code-list               Indicator       indicator
+     ons-geography-code.csv#code-list      ONS Geography Code          areacd
+
+- The data cube has the following dataset information:
+        - Number of Rows: 4284
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+             indicator    areacd     areanm geography  observation                        unit                     measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+apprenticeships-starts e92000001    england    nation        947.0 Rate per 100,000 population Rate per 100,000 population 2022-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e92000001    england    nation        981.0 Rate per 100,000 population Rate per 100,000 population 2021-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e92000001    england    nation        912.0 Rate per 100,000 population Rate per 100,000 population 2020-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e92000001    england    nation        918.0 Rate per 100,000 population Rate per 100,000 population 2019-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e92000001    england    nation       1122.0 Rate per 100,000 population Rate per 100,000 population 2018-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e92000001    england    nation       1075.0 Rate per 100,000 population Rate per 100,000 population 2017-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e12000001 north-east    region       1365.0 Rate per 100,000 population Rate per 100,000 population 2017-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e12000001 north-east    region       1401.0 Rate per 100,000 population Rate per 100,000 population 2018-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e12000001 north-east    region       1085.0 Rate per 100,000 population Rate per 100,000 population 2019-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-starts e12000001 north-east    region       1039.0 Rate per 100,000 population Rate per 100,000 population 2020-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+        - Last 10 Rows: 
+                   indicator    areacd                    areanm                geography  observation                        unit                     measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+apprenticeships-achievements e07000191             west-somerset local-authority-district        804.0 Rate per 100,000 population Rate per 100,000 population 2017-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000246 somerset-west-and-taunton local-authority-district        558.0 Rate per 100,000 population Rate per 100,000 population 2020-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000246 somerset-west-and-taunton local-authority-district        643.0 Rate per 100,000 population Rate per 100,000 population 2018-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000246 somerset-west-and-taunton local-authority-district        524.0 Rate per 100,000 population Rate per 100,000 population 2021-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000246 somerset-west-and-taunton local-authority-district        508.0 Rate per 100,000 population Rate per 100,000 population 2019-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000189            south-somerset local-authority-district        952.0 Rate per 100,000 population Rate per 100,000 population 2017-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000189            south-somerset local-authority-district        667.0 Rate per 100,000 population Rate per 100,000 population 2018-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000189            south-somerset local-authority-district        557.0 Rate per 100,000 population Rate per 100,000 population 2019-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000189            south-somerset local-authority-district        539.0 Rate per 100,000 population Rate per 100,000 population 2020-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+apprenticeships-achievements e07000189            south-somerset local-authority-district        501.0 Rate per 100,000 population Rate per 100,000 population 2021-09-01t00-00-00/p1y                           NaN                           NaN                NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                  Measure        Unit  Count
+Number of apprenticeships per 100,000   4284
+        
