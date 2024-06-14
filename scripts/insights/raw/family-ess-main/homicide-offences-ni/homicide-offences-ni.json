@@ -1,0 +1,94 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Homicide Offences (Northern Ireland)",
+    "creator": "https://www.gov.uk/government/organisations/police-service-of-northern-ireland",
+    "summary": "Rate of Homicide offences per million population, Northern Ireland, 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022.",
+    "description": "This dataset shows the rate of Homicide offences per million population, in Northern Ireland, for 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland) \n\n### Source\n\n - Northern Ireland: [Police Service of Northern Ireland](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics) \n\n\n### Source Notes and Caveats \n- Crimes are geographically recorded by the police based on the location in which the incident occurred.\n\n - Statistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).\n\n - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\n - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "northern-ireland",
+        "local-authority",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2024-06-11T09:32",
+    "dataset_modified": "2024-06-11T09:32",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-interval"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Per Million",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 1e-06
+            },
+            "measure": {
+                "label": "Homicides",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#crime-rate"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Homicide Offences (Northern Ireland)",
+      "prefix": null,
+      "suffix": null,
+      "subText": "per million population",
+      "decimalPlaces": 1,
+      "subtitle": "Homicide offences per million people",
+      "experimentalStatistic": "F",
+      "sourceDate": "24/11/2023",
+      "sourceURL": "https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
+      "sourceOrg": "Police Service of Northern Ireland",
+      "longDescription": "This indicator shows the rate of Homicide offences per million population, in Northern Ireland, for 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022.",
+      "caveats": "Crimes are geographically recorded by the police based on the location in which the incident occurred.\n\nStatistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+      "standardised": "T"
+  }
+}

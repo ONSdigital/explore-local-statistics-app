@@ -1,0 +1,129 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Homicide Offences (Northern Ireland)
+          - Label: Homicide Offences (Northern Ireland)
+          - Issued: 2024-06-11T09:32:00
+          - Modified: 2024-06-11T09:32:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/police-service-of-northern-ireland
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice
+          - Keywords: 
+		-- local-authority
+		-- subnational
+		-- northern-ireland
+		-- region
+          - Contact Point: None
+          - Identifier: Homicide Offences (Northern Ireland)
+          - Comment: Rate of Homicide offences per million population, Northern Ireland, 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022.
+          - Description: This dataset shows the rate of Homicide offences per million population, in Northern Ireland, for 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022
+		
+		### Coverage 
+		
+		Northern Ireland
+		
+		#### Geography definition
+		
+		Local Government Districts,
+		Nation (Northern Ireland) 
+		
+		### Source
+		
+		 - Northern Ireland: [Police Service of Northern Ireland](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics) 
+		
+		
+		### Source Notes and Caveats 
+		- Crimes are geographically recorded by the police based on the location in which the incident occurred.
+		
+		 - Statistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).
+		
+		 - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.
+		
+		 - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable. 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Homicide Offences (Northern Ireland)
+    - Columns: 
+                              Title         Type  Required                                                               Property URL Observations Column Titles
+                             AREACD    Dimension      True        homicide-offences-northern-ireland.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 homicide-offences-northern-ireland.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            homicide-offences-northern-ireland.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                       None                           
+                          Indicator   Suppressed     False                                                                       None                           
+                            Mission   Suppressed     False                                                                       None                           
+                           Category   Suppressed     False                                                                       None                           
+                             Period    Dimension      True   homicide-offences-northern-ireland.csv#dimension/gregorian-time-interval                Observation
+                        Observation Observations     False                   homicide-offences-northern-ireland.csv#measure/homicides                Observation
+                            Measure   Suppressed     False                                                                       None                           
+                               Unit   Suppressed     False                                                                       None                           
+    Lower Confidence Interval (95%)    Attribute     False homicide-offences-northern-ireland.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False homicide-offences-northern-ireland.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        homicide-offences-northern-ireland.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                       None                           
+                              Notes   Suppressed     False                                                                       None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          AREANM
+         geography-type.csv#code-list          Geography Type       Geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
+     ons-geography-code.csv#code-list      ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 240
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD           AREANM Geography                                                      Variable Name         Indicator    Mission                                                  Category                  Period  Observation                                   Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2001-04-01t00-00-00/p3y    76.581677 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    36.753819 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y    35.253454 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2018-04-01t00-00-00/p3y    37.924298 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2017-04-01t00-00-00/p3y    40.821541 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2016-04-01t00-00-00/p3y    39.462920 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2014-04-01t00-00-00/p3y    34.502408 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2013-04-01t00-00-00/p3y    36.350102 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2012-04-01t00-00-00/p3y    35.486606 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002 northern-ireland    nation Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2011-04-01t00-00-00/p3y    35.624188 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+        - Last 10 Rows: 
+   AREACD              AREANM                Geography                                                      Variable Name         Indicator    Mission                                                  Category                  Period  Observation                                   Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2008-04-01t00-00-00/p3y    25.631496 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2007-04-01t00-00-00/p3y    25.804121 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2005-04-01t00-00-00/p3y    19.545502 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2004-04-01t00-00-00/p3y    39.413268 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2003-04-01t00-00-00/p3y    33.131891 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2002-04-01t00-00-00/p3y    79.774504 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2001-04-01t00-00-00/p3y    99.868174 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2019-04-01t00-00-00/p3y    36.763354 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2009-04-01t00-00-00/p3y    25.556166 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011 ards-and-north-down local-authority-district Homicide Offences (rate per million population) (Northern Ireland) Homicide Offences Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    18.312000 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                 NaN         1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+  Measure        Unit  Count
+Homicides Per Million    240
+        

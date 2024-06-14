@@ -21,6 +21,10 @@
 			"label": "Modelled unemployment rate"
 		},
 		{
+			"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
+			"label": "Economically inactive people due to long-term sickness"
+		},
+		{
 			"code": "gross-disposable-household-income-per-head",
 			"label": "Gross disposable household income"
 		},
@@ -105,6 +109,10 @@
 			"label": "Pupils meeting the expected standard in reading, writing and maths at the end of Key Stage 2"
 		},
 		{
+			"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
+			"label": "No qualifications (Great Britain)"
+		},
+		{
 			"code": "early-years-Communication and Language",
 			"label": "Communication and language skills by end of Early years foundation stage"
 		},
@@ -139,6 +147,10 @@
 		{
 			"code": "apprenticeship-Apprenticeships starts",
 			"label": "Apprenticeship starts (England)"
+		},
+		{
+			"code": "apprenticeships-starts-ni",
+			"label": "Apprenticeships starts (Northern Ireland)"
 		},
 		{
 			"code": "cigarette-smokers",
@@ -193,6 +205,10 @@
 			"label": "Preventable circulatory mortality (Northern Ireland)"
 		},
 		{
+			"code": "mortality-rate-from-coronary-heart-disease-scotland",
+			"label": "Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)"
+		},
+		{
 			"code": "healthy-life-expectancy-Female healthy life expectancy",
 			"label": "Female healthy life expectancy"
 		},
@@ -225,6 +241,10 @@
 			"label": "4G coverage"
 		},
 		{
+			"code": "5g-coverage",
+			"label": "5G coverage"
+		},
+		{
 			"code": "average-travel-time-long-cycling",
 			"label": "Travel time to employment centre by bicycle"
 		},
@@ -239,6 +259,10 @@
 		{
 			"code": "homicide-offences",
 			"label": "Homicide Offences (England and Wales)"
+		},
+		{
+			"code": "homicide-offences-ni",
+			"label": "Homicide Offences (Northern Ireland)"
 		}
 	],
 	"indicatorsObject": {
@@ -828,6 +852,111 @@
 				2023
 			]
 		},
+		"proportion-of-people-who-are-economically-inactive-due-to-sickness": {
+			"id": 80,
+			"topic": "economy",
+			"subTopic": "employment",
+			"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
+			"minXDomainNumb": 2004,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
+				"slug": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
+				"label": "Economically inactive people due to long-term sickness",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "16/04/2024",
+				"sourceURL": "https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.",
+				"standardised": "T",
+				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E47",
+					"S12",
+					"W06"
+				],
+				"groups": [
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"gross-disposable-household-income-per-head": {
 			"id": 2,
 			"topic": "economy",
@@ -976,7 +1105,7 @@
 				"experimentalStatistic": "F",
 				"sourceDate": "01/11/2023|01/11/2023",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/previousReleases|https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/annual-survey-hours-and-earnings",
-				"sourceOrg": "Office for National Statistics",
+				"sourceOrg": "Office for National Statistics|Northern Ireland Statistics and Research Agency",
 				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for 2002-2023.",
 				"standardised": "T",
 				"caveats": "The country level figure for Northern Ireland has been sourced from NOMIS rather than NISRA. This is to allow for confidence intervals.",
@@ -3028,6 +3157,94 @@
 				2022
 			]
 		},
+		"aged-16-to-64-years-with-no-qualifications-great-britain": {
+			"id": 79,
+			"topic": "education and skills",
+			"subTopic": "attainment and participation",
+			"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
+			"minXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
+			"metadata": {
+				"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
+				"slug": "aged-16-to-64-years-with-no-qualifications-great-britain",
+				"label": "No qualifications (Great Britain)",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of people aged 16 to 64 with no qualifications",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "16/04/2024",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/apsnew",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications, in Great Britain, for 2022 and 2023.",
+				"standardised": "T",
+				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E47",
+					"S12",
+					"W06"
+				],
+				"groups": [
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2022,
+				2023
+			]
+		},
 		"early-years-Communication and Language": {
 			"id": 25,
 			"topic": "education and skills",
@@ -3897,6 +4114,102 @@
 				2020,
 				2021,
 				2022
+			]
+		},
+		"apprenticeships-starts-ni": {
+			"id": 74,
+			"topic": "education and skills",
+			"subTopic": "apprenticeships",
+			"code": "apprenticeships-starts-ni",
+			"minXDomainNumb": 2017,
+			"maxXDomainNumb": 2021,
+			"metadata": {
+				"code": "apprenticeships-starts-ni",
+				"slug": "apprenticeships-starts-ni",
+				"label": "Apprenticeships starts (Northern Ireland)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 100,000 population",
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Apprenticeship programme starts by people aged 16 or above, per 100,000 people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "21/05/2024",
+				"sourceURL": "https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables",
+				"sourceOrg": "Department for the Economy (Northern Ireland)",
+				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2017/18 to 2021/2",
+				"standardised": "T",
+				"caveats": "Data relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"N"
+				],
+				"types": [
+					"N09",
+					"N92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2017,
+				2018,
+				2019,
+				2020,
+				2021
 			]
 		},
 		"cigarette-smokers": {
@@ -5445,6 +5758,119 @@
 				2022
 			]
 		},
+		"mortality-rate-from-coronary-heart-disease-scotland": {
+			"id": 77,
+			"topic": "health and wellbeing",
+			"subTopic": "disease and preventable mortality",
+			"code": "mortality-rate-from-coronary-heart-disease-scotland",
+			"minXDomainNumb": 2001,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "mortality-rate-from-coronary-heart-disease-scotland",
+				"slug": "mortality-rate-from-coronary-heart-disease-scotland",
+				"label": "Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 100,000 population",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Age-standardised mortality rate from coronary heart disease or cerebrovascular disease for people aged under 75",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/01/2023|24/01/2023",
+				"sourceURL": "https://publichealthscotland.scot/publications/scottish-heart-disease-statistics/scottish-heart-disease-statistics-year-ending-31-march-2022/|https://publichealthscotland.scot/publications/scottish-stroke-statistics/scottish-stroke-statistics-year-ending-31-march-2022/",
+				"sourceOrg": "Public Health Scotland Heart disease statistics|Public Health Scotland Stroke statistics",
+				"longDescription": "This indicator shows the age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population (2019 definition), in Scotland, for 2001 to 2022.",
+				"standardised": "T",
+				"caveats": "Data are based on year of death registration.\n\nData relate to all deaths that occurred in Scotland. This includes those who are resident outwith Scotland, those with no fixed abode and those with unknown residence.\n\nData includes underlying cause of death from coronary heart disease (ICD-10 code I20-I25) or cerebrovascular disease (ICD-10 code I60-I69).\n\nAge standardised rates calculated using the direct method, standardised to the 2013 European Standard Population (ESP2013). National Records of Scotland Population Estimates were used in the calculation of the crude and standardised rates.",
+				"confidenceIntervals": "T",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"S"
+				],
+				"types": [
+					"S12",
+					"S92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"healthy-life-expectancy-Female healthy life expectancy": {
 			"id": 58,
 			"topic": "health and wellbeing",
@@ -6309,6 +6735,95 @@
 				2024
 			]
 		},
+		"5g-coverage": {
+			"id": 78,
+			"topic": "connectivity",
+			"subTopic": "digital connectivity",
+			"code": "5g-coverage",
+			"minXDomainNumb": 2024,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "5g-coverage",
+				"slug": "5g-coverage",
+				"label": "5G coverage",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of area with 5G coverage from at least one mobile network provider",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/04/2024",
+				"sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+				"sourceOrg": "Ofcom",
+				"longDescription": "This indicator shows the percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, as of January 2024.",
+				"standardised": "T",
+				"caveats": null,
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E47",
+					"N09",
+					"S12",
+					"W06"
+				],
+				"groups": [
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2024
+			]
+		},
 		"average-travel-time-long-cycling": {
 			"id": 66,
 			"topic": "connectivity",
@@ -6680,6 +7195,117 @@
 			"years": [
 				2020
 			]
+		},
+		"homicide-offences-ni": {
+			"id": 73,
+			"topic": "crime",
+			"subTopic": "crime",
+			"code": "homicide-offences-ni",
+			"minXDomainNumb": 2001,
+			"maxXDomainNumb": 2020,
+			"metadata": {
+				"code": "homicide-offences-ni",
+				"slug": "homicide-offences-ni",
+				"label": "Homicide Offences (Northern Ireland)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per million population",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Homicide offences per million people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/11/2023",
+				"sourceURL": "https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
+				"sourceOrg": "Police Service of Northern Ireland",
+				"longDescription": "This indicator shows the rate of Homicide offences per million population, in Northern Ireland, for 3-year rolling periods between 04/2001-03/2004 to 04/2019-03/2022.",
+				"standardised": "T",
+				"caveats": "Crimes are geographically recorded by the police based on the location in which the incident occurred.\n\nStatistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"N"
+				],
+				"types": [
+					"N09",
+					"N92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2018
+			},
+			"years": [
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020
+			]
 		}
 	},
 	"topicsArray": [
@@ -6693,7 +7319,8 @@
 						"ni-employment-rate-Economic Inactivity Rate",
 						"employment-rate-long-Employment Rate",
 						"ni-employment-rate-Employment Rate",
-						"aged-16-years-and-over-modelled-unemployment"
+						"aged-16-years-and-over-modelled-unemployment",
+						"proportion-of-people-who-are-economically-inactive-due-to-sickness"
 					]
 				},
 				{
@@ -6759,7 +7386,8 @@
 						"gcses-and-equivalent-in-english-and-maths-by-age-19",
 						"aged-16-to-64-years-level-3-or-above-qualifications",
 						"aged-16-to-64-years-level3-or-above-qualifications-ni",
-						"pupils-at-expected-standards-by-end-of-primary-school"
+						"pupils-at-expected-standards-by-end-of-primary-school",
+						"aged-16-to-64-years-with-no-qualifications-great-britain"
 					]
 				},
 				{
@@ -6788,7 +7416,8 @@
 					"name": "apprenticeships",
 					"indicatorCodes": [
 						"apprenticeship-Apprenticeships achievements",
-						"apprenticeship-Apprenticeships starts"
+						"apprenticeship-Apprenticeships starts",
+						"apprenticeships-starts-ni"
 					]
 				}
 			]
@@ -6816,7 +7445,8 @@
 					"indicatorCodes": [
 						"cancer-diagnosis-at-stage-1-and-2",
 						"cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates",
-						"cardiovascular-mortality-persons-aged-under-75-ni"
+						"cardiovascular-mortality-persons-aged-under-75-ni",
+						"mortality-rate-from-coronary-heart-disease-scotland"
 					]
 				},
 				{
@@ -6844,7 +7474,8 @@
 					"name": "digital connectivity",
 					"indicatorCodes": [
 						"gigabit-capable-broadband",
-						"4g-coverage"
+						"4g-coverage",
+						"5g-coverage"
 					]
 				},
 				{
@@ -6863,7 +7494,8 @@
 				{
 					"name": "crime",
 					"indicatorCodes": [
-						"homicide-offences"
+						"homicide-offences",
+						"homicide-offences-ni"
 					]
 				}
 			]

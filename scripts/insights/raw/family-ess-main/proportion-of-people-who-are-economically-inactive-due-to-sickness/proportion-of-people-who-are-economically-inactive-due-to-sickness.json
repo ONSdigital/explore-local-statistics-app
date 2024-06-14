@@ -1,0 +1,91 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Economically inactive people due to long-term sickness",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "The proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, Great Britain, 2004 - 2022.",
+    "description": "This dataset shows the proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.\n\n### Coverage \n\nGB (England, Wales and Scotland)\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities, \nCounties, \nCombined Authorities\n\n### Source\n\n - Great Britain: [Nomis](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17)\n\n\n### Source Notes and Caveats \nThis indicator is based on re-weighted Annual Population Survey (APS) datasets updated on 16 August 2022. For more information, see the [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022). \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "annual-population-survey",
+        "local-authority",
+        "long-term-sickness",
+        "subnational",
+        "annual-population-survey"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "themes": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork",
+    "dataset_issued": "2024-06-13T13:47",
+    "dataset_modified": "2024-06-13T13:47",
+    "columns": {
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "Unit": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Economically inactive people due to long-term sickness",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Lower Confidence Interval (95%)": {
+            "type": "attribute",
+            "label": "Lower Confidence Interval",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "type": "attribute",
+            "label": "Upper Confidence Interval",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Economically inactive people due to long-term sickness",
+      "prefix": null,
+      "suffix": "%",
+      "subText": null,
+      "decimalPlaces": 1,
+      "subtitle": "Percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months",
+      "experimentalStatistic": "F",
+      "sourceDate": "16/04/2024",
+      "sourceURL": "https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17",
+      "sourceOrg": "Office for National Statistics",
+      "longDescription": "This indicator shows the percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.",
+      "caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
+      "standardised": "T"
+    }
+}

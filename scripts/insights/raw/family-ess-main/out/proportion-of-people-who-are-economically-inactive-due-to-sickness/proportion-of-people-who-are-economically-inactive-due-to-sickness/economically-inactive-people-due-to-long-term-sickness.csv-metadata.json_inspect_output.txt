@@ -1,0 +1,124 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Economically inactive people due to long-term sickness
+          - Label: Economically inactive people due to long-term sickness
+          - Issued: 2024-06-13T13:47:00
+          - Modified: 2024-06-13T13:47:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- subnational
+		-- local-authority
+		-- annual-population-survey
+		-- long-term-sickness
+          - Contact Point: None
+          - Identifier: Economically inactive people due to long-term sickness
+          - Comment: The proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, Great Britain, 2004 - 2022.
+          - Description: This dataset shows the proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.
+		
+		### Coverage 
+		
+		GB (England, Wales and Scotland)
+		
+		### Geography definition
+		
+		Local Authority Districts and Unitary Authorities, 
+		Counties, 
+		Combined Authorities
+		
+		### Source
+		
+		 - Great Britain: [Nomis](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17)
+		
+		
+		### Source Notes and Caveats 
+		This indicator is based on re-weighted Annual Population Survey (APS) datasets updated on 16 August 2022. For more information, see the [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022). 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Economically inactive people due to long-term sickness
+    - Columns: 
+                              Title         Type  Required                                                                                                              Property URL Observations Column Titles
+                             AREACD    Dimension      True                                   economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                            economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                                       economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type                Observation
+                      Variable Name    Dimension      True                                        economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name                Observation
+                          Indicator   Suppressed     False                                                                                                                      None                           
+                            Mission    Dimension      True                                              economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission                Observation
+                           Category    Dimension      True                                             economically-inactive-people-due-to-long-term-sickness.csv#dimension/category                Observation
+                             Period    Dimension      True                                                 economically-inactive-people-due-to-long-term-sickness.csv#dimension/year                Observation
+                        Observation Observations     False economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness                Observation
+                            Measure   Suppressed     False                                                                                                                      None                           
+                               Unit   Suppressed     False                                                                                                                      None                           
+    Lower Confidence Interval (95%)    Attribute     False                            economically-inactive-people-due-to-long-term-sickness.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                            economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                                   economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                                                      None                           
+                              Notes   Suppressed     False                                                                                                                      None                           
+    - Columns where suppress output is true: 
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 7
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+          category.csv#code-list           Category        Category
+    geography-type.csv#code-list     Geography Type       Geography
+           mission.csv#code-list            Mission         Mission
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+     variable-name.csv#code-list      Variable Name   Variable Name
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 7258
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD      AREANM                         Geography                                                                                      Variable Name                                                                                                   Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2004        31.55 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2022        35.48 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2021        31.27 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2020        28.45 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2019        28.64 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2018        25.51 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2016        23.60 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2015        22.85 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2014        25.00 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006 tees-valley combined-authority-or-city-region proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2017        26.24 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+        - Last 10 Rows: 
+   AREACD       AREANM                Geography                                                                                      Variable Name                                                                                                   Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2015        33.74 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2016        29.20 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2018        34.58 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2019        34.60 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2020        35.79 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2021        26.43 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2005        39.32 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2014        40.10 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2004        37.61 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s12000040 west-lothian local-authority-district proportion-of-economically-inactive-people-who-are-economically-inactive-due-to-long-term-sickness Proportion of people who are economically inactive, who are economically inactive due to long term sickness mission-1 spreading-opportunity-and-improving-public-services    2022        33.86 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                               Measure    Unit  Count
+Economically inactive people due to long-term sickness Percent   7258
+        

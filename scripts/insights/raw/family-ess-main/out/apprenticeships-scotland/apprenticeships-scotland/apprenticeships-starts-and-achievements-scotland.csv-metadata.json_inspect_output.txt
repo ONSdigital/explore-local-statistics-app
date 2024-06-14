@@ -1,0 +1,110 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Apprenticeships starts and achievements (Scotland)
+          - Label: Apprenticeships starts and achievements (Scotland)
+          - Issued: 2024-06-12T11:11:00
+          - Modified: 2024-06-12T11:11:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/the-scottish-government
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- modern-apprenticeships
+		-- local-authority
+		-- education-and-training
+		-- scotland
+		-- subnational
+		-- apprenticeship
+          - Contact Point: None
+          - Identifier: Apprenticeships starts and achievements (Scotland)
+          - Comment: Modern apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, Scotland, financial years 2013/14 to 2023/24.
+          - Description: This dataset shows modern apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, in Scotland, for financial years 2013/14 to 2023/24.
+		
+		### Coverage 
+		
+		Scotland
+		
+		#### Geography definition
+		
+		Council Areas,
+		Nation (Scotland)
+		
+		### Source
+		
+		 - Scotland: [Skills Development Scotland](https://www.skillsdevelopmentscotland.co.uk/publications-statistics/statistics/modern-apprenticeships) 
+		
+		
+		### Source Notes and Caveats 
+		- Geography is based upon the home postcode of the learner.
+		- The [Scotland population time series data](https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/mid-year-population-estimates/population-estimates-time-series-data) is used to create a rate per 100,000 population and are currently available for the years up to mid-2021. It is standard procedure to revise the annual population estimates once new census data becomes available. The population estimates for mid-2022 will be added to the time series, alongside revised figures for mid-2011 to mid-2021, later in 2024.
+		- Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Apprenticeships starts and achievements (Scotland)
+    - Columns: 
+                           Title         Type  Required                                                                             Property URL Observations Column Titles
+                          AREACD    Dimension      True        apprenticeships-starts-and-achievements-scotland.csv#dimension/ons-geography-code                Observation
+                          AREANM    Dimension      True                 apprenticeships-starts-and-achievements-scotland.csv#dimension/area-name                Observation
+                       Geography    Dimension      True            apprenticeships-starts-and-achievements-scotland.csv#dimension/geography-type                Observation
+                       Indicator    Dimension      True                 apprenticeships-starts-and-achievements-scotland.csv#dimension/indicator                Observation
+                     Observation Observations     False   apprenticeships-starts-and-achievements-scotland.csv#measure/number-of-apprenticeships                Observation
+                            Unit   Suppressed     False                                                                                     None                           
+                         Measure   Suppressed     False                                                                                     None                           
+                          Period    Dimension      True           apprenticeships-starts-and-achievements-scotland.csv#dimension/government-year                Observation
+    Lower_confidence_interval_95    Attribute     False apprenticeships-starts-and-achievements-scotland.csv#attribute/lower-confidence-interval                Observation
+    Upper_confidence_interval_95    Attribute     False apprenticeships-starts-and-achievements-scotland.csv#attribute/upper-confidence-interval                Observation
+              Observation_status    Attribute     False        apprenticeships-starts-and-achievements-scotland.csv#attribute/observation-status                Observation
+    - Columns where suppress output is true: 
+    		-- Unit
+    		-- Measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+   government-year.csv#code-list    Government Year          Period
+         indicator.csv#code-list          Indicator       Indicator
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 726
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD   AREANM Geography                       Indicator  Observation                        Unit                     Measure    Period  Lower_confidence_interval_95  Upper_confidence_interval_95  Observation_status
+s92000003 scotland    nation apprenticeships-starts-scotland   572.538660 Rate per 100,000 population Rate per 100,000 population 2013-2014                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   569.067153 Rate per 100,000 population Rate per 100,000 population 2014-2015                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   578.783152 Rate per 100,000 population Rate per 100,000 population 2015-2016                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   585.058355 Rate per 100,000 population Rate per 100,000 population 2016-2017                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   602.237497 Rate per 100,000 population Rate per 100,000 population 2017-2018                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   603.505778 Rate per 100,000 population Rate per 100,000 population 2018-2019                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   613.729531 Rate per 100,000 population Rate per 100,000 population 2019-2020                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   410.070568 Rate per 100,000 population Rate per 100,000 population 2020-2021                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   556.017913 Rate per 100,000 population Rate per 100,000 population 2021-2022                           NaN                           NaN                 NaN
+s92000003 scotland    nation apprenticeships-starts-scotland   557.024835 Rate per 100,000 population Rate per 100,000 population 2022-2023                           NaN                           NaN                 NaN
+        - Last 10 Rows: 
+   AREACD       AREANM                Geography                             Indicator  Observation                        Unit                     Measure    Period  Lower_confidence_interval_95  Upper_confidence_interval_95  Observation_status
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   571.792475 Rate per 100,000 population Rate per 100,000 population 2019-2020                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   433.375208 Rate per 100,000 population Rate per 100,000 population 2021-2022                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   553.680406 Rate per 100,000 population Rate per 100,000 population 2018-2019                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   463.950760 Rate per 100,000 population Rate per 100,000 population 2022-2023                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   420.513316 Rate per 100,000 population Rate per 100,000 population 2016-2017                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   463.582622 Rate per 100,000 population Rate per 100,000 population 2015-2016                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   460.855432 Rate per 100,000 population Rate per 100,000 population 2014-2015                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   473.255402 Rate per 100,000 population Rate per 100,000 population 2013-2014                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   451.095861 Rate per 100,000 population Rate per 100,000 population 2017-2018                           NaN                           NaN                 NaN
+s12000040 west-lothian local-authority-district apprenticeships-achievements-scotland   417.422747 Rate per 100,000 population Rate per 100,000 population 2023-2024                           NaN                           NaN                 NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                  Measure        Unit  Count
+Number of apprenticeships per 100,000    726
+        
