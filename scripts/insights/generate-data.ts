@@ -14,6 +14,7 @@ import {
 import { writeJson } from './io.ts';
 import { checkSlugs } from './data-processing-warnings.ts';
 import { createSpreadsheet } from './create-spreadsheet.ts';
+import { generateSitemap } from './generate-sitemap.ts';
 
 const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.json`;
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
@@ -33,6 +34,11 @@ async function main() {
 	config.indicators = indicators.objects();
 	config.indicatorsCalculations = indicatorsCalculations;
 	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
+
+	const sitemapPlaces = readCsvAutoType(`static/data/places.csv`)
+	// writeJson('./sitemapPlaces.json', sitemapPlaces);
+	//use sitemapPlaces rather than config.areas 
+    generateSitemap(sitemapPlaces, config.indicatorsMetadata)
 
 	checkSlugs(config.indicatorsMetadata.map((d) => d.slug));
 
