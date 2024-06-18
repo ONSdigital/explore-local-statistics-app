@@ -54,7 +54,7 @@ export function downloadCSV(data, metadata, indicator, filename = 'data.csv') {
 	const xDomainArr = xDomain
 		? metadata.periodsLookupArray.filter(
 				(t) =>
-					t.periodGroup === indicator.periodGroup &&
+					t.id === indicator.id &&
 					t.xDomainNumb >= xDomain[0] &&
 					t.xDomainNumb <= xDomain[xDomain.length - 1]
 			)
