@@ -110,7 +110,7 @@
 		},
 		{
 			"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
-			"label": "No qualifications (Great Britain)"
+			"label": "No qualifications"
 		},
 		{
 			"code": "early-years-Communication and Language",
@@ -858,7 +858,7 @@
 			"subTopic": "employment",
 			"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
 			"minXDomainNumb": 2004,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
 				"slug": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
@@ -875,7 +875,7 @@
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.",
+				"longDescription": "This indicator shows the percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain (Northern Ireland national figure included), for 2004 - 2022.",
 				"standardised": "T",
 				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
 				"confidenceIntervals": "F",
@@ -885,6 +885,7 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
+					"N",
 					"S",
 					"W"
 				],
@@ -894,11 +895,46 @@
 					"E08",
 					"E09",
 					"E10",
+					"E12",
 					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N92",
 					"S12",
-					"W06"
+					"S92",
+					"W06",
+					"W92"
 				],
 				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
 					{
 						"key": "cauth",
 						"codes": [
@@ -954,7 +990,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"gross-disposable-household-income-per-head": {
@@ -3167,7 +3204,7 @@
 			"metadata": {
 				"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
 				"slug": "aged-16-to-64-years-with-no-qualifications-great-britain",
-				"label": "No qualifications (Great Britain)",
+				"label": "No qualifications",
 				"prefix": "",
 				"suffix": "%",
 				"subText": null,
@@ -3180,7 +3217,7 @@
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/apsnew",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications, in Great Britain, for 2022 and 2023.",
+				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications, in Great Britain (Northern Ireland national figure included), for 2022 and 2023.",
 				"standardised": "T",
 				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
 				"confidenceIntervals": "F",
@@ -3190,6 +3227,7 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
+					"N",
 					"S",
 					"W"
 				],
@@ -3199,11 +3237,46 @@
 					"E08",
 					"E09",
 					"E10",
+					"E12",
 					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N92",
 					"S12",
-					"W06"
+					"S92",
+					"W06",
+					"W92"
 				],
 				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
 					{
 						"key": "cauth",
 						"codes": [
@@ -4139,7 +4212,7 @@
 				"sourceDate": "21/05/2024",
 				"sourceURL": "https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables",
 				"sourceOrg": "Department for the Economy (Northern Ireland)",
-				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2017/18 to 2021/2",
+				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2017/18 to 2021/22",
 				"standardised": "T",
 				"caveats": "Data relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
 				"confidenceIntervals": "F",
