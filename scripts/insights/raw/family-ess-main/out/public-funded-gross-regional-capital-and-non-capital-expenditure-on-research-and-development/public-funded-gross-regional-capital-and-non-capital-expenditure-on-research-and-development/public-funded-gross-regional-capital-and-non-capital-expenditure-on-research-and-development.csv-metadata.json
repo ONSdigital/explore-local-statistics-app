@@ -243,7 +243,29 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/area-name",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/government-year",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
@@ -251,91 +273,84 @@
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 2
+                    "@value": 4
                 }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@language": "en",
-                    "@value": "Capital and non-capital expenditure "
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
                 }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#csvcubed-build-activity",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/unit",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/ns/prov#used": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@language": "en",
-                    "@value": "Area Name"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/area-name"
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
                 }
             ]
         },
         {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -360,87 +375,55 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/observation-status",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status"
                 }
             ],
-            "http://purl.org/linked-data/cube#measure": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "government-year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Government Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/government-year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@value": 10
                 }
             ]
         },
         {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dataset",
             "@type": [
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -506,7 +489,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "research-and-development"
+                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -514,11 +497,11 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "region"
+                    "@value": "research-and-development"
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
+                    "@value": "region"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -533,60 +516,170 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "government-year.csv#code-list"
+                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "Government Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/government-year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Capital and non-capital expenditure "
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
                     "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+                }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/observation-status",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/ons-geography-code",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status"
-                }
-            ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@value": false
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 10
+                    "@value": 1
                 }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status",
             "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -597,32 +690,6 @@
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
                     "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/geography-type"
                 }
             ]
         },
@@ -655,42 +722,6 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
-                },
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
-                }
-            ]
-        },
-        {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
@@ -698,35 +729,33 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/lower-confidence-interval",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                    "@language": "en",
+                    "@value": "Geography Type"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/geography-type"
                 }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/geography-type",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/area-name",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
@@ -734,46 +763,39 @@
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 3
+                    "@value": 2
                 }
-            ]
-        },
-        {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#class/government-year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#structure",
             "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure"
-                },
                 {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/ons-geography-code"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/observation-status"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/lower-confidence-interval"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/geography-type"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/unit"
                 },
                 {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/government-year"
@@ -782,21 +804,24 @@
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/area-name"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/measure-type"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/lower-confidence-interval"
                 },
                 {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/upper-confidence-interval"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/geography-type"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/measure-type"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/unit"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
                 },
                 {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
@@ -805,25 +830,22 @@
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
                 },
                 {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                },
+                {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/observation-status"
                 },
                 {
                     "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/area-name"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
-                },
-                {
                     "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 },
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/geography-type"
                 }
             ],
             "http://purl.org/linked-data/cube#sliceKey": [
@@ -833,53 +855,34 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/unit",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/ons-geography-code",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#csvcubed-build-activity",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
                 }
             ]
         },
@@ -907,25 +910,22 @@
             ]
         },
         {
-            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#component/government-year",
+            "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
             ]
         },
@@ -1000,9 +1000,9 @@
         {
             "@id": "public-funded-gross-regional-capital-and-non-capital-expenditure-on-research-and-development.csv#unit/pounds-sterling-millions",
             "@type": [
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
                 "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

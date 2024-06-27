@@ -21,10 +21,6 @@
 			"label": "Modelled unemployment rate"
 		},
 		{
-			"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
-			"label": "Economically inactive people due to long-term sickness"
-		},
-		{
 			"code": "gross-disposable-household-income-per-head",
 			"label": "Gross disposable household income"
 		},
@@ -109,10 +105,6 @@
 			"label": "Pupils meeting the expected standard in reading, writing and maths at the end of Key Stage 2"
 		},
 		{
-			"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
-			"label": "No qualifications"
-		},
-		{
 			"code": "early-years-Communication and Language",
 			"label": "Communication and language skills by end of Early years foundation stage"
 		},
@@ -150,15 +142,7 @@
 		},
 		{
 			"code": "apprenticeships-starts-ni",
-			"label": "Apprenticeships starts (Northern Ireland)"
-		},
-		{
-			"code": "apprenticeships-scotland-Apprenticeships starts (Scotland)",
-			"label": "Apprenticeship starts (Scotland)"
-		},
-		{
-			"code": "apprenticeships-scotland-Apprenticeships achievements (Scotland)",
-			"label": "Apprenticeship achievements (Scotland)"
+			"label": "ApprenticeshipsNI starts (Northern Ireland)"
 		},
 		{
 			"code": "cigarette-smokers",
@@ -267,10 +251,6 @@
 		{
 			"code": "homicide-offences",
 			"label": "Homicide Offences (England and Wales)"
-		},
-		{
-			"code": "homicide-offences-ni",
-			"label": "Homicide Offences (Northern Ireland)"
 		}
 	],
 	"indicatorsObject": {
@@ -836,148 +816,6 @@
 					}
 				],
 				"year": 2021
-			},
-			"years": [
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023
-			]
-		},
-		"proportion-of-people-who-are-economically-inactive-due-to-sickness": {
-			"id": 80,
-			"topic": "economy",
-			"subTopic": "employment",
-			"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
-			"minXDomainNumb": 2004,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
-				"slug": "proportion-of-people-who-are-economically-inactive-due-to-sickness",
-				"label": "Economically inactive people due to long-term sickness",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "16/04/2024",
-				"sourceURL": "https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the percentage of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain (Northern Ireland national figure included), for 2004 - 2022.",
-				"standardised": "T",
-				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
 			},
 			"years": [
 				2004,
@@ -1644,7 +1482,7 @@
 				"subText": "in millions",
 				"decimalPlaces": 0,
 				"howToMeasureChange": "abs",
-				"subtitle": "Public-funded gross expenditure within this region",
+				"subtitle": "Public-funded gross expenditure within each region",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "T",
@@ -1724,7 +1562,7 @@
 				"subText": "in millions",
 				"decimalPlaces": 0,
 				"howToMeasureChange": "abs",
-				"subtitle": "Businesses gross expenditure within this region",
+				"subtitle": "Businesses gross expenditure within each region",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
@@ -2389,7 +2227,7 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "T",
 				"experimentalStatistic": "F",
-				"sourceDate": "01/09/2023",
+				"sourceDate": "07/09/2023",
 				"sourceURL": "https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure",
 				"sourceOrg": "Welsh Government",
 				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in Wales, for financial years 2001/02 to 2021/22.",
@@ -3200,130 +3038,6 @@
 				2020,
 				2021,
 				2022
-			]
-		},
-		"aged-16-to-64-years-with-no-qualifications-great-britain": {
-			"id": 79,
-			"topic": "education and skills",
-			"subTopic": "attainment and participation",
-			"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
-			"minXDomainNumb": 2022,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "aged-16-to-64-years-with-no-qualifications-great-britain",
-				"slug": "aged-16-to-64-years-with-no-qualifications-great-britain",
-				"label": "No qualifications",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Percentage of people aged 16 to 64 with no qualifications",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "16/04/2024",
-				"sourceURL": "https://www.nomisweb.co.uk/datasets/apsnew",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications, in Great Britain (Northern Ireland national figure included), for 2022 and 2023.",
-				"standardised": "T",
-				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2022,
-				2023
 			]
 		},
 		"early-years-Communication and Language": {
@@ -4207,7 +3921,7 @@
 			"metadata": {
 				"code": "apprenticeships-starts-ni",
 				"slug": "apprenticeships-starts-ni",
-				"label": "Apprenticeships starts (Northern Ireland)",
+				"label": "ApprenticeshipsNI starts (Northern Ireland)",
 				"prefix": "",
 				"suffix": "",
 				"subText": "per 100,000 population",
@@ -4222,7 +3936,7 @@
 				"sourceOrg": "Department for the Economy (Northern Ireland)",
 				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2017/18 to 2021/22",
 				"standardised": "T",
-				"caveats": "Data relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"caveats": "Data relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\nThe data includes level 2 and level 3 apprenticeship qualification data.\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -4291,210 +4005,6 @@
 				2019,
 				2020,
 				2021
-			]
-		},
-		"apprenticeships-scotland-Apprenticeships starts (Scotland)": {
-			"id": 75,
-			"topic": "education and skills",
-			"subTopic": "apprenticeships",
-			"code": "apprenticeships-scotland-Apprenticeships starts (Scotland)",
-			"minXDomainNumb": 2013,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "apprenticeships-scotland-Apprenticeships starts (Scotland)",
-				"slug": "apprenticeships-starts-scotland",
-				"label": "Apprenticeship starts (Scotland)",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per 100,000 population",
-				"decimalPlaces": 0,
-				"howToMeasureChange": null,
-				"subtitle": "Modern apprenticeship programme starts by people aged 16 or above, per 100,000 people",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "21/05/2024",
-				"sourceURL": "https://www.skillsdevelopmentscotland.co.uk/publications-statistics/statistics/modern-apprenticeships",
-				"sourceOrg": "Skills Development Scotland",
-				"longDescription": "This indicator shows modern apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Scotland, for financial years 2013/14 to 2023/24.",
-				"standardised": "T",
-				"caveats": "Geography is based upon the home postcode of the learner.\n\nThe [Scotland population time series data](https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/mid-year-population-estimates/population-estimates-time-series-data) is used to create a rate per 100,000 population and are currently available for the years up to mid-2021. It is standard procedure to revise the annual population estimates once new census data becomes available. The population estimates for mid-2022 will be added to the time series, alongside revised figures for mid-2011 to mid-2021, later in 2024.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"S"
-				],
-				"types": [
-					"S12",
-					"S92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2018
-			},
-			"years": [
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023
-			]
-		},
-		"apprenticeships-scotland-Apprenticeships achievements (Scotland)": {
-			"id": 76,
-			"topic": "education and skills",
-			"subTopic": "apprenticeships",
-			"code": "apprenticeships-scotland-Apprenticeships achievements (Scotland)",
-			"minXDomainNumb": 2013,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "apprenticeships-scotland-Apprenticeships achievements (Scotland)",
-				"slug": "apprenticeships-achievements-scotland",
-				"label": "Apprenticeship achievements (Scotland)",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per 100,000 population",
-				"decimalPlaces": 0,
-				"howToMeasureChange": null,
-				"subtitle": "Modern apprenticeship programme achievements by people aged 16 or above, per 100,000 people",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "21/05/2024",
-				"sourceURL": "https://www.skillsdevelopmentscotland.co.uk/publications-statistics/statistics/modern-apprenticeships",
-				"sourceOrg": "Skills Development Scotland",
-				"longDescription": "This indicator shows modern apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in Scotland, for financial years 2013/14 to 2023/24.",
-				"standardised": "T",
-				"caveats": "Geography is based upon the home postcode of the learner.\n\nThe [Scotland population time series data](https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/mid-year-population-estimates/population-estimates-time-series-data) is used to create a rate per 100,000 population and are currently available for the years up to mid-2021. It is standard procedure to revise the annual population estimates once new census data becomes available. The population estimates for mid-2022 will be added to the time series, alongside revised figures for mid-2011 to mid-2021, later in 2024.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"S"
-				],
-				"types": [
-					"S12",
-					"S92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2018
-			},
-			"years": [
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023
 			]
 		},
 		"cigarette-smokers": {
@@ -7480,117 +6990,6 @@
 			"years": [
 				2020
 			]
-		},
-		"homicide-offences-ni": {
-			"id": 73,
-			"topic": "crime",
-			"subTopic": "crime",
-			"code": "homicide-offences-ni",
-			"minXDomainNumb": 2001,
-			"maxXDomainNumb": 2020,
-			"metadata": {
-				"code": "homicide-offences-ni",
-				"slug": "homicide-offences-ni",
-				"label": "Homicide Offences (Northern Ireland)",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per million population",
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Homicide offences per million people",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "24/11/2023",
-				"sourceURL": "https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
-				"sourceOrg": "Police Service of Northern Ireland",
-				"longDescription": "This indicator shows the rate of Homicide offences per million population, in Northern Ireland, for 3-year rolling periods between 04/2001-03/2004 to 04/2020-03/2023.",
-				"standardised": "T",
-				"caveats": "Crimes are geographically recorded by the police based on the location in which the incident occurred.\n\nStatistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).\n\n[2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"N"
-				],
-				"types": [
-					"N09",
-					"N92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2018
-			},
-			"years": [
-				2001,
-				2002,
-				2003,
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020
-			]
 		}
 	},
 	"topicsArray": [
@@ -7604,8 +7003,7 @@
 						"ni-employment-rate-Economic Inactivity Rate",
 						"employment-rate-long-Employment Rate",
 						"ni-employment-rate-Employment Rate",
-						"aged-16-years-and-over-modelled-unemployment",
-						"proportion-of-people-who-are-economically-inactive-due-to-sickness"
+						"aged-16-years-and-over-modelled-unemployment"
 					]
 				},
 				{
@@ -7671,8 +7069,7 @@
 						"gcses-and-equivalent-in-english-and-maths-by-age-19",
 						"aged-16-to-64-years-level-3-or-above-qualifications",
 						"aged-16-to-64-years-level3-or-above-qualifications-ni",
-						"pupils-at-expected-standards-by-end-of-primary-school",
-						"aged-16-to-64-years-with-no-qualifications-great-britain"
+						"pupils-at-expected-standards-by-end-of-primary-school"
 					]
 				},
 				{
@@ -7702,9 +7099,7 @@
 					"indicatorCodes": [
 						"apprenticeship-Apprenticeships achievements",
 						"apprenticeship-Apprenticeships starts",
-						"apprenticeships-starts-ni",
-						"apprenticeships-scotland-Apprenticeships starts (Scotland)",
-						"apprenticeships-scotland-Apprenticeships achievements (Scotland)"
+						"apprenticeships-starts-ni"
 					]
 				}
 			]
@@ -7781,8 +7176,7 @@
 				{
 					"name": "crime",
 					"indicatorCodes": [
-						"homicide-offences",
-						"homicide-offences-ni"
+						"homicide-offences"
 					]
 				}
 			]

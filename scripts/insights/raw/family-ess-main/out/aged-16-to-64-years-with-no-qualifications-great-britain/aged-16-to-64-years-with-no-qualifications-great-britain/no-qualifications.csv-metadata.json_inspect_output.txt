@@ -1,0 +1,123 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: No qualifications
+          - Label: No qualifications
+          - Issued: 2024-06-13T14:14:00
+          - Modified: 2024-06-13T14:14:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
+          - Keywords: 
+		-- local-authority
+		-- annual-population-survey
+		-- subnational
+		-- no-qualifications
+          - Contact Point: None
+          - Identifier: No qualifications
+          - Comment: Percentage of the population aged 16 to 64 with no qualifications, Great Britain (Northern Ireland national figure included), 2022 and 2023.
+          - Description: This dataset shows the percentage of the population aged 16 to 64 with no qualifications, in Great Britain (Northern Ireland national figure included), for 2022 and 2023.
+		
+		### Coverage 
+		
+		GB (England, Wales and Scotland). Northern Ireland national figure included.
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities, 
+		Counties, 
+		Combined Authorities, 
+		Regions, 
+		Nations (England, Wales, Scotland, Northern Ireland), 
+		Countries (UK, GB, England and Wales)
+		
+		### Source
+		
+		 - Great Britain: [Nomis](https://www.nomisweb.co.uk/datasets/apsnew) 
+		
+		
+		### Source Notes and Caveats 
+		This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: No qualifications
+    - Columns: 
+                              Title         Type  Required                                                             Property URL Observations Column Titles
+                             AREACD    Dimension      True                       no-qualifications.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                no-qualifications.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                           no-qualifications.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                     None                           
+                          Indicator   Suppressed     False                                                                     None                           
+                            Mission   Suppressed     False                                                                     None                           
+                           Category   Suppressed     False                                                                     None                           
+                             Period    Dimension      True                                     no-qualifications.csv#dimension/year                Observation
+                        Observation Observations     False no-qualifications.csv#measure/aged-16-to-64-years-with-no-qualifications                Observation
+                            Measure   Suppressed     False                                                                     None                           
+                               Unit   Suppressed     False                                                                     None                           
+    Lower Confidence Interval (95%)    Attribute     False                no-qualifications.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                no-qualifications.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                       no-qualifications.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                     None                           
+                              Notes   Suppressed     False                                                                     None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 796
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD        AREANM                         Geography                                                                     Variable Name                                                  Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+e47000006   tees-valley combined-authority-or-city-region Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022         8.22 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000006   tees-valley combined-authority-or-city-region Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023         8.03 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e47000014    north-east combined-authority-or-city-region Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022          NaN Percentage    %                              NaN                              NaN                  x        -1    NaN
+e47000014    north-east combined-authority-or-city-region Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          NaN Percentage    %                              NaN                              NaN                  x        -1    NaN
+e06000047 county-durham       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022         8.00 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e06000047 county-durham       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023         8.34 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e06000005    darlington       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023         5.56 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e06000005    darlington       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022         5.11 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e06000001    hartlepool       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023        11.13 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e06000001    hartlepool       county-or-unitary-authority Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022         8.33 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+        - Last 10 Rows: 
+   AREACD            AREANM Geography                                                                     Variable Name                                                  Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+s92000003          scotland    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022          8.0 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+n92000002  northern-ireland    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022         13.6 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2022          6.7 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+k02000001    united-kingdom   country Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          6.6 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+k03000001     great-britain   country Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          6.5 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+e92000001           england    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          6.2 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+w92000004             wales    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          8.6 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+s92000003          scotland    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          8.2 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+n92000002  northern-ireland    nation Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023         12.3 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Proportion of the population aged 16 to 64 with no qualifications (Great Britain) Aged 16 to 64 years with no qualifications (Great Britain) Mission 6 Spreading opportunity and improving public services    2023          6.3 Percentage    %                              NaN                              NaN                NaN        -1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                   Measure    Unit  Count
+Aged 16 to 64 years with no qualifications percent    796
+        
