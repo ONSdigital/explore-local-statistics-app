@@ -1,0 +1,1123 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "apprenticeships-starts-and-achievements-england.csv#dataset",
+    "tables": [
+        {
+            "url": "apprenticeships-starts-and-achievements-england.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "indicator",
+                        "name": "indicator",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator",
+                        "valueUrl": "indicator.csv#{+indicator}",
+                        "required": true
+                    },
+                    {
+                        "titles": "areacd",
+                        "name": "areacd",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
+                        "required": true
+                    },
+                    {
+                        "titles": "areanm",
+                        "name": "areanm",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
+                    },
+                    {
+                        "titles": "geography",
+                        "name": "geography",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "observation",
+                        "name": "observation",
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "unit",
+                        "name": "unit",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "measure",
+                        "name": "measure",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "period",
+                        "name": "period",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}",
+                        "required": true
+                    },
+                    {
+                        "titles": "lower_confidence_interval_95",
+                        "name": "lower_confidence_interval_95",
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "upper_confidence_interval_95",
+                        "name": "upper_confidence_interval_95",
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "observation_status",
+                        "name": "observation_status",
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#attribute/observation-status",
+                        "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
+                        "required": false
+                    },
+                    {
+                        "name": "virt_slice",
+                        "virtual": true,
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Slice"
+                    },
+                    {
+                        "name": "virt_slice_structure",
+                        "virtual": true,
+                        "propertyUrl": "qb:sliceStructure",
+                        "valueUrl": "apprenticeships-starts-and-achievements-england.csv#slice/cross-measures"
+                    },
+                    {
+                        "name": "virt_obs_observation",
+                        "virtual": true,
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships"
+                    },
+                    {
+                        "name": "virt_obs_observation_meas",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "qb:measureType",
+                        "valueUrl": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships"
+                    },
+                    {
+                        "name": "virt_obs_observation_unit",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "apprenticeships-starts-and-achievements-england.csv#unit/per-100-000"
+                    },
+                    {
+                        "name": "virt_dim_observation_indicator",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator",
+                        "valueUrl": "indicator.csv#{+indicator}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areacd",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}"
+                    },
+                    {
+                        "name": "virt_obs_observation_type",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Observation"
+                    },
+                    {
+                        "name": "virt_dataSet_observation",
+                        "virtual": true,
+                        "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#obs/{indicator},{areacd},{areanm},{geography},{period}@number-of-apprenticeships",
+                        "propertyUrl": "qb:dataSet",
+                        "valueUrl": "apprenticeships-starts-and-achievements-england.csv#dataset"
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "indicator",
+                        "reference": {
+                            "resource": "indicator.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "period",
+                        "reference": {
+                            "resource": "gregorian-time-interval.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    }
+                ],
+                "primaryKey": [
+                    "indicator",
+                    "areacd",
+                    "areanm",
+                    "geography",
+                    "period"
+                ],
+                "aboutUrl": "apprenticeships-starts-and-achievements-england.csv#slice/{indicator},{areacd},{areanm},{geography},{period}"
+            }
+        },
+        {
+            "url": "indicator.csv",
+            "tableSchema": "indicator.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "gregorian-time-interval.csv",
+            "tableSchema": "gregorian-time-interval.table.json",
+            "suppressOutput": true
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "indicator.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Indicator"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#class/indicator"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "gregorian-time-interval.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Gregorian Time Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/number-of-apprenticeships",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#class/indicator",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 11
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Number of apprenticeships"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/department-for-education"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nCombined Authorities,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills) \n\n\n### Source Notes and Caveats \n- Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.\n- Achievements are the count of apprenticeships achieved at any point during the stated academic period. Learners achieving more than one apprenticeship will appear more than once.\n- Geography is based upon the home postcode of the learner.\n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Apprenticeships starts and achievements (England)"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-05-17T12:25:28.117899"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-02-12T09:26:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Apprenticeships starts and achievements (England)"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Apprenticeships started and achieved by adults aged 16+ based on home address, rate per 100,000 population, England, academic years 2017/18 to 2022/23"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Apprenticeships starts and achievements (England)"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "education-and-training"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "apprenticeship"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "community-learning"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/geography-type"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/measure-type"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/observation-status"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/unit"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/number-of-apprenticeships"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/area-name"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#component/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/indicator"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#measure/number-of-apprenticeships"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements-england.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dependency/indicator",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./indicator.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "indicator.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dependency/area-name",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dependency/geography-type",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#dependency/gregorian-time-interval",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./gregorian-time-interval.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "gregorian-time-interval.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements-england.csv#unit/per-100-000",
+            "@type": [
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "0.001"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "per 100,000"
+                }
+            ]
+        }
+    ]
+}

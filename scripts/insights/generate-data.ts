@@ -27,10 +27,21 @@ const INDIVIDUAL_DATASETS_OUTPUT_DIR = `static/insights/individual-datasets`;
 await main();
 
 async function main() {
-	const [combinedData, indicators, indicatorsCalculations, _oldStyleIndicatorsCalculations] =
-		await arqueroProcessing();
+	const [
+		combinedData,
+		indicators,
+		indicatorsCalculations,
+		_oldStyleIndicatorsCalculations,
+		periods,
+		jsonAdditionalMetadata
+	] = await arqueroProcessing();
 
 	const config = readConfigFromCsvs();
+
+	config.indicatorsMetadata = config.indicatorsMetadata.map((el) => {
+		return { ...el, ...(el.code in jsonAdditionalMetadata ? jsonAdditionalMetadata[el.code] : {}) };
+	});
+
 	config.indicators = indicators.objects();
 	config.indicatorsCalculations = indicatorsCalculations;
 	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
@@ -47,7 +58,12 @@ async function main() {
 		config.indicators
 	);
 
-	const outConfig = generateOutConfig(config, combinedData, combinedDataObjectColumnOriented);
+	const outConfig = generateOutConfig(
+		config,
+		combinedData,
+		combinedDataObjectColumnOriented,
+		periods
+	);
 
 	const data = {
 		combinedDataObjectColumnOriented,
@@ -87,6 +103,7 @@ async function main() {
 	createSpreadsheet(
 		combinedDataObjectColumnOriented,
 		outConfig,
+		periods,
 		'static/insights/datadownload.ods'
 	);
 }
@@ -125,7 +142,7 @@ function generateOutData(combinedData, indicatorsArray) {
 	return combinedDataObjectColumnOriented;
 }
 
-function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented) {
+function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented, periods) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
 	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
 
@@ -165,11 +182,11 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		};
 	});
 
-	const periodsLookupArray = config.periodsLookup.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
-	const usedPeriodGroups = new Set(indicatorsArray.map((d) => d.periodGroup));
+	const periodsLookupArray = periods;
+	const usedPeriodGroups = new Set(indicatorsArray.map((d) => d.id));
 	const periodsLookupObject = toLookupWithMultipleValues(
-		periodsLookupArray.filter((d) => usedPeriodGroups.has(d.periodGroup)),
-		'periodGroup'
+		periodsLookupArray.filter((d) => usedPeriodGroups.has(d.id)),
+		'id'
 	);
 
 	const indicatorsCalculationsArray = combineIndicatorCalculations(
@@ -364,7 +381,8 @@ function makeClustersCalculations(clustersLookup, combinedData) {
 				const clusterValues = clusterItems === undefined ? [] : clusterItems.map((d) => d.value);
 				filteredResults[cluster] = {
 					median: clusterValues.length === 0 ? null : median(clusterValues),
-					mad: clusterValues.length === 0 ? null : mad(clusterValues)
+					mad: clusterValues.length === 0 ? null : mad(clusterValues),
+					count: clusterValues.length
 				};
 			}
 			clustersCalculations[clusterType].push({ code, xDomainNumb, filteredResults });
@@ -398,7 +416,8 @@ function makeSameParentGeogCalculations(areasGeogLevel, areasParentsLookup, comb
 				.map((d) => d.value);
 			filteredResults[geogGroup.parentCode] = {
 				median: geogGroupValues.length === 0 ? null : median(geogGroupValues),
-				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues)
+				mad: geogGroupValues.length === 0 ? null : mad(geogGroupValues),
+				count: geogGroupValues.length
 			};
 		}
 		sameParentGeogCalculations.push({ code, xDomainNumb, filteredResults });

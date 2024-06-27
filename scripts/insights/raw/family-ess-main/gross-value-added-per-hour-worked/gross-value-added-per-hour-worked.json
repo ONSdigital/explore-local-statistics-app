@@ -14,7 +14,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2023-05-19T09:29:33.324488",
-    "dataset_modified": "2023-08-24T16:30",
+    "dataset_modified": "2024-02-05T15:30",
     "themes": "https://www.ons.gov.uk/economy/economicoutputandproductivity",
     "columns": {
         "Period": {
@@ -39,7 +39,7 @@
         "Indicator": false,
         "Mission": false,
         "Category": false,
-        "Value": {
+        "Observation": {
             "type": "observations",
             "data_type": "decimal",
             "unit": {
@@ -57,14 +57,14 @@
             "label": "Lower Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Upper Confidence Interval (95%)": {
             "label": "Upper Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Observation Status": {
@@ -75,5 +75,20 @@
         },
         "Polarity": false,
         "Notes": false
-    }
+    },
+    "ess-beta-metadata": {
+      "label": "Gross value added per hour worked",
+      "prefix": "GBPSign",
+      "suffix": null,
+      "subText": null,
+      "decimalPlaces": 1,
+      "subtitle": "Estimated value of goods and services produced per hour worked",
+      "experimentalStatistic": "T",
+      "sourceDate": "20/06/2023",
+      "sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/articles/regionalandsubregionalproductivityintheuk/previousReleases",
+      "sourceOrg": "Office for National Statistics",
+      "longDescription": "This indicator shows the measure of business productivity (estimate of the volume of goods and services produced) in £ per hour worked (official statistics in development), in the UK, for 2004-2021.",
+      "caveats": null,
+      "standardised": "T"
+  }
 }

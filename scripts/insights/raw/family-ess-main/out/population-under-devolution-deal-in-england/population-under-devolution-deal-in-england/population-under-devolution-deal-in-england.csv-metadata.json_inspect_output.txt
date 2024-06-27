@@ -6,7 +6,7 @@
           - Title: Population under devolution deal in England
           - Label: Population under devolution deal in England
           - Issued: 2023-03-31T12:14:51.117734
-          - Modified: 2023-03-31T12:14:51.117734
+          - Modified: 2024-02-05T14:14:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,10 +14,10 @@
           - Themes: 
 		-- https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes
           - Keywords: 
-		-- subnational
-		-- combined-authority
 		-- mayor
 		-- region
+		-- subnational
+		-- combined-authority
           - Contact Point: None
           - Identifier: Population under devolution deal in England
           - Comment: Percentage of the population living in an area covered by the highest level of devolution, England, as of 13 January 2023.
@@ -44,25 +44,23 @@
     - Dataset Label: Population under devolution deal in England
     - Columns: 
                               Title         Type  Required                                                                                        Property URL Observations Column Titles
-                             AREACD    Dimension      True                     population-under-devolution-deal-in-england.csv#dimension/statistical-geography                      Value
-                             AREANM   Suppressed     False                                                                                                None                           
-                          Geography   Suppressed     False                                                                                                None                           
+                             AREACD    Dimension      True                        population-under-devolution-deal-in-england.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                 population-under-devolution-deal-in-england.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                            population-under-devolution-deal-in-england.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                                                None                           
                           Indicator   Suppressed     False                                                                                                None                           
                             Mission   Suppressed     False                                                                                                None                           
                            Category   Suppressed     False                                                                                                None                           
-                             Period    Dimension      True                              population-under-devolution-deal-in-england.csv#dimension/time-instant                      Value
-                              Value Observations     False population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england                      Value
+                             Period    Dimension      True                              population-under-devolution-deal-in-england.csv#dimension/time-instant                Observation
+                        Observation Observations     False population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england                Observation
                             Measure   Suppressed     False                                                                                                None                           
                                Unit   Suppressed     False                                                                                                None                           
-    Lower Confidence Interval (95%)    Attribute     False                 population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval                      Value
-    Upper Confidence Interval (95%)    Attribute     False                 population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval                      Value
-                 Observation Status    Attribute     False                        population-under-devolution-deal-in-england.csv#attribute/observation-status                      Value
+    Lower Confidence Interval (95%)    Attribute     False                 population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                 population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                        population-under-devolution-deal-in-england.csv#attribute/observation-status                Observation
                            Polarity   Suppressed     False                                                                                                None                           
                               Notes   Suppressed     False                                                                                                None                           
     - Columns where suppress output is true: 
-    		-- AREANM
-    		-- Geography
     		-- Variable Name
     		-- Indicator
     		-- Mission
@@ -73,39 +71,41 @@
     		-- Notes
 
 - The data cube has the following code list information:
-        - Number of Code Lists: 2
+        - Number of Code Lists: 4
         - Code Lists:
-                                                                                Code List                                                             Code List Label Columns Used In
-ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv#code-list ONS Geography Code List for population-under-devolution-deal-in-england.csv          AREACD
-                                                               time-instant.csv#code-list                                                                Time Instant          Period
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+      time-instant.csv#code-list       Time Instant          Period
 
 - The data cube has the following dataset information:
         - Number of Rows: 10
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD                   AREANM Geography                                                                             Variable Name                                   Indicator    Mission                                 Category              Period      Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
-e92000001                  England    Nation Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  41.062410 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000001               North East    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  56.942797 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000002              North West     Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  59.551783 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000003 Yorkshire and The Humber    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  67.941547 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000004            East Midlands    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000005            West Midlands    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  48.975722 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000006          East of England    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  14.126377 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000007                   London    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00 100.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000008             South East\n    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000009               South West    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  16.704056 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+   AREACD                   AREANM Geography                                                                             Variable Name                                   Indicator    Mission                                 Category              Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+e92000001                  england    nation Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    41.062410 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000001               north-east    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    56.942797 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000002               north-west    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    59.551783 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000003 yorkshire-and-the-humber    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    67.941547 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000004            east-midlands    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00     0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000005            west-midlands    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    48.975722 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000006          east-of-england    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    14.126377 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000007                   london    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   100.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000008               south-east    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00     0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000009               south-west    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    16.704056 Percentage    %                              NaN                              NaN                 NaN         1    NaN
         - Last 10 Rows: 
-   AREACD                   AREANM Geography                                                                             Variable Name                                   Indicator    Mission                                 Category              Period      Value    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
-e92000001                  England    Nation Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  41.062410 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000001               North East    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  56.942797 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000002              North West     Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  59.551783 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000003 Yorkshire and The Humber    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  67.941547 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000004            East Midlands    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000005            West Midlands    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  48.975722 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000006          East of England    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  14.126377 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000007                   London    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00 100.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000008             South East\n    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
-e12000009               South West    Region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00  16.704056 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+   AREACD                   AREANM Geography                                                                             Variable Name                                   Indicator    Mission                                 Category              Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+e92000001                  england    nation Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    41.062410 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000001               north-east    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    56.942797 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000002               north-west    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    59.551783 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000003 yorkshire-and-the-humber    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    67.941547 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000004            east-midlands    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00     0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000005            west-midlands    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    48.975722 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000006          east-of-england    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    14.126377 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000007                   london    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00   100.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000008               south-east    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00     0.000000 Percentage    %                              NaN                              NaN                 NaN         1    NaN
+e12000009               south-west    region Percentage of the population living in an area covered by the highest level of devolution Population under devolution deal in England Mission 12 Empowering local leaders and communities 2023-01-13t00-00-00    16.704056 Percentage    %                              NaN                              NaN                 NaN         1    NaN
         
 
 - The data cube has the following value counts:

@@ -23,8 +23,6 @@
 	$: regex = searchText ? new RegExp(searchText, 'i') : null;
 
 	let isSearchTextFilled = false;
-
-	$: console.log(accordionSection);
 </script>
 
 <AccordionInner title={accordionSection.label}>

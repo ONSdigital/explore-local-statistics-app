@@ -9,19 +9,23 @@
                     {
                         "titles": "AREACD",
                         "name": "areacd",
-                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv#{+areacd}",
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
                         "required": true
                     },
                     {
                         "titles": "AREANM",
                         "name": "areanm",
-                        "suppressOutput": true
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
                     },
                     {
                         "titles": "Geography",
                         "name": "geography",
-                        "suppressOutput": true
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
                     },
                     {
                         "titles": "Variable Name",
@@ -51,9 +55,9 @@
                         "required": true
                     },
                     {
-                        "titles": "Value",
-                        "name": "value",
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england",
                         "datatype": "decimal",
                         "required": false
@@ -71,7 +75,7 @@
                     {
                         "titles": "Lower Confidence Interval (95%)",
                         "name": "lower_confidence_interval_95",
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -79,7 +83,7 @@
                     {
                         "titles": "Upper Confidence Interval (95%)",
                         "name": "upper_confidence_interval_95",
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -87,7 +91,7 @@
                     {
                         "titles": "Observation Status",
                         "name": "observation_status",
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "population-under-devolution-deal-in-england.csv#attribute/observation-status",
                         "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
                         "required": false
@@ -115,50 +119,64 @@
                         "valueUrl": "population-under-devolution-deal-in-england.csv#slice/cross-measures"
                     },
                     {
-                        "name": "virt_obs_value",
+                        "name": "virt_obs_observation",
                         "virtual": true,
                         "propertyUrl": "qb:observation",
-                        "valueUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england"
+                        "valueUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england"
                     },
                     {
-                        "name": "virt_obs_value_meas",
+                        "name": "virt_obs_observation_meas",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "qb:measureType",
                         "valueUrl": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
                     },
                     {
-                        "name": "virt_obs_value_unit",
+                        "name": "virt_obs_observation_unit",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "population-under-devolution-deal-in-england.csv#unit/percent"
                     },
                     {
-                        "name": "virt_dim_value_areacd",
+                        "name": "virt_dim_observation_areacd",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
-                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv#{+areacd}"
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
                     },
                     {
-                        "name": "virt_dim_value_period",
+                        "name": "virt_dim_observation_areanm",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
+                        "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "population-under-devolution-deal-in-england.csv#dimension/time-instant",
                         "valueUrl": "time-instant.csv#{+period}"
                     },
                     {
-                        "name": "virt_obs_value_type",
+                        "name": "virt_obs_observation_type",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
-                        "name": "virt_dataSet_value",
+                        "name": "virt_dataSet_observation",
                         "virtual": true,
-                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{period}@population-under-devolution-deal-in-england",
+                        "aboutUrl": "population-under-devolution-deal-in-england.csv#obs/{areacd},{areanm},{geography},{period}@population-under-devolution-deal-in-england",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "population-under-devolution-deal-in-england.csv#dataset"
                     }
@@ -167,7 +185,21 @@
                     {
                         "columnReference": "areacd",
                         "reference": {
-                            "resource": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv",
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
                             "columnReference": "uri_identifier"
                         }
                     },
@@ -181,14 +213,26 @@
                 ],
                 "primaryKey": [
                     "areacd",
+                    "areanm",
+                    "geography",
                     "period"
                 ],
-                "aboutUrl": "population-under-devolution-deal-in-england.csv#slice/{areacd},{period}"
+                "aboutUrl": "population-under-devolution-deal-in-england.csv#slice/{areacd},{areanm},{geography},{period}"
             }
         },
         {
-            "url": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv",
-            "tableSchema": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.table.json",
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
             "suppressOutput": true
         },
         {
@@ -199,11 +243,142 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "population-under-devolution-deal-in-england.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/time-instant"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/population-under-devolution-deal-in-england"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/observation-status"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/measure-type"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/area-name"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/unit"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#component/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                }
+            ]
+        },
+        {
             "@id": "population-under-devolution-deal-in-england.csv#component/unit",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -222,39 +397,7 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#class/time-instant",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Population under devolution deal in England"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                    "@value": 6
                 }
             ]
         },
@@ -262,8 +405,8 @@
             "@id": "population-under-devolution-deal-in-england.csv#component/upper-confidence-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -282,141 +425,75 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 7
+                    "@value": 9
                 }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#component/population-under-devolution-deal-in-england",
+            "@id": "population-under-devolution-deal-in-england.csv#slice/cross-measures",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#SliceKey"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "time-instant.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Time Instant"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#class/time-instant"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#component/time-instant",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/area-name"
+                },
                 {
                     "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#class/time-instant",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 2
+                    "@value": 1
                 }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#component/lower-confidence-interval",
+            "@id": "population-under-devolution-deal-in-england.csv#class/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#AttributeProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -432,164 +509,87 @@
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval",
+            "@id": "population-under-devolution-deal-in-england.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#AttributeProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "Observation Status"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Statistical Geography"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#class/statistical-geography"
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#component/observation-status",
+            "@id": "population-under-devolution-deal-in-england.csv#component/measure-type",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@value": false
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/population-under-devolution-deal-in-england"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/time-instant"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/statistical-geography"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/measure-type"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/observation-status"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#component/unit"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
-                },
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "population-under-devolution-deal-in-england.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "population-under-devolution-deal-in-england.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.2"
+                    "@value": 5
                 }
             ]
         },
         {
             "@id": "population-under-devolution-deal-in-england.csv#dataset",
             "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#DataSet"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -621,7 +621,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-03-31T12:14:51.117734"
+                    "@value": "2024-02-05T14:14:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -655,7 +655,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "region"
+                    "@value": "mayor"
                 },
                 {
                     "@language": "en",
@@ -663,11 +663,11 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "mayor"
+                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
+                    "@value": "region"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -682,20 +682,165 @@
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#component/measure-type",
+            "@id": "population-under-devolution-deal-in-england.csv#component/population-under-devolution-deal-in-england",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "time-instant.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Time Instant"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#class/time-instant"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#measure/population-under-devolution-deal-in-england",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Population under devolution deal in England"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#component/time-instant",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#dimension/geography-type"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -705,73 +850,141 @@
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#slice/cross-measures",
+            "@id": "population-under-devolution-deal-in-england.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography"
-                },
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/time-instant"
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#class/geography-type"
                 }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#class/statistical-geography",
+            "@id": "population-under-devolution-deal-in-england.csv#dimension/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#class/area-name"
+                }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#component/statistical-geography",
+            "@id": "population-under-devolution-deal-in-england.csv#component/lower-confidence-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography"
+                    "@id": "population-under-devolution-deal-in-england.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "population-under-devolution-deal-in-england.csv#dimension/statistical-geography"
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 1
+                    "@value": 8
                 }
             ]
         },
         {
-            "@id": "population-under-devolution-deal-in-england.csv#dependency/ons-geography-code-list-for-population-under-devolution-deal-in-england-csv",
+            "@id": "population-under-devolution-deal-in-england.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
-                    "@id": "./ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv-metadata.json"
+                    "@id": "./ons-geography-code.csv-metadata.json"
                 }
             ],
             "http://rdfs.org/ns/void#uriSpace": [
                 {
-                    "@value": "ons-geography-code-list-for-population-under-devolution-deal-in-england-csv.csv#"
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "population-under-devolution-deal-in-england.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
                 }
             ]
         },
         {
             "@id": "population-under-devolution-deal-in-england.csv#dependency/time-instant",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -788,8 +1001,8 @@
             "@id": "population-under-devolution-deal-in-england.csv#unit/percent",
             "@type": [
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

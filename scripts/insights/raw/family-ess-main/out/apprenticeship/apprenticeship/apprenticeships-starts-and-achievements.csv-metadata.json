@@ -240,24 +240,123 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#csvcubed-build-activity",
+            "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
-            "http://www.w3.org/ns/prov#used": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                    "@language": "en",
+                    "@value": "Observation Status"
                 }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#class/indicator",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -278,55 +377,113 @@
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status",
+            "@id": "apprenticeships-starts-and-achievements.csv#class/gregorian-time-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/area-name",
+            "@id": "apprenticeships-starts-and-achievements.csv#component/measure-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 3
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
                 }
             ]
         },
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dataset",
             "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
                 "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Dataset",
                 "http://purl.org/linked-data/cube#DataSet"
             ],
             "http://purl.org/dc/terms/creator": [
@@ -393,19 +550,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "county"
-                },
-                {
-                    "@language": "en",
-                    "@value": "community-learning"
-                },
-                {
-                    "@language": "en",
                     "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "local-authority"
                 },
                 {
                     "@language": "en",
@@ -413,7 +558,19 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "community-learning"
+                },
+                {
+                    "@language": "en",
                     "@value": "apprenticeship"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -428,20 +585,27 @@
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/upper-confidence-interval",
+            "@id": "apprenticeships-starts-and-achievements.csv#class/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -451,16 +615,69 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 10
+                    "@value": 11
                 }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "apprenticeships-starts-and-achievements.csv#component/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -479,138 +696,78 @@
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#structure",
+            "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/indicator"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/unit"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/area-name"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/observation-status"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/measure-type"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/geography-type"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/number-of-apprenticeships"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/gregorian-time-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#component/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "gregorian-time-interval.csv#code-list"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Gregorian Time Interval"
+                    "@value": "Geography Type"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#class/gregorian-time-interval"
+                    "@id": "apprenticeships-starts-and-achievements.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
                 }
             ]
         },
         {
             "@id": "apprenticeships-starts-and-achievements.csv#slice/cross-measures",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
-                },
                 {
                     "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
                 },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/ons-geography-code"
                 },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/ons-geography-code"
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
                 },
                 {
                     "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
@@ -618,12 +775,32 @@
             ]
         },
         {
+            "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
             "@id": "apprenticeships-starts-and-achievements.csv#dimension/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -649,42 +826,12 @@
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/number-of-apprenticeships",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
             "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -704,306 +851,159 @@
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/observation-status",
+            "@id": "apprenticeships-starts-and-achievements.csv#structure",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#component": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/ons-geography-code"
+                },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/lower-confidence-interval"
+                },
                 {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/upper-confidence-interval"
+                },
                 {
-                    "@value": 11
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/indicator",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/measure-type"
+                },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/observation-status"
+                },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/gregorian-time-interval"
+                },
                 {
-                    "@value": 1
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/geography-type"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/indicator"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/area-name"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/unit"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#component/number-of-apprenticeships"
                 }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/gregorian-time-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
                     "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+                },
                 {
                     "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
+                },
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval"
+                },
                 {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
                 {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/observation-status"
+                },
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#class/indicator",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/indicator"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
+                },
                 {
                     "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
+                },
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name"
                 }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "apprenticeships-starts-and-achievements.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeships-starts-and-achievements.csv#component/number-of-apprenticeships",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#measure": [
                 {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "apprenticeships-starts-and-achievements.csv#measure/number-of-apprenticeships"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 5
+                    "@value": 7
                 }
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval",
+            "@id": "apprenticeships-starts-and-achievements.csv#dimension/gregorian-time-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#dimension/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "area-name.csv#code-list"
+                    "@id": "gregorian-time-interval.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Area Name"
+                    "@value": "Gregorian Time Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#class/area-name"
+                    "@id": "apprenticeships-starts-and-achievements.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
                 }
             ]
         },
         {
-            "@id": "apprenticeships-starts-and-achievements.csv#component/lower-confidence-interval",
+            "@id": "apprenticeships-starts-and-achievements.csv#csvcubed-build-activity",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
                 }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "apprenticeships-starts-and-achievements.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeships-starts-and-achievements.csv#class/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dependency/indicator",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1019,8 +1019,8 @@
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1036,8 +1036,8 @@
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dependency/area-name",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1053,8 +1053,8 @@
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dependency/geography-type",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1070,8 +1070,8 @@
         {
             "@id": "apprenticeships-starts-and-achievements.csv#dependency/gregorian-time-interval",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {

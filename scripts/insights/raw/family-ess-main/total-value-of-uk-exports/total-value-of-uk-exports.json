@@ -16,7 +16,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2023-05-23T15:14:20.820244",
-    "dataset_modified": "2023-08-25T13:09",
+    "dataset_modified": "2024-02-05T13:09",
     "themes": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade",
     "columns": {
         "Period": {
@@ -41,7 +41,7 @@
         "Indicator": false,
         "Mission": false,
         "Category": false,
-        "Value": {
+        "Observation": {
             "type": "observations",
             "data_type": "decimal",
             "unit": {
@@ -59,14 +59,14 @@
             "label": "Lower Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Upper Confidence Interval (95%)": {
             "label": "Upper Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Observation Status": {
@@ -77,5 +77,20 @@
         },
         "Polarity": false,
         "Notes": false
-    }
+    },
+    "ess-beta-metadata": {
+      "label": "Value of UK exports",
+      "prefix": "GBPSign",
+      "suffix": null,
+      "subText": "in millions",
+      "decimalPlaces": 0,
+      "subtitle": "Estimated total value of UK exports including trade in both goods and services",
+      "experimentalStatistic": "T",
+      "sourceDate": "28/06/2023",
+      "sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/bulletins/internationaltradeinuknationsregionsandcities/previousReleases",
+      "sourceOrg": "Office for National Statistics",
+      "longDescription": "This indicator shows the estimated total value of UK exports including trade in both goods and services (official statistics in development), in the UK, for 2021.",
+      "caveats": null,
+      "standardised": "F"
+  }
 }

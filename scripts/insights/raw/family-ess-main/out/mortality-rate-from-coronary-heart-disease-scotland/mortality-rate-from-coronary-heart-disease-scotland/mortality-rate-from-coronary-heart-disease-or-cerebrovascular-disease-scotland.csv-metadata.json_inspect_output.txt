@@ -1,0 +1,120 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)
+          - Label: Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)
+          - Issued: 2024-06-13T14:43:00
+          - Modified: 2024-06-13T14:43:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/the-scottish-government
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
+          - Keywords: 
+		-- region
+		-- subnational
+		-- local-authority
+		-- heart-disease
+		-- scotland
+          - Contact Point: None
+          - Identifier: Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)
+          - Comment: Age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population (2019 definition), Scotland, 2001 to 2022.
+          - Description: This dataset shows the age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population (2019 definition), in Scotland, for 2001 to 2022.
+		
+		### Coverage 
+		
+		Scotland
+		
+		#### Geography definition
+		
+		Council Areas,
+		Nation (Scotland) 
+		
+		### Source
+		
+		 - Scotland: [Public Health Scotland Heart disease statistics]https://publichealthscotland.scot/publications/scottish-heart-disease-statistics/scottish-heart-disease-statistics-year-ending-31-march-2022/) and [Public Health Scotland Stroke statistics]https://publichealthscotland.scot/publications/scottish-stroke-statistics/scottish-stroke-statistics-year-ending-31-march-2022/) 
+		
+		
+		### Source Notes and Caveats 
+		- Data are based on year of death registration.
+		- Data relate to all deaths that occurred in Scotland. This includes those who are resident outwith Scotland, those with no fixed abode and those with unknown residence.
+		- Data includes underlying cause of death from coronary heart disease (ICD-10 code I20-I25) or cerebrovascular disease (ICD-10 code I60-I69).
+		- Age standardised rates calculated using the direct method, standardised to the 2013 European Standard Population (ESP2013). National Records of Scotland Population Estimates were used in the calculation of the crude and standardised rates.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Mortality rate from coronary heart disease or cerebrovascular disease (Scotland)
+    - Columns: 
+                              Title         Type  Required                                                                                                                                       Property URL Observations Column Titles
+                             AREACD    Dimension      True                                    mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                             mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                                        mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                                                                               None                           
+                          Indicator   Suppressed     False                                                                                                                                               None                           
+                            Mission   Suppressed     False                                                                                                                                               None                           
+                           Category   Suppressed     False                                                                                                                                               None                           
+                             Period    Dimension      True                                                  mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year                Observation
+                        Observation Observations     False mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75                Observation
+                            Measure   Suppressed     False                                                                                                                                               None                           
+                               Unit   Suppressed     False                                                                                                                                               None                           
+    Lower Confidence Interval (95%)    Attribute     False                             mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                             mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                                    mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                                                                               None                           
+                              Notes   Suppressed     False                                                                                                                                               None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 726
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD   AREANM Geography                                                                                                      Variable Name                                                                                                 Indicator   Mission                                            Category  Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2001   157.415664 Rate per 100,000 population Rate per 100,000 population                       153.531043                       161.373564                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2022    71.652355 Rate per 100,000 population Rate per 100,000 population                        69.372919                        73.987458                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2021    72.300235 Rate per 100,000 population Rate per 100,000 population                        70.006109                        74.650288                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2020    69.921230 Rate per 100,000 population Rate per 100,000 population                        67.652400                        72.246663                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2019    65.718756 Rate per 100,000 population Rate per 100,000 population                        63.505910                        67.988954                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2018    66.281184 Rate per 100,000 population Rate per 100,000 population                        64.047040                        68.573312                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2017    68.413730 Rate per 100,000 population Rate per 100,000 population                        66.124646                        70.761760                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2015    72.364388 Rate per 100,000 population Rate per 100,000 population                        69.950911                        74.839625                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2014    69.894915 Rate per 100,000 population Rate per 100,000 population                        67.513372                        72.338763                 NaN        -1    NaN
+s92000003 scotland    nation Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2013    77.167089 Rate per 100,000 population Rate per 100,000 population                        74.640693                        79.756916                 NaN        -1    NaN
+        - Last 10 Rows: 
+   AREACD       AREANM                Geography                                                                                                      Variable Name                                                                                                 Indicator   Mission                                            Category  Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2010    93.188725 Rate per 100,000 population Rate per 100,000 population                        77.476718                       111.116515                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2001   196.226376 Rate per 100,000 population Rate per 100,000 population                       169.905550                       225.415810                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2002   150.851053 Rate per 100,000 population Rate per 100,000 population                       128.091054                       176.447715                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2003   155.065457 Rate per 100,000 population Rate per 100,000 population                       132.288753                       180.582183                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2004   129.522960 Rate per 100,000 population Rate per 100,000 population                       109.037603                       152.689351                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2011    81.338179 Rate per 100,000 population Rate per 100,000 population                        66.910392                        97.922361                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2007   112.327955 Rate per 100,000 population Rate per 100,000 population                        94.044022                       133.087668                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2008   121.596046 Rate per 100,000 population Rate per 100,000 population                       103.230552                       142.250499                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2009   101.100551 Rate per 100,000 population Rate per 100,000 population                        84.641570                       119.796964                 NaN        -1    NaN
+s12000040 west-lothian local-authority-district Under 75 mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mortality rate from coronary heart disease or cerebrovascular disease (per 100,000 population) (Scotland) Mission 7 Spreading opportunity and improving public services    2005   129.566487 Rate per 100,000 population Rate per 100,000 population                       109.460830                       152.247485                 NaN        -1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                                Measure        Unit  Count
+Age-standardised mortality rate for those aged under 75 per 100,000    726
+        

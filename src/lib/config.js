@@ -1,3 +1,13 @@
+///
+
+export const geoLevelsLookup = {
+	lower: 'ltla',
+	upper: 'utla',
+	region: 'rgn',
+	country: 'ctry',
+	combined: 'cauth'
+};
+
 export const countries = [
 	{ name: 'England', code: 'E92000001' },
 	{ name: 'Northern Ireland', code: 'N92000002' },
@@ -22,9 +32,7 @@ export const regions = [
 export let mainChartOptionsArray = [
 	{ id: 'line', label: 'Time series', multiYear: 'Yes' },
 	{ id: 'bar', label: 'Bar chart', multiYear: 'No' },
-	//{ id: 'beeswarm', label: 'Beeswarm', multiYear: 'No' },
 	{ id: 'map', label: 'Map', multiYear: 'No' }
-	//{ id: 'table', label: 'Table', multiYear: 'Either' }
 ];
 
 export let addTheArray = [
@@ -114,97 +122,4 @@ export const geogLevelToNameLookup = {
 	combined: { singular: 'combined authority', plural: 'combined authorities' },
 	region: { singular: 'region', plural: 'regions' },
 	country: { singular: 'country', plural: 'countries' }
-};
-
-export const changeAreasIncludeExcludeObject = {
-	lower: {
-		median: {
-			'all-siblings': true,
-			'same-parent-siblings': true,
-			'similar-siblings': true,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		},
-		related: {
-			'all-siblings': true,
-			'same-parent-siblings': true,
-			'similar-siblings': true,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		}
-	},
-	upper: {
-		median: {
-			'all-siblings': true,
-			'same-parent-siblings': true,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		},
-		related: {
-			'all-siblings': true,
-			'same-parent-siblings': true,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		}
-	},
-	combined: {
-		median: {
-			'all-siblings': false,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		},
-		related: {
-			'all-siblings': true,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': true,
-			'lower-tier-local-authority-children': true
-		}
-	},
-	region: {
-		median: {
-			'all-siblings': false,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		},
-		related: {
-			'all-siblings': true,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': true,
-			'lower-tier-local-authority-children': true
-		}
-	},
-	country: {
-		median: {
-			'all-siblings': false,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': false,
-			'upper-tier-local-authority-children': false,
-			'lower-tier-local-authority-children': false
-		},
-		related: {
-			'all-siblings': true,
-			'same-parent-siblings': false,
-			'similar-siblings': false,
-			'region-children': true,
-			'upper-tier-local-authority-children': true,
-			'lower-tier-local-authority-children': true
-		}
-	}
 };

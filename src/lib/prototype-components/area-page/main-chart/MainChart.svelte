@@ -26,6 +26,8 @@
 		indicator,
 		geoGroup;
 
+	$: console.log(metadata);
+
 	const maxSelection = 10;
 
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
@@ -152,12 +154,16 @@
 		Math.max(...visibleAreasPeriods.filter((el) => el <= xDomainInit[1]))
 	];
 
+	$: console.log(metadata.periodsLookupArray);
+
 	$: timePeriodsArray = metadata.periodsLookupArray.filter(
 		(el) =>
-			el.periodGroup === indicator.periodGroup &&
+			el.id === indicator.id &&
 			el.xDomainNumb >= indicator.minXDomainNumb &&
 			el.xDomainNumb <= indicator.maxXDomainNumb
 	);
+
+	$: console.log(timePeriodsArray);
 
 	$: chosenTimePeriodsArray = timePeriodsArray.filter(
 		(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]

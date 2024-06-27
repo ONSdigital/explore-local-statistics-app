@@ -13,6 +13,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2023-03-31T12:14:51.117734",
+    "dataset_modified": "2024-02-05T14:14",
     "themes": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes",
     "columns": {
         "Period": {
@@ -20,17 +21,24 @@
             "from_template": "gregorian-instant"
         },
         "AREACD": {
-            "label": "Statistical Geography",
             "type": "dimension",
-            "code_list": "./geography_code_list.json"
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
         },
-        "AREANM": false,
-        "Geography": false,
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
         "Variable Name": false,
         "Indicator": false,
         "Mission": false,
         "Category": false,
-        "Value": {
+        "Observation": {
             "type": "observations",
             "data_type": "decimal",
             "unit": {
@@ -48,14 +56,14 @@
             "label": "Lower Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Upper Confidence Interval (95%)": {
             "label": "Upper Confidence Interval",
             "type": "attribute",
             "data_type": "decimal",
-            "describes_observations": "Value",
+            "describes_observations": "Observation",
             "required": false
         },
         "Observation Status": {

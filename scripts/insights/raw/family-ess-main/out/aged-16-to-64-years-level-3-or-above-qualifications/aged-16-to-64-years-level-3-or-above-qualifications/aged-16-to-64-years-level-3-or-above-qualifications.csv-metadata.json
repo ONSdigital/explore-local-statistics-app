@@ -9,19 +9,23 @@
                     {
                         "titles": "AREACD",
                         "name": "areacd",
-                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv#{+areacd}",
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
                         "required": true
                     },
                     {
                         "titles": "AREANM",
                         "name": "areanm",
-                        "suppressOutput": true
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
                     },
                     {
                         "titles": "Geography",
                         "name": "geography",
-                        "suppressOutput": true
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
                     },
                     {
                         "titles": "Variable Name",
@@ -51,9 +55,9 @@
                         "required": true
                     },
                     {
-                        "titles": "Value",
-                        "name": "value",
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications",
                         "datatype": "decimal",
                         "required": false
@@ -71,7 +75,7 @@
                     {
                         "titles": "Lower Confidence Interval (95%)",
                         "name": "lower_confidence_interval_95",
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -79,7 +83,7 @@
                     {
                         "titles": "Upper Confidence Interval (95%)",
                         "name": "upper_confidence_interval_95",
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval",
                         "datatype": "decimal",
                         "required": false
@@ -87,7 +91,7 @@
                     {
                         "titles": "Observation Status",
                         "name": "observation_status",
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status",
                         "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
                         "required": false
@@ -115,50 +119,64 @@
                         "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/cross-measures"
                     },
                     {
-                        "name": "virt_obs_value",
+                        "name": "virt_obs_observation",
                         "virtual": true,
                         "propertyUrl": "qb:observation",
-                        "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications"
+                        "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications"
                     },
                     {
-                        "name": "virt_obs_value_meas",
+                        "name": "virt_obs_observation_meas",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "qb:measureType",
                         "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
                     },
                     {
-                        "name": "virt_obs_value_unit",
+                        "name": "virt_obs_observation_unit",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#unit/percent"
                     },
                     {
-                        "name": "virt_dim_value_areacd",
+                        "name": "virt_dim_observation_areacd",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
-                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography",
-                        "valueUrl": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv#{+areacd}"
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
                     },
                     {
-                        "name": "virt_dim_value_period",
+                        "name": "virt_dim_observation_areanm",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year",
                         "valueUrl": "year.csv#{+period}"
                     },
                     {
-                        "name": "virt_obs_value_type",
+                        "name": "virt_obs_observation_type",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
-                        "name": "virt_dataSet_value",
+                        "name": "virt_dataSet_observation",
                         "virtual": true,
-                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
+                        "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dataset"
                     }
@@ -167,7 +185,21 @@
                     {
                         "columnReference": "areacd",
                         "reference": {
-                            "resource": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv",
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
                             "columnReference": "uri_identifier"
                         }
                     },
@@ -181,14 +213,26 @@
                 ],
                 "primaryKey": [
                     "areacd",
+                    "areanm",
+                    "geography",
                     "period"
                 ],
-                "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/{areacd},{period}"
+                "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/{areacd},{areanm},{geography},{period}"
             }
         },
         {
-            "url": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv",
-            "tableSchema": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.table.json",
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
             "suppressOutput": true
         },
         {
@@ -199,151 +243,37 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/statistical-geography",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/aged-16-to-64-years-level-3-or-above-qualifications",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/measure-type",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#csvcubed-build-activity",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/unit",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -362,17 +292,43 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/geography-type"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -392,163 +348,20 @@
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#csvcubed-build-activity",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.2"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/statistical-geography"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/unit"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/aged-16-to-64-years-level-3-or-above-qualifications"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/observation-status"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/year"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/measure-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/statistical-geography",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -558,44 +371,61 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 7
+                    "@value": 8
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/statistical-geography",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/measure-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#codeList": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv#code-list"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Statistical Geography"
+                    "@value": "Observation Status"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/statistical-geography"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dataset",
             "@type": [
+                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://purl.org/linked-data/cube#Attachable"
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -627,7 +457,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-05-23T10:17:47.964593"
+                    "@value": "2024-02-05T12:17:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -661,15 +491,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "national-vocational-qualification"
-                },
-                {
-                    "@language": "en",
                     "@value": "local-authority"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -677,7 +499,15 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "national-vocational-qualification"
+                },
+                {
+                    "@language": "en",
                     "@value": "annual-population-survey"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -692,20 +522,20 @@
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/lower-confidence-interval",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -715,67 +545,450 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 6
+                    "@value": 10
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/year",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/observation-status"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/measure-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/unit"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/aged-16-to-64-years-level-3-or-above-qualifications"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/area-name"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/geography-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/aged-16-to-64-years-level-3-or-above-qualifications",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/area-name",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/observation-status",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
+                    "@id": "ons-geography-code.csv#code-list"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#attribute/observation-status"
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@value": false
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/ons-geography-code"
                 }
             ],
-            "http://purl.org/linked-data/cube#order": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@value": 8
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dependency/ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#class/ons-geography-code",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
-                    "@id": "./ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv-metadata.json"
+                    "@id": "./ons-geography-code.csv-metadata.json"
                 }
             ],
             "http://rdfs.org/ns/void#uriSpace": [
                 {
-                    "@value": "ons-geography-code-list-for-aged-16-to-64-years-level-3-or-above-qualifications.csv#"
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dependency/area-name",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dependency/geography-type",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#dependency/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -791,9 +1004,9 @@
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications.csv#unit/percent",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://qudt.org/schema/qudt/Unit",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

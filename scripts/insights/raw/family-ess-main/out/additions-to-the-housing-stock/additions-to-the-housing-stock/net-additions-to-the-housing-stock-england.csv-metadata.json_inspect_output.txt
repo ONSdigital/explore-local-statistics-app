@@ -1,0 +1,124 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Net additions to the housing stock (England)
+          - Label: Net additions to the housing stock (England)
+          - Issued: 2023-05-05T08:59:11.430214
+          - Modified: 2024-02-05T14:10:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/housing
+          - Keywords: 
+		-- subnational
+		-- dwelling
+		-- county
+		-- local-authority
+		-- conversion
+		-- new-building
+		-- demolition
+          - Contact Point: None
+          - Identifier: Net additions to the housing stock (England)
+          - Comment: Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, England, financial year 2022 - 2023.
+          - Description: This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2022 - 2023.
+		
+		### Coverage 
+		
+		England
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Metropolitan Counties,
+		Nation (England) 
+		
+		### Source
+		
+		 - England: [Department for Levelling Up, Housing and Communities](https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants#) 
+		
+		
+		### Source Notes and Caveats 
+		Net additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9). 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Net additions to the housing stock (England)
+    - Columns: 
+                              Title         Type  Required                                                                          Property URL Observations Column Titles
+                             AREACD    Dimension      True           net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                    net-additions-to-the-housing-stock-england.csv#dimension/area-name                Observation
+                          Geography    Dimension      True               net-additions-to-the-housing-stock-england.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                  None                           
+                          Indicator   Suppressed     False                                                                                  None                           
+                            Mission   Suppressed     False                                                                                  None                           
+                           Category   Suppressed     False                                                                                  None                           
+                             Period    Dimension      True              net-additions-to-the-housing-stock-england.csv#dimension/government-year                Observation
+                        Observation Observations     False net-additions-to-the-housing-stock-england.csv#measure/net-additions-to-housing-stock                Observation
+                            Measure   Suppressed     False                                                                                  None                           
+                               Unit   Suppressed     False                                                                                  None                           
+    Lower Confidence Interval (95%)    Attribute     False    net-additions-to-the-housing-stock-england.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False    net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False           net-additions-to-the-housing-stock-england.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                  None                           
+                              Notes   Suppressed     False                                                                                  None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+   government-year.csv#code-list    Government Year          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 349
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD                   AREANM                   Geography                                             Variable Name                      Indicator    Mission                                                  Category    Period  Observation                                  Measure                                     Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e92000001                  england                      nation Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          9.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e12000001               north-east                      region Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          7.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000047            county-durham county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          6.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000005               darlington county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         10.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000001               hartlepool county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         11.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000002            middlesbrough county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          9.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000057           northumberland county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         10.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000003     redcar-and-cleveland county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          7.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e06000004         stockton-on-tees county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          7.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+e11000007 tyne-and-wear-met-county county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          7.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD                    AREANM                   Geography                                             Variable Name                      Indicator    Mission                                                  Category    Period  Observation                                  Measure                                     Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                     Notes
+e07000079                  cotswold    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          8.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1                                                       NaN
+e07000080            forest-of-dean    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         13.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1                                                       NaN
+e07000081                gloucester    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023          9.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1                                                       NaN
+e07000082                    stroud    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         11.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1                                                       NaN
+e07000083                tewkesbury    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         27.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1                                                       NaN
+e10000027                  somerset county-or-unitary-authority Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         11.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000187                    mendip    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         10.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000188                 sedgemoor    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         12.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000246 somerset-west-and-taunton    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         13.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset    local-authority-district Net additions to the housing stock (rate per 1,000 stock) Additions to the housing stock Mission 10 Restoring a sense of community, local pride and belonging 2022-2023         11.0 Net additional dwellings per 1,000 stock Net additional dwellings per 1,000 stock                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                       Measure      Unit  Count
+Net additions to housing stock per 1,000    349
+        

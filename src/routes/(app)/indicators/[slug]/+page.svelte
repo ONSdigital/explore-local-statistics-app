@@ -78,7 +78,7 @@
 
 		timePeriodsArray = metadata.periodsLookupArray.filter(
 			(el) =>
-				el.periodGroup === data.indicator.periodGroup &&
+				el.id === data.indicator.id &&
 				el.xDomainNumb >= data.indicator.minXDomainNumb &&
 				el.xDomainNumb <= data.indicator.maxXDomainNumb
 		);
@@ -431,13 +431,6 @@
 
 {#if mapData && pivotedData}
 	<NavSections contentsLabel="Contents" marginTop>
-		<!-- <strong class="selected-areas">Selected areas</strong>
-		<StickyHeaderIndicators
-			bind:selectionsObject
-			{accordionArray}
-			customLookup={customLookup['indicator-additional-visible']}
-		/> -->
-
 		{#if data.indicator.metadata.standardised === 'T'}
 			<NavSection title="Map">
 				<div class="row-container">
