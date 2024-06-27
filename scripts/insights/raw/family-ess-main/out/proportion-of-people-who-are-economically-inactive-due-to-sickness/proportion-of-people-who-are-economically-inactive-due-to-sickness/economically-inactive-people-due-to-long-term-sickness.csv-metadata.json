@@ -309,73 +309,271 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/area-name",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 2
+                    "@value": 3
                 }
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "year.csv#code-list"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Year"
+                    "@value": "Geography Type"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/year"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain (Northern Ireland national figure included), for 2004 - 2022.\n\n### Coverage \n\nGB (England, Wales and Scotland). Northern Ireland national figure included.\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities, \nCounties, \nCombined Authorities, \nRegions, \nNations (England, Wales, Scotland, Northern Ireland), \nCountries (UK, GB, England and Wales)\n\n### Source\n\n - Great Britain: [Nomis](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17)\n\n\n### Source Notes and Caveats \nThis indicator is based on re-weighted Annual Population Survey (APS) datasets updated on 16 August 2022. For more information, see the [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022). \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Economically inactive people due to long-term sickness"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-06-13T13:47:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-06-13T14:47:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Economically inactive people due to long-term sickness"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "The proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, Great Britain (Northern Ireland national figure included), 2004 - 2022."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Economically inactive people due to long-term sickness"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "annual-population-survey"
+                },
+                {
+                    "@language": "en",
+                    "@value": "long-term-sickness"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -401,521 +599,11 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "variable-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Variable Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/variable-name"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/variable-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/category",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 12
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dataset",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://purl.org/linked-data/cube#Attachable"
-            ],
-            "http://purl.org/dc/terms/creator": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/description": [
-                {
-                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, in Great Britain, for 2004 - 2022.\n\n### Coverage \n\nGB (England, Wales and Scotland)\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities, \nCounties, \nCombined Authorities\n\n### Source\n\n - Great Britain: [Nomis](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17)\n\n\n### Source Notes and Caveats \nThis indicator is based on re-weighted Annual Population Survey (APS) datasets updated on 16 August 2022. For more information, see the [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022). \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
-                }
-            ],
-            "http://purl.org/dc/terms/identifier": [
-                {
-                    "@value": "Economically inactive people due to long-term sickness"
-                }
-            ],
-            "http://purl.org/dc/terms/issued": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-06-13T13:47:00"
-                }
-            ],
-            "http://purl.org/dc/terms/license": [
-                {
-                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-06-13T13:47:00"
-                }
-            ],
-            "http://purl.org/dc/terms/publisher": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Economically inactive people due to long-term sickness"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#structure"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                {
-                    "@language": "en",
-                    "@value": "The proportion of economically inactive people who are economically inactive due to health problems lasting for longer than 12 months, Great Britain, 2004 - 2022."
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Economically inactive people due to long-term sickness"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#keyword": [
-                {
-                    "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "long-term-sickness"
-                },
-                {
-                    "@language": "en",
-                    "@value": "local-authority"
-                },
-                {
-                    "@language": "en",
-                    "@value": "annual-population-survey"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#theme": [
-                {
-                    "@id": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#csvcubed-build-activity"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/unit"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/area-name"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/mission"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/geography-type"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/measure-type"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/category"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/observation-status"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/variable-name"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/year"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/economically-inactive-people-due-to-long-term-sickness"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 13
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/category",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -939,19 +627,82 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/variable-name",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/variable-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/category",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
             ]
         },
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -972,42 +723,35 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/mission",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/economically-inactive-people-due-to-long-term-sickness",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#measure": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 5
+                    "@value": 10
                 }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -1028,74 +772,25 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#slice/cross-measures",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
-                },
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/ons-geography-code",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Economically inactive people due to long-term sickness"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/mission",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/measure-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -1114,60 +809,102 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/upper-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/economically-inactive-people-due-to-long-term-sickness",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#measure": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 10
+                    "@value": 12
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/mission",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 13
                 }
             ]
         },
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/unit",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -1191,10 +928,273 @@
             ]
         },
         {
-            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/ons-geography-code",
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "variable-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Variable Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/variable-name"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/category",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/unit"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/variable-name"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/economically-inactive-people-due-to-long-term-sickness"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/area-name"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/observation-status"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/category"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/year"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/geography-type"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/measure-type"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/mission"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/year"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/variable-name"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/category"
+                },
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/mission"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/variable-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#measure/economically-inactive-people-due-to-long-term-sickness",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Economically inactive people due to long-term sickness"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#class/mission",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1210,8 +1210,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1227,8 +1227,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1244,8 +1244,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/variable-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1261,8 +1261,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/mission",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1278,8 +1278,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/category",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1295,8 +1295,8 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#dependency/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1312,9 +1312,9 @@
         {
             "@id": "economically-inactive-people-due-to-long-term-sickness.csv#unit/percent",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://qudt.org/schema/qudt/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
