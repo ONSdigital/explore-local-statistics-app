@@ -147,7 +147,7 @@ function getIndicatorsCalculations(indicators: ColumnTable, combined_data, areas
 					aq.escape((d) => d.level === geogLevel)
 				);
 
-				if (filteredIndicatorDataSingleGeog.numRows() > 1) {
+				if (filteredIndicatorDataSingleGeog.numRows() >= 1) {
 					const values = filteredIndicatorDataSingleGeog.array('value');
 					allCalcsForIndicatorAndPeriod.calcsByGeogLevel[geogLevel] = {
 						med: median(values),
