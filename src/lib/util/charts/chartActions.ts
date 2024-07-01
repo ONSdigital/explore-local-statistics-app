@@ -19,7 +19,7 @@ function makeColumns(data, indicator) {
 		{ key: 'areacd', label: 'Area code' },
 		{ key: 'areanm', label: 'Area name' },
 		{ key: 'xDomainNumb', label: 'Time period' },
-		{ key: 'value', label: `Value (${unit})` },
+		{ key: 'value', label: `"Value (${unit})"` },
 		{ key: 'lci', label: 'Confidence interval lower' },
 		{ key: 'uci', label: 'Confidence interval upper' }
 	].filter(
