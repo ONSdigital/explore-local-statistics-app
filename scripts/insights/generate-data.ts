@@ -37,6 +37,11 @@ async function main() {
 
 	const config = readConfigFromCsvs();
 
+	console.log(
+		'Duplicate areas: ',
+		config.areas.map((d) => d.areanm).filter((e, i, a) => a.indexOf(e) !== i)
+	);
+
 	config.indicatorsMetadata = config.indicatorsMetadata.map((el) => {
 		return { ...el, ...(el.code in jsonAdditionalMetadata ? jsonAdditionalMetadata[el.code] : {}) };
 	});
