@@ -158,7 +158,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'wpc',
-		codes: ['E14', 'N05', 'S14', 'W07'],
+		codes: ['E14', 'N05', 'N06', 'S14', 'W07'],
 		pcio: 'parliamentary_constituency',
 		label: 'parliamentary constituency',
 		plural: 'parliamentary constituencies',
