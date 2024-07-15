@@ -28,14 +28,14 @@ export const sources = [
 	{
 		id: 'la',
 		type: 'vector',
-		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2023/authorities-all/v1/boundaries/{z}/{x}/{y}.pbf',
+		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2024/authorities-all/v1/boundaries/{z}/{x}/{y}.pbf',
 		layer: 'boundaries',
 		minzoom: 4
 	},
 	{
 		id: 'wpc',
 		type: 'vector',
-		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2010/wpc/v2/boundaries/{z}/{x}/{y}.pbf',
+		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2024/wpc/v1/boundaries/{z}/{x}/{y}.pbf',
 		layer: 'boundaries',
 		minzoom: 4
 	},
@@ -54,7 +54,7 @@ export const sources = [
 	{
 		id: 'wd',
 		type: 'vector',
-		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2023/wd/v1/boundaries/{z}/{x}/{y}.pbf',
+		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2024/wd/v1/boundaries/{z}/{x}/{y}.pbf',
 		layer: 'boundaries',
 		minzoom: 6
 	},
@@ -158,7 +158,7 @@ export const geoTypes = [
 	},
 	{
 		key: 'wpc',
-		codes: ['E14', 'N06', 'S14', 'W07'],
+		codes: ['E14', 'N05', 'S14', 'W07'],
 		pcio: 'parliamentary_constituency',
 		label: 'parliamentary constituency',
 		plural: 'parliamentary constituencies',

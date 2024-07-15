@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { geoTypes, geoCodesLookup } from '$lib/config/geoConfig';
 
-const cdnUrl = 'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/ap-geos/v2';
+const cdnUrl = 'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/ap-geos/v3';
 
 type GetAreaResult =
 	| { kind: 'Success'; place: any; geoType: any; childTypes: any; geometry: any }
