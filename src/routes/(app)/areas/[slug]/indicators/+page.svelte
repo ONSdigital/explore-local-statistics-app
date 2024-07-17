@@ -4,7 +4,7 @@
 	import { base } from '$app/paths';
 
 	import type { PageData } from './$types';
-	import { afterNavigate } from '$app/navigation';
+	import { goto, afterNavigate } from '$app/navigation';
 
 	import {
 		Breadcrumb,
@@ -45,12 +45,19 @@
 	import { constructRelatedAreasGroups } from './util/geo/constructRelatedAreasGroups.js';
 	import { createIndicatorRowsAccordionArray } from './util/interactivity/createIndicatorRowsAccordionArray';
 	import { createSelectAnIndicatorAccordionArray } from './util/interactivity/createSelectAnIndicatorAccordionArray';
-	import { navigateToOtherAreaPage } from './util/url/navigateToOtherAreaPage';
+	// import { navigateToOtherAreaPage } from './util/url/navigateToOtherAreaPage';
 
 	export let data: PageData;
 
 	let metadata = data.metadata;
 	let chartData = data.chartData;
+	let nonObsoleteAreas = {};
+
+	Object.entries(metadata.areasObject).forEach(([key, value]) => {
+		if (!value.areanm.includes('(obsolete)')) {
+			nonObsoleteAreas[key] = value;
+		}
+	});
 
 	let postcode, searchValue;
 	let mapColors = null;
@@ -86,6 +93,15 @@
 		similarAreas,
 		demographicallySimilarAreas;
 
+	//The same function as used on the /areas/[slug] page - was removed to a separate function but not working because of issues passing data - could possibly be fixed with stores?
+	function navTo(e, options = {}, type = 'search') {
+		if (e.detail.type === 'postcode') {
+			postcode = e.detail;
+		} else {
+			goto(`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}`, options);
+		}
+	}
+
 	afterNavigate(() => {
 		// variables which track search inputs when users search for other areas
 		postcode = null;
@@ -93,7 +109,7 @@
 
 		// merges together data for our selected area
 		selectedArea = {
-			...metadata.areasObject[data.place.areacd],
+			...nonObsoleteAreas[data.place.areacd],
 			role: 'main',
 			similarCluster:
 				metadata.clustersLookup.data.demographic[
@@ -121,22 +137,30 @@
 			: selectedArea.countrycd;
 		ukAreaCode = 'K02000001' === selectedArea.parentcd ? null : 'K02000001';
 
-		parentArea = metadata.areasObject[parentAreaCode];
-		countryArea = metadata.areasObject[countryAreaCode];
-		ukArea = metadata.areasObject[ukAreaCode];
+		parentArea = nonObsoleteAreas[parentAreaCode];
+		countryArea = nonObsoleteAreas[countryAreaCode];
+		ukArea = nonObsoleteAreas[ukAreaCode];
 
 		// determine which areas are of the same geography level as the selected area
-		sameGeogLevelCodes = metadata.areasGeogLevelObject[selectedArea.geogLevel];
-		sameGeogLevelAreas = sameGeogLevelCodes.map((el) => metadata.areasObject[el]);
+		sameGeogLevelCodes = metadata.areasGeogLevelObject[selectedArea.geogLevel].filter((d) =>
+			Object.keys(nonObsoleteAreas).includes(d)
+		);
+		sameGeogLevelAreas = sameGeogLevelCodes.map((el) => nonObsoleteAreas[el]);
 
 		// determine which areas have the same parentArea as the selected area
 		sameParentAreas = metadata.areasArray.filter(
-			(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
+			(el) =>
+				el.parentcd === selectedArea.parentcd &&
+				el.areacd != selectedArea.areacd &&
+				Object.keys(nonObsoleteAreas).includes(el.areacd)
 		);
 
 		// determine which areas have the same parentArea and are of the same geography level as the selected area
 		sameParentSameGeogAreas = sameGeogLevelAreas.filter(
-			(el) => el.parentcd === selectedArea.parentcd && el.areacd != selectedArea.areacd
+			(el) =>
+				el.parentcd === selectedArea.parentcd &&
+				el.areacd != selectedArea.areacd &&
+				Object.keys(nonObsoleteAreas).includes(el.areacd)
 		);
 		sameParentSameGeogCodes = sameParentSameGeogAreas.map((el) => el.areacd);
 
@@ -279,35 +303,35 @@
 		selectionsObject['areas-rows-comparison-chosen'],
 		false,
 		parentAndRelatedAreasObject,
-		metadata.areasObject
+		nonObsoleteAreas
 	);
 
 	$: selectionsObject['areas-rows-additional-visible'] = updateVisibleAreasArray(
 		selectionsObject['areas-rows-additional-chosen'],
 		false,
 		parentAndRelatedAreasObject,
-		metadata.areasObject
+		nonObsoleteAreas
 	);
 
 	$: selectionsObject['related-rows-visible'] = updateVisibleAreasArray(
 		selectionsObject['related-rows-chosen'],
 		true,
 		parentAndRelatedAreasObject,
-		metadata.areasObject
+		nonObsoleteAreas
 	);
 
 	$: selectionsObject['areas-single-additional-visible'] = updateVisibleAreasArray(
 		selectionsObject['areas-single-additional-chosen'],
 		false,
 		parentAndRelatedAreasObject,
-		metadata.areasObject
+		nonObsoleteAreas
 	);
 
 	$: selectionsObject['related-single-visible'] = updateVisibleAreasArray(
 		selectionsObject['related-single-chosen'],
 		true,
 		parentAndRelatedAreasObject,
-		metadata.areasObject
+		nonObsoleteAreas
 	);
 
 	//creates the accordion array for the indicator rows section of the page. each element of the array contains a checkbox or radio selection and defines which areas can be chosen from and which selectionsObject entry is updated when a selection is made
@@ -414,7 +438,7 @@
 				essOnly
 				hideIcon
 				bind:value={searchValue}
-				on:submit={navigateToOtherAreaPage}
+				on:submit={navTo}
 				on:clear={() => (postcode = null)}
 			/>
 			{#if postcode}

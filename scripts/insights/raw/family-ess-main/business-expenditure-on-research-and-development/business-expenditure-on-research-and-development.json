@@ -1,93 +1,88 @@
 {
-    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
-    "title": "Business expenditure on research and development",
-    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
-    "summary": "Total UK business expenditure on research and development, UK, 2022.",
-    "description": "This dataset shows the total UK business expenditure on research and development, in the UK, for 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1,\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases) \n\n\n### Source Notes and Caveats \nStatistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).\n\n\n",
-    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-    "keywords": [
-        "research-and-development",
-        "expenditure" ,
-        "subnational",
-        "region"
-    ],
-    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
-    "dataset_issued": "2024-05-15T16:25:11.468465",
-    "dataset_modified": "2024-05-15T16:25:11.468465",
-    "themes": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes",
-    "columns": {
-        "Period": {
-            "type": "dimension",
-            "from_template": "year"
-        },
-        "AREACD": {
-            "type": "dimension",
-            "from_template": "statistical-geography",
-            "label": "ONS Geography Code",
-            "code_list": true
-        },
-        "AREANM": {
-            "type": "dimension",
-            "label": "Area Name"
-        },
-        "Geography": {
-            "type": "dimension",
-            "label": "Geography Type"
-        },
-        "Variable Name": false,
-        "Indicator": false,
-        "Mission": false,
-        "Category": false,
-        "Observation": {
-            "type": "observations",
-            "data_type": "decimal",
-            "unit": {
-                "label": "Pounds Sterling, Millions",
-                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
-            },
-            "measure": {
-                "label": "Capital and non-capital expenditure ",
-                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
-            }
-        },
-        "Measure": false,
-        "Unit": false,
-        "Lower Confidence Interval (95%)": {
-            "label": "Lower Confidence Interval",
-            "type": "attribute",
-            "data_type": "decimal",
-            "describes_observations": "Observation",
-            "required": false
-        },
-        "Upper Confidence Interval (95%)": {
-            "label": "Upper Confidence Interval",
-            "type": "attribute",
-            "data_type": "decimal",
-            "describes_observations": "Observation",
-            "required": false
-        },
-        "Observation Status": {
-            "type": "attribute",
-            "label": "Observation Status",
-            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
-        },
-        "Polarity": false,
-        "Notes": false
-    },
-    "ess-beta-metadata": {
-      "label": "Business expenditure on research and development",
-      "prefix": "GBPSign",
-      "suffix": null,
-      "subText": "in millions",
-      "decimalPlaces": 0,
-      "subtitle": "Businesses gross expenditure within each region",
-      "experimentalStatistic": "F",
-      "sourceDate": "27/02/2024",
-      "sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/datasets/businessenterpriseresearchanddevelopmentukdesignatedasofficialstatistics",
-      "sourceOrg": "Office for National Statistics",
-      "longDescription": "This indicator shows the total UK business enterprise expenditure on research and development, in the UK, for 2022.",
-      "caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
-      "standardised": "F"
-  }
+	"$schema": "https://purl.org/csv-cubed/qube-config/v1",
+	"title": "Business expenditure on research and development",
+	"creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+	"summary": "Total UK business expenditure on research and development, UK, 2022.",
+	"description": "This dataset shows the total UK business expenditure on research and development, in the UK, for 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1,\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases) \n\n\n### Source Notes and Caveats \nStatistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).\n\n\n",
+	"license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+	"keywords": ["research-and-development", "expenditure", "subnational", "region"],
+	"publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+	"dataset_issued": "2024-05-15T16:25:11.468465",
+	"dataset_modified": "2024-05-15T16:25:11.468465",
+	"themes": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes",
+	"columns": {
+		"Period": {
+			"type": "dimension",
+			"from_template": "year"
+		},
+		"AREACD": {
+			"type": "dimension",
+			"from_template": "statistical-geography",
+			"label": "ONS Geography Code",
+			"code_list": true
+		},
+		"AREANM": {
+			"type": "dimension",
+			"label": "Area Name"
+		},
+		"Geography": {
+			"type": "dimension",
+			"label": "Geography Type"
+		},
+		"Variable Name": false,
+		"Indicator": false,
+		"Mission": false,
+		"Category": false,
+		"Observation": {
+			"type": "observations",
+			"data_type": "decimal",
+			"unit": {
+				"label": "Pounds Sterling, Millions",
+				"from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+			},
+			"measure": {
+				"label": "Capital and non-capital expenditure ",
+				"from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+			}
+		},
+		"Measure": false,
+		"Unit": false,
+		"Lower Confidence Interval (95%)": {
+			"label": "Lower Confidence Interval",
+			"type": "attribute",
+			"data_type": "decimal",
+			"describes_observations": "Observation",
+			"required": false
+		},
+		"Upper Confidence Interval (95%)": {
+			"label": "Upper Confidence Interval",
+			"type": "attribute",
+			"data_type": "decimal",
+			"describes_observations": "Observation",
+			"required": false
+		},
+		"Observation Status": {
+			"type": "attribute",
+			"label": "Observation Status",
+			"from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+			"cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+		},
+		"Polarity": false,
+		"Notes": false
+	},
+	"ess-beta-metadata": {
+		"label": "Business expenditure on research and development",
+		"prefix": "GBPSign",
+		"suffix": null,
+		"subText": "in £ millions",
+		"decimalPlaces": 0,
+		"subtitle": "Businesses gross expenditure within each region",
+		"experimentalStatistic": "F",
+		"sourceDate": "27/02/2024",
+		"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/datasets/businessenterpriseresearchanddevelopmentukdesignatedasofficialstatistics",
+		"sourceOrg": "Office for National Statistics",
+		"longDescription": "This indicator shows the total UK business enterprise expenditure on research and development, in the UK, for 2022.",
+		"caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
+		"standardised": "F"
+	}
 }

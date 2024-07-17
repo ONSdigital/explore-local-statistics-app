@@ -19,7 +19,7 @@ function makeColumns(data, indicator) {
 		{ key: 'areacd', label: 'Area code' },
 		{ key: 'areanm', label: 'Area name' },
 		{ key: 'xDomainNumb', label: 'Time period' },
-		{ key: 'value', label: `Value (${unit})` },
+		{ key: 'value', label: `"Value (${unit})"` },
 		{ key: 'lci', label: 'Confidence interval lower' },
 		{ key: 'uci', label: 'Confidence interval upper' }
 	].filter(
@@ -85,7 +85,7 @@ https://explore-local-statistics.beta.ons.gov.uk/indicators/${indicator.metadata
 	csv += `${cols.labels.join(',')}\n${csvFormatBody(sortData(mappedData), cols.keys)}`;
 
 	const url = window.URL || window.webkitURL || window;
-	const blob = new Blob([csv], { type: 'text/csv' });
+	const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;  charset=utf-8' });
 	doDownload(url.createObjectURL(blob), filename);
 }
 

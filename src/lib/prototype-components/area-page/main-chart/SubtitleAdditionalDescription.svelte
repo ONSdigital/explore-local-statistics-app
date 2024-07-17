@@ -42,7 +42,7 @@
 	<h3>
 		{selectedIndicator.metadata.label}
 	</h3>
-	{#if selectedIndicator.metadata.subText === 'in millions'}
+	{#if selectedIndicator.metadata.subText === 'in £ millions'}
 		<span>, {selectedIndicator.metadata.subText}</span>
 	{/if}
 </span>

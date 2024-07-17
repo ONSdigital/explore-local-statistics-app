@@ -173,7 +173,7 @@
 		{metadata}
 		data={csvData}
 		{embedProps}
-		unit={getUnit(indicator.metadata) === 'in millions' ? getUnit(indicator.metadata) : null}
+		unit={getUnit(indicator.metadata) === 'in £ millions' ? getUnit(indicator.metadata) : null}
 	>
 		<p class="subtitle">
 			{indicator.metadata.subtitle}, {chosenStartTimePeriod.label} to {chosenTimePeriodDropdownLabel}
