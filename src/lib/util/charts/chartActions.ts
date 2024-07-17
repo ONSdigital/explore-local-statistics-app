@@ -85,7 +85,7 @@ https://explore-local-statistics.beta.ons.gov.uk/indicators/${indicator.metadata
 	csv += `${cols.labels.join(',')}\n${csvFormatBody(sortData(mappedData), cols.keys)}`;
 
 	const url = window.URL || window.webkitURL || window;
-	const blob = new Blob([csv], { type: 'text/csv' });
+	const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;  charset=utf-8' });
 	doDownload(url.createObjectURL(blob), filename);
 }
 
