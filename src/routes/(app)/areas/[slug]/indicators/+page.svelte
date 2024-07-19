@@ -46,12 +46,14 @@
 	import { createIndicatorRowsAccordionArray } from './util/interactivity/createIndicatorRowsAccordionArray';
 	import { createSelectAnIndicatorAccordionArray } from './util/interactivity/createSelectAnIndicatorAccordionArray';
 	// import { navigateToOtherAreaPage } from './util/url/navigateToOtherAreaPage';
+	import viewport from './util/interactivity/useViewportAction';
 
 	export let data: PageData;
 
 	let metadata = data.metadata;
 	let chartData = data.chartData;
 	let nonObsoleteAreas = {};
+	let stickyZIndex;
 
 	Object.entries(metadata.areasObject).forEach(([key, value]) => {
 		if (!value.areanm.includes('(obsolete)')) {
@@ -453,7 +455,15 @@
 			{/if}
 		</Card>
 	</Cards>
-
+	<div
+		use:viewport
+		on:enterViewport={() => {
+			stickyZIndex = 0;
+		}}
+		on:exitViewport={() => {
+			stickyZIndex = 10;
+		}}
+	></div>
 	<NavSections contentsLabel="Contents">
 		<IndicatorRowsSection
 			{selectedArea}
@@ -463,6 +473,7 @@
 			bind:selectionsObject
 			accordionArray={rowsAccordionArray}
 			customLookup={customLookup['areas-rows-additional-visible']}
+			bind:stickyZIndex
 		></IndicatorRowsSection>
 
 		<NavSection title="Select an indicator">

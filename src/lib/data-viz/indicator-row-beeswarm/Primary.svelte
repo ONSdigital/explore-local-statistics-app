@@ -137,7 +137,7 @@
 
 	<g class="primary-circles-group" transform="translate(0,{chartHeight})">
 		{#each primaryCircleDataStep2.filter((el) => !el.datum.priority) as circle}
-			{#if showConfidenceIntervals}
+			{#if !showConfidenceIntervals}
 				<Circle {circle} {y} {customLookup} bind:hoverAreaId bind:hoverIndicatorId {indicator}
 				></Circle>
 			{/if}
