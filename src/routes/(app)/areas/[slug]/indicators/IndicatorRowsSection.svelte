@@ -9,7 +9,8 @@
 		filteredIndicatorsCodes,
 		selectionsObject,
 		accordionArray,
-		customLookup;
+		customLookup,
+		stickyZIndex;
 
 	// tracks the selected start and end years based on the time periods slider - the initial values are based on a calculation made in data:generate of the min and max time periods across all indicators included in the app
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
@@ -34,6 +35,7 @@
 		bind:chosenXDomainNumbStart
 		bind:chosenXDomainNumbEnd
 		bind:showConfidenceIntervals
+		bind:stickyZIndex
 	></StickyHeader>
 	<div class="topic-sections-container">
 		{#each metadata.topicsArray as topic, i}

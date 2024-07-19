@@ -247,7 +247,7 @@
 	}
 </script>
 
-<svg viewBox="0 0 {w} {h}" class="svg-icon">
+<svg viewBox="0 0 {w} {h}" class="svg-icon" alt="">
 	{#each points.features.map((pt) => proj(pt.geometry.coordinates)) as pt}
 		<circle cx={pt[0]} cy={pt[1]} r={pointSpacing / 2 - 1} fill-opacity="0.25" />
 	{/each}

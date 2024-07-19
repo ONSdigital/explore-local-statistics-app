@@ -637,6 +637,7 @@
 	viewBox="0 0 298 378"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
+	alt=""
 >
 	<g fill="#206095">
 		{#each points[0] as pt}

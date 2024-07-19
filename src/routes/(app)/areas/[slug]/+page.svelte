@@ -246,6 +246,7 @@
 					href={parseTemplate(link.url, link.place)}
 					image={link.image}
 					bgcolor={link.bgcolor}
+					imageAlt=""
 				>
 					{@html parseTemplate(link.description, link.place)}
 				</Card>

@@ -12,7 +12,8 @@
 		customLookup,
 		chosenXDomainNumbStart,
 		chosenXDomainNumbEnd,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		stickyZIndex;
 
 	//splits additonal areas into parent / uk and others, so that the parent and uk areas always ordered first on the key
 	$: visibleParentAreas = selectionsObject['areas-rows-additional-visible'].filter(
@@ -25,7 +26,7 @@
 	let showAllAreas = false;
 </script>
 
-<div class="row-container sticky control-panel">
+<div class="row-container sticky control-panel" style="z-index: {stickyZIndex}">
 	<div class="visible-areas-key-container grid-container">
 		<AreaPanel
 			area={selectedArea}
@@ -115,7 +116,7 @@
 		padding: 10px 0;
 		position: sticky;
 		top: 0px;
-		z-index: 10;
+		/* z-index: 10; */
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
