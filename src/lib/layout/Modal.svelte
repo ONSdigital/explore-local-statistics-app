@@ -21,10 +21,11 @@
 	<div on:click|stopPropagation>
 		<div class="row-container title-exit-button-container">
 			<slot name="title" />
-			<Button on:click={() => dialog.close()} small={true} variant="secondary">
+			<Button on:click={() => dialog.close()} small={true} hideLabel variant="secondary">
 				<div slot="icon" style:display="contents">
 					<Icon type="close" />
 				</div>
+				"Close"
 			</Button>
 		</div>
 		<div class="dialog-content">
