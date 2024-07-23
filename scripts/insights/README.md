@@ -7,6 +7,8 @@ This script creates the data that the /insights (ESS) visualisations use.
 - adds any missing variable name(s) in the raw data
 - maps some area codes
 
+> See `managing-raw-data.updates.md` for a how-to about managing new raw data.
+
 ## How to run the script
 
 ```
