@@ -25,7 +25,7 @@
 				<div slot="icon" style:display="contents">
 					<Icon type="close" />
 				</div>
-				"Close"
+				Close
 			</Button>
 		</div>
 		<div class="dialog-content">

@@ -116,7 +116,7 @@
 	max={value[1] - 1}
 	{step}
 	{disabled}
-	aria-label="Selected time period maximum"
+	aria-label="Selected time period minimum"
 />
 {#if range}
 	<input
@@ -129,7 +129,7 @@
 		{max}
 		{step}
 		{disabled}
-		aria-label="Selected time period minimum"
+		aria-label="Selected time period maximum"
 	/>
 {/if}
 
