@@ -199,7 +199,8 @@
 		{/if}
 	</Card>
 	<Card colspan={3} noBackground>
-		<div style:margin-top="10px" class="ons-u-d-no ons-u-d-b@s">
+		<!-- Removed the "ons-u-d-no" class that was hiding the tab panel at 400% zoom -->
+		<div style:margin-top="10px" class="ons-u-d-b@s">
 			{#key childType}
 				{#if childType}
 					<Tabs

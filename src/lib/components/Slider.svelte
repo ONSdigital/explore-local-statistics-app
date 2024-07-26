@@ -43,6 +43,7 @@
 		pos = Array.isArray(value)
 			? value.map((v) => Math.min(Math.max(v, min), max)).map((v) => (v - min) / (max - min))
 			: [(value - min) / (max - min), 0];
+		dispatch('input', value);
 	}
 	function checkPos(pos) {
 		return [Math.min(...pos), Math.max(...pos)];
@@ -115,6 +116,7 @@
 	max={value[1] - 1}
 	{step}
 	{disabled}
+	aria-label="Selected time period minimum"
 />
 {#if range}
 	<input
@@ -127,6 +129,7 @@
 		{max}
 		{step}
 		{disabled}
+		aria-label="Selected time period maximum"
 	/>
 {/if}
 
