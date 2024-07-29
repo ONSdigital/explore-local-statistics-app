@@ -8,7 +8,7 @@
 		markerRadius,
 		markerShape = 'circle',
 		button = true,
-		fontSize = '18px',
+		fontSize = '18.66px',
 		fontWeight = 'normal',
 		backgroundColor = 'contrast',
 		color = 'color',
@@ -67,7 +67,7 @@
 {:else if area}
 	<div
 		class="visible-area-container marker-area-container"
-		style="background-color: {bgColor}; font-weight: {fontWeight}; font-size: {fontSize};"
+		style="background-color: #fff; font-weight: {fontWeight}; font-size: {fontSize};"
 	>
 		{#if markerRadius}
 			<svg width="20" height="20">
