@@ -88,10 +88,10 @@
 			Explore areas within the United Kingdom.
 		{:else}
 			{#if data.place.end}
-				<span class="inactive-badge">Inactive</span>
+				<span class="inactive-badge">Inactive</span> {data.place.typenm}
+			{:else}
+				{capitalise(data.place.typenm)}
 			{/if}
-
-			{capitalise(data.place.typenm)}
 			{getName(data.place.parents[0], 'in', 'prefix')}
 			<a
 				href="{base}/areas/{makeCanonicalSlug(
@@ -109,7 +109,7 @@
 				<p class="ons-u-fs-s additional-area-info">
 					In {data.place.start}, it replaced
 					{#each data.place.replaces as rep, i}
-						{getName(rep, 'the', 'prefix')}
+						{data.place.areanm === rep.areanm ? 'the previous' : getName(rep, 'the', 'prefix')}
 						<a
 							href="{base}/areas/{makeCanonicalSlug(rep.areacd, rep.areanm)}"
 							data-sveltekit-noscroll>{getName(rep)}</a
@@ -125,11 +125,10 @@
 			{/if}
 			{#if data.place.end && data.place.successor?.areacd}
 				<p class="ons-u-fs-s additional-area-info">
-					In {data.place.end + 1}, it was replaced by {getName(
-						data.place.successor,
-						'the',
-						'prefix'
-					)}
+					In {data.place.end + 1}, it was replaced by
+					{data.place.areanm === data.place.successor.areanm
+						? 'the new'
+						: getName(data.place.successor, 'the', 'prefix')}
 					<a
 						href="{base}/areas/{makeCanonicalSlug(
 							data.place.successor.areacd,
