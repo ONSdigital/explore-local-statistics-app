@@ -10,6 +10,7 @@
 		indicator,
 		timePeriodsArray,
 		xDomain,
+		selectedArea,
 		selectedFilteredChartData,
 		comparisonFilteredChartData,
 		indicatorCalculations,
@@ -83,12 +84,26 @@
 				];
 
 	//used for the positioning of the label
-	$: initialValue = selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[0]);
+	$: initialValue =
+		selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[0]) ??
+		selectedFilteredChartData[selectedFilteredChartData.length - 1];
 	$: latestValue = selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[1]);
+
+	$: lineChartAltText =
+		`Line chart for ${indicator.metadata.label}` +
+		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}) ` : ` `) +
+		`in ${selectedArea.areanm}. ` +
+		`Between ${selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[0]) ? xDomain[0] : selectedFilteredChartData[selectedFilteredChartData.length - 1].xDomainNumb} and ${xDomain[1]} ${indicator.metadata.label}` +
+		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}) ` : ` `) +
+		`in ${selectedArea.areanm} ${latestValue.value - initialValue.value > 0 ? 'increased' : 'decreased'} by ` +
+		`${indicator.metadata?.prefix}${roundNumber(Math.abs(latestValue.value - initialValue.value), indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix == '%' ? ' percentage points' : indicator.metadata?.suffix}.`;
+
+	$: console.log(lineChartAltText);
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
 	<svg {width} {height}>
+		<desc>{lineChartAltText}</desc>
 		<g transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
 				<LineChartRow

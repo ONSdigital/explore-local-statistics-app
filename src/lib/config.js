@@ -65,9 +65,9 @@ export let abbreviatedNamesObject = {
 
 export const colorsLookup = {
 	main: { color: '#003C57', contrast: 'white' },
-	parent: { color: '#F66068', contrast: 'white' },
+	parent: { color: '#F66068', contrast: '#222' },
 	country: { color: '#118C7B', contrast: 'white' },
-	uk: { color: '#00A3A6', contrast: 'white' },
+	uk: { color: '#00A3A6', contrast: '#222' },
 	custom: [
 		{ color: '#206095', contrast: 'white' },
 		{ color: '#a8bd3a', contrast: '#222' },
@@ -75,7 +75,7 @@ export const colorsLookup = {
 		{ color: '#27a0cc', contrast: '#222' }
 	],
 	customExceedThreshold: { color: 'grey', contrast: 'white' },
-	selected: { color: '#F39431', contrast: 'white' },
+	selected: { color: '#F39431', contrast: '#222' },
 	comparison: { color: '#746CB1', contrast: 'white' },
 	related: { color: '#b0b0b0', contrast: '#222' }
 };

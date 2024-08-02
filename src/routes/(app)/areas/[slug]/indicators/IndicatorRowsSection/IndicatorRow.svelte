@@ -152,6 +152,7 @@
 							filteredChartData={filteredChartDataObject.timeSeries.filtered}
 							{metadata}
 							{indicator}
+							{selectedArea}
 							{selectionsObject}
 							{hoverAreaId}
 							{timePeriodsArray}

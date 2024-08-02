@@ -88,10 +88,10 @@
 			Explore areas within the United Kingdom.
 		{:else}
 			{#if data.place.end}
-				<span class="inactive-badge">Inactive</span>
+				<span class="inactive-badge">Inactive</span> {data.place.typenm}
+			{:else}
+				{capitalise(data.place.typenm)}
 			{/if}
-
-			{capitalise(data.place.typenm)}
 			{getName(data.place.parents[0], 'in', 'prefix')}
 			<a
 				href="{base}/areas/{makeCanonicalSlug(
@@ -99,22 +99,24 @@
 					data.place.parents[0].areanm
 				)}"
 				data-sveltekit-noscroll>{getName(data.place.parents[0])}</a
-			>.
+			>
 			{#if ['E02', 'W02'].includes(data.place.typecd)}
 				<p class="ons-u-fs-s additional-area-info">
-					Also known as {data.place.areanm}.
+					Also known as {data.place.areanm}
 				</p>
 			{/if}
 			{#if data.place.start && data.place.replaces?.[0]?.areacd}
 				<p class="ons-u-fs-s additional-area-info">
 					In {data.place.start}, it replaced
 					{#each data.place.replaces as rep, i}
-						{getName(rep, 'the', 'prefix')}
+						{data.place.areanm === rep.areanm ? 'the previous' : getName(rep, 'the', 'prefix')}
 						<a
 							href="{base}/areas/{makeCanonicalSlug(rep.areacd, rep.areanm)}"
 							data-sveltekit-noscroll>{getName(rep)}</a
-						>{i === data.place.replaces.length - 1
-							? '.'
+						>
+						({rep.areacd})
+						{i === data.place.replaces.length - 1
+							? ''
 							: i === data.place.replaces.length - 2
 								? ' and '
 								: ', '}
@@ -123,11 +125,10 @@
 			{/if}
 			{#if data.place.end && data.place.successor?.areacd}
 				<p class="ons-u-fs-s additional-area-info">
-					In {data.place.end + 1}, it was replaced by {getName(
-						data.place.successor,
-						'the',
-						'prefix'
-					)}
+					In {data.place.end + 1}, it was replaced by
+					{data.place.areanm === data.place.successor.areanm
+						? 'the new'
+						: getName(data.place.successor, 'the', 'prefix')}
 					<a
 						href="{base}/areas/{makeCanonicalSlug(
 							data.place.successor.areacd,
@@ -135,7 +136,7 @@
 						)}"
 						data-sveltekit-noscroll>{getName(data.place.successor)}</a
 					>
-					({data.place.successor.areacd}).
+					({data.place.successor.areacd})
 				</p>
 			{:else if data.place.end}
 				<p class="ons-u-fs-s additional-area-info">
@@ -305,8 +306,16 @@
 		background-color: #003c57;
 	}
 	.additional-area-info {
-		margin-top: 6px;
+		margin-top: 12px;
 		margin-bottom: 0;
+	}
+	.active-badge {
+		font-weight: bold;
+		color: white;
+		padding: 0 8px 2px 8px;
+		border-radius: 4px;
+		background-color: #003c57;
+		margin-right: 2px;
 	}
 	.inactive-badge {
 		font-weight: bold;

@@ -464,7 +464,7 @@
 			stickyZIndex = 10;
 		}}
 	></div>
-	<NavSections contentsLabel="Contents">
+	<NavSections cls="no-display-hidden-header" contentsLabel="Contents">
 		<IndicatorRowsSection
 			{selectedArea}
 			{metadata}
@@ -584,5 +584,8 @@
 		color: white;
 		padding: 0 6px;
 		border-radius: 3px;
+	}
+	:global(.no-display-hidden-header h3.ons-u-vh) {
+		display: none;
 	}
 </style>

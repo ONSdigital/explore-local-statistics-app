@@ -66,6 +66,10 @@
 {/if}
 
 <style>
+	:global(#topics > h2) {
+		display: none;
+	}
+
 	.sub-topic-header {
 		font-weight: normal;
 		padding: 0px;

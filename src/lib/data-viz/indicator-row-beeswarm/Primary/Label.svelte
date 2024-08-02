@@ -19,7 +19,7 @@
 				x={-labelRect.width / 2 - 3}
 				y={-43}
 				width={labelRect.width + 6}
-				height={role === 'main' ? 35 : 24}
+				height={role === 'main' ? 35 : 28}
 				fill="white"
 				stroke={colorsLookup[role].color}
 				stroke-width={role === 'main' ? '3px' : '1.5px'}
@@ -29,10 +29,10 @@
 
 		<g>
 			<text
-				style="font-size: {role === 'main' ? '30px' : '20px'}; stroke-width: {role === 'main'
+				style="font-size: {role === 'main' ? '30px' : '24px'}; stroke-width: {role === 'main'
 					? '1px'
 					: '0.5px'}"
-				y={role === 'main' ? -15 : -24}
+				y={role === 'main' ? -15 : -20}
 				bind:contentRect={labelRect}
 				text-anchor="middle"
 				fill={colorsLookup[role].color}
