@@ -95,8 +95,8 @@
 		`in ${selectedArea.areanm}. ` +
 		`Between ${selectedFilteredChartData.find((el) => el.xDomainNumb == xDomain[0]) ? xDomain[0] : selectedFilteredChartData[selectedFilteredChartData.length - 1].xDomainNumb} and ${xDomain[1]} ${indicator.metadata.label}` +
 		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}) ` : ` `) +
-		`in ${selectedArea.areanm} ${latestValue.value - initialValue.value > 0 ? 'increased' : 'decreased'} by ` +
-		`${indicator.metadata?.prefix}${roundNumber(Math.abs(latestValue.value - initialValue.value), indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix == '%' ? ' percentage points' : indicator.metadata?.suffix}.`;
+		`in ${selectedArea.areanm} ${latestValue?.value - initialValue.value > 0 ? 'increased' : 'decreased'} by ` +
+		`${indicator.metadata?.prefix}${roundNumber(Math.abs(latestValue?.value - initialValue.value), indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix == '%' ? ' percentage points' : indicator.metadata?.suffix}.`;
 
 	$: console.log(lineChartAltText);
 </script>
