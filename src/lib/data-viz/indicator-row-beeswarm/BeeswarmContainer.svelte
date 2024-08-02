@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Beeswarm from './Beeswarm.svelte';
-
+	// import { addThousandsSeparator } from '$lib/util/charts/addThousandsSeparator';
+	import { roundNumber } from '$lib/util/charts/roundNumber';
 	import { indicatorRowBeeswarmChartSettings } from '../../../routes/(app)/areas/[slug]/indicators/config';
 
 	import { scaleLinear } from 'd3-scale';
@@ -82,70 +83,87 @@
 					  -indicatorCalculations.mad
 					? 'Lower'
 					: 'Similar';
+
+	$: beeswarmAltText =
+		`Beeswarm chart showing values for ${indicator.metadata.label}` +
+		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}). ` : `. `) +
+		`The value for ${selectedArea.areanm} was ${indicator.metadata?.prefix}${roundNumber(selectedFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}, ` +
+		(comparisonFilteredChartDataBeeswarmWithRole?.value
+			? `The ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm} value was ${indicator.metadata?.prefix}${roundNumber(comparisonFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}.`
+			: `No value available for ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm}.`);
+
+	$: console.log(beeswarmAltText);
 </script>
 
-<div class="svg-container" bind:clientWidth={width}>
-	<svg {width} {height}>
-		{#if chartWidth && chartHeight}
-			<g transform="translate({padding.left + spaceForOutliers},{padding.top})">
-				{#if chartWidth && chartHeight}
-					<Beeswarm
-						{metadata}
-						{indicator}
-						{selectedFilteredChartDataBeeswarmWithRole}
-						{comparisonFilteredChartDataBeeswarmWithRole}
-						{additionalFilteredChartDataBeeswarm}
-						{filteredChartDataBeeswarm}
-						{selectedArea}
-						{selectionsObject}
-						bind:hoverAreaId
-						bind:hoverIndicatorId
-						{spaceForOutliers}
-						{chartWidth}
-						{chartHeight}
-						{xDomain}
-						{customLookup}
-						{showConfidenceIntervals}
-						{observed}
-						{width}
-						{x}
-					></Beeswarm>
-				{/if}
-			</g>
-		{/if}
-	</svg>
-</div>
-
-<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
-	<div class="robo-text-inline">
-		<span>
-			{#if selectionsObject['areas-rows-comparison-visible'] && includeComparisonText}
-				{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
-					No
-				{:else}
-					<span style="font-weight: bold">{selectedComparisonDifference}</span>
-					{selectedComparisonDifference === 'Similar' ? 'to' : 'than'}
-				{/if}
-				<span
-					>{selectedComparisonDifference === 'No selected'
-						? selectedArea.areanm
-						: 'label' in selectionsObject['areas-rows-comparison-visible']
-							? 'average'
-							: selectionsObject['areas-rows-comparison-visible'].areanm}
-				</span>
-				{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
-					value for
-				{:else}
-					in
-				{/if}
-			{:else}<span>Values for</span>{/if}
-
-			<span>{latestTimePeriod.label}</span>
-		</span>
+<figure class="beeswarm-figure">
+	<div class="svg-container" bind:clientWidth={width}>
+		<svg {width} {height}>
+			<desc>{beeswarmAltText}</desc>
+			{#if chartWidth && chartHeight}
+				<g transform="translate({padding.left + spaceForOutliers},{padding.top})">
+					{#if chartWidth && chartHeight}
+						<Beeswarm
+							{metadata}
+							{indicator}
+							{selectedFilteredChartDataBeeswarmWithRole}
+							{comparisonFilteredChartDataBeeswarmWithRole}
+							{additionalFilteredChartDataBeeswarm}
+							{filteredChartDataBeeswarm}
+							{selectedArea}
+							{selectionsObject}
+							bind:hoverAreaId
+							bind:hoverIndicatorId
+							{spaceForOutliers}
+							{chartWidth}
+							{chartHeight}
+							{xDomain}
+							{customLookup}
+							{showConfidenceIntervals}
+							{observed}
+							{width}
+							{x}
+						></Beeswarm>
+					{/if}
+				</g>
+			{/if}
+		</svg>
 	</div>
-</div>
+
+	<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
+		<div class="robo-text-inline">
+			<span>
+				{#if selectionsObject['areas-rows-comparison-visible'] && includeComparisonText}
+					{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
+						No
+					{:else}
+						<span style="font-weight: bold">{selectedComparisonDifference}</span>
+						{selectedComparisonDifference === 'Similar' ? 'to' : 'than'}
+					{/if}
+					<span
+						>{selectedComparisonDifference === 'No selected'
+							? selectedArea.areanm
+							: 'label' in selectionsObject['areas-rows-comparison-visible']
+								? 'average'
+								: selectionsObject['areas-rows-comparison-visible'].areanm}
+					</span>
+					{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
+						value for
+					{:else}
+						in
+					{/if}
+				{:else}<span>Values for</span>{/if}
+
+				<span>{latestTimePeriod.label}</span>
+			</span>
+		</div>
+	</div>
+</figure>
 
 <style>
+	.beeswarm-figure {
+		margin: 0;
+	}
+
 	svg {
 		overflow: visible;
 		padding: 0px;
