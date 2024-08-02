@@ -87,7 +87,7 @@
 	$: beeswarmAltText =
 		`Beeswarm chart showing values for ${indicator.metadata.label}` +
 		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}). ` : `. `) +
-		`The value for ${selectedArea.areanm} was ${indicator.metadata?.prefix}${roundNumber(selectedFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}, ` +
+		`The value for ${selectedArea.areanm} was ${indicator.metadata?.prefix}${roundNumber(selectedFilteredChartDataBeeswarmWithRole?.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}, ` +
 		(comparisonFilteredChartDataBeeswarmWithRole?.value
 			? `The ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm} value was ${indicator.metadata?.prefix}${roundNumber(comparisonFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}.`
 			: `No value available for ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm}.`);
