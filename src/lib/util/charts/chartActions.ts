@@ -46,7 +46,17 @@ function sortData(data) {
 	return sorted;
 }
 
-export function downloadCSV(data, metadata, indicator, filename = 'data.csv') {
+export function downloadCSV(
+	data,
+	metadata,
+	indicator,
+	type,
+	filename = indicator.metadata.slug +
+		'-' +
+		type +
+		(type == 'map' || type == 'table' ? '-' : '-chart-') +
+		'data.csv'
+) {
 	const cols = makeColumns(data, indicator);
 	const xDomain = cols.keys.includes('xDomainNumb')
 		? Array.from(new Set(data.map((d) => d.xDomainNumb))).sort((a, b) => a - b)
@@ -89,7 +99,12 @@ https://explore-local-statistics.beta.ons.gov.uk/indicators/${indicator.metadata
 	doDownload(url.createObjectURL(blob), filename);
 }
 
-export async function downloadPNG(el, filename = 'chart.png') {
+export async function downloadPNG(
+	el,
+	slug,
+	type,
+	filename = slug + '-' + type + (type == 'map' || type == 'table' ? '-' : '-chart-') + 'image.png'
+) {
 	html2canvas(el, {
 		windowWidth: el.scrollWidth,
 		windowHeight: el.scrollHeight,

@@ -36,7 +36,7 @@
 					><button
 						class="btn-link"
 						on:click={() => {
-							downloadPNG(el);
+							downloadPNG(el, indicator.metadata.slug, type);
 							const eventData = {
 								event: 'fileDownload',
 								extension: 'png',
@@ -47,7 +47,7 @@
 								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
-						}}>Download image (PNG)</button
+						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} image (PNG)</button
 					></span
 				>
 			</li>{/if}
@@ -56,7 +56,7 @@
 					><button
 						class="btn-link"
 						on:click={() => {
-							downloadCSV(data, metadata, indicator);
+							downloadCSV(data, metadata, indicator, type);
 							const eventData = {
 								event: 'fileDownload',
 								extension: 'csv',
@@ -67,7 +67,7 @@
 								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
-						}}>Download data (CSV)</button
+						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} data (CSV)</button
 					></span
 				>
 			</li>{/if}
