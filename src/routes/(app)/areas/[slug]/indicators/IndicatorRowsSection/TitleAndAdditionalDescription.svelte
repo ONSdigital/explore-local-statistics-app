@@ -72,6 +72,11 @@
 		</p>
 
 		<p>
+			<span style="font-weight: bold">Published on:</span>
+			{indicator.metadata.sourceDate}
+		</p>
+
+		<p>
 			For more data and charts, visit our page on <a
 				href="{base}/indicators/{indicator.metadata.slug}">{indicator.metadata.label}.</a
 			>
