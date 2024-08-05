@@ -13,7 +13,7 @@ function doDownload(dataUrl, filename) {
 	a.click();
 }
 
-function makeColumns(data, indicator) {
+function makeColumns(data, indicator, metadata) {
 	const unit = getUnit(indicator.metadata);
 	const cols = [
 		{ key: 'areacd', label: 'Area code' },
@@ -32,10 +32,31 @@ function makeColumns(data, indicator) {
 		return key;
 	};
 	let keys = Object.keys(data[0]).filter((key) => typeof +key === 'number' && !isNaN(+key));
+	//Formatting the dates in the csv table download
+	const xDomainArr = keys[0]
+		? metadata.periodsLookupArray.filter(
+				(t) =>
+					t.id === indicator.id &&
+					t.xDomainNumb >= keys[0] &&
+					t.xDomainNumb <= keys[keys.length - 1]
+			)
+		: null;
+
+	const xDomainMap = xDomainArr
+		? (() => {
+				const map = {};
+				xDomainArr.forEach((t) => (map[t.xDomainNumb] = t.label));
+				return map;
+			})()
+		: null;
+
 	keys = keys[0]
 		? [...cols.slice(0, 2).map((col) => col.key), ...keys]
 		: cols.map((col) => col.key);
-	const labels = keys.map(formatKeys);
+
+	const labels = xDomainArr
+		? keys.map(formatKeys).map((d) => xDomainMap[d] ?? d)
+		: keys.map(formatKeys);
 	return { keys, labels };
 }
 
@@ -57,7 +78,7 @@ export function downloadCSV(
 		(type == 'map' || type == 'table' ? '-' : '-chart-') +
 		'data.csv'
 ) {
-	const cols = makeColumns(data, indicator);
+	const cols = makeColumns(data, indicator, metadata);
 	const xDomain = cols.keys.includes('xDomainNumb')
 		? Array.from(new Set(data.map((d) => d.xDomainNumb))).sort((a, b) => a - b)
 		: null;
