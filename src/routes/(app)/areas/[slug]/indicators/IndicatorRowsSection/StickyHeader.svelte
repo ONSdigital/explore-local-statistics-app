@@ -23,10 +23,19 @@
 		(el) => el.role === 'custom'
 	);
 
+	let innerWindowHeight = window.innerHeight;
+
+	window.addEventListener('resize', () => {
+		innerWindowHeight = window.innerHeight;
+	});
+
 	let showAllAreas = false;
 </script>
 
-<div class="row-container sticky control-panel" style="z-index: {stickyZIndex}">
+<div
+	class="row-container sticky control-panel"
+	style="z-index: {stickyZIndex}; top: {innerWindowHeight <= 300 ? -130 : 0}px"
+>
 	<div class="visible-areas-key-container grid-container">
 		<AreaPanel
 			area={selectedArea}
@@ -121,6 +130,10 @@
 		flex-direction: column;
 		gap: 10px;
 		justify-content: space-between;
+	}
+
+	.sticky:hover {
+		top: 0px !important;
 	}
 
 	.row-container {
