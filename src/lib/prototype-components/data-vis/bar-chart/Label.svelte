@@ -7,7 +7,7 @@
 		customLookup,
 		fontSize = 18,
 		connectingLineInfo;
-
+	$: console.log(label);
 	$: color =
 		label.datum.role != 'related' && hoverId === label.datum.areacd
 			? colorsLookup.selected
@@ -100,7 +100,7 @@
 						y={-textArray.length * (fontSize / 2) + j * fontSize + fontSize / 2}
 						fill={color.contrast}
 						stroke="none"
-						class={label.datum.role}>{line}</text
+						class={label.datum.groupLabel ? '' : label.datum.role}>{line}</text
 					>
 				{/each}
 			</g>
