@@ -30,9 +30,11 @@
 <style>
 	line {
 		stroke: #222;
+		forced-color-adjust: auto;
 	}
 
 	text {
 		font-size: 16px;
+		forced-color-adjust: auto;
 	}
 </style>

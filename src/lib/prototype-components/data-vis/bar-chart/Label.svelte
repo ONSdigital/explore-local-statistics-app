@@ -99,13 +99,15 @@
 						style="font-size: {fontSize}px;"
 						y={-textArray.length * (fontSize / 2) + j * fontSize + fontSize / 2}
 						fill={color.contrast}
-						stroke="none">{line}</text
+						stroke="none"
+						class={label.datum.role}>{line}</text
 					>
 				{/each}
 			</g>
 		</g>
 	</g>
 {/if}
+
 <!-- {#if hoverId === label.datum.areacd || !hoverId}
 	<g
 		on:mouseenter={onMouseEnterEvent}
@@ -132,3 +134,8 @@
 		</g>
 	</g>
 {/if} -->
+<style>
+	text.related {
+		forced-color-adjust: auto;
+	}
+</style>
