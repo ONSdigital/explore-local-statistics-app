@@ -141,7 +141,7 @@
 
 <div class="svg-container" bind:clientWidth={width}>
 	{#if showConfidenceIntervals && indicator.metadata.confidenceIntervals === 'T'}
-		<svg {width} height="50">
+		<svg aria-hidden="true" {width} height="50">
 			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
 			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
 			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
@@ -159,8 +159,16 @@
 		</svg>
 	{/if}
 
-	<svg {width} {height}>
-		<g transform="translate({padding.left},{padding.top})">
+	<svg
+		role="img"
+		aria-labelledby={indicator.metadata.slug + '-main-line-chart-description'}
+		{width}
+		{height}
+	>
+		<desc id={indicator.metadata.slug + '-main-line-chart-description'}
+			>Line chart for {indicator.metadata.label}. The data is available to download below.</desc
+		>
+		<g aria-hidden="true" transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
 				<LineChart
 					{width}

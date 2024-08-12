@@ -105,120 +105,122 @@
 	$: console.log('dp', dp);
 </script>
 
-<div class="map-container">
-	{#if features && bounds}
-		<Map
-			style="{base}/data/mapstyle.json"
-			location={{ bounds }}
-			options={{
-				fitBoundsOptions: { padding: 10 },
-				maxBounds: [-19, 48, 12, 62],
-				cooperativeGestures: true,
-				preserveDrawingBuffer: true
-			}}
-			controls
-		>
-			{#key clusterKey}
-				<MapSource
-					id="features"
-					type="geojson"
-					data={featureCollection(features, data)}
-					promoteId="areacd"
-				>
-					<MapLayer
-						id="fills"
-						type="fill"
-						paint={{ 'fill-color': ['get', 'color'], 'fill-opacity': 0.7 }}
-						order="place_other"
-						hover
-						{hovered}
-						let:hovered
-						on:hover={doHover}
-						select
-						on:select={doSelect}
-						highlight
-						highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
+<div aria-hidden="true" class="map-outer">
+	<div class="map-container">
+		{#if features && bounds}
+			<Map
+				style="{base}/data/mapstyle.json"
+				location={{ bounds }}
+				options={{
+					fitBoundsOptions: { padding: 10 },
+					maxBounds: [-19, 48, 12, 62],
+					cooperativeGestures: true,
+					preserveDrawingBuffer: true
+				}}
+				controls
+			>
+				{#key clusterKey}
+					<MapSource
+						id="features"
+						type="geojson"
+						data={featureCollection(features, data)}
+						promoteId="areacd"
 					>
-						<MapTooltip content={features?.[hovered]?.properties?.areanm || ''} />
-					</MapLayer>
-					<MapLayer
-						id="lines"
-						type="line"
-						paint={{ 'line-color': 'white', 'line-width': 0.5 }}
-						order="place_other"
-					/>
-					<MapLayer
-						id="highlight"
-						type="line"
-						paint={{
-							'line-color': [
-								'case',
-								['==', ['feature-state', 'hovered'], true],
-								'orange',
-								'rgba(255,255,255,0)'
-							],
-							'line-width': 2
-						}}
-						order="place_suburb"
-					/>
-				</MapSource>
-			{/key}
-			{#if selected[0]}
-				<MapSource
-					id="selected"
-					type="geojson"
-					data={featureCollection(features, selected, { boundary: true })}
-					promoteId="areacd"
-				>
-					<MapLayer
-						id="selected-outline"
-						type="line"
-						paint={{
-							'line-color': 'white',
-							'line-width': 4
-						}}
-						order="place_other"
-					/>
-					<MapLayer
+						<MapLayer
+							id="fills"
+							type="fill"
+							paint={{ 'fill-color': ['get', 'color'], 'fill-opacity': 0.7 }}
+							order="place_other"
+							hover
+							{hovered}
+							let:hovered
+							on:hover={doHover}
+							select
+							on:select={doSelect}
+							highlight
+							highlighted={selected?.[0] ? selected.map((s) => s.areacd) : []}
+						>
+							<MapTooltip content={features?.[hovered]?.properties?.areanm || ''} />
+						</MapLayer>
+						<MapLayer
+							id="lines"
+							type="line"
+							paint={{ 'line-color': 'white', 'line-width': 0.5 }}
+							order="place_other"
+						/>
+						<MapLayer
+							id="highlight"
+							type="line"
+							paint={{
+								'line-color': [
+									'case',
+									['==', ['feature-state', 'hovered'], true],
+									'orange',
+									'rgba(255,255,255,0)'
+								],
+								'line-width': 2
+							}}
+							order="place_suburb"
+						/>
+					</MapSource>
+				{/key}
+				{#if selected[0]}
+					<MapSource
 						id="selected"
-						type="line"
-						paint={{
-							'line-color': ['get', 'color'],
-							'line-width': 2.5
-						}}
-						order="place_other"
-					/>
-				</MapSource>
-			{/if}
-		</Map>
+						type="geojson"
+						data={featureCollection(features, selected, { boundary: true })}
+						promoteId="areacd"
+					>
+						<MapLayer
+							id="selected-outline"
+							type="line"
+							paint={{
+								'line-color': 'white',
+								'line-width': 4
+							}}
+							order="place_other"
+						/>
+						<MapLayer
+							id="selected"
+							type="line"
+							paint={{
+								'line-color': ['get', 'color'],
+								'line-width': 2.5
+							}}
+							order="place_other"
+						/>
+					</MapSource>
+				{/if}
+			</Map>
+		{/if}
+	</div>
+	{#if features && legendType === 'choropleth'}
+		<BreaksChart
+			data={data.map((d) => ({ ...d, areanm: features[d.areacd]?.properties?.areanm }))}
+			{breaks}
+			{hovered}
+			{selected}
+			{prefix}
+			{suffix}
+			format={(d) =>
+				d.toLocaleString('en-GB', {
+					minimumFractionDigits: dp,
+					maximumFractionDigits: dp
+				})}
+			{getColor}
+			on:select={doSelect}
+			on:hover={doHover}
+		/>
+	{:else if legendType === 'categorical'}
+		<ul class="legend-list">
+			{#each ['a', 'b', 'c', 'd'] as cluster}
+				<li class="legend-chip" style:background={colors[cluster]}>
+					Cluster {cluster.toUpperCase()}
+				</li>
+			{/each}
+		</ul>
 	{/if}
 </div>
-{#if features && legendType === 'choropleth'}
-	<BreaksChart
-		data={data.map((d) => ({ ...d, areanm: features[d.areacd]?.properties?.areanm }))}
-		{breaks}
-		{hovered}
-		{selected}
-		{prefix}
-		{suffix}
-		format={(d) =>
-			d.toLocaleString('en-GB', {
-				minimumFractionDigits: dp,
-				maximumFractionDigits: dp
-			})}
-		{getColor}
-		on:select={doSelect}
-		on:hover={doHover}
-	/>
-{:else if legendType === 'categorical'}
-	<ul class="legend-list">
-		{#each ['a', 'b', 'c', 'd'] as cluster}
-			<li class="legend-chip" style:background={colors[cluster]}>
-				Cluster {cluster.toUpperCase()}
-			</li>
-		{/each}
-	</ul>
-{/if}
 
 <style>
 	.map-container {

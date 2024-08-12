@@ -66,6 +66,9 @@
 			on:select={doSelect}
 		/>
 	</div>
+	<div class="ons-u-vh">
+		Map for {indicator.metadata.label}. The data is available to download below.
+	</div>
 	<div class="source-notes-container">
 		<p class="source-container">
 			<span style="font-weight: bold">Source:</span>

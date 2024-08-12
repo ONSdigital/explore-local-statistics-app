@@ -102,9 +102,14 @@
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>
-	<svg {width} {height}>
-		<desc>{lineChartAltText}</desc>
-		<g transform="translate({padding.left},{padding.top})">
+	<svg
+		role="img"
+		aria-labelledby={indicator.metadata.slug + '-line-chart-description'}
+		{width}
+		{height}
+	>
+		<desc id={indicator.metadata.slug + '-line-chart-description'}>{lineChartAltText}</desc>
+		<g aria-hidden="true" transform="translate({padding.left},{padding.top})">
 			{#if chartWidth && chartHeight}
 				<LineChartRow
 					{indicator}

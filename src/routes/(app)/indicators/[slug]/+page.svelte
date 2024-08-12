@@ -513,6 +513,9 @@
 							customLookup={customLookup['indicator-additional-visible']}
 							on:select={doSelect}
 						/>
+						<div class="ons-u-vh">
+							Map for {data.indicator.metadata.label}. The data is available to download below.
+						</div>
 					</ContentBlock>
 				{/if}
 			</NavSection>
