@@ -3,7 +3,7 @@
 		fill = 'black';
 </script>
 
-<div class="info-cell">
+<div class="info-cell" aria-hidden="true">
 	<svg
 		style:width="24px"
 		style:height="24px"
@@ -28,5 +28,6 @@
 	svg {
 		vertical-align: middle;
 		overflow: visible;
+		forced-color-adjust: auto;
 	}
 </style>
