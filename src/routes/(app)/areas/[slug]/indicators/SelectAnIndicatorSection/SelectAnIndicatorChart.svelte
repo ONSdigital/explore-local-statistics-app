@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Tabs, Tab, Select } from '@onsvisual/svelte-components';
-
+	import {
+		// Tabs,
+		// Tab,
+		Select
+	} from '@onsvisual/svelte-components';
+	import Tabs from '$lib/modified-library-components/Tabs.svelte';
+	import Tab from '$lib/modified-library-components/Tab.svelte';
 	import LineChartWrapper from './LineChartWrapper.svelte';
 	import MapWrapper from './MapWrapper.svelte';
 	import BarChartWrapper from './BarChartWrapper.svelte';
