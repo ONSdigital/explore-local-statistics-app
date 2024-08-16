@@ -133,9 +133,11 @@
 			inset -12px 0 0 0 var(--background, white),
 			inset 0 -8px 0 0 #222;
 	}
-	.ons-tab--row {
+	/* Changed this bit of css from the svelte-component */
+	/* .ons-tab--row {
 		background: var(--hinted, #e2e2e3);
-	}
+	} */
+	/* End change */
 	.ons-tab[aria-selected='true']:not(:focus) {
 		background-color: var(--background, white);
 	}
