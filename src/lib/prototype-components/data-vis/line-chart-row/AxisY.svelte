@@ -107,5 +107,10 @@
 <style>
 	line {
 		stroke: #222;
+		forced-color-adjust: auto;
+	}
+
+	text {
+		forced-color-adjust: auto;
 	}
 </style>

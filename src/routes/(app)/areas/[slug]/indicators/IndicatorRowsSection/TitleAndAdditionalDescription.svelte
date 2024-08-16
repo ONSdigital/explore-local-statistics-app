@@ -28,6 +28,8 @@
 	on:mouseleave={onMouseleaveEvent}
 	on:click={onClickEvent}
 	style:margin="0 0 8px 0"
+	aria-expanded={displayAdditional}
+	aria-controls={indicator.metadata.slug + '-additional-description-text'}
 >
 	{#if showVisuals}
 		<span style="font-weight: bold"
@@ -46,7 +48,10 @@
 </button>
 
 {#if displayAdditional}
-	<div class="indicator-additional-description-text-container">
+	<div
+		id={indicator.metadata.slug + '-additional-description-text'}
+		class="indicator-additional-description-text-container"
+	>
 		{#if indicator.metadata.experimentalStatistic === 'T'}
 			<div class="stat-in-dev">
 				<div>Official statistics in development</div>

@@ -97,10 +97,18 @@
 
 <figure class="beeswarm-figure">
 	<div class="svg-container" bind:clientWidth={width}>
-		<svg {width} {height}>
-			<desc>{beeswarmAltText}</desc>
+		<svg
+			role="img"
+			aria-labelledby={indicator.metadata.slug + '-beeswarm-description'}
+			{width}
+			{height}
+		>
+			<desc id={indicator.metadata.slug + '-beeswarm-description'}>{beeswarmAltText}</desc>
 			{#if chartWidth && chartHeight}
-				<g transform="translate({padding.left + spaceForOutliers},{padding.top})">
+				<g
+					aria-hidden="true"
+					transform="translate({padding.left + spaceForOutliers},{padding.top})"
+				>
 					{#if chartWidth && chartHeight}
 						<Beeswarm
 							{metadata}

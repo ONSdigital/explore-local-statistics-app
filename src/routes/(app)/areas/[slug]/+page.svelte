@@ -15,10 +15,12 @@
 		Button,
 		Cards,
 		Card,
-		Tabs,
-		Tab,
+		// Tabs,
+		// Tab,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
+	import Tabs from '$lib/modified-library-components/Tabs.svelte';
+	import Tab from '$lib/modified-library-components/Tab.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import AreaNavMap from '$lib/components/AreaNavMap.svelte';
