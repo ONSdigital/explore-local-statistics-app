@@ -177,7 +177,7 @@
 	{/if}
 	<Card title="Find another area">
 		<label for="search" style:display="block" style:margin-bottom="8px"
-			>Type a place name or postcode</label
+			>Search for a place name or postcode</label
 		>
 		<AreaSelect
 			id="search"
