@@ -233,6 +233,9 @@
 </script>
 
 <div class="main-chart-column-container">
+	<label for="select-indicator" style:display="block" style:margin-bottom="8px"
+		>Select an indicator to explore:</label
+	>
 	<div class="row-container title-buttons-container">
 		<div class="select-container">
 			<Select
