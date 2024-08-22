@@ -38,14 +38,14 @@
 	dialog {
 		width: 760px;
 		margin-top: 40px;
-		min-height: 350px;
+		min-height: /*350px*/ 40vh;
 		max-height: calc(100vh - 80px);
 		border-radius: 5px;
 		border: none;
 		padding: 0;
 	}
 	.dialog-content {
-		max-height: calc(100vh - 175px);
+		/* max-height: calc(100vh - 175px); */
 		overflow-x: hidden;
 		overflow-y: auto;
 		padding: 0 12px;
