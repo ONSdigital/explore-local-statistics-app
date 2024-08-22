@@ -2,6 +2,7 @@
 	import Radio from '$lib/modified-library-components/Radio.svelte';
 	import Checkbox from '$lib/modified-library-components/Checkbox.svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import { slugify } from '$lib/util/url/slugify';
 
 	export let accordionSection, option, chosen, regex;
 
@@ -19,11 +20,17 @@
 	$: idKey = 'idKey' in option ? option.idKey : 'areacd';
 
 	$: optionsArray = option.data.filter((el) => (!regex ? true : regex.test(el[labelKey])));
+	$: if (option.accordion) console.log(slugify(option?.label));
 </script>
 
 {#if optionsArray.length > 0}
 	{#if option.accordion}
-		<button class="row-container accordion-button" on:click={onClickEventOpen}>
+		<button
+			class="row-container accordion-button"
+			aria-expanded={accordionOpen}
+			aria-controls={'column-container-' + slugify(option?.label)}
+			on:click={onClickEventOpen}
+		>
 			<Icon type="chevron" rotation={accordionOpen ? -90 : 0} />
 			<span>{option.label}</span>
 		</button>
@@ -32,7 +39,10 @@
 	{/if}
 
 	{#if !option.accordion || accordionOpen}
-		<div class="column-container">
+		<div
+			class="column-container"
+			id={accordionOpen ? 'column-container-' + slugify(option?.label) : ''}
+		>
 			{#if accordionSection.type === 'radio'}
 				<Radio
 					{optionsArray}
