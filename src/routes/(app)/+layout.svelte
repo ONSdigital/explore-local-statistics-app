@@ -68,3 +68,9 @@
 	</div>
 	<Footer theme="dark" />
 </div>
+
+<style>
+	:global(a:focus > svg.logo) {
+		outline: auto 5px;
+	}
+</style>
