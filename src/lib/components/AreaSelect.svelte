@@ -98,6 +98,8 @@
 			dispatch('select', selectedObject);
 			_placeholder = placeholder;
 		}
+		//Move focus to the search button
+		document.getElementsByClassName('select-container')[0].lastElementChild.focus();
 	}
 
 	function doSubmit() {
