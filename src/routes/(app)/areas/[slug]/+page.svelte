@@ -18,10 +18,9 @@
 		// Tabs,
 		// Tab,
 		Accordion,
-		// AccordionItem,
+		AccordionItem,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
-	import AccordionItem from '$lib/prototype-components/modified-svelte-components/AccordionItem.svelte'; //This is the exact item from svelte-components - but it's not exported in v0.1.72
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
