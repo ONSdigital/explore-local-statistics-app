@@ -16,7 +16,7 @@
 </script>
 
 <Theme theme="light" background="none">
-	<p role="status" class="dl-status">Areas covering <strong>{postcode.postcd}</strong></p>
+	<p role="alert" class="dl-status">Areas covering <strong>{postcode.postcd}</strong></p>
 	<dl class="dl-results">
 		{#each postcode.places as p}
 			{#if geoCodesLookup[p.areacd.slice(0, 3)]}

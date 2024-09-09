@@ -444,12 +444,14 @@
 				<div class="row-container">
 					<div class="content-dropdowns" data-html2canvas-ignore>
 						<Dropdown
+							label="Geography type"
 							options={geoGroups.filter((g) => g.key !== 'uk')}
 							bind:value={geoGroup}
 							on:change={refreshData}
 						/>
 						<Dropdown
 							id="year"
+							label="Time period"
 							options={timePeriodsArray.map((el) => el.label)}
 							width={10}
 							bind:value={chosenTimePeriodDropdownLabel}
@@ -566,6 +568,7 @@
 				<div class="content-dropdowns" data-html2canvas-ignore>
 					<Dropdown
 						id="year"
+						label="Time period"
 						options={timePeriodsArray.map((el) => el.label)}
 						width={10}
 						bind:value={chosenTimePeriodDropdownLabel}
@@ -611,7 +614,12 @@
 		<NavSection title="Table">
 			<div class="row-container">
 				<div class="content-dropdowns" data-html2canvas-ignore>
-					<Dropdown options={geoGroups} bind:value={geoGroup} on:change={refreshData} />
+					<Dropdown
+						label="Geography type"
+						options={geoGroups}
+						bind:value={geoGroup}
+						on:change={refreshData}
+					/>
 				</div>
 			</div>
 			<ContentBlock
@@ -742,6 +750,8 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		gap: 10px;
+		padding-bottom: 10px;
+		align-items: flex-end;
 	}
 
 	.subtitle {

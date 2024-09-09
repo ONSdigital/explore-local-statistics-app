@@ -151,4 +151,12 @@
 		padding-left: 12px;
 		padding-right: 12px;
 	}
+
+	/* Bespoke fix for 'select an indicator chart' tabs */
+	@media (max-width: 360px) {
+		.ons-tab {
+			padding-left: 9px;
+			padding-right: 9px;
+		}
+	}
 </style>

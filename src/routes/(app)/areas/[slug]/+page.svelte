@@ -17,6 +17,8 @@
 		Card,
 		// Tabs,
 		// Tab,
+		Accordion,
+		AccordionItem,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
@@ -62,6 +64,8 @@
 		postcode = null;
 		searchValue = null;
 	});
+
+	let tabsWidth;
 </script>
 
 <svelte:head>
@@ -177,7 +181,7 @@
 	{/if}
 	<Card title="Find another area">
 		<label for="search" style:display="block" style:margin-bottom="8px"
-			>Type a place name or postcode</label
+			>Search for a place name or postcode</label
 		>
 		<AreaSelect
 			id="search"
@@ -203,31 +207,54 @@
 	</Card>
 	<Card colspan={3} noBackground>
 		<!-- Removed the "ons-u-d-no" class that was hiding the tab panel at 400% zoom -->
-		<div style:margin-top="10px" class="ons-u-d-b@s">
+		<div style:margin-top="10px" class="ons-u-d-b@s" bind:clientWidth={tabsWidth}>
 			{#key childType}
 				{#if childType}
-					<Tabs
-						selected={childType.key}
-						compact
-						on:change={(e) => (childType = data.childTypes.find((c) => c.key === e.detail.id))}
-					>
-						{#each data.childTypes as type, i}
-							<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
-								<ul class="list-columns">
-									{#each filterChildren(data.place, type) as child, i}
-										<li>
-											<a
-												href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
-												data-sveltekit-noscroll
-												rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
-												>{getName(child)}</a
-											>
-										</li>
-									{/each}
-								</ul>
-							</Tab>
-						{/each}
-					</Tabs>
+					{#if tabsWidth > 510 || data.childTypes.length === 1}
+						<Tabs
+							selected={childType.key}
+							compact
+							on:change={(e) => (childType = data.childTypes.find((c) => c.key === e.detail.id))}
+						>
+							{#each data.childTypes as type, i}
+								<Tab title={capitalise(type.plural)} id={type.key} hideTitle>
+									<ul class="list-columns">
+										{#each filterChildren(data.place, type) as child, i}
+											<li>
+												<a
+													href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
+													data-sveltekit-noscroll
+													rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+													>{getName(child)}</a
+												>
+											</li>
+										{/each}
+									</ul>
+								</Tab>
+							{/each}
+						</Tabs>
+					{:else}
+						<!-- Use accordion when screen sizes are very small and there is more that one tab -->
+						<Accordion width="full">
+							{#each data.childTypes as type, i}
+								<!-- {capitalise(type.plural)} -->
+								<AccordionItem title={capitalise(type.plural)}>
+									<ul class="list-columns">
+										{#each filterChildren(data.place, type) as child, i}
+											<li>
+												<a
+													href="{base}/areas/{makeCanonicalSlug(child.areacd, child?.areanm)}"
+													data-sveltekit-noscroll
+													rel={noIndex.includes(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+													>{getName(child)}</a
+												>
+											</li>
+										{/each}
+									</ul></AccordionItem
+								>
+							{/each}
+						</Accordion>
+					{/if}
 				{:else}
 					<p>No smaller areas available within {getName(data.place, 'the')}.</p>
 				{/if}

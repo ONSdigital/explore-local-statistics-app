@@ -23,7 +23,12 @@
 
 {#if optionsArray.length > 0}
 	{#if option.accordion}
-		<button class="row-container accordion-button" on:click={onClickEventOpen}>
+		<button
+			class="row-container accordion-button"
+			aria-expanded={accordionOpen}
+			aria-controls={'column-container-' + option?.key}
+			on:click={onClickEventOpen}
+		>
 			<Icon type="chevron" rotation={accordionOpen ? -90 : 0} />
 			<span>{option.label}</span>
 		</button>
@@ -32,7 +37,7 @@
 	{/if}
 
 	{#if !option.accordion || accordionOpen}
-		<div class="column-container">
+		<div class="column-container" id={'column-container-' + option?.key}>
 			{#if accordionSection.type === 'radio'}
 				<Radio
 					{optionsArray}

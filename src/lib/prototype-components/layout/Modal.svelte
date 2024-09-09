@@ -21,10 +21,11 @@
 	<div on:click|stopPropagation>
 		<div class="row-container title-exit-button-container">
 			<slot name="title" />
-			<Button on:click={() => dialog.close()} small={true} variant="secondary">
+			<Button on:click={() => dialog.close()} small={true} hideLabel variant="secondary">
 				<div slot="icon" style:display="contents">
 					<Icon type="close" />
 				</div>
+				Close
 			</Button>
 		</div>
 		<div class="dialog-content">
@@ -37,14 +38,14 @@
 	dialog {
 		width: 760px;
 		margin-top: 40px;
-		min-height: 350px;
+		min-height: /*350px*/ 40vh;
 		max-height: calc(100vh - 80px);
 		border-radius: 5px;
 		border: none;
 		padding: 0;
 	}
 	.dialog-content {
-		max-height: calc(100vh - 175px);
+		/* max-height: calc(100vh - 175px); */
 		overflow-x: hidden;
 		overflow-y: auto;
 		padding: 0 12px;
