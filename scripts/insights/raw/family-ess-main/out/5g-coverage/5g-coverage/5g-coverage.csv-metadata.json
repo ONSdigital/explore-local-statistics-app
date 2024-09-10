@@ -243,293 +243,13 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "5g-coverage.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "5g-coverage.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "5g-coverage.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geographic area with 5G coverage by at least one provider"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#component/geographic-area-with-5g-coverage-by-at-least-one-provider",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "5g-coverage.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#dimension/month",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "month.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Month"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "5g-coverage.csv#class/month"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#component/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "5g-coverage.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "5g-coverage.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#slice/cross-measures",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "5g-coverage.csv#dimension/month"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#component/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
             "@id": "5g-coverage.csv#dimension/area-name",
             "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -549,69 +269,107 @@
             ]
         },
         {
-            "@id": "5g-coverage.csv#component/month",
+            "@id": "5g-coverage.csv#attribute/lower-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "5g-coverage.csv#dimension/month"
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "5g-coverage.csv#dimension/month"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
             ]
         },
         {
-            "@id": "5g-coverage.csv#component/unit",
+            "@id": "5g-coverage.csv#dimension/geography-type",
             "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@language": "en",
+                    "@value": "Geography Type"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
+                    "@id": "5g-coverage.csv#class/geography-type"
                 }
             ]
         },
         {
-            "@id": "5g-coverage.csv#class/ons-geography-code",
+            "@id": "5g-coverage.csv#class/area-name",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "5g-coverage.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
             ]
         },
         {
             "@id": "5g-coverage.csv#structure",
             "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#component": [
                 {
@@ -627,45 +385,45 @@
                     "@id": "5g-coverage.csv#component/month"
                 },
                 {
-                    "@id": "5g-coverage.csv#component/observation-status"
+                    "@id": "5g-coverage.csv#component/upper-confidence-interval"
                 },
                 {
-                    "@id": "5g-coverage.csv#component/measure-type"
+                    "@id": "5g-coverage.csv#component/observation-status"
                 },
                 {
                     "@id": "5g-coverage.csv#component/lower-confidence-interval"
                 },
                 {
-                    "@id": "5g-coverage.csv#component/unit"
-                },
-                {
-                    "@id": "5g-coverage.csv#component/upper-confidence-interval"
-                },
-                {
                     "@id": "5g-coverage.csv#component/geographic-area-with-5g-coverage-by-at-least-one-provider"
+                },
+                {
+                    "@id": "5g-coverage.csv#component/measure-type"
+                },
+                {
+                    "@id": "5g-coverage.csv#component/unit"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
+                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
+                },
+                {
                     "@id": "5g-coverage.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "5g-coverage.csv#dimension/area-name"
                 },
                 {
                     "@id": "http://purl.org/linked-data/cube#measureType"
                 },
                 {
-                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
+                    "@id": "5g-coverage.csv#dimension/area-name"
                 },
                 {
                     "@id": "5g-coverage.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "5g-coverage.csv#dimension/month"
+                },
+                {
+                    "@id": "5g-coverage.csv#dimension/geography-type"
                 },
                 {
                     "@id": "5g-coverage.csv#attribute/lower-confidence-interval"
@@ -674,7 +432,7 @@
                     "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 },
                 {
-                    "@id": "5g-coverage.csv#dimension/month"
+                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#sliceKey": [
@@ -684,13 +442,93 @@
             ]
         },
         {
+            "@id": "5g-coverage.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#dimension/month"
+                },
+                {
+                    "@id": "5g-coverage.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "5g-coverage.csv#dimension/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "5g-coverage.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
             "@id": "5g-coverage.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -744,7 +582,7 @@
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "Percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, as of January 2024.."
+                    "@value": "Percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, as of January 2024."
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -756,7 +594,11 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "connectivity"
                 },
                 {
                     "@language": "en",
@@ -764,11 +606,7 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "connectivity"
+                    "@value": "local-authority"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -783,42 +621,123 @@
             ]
         },
         {
-            "@id": "5g-coverage.csv#dimension/ons-geography-code",
+            "@id": "5g-coverage.csv#component/geographic-area-with-5g-coverage-by-at-least-one-provider",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
-            "http://purl.org/linked-data/cube#codeList": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "ons-geography-code.csv#code-list"
+                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
                 }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "5g-coverage.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "ONS Geography Code"
+                    "@value": "Upper Confidence Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "5g-coverage.csv#class/ons-geography-code"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                    "@id": "5g-coverage.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#component/month",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#dimension/month"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "5g-coverage.csv#dimension/month"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
                 }
             ]
         },
         {
             "@id": "5g-coverage.csv#component/upper-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -842,43 +761,48 @@
             ]
         },
         {
-            "@id": "5g-coverage.csv#component/geography-type",
+            "@id": "5g-coverage.csv#component/unit",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "5g-coverage.csv#dimension/geography-type"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "5g-coverage.csv#dimension/geography-type"
+                    "@value": true
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 3
+                    "@value": 6
                 }
             ]
         },
         {
-            "@id": "5g-coverage.csv#component/lower-confidence-interval",
+            "@id": "5g-coverage.csv#component/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "5g-coverage.csv#attribute/lower-confidence-interval"
+                    "@id": "5g-coverage.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "5g-coverage.csv#attribute/lower-confidence-interval"
+                    "@id": "5g-coverage.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -888,52 +812,128 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "5g-coverage.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
+                    "@value": 10
                 }
             ]
         },
         {
             "@id": "5g-coverage.csv#class/month",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "5g-coverage.csv#class/area-name",
+            "@id": "5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geographic area with 5G coverage by at least one provider"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#dimension/month",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "month.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Month"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "5g-coverage.csv#class/month"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "5g-coverage.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "5g-coverage.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "5g-coverage.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
             ]
         },
         {
             "@id": "5g-coverage.csv#dependency/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -949,8 +949,8 @@
         {
             "@id": "5g-coverage.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -966,8 +966,8 @@
         {
             "@id": "5g-coverage.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -983,8 +983,8 @@
         {
             "@id": "5g-coverage.csv#dependency/month",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1000,9 +1000,9 @@
         {
             "@id": "5g-coverage.csv#unit/percent",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

@@ -9,16 +9,15 @@
                     {
                         "titles": "AREANM",
                         "name": "areanm",
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
-                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name",
-                        "datatype": "string",
-                        "required": false
+                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
                     },
                     {
                         "titles": "AREACD",
                         "name": "areacd",
-                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography",
-                        "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{+areacd}",
+                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
                         "required": true
                     },
                     {
@@ -29,9 +28,9 @@
                         "required": true
                     },
                     {
-                        "titles": "Gross Value Added",
-                        "name": "gross_value_added",
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added",
                         "datatype": "decimal",
                         "required": true
@@ -49,55 +48,76 @@
                         "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/cross-measures"
                     },
                     {
-                        "name": "virt_obs_gross_value_added",
+                        "name": "virt_obs_observation",
                         "virtual": true,
                         "propertyUrl": "qb:observation",
-                        "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added"
+                        "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added"
                     },
                     {
-                        "name": "virt_obs_gross_value_added_meas",
+                        "name": "virt_obs_observation_meas",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "qb:measureType",
                         "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
                     },
                     {
-                        "name": "virt_obs_gross_value_added_unit",
+                        "name": "virt_obs_observation_unit",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#unit/pounds-sterling-millions"
                     },
                     {
-                        "name": "virt_dim_gross_value_added_areacd",
+                        "name": "virt_dim_observation_areanm",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
-                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography",
-                        "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{+areacd}"
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
+                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
                     },
                     {
-                        "name": "virt_dim_gross_value_added_period",
+                        "name": "virt_dim_observation_areacd",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
+                        "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year",
                         "valueUrl": "year.csv#{+period}"
                     },
                     {
-                        "name": "virt_obs_gross_value_added_type",
+                        "name": "virt_obs_observation_type",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
-                        "name": "virt_dataSet_gross_value_added",
+                        "name": "virt_dataSet_observation",
                         "virtual": true,
-                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areacd},{period}@gross-value-added",
+                        "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#obs/{areanm},{areacd},{period}@gross-value-added",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dataset"
                     }
                 ],
                 "foreignKeys": [
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
                     {
                         "columnReference": "period",
                         "reference": {
@@ -107,11 +127,22 @@
                     }
                 ],
                 "primaryKey": [
+                    "areanm",
                     "areacd",
                     "period"
                 ],
-                "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/{areacd},{period}"
+                "aboutUrl": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/{areanm},{areacd},{period}"
             }
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
         },
         {
             "url": "year.csv",
@@ -121,190 +152,13 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/unit"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/measure-type"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/gross-value-added"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/statistical-geography"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/area-name"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography"
-                },
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Statistical Geography"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/statistical-geography"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
             "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/ns/dcat#Dataset",
-                "http://purl.org/linked-data/cube#DataSet"
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -325,7 +179,7 @@
             "http://purl.org/dc/terms/issued": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-07-26T14:30:56.150896"
+                    "@value": "2023-07-26T14:30:00"
                 }
             ],
             "http://purl.org/dc/terms/license": [
@@ -336,7 +190,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-07-26T14:30:56.150896"
+                    "@value": "2023-07-26T14:35:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -370,7 +224,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "subregional-productivity"
+                    "@value": "local-authority"
                 },
                 {
                     "@language": "en",
@@ -378,15 +232,15 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subregional-productivity"
                 },
                 {
                     "@language": "en",
                     "@value": "region"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -401,57 +255,25 @@
             ]
         },
         {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/gross-value-added",
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
                 }
             ],
-            "http://purl.org/linked-data/cube#measure": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.6"
-                }
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#string"
+                    "@value": 3
                 }
             ]
         },
@@ -460,8 +282,8 @@
             "@type": [
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -481,34 +303,51 @@
             ]
         },
         {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/statistical-geography",
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
             ]
         },
         {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/year",
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/statistical-geography",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography"
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography"
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
@@ -518,11 +357,18 @@
             ]
         },
         {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
             "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/unit",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -546,11 +392,91 @@
             ]
         },
         {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                }
+            ]
+        },
+        {
             "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/measure-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -565,6 +491,161 @@
             "http://purl.org/linked-data/cube#order": [
                 {
                     "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/gross-value-added",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/area-name"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/gross-value-added"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/measure-type"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/unit"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#component/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dependency/area-name",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
                 }
             ]
         },
@@ -588,8 +669,8 @@
         {
             "@id": "england-and-wales-lower-layer-super-output-areas-gross-value-added-gva-estimates.csv#unit/pounds-sterling-millions",
             "@type": [
-                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [

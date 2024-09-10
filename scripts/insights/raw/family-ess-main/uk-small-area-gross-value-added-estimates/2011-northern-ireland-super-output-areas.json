@@ -14,24 +14,23 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "themes": "https://www.ons.gov.uk/economy/economicoutputandproductivity",
+    "dataset_issued": "2023-07-26T14:30",
+    "dataset_modified": "2023-07-26T14:30",
     "columns": {
         "Period": {
             "from_template": "year"
         },
-        "AREANM": {
-            "type": "attribute",
-            "data_type": "string",
-            "label": "Area Name",
-            "description": "Attribute not assigned to an observation."
-        },
-        "AREACD": {
+       "AREACD": {
             "type": "dimension",
-            "from_existing": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-            "definition_uri": "https://www.nisra.gov.uk/support/output-geography-census-2011/super-output-areas",
-            "label": "Statistical Geography",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
             "code_list": true
         },
-        "Gross Value Added": {
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Observation": {
             "type": "observations",
             "data_type": "decimal",
             "unit": {
