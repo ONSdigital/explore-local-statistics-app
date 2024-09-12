@@ -5,8 +5,8 @@
         - The data cube has the following catalog metadata:
           - Title: Scotland data zones gross value added (GVA) estimates
           - Label: Scotland data zones gross value added (GVA) estimates
-          - Issued: 2023-07-26T14:34:51.476913
-          - Modified: 2023-07-26T14:34:51.476913
+          - Issued: 2023-07-26T14:30:00
+          - Modified: 2023-07-26T14:30:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,11 +14,11 @@
           - Themes: 
 		-- https://www.ons.gov.uk/economy/economicoutputandproductivity
           - Keywords: 
-		-- international-territorial-level
 		-- subregional-productivity
-		-- region
 		-- local-authority
 		-- subnational
+		-- international-territorial-level
+		-- region
           - Contact Point: None
           - Identifier: Scotland data zones gross value added (GVA) estimates
           - Comment: Provides GVA estimates for data zones (DZ, Scotland), 1998 to 2020.
@@ -47,46 +47,48 @@
  - The data cube has the following column component information: 
     - Dataset Label: Scotland data zones gross value added (GVA) estimates
     - Columns: 
-                Title         Type  Required                                                                            Property URL Observations Column Titles
-               AREANM    Attribute     False             scotland-data-zones-gross-value-added-gva-estimates.csv#attribute/area-name          Gross Value Added
-               AREACD    Dimension      True scotland-data-zones-gross-value-added-gva-estimates.csv#dimension/statistical-geography          Gross Value Added
-               Period    Dimension      True                  scotland-data-zones-gross-value-added-gva-estimates.csv#dimension/year          Gross Value Added
-    Gross Value Added Observations      True       scotland-data-zones-gross-value-added-gva-estimates.csv#measure/gross-value-added          Gross Value Added
+          Title         Type  Required                                                                         Property URL Observations Column Titles
+         AREANM    Dimension      True          scotland-data-zones-gross-value-added-gva-estimates.csv#dimension/area-name                Observation
+         AREACD    Dimension      True scotland-data-zones-gross-value-added-gva-estimates.csv#dimension/ons-geography-code                Observation
+         Period    Dimension      True               scotland-data-zones-gross-value-added-gva-estimates.csv#dimension/year                Observation
+    Observation Observations      True    scotland-data-zones-gross-value-added-gva-estimates.csv#measure/gross-value-added                Observation
     - Columns where suppress output is true: None
 
 - The data cube has the following code list information:
-        - Number of Code Lists: 1
+        - Number of Code Lists: 3
         - Code Lists:
-         Code List Code List Label Columns Used In
-year.csv#code-list            Year          Period
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
         - Number of Rows: 160448
         - Number of Duplicates: 0
         - First 10 Rows: 
-                            AREANM    AREACD  Period  Gross Value Added
-              Tullibody South - 01 S01007409    1998             29.617
-              Tullibody South - 02 S01007410    1998              1.179
-              Tullibody South - 03 S01007411    1998              5.085
-              Tullibody South - 04 S01007412    1998              0.834
-              Tullibody South - 05 S01007413    1998              2.606
-              Tullibody South - 06 S01007414    1998              1.236
-Tullibody North and Glenochil - 01 S01007415    1998              2.178
-Tullibody North and Glenochil - 02 S01007416    1998              0.523
-Tullibody North and Glenochil - 03 S01007417    1998              1.045
-Tullibody North and Glenochil - 04 S01007418    1998              2.413
+                          AREANM    AREACD  Period  Observation
+              tullibody-south-01 s01007409    1998       29.617
+              tullibody-south-02 s01007410    1998        1.179
+              tullibody-south-03 s01007411    1998        5.085
+              tullibody-south-04 s01007412    1998        0.834
+              tullibody-south-05 s01007413    1998        2.606
+              tullibody-south-06 s01007414    1998        1.236
+tullibody-north-and-glenochil-01 s01007415    1998        2.178
+tullibody-north-and-glenochil-02 s01007416    1998        0.523
+tullibody-north-and-glenochil-03 s01007417    1998        1.045
+tullibody-north-and-glenochil-04 s01007418    1998        2.413
         - Last 10 Rows: 
-               AREANM    AREACD  Period  Gross Value Added
-Drumchapel North - 04 S01010494    2020              2.507
-Drumchapel North - 05 S01010495    2020              2.507
-     Drumry East - 01 S01010496    2020              8.673
-     Drumry East - 02 S01010497    2020              7.383
-     Drumry East - 03 S01010498    2020              7.383
-     Drumry East - 04 S01010499    2020             41.869
-     Drumry West - 01 S01010500    2020              2.254
-     Drumry West - 02 S01010501    2020              0.517
-     Drumry West - 03 S01010502    2020              1.893
-     Drumry West - 04 S01010503    2020              3.405
+             AREANM    AREACD  Period  Observation
+drumchapel-north-04 s01010494    2020        2.507
+drumchapel-north-05 s01010495    2020        2.507
+     drumry-east-01 s01010496    2020        8.673
+     drumry-east-02 s01010497    2020        7.383
+     drumry-east-03 s01010498    2020        7.383
+     drumry-east-04 s01010499    2020       41.869
+     drumry-west-01 s01010500    2020        2.254
+     drumry-west-02 s01010501    2020        0.517
+     drumry-west-03 s01010502    2020        1.893
+     drumry-west-04 s01010503    2020        3.405
         
 
 - The data cube has the following value counts:

@@ -243,6 +243,42 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
@@ -250,61 +286,11 @@
             ]
         },
         {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/area-name",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -325,9 +311,9 @@
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -351,398 +337,33 @@
             ]
         },
         {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval",
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/unit",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name",
-            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "area-name.csv#code-list"
+                    "@id": "year.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Area Name"
+                    "@value": "Year"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/ons-geography-code"
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/year"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/geography-type"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/observation-status"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/unit"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/measure-type"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/year"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/area-name"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#slice/cross-measures",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
-                },
-                {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
                 }
             ]
         },
@@ -750,8 +371,8 @@
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dataset",
             "@type": [
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
                 "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/ns/dcat#Dataset"
             ],
@@ -763,7 +384,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population (2019 definition), in Scotland, for 2001 to 2022.\n\n### Coverage \n\nScotland\n\n#### Geography definition\n\nCouncil Areas,\nNation (Scotland) \n\n### Source\n\n - Scotland: [Public Health Scotland Heart disease statistics]https://publichealthscotland.scot/publications/scottish-heart-disease-statistics/scottish-heart-disease-statistics-year-ending-31-march-2022/) and [Public Health Scotland Stroke statistics]https://publichealthscotland.scot/publications/scottish-stroke-statistics/scottish-stroke-statistics-year-ending-31-march-2022/) \n\n\n### Source Notes and Caveats \n- Data are based on year of death registration.\n- Data relate to all deaths that occurred in Scotland. This includes those who are resident outwith Scotland, those with no fixed abode and those with unknown residence.\n- Data includes underlying cause of death from coronary heart disease (ICD-10 code I20-I25) or cerebrovascular disease (ICD-10 code I60-I69).\n- Age standardised rates calculated using the direct method, standardised to the 2013 European Standard Population (ESP2013). National Records of Scotland Population Estimates were used in the calculation of the crude and standardised rates."
+                    "@value": "This dataset shows the age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population, in Scotland, for 2001 to 2022.\n\n### Coverage \n\nScotland\n\n#### Geography definition\n\nCouncil Areas,\nNation (Scotland) \n\n### Source\n\n - Scotland: [Public Health Scotland Heart disease statistics](https://publichealthscotland.scot/publications/scottish-heart-disease-statistics/scottish-heart-disease-statistics-year-ending-31-march-2022/) and [Public Health Scotland Stroke statistics](https://publichealthscotland.scot/publications/scottish-stroke-statistics/scottish-stroke-statistics-year-ending-31-march-2022/) \n\n\n### Source Notes and Caveats \n- Data are based on year of death registration.\n- Data relate to all deaths that occurred in Scotland. This includes those who are resident outwith Scotland, those with no fixed abode and those with unknown residence.\n- Data includes underlying cause of death from coronary heart disease (ICD-10 code I20-I25) or cerebrovascular disease (ICD-10 code I60-I69).\n- Age standardised rates calculated using the direct method, standardised to the 2013 European Standard Population (ESP2013). National Records of Scotland Population Estimates were used in the calculation of the crude and standardised rates."
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -807,7 +428,7 @@
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "Age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population (2019 definition), Scotland, 2001 to 2022."
+                    "@value": "Age-standardised mortality rate from coronary heart disease or cerebrovascular disease for those aged under 75 per 100,000 population, Scotland, 2001 to 2022."
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -819,14 +440,6 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "heart-disease"
-                },
-                {
-                    "@language": "en",
-                    "@value": "scotland"
-                },
-                {
-                    "@language": "en",
                     "@value": "local-authority"
                 },
                 {
@@ -836,6 +449,14 @@
                 {
                     "@language": "en",
                     "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "scotland"
+                },
+                {
+                    "@language": "en",
+                    "@value": "heart-disease"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -850,36 +471,205 @@
             ]
         },
         {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75",
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/observation-status"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/measure-type"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/year"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/geography-type"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/unit"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Age-standardised mortality rate for those aged under 75"
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
                     "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
                 }
             ]
         },
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/lower-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -903,41 +693,251 @@
             ]
         },
         {
-            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year",
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/unit",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "year.csv#code-list"
+                    "@id": "ons-geography-code.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Year"
+                    "@value": "ONS Geography Code"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/year"
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/ons-geography-code"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Age-standardised mortality rate for those aged under 75"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#class/area-name"
                 }
             ]
         },
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dependency/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -953,8 +953,8 @@
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -970,8 +970,8 @@
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -987,8 +987,8 @@
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#dependency/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1004,9 +1004,9 @@
         {
             "@id": "mortality-rate-from-coronary-heart-disease-or-cerebrovascular-disease-scotland.csv#unit/per-100-000",
             "@type": [
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

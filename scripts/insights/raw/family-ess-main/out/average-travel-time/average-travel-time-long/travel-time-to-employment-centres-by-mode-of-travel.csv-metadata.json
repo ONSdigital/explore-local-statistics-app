@@ -221,102 +221,11 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/mode-of-travel",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
             "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/measure-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -335,36 +244,191 @@
             ]
         },
         {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/geography-type",
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/mode-of-travel",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Travel time to employment centre with 500 to 4999 jobs"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#travel-time"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/mode-of-travel"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/area-name"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/geography-type"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/measure-type"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/unit"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/year"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/travel-time-to-employment-centre-with-500-to-4999-jobs"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
                     "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
+                },
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#sliceKey": [
                 {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/travel-time-to-employment-centre-with-500-to-4999-jobs",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 3
+                    "@value": 7
                 }
             ]
         },
         {
             "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dataset",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/ns/dcat#Resource"
+                "http://purl.org/linked-data/cube#DataSet"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -374,7 +438,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), in England, for periods 2014-2019. \n\n### Coverage \n\nEngland\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nMetropolitan Counties,\nCounties,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Transport](https://www.gov.uk/government/statistical-data-sets/journey-time-statistics-data-tables-jts) \n\n\n### Source Notes and Caveats \nData is not available for 2018. \n\n\n"
+                    "@value": "This dataset shows the average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (official statistics in development), in England, for periods 2014-2019. \n\n### Coverage \n\nEngland\n\n### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nMetropolitan Counties,\nCounties,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Transport](https://www.gov.uk/government/statistical-data-sets/journey-time-statistics-data-tables-jts) \n\n\n### Source Notes and Caveats \nData is not available for 2018. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -418,7 +482,7 @@
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (experimental statistics), England, 2014-2019."
+                    "@value": "Average travel time in minutes to nearest employment centre with 500 to 4999 jobs available by public transport or walking, by cycle and by car (official statistics in development), England, 2014-2019."
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -434,10 +498,6 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "travel-to-work"
-                },
-                {
-                    "@language": "en",
                     "@value": "transport"
                 },
                 {
@@ -447,6 +507,10 @@
                 {
                     "@language": "en",
                     "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "travel-to-work"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -461,37 +525,18 @@
             ]
         },
         {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name",
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/area-name"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
             "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -510,256 +555,12 @@
             ]
         },
         {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/mode-of-travel",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/travel-time-to-employment-centre-with-500-to-4999-jobs"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/year"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/geography-type"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/unit"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/area-name"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/measure-type"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/mode-of-travel"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year"
-                },
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/travel-time-to-employment-centre-with-500-to-4999-jobs",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "mode-of-travel.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Mode of travel"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/mode-of-travel"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#measure/travel-time-to-employment-centre-with-500-to-4999-jobs",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Travel time to employment centre with 500 to 4999 jobs"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#travel-time"
-                }
-            ]
-        },
-        {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
             "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/year",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -785,11 +586,95 @@
             ]
         },
         {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
             "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -808,10 +693,125 @@
             ]
         },
         {
-            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/ons-geography-code",
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/area-name",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#component/mode-of-travel",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#dimension/mode-of-travel",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "mode-of-travel.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Mode of travel"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "travel-time-to-employment-centres-by-mode-of-travel.csv#class/mode-of-travel"
+                }
             ]
         },
         {

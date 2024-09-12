@@ -1,4 +1,5 @@
 {
+    "@context": "http://www.w3.org/ns/csvw",
     "columns": [
         {
             "titles": "Uri Identifier",
@@ -23,7 +24,7 @@
             "name": "parent_uri_identifier",
             "required": false,
             "propertyUrl": "skos:broader",
-            "valueUrl": "ons-geography-code-list-for-pupils-at-expected-standards-by-end-of-primary-school-csv.csv#{+parent_uri_identifier}"
+            "valueUrl": "ons-geography-code.csv#{+parent_uri_identifier}"
         },
         {
             "titles": "Sort Priority",
@@ -42,7 +43,7 @@
             "titles": "Original Concept URI",
             "name": "uri",
             "required": true,
-            "propertyUrl": "owl:sameAs",
+            "propertyUrl": "skos:exactMatch",
             "valueUrl": "{+uri}"
         },
         {
@@ -50,7 +51,7 @@
             "name": "virt_inScheme",
             "required": true,
             "propertyUrl": "skos:inScheme",
-            "valueUrl": "ons-geography-code-list-for-pupils-at-expected-standards-by-end-of-primary-school-csv.csv#code-list"
+            "valueUrl": "ons-geography-code.csv#code-list"
         },
         {
             "virtual": true,
@@ -60,6 +61,6 @@
             "valueUrl": "skos:Concept"
         }
     ],
-    "aboutUrl": "ons-geography-code-list-for-pupils-at-expected-standards-by-end-of-primary-school-csv.csv#{+uri_identifier}",
+    "aboutUrl": "ons-geography-code.csv#{+uri_identifier}",
     "primaryKey": "uri_identifier"
 }

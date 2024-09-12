@@ -84,7 +84,7 @@
 	.source-container {
 		padding: 0px;
 		margin: 0px;
-		line-height: 1;
+		line-height: 1.2;
 	}
 
 	.content-subhead {

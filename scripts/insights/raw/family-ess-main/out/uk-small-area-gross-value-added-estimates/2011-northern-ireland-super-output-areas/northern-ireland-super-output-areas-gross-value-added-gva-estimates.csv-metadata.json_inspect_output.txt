@@ -5,8 +5,8 @@
         - The data cube has the following catalog metadata:
           - Title: Northern Ireland super output areas gross value added (GVA) estimates
           - Label: Northern Ireland super output areas gross value added (GVA) estimates
-          - Issued: 2023-07-26T14:34:35.657657
-          - Modified: 2023-07-26T14:34:35.657657
+          - Issued: 2023-07-26T14:30:00
+          - Modified: 2023-07-26T14:30:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,10 +15,10 @@
 		-- https://www.ons.gov.uk/economy/economicoutputandproductivity
           - Keywords: 
 		-- local-authority
-		-- region
-		-- subregional-productivity
-		-- international-territorial-level
 		-- subnational
+		-- region
+		-- international-territorial-level
+		-- subregional-productivity
           - Contact Point: None
           - Identifier: Northern Ireland super output areas gross value added (GVA) estimates
           - Comment: Provides GVA estimates for super output areas (SOA, Northern Ireland), 1998 to 2020.
@@ -47,47 +47,48 @@
  - The data cube has the following column component information: 
     - Dataset Label: Northern Ireland super output areas gross value added (GVA) estimates
     - Columns: 
-                Title         Type  Required                                                                                            Property URL Observations Column Titles
-               AREANM    Attribute     False             northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#attribute/area-name          Gross Value Added
-               AREACD    Dimension      True northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#dimension/statistical-geography          Gross Value Added
-               Period    Dimension      True                  northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year          Gross Value Added
-    Gross Value Added Observations      True       northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added          Gross Value Added
+          Title         Type  Required                                                                                         Property URL Observations Column Titles
+         AREANM    Dimension      True          northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#dimension/area-name                Observation
+         AREACD    Dimension      True northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#dimension/ons-geography-code                Observation
+         Period    Dimension      True               northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#dimension/year                Observation
+    Observation Observations      True    northern-ireland-super-output-areas-gross-value-added-gva-estimates.csv#measure/gross-value-added                Observation
     - Columns where suppress output is true: None
 
 - The data cube has the following code list information:
-        - Number of Code Lists: 2
+        - Number of Code Lists: 3
         - Code Lists:
-                          Code List       Code List Label Columns Used In
-statistical-geography.csv#code-list Statistical Geography          AREACD
-                 year.csv#code-list                  Year          Period
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
         - Number of Rows: 20470
         - Number of Duplicates: 0
         - First 10 Rows: 
-          AREANM   AREACD  Period  Gross Value Added
-    Aldergrove_1 95aa01s1    1998             96.355
-    Aldergrove_2 95aa01s2    1998             77.792
-    Aldergrove_3 95aa01s3    1998             77.792
-          Balloo 95aa02w1    1998              2.932
-     Ballycraigy 95aa03w1    1998              3.636
-           Clady 95aa04w1    1998             30.386
-       Cranfield 95aa05w1    1998              9.248
-Crumlin_1_Antrim 95aa06s1    1998             15.706
-Crumlin_2_Antrim 95aa06s2    1998              9.323
-      Drumanaway 95aa07w1    1998              7.947
+          AREANM   AREACD  Period  Observation
+    aldergrove_1 95aa01s1    1998       96.355
+    aldergrove_2 95aa01s2    1998       77.792
+    aldergrove_3 95aa01s3    1998       77.792
+          balloo 95aa02w1    1998        2.932
+     ballycraigy 95aa03w1    1998        3.636
+           clady 95aa04w1    1998       30.386
+       cranfield 95aa05w1    1998        9.248
+crumlin_1_antrim 95aa06s1    1998       15.706
+crumlin_2_antrim 95aa06s2    1998        9.323
+      drumanaway 95aa07w1    1998        7.947
         - Last 10 Rows: 
-         AREANM   AREACD  Period  Gross Value Added
- Newtownstewart 95zz09w1    2020             33.730
-          North 95zz10w1    2020             88.487
-     Plumbridge 95zz11w1    2020             17.443
-     Sion Mills 95zz12w1    2020             16.688
-     Slievekirk 95zz13w1    2020             20.556
-        South_1 95zz14s1    2020             39.966
-        South_2 95zz14s2    2020              3.144
-Victoria Bridge 95zz15w1    2020             32.673
-         West_1 95zz16s1    2020              6.479
-         West_2 95zz16s2    2020             73.696
+         AREANM   AREACD  Period  Observation
+ newtownstewart 95zz09w1    2020       33.730
+          north 95zz10w1    2020       88.487
+     plumbridge 95zz11w1    2020       17.443
+     sion-mills 95zz12w1    2020       16.688
+     slievekirk 95zz13w1    2020       20.556
+        south_1 95zz14s1    2020       39.966
+        south_2 95zz14s2    2020        3.144
+victoria-bridge 95zz15w1    2020       32.673
+         west_1 95zz16s1    2020        6.479
+         west_2 95zz16s2    2020       73.696
         
 
 - The data cube has the following value counts:

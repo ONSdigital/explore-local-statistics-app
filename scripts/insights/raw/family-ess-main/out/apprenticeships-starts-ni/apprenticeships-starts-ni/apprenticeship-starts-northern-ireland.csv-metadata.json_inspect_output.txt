@@ -1,0 +1,131 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Apprenticeship starts (Northern Ireland)
+          - Label: Apprenticeship starts (Northern Ireland)
+          - Issued: 2024-06-11T09:52:00
+          - Modified: 2024-09-02T11:12:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/department-for-the-economy-northern-ireland
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- apprenticeship
+		-- education-and-training
+		-- northern-ireland
+		-- local-authority
+		-- subnational
+          - Contact Point: None
+          - Identifier: Apprenticeship starts (Northern Ireland)
+          - Comment: Apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, Northern Ireland, academic years  2018/19 to 2021/22.
+          - Description: This dataset shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for academic years 2018/19 to 2021/22.
+		
+		### Coverage 
+		
+		Northern Ireland
+		
+		#### Geography definition
+		
+		Local Government Districts,
+		Nation (Northern Ireland)
+		
+		### Source
+		
+		 - Northern Ireland: Department for the Economy (Northern Ireland) [Apprenticeships NI](https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables), [Futher Education (FE) colleges and College of Agriculture, Food and Rural Enterprise (CAFRE)](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeships-further-education-academic-year-202223) and [Higher Education Institutions](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeship-higher-education-institutions-statistical-fact-sheet-202122) 
+		
+		
+		### Source Notes and Caveats 
+		- Starts refer to the number of participants who are in the first year of an apprenticeship programme. - Data relate to participants who have been on their course 28 days or more.
+		 - Geography is based upon the home postcode of the learner.
+		 - ApprenticeshipsNI includes levels 2 and 3.
+		 - 
+		 - Higher Level Apprenticeships (HLA) at further education (FE) colleges in Northern Ireland and the College of Agriculture, Food and Rural Enterprise (CAFRE) includes levels 4, 5 and 6.
+		 - HLA at Higher Education Institutions (HEIs) in Northern Ireland includes levels 6 and 7.
+		 - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.
+		 - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Apprenticeship starts (Northern Ireland)
+    - Columns: 
+                              Title         Type  Required                                                                       Property URL Observations Column Titles
+                             AREACD    Dimension      True            apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                     apprenticeship-starts-northern-ireland.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                apprenticeship-starts-northern-ireland.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                               None                           
+                          Indicator   Suppressed     False                                                                               None                           
+                            Mission   Suppressed     False                                                                               None                           
+                           Category   Suppressed     False                                                                               None                           
+                             Period    Dimension      True       apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval                Observation
+                        Observation Observations     False apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts                Observation
+                            Measure   Suppressed     False                                                                               None                           
+                               Unit   Suppressed     False                                                                               None                           
+    Lower Confidence Interval (95%)    Attribute     False     apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False     apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False            apprenticeship-starts-northern-ireland.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                               None                           
+                              Notes   Suppressed     False                                                                               None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          AREANM
+         geography-type.csv#code-list          Geography Type       Geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
+     ons-geography-code.csv#code-list      ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 48
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD                              AREANM                Geography                                          Variable Name                                 Indicator   Mission                                            Category                  Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n92000002                    northern-ireland                   nation Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   426.886496 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002                    northern-ireland                   nation Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   343.495062 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002                    northern-ireland                   nation Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2020-08-01t00-00-00/p1y   416.509149 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n92000002                    northern-ireland                   nation Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y   501.454773 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000001             antrim-and-newtownabbey local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   453.869698 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000001             antrim-and-newtownabbey local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   329.884411 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000001             antrim-and-newtownabbey local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2020-08-01t00-00-00/p1y   320.418956 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000001             antrim-and-newtownabbey local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y   455.266429 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   333.770771 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   341.584335 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+        - Last 10 Rows: 
+   AREACD                AREANM                Geography                                          Variable Name                                 Indicator   Mission                                            Category                  Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
+n09000009            mid-ulster local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   456.636921 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000009            mid-ulster local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   606.816366 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   430.491991 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   366.700476 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2020-08-01t00-00-00/p1y   388.928960 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000010 newry-mourne-and-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y   582.331718 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2018-08-01t00-00-00/p1y   299.762467 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2019-08-01t00-00-00/p1y   256.126315 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2020-08-01t00-00-00/p1y   296.201867 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+n09000011   ards-and-north-down local-authority-district Number of starts on apprenticeships (Northern Ireland) Apprenticeships starts (Northern Ireland) Mission 6 Spreading opportunity and improving public services 2021-08-01t00-00-00/p1y   384.532264 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                 NaN         1    NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                        Measure        Unit  Count
+Number of apprenticeship starts per 100,000     48
+        
