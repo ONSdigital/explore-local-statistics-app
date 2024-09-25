@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "gigabit-capable-broadband.csv#dataset",
+    "@id": "gigabit-capable-broadband.csv#qbDataSet",
     "tables": [
         {
             "url": "gigabit-capable-broadband.csv",
@@ -178,7 +178,7 @@
                         "virtual": true,
                         "aboutUrl": "gigabit-capable-broadband.csv#obs/{areacd},{areanm},{geography},{period}@premises-with-gigabit-capable-broadband",
                         "propertyUrl": "qb:dataSet",
-                        "valueUrl": "gigabit-capable-broadband.csv#dataset"
+                        "valueUrl": "gigabit-capable-broadband.csv#qbDataSet"
                     }
                 ],
                 "foreignKeys": [
@@ -243,31 +243,149 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval",
+            "@id": "gigabit-capable-broadband.csv#slice/cross-measures",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/month"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/unit",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/ofcom"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Gigabit capable broadband"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-03-31T12:12:36.754038"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Gigabit capable broadband"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#structure"
+                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "Gigabit capable broadband"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "gigabit-capable-broadband.csv#dataset"
                 }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#class/month",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "gigabit-capable-broadband.csv#component/premises-with-gigabit-capable-broadband",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -286,12 +404,146 @@
             ]
         },
         {
+            "@id": "gigabit-capable-broadband.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#measure/premises-with-gigabit-capable-broadband",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Premises with gigabit capable broadband"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
             "@id": "gigabit-capable-broadband.csv#dimension/month",
             "@type": [
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -317,54 +569,84 @@
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#component/month",
+            "@id": "gigabit-capable-broadband.csv#component/area-name",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/month"
+                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/month"
+                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
+                    "@value": 2
                 }
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#attribute/observation-status",
+            "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Observation Status"
+                    "@value": "Lower Confidence Interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
                 }
             ]
         },
         {
             "@id": "gigabit-capable-broadband.csv#component/measure-type",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -383,98 +665,78 @@
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#class/ons-geography-code",
+            "@id": "gigabit-capable-broadband.csv#attribute/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#structure",
+            "@id": "gigabit-capable-broadband.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
-            "http://purl.org/linked-data/cube#component": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#component/unit"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/observation-status"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/month"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/measure-type"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/geography-type"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/premises-with-gigabit-capable-broadband"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#component/area-name"
+                    "@id": "geography-type.csv#code-list"
                 }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
-                },
+                    "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
                 {
                     "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/month"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#measure/premises-with-gigabit-capable-broadband"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#sliceKey": [
+            "http://purl.org/linked-data/cube#order": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
+                    "@value": 1
                 }
             ]
         },
@@ -482,9 +744,9 @@
             "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code",
             "@type": [
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -510,334 +772,111 @@
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#class/area-name",
+            "@id": "gigabit-capable-broadband.csv#structure",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#component": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
+                    "@id": "gigabit-capable-broadband.csv#component/unit"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/month"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/measure-type"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/observation-status"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/area-name"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/geography-type"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#component/premises-with-gigabit-capable-broadband"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
+                },
                 {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
                 {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#measure/premises-with-gigabit-capable-broadband"
+                },
                 {
                     "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
                 },
                 {
                     "@id": "gigabit-capable-broadband.csv#dimension/month"
                 },
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
+                    "@id": "gigabit-capable-broadband.csv#attribute/observation-status"
                 },
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
+                    "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#slice/cross-measures"
                 }
             ]
         },
         {
-            "@id": "gigabit-capable-broadband.csv#component/area-name",
+            "@id": "gigabit-capable-broadband.csv#component/month",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#measure/premises-with-gigabit-capable-broadband",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Premises with gigabit capable broadband"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/upper-confidence-interval",
-            "@type": [
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
-                }
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#class/month",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "gigabit-capable-broadband.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
+                    "@id": "gigabit-capable-broadband.csv#dimension/month"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#dimension/ons-geography-code"
+                    "@id": "gigabit-capable-broadband.csv#dimension/month"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 1
+                    "@value": 4
                 }
             ]
         },
         {
             "@id": "gigabit-capable-broadband.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Resource"
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -847,7 +886,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": " This dataset shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) \n\n\n"
+                    "@value": "This dataset shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales)\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) \n\n\n### Source Notes and Caveats \nSome of this data has been aggregated and may show differences to other published figures. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -869,7 +908,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-05-31T09:58:00"
+                    "@value": "2024-09-23T16:01:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -881,11 +920,6 @@
                 {
                     "@language": "en",
                     "@value": "Gigabit capable broadband"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "gigabit-capable-broadband.csv#structure"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#comment": [
@@ -900,10 +934,15 @@
                     "@value": "Gigabit capable broadband"
                 }
             ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "gigabit-capable-broadband.csv#qbDataSet"
+                }
+            ],
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "connectivity"
+                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -911,29 +950,66 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
+                    "@value": "connectivity"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
                 },
                 {
                     "@language": "en",
                     "@value": "broadband-mobile-coverage"
+                },
+                {
+                    "@language": "en",
+                    "@value": "combined-authority"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
                 {
                     "@id": "https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry"
                 }
+            ]
+        },
+        {
+            "@id": "gigabit-capable-broadband.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+            "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "gigabit-capable-broadband.csv#csvcubed-build-activity"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
                 }
             ]
         },
         {
             "@id": "gigabit-capable-broadband.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -949,8 +1025,8 @@
         {
             "@id": "gigabit-capable-broadband.csv#dependency/area-name",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -966,8 +1042,8 @@
         {
             "@id": "gigabit-capable-broadband.csv#dependency/geography-type",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -983,8 +1059,8 @@
         {
             "@id": "gigabit-capable-broadband.csv#dependency/month",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1000,9 +1076,9 @@
         {
             "@id": "gigabit-capable-broadband.csv#unit/percent",
             "@type": [
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
                 "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

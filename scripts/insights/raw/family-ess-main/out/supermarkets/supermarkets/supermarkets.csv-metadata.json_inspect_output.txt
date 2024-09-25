@@ -1,0 +1,123 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Supermarkets
+          - Label: Supermarkets
+          - Issued: 2024-09-18T15:07:00
+          - Modified: 2024-09-18T15:07:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing
+          - Keywords: 
+		-- supermarkets
+		-- subnational
+		-- local-authority
+		-- county
+          - Contact Point: None
+          - Identifier: Supermarkets
+          - Comment: Supermarkets per 10,000 people, UK, as at August 2023.
+          - Description: This dataset shows supermarkets per 10,000 people, in the UK, as at August 2023.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Combined Authorities,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Countries (UK, GB, England and Wales) 
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/1numberofchainsupermarketsacrosslocalauthoritydistrictsladandsmallergeographicalareasintheuk) 
+		
+		
+		### Source Notes and Caveats 
+		Data about chain supermarkets in the UK is from the Geolytix Supermarket Retail Points project. This data is complemented by 52 stores from selected food retailers not in the Geolytix dataset. Per capita estimates are calculated using the usual resident population estimates from the most recent Census. These per capita estimates are not directly comparable between the different countries because of the non-consistent census dates that the population estimates were taken on.  Some of this data has been aggregated and may show differences to other published figures. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Supermarkets
+    - Columns: 
+                              Title         Type  Required                                         Property URL Observations Column Titles
+                             AREACD    Dimension      True        supermarkets.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 supermarkets.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            supermarkets.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                 None                           
+                          Indicator   Suppressed     False                                                 None                           
+                            Mission   Suppressed     False                                                 None                           
+                           Category   Suppressed     False                                                 None                           
+                             Period    Dimension      True                     supermarkets.csv#dimension/month                Observation
+                        Observation Observations     False      supermarkets.csv#measure/number-of-supermarkets                Observation
+                            Measure   Suppressed     False                                                 None                           
+                               Unit   Suppressed     False                                                 None                           
+    Lower Confidence Interval (95%)    Attribute     False supermarkets.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False supermarkets.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        supermarkets.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                 None                           
+                              Notes   Suppressed     False                                                 None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+             month.csv#code-list              Month          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 426
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD            AREANM                         Geography                            Variable Name                                Indicator   Mission                                                  Category  Period  Observation                                        Measure                    Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                        Notes
+k02000001    united-kingdom                           country Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.70 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+k03000001     great-britain                           country Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.68 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+k04000001 england-and-wales                           country Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.62 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+e92000001           england                            nation Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.60 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+e12000001        north-east                            region Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.89 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+e47000006       tees-valley combined-authority-or-city-region Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.20 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+e47000014        north-east combined-authority-or-city-region Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.79 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
+e06000047     county-durham       county-or-unitary-authority Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.14 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                          NaN
+e06000005        darlington       county-or-unitary-authority Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.97 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                          NaN
+e06000001        hartlepool       county-or-unitary-authority Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.47 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                          NaN
+        - Last 10 Rows: 
+   AREACD                              AREANM                Geography                            Variable Name                                Indicator   Mission                                                  Category  Period  Observation                                        Measure                    Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.88 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000003                             belfast local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.65 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000004            causeway-coast-and-glens local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         4.09 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000005             derry-city-and-strabane local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.18 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000006                 fermanagh-and-omagh local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         4.54 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000007             lisburn-and-castlereagh local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.48 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000008                 mid-and-east-antrim local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.45 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000009                          mid-ulster local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         3.46 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000010               newry-mourne-and-down local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.91 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+n09000011                 ards-and-north-down local-authority-district Chain supermarkets per 10,000 population Chain supermarkets per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-08         2.75 Counts of chain supermarkets per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+               Measure       Unit  Count
+Number of supermarkets per 10,000    426
+        

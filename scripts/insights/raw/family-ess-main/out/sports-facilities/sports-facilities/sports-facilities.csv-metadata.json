@@ -1,0 +1,1108 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "sports-facilities.csv#qbDataSet",
+    "tables": [
+        {
+            "url": "sports-facilities.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "AREACD",
+                        "name": "areacd",
+                        "propertyUrl": "sports-facilities.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
+                        "required": true
+                    },
+                    {
+                        "titles": "AREANM",
+                        "name": "areanm",
+                        "propertyUrl": "sports-facilities.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Geography",
+                        "name": "geography",
+                        "propertyUrl": "sports-facilities.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Variable Name",
+                        "name": "variable_name",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Indicator",
+                        "name": "indicator",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Mission",
+                        "name": "mission",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Category",
+                        "name": "category",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Period",
+                        "name": "period",
+                        "propertyUrl": "sports-facilities.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#measure/number-of-sports-facilities",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Measure",
+                        "name": "measure",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Unit",
+                        "name": "unit",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Lower Confidence Interval (95%)",
+                        "name": "lower_confidence_interval_95",
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#attribute/lower-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Upper Confidence Interval (95%)",
+                        "name": "upper_confidence_interval_95",
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#attribute/upper-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Observation Status",
+                        "name": "observation_status",
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#attribute/observation-status",
+                        "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
+                        "required": false
+                    },
+                    {
+                        "titles": "Polarity",
+                        "name": "polarity",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Notes",
+                        "name": "notes",
+                        "suppressOutput": true
+                    },
+                    {
+                        "name": "virt_slice",
+                        "virtual": true,
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Slice"
+                    },
+                    {
+                        "name": "virt_slice_structure",
+                        "virtual": true,
+                        "propertyUrl": "qb:sliceStructure",
+                        "valueUrl": "sports-facilities.csv#slice/cross-measures"
+                    },
+                    {
+                        "name": "virt_obs_observation",
+                        "virtual": true,
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities"
+                    },
+                    {
+                        "name": "virt_obs_observation_meas",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "qb:measureType",
+                        "valueUrl": "sports-facilities.csv#measure/number-of-sports-facilities"
+                    },
+                    {
+                        "name": "virt_obs_observation_unit",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "sports-facilities.csv#unit/per-10-000"
+                    },
+                    {
+                        "name": "virt_dim_observation_areacd",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "sports-facilities.csv#dimension/gregorian-time-interval",
+                        "valueUrl": "gregorian-time-interval.csv#{+period}"
+                    },
+                    {
+                        "name": "virt_obs_observation_type",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Observation"
+                    },
+                    {
+                        "name": "virt_dataSet_observation",
+                        "virtual": true,
+                        "aboutUrl": "sports-facilities.csv#obs/{areacd},{areanm},{geography},{period}@number-of-sports-facilities",
+                        "propertyUrl": "qb:dataSet",
+                        "valueUrl": "sports-facilities.csv#qbDataSet"
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "period",
+                        "reference": {
+                            "resource": "gregorian-time-interval.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    }
+                ],
+                "primaryKey": [
+                    "areacd",
+                    "areanm",
+                    "geography",
+                    "period"
+                ],
+                "aboutUrl": "sports-facilities.csv#slice/{areacd},{areanm},{geography},{period}"
+            }
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "gregorian-time-interval.csv",
+            "tableSchema": "gregorian-time-interval.table.json",
+            "suppressOutput": true
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "sports-facilities.csv#component/number-of-sports-facilities",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#measure/number-of-sports-facilities"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "sports-facilities.csv#measure/number-of-sports-facilities"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#qbDataSet",
+            "@type": [
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-23T15:31:00"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "sports-facilities.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "sports-facilities.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "sports-facilities.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#slice/cross-measures",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/area-name"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "sports-facilities.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "sports-facilities.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "sports-facilities.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "sports-facilities.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "sports-facilities.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/number-of-sports-facilities"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/geography-type"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/observation-status"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/unit"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/area-name"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/measure-type"
+                },
+                {
+                    "@id": "sports-facilities.csv#component/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "sports-facilities.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#measure/number-of-sports-facilities"
+                },
+                {
+                    "@id": "sports-facilities.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "sports-facilities.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "sports-facilities.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "sports-facilities.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "sports-facilities.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "sports-facilities.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "sports-facilities.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#measure/number-of-sports-facilities",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#MeasureProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Number of sports facilities"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "sports-facilities.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "sports-facilities.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "sports-facilities.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dimension/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "gregorian-time-interval.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Gregorian Time Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "sports-facilities.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "sports-facilities.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dataset",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows sports facilities per 10,000 people, in the England, as at 5 October 2023\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNation (England) \n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/numberofsportsfacilitiesacrosslocalauthoritydistrictsladandmiddlelayersuperoutputareasmsoainenglandandwales) \n\n\n### Source Notes and Caveats \nPer capita estimates are calculated using the usual resident population estimates from the most recent Census. Some of this data has been aggregated and may show differences to other published figures. \n\n\n"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-23T15:31:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-23T15:31:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Sports facilities per 10,000 people, England, as at 5 October 2023"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Sports facilities"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "sports-facilities.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "sports-facilities"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "combined-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#dependency/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./gregorian-time-interval.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "gregorian-time-interval.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "sports-facilities.csv#unit/per-10-000",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "0.01"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "per 10,000"
+                }
+            ]
+        }
+    ]
+}

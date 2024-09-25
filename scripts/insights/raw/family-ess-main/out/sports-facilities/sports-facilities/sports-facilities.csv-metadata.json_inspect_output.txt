@@ -1,0 +1,124 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Sports facilities
+          - Label: Sports facilities
+          - Issued: 2024-09-23T15:31:00
+          - Modified: 2024-09-23T15:31:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing
+          - Keywords: 
+		-- county
+		-- region
+		-- local-authority
+		-- subnational
+		-- combined-authority
+		-- sports-facilities
+          - Contact Point: None
+          - Identifier: Sports facilities
+          - Comment: Sports facilities per 10,000 people, England, as at 5 October 2023
+          - Description: This dataset shows sports facilities per 10,000 people, in the England, as at 5 October 2023
+		
+		### Coverage 
+		
+		England
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Combined Authorities,
+		Regions,
+		Nation (England) 
+		
+		### Source
+		
+		 - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/numberofsportsfacilitiesacrosslocalauthoritydistrictsladandmiddlelayersuperoutputareasmsoainenglandandwales) 
+		
+		
+		### Source Notes and Caveats 
+		Per capita estimates are calculated using the usual resident population estimates from the most recent Census. Some of this data has been aggregated and may show differences to other published figures. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Sports facilities
+    - Columns: 
+                              Title         Type  Required                                              Property URL Observations Column Titles
+                             AREACD    Dimension      True        sports-facilities.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 sports-facilities.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            sports-facilities.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                      None                           
+                          Indicator   Suppressed     False                                                      None                           
+                            Mission   Suppressed     False                                                      None                           
+                           Category   Suppressed     False                                                      None                           
+                             Period    Dimension      True   sports-facilities.csv#dimension/gregorian-time-interval                Observation
+                        Observation Observations     False sports-facilities.csv#measure/number-of-sports-facilities                Observation
+                            Measure   Suppressed     False                                                      None                           
+                               Unit   Suppressed     False                                                      None                           
+    Lower Confidence Interval (95%)    Attribute     False sports-facilities.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False sports-facilities.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        sports-facilities.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                      None                           
+                              Notes   Suppressed     False                                                      None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Mission
+    		-- Category
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          AREANM
+         geography-type.csv#code-list          Geography Type       Geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
+     ons-geography-code.csv#code-list      ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 355
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD               AREANM                         Geography                           Variable Name                               Indicator   Mission                                                  Category              Period  Observation                                       Measure                    Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
+e92000001              england                            nation Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        17.13 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e12000001           north-east                            region Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        16.86 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000006          tees-valley combined-authority-or-city-region Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        16.11 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000014           north-east combined-authority-or-city-region Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        17.11 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e06000047        county-durham       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        18.66 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000005           darlington       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        18.55 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000001           hartlepool       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        17.44 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000002        middlesbrough       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        13.55 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000057       northumberland       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        22.77 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000003 redcar-and-cleveland       county-or-unitary-authority Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        16.48 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                                                NaN
+        - Last 10 Rows: 
+   AREACD                    AREANM                Geography                           Variable Name                               Indicator   Mission                                                  Category              Period  Observation                                       Measure                    Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                     Notes
+e07000078                cheltenham local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        18.60 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000079                  cotswold local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        27.96 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000080            forest-of-dean local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        21.49 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000081                gloucester local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        16.84 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000082                    stroud local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        24.44 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000083                tewkesbury local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        22.13 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1                                                       NaN
+e07000187                    mendip local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        24.12 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000188                 sedgemoor local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        20.18 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000246 somerset-west-and-taunton local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        23.88 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Sports facilities per 10,000 population Sports facilities per 10,000 population Mission 9 Restoring a sense of community, local pride and belonging 2023-10-05t00-00-00        23.28 Counts of sports facilities per 10,000 people Count per 10,000 people                              NaN                              NaN                 NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                    Measure       Unit  Count
+Number of sports facilities per 10,000    355
+        

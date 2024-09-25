@@ -1,0 +1,1100 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "supermarkets.csv#qbDataSet",
+    "tables": [
+        {
+            "url": "supermarkets.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "AREACD",
+                        "name": "areacd",
+                        "propertyUrl": "supermarkets.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
+                        "required": true
+                    },
+                    {
+                        "titles": "AREANM",
+                        "name": "areanm",
+                        "propertyUrl": "supermarkets.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Geography",
+                        "name": "geography",
+                        "propertyUrl": "supermarkets.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Variable Name",
+                        "name": "variable_name",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Indicator",
+                        "name": "indicator",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Mission",
+                        "name": "mission",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Category",
+                        "name": "category",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Period",
+                        "name": "period",
+                        "propertyUrl": "supermarkets.csv#dimension/month",
+                        "valueUrl": "month.csv#{+period}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Observation",
+                        "name": "observation",
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#measure/number-of-supermarkets",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Measure",
+                        "name": "measure",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Unit",
+                        "name": "unit",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Lower Confidence Interval (95%)",
+                        "name": "lower_confidence_interval_95",
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#attribute/lower-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Upper Confidence Interval (95%)",
+                        "name": "upper_confidence_interval_95",
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#attribute/upper-confidence-interval",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "Observation Status",
+                        "name": "observation_status",
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#attribute/observation-status",
+                        "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
+                        "required": false
+                    },
+                    {
+                        "titles": "Polarity",
+                        "name": "polarity",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "Notes",
+                        "name": "notes",
+                        "suppressOutput": true
+                    },
+                    {
+                        "name": "virt_slice",
+                        "virtual": true,
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Slice"
+                    },
+                    {
+                        "name": "virt_slice_structure",
+                        "virtual": true,
+                        "propertyUrl": "qb:sliceStructure",
+                        "valueUrl": "supermarkets.csv#slice/cross-measures"
+                    },
+                    {
+                        "name": "virt_obs_observation",
+                        "virtual": true,
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets"
+                    },
+                    {
+                        "name": "virt_obs_observation_meas",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "qb:measureType",
+                        "valueUrl": "supermarkets.csv#measure/number-of-supermarkets"
+                    },
+                    {
+                        "name": "virt_obs_observation_unit",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "supermarkets.csv#unit/per-10-000"
+                    },
+                    {
+                        "name": "virt_dim_observation_areacd",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "supermarkets.csv#dimension/month",
+                        "valueUrl": "month.csv#{+period}"
+                    },
+                    {
+                        "name": "virt_obs_observation_type",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Observation"
+                    },
+                    {
+                        "name": "virt_dataSet_observation",
+                        "virtual": true,
+                        "aboutUrl": "supermarkets.csv#obs/{areacd},{areanm},{geography},{period}@number-of-supermarkets",
+                        "propertyUrl": "qb:dataSet",
+                        "valueUrl": "supermarkets.csv#qbDataSet"
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "period",
+                        "reference": {
+                            "resource": "month.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    }
+                ],
+                "primaryKey": [
+                    "areacd",
+                    "areanm",
+                    "geography",
+                    "period"
+                ],
+                "aboutUrl": "supermarkets.csv#slice/{areacd},{areanm},{geography},{period}"
+            }
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "month.csv",
+            "tableSchema": "month.table.json",
+            "suppressOutput": true
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "supermarkets.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "supermarkets.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/unit",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/number-of-supermarkets",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#measure/number-of-supermarkets"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "supermarkets.csv#measure/number-of-supermarkets"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#dimension/area-name"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/month"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/ons-geography-code"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#class/month",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "supermarkets.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dimension/month",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "month.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Month"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "supermarkets.csv#class/month"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "supermarkets.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#measure/number-of-supermarkets",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Number of supermarkets"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "supermarkets.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "supermarkets.csv#component/measure-type"
+                },
+                {
+                    "@id": "supermarkets.csv#component/area-name"
+                },
+                {
+                    "@id": "supermarkets.csv#component/geography-type"
+                },
+                {
+                    "@id": "supermarkets.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "supermarkets.csv#component/observation-status"
+                },
+                {
+                    "@id": "supermarkets.csv#component/number-of-supermarkets"
+                },
+                {
+                    "@id": "supermarkets.csv#component/unit"
+                },
+                {
+                    "@id": "supermarkets.csv#component/month"
+                },
+                {
+                    "@id": "supermarkets.csv#component/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#measure/number-of-supermarkets"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "supermarkets.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/area-name"
+                },
+                {
+                    "@id": "supermarkets.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "supermarkets.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "supermarkets.csv#dimension/month"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "supermarkets.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "supermarkets.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/month",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#dimension/month"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "supermarkets.csv#dimension/month"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "supermarkets.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "supermarkets.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "supermarkets.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#Attachable"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-18T15:07:00"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "supermarkets.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "supermarkets.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "supermarkets.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "supermarkets.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "supermarkets.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "supermarkets.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dataset",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/ns/dcat#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows supermarkets per 10,000 people, in the UK, as at August 2023.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/1numberofchainsupermarketsacrosslocalauthoritydistrictsladandsmallergeographicalareasintheuk) \n\n\n### Source Notes and Caveats \nData about chain supermarkets in the UK is from the Geolytix Supermarket Retail Points project. This data is complemented by 52 stores from selected food retailers not in the Geolytix dataset. Per capita estimates are calculated using the usual resident population estimates from the most recent Census. These per capita estimates are not directly comparable between the different countries because of the non-consistent census dates that the population estimates were taken on.  Some of this data has been aggregated and may show differences to other published figures. \n\n\n"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-18T15:07:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-18T15:07:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Supermarkets per 10,000 people, UK, as at August 2023."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Supermarkets"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "supermarkets.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "supermarkets"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#dependency/month",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./month.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "month.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "supermarkets.csv#unit/per-10-000",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "0.01"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "per 10,000"
+                }
+            ]
+        }
+    ]
+}

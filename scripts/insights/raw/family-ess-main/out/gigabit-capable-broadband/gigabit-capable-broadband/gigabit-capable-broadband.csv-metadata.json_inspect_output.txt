@@ -6,7 +6,7 @@
           - Title: Gigabit capable broadband
           - Label: Gigabit capable broadband
           - Issued: 2023-03-31T12:12:36.754038
-          - Modified: 2024-05-31T09:58:00
+          - Modified: 2024-09-23T16:01:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/ofcom
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,13 +15,16 @@
 		-- https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry
           - Keywords: 
 		-- broadband-mobile-coverage
-		-- connectivity
-		-- local-authority
+		-- county
 		-- subnational
+		-- local-authority
+		-- region
+		-- combined-authority
+		-- connectivity
           - Contact Point: None
           - Identifier: Gigabit capable broadband
           - Comment: Percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), UK, as of January 2024.
-          - Description:  This dataset shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.
+          - Description: This dataset shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.
 		
 		### Coverage 
 		
@@ -29,11 +32,20 @@
 		
 		#### Geography definition
 		
-		Local Authority Districts and Unitary Authorities
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Combined Authorities,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Countries (UK, GB, England and Wales)
 		
 		### Source
 		
 		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) 
+		
+		
+		### Source Notes and Caveats 
+		Some of this data has been aggregated and may show differences to other published figures. 
 		
 		
 		
@@ -79,20 +91,20 @@
 ons-geography-code.csv#code-list ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 374
+        - Number of Rows: 426
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD               AREANM                   Geography                           Variable Name                 Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-e06000047        county-durham county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         59.8 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000005           darlington county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         88.2 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000001           hartlepool county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         93.1 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000002        middlesbrough county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         94.3 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000057       northumberland county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         64.6 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000003 redcar-and-cleveland county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         88.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e06000004     stockton-on-tees county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         92.3 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e08000037            gateshead    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         79.6 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e08000021  newcastle-upon-tyne    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         90.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-e08000022       north-tyneside    local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         89.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+   AREACD            AREANM                         Geography                           Variable Name                 Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
+k02000001    united-kingdom                           country Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         78.5 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k03000001     great-britain                           country Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         78.1 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k04000001 england-and-wales                           country Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         78.6 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e92000001           england                            nation Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         79.3 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e12000001        north-east                            region Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         80.0 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000006       tees-valley combined-authority-or-city-region Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         91.4 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000014        north-east combined-authority-or-city-region Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         76.2 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e06000047     county-durham       county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         59.8 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000005        darlington       county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         88.2 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000001        hartlepool       county-or-unitary-authority Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         93.1 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
         - Last 10 Rows: 
    AREACD                              AREANM                Geography                           Variable Name                 Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
 n09000002 armagh-city-banbridge-and-craigavon local-authority-district Premises with gigabit capable broadband Gigabit capable broadband Mission 4 Boosting productivity, pay, jobs and living standards 2024-01         91.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
@@ -110,5 +122,5 @@ n09000011                 ards-and-north-down local-authority-district Premises 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                 Measure    Unit  Count
-Premises with gigabit capable broadband Percent    374
+Premises with gigabit capable broadband Percent    426
         

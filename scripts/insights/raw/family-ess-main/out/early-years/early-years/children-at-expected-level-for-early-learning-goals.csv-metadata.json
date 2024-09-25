@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "children-at-expected-level-for-early-learning-goals.csv#dataset",
+    "@id": "children-at-expected-level-for-early-learning-goals.csv#qbDataSet",
     "tables": [
         {
             "url": "children-at-expected-level-for-early-learning-goals.csv",
@@ -84,7 +84,7 @@
                         "name": "virt_dataset",
                         "virtual": true,
                         "propertyUrl": "http://purl.org/linked-data/cube#dataSet",
-                        "valueUrl": "children-at-expected-level-for-early-learning-goals.csv#dataset"
+                        "valueUrl": "children-at-expected-level-for-early-learning-goals.csv#qbDataSet"
                     },
                     {
                         "name": "virt_unit",
@@ -156,228 +156,105 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/communication-and-language",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval (95%)"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/literacy",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Literacy"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval (95%)"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/lower-confidence-interval-95",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/upper-confidence-interval-95",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 11
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/observation-status"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/mathematics"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/geography-type"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/measure-type"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/unit"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/communication-and-language"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/gregorian-time-interval"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/literacy"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/lower-confidence-interval-95"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/upper-confidence-interval-95"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
                     "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/literacy"
                 }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
+                }
             ]
         },
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -402,176 +279,13 @@
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/mathematics",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#dataset",
-            "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#DataSet"
-            ],
-            "http://purl.org/dc/terms/creator": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/department-for-education"
-                }
-            ],
-            "http://purl.org/dc/terms/description": [
-                {
-                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language, literacy and mathematics early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/early-years-foundation-stage-profile-results) \n\n\n### Source Notes and Caveats \n- Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years. \n- Results are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology). \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
-                }
-            ],
-            "http://purl.org/dc/terms/identifier": [
-                {
-                    "@value": "Children at expected level for early learning goals"
-                }
-            ],
-            "http://purl.org/dc/terms/issued": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-01-04T12:26:49.626680"
-                }
-            ],
-            "http://purl.org/dc/terms/license": [
-                {
-                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-02-05T12:26:49.626680"
-                }
-            ],
-            "http://purl.org/dc/terms/publisher": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Children at expected level for early learning goals"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#structure"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                {
-                    "@language": "en",
-                    "@value": "Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language, literacy and mathematics early learning goals, England (state-funded schools), academic years 2021/22 to 2022/23."
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Children at expected level for early learning goals"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#keyword": [
-                {
-                    "@language": "en",
-                    "@value": "county"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "children-development"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
-                },
-                {
-                    "@language": "en",
-                    "@value": "state-funded-school"
-                },
-                {
-                    "@language": "en",
-                    "@value": "local-authority"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#theme": [
-                {
-                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#csvcubed-build-activity"
-                }
-            ]
-        },
-        {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/ons-geography-code",
             "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -596,105 +310,11 @@
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval (95%)"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Mathematics"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#component/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -713,83 +333,92 @@
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/geography-type",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/lower-confidence-interval-95",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 3
+                    "@value": 10
                 }
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/geography-type",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#qbDataSet",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/gregorian-time-interval",
-            "@type": [
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Distribution"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/dc/terms/creator": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval"
+                    "@id": "https://www.gov.uk/government/organisations/department-for-education"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/dc/terms/identifier": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval"
+                    "@value": "Children at expected level for early learning goals"
                 }
             ],
-            "http://purl.org/linked-data/cube#order": [
+            "http://purl.org/dc/terms/issued": [
                 {
-                    "@value": 4
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-01-04T12:26:49.626680"
                 }
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
             ],
-            "http://www.w3.org/ns/prov#used": [
+            "http://purl.org/dc/terms/title": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                    "@language": "en",
+                    "@value": "Children at expected level for early learning goals"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Children at expected level for early learning goals"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#csvcubed-build-activity"
                 }
             ]
         },
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#component/unit",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -813,37 +442,68 @@
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/observation-status",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/upper-confidence-interval-95",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@language": "en",
-                    "@value": "Observation Status"
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 11
                 }
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/literacy",
+            "@type": [
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#MeasureProperty"
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Communication and Language"
+                    "@value": "Literacy"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
@@ -860,9 +520,9 @@
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#component/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -886,11 +546,281 @@
             ]
         },
         {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Mathematics"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Communication and Language"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/mathematics",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/lower-confidence-interval-95"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/mathematics"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/unit"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/observation-status"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/measure-type"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/area-name"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/literacy"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/upper-confidence-interval-95"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/communication-and-language"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#component/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/literacy"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/lower-confidence-interval-95"
+                },
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/mathematics"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#component/literacy",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -909,33 +839,171 @@
             ]
         },
         {
-            "@id": "children-at-expected-level-for-early-learning-goals.csv#component/communication-and-language",
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#class/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#attribute/upper-confidence-interval-95",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval (95%)"
                 }
             ],
-            "http://purl.org/linked-data/cube#measure": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "children-at-expected-level-for-early-learning-goals.csv#measure/communication-and-language"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/department-for-education"
                 }
             ],
-            "http://purl.org/linked-data/cube#order": [
+            "http://purl.org/dc/terms/description": [
                 {
-                    "@value": 5
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language, literacy and mathematics early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/early-years-foundation-stage-profile-results) \n\n\n### Source Notes and Caveats \n- Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years. \n- Results are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology). \n- Some of this data has been aggregated and may show differences to other published figures. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Children at expected level for early learning goals"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-01-04T12:26:49.626680"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-09-24T15:00:49.626680"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Children at expected level for early learning goals"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language, literacy and mathematics early learning goals, England (state-funded schools), academic years 2021/22 to 2022/23."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Children at expected level for early learning goals"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "children-at-expected-level-for-early-learning-goals.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "state-funded-school"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "combined-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "children-development"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare"
+                }
+            ]
+        },
+        {
+            "@id": "children-at-expected-level-for-early-learning-goals.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
                 }
             ]
         },
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dependency/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -951,8 +1019,8 @@
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -968,8 +1036,8 @@
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -985,8 +1053,8 @@
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#dependency/gregorian-time-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1002,9 +1070,9 @@
         {
             "@id": "children-at-expected-level-for-early-learning-goals.csv#unit/percent",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://qudt.org/schema/qudt/Unit",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
