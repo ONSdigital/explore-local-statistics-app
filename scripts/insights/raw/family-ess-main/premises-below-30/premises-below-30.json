@@ -1,0 +1,96 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Premises below 30Mbps",
+    "creator": "https://www.gov.uk/government/organisations/ofcom",
+    "summary": "Percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.",
+    "description": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales)\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) \n\n\n### Source Notes and Caveats \nSome of this data has been aggregated and may show differences to other published figures. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "broadband-mobile-coverage",
+        "connectivity",
+        "local-authority",
+        "county",
+        "combined-authority",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2024-09-25T11:35:00",
+    "dataset_modified": "2024-09-25T16:41:00",
+    "themes": "https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "month"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Mission": false,
+        "Category": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Premises that do not have access to services above 30Mbps",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Premises below 30Mbps",
+      "prefix": null,
+      "suffix": "%",
+      "subText": null,
+      "decimalPlaces": 1,
+      "subtitle": "Percentage of premises that do not have access to services above 30Mbps",
+      "experimentalStatistic": "F",
+      "sourceDate": "24/04/2024",
+      "sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+      "sourceOrg": "Ofcom",
+      "longDescription": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.",
+      "caveats": "Some of this data has been aggregated and may show differences to other published figures.",
+      "standardised": "T"
+    }
+}
