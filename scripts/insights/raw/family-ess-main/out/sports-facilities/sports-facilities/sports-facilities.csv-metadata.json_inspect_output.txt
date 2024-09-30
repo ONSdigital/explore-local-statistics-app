@@ -6,7 +6,7 @@
           - Title: Sports facilities
           - Label: Sports facilities
           - Issued: 2024-09-23T15:31:00
-          - Modified: 2024-09-23T15:31:00
+          - Modified: 2024-09-30T14:51:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,16 +14,16 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing
           - Keywords: 
-		-- county
-		-- region
+		-- sports-facilities
 		-- local-authority
 		-- subnational
+		-- county
 		-- combined-authority
-		-- sports-facilities
+		-- region
           - Contact Point: None
           - Identifier: Sports facilities
           - Comment: Sports facilities per 10,000 people, England, as at 5 October 2023
-          - Description: This dataset shows sports facilities per 10,000 people, in the England, as at 5 October 2023
+          - Description: This dataset shows sports facilities per 10,000 people, in England, as at 5 October 2023
 		
 		### Coverage 
 		
@@ -43,7 +43,9 @@
 		
 		
 		### Source Notes and Caveats 
-		Per capita estimates are calculated using the usual resident population estimates from the most recent Census. Some of this data has been aggregated and may show differences to other published figures. 
+		Per capita estimates are calculated using the usual resident population estimates from the most recent Census. 
+		
+		Some of this data has been aggregated and may show differences to other published figures. 
 		
 		
 		
@@ -60,7 +62,7 @@
                           Indicator   Suppressed     False                                                      None                           
                             Mission   Suppressed     False                                                      None                           
                            Category   Suppressed     False                                                      None                           
-                             Period    Dimension      True   sports-facilities.csv#dimension/gregorian-time-interval                Observation
+                             Period    Dimension      True              sports-facilities.csv#dimension/time-instant                Observation
                         Observation Observations     False sports-facilities.csv#measure/number-of-sports-facilities                Observation
                             Measure   Suppressed     False                                                      None                           
                                Unit   Suppressed     False                                                      None                           
@@ -82,11 +84,11 @@
 - The data cube has the following code list information:
         - Number of Code Lists: 4
         - Code Lists:
-                            Code List         Code List Label Columns Used In
-              area-name.csv#code-list               Area Name          AREANM
-         geography-type.csv#code-list          Geography Type       Geography
-gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
-     ons-geography-code.csv#code-list      ONS Geography Code          AREACD
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+      time-instant.csv#code-list       Time Instant          Period
 
 - The data cube has the following dataset information:
         - Number of Rows: 355

@@ -14,12 +14,12 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing
           - Keywords: 
-		-- combined-authority
-		-- subnational
-		-- county
-		-- region
-		-- local-authority
 		-- museums
+		-- county
+		-- subnational
+		-- local-authority
+		-- combined-authority
+		-- region
           - Contact Point: None
           - Identifier: Museums
           - Comment: Museums per 100,000 people, UK, as at 30 September 2021.
@@ -61,7 +61,7 @@
                           Indicator   Suppressed     False                                            None                           
                             Mission   Suppressed     False                                            None                           
                            Category   Suppressed     False                                            None                           
-                             Period    Dimension      True   museums.csv#dimension/gregorian-time-interval                Observation
+                             Period    Dimension      True              museums.csv#dimension/time-instant                Observation
                         Observation Observations     False           museums.csv#measure/number-of-museums                Observation
                             Measure   Suppressed     False                                            None                           
                                Unit   Suppressed     False                                            None                           
@@ -83,11 +83,11 @@
 - The data cube has the following code list information:
         - Number of Code Lists: 4
         - Code Lists:
-                            Code List         Code List Label Columns Used In
-              area-name.csv#code-list               Area Name          AREANM
-         geography-type.csv#code-list          Geography Type       Geography
-gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
-     ons-geography-code.csv#code-list      ONS Geography Code          AREACD
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+      time-instant.csv#code-list       Time Instant          Period
 
 - The data cube has the following dataset information:
         - Number of Rows: 426

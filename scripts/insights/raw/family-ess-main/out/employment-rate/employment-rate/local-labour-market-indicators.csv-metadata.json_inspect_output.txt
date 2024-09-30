@@ -1,0 +1,133 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Local labour market indicators
+          - Label: Local labour market indicators
+          - Issued: 2023-08-25T12:44:00
+          - Modified: 2024-09-30T11:44:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork
+          - Keywords: 
+		-- labour-market
+		-- paid-work
+		-- subnational
+		-- annual-population-survey
+		-- region
+		-- local-authority
+          - Contact Point: None
+          - Identifier: Local labour market indicators
+          - Comment: Employment rate and economic inactivity rate for people aged between 16 and 64 years (official statistics in development), Great Britain (Northern Ireland national figure included), 2004 to 2023.
+          - Description: This dataset shows:
+		
+		Employment rate age 16 to 64 
+		 - the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from (official statistics in development) 
+		
+		Economic inactivity rate age 16 to 64 
+		 - the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks (official statistics in development) 
+		
+		 In Great Britain (Northern Ireland national figure included), for periods 2004 to 2023.
+		
+		### Coverage 
+		
+		GB (England, Wales and Scotland). Northern Ireland national figure included.
+		
+		### Geography definition
+		
+		Local Authority Districts and Unitary Authorities, 
+		Counties, 
+		Combined Authorities, 
+		Regions, 
+		Nations (England, Wales, Scotland, Northern Ireland), 
+		Countries (UK, GB, England and Wales)
+		
+		### Source
+		
+		 - Great Britain: [Office for National Statistics](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousReleases) 
+		
+		Data is also available on [NOMIS](https://www.nomisweb.co.uk/query/construct/summary.asp?mode=construct&version=0&dataset=17) 
+		
+		
+		### Source Notes and Caveats 
+		Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
+		
+		Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive. 
+		
+		
+		
+		### How to read time intervals in ISO8601 format 
+		This dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). 
+		For example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. 
+		For more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Local labour market indicators
+    - Columns: 
+                           Title         Type  Required                                                           Property URL Observations Column Titles
+                          areacd    Dimension      True        local-labour-market-indicators.csv#dimension/ons-geography-code                           
+                          areanm    Dimension      True                 local-labour-market-indicators.csv#dimension/area-name                           
+                       geography    Dimension      True            local-labour-market-indicators.csv#dimension/geography-type                           
+                          period    Dimension      True   local-labour-market-indicators.csv#dimension/gregorian-time-interval                           
+                       indicator     Measures      True                           http://purl.org/linked-data/cube#measureType                observation
+                     observation Observations     False                local-labour-market-indicators.csv#measure/{+indicator}                           
+                            unit   Suppressed     False                                                                   None                           
+                         measure   Suppressed     False                                                                   None                           
+                       numerator    Attribute     False                 local-labour-market-indicators.csv#attribute/numerator                           
+                     denominator    Attribute     False               local-labour-market-indicators.csv#attribute/denominator                           
+    lower_confidence_interval_95    Attribute     False local-labour-market-indicators.csv#attribute/lower-confidence-interval                           
+    upper_confidence_interval_95    Attribute     False local-labour-market-indicators.csv#attribute/upper-confidence-interval                           
+              observation_status    Attribute     False        local-labour-market-indicators.csv#attribute/observation-status                           
+    - Columns where suppress output is true: 
+    		-- unit
+    		-- measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                            Code List         Code List Label Columns Used In
+              area-name.csv#code-list               Area Name          areanm
+         geography-type.csv#code-list          Geography Type       geography
+gregorian-time-interval.csv#code-list Gregorian Time Interval          period
+     ons-geography-code.csv#code-list      ONS Geography Code          areacd
+
+- The data cube has the following dataset information:
+        - Number of Observations: 16520
+        - Number of Duplicates: 0
+        - First 10 Observations: 
+   areacd         areanm geography                  period       indicator  observation unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+k02000001 united-kingdom   country 2004-01-01t00-00-00/p1y employment-rate         72.5    % Percentage 27778100.0   38339800.0                          72.3                          72.7                NaN
+k02000001 united-kingdom   country 2018-01-01t00-00-00/p1y employment-rate         75.0    % Percentage 30933500.0   41250300.0                          74.8                          75.2                NaN
+k02000001 united-kingdom   country 2017-01-01t00-00-00/p1y employment-rate         74.7    % Percentage 30752400.0   41157900.0                          74.5                          74.9                NaN
+k02000001 united-kingdom   country 2016-01-01t00-00-00/p1y employment-rate         73.8    % Percentage 30315100.0   41056500.0                          73.6                          74.0                NaN
+k02000001 united-kingdom   country 2015-01-01t00-00-00/p1y employment-rate         73.4    % Percentage 30005400.0   40853200.0                          73.2                          73.6                NaN
+k02000001 united-kingdom   country 2014-01-01t00-00-00/p1y employment-rate         72.3    % Percentage 29371500.0   40651700.0                          72.1                          72.5                NaN
+k02000001 united-kingdom   country 2019-01-01t00-00-00/p1y employment-rate         75.6    % Percentage 31266400.0   41330500.0                          75.4                          75.8                NaN
+k02000001 united-kingdom   country 2023-01-01t00-00-00/p1y employment-rate         75.7    % Percentage 31559400.0   41678800.0                          75.4                          76.0                NaN
+k02000001 united-kingdom   country 2022-01-01t00-00-00/p1y employment-rate         75.5    % Percentage 31339500.0   41514600.0                          75.2                          75.8                NaN
+k02000001 united-kingdom   country 2021-01-01t00-00-00/p1y employment-rate         74.7    % Percentage 30915300.0   41368300.0                          74.5                          74.9                NaN
+        - Last 10 Observations: 
+   areacd           areanm geography                  period                indicator  observation unit    measure  numerator  denominator  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
+n92000002 northern-ireland    nation 2013-01-01t00-00-00/p1y economic-inactivity-rate         27.5    % Percentage   318100.0    1158100.0                          26.1                          28.9                NaN
+n92000002 northern-ireland    nation 2008-01-01t00-00-00/p1y economic-inactivity-rate         29.2    % Percentage   334100.0    1145300.0                          27.9                          30.5                NaN
+n92000002 northern-ireland    nation 2006-01-01t00-00-00/p1y economic-inactivity-rate         29.6    % Percentage   330900.0    1119000.0                          28.3                          30.9                NaN
+n92000002 northern-ireland    nation 2007-01-01t00-00-00/p1y economic-inactivity-rate         28.5    % Percentage   323400.0    1133900.0                          27.2                          29.8                NaN
+n92000002 northern-ireland    nation 2005-01-01t00-00-00/p1y economic-inactivity-rate         29.8    % Percentage   328900.0    1105000.0                          28.5                          31.1                NaN
+n92000002 northern-ireland    nation 2004-01-01t00-00-00/p1y economic-inactivity-rate         30.3    % Percentage   331000.0    1091500.0                          29.0                          31.6                NaN
+n92000002 northern-ireland    nation 2011-01-01t00-00-00/p1y economic-inactivity-rate         27.6    % Percentage   319900.0    1159700.0                          26.3                          28.9                NaN
+n92000002 northern-ireland    nation 2012-01-01t00-00-00/p1y economic-inactivity-rate         27.6    % Percentage   320000.0    1158600.0                          26.3                          28.9                NaN
+n92000002 northern-ireland    nation 2009-01-01t00-00-00/p1y economic-inactivity-rate         30.1    % Percentage   347000.0    1152000.0                          28.8                          31.4                NaN
+n92000002 northern-ireland    nation 2010-01-01t00-00-00/p1y economic-inactivity-rate         29.1    % Percentage   336800.0    1157000.0                          27.7                          30.5                NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                 Measure    Unit  Count
+economic-inactivity-rate Percent   8260
+         employment-rate Percent   8260
+        
