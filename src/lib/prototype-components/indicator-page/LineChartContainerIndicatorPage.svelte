@@ -41,7 +41,7 @@
 				]
 			: null;
 
-	$: filteredChartData = chartData.filter((el) => el.value);
+	$: filteredChartData = chartData.filter((el) => (el.value == 0 ? el : el.value));
 
 	$: filteredChartDataSelected = [];
 
