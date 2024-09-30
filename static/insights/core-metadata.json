@@ -109,7 +109,7 @@
 			"label": "No qualifications"
 		},
 		{
-			"code": "early-years-Communication and Language",
+			"code": "early-years-Communication and language",
 			"label": "Communication and language skills by end of Early years foundation stage"
 		},
 		{
@@ -774,11 +774,11 @@
 				"subtitle": "Modelled percentage of economically active people aged 16 years and over without a job and actively seeking work",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
+				"experimentalStatistic": "T",
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/li01regionallabourmarketlocalindicatorsforcountieslocalandunitaryauthorities",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows model-based estimates for the proportion of economically active people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks, in Great Britain, for periods 2004 to 2023.",
+				"longDescription": "This indicator shows model-based estimates for the proportion of economically active people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks (official statistics in development), in Great Britain, for periods 2004 to 2023.",
 				"standardised": "T",
 				"caveats": "Unemployment rates are calculated as a percentage of aged 16 years and over economically active population.\n\nAs unemployed form a small percentage of the population, the Annual Population Survey (APS) unemployment estimates within local authorities are based on very small samples so for many areas are unreliable. To overcome this model-based estimates have been developed that provide better estimates of total unemployed for local authorities. \n\nThe model-based estimate improves on the APS estimate by borrowing strength from the claimant count to produce an estimate that is more precise i.e. has a smaller confidence interval. The claimant count is not itself a measure of unemployment but is strongly correlated with unemployment, and, as it is an administrative count, is known without sampling error. The gain in precision is greatest for areas with smaller sample sizes.\n\nRefer to the [user guide (pdf)](http://www.ons.gov.uk/ons/guide-method/method-quality/specific/labour-market/subnational-labour/model-based-estimates-of-ilo-unemployment-for-lad-uas-in-great-britain---guide-for-users.pdf) for further details.",
 				"confidenceIntervals": "T",
@@ -3224,16 +3224,16 @@
 				2023
 			]
 		},
-		"early-years-Communication and Language": {
+		"early-years-Communication and language": {
 			"id": 25,
 			"topic": "education and skills",
 			"subTopic": "early-years learning",
-			"code": "early-years-Communication and Language",
+			"code": "early-years-Communication and language",
 			"": null,
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2022,
 			"metadata": {
-				"code": "early-years-Communication and Language",
+				"code": "early-years-Communication and language",
 				"slug": "early-years-communication-language",
 				"label": "Communication and language skills by end of Early years foundation stage",
 				"prefix": "",
@@ -3250,7 +3250,7 @@
 				"sourceOrg": "Department for Education",
 				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.",
 				"standardised": "T",
-				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years. \nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3266,6 +3266,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92"
 				],
 				"groups": [
@@ -3288,6 +3289,13 @@
 							"W92"
 						],
 						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3316,7 +3324,7 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
 				2021,
@@ -3365,6 +3373,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92"
 				],
 				"groups": [
@@ -3387,6 +3396,13 @@
 							"W92"
 						],
 						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3415,7 +3431,7 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
 				2021,
@@ -3464,6 +3480,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92"
 				],
 				"groups": [
@@ -3486,6 +3503,13 @@
 							"W92"
 						],
 						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3514,7 +3538,7 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
 				2021,
@@ -8132,7 +8156,7 @@
 				{
 					"name": "early-years learning",
 					"indicatorCodes": [
-						"early-years-Communication and Language",
+						"early-years-Communication and language",
 						"early-years-Literacy",
 						"early-years-Mathematics"
 					]
