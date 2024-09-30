@@ -21,7 +21,9 @@
 
 	//get data for our selected area, determine which time period range our selected area has data for
 	$: selectedChartData = indicatorChartData
-		? indicatorChartData.filter((el) => el.areacd === selectedArea.areacd && el.value)
+		? indicatorChartData.filter(
+				(el) => el.areacd === selectedArea.areacd && (el.value == 0 ? el : el.value)
+			)
 		: null;
 	$: selectedPeriods = selectedChartData ? selectedChartData.map((el) => el.xDomainNumb) : [];
 	$: selectedXDomain = [Math.min(...selectedPeriods), Math.max(...selectedPeriods)];

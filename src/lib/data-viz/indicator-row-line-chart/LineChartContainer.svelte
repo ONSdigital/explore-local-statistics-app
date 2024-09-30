@@ -69,7 +69,7 @@
 		...(comparisonFilteredChartData ? comparisonFilteredChartData : [])
 	].map((el) => [el.value, 'lci' in el ? el.lci : null, 'uci' in el ? el.uci : null]);
 
-	$: flattenedValues = [].concat(...values).filter((el) => el);
+	$: flattenedValues = [].concat(...values).filter((el) => (el == 0 ? true : el));
 
 	$: yDomainRaw = [0.95 * Math.min(...flattenedValues), 1.05 * Math.max(...flattenedValues)];
 
