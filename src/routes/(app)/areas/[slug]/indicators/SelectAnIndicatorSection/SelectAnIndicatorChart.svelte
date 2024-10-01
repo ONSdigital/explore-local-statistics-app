@@ -59,7 +59,9 @@
 	//filter chart data to just data within chosen time period
 	$: filteredChartData = chartData.combinedDataObject[indicator.code].filter(
 		(el) =>
-			el.value && el.xDomainNumb >= chosenXDomainNumbStart && el.xDomainNumb <= chosenXDomainNumbEnd
+			(el.value == 0 ? el : el.value) &&
+			el.xDomainNumb >= chosenXDomainNumbStart &&
+			el.xDomainNumb <= chosenXDomainNumbEnd
 	);
 
 	//filter to get chart data for the selected area only

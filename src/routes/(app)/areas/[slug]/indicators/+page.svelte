@@ -373,6 +373,14 @@
 			selectionsObject['areas-single-additional-visible'].filter((el) => el.role === 'custom')
 		);
 	}
+	// handles change when choosing different cluster types. Only clusterGroup changes as it's bound to the dropdown, everything is coming for data on load.
+	$: similarAreas = getSimilarAreas(
+		areaClusters,
+		clusterGroup,
+		metadata,
+		chartData.clusterData,
+		parentArea
+	);
 </script>
 
 {#if navigated}

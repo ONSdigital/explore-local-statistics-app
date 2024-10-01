@@ -54,8 +54,8 @@
 								{metadata}
 								{selectedArea}
 								{selectionsObject}
-								indicatorChartData={chartData.combinedDataObject[indicator.code].filter(
-									(el) => el.value
+								indicatorChartData={chartData.combinedDataObject[indicator.code].filter((el) =>
+									el.value == 0 ? el : el.value
 								)}
 								{chosenXDomain}
 								{showConfidenceIntervals}
