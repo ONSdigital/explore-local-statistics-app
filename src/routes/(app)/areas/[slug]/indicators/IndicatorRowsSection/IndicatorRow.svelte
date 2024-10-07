@@ -6,7 +6,7 @@
 	import { createTimeSeriesOfMedianValues } from './createTimeSeriesOfMedianValues';
 	import { filterDataForCharts } from './filterDataForCharts';
 
-	import { Observe } from '@onsvisual/svelte-components';
+	import { Observe, Twisty } from '@onsvisual/svelte-components';
 
 	export let hoverAreaId,
 		hoverIndicatorId,
@@ -113,6 +113,9 @@
 
 	$: showVisuals = filteredChartDataObject && latestTimePeriod;
 
+	let indicatorChartsWidth = 900;
+	$: console.log(indicatorChartsWidth);
+
 	let observed = false;
 </script>
 
@@ -121,9 +124,12 @@
 </div>
 
 <Observe bind:visible={observed}>
-	<div class="indicator-row-container">
+	<div class="indicator-row-container" bind:clientWidth={indicatorChartsWidth}>
 		{#if showVisuals}
-			<div class="visuals-container">
+			<div
+				class="visuals-container"
+				style={indicatorChartsWidth < 600 ? 'display: flex; flex-direction:column' : ''}
+			>
 				<div class="beeswarm-container">
 					<BeeswarmContainer
 						{observed}
@@ -146,29 +152,58 @@
 					></BeeswarmContainer>
 				</div>
 
-				<div class="divider-vertical"></div>
-
-				<div class="line-chart-container">
-					{#if xDomain[0] != xDomain[1]}
-						<LineChartContainer
-							filteredChartData={filteredChartDataObject.timeSeries.filtered}
-							{metadata}
-							{indicator}
-							{selectedArea}
-							{selectionsObject}
-							{hoverAreaId}
-							{timePeriodsArray}
-							{xDomain}
-							selectedFilteredChartData={filteredChartDataObject.timeSeries.selected}
-							comparisonFilteredChartData={filteredChartDataObject.timeSeries.comparison}
-							{indicatorCalculations}
-							{customLookup}
-							{showConfidenceIntervals}
-						></LineChartContainer>
+				{#if indicatorChartsWidth < 600}
+					{#if xDomain[0] == xDomain[1]}
+						<span style="margin-top: 10px">No time series data to display</span>
 					{:else}
-						<span>No time series data to display</span>
+						<div style="height: 10px"></div>
+						<Twisty title="Show trend">
+							<div class="twisty-content">
+								<div class="line-chart-container" style="max-width:300px">
+									<LineChartContainer
+										filteredChartData={filteredChartDataObject.timeSeries.filtered}
+										{metadata}
+										{indicator}
+										{selectedArea}
+										{selectionsObject}
+										{hoverAreaId}
+										{timePeriodsArray}
+										{xDomain}
+										selectedFilteredChartData={filteredChartDataObject.timeSeries.selected}
+										comparisonFilteredChartData={filteredChartDataObject.timeSeries.comparison}
+										{indicatorCalculations}
+										{customLookup}
+										{showConfidenceIntervals}
+									></LineChartContainer>
+								</div>
+							</div>
+						</Twisty>
 					{/if}
-				</div>
+				{:else}
+					<div class="divider-vertical"></div>
+
+					<div class="line-chart-container" style="width:225px">
+						{#if xDomain[0] != xDomain[1]}
+							<LineChartContainer
+								filteredChartData={filteredChartDataObject.timeSeries.filtered}
+								{metadata}
+								{indicator}
+								{selectedArea}
+								{selectionsObject}
+								{hoverAreaId}
+								{timePeriodsArray}
+								{xDomain}
+								selectedFilteredChartData={filteredChartDataObject.timeSeries.selected}
+								comparisonFilteredChartData={filteredChartDataObject.timeSeries.comparison}
+								{indicatorCalculations}
+								{customLookup}
+								{showConfidenceIntervals}
+							></LineChartContainer>
+						{:else}
+							<span>No time series data to display</span>
+						{/if}
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</div>
@@ -208,22 +243,7 @@
 		flex-direction: column;
 		flex-wrap: nowrap;
 		justify-content: center;
-		width: 225px;
-		overflow: hidden;
-	}
-
-	@media (max-width: 950px) {
-		.line-chart-container {
-			display: none;
-		}
-
-		.divider-vertical {
-			display: none;
-		}
-
-		.beeswarm-container {
-			margin: 0px 10px;
-		}
+		overflow: visible;
 	}
 
 	span {
@@ -235,5 +255,9 @@
 
 	.no-data-text {
 		font-weight: bold;
+	}
+
+	.twisty-content {
+		padding-left: 10%;
 	}
 </style>
