@@ -135,7 +135,7 @@
 
 <div class="svg-container" bind:clientWidth={width}>
 	{#if showConfidenceIntervals && indicator.metadata.confidenceIntervals === 'T'}
-		<svg aria-hidden="true" {width} height="90">
+		<svg aria-hidden="true" {width} height="90" class="bar-chart-legend">
 			<line x1="10" y1="15" x2="170" y2="15" stroke="#222" opacity="0.2" stroke-width="8px"></line>
 			<rect x="8" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"></rect>
 			<rect x="168" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"
@@ -213,5 +213,9 @@
 <style>
 	svg {
 		overflow: visible;
+	}
+
+	.bar-chart-legend {
+		forced-color-adjust: auto;
 	}
 </style>
