@@ -1,18 +1,14 @@
 # Explore Local Statistics
 
-> This readme needs adding to.
+> This readme needs further information.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To work with ONSdigital, you need to have completed Steps 1-3 from the ONSdigital [setup guide](https://github.com/ONSdigital/dp/blob/main/guides/GETTING_STARTED.md) in order to be able to make _signed commits_.
+
+Install dependencies with `npm install`, then start a development server:
 
     npm run dev
-
-## Building
-
-To create a production version of your app:
-
-    npm run build
 
 ## Data
 

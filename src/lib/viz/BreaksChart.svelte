@@ -227,6 +227,7 @@
 		position: relative;
 		width: 100%;
 		font-size: 14px;
+		forced-color-adjust: none;
 	}
 	.block {
 		position: absolute;
@@ -245,6 +246,7 @@
 		bottom: calc(100% + 8px);
 		text-align: center;
 		transform: translateX(-50%);
+		forced-color-adjust: auto;
 	}
 	.marker {
 		position: absolute;
