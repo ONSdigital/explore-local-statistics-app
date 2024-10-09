@@ -13,7 +13,8 @@
 		chosenXDomainNumbStart,
 		chosenXDomainNumbEnd,
 		showConfidenceIntervals,
-		stickyZIndex;
+		stickyZIndex,
+		toggle;
 
 	//splits additonal areas into parent / uk and others, so that the parent and uk areas always ordered first on the key
 	$: visibleParentAreas = selectionsObject['areas-rows-additional-visible'].filter(
@@ -110,6 +111,15 @@
 			bind:chosenXDomainNumbEnd
 			includeNotes={true}
 		></ChartOptions>
+
+		<div class="toggle-container">
+			Beeswarm
+			<label class="switch">
+				<input type="checkbox" bind:checked={toggle} on:change={() => console.log(toggle)} />
+				<span class="slider"></span>
+			</label>
+			Line chart
+		</div>
 	</div>
 </div>
 
@@ -153,7 +163,7 @@
 	.buttons-container {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 		justify-content: flex-end;
 		gap: 4px;
 	}
@@ -162,5 +172,59 @@
 		text-align: left;
 		font-size: 16px;
 		padding-left: 24px;
+	}
+
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		z-index: 1;
+	}
+
+	.switch input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #206095;
+		-webkit-transition: 0.4s;
+		transition: 0.4s;
+		border-radius: 34px;
+	}
+
+	.slider:before {
+		position: absolute;
+		content: '';
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: white;
+		-webkit-transition: 0.4s;
+		transition: 0.4s;
+		border-radius: 50%;
+	}
+
+	input:focus + .slider {
+		box-shadow: 0 0 0 6px #fbc900;
+	}
+
+	input:checked + .slider:before {
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
+		transform: translateX(26px);
+	}
+
+	.toggle-container {
+		display: block;
 	}
 </style>

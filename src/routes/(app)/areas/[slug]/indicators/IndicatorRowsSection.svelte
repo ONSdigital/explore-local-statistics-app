@@ -10,7 +10,8 @@
 		selectionsObject,
 		accordionArray,
 		customLookup,
-		stickyZIndex;
+		stickyZIndex,
+		toggle;
 
 	// tracks the selected start and end years based on the time periods slider - the initial values are based on a calculation made in data:generate of the min and max time periods across all indicators included in the app
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
@@ -21,6 +22,8 @@
 
 	// hoverAreaId tracks which area is being hovered over, hoverIndicatorId tracks which chart is being hovered over (since the label name appears on this chart)
 	let hoverAreaId, hoverIndicatorId;
+
+	$: console.log(toggle);
 </script>
 
 <div class="sticky-container">
@@ -30,6 +33,7 @@
 		{metadata}
 		{selectedArea}
 		{accordionArray}
+		bind:toggle
 		bind:selectionsObject
 		{customLookup}
 		bind:chosenXDomainNumbStart
@@ -43,6 +47,7 @@
 				{metadata}
 				{topic}
 				{filteredIndicatorsCodes}
+				bind:toggle
 				bind:hoverAreaId
 				bind:hoverIndicatorId
 				{selectedArea}

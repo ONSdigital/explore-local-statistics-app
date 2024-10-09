@@ -12,7 +12,8 @@
 		customLookup,
 		chartData,
 		chosenXDomain,
-		showConfidenceIntervals;
+		showConfidenceIntervals,
+		toggle;
 
 	let topicUppercase = topic.name[0].toUpperCase() + topic.name.substring(1);
 
@@ -24,6 +25,8 @@
 			)
 		}))
 		.filter((el) => el.filteredIndicatorCodes.length > 0);
+
+	$: console.log(toggle);
 </script>
 
 {#if subTopics.length > 0}
@@ -44,6 +47,7 @@
 							<IndicatorRow
 								bind:hoverAreaId
 								bind:hoverIndicatorId
+								bind:toggle
 								{indicator}
 								{customLookup}
 								{metadata}

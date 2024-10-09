@@ -49,6 +49,7 @@
 	import viewport from './util/interactivity/useViewportAction';
 
 	export let data: PageData;
+	export let toggle;
 
 	let metadata = data.metadata;
 	let chartData = data.chartData;
@@ -478,6 +479,7 @@
 			{metadata}
 			{chartData}
 			{filteredIndicatorsCodes}
+			bind:toggle
 			bind:selectionsObject
 			accordionArray={rowsAccordionArray}
 			customLookup={customLookup['areas-rows-additional-visible']}
