@@ -6,7 +6,7 @@
           - Title: Cigarette smokers
           - Label: Cigarette smokers
           - Issued: 2023-03-31T12:11:24.009378
-          - Modified: 2024-02-05T12:00:00
+          - Modified: 2024-10-10T08:07:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,15 +14,15 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
           - Keywords: 
+		-- subnational
+		-- smoking-habits
 		-- region
 		-- annual-population-survey
-		-- smoking-habits
 		-- local-authority
-		-- subnational
           - Contact Point: None
           - Identifier: Cigarette smokers
-          - Comment: Percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), United Kingdom, 2012 - 2022.
-          - Description: This dataset shows the percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), in the United Kingdom, for 2012 - 2022.
+          - Comment: Percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), United Kingdom, 2012 to 2023.
+          - Description: This dataset shows the percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), in the United Kingdom, for 2012 to 2023.
 		
 		### Coverage 
 		
@@ -42,7 +42,9 @@
 		
 		
 		### Source Notes and Caveats 
-		To improve the comparability of smoking prevalence estimates for 2020 and subsequent years, the weighting methodology has been improved to remove the effect of the change in method of data collection between 2019 and 2020. For more information please refer to the [Adult smoking habits in the UK methodology page](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking/methodologies/adultsmokinghabitsintheukmethodology)
+		To improve the comparability of smoking prevalence estimates for 2020 and subsequent years, the weighting methodology has been improved to remove the effect of the change in method of data collection between 2019 and 2020. For more information please refer to the [Adult smoking habits in the UK methodology page.](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking/methodologies/adultsmokinghabitsintheukmethodology)
+		
+		Northern Ireland local authority smoking prevalence estimates are not available before 2015.
         
 
  - The data cube has the following column component information: 
@@ -54,8 +56,6 @@
                           Geography    Dimension      True            cigarette-smokers.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                      None                           
                           Indicator   Suppressed     False                                                      None                           
-                            Mission   Suppressed     False                                                      None                           
-                           Category   Suppressed     False                                                      None                           
                              Period    Dimension      True                      cigarette-smokers.csv#dimension/year                Observation
                         Observation Observations     False           cigarette-smokers.csv#measure/cigarette-smokers                Observation
                             Measure   Suppressed     False                                                      None                           
@@ -68,8 +68,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -85,36 +83,36 @@ ons-geography-code.csv#code-list ONS Geography Code          AREACD
               year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 4664
+        - Number of Rows: 5100
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD         AREANM Geography                          Variable Name         Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2022         12.9 Percentage    %                             12.6                             13.1                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2021         13.3 Percentage    %                             13.0                             13.5                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2020         14.0 Percentage    %                             13.8                             14.3                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2018         14.7 Percentage    %                             14.5                             14.9                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2017         15.1 Percentage    %                             14.9                             15.3                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2019         14.1 Percentage    %                             13.9                             14.3                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2015         17.2 Percentage    %                             17.0                             17.4                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2014         18.1 Percentage    %                             17.9                             18.4                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2013         18.8 Percentage    %                             18.5                             19.0                NaN        -1   NaN
-k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2012         19.6 Percentage    %                             19.4                             19.8                NaN        -1   NaN
+   AREACD         AREANM Geography                          Variable Name         Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2023         11.9 Percentage    %                             11.6                             12.2                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2022         12.9 Percentage    %                             12.6                             13.1                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2021         13.3 Percentage    %                             13.0                             13.5                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2019         14.1 Percentage    %                             13.9                             14.3                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2018         14.7 Percentage    %                             14.5                             14.9                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2020         14.0 Percentage    %                             13.8                             14.3                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2016         15.8 Percentage    %                             15.6                             16.1                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2015         17.2 Percentage    %                             17.0                             17.4                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2014         18.1 Percentage    %                             17.9                             18.4                NaN        -1   NaN
+k02000001 united-kingdom   country Adults that currently smoke cigarettes Cigarette smokers    2013         18.8 Percentage    %                             18.5                             19.0                NaN        -1   NaN
         - Last 10 Rows: 
-   AREACD              AREANM                Geography                          Variable Name         Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2012          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2013          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2014          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2015         13.8 Percentage    %                              9.2                             18.5                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2016         13.3 Percentage    %                              9.6                             16.9                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2017         14.1 Percentage    %                             10.4                             17.9                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2018         11.9 Percentage    %                              8.6                             15.1                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2019         13.1 Percentage    %                             10.0                             16.1                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2020         15.3 Percentage    %                             11.0                             19.6                NaN        -1   NaN
-n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers Mission 7 Spreading opportunity and improving public services    2022         12.8 Percentage    %                              9.8                             15.8                NaN        -1   NaN
+   AREACD              AREANM                Geography                          Variable Name         Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2019         13.1 Percentage    %                             10.0                             16.1                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2018         11.9 Percentage    %                              8.6                             15.1                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2017         14.1 Percentage    %                             10.4                             17.9                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2015         13.8 Percentage    %                              9.2                             18.5                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2014          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2013          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2012          NaN Percentage    %                              NaN                              NaN                  x        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2022         12.8 Percentage    %                              9.8                             15.8                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2016         13.3 Percentage    %                              9.6                             16.9                NaN        -1   NaN
+n09000011 ards-and-north-down local-authority-district Adults that currently smoke cigarettes Cigarette smokers    2023         11.5 Percentage    %                              8.3                             14.7                NaN        -1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
           Measure    Unit  Count
-Cigarette smokers percent   4664
+Cigarette smokers percent   5100
         
