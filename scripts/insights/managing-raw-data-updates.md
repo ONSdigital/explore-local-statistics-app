@@ -3,7 +3,7 @@
 The raw data used in this project is maintained on the [
 Connected Open Government Statistics (COGS) github site.](https://github.com/GSS-Cogs).
 
-The [family-ESS repository](https://github.com/GSS-Cogs/family-ess) is updated by the analysis and data teams on a frequent basis. For changes to this repository to be replicated in the Explore Local Statistics app, the following steps need to be undertaken by a member of the data vis team.
+The [explore-local-statistics-data](https://github.com/ONSdigital/explore-local-statistics-data) is updated by the analysis and data teams on a frequent basis. For changes to this repository to be replicated in the Explore Local Statistics app, the following steps need to be undertaken by a member of the data vis team.
 
 ## Step 1 - Ask what changes have occurred
 
@@ -19,7 +19,7 @@ Navigate to the folder local-statistics/scripts/insights/raw and delete the fold
 
 Next, copy the family-ess-main folder from github and place it in local-statistics/scripts/insights/raw. If you wish to do this using the terminal the command is:
 
-`git clone https://github.com/GSS-Cogs/family-ess`
+`git clone https://github.com/ONSdigital/explore-local-statistics-data.git`
 
 ## Step 3 - Give it a go and see what happens
 
