@@ -103,6 +103,8 @@
 		} else {
 			goto(`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}`, options);
 		}
+
+		console.log(e.detail.type);
 	}
 
 	afterNavigate(() => {
