@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "cigarette-smokers.csv#dataset",
+    "@id": "cigarette-smokers.csv#qbDataSet",
     "tables": [
         {
             "url": "cigarette-smokers.csv",
@@ -35,16 +35,6 @@
                     {
                         "titles": "Indicator",
                         "name": "indicator",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Mission",
-                        "name": "mission",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Category",
-                        "name": "category",
                         "suppressOutput": true
                     },
                     {
@@ -178,7 +168,7 @@
                         "virtual": true,
                         "aboutUrl": "cigarette-smokers.csv#obs/{areacd},{areanm},{geography},{period}@cigarette-smokers",
                         "propertyUrl": "qb:dataSet",
-                        "valueUrl": "cigarette-smokers.csv#dataset"
+                        "valueUrl": "cigarette-smokers.csv#qbDataSet"
                     }
                 ],
                 "foreignKeys": [
@@ -243,188 +233,13 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "cigarette-smokers.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "cigarette-smokers.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/area-name"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/year"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "cigarette-smokers.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#measure/cigarette-smokers",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Cigarette smokers"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
             "@id": "cigarette-smokers.csv#dimension/year",
             "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty"
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -449,378 +264,50 @@
             ]
         },
         {
-            "@id": "cigarette-smokers.csv#dataset",
-            "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/ns/dcat#Resource"
-            ],
-            "http://purl.org/dc/terms/creator": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/description": [
-                {
-                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), in the United Kingdom, for 2012 - 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nEnglish counties,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/datasets/smokinghabitsintheukanditsconstituentcountries) \n\n\n### Source Notes and Caveats \nTo improve the comparability of smoking prevalence estimates for 2020 and subsequent years, the weighting methodology has been improved to remove the effect of the change in method of data collection between 2019 and 2020. For more information please refer to the [Adult smoking habits in the UK methodology page](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking/methodologies/adultsmokinghabitsintheukmethodology)"
-                }
-            ],
-            "http://purl.org/dc/terms/identifier": [
-                {
-                    "@value": "Cigarette smokers"
-                }
-            ],
-            "http://purl.org/dc/terms/issued": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-03-31T12:11:24.009378"
-                }
-            ],
-            "http://purl.org/dc/terms/license": [
-                {
-                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-02-05T12:00:00"
-                }
-            ],
-            "http://purl.org/dc/terms/publisher": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Cigarette smokers"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "cigarette-smokers.csv#structure"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                {
-                    "@language": "en",
-                    "@value": "Percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), United Kingdom, 2012 - 2022."
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Cigarette smokers"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#keyword": [
-                {
-                    "@language": "en",
-                    "@value": "local-authority"
-                },
-                {
-                    "@language": "en",
-                    "@value": "smoking-habits"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
-                },
-                {
-                    "@language": "en",
-                    "@value": "annual-population-survey"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#theme": [
-                {
-                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "cigarette-smokers.csv#csvcubed-build-activity"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/cigarette-smokers",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "cigarette-smokers.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/area-name"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/year"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/observation-status"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/cigarette-smokers"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/geography-type"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/measure-type"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#component/unit"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#dimension/area-name"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
-                },
-                {
-                    "@id": "cigarette-smokers.csv#dimension/year"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "cigarette-smokers.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#attribute/observation-status",
+            "@id": "cigarette-smokers.csv#measure/cigarette-smokers",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#MeasureProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "Cigarette smokers"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
                     "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 4
                 }
             ]
         },
@@ -876,13 +363,162 @@
             ]
         },
         {
+            "@id": "cigarette-smokers.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "cigarette-smokers.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/area-name"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/year"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/cigarette-smokers",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                }
+            ]
+        },
+        {
             "@id": "cigarette-smokers.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty"
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -907,12 +543,121 @@
             ]
         },
         {
+            "@id": "cigarette-smokers.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "cigarette-smokers.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#DataSet"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-03-31T12:11:24.009378"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "cigarette-smokers.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "cigarette-smokers.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "cigarette-smokers.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
             "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -927,17 +672,326 @@
             ]
         },
         {
-            "@id": "cigarette-smokers.csv#class/area-name",
+            "@id": "cigarette-smokers.csv#class/geography-type",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "cigarette-smokers.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/geography-type"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/observation-status"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/unit"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/area-name"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/measure-type"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/cigarette-smokers"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#component/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#dimension/year"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#measure/cigarette-smokers"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/area-name"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "cigarette-smokers.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "cigarette-smokers.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "cigarette-smokers.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), in the United Kingdom, for 2012 to 2023.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nEnglish counties,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/datasets/smokinghabitsintheukanditsconstituentcountries) \n\n\n### Source Notes and Caveats \nTo improve the comparability of smoking prevalence estimates for 2020 and subsequent years, the weighting methodology has been improved to remove the effect of the change in method of data collection between 2019 and 2020. For more information please refer to the [Adult smoking habits in the UK methodology page.](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking/methodologies/adultsmokinghabitsintheukmethodology)\n\nNorthern Ireland local authority smoking prevalence estimates are not available before 2015."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-03-31T12:11:24.009378"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-10-10T08:07:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Percentage of adults (18+) who state they currently smoke cigarettes (excluding e-cigarettes), United Kingdom, 2012 to 2023."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Cigarette smokers"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "cigarette-smokers.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "annual-population-survey"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "smoking-habits"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare"
+                }
+            ]
+        },
+        {
+            "@id": "cigarette-smokers.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
+                }
             ]
         },
         {
             "@id": "cigarette-smokers.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -953,8 +1007,8 @@
         {
             "@id": "cigarette-smokers.csv#dependency/area-name",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -970,8 +1024,8 @@
         {
             "@id": "cigarette-smokers.csv#dependency/geography-type",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -987,8 +1041,8 @@
         {
             "@id": "cigarette-smokers.csv#dependency/year",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1004,9 +1058,9 @@
         {
             "@id": "cigarette-smokers.csv#unit/percent",
             "@type": [
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
