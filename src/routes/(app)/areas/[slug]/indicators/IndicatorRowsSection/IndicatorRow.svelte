@@ -18,7 +18,8 @@
 		selectionsObject,
 		chosenXDomain,
 		showConfidenceIntervals,
-		toggle;
+		toggle,
+		indicatorChartsWidth = 900;
 
 	//get data for our selected area, determine which time period range our selected area has data for
 	$: selectedChartData = indicatorChartData
@@ -116,7 +117,7 @@
 
 	let observed = false;
 
-	$: console.log(toggle);
+	$: console.log(indicatorChartsWidth);
 </script>
 
 <div class="indicator-row-container" style="margin-bottom: 20px;">
@@ -124,10 +125,59 @@
 </div>
 
 <Observe bind:visible={observed}>
-	<div class="indicator-row-container">
+	<div class="indicator-row-container" bind:clientWidth={indicatorChartsWidth}>
 		{#if showVisuals}
 			<div class="visuals-container">
-				{#if !toggle}
+				{#if indicatorChartsWidth < 635}
+					{#if !toggle}
+						<div class="beeswarm-container">
+							<BeeswarmContainer
+								{observed}
+								{metadata}
+								{indicator}
+								{latestTimePeriod}
+								{latestIndicatorCalculations}
+								{selectionsObject}
+								{selectedArea}
+								bind:hoverAreaId
+								bind:hoverIndicatorId
+								selectedFilteredChartDataBeeswarmWithRole={filteredChartDataObject.beeswarm
+									.selected}
+								comparisonFilteredChartDataBeeswarmWithRole={filteredChartDataObject.beeswarm
+									.comparison}
+								additionalFilteredChartDataBeeswarm={filteredChartDataObject.beeswarm.additional}
+								filteredChartDataBeeswarm={filteredChartDataObject.beeswarm.filtered}
+								{customLookup}
+								{showConfidenceIntervals}
+								{indicatorCalculations}
+							></BeeswarmContainer>
+						</div>
+					{:else}
+						<div class="divider-vertical"></div>
+
+						<div class="line-chart-container">
+							{#if xDomain[0] != xDomain[1]}
+								<LineChartContainer
+									filteredChartData={filteredChartDataObject.timeSeries.filtered}
+									{metadata}
+									{indicator}
+									{selectedArea}
+									{selectionsObject}
+									{hoverAreaId}
+									{timePeriodsArray}
+									{xDomain}
+									selectedFilteredChartData={filteredChartDataObject.timeSeries.selected}
+									comparisonFilteredChartData={filteredChartDataObject.timeSeries.comparison}
+									{indicatorCalculations}
+									{customLookup}
+									{showConfidenceIntervals}
+								></LineChartContainer>
+							{:else}
+								<span>No time series data to display</span>
+							{/if}
+						</div>
+					{/if}
+				{:else}
 					<div class="beeswarm-container">
 						<BeeswarmContainer
 							{observed}
@@ -149,7 +199,7 @@
 							{indicatorCalculations}
 						></BeeswarmContainer>
 					</div>
-				{:else}
+
 					<div class="divider-vertical"></div>
 
 					<div class="line-chart-container">
@@ -214,12 +264,13 @@
 		flex-wrap: nowrap;
 		justify-content: center;
 		width: 225px;
-		overflow: hidden;
+		overflow: visible;
 	}
 
 	@media (max-width: 950px) {
 		.line-chart-container {
-			display: none;
+			max-width: 300px;
+			margin-left: 10%;
 		}
 
 		.divider-vertical {

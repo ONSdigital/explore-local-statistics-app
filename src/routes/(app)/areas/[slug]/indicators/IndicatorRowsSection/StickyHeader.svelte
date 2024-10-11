@@ -14,7 +14,8 @@
 		chosenXDomainNumbEnd,
 		showConfidenceIntervals,
 		stickyZIndex,
-		toggle;
+		toggle,
+		indicatorChartsWidth;
 
 	//splits additonal areas into parent / uk and others, so that the parent and uk areas always ordered first on the key
 	$: visibleParentAreas = selectionsObject['areas-rows-additional-visible'].filter(
@@ -31,6 +32,7 @@
 	});
 
 	let showAllAreas = false;
+	$: console.log(indicatorChartsWidth);
 </script>
 
 <div
@@ -112,14 +114,16 @@
 			includeNotes={true}
 		></ChartOptions>
 
-		<div class="toggle-container">
-			Beeswarm
-			<label class="switch">
-				<input type="checkbox" bind:checked={toggle} on:change={() => console.log(toggle)} />
-				<span class="slider"></span>
-			</label>
-			Line chart
-		</div>
+		{#if indicatorChartsWidth < 635}
+			<div class="toggle-container">
+				Beeswarm
+				<label class="switch">
+					<input type="checkbox" bind:checked={toggle} on:change={() => console.log(toggle)} />
+					<span class="slider"></span>
+				</label>
+				Line chart
+			</div>
+		{/if}
 	</div>
 </div>
 

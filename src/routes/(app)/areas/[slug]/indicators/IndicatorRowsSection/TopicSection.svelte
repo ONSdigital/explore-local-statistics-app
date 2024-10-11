@@ -13,7 +13,8 @@
 		chartData,
 		chosenXDomain,
 		showConfidenceIntervals,
-		toggle;
+		toggle,
+		indicatorChartsWidth;
 
 	let topicUppercase = topic.name[0].toUpperCase() + topic.name.substring(1);
 
@@ -48,6 +49,7 @@
 								bind:hoverAreaId
 								bind:hoverIndicatorId
 								bind:toggle
+								bind:indicatorChartsWidth
 								{indicator}
 								{customLookup}
 								{metadata}
