@@ -1,0 +1,144 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/homicide-offences/editions/2023-Q2/versions/2",
+    "@type": "ons:Version",
+    "title": "Homicide Offences (England and Wales)",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/homicide-offences/homicide-offences.csv",
+            "title": "Homicide Offences (England and Wales)",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/homicide-offences/homicide-offences.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/homicide-offences/homicide-offences/homicide-offences.csv",
+            "title": "Homicide Offences (England and Wales)",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/homicide-offences/homicide-offences/homicide-offences.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/homicide-offences/homicide-offences/homicide-offences.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/homicide-offences/editions/2023-Q2",
+            "@type": "ons:Edition",
+            "title": "Homicide Offences (England and Wales)",
+            "abstract": "Rate of Homicide offences per million population, England and Wales, three-year rolling period 04/2020-03/2023.",
+            "description": "This dataset shows the rate of Homicide offences per million population, in England and Wales, for three-year rolling period 04/2020-03/2023.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nRegions,\nPolice Force Area,\nNations (England, Wales),\nCountry (England and Wales)\n\n### Source\n\n - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) \n\n\n### Source Notes and Caveats \nData presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 12 December 2023. The data will change as subsequent court hearings take place or as further information is received. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "issued": "2023-05-11T11:56:05",
+            "modified": "2024-02-12T15:56:05",
+            "wrds:caveat": "",
+            "keyword": [
+                "home-office-homicide-index",
+                "police-force-area",
+                "region",
+                "subnational"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice",
+            "spatial_coverage": [
+                "K04000001"
+            ],
+            "spatial_resolution": [
+                "E12",
+                "E23",
+                "W15"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2020-04-01T00:00:00+00:00",
+                "end": "2022-03-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P3Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

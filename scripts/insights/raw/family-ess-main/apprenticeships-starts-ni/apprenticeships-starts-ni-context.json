@@ -1,0 +1,141 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/apprenticeships-ni/editions/2024-Q2/versions/1",
+    "@type": "ons:Version",
+    "title": "ApprenticeshipsNI starts (Northern Ireland)",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/apprenticeships-starts-ni/apprenticeships-starts-ni.csv",
+            "title": "ApprenticeshipsNI starts (Northern Ireland)",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/apprenticeships-starts-ni/apprenticeships-starts-ni.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/apprenticeships-starts-ni/apprenticeships-starts-ni/apprenticeships-starts-northern-ireland.csv",
+            "title": "ApprenticeshipsNI starts (Northern Ireland)",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/apprenticeships-starts-ni/apprenticeships-starts-ni/apprenticeships-starts-northern-ireland.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/apprenticeships-starts-ni/apprenticeships-starts-ni/apprenticeships-starts-northern-ireland.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/apprenticeships-ni/editions/2024-Q2",
+            "@type": "ons:Edition",
+            "title": "ApprenticeshipsNI starts (Northern Ireland)",
+            "abstract": "Apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, Northern Ireland, academic years  2017/18 to 2021/22.",
+            "description": "This dataset shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for academic years 2017/18 to 2021/22.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: [Department for the Economy (Northern Ireland)](https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables) \n\n\n### Source Notes and Caveats \n- Data relate to participants who have been on their course 28 days or more.\n - Geography is based upon the home postcode of the learner.\n - This dataset includes level 2 and level 3 apprenticeship qualification data.\n - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.\n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/department-for-the-economy-northern-ireland",
+            "issued": "2024-06-11T09:52",
+            "modified": "2024-06-11T09:52",
+            "wrds:caveat": "",
+            "keyword": [
+                "apprenticeship",
+                "education-and-training",
+                "subnational",
+                "northern-ireland",
+                "local-authority"
+            ],
+            "theme": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork",
+            "spatial_coverage": "N92000002",
+            "spatial_resolution": [
+                "N09"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2017-08-01T00:00:00+00:00",
+                "end": "2022-07-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

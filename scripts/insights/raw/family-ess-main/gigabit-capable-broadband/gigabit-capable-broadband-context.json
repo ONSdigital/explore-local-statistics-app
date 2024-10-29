@@ -1,0 +1,151 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/gigabit-capable-broadband/editions/2023-Q1/versions/3",
+    "@type": "ons:Version",
+    "title": "Gigabit capable broadband",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/gigabit-capable-broadband/gigabit-capable-broadband.csv",
+            "title": "Gigabit capable broadband",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/gigabit-capable-broadband/gigabit-capable-broadband.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/gigabit-capable-broadband/gigabit-capable-broadband/gigabit-capable-broadband.csv",
+            "title": "Gigabit capable broadband",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/gigabit-capable-broadband/gigabit-capable-broadband/gigabit-capable-broadband.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/gigabit-capable-broadband/gigabit-capable-broadband/gigabit-capable-broadband.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/gigabit-capable-broadband/editions/2023-Q1",
+            "@type": "ons:Edition",
+            "title": "Gigabit capable broadband",
+            "abstract": "Percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), UK, as of January 2024.",
+            "description": "This dataset shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities\n\n### Source\n\n - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) \n\n\n",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/ofcom",
+            "issued": "2023-03-31T12:12:36",
+            "modified": "2024-09-23T16:01",
+            "wrds:caveat": "",
+            "keyword": [
+                "broadband-mobile-coverage",
+                "connectivity",
+                "local-authority",
+                "subnational"
+            ],
+            "theme": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade",
+            "spatial_coverage": [
+                "K02000001"
+            ],
+            "spatial_resolution": [
+                "E06",
+                "E07",
+                "E08",
+                "E09",
+                "E10",
+                "E12",
+                "E47",
+                "N09",
+                "S12",
+                "W06"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2024-01-01T00:00:00+00:00",
+                "end": "2024-01-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1M"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

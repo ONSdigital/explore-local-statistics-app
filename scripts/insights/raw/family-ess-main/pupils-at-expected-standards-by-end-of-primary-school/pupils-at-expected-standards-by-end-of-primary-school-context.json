@@ -1,0 +1,151 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/pupils-at-expected-standards-by-end-of-primary-school/editions/2023-Q1/versions/2",
+    "@type": "ons:Version",
+    "title": "Pupils meeting the expected standard in reading, writing and maths at the end of key stage 2",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school.csv",
+            "title": "Pupils meeting the expected standard in reading, writing and maths at the end of key stage 2",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school.csv",
+            "title": "Pupils meeting the expected standard in reading, writing and maths at the end of key stage 2",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school/pupils-at-expected-standards-by-end-of-primary-school.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/pupils-at-expected-standards-by-end-of-primary-school/editions/2023-Q1",
+            "@type": "ons:Edition",
+            "title": "Pupils meeting the expected standard in reading, writing and maths at the end of key stage 2",
+            "abstract": "Percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, England (state-funded schools), academic years 2015/16 - 2023/24",
+            "description": "This dataset shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of key stage 2, in England state-funded schools, for academic years 2015/16 - 2023/24.\n\n### Coverage \n\nEngland (state-funded schools)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-2-attainment) \n\n\n### Source Notes and Caveats \n- 'State-funded schools' includes LA maintained schools, sponsored academies, converter academies, free schools and state-funded special schools (including hospital schools).\n- Figures for 2024 are based on provisional data. Figures for other years are based on final data.\n- Data is not available for 2019/20 and 2020/21 academic years as assessments were cancelled due to the COVID-19 pandemic.\n- Writing teacher assessment and reading, writing and maths (combined) measures from 2018 onwards are not directly comparable to previous years due to changes in the writing teacher assessment frameworks. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/department-for-education",
+            "issued": "2023-03-31T12:15:14",
+            "modified": "2024-04-08T14:25",
+            "wrds:caveat": "",
+            "keyword": [
+                "key-stage-2-attainment",
+                "reading",
+                "writing",
+                "maths",
+                "state-funded-school",
+                "subnational",
+                "county",
+                "region"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+            "spatial_coverage": [
+                "E92000001"
+            ],
+            "spatial_resolution": [
+                "E06",
+                "E08",
+                "E09",
+                "E10",
+                "E12",
+                "E13"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2015-09-01T00:00:00+00:00",
+                "end": "2024-08-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}
