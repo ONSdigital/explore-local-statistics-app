@@ -21,6 +21,8 @@ Next, copy the family-ess-main folder from github and place it in local-statisti
 
 `git clone https://github.com/ONSdigital/explore-local-statistics-data.git`
 
+There is also a script to download the data. Use `npm run data:download`
+
 ## Step 3 - Give it a go and see what happens
 
 Once the raw data has been moved to the scripts/insights/raw folder, we are now ready to attempt our data generating step. This step manipulates the data in this folder - combined with other initial configuration data - into json files that can be easily read in by our app.
@@ -41,7 +43,7 @@ Therefore, when a new file is added, the script will provide the following warni
 
 _The script has been aborted because the list of file paths read in from the scripts/insights/raw/family-ess-main folder includes files which are not listed in the manifest..._
 
-Above this warning message will be a console.logged array including the new file paths. You need to add this file path to the data-fiels-manifest file and provide info on how to handle it.
+Above this warning message will be a console.logged array including the new file paths. You need to add this file path to the data-files-manifest file and provide info on how to handle it.
 
 Data-files-manifest also includes a multiIndicatorCategory field. This is used to deal with any datasets which are 'cubed' - e.g. a single file includes data for multiple indicators. In this instance, data:generate splits these out into separate inputs, and so it needs to know what field in the csv file differentiates them.
 
