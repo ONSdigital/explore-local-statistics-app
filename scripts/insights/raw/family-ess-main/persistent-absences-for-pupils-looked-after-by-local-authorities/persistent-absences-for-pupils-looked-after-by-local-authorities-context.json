@@ -1,0 +1,148 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-Q2/versions/2",
+    "@type": "ons:Version",
+    "title": "Persistent absences for pupils looked after by local authorities",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities.csv",
+            "title": "Persistent absences for pupils looked after by local authorities",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities.csv",
+            "title": "Persistent absences for pupils looked after by local authorities",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities/persistent-absences-for-pupils-looked-after-by-local-authorities.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/persistent-absences-for-pupils-looked-after-by-local-authorities/editions/2023-Q2",
+            "@type": "ons:Edition",
+            "title": "Persistent absences for pupils looked after by local authorities",
+            "abstract": "Percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded primary and secondary schools, special schools and pupil referral units), financial years 2016/17 - 2022/23.",
+            "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary, special schools and pupil referral units who have been looked after continuously for at least 12 months (as of 31 March of that year) by local authorities who were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded primary and secondary schools, special schools and pupil referral units), for financial years 2016/17 - 2022/23.\n\n### Coverage \n\nEngland (state-funded primary and secondary schools, special schools and pupil referral units)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/outcomes-for-children-in-need-including-children-looked-after-by-local-authorities-in-england) \n\n\n### Source Notes and Caveats \n\nFor the looked after children, absence data is matched to school census data for each school type, meaning that the pupils included are those on the school census with absence data. Persistent absence figures for all pupils and FSM are taken from the national absence figures and are produced using a different methodology based on enrolments and the school type is allocated in a different way so it is not appropriate to compare these figures with those for looked after children. \n\n\n",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/department-for-education",
+            "issued": "2023-05-16T13:35:25",
+            "modified": "2024-05-14T14:34",
+            "wrds:caveat": "",
+            "keyword": [
+                "state-funded-school",
+                "children-out-of-school",
+                "subnational",
+                "county",
+                "region"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+            "spatial_coverage": [
+                "E92000001"
+            ],
+            "spatial_resolution": [
+                "E06",
+                "E08",
+                "E09",
+                "E10",
+                "E12",
+                "E13"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2016-04-01T00:00:00+00:00",
+                "end": "2023-03-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

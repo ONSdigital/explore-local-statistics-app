@@ -1,0 +1,142 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/aged-16-to-64-years-level3-or-above-qualifications-ni/editions/2023-Q2/versions/2",
+    "@type": "ons:Version",
+    "title": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level3-or-above-qualifications-ni.csv",
+            "title": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level3-or-above-qualifications-ni.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv",
+            "title": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level3-or-above-qualifications-ni/aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/aged-16-to-64-years-level3-or-above-qualifications-ni/editions/2023-Q2",
+            "@type": "ons:Edition",
+            "title": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland",
+            "abstract": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Northern Ireland, 2016 to 2022.",
+            "description": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Northern Ireland, for 2016 to 2022.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts, \nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.nisra.gov.uk/publications/highest-qualification-level-2022) \n\n\n### Source Notes and Caveats \nFigures produced by NISRA may differ slightly to other highest qualification levels statistical publications, either due to differing sources, age analysed or slight differences in methodologies for assigning highest qualifications levels. \n\n\n",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency",
+            "issued": "2023-05-23T10:17:47.964593",
+            "modified": "2024-02-09T10:17:47.964593",
+            "wrds:caveat": "",
+            "keyword": [
+                "annual-population-survey",
+                "national-vocational-qualification",
+                "subnational",
+                "local-authority",
+                "region",
+                "northern-ireland"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+            "spatial_coverage": "N92000002",
+            "spatial_resolution": [
+                "N09"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2016-01-01T00:00:00+00:00",
+                "end": "2022-12-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

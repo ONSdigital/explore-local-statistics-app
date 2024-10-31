@@ -1,0 +1,148 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/persistent-absences-for-all-pupils/editions/2023-Q1/versions/2",
+    "@type": "ons:Version",
+    "title": "Persistent absences for all pupils",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils.csv",
+            "title": "Persistent absences for all pupils",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils.csv",
+            "title": "Persistent absences for all pupils",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils/persistent-absences-for-all-pupils.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/persistent-absences-for-all-pupils/editions/2023-Q1",
+            "@type": "ons:Edition",
+            "title": "Persistent absences for all pupils",
+            "abstract": "Percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, England (state-funded schools), academic years 2006/07 - 2022/23.",
+            "description": "This dataset shows the percentage of pupils in state-funded primary, state funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2006/07 - 2022/23. \n\n### Coverage \n\nEngland (state-funded primary and secondary schools, and special schools)\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nRegions,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england#) \n\n\n### Source Notes and Caveats \n- Data is not available for academic year 2019/20.\n- Total includes state-funded primary, secondary and special schools. Data for special schools is available from 2016/17 to present. \n- Sessions recorded as not attending due to COVID circumstances are included as possible sessions in 2020/21 and 2021/22 only, but not as an absence within absence rates.\n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/department-for-education",
+            "issued": "2023-03-31T12:14:18",
+            "modified": "2024-04-08T10:00",
+            "wrds:caveat": "",
+            "keyword": [
+                "state-funded-school",
+                "children-out-of-school",
+                "subnational",
+                "county",
+                "region"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+            "spatial_coverage": [
+                "E92000001"
+            ],
+            "spatial_resolution": [
+                "E06",
+                "E08",
+                "E09",
+                "E10",
+                "E12",
+                "E13"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2006-08-01T00:00:00+00:00",
+                "end": "2023-07-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,144 @@
+{
+    "@context": "https://github.com/ONSdigital/application-profile/blob/draft/ons_context_v0.1.json",
+    "@id": "https://ons.gov.uk/datasets/aged-19-years-and-over-further-education-and-skills-learner-achievements/editions/2023-Q2/versions/2",
+    "@type": "ons:Version",
+    "title": "Aged 19 years and over further education and skills learner achievements",
+    "dcat:distribution": [
+        {
+            "@id": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements.csv",
+            "title": "Aged 19 years and over further education and skills learner achievements",
+            "download_url": "https://github.com/ONSdigital/explore-local-statistics-data/blob/main/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements.csv",
+            "media_type": "text/csv"
+        },
+        {
+            "@id": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements.csv",
+            "title": "Aged 19 years and over further education and skills learner achievements",
+            "download_url": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements.csv",
+            "media_type": "application/csvm+json",
+            "described_by": "https://onsdigital.github.io/explore-local-statistics-data/out/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements/aged-19-years-and-over-further-education-and-skills-learner-achievements.csv-metadata.json"
+        }
+    ],
+    "@reverse": {
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/aged-16-years-and-over-modelled-unemployment/editions/2023-Q2",
+            "@type": "ons:Edition",
+            "title": "Aged 19 years and over further education and skills learner achievements",
+            "abstract": "Count of learners achieving a funded further education and skills learning aim, with the exception of community learning and non-regulated Multiply aims, England, academic years 2016/17 to 2022/23.",
+            "description": "This dataset shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning and non-regulated Multiply aims, in England, for academic years 2016/17 to 2022/23.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nNation (England)\n\n### Source\n\n - England: [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills) \n\n\n### Source Notes and Caveats \nOnly national level data is available for academic years 2016/17 and 2017/18. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+            "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+            "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "creator": "https://www.gov.uk/government/organisations/department-for-education",
+            "issued": "2023-05-17T12:25:02.243397",
+            "modified": "2024-03-21T12:25:02.243397",
+            "wrds:caveat": "",
+            "keyword": [
+                "apprenticeship",
+                "community-learning",
+                "education-and-training",
+                "subnational",
+                "county"
+            ],
+            "theme": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare",
+            "spatial_coverage": "E92000001",
+            "spatial_resolution": [
+                "E06",
+                "E08",
+                "E09",
+                "E10"
+            ],
+            "temporal_coverage": {
+                "@type": "dcterms:PeriodOfTime",
+                "start": "2016-08-01T00:00:00+00:00",
+                "end": "2023-07-31T00:00:00+00:00"
+            },
+            "temporal_resolution": [
+                "P1Y"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "AREACD",
+                        "titles": "Area Code",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "AREANM",
+                        "titles": "Area Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Geography",
+                        "titles": "Geography",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Variable Name",
+                        "titles": "Variable Name",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Indicator",
+                        "titles": "Indicator",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Mission",
+                        "titles": "Mission",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Category",
+                        "titles": "Category",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Period",
+                        "titles": "Period",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Observation",
+                        "titles": "Observation",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Measure",
+                        "titles": "Measure",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Unit",
+                        "titles": "Unit",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Lower Confidence Interval (95%)",
+                        "titles": "Lower Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Upper Confidence Interval (95%)",
+                        "titles": "Upper Confidence Interval",
+                        "datatype": "decimal"
+                    },
+                    {
+                        "name": "Observation Status",
+                        "titles": "Observation Status",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Polarity",
+                        "titles": "Polarity",
+                        "datatype": "string"
+                    },
+                    {
+                        "name": "Notes",
+                        "titles": "Notes",
+                        "datatype": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

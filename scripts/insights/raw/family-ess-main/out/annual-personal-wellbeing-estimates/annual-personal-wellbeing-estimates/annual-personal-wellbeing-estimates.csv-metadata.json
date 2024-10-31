@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "annual-personal-wellbeing-estimates.csv#dataset",
+    "@id": "annual-personal-wellbeing-estimates.csv#qbDataSet",
     "tables": [
         {
             "url": "annual-personal-wellbeing-estimates.csv",
@@ -84,7 +84,7 @@
                         "name": "virt_dataset",
                         "virtual": true,
                         "propertyUrl": "http://purl.org/linked-data/cube#dataSet",
-                        "valueUrl": "annual-personal-wellbeing-estimates.csv#dataset"
+                        "valueUrl": "annual-personal-wellbeing-estimates.csv#qbDataSet"
                     },
                     {
                         "name": "virt_unit",
@@ -156,6 +156,109 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/happiness-mean-score-where-10-is-completely-happy",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/satisfaction-mean-score-where-10-is-completely-satisfied",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
             "@id": "annual-personal-wellbeing-estimates.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
@@ -163,13 +266,568 @@
             ]
         },
         {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/worthwhile-mean-score-where-10-is-completely-worthwhile",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 11
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/anxiety-mean-score-where-10-is-completely-anxious",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Anxiety mean score (where 10 is 'completely anxious')"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Satisfaction mean score (where 10 is 'completely satisfied')"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/government-year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#class/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Worthwhile mean score (where 10 is 'completely worthwhile')"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 12
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "government-year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Government Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#class/government-year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Annual personal wellbeing estimates"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-09-13T13:32:00"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Annual personal wellbeing estimates"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Annual personal wellbeing estimates"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 13
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Happiness mean score (where 10 is 'completely happy')"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
+                }
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "annual-personal-wellbeing-estimates.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
             "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -189,13 +847,101 @@
             ]
         },
         {
+            "@id": "annual-personal-wellbeing-estimates.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/area-name"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/unit"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/worthwhile-mean-score-where-10-is-completely-worthwhile"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/happiness-mean-score-where-10-is-completely-happy"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/anxiety-mean-score-where-10-is-completely-anxious"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/satisfaction-mean-score-where-10-is-completely-satisfied"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/observation-status"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/measure-type"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/government-year"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#component/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
+                }
+            ]
+        },
+        {
             "@id": "annual-personal-wellbeing-estimates.csv#dataset",
             "@type": [
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/ns/dcat#Resource"
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -241,11 +987,6 @@
                     "@value": "Annual personal wellbeing estimates"
                 }
             ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#structure"
-                }
-            ],
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
@@ -258,26 +999,15 @@
                     "@value": "Annual personal wellbeing estimates"
                 }
             ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "annual-personal-wellbeing-estimates.csv#qbDataSet"
+                }
+            ],
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "personal-wellbeing"
-                },
-                {
-                    "@language": "en",
-                    "@value": "anxiety"
-                },
-                {
-                    "@language": "en",
-                    "@value": "regions"
-                },
-                {
-                    "@language": "en",
-                    "@value": "quality-of-life"
-                },
-                {
-                    "@language": "en",
-                    "@value": "annual-population-survey"
+                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -285,7 +1015,19 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "subnational"
+                    "@value": "personal-wellbeing"
+                },
+                {
+                    "@language": "en",
+                    "@value": "counties"
+                },
+                {
+                    "@language": "en",
+                    "@value": "regions"
+                },
+                {
+                    "@language": "en",
+                    "@value": "anxiety"
                 },
                 {
                     "@language": "en",
@@ -293,317 +1035,20 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "annual-population-survey"
+                },
+                {
+                    "@language": "en",
                     "@value": "life-satisfaction"
                 },
                 {
                     "@language": "en",
-                    "@value": "counties"
+                    "@value": "quality-of-life"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
                 {
                     "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#csvcubed-build-activity"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy",
-            "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Happiness mean score (where 10 is 'completely happy')"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/anxiety-mean-score-where-10-is-completely-anxious",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 13
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 12
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile",
-            "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Worthwhile mean score (where 10 is 'completely worthwhile')"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "government-year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Government Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#class/government-year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/worthwhile-mean-score-where-10-is-completely-worthwhile",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious",
-            "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Anxiety mean score (where 10 is 'completely anxious')"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/satisfaction-mean-score-where-10-is-completely-satisfied",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
                 }
             ]
         },
@@ -615,389 +1060,25 @@
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
                 }
             ]
         },
         {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/area-name",
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/ns/prov#Entity",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied",
-            "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/dc/terms/title": [
                 {
                     "@language": "en",
-                    "@value": "Satisfaction mean score (where 10 is 'completely satisfied')"
+                    "@value": "csvcubed v0.5.1"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#scale"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/area-name"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/happiness-mean-score-where-10-is-completely-happy"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/measure-type"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/worthwhile-mean-score-where-10-is-completely-worthwhile"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/unit"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/anxiety-mean-score-where-10-is-completely-anxious"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/observation-status"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/satisfaction-mean-score-where-10-is-completely-satisfied"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/government-year"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#component/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/satisfaction-mean-score-where-10-is-completely-satisfied"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/anxiety-mean-score-where-10-is-completely-anxious"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/worthwhile-mean-score-where-10-is-completely-worthwhile"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/government-year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#class/government-year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/happiness-mean-score-where-10-is-completely-happy",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#measure/happiness-mean-score-where-10-is-completely-happy"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 11
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "annual-personal-wellbeing-estimates.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "annual-personal-wellbeing-estimates.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
                 }
             ]
         },
@@ -1072,8 +1153,8 @@
         {
             "@id": "annual-personal-wellbeing-estimates.csv#unit/score",
             "@type": [
-                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
