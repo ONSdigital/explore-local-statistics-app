@@ -6,7 +6,7 @@
           - Title: Aged 16 to 64 years level 3 or above qualifications
           - Label: Aged 16 to 64 years level 3 or above qualifications
           - Issued: 2023-05-23T10:17:47.964593
-          - Modified: 2024-02-05T12:17:00
+          - Modified: 2024-10-31T10:17:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,15 +14,15 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
           - Keywords: 
-		-- subnational
+		-- regulated-qualifications-framework
 		-- annual-population-survey
-		-- region
-		-- national-vocational-qualification
+		-- subnational
 		-- local-authority
+		-- region
           - Contact Point: None
           - Identifier: Aged 16 to 64 years level 3 or above qualifications
-          - Comment: Percentage of the population aged 16 – 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2004 to 2021
-          - Description: This dataset shows the percentage of the population aged 16 – 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2004 - 2021.
+          - Comment: Percentage of the population aged 16 – 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, Great Britain (Northern Ireland national figure included), 2022 to 2023
+          - Description: This dataset shows the percentage of the population aged 16 – 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2022 to 2023.
 		
 		### Coverage 
 		
@@ -31,7 +31,6 @@
 		#### Geography definition
 		
 		Local Authority Districts and Unitary Authorities,
-		Metropolitan Counties,
 		Counties,
 		Regions,
 		Combined Authorities,
@@ -40,13 +39,13 @@
 		
 		### Source
 		
-		 - Great Britain: [Nomis](https://www.nomisweb.co.uk/query/construct/summary.asp?reset=yes&mode=construct&dataset=17&version=0&anal=1&initsel=) 
+		 - Great Britain: [Nomis](https://www.nomisweb.co.uk/datasets/apsnew) 
 		
 		
 		### Source Notes and Caveats 
 		This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).
 		
-		As of 18 Apr 2023 qualification estimates from the APS for the Jan 2022-Dec 2022 survey period are temporarily suspended. Qualifications outputs for 2022 will be reinstated on NOMIS as soon as the update has been made. 
+		Please note that this indicator previously used National Vocational Qualification (NVQ) level 3+ qualifications data but has been updated to the Regulated Qualifications Framework (RQF) level 3+ qualifications data. 
 		
 		
 		
@@ -61,8 +60,6 @@
                           Geography    Dimension      True                                    aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                                                                None                           
                           Indicator   Suppressed     False                                                                                                                None                           
-                            Mission   Suppressed     False                                                                                                                None                           
-                           Category   Suppressed     False                                                                                                                None                           
                              Period    Dimension      True                                              aged-16-to-64-years-level-3-or-above-qualifications.csv#dimension/year                Observation
                         Observation Observations     False aged-16-to-64-years-level-3-or-above-qualifications.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications                Observation
                             Measure   Suppressed     False                                                                                                                None                           
@@ -75,8 +72,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -92,36 +87,36 @@ ons-geography-code.csv#code-list ONS Geography Code          AREACD
               year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 7578
+        - Number of Rows: 828
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD         AREANM Geography                                                          Variable Name                                           Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2004         43.7 Percentage    %                             43.4                             44.0                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2021         61.4 Percentage    %                             61.0                             61.8                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2020         61.2 Percentage    %                             60.8                             61.6                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2019         58.4 Percentage    %                             58.0                             58.8                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2018         57.6 Percentage    %                             57.2                             58.0                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2017         56.9 Percentage    %                             56.5                             57.3                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2015         55.5 Percentage    %                             55.1                             55.9                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2014         54.8 Percentage    %                             54.4                             55.2                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2013         53.7 Percentage    %                             53.3                             54.1                NaN         1   NaN
-k02000001 united-kingdom   country Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2016         56.7 Percentage    %                             56.3                             57.1                NaN         1   NaN
+   AREACD            AREANM Geography                                   Variable Name                                                 Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001    united-kingdom   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.7 Percentage    %                             66.4                             67.0                NaN         1   NaN
+k02000001    united-kingdom   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         67.7 Percentage    %                             67.4                             68.0                NaN         1   NaN
+k03000001     great-britain   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.9 Percentage    %                             66.6                             67.2                NaN         1   NaN
+k03000001     great-britain   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         67.8 Percentage    %                             67.5                             68.1                NaN         1   NaN
+k04000001 england-and-wales   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.3 Percentage    %                             66.0                             66.6                NaN         1   NaN
+k04000001 england-and-wales   country Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         67.3 Percentage    %                             66.9                             67.7                NaN         1   NaN
+e92000001           england    nation Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.4 Percentage    %                             66.1                             66.7                NaN         1   NaN
+e92000001           england    nation Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         67.4 Percentage    %                             67.0                             67.8                NaN         1   NaN
+e12000001        north-east    region Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         60.4 Percentage    %                             59.2                             61.6                NaN         1   NaN
+e12000001        north-east    region Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         62.8 Percentage    %                             61.4                             64.2                NaN         1   NaN
         - Last 10 Rows: 
-   AREACD           AREANM Geography                                                          Variable Name                                           Indicator   Mission                                            Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2018         53.5 Percentage    %                             51.3                             55.7                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2012         45.8 Percentage    %                             43.4                             48.2                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2008         43.2 Percentage    %                             41.0                             45.4                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2007         43.0 Percentage    %                             40.7                             45.3                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2006         40.9 Percentage    %                             38.7                             43.1                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2005         40.1 Percentage    %                             37.9                             42.3                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2004         39.9 Percentage    %                             37.7                             42.1                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2011         41.8 Percentage    %                             39.4                             44.2                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2010         44.6 Percentage    %                             42.3                             46.9                NaN         1   NaN
-n92000002 northern-ireland    nation Proportion of the population aged 16 – 64 with level 3+ qualifications Aged 16 to 64 years level 3 or above qualifications Mission 6 Spreading opportunity and improving public services    2009         43.7 Percentage    %                             41.4                             46.0                NaN         1   NaN
+   AREACD              AREANM                Geography                                   Variable Name                                                 Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+s12000029   south-lanarkshire local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         69.2 Percentage    %                             63.8                             74.6                NaN         1   NaN
+s12000029   south-lanarkshire local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         68.4 Percentage    %                             64.0                             72.8                NaN         1   NaN
+s12000030            stirling local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         78.5 Percentage    %                             74.6                             82.4                NaN         1   NaN
+s12000030            stirling local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         83.1 Percentage    %                             79.0                             87.2                NaN         1   NaN
+s12000039 west-dunbartonshire local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         62.9 Percentage    %                             57.4                             68.4                NaN         1   NaN
+s12000039 west-dunbartonshire local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.4 Percentage    %                             61.6                             71.2                NaN         1   NaN
+s12000040        west-lothian local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         66.7 Percentage    %                             61.9                             71.5                NaN         1   NaN
+s12000040        west-lothian local-authority-district Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         65.5 Percentage    %                             59.9                             71.1                NaN         1   NaN
+n92000002    northern-ireland                   nation Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2023         62.7 Percentage    %                             61.5                             63.9                NaN         1   NaN
+n92000002    northern-ireland                   nation Level 3 or above qualifications (Great Britain) Proportion of the population aged 16 to 64 with level 3+     2022         60.8 Percentage    %                             59.6                             62.0                NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                             Measure    Unit  Count
-Aged 16 to 64 years level 3 or above qualifications percent   7578
+Aged 16 to 64 years level 3 or above qualifications percent    828
         
