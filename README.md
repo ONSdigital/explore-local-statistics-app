@@ -10,7 +10,7 @@ Install dependencies with `npm install`, then start a development server:
 
     npm run dev
 
-When developing new features, please create a feature branch and complete a code review before merging to dev.
+When developing new features, create a feature branch and complete a code review before merging to dev.
 
 ## Data
 
