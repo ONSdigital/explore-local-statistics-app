@@ -243,64 +243,448 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "museums.csv#component/geography-type",
+            "@id": "museums.csv#attribute/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "museums.csv#dimension/geography-type"
+                    "@language": "en",
+                    "@value": "Observation Status"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "museums.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
         {
-            "@id": "museums.csv#component/upper-confidence-interval",
+            "@id": "museums.csv#component/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "museums.csv#attribute/upper-confidence-interval"
+                    "@id": "museums.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "museums.csv#attribute/upper-confidence-interval"
+                    "@id": "museums.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 9
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "museums.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "museums.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "museums.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#measure/number-of-museums",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Number of museums"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "museums.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#class/time-instant",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "museums.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#component/time-instant",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "museums.csv#dimension/time-instant"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "museums.csv#dimension/time-instant"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "museums.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "museums.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "museums.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "museums.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "museums.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "museums.csv#dimension/area-name"
+                },
+                {
+                    "@id": "museums.csv#dimension/time-instant"
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "museums.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "museums.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "museums.csv#component/unit"
+                },
+                {
+                    "@id": "museums.csv#component/geography-type"
+                },
+                {
+                    "@id": "museums.csv#component/area-name"
+                },
+                {
+                    "@id": "museums.csv#component/time-instant"
+                },
+                {
+                    "@id": "museums.csv#component/number-of-museums"
+                },
+                {
+                    "@id": "museums.csv#component/measure-type"
+                },
+                {
+                    "@id": "museums.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "museums.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "museums.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "museums.csv#component/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "museums.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "museums.csv#dimension/time-instant"
+                },
+                {
+                    "@id": "museums.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "museums.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "museums.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "museums.csv#measure/number-of-museums"
+                },
+                {
+                    "@id": "museums.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "museums.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "museums.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#component/number-of-museums",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "museums.csv#measure/number-of-museums"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "museums.csv#measure/number-of-museums"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "museums.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "museums.csv#class/geography-type"
                 }
             ]
         },
         {
             "@id": "museums.csv#qbDataSet",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Distribution",
                 "http://purl.org/linked-data/cube#Attachable",
                 "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Distribution"
+                "http://www.w3.org/ns/dcat#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -347,57 +731,66 @@
             ]
         },
         {
-            "@id": "museums.csv#attribute/lower-confidence-interval",
+            "@id": "museums.csv#component/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
+                    "@id": "museums.csv#dimension/geography-type"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "museums.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
                 }
             ]
         },
         {
-            "@id": "museums.csv#measure/number-of-museums",
+            "@id": "museums.csv#component/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@language": "en",
-                    "@value": "Number of museums"
+                    "@id": "museums.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "museums.csv#attribute/lower-confidence-interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
                 }
             ]
         },
         {
             "@id": "museums.csv#attribute/upper-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -412,20 +805,13 @@
             ]
         },
         {
-            "@id": "museums.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
             "@id": "museums.csv#dimension/time-instant",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -450,424 +836,52 @@
             ]
         },
         {
-            "@id": "museums.csv#component/number-of-museums",
+            "@id": "museums.csv#component/upper-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#measure/number-of-museums"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "museums.csv#measure/number-of-museums"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "museums.csv#component/geography-type"
-                },
-                {
-                    "@id": "museums.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "museums.csv#component/number-of-museums"
-                },
-                {
-                    "@id": "museums.csv#component/time-instant"
-                },
-                {
-                    "@id": "museums.csv#component/unit"
-                },
-                {
-                    "@id": "museums.csv#component/observation-status"
-                },
-                {
-                    "@id": "museums.csv#component/measure-type"
-                },
-                {
-                    "@id": "museums.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "museums.csv#component/area-name"
-                },
-                {
-                    "@id": "museums.csv#component/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "museums.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "museums.csv#dimension/area-name"
-                },
-                {
-                    "@id": "museums.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "museums.csv#dimension/time-instant"
-                },
+            "http://purl.org/linked-data/cube#attribute": [
                 {
                     "@id": "museums.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "museums.csv#measure/number-of-museums"
-                },
-                {
-                    "@id": "museums.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "museums.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "museums.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "museums.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "museums.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#class/time-instant",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "museums.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "museums.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#component/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "museums.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "museums.csv#attribute/observation-status"
+                    "@id": "museums.csv#attribute/upper-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 10
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
                 }
             ]
         },
         {
-            "@id": "museums.csv#component/ons-geography-code",
+            "@id": "museums.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "museums.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "museums.csv#component/time-instant",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#dimension/time-instant"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "museums.csv#dimension/time-instant"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#component/unit",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "museums.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "museums.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "museums.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "museums.csv#dimension/time-instant"
-                },
-                {
-                    "@id": "museums.csv#dimension/area-name"
-                },
-                {
-                    "@id": "museums.csv#dimension/ons-geography-code"
-                }
-            ]
-        },
-        {
-            "@id": "museums.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
+                    "@value": "Lower Confidence Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "museums.csv#class/area-name"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
             ]
         },
@@ -875,8 +889,8 @@
             "@id": "museums.csv#dataset",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Dataset"
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/ns/dcat#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -886,7 +900,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows museums per 100,000 people, in the UK, as at 30 September 2021.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/numberofmuseumsacrosslocalauthoritydistrictsladintheunitedkingdom \n\n\n### Source Notes and Caveats \nPer capita estimates are calculated using the usual resident population estimates from the most recent Census. These per capita estimates are not directly comparable between the different countries because of the non-consistent census dates that the population estimates were taken on. Some of this data has been aggregated and may show differences to other published figures. \n\n\n"
+                    "@value": "This dataset shows museums per 100,000 people, in the UK, as at 30 September 2021.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/numberofmuseumsacrosslocalauthoritydistrictsladintheunitedkingdom) \n\n\n### Source Notes and Caveats \nPer capita estimates are calculated using the usual resident population estimates from the most recent Census. These per capita estimates are not directly comparable between the different countries because of the non-consistent census dates that the population estimates were taken on.\n\nSome of this data has been aggregated and may show differences to other published figures. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -942,15 +956,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "combined-authority"
-                },
-                {
-                    "@language": "en",
                     "@value": "museums"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
                 },
                 {
                     "@language": "en",
@@ -962,7 +968,15 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "combined-authority"
+                },
+                {
+                    "@language": "en",
                     "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -986,8 +1000,8 @@
         {
             "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Entity"
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/title": [
                 {
@@ -1004,8 +1018,8 @@
         {
             "@id": "museums.csv#dependency/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1021,8 +1035,8 @@
         {
             "@id": "museums.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1038,8 +1052,8 @@
         {
             "@id": "museums.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1055,8 +1069,8 @@
         {
             "@id": "museums.csv#dependency/time-instant",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1072,8 +1086,8 @@
         {
             "@id": "museums.csv#unit/per-100-000",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://qudt.org/schema/qudt/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [

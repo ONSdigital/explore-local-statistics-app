@@ -243,31 +243,118 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/lower-confidence-interval",
+            "@id": "net-additions-to-the-housing-stock-england.csv#structure",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#component": [
                 {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/geography-type"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/unit"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/net-additions-to-housing-stock"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/area-name"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/measure-type"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/government-year"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#component/observation-status"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#measure/net-additions-to-housing-stock"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/unit",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
                 }
             ]
         },
         {
             "@id": "net-additions-to-the-housing-stock-england.csv#component/lower-confidence-interval",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -281,21 +368,47 @@
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
                 }
             ]
         },
         {
             "@id": "net-additions-to-the-housing-stock-england.csv#component/net-additions-to-housing-stock",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -309,37 +422,69 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 7
                 }
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-england.csv#class/ons-geography-code",
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/observation-status",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/ons-geography-code",
-            "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 1
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
                 }
             ]
         },
@@ -348,8 +493,8 @@
             "@type": [
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -369,20 +514,13 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-england.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
             "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year",
             "@type": [
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -407,11 +545,125 @@
             ]
         },
         {
+            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
             "@id": "net-additions-to-the-housing-stock-england.csv#component/geography-type",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -425,22 +677,173 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 3
                 }
             ]
         },
         {
+            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#class/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#slice/cross-measures",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-england.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
             "@id": "net-additions-to-the-housing-stock-england.csv#qbDataSet",
             "@type": [
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/ns/dcat#Distribution"
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
-                    "@id": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities"
+                    "@id": "https://www.gov.uk/government/organisations/ministry-of-housing-communities-local-government"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -483,404 +886,15 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#class/government-year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/government-year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/net-additions-to-housing-stock"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/observation-status"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/geography-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/government-year"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/measure-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/unit"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#component/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/government-year"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#measure/net-additions-to-housing-stock"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#dimension/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-england.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-england.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
             "@id": "net-additions-to-the-housing-stock-england.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
-                    "@id": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities"
+                    "@id": "https://www.gov.uk/government/organisations/ministry-of-housing-communities-local-government"
                 }
             ],
             "http://purl.org/dc/terms/description": [
@@ -908,7 +922,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-08-30T09:59:00"
+                    "@value": "2024-11-05T14:12:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -942,15 +956,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "demolition"
-                },
-                {
-                    "@language": "en",
                     "@value": "dwelling"
-                },
-                {
-                    "@language": "en",
-                    "@value": "new-building"
                 },
                 {
                     "@language": "en",
@@ -962,24 +968,32 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "new-building"
                 },
                 {
                     "@language": "en",
                     "@value": "county"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "demolition"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
                 {
-                    "@id": "https://www.ons.gov.uk/ministry-of-housing-communities-local-government"
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing"
                 }
             ]
         },
         {
             "@id": "net-additions-to-the-housing-stock-england.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {

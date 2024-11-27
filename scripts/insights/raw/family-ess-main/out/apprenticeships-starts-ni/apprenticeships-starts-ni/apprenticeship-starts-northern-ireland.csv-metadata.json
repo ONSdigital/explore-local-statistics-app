@@ -243,289 +243,160 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#class/geography-type",
+            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "gregorian-time-interval.csv#code-list"
+                    "@id": "area-name.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Gregorian Time Interval"
+                    "@value": "Area Name"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#class/gregorian-time-interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#class/area-name"
                 }
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#slice/cross-measures",
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/observation-status",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/number-of-apprenticeship-starts",
-            "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 9
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
                 }
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/unit",
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@value": true
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#class/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#class/geography-type"
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
                 }
             ]
         },
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#structure",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DataStructureDefinition"
             ],
             "http://purl.org/linked-data/cube#component": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/measure-type"
-                },
-                {
                     "@id": "apprenticeship-starts-northern-ireland.csv#component/gregorian-time-interval"
                 },
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/area-name"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/unit"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/measure-type"
                 },
                 {
                     "@id": "apprenticeship-starts-northern-ireland.csv#component/observation-status"
                 },
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/lower-confidence-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/unit"
                 },
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#component/geography-type"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/upper-confidence-interval"
                 },
                 {
                     "@id": "apprenticeship-starts-northern-ireland.csv#component/ons-geography-code"
                 },
                 {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/geography-type"
+                },
+                {
                     "@id": "apprenticeship-starts-northern-ireland.csv#component/number-of-apprenticeship-starts"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/area-name"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#component/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
                 },
                 {
                     "@id": "http://purl.org/linked-data/cube#measureType"
                 },
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
                 },
                 {
                     "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
             "http://purl.org/linked-data/cube#sliceKey": [
@@ -535,96 +406,13 @@
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Number of apprenticeship starts"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
             "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -649,36 +437,272 @@
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name",
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#class/gregorian-time-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/number-of-apprenticeship-starts",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval",
+            "@type": [
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "area-name.csv#code-list"
+                    "@id": "gregorian-time-interval.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Area Name"
+                    "@value": "Gregorian Time Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#class/area-name"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#measure/number-of-apprenticeship-starts",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Number of apprenticeship starts"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#count"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
                 }
             ]
         },
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#component/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
@@ -693,96 +717,65 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 2
                 }
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/ons-geography-code",
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/measure-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 1
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
                 }
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/observation-status",
+            "@id": "apprenticeship-starts-northern-ireland.csv#slice/cross-measures",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
+                },
                 {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                },
                 {
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/geography-type"
+                },
                 {
-                    "@language": "en",
-                    "@value": "Observation Status"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/area-name"
                 }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "apprenticeship-starts-northern-ireland.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#qbDataSet",
             "@type": [
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
                 "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Distribution"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -831,9 +824,9 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -849,34 +842,55 @@
             ]
         },
         {
-            "@id": "apprenticeship-starts-northern-ireland.csv#component/gregorian-time-interval",
+            "@id": "apprenticeship-starts-northern-ireland.csv#attribute/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "apprenticeship-starts-northern-ireland.csv#component/ons-geography-code",
+            "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/gregorian-time-interval"
+                    "@id": "apprenticeship-starts-northern-ireland.csv#dimension/ons-geography-code"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
                 }
             ]
         },
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#dataset",
             "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/ns/dcat#Resource"
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -886,7 +900,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for academic years 2018/19 to 2021/22.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: Department for the Economy (Northern Ireland) [Apprenticeships NI](https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables), [Futher Education (FE) colleges and College of Agriculture, Food and Rural Enterprise (CAFRE)](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeships-further-education-academic-year-202223) and [Higher Education Institutions](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeship-higher-education-institutions-statistical-fact-sheet-202122) \n\n\n### Source Notes and Caveats \n- Starts refer to the number of participants who are in the first year of an apprenticeship programme. - Data relate to participants who have been on their course 28 days or more.\n - Geography is based upon the home postcode of the learner.\n - ApprenticeshipsNI includes levels 2 and 3.\n - \n - Higher Level Apprenticeships (HLA) at further education (FE) colleges in Northern Ireland and the College of Agriculture, Food and Rural Enterprise (CAFRE) includes levels 4, 5 and 6.\n - HLA at Higher Education Institutions (HEIs) in Northern Ireland includes levels 6 and 7.\n - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.\n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                    "@value": "This dataset shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for academic years 2018/19 to 2021/22.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: Department for the Economy (Northern Ireland) [Apprenticeships NI](https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables), [Futher Education (FE) colleges and College of Agriculture, Food and Rural Enterprise (CAFRE)](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeships-further-education-academic-year-202223) and [Higher Education Institutions](https://www.economy-ni.gov.uk/publications/higher-level-apprenticeship-higher-education-institutions-statistical-fact-sheet-202122) \n\n\n### Source Notes and Caveats \n- Starts refer to the number of participants who are in the first year of an apprenticeship programme. \n- Data relate to participants who have been on their course 28 days or more.\n - Geography is based upon the home postcode of the learner.\n - ApprenticeshipsNI includes levels 2 and 3.\n - Higher Level Apprenticeships (HLA) at further education (FE) colleges in Northern Ireland and the College of Agriculture, Food and Rural Enterprise (CAFRE) includes levels 4, 5 and 6.\n - HLA at Higher Education Institutions (HEIs) in Northern Ireland includes levels 6 and 7.\n - [2022 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2022-mid-year-population-estimates-northern-ireland) have been used to create a rate per 100,000 population.\n - Figures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.\n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -908,7 +922,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-09-02T11:13:00"
+                    "@value": "2024-11-07T15:16:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -942,15 +956,11 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
                     "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "education-and-training"
-                },
-                {
-                    "@language": "en",
-                    "@value": "northern-ireland"
                 },
                 {
                     "@language": "en",
@@ -958,7 +968,11 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "northern-ireland"
+                },
+                {
+                    "@language": "en",
+                    "@value": "education-and-training"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -970,8 +984,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
@@ -982,8 +996,8 @@
         {
             "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Entity"
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/title": [
                 {
@@ -1000,8 +1014,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#dependency/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1017,8 +1031,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#dependency/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1034,8 +1048,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#dependency/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1051,8 +1065,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#dependency/gregorian-time-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://rdfs.org/ns/void#Dataset"
+                "http://rdfs.org/ns/void#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1068,8 +1082,8 @@
         {
             "@id": "apprenticeship-starts-northern-ireland.csv#unit/per-100-000",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://qudt.org/schema/qudt/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
