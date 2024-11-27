@@ -3,10 +3,10 @@
 
 
         - The data cube has the following catalog metadata:
-          - Title: Homicide Offences
-          - Label: Homicide Offences
+          - Title: Homicide offences
+          - Label: Homicide offences
           - Issued: 2023-05-11T11:56:05.595427
-          - Modified: 2024-02-12T15:56:05.595427
+          - Modified: 2024-11-27T07:36:05.595427
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,34 +14,42 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice
           - Keywords: 
-		-- home-office-homicide-index
-		-- police-force-area
 		-- subnational
+		-- home-office-homicide-index
 		-- region
+		-- police-force-area
           - Contact Point: None
-          - Identifier: Homicide Offences
-          - Comment: Rate of Homicide offences per million population, England and Wales, 04/2020-03/2023.
-          - Description: This dataset shows the rate of Homicide offences per million population, in England and Wales, for period 04/2020-03/2023.
+          - Identifier: Homicide offences
+          - Comment: Rate of homicide offences per million population, England, Wales and Northern Ireland, three-year rolling periods 04/2012-03/2015 to 04/2020-03/2023.
+          - Description: This dataset shows the rate of homicide offences per million population, in England, Wales and Northern Ireland, for three-year rolling periods 04/2012-03/2015 to 04/2020-03/2023.
 		
 		### Coverage 
 		
-		England and Wales
+		England, Wales and Northern Ireland
 		
 		#### Geography definition
 		
 		Regions,
 		Police Force Area,
-		Nations (England, Wales),
+		Nations (England, Wales, Northern Ireland),
 		Country (England and Wales)
 		
 		### Source
 		
-		 - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) 
-		 - Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#) 
+		 - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#)
+		
+		 - Northern Ireland: [Police Service of Northern Ireland](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics) 
 		
 		
 		### Source Notes and Caveats 
-		Data presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 12 December 2023. The data will change as subsequent court hearings take place or as further information is received. 
+		
+		- England and Wales data presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 12 December 2023. The data will change as subsequent court hearings take place or as further information is received.
+		
+		- Northern Ireland statistics on police recorded crime are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics).
+		
+		- 2022 mid-year population estimates have been used to create a rate per million population.
+		
+		- Some of this data has been aggregated and may show differences to other published figures. 
 		
 		
 		
@@ -52,7 +60,7 @@
         
 
  - The data cube has the following column component information: 
-    - Dataset Label: Homicide Offences
+    - Dataset Label: Homicide offences
     - Columns: 
                               Title         Type  Required                                              Property URL Observations Column Titles
                              AREACD    Dimension      True        homicide-offences.csv#dimension/ons-geography-code                Observation
@@ -60,8 +68,6 @@
                           Geography    Dimension      True            homicide-offences.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                      None                           
                           Indicator   Suppressed     False                                                      None                           
-                            Mission   Suppressed     False                                                      None                           
-                           Category   Suppressed     False                                                      None                           
                              Period    Dimension      True   homicide-offences.csv#dimension/gregorian-time-interval                Observation
                         Observation Observations     False                   homicide-offences.csv#measure/homicides                Observation
                             Measure   Suppressed     False                                                      None                           
@@ -74,8 +80,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -91,36 +95,36 @@ gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
      ons-geography-code.csv#code-list      ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 55
+        - Number of Rows: 504
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD             AREANM         Geography                                                       Variable Name                             Indicator    Mission                                                  Category                  Period  Observation                                   Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
-k04000001  england-and-wales           country Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    10.161493 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e92000001            england            nation Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    10.251488 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e12000001         north-east            region Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    10.784636 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000013          cleveland police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    15.792521 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000008             durham police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     6.843233 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000007        northumbria police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    10.538494 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e12000002         north-west            region Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    11.660340 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000006           cheshire police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     4.593185 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000002            cumbria police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     8.658453 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000005 greater-manchester police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    14.443696 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+   AREACD            AREANM Geography     Variable Name         Indicator                  Period  Observation                                         Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2012-04-01t00-00-00/p3y     9.165392 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2013-04-01t00-00-00/p3y     9.063883 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2014-04-01t00-00-00/p3y     9.968657 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2015-04-01t00-00-00/p3y    10.988095 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2016-04-01t00-00-00/p3y    11.510326 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2017-04-01t00-00-00/p3y    11.376917 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2018-04-01t00-00-00/p3y    10.530849 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2019-04-01t00-00-00/p3y    10.752065 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+k04000001 england-and-wales   country Homicide Offences Homicide Offences 2020-04-01t00-00-00/p3y    10.230103 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+e92000001           england    nation Homicide Offences Homicide Offences 2020-04-01t00-00-00/p3y    10.320357 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
         - Last 10 Rows: 
-   AREACD             AREANM         Geography                                                       Variable Name                             Indicator    Mission                                                  Category                  Period  Observation                                   Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
-e23000036  avon-and-somerset police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     9.771890 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000035 devon-and-cornwall police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     8.005830 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000039             dorset police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     6.411402 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000037    gloucestershire police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    12.410130 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-e23000038          wiltshire police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     4.502073 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-w92000004              wales            nation Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     7.888784 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-w15000004        dyfed-powys police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y    10.290057 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-w15000002              gwent police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     8.451657 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-w15000001        north-wales police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     8.664022 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
-w15000003        south-wales police-force-area Homicide Offences (rate per million population) (England and Wales) Homicide Offences (England and Wales) Mission 11 Restoring a sense of community, local pride and belonging 2020-04-01t00-00-00/p3y     6.292237 Rate of offences per 1,000,000 population Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+   AREACD           AREANM         Geography     Variable Name         Indicator                  Period  Observation                                         Measure                          Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity  Notes
+w15000003      south-wales police-force-area Homicide Offences Homicide Offences 2016-04-01t00-00-00/p3y     9.728159 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2019-04-01t00-00-00/p3y    11.751151 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2012-04-01t00-00-00/p3y    11.828869 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2013-04-01t00-00-00/p3y    12.116701 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2014-04-01t00-00-00/p3y    11.500803 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2015-04-01t00-00-00/p3y    11.968291 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2016-04-01t00-00-00/p3y    13.154307 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2017-04-01t00-00-00/p3y    13.607180 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2018-04-01t00-00-00/p3y    12.641433 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
+n92000002 northern-ireland            nation Homicide Offences Homicide Offences 2020-04-01t00-00-00/p3y    12.251273 Homicide Offences (rate per million population) Rate per 1,000,000 population                              NaN                              NaN                NaN        -1    NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
   Measure        Unit  Count
-Homicides Per Million     55
+Homicides Per Million    504
         
