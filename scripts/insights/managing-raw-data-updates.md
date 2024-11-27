@@ -95,20 +95,3 @@ It is recommended to open up the csv file to make edits in vscode rather than ex
 Note: The unique time periods file has been derived from the time periods in the raw data. However, there is one issue where a dataset has missing years - for example, persistent-absences-for-all-pupils currently has data for 2018 and 2020 but not for 2019. The way the app is currently coded, this causes an error if the user adjusts the slider to show data for 2019, since it can't find labels for that year.
 
 The current work around is that we add a additional-periods-lookup-for-sliders.csv input which includes these missing time periods. Therefore, if more indicators with missing years are added, or data for these missing years is added for existing indicators - then this file will need updating.
-
-### Errors
-
-
-If you've added a dataset but now want to remove it, you need to do things in reverse. Set it to be not included in the `data-files-manifest.csv` using `N`.
-
-Remove it from the `indicators-metadata.csv` and the `indicators-lookup.csv`.
-Present in left set but not in right:
-[ 'claimant-count' ]
-/Users/Lauh/Documents/GitHub/local-statistics/scripts/insights/table-utils.ts:34
-                throw new Error(
-                      ^
-
-
-Error: The column "code" used for joining has different sets of values in the two tables!
-
-
