@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dataset",
+    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#qbDataSet",
     "tables": [
         {
             "url": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv",
@@ -35,16 +35,6 @@
                     {
                         "titles": "Indicator",
                         "name": "indicator",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Mission",
-                        "name": "mission",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Category",
-                        "name": "category",
                         "suppressOutput": true
                     },
                     {
@@ -178,7 +168,7 @@
                         "virtual": true,
                         "aboutUrl": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#obs/{areacd},{areanm},{geography},{period}@aged-16-to-64-years-level-3-or-above-qualifications",
                         "propertyUrl": "qb:dataSet",
-                        "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dataset"
+                        "valueUrl": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#qbDataSet"
                     }
                 ],
                 "foreignKeys": [
@@ -243,13 +233,43 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -274,60 +294,53 @@
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/measure-type",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "year.csv#code-list"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@language": "en",
+                    "@value": "Year"
                 }
             ],
-            "http://purl.org/linked-data/cube#order": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@value": 5
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/geography-type",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status"
+                    "@language": "en",
+                    "@value": "Observation Status"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
@@ -350,94 +363,176 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 3
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#structure",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/ons-geography-code",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
-            "http://purl.org/linked-data/cube#component": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/aged-16-to-64-years-level-3-or-above-qualifications"
-                },
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/unit"
-                },
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/area-name"
-                },
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/geography-type"
-                },
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/ons-geography-code"
-                },
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/year"
-                },
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/observation-status"
-                },
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/upper-confidence-interval"
-                },
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/measure-type"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/lower-confidence-interval"
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
-                },
-                {
                     "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#sliceKey": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#slice/cross-measures"
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#MeasureProperty"
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -475,68 +570,25 @@
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": true
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -556,15 +608,112 @@
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#slice/cross-measures",
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/year",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
+                },
+                {
                     "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/unit"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/year"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/measure-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/area-name"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/observation-status"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/geography-type"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/aged-16-to-64-years-level-3-or-above-qualifications"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
                 },
                 {
                     "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
@@ -573,7 +722,18 @@
                     "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/geography-type"
                 },
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#measure/aged-16-to-64-years-level-3-or-above-qualifications"
+                },
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#slice/cross-measures"
                 }
             ]
         },
@@ -582,6 +742,83 @@
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Distribution"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-05-23T10:17:47.964593"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
             ]
         },
         {
@@ -603,11 +840,13 @@
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 8
                 }
             ]
@@ -631,119 +870,17 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
         {
             "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dataset",
             "@type": [
+                "http://www.w3.org/ns/dcat#Dataset",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/ns/dcat#Dataset"
+                "http://www.w3.org/ns/dcat#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -753,7 +890,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Northern Ireland, for 2016 to 2022.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts, \nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.nisra.gov.uk/publications/highest-qualification-level-2022) \n\n\n### Source Notes and Caveats \nFigures produced by NISRA may differ slightly to other highest qualification levels statistical publications, either due to differing sources, age analysed or slight differences in methodologies for assigning highest qualifications levels. \n\n\n"
+                    "@value": "This dataset shows the percentage of the population aged 16 to 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, in Northern Ireland, for 2016 to 2023.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts, \nNation (Northern Ireland)\n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.nisra.gov.uk/publications/highest-qualification-level-2023) \n\n\n### Source Notes and Caveats \nFigures produced by NISRA may differ slightly to other highest qualification levels statistical publications, either due to differing sources, age analysed or slight differences in methodologies for assigning highest qualifications levels. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -775,7 +912,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-02-09T10:17:47.964593"
+                    "@value": "2024-11-15T14:46:42.964593"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -789,15 +926,10 @@
                     "@value": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland"
                 }
             ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#structure"
-                }
-            ],
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "Percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, Northern Ireland, 2016 to 2022."
+                    "@value": "Percentage of the population aged 16 to 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, Northern Ireland, 2016 to 2023"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -806,10 +938,23 @@
                     "@value": "Aged 16 to 64 years level 3 or above qualifications, Northern Ireland"
                 }
             ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#qbDataSet"
+                }
+            ],
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
+                    "@value": "annual-population-survey"
+                },
+                {
+                    "@language": "en",
                     "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
                 },
                 {
                     "@language": "en",
@@ -817,123 +962,46 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "national-vocational-qualification"
-                },
-                {
-                    "@language": "en",
                     "@value": "subnational"
                 },
                 {
                     "@language": "en",
-                    "@value": "annual-population-survey"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
+                    "@value": "regulated-qualification-framework"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
                 {
                     "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare"
                 }
+            ]
+        },
+        {
+            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+            "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#csvcubed-build-activity"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
                 }
             ]
         },
         {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/year",
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty"
+                "http://www.w3.org/ns/prov#Entity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/dc/terms/title": [
                 {
                     "@language": "en",
-                    "@value": "Year"
+                    "@value": "csvcubed v0.5.1"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
                 {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#class/year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "aged-16-to-64-years-level-3-or-above-qualifications-northern-ireland.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
                 }
             ]
         },
