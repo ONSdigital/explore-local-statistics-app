@@ -25,3 +25,10 @@ It's possible to use `npm link` to work locally with the components, without hav
 - Verify with `npm ls @onsvisual/svelte-components` that the package is symlink'd to your local location of the library.
 - With local-statistics running, the Svelte library components should live update each time you run `npm run build`.
 - To unlink, run `npm unlink @onsvisual/svelte-components`.
+
+## Dockerised production build
+
+The app can be run using Docker for production, for which we use the SvelteKit Node adapter. You can run a production build locally like so:
+
+    docker build -t els .
+    docker run -p 3000:3000 els
