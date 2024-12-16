@@ -53,19 +53,19 @@
 			"label": "Business expenditure on research and development"
 		},
 		{
-			"code": "business-demography-Active enterprises",
+			"code": "active-enterprises",
 			"label": "Active businesses"
 		},
 		{
-			"code": "business-demography-Births of new enterprises",
+			"code": "business-demography-Business births",
 			"label": "Business births"
 		},
 		{
-			"code": "business-demography-Deaths of enterprises",
+			"code": "business-demography-Business deaths",
 			"label": "Business deaths"
 		},
 		{
-			"code": "business-demography-High growth enterprises",
+			"code": "business-demography-High growth businesses",
 			"label": "High growth businesses"
 		},
 		{
@@ -1671,17 +1671,17 @@
 				2023
 			]
 		},
-		"business-demography-Active enterprises": {
+		"active-enterprises": {
 			"id": 27,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Active enterprises",
+			"code": "active-enterprises",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Active enterprises",
-				"slug": "active-enterprises",
+				"code": "active-enterprises",
+				"slug": "active-businesses",
 				"label": "Active businesses",
 				"prefix": "",
 				"suffix": "",
@@ -1692,12 +1692,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2017 to 2022.",
+				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2018 to 2023.",
 				"standardised": "F",
-				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Births and deaths are then identified by comparing active populations for different years.",
+				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1716,6 +1716,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -1756,6 +1757,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -1782,44 +1790,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-Births of new enterprises": {
+		"business-demography-Business births": {
 			"id": 4,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Births of new enterprises",
+			"code": "business-demography-Business births",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Births of new enterprises",
+				"code": "business-demography-Business births",
 				"slug": "births-of-new-enterprises",
 				"label": "Business births",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Count of businesses newly registered for VAT and/or PAYE",
+				"subtitle": "Percentage of businesses newly registered for VAT and/or PAYE",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of business births, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones.",
+				"longDescription": "This indicator shows the business births as a percentage of all active businesses, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones. The birth rate is calculated using the number of births as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1838,6 +1846,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -1878,6 +1887,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -1904,44 +1920,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-Deaths of enterprises": {
+		"business-demography-Business deaths": {
 			"id": 5,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Deaths of enterprises",
+			"code": "business-demography-Business deaths",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Deaths of enterprises",
+				"code": "business-demography-Business deaths",
 				"slug": "deaths-of-enterprises",
 				"label": "Business deaths",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Count of businesses ceasing activity",
+				"subtitle": "Percentage of businesses ceasing activity",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of business deaths, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision.",
+				"longDescription": "This indicator shows the business deaths as a percentage of all active businesses, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision. The death rate is calculated using the number of deaths as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1960,6 +1976,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -2000,6 +2017,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -2026,44 +2050,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-High growth enterprises": {
+		"business-demography-High growth businesses": {
 			"id": 37,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-High growth enterprises",
+			"code": "business-demography-High growth businesses",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-High growth enterprises",
+				"code": "business-demography-High growth businesses",
 				"slug": "high-growth-enterprises",
 				"label": "High growth businesses",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Businesses with an average growth in employment of greater than 20% per year over a three-year period",
+				"subtitle": "Percentage of businesses with an average growth in employment of greater than 20% per year over a three-year period",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of high growth businesses, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "High growth businesses are measured by an average growth in employment of greater than 20%, per annum, over a three-year period.",
+				"longDescription": "This indicator shows the high growth businesses as a percentage of active businesses with 10 or more employees, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "High growth measures all businesses with an average growth in employment of greater than 20%, per annum, over a three-year period. The size threshold used to identify these businesses is that they have 10 or more employees. The rate of high growth businesses is calculated using the number of high growth businesses as a proportion of the active businesses with 10 or more employees. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2082,6 +2106,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -2122,6 +2147,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -2148,15 +2180,15 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"additions-to-the-housing-stock": {
@@ -8215,10 +8247,10 @@
 				{
 					"name": "business",
 					"indicatorCodes": [
-						"business-demography-Active enterprises",
-						"business-demography-Births of new enterprises",
-						"business-demography-Deaths of enterprises",
-						"business-demography-High growth enterprises"
+						"active-enterprises",
+						"business-demography-Business births",
+						"business-demography-Business deaths",
+						"business-demography-High growth businesses"
 					]
 				}
 			]
