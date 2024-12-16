@@ -1,0 +1,124 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Active businesses
+          - Label: Active businesses
+          - Issued: 2024-01-30T12:26:49.626680
+          - Modified: 2024-12-11T12:20:49.626680
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/businessindustryandtrade/business
+          - Keywords: 
+		-- county
+		-- combined-authority
+		-- subnational
+		-- enterprises
+		-- local-authority
+		-- region
+		-- business-demography
+          - Contact Point: None
+          - Identifier: Active businesses
+          - Comment: Count of active businesses, UK, 2018 to 2023.
+          - Description: This dataset shows the count of active businesses, in the UK, for 2018 to 2023.
+		
+		### Coverage 
+		
+		UK 
+		
+		### Geography definition
+		
+		 Local Authority Districts and Unitary Authorities, 
+		English counties, 
+		Combined Authorities, 
+		Regions, 
+		Nations (England, Wales, Scotland, Northern Ireland), 
+		Countries (UK, GB, England and Wales)
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases)
+		
+		
+		### Source Notes and Caveats 
+		
+		- The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. 
+		- Some of this data has been aggregated and may show differences to other published figures. 
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Active businesses
+    - Columns: 
+                              Title         Type  Required                                                 Property URL Observations Column Titles
+                             AREACD    Dimension      True           active-businesses.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                    active-businesses.csv#dimension/area-name                Observation
+                          Geography    Dimension      True               active-businesses.csv#dimension/geography-type                Observation
+                      Variable Name    Dimension      True                active-businesses.csv#dimension/variable-name                Observation
+                          Indicator    Dimension      True                    active-businesses.csv#dimension/indicator                Observation
+                             Period    Dimension      True                         active-businesses.csv#dimension/year                Observation
+                        Observation Observations     False          active-businesses.csv#measure/number-of-enterprises                Observation
+                            Measure   Suppressed     False                                                         None                           
+                               Unit   Suppressed     False                                                         None                           
+    Lower Confidence Interval (95%)    Attribute     False active-businesses.csv#attribute/lower-confidence-interval-95                Observation
+    Upper Confidence Interval (95%)    Attribute     False active-businesses.csv#attribute/upper-confidence-interval-95                Observation
+                 Observation Status    Attribute     False           active-businesses.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                         None                           
+                              Notes   Suppressed     False                                                         None                           
+    - Columns where suppress output is true: 
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 6
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+         indicator.csv#code-list          Indicator       Indicator
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+     variable-name.csv#code-list      Variable Name   Variable Name
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 2670
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD         AREANM Geography     Variable Name         Indicator  Period  Observation               Measure                  Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+k02000001 united-kingdom   country active-businesses active-businesses    2021      2939675 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country active-businesses active-businesses    2022      2924685 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country active-businesses active-businesses    2023      2870295 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country active-businesses active-businesses    2018      2841025 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country active-businesses active-businesses    2020      2897115 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k02000001 united-kingdom   country active-businesses active-businesses    2019      2889115 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k03000001  great-britain   country active-businesses active-businesses    2019      2827385 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k03000001  great-britain   country active-businesses active-businesses    2018      2780945 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k03000001  great-britain   country active-businesses active-businesses    2020      2834790 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+k03000001  great-britain   country active-businesses active-businesses    2022      2859940 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD                AREANM                Geography     Variable Name         Indicator  Period  Observation               Measure                  Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000010 newry-mourne-and-down local-authority-district active-businesses active-businesses    2023         7645 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000010 newry-mourne-and-down local-authority-district active-businesses active-businesses    2018         6855 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000010 newry-mourne-and-down local-authority-district active-businesses active-businesses    2020         7120 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000010 newry-mourne-and-down local-authority-district active-businesses active-businesses    2019         7075 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2018         4430 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2023         4530 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2020         4505 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2021         4670 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2022         4645 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district active-businesses active-businesses    2019         4505 Number of enterprises Number of enterprises                              NaN                              NaN                 NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+              Measure   Unit  Count
+Number of Enterprises number   2670
+        

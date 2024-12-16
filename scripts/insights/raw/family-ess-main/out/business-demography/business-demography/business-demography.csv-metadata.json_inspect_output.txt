@@ -6,7 +6,7 @@
           - Title: Business demography
           - Label: Business demography
           - Issued: 2024-01-30T12:26:49.626680
-          - Modified: 2024-02-09T09:26:49.626680
+          - Modified: 2024-12-04T14:34:49.626680
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,15 +15,16 @@
 		-- https://www.ons.gov.uk/businessindustryandtrade/business
           - Keywords: 
 		-- enterprises
-		-- region
-		-- business-demography
-		-- local-authority
-		-- subnational
 		-- county
+		-- local-authority
+		-- region
+		-- combined-authority
+		-- subnational
+		-- business-demography
           - Contact Point: None
           - Identifier: Business demography
-          - Comment: Count of business births, deaths, actives, and high growth businesses, UK, 2017 to 2022.
-          - Description: This dataset shows the count of business births, deaths, actives, and high growth businesses, in the UK, for 2017 to 2022.
+          - Comment: Percentage of business births, deaths and high growth, UK, 2018 to 2023.
+          - Description: This dataset shows the percentage of business births, deaths and high growth, in the UK, for 2018 to 2023.
 		
 		### Coverage 
 		
@@ -33,6 +34,7 @@
 		
 		 Local Authority Districts and Unitary Authorities, 
 		English counties, 
+		Combined authorities 
 		Regions, 
 		Nations (England, Wales, Scotland, Northern Ireland), 
 		Countries (UK, GB, England and Wales)
@@ -44,10 +46,14 @@
 		
 		### Source Notes and Caveats 
 		
-		- A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones. 
+		-A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2.  Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones.
+		- The birth rate is calculated using the number of births as a proportion of the active businesses.
 		- A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision.
+		- The death rate is calculated using the number of deaths as a proportion of the active businesses.
 		- The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Births and deaths are then identified by comparing active populations for different years.
-		- High growth businesses are measured by an average growth in employment of greater than 20%, per annum, over a three-year period.
+		- High growth measures all businesses with an average growth in employment of greater than 20%, per annum, over a three-year period. The size threshold used to identify these businesses is that they have 10 or more employees.
+		- The rate of high growth businesses is calculated using the number of high growth businesses as a proportion of the active businesses with 10 or more employees.
+		- Some of this data has been aggregated and may show differences to other published figures.
         
 
  - The data cube has the following column component information: 
@@ -58,7 +64,7 @@
                           areacd    Dimension      True           business-demography.csv#dimension/ons-geography-code                observation
                           areanm    Dimension      True                    business-demography.csv#dimension/area-name                observation
                        geography    Dimension      True               business-demography.csv#dimension/geography-type                observation
-                     observation Observations     False           business-demography.csv#measure/number-of-enterprise                observation
+                     observation Observations     False                     business-demography.csv#measure/percentage                observation
                             unit   Suppressed     False                                                           None                           
                          measure   Suppressed     False                                                           None                           
                           period    Dimension      True                         business-demography.csv#dimension/year                observation
@@ -80,36 +86,36 @@ ons-geography-code.csv#code-list ONS Geography Code          areacd
               year.csv#code-list               Year          period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 10352
+        - Number of Rows: 8010
         - Number of Duplicates: 0
         - First 10 Rows: 
-                indicator    areacd         areanm geography  observation unit            measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
-births-of-new-enterprises k02000001 united-kingdom   country       333020  NUM count-of-companies    2020                           NaN                           NaN                 NaN
-births-of-new-enterprises k02000001 united-kingdom   country       363995  NUM count-of-companies    2021                           NaN                           NaN                 NaN
-births-of-new-enterprises k02000001 united-kingdom   country       336925  NUM count-of-companies    2022                           NaN                           NaN                 NaN
-births-of-new-enterprises k02000001 united-kingdom   country       356895  NUM count-of-companies    2017                           NaN                           NaN                 NaN
-births-of-new-enterprises k02000001 united-kingdom   country       348630  NUM count-of-companies    2018                           NaN                           NaN                 NaN
-births-of-new-enterprises k02000001 united-kingdom   country       363825  NUM count-of-companies    2019                           NaN                           NaN                 NaN
-births-of-new-enterprises k03000001  great-britain   country       327350  NUM count-of-companies    2020                           NaN                           NaN                 NaN
-births-of-new-enterprises k03000001  great-britain   country       357340  NUM count-of-companies    2021                           NaN                           NaN                 NaN
-births-of-new-enterprises k03000001  great-britain   country       331540  NUM count-of-companies    2022                           NaN                           NaN                 NaN
-births-of-new-enterprises k03000001  great-britain   country       350325  NUM count-of-companies    2017                           NaN                           NaN                 NaN
+      indicator    areacd         areanm geography  observation unit    measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+business-births k02000001 united-kingdom   country    11.494884    % Percentage    2020                           NaN                           NaN                 NaN
+business-births k02000001 united-kingdom   country    12.271275    % Percentage    2018                           NaN                           NaN                 NaN
+business-births k02000001 united-kingdom   country    12.592957    % Percentage    2019                           NaN                           NaN                 NaN
+business-births k02000001 united-kingdom   country    12.382151    % Percentage    2021                           NaN                           NaN                 NaN
+business-births k02000001 united-kingdom   country    11.520044    % Percentage    2022                           NaN                           NaN                 NaN
+business-births k02000001 united-kingdom   country    11.010192    % Percentage    2023                           NaN                           NaN                 NaN
+business-births k03000001  great-britain   country    11.072716    % Percentage    2023                           NaN                           NaN                 NaN
+business-births k03000001  great-britain   country    12.429196    % Percentage    2021                           NaN                           NaN                 NaN
+business-births k03000001  great-britain   country    11.592551    % Percentage    2022                           NaN                           NaN                 NaN
+business-births k03000001  great-britain   country    12.336993    % Percentage    2018                           NaN                           NaN                 NaN
         - Last 10 Rows: 
-              indicator    areacd                areanm                geography  observation unit            measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
-high-growth-enterprises n09000010 newry-mourne-and-down local-authority-district           25  NUM count-of-companies    2022                           NaN                           NaN                 NaN
-high-growth-enterprises n09000010 newry-mourne-and-down local-authority-district           30  NUM count-of-companies    2020                           NaN                           NaN                 NaN
-high-growth-enterprises n09000010 newry-mourne-and-down local-authority-district           25  NUM count-of-companies    2019                           NaN                           NaN                 NaN
-high-growth-enterprises n09000010 newry-mourne-and-down local-authority-district           20  NUM count-of-companies    2021                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           10  NUM count-of-companies    2019                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           20  NUM count-of-companies    2017                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           15  NUM count-of-companies    2018                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           15  NUM count-of-companies    2022                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           10  NUM count-of-companies    2021                           NaN                           NaN                 NaN
-high-growth-enterprises n09000011   ards-and-north-down local-authority-district           15  NUM count-of-companies    2020                           NaN                           NaN                 NaN
+             indicator    areacd                areanm                geography  observation unit    measure  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+high-growth-businesses n09000010 newry-mourne-and-down local-authority-district     3.289474    % Percentage    2022                           NaN                           NaN                 NaN
+high-growth-businesses n09000010 newry-mourne-and-down local-authority-district     3.896104    % Percentage    2023                           NaN                           NaN                 NaN
+high-growth-businesses n09000010 newry-mourne-and-down local-authority-district     3.472222    % Percentage    2019                           NaN                           NaN                 NaN
+high-growth-businesses n09000010 newry-mourne-and-down local-authority-district     4.166667    % Percentage    2020                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     4.040404    % Percentage    2023                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     3.157895    % Percentage    2022                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     2.061856    % Percentage    2019                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     3.030303    % Percentage    2018                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     2.127660    % Percentage    2021                           NaN                           NaN                 NaN
+high-growth-businesses n09000011   ards-and-north-down local-authority-district     3.157895    % Percentage    2020                           NaN                           NaN                 NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
-             Measure   Unit  Count
-Number of Enterprise number  10352
+   Measure    Unit  Count
+Percentage percent   8010
         
