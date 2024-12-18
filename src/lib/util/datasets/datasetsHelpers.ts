@@ -43,7 +43,7 @@ export function makeMapData(data, types, year) {
 	);
 	if (filtered.length === 0) return { data: [], breaks: [] };
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
-	const breaks = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]];
+	const breaks = uniqueRoundedNumbers({numbers:[...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]],decimalPlaces:0});
 	const codes = [];
 	for (const d of filtered) {
 		d.cluster = getBreak(breaks, d.value);
@@ -51,3 +51,24 @@ export function makeMapData(data, types, year) {
 	}
 	return { data: filtered, breaks, codes };
 }
+
+/*
+  Round number to decimalPlaces
+*/
+export function roundNumber(args: { number: number; decimalPlaces: number }): number {
+	const roundingFactor = 10 ** args.decimalPlaces;
+	return Math.round(args.number * roundingFactor) / roundingFactor;
+  }
+  
+  /*
+	Return numbers rounded to decimalPlaces with repeated numbers removed.
+  */
+  export function uniqueRoundedNumbers(args: { numbers: number[]; decimalPlaces: number }): number[] {
+	return [
+	  ...new Set(
+		args.numbers.map((n) => {
+		  return roundNumber({ number: n, decimalPlaces: args.decimalPlaces });
+		}),
+	  ),
+	];
+  }
