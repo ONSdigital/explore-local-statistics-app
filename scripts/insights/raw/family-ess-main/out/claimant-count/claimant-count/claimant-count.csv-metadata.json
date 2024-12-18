@@ -233,31 +233,42 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "claimant-count.csv#attribute/observation-status",
+            "@id": "claimant-count.csv#dimension/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "year.csv#code-list"
+                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Observation Status"
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "claimant-count.csv#class/year"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
                 }
             ]
         },
         {
             "@id": "claimant-count.csv#component/year",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -277,37 +288,35 @@
             ]
         },
         {
-            "@id": "claimant-count.csv#dimension/geography-type",
+            "@id": "claimant-count.csv#component/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
-            "http://purl.org/linked-data/cube#codeList": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "geography-type.csv#code-list"
+                    "@id": "claimant-count.csv#dimension/ons-geography-code"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@language": "en",
-                    "@value": "Geography Type"
+                    "@id": "claimant-count.csv#dimension/ons-geography-code"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://purl.org/linked-data/cube#order": [
                 {
-                    "@id": "claimant-count.csv#class/geography-type"
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
                 }
             ]
         },
         {
             "@id": "claimant-count.csv#component/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -327,11 +336,97 @@
             ]
         },
         {
+            "@id": "claimant-count.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "claimant-count.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "claimant-count.csv#class/geography-type"
+                }
+            ]
+        },
+        {
             "@id": "claimant-count.csv#component/observation-status",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -357,68 +452,20 @@
             ]
         },
         {
-            "@id": "claimant-count.csv#component/aged-16-to-64-years-claimant-count",
+            "@id": "claimant-count.csv#class/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "claimant-count.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "claimant-count.csv#qbDataSet",
             "@type": [
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Distribution",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Distribution"
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -465,11 +512,80 @@
             ]
         },
         {
+            "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Aged 16 to 64 years Claimant Count"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#component/aged-16-to-64-years-claimant-count",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
             "@id": "claimant-count.csv#component/upper-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -495,249 +611,12 @@
             ]
         },
         {
-            "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Aged 16 to 64 years Claimant Count"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "claimant-count.csv#component/geography-type"
-                },
-                {
-                    "@id": "claimant-count.csv#component/year"
-                },
-                {
-                    "@id": "claimant-count.csv#component/unit"
-                },
-                {
-                    "@id": "claimant-count.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "claimant-count.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "claimant-count.csv#component/area-name"
-                },
-                {
-                    "@id": "claimant-count.csv#component/measure-type"
-                },
-                {
-                    "@id": "claimant-count.csv#component/observation-status"
-                },
-                {
-                    "@id": "claimant-count.csv#component/aged-16-to-64-years-claimant-count"
-                },
-                {
-                    "@id": "claimant-count.csv#component/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "claimant-count.csv#dimension/year"
-                },
-                {
-                    "@id": "claimant-count.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/area-name"
-                },
-                {
-                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "claimant-count.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "claimant-count.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "claimant-count.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "claimant-count.csv#dimension/year"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/area-name"
-                },
-                {
-                    "@id": "claimant-count.csv#dimension/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "claimant-count.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "claimant-count.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#attribute/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#dimension/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "claimant-count.csv#class/year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
             "@id": "claimant-count.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -752,75 +631,18 @@
             ]
         },
         {
-            "@id": "claimant-count.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
             "@id": "claimant-count.csv#class/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "claimant-count.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "claimant-count.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "claimant-count.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "claimant-count.csv#class/area-name"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "claimant-count.csv#component/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -846,11 +668,189 @@
             ]
         },
         {
+            "@id": "claimant-count.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "claimant-count.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "claimant-count.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "claimant-count.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "claimant-count.csv#component/aged-16-to-64-years-claimant-count"
+                },
+                {
+                    "@id": "claimant-count.csv#component/area-name"
+                },
+                {
+                    "@id": "claimant-count.csv#component/geography-type"
+                },
+                {
+                    "@id": "claimant-count.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "claimant-count.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "claimant-count.csv#component/observation-status"
+                },
+                {
+                    "@id": "claimant-count.csv#component/unit"
+                },
+                {
+                    "@id": "claimant-count.csv#component/measure-type"
+                },
+                {
+                    "@id": "claimant-count.csv#component/year"
+                },
+                {
+                    "@id": "claimant-count.csv#component/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "claimant-count.csv#dimension/area-name"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/year"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "claimant-count.csv#measure/aged-16-to-64-years-claimant-count"
+                },
+                {
+                    "@id": "claimant-count.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "claimant-count.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "claimant-count.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "claimant-count.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "claimant-count.csv#slice/cross-measures",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "claimant-count.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/area-name"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "claimant-count.csv#dimension/year"
+                }
+            ]
+        },
+        {
             "@id": "claimant-count.csv#component/unit",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -878,9 +878,9 @@
         {
             "@id": "claimant-count.csv#dataset",
             "@type": [
-                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/ns/dcat#Dataset"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -912,7 +912,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-11-15T15:47:00"
+                    "@value": "2024-12-16T08:16:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -946,7 +946,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "region"
+                    "@value": "county"
                 },
                 {
                     "@language": "en",
@@ -954,19 +954,19 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "labour-market"
-                },
-                {
-                    "@language": "en",
                     "@value": "subnational"
                 },
                 {
                     "@language": "en",
-                    "@value": "county"
+                    "@value": "claimant-count"
                 },
                 {
                     "@language": "en",
-                    "@value": "claimant-count"
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "labour-market"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -978,8 +978,8 @@
         {
             "@id": "claimant-count.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
@@ -990,8 +990,8 @@
         {
             "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
             "@type": [
-                "http://www.w3.org/ns/prov#Entity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
             ],
             "http://purl.org/dc/terms/title": [
                 {
@@ -1008,8 +1008,8 @@
         {
             "@id": "claimant-count.csv#dependency/ons-geography-code",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1025,8 +1025,8 @@
         {
             "@id": "claimant-count.csv#dependency/area-name",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1042,8 +1042,8 @@
         {
             "@id": "claimant-count.csv#dependency/geography-type",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1059,8 +1059,8 @@
         {
             "@id": "claimant-count.csv#dependency/year",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -1076,9 +1076,9 @@
         {
             "@id": "claimant-count.csv#unit/percent",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "business-expenditure-on-research-and-development.csv#dataset",
+    "@id": "business-expenditure-on-research-and-development.csv#qbDataSet",
     "tables": [
         {
             "url": "business-expenditure-on-research-and-development.csv",
@@ -35,16 +35,6 @@
                     {
                         "titles": "Indicator",
                         "name": "indicator",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Mission",
-                        "name": "mission",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Category",
-                        "name": "category",
                         "suppressOutput": true
                     },
                     {
@@ -178,7 +168,7 @@
                         "virtual": true,
                         "aboutUrl": "business-expenditure-on-research-and-development.csv#obs/{areacd},{areanm},{geography},{period}@capital-and-non-capital-expenditure",
                         "propertyUrl": "qb:dataSet",
-                        "valueUrl": "business-expenditure-on-research-and-development.csv#dataset"
+                        "valueUrl": "business-expenditure-on-research-and-development.csv#qbDataSet"
                     }
                 ],
                 "foreignKeys": [
@@ -243,76 +233,45 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "business-expenditure-on-research-and-development.csv#component/year",
+            "@id": "business-expenditure-on-research-and-development.csv#component/unit",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
                 }
             ]
         },
         {
             "@id": "business-expenditure-on-research-and-development.csv#structure",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#component": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/geography-type"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/year"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/area-name"
-                },
-                {
                     "@id": "business-expenditure-on-research-and-development.csv#component/unit"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/upper-confidence-interval"
                 },
                 {
                     "@id": "business-expenditure-on-research-and-development.csv#component/observation-status"
@@ -321,24 +280,39 @@
                     "@id": "business-expenditure-on-research-and-development.csv#component/ons-geography-code"
                 },
                 {
+                    "@id": "business-expenditure-on-research-and-development.csv#component/measure-type"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#component/year"
+                },
+                {
                     "@id": "business-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure"
                 },
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#component/measure-type"
+                    "@id": "business-expenditure-on-research-and-development.csv#component/geography-type"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#component/area-name"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#component/lower-confidence-interval"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
                 },
                 {
                     "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
                 },
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                    "@id": "http://purl.org/linked-data/cube#measureType"
                 },
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
                 },
                 {
                     "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
@@ -347,16 +321,16 @@
                     "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
                 },
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
-                },
-                {
                     "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
                 },
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
                 },
                 {
                     "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
                 }
             ],
             "http://purl.org/linked-data/cube#sliceKey": [
@@ -366,448 +340,13 @@
             ]
         },
         {
-            "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
-                },
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/lower-confidence-interval",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#dimension/year",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "year.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#class/year"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.12"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#dataset",
-            "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#DataSet"
-            ],
-            "http://purl.org/dc/terms/creator": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/description": [
-                {
-                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the total business expenditure on research and development, in the UK, for 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1,\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases) \n\n\n### Source Notes and Caveats \nStatistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).\n\n\n"
-                }
-            ],
-            "http://purl.org/dc/terms/identifier": [
-                {
-                    "@value": "Business expenditure on research and development"
-                }
-            ],
-            "http://purl.org/dc/terms/issued": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-05-15T16:25:11.468465"
-                }
-            ],
-            "http://purl.org/dc/terms/license": [
-                {
-                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-05-15T16:25:11.468465"
-                }
-            ],
-            "http://purl.org/dc/terms/publisher": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Business expenditure on research and development"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#structure"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                {
-                    "@language": "en",
-                    "@value": "Total business expenditure on research and development, UK, 2022."
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Business expenditure on research and development"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#keyword": [
-                {
-                    "@language": "en",
-                    "@value": "expenditure"
-                },
-                {
-                    "@language": "en",
-                    "@value": "research-and-development"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#theme": [
-                {
-                    "@id": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#csvcubed-build-activity"
-                }
-            ]
-        },
-        {
-            "@id": "business-expenditure-on-research-and-development.csv#component/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
-                }
-            ]
-        },
-        {
             "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#CodedProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -832,11 +371,257 @@
             ]
         },
         {
+            "@id": "business-expenditure-on-research-and-development.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#dimension/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#qbDataSet",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://purl.org/linked-data/cube#DataSet"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-05-15T16:25:11.468465"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/capital-and-non-capital-expenditure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
             "@id": "business-expenditure-on-research-and-development.csv#component/measure-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -850,29 +635,106 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 5
                 }
             ]
         },
         {
-            "@id": "business-expenditure-on-research-and-development.csv#class/geography-type",
+            "@id": "business-expenditure-on-research-and-development.csv#slice/cross-measures",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/year"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
+                }
             ]
         },
         {
-            "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval",
+            "@id": "business-expenditure-on-research-and-development.csv#component/lower-confidence-interval",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "Lower Confidence Interval"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
@@ -882,12 +744,99 @@
             ]
         },
         {
+            "@id": "business-expenditure-on-research-and-development.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#dimension/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
             "@id": "business-expenditure-on-research-and-development.csv#measure/capital-and-non-capital-expenditure",
             "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -907,25 +856,144 @@
             ]
         },
         {
-            "@id": "business-expenditure-on-research-and-development.csv#component/ons-geography-code",
+            "@id": "business-expenditure-on-research-and-development.csv#attribute/upper-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "business-expenditure-on-research-and-development.csv#dimension/ons-geography-code"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#dataset",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
                 }
             ],
-            "http://purl.org/linked-data/cube#order": [
+            "http://purl.org/dc/terms/description": [
                 {
-                    "@value": 1
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the total business expenditure on research and development, in the UK, for 2022 and 2023.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nInternational Territorial Level (ITL) 1,\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/bulletins/businessenterpriseresearchanddevelopment/previousReleases) \n\n\n### Source Notes and Caveats \nStatistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).\n\nRegional estimates are compiled based on a combination of larger businesses reporting their R&D performing locations and smaller businesses having their data allocated to the location of their main business address held on the inter-departmental business register.\n\nEstimates produced at disaggregate levels such as region, product group and SIC may in some cases be subject to a high level of variability from year to year. This may be due to industry reclassification of some businesses and sampling variability.\n\n\n"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-05-15T16:25:11.468465"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-12-11T15:00:11.468465"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Total business expenditure on research and development, UK, 2022 and 2023."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Business expenditure on research and development"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "business-expenditure-on-research-and-development.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "expenditure"
+                },
+                {
+                    "@language": "en",
+                    "@value": "research-and-development"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes"
+                }
+            ]
+        },
+        {
+            "@id": "business-expenditure-on-research-and-development.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
                 }
             ]
         },
@@ -1000,9 +1068,9 @@
         {
             "@id": "business-expenditure-on-research-and-development.csv#unit/pounds-sterling-millions",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
