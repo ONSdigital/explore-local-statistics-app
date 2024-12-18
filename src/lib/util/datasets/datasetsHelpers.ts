@@ -51,7 +51,8 @@ export function makeMapData(data, types, year) {
 	}
 	return { data: filtered, breaks, codes };
 }
-
+// stolen these functions from census maps 
+// https://github.com/ONSdigital/dp-census-atlas/blob/develop/src/util/numberUtil.ts
 /*
   Round number to decimalPlaces
 */
