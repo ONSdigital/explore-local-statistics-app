@@ -6,7 +6,7 @@
           - Title: Premises below 30Mbps
           - Label: Premises below 30Mbps
           - Issued: 2024-09-25T11:35:00
-          - Modified: 2024-09-25T16:41:00
+          - Modified: 2024-12-18T09:34:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/ofcom
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,17 +14,17 @@
           - Themes: 
 		-- https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry
           - Keywords: 
-		-- region
 		-- county
-		-- local-authority
-		-- connectivity
 		-- broadband-mobile-coverage
-		-- subnational
+		-- region
 		-- combined-authority
+		-- connectivity
+		-- subnational
+		-- local-authority
           - Contact Point: None
           - Identifier: Premises below 30Mbps
-          - Comment: Percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.
-          - Description: This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.
+          - Comment: Percentage of premises that do not have access to services above 30Mbps, UK, as of July 2024.
+          - Description: This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of July 2024.
 		
 		### Coverage 
 		
@@ -41,7 +41,7 @@
 		
 		### Source
 		
-		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024) 
+		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/) 
 		
 		
 		### Source Notes and Caveats 
@@ -60,8 +60,6 @@
                           Geography    Dimension      True                                          premises-below-30mbps.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                                        None                           
                           Indicator   Suppressed     False                                                                                        None                           
-                            Mission   Suppressed     False                                                                                        None                           
-                           Category   Suppressed     False                                                                                        None                           
                              Period    Dimension      True                                                   premises-below-30mbps.csv#dimension/month                Observation
                         Observation Observations     False premises-below-30mbps.csv#measure/premises-that-do-not-have-access-to-services-above-30mbps                Observation
                             Measure   Suppressed     False                                                                                        None                           
@@ -74,8 +72,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -91,36 +87,36 @@
 ons-geography-code.csv#code-list ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 426
+        - Number of Rows: 409
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD            AREANM                         Geography          Variable Name              Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
-k02000001    united-kingdom                           country Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.9 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-k03000001     great-britain                           country Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.9 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-k04000001 england-and-wales                           country Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.8 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e92000001           england                            nation Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.7 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e12000001        north-east                            region Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.7 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e47000006       tees-valley combined-authority-or-city-region Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.6 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e47000014        north-east combined-authority-or-city-region Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.7 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e06000047     county-durham       county-or-unitary-authority Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          3.5 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
-e06000005        darlington       county-or-unitary-authority Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          3.6 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
-e06000001        hartlepool       county-or-unitary-authority Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.4 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+   AREACD            AREANM                         Geography         Variable Name             Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
+k02000001    united-kingdom                           country Premises below 30Mbps Premises below 30Mbps 2024-07          2.7 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k03000001     great-britain                           country Premises below 30Mbps Premises below 30Mbps 2024-07          2.7 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k04000001 england-and-wales                           country Premises below 30Mbps Premises below 30Mbps 2024-07          2.5 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e92000001           england                            nation Premises below 30Mbps Premises below 30Mbps 2024-07          2.5 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e12000001        north-east                            region Premises below 30Mbps Premises below 30Mbps 2024-07          2.5 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000006       tees-valley combined-authority-or-city-region Premises below 30Mbps Premises below 30Mbps 2024-07          2.3 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000014        north-east combined-authority-or-city-region Premises below 30Mbps Premises below 30Mbps 2024-07          2.5 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e06000047     county-durham       county-or-unitary-authority Premises below 30Mbps Premises below 30Mbps 2024-07          3.3 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000005        darlington       county-or-unitary-authority Premises below 30Mbps Premises below 30Mbps 2024-07          3.1 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000001        hartlepool       county-or-unitary-authority Premises below 30Mbps Premises below 30Mbps 2024-07          1.4 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
         - Last 10 Rows: 
-   AREACD                              AREANM                Geography          Variable Name              Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-n09000002 armagh-city-banbridge-and-craigavon local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          1.2 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000003                             belfast local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          0.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000004            causeway-coast-and-glens local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          3.6 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000005             derry-city-and-strabane local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.2 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000006                 fermanagh-and-omagh local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          3.6 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000007             lisburn-and-castlereagh local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          0.8 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000008                 mid-and-east-antrim local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.0 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000009                          mid-ulster local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          2.2 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000010               newry-mourne-and-down local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          1.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000011                 ards-and-north-down local-authority-district Premises below 30Mbits Premises below 30Mbits Mission 4 Boosting productivity, pay, jobs and living standards 2024-01          0.4 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+   AREACD                              AREANM                Geography         Variable Name             Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          1.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000003                             belfast local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          0.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000004            causeway-coast-and-glens local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          3.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000005             derry-city-and-strabane local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          2.4 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000006                 fermanagh-and-omagh local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          5.4 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000007             lisburn-and-castlereagh local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          0.7 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000008                 mid-and-east-antrim local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          1.9 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000009                          mid-ulster local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          2.8 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000010               newry-mourne-and-down local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          2.1 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000011                 ards-and-north-down local-authority-district Premises below 30Mbps Premises below 30Mbps 2024-07          0.5 Percentage    %                              NaN                              NaN                 NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                                   Measure    Unit  Count
-Premises that do not have access to services above 30Mbps Percent    426
+Premises that do not have access to services above 30Mbps Percent    409
         

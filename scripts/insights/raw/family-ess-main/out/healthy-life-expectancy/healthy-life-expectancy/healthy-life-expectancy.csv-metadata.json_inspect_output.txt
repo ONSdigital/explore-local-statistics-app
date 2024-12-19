@@ -6,7 +6,7 @@
           - Title: Healthy life expectancy
           - Label: Healthy life expectancy
           - Issued: 2024-01-12T12:13:33.912610
-          - Modified: 2024-02-13T13:23:23.912610
+          - Modified: 2024-12-19T12:52:23.912610
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,35 +14,39 @@
           - Themes: 
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare
           - Keywords: 
+		-- women
 		-- annual-population-survey
-		-- men
+		-- good-health
 		-- county
 		-- region
-		-- good-health
-		-- women
+		-- men
 		-- subnational
           - Contact Point: None
           - Identifier: Healthy life expectancy
-          - Comment: Average years expected to be lived in good health for females and males born during the reference period, United Kingdom, three-year rolling periods 2011 - 2013 to 2018 - 2020.
-          - Description: This dataset shows the average years expected to be lived in good health for females and males born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.
+          - Comment: Average years expected to be lived in good health for females and males born during the reference period (official statistics in development), England and Wales, three-year rolling periods between 2011 to 2013 and 2021 to 2023.
+          - Description: This dataset shows the average years expected to be lived in good health for females and males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.
 		
 		### Coverage 
 		
-		UK
+		England and Wales
 		
 		#### Geography definition
 		
 		Counties and Unitary Authorities,
 		Welsh Health Boards,
-		Metropolitan counties,
+		Counties,
 		Regions,
-		Combined Authorities,
-		Nations (England, Wales, Scotland, Northern Ireland),
-		Country (UK)
+		Nations (England, Wales)
 		
 		### Source
 		
-		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) 
+		 - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) 
+		
+		
+		### Source Notes and Caveats 
+		Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.
+		
+		The estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logsitic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status. 
 		
 		
 		
@@ -82,36 +86,36 @@ gregorian-time-interval.csv#code-list Gregorian Time Interval          period
      ons-geography-code.csv#code-list      ONS Geography Code          areacd
 
 - The data cube has the following dataset information:
-        - Number of Rows: 3870
+        - Number of Rows: 4202
         - Number of Duplicates: 0
         - First 10 Rows: 
-                   indicator    areacd         areanm geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
-male-healthy-life-expectancy k02000001 united-kingdom   country        62.83  yrs   Years 2018-01-01t00-00-00/p3y                         62.65                         63.00                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        62.90  yrs   Years 2017-01-01t00-00-00/p3y                         62.74                         63.05                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        63.09  yrs   Years 2016-01-01t00-00-00/p3y                         62.94                         63.24                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        63.13  yrs   Years 2015-01-01t00-00-00/p3y                         62.98                         63.28                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        63.04  yrs   Years 2014-01-01t00-00-00/p3y                         62.90                         63.19                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        63.09  yrs   Years 2013-01-01t00-00-00/p3y                         62.95                         63.24                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        62.90  yrs   Years 2011-01-01t00-00-00/p3y                         62.75                         63.04                NaN
-male-healthy-life-expectancy k02000001 united-kingdom   country        63.08  yrs   Years 2012-01-01t00-00-00/p3y                         62.93                         63.22                NaN
-male-healthy-life-expectancy e92000001        england    nation        63.18  yrs   Years 2011-01-01t00-00-00/p3y                         63.02                         63.34                NaN
-male-healthy-life-expectancy e92000001        england    nation        63.38  yrs   Years 2013-01-01t00-00-00/p3y                         63.21                         63.54                NaN
+                   indicator    areacd  areanm geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+male-healthy-life-expectancy e92000001 england    nation        63.02  yrs   Years 2011-01-01t00-00-00/p3y                         62.85                         63.20                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.17  yrs   Years 2012-01-01t00-00-00/p3y                         63.00                         63.35                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.22  yrs   Years 2013-01-01t00-00-00/p3y                         63.05                         63.40                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.27  yrs   Years 2014-01-01t00-00-00/p3y                         63.09                         63.45                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.33  yrs   Years 2015-01-01t00-00-00/p3y                         63.15                         63.52                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.32  yrs   Years 2016-01-01t00-00-00/p3y                         63.14                         63.51                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.19  yrs   Years 2017-01-01t00-00-00/p3y                         63.00                         63.39                 NaN
+male-healthy-life-expectancy e92000001 england    nation        63.08  yrs   Years 2018-01-01t00-00-00/p3y                         62.88                         63.28                 NaN
+male-healthy-life-expectancy e92000001 england    nation        62.74  yrs   Years 2019-01-01t00-00-00/p3y                         62.53                         62.95                 NaN
+male-healthy-life-expectancy e92000001 england    nation        62.29  yrs   Years 2020-01-01t00-00-00/p3y                         62.07                         62.51                 NaN
         - Last 10 Rows: 
-                     indicator    areacd                areanm                geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95 observation_status
-female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        62.34  yrs   Years 2018-01-01t00-00-00/p3y                         59.42                         65.25                NaN
-female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        64.66  yrs   Years 2017-01-01t00-00-00/p3y                         62.26                         67.05                NaN
-female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        66.85  yrs   Years 2016-01-01t00-00-00/p3y                         64.40                         69.30                NaN
-female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        66.99  yrs   Years 2015-01-01t00-00-00/p3y                         64.11                         69.88                NaN
-female-healthy-life-expectancy n09000010 newry-mourne-and-down local-authority-district        65.02  yrs   Years 2014-01-01t00-00-00/p3y                         62.24                         67.80                NaN
-female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.27  yrs   Years 2016-01-01t00-00-00/p3y                         60.47                         66.07                NaN
-female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        62.91  yrs   Years 2018-01-01t00-00-00/p3y                         59.91                         65.91                NaN
-female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.35  yrs   Years 2017-01-01t00-00-00/p3y                         60.93                         65.78                NaN
-female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        61.02  yrs   Years 2014-01-01t00-00-00/p3y                         57.73                         64.31                NaN
-female-healthy-life-expectancy n09000011   ards-and-north-down local-authority-district        63.03  yrs   Years 2015-01-01t00-00-00/p3y                         60.17                         65.89                NaN
+                     indicator    areacd  areanm                geography  observation unit measure                  period  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+female-healthy-life-expectancy w06000022 newport local-authority-district        60.69  yrs   Years 2011-01-01t00-00-00/p3y                         58.13                         63.26                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        61.90  yrs   Years 2012-01-01t00-00-00/p3y                         59.36                         64.44                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        61.40  yrs   Years 2013-01-01t00-00-00/p3y                         58.63                         64.16                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        61.00  yrs   Years 2014-01-01t00-00-00/p3y                         58.05                         63.94                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        60.71  yrs   Years 2015-01-01t00-00-00/p3y                         57.80                         63.63                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        60.11  yrs   Years 2016-01-01t00-00-00/p3y                         57.38                         62.85                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        59.40  yrs   Years 2017-01-01t00-00-00/p3y                         56.61                         62.19                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        59.35  yrs   Years 2018-01-01t00-00-00/p3y                         56.43                         62.28                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        58.66  yrs   Years 2019-01-01t00-00-00/p3y                         55.47                         61.85                 NaN
+female-healthy-life-expectancy w06000022 newport local-authority-district        56.65  yrs   Years 2021-01-01t00-00-00/p3y                         52.92                         60.37                 NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                 Measure  Unit  Count
-Healthy life expectancy Years   3870
+Healthy life expectancy Years   4202
         

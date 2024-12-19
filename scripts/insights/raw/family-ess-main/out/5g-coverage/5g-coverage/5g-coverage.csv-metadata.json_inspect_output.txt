@@ -6,7 +6,7 @@
           - Title: 5G coverage
           - Label: 5G coverage
           - Issued: 2024-06-13T13:14:00
-          - Modified: 2024-09-27T16:46:00
+          - Modified: 2024-12-17T20:10:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/ofcom
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -16,15 +16,15 @@
           - Keywords: 
 		-- subnational
 		-- broadband-mobile-coverage
-		-- county
-		-- region
-		-- connectivity
 		-- local-authority
+		-- region
 		-- combined-authority
+		-- connectivity
+		-- county
           - Contact Point: None
           - Identifier: 5G coverage
-          - Comment: Percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), UK, as of January 2024.
-          - Description: This dataset shows the percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), in the UK, as of January 2024.
+          - Comment: Percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), UK, as of September 2024.
+          - Description: This dataset shows the percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), in the UK, as of September 2024.
 		
 		### Coverage 
 		
@@ -41,7 +41,7 @@
 		
 		### Source
 		
-		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024)
+		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/)
 		
 		
 		### Source Notes and Caveats 
@@ -60,8 +60,6 @@
                           Geography    Dimension      True                                          5g-coverage.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                              None                           
                           Indicator   Suppressed     False                                                                              None                           
-                            Mission   Suppressed     False                                                                              None                           
-                           Category   Suppressed     False                                                                              None                           
                              Period    Dimension      True                                                   5g-coverage.csv#dimension/month                Observation
                         Observation Observations     False 5g-coverage.csv#measure/geographic-area-with-5g-coverage-by-at-least-one-provider                Observation
                             Measure   Suppressed     False                                                                              None                           
@@ -74,8 +72,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -91,36 +87,36 @@
 ons-geography-code.csv#code-list ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 426
+        - Number of Rows: 409
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD            AREANM                         Geography                                                Variable Name   Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                        Notes
-k02000001    united-kingdom                           country 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        50.23 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-k03000001     great-britain                           country 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        50.09 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-k04000001 england-and-wales                           country 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        64.08 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-e92000001           england                            nation 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        66.92 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-e12000001        north-east                            region 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        46.51 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-e47000006       tees-valley combined-authority-or-city-region 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        85.01 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-e47000014        north-east combined-authority-or-city-region 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        42.58 Percentage    %                              NaN                              NaN                 NaN         1 This data was aggregated and may show differences to other published figures
-e06000047     county-durham       county-or-unitary-authority 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        47.37 Percentage    %                              NaN                              NaN                 NaN         1                                                                          NaN
-e06000005        darlington       county-or-unitary-authority 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        82.90 Percentage    %                              NaN                              NaN                 NaN         1                                                                          NaN
-e06000001        hartlepool       county-or-unitary-authority 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        93.83 Percentage    %                              NaN                              NaN                 NaN         1                                                                          NaN
+   AREACD            AREANM                         Geography Variable Name                                                    Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
+k02000001    united-kingdom                           country   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        59.79 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k03000001     great-britain                           country   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        59.12 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k04000001 england-and-wales                           country   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        72.88 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e92000001           england                            nation   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        76.18 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e12000001        north-east                            region   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        55.57 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000006       tees-valley combined-authority-or-city-region   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        90.99 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000014        north-east combined-authority-or-city-region   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        51.96 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e06000047     county-durham       county-or-unitary-authority   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        60.07 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000005        darlington       county-or-unitary-authority   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        94.62 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000001        hartlepool       county-or-unitary-authority   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        99.08 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
         - Last 10 Rows: 
-   AREACD                              AREANM                Geography                                                Variable Name   Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-n09000002 armagh-city-banbridge-and-craigavon local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        61.17 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000003                             belfast local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        98.07 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000004            causeway-coast-and-glens local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        49.97 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000005             derry-city-and-strabane local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        35.64 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000006                 fermanagh-and-omagh local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        33.36 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000007             lisburn-and-castlereagh local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        82.93 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000008                 mid-and-east-antrim local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        49.28 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000009                          mid-ulster local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        61.25 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000010               newry-mourne-and-down local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        63.44 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000011                 ards-and-north-down local-authority-district 5G coverage provided by at least one mobile network provider 5G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        52.48 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+   AREACD                              AREANM                Geography Variable Name                                                    Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        91.37 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000003                             belfast local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        99.67 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000004            causeway-coast-and-glens local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        73.50 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000005             derry-city-and-strabane local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        53.74 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000006                 fermanagh-and-omagh local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        39.09 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000007             lisburn-and-castlereagh local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        96.48 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000008                 mid-and-east-antrim local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        81.37 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000009                          mid-ulster local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        81.42 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000010               newry-mourne-and-down local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        79.45 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000011                 ards-and-north-down local-authority-district   5G coverage 5G coverage provided by at least one mobile network provider 2024-09        83.84 Percentage    %                              NaN                              NaN                 NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                                   Measure    Unit  Count
-Geographic area with 5G coverage by at least one provider percent    426
+Geographic area with 5G coverage by at least one provider percent    409
         

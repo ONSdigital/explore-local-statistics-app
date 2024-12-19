@@ -2,8 +2,8 @@
     "$schema": "https://purl.org/csv-cubed/qube-config/v1",
     "title": "Healthy life expectancy",
     "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
-    "summary": "Average years expected to be lived in good health for females and males born during the reference period, United Kingdom, three-year rolling periods 2011 - 2013 to 2018 - 2020.",
-    "description": "This dataset shows the average years expected to be lived in good health for females and males born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nWelsh Health Boards,\nMetropolitan counties,\nRegions,\nCombined Authorities,\nNations (England, Wales, Scotland, Northern Ireland),\nCountry (UK)\n\n### Source\n\n - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
+    "summary": "Average years expected to be lived in good health for females and males born during the reference period (official statistics in development), England and Wales, three-year rolling periods between 2011 to 2013 and 2021 to 2023.",
+    "description": "This dataset shows the average years expected to be lived in good health for females and males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nWelsh Health Boards,\nCounties,\nRegions,\nNations (England, Wales)\n\n### Source\n\n - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) \n\n\n### Source Notes and Caveats \nCoverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logsitic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals).",
     "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "keywords": [
         "women",
@@ -16,7 +16,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "dataset_issued": "2024-01-12T12:13:33.91261",
-    "dataset_modified": "2024-02-13T13:23:23.91261",
+    "dataset_modified": "2024-12-19T12:52:23.91261",
     "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare",
   
     "columns": {
@@ -83,25 +83,24 @@
         "suffix": null,
         "subText": "years",
         "decimalPlaces": 1,
-        "experimentalStatistic": "F",
-        "sourceDate": "04/03/2022",
+        "experimentalStatistic": "T",
+        "sourceDate": "12/12/2024",
         "sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#",
         "sourceOrg": "Office for National Statistics",
-        "standardised": "T"
+        "standardised": "T",
+        "caveats": "Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logsitic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status."
       },
   
       "Female healthy life expectancy": {
         "label": "Female healthy life expectancy",
         "subtitle": "Average years expected to be lived in good health for females born during year",
-        "longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.",
-        "caveats": null
+        "longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023."
       },
   
       "Male healthy life expectancy": {
         "label": "Male healthy life expectancy",
         "subtitle": "Average years expected to be lived in good health for males born during year",
-        "longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.",
-        "caveats": null
+        "longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023."
       }
   }
 }

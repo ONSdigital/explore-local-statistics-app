@@ -6,7 +6,7 @@
           - Title: 4G coverage
           - Label: 4G coverage
           - Issued: 2023-03-31T12:10:26.937229
-          - Modified: 2024-09-23T10:30:00
+          - Modified: 2024-12-17T19:27:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/ofcom
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,16 +15,16 @@
 		-- https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry
           - Keywords: 
 		-- county
-		-- combined-authority
-		-- local-authority
 		-- region
+		-- combined-authority
 		-- connectivity
 		-- broadband-mobile-coverage
+		-- local-authority
 		-- subnational
           - Contact Point: None
           - Identifier: 4G coverage
-          - Comment: Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, as of January 2024.
-          - Description: This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, as of January 2024.
+          - Comment: Percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), UK, as of September 2024.
+          - Description: This dataset shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, as of September 2024.
 		
 		### Coverage 
 		
@@ -41,7 +41,7 @@
 		
 		### Source
 		
-		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024)
+		 - United Kingdom: [Ofcom](https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/)
 		
 		
 		### Source Notes and Caveats 
@@ -60,8 +60,6 @@
                           Geography    Dimension      True                                          4g-coverage.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                              None                           
                           Indicator   Suppressed     False                                                                              None                           
-                            Mission   Suppressed     False                                                                              None                           
-                           Category   Suppressed     False                                                                              None                           
                              Period    Dimension      True                                                   4g-coverage.csv#dimension/month                Observation
                         Observation Observations     False 4g-coverage.csv#measure/geographic-area-with-4g-coverage-by-at-least-one-provider                Observation
                             Measure   Suppressed     False                                                                              None                           
@@ -74,8 +72,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -91,36 +87,36 @@
 ons-geography-code.csv#code-list ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 426
+        - Number of Rows: 409
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD            AREANM                         Geography                                                Variable Name   Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
-k02000001    united-kingdom                           country 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        93.13 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-k03000001     great-britain                           country 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        92.88 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-k04000001 england-and-wales                           country 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        97.09 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e92000001           england                            nation 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        97.91 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e12000001        north-east                            region 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        92.81 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e47000006       tees-valley combined-authority-or-city-region 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.75 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e47000014        north-east combined-authority-or-city-region 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        92.11 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
-e06000047     county-durham       county-or-unitary-authority 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        95.37 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
-e06000005        darlington       county-or-unitary-authority 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.99 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
-e06000001        hartlepool       county-or-unitary-authority 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.98 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+   AREACD            AREANM                         Geography Variable Name                                                    Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                                              Notes
+k02000001    united-kingdom                           country   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        95.28 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k03000001     great-britain                           country   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        95.09 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+k04000001 england-and-wales                           country   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        98.22 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e92000001           england                            nation   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        98.67 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e12000001        north-east                            region   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        95.48 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000006       tees-valley combined-authority-or-city-region   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        99.77 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e47000014        north-east combined-authority-or-city-region   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        95.04 Percentage    %                              NaN                              NaN                 NaN         1 This data has been aggregated and may show differences to other published figures.
+e06000047     county-durham       county-or-unitary-authority   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        95.91 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000005        darlington       county-or-unitary-authority   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        99.99 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
+e06000001        hartlepool       county-or-unitary-authority   4G coverage 4G coverage provided by at least one mobile network provider 2024-09       100.00 Percentage    %                              NaN                              NaN                 NaN         1                                                                                NaN
         - Last 10 Rows: 
-   AREACD                              AREANM                Geography                                                Variable Name   Indicator   Mission                                              Category  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-n09000002 armagh-city-banbridge-and-craigavon local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.25 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000003                             belfast local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000004            causeway-coast-and-glens local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        96.39 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000005             derry-city-and-strabane local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        92.59 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000006                 fermanagh-and-omagh local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        97.47 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000007             lisburn-and-castlereagh local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000008                 mid-and-east-antrim local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000009                          mid-ulster local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        99.29 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000010               newry-mourne-and-down local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01        93.90 Percentage    %                              NaN                              NaN                 NaN         1   NaN
-n09000011                 ards-and-north-down local-authority-district 4G coverage provided by at least one mobile network provider 4G coverage Mission 4 Boosting productivity, pay, jobs and living standards 2024-01       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+   AREACD                              AREANM                Geography Variable Name                                                    Indicator  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000002 armagh-city-banbridge-and-craigavon local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        99.86 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000003                             belfast local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000004            causeway-coast-and-glens local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        97.33 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000005             derry-city-and-strabane local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        94.64 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000006                 fermanagh-and-omagh local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        98.56 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000007             lisburn-and-castlereagh local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000008                 mid-and-east-antrim local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        99.37 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000009                          mid-ulster local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        99.63 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000010               newry-mourne-and-down local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09        96.99 Percentage    %                              NaN                              NaN                 NaN         1   NaN
+n09000011                 ards-and-north-down local-authority-district   4G coverage 4G coverage provided by at least one mobile network provider 2024-09       100.00 Percentage    %                              NaN                              NaN                 NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                                   Measure    Unit  Count
-Geographic area with 4G coverage by at least one provider percent    426
+Geographic area with 4G coverage by at least one provider percent    409
         
