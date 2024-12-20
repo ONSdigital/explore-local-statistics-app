@@ -240,320 +240,42 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "healthy-life-expectancy.csv#component/healthy-life-expectancy",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#class/ons-geography-code",
+            "@id": "healthy-life-expectancy.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#component/indicator",
+            "@id": "healthy-life-expectancy.csv#class/indicator",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 1
-                }
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#component/observation-status",
+            "@id": "healthy-life-expectancy.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 11
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "healthy-life-expectancy.csv#component/geography-type"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/observation-status"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/healthy-life-expectancy"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/area-name"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/measure-type"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/gregorian-time-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/unit"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#component/indicator"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "healthy-life-expectancy.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#dimension/indicator",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "indicator.csv#code-list"
+                    "@id": "geography-type.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Indicator"
+                    "@value": "Geography Type"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "healthy-life-expectancy.csv#class/indicator"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#component/measure-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "gregorian-time-interval.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Gregorian Time Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "healthy-life-expectancy.csv#class/gregorian-time-interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#attribute/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#component/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 4
+                    "@id": "healthy-life-expectancy.csv#class/geography-type"
                 }
             ]
         },
@@ -590,10 +312,10 @@
         {
             "@id": "healthy-life-expectancy.csv#attribute/lower-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -604,6 +326,30 @@
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
                     "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
                 }
             ]
         },
@@ -632,158 +378,6 @@
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Healthy life expectancy"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#life-expectancy"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#dimension/area-name",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "healthy-life-expectancy.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "ons-geography-code.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "ONS Geography Code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "healthy-life-expectancy.csv#class/ons-geography-code"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#component/unit",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#class/gregorian-time-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "healthy-life-expectancy.csv#class/geography-type"
-                }
-            ]
-        },
-        {
             "@id": "healthy-life-expectancy.csv#component/ons-geography-code",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
@@ -808,12 +402,383 @@
             ]
         },
         {
+            "@id": "healthy-life-expectancy.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy",
+            "@type": [
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Healthy life expectancy"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#life-expectancy"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "gregorian-time-interval.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Gregorian Time Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "healthy-life-expectancy.csv#class/gregorian-time-interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#dimension/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "indicator.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Indicator"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "healthy-life-expectancy.csv#class/indicator"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 11
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "healthy-life-expectancy.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#attribute/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "healthy-life-expectancy.csv#component/area-name"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/measure-type"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/gregorian-time-interval"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/indicator"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/unit"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/geography-type"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/healthy-life-expectancy"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#component/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "healthy-life-expectancy.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/healthy-life-expectancy",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "healthy-life-expectancy.csv#measure/healthy-life-expectancy"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/indicator"
+                },
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/gregorian-time-interval"
+                }
+            ]
+        },
+        {
             "@id": "healthy-life-expectancy.csv#qbDataSet",
             "@type": [
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Distribution",
-                "http://www.w3.org/ns/dcat#Resource",
                 "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
@@ -861,45 +826,14 @@
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#class/geography-type",
+            "@id": "healthy-life-expectancy.csv#class/gregorian-time-interval",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "healthy-life-expectancy.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#class/indicator",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "healthy-life-expectancy.csv#component/upper-confidence-interval",
+            "@id": "healthy-life-expectancy.csv#component/unit",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
@@ -907,53 +841,119 @@
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#boolean",
-                    "@value": false
+                    "@value": true
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 10
+                    "@value": 6
                 }
             ]
         },
         {
-            "@id": "healthy-life-expectancy.csv#attribute/upper-confidence-interval",
+            "@id": "healthy-life-expectancy.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "healthy-life-expectancy.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#dimension/ons-geography-code",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#AttributeProperty"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Upper Confidence Interval"
+                    "@value": "ONS Geography Code"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                    "@id": "healthy-life-expectancy.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "healthy-life-expectancy.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
                 }
             ]
         },
         {
             "@id": "healthy-life-expectancy.csv#dataset",
             "@type": [
+                "http://www.w3.org/ns/dcat#Dataset",
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -963,7 +963,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the average years expected to be lived in good health for females and males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nWelsh Health Boards,\nCounties,\nRegions,\nNations (England, Wales)\n\n### Source\n\n - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) \n\n\n### Source Notes and Caveats \nCoverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logsitic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
+                    "@value": "This dataset shows the average years expected to be lived in good health for females and males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nCounties and Unitary Authorities,\nWelsh Health Boards,\nCounties,\nRegions,\nNations (England, Wales)\n\n### Source\n\n - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#) \n\n\n### Source Notes and Caveats \nCoverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logistic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status. \n\n\n\n### How to read time intervals in ISO8601 format \nThis dataset uses custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day). \nFor example, from April 2019 to March 2022 is represented as 2019-04-01T00:00:00/P3Y, which can be read as '3 years period starts from 1st of April 2019 and ends on 31st March 2022'. \nFor more instructions on how to read this, please visit [Time intervals on Wikipedia](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)."
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -985,7 +985,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-12-19T12:52:23.912610"
+                    "@value": "2024-12-20T11:32:23.912610"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -1019,19 +1019,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "county"
-                },
-                {
-                    "@language": "en",
                     "@value": "good-health"
-                },
-                {
-                    "@language": "en",
-                    "@value": "men"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
                 },
                 {
                     "@language": "en",
@@ -1043,7 +1031,19 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "subnational"
+                },
+                {
+                    "@language": "en",
+                    "@value": "men"
+                },
+                {
+                    "@language": "en",
                     "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "county"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -1171,8 +1171,8 @@
             "@id": "healthy-life-expectancy.csv#unit/years",
             "@type": [
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://qudt.org/schema/qudt/Unit",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
