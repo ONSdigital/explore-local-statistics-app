@@ -500,15 +500,10 @@
 		{#if areaClusters}
 			<NavSection title="Similar areas">
 				<p>
-					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
-					These clusters of areas are based on
-					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
-						target="_blank">an analysis carried out by the ONS</a
-					>.
+					The ten areas most similar to {getName(data.place, 'the')}.
 				</p>
 				<ContentBlock showActions={false}>
-					<Dropdown
+					<!-- <Dropdown
 						label="Select a group of indicators:"
 						options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
 						bind:value={clusterGroup}
@@ -519,7 +514,24 @@
 						legendType={null}
 						selected={[data.place]}
 						bind:colors={mapColors}
+					/> -->
+					<Map
+						data={data.chartData.neighbourData[data.place.areacd].neighbours.map((d) => ({
+							areacd: d,
+							cluster: 'a'
+						}))}
+						legendType={null}
+						selected={[data.place]}
 					/>
+					<ul>
+						{#each data.chartData.neighbourData[data.place.areacd].neighbours as neighbour}
+							<li>{metadata.areasObject[neighbour].areanm}</li>
+						{/each}
+					</ul>
+					<p>
+						{capitalizeFirstLetter(getName(data.place, 'the'))} is in cluster {data.chartData
+							.neighbourData[data.place.areacd].global}.
+					</p>
 					{#if areaClusters[clusterGroup.id] && mapColors}
 						<p style:margin-top="12px">
 							<strong
