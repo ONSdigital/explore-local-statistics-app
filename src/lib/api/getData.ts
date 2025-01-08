@@ -44,13 +44,15 @@ export const getData = async (fetch: typeof window.fetch): Promise<GetDataResult
 		}
 
 		const clusterData = reshapeData(metadataParsed.clustersLookup.data);
+		const neighbourData = metadataParsed.neighbourLookup;
 
 		return {
 			kind: 'Success',
 			chartData: {
 				combinedDataObject: reshapedData,
 				beeswarmKeyData: dataParsed.beeswarmKeyData,
-				clusterData
+				clusterData,
+				neighbourData
 			},
 			metadata: metadataParsed
 		};
