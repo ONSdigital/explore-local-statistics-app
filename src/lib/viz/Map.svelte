@@ -101,8 +101,6 @@
 		);
 		bounds = bbox(geojson);
 	});
-
-	$: console.log('dp', dp);
 </script>
 
 <div aria-hidden="true" class="map-outer">
