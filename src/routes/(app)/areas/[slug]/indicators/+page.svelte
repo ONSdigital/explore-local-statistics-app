@@ -25,6 +25,7 @@
 	import AreaList from '$lib/components/AreaList.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
+	import Legend from '$lib/viz/Legend.svelte';
 
 	import SelectAnIndicatorSection from './SelectAnIndicatorSection.svelte';
 	import IndicatorRowsSection from './IndicatorRowsSection.svelte';
@@ -503,37 +504,58 @@
 					The ten areas most similar to {getName(data.place, 'the')}.
 				</p>
 				<ContentBlock showActions={false}>
-					<!-- <Dropdown
+					<Dropdown
 						label="Select a group of indicators:"
 						options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
 						bind:value={clusterGroup}
 					/>
+					{#if mapColors}
+						<Legend
+							items={[
+								{
+									colour: mapColors[areaClusters[clusterGroup.id]] || 'lightgrey',
+									label: 'Areas in cluster',
+									type: 'circle'
+								},
+								{ colour: 'black', label: 'Similar areas', type: 'refline' }
+							]}
+						/>
+					{/if}
 					<Map
 						data={data.chartData.clusterData}
 						clusterKey={clusterGroup.id}
 						legendType={null}
 						selected={[data.place]}
-						bind:colors={mapColors}
-					/> -->
-					<Map
-						data={data.chartData.neighbourData[data.place.areacd].neighbours.map((d) => ({
+						neighbours={data.chartData.neighbourData[data.place.areacd].neighbours.map((d) => ({
 							areacd: d,
-							cluster: 'a'
+							global: 'a'
 						}))}
-						legendType={null}
-						selected={[data.place]}
+						bind:colors={mapColors}
 					/>
 					<ul>
 						{#each data.chartData.neighbourData[data.place.areacd].neighbours as neighbour}
-							<li>{metadata.areasObject[neighbour].areanm}</li>
+							<li>
+								<a
+									href="{base}/areas/{makeCanonicalSlug(
+										neighbour,
+										metadata.areasObject[neighbour].areanm
+									)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+								>
+							</li>
 						{/each}
 					</ul>
-					<p>
-						{capitalizeFirstLetter(getName(data.place, 'the'))} is in cluster {data.chartData
-							.neighbourData[data.place.areacd].global}.
-					</p>
 					{#if areaClusters[clusterGroup.id] && mapColors}
 						<p style:margin-top="12px">
+							<strong
+								class="cluster-highlight"
+								style:background={mapColors[areaClusters[clusterGroup.id]]}
+							>
+								{capitalizeFirstLetter(getName(data.place, 'the'))} is in cluster {data.chartData
+									.neighbourData[data.place.areacd].global}.
+							</strong>
+						</p>
+
+						<!-- <p style:margin-top="12px">
 							<strong
 								class="cluster-highlight"
 								style:background={mapColors[areaClusters[clusterGroup.id]]}
@@ -566,7 +588,7 @@
 						</Twisty>
 						<p style:margin-top="12px">
 							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
-						</p>
+						</p> -->
 					{/if}
 				</ContentBlock>
 			</NavSection>
