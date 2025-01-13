@@ -532,7 +532,7 @@
 						}))}
 						bind:colors={mapColors}
 					/>
-					<ul>
+					<ol>
 						{#each data.chartData.neighbourData[data.place.areacd].neighbours as neighbour}
 							<li>
 								<a
@@ -543,7 +543,7 @@
 								>
 							</li>
 						{/each}
-					</ul>
+					</ol>
 					{#if areaClusters[clusterGroup.id] && mapColors}
 						<p style:margin-top="12px">
 							<strong
