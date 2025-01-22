@@ -29,6 +29,8 @@ COPY --from=builder /app/node_modules ./node_modules
 
 # Set a custom var to use the Node adapter at runtime
 ENV SVELTEKIT_ADAPTER=node
+# Set a custom var for the production base path
+ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
 # Set the standard NODE_ENV var to production
 ENV NODE_ENV=production
 
