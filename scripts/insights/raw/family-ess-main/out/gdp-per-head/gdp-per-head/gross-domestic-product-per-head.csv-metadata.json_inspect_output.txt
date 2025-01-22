@@ -1,0 +1,112 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Gross domestic product per head
+          - Label: Gross domestic product per head
+          - Issued: 2025-01-20T08:16:00
+          - Modified: 2025-01-20T16:16:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/economy/grossdomesticproductgdp
+          - Keywords: 
+		-- local-authority
+		-- subregional-productivity
+		-- region
+		-- international-territorial-level
+		-- gross-domestic-product
+		-- subnational
+          - Contact Point: None
+          - Identifier: Gross domestic product per head
+          - Comment: Gross domestic product per head at current market prices and in chained volume measures, in pounds, UK, 1998 to 2022.
+          - Description: This dataset shows gross domestic product per head at current market prices and in chained volume measures, in pounds, UK, 1998 to 2022.
+		
+		### Coverage 
+		
+		UK 
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		ITL1 (UK Nations, English Regions, UK less Extra-Regio)
+		
+		### Source
+		
+		 - UK: [Office for National Statistics](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) 
+		
+		
+		### Source Notes and Caveats 
+		- GDP per head at current market prices time series includes the effects of inflation and is most useful for comparison of levels across different areas.
+		
+		- GDP per head at current market prices time series have the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.
+		
+		- 2022 data are provisional.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Gross domestic product per head
+    - Columns: 
+                              Title         Type  Required                                                                Property URL Observations Column Titles
+                             AREACD    Dimension      True            gross-domestic-product-per-head.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                     gross-domestic-product-per-head.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                gross-domestic-product-per-head.csv#dimension/geography-type                Observation
+                          Indicator    Dimension      True                     gross-domestic-product-per-head.csv#dimension/indicator                Observation
+                        Observation Observations     False gross-domestic-product-per-head.csv#measure/gross-domestic-product-per-head                Observation
+                               Unit   Suppressed     False                                                                        None                           
+                            Measure   Suppressed     False                                                                        None                           
+                             Period    Dimension      True                          gross-domestic-product-per-head.csv#dimension/year                Observation
+    Lower Confidence Interval (95%)    Attribute     False     gross-domestic-product-per-head.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False     gross-domestic-product-per-head.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False            gross-domestic-product-per-head.csv#attribute/observation-status                Observation
+    - Columns where suppress output is true: 
+    		-- Unit
+    		-- Measure
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+         indicator.csv#code-list          Indicator       Indicator
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 30550
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD      AREANM                         Geography                                               Indicator  Observation Unit Measure  Period  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      13134.0    £  Pounds    1998                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      25910.0    £  Pounds    2022                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      24222.0    £  Pounds    2021                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      22607.0    £  Pounds    2020                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      23676.0    £  Pounds    2019                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      23191.0    £  Pounds    2018                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      22674.0    £  Pounds    2017                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      22588.0    £  Pounds    2015                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      21540.0    £  Pounds    2014                              NaN                              NaN                NaN
+e47000006 tees-valley combined-authority-or-city-region gross-domestic-product-per-head-at-current-market-price      20715.0    £  Pounds    2013                              NaN                              NaN                NaN
+        - Last 10 Rows: 
+AREACD              AREANM   Geography                                                 Indicator  Observation Unit Measure  Period  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      21561.0    £  Pounds    2005                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      19994.0    £  Pounds    2003                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      19402.0    £  Pounds    2002                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      19428.0    £  Pounds    2001                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      18948.0    £  Pounds    2000                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      17743.0    £  Pounds    1999                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      16736.0    £  Pounds    1998                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      22892.0    £  Pounds    2021                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      19190.0    £  Pounds    2009                              NaN                              NaN                NaN
+ tln0g fermanagh-and-omagh itl-level-3 gross-domestic-product-per-head-in-chained-volume-measure      23270.0    £  Pounds    2022                              NaN                              NaN                NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                        Measure            Unit  Count
+Gross domestic product per head Pounds Sterling  30550
+        

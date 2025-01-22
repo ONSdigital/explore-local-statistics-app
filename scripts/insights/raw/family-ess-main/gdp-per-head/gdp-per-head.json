@@ -1,0 +1,105 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Gross domestic product per head",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Gross domestic product per head at current market prices and in chained volume measures, in pounds, UK, 1998 to 2022.",
+    "description": "This dataset shows gross domestic product per head at current market prices and in chained volume measures, in pounds, UK, 1998 to 2022.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nITL1 (UK Nations, English Regions, UK less Extra-Regio)\n\n### Source\n\n - UK: [Office for National Statistics](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) \n\n\n### Source Notes and Caveats \n- GDP per head at current market prices time series includes the effects of inflation and is most useful for comparison of levels across different areas.\n\n- GDP per head at current market prices time series have the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.\n\n- 2022 data are provisional.",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "subregional-productivity",
+        "gross-domestic-product",
+        "local-authority",
+        "international-territorial-level",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2025-01-20T08:16",
+    "dataset_modified": "2025-01-20T16:16",
+    "themes": "https://www.ons.gov.uk/economy/grossdomesticproductgdp",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Indicator": {
+            "type": "dimension",
+            "label": "Indicator"
+        },
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Pounds Sterling",
+                "from_existing": "http://qudt.org/vocab/unit/PoundSterling"
+            },
+            "measure": {
+                "label": "Gross domestic product per head",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#monetary-count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        }
+    },
+    "ess-beta-metadata": {
+        "shared": {
+          "prefix": "GBPSign",
+          "suffix": null,
+          "subText": null,
+          "decimalPlaces": 1,
+          "experimentalStatistic": "F",
+          "sourceDate": "24/04/2024",
+          "sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
+          "sourceOrg": "Office for National Statistics",
+          "standardised": "T"
+        },
+    
+        "Gross domestic product per head at current market price": {
+          "label": "Gross domestic product per head at current market price",
+          "subtitle": "GDP per head including the effects of inflation.",
+          "longDescription": "This indicator shows gross domestic product (GDP) per head at current market prices in pounds, in the UK, for 1998 to 2022.",
+          "caveats": "These time series includes the effects of inflation and is most useful for comparison of levels across different areas.\n\n2022 data are provisional."
+        },
+    
+        "Gross domestic product per head in chained volume measure": {
+          "label": "Gross domestic product per head in chained volume measure",
+          "subtitle": "GDP per head with the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant.",
+          "longDescription": "This indicator shows gross domestic product (GDP) per head in chained volume measures (CVM) in 2019 money value, in pounds, in the UK, for 1998 to 2022.",
+          "caveats":"These time series have the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.\n\n2022 data are provisional."
+        }
+    }
+  }
