@@ -557,7 +557,7 @@
 						<Twisty
 							title={clusterGroup.id === 'global'
 								? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
-								: `Show the twenty most similar areas to Winchester, according to ${clusterGroup.id} statistics.`}
+								: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
 						>
 							<ol>
 								{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
