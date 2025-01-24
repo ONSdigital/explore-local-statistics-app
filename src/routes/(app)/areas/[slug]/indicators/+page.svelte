@@ -382,6 +382,8 @@
 		chartData.clusterData,
 		parentArea
 	);
+
+	$: console.log('data', data);
 </script>
 
 {#if navigated}
@@ -501,7 +503,12 @@
 		{#if areaClusters}
 			<NavSection title="Similar areas">
 				<p>
-					The ten areas most similar to {getName(data.place, 'the')}.
+					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
+					These clusters of areas are based on
+					<a
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+						target="_blank">an analysis carried out by the ONS</a
+					>.
 				</p>
 				<ContentBlock showActions={false}>
 					<Dropdown
@@ -517,7 +524,7 @@
 									label: 'Areas in cluster',
 									type: 'circle'
 								},
-								{ colour: 'black', label: 'Similar areas', type: 'refline' }
+								{ colour: 'black', label: 'Statistically similar areas', type: 'refline' }
 							]}
 						/>
 					{/if}
@@ -526,69 +533,48 @@
 						clusterKey={clusterGroup.id}
 						legendType={null}
 						selected={[data.place]}
-						neighbours={data.chartData.neighbourData[data.place.areacd].neighbours.map((d) => ({
-							areacd: d,
-							global: 'a'
-						}))}
+						neighbours={data.chartData.neighbourData[data.place.areacd][clusterGroup.id].map(
+							(d) => ({
+								areacd: d,
+								global: 'a'
+							})
+						)}
 						bind:colors={mapColors}
 					/>
-					<ol>
-						{#each data.chartData.neighbourData[data.place.areacd].neighbours as neighbour}
-							<li>
-								<a
-									href="{base}/areas/{makeCanonicalSlug(
-										neighbour,
-										metadata.areasObject[neighbour].areanm
-									)}/indicators">{metadata.areasObject[neighbour].areanm}</a
-								>
-							</li>
-						{/each}
-					</ol>
+
 					{#if areaClusters[clusterGroup.id] && mapColors}
 						<p style:margin-top="12px">
 							<strong
 								class="cluster-highlight"
 								style:background={mapColors[areaClusters[clusterGroup.id]]}
 							>
-								{capitalizeFirstLetter(getName(data.place, 'the'))} is in cluster {data.chartData
-									.neighbourData[data.place.areacd].global}.
+								{capitalizeFirstLetter(getName(data.place, 'the'))} is in {clusterGroup.id} cluster {areaClusters[
+									clusterGroup.id
+								].toUpperCase()}.
 							</strong>
 						</p>
 
-						<!-- <p style:margin-top="12px">
-							<strong
-								class="cluster-highlight"
-								style:background={mapColors[areaClusters[clusterGroup.id]]}
-							>
-								{capitalizeFirstLetter(getName(data.place, 'the'))} is in
-								{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}
-							</strong>
-						</p>
 						<Twisty
-							title="Show all areas in {clusterGroup.id} cluster {areaClusters[
-								clusterGroup.id
-							].toUpperCase()}"
+							title={clusterGroup.id === 'global'
+								? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
+								: `Show the twenty most similar areas to Winchester, according to ${clusterGroup.id} statistics.`}
 						>
-							<p>
-								Areas {getName(parentArea, 'in')}<br />
-								{#each similarAreas.region as area, i}
-									<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
-										>{area.areanm}</a
-									>{i < similarAreas.region.length - 1 ? `, ` : '.'}
+							<ol>
+								{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+									<li>
+										<a
+											href="{base}/areas/{makeCanonicalSlug(
+												neighbour,
+												metadata.areasObject[neighbour].areanm
+											)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+										>
+									</li>
 								{/each}
-							</p>
-							<p>
-								Other areas<br />
-								{#each similarAreas.other as area, i}
-									<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
-										>{area.areanm}</a
-									>{i < similarAreas.other.length - 1 ? `, ` : '.'}
-								{/each}
-							</p>
+							</ol>
 						</Twisty>
 						<p style:margin-top="12px">
 							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
-						</p> -->
+						</p>
 					{/if}
 				</ContentBlock>
 			</NavSection>
