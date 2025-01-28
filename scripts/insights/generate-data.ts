@@ -160,7 +160,7 @@ function generateOutData(combinedData, indicatorsArray) {
 	// Create a Map to group data by code
 	const combinedDataLookup = new Map();
 
-	// Group the data by code and ensure it's sorted by xDomainNumb
+	// Group the data by code
 	combinedData.forEach((item) => {
 		if (!item.code) return;
 
@@ -170,9 +170,9 @@ function generateOutData(combinedData, indicatorsArray) {
 		combinedDataLookup.get(item.code).push(item);
 	});
 
-	// Sort each group by xDomainNumb
+	// Sort each group by xDomainNumb in DESCENDING order
 	for (const [code, items] of combinedDataLookup) {
-		items.sort((a, b) => a.xDomainNumb - b.xDomainNumb);
+		items.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
 	}
 
 	const combinedDataObjectColumnOriented = {};
@@ -204,7 +204,6 @@ function generateOutData(combinedData, indicatorsArray) {
 				valuesforIndicatorYear[key] = [];
 			}
 
-			// Only add non-zero values
 			if (row.value !== 0) {
 				valuesforIndicatorYear[key].push({
 					value: row.value,
@@ -233,21 +232,19 @@ function generateOutData(combinedData, indicatorsArray) {
 			});
 		});
 
-		// Filter rows excluding flagged areacds and maintain chronological order
+		// Filter rows excluding flagged areacds and maintain DESCENDING order
 		const filteredRows = rows
 			.filter((row) => !areacdsToExclude.has(row.areacd))
-			.sort((a, b) => a.xDomainNumb - b.xDomainNumb);
+			.sort((a, b) => b.xDomainNumb - a.xDomainNumb); // Descending order
 
 		if (filteredRows.length > 0) {
 			const dataByColumn = {};
 			const keys = Object.keys(filteredRows[0]);
 
-			// Ensure chronological order is maintained in column arrays
 			keys.forEach((columnName) => {
 				dataByColumn[columnName] = filteredRows.map((row) => row[columnName]);
 			});
 
-			// Only set single values for id and code
 			if (dataByColumn.id && dataByColumn.id.length > 0) {
 				dataByColumn.id = dataByColumn.id[0];
 			}
