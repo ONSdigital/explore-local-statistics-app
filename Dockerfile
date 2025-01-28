@@ -10,6 +10,8 @@ COPY . .
 
 # Set a custom var to use the Node adapter for the build
 ENV SVELTEKIT_ADAPTER=node
+# Set a custom var for the production base path
+ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
 
 # Build the application
 RUN npm run build
