@@ -234,7 +234,7 @@ function generateOutData(combinedData, indicatorsArray) {
 
 		// Filter rows excluding flagged areacds and maintain DESCENDING order
 		const filteredRows = rows
-			.filter((row) => !areacdsToExclude.has(row.areacd))
+			// .filter((row) => !areacdsToExclude.has(row.areacd))
 			.sort((a, b) => b.xDomainNumb - a.xDomainNumb); // Descending order
 
 		if (filteredRows.length > 0) {
