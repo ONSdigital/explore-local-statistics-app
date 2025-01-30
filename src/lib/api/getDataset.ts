@@ -51,7 +51,7 @@ export const getDataset = async (
 };
 
 /**
- * Filters out areas that have values exceeding 700 times the minimum value for any year
+ * Filters out areas that have values exceeding 700 times the minimum positive value for any year
  * @param {Array} data - Array of objects containing area data
  * @param {number} threshold - Multiplier threshold (default: 700)
  * @returns {Array} Filtered array excluding areas with extreme values
@@ -71,9 +71,14 @@ function filterExtremeAreas(data, threshold = 700) {
 		return acc;
 	}, {});
 
-	// Find minimum values per year
+	// Find minimum positive values per year
 	const yearMinimums = Object.entries(yearGroups).reduce((acc, [year, values]) => {
-		acc[year] = Math.min(...values);
+		// Filter out zero and negative values before finding minimum
+		const positiveValues = values.filter((value) => value > 0);
+		// Only set minimum if there are positive values
+		if (positiveValues.length > 0) {
+			acc[year] = Math.min(...positiveValues);
+		}
 		return acc;
 	}, {});
 
@@ -81,7 +86,8 @@ function filterExtremeAreas(data, threshold = 700) {
 	const extremeAreas = new Set();
 	data.forEach((item) => {
 		const yearMin = yearMinimums[item.xDomainNumb];
-		if (item.value > yearMin * threshold) {
+		// Only check against minimum if we have a valid minimum for that year
+		if (yearMin !== undefined && item.value > yearMin * threshold) {
 			extremeAreas.add(item.areacd);
 		}
 	});
