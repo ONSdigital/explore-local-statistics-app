@@ -21,9 +21,9 @@ This project uses a Svelte port of the ONS Design System components.
 It's possible to use `npm link` to work locally with the components, without having to publish the components to npm during development.
 
 - In svelte-components, run `npm link` and them `npm run build`.
-- In local-statistics, run `npm link @onsvisual/svelte-components`.
+- In explore-local-statistics, run `npm link @onsvisual/svelte-components`.
 - Verify with `npm ls @onsvisual/svelte-components` that the package is symlink'd to your local location of the library.
-- With local-statistics running, the Svelte library components should live update each time you run `npm run build`.
+- With explore-local-statistics running, the Svelte library components should live update each time you run `npm run build`.
 - To unlink, run `npm unlink @onsvisual/svelte-components`.
 
 ## Dockerised production build
