@@ -51,10 +51,10 @@ async function main() {
 	config.indicatorsCalculations = indicatorsCalculations;
 	config._oldStyleIndicatorsCalculations = _oldStyleIndicatorsCalculations;
 
-	const sitemapPlaces = readCsvAutoType(`static/data/places.csv`);
+	const sitemapPlaces = readCsvAutoType(`static/data/places.csv`)
 	// writeJson('./sitemapPlaces.json', sitemapPlaces);
-	//use sitemapPlaces rather than config.areas
-	generateSitemap(sitemapPlaces, config.indicatorsMetadata);
+	//use sitemapPlaces rather than config.areas 
+    generateSitemap(sitemapPlaces, config.indicatorsMetadata)
 
 	checkSlugs(config.indicatorsMetadata.map((d) => d.slug));
 
@@ -113,147 +113,35 @@ async function main() {
 	);
 }
 
-// function generateOutData(combinedData, indicatorsArray) {
-// 	const combinedDataLookup = toNestedLookup(
-// 		[...combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb),
-// 		['code']
-// 	);
-
-// 	// combinedDataObjectColumnOriented stores an array for each column to save space.
-// 	const combinedDataObjectColumnOriented = {};
-// 	for (const indicator of indicatorsArray) {
-// 		const rows = combinedDataLookup.get(indicator.code);
-// 		if (rows.length === 0) {
-// 			throw new Error('Unexpectedly empty `rows` array.');
-// 		}
-// 		const keys = Object.keys(rows[0]);
-// 		for (const row of rows) {
-// 			if (Object.keys(row).length !== keys.length) {
-// 				throw new Error('Unexpected number of keys in a data row.');
-// 			}
-// 		}
-// 		const dataByColumn = {};
-// 		for (const columnName of keys) {
-// 			dataByColumn[columnName] = rows.map((row) => row[columnName]);
-// 		}
-
-// 		// We don't need arrays for id and code, because all array elements are the same
-// 		dataByColumn.id = dataByColumn.id[0];
-// 		dataByColumn.code = dataByColumn.code[0];
-
-// 		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
-// 	}
-
-// 	return combinedDataObjectColumnOriented;
-// }
-
 function generateOutData(combinedData, indicatorsArray) {
-	if (
-		!combinedData ||
-		!Array.isArray(combinedData) ||
-		!indicatorsArray ||
-		!Array.isArray(indicatorsArray)
-	) {
-		throw new Error('Invalid input: combinedData and indicatorsArray must be arrays');
-	}
+	const combinedDataLookup = toNestedLookup(
+		[...combinedData].sort((a, b) => b.xDomainNumb - a.xDomainNumb),
+		['code']
+	);
 
-	// Create a Map to group data by code
-	const combinedDataLookup = new Map();
-
-	// Group the data by code
-	combinedData.forEach((item) => {
-		if (!item.code) return;
-
-		if (!combinedDataLookup.has(item.code)) {
-			combinedDataLookup.set(item.code, []);
-		}
-		combinedDataLookup.get(item.code).push(item);
-	});
-
-	// Sort each group by xDomainNumb in DESCENDING order
-	for (const [code, items] of combinedDataLookup) {
-		items.sort((a, b) => b.xDomainNumb - a.xDomainNumb);
-	}
-
+	// combinedDataObjectColumnOriented stores an array for each column to save space.
 	const combinedDataObjectColumnOriented = {};
-
 	for (const indicator of indicatorsArray) {
-		if (!indicator.code) {
-			console.warn(`Skipping indicator with missing code:`, indicator);
-			continue;
-		}
-
 		const rows = combinedDataLookup.get(indicator.code);
-
-		if (!rows || !Array.isArray(rows) || rows.length === 0) {
-			console.warn(`No data found for indicator code: ${indicator.code}`);
-			continue;
+		if (rows.length === 0) {
+			throw new Error('Unexpectedly empty `rows` array.');
+		}
+		const keys = Object.keys(rows[0]);
+		for (const row of rows) {
+			if (Object.keys(row).length !== keys.length) {
+				throw new Error('Unexpected number of keys in a data row.');
+			}
+		}
+		const dataByColumn = {};
+		for (const columnName of keys) {
+			dataByColumn[columnName] = rows.map((row) => row[columnName]);
 		}
 
-		const areacdsToExclude = new Set();
-		const valuesforIndicatorYear = {};
+		// We don't need arrays for id and code, because all array elements are the same
+		dataByColumn.id = dataByColumn.id[0];
+		dataByColumn.code = dataByColumn.code[0];
 
-		// Process only valid rows with required properties
-		rows.forEach((row) => {
-			if (!row.areacd || !row.value || row.value === undefined || !row.xDomainNumb) {
-				return;
-			}
-
-			const key = `${row.id}_${row.xDomainNumb}`;
-			if (!valuesforIndicatorYear[key]) {
-				valuesforIndicatorYear[key] = [];
-			}
-
-			if (row.value !== 0) {
-				valuesforIndicatorYear[key].push({
-					value: row.value,
-					areacd: row.areacd
-				});
-			}
-		});
-
-		Object.keys(valuesforIndicatorYear).forEach((key) => {
-			const valuesForThisIndicatorAndYear = valuesforIndicatorYear[key];
-
-			if (valuesForThisIndicatorAndYear.length === 0) {
-				return;
-			}
-
-			const lowestValue = valuesForThisIndicatorAndYear.reduce((prev, current) =>
-				prev.value < current.value ? prev : current
-			);
-
-			if (lowestValue.value <= 0) return;
-
-			valuesForThisIndicatorAndYear.forEach((value) => {
-				if (value.value > 700 * lowestValue.value) {
-					areacdsToExclude.add(value.areacd);
-				}
-			});
-		});
-
-		// Filter rows excluding flagged areacds and maintain DESCENDING order
-		const filteredRows = rows
-			// .filter((row) => !areacdsToExclude.has(row.areacd))
-			.sort((a, b) => b.xDomainNumb - a.xDomainNumb); // Descending order
-
-		if (filteredRows.length > 0) {
-			const dataByColumn = {};
-			const keys = Object.keys(filteredRows[0]);
-
-			keys.forEach((columnName) => {
-				dataByColumn[columnName] = filteredRows.map((row) => row[columnName]);
-			});
-
-			if (dataByColumn.id && dataByColumn.id.length > 0) {
-				dataByColumn.id = dataByColumn.id[0];
-			}
-			if (dataByColumn.code && dataByColumn.code.length > 0) {
-				dataByColumn.code = dataByColumn.code[0];
-			}
-
-			combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
-		}
+		combinedDataObjectColumnOriented[indicator.code] = dataByColumn;
 	}
 
 	return combinedDataObjectColumnOriented;
