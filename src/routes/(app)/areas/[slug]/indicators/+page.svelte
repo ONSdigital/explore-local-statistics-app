@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 
-	import { base } from '$app/paths';
+	import { base, assets } from '$app/paths';
 
 	import type { PageData } from './$types';
 	import { goto, afterNavigate } from '$app/navigation';
@@ -563,7 +563,7 @@
 		<NavSection title="Get the data">
 			<p>
 				Download available indicators for all areas in our <a
-					href="{base}/insights/datadownload.ods"
+					href="{assets}/insights/datadownload.ods"
 					rel="external"
 					on:click={() =>
 						analyticsEvent({

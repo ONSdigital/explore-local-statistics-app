@@ -1,7 +1,7 @@
 <script lang="ts">
 	//@ts-nocheck
 	import MarkdownIt from 'markdown-it';
-	import { base } from '$app/paths';
+	import { base, assets } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
 		Breadcrumb,
@@ -666,7 +666,7 @@
 			</ul>
 			<p>
 				Download all available indicators in <a
-					href="{base}/insights/datadownload.ods"
+					href="{assets}/insights/datadownload.ods"
 					rel="external"
 					on:click={() =>
 						analyticsEvent({

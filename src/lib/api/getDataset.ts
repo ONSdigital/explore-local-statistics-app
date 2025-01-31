@@ -1,4 +1,4 @@
-import { base } from '$app/paths';
+import { assets, base } from '$app/paths';
 
 type GetDatasetResult =
 	| {
@@ -13,7 +13,7 @@ export const getDataset = async (
 	fetch: typeof window.fetch,
 	slug: string
 ): Promise<GetDatasetResult> => {
-	const metadataResult = await fetch(`${base}/insights/config.json`);
+	const metadataResult = await fetch(`${assets}/insights/config.json`);
 	if (!metadataResult) return { kind: 'Failure' };
 
 	const metadata = await metadataResult.json();
@@ -22,7 +22,7 @@ export const getDataset = async (
 	);
 	if (!indicator) return { kind: 'Failure' };
 
-	const dataResult = await fetch(`${base}/insights/individual-datasets/${slug}.json`);
+	const dataResult = await fetch(`${assets}/insights/individual-datasets/${slug}.json`);
 
 	if (dataResult) {
 		const colData = await dataResult.json();

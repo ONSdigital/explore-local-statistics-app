@@ -1,17 +1,23 @@
-# Stage 1 - Build
-FROM node:18-alpine AS builder
+# Stage 0 - Shared
+FROM node:18-alpine AS shared
 WORKDIR /app
+
+# Custom var for the Node adapter
+ENV SVELTEKIT_ADAPTER=node
+# Custom var for the base path
+ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
+# Custom var for the assets path
+ENV SVELTEKIT_ASSETS_PATH=http://localhost:8080/some-path
+
+# -------------------------------------------------------
+# Stage 1 - Build
+FROM shared AS builder
 
 # Install dependencies
 COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
-
-# Set a custom var to use the Node adapter for the build
-ENV SVELTEKIT_ADAPTER=node
-# Set a custom var for the production base path
-ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
 
 # Build the application
 RUN npm run build
@@ -21,18 +27,13 @@ RUN npm prune --production
 
 # -------------------------------------------------------
 # Stage 2 - Run
-FROM node:18-alpine
-WORKDIR /app
+FROM shared
 
 # Copy only necessary files
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 
-# Set a custom var to use the Node adapter at runtime
-ENV SVELTEKIT_ADAPTER=node
-# Set a custom var for the production base path
-ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
 # Set the standard NODE_ENV var to production
 ENV NODE_ENV=production
 

@@ -8,6 +8,9 @@ const adapter = process.env.SVELTEKIT_ADAPTER === 'node' ? nodeAdapter() : autoA
 // we made a SVELTEKIT_BASE_PATH var so we can specify the app base path in production
 const basePath = process.env.SVELTEKIT_BASE_PATH || '';
 
+// we made a SVELTEKIT_ASSETS_PATH var so we can specify the app assets path in production
+const assetsPath = process.env.SVELTEKIT_ASSETS_PATH || '';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
@@ -15,6 +18,7 @@ const config = {
 	kit: {
 		adapter: adapter,
 		paths: {
+			assets: assetsPath,
 			base: basePath
 		}
 	}

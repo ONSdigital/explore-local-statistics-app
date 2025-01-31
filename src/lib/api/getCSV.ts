@@ -10,7 +10,12 @@ const stripBom = (str) => {
 // Load CSV data. Cells with "|" characters split into arrays.
 export async function getCSV(url, fetch = window.fetch) {
 	const str = await (await fetch(url)).text();
-	const data = csvParse(stripBom(str), autoType);
+	return parseCSV(str);
+}
+
+// Parse CSV data. Cells with "|" characters split into arrays.
+export async function parseCSV(csv: string) {
+	const data = csvParse(stripBom(csv), autoType);
 	const cols = data.columns.filter((c) => {
 		data[0][c] && String(data[0][c]).includes('|');
 	});

@@ -1,5 +1,5 @@
 <script>
-	import { base } from '$app/paths';
+	import { assets } from '$app/paths';
 	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
 
 	export let geometry;
@@ -7,7 +7,7 @@
 </script>
 
 <Map
-	style="{base}/data/mapstyle.json"
+	style="{assets}/data/mapstyle.json"
 	location={{ bounds }}
 	interactive={false}
 	options={{ fitBoundsOptions: { padding: 20 } }}

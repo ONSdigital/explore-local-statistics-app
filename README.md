@@ -32,3 +32,13 @@ The app can be run using Docker for production, for which we use the SvelteKit N
 
     docker build -t els .
     docker run -p 3000:3000 els
+
+### Hosting assets in a bucket
+
+We host the Sveltekit assets (the app's files, including the built `.js`, `.css` files and everything in `/static`) in a bucket to reduce the disk costs in the container. This bucket is on the CND on a separate pubic domain `static.ons.gov.uk`. We copy the built `client` assets during deployment.
+
+To simulate this locally, copy the client build output from the container to a local http server running at `../liveserv` (we used `live-server` with the `--cors` option):
+
+    docker cp (container-name):/app/build/client/explore-local-statistics ../liveserv/some-path
+
+The app's assets will be available at `http://localhost:8080/some-path/` and `svelte.config.js` `kit.paths.assets` value can be set to this in the build.
