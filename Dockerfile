@@ -12,6 +12,9 @@ COPY . .
 ENV SVELTEKIT_ADAPTER=node
 # Set a custom var for the production base path
 ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
+# bring in - and then use - short commit-hash for path for assets
+ARG commit_hash=zzzz
+ENV SVELTEKIT_ASSETS_PATH=/explore-local-statistics/$commit_hash
 
 # Build the application
 RUN npm run build
@@ -33,6 +36,9 @@ COPY --from=builder /app/node_modules ./node_modules
 ENV SVELTEKIT_ADAPTER=node
 # Set a custom var for the production base path
 ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
+# bring in - and then use - short commit-hash for path for assets
+ARG commit_hash=zzzz
+ENV SVELTEKIT_ASSETS_PATH=/explore-local-statistics/$commit_hash
 # Set the standard NODE_ENV var to production
 ENV NODE_ENV=production
 
