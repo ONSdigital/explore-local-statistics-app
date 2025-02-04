@@ -435,6 +435,7 @@
 				icon="arrow"
 				iconPosition="after"
 				href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+				arialabel="Read more about {getName(data.place, 'the')}"
 				small>Read more</Button
 			>
 		</Card>
