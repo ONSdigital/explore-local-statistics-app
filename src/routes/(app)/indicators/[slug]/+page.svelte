@@ -4,7 +4,6 @@
 	import { base } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
-		Breadcrumb,
 		Titleblock,
 		NavSections,
 		NavSection,
@@ -396,15 +395,6 @@
 		: null;
 </script>
 
-<Breadcrumb
-	links={[
-		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Local indicators', href: `${base}/indicators` },
-		{ label: data.indicator.metadata.label }
-	]}
-	background="#eaeaea"
-/>
 <Titleblock
 	title={data.indicator.metadata.label}
 	meta={[

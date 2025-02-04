@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { base } from '$app/paths';
-	import { Breadcrumb, Titleblock, NavSections, NavSection } from '@onsvisual/svelte-components';
+	import { Titleblock, NavSections, NavSection } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import Lede from '$lib/components/Lede.svelte';
 
@@ -40,13 +40,6 @@
 	$: filteredTopics = filterTopics(filterText);
 </script>
 
-<Breadcrumb
-	links={[
-		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Local indicators' }
-	]}
-/>
 <Titleblock title="Local indicators">
 	<Lede
 		>Explore our {datasetsCount} local indicators, including <b>disposable household income</b>,

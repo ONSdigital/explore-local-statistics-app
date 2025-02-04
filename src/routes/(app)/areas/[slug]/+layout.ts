@@ -6,6 +6,7 @@ import { getCSV } from '$lib/api/getCSV';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 import { getName } from '@onsvisual/robo-utils';
+import { Breadcrumb } from '@onsvisual/svelte-components';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
@@ -40,7 +41,17 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 			links,
 			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
 			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`,
-			pageType: `area page`
+			pageType: `area page`,
+			component: Breadcrumb,
+			breadcrumbLinks: [
+				{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+				{ label: 'Explore local statistics', href: `${base}/` },
+				...[...result.place.parents]
+					.reverse()
+					.map((p) => ({ label: getName(p), href: `${base}/areas/${p.areacd}` })),
+				{ label: getName(result.place) }
+			],
+			background: '#fff'
 		};
 	}
 };
