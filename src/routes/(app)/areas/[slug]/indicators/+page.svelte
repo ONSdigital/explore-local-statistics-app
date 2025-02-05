@@ -92,6 +92,7 @@
 	let clusterGroupsArray,
 		clusterGroup,
 		areaClusters,
+		areaNeighbours,
 		clusterDescriptions,
 		similarAreas,
 		demographicallySimilarAreas;
@@ -174,7 +175,11 @@
 		}));
 
 		clusterGroup = clusterGroupsArray[0];
+		// Find the cluster data for the selected area
 		areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
+		// Find nearest neighbours for the selected area
+		areaNeighbours = data.chartData.neighbourData?.[data.place.areacd] || null;
+		// Get the cluster descriptions
 		clusterDescriptions = makeClusterDescriptions(data.metadata.clustersLookup.descriptions);
 		similarAreas = getSimilarAreas(
 			areaClusters,
@@ -384,6 +389,7 @@
 	);
 
 	$: console.log('data', data);
+	$: console.log(areaNeighbours);
 </script>
 
 {#if navigated}
@@ -500,7 +506,7 @@
 			></SelectAnIndicatorSection>
 		</NavSection>
 
-		{#if areaClusters}
+		{#if areaClusters && areaNeighbours}
 			<NavSection title="Similar areas">
 				<p>
 					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
@@ -553,29 +559,58 @@
 								].toUpperCase()}.
 							</strong>
 						</p>
-
-						<Twisty
-							title={clusterGroup.id === 'global'
-								? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
-								: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
-						>
-							<ol>
-								{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
-									<li>
-										<a
-											href="{base}/areas/{makeCanonicalSlug(
-												neighbour,
-												metadata.areasObject[neighbour].areanm
-											)}/indicators">{metadata.areasObject[neighbour].areanm}</a
-										>
-									</li>
-								{/each}
-							</ol>
-						</Twisty>
-						<p style:margin-top="12px">
-							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
-						</p>
 					{/if}
+					<Twisty
+						title={clusterGroup.id === 'global'
+							? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
+							: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
+					>
+						<ol>
+							{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+								<li>
+									<a
+										href="{base}/areas/{makeCanonicalSlug(
+											neighbour,
+											metadata.areasObject[neighbour].areanm
+										)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+									>
+								</li>
+							{/each}
+						</ol>
+					</Twisty>
+					<p style:margin-top="12px">
+						{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
+					</p>
+				</ContentBlock>
+			</NavSection>
+		{:else if areaNeighbours}
+			<NavSection title="Similar areas">
+				<ContentBlock showActions={false}>
+					<Dropdown
+						label="Select a group of indicators:"
+						options={clusterGroupsArray.filter((c) => areaNeighbours[c.id])}
+						bind:value={clusterGroup}
+					/>
+					<p style:margin-top="12px">
+						The twenty most statistically similar areas for {getName(data.place, 'the')}. These
+						areas are based on
+						<a
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+							target="_blank">an analysis carried out by the ONS</a
+						>
+					</p>
+					<ol>
+						{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+							<li>
+								<a
+									href="{base}/areas/{makeCanonicalSlug(
+										neighbour,
+										metadata.areasObject[neighbour].areanm
+									)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+								>
+							</li>
+						{/each}
+					</ol>
 				</ContentBlock>
 			</NavSection>
 		{/if}
