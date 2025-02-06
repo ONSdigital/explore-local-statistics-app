@@ -585,20 +585,21 @@
 			</NavSection>
 		{:else if areaNeighbours}
 			<NavSection title="Similar areas">
+				<p>
+					Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
+					based on a specific group of indicators. This ranking is derived from
+					<a
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+						target="_blank">an analysis carried out by the ONS</a
+					>.
+				</p>
 				<ContentBlock showActions={false}>
 					<Dropdown
 						label="Select a group of indicators:"
 						options={clusterGroupsArray.filter((c) => areaNeighbours[c.id])}
 						bind:value={clusterGroup}
 					/>
-					<p style:margin-top="12px">
-						The twenty most statistically similar areas for {getName(data.place, 'the')}. These
-						areas are based on
-						<a
-							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
-							target="_blank">an analysis carried out by the ONS</a
-						>
-					</p>
+
 					<ol>
 						{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
 							<li>
