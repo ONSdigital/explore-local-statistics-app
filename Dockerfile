@@ -8,6 +8,8 @@ ENV SVELTEKIT_ADAPTER=node
 ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
 # Custom var for the assets path
 ENV SVELTEKIT_ASSETS_PATH=http://localhost:8080/some-path
+# Custom var for the app version
+ENV SVELTEKIT_APP_VERSION=someversionstring
 
 # -------------------------------------------------------
 # Stage 1 - Build
