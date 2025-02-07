@@ -5,11 +5,14 @@ WORKDIR /app
 # Custom var for the Node adapter
 ENV SVELTEKIT_ADAPTER=node
 # Custom var for the base path
-ENV SVELTEKIT_BASE_PATH=/explore-local-statistics
+ARG SVELTEKIT_BASE_PATH
+ENV SVELTEKIT_BASE_PATH=${SVELTEKIT_BASE_PATH}
 # Custom var for the assets path
-ENV SVELTEKIT_ASSETS_PATH=http://localhost:8080/some-path
+ARG SVELTEKIT_ASSETS_PATH
+ENV SVELTEKIT_ASSETS_PATH=${SVELTEKIT_ASSETS_PATH}
 # Custom var for the app version
-ENV SVELTEKIT_APP_VERSION=someversionstring
+ARG SVELTEKIT_APP_VERSION
+ENV SVELTEKIT_APP_VERSION=${SVELTEKIT_APP_VERSION}
 
 # -------------------------------------------------------
 # Stage 1 - Build

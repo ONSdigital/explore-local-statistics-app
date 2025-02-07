@@ -21,7 +21,8 @@ const config = {
 			assets: assetsPath,
 			base: basePath
 		},
-		version: { name: appVersion }
+		// only set the app version if we are given one
+		...(appVersion && { version: { name: appVersion } })
 	}
 };
 
