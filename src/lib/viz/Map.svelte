@@ -25,9 +25,9 @@
 		3: 'rgb(0, 78, 166)',
 		4: 'rgb(0, 13, 84)',
 		a: '#206095',
-		b: '#27A0CC',
-		c: '#871A5B',
-		d: '#A8BD3A'
+		b: '#206095',
+		c: '#206095',
+		d: '#206095'
 	};
 	export let topoPath = `${base}/data/topo.json`;
 	export let customLookup = null;
