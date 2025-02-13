@@ -387,9 +387,6 @@
 		chartData.clusterData,
 		parentArea
 	);
-
-	$: console.log('data', data);
-	$: console.log(areaNeighbours);
 </script>
 
 {#if navigated}
@@ -512,7 +509,7 @@
 					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
 					These clusters of areas are based on
 					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
 						target="_blank">an analysis carried out by the ONS</a
 					>.
 				</p>
@@ -589,7 +586,7 @@
 					Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
 					based on a specific group of indicators. This ranking is derived from
 					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
 						target="_blank">an analysis carried out by the ONS</a
 					>.
 				</p>
