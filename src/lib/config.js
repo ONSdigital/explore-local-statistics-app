@@ -76,7 +76,7 @@ export const colorsLookup = {
 	],
 	customExceedThreshold: { color: 'grey', contrast: 'white' },
 	selected: { color: '#F4A148', contrast: '#222' },
-	darkerSelected: { color: '#DE790D', contrast: 'white' },
+	darkerSelected: { color: '#DE790D', contrast: '#222' },
 	comparison: { color: '#746CB1', contrast: 'white' },
 	related: { color: '#b0b0b0', contrast: '#222' }
 };

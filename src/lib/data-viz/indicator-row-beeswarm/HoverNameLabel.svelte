@@ -47,12 +47,12 @@
 		>
 			{#if labelRectArray[i]}
 				<rect
-					x={(labelPinPoint === 'start' ? 0 : -labelRectArray[i].width) - 3}
-					y={-textArray.length * 10 - 9}
-					width={labelRectArray[i].width + 6}
+					x={(labelPinPoint === 'start' ? 0 : -labelRectArray[i].width) - 7}
+					y={-4 + -textArray.length * 10 - 9}
+					width={labelRectArray[i].width + 14}
 					height={labelRectArray[i].height +
-						(/[qgyp]/.test(textArray[textArray.length - 1]) ? -1 : -4)}
-					fill="white"
+						(/[qgyp]/.test(textArray[textArray.length - 1]) ? 7 : 4)}
+					fill={colorsLookup['selected'].color}
 					stroke={colorsLookup['selected'].color}
 					stroke-width="1.5px"
 					rx="2px"
@@ -65,8 +65,8 @@
 						style="font-size: 20px; stroke-width: 0.5px"
 						y={-textArray.length * 10 + j * 20 + 10}
 						text-anchor={labelPinPoint}
-						fill={colorsLookup['selected'].color}
-						stroke={colorsLookup['selected'].color}>{line}</text
+						fill={colorsLookup['darkerSelected'].contrast}
+						stroke={colorsLookup['darkerSelected'].contrast}>{line}</text
 					>
 				{/each}
 			</g>
