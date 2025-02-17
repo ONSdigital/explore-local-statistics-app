@@ -1,0 +1,92 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Domestic gas consumption",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Median domestic gas consumption kWh per meter point, Great Britain, 2012 to 2023.",
+    "description": "This dataset shows median domestic gas consumption kWh per meter point, in Great Britain, for 2012 to 2023.\n\n### Coverage \n\nGreat Britain \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland), Countries (GB, England and Wales)\n\n### Source\n\n - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-gas-consumption-data)\n\n\n### Source Notes and Caveats \n- These estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.\n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "environment",
+        "gas",
+        "local-authority",
+        "region",
+        "subnational"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero",
+    "dataset_issued": "2025-02-12T13:52",
+    "dataset_modified": "2025-02-12T13:52",
+    "themes": "https://www.ons.gov.uk/economy/environmentalaccounts",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "kWh per meter point",
+                "from_existing": "http://qudt.org/vocab/unit/KiloW-HR"
+            },
+            "measure": {
+                "label": "Median domestic gas consumption",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#consumption-per-meter-point"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Domestic gas consumption",
+      "prefix": null,
+      "suffix": null,
+      "subText": "kWh per meter point",
+      "decimalPlaces": 1,
+      "subtitle": "Median domestic gas consumption kWh per meter point",
+      "experimentalStatistic": "F",
+      "sourceDate": "19/12/2024",
+      "sourceURL": "https://www.gov.uk/government/collections/sub-national-gas-consumption-data",
+      "sourceOrg": "Department for Energy Security and Net Zero",
+      "longDescription": "This indicator shows median domestic gas consumption kWh per meter point, in Great Britain, for 2012 to 2023.",
+      "caveats": "These estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.",
+      "standardised": "T"
+  }
+}

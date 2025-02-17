@@ -1,0 +1,119 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Domestic electricity consumption
+          - Label: Domestic electricity consumption
+          - Issued: 2025-02-12T13:47:00
+          - Modified: 2025-02-12T13:47:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/economy/environmentalaccounts
+          - Keywords: 
+		-- environment
+		-- local-authority
+		-- region
+		-- electricity
+		-- subnational
+          - Contact Point: None
+          - Identifier: Domestic electricity consumption
+          - Comment: Median domestic electricity consumption kWh per meter point, UK, 2012 to 2023.
+          - Description: This dataset shows median domestic electricity consumption kWh per meter point, in the UK, for 2012 to 2023.
+		
+		### Coverage 
+		
+		UK 
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland, Northern Ireland), Countries (GB, England and Wales)
+		
+		### Source
+		
+		 - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-electricity-consumption-data)
+		
+		 - Northern Ireland: [Department for Energy Security and Net Zero](https://www.gov.uk/government/statistics/sub-national-electricity-consumption-statistics-in-northern-ireland)
+		
+		
+		### Source Notes and Caveats 
+		- Northern Ireland local government districts figures are only available from 2015 onwards.
+		
+		- These figures are based on meter level electricity consumption data provided by data aggregators (who compile this data on behalf of electricity suppliers).
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Domestic electricity consumption
+    - Columns: 
+                              Title         Type  Required                                                                         Property URL Observations Column Titles
+                             AREACD    Dimension      True                    domestic-electricity-consumption.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                             domestic-electricity-consumption.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                        domestic-electricity-consumption.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                 None                           
+                          Indicator   Suppressed     False                                                                                 None                           
+                             Period    Dimension      True                                  domestic-electricity-consumption.csv#dimension/year                Observation
+                        Observation Observations     False domestic-electricity-consumption.csv#measure/median-domestic-electricity-consumption                Observation
+                            Measure   Suppressed     False                                                                                 None                           
+                               Unit   Suppressed     False                                                                                 None                           
+    Lower Confidence Interval (95%)    Attribute     False             domestic-electricity-consumption.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False             domestic-electricity-consumption.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                    domestic-electricity-consumption.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                 None                           
+                              Notes   Suppressed     False                                                                                 None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 4581
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD        AREANM Geography                    Variable Name              Indicator  Period  Observation                     Measure                Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2012       3211.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2013       3206.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2014       3178.5 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2015       3175.2 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2016       3061.5 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2017       2967.6 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2018       2881.3 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2019       2849.9 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2020       2937.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+k03000001 great-britain   country Domestic electricity consumption Electicity consumption    2021       2721.3 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD                AREANM                Geography                    Variable Name              Indicator  Period  Observation                     Measure                Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n09000010 newry-mourne-and-down local-authority-district Domestic electricity consumption Electicity consumption    2019       3375.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2022       2771.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2015       3288.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2016       3205.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2017       3180.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2018       3074.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2019       3045.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2020       3215.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2021       3033.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+n09000011   ards-and-north-down local-authority-district Domestic electricity consumption Electicity consumption    2023       2725.0 Consumption per meter point kWh per meter point                              NaN                              NaN                 NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                Measure                Unit  Count
+Median domestic electricity consumption kWh per meter point   4581
+        
