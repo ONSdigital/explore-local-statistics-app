@@ -24,6 +24,7 @@
 	import AreaList from '$lib/components/AreaList.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
+	import Legend from '$lib/viz/Legend.svelte';
 
 	import SelectAnIndicatorSection from './SelectAnIndicatorSection.svelte';
 	import IndicatorRowsSection from './IndicatorRowsSection.svelte';
@@ -90,6 +91,7 @@
 	let clusterGroupsArray,
 		clusterGroup,
 		areaClusters,
+		areaNeighbours,
 		clusterDescriptions,
 		similarAreas,
 		demographicallySimilarAreas;
@@ -172,7 +174,11 @@
 		}));
 
 		clusterGroup = clusterGroupsArray[0];
+		// Find the cluster data for the selected area
 		areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
+		// Find nearest neighbours for the selected area
+		areaNeighbours = data.chartData.neighbourData?.[data.place.areacd] || null;
+		// Get the cluster descriptions
 		clusterDescriptions = makeClusterDescriptions(data.metadata.clustersLookup.descriptions);
 		similarAreas = getSimilarAreas(
 			areaClusters,
@@ -478,13 +484,13 @@
 			></SelectAnIndicatorSection>
 		</NavSection>
 
-		{#if areaClusters}
+		{#if areaClusters && areaNeighbours}
 			<NavSection title="Similar areas">
 				<p>
 					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
 					These clusters of areas are based on
 					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesintheukmethodology"
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
 						target="_blank">an analysis carried out by the ONS</a
 					>.
 				</p>
@@ -494,49 +500,96 @@
 						options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
 						bind:value={clusterGroup}
 					/>
+					{#if mapColors}
+						<Legend
+							items={[
+								{
+									colour: mapColors[areaClusters[clusterGroup.id]] || 'lightgrey',
+									label: 'Areas in cluster',
+									type: 'circle'
+								},
+								{ colour: 'black', label: 'Statistically similar areas', type: 'refline' }
+							]}
+						/>
+					{/if}
 					<Map
 						data={data.chartData.clusterData}
 						clusterKey={clusterGroup.id}
 						legendType={null}
 						selected={[data.place]}
+						neighbours={data.chartData.neighbourData[data.place.areacd][clusterGroup.id].map(
+							(d) => ({
+								areacd: d,
+								global: 'a'
+							})
+						)}
 						bind:colors={mapColors}
 					/>
+
 					{#if areaClusters[clusterGroup.id] && mapColors}
 						<p style:margin-top="12px">
 							<strong
 								class="cluster-highlight"
 								style:background={mapColors[areaClusters[clusterGroup.id]]}
 							>
-								{capitalizeFirstLetter(getName(data.place, 'the'))} is in
-								{clusterGroup.id} cluster {areaClusters[clusterGroup.id].toUpperCase()}
+								{capitalizeFirstLetter(getName(data.place, 'the'))} is in {clusterGroup.id} cluster {areaClusters[
+									clusterGroup.id
+								].toUpperCase()}.
 							</strong>
 						</p>
-						<Twisty
-							title="Show all areas in {clusterGroup.id} cluster {areaClusters[
-								clusterGroup.id
-							].toUpperCase()}"
-						>
-							<p>
-								Areas {getName(parentArea, 'in')}<br />
-								{#each similarAreas.region as area, i}
-									<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
-										>{area.areanm}</a
-									>{i < similarAreas.region.length - 1 ? `, ` : '.'}
-								{/each}
-							</p>
-							<p>
-								Other areas<br />
-								{#each similarAreas.other as area, i}
-									<a href="{base}/areas/{makeCanonicalSlug(area.areacd, area.areanm)}/indicators"
-										>{area.areanm}</a
-									>{i < similarAreas.other.length - 1 ? `, ` : '.'}
-								{/each}
-							</p>
-						</Twisty>
-						<p style:margin-top="12px">
-							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
-						</p>
 					{/if}
+					<Twisty
+						title={clusterGroup.id === 'global'
+							? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
+							: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
+					>
+						<ol>
+							{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+								<li>
+									<a
+										href="{base}/areas/{makeCanonicalSlug(
+											neighbour,
+											metadata.areasObject[neighbour].areanm
+										)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+									>
+								</li>
+							{/each}
+						</ol>
+					</Twisty>
+					<p style:margin-top="12px">
+						{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
+					</p>
+				</ContentBlock>
+			</NavSection>
+		{:else if areaNeighbours}
+			<NavSection title="Similar areas">
+				<p>
+					Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
+					based on a specific group of indicators. This ranking is derived from
+					<a
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+						target="_blank">an analysis carried out by the ONS</a
+					>.
+				</p>
+				<ContentBlock showActions={false}>
+					<Dropdown
+						label="Select a group of indicators:"
+						options={clusterGroupsArray.filter((c) => areaNeighbours[c.id])}
+						bind:value={clusterGroup}
+					/>
+
+					<ol>
+						{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+							<li>
+								<a
+									href="{base}/areas/{makeCanonicalSlug(
+										neighbour,
+										metadata.areasObject[neighbour].areanm
+									)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+								>
+							</li>
+						{/each}
+					</ol>
 				</ContentBlock>
 			</NavSection>
 		{/if}
