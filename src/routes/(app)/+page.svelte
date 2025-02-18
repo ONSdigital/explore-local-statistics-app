@@ -38,14 +38,6 @@
 	}
 </script>
 
-<Breadcrumb
-	links={[
-		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-		{ label: 'Explore local statistics' }
-	]}
-	background="#e9eff4"
-/>
-
 <Titleblock title="Explore local statistics" background="#e9eff4">
 	<UKMap />
 	<Lede>Find, compare and visualise statistics about places in the United Kingdom.</Lede>

@@ -7,7 +7,6 @@
 	import { goto, afterNavigate } from '$app/navigation';
 
 	import {
-		Breadcrumb,
 		Titleblock,
 		NavSections,
 		NavSection,
@@ -390,24 +389,6 @@
 </script>
 
 {#if navigated}
-	<Breadcrumb
-		links={[
-			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-			{ label: 'Explore local statistics', href: `${base}/` },
-			...[...data.place.parents].reverse().map((p) => ({
-				label: getName(p),
-				href: `${base}/areas/${makeCanonicalSlug(p.areacd, p.areanm)}`
-			})),
-
-			{
-				label: getName(data.place),
-				href: `${base}/areas/${makeCanonicalSlug(data.place.areacd, data.place.areanm)}`
-			},
-			{ label: `Local indictators` }
-		]}
-		background="#eaeaea"
-	/>
-
 	<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
 		<Lede>Explore local indicators, trends and get data for {getName(data.place, 'the')}</Lede>
 	</Titleblock>
