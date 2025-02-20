@@ -79,7 +79,10 @@
 			</li>{/if}
 		<li>
 			<Icon type="code" /><span
-				><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
+				><button
+					class="btn-link"
+					aria-expanded={showEmbed}
+					on:click={() => (showEmbed = !showEmbed)}
 					>{showEmbed ? 'Hide embed code' : `Embed code`}</button
 				></span
 			>
