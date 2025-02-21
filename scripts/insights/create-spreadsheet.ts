@@ -14,7 +14,7 @@ export function createSpreadsheet(data, metadata, periods, filename) {
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
 			'Some indicators use custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day).',
-			'[Quality and Methodology Information](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsservicequalityandmethodsguide) for the Explore Local Statistics service details the strengths and limitations of the service, methods used, data uses and users.'
+			'[Quality and Methodology Information](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi) for the Explore Local Statistics service details the strengths and limitations of the service, methods used, data uses and users.'
 		],
 		notes: [],
 		sheets: []
