@@ -612,6 +612,13 @@
 					>select an indicator</a
 				> chart above, you can click the "download data" link immediately below it.
 			</p>
+			<p>
+				<a
+					href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsservicequalityandmethodsguide"
+					>Quality and Methodology Information</a
+				> for the Explore Local Statistics service details the strengths and limitations of the service,
+				methods used, data uses and users.
+			</p>
 		</NavSection>
 	</NavSections>
 {/if}
