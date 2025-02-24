@@ -1,4 +1,5 @@
 import { assets, base } from '$app/paths';
+import { filterExtremeAreas } from '$lib/util/datasets/datasetsHelpers.ts';
 
 type GetDatasetResult =
 	| {
@@ -41,7 +42,7 @@ export const getDataset = async (
 
 		return {
 			kind: 'Success',
-			chartData,
+			chartData: filterExtremeAreas(chartData),
 			metadata,
 			indicator
 		};

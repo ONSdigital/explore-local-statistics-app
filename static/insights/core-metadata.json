@@ -53,19 +53,19 @@
 			"label": "Business expenditure on research and development"
 		},
 		{
-			"code": "business-demography-Active enterprises",
+			"code": "active-enterprises",
 			"label": "Active businesses"
 		},
 		{
-			"code": "business-demography-Births of new enterprises",
+			"code": "business-demography-Business births",
 			"label": "Business births"
 		},
 		{
-			"code": "business-demography-Deaths of enterprises",
+			"code": "business-demography-Business deaths",
 			"label": "Business deaths"
 		},
 		{
-			"code": "business-demography-High growth enterprises",
+			"code": "business-demography-High growth businesses",
 			"label": "High growth businesses"
 		},
 		{
@@ -133,15 +133,11 @@
 			"label": "Persistent absences for pupils looked after by local authorities"
 		},
 		{
-			"code": "schools-and-nursery-schools-rated-good-or-outstanding",
-			"label": "State-funded schools rated good or outstanding"
-		},
-		{
-			"code": "apprenticeship-Apprenticeships achievements",
+			"code": "apprenticeship-Apprenticeship achievements (England)",
 			"label": "Apprenticeship achievements (England)"
 		},
 		{
-			"code": "apprenticeship-Apprenticeships starts",
+			"code": "apprenticeship-Apprenticeship starts (England)",
 			"label": "Apprenticeship starts (England)"
 		},
 		{
@@ -262,7 +258,7 @@
 		},
 		{
 			"code": "homicide-offences",
-			"label": "Homicide Offences (England and Wales)"
+			"label": "Homicide offences"
 		},
 		{
 			"code": "supermarkets",
@@ -279,6 +275,18 @@
 		{
 			"code": "premises-below-30",
 			"label": "Premises below 30Mbps"
+		},
+		{
+			"code": "claimant-count",
+			"label": "Claimant Count"
+		},
+		{
+			"code": "gdp-per-head-Gross domestic product per head at current market price",
+			"label": "Gross domestic product per head at current market prices"
+		},
+		{
+			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+			"label": "Gross domestic product per head in chained volume measures"
 		}
 	],
 	"indicatorsObject": {
@@ -308,7 +316,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks (official statistics in development), in Great Britain (Northern Ireland national figure included), for periods 2004 to 2023.",
 				"standardised": "T",
-				"caveats": "Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.",
+				"caveats": "Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nThe ongoing challenges with response rates, response levels and weighting approach mean that labour market statistics based on both the Labour Force Survey (LFS) and Annual Population Survey (APS) will be considered [official statistics in development](https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/) until further review. Because of increased volatility of LFS and APS estimates, estimates of change should be treated with additional caution.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -431,8 +439,8 @@
 			"subTopic": "employment",
 			"code": "ni-employment-rate-Economic Inactivity Rate",
 			"": null,
-			"minXDomainNumb": 2022,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2023,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "ni-employment-rate-Economic Inactivity Rate",
 				"slug": "ni-economic-inactivity-rate",
@@ -446,12 +454,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/10/2023",
+				"sourceDate": "09/07/2024",
 				"sourceURL": "https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/labour-force-survey",
 				"sourceOrg": "Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks, in Northern Ireland, for 2022.",
+				"longDescription": "This indicator shows the percentage of people aged between 16 and 64 years who are not in employment but do not meet the internationally accepted definition of unemployment because they have not been seeking work within the last four weeks or they are unable to start work in the next two weeks, in Northern Ireland, for 2023.",
 				"standardised": "T",
-				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nTime series data is available at [NISRA](https://www.nisra.gov.uk/publications/labour-market-status-sub-population-tables).",
+				"caveats": "Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nTime series data is available at [NISRA](https://www.nisra.gov.uk/publications/labour-market-status-sub-population-tables).\n\nBecause the Labour Force Survey (LFS) is a sample survey, results are subject to sampling error, i.e. the actual percentage of the population in private households with a particular characteristic may differ from the percentage of the LFS sample with that characteristic.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -515,7 +523,7 @@
 				"year": 2018
 			},
 			"years": [
-				2022
+				2023
 			]
 		},
 		"employment-rate-Employment Rate": {
@@ -544,7 +552,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from (official statistics in development), in Great Britain (Northern Ireland national figure included), for periods 2004 to 2023.",
 				"standardised": "T",
-				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.",
+				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nThe ongoing challenges with response rates, response levels and weighting approach mean that labour market statistics based on both the Labour Force Survey (LFS) and Annual Population Survey (APS) will be considered [official statistics in development](https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/) until further review. Because of increased volatility of LFS and APS estimates, estimates of change should be treated with additional caution.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -667,8 +675,8 @@
 			"subTopic": "employment",
 			"code": "ni-employment-rate-Employment Rate",
 			"": null,
-			"minXDomainNumb": 2022,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2023,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "ni-employment-rate-Employment Rate",
 				"slug": "ni-employment-rate",
@@ -682,12 +690,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/10/2023",
+				"sourceDate": "09/07/2024",
 				"sourceURL": "https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/labour-force-survey",
 				"sourceOrg": "Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the proportion of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from, in Northern Ireland, for 2022.",
+				"longDescription": "This indicator shows the percentage of people aged between 16 and 64 years in paid work or who had a job that they were temporarily away from, in Northern Ireland, for 2023.",
 				"standardised": "T",
-				"caveats": "Calculation of economic inactivity rate: number of economically inactive people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nTime series data is available at [NISRA](https://www.nisra.gov.uk/publications/labour-market-status-sub-population-tables).",
+				"caveats": "Calculation of employment rate: number of employed people aged 16 to 64 years divided by the population aged 16 to 64 years. Population is the sum of employed plus unemployed plus inactive.\n\nTime series data is available at [NISRA](https://www.nisra.gov.uk/publications/labour-market-status-sub-population-tables).\n\nBecause the Labour Force Survey (LFS) is a sample survey, results are subject to sampling error, i.e. the actual percentage of the population in private households with a particular characteristic may differ from the percentage of the LFS sample with that characteristic.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -751,7 +759,7 @@
 				"year": 2018
 			},
 			"years": [
-				2022
+				2023
 			]
 		},
 		"aged-16-years-and-over-modelled-unemployment": {
@@ -780,7 +788,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows model-based estimates for the proportion of economically active people aged 16 years and over without a job who have been actively seeking work within the last four weeks and are available to start work within the next two weeks (official statistics in development), in Great Britain, for periods 2004 to 2023.",
 				"standardised": "T",
-				"caveats": "Unemployment rates are calculated as a percentage of aged 16 years and over economically active population.\n\nAs unemployed form a small percentage of the population, the Annual Population Survey (APS) unemployment estimates within local authorities are based on very small samples so for many areas are unreliable. To overcome this model-based estimates have been developed that provide better estimates of total unemployed for local authorities. \n\nThe model-based estimate improves on the APS estimate by borrowing strength from the claimant count to produce an estimate that is more precise i.e. has a smaller confidence interval. The claimant count is not itself a measure of unemployment but is strongly correlated with unemployment, and, as it is an administrative count, is known without sampling error. The gain in precision is greatest for areas with smaller sample sizes.\n\nRefer to the [user guide (pdf)](http://www.ons.gov.uk/ons/guide-method/method-quality/specific/labour-market/subnational-labour/model-based-estimates-of-ilo-unemployment-for-lad-uas-in-great-britain---guide-for-users.pdf) for further details.",
+				"caveats": "Unemployment rates are calculated as a percentage of aged 16 years and over economically active population.\n\nAs unemployed form a small percentage of the population, the Annual Population Survey (APS) unemployment estimates within local authorities are based on very small samples so for many areas are unreliable. To overcome this model-based estimates have been developed that provide better estimates of total unemployed for local authorities.\n\nThe ongoing challenges with response rates, response levels and weighting approach mean that labour market statistics based on both the Labour Force Survey (LFS) and Annual Population Survey (APS) will be considered [official statistics in development](https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/) until further review. Because of increased volatility of LFS and APS estimates, estimates of change should be treated with additional caution.\n\nThe model-based estimate improves on the APS estimate by borrowing strength from the claimant count to produce an estimate that is more precise i.e. has a smaller confidence interval. The claimant count is not itself a measure of unemployment but is strongly correlated with unemployment, and, as it is an administrative count, is known without sampling error. The gain in precision is greatest for areas with smaller sample sizes.\n\nRefer to the [user guide (pdf)](http://www.ons.gov.uk/ons/guide-method/method-quality/specific/labour-market/subnational-labour/model-based-estimates-of-ilo-unemployment-for-lad-uas-in-great-britain---guide-for-users.pdf) for further details.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1007,7 +1015,7 @@
 			"code": "gross-median-weekly-pay",
 			"": null,
 			"minXDomainNumb": 2002,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "gross-median-weekly-pay",
 				"slug": "gross-median-weekly-pay",
@@ -1021,12 +1029,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "01/11/2023|01/11/2023",
+				"sourceDate": "29/10/2024|29/10/2024",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/previousReleases|https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/annual-survey-hours-and-earnings",
 				"sourceOrg": "Office for National Statistics|Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for 2002-2023.",
+				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for a pay period in April 2002 to April 2024.",
 				"standardised": "T",
-				"caveats": "The country level figure for Northern Ireland has been sourced from NOMIS rather than NISRA. This is to allow for confidence intervals.",
+				"caveats": "For Great Britain data, 2024 estimates are provisional and relate to the pay period that includes 17 April 2024. Estimates for 2023 have been revised and relate to the pay period that includes 19 April 2023.\n\nThe country level figure for Northern Ireland has been sourced from NOMIS rather than NISRA. This is to allow for confidence intervals.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1135,7 +1143,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"total-value-of-uk-exports": {
@@ -1595,7 +1604,7 @@
 			"code": "business-expenditure-on-research-and-development",
 			"": null,
 			"minXDomainNumb": 2022,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "business-expenditure-on-research-and-development",
 				"slug": "business-expenditure-on-research-and-development",
@@ -1609,12 +1618,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "27/02/2024",
+				"sourceDate": "11/12/2024",
 				"sourceURL": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure/datasets/businessenterpriseresearchanddevelopmentukdesignatedasofficialstatistics",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the total business enterprise expenditure on research and development, in the UK, for 2022.",
+				"longDescription": "This indicator shows the total business enterprise expenditure on research and development, in the UK, for 2022 and 2023.",
 				"standardised": "F",
-				"caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).",
+				"caveats": "Statistics presented are compiled in line with internationally-agreed best practice as defined in the Frascati Manual 2015 by the [Organisation for Economic Co-operation and Development](https://www.oecd.org/publications/frascati-manual-2015-9789264239012-en.htm).\n\nRegional estimates are compiled based on a combination of larger businesses reporting their R&D performing locations and smaller businesses having their data allocated to the location of their main business address held on the inter-departmental business register.\n\nEstimates produced at disaggregate levels such as region, product group and SIC may in some cases be subject to a high level of variability from year to year. This may be due to industry reclassification of some businesses and sampling variability.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "region",
 				"beeswarmRowUseMinMax": "F"
@@ -1666,20 +1675,21 @@
 				"year": 2018
 			},
 			"years": [
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-Active enterprises": {
+		"active-enterprises": {
 			"id": 27,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Active enterprises",
+			"code": "active-enterprises",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Active enterprises",
-				"slug": "active-enterprises",
+				"code": "active-enterprises",
+				"slug": "active-businesses",
 				"label": "Active businesses",
 				"prefix": "",
 				"suffix": "",
@@ -1690,12 +1700,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2017 to 2022.",
+				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2018 to 2023.",
 				"standardised": "F",
-				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Births and deaths are then identified by comparing active populations for different years.",
+				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1714,6 +1724,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -1754,6 +1765,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -1780,44 +1798,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-Births of new enterprises": {
+		"business-demography-Business births": {
 			"id": 4,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Births of new enterprises",
+			"code": "business-demography-Business births",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Births of new enterprises",
+				"code": "business-demography-Business births",
 				"slug": "births-of-new-enterprises",
 				"label": "Business births",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Count of businesses newly registered for VAT and/or PAYE",
+				"subtitle": "Percentage of businesses newly registered for VAT and/or PAYE",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of business births, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones.",
+				"longDescription": "This indicator shows the business births as a percentage of all active businesses, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones. The birth rate is calculated using the number of births as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1836,6 +1854,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -1876,6 +1895,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -1902,44 +1928,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-Deaths of enterprises": {
+		"business-demography-Business deaths": {
 			"id": 5,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-Deaths of enterprises",
+			"code": "business-demography-Business deaths",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-Deaths of enterprises",
+				"code": "business-demography-Business deaths",
 				"slug": "deaths-of-enterprises",
 				"label": "Business deaths",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Count of businesses ceasing activity",
+				"subtitle": "Percentage of businesses ceasing activity",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of business deaths, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision.",
+				"longDescription": "This indicator shows the business deaths as a percentage of all active businesses, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision. The death rate is calculated using the number of deaths as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1958,6 +1984,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -1998,6 +2025,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -2024,44 +2058,44 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"business-demography-High growth enterprises": {
+		"business-demography-High growth businesses": {
 			"id": 37,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "business-demography-High growth enterprises",
+			"code": "business-demography-High growth businesses",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "business-demography-High growth enterprises",
+				"code": "business-demography-High growth businesses",
 				"slug": "high-growth-enterprises",
 				"label": "High growth businesses",
 				"prefix": "",
-				"suffix": "",
-				"subText": "number of enterprises",
-				"decimalPlaces": 0,
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Businesses with an average growth in employment of greater than 20% per year over a three-year period",
+				"subtitle": "Percentage of businesses with an average growth in employment of greater than 20% per year over a three-year period",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "22/11/2023",
+				"sourceDate": "18/11/2024",
 				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousReleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the count of high growth businesses, in the UK, for 2017 to 2022.",
-				"standardised": "F",
-				"caveats": "High growth businesses are measured by an average growth in employment of greater than 20%, per annum, over a three-year period.",
+				"longDescription": "This indicator shows the high growth businesses as a percentage of active businesses with 10 or more employees, in the UK, for 2018 to 2023.",
+				"standardised": "T",
+				"caveats": "High growth measures all businesses with an average growth in employment of greater than 20%, per annum, over a three-year period. The size threshold used to identify these businesses is that they have 10 or more employees. The rate of high growth businesses is calculated using the number of high growth businesses as a proportion of the active businesses with 10 or more employees. Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2080,6 +2114,7 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -2120,6 +2155,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -2146,15 +2188,15 @@
 						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"additions-to-the-housing-stock": {
@@ -2163,8 +2205,8 @@
 			"subTopic": "housing",
 			"code": "additions-to-the-housing-stock",
 			"": null,
-			"minXDomainNumb": 2022,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2023,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "additions-to-the-housing-stock",
 				"slug": "additions-to-the-housing-stock",
@@ -2178,10 +2220,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "T",
 				"experimentalStatistic": "F",
-				"sourceDate": "20/11/2023",
-				"sourceURL": "https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants#full-publication-update-history",
+				"sourceDate": "28/11/2024",
+				"sourceURL": "https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants",
 				"sourceOrg": "Ministry of Housing, Communities and Local Government",
-				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2022 - 2023.",
+				"longDescription": "This indicator shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year ending 2024.",
 				"standardised": "T",
 				"caveats": "Net additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9).",
 				"confidenceIntervals": "F",
@@ -2252,7 +2294,7 @@
 				"year": 2021
 			},
 			"years": [
-				2022
+				2023
 			]
 		},
 		"net-additions-to-the-housing-stock-wales": {
@@ -2479,8 +2521,8 @@
 			"subTopic": "attainment and participation",
 			"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
 			"": null,
-			"minXDomainNumb": 2016,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "aged-19-years-and-over-further-education-and-skills-learner-achievements",
 				"slug": "further-education-and-skills-learner-achievements",
@@ -2494,12 +2536,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "25/01/2024",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills/2022-23",
+				"sourceDate": "30/01/2025",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills/2023-24",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2016/17 to 2022/23.",
+				"longDescription": "This indicator shows the count of learners achieving a funded further education and skills learning aim, with the exception of community learning, non-qualification parts of the Multiply programme and bootcamps, in England, for academic years 2018/19 to 2023/24.",
 				"standardised": "F",
-				"caveats": "Only national level data is available for academic years 2016/17 and 2017/18.",
+				"caveats": null,
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2543,13 +2585,12 @@
 				"year": 2021
 			},
 			"years": [
-				2016,
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"aged-19-years-and-over-further-education-and-skills-participation": {
@@ -2558,8 +2599,8 @@
 			"subTopic": "attainment and participation",
 			"code": "aged-19-years-and-over-further-education-and-skills-participation",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "aged-19-years-and-over-further-education-and-skills-participation",
 				"slug": "further-education-and-skills-participation",
@@ -2573,12 +2614,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
-				"sourceURL": "https://explore-education-statistics.service.gov.uk/data-catalogue/further-education-and-skills/2022-23",
+				"sourceDate": "28/11/2024",
+				"sourceURL": "https://explore-education-statistics.service.gov.uk/data-catalogue/further-education-and-skills/2023-24",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows 19+ further education and skills participation rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+				"longDescription": "This indicator shows aged 19 years and over further education and skills participation rate per 100,000 population, in England, for full academic years 2018/19 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Participation is the count of learners that participated at any point during the stated academic period. Learners undertaking more than one course will be counted only once.\n\nGeography is based upon the home postcode of the learner.",
+				"caveats": "Participation is the count of learners that participated at any point during the stated academic period. Learners undertaking more than one course will be counted only once.\n\nGeography is based upon the home postcode of the learner.\n\nFigures for all academic years cover the twelve months (Aug to Jul) and are final full year figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2655,12 +2696,12 @@
 				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"gcses-and-equivalent-in-english-and-maths-by-age-19": {
@@ -2795,13 +2836,13 @@
 				"subtitle": "Percentage of people aged 16 to 64 with Level 3 or above qualifications",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
+				"experimentalStatistic": "T",
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/apsnew",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the percentage of the population aged 16 to 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, in Great Britain (Northern Ireland national figure included), for 2022 to 2023.",
+				"longDescription": "This indicator shows the percentage of the population aged 16 to 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications (official statistics in development), in Great Britain (Northern Ireland national figure included), for 2022 to 2023.",
 				"standardised": "T",
-				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).\n\nPlease note that this indicator previously used National Vocational Qualification (NVQ) level 3+ qualifications data but has been updated to the Regulated Qualifications Framework (RQF) level 3+ qualifications data.",
+				"caveats": "The ongoing challenges with response rates, response levels and weighting approach mean that labour market statistics based on both the Labour Force Survey (LFS) and Annual Population Survey (APS) will be considered [official statistics in development](https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/) until further review. Because of increased volatility of LFS and APS estimates, estimates of change should be treated with additional caution.\n\nPlease note that this indicator previously used National Vocational Qualification (NVQ) level 3+ qualifications data but has been updated to the Regulated Qualifications Framework (RQF) level 3+ qualifications data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2907,7 +2948,7 @@
 			"code": "aged-16-to-64-years-level3-or-above-qualifications-ni",
 			"": null,
 			"minXDomainNumb": 2016,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "aged-16-to-64-years-level3-or-above-qualifications-ni",
 				"slug": "ni-level-3-or-above-qualifications",
@@ -2921,10 +2962,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/12/2023",
-				"sourceURL": "https://www.nisra.gov.uk/publications/highest-qualification-level-2022",
+				"sourceDate": "03/10/2024",
+				"sourceURL": "https://www.nisra.gov.uk/publications/highest-qualification-level-2023",
 				"sourceOrg": "Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the percentage of the population aged 16 to 64 with National Vocational Qualification (NVQ) level 3+ qualifications, in Northern Ireland, for 2016 to 2022.",
+				"longDescription": "This indicator shows the percentage of the population aged 16 to 64 with Regulated Qualifications Framework (RQF) level 3+ qualifications, in Northern Ireland, for 2016 to 2023.",
 				"standardised": "T",
 				"caveats": "Figures produced by NISRA may differ slightly to other highest qualification levels statistical publications, either due to differing sources, age analysed or slight differences in methodologies for assigning highest qualifications levels.",
 				"confidenceIntervals": "F",
@@ -2996,7 +3037,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"pupils-at-expected-standards-by-end-of-primary-school": {
@@ -3005,7 +3047,7 @@
 			"subTopic": "attainment and participation",
 			"code": "pupils-at-expected-standards-by-end-of-primary-school",
 			"": null,
-			"minXDomainNumb": 2015,
+			"minXDomainNumb": 2018,
 			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "pupils-at-expected-standards-by-end-of-primary-school",
@@ -3020,12 +3062,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "10/09/2024",
+				"sourceDate": "12/12/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-2-attainment",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of Key Stage 2, in England state-funded schools, for academic years 2015/16 - 2023/24.",
+				"longDescription": "This indicator shows the percentage of pupils in state-funded schools meeting the expected standard in reading, writing and maths at the end of Key Stage 2, in England state-funded schools, for academic years 2018/19 - 2023/24.",
 				"standardised": "T",
-				"caveats": "All figures include LA maintained schools, academies and free schools. Excludes alternative provision and independent schools.\n\nFigures for 2024 are based on provisional data. Figures for other years are based on final data.\n\nData is not available for 2019/20 and 2020/21 academic years as assessments were cancelled due to the COVID-19 pandemic.\n\nWriting teacher assessment and reading, writing and maths (combined) measures from 2018 onwards are not directly comparable to previous years due to changes in the writing teacher assessment frameworks.",
+				"caveats": "'State-funded schools' includes LA maintained schools, sponsored academies, converter academies, free schools and state-funded special schools (including hospital schools).\n\nData is not available for 2019/20 and 2020/21 academic years as assessments were cancelled due to the COVID-19 pandemic.\n\nWriting teacher assessment and reading, writing and maths (combined) measures from 2018 onwards are not directly comparable to previous years due to changes in the writing teacher assessment frameworks.\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3036,10 +3078,12 @@
 				],
 				"types": [
 					"E06",
+					"E07",
 					"E08",
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92"
 				],
 				"groups": [
@@ -3064,6 +3108,13 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -3075,17 +3126,25 @@
 							"W06"
 						],
 						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
 					}
 				],
 				"year": 2023
 			},
 			"years": [
-				2015,
-				2016,
-				2017,
 				2018,
-				2019,
-				2020,
 				2021,
 				2022,
 				2023
@@ -3111,13 +3170,13 @@
 				"subtitle": "Percentage of people aged 16 to 64 with no qualifications",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
+				"experimentalStatistic": "T",
 				"sourceDate": "16/04/2024",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/apsnew",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications, in Great Britain (Northern Ireland national figure included), for 2022 and 2023.",
+				"longDescription": "This indicator shows percentage of the population aged 16 to 64 with no qualifications (official statistics in development), in Great Britain (Northern Ireland national figure included), for 2022 and 2023.",
 				"standardised": "T",
-				"caveats": "This indicator is based on re-weighted Annual Population Survey datasets updated on 16 August 2022. For more information, see [Impact of reweighting on Labour Force Survey key indicators: 2022](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/impactofreweightingonlabourforcesurveykeyindicators/2022).",
+				"caveats": "The ongoing challenges with response rates, response levels and weighting approach mean that labour market statistics based on both the Labour Force Survey (LFS) and Annual Population Survey (APS) will be considered [official statistics in development](https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/) until further review. Because of increased volatility of LFS and APS estimates, estimates of change should be treated with additional caution.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3223,7 +3282,7 @@
 			"code": "early-years-Communication and language",
 			"": null,
 			"minXDomainNumb": 2021,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "early-years-Communication and language",
 				"slug": "early-years-communication-language",
@@ -3237,12 +3296,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
+				"sourceDate": "28/11/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/early-years-foundation-stage-profile-results",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.",
+				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all communication and language early learning goals, in England (state-funded schools), for academic years 2021/22 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare assessment outcomes from 2021/22 onwards with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3320,7 +3379,8 @@
 			},
 			"years": [
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"early-years-Literacy": {
@@ -3330,7 +3390,7 @@
 			"code": "early-years-Literacy",
 			"": null,
 			"minXDomainNumb": 2021,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "early-years-Literacy",
 				"slug": "early-years-literacy",
@@ -3344,12 +3404,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
+				"sourceDate": "28/11/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/early-years-foundation-stage-profile-results",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all literacy early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.",
+				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all literacy early learning goals, in England (state-funded schools), for academic years 2021/22 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare assessment outcomes from 2021/22 onwards with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3427,7 +3487,8 @@
 			},
 			"years": [
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"early-years-Mathematics": {
@@ -3437,7 +3498,7 @@
 			"code": "early-years-Mathematics",
 			"": null,
 			"minXDomainNumb": 2021,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "early-years-Mathematics",
 				"slug": "early-years-mathematics",
@@ -3451,12 +3512,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
+				"sourceDate": "28/11/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/early-years-foundation-stage-profile-results",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all mathematics early learning goals, in England (state-funded schools), for academic years 2021/22 to 2022/23.",
+				"longDescription": "This indicator shows the Early years foundation stage profile outcomes of five year olds. Percentage at 'expected level' across all mathematics early learning goals, in England (state-funded schools), for academic years 2021/22 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare 2021/22 and 2022/23 assessment outcomes with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "Early years foundation stage profile was revised significantly in September 2021. It is therefore not possible to directly compare assessment outcomes from 2021/22 onwards with earlier years.\n\nResults are published by DfE and there are some differences between the results broken down by upper tier local authorities (based on the location of the submitting authority) and those by lower tier local authorities (based on the postcode of the school or provider). For more information, please refer to [Early years foundation stage profile results Methodology](https://explore-education-statistics.service.gov.uk/methodology/early-years-foundation-stage-profile-results-methodology).\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3534,7 +3595,8 @@
 			},
 			"years": [
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"persistent-absences-for-all-pupils": {
@@ -3814,101 +3876,17 @@
 				2022
 			]
 		},
-		"schools-and-nursery-schools-rated-good-or-outstanding": {
-			"id": 42,
-			"topic": "education and skills",
-			"subTopic": "school performance",
-			"code": "schools-and-nursery-schools-rated-good-or-outstanding",
-			"": null,
-			"minXDomainNumb": 2024,
-			"maxXDomainNumb": 2024,
-			"metadata": {
-				"code": "schools-and-nursery-schools-rated-good-or-outstanding",
-				"slug": "schools-and-nursery-schools-rated-good-or-outstanding",
-				"label": "State-funded schools rated good or outstanding",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": "pp",
-				"subtitle": "Percentage of state-funded schools rated good or outstanding by Ofsted",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "15/10/2024",
-				"sourceURL": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes",
-				"sourceOrg": "Ofsted",
-				"longDescription": "This indicator shows the percentage of state-funded Nursery schools, Primary schools, Secondary schools, Alternative Provision (AP) schools and Special schools that are rated ‘Good’ or ‘Outstanding’ by Ofsted, in England (state-funded schools), as at 30 September 2024.",
-				"standardised": "T",
-				"caveats": "These figures cover all state-funded schools in England and are updated on a rolling basis.\n\nThe data covers inspections carried out between 01 September 2023 to 31 August 2024 and published by 30 September 2024.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E"
-				],
-				"types": [
-					"E06",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2024
-			]
-		},
-		"apprenticeship-Apprenticeships achievements": {
+		"apprenticeship-Apprenticeship achievements (England)": {
 			"id": 44,
 			"topic": "education and skills",
 			"subTopic": "apprenticeships",
-			"code": "apprenticeship-Apprenticeships achievements",
+			"code": "apprenticeship-Apprenticeship achievements (England)",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "apprenticeship-Apprenticeships achievements",
-				"slug": "apprenticeships-achievements-new",
+				"code": "apprenticeship-Apprenticeship achievements (England)",
+				"slug": "apprenticeships-achievements-england",
 				"label": "Apprenticeship achievements (England)",
 				"prefix": "",
 				"suffix": "",
@@ -3919,12 +3897,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
+				"sourceDate": "28/11/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+				"longDescription": "This indicator shows apprenticeships achieved by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2018/19 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Achievements are the count of apprenticeships achieved at any point during the stated academic period. Learners achieving more than one apprenticeship will appear more than once.\n\nGeography is based upon the home postcode of the learner.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"caveats": "Achievements are the count of apprenticeships achieved at any point during the stated academic period. Learners achieving more than one apprenticeship will appear more than once.\n\nGeography is based upon the home postcode of the learner.\n\nFigures for all academic years cover the twelve months (Aug to Jul) and are final full year figures.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -4001,25 +3979,25 @@
 				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
-		"apprenticeship-Apprenticeships starts": {
+		"apprenticeship-Apprenticeship starts (England)": {
 			"id": 43,
 			"topic": "education and skills",
 			"subTopic": "apprenticeships",
-			"code": "apprenticeship-Apprenticeships starts",
+			"code": "apprenticeship-Apprenticeship starts (England)",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2022,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2023,
 			"metadata": {
-				"code": "apprenticeship-Apprenticeships starts",
-				"slug": "apprenticeships-starts-new",
+				"code": "apprenticeship-Apprenticeship starts (England)",
+				"slug": "apprenticeships-starts-england",
 				"label": "Apprenticeship starts (England)",
 				"prefix": "",
 				"suffix": "",
@@ -4030,12 +4008,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/11/2023",
+				"sourceDate": "28/11/2024",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/further-education-and-skills",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2017/18 to 2022/23.",
+				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in England, for full academic years 2018/19 to 2023/24.",
 				"standardised": "T",
-				"caveats": "Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.\n\nGeography is based upon the home postcode of the learner.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"caveats": "Starts are the count of apprenticeships started at any point during the stated academic period. Learners starting more than one apprenticeship will appear more than once.\n\nGeography is based upon the home postcode of the learner.\n\nFigures for all academic years cover the twelve months (Aug to Jul) and are final full year figures.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -4112,12 +4090,12 @@
 				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"apprenticeships-starts-ni": {
@@ -4555,7 +4533,7 @@
 			"code": "child-obesity-Aged four to five years healthy weight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years healthy weight",
 				"slug": "healthy-weight-children-reception",
@@ -4569,10 +4547,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as healthy weight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as healthy weight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -4667,7 +4645,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged 10 to 11 years healthy weight": {
@@ -4677,7 +4656,7 @@
 			"code": "child-obesity-Aged 10 to 11 years healthy weight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years healthy weight",
 				"slug": "healthy-weight-children-year-6",
@@ -4691,10 +4670,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as healthy weight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as healthy weight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -4789,7 +4768,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged four to five years obese": {
@@ -4799,7 +4779,7 @@
 			"code": "child-obesity-Aged four to five years obese",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years obese",
 				"slug": "obese-children-reception",
@@ -4813,10 +4793,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -4911,7 +4891,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged 10 to 11 years obese": {
@@ -4921,7 +4902,7 @@
 			"code": "child-obesity-Aged 10 to 11 years obese",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years obese",
 				"slug": "obese-children-year-6",
@@ -4935,10 +4916,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -5033,7 +5014,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged four to five years overweight": {
@@ -5043,7 +5025,7 @@
 			"code": "child-obesity-Aged four to five years overweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years overweight",
 				"slug": "overweight-children-reception",
@@ -5057,10 +5039,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -5155,7 +5137,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged 10 to 11 years overweight": {
@@ -5165,7 +5148,7 @@
 			"code": "child-obesity-Aged 10 to 11 years overweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years overweight",
 				"slug": "overweight-children-year-6",
@@ -5179,10 +5162,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -5277,7 +5260,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged four to five years underweight": {
@@ -5287,7 +5271,7 @@
 			"code": "child-obesity-Aged four to five years underweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years underweight",
 				"slug": "underweight-children-reception",
@@ -5301,10 +5285,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 4-5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -5399,7 +5383,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"child-obesity-Aged 10 to 11 years underweight": {
@@ -5409,7 +5394,7 @@
 			"code": "child-obesity-Aged 10 to 11 years underweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years underweight",
 				"slug": "underweight-children-year-6",
@@ -5423,10 +5408,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "07/11/2023",
+				"sourceDate": "05/11/2024",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/national-child-measurement-programme/data",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the proportion of children aged 10-11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2022/23.",
+				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2023/24.",
 				"standardised": "T",
 				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.",
 				"confidenceIntervals": "T",
@@ -5521,7 +5506,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"adult-obesity-prevalence-aged-18-years-and-over": {
@@ -6103,7 +6089,7 @@
 			"code": "healthy-life-expectancy-Female healthy life expectancy",
 			"": null,
 			"minXDomainNumb": 2011,
-			"maxXDomainNumb": 2018,
+			"maxXDomainNumb": 2021,
 			"metadata": {
 				"code": "healthy-life-expectancy-Female healthy life expectancy",
 				"slug": "female-healthy-life-expectancy",
@@ -6116,13 +6102,13 @@
 				"subtitle": "Average years expected to be lived in good health for females born during year",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "04/03/2022",
+				"experimentalStatistic": "T",
+				"sourceDate": "16/01/2025",
 				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.",
+				"longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.",
 				"standardised": "T",
-				"caveats": null,
+				"caveats": "Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logistic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6130,8 +6116,6 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
-					"N",
-					"S",
 					"W"
 				],
 				"types": [
@@ -6140,24 +6124,11 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
-					"K02",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
 					"W06",
 					"W92"
 				],
 				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
 					{
 						"key": "ctry",
 						"codes": [
@@ -6179,13 +6150,6 @@
 						"label": "Countries and regions"
 					},
 					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -6199,7 +6163,7 @@
 						"label": "Upper-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
 				2011,
@@ -6209,7 +6173,10 @@
 				2015,
 				2016,
 				2017,
-				2018
+				2018,
+				2019,
+				2020,
+				2021
 			]
 		},
 		"healthy-life-expectancy-Male healthy life expectancy": {
@@ -6219,7 +6186,7 @@
 			"code": "healthy-life-expectancy-Male healthy life expectancy",
 			"": null,
 			"minXDomainNumb": 2011,
-			"maxXDomainNumb": 2018,
+			"maxXDomainNumb": 2021,
 			"metadata": {
 				"code": "healthy-life-expectancy-Male healthy life expectancy",
 				"slug": "male-healthy-life-expectancy",
@@ -6232,13 +6199,13 @@
 				"subtitle": "Average years expected to be lived in good health for males born during year",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "04/03/2022",
+				"experimentalStatistic": "T",
+				"sourceDate": "16/01/2025",
 				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousReleases#",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period, in the United Kingdom, for three-year rolling periods 2011 - 2013 to 2018 - 2020.",
+				"longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.",
 				"standardised": "T",
-				"caveats": null,
+				"caveats": "Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logistic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6246,8 +6213,6 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
-					"N",
-					"S",
 					"W"
 				],
 				"types": [
@@ -6256,24 +6221,11 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
-					"K02",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
 					"W06",
 					"W92"
 				],
 				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
 					{
 						"key": "ctry",
 						"codes": [
@@ -6295,13 +6247,6 @@
 						"label": "Countries and regions"
 					},
 					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -6315,7 +6260,7 @@
 						"label": "Upper-tier/unitary authorities"
 					}
 				],
-				"year": 2021
+				"year": 2023
 			},
 			"years": [
 				2011,
@@ -6325,7 +6270,10 @@
 				2015,
 				2016,
 				2017,
-				2018
+				2018,
+				2019,
+				2020,
+				2021
 			]
 		},
 		"annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious')": {
@@ -6853,10 +6801,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/04/2024",
-				"sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+				"sourceDate": "05/12/2024",
+				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/",
 				"sourceOrg": "Ofcom",
-				"longDescription": "This indicator shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of January 2024.",
+				"longDescription": "This indicator shows the percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more), in the UK, as of July 2024.",
 				"standardised": "T",
 				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
@@ -6978,10 +6926,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/04/2024",
-				"sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+				"sourceDate": "05/12/2024",
+				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/",
 				"sourceOrg": "Ofcom",
-				"longDescription": "This indicator shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, as of January 2024.",
+				"longDescription": "This indicator shows the percentage of geographic areas with 4G signal outdoors from at least 1 operator (signal threshold: 105dBm), in the UK, as of September 2024.",
 				"standardised": "T",
 				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
@@ -7103,10 +7051,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/04/2024",
-				"sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+				"sourceDate": "05/12/2024",
+				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/",
 				"sourceOrg": "Ofcom",
-				"longDescription": "This indicator shows the percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), in the UK, as of January 2024.",
+				"longDescription": "This indicator shows the percentage of geographic areas with 5G signal outdoors from at least 1 operator (signal threshold: 110dBm), in the UK, as of September 2024.",
 				"standardised": "T",
 				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
@@ -7519,27 +7467,27 @@
 			"subTopic": "crime",
 			"code": "homicide-offences",
 			"": null,
-			"minXDomainNumb": 2020,
+			"minXDomainNumb": 2012,
 			"maxXDomainNumb": 2020,
 			"metadata": {
 				"code": "homicide-offences",
 				"slug": "homicide-offences",
-				"label": "Homicide Offences (England and Wales)",
+				"label": "Homicide offences",
 				"prefix": "",
 				"suffix": "",
 				"subText": "per million population",
 				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
 				"subtitle": "Homicide offences per million people",
-				"zeroBaseline": "F",
+				"zeroBaseline": "T",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "08/02/2024",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the rate of Homicide offences per million population, in England and Wales, for three-year rolling period 04/2020-03/2023.",
+				"sourceDate": "08/02/2024|24/11/2023",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousReleases#|https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
+				"sourceOrg": "Office for National Statistics|Police Service of Northern Ireland",
+				"longDescription": "This indicator shows the rate of homicide offences per million population, in England, Wales and Northern Ireland, for three-year rolling periods 04/2012-03/2015 to 04/2020-03/2023.",
 				"standardised": "T",
-				"caveats": "Data presented have been extracted from the Home Office Homicide Index which contains detailed record-level information about each homicide recorded by police in England and Wales. The Homicide Index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 12 December 2023. The data will change as subsequent court hearings take place or as further information is received.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"caveats": "England and Wales data has been extracted from the Home Office Homicide Index, which contains detailed record-level information about each homicide recorded by police in England and Wales. This index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 12 December 2023 and will change as subsequent court hearings take place or as further information is received. In contrast, the Northern Ireland homicide figures represent those initially recorded as homicide, with no revisions based on further police or court decisions.\n\nNorthern Ireland statistics on police recorded crime are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/sites/default/files/2023-11/Police%20Recorded%20Crime%20User%20Guide.pdf).\n\nMid-year population estimates covering the years 2013 to 2021 have been used to create rate per milion population. The mid-year estimate in the middle of the three-year period  was used, for example the period 04/2020 to 03/2023 used 2021 mid-year population estimates.\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -7547,12 +7495,14 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
+					"N",
 					"W"
 				],
 				"types": [
 					"E12",
 					"E92",
 					"K04",
+					"N92",
 					"W92"
 				],
 				"groups": [
@@ -7580,6 +7530,14 @@
 				"year": 2018
 			},
 			"years": [
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
 				2020
 			]
 		},
@@ -7960,10 +7918,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/04/2024",
-				"sourceURL": "https://www.ofcom.org.uk/research-and-data/multi-sector-research/infrastructure-research/connected-nations-update-spring-2024",
+				"sourceDate": "05/12/2024",
+				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-2024/",
 				"sourceOrg": "Ofcom",
-				"longDescription": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of January 2024.",
+				"longDescription": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of July 2024.",
 				"standardised": "T",
 				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
@@ -8063,6 +8021,420 @@
 			"years": [
 				2024
 			]
+		},
+		"claimant-count": {
+			"id": 84,
+			"topic": "economy",
+			"subTopic": "employment",
+			"code": "claimant-count",
+			"": null,
+			"minXDomainNumb": 2001,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "claimant-count",
+				"slug": "claimant-count",
+				"label": "Claimant Count",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of people aged 16 to 64 who are claiming unemployment-related benefits",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "T",
+				"sourceDate": "21/01/2025",
+				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousReleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows Claimant Count as a percentage of residents aged 16 to 64 (official statistics in development), in the UK, for 2001 to 2024.",
+				"standardised": "T",
+				"caveats": "Proportions of people claiming are the number of claimants divided by the population aged from 16 to 64 from mid-year 2021 population estimates.\n\nThe experimental Claimant Count consists of claimants of Jobseekers Allowance (JSA) and some Universal Credit (UC) Claimants. The UC claimants that are included are 1) those that were recorded as not in employment (May 2013-April 2015), and 2) those claimants of Universal Credit who are required to search for work, i.e. within the Searching for Work conditionality regime as defined by the Department for Work & Pensions (from April 2015 onwards).\n\nThe count is based on live claims on the second Thursday of the reference month.\n\nUnder certain circumstances, some people are able to claim both contribution-based JSA and UC at the same time. Consequently, there has been a small amount of double counting. Information from DWP suggests this double counting increased at the start of the pandemic and has stabilised at approximately 1.0 to 1.5% of the Claimant Count.\n\nNorthern Ireland local government districts Claimant Count figures are only available from 2013 onwards.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"gdp-per-head-Gross domestic product per head at current market price": {
+			"id": 85,
+			"topic": "economy",
+			"subTopic": "productivity",
+			"code": "gdp-per-head-Gross domestic product per head at current market price",
+			"": null,
+			"minXDomainNumb": 1998,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "gdp-per-head-Gross domestic product per head at current market price",
+				"slug": "gross-domestic-product-per-head-at-current-market-price",
+				"label": "Gross domestic product per head at current market prices",
+				"prefix": "£",
+				"suffix": "",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "GDP per head including the effects of inflation",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/04/2024",
+				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows gross domestic product (GDP) per head at current market prices in pounds, in the UK, for 1998 to 2022.",
+				"standardised": "T",
+				"caveats": "This time series includes the effects of inflation and is most useful for comparison of levels between different areas.\n\n2022 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"gdp-per-head-Gross domestic product per head in chained volume measure": {
+			"id": 86,
+			"topic": "economy",
+			"subTopic": "productivity",
+			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+			"": null,
+			"minXDomainNumb": 1998,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+				"slug": "gross-domestic-product-per-head-in-chained-volume-measure",
+				"label": "Gross domestic product per head in chained volume measures",
+				"prefix": "£",
+				"suffix": "",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "GDP per head with the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/04/2024",
+				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows gross domestic product (GDP) per head in chained volume measures (CVM) in 2019 money value, in pounds, in the UK, for 1998 to 2022.",
+				"standardised": "T",
+				"caveats": "This time series has the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.\n\n2022 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
 		}
 	},
 	"topicsArray": [
@@ -8076,7 +8448,8 @@
 						"ni-employment-rate-Economic Inactivity Rate",
 						"employment-rate-Employment Rate",
 						"ni-employment-rate-Employment Rate",
-						"aged-16-years-and-over-modelled-unemployment"
+						"aged-16-years-and-over-modelled-unemployment",
+						"claimant-count"
 					]
 				},
 				{
@@ -8095,7 +8468,9 @@
 				{
 					"name": "productivity",
 					"indicatorCodes": [
-						"gross-value-added-per-hour-worked"
+						"gross-value-added-per-hour-worked",
+						"gdp-per-head-Gross domestic product per head at current market price",
+						"gdp-per-head-Gross domestic product per head in chained volume measure"
 					]
 				},
 				{
@@ -8110,10 +8485,10 @@
 				{
 					"name": "business",
 					"indicatorCodes": [
-						"business-demography-Active enterprises",
-						"business-demography-Births of new enterprises",
-						"business-demography-Deaths of enterprises",
-						"business-demography-High growth enterprises"
+						"active-enterprises",
+						"business-demography-Business births",
+						"business-demography-Business deaths",
+						"business-demography-High growth businesses"
 					]
 				}
 			]
@@ -8163,16 +8538,10 @@
 					]
 				},
 				{
-					"name": "school performance",
-					"indicatorCodes": [
-						"schools-and-nursery-schools-rated-good-or-outstanding"
-					]
-				},
-				{
 					"name": "apprenticeships",
 					"indicatorCodes": [
-						"apprenticeship-Apprenticeships achievements",
-						"apprenticeship-Apprenticeships starts",
+						"apprenticeship-Apprenticeship achievements (England)",
+						"apprenticeship-Apprenticeship starts (England)",
 						"apprenticeships-starts-ni",
 						"apprenticeships-scotland-Apprenticeships starts (Scotland)",
 						"apprenticeships-scotland-Apprenticeships achievements (Scotland)"
