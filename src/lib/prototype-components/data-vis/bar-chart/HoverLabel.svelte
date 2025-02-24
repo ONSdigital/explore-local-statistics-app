@@ -44,14 +44,14 @@
 					{#if i === 0 || (labelRectArray[i - 1] && labelRectArray[i - 1].width > labelSpace)}
 						{#if labelRectArray[i]}
 							<rect
-								x={-labelRectArray[i].width}
-								y={-labelRectArray[i].height / 2 - fontSize / 4.5}
-								width={labelRectArray[i].width + 6}
+								x={-4 + -labelRectArray[i].width}
+								y={-4 + -labelRectArray[i].height / 2 - fontSize / 4.5}
+								width={labelRectArray[i].width + 14}
 								height={Math.max(
 									0,
 									labelRectArray[i].height -
 										fontSize / 4.5 +
-										(/[qgyp]/.test(textArray[textArray.length - 1]) ? 2 : 0)
+										(/[qgyp]/.test(textArray[textArray.length - 1]) ? 10 : 8)
 								)}
 								fill={color.color}
 								stroke="none"

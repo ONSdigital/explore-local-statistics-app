@@ -54,7 +54,11 @@
 <g class="label-path-group">
 	<g transform="translate(0,{chartHeight})">
 		<path stroke="white" fill="none" d={linePath} stroke-width="4px"></path>
-		<path stroke={colorsLookup['selected'].color} fill="none" d={linePath} stroke-width="1.5px"
+		<path
+			stroke={colorsLookup['darkerSelected'].color}
+			fill="none"
+			d={linePath}
+			stroke-width="1.5px"
 		></path>
 	</g>
 </g>
@@ -68,7 +72,7 @@
 				width={labelRect.width + 6}
 				height="24"
 				fill="white"
-				stroke={colorsLookup['selected'].color}
+				stroke={colorsLookup['darkerSelected'].color}
 				stroke-width="1.5px"
 				rx="2px"
 			></rect>
@@ -80,8 +84,8 @@
 				y="-24"
 				bind:contentRect={labelRect}
 				text-anchor="middle"
-				fill={colorsLookup['selected'].color}
-				stroke={colorsLookup['selected'].color}
+				fill={colorsLookup['darkerSelected'].color}
+				stroke={colorsLookup['darkerSelected'].color}
 				>{indicator.metadata.prefix +
 					addThousandsSeparator(roundNumber(area.datum.value, indicator.metadata.decimalPlaces)) +
 					indicator.metadata.suffix}</text

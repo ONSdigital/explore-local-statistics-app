@@ -397,7 +397,11 @@
 		<Card noBackground>
 			<div style:height="200px">
 				{#key data.geometry}
-					<AreaLocMap geometry={data.geometry} bounds={data.place.bounds} />
+					<AreaLocMap
+						geometry={data.geometry}
+						bounds={data.place.bounds}
+						mapDescription={'Map of ' + getName(data.place, 'the')}
+					/>
 				{/key}
 			</div>
 		</Card>
@@ -418,6 +422,7 @@
 				icon="arrow"
 				iconPosition="after"
 				href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+				arialabel="Read more about {getName(data.place, 'the')}"
 				small>Read more</Button
 			>
 		</Card>
@@ -524,6 +529,7 @@
 							})
 						)}
 						bind:colors={mapColors}
+						mapDescription="Map showing clusters of similar areas"
 					/>
 
 					{#if areaClusters[clusterGroup.id] && mapColors}
