@@ -678,6 +678,13 @@
 					>.
 				</p>
 			{/if}
+			<p>
+				<a
+					href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
+					>Quality and Methodology Information</a
+				> for the Explore Local Statistics service details the strengths and limitations of the service,
+				methods used, data uses and users.
+			</p>
 		</NavSection>
 		<NavSection title="Other indicators">
 			<p>
