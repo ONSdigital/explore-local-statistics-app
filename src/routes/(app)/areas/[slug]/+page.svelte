@@ -9,7 +9,6 @@
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 	import { filterChildren } from '$lib/util/geo/filterChildren';
 	import {
-		Breadcrumb,
 		Titleblock,
 		Section,
 		Button,
@@ -74,16 +73,6 @@
 	{/if}
 </svelte:head>
 
-<Breadcrumb
-	links={[
-		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-		{ label: 'Explore local statistics', href: `${base}/` },
-		...[...data.place.parents]
-			.reverse()
-			.map((p) => ({ label: getName(p), href: `${base}/areas/${p.areacd}` })),
-		{ label: getName(data.place) }
-	]}
-/>
 <Titleblock
 	title={getName(data.place)}
 	titleBadge={data.place.areacd}
