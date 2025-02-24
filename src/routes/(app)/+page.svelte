@@ -136,6 +136,13 @@
 		The ESS service aims to provide one place for users to find, visualise, compare and download
 		subnational statistics by standardised geographies and customer-defined areas.
 	</p>
+	<p>
+		<a
+			href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
+			>Quality and Methodology Information</a
+		> for the Explore Local Statistics service details the strengths and limitations of the service,
+		methods used, data uses and users.
+	</p>
 </Section>
 
 <style>
