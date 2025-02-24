@@ -144,7 +144,12 @@
 
 <Cards id="related-areas" height="auto">
 	<Card colspan={2} rowspan={2} noBackground>
-		<AreaNavMap {data} {childType} on:select={mapSelect} />
+		<AreaNavMap
+			{data}
+			{childType}
+			on:select={mapSelect}
+			mapDescription={'Map of ' + getName(data.place, 'the')}
+		/>
 	</Card>
 
 	{#if data.place.areacd !== 'K02000001'}

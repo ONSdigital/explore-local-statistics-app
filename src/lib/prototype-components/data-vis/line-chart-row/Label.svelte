@@ -7,6 +7,8 @@
 	let labelRectCheck;
 	let labelRect;
 
+	$: color = role === 'selected' ? colorsLookup['darkerSelected'].color : colorsLookup[role].color;
+
 	$: maxLabelWidth = labelRect ? labelRect.width + 45 : 60;
 
 	$: initialValue = data[data.length - 1];
@@ -33,8 +35,8 @@
 				y={hover ? 8 : 10}
 				bind:contentRect={labelRectCheck}
 				text-anchor="start"
-				fill={colorsLookup[role].color}
-				stroke={colorsLookup[role].color}>{changeText}</text
+				fill={color}
+				stroke={color}>{changeText}</text
 			>
 		</g>
 
@@ -53,7 +55,7 @@
 							width={labelRect.width + 20}
 							height={{ 16: 23, 18: 23, 20: 25, 24: 29 }[fontSize]}
 							fill="white"
-							stroke={colorsLookup[role].color}
+							stroke={color}
 							stroke-width={hover ? '1.5' : '2px'}
 							rx="2px"
 						></rect>
@@ -66,29 +68,19 @@
 							y={{ 16: 7, 18: 8, 20: 8, 24: 10 }[fontSize]}
 							bind:contentRect={labelRect}
 							text-anchor="start"
-							fill={colorsLookup[role].color}
-							stroke={colorsLookup[role].color}>{changeText}</text
+							fill={color}
+							stroke={color}>{changeText}</text
 						>
 					</g>
 
 					{#if roundNumber(latestValue.value - initialValue.value, indicator.metadata.decimalPlaces) > 0}
-						<path d="M 6 -6 L 6 9" stroke={colorsLookup[role].color} stroke-width="2px"></path>
-						<path
-							d="M6 -6 l-3 3 l6 0 z"
-							stroke={colorsLookup[role].color}
-							fill={colorsLookup[role].color}
-							stroke-width="2px"
-						></path>
+						<path d="M 6 -6 L 6 9" stroke={color} stroke-width="2px"></path>
+						<path d="M6 -6 l-3 3 l6 0 z" stroke={color} fill={color} stroke-width="2px"></path>
 					{:else if roundNumber(initialValue.value - latestValue.value, indicator.metadata.decimalPlaces) > 0}
-						<path d="M 6 -6 L 6 9" stroke={colorsLookup[role].color} stroke-width="2px"></path>
-						<path
-							d="M6 9 l-3 -3 l6 0 z"
-							stroke={colorsLookup[role].color}
-							fill={colorsLookup[role].color}
-							stroke-width="2px"
-						></path>
+						<path d="M 6 -6 L 6 9" stroke={color} stroke-width="2px"></path>
+						<path d="M6 9 l-3 -3 l6 0 z" stroke={color} fill={color} stroke-width="2px"></path>
 					{:else}
-						<path d="M 2 2.5 L 10 2.5" stroke={colorsLookup[role].color} stroke-width="2px"></path>
+						<path d="M 2 2.5 L 10 2.5" stroke={color} stroke-width="2px"></path>
 					{/if}
 				</g>
 			</g>
@@ -108,7 +100,7 @@
 						width={labelRect.width + 8}
 						height={38}
 						fill="white"
-						stroke={colorsLookup[role].color}
+						stroke={color}
 						stroke-width={hover ? '1.5' : '2px'}
 						rx="2px"
 					></rect>
@@ -121,8 +113,8 @@
 						y="-5"
 						bind:contentRect={labelRect}
 						text-anchor="start"
-						fill={colorsLookup[role].color}
-						stroke={colorsLookup[role].color}
+						fill={color}
+						stroke={color}
 						>No
 					</text>
 					<text
@@ -131,8 +123,8 @@
 						y="12"
 						bind:contentRect={labelRect}
 						text-anchor="start"
-						fill={colorsLookup[role].color}
-						stroke={colorsLookup[role].color}
+						fill={color}
+						stroke={color}
 						>change
 					</text>
 				</g>

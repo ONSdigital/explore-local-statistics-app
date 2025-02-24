@@ -21,7 +21,7 @@
 		});
 
 	$: color = hover
-		? colorsLookup.selected
+		? colorsLookup.darkerSelected
 		: area
 			? area.role === 'custom'
 				? Object.keys(customLookup).length > colorsLookup.custom.length
