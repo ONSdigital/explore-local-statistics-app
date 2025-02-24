@@ -35,6 +35,9 @@
 				<Icon type="chart" /><span
 					><button
 						class="btn-link"
+						aria-label="Download the {indicator.metadata.label} {type} {type == 'map'
+							? ''
+							: 'chart'} as a PNG image"
 						on:click={() => {
 							downloadPNG(el, indicator.metadata.slug, type);
 							const eventData = {
@@ -55,6 +58,9 @@
 				<Icon type="download" /><span
 					><button
 						class="btn-link"
+						aria-label="Download the {indicator.metadata.label} {type} {type == 'map'
+							? ''
+							: 'chart'} data as a CSV file"
 						on:click={() => {
 							downloadCSV(data, metadata, indicator, type);
 							const eventData = {
@@ -73,7 +79,10 @@
 			</li>{/if}
 		<li>
 			<Icon type="code" /><span
-				><button class="btn-link" on:click={() => (showEmbed = !showEmbed)}
+				><button
+					class="btn-link"
+					aria-expanded={showEmbed}
+					on:click={() => (showEmbed = !showEmbed)}
 					>{showEmbed ? 'Hide embed code' : `Embed code`}</button
 				></span
 			>

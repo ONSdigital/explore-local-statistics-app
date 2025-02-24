@@ -17,7 +17,9 @@
 			? Object.keys(customLookup).length > colorsLookup.custom.length
 				? colorsLookup.customExceedThreshold
 				: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
-			: colorsLookup[area.role]
+			: area.role === 'selected'
+				? colorsLookup['darkerSelected']
+				: colorsLookup[area.role]
 		: { color: null, constrast: null };
 
 	$: markerSizeLast =
