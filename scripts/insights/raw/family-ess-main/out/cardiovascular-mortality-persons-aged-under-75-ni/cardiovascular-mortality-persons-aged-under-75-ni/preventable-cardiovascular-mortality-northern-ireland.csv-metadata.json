@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dataset",
+    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#qbDataSet",
     "tables": [
         {
             "url": "preventable-cardiovascular-mortality-northern-ireland.csv",
@@ -178,7 +178,7 @@
                         "virtual": true,
                         "aboutUrl": "preventable-cardiovascular-mortality-northern-ireland.csv#obs/{areacd},{areanm},{geography},{period}@age-standardised-mortality-rate-for-those-aged-under-75",
                         "propertyUrl": "qb:dataSet",
-                        "valueUrl": "preventable-cardiovascular-mortality-northern-ireland.csv#dataset"
+                        "valueUrl": "preventable-cardiovascular-mortality-northern-ireland.csv#qbDataSet"
                     }
                 ],
                 "foreignKeys": [
@@ -243,6 +243,171 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/measure-type"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/observation-status"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/unit"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/area-name"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/geography-type"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/geography-type",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
@@ -250,40 +415,86 @@
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/lower-confidence-interval",
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/area-name",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
-                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#dimension": [
                 {
-                    "@value": false
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 8
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
                 }
             ]
         },
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -298,102 +509,13 @@
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/area-name"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#csvcubed-build-activity",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
-            ],
-            "http://www.w3.org/ns/prov#used": [
-                {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.4.10"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -418,126 +540,72 @@
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dataset",
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/observation-status",
             "@type": [
-                "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Dataset",
-                "http://www.w3.org/ns/dcat#Resource"
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
-            "http://purl.org/dc/terms/creator": [
+            "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "https://www.gov.uk/government/organisations/northern-ireland-statistics-and-research-agency"
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
                 }
             ],
-            "http://purl.org/dc/terms/description": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), in Northern Ireland, for 2001 to 2021.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland) \n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.health-ni.gov.uk/publications/age-standardised-death-rate-preventable-cardiovascular-disease-by-local-government-2001-2021) \n\n\n### Source Notes and Caveats \n- All figures up to and including 2011 are based on the 2011 Census mid-year population estimates. \n- All figures from 2012 onward are based on the 2021 Census mid-year population estimates. \n- As the latest data point for this indicator covers the COVID-19 pandemic period, it will include any effects of the COVID-19 pandemic. \n- Rates presented are based on year of death registration, not year of occurrence."
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
                 }
             ],
-            "http://purl.org/dc/terms/identifier": [
+            "http://purl.org/linked-data/cube#componentRequired": [
                 {
-                    "@value": "Preventable cardiovascular mortality, Northern Ireland"
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
                 }
             ],
-            "http://purl.org/dc/terms/issued": [
+            "http://purl.org/linked-data/cube#order": [
                 {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-01-26T12:41:00"
-                }
-            ],
-            "http://purl.org/dc/terms/license": [
-                {
-                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-01-30T09:37:40"
-                }
-            ],
-            "http://purl.org/dc/terms/publisher": [
-                {
-                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Preventable cardiovascular mortality, Northern Ireland"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#structure"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#comment": [
-                {
-                    "@language": "en",
-                    "@value": "Age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population (2019 definition), Northern Ireland, 2001 to 2021"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Preventable cardiovascular mortality, Northern Ireland"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#keyword": [
-                {
-                    "@language": "en",
-                    "@value": "premature-death"
-                },
-                {
-                    "@language": "en",
-                    "@value": "heart-disease"
-                },
-                {
-                    "@language": "en",
-                    "@value": "northern-ireland"
-                },
-                {
-                    "@language": "en",
-                    "@value": "region"
-                },
-                {
-                    "@language": "en",
-                    "@value": "subnational"
-                },
-                {
-                    "@language": "en",
-                    "@value": "local-authority"
-                }
-            ],
-            "http://www.w3.org/ns/dcat#theme": [
-                {
-                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare"
-                }
-            ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#csvcubed-build-activity"
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
                 }
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/year",
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/unit",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
             ]
         },
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -559,8 +627,8 @@
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/ons-geography-code",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
@@ -575,43 +643,64 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 1
                 }
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/observation-status",
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name",
             "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
-            "http://purl.org/linked-data/cube#attribute": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
+                    "@id": "area-name.csv#code-list"
                 }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#slice/cross-measures",
+            "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
+                },
                 {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/ons-geography-code"
+                },
                 {
-                    "@value": 10
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
                 }
             ]
         },
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/geography-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentSet"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
@@ -626,188 +715,19 @@
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Class"
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type",
-            "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Geography Type"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/unit",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
                 }
             ]
         },
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -832,109 +752,267 @@
             ]
         },
         {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#structure",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/year"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/geography-type"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/observation-status"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/age-standardised-mortality-rate-for-those-aged-under-75"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/area-name"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/unit"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/measure-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#measure/age-standardised-mortality-rate-for-those-aged-under-75"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#slice/cross-measures",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/area-name"
-                },
-                {
-                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/ons-geography-code"
-                }
-            ]
-        },
-        {
-            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/area-name",
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#class/year",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/lower-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#qbDataSet",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://www.w3.org/ns/dcat#Distribution"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/department-of-health-northern-ireland"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-01-26T12:41:00"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/department-of-health-northern-ireland"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population, in Northern Ireland, for 2001 to 2022.\n\n### Coverage \n\nNorthern Ireland\n\n#### Geography definition\n\nLocal Government Districts,\nNation (Northern Ireland) \n\n### Source\n\n - Northern Ireland: [Northern Ireland Statistics and Research Agency (NISRA)](https://www.health-ni.gov.uk/publications/age-standardised-death-rate-preventable-cardiovascular-disease-by-local-government-2001-2022) \n\n\n### Source Notes and Caveats \n- Data have been updated for years 2001 to 2022, and therefore cover the COVID-19 pandemic. The official population estimates for mid-2012 to mid-2020 have been revised, to incorporate the data now available from Census 2021. The data for this indicator has been revised to use the rebased population estimates from 2012 onwards. \n- Rates presented are based on year of death registration, not year of occurrence."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2024-01-26T12:41:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2025-02-12T09:02:40"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population, Northern Ireland, 2001 to 2022."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Preventable cardiovascular mortality (Northern Ireland)"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "northern-ireland"
+                },
+                {
+                    "@language": "en",
+                    "@value": "heart-disease"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "premature-death"
+                },
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "subnational"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare"
+                }
+            ]
+        },
+        {
+            "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
+                }
             ]
         },
         {
@@ -1008,9 +1086,9 @@
         {
             "@id": "preventable-cardiovascular-mortality-northern-ireland.csv#unit/per-100-000",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
                 "http://qudt.org/schema/qudt/Unit",
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {

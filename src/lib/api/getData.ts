@@ -1,4 +1,5 @@
 import { base } from '$app/paths';
+import { filterExtremeAreas } from '$lib/util/datasets/datasetsHelpers.ts';
 
 type GetDataResult = { kind: 'Success'; chartData: JSON; metadata: JSON } | { kind: 'Failure' };
 
@@ -44,13 +45,15 @@ export const getData = async (fetch: typeof window.fetch): Promise<GetDataResult
 		}
 
 		const clusterData = reshapeData(metadataParsed.clustersLookup.data);
+		const neighbourData = metadataParsed.neighbourLookup;
 
 		return {
 			kind: 'Success',
 			chartData: {
-				combinedDataObject: reshapedData,
+				combinedDataObject: filterAllDatasets(reshapedData),
 				beeswarmKeyData: dataParsed.beeswarmKeyData,
-				clusterData
+				clusterData,
+				neighbourData
 			},
 			metadata: metadataParsed
 		};
@@ -58,3 +61,11 @@ export const getData = async (fetch: typeof window.fetch): Promise<GetDataResult
 		return { kind: 'Failure' };
 	}
 };
+
+function filterAllDatasets(datasets: Record<string, Array<any>>, threshold?: number) {
+	Object.keys(datasets).forEach((key) => {
+		datasets[key] = filterExtremeAreas(datasets[key], threshold);
+	});
+
+	return datasets;
+}

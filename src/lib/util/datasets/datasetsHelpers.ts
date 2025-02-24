@@ -43,11 +43,82 @@ export function makeMapData(data, types, year) {
 	);
 	if (filtered.length === 0) return { data: [], breaks: [] };
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
-	const breaks = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]];
+	const breaks = uniqueRoundedNumbers({
+		numbers: [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]],
+		decimalPlaces: 0
+	});
 	const codes = [];
 	for (const d of filtered) {
 		d.cluster = getBreak(breaks, d.value);
 		codes.push(d.areacd);
 	}
 	return { data: filtered, breaks, codes };
+}
+// stolen these functions from census maps
+// https://github.com/ONSdigital/dp-census-atlas/blob/develop/src/util/numberUtil.ts
+/*
+  Round number to decimalPlaces
+*/
+export function roundNumber(args: { number: number; decimalPlaces: number }): number {
+	const roundingFactor = 10 ** args.decimalPlaces;
+	return Math.round(args.number * roundingFactor) / roundingFactor;
+}
+
+/*
+	Return numbers rounded to decimalPlaces with repeated numbers removed.
+  */
+export function uniqueRoundedNumbers(args: { numbers: number[]; decimalPlaces: number }): number[] {
+	return [
+		...new Set(
+			args.numbers.map((n) => {
+				return roundNumber({ number: n, decimalPlaces: args.decimalPlaces });
+			})
+		)
+	];
+}
+
+/**
+ * Filters out areas that have values exceeding 700 times the minimum positive value for any year
+ * @param {Array} data - Array of objects containing area data
+ * @param {number} threshold - Multiplier threshold (default: 700)
+ * @returns {Array} Filtered array excluding areas with extreme values
+ */
+export function filterExtremeAreas(data, threshold = 700) {
+	// Input validation
+	if (!Array.isArray(data) || data.length === 0) {
+		return [];
+	}
+
+	// Group values by year
+	const yearGroups = data.reduce((acc, item) => {
+		if (!acc[item.xDomainNumb]) {
+			acc[item.xDomainNumb] = [];
+		}
+		acc[item.xDomainNumb].push(item.value);
+		return acc;
+	}, {});
+
+	// Find minimum positive values per year
+	const yearMinimums = Object.entries(yearGroups).reduce((acc, [year, values]) => {
+		// Filter out zero and negative values before finding minimum
+		const positiveValues = values.filter((value) => value > 0);
+		// Only set minimum if there are positive values
+		if (positiveValues.length > 0) {
+			acc[year] = Math.min(...positiveValues);
+		}
+		return acc;
+	}, {});
+
+	// Identify areas that exceed the threshold in any year
+	const extremeAreas = new Set();
+	data.forEach((item) => {
+		const yearMin = yearMinimums[item.xDomainNumb];
+		// Only check against minimum if we have a valid minimum for that year
+		if (yearMin !== undefined && item.value > yearMin * threshold) {
+			extremeAreas.add(item.areacd);
+		}
+	});
+
+	// Filter out areas with extreme values
+	return data.filter((item) => !extremeAreas.has(item.areacd));
 }
