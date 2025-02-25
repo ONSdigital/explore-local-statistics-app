@@ -41,7 +41,7 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 			links,
 			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
 			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`,
-			pageType: `area page`,
+			pageType: `els - area page`,
 			component: Breadcrumb,
 			breadcrumbLinks: [
 				{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
