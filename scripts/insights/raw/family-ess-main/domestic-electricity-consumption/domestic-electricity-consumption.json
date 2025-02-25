@@ -2,6 +2,8 @@
     "$schema": "https://purl.org/csv-cubed/qube-config/v1",
     "title": "Domestic electricity consumption",
     "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Median domestic electricity consumption (kWh), UK, 2012 to 2023.",
+    "description": "This dataset shows median domestic electricity consumption (kWh), in the UK, for 2012 to 2023.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland, Northern Ireland), Countries (GB, England and Wales)\n\n### Source\n\n - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-electricity-consumption-data)\n\n - Northern Ireland: [Department for Energy Security and Net Zero](https://www.gov.uk/government/statistics/sub-national-electricity-consumption-statistics-in-northern-ireland)\n\n\n### Source Notes and Caveats \n- These figures are based on meter level electricity consumption data.\n\n- Electricity consumption estimates for Great Britain cover the months February to January. For example, 2023 relates to the period February 2023 to January 2024. Electricity meters with a profile class of 1 or 2 are classified as domestic meters.\n\n-Electricity consumption estimates for Northern Ireland refer to financial years (1 April – 31 March). For example, 2023 relates to the period 1 April 2023 to 31 March 2024. Northern Ireland local government district figures are only available from 2015 onwards. Electricity meters are classified as domestic meters based on their tariff type. \n\n\n",
     "summary": "Median domestic electricity consumption kWh per meter point, UK, 2012 to 2023.",
     "description": "This dataset shows median domestic electricity consumption kWh per meter point, in the UK, for 2012 to 2023.\n\n### Coverage \n\nUK \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland, Northern Ireland), Countries (GB, England and Wales)\n\n### Source\n\n - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-electricity-consumption-data)\n\n - Northern Ireland: [Department for Energy Security and Net Zero](https://www.gov.uk/government/statistics/sub-national-electricity-consumption-statistics-in-northern-ireland)\n\n\n### Source Notes and Caveats \n- Northern Ireland local government district figures are only available from 2015 onwards.\n\n- These figures are based on meter level electricity consumption data provided by data aggregators (who compile this data on behalf of electricity suppliers).\n\n\n",
     "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
@@ -14,6 +16,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero",
     "dataset_issued": "2025-02-12T13:47",
+    "dataset_modified": "2025-02-24T08:48",
     "dataset_modified": "2025-02-17T14:58",
     "themes": "https://www.ons.gov.uk/economy/environmentalaccounts",
     "columns": {
@@ -41,7 +44,7 @@
             "type": "observations",
             "data_type": "decimal",
             "unit": {
-                "label": "kWh per meter point",
+                "label": "kWh",
                 "from_existing": "http://qudt.org/vocab/unit/KiloW-HR"
             },
             "measure": {
@@ -78,13 +81,15 @@
       "label": "Domestic electricity consumption",
       "prefix": null,
       "suffix": null,
-      "subText": "kWh per meter point",
+      "subText": "kWh",
       "decimalPlaces": 1,
-      "subtitle": "Median domestic electricity consumption kWh per meter point",
+      "subtitle": "Median domestic electricity consumption (kWh)",
       "experimentalStatistic": "F",
       "sourceDate": "19/12/2024|19/12/2024",
       "sourceURL": "https://www.gov.uk/government/collections/sub-national-electricity-consumption-data|https://www.gov.uk/government/statistics/sub-national-electricity-consumption-statistics-in-northern-ireland",
       "sourceOrg": "Department for Energy Security and Net Zero (Great Britain)|Department for Energy Security and Net Zero (Northern Ireland)",
+      "longDescription": "This indicator shows median domestic electricity consumption (kWh), in the UK, for 2012 to 2023.",
+      "caveats": "These figures are based on meter level electricity consumption data.\n\nElectricity consumption estimates for Great Britain cover the months February to January. For example, 2023 relates to the period February 2023 to January 2024. Electricity meters with a profile class of 1 or 2 are classified as domestic meters.\n\nElectricity consumption estimates for Northern Ireland refer to financial years (1 April – 31 March). For example, 2023 relates to the period 1 April 2023 to 31 March 2024. Northern Ireland local government district figures are only available from 2015 onwards. Electricity meters are classified as domestic meters based on their tariff type.",
       "longDescription": "This indicator shows median domestic electricity consumption kWh per meter point, in the UK, for 2012 to 2023.",
       "caveats": "Northern Ireland local government district figures are only available from 2015 onwards.\n\nThese figures are based on meter level electricity consumption data provided by data aggregators (who compile this data on behalf of electricity suppliers).",
       "standardised": "T"

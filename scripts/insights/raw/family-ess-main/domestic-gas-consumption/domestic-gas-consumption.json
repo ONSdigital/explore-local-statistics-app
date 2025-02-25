@@ -2,6 +2,8 @@
     "$schema": "https://purl.org/csv-cubed/qube-config/v1",
     "title": "Domestic gas consumption",
     "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Median domestic gas consumption (kWh), Great Britain, 2012 to 2023.",
+    "description": "This dataset shows median domestic gas consumption (kWh), in Great Britain, for 2012 to 2023.\n\n### Coverage \n\nGreat Britain \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland), Countries (GB, England and Wales)\n\n### Source\n\n - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-gas-consumption-data)\n\n\n### Source Notes and Caveats \n\nThese figures are based on meter level gas consumption data. Those meters with an annual consumption less than 73,200 kWh are classified as domestic meters. This means that some small industrial and commercial consumers will be classified as domestic.\n\nThese estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.\n\nThe precise time periods covered by different years of data differ:\n\n- Prior to 2015: October – September (same period as 2015)\n\n- 2015: October 2014 – September 2015\n\n- 2016: mid-July 2016 – mid-July 2017\n\n- 2017: mid-June 2017 – mid-June 2018\n\n- 2018: mid-May 2018 – mid-May 2019\n\n- 2019 onwards: same pattern as 2018\n\n\n",
     "summary": "Median domestic gas consumption kWh per meter point, Great Britain, 2012 to 2023.",
     "description": "This dataset shows median domestic gas consumption kWh per meter point, in Great Britain, for 2012 to 2023.\n\n### Coverage \n\nGreat Britain \n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland), Countries (GB, England and Wales)\n\n### Source\n\n - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-gas-consumption-data)\n\n\n### Source Notes and Caveats \n- These estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.\n\n\n",
     "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
@@ -14,6 +16,7 @@
     ],
     "publisher": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero",
     "dataset_issued": "2025-02-12T13:52",
+    "dataset_modified": "2025-02-24T09:00",
     "dataset_modified": "2025-02-12T13:52",
     "themes": "https://www.ons.gov.uk/economy/environmentalaccounts",
     "columns": {
@@ -41,6 +44,7 @@
             "type": "observations",
             "data_type": "decimal",
             "unit": {
+                "label": "kWh",
                 "label": "kWh per meter point",
                 "from_existing": "http://qudt.org/vocab/unit/KiloW-HR"
             },
@@ -78,6 +82,9 @@
       "label": "Domestic gas consumption",
       "prefix": null,
       "suffix": null,
+      "subText": "kWh",
+      "decimalPlaces": 1,
+      "subtitle": "Median domestic gas consumption (kWh)",
       "subText": "kWh per meter point",
       "decimalPlaces": 1,
       "subtitle": "Median domestic gas consumption kWh per meter point",
@@ -85,6 +92,8 @@
       "sourceDate": "19/12/2024",
       "sourceURL": "https://www.gov.uk/government/collections/sub-national-gas-consumption-data",
       "sourceOrg": "Department for Energy Security and Net Zero",
+      "longDescription": "This indicator shows median domestic gas consumption (kWh), in Great Britain, for 2012 to 2023.",
+      "caveats": "These figures are based on meter level gas consumption data. Those meters with an annual consumption less than 73,200 kWh are classified as domestic meters. This means that some small industrial and commercial consumers will be classified as domestic.\n\nThese estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.\n\nThe precise time periods covered by different years of data differ:\n- Prior to 2015: October – September (same period as 2015)\n- 2015: October 2014 – September 2015\n- 2016: mid-July 2016 – mid-July 2017\n- 2017: mid-June 2017 – mid-June 2018\n- 2018: mid-May 2018 – mid-May 2019\n- 2019 onwards: same pattern as 2018",
       "longDescription": "This indicator shows median domestic gas consumption kWh per meter point, in Great Britain, for 2012 to 2023.",
       "caveats": "These estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.",
       "standardised": "T"
