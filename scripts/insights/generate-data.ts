@@ -100,7 +100,10 @@ async function main() {
 	const areaDetails = generateAreaDetails(
 		outConfig.clustersLookup,
 		outConfig.areasArray,
-		combinedData
+		combinedData,
+		config.globalNeighbours,
+		config.demographicNeighbours,
+		config.economicNeighbours
 	);
 
 	for (const areacd of Object.keys(areaDetails)) {
@@ -152,6 +155,12 @@ function generateOutData(combinedData, indicatorsArray) {
 function generateOutConfig(config, combinedData, combinedDataObjectColumnOriented, periods) {
 	const clustersLookup = makeClustersLookup(config.clustersLookup);
 	const clustersCalculations = makeClustersCalculations(clustersLookup, combinedData);
+
+	const neighbourLookup = makeNeighbourLookup(
+		config.globalNeighbours,
+		config.demographicNeighbours,
+		config.economicNeighbours
+	);
 
 	const sameParentGeogCalculations = makeSameParentGeogCalculations(
 		config.areasGeogLevel,
@@ -216,7 +225,8 @@ function generateOutConfig(config, combinedData, combinedDataObjectColumnOriente
 		topicsArray,
 		periodsLookupArray,
 		periodsLookupObject,
-		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray)
+		globalXDomainExtent: findGlobalXDomainExtent(indicatorsArray),
+		neighbourLookup
 	};
 }
 
@@ -231,7 +241,14 @@ function makeIndicatorsMetadataObject(indicatorsMetadata) {
 	return toLookup(indicatorsMetadata, 'code');
 }
 
-function generateAreaDetails(clustersLookup, areasArray, combinedData) {
+function generateAreaDetails(
+	clustersLookup,
+	areasArray,
+	combinedData,
+	globalNeighbours,
+	demographicNeighbours,
+	economicNeighbours
+) {
 	const areaDetails = Object.fromEntries(
 		areasArray.map((d) => [d.areacd, { ...d, filteredIndicators: {} }])
 	);
@@ -258,6 +275,18 @@ function generateAreaDetails(clustersLookup, areasArray, combinedData) {
 		}
 	}
 
+	// add in info about global cluster and nearest neighbours
+	const nearestNeighbourLookup = makeNeighbourLookup(
+		globalNeighbours,
+		demographicNeighbours,
+		economicNeighbours
+	);
+	for (const areacd of Object.keys(areaDetails)) {
+		if (areacd in nearestNeighbourLookup) {
+			areaDetails[areacd].nearestNeighbours = nearestNeighbourLookup[areacd];
+		}
+	}
+
 	for (const areaDatum of Object.values(areaDetails)) {
 		areaDatum.areasWithSameParent = areasArray
 			.filter(
@@ -268,7 +297,6 @@ function generateAreaDetails(clustersLookup, areasArray, combinedData) {
 			)
 			.map((d) => d.areacd);
 	}
-
 	return areaDetails;
 }
 
@@ -339,6 +367,43 @@ function makeClustersLookup(clustersLookupRaw) {
 		}
 	}
 	return clustersLookup;
+}
+
+function makeNeighbourLookup(globalLookup, demographyLookup, economyLookup) {
+	const nearestNeighbourLookup = {};
+
+	// Process each lookup file
+	const lookups = [
+		{ data: globalLookup, type: 'global' },
+		{ data: demographyLookup, type: 'demographic' },
+		{ data: economyLookup, type: 'economic' }
+	];
+
+	lookups.forEach(({ data, type }) => {
+		for (const row of data) {
+			const areacd = row['AREACD'];
+
+			// Initialize area entry if not exists
+			if (!nearestNeighbourLookup[areacd]) {
+				nearestNeighbourLookup[areacd] = {};
+			}
+
+			// Create neighbours array for this type
+			const neighbours = [];
+
+			// Collect neighbours from the row
+			for (const key in row) {
+				if (!key.includes('AREACD')) {
+					neighbours.push(row[key]);
+				}
+			}
+
+			// Store neighbours for this specific type
+			nearestNeighbourLookup[areacd][type] = neighbours;
+		}
+	});
+
+	return nearestNeighbourLookup;
 }
 
 function getClusterDescriptions() {
@@ -514,6 +579,10 @@ function readConfigFromCsvs() {
 
 	return {
 		clustersLookup: readCsvAutoType(`${clustersDir}/Cluster_allocation.csv`),
+		// clusterNeighbours: readCsvAutoType(`${clustersDir}/Cluster_neighbours.csv`),
+		globalNeighbours: readCsvAutoType(`${clustersDir}/Global_neighbours.csv`),
+		economicNeighbours: readCsvAutoType(`${clustersDir}/Economic_neighbours.csv`),
+		demographicNeighbours: readCsvAutoType(`${clustersDir}/Demographic_neighbours.csv`),
 		areasGeogInfo: readCsvAutoType(`${geogDir}/areas-geog-info.csv`),
 		areasGeogLevel: readCsvAutoType(`${geogDir}/areas-geog-level.csv`),
 		areasParentsLookup: readCsvAutoType(`${geogDir}/areas-parents-lookup.csv`),

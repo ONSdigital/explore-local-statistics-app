@@ -13,6 +13,7 @@
 
 	export let data;
 	export let childType;
+	export let mapDescription;
 
 	let map;
 	let hovered;
@@ -50,6 +51,7 @@
 			cooperativeGestures: true
 		}}
 		controls
+		{mapDescription}
 	>
 		{#each mapSources as s}
 			<MapSource

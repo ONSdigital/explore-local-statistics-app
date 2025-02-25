@@ -29,7 +29,7 @@
 		<div slot="icon" style:display="contents">
 			<Icon type="settings" />
 		</div>
-		Options
+		Chart options
 	</Button>
 </div>
 

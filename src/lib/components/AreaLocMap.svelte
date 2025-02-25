@@ -4,6 +4,7 @@
 
 	export let geometry;
 	export let bounds;
+	export let mapDescription;
 </script>
 
 <Map
@@ -11,6 +12,7 @@
 	location={{ bounds }}
 	interactive={false}
 	options={{ fitBoundsOptions: { padding: 20 } }}
+	{mapDescription}
 >
 	{#key geometry}
 		<MapSource id="boundary" type="geojson" data={geometry}>

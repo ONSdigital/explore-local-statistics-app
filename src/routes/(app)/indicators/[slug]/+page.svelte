@@ -4,7 +4,6 @@
 	import { base, assets } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
-		Breadcrumb,
 		Titleblock,
 		NavSections,
 		NavSection,
@@ -396,15 +395,6 @@
 		: null;
 </script>
 
-<Breadcrumb
-	links={[
-		{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
-		{ label: 'Explore local statistics', href: `${base}/` },
-		{ label: 'Local indicators', href: `${base}/indicators` },
-		{ label: data.indicator.metadata.label }
-	]}
-	background="#eaeaea"
-/>
 <Titleblock
 	title={data.indicator.metadata.label}
 	meta={[
@@ -688,6 +678,13 @@
 					>.
 				</p>
 			{/if}
+			<p>
+				<a
+					href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
+					>Quality and Methodology Information</a
+				> for the Explore Local Statistics service details the strengths and limitations of the service,
+				methods used, data uses and users.
+			</p>
 		</NavSection>
 		<NavSection title="Other indicators">
 			<p>

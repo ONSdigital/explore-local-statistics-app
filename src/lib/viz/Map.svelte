@@ -9,12 +9,14 @@
 	import { colorsLookup } from '$lib/config';
 	import BreaksChart from './BreaksChart.svelte';
 
+	export let mapDescription;
 	export let data;
 	export let breaks = null;
 	export let geos = null;
 	export let prefix = '';
 	export let suffix = '';
 	export let selected = [];
+	export let neighbours = null;
 	export let hovered = null;
 	export let dp = 0;
 	export const colors = {
@@ -24,9 +26,9 @@
 		3: 'rgb(0, 78, 166)',
 		4: 'rgb(0, 13, 84)',
 		a: '#206095',
-		b: '#27A0CC',
-		c: '#871A5B',
-		d: '#A8BD3A'
+		b: '#206095',
+		c: '#206095',
+		d: '#206095'
 	};
 	export let topoPath = `${assets}/data/topo.json`;
 	export let customLookup = null;
@@ -101,8 +103,6 @@
 		);
 		bounds = bbox(geojson);
 	});
-
-	$: console.log('dp', dp);
 </script>
 
 <div aria-hidden="true" class="map-outer">
@@ -118,6 +118,7 @@
 					preserveDrawingBuffer: true
 				}}
 				controls
+				{mapDescription}
 			>
 				{#key clusterKey}
 					<MapSource
@@ -163,34 +164,61 @@
 							order="place_suburb"
 						/>
 					</MapSource>
-				{/key}
-				{#if selected[0]}
-					<MapSource
-						id="selected"
-						type="geojson"
-						data={featureCollection(features, selected, { boundary: true })}
-						promoteId="areacd"
-					>
-						<MapLayer
-							id="selected-outline"
-							type="line"
-							paint={{
-								'line-color': 'white',
-								'line-width': 4
-							}}
-							order="place_other"
-						/>
-						<MapLayer
+					{#if selected[0]}
+						<MapSource
 							id="selected"
-							type="line"
-							paint={{
-								'line-color': ['get', 'color'],
-								'line-width': 2.5
-							}}
-							order="place_other"
-						/>
-					</MapSource>
-				{/if}
+							type="geojson"
+							data={featureCollection(features, selected, { boundary: true })}
+							promoteId="areacd"
+						>
+							<MapLayer
+								id="selected-outline"
+								type="line"
+								paint={{
+									'line-color': 'white',
+									'line-width': 4
+								}}
+								order="place_other"
+							/>
+							<MapLayer
+								id="selected"
+								type="line"
+								paint={{
+									'line-color': ['get', 'color'],
+									'line-width': 2.5
+								}}
+								order="place_other"
+							/>
+						</MapSource>
+					{/if}
+					{#if neighbours}
+						<MapSource
+							id="neighbours"
+							type="geojson"
+							data={featureCollection(features, neighbours, { boundary: true })}
+							promoteId="areacd"
+						>
+							<MapLayer
+								id="neighbours-outline"
+								type="line"
+								paint={{
+									'line-color': 'white',
+									'line-width': 4
+								}}
+								order="place_other"
+							/>
+							<MapLayer
+								id="neighbours"
+								type="line"
+								paint={{
+									'line-color': ['get', 'color'],
+									'line-width': 2.5
+								}}
+								order="place_other"
+							/>
+						</MapSource>
+					{/if}
+				{/key}
 			</Map>
 		{/if}
 	</div>

@@ -15,7 +15,7 @@
 
 	$: color =
 		hoverId && hoverId === area.areacd
-			? colorsLookup.selected
+			? colorsLookup.darkerSelected
 			: area
 				? area.role === 'custom'
 					? Object.keys(customLookup).length > colorsLookup.custom.length
