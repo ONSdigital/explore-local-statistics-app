@@ -9,6 +9,7 @@
 	import { colorsLookup } from '$lib/config';
 	import BreaksChart from './BreaksChart.svelte';
 
+	export let mapDescription;
 	export let data;
 	export let breaks = null;
 	export let geos = null;
@@ -117,6 +118,7 @@
 					preserveDrawingBuffer: true
 				}}
 				controls
+				{mapDescription}
 			>
 				{#key clusterKey}
 					<MapSource
