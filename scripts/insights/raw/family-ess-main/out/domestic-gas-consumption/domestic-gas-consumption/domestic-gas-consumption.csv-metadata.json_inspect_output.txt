@@ -1,0 +1,115 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Domestic gas consumption
+          - Label: Domestic gas consumption
+          - Issued: 2025-02-12T13:52:00
+          - Modified: 2025-02-12T13:52:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/economy/environmentalaccounts
+          - Keywords: 
+		-- region
+		-- local-authority
+		-- gas
+		-- environment
+		-- subnational
+          - Contact Point: None
+          - Identifier: Domestic gas consumption
+          - Comment: Median domestic gas consumption kWh per meter point, Great Britain, 2012 to 2023.
+          - Description: This dataset shows median domestic gas consumption kWh per meter point, in Great Britain, for 2012 to 2023.
+		
+		### Coverage 
+		
+		Great Britain 
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities, Regions, Nations (England, Wales, Scotland), Countries (GB, England and Wales)
+		
+		### Source
+		
+		 - Great Britain: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/sub-national-gas-consumption-data)
+		
+		
+		### Source Notes and Caveats 
+		- These estimates are weather-corrected. This means that the effect of differences in weather conditions between years has been removed to provide more like for like comparisons over time.
+		
+		
+		
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Domestic gas consumption
+    - Columns: 
+                              Title         Type  Required                                                         Property URL Observations Column Titles
+                             AREACD    Dimension      True            domestic-gas-consumption.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                     domestic-gas-consumption.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                domestic-gas-consumption.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                 None                           
+                          Indicator   Suppressed     False                                                                 None                           
+                             Period    Dimension      True                          domestic-gas-consumption.csv#dimension/year                Observation
+                        Observation Observations     False domestic-gas-consumption.csv#measure/median-domestic-gas-consumption                Observation
+                            Measure   Suppressed     False                                                                 None                           
+                               Unit   Suppressed     False                                                                 None                           
+    Lower Confidence Interval (95%)    Attribute     False     domestic-gas-consumption.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False     domestic-gas-consumption.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False            domestic-gas-consumption.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                 None                           
+                              Notes   Suppressed     False                                                                 None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+              year.csv#code-list               Year          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 4465
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD        AREANM Geography            Variable Name       Indicator  Period  Observation                     Measure                Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2012  12660.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2013  12218.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2014  11958.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2015  11807.92079 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2016  11788.38583 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2017  12054.34783 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2018  11841.42716 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2019  11950.49505 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2020  12144.43693 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+k03000001 great-britain   country Domestic gas consumption Gas consumption    2021  11344.90430 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD       AREANM                Geography            Variable Name       Indicator  Period  Observation                     Measure                Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2020  13285.48117 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2019  13112.48761 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2017  13214.07334 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2022  10723.68882 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2015  13068.38454 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2014  13387.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2013  13694.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2012  14204.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2016  13000.00000 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+s12000040 west-lothian local-authority-district Domestic gas consumption Gas consumption    2023  10925.90924 Consumption per meter point kWh per meter point                              NaN                              NaN                NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                        Measure                Unit  Count
+Median domestic gas consumption kWh per meter point   4465
+        
