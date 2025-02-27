@@ -1,0 +1,94 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Greenhouse gas emissions",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "This indicator shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2022.",
+    "description": "This dataset shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2022.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - United Kingdom: [Department for Energy Security and Net Zero](https://www.gov.uk/government/collections/uk-local-authority-and-regional-greenhouse-gas-emissions-national-statistics) \n\n\n### Source Notes and Caveats \nGreenhouse gas emissions (tCO2e) per capita refers to the average amount of greenhouse gas emissions produced by each person in a specific area over a year. This metric is calculated by dividing the total greenhouse gas emissions of an area by its population. The result is expressed in tonnes of CO2 equivalent (tCO2e) per person.\n\nGreenhouse gas emissions here include territorial emissions of carbon dioxide (CO2), methane (CH4) and nitrous oxide (N2O).\n\nEmissions are reported against the areas where they occurred except for emissions associated with energy supply that are distributed to the areas based on where the 'end-use' of the energy occurred and emissions from waste that have been distributed based on the waste arising in each area.\n\nEmissions data is from UK local authority greenhouse gas emissions estimates where some emissions can't be fully allocated to individual local authorities for technical or disclosure reasons. \n\nSome of this data has been aggregated and may show differences to other published figures.\n\nEmissions data is also visualised on [Local Authority Greenhouse Gas Map.](https://naei.energysecurity.gov.uk/laghgapp/) \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "emissions",
+        "greenhouse-gas",
+        "subnational",
+        "local-authority",
+        "county",
+        "combined-authority",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero",
+    "dataset_issued": "2025-02-11T11:35",
+    "dataset_modified": "2025-02-26T12:50",
+    "themes": "https://www.ons.gov.uk/economy/environmentalaccounts",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "Tonnes of CO2 equivalent",
+                "from_existing": "http://qudt.org/vocab/unit/TONNE"
+            },
+            "measure": {
+                "label": "Emissions (tCO2e) per capita",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#per-capita-emissions"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+        "label": "Greenhouse gas emissions",
+        "prefix": null,
+        "suffix": null,
+        "subText": "tCO2e per capita",
+        "decimalPlaces": 1,
+        "subtitle": "Greenhouse gas emissions (tCO2e) per capita",
+        "experimentalStatistic": "F",
+        "sourceDate": "27/06/2024",
+        "sourceURL": "https://www.gov.uk/government/collections/uk-local-authority-and-regional-greenhouse-gas-emissions-national-statistics",
+        "sourceOrg": "Department for Energy Security and Net Zero",
+        "longDescription": "This indicator shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2022.",
+        "caveats": "Greenhouse gas emissions (tCO2e) per capita refers to the average amount of greenhouse gas emissions produced by each person in a specific area over a year. This metric is calculated by dividing the total greenhouse gas emissions of an area by its population. The result is expressed in tonnes of CO2 equivalent (tCO2e) per person.\n\nGreenhouse gas emissions here include territorial emissions of carbon dioxide (CO2), methane (CH4) and nitrous oxide (N2O).\n\nEmissions are reported against the areas where they occurred except for emissions associated with energy supply that are distributed to the areas based on where the 'end-use' of the energy occurred and emissions from waste that have been distributed based on the waste arising in each area.\n\nEmissions data is from UK local authority greenhouse gas emissions estimates where some emissions can't be fully allocated to individual local authorities for technical or disclosure reasons.\n\nSome of this data has been aggregated and may show differences to other published figures.\n\nEmissions data is also visualised on [Local Authority Greenhouse Gas Map.](https://naei.energysecurity.gov.uk/laghgapp/)",
+        "standardised": "T"
+    }
+}
