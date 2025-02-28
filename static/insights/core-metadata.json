@@ -241,6 +241,10 @@
 			"label": "Domestic gas consumption"
 		},
 		{
+			"code": "greenhouse-gas-emissions",
+			"label": "Greenhouse gas emissions"
+		},
+		{
 			"code": "gigabit-capable-broadband",
 			"label": "Gigabit capable broadband"
 		},
@@ -7021,6 +7025,148 @@
 				2023
 			]
 		},
+		"greenhouse-gas-emissions": {
+			"id": 89,
+			"topic": "environment",
+			"subTopic": "environment",
+			"code": "greenhouse-gas-emissions",
+			"": null,
+			"minXDomainNumb": 2005,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "greenhouse-gas-emissions",
+				"slug": "greenhouse-gas-emissions",
+				"label": "Greenhouse gas emissions",
+				"prefix": "",
+				"suffix": "",
+				"subText": "tCO2e per capita",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Greenhouse gas emissions (tCO2e) per capita",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "27/06/2024",
+				"sourceURL": "https://www.gov.uk/government/collections/uk-local-authority-and-regional-greenhouse-gas-emissions-national-statistics",
+				"sourceOrg": "Department for Energy Security and Net Zero",
+				"longDescription": "This indicator shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2022.",
+				"standardised": "T",
+				"caveats": "Greenhouse gas emissions (tCO2e) per capita refers to the average amount of greenhouse gas emissions produced by each person in a specific area over a year. This metric is calculated by dividing the total greenhouse gas emissions of an area by its population. The result is expressed in tonnes of CO2 equivalent (tCO2e) per person.\n\nGreenhouse gas emissions here include territorial emissions of carbon dioxide (CO2), methane (CH4) and nitrous oxide (N2O).\n\nEmissions are reported against the areas where they occurred except for emissions associated with energy supply that are distributed to the areas based on where the 'end-use' of the energy occurred and emissions from waste that have been distributed based on the waste arising in each area.\n\nEmissions data is from UK local authority greenhouse gas emissions estimates where some emissions can't be fully allocated to individual local authorities for technical or disclosure reasons.\n\nSome of this data has been aggregated and may show differences to other published figures.\n\nEmissions data is also visualised on [Local Authority Greenhouse Gas Map.](https://naei.energysecurity.gov.uk/laghgapp/)",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
 		"gigabit-capable-broadband": {
 			"id": 64,
 			"topic": "connectivity",
@@ -8842,7 +8988,8 @@
 					"name": "environment",
 					"indicatorCodes": [
 						"domestic-electricity-consumption",
-						"domestic-gas-consumption"
+						"domestic-gas-consumption",
+						"greenhouse-gas-emissions"
 					]
 				}
 			]
