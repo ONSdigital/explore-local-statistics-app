@@ -1,0 +1,93 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Residents within a 30 minute walk of their nearest railway station",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Percentage of the resident population living within a 30 minute walk of their nearest railway station, England and Wales, as at June 2024.",
+    "description": "This dataset shows the percentage of the resident population living within a 30 minute walk of their nearest railway station, in England and Wales, as at June 2024.\n\n### Coverage \n\nEngland and Wales\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCombined Authorities,\nRegions,\nNations (England, Wales),\nCountries (England and Wales) \n\n### Source\n\n - England and Wales: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/traveltimetorailwaystationsinlocalareasenglandandwales) \n\n\n### Source Notes and Caveats \nTravel time to railway stations analysis was performed in collaboration with the Ordnance Survey (OS). Some stations within the National Public Transport Access Nodes (NaPTAN) dataset have been excluded from this analysis. For example, stations on heritage lines that have a seasonal service and stations having a parliamentary service. This analysis contains the locations of 2,808 rail stations in England and Wales in June 2024.\n\nAnalysis parameters, including walking speed of 4.8 kilometres per hour, closely follow those of the [Department for Transport Journey Time Statistics (2019)](https://www.gov.uk/government/publications/journey-time-statistics-guidance/journey-time-statistics-notes-and-definitions-2019#model-params).\n\nPlease see the ['More quality and methodology information'](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/accesstolocalamenitiesinenglandandwales/october2024#data-sources-and-quality) section of the publication for further details.\n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "railway",
+        "walk",
+        "travel-time",
+        "local-authority",
+        "combined-authority",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2025-02-28T10:07",
+    "dataset_modified": "2025-02-28T10:07",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-instant"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "percent",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT"
+            },
+            "measure": {
+                "label": "Population within a 30 minute walk of their nearest railway station",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#count"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Residents within a 30 minute walk of their nearest railway station",
+      "prefix": null,
+      "suffix": "%",
+      "subText": null,
+      "decimalPlaces": 0,
+      "subtitle": "Percentage of resident population within a 30 minute walk of their nearest railway station",
+      "experimentalStatistic": "F",
+      "sourceDate": "17/10/2024",
+      "sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/traveltimetorailwaystationsinlocalareasenglandandwales",
+      "sourceOrg": "Office for National Statistics",
+      "longDescription": "This indicator shows the percentage of the resident population living within a 30 minute walk of their nearest railway station, in England and Wales, as at June 2024.",
+      "caveats": "Travel time to railway stations analysis was performed in collaboration with the Ordnance Survey (OS). Some stations within the National Public Transport Access Nodes (NaPTAN) dataset have been excluded from this analysis. For example, stations on heritage lines that have a seasonal service and stations having a parliamentary service. This analysis contains the locations of 2,808 rail stations in England and Wales in June 2024.\n\nAnalysis parameters, including walking speed of 4.8 kilometres per hour, closely follow those of the [Department for Transport Journey Time Statistics (2019)](https://www.gov.uk/government/publications/journey-time-statistics-guidance/journey-time-statistics-notes-and-definitions-2019#model-params).\n\nPlease see the ['More quality and methodology information'](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/accesstolocalamenitiesinenglandandwales/october2024#data-sources-and-quality) section of the publication for further details.",
+      "standardised": "T"
+    }
+}
