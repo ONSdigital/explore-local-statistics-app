@@ -1,23 +1,15 @@
 import { error, redirect } from '@sveltejs/kit';
-import { base, assets } from '$app/paths';
+import { base } from '$app/paths';
 import type { LayoutLoad } from './$types';
 import { getArea } from '$lib/api/getArea';
-import { getCSV } from '$lib/api/getCSV';
 import { extractAreaCodeFromSlug } from '$lib/util/areas/extractAreaCodeFromSlug';
 import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 import { getName } from '@onsvisual/robo-utils';
 import { Breadcrumb } from '@onsvisual/svelte-components';
-// import linksCsv from '../../../../data/links.csv';
+import productLinks from '$lib/../data/product-links.json';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.slug);
-	// const links = await parseCSV(linksCsv);
-	const links = await getCSV(`${assets}/data/links.csv`, fetch);
-	for (const link of links) {
-		for (const key of ['url', 'image']) {
-			if (link[key] && !link[key].startsWith('http')) link[key] = base + link[key];
-		}
-	}
 
 	if (code.kind === 'Failure') {
 		error(404, { message: 'Invalid area code' });
@@ -40,7 +32,7 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 
 		return {
 			...result,
-			links,
+			links: productLinks.map(addBaseUrlsToProductLink),
 			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
 			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`,
 			pageType: `area page`,
@@ -57,3 +49,9 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 		};
 	}
 };
+
+const addBaseUrlsToProductLink = (link: (typeof productLinks)[0]) => ({
+	...link,
+	url: link.url.startsWith('/') ? base + link.url : link.url,
+	image: link.image.startsWith('/') ? base + link.image : link.image
+});
