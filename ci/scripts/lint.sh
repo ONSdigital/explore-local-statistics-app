@@ -1,6 +1,6 @@
 #!/bin/sh -eux
 
-pushd explore-local-statistics-app
+cd explore-local-statistics-app
   npm install --unsafe-perm
   npm run lint
-popd
+cd -

@@ -4,10 +4,10 @@ apk add --no-cache make
 
 app_dir=explore-local-statistics-app
 
-pushd "$app_dir"
+cd "$app_dir"
   SHORT_REF=$(git rev-parse --short HEAD)
   make build IMAGE_TAG=${SHORT_REF}
-popd
+cd -
 
 if   [[ "$APPLICATION" = "explore-local-statistics-app" ]]; then
     mkdir build/$SHORT_REF
