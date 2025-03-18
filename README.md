@@ -12,7 +12,7 @@ Install dependencies with `npm install`, then start a development server:
 
 ## Data
 
-See `scripts\insights\README.md` to learn about how data is managed and updated.
+See `scripts/insights/README.md` to learn about how data is managed and updated.
 
 ## ONSvisual/svelte-components
 
