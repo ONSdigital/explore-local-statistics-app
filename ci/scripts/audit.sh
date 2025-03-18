@@ -1,6 +1,9 @@
 #!/bin/bash -eux
 
+apk add --no-cache make
+
 pushd explore-local-statistics-app
-  npm install --unsafe-perm
-  npm run audit
+    make audit
+    # npm install --unsafe-perm
+    # npm run audit
 popd

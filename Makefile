@@ -95,6 +95,10 @@ run:
 test:
 	$(NPM) run test
 
+.PHONY: test-component
+test-component:
+	: # no-op
+
 # the below are separated deliberately - see Dockerfile
 
 .PHONY: build-builder-init
