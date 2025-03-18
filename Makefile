@@ -91,6 +91,10 @@ endif
 run:
 	docker run -p $(PORT):$(PORT) $(IMAGE_URL):$(IMAGE_TAG)
 
+.PHONY: test
+test:
+	$(NPM) run test
+
 # the below are separated deliberately - see Dockerfile
 
 .PHONY: build-builder-init
