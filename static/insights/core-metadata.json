@@ -285,6 +285,14 @@
 			"label": "Museums"
 		},
 		{
+			"code": "library-walk",
+			"label": "Residents within a 30 minute walk of their nearest library"
+		},
+		{
+			"code": "railway-station-walk",
+			"label": "Residents within a 30 minute walk of their nearest railway station"
+		},
+		{
 			"code": "premises-below-30",
 			"label": "Premises below 30Mbps"
 		},
@@ -1026,7 +1034,7 @@
 			"subTopic": "pay and income",
 			"code": "gross-median-weekly-pay",
 			"": null,
-			"minXDomainNumb": 2002,
+			"minXDomainNumb": 2008,
 			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "gross-median-weekly-pay",
@@ -1044,7 +1052,7 @@
 				"sourceDate": "29/10/2024|29/10/2024",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/previousReleases|https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/annual-survey-hours-and-earnings",
 				"sourceOrg": "Office for National Statistics|Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for a pay period in April 2002 to April 2024.",
+				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for a pay period in April 2008 to April 2024.",
 				"standardised": "T",
 				"caveats": "For Great Britain data, 2024 estimates are provisional and relate to the pay period that includes 17 April 2024. Estimates for 2023 have been revised and relate to the pay period that includes 19 April 2023.\n\nThe country level figure for Northern Ireland has been sourced from NOMIS rather than NISRA. This is to allow for confidence intervals.",
 				"confidenceIntervals": "T",
@@ -1134,12 +1142,6 @@
 				"year": 2023
 			},
 			"years": [
-				2002,
-				2003,
-				2004,
-				2005,
-				2006,
-				2007,
 				2008,
 				2009,
 				2010,
@@ -7026,7 +7028,7 @@
 			]
 		},
 		"greenhouse-gas-emissions": {
-			"id": 89,
+			"id": 90,
 			"topic": "environment",
 			"subTopic": "environment",
 			"code": "greenhouse-gas-emissions",
@@ -8284,6 +8286,198 @@
 				2021
 			]
 		},
+		"library-walk": {
+			"id": 91,
+			"topic": "connectivity",
+			"subTopic": "access to amenities",
+			"code": "library-walk",
+			"": null,
+			"minXDomainNumb": 2024,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "library-walk",
+				"slug": "library-walk",
+				"label": "Residents within a 30 minute walk of their nearest library",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of resident population within a 30 minute walk of their nearest library",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "17/10/2024",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/traveltimetolibrariesinlocalareasenglandandwales",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of the resident population living within a 30 minute walk of their nearest library, in England and Wales, as at May 2024.",
+				"standardised": "T",
+				"caveats": "Travel time to libraries analysis was performed in collaboration with Ordnance Survey (OS). This analysis contains the locations of 3,159 static public libraries from the Arts Council for England dataset, accurate to May 2024. This analysis does not include mobile and other libraries that are not routinely open to the public or those that are open for less than 2 hours a week.\n\nAnalysis parameters, including walking speed of 4.8 kilometres per hour, closely follow those of the [Department for Transport Journey Time Statistics (2019)](https://www.gov.uk/government/publications/journey-time-statistics-guidance/journey-time-statistics-notes-and-definitions-2019#model-params).\n\nPlease see the ['More quality and methodology information'](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/accesstolocalamenitiesinenglandandwales/october2024#data-sources-and-quality) section of the publication for further details.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K04",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2024
+			]
+		},
+		"railway-station-walk": {
+			"id": 92,
+			"topic": "connectivity",
+			"subTopic": "access to amenities",
+			"code": "railway-station-walk",
+			"": null,
+			"minXDomainNumb": 2024,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "railway-station-walk",
+				"slug": "railway-station-walk",
+				"label": "Residents within a 30 minute walk of their nearest railway station",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of resident population within a 30 minute walk of their nearest railway station",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "17/10/2024",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/traveltimetorailwaystationsinlocalareasenglandandwales",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of the resident population living within a 30 minute walk of their nearest railway station, in England and Wales, as at June 2024.",
+				"standardised": "T",
+				"caveats": "Travel time to railway stations analysis was performed in collaboration with Ordnance Survey (OS). This analysis contains the locations of 2,808 rail stations in England and Wales in June 2024. Some stations within the National Public Transport Access Nodes (NaPTAN) dataset have been excluded from this analysis. For example, stations on heritage lines that have a seasonal service and stations having a parliamentary service.\n\nAnalysis parameters, including walking speed of 4.8 kilometres per hour, closely follow those of the [Department for Transport Journey Time Statistics (2019)](https://www.gov.uk/government/publications/journey-time-statistics-guidance/journey-time-statistics-notes-and-definitions-2019#model-params).\n\nPlease see the ['More quality and methodology information'](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/accesstolocalamenitiesinenglandandwales/october2024#data-sources-and-quality) section of the publication for further details.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K04",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2024
+			]
+		},
 		"premises-below-30": {
 			"id": 83,
 			"topic": "connectivity",
@@ -9019,7 +9213,9 @@
 					"indicatorCodes": [
 						"supermarkets",
 						"sports-facilities",
-						"museums"
+						"museums",
+						"library-walk",
+						"railway-station-walk"
 					]
 				}
 			]
