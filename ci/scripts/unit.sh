@@ -8,7 +8,7 @@ cd "$app_dir"
 
     if   [[ "$APPLICATION" = "explore-local-statistics"        ]]; then
 
-        make test
+        make test IMAGE_TAG=dummy_tag_for_image
 
     elif [[ "$APPLICATION" = "explore-local-statistics-assets" ]]; then
 
