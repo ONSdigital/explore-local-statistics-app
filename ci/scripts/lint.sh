@@ -1,6 +1,9 @@
 #!/bin/sh -eux
 
+apk add --no-cache make
+
 cd explore-local-statistics-app
-  npm install --unsafe-perm
-  npm run lint
+
+    make lint IMAGE_TAG=dummy_tag_for_image
+
 cd -

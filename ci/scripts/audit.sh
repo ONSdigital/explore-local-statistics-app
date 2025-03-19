@@ -3,7 +3,7 @@
 apk add --no-cache make
 
 cd explore-local-statistics-app
-    make audit
-    # npm install --unsafe-perm
-    # npm run audit
+
+    make audit IMAGE_TAG=dummy_tag_for_image
+
 cd -

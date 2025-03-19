@@ -9,7 +9,7 @@ ECR_AWS_PROFILE?=dp-ci
 AWS_ECR_ACCOUNT?=$(shell aws sts --profile $(ECR_AWS_PROFILE) get-caller-identity --query Account --output text)
 AWS_ECR_URL?=$(AWS_ECR_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com
 
-IMAGE_TAG?=$(error Must use: make TAG=tag_for_image)
+IMAGE_TAG?=$(error Must use: make IMAGE_TAG=tag_for_image)
 IMAGE_NAME?=onsdigital/explore-local-statistics-app
 IMAGE_URL?=$(AWS_ECR_URL)/$(IMAGE_NAME)
 
