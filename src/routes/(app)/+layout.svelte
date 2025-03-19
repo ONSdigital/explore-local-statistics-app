@@ -54,11 +54,13 @@
 <div class="flex flex-col min-h-screen">
 	<div class="flex-grow">
 		<Header bilingual={false}>
-			<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-			<PhaseBanner
-				phase="beta"
-				href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
-			/>
+			<div slot="before">
+				<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
+				<PhaseBanner
+					phase="beta"
+					href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
+				/>
+			</div>
 		</Header>
 		{#if $page.data.component}
 			<svelte:component
