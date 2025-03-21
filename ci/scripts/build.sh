@@ -1,5 +1,6 @@
 #!/bin/sh -eux
 
+# make for build; git for SHORT_REF
 apk add --no-cache make git
 
 cwd=$(pwd)
@@ -9,7 +10,9 @@ BUILD="$cwd/build"
 cd "$app_dir"
 
     SHORT_REF=$(git rev-parse --short HEAD) # XXX not needed TODO
+    [[ -n "$SHORT_REF" ]]   # check that git returned valid value
 
+    # need to build for app and assets
     make build-builder-init \
          build \
             ENABLE_S3_ASSETS=false \
@@ -24,7 +27,8 @@ cd "$app_dir"
 
     elif [[ "$APPLICATION" = "explore-local-statistics-assets" ]]; then
 
-        cp -a "build/client/explore-local-statistics" "$BUILD"
+        mkdir "$BUILD/${SHORT_REF}"
+        cp -a "build/client/explore-local-statistics/." "$BUILD/${SHORT_REF}"
 
     fi
 
