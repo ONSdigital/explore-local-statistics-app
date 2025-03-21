@@ -96,8 +96,8 @@ run:
 
 .PHONY: test
 test:
-	: $(NPM) install --unsafe-perm
-	: WAITING FOR FILE CHANGES		$(NPM) run test:unit
+	$(NPM) install --unsafe-perm
+	$(NPM) run test:unit
 
 .PHONY: test-component
 test-component:
