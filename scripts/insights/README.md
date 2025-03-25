@@ -11,9 +11,7 @@ This script creates the data that the /insights (ESS) visualisations use.
 
 ## How to run the script
 
-```
-npm run data:generate
-```
+    npm run data:generate
 
 ## Input files
 
