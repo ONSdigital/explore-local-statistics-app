@@ -10,7 +10,7 @@ export function createSpreadsheet(data, metadata, periods, filename) {
 		coverSheetContents: [
 			'## Source',
 			'Office for National Statistics (ONS) and other producers of official statistics.',
-			'[Visit Explore Local Statistics on the ONS website](http://explore-local-statistics.beta.ons.gov.uk/)',
+			'[Visit Explore Local Statistics on the ONS website](http://ons.gov.uk/explore-local-statistics/)',
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
 			'Some indicators use custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day).',

@@ -4,7 +4,6 @@
 	import {
 		AnalyticsBanner,
 		analyticsEvent,
-		PhaseBanner,
 		Header,
 		Main,
 		Footer
@@ -56,10 +55,6 @@
 		<Header bilingual={false}>
 			<div slot="before">
 				<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-				<PhaseBanner
-					phase="beta"
-					href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
-				/>
 			</div>
 		</Header>
 		{#if $page.data.component}

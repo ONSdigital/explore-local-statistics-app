@@ -1,7 +1,7 @@
 <script lang="ts">
 	//@ts-nocheck
 	import { onMount, createEventDispatcher } from 'svelte';
-	import { base } from '$app/paths';
+	import { assets } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { makeFeatures } from '$lib/util/geo/makeFeatures';
 	import { countryLookup } from '$lib/config/geoConfig';
@@ -30,7 +30,7 @@
 		c: '#206095',
 		d: '#206095'
 	};
-	export let topoPath = `${base}/data/topo.json`;
+	export let topoPath = `${assets}/data/topo.json`;
 	export let customLookup = null;
 	export let legendType = 'choropleth';
 	export let clusterKey = 'cluster';
@@ -109,7 +109,7 @@
 	<div class="map-container">
 		{#if features && bounds}
 			<Map
-				style="{base}/data/mapstyle.json"
+				style="{assets}/data/mapstyle.json"
 				location={{ bounds }}
 				options={{
 					fitBoundsOptions: { padding: 10 },
