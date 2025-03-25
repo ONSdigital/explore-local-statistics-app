@@ -14,7 +14,8 @@ IMAGE_TAG?=$(error Must use: make IMAGE_TAG=tag_for_image)
 IMAGE_NAME?=onsdigital/explore-local-statistics-app
 IMAGE_URL?=$(AWS_ECR_URL)/$(IMAGE_NAME)
 
-COMMIT_HASH?=$(shell git rev-parse --short HEAD)
+# 7 matches that from cdn-assets image put short_ref (for ECR)
+COMMIT_HASH?=$(shell git rev-parse --short=7 HEAD)
 
 NVM_SOURCE_PATH ?= $(HOME)/.nvm/nvm.sh
 ifneq ("$(wildcard $(NVM_SOURCE_PATH))","")
@@ -103,7 +104,9 @@ test:
 test-component:
 	: # no-op
 
-# the below are separated deliberately - see Dockerfile (for local builds)
+# the `build-builder*` targets are separated deliberately, trying to keep consistent across:
+# - local builds: `Dockerfile`
+# - CI    builds: `ci/scripts/build.sh`
 
 .PHONY: build-builder-init
 build-builder-init:

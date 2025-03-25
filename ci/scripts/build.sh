@@ -1,7 +1,7 @@
 #!/bin/sh -eux
 
-# make for build; git for SHORT_REF
-apk add --no-cache make git
+# make for build
+apk add --no-cache make
 
 cwd=$(pwd)
 app_dir=explore-local-statistics-app
@@ -9,18 +9,18 @@ BUILD="$cwd/build"
 
 cd "$app_dir"
 
-    SHORT_REF=$(git rev-parse --short HEAD) # XXX not needed TODO
+    SHORT_REF=$(cat .git/short_ref) # XXX not needed TODO
     [[ -n "$SHORT_REF" ]]   # check that git returned valid value
 
     # need to build for app and assets
     make build-builder-init \
          build \
-            IMAGE_TAG=dummy-concourse-${SHORT_REF} \
+            IMAGE_TAG=assets-${SHORT_REF} \
             COMMIT_HASH=${SHORT_REF}
 
     if   [[ "$APPLICATION" = "explore-local-statistics"        ]]; then
 
-        cp -a Dockerfile.concourse build node_modules package.json "$BUILD"
+        cp -a build node_modules package.json "$BUILD"
 
         ls "$BUILD"
 
