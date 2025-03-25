@@ -15,7 +15,6 @@ cd "$app_dir"
     # need to build for app and assets
     make build-builder-init \
          build \
-            ENABLE_S3_ASSETS=false \
             IMAGE_TAG=dummy-concourse-${SHORT_REF} \
             COMMIT_HASH=${SHORT_REF}
 
