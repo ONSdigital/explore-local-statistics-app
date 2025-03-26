@@ -15,7 +15,7 @@ cd "$app_dir"
     # need to build for app and assets
     make build-builder-init \
          build \
-            IMAGE_TAG=concourse-${SHORT_REF}-${AWS_PROFILE} \
+            IMAGE_TAG=concourse-${AWS_PROFILE}-${SHORT_REF} \
             COMMIT_HASH=${SHORT_REF}
 
     mkdir "$BUILD/app"
