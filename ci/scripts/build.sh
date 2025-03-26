@@ -15,7 +15,7 @@ cd "$app_dir"
     # need to build for app and assets
     make build-builder-init \
          build \
-            IMAGE_TAG=assets-${SHORT_REF} \
+            IMAGE_TAG=concourse-${SHORT_REF}-${AWS_PROFILE} \
             COMMIT_HASH=${SHORT_REF}
 
     if   [[ "$APPLICATION" = "explore-local-statistics"        ]]; then
