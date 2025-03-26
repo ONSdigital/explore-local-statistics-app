@@ -9,7 +9,7 @@
 		Footer
 	} from '@onsvisual/svelte-components';
 
-	const analyticsId = 'GTM-P8JVL5X5';
+	const analyticsId = 'GTM-MBCBVQS';
 	const analyticsProps = {
 		contentTitle: 'Explore local statistics',
 		releaseDate: '20240326',
