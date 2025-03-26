@@ -20,7 +20,7 @@ cd "$app_dir"
 
     if   [[ "$APPLICATION" = "explore-local-statistics"        ]]; then
 
-        cp -a build node_modules package.json "$BUILD"
+        cp -a Dockerfile.concourse build node_modules package.json "$BUILD"
 
         ls "$BUILD"
 

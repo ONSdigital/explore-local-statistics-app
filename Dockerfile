@@ -24,7 +24,6 @@ ENV ENABLE_S3_ASSETS=${ENABLE_S3_ASSETS}
 FROM shared AS builder
 
 # add make(1)
-RUN apk add --no-cache make
 # vars for the Makefile
 ARG IMAGE_TAG
 ENV IMAGE_TAG=${IMAGE_TAG}

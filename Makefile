@@ -68,10 +68,10 @@ build-local:
 	docker build	--build-arg SVELTEKIT_BASE_PATH=$(SVELTEKIT_BASE_PATH)		\
 			--build-arg SVELTEKIT_ASSETS_PATH=$(SVELTEKIT_ASSETS_PATH)	\
 			--build-arg SVELTEKIT_APP_VERSION=$(SVELTEKIT_APP_VERSION)	\
-			--build-arg AWS_ECR_ACCOUNT=$(AWS_ECR_ACCOUNT)	\
-			--build-arg COMMIT_HASH=$(COMMIT_HASH)		\
-			--build-arg IMAGE_TAG=$(IMAGE_TAG)		\
-			--build-arg ENABLE_S3_ASSETS=false		\
+			--build-arg AWS_ECR_ACCOUNT=$(AWS_ECR_ACCOUNT)			\
+			--build-arg COMMIT_HASH=$(COMMIT_HASH)				\
+			--build-arg IMAGE_TAG=$(IMAGE_TAG)				\
+			--build-arg ENABLE_S3_ASSETS=$(ENABLE_S3_ASSETS)		\
 			--tag $(IMAGE_URL):$(IMAGE_TAG) .
 
 .PHONY: debug
@@ -82,7 +82,8 @@ debug:
 push: push-image push-assets
 .PHONY: push-image
 push-image:
-	docker push $(IMAGE_URL):$(IMAGE_TAG)
+	AWS_PROFILE=$(AWS_ECR_ACCOUNT) docker push $(IMAGE_URL):$(IMAGE_TAG)
+
 .PHONY: push-assets
 push-assets:
 ifeq ($(ENABLE_S3_ASSETS),true)
