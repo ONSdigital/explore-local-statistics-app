@@ -18,18 +18,10 @@ cd "$app_dir"
             IMAGE_TAG=concourse-${SHORT_REF}-${AWS_PROFILE} \
             COMMIT_HASH=${SHORT_REF}
 
-    # if   [[ "$APPLICATION" = "explore-local-statistics"        ]]; then
+    mkdir "$BUILD/app"
+    cp -a Dockerfile.concourse build node_modules package.json "$BUILD/app"
 
-        mkdir "$BUILD/app"
-        cp -a Dockerfile.concourse build node_modules package.json "$BUILD/app"
-
-        # ls "$BUILD"
-
-    # elif [[ "$APPLICATION" = "explore-local-statistics-assets" ]]; then
-
-        mkdir "$BUILD/assets/${SHORT_REF}"
-        cp -a "build/client/explore-local-statistics/." "$BUILD/assets/${SHORT_REF}"
-
-    # fi
+    mkdir -p "$BUILD/assets/${SHORT_REF}"
+    cp -a "build/client/explore-local-statistics/." "$BUILD/assets/${SHORT_REF}"
 
 cd "$cwd"
