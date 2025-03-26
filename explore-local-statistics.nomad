@@ -74,7 +74,7 @@ job "explore-local-statistics" {
         # keep all below in-sync with Makefile
         export SVELTEKIT_BASE_PATH=/explore-local-statistics
         export SVELTEKIT_ADAPTER=node
-        export SVELTEKIT_APP_VERSION="concourse-{{REVISION}}"
+        export SVELTEKIT_APP_VERSION="{{REVISION}}"
 
         S3_PREFIX="explore-local-statistics-assets/{{REVISION}}"
         if   [[ $AWS_PROFILE = dp-sandbox ]]; then

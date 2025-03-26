@@ -11,7 +11,7 @@ AWS_ECR_ACCOUNT?=$(shell aws sts --profile $(ECR_AWS_PROFILE) get-caller-identit
 AWS_ECR_URL?=$(AWS_ECR_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com
 
 IMAGE_TAG?=$(error Must use: make IMAGE_TAG=tag_for_image)
-IMAGE_NAME?=onsdigital/explore-local-statistics-app
+IMAGE_NAME?=explore-local-statistics
 IMAGE_URL?=$(AWS_ECR_URL)/$(IMAGE_NAME)
 
 # 7 matches that from cdn-assets image put short_ref (for ECR)
@@ -48,7 +48,7 @@ endif # ENABLE_S3_ASSETS
 
 export SVELTEKIT_BASE_PATH=/explore-local-statistics
 export SVELTEKIT_ADAPTER=node
-export SVELTEKIT_APP_VERSION=$(IMAGE_TAG)
+export SVELTEKIT_APP_VERSION=$(COMMIT_HASH)
 
 .PHONY: build
 build: build-builder
@@ -71,6 +71,7 @@ build-local:
 			--build-arg AWS_ECR_ACCOUNT=$(AWS_ECR_ACCOUNT)			\
 			--build-arg COMMIT_HASH=$(COMMIT_HASH)				\
 			--build-arg IMAGE_TAG=$(IMAGE_TAG)				\
+			--build-arg AWS_PROFILE=$(AWS_PROFILE)				\
 			--build-arg ENABLE_S3_ASSETS=$(ENABLE_S3_ASSETS)		\
 			--tag $(IMAGE_URL):$(IMAGE_TAG) .
 
