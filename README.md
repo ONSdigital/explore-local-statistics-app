@@ -41,7 +41,7 @@ Or you can parameterise the image with `--build-arg`s:
 
 ### Hosting assets in a bucket
 
-In production we host the SvelteVit assets (i.e. the app's files, including the built `.js`, `.css` files and everything in `/static`) in a bucket to reduce the disk costs in the container. This bucket is on the CND domain `cdn.ons.gov.uk`. We copy the built assets during deployment.
+In production we host the SvelteVit assets (i.e. the app's files, including the built `.js`, `.css` files and everything in `/explore-local-statistics/<COMMIT_HASH>/...`) in a bucket to reduce the disk costs in the container. This bucket is on the CDN domain `cdn.ons.gov.uk`. We copy the built assets during build in CI.
 
 To simulate this locally, copy the client build output from the container to a local HTTP server for example running at `../liveserv` (we used `live-server` with the `--cors` option):
 
