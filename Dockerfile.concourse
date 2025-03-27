@@ -1,0 +1,29 @@
+FROM node:18.20.7
+
+WORKDIR /app
+
+# XXX TODO                       instead of the below, use SECRETS..??
+# XXX TODO                      or does this need to be here
+# Custom var for the Node adapter
+ENV SVELTEKIT_ADAPTER=node
+# Custom var for the base path
+ARG SVELTEKIT_BASE_PATH
+ENV SVELTEKIT_BASE_PATH=${SVELTEKIT_BASE_PATH}
+# Custom var for the assets path
+ARG SVELTEKIT_ASSETS_PATH
+ENV SVELTEKIT_ASSETS_PATH=${SVELTEKIT_ASSETS_PATH}
+# Custom var for the app version
+ARG SVELTEKIT_APP_VERSION
+ENV SVELTEKIT_APP_VERSION=${SVELTEKIT_APP_VERSION}
+
+ARG AWS_PROFILE
+ENV AWS_PROFILE=dp-${PROFILE}
+
+# Install dependencies from previous build
+COPY . .
+
+# Set the standard NODE_ENV var to production
+ENV NODE_ENV=production
+
+# Start the app (node build/index.js)
+CMD ["node", "build"]
