@@ -10,14 +10,15 @@ BUILD="$cwd/build"
 cd "$app_dir"
 
     if   [[ -f .git/short_ref ]]; then
+        # in CI, the 'integration' tab uses a git image that produces the below file with a 7-char hash
         SHORT_REF=$(cat .git/short_ref)
     elif [[ -f .git/resource/base_sha ]]; then
+        # in CI, the 'prs' tab uses a git image that produces the below file with a full hash
         SHORT_REF=$(cat .git/resource/base_sha)
-        echo "<$SHORT_REF>"
-        echo "<${SHORT_REF:0:7}>"
+        # reduce to 7-char
+        SHORT_REF="${SHORT_REF:0:7}"
     fi
     [[ -n "$SHORT_REF" ]]   # check that ref is a valid value
-        exit 2
 
     # build app and assets
     #   IMAGE_TAG   to match that in CI (see tag_prefix)
