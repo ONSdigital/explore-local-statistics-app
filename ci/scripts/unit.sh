@@ -1,8 +1,8 @@
 #!/bin/sh -eux
 
-apk add --no-cache make
-
 app_dir=explore-local-statistics-app
+
+apk add --no-cache make
 
 cd "$app_dir"
 

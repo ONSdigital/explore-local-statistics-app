@@ -26,7 +26,7 @@ NPM = $(NVM_EXEC) npm
 PORT?=3000
 
 S3_CDN_BUCKET?=ons-$(AWS_PROFILE)-cdn
-S3_PREFIX?=explore-local-statistics-assets/$(COMMIT_HASH)
+S3_PREFIX?=explore-local-statistics/$(COMMIT_HASH)
 AWS_S3_CDN_URL?=s3://$(S3_CDN_BUCKET)/$(S3_PREFIX)
 
 ifeq ($(ENABLE_S3_ASSETS),true)
