@@ -9,8 +9,14 @@ BUILD="$cwd/build"
 
 cd "$app_dir"
 
-    SHORT_REF=$(cat .git/short_ref)
+    if   [[ -f .git/short_ref ]]; then
+        SHORT_REF=$(cat .git/short_ref)
+    elif [[ -f .git/resource/base_sha ]]; then
+        SHORT_REF=$(cat .git/resource/base_sha)
+        echo "<$SHORT_REF>"
+    fi
     [[ -n "$SHORT_REF" ]]   # check that ref is a valid value
+        exit 2
 
     # build app and assets
     #   IMAGE_TAG   to match that in CI (see tag_prefix)
