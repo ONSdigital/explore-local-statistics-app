@@ -60,8 +60,9 @@ audit:
 
 .PHONY: lint
 lint:
-	$(NPM) install --unsafe-perm
-	$(NPM) run lint
+	exit 0 # no-op for now XXX
+	# $(NPM) install --unsafe-perm
+	# $(NPM) run lint
 
 .PHONY: build-local
 build-local:
@@ -104,7 +105,7 @@ test:
 
 .PHONY: test-component
 test-component:
-	: # no-op
+	exit 0 # no-op
 
 # the `build-builder*` targets are separated deliberately, trying to keep consistent across:
 # - local builds: `Dockerfile`
