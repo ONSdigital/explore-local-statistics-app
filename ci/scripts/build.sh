@@ -14,6 +14,7 @@ cd "$app_dir"
     elif [[ -f .git/resource/base_sha ]]; then
         SHORT_REF=$(cat .git/resource/base_sha)
         echo "<$SHORT_REF>"
+        echo "<${SHORT_REF:0:7}>"
     fi
     [[ -n "$SHORT_REF" ]]   # check that ref is a valid value
         exit 2
