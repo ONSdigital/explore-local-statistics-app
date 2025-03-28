@@ -10,7 +10,7 @@ export const load: LayoutLoad = async () => {
 		pageType: `els-home-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
-			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+			{ label: 'Home', href: `/`, refresh: true },
 			{ label: 'Explore local statistics' }
 		],
 		background: '#e9eff4'
