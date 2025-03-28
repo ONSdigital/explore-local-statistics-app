@@ -2,7 +2,7 @@
 
 This script creates the data that the /insights (ESS) visualisations use.
 
-- takes the raw data from the GitHub repo https://github.com/ONSdigital/explore-local-statistics-data
+- takes the raw data from the GitHub repo <https://github.com/ONSdigital/explore-local-statistics-data>
 - performs some aggregatation (median, mad)
 - adds any missing variable name(s) in the raw data
 - maps some area codes
