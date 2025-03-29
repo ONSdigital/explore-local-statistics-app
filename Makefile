@@ -1,4 +1,4 @@
-export ENABLE_S3_ASSETS?=true
+export ENABLE_S3_ASSETS?=false
 APP=explore-local-statistics
 
 # where this will run (for CDN)
