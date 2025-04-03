@@ -38,7 +38,7 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 			pageType: `area page`,
 			component: Breadcrumb,
 			breadcrumbLinks: [
-				{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+				{ label: 'Home', href: `/`, refresh: true },
 				{ label: 'Explore local statistics', href: `${base}/` },
 				...[...result.place.parents]
 					.reverse()
