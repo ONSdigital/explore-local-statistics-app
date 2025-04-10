@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { createEventDispatcher } from 'svelte';
-	import { base } from '$app/paths';
+	import { assets } from '$app/paths';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import { analyticsEvent } from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
@@ -43,7 +43,7 @@
 <div style:height="450px">
 	<Map
 		bind:map
-		style="{base}/data/mapstyle.json"
+		style="{assets}/data/mapstyle.json"
 		location={{ bounds: data.place.bounds }}
 		options={{
 			fitBoundsOptions: { padding: 20 },

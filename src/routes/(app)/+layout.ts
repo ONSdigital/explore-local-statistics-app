@@ -1,10 +1,8 @@
 import type { LayoutLoad } from './$types';
-import { base } from '$app/paths';
 import { Breadcrumb } from '@onsvisual/svelte-components';
+import coreMetadata from '../../data/insights/core-metadata.json';
 
-export const load: LayoutLoad = async ({ fetch }) => {
-	const coreMetadata = await (await fetch(`${base}/insights/core-metadata.json`)).json();
-
+export const load: LayoutLoad = async () => {
 	return {
 		coreMetadata,
 		title: `Explore local statistics - ONS`,

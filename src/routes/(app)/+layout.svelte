@@ -4,13 +4,12 @@
 	import {
 		AnalyticsBanner,
 		analyticsEvent,
-		PhaseBanner,
 		Header,
 		Main,
 		Footer
 	} from '@onsvisual/svelte-components';
 
-	const analyticsId = 'GTM-P8JVL5X5';
+	const analyticsId = 'GTM-MBCBVQS';
 	const analyticsProps = {
 		contentTitle: 'Explore local statistics',
 		releaseDate: '20240326',
@@ -56,10 +55,6 @@
 		<Header bilingual={false}>
 			<div slot="before">
 				<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-				<PhaseBanner
-					phase="beta"
-					href="https://consultations.ons.gov.uk/digital-publishing/8302beaa/consultation/intro/"
-				/>
 			</div>
 		</Header>
 		{#if $page.data.component}

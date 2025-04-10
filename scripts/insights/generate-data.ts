@@ -20,9 +20,11 @@ const COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data.j
 const CONFIG_OUTPUT_PATH = `static/insights/config.json`;
 const UNMINIFIED_COLUMN_ORIENTED_DATA_OUTPUT_PATH = `static/insights/column-oriented-data-unminified.json`;
 const UNMINIFIED_CONFIG_OUTPUT_PATH = `static/insights/config-unminified.json`;
-const CORE_METADATA_OUTPUT_PATH = `static/insights/core-metadata.json`;
 const AREA_DETAILS_OUTPUT_DIR = `static/insights/area-details`;
 const INDIVIDUAL_DATASETS_OUTPUT_DIR = `static/insights/individual-datasets`;
+
+// put the core-metadata into src to be imported as it's currently loaded in the layout page and is reasonably small
+const CORE_METADATA_OUTPUT_PATH = `src/data/insights/core-metadata.json`;
 
 await main();
 

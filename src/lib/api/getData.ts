@@ -1,4 +1,4 @@
-import { base } from '$app/paths';
+import { assets, base } from '$app/paths';
 import { filterExtremeAreas } from '$lib/util/datasets/datasetsHelpers.ts';
 
 type GetDataResult = { kind: 'Success'; chartData: JSON; metadata: JSON } | { kind: 'Failure' };
@@ -30,8 +30,8 @@ function reshapeData(colData) {
 }
 
 export const getData = async (fetch: typeof window.fetch): Promise<GetDataResult> => {
-	const dataResult = await fetch(`${base}/insights/column-oriented-data.json`);
-	const metadataResult = await fetch(`${base}/insights/config.json`);
+	const dataResult = await fetch(`${assets}/insights/column-oriented-data.json`);
+	const metadataResult = await fetch(`${assets}/insights/config.json`);
 
 	if (dataResult && metadataResult) {
 		const dataParsed = await dataResult.json();

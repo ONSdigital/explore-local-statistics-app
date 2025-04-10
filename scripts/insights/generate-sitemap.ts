@@ -17,24 +17,21 @@ export function generateSitemap(areas, indicators) {
 
 	const paths: string[] = [];
 
-	paths.push('https://explore-local-statistics.beta.ons.gov.uk/');
-	paths.push('https://explore-local-statistics.beta.ons.gov.uk/areas/');
-	paths.push('https://explore-local-statistics.beta.ons.gov.uk/indicators/');
+	paths.push('https://ons.gov.uk/explore-local-statistics/');
+	paths.push('https://ons.gov.uk/explore-local-statistics/areas/');
+	paths.push('https://ons.gov.uk/explore-local-statistics/indicators/');
 
 	Object.keys(sitemapData).forEach((d) => {
 		if (d == 'areas') {
 			sitemapData[d].forEach((e) => {
 				paths.push(
-					'https://explore-local-statistics.beta.ons.gov.uk/areas/' +
-						e.areacd +
-						'-' +
-						slugify(e.areanm)
+					'https://ons.gov.uk/explore-local-statistics/areas/' + e.areacd + '-' + slugify(e.areanm)
 				);
 			});
 		} else if (d == 'areas-with-indicators') {
 			sitemapData[d].forEach((e) => {
 				paths.push(
-					'https://explore-local-statistics.beta.ons.gov.uk/areas/' +
+					'https://ons.gov.uk/explore-local-statistics/areas/' +
 						e.areacd +
 						'-' +
 						slugify(e.areanm) +
@@ -43,7 +40,7 @@ export function generateSitemap(areas, indicators) {
 			});
 		} else {
 			sitemapData[d].forEach((f) => {
-				paths.push('https://explore-local-statistics.beta.ons.gov.uk/indicators/' + f);
+				paths.push('https://ons.gov.uk/explore-local-statistics/indicators/' + f);
 			});
 		}
 	});
