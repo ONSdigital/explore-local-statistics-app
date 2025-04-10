@@ -102,6 +102,7 @@
 			aria-labelledby={indicator.metadata.slug + '-beeswarm-description'}
 			{width}
 			{height}
+			tabindex="0"
 		>
 			<desc id={indicator.metadata.slug + '-beeswarm-description'}>{beeswarmAltText}</desc>
 			{#if chartWidth && chartHeight}
