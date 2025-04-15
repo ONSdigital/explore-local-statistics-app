@@ -45,7 +45,6 @@
 								fileExtension: 'png',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
-								indicatorName: indicator.metadata.label,
 								contentGroup: indicator.topic,
 								contentSubgroup: indicator.subTopic
 							};
@@ -68,7 +67,6 @@
 								fileExtension: 'csv',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
-								indicatorName: indicator.metadata.label,
 								contentGroup: indicator.topic,
 								contentSubgroup: indicator.subTopic
 							};
@@ -99,7 +97,6 @@
 						event: 'embed',
 						chartType: type,
 						indicatorCode: indicator.metadata.slug,
-						indicatorName: indicator.metadata.label,
 						contentGroup: indicator.topic,
 						contentSubgroup: indicator.subTopic
 					};
