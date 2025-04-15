@@ -47,7 +47,7 @@
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
 								contentGroup: indicator.topic,
-								indicatorSubtopic: indicator.subTopic
+								contentSubgroup: indicator.subTopic
 							};
 							analyticsEvent(eventData);
 						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} image (PNG)</button
@@ -70,7 +70,7 @@
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
 								contentGroup: indicator.topic,
-								indicatorSubtopic: indicator.subTopic
+								contentSubgroup: indicator.subTopic
 							};
 							analyticsEvent(eventData);
 						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} data (CSV)</button
@@ -101,7 +101,7 @@
 						indicatorCode: indicator.metadata.slug,
 						indicatorName: indicator.metadata.label,
 						contentGroup: indicator.topic,
-						indicatorSubtopic: indicator.subTopic
+						contentSubgroup: indicator.subTopic
 					};
 					analyticsEvent(eventData);
 				}}>Copy to clipboard</Button
