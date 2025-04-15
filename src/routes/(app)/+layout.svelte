@@ -18,6 +18,7 @@
 	afterNavigate(() => {
 		const eventData = {
 			event: 'pageView',
+			product: 'explore local statistics',
 			pageUrl: $page.url.href,
 			contentTitle: $page.data.title,
 			contentType: $page.data.pageType
