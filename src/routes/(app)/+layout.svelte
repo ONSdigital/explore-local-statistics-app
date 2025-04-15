@@ -23,10 +23,7 @@
 			contentTitle: $page.data.title,
 			contentType: $page.data.pageType
 		};
-		if (
-			['els - area page', 'els - area data page'].includes($page.data.pageType) &&
-			$page.data.place
-		) {
+		if (['els-area-page', 'els-area-data-page'].includes($page.data.pageType) && $page.data.place) {
 			eventData.areaCode = $page.data.place.areacd;
 			eventData.areaName = $page.data.place.areanm || $page.data.place.areacd;
 			eventData.areaType = $page.data.place.typenm;
