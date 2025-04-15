@@ -91,8 +91,6 @@
 		(comparisonFilteredChartDataBeeswarmWithRole?.value
 			? `The ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm} value was ${indicator.metadata?.prefix}${roundNumber(comparisonFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}.`
 			: `No value available for ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm}.`);
-
-	$: console.log(beeswarmAltText);
 </script>
 
 <figure class="beeswarm-figure">

@@ -25,8 +25,6 @@
 	$: xAxisFinalTickWidth = xAxisFinalTick ? xAxisFinalTick.width : null;
 
 	$: maxWidth = xAxisTickRects.length > 0 ? Math.max(...xAxisTickRects.map((el) => el.width)) : 0;
-
-	$: console.log(maxWidth * ticks.length >= 0.75 * chartWidth);
 </script>
 
 <g class="x-axis-container">
