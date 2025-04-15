@@ -42,7 +42,7 @@
 							downloadPNG(el, indicator.metadata.slug, type);
 							const eventData = {
 								event: 'fileDownload',
-								extension: 'png',
+								fileExtension: 'png',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
@@ -65,7 +65,7 @@
 							downloadCSV(data, metadata, indicator, type);
 							const eventData = {
 								event: 'fileDownload',
-								extension: 'csv',
+								fileExtension: 'csv',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
