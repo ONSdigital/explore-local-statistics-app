@@ -46,7 +46,7 @@
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
-								indicatorTopic: indicator.topic,
+								contentGroup: indicator.topic,
 								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
@@ -69,7 +69,7 @@
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
 								indicatorName: indicator.metadata.label,
-								indicatorTopic: indicator.topic,
+								contentGroup: indicator.topic,
 								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
@@ -100,7 +100,7 @@
 						chartType: type,
 						indicatorCode: indicator.metadata.slug,
 						indicatorName: indicator.metadata.label,
-						indicatorTopic: indicator.topic,
+						contentGroup: indicator.topic,
 						indicatorSubtopic: indicator.subTopic
 					};
 					analyticsEvent(eventData);
