@@ -76,7 +76,7 @@ job "explore-local-statistics" {
         export SVELTEKIT_ADAPTER=node
         export SVELTEKIT_APP_VERSION="{{REVISION}}"
 
-        S3_PREFIX="explore-local-statistics-assets/{{REVISION}}"
+        S3_PREFIX="explore-local-statistics/{{REVISION}}"
         if   [[ $AWS_PROFILE = dp-sandbox ]]; then
           export SVELTEKIT_ASSETS_PATH="https://ons-$AWS_PROFILE-cdn.s3.eu-west-2.amazonaws.com/$S3_PREFIX"
         elif [[ $AWS_PROFILE = dp-staging ]]; then
@@ -88,14 +88,6 @@ job "explore-local-statistics" {
         destination = "${NOMAD_TASK_DIR}/vars"
       }
 
-      # template {
-      # source      = "${NOMAD_TASK_DIR}/vars-template"
-      # destination = "${NOMAD_TASK_DIR}/vars"
-      # }
-
-      # vault {
-      # policies = ["explore-local-statistics-web"]
-      # }
     }
   }
 }

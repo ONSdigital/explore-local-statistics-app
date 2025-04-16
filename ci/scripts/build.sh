@@ -9,7 +9,15 @@ BUILD="$cwd/build"
 
 cd "$app_dir"
 
-    SHORT_REF=$(cat .git/short_ref)
+    if   [[ -f .git/short_ref ]]; then
+        # in CI, the 'integration' tab uses a git image that produces the below file with a 7-char hash
+        SHORT_REF=$(cat .git/short_ref)
+    elif [[ -f .git/resource/base_sha ]]; then
+        # in CI, the 'prs' tab uses a git image that produces the below file with a full hash
+        SHORT_REF=$(cat .git/resource/base_sha)
+        # reduce to 7-char
+        SHORT_REF="${SHORT_REF:0:7}"
+    fi
     [[ -n "$SHORT_REF" ]]   # check that ref is a valid value
 
     # build app and assets
