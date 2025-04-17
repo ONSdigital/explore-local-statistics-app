@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		...result,
 		title: `${result.indicator.metadata.label} - ONS`,
 		description: result.indicator.metadata.subtitle,
-		pageType: `indicator data page`,
+		pageType: `els-indicator-data-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
 			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },

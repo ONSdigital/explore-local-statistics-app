@@ -12,23 +12,23 @@
 	const analyticsId = 'GTM-MBCBVQS';
 	const analyticsProps = {
 		contentTitle: 'Explore local statistics',
-		releaseDate: '20240326',
 		contentType: 'exploratory'
 	};
 
 	afterNavigate(() => {
 		const eventData = {
 			event: 'pageView',
+			product: 'explore local statistics',
 			pageUrl: $page.url.href,
 			contentTitle: $page.data.title,
 			contentType: $page.data.pageType
 		};
-		if (['area page', 'area data page'].includes($page.data.pageType) && $page.data.place) {
+		if (['els-area-page', 'els-area-data-page'].includes($page.data.pageType) && $page.data.place) {
 			eventData.areaCode = $page.data.place.areacd;
 			eventData.areaName = $page.data.place.areanm || $page.data.place.areacd;
 			eventData.areaType = $page.data.place.typenm;
-		} else if ($page.data.pageType === 'indicator data page' && $page.data.indicator) {
-			eventData.indicatorCode = $page.data.indicator.metadata.slug;
+		} else if ($page.data.pageType === 'els-indicator-data-page' && $page.data.indicator) {
+			eventData.indicator = $page.data.indicator.metadata.slug;
 			eventData.indicatorName = $page.data.indicator.metadata.label;
 			eventData.contentGroup = $page.data.indicator.topic;
 			eventData.contentSubgroup = $page.data.indicator.subTopic;
