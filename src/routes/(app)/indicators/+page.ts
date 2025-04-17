@@ -12,7 +12,7 @@ export const load: PageLoad = async ({ parent }) => {
 		pageType: `els-indicators-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
-			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+			{ label: 'Home', href: `/`, refresh: true },
 			{ label: 'Explore local statistics', href: `${base}/` },
 			{ label: 'Local indicators' }
 		],
