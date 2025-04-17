@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ parent }) => {
 		coreMetadata,
 		title: `Explore local indicators - ONS`,
 		description: `Explore ${coreMetadata.indicatorsCodeLabelArray.length} local datasets from the ONS, including disposable household income, participation in further education and life satisfaction.`,
-		pageType: `indicators page`,
+		pageType: `els-indicators-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
 			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
