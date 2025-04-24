@@ -42,11 +42,12 @@
 							downloadPNG(el, indicator.metadata.slug, type);
 							const eventData = {
 								event: 'fileDownload',
-								fileExtension: 'png',
+								extension: 'png',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
-								contentGroup: indicator.topic,
-								contentSubgroup: indicator.subTopic
+								indicatorName: indicator.metadata.label,
+								indicatorTopic: indicator.topic,
+								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
 						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} image (PNG)</button
@@ -64,11 +65,12 @@
 							downloadCSV(data, metadata, indicator, type);
 							const eventData = {
 								event: 'fileDownload',
-								fileExtension: 'csv',
+								extension: 'csv',
 								chartType: type,
 								indicatorCode: indicator.metadata.slug,
-								contentGroup: indicator.topic,
-								contentSubgroup: indicator.subTopic
+								indicatorName: indicator.metadata.label,
+								indicatorTopic: indicator.topic,
+								indicatorSubtopic: indicator.subTopic
 							};
 							analyticsEvent(eventData);
 						}}>Download {type} {type == 'map' || type == 'table' ? '' : 'chart'} data (CSV)</button
@@ -97,8 +99,9 @@
 						event: 'embed',
 						chartType: type,
 						indicatorCode: indicator.metadata.slug,
-						contentGroup: indicator.topic,
-						contentSubgroup: indicator.subTopic
+						indicatorName: indicator.metadata.label,
+						indicatorTopic: indicator.topic,
+						indicatorSubtopic: indicator.subTopic
 					};
 					analyticsEvent(eventData);
 				}}>Copy to clipboard</Button
