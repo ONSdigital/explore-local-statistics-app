@@ -4,8 +4,6 @@
 
 	export let label, maxLabelWidth, y, isHoverLabelVisible, fontSize, labelSpace;
 
-	$: console.log(label);
-
 	$: areaName = label.areanm;
 
 	$: textArrayOptions = [

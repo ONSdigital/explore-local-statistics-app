@@ -7,7 +7,7 @@ export const load: LayoutLoad = async () => {
 		coreMetadata,
 		title: `Explore local statistics - ONS`,
 		description: `Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.`,
-		pageType: `home page`,
+		pageType: `els-home-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
 			{ label: 'Home', href: `/`, refresh: true },

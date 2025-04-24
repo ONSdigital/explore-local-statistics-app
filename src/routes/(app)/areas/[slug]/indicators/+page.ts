@@ -13,7 +13,7 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 		...result,
 		title: `Local indicators for ${getName(place, 'the')} (${place.areacd}) - ONS`,
 		description: `Explore local statistics from the ONS on ${getName(place, 'the')} (${place.typenm}). Includes data on population, economy and health.`,
-		pageType: `area data page`,
+		pageType: `els-area-data-page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
 			{ label: 'Home', href: `/`, refresh: true },

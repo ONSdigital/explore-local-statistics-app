@@ -17,8 +17,6 @@
 	$: maxWidth = xAxisTickRects.length > 0 ? Math.max(...xAxisTickRects.map((el) => el.width)) : 0;
 
 	$: filteredTicks = timePeriodsArray.filter((el) => ticks.includes(parseInt(el.xDomainNumb)));
-
-	$: console.log(maxWidth);
 </script>
 
 <g class="x-axis-container" transform="translate(0,{chartHeight})">
