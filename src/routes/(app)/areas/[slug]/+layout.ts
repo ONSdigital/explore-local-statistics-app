@@ -35,10 +35,10 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
 			links: productLinks.map(addBaseUrlsToProductLink),
 			title: `${getName(result.place)} (${result.place.areacd}) - ONS`,
 			description: `Find facts and figures from across the ONS on ${getName(result.place, 'the')} (${result.place.typenm}).`,
-			pageType: `els-area-page`,
+			pageType: `area page`,
 			component: Breadcrumb,
 			breadcrumbLinks: [
-				{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+				{ label: 'Home', href: `/`, refresh: true },
 				{ label: 'Explore local statistics', href: `${base}/` },
 				...[...result.place.parents]
 					.reverse()

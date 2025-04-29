@@ -36,6 +36,17 @@
 		let newvalue = pos
 			.map((v) => min + v * width)
 			.map((v) => Math.round((v - offset) / step) * step + offset);
+
+		// If timePeriodsArray is provided, check if all selected values exist
+		if (timePeriodsArray) {
+			const valid = newvalue.every((val) => timePeriodsArray.some((el) => el.xDomainNumb === val));
+
+			if (!valid) {
+				console.warn('Invalid time period(s) selected, dispatch skipped:', newvalue);
+				return;
+			}
+		}
+
 		value = Array.isArray(value) ? newvalue : newvalue[0];
 		dispatch('input', value);
 	}
@@ -52,7 +63,6 @@
 		setPos(value);
 		setValue(pos);
 	}
-
 	$: multipleTimePeriodsSelected = Math.min(...value) != Math.max(...value);
 </script>
 

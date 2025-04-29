@@ -7,7 +7,6 @@
 		customLookup,
 		fontSize = 18,
 		connectingLineInfo;
-	$: console.log(label);
 	$: color =
 		label.datum.role != 'related' && hoverId === label.datum.areacd
 			? colorsLookup.selected

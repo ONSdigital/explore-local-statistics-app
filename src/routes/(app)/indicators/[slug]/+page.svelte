@@ -306,8 +306,6 @@
 		}
 	];
 
-	$: console.log(accordionArrayMap);
-
 	$: accordionArrayLineBarBeeswarm = [
 		{
 			label: 'Selected areas',
@@ -661,7 +659,7 @@
 					on:click={() =>
 						analyticsEvent({
 							event: 'fileDownload',
-							fileExtension: 'ods',
+							extension: 'ods',
 							chartType: 'all'
 						})}>accompanying dataset (ODS, 4MB)</a
 				>.
