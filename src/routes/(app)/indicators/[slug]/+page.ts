@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		...result,
 		title: `${result.indicator.metadata.label} - ONS`,
 		description: result.indicator.metadata.subtitle,
-		pageType: `els-indicator-data-page`,
+		pageType: `indicator data page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
 			{ label: 'Home', href: `/`, refresh: true },
