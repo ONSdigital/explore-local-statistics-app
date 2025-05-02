@@ -40,8 +40,6 @@
 
 	$: connectingLineInfo = permanentLabels ? groupAdjacentItemsWithPositions(permanentLabels) : null;
 
-	$: console.log(connectingLineInfo);
-
 	let labelRectArray = [];
 
 	$: maxLabelWidth =

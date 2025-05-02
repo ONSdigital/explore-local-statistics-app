@@ -4,8 +4,6 @@
 
 	export let label, maxLabelWidth, y, isHoverLabelVisible, fontSize, labelSpace;
 
-	$: console.log(labelSpace);
-
 	$: areaName = label.areanm;
 
 	$: textArrayOptions = [
@@ -50,8 +48,6 @@
 
 	$: isHoverLabelVisible =
 		isOneLineLabelVisilble || isTwoLineLabelVisilble || isThreeLineLabelVisilble;*/
-
-	$: console.log(labelRectArray);
 </script>
 
 <g class="hover-label-container">
