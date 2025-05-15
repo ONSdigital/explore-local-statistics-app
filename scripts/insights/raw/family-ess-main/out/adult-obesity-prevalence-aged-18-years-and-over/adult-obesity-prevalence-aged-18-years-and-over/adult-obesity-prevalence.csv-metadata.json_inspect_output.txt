@@ -6,7 +6,7 @@
           - Title: Adult obesity prevalence
           - Label: Adult obesity prevalence
           - Issued: 2023-05-17T12:41:34.475144
-          - Modified: 2024-05-30T14:27:00
+          - Modified: 2025-05-12T09:14:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -16,13 +16,13 @@
           - Keywords: 
 		-- obesity
 		-- region
-		-- subnational
 		-- county
+		-- subnational
 		-- local-authority
           - Contact Point: None
           - Identifier: Adult obesity prevalence
-          - Comment: Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.
-          - Description: This dataset shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2022-15/11/2023.
+          - Comment: Percentage of adults aged 18 and over classified as living with obesity, England, 16/11/2015-15/11/2016 to 16/11/2023-15/11/2024.
+          - Description: This dataset shows the percentage of adults aged 18 and over classified as living with obesity, in England, for 16/11/2015-15/11/2016 to 16/11/2023-15/11/2024.
 		
 		### Coverage 
 		
@@ -55,28 +55,24 @@
  - The data cube has the following column component information: 
     - Dataset Label: Adult obesity prevalence
     - Columns: 
-                              Title         Type  Required                                                                     Property URL Observations Column Titles
-                             AREACD    Dimension      True                        adult-obesity-prevalence.csv#dimension/ons-geography-code                Observation
-                             AREANM    Dimension      True                                 adult-obesity-prevalence.csv#dimension/area-name                Observation
-                          Geography    Dimension      True                            adult-obesity-prevalence.csv#dimension/geography-type                Observation
-                      Variable Name   Suppressed     False                                                                             None                           
-                          Indicator   Suppressed     False                                                                             None                           
-                            Mission   Suppressed     False                                                                             None                           
-                           Category   Suppressed     False                                                                             None                           
-                             Period    Dimension      True                   adult-obesity-prevalence.csv#dimension/gregorian-time-interval                Observation
-                        Observation Observations     False adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-obese                Observation
-                            Measure   Suppressed     False                                                                             None                           
-                               Unit   Suppressed     False                                                                             None                           
-    Lower Confidence Interval (95%)    Attribute     False                 adult-obesity-prevalence.csv#attribute/lower-confidence-interval                Observation
-    Upper Confidence Interval (95%)    Attribute     False                 adult-obesity-prevalence.csv#attribute/upper-confidence-interval                Observation
-                 Observation Status    Attribute     False                        adult-obesity-prevalence.csv#attribute/observation-status                Observation
-                           Polarity   Suppressed     False                                                                             None                           
-                              Notes   Suppressed     False                                                                             None                           
+                              Title         Type  Required                                                                                   Property URL Observations Column Titles
+                             AREACD    Dimension      True                                      adult-obesity-prevalence.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                               adult-obesity-prevalence.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                                          adult-obesity-prevalence.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                           None                           
+                          Indicator   Suppressed     False                                                                                           None                           
+                             Period    Dimension      True                                 adult-obesity-prevalence.csv#dimension/gregorian-time-interval                Observation
+                        Observation Observations     False adult-obesity-prevalence.csv#measure/adults-aged-18-years-and-over-who-are-living-with-obesity                Observation
+                            Measure   Suppressed     False                                                                                           None                           
+                               Unit   Suppressed     False                                                                                           None                           
+    Lower Confidence Interval (95%)    Attribute     False                               adult-obesity-prevalence.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                               adult-obesity-prevalence.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                                      adult-obesity-prevalence.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                           None                           
+                              Notes   Suppressed     False                                                                                           None                           
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -92,36 +88,36 @@ gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
      ons-geography-code.csv#code-list      ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 2836
+        - Number of Rows: 3173
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD     AREANM Geography                  Variable Name                                         Indicator   Mission                                            Category                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2015-11-16t00-00-00/p1y     22.62620 Percentage    %                         22.42869                         22.82922                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2016-11-16t00-00-00/p1y     23.12811 Percentage    %                         22.92540                         23.33213                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2017-11-16t00-00-00/p1y     23.09746 Percentage    %                         22.88679                         23.31204                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2018-11-16t00-00-00/p1y     23.50096 Percentage    %                         23.29284                         23.71211                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2019-11-16t00-00-00/p1y     24.35666 Percentage    %                         24.13765                         24.57318                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2020-11-16t00-00-00/p1y     25.20737 Percentage    %                         24.99072                         25.42366                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2021-11-16t00-00-00/p1y     25.92851 Percentage    %                         25.70006                         26.15701                 NaN        -1   NaN
-e92000001    england    nation Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2022-11-16t00-00-00/p1y     26.23816 Percentage    %                         26.01254                         26.46943                 NaN        -1   NaN
-e12000001 north-east    region Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2022-11-16t00-00-00/p1y     32.17030 Percentage    %                         31.01596                         33.34419                 NaN        -1   NaN
-e12000001 north-east    region Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2021-11-16t00-00-00/p1y     32.36641 Percentage    %                         31.23296                         33.55780                 NaN        -1   NaN
+   AREACD     AREANM Geography            Variable Name                      Indicator                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2015-11-16t00-00-00/p1y     22.62620 Percentage    %                         22.42869                         22.82922                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2016-11-16t00-00-00/p1y     23.12811 Percentage    %                         22.92540                         23.33213                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2017-11-16t00-00-00/p1y     23.09746 Percentage    %                         22.88679                         23.31204                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2018-11-16t00-00-00/p1y     23.50096 Percentage    %                         23.29284                         23.71211                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2019-11-16t00-00-00/p1y     24.35666 Percentage    %                         24.13765                         24.57318                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2020-11-16t00-00-00/p1y     25.20737 Percentage    %                         24.99072                         25.42366                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2021-11-16t00-00-00/p1y     25.92851 Percentage    %                         25.70006                         26.15701                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2022-11-16t00-00-00/p1y     26.23816 Percentage    %                         26.01254                         26.46943                 NaN        -1   NaN
+e92000001    england    nation Adult obesity prevalence Adult (18+) obesity prevalence 2023-11-16t00-00-00/p1y     26.50162 Percentage    %                         26.27533                         26.73189                 NaN        -1   NaN
+e12000001 north-east    region Adult obesity prevalence Adult (18+) obesity prevalence 2023-11-16t00-00-00/p1y     32.53645 Percentage    %                         31.46982                         33.59580                 NaN        -1   NaN
         - Last 10 Rows: 
-   AREACD                    AREANM                Geography                  Variable Name                                         Indicator   Mission                                            Category                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                     Notes
-e07000246 somerset-west-and-taunton local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2017-11-16t00-00-00/p1y     25.36741 Percentage    %                         22.48804                         28.34928                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000246 somerset-west-and-taunton local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2015-11-16t00-00-00/p1y     21.79928 Percentage    %                         19.14414                         24.54955                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000246 somerset-west-and-taunton local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2018-11-16t00-00-00/p1y     25.98326 Percentage    %                         23.11161                         28.86133                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2020-11-16t00-00-00/p1y     24.58456 Percentage    %                         20.57416                         28.70813                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2015-11-16t00-00-00/p1y     18.88211 Percentage    %                         15.24664                         22.64574                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2016-11-16t00-00-00/p1y     21.19563 Percentage    %                         17.36111                         25.23148                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2017-11-16t00-00-00/p1y     26.44246 Percentage    %                         22.22222                         30.86420                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2018-11-16t00-00-00/p1y     21.08507 Percentage    %                         17.25768                         25.05910                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2019-11-16t00-00-00/p1y     21.18353 Percentage    %                         17.41176                         25.17647                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Adult (18+) obesity prevalence Adult obesity prevalence (aged 18 years and over) Mission 7 Spreading opportunity and improving public services 2021-11-16t00-00-00/p1y     22.76445 Percentage    %                         18.90661                         26.65148                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+   AREACD                    AREANM                Geography            Variable Name                      Indicator                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity                                                     Notes
+e07000246 somerset-west-and-taunton local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2015-11-16t00-00-00/p1y     21.79928 Percentage    %                         19.14414                         24.54955                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000246 somerset-west-and-taunton local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2017-11-16t00-00-00/p1y     25.36741 Percentage    %                         22.48804                         28.34928                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000246 somerset-west-and-taunton local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2021-11-16t00-00-00/p1y     27.01741 Percentage    %                         22.96984                         31.32251                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2019-11-16t00-00-00/p1y     21.18353 Percentage    %                         17.41176                         25.17647                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2018-11-16t00-00-00/p1y     21.08507 Percentage    %                         17.25768                         25.05910                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2020-11-16t00-00-00/p1y     24.58456 Percentage    %                         20.57416                         28.70813                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2016-11-16t00-00-00/p1y     21.19563 Percentage    %                         17.36111                         25.23148                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2015-11-16t00-00-00/p1y     18.88211 Percentage    %                         15.24664                         22.64574                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2017-11-16t00-00-00/p1y     26.44246 Percentage    %                         22.22222                         30.86420                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district Adult obesity prevalence Adult (18+) obesity prevalence 2021-11-16t00-00-00/p1y     22.76445 Percentage    %                         18.90661                         26.65148                 NaN        -1 Obsolete code since 2023 (replaced by E06000066 Somerset)
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
-                                      Measure    Unit  Count
-Adults (aged 18 years and over) who are obese percent   2836
+                                                    Measure    Unit  Count
+Adults (aged 18 years and over) who are living with obesity percent   3173
         

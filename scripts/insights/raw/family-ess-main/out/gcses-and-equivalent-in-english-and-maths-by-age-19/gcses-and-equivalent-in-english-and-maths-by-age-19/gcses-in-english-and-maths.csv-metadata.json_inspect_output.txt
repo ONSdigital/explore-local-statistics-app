@@ -6,7 +6,7 @@
           - Title: GCSEs in English and Maths
           - Label: GCSEs in English and Maths
           - Issued: 2023-05-17T12:40:00
-          - Modified: 2024-09-30T15:42:00
+          - Modified: 2025-05-12T12:42:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/department-for-education
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -15,17 +15,17 @@
 		-- https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare
           - Keywords: 
 		-- region
-		-- English
-		-- local-authority
-		-- maths
 		-- subnational
+		-- county
 		-- combined-authority
 		-- level-2-attainment
-		-- county
+		-- local-authority
+		-- English
+		-- maths
           - Contact Point: None
           - Identifier: GCSEs in English and Maths
-          - Comment: GCSEs (and equivalent) in English and maths by age 19, England, academic years 2016/17 to 2022/23.
-          - Description: This dataset shows GCSEs (and equivalent) in English and maths by age 19, in England, for academic years 2016/17 to 2022/23.
+          - Comment: GCSEs (and equivalent) in English and maths by age 19, England, academic years 2016/17 to 2023/24.
+          - Description: This dataset shows GCSEs (and equivalent) in English and maths by age 19, in England, for academic years 2016/17 to 2023/24.
 		
 		### Coverage 
 		
@@ -64,8 +64,6 @@
                           Geography    Dimension      True                                    gcses-in-english-and-maths.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                                       None                           
                           Indicator   Suppressed     False                                                                                       None                           
-                            Mission   Suppressed     False                                                                                       None                           
-                           Category   Suppressed     False                                                                                       None                           
                              Period    Dimension      True                           gcses-in-english-and-maths.csv#dimension/gregorian-time-interval                Observation
                         Observation Observations     False gcses-in-english-and-maths.csv#measure/gcses-and-equivalent-in-english-and-maths-by-age-19                Observation
                             Measure   Suppressed     False                                                                                       None                           
@@ -78,8 +76,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -95,36 +91,36 @@ gregorian-time-interval.csv#code-list Gregorian Time Interval          Period
      ons-geography-code.csv#code-list      ONS Geography Code          AREACD
 
 - The data cube has the following dataset information:
-        - Number of Rows: 2586
+        - Number of Rows: 2810
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD     AREANM Geography                                                                               Variable Name                                             Indicator   Mission                                            Category                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2017-09-01t00-00-00/p1y       70.969 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2018-09-01t00-00-00/p1y       71.323 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y       70.854 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y       74.920 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2022-09-01t00-00-00/p1y       77.989 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y       73.031 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e92000001    england    nation Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2016-09-01t00-00-00/p1y       71.509 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e12000001 north-east    region Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y       70.163 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e12000001 north-east    region Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y       67.411 Percentage    %                              NaN                              NaN                NaN         1   NaN
-e12000001 north-east    region Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2022-09-01t00-00-00/p1y       74.996 Percentage    %                              NaN                              NaN                NaN         1   NaN
+   AREACD     AREANM Geography              Variable Name                                                                                   Indicator                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2016-09-01t00-00-00/p1y       71.602 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2017-09-01t00-00-00/p1y       71.062 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2018-09-01t00-00-00/p1y       71.413 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2019-09-01t00-00-00/p1y       70.907 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2020-09-01t00-00-00/p1y       73.053 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2021-09-01t00-00-00/p1y       74.951 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2022-09-01t00-00-00/p1y       78.025 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e92000001    england    nation GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2023-09-01t00-00-00/p1y       75.761 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e12000001 north-east    region GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2023-09-01t00-00-00/p1y       73.945 Percentage    %                              NaN                              NaN                NaN         1   NaN
+e12000001 north-east    region GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2022-09-01t00-00-00/p1y       75.031 Percentage    %                              NaN                              NaN                NaN         1   NaN
         - Last 10 Rows: 
-   AREACD                    AREANM                Geography                                                                               Variable Name                                             Indicator   Mission                                            Category                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity                                                     Notes
-e07000246 somerset-west-and-taunton local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y       70.236 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000246 somerset-west-and-taunton local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y       71.852 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000246 somerset-west-and-taunton local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y       74.394 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2022-09-01t00-00-00/p1y       78.027 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2020-09-01t00-00-00/p1y       71.213 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2018-09-01t00-00-00/p1y       72.599 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2016-09-01t00-00-00/p1y       73.083 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2019-09-01t00-00-00/p1y       73.522 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2021-09-01t00-00-00/p1y       74.405 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
-e07000189            south-somerset local-authority-district Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 GCSEs (and equivalent) in English and maths by age 19 Mission 5 Spreading opportunity and improving public services 2017-09-01t00-00-00/p1y       72.677 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+   AREACD                    AREANM                Geography              Variable Name                                                                                   Indicator                  Period  Observation    Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity                                                     Notes
+e07000246 somerset-west-and-taunton local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2022-09-01t00-00-00/p1y       72.865 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000246 somerset-west-and-taunton local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2021-09-01t00-00-00/p1y       74.470 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2022-09-01t00-00-00/p1y       78.027 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2016-09-01t00-00-00/p1y       73.083 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2017-09-01t00-00-00/p1y       72.677 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2018-09-01t00-00-00/p1y       72.966 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2019-09-01t00-00-00/p1y       73.522 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2020-09-01t00-00-00/p1y       71.264 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2021-09-01t00-00-00/p1y       74.537 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
+e07000189            south-somerset local-authority-district GCSEs in English and Maths Young people achieving GCSEs (and equivalent qualifications) in English and maths by age 19 2023-09-01t00-00-00/p1y       75.478 Percentage    %                              NaN                              NaN                NaN         1 Obsolete code since 2023 (replaced by E06000066 Somerset)
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                                               Measure    Unit  Count
-GCSEs (and equivalent) in English and maths by age 19 percent   2586
+GCSEs (and equivalent) in English and maths by age 19 percent   2810
         
