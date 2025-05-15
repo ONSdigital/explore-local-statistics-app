@@ -203,6 +203,15 @@
 		overflow: hidden;
 	}
 
+	.beeswarm-container:focus-within {
+		box-shadow:
+			0 0 0 0 var(--ons-color-page-light),
+			0 0 0 2px var(--ons-color-text-link-focus),
+			0 0 0 6px var(--ons-color-focus);
+		outline: 3px solid rgba(0, 0, 0, 0);
+		z-index: 1;
+	}
+
 	.line-chart-container {
 		display: flex;
 		flex-direction: column;
