@@ -3,7 +3,7 @@
 	import {
 		// Tabs,
 		// Tab,
-		Select
+		AccessibleSelect as Select
 	} from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
@@ -28,8 +28,8 @@
 		chartData,
 		metadata,
 		selectedArea,
-		chosenIndicatorId,
 		accordionArray;
+	export let chosenIndicatorId = filteredIndicators[0];
 
 	let el = {},
 		indicator,
@@ -243,10 +243,9 @@
 			<Select
 				id="select-indicator"
 				options={filteredIndicators}
-				idKey="code"
 				labelKey="label"
 				groupKey="topic"
-				clusterByGroup
+				label={null}
 				clearable={false}
 				bind:value={chosenIndicatorId}
 				on:change={refreshData}
@@ -385,7 +384,7 @@
 
 	.select-container {
 		width: 100%;
-		max-width: 450px;
+		max-width: 410px;
 		flex-grow: 1;
 	}
 
