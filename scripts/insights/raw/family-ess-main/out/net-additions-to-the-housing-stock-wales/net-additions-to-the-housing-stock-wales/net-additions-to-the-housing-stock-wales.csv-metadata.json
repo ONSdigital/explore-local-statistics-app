@@ -38,16 +38,6 @@
                         "suppressOutput": true
                     },
                     {
-                        "titles": "Mission",
-                        "name": "mission",
-                        "suppressOutput": true
-                    },
-                    {
-                        "titles": "Category",
-                        "name": "category",
-                        "suppressOutput": true
-                    },
-                    {
                         "titles": "Period",
                         "name": "period",
                         "propertyUrl": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year",
@@ -243,11 +233,98 @@
     ],
     "rdfs:seeAlso": [
         {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#class/area-name"
+                }
+            ]
+        },
+        {
             "@id": "net-additions-to-the-housing-stock-wales.csv#component/lower-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -261,78 +338,24 @@
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
                     "@value": false
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
                     "@value": 8
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/unit",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": true
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/observation-status",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 10
                 }
             ]
         },
         {
             "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -355,11 +378,11 @@
         {
             "@id": "net-additions-to-the-housing-stock-wales.csv#qbDataSet",
             "@type": [
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://purl.org/linked-data/cube#DataSet",
                 "http://www.w3.org/ns/dcat#Distribution",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -406,12 +429,36 @@
             ]
         },
         {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
             "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -426,41 +473,12 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#slice/cross-measures",
-            "@type": [
-                "http://purl.org/linked-data/cube#SliceKey",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#class/government-year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
             "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -486,93 +504,247 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 3
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#class/geography-type",
+            "@id": "net-additions-to-the-housing-stock-wales.csv#class/area-name",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock",
+            "@id": "net-additions-to-the-housing-stock-wales.csv#slice/cross-measures",
             "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
+            "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@language": "en",
-                    "@value": "Net additions to housing stock"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
+                },
                 {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
+                },
                 {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
                 }
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name",
+            "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Area Name"
+                    "@value": "Observation Status"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#class/area-name"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/net-additions-to-housing-stock"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/area-name"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/observation-status"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/measure-type"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/government-year"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/unit"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#class/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/observation-status",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/government-year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
                 }
             ]
         },
         {
             "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year",
             "@type": [
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#codeList": [
@@ -598,211 +770,19 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/ons-geography-code",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/net-additions-to-housing-stock",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#class/area-name",
+            "@id": "net-additions-to-the-housing-stock-wales.csv#class/ons-geography-code",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/measure-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 5
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/observation-status"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/geography-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/measure-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/government-year"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/net-additions-to-housing-stock"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#component/unit"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/lower-confidence-interval"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/government-year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#dimension/government-year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                }
-            ]
-        },
-        {
             "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/lower-confidence-interval",
             "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
@@ -817,57 +797,81 @@
             ]
         },
         {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#class/ons-geography-code",
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/net-additions-to-housing-stock",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/observation-status",
-            "@type": [
-                "http://purl.org/linked-data/cube#AttributeProperty",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Observation Status"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
-                }
-            ]
-        },
-        {
-            "@id": "net-additions-to-the-housing-stock-wales.csv#component/upper-confidence-interval",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
-                }
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "net-additions-to-the-housing-stock-wales.csv#attribute/upper-confidence-interval"
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
                 }
             ],
-            "http://purl.org/linked-data/cube#componentRequired": [
+            "http://purl.org/linked-data/cube#measure": [
                 {
-                    "@value": false
+                    "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock"
                 }
             ],
             "http://purl.org/linked-data/cube#order": [
                 {
-                    "@value": 9
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#component/unit",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "net-additions-to-the-housing-stock-wales.csv#measure/net-additions-to-housing-stock",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Net additions to housing stock"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
                 }
             ]
         },
@@ -875,8 +879,8 @@
             "@id": "net-additions-to-the-housing-stock-wales.csv#dataset",
             "@type": [
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset"
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -886,7 +890,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in Wales, for financial years 2001/02 to 2022/23.\n\n### Coverage \n\nWales\n\n#### Geography definition\n\nLocal Authority Districts, \nNation (Wales) \n\n### Source\n\n - Wales: [Welsh Government](https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure) \n\n\n### Source Notes and Caveats \nIn Wales, the approach to housing stock is very similar to that in England, using the Census and adding a measure of net supply for each intervening year. However, there may be a small negative bias in the net supply estimate for Wales compared to the rest of the UK since they do not include new builds certified by Approved Inspectors and they have no way of incorporating gains or losses due to Change of Use.\n\nPlease note that data is rounded to even. \n\n\n"
+                    "@value": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in Wales, for financial years 2001/02 to 2023/24.\n\n### Coverage \n\nWales\n\n#### Geography definition\n\nLocal Authority Districts, \nNation (Wales) \n\n### Source\n\n - Wales: [Welsh Government](https://statswales.gov.wales/Catalogue/Housing/Dwelling-Stock-Estimates/dwellingstockestimates-by-localauthority-tenure) \n\n\n### Source Notes and Caveats \nIn Wales, the approach to housing stock is very similar to that in England, using the Census and adding a measure of net supply for each intervening year. However, there may be a small negative bias in the net supply estimate for Wales compared to the rest of the UK since they do not include new builds certified by Approved Inspectors and they have no way of incorporating gains or losses due to Change of Use.\n\nPlease note that data is rounded to even. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -908,7 +912,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2024-09-20T11:29:00"
+                    "@value": "2025-05-28T10:53:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -925,7 +929,7 @@
             "http://www.w3.org/2000/01/rdf-schema#comment": [
                 {
                     "@language": "en",
-                    "@value": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, Wales, financial years 2001/02 to 2022/23."
+                    "@value": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, Wales, financial years 2001/02 to 2023/24."
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
@@ -942,6 +946,10 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
+                    "@value": "demolition"
+                },
+                {
+                    "@language": "en",
                     "@value": "subnational"
                 },
                 {
@@ -950,11 +958,11 @@
                 },
                 {
                     "@language": "en",
-                    "@value": "local-authority"
+                    "@value": "dwelling"
                 },
                 {
                     "@language": "en",
-                    "@value": "dwelling"
+                    "@value": "local-authority"
                 },
                 {
                     "@language": "en",
@@ -963,10 +971,6 @@
                 {
                     "@language": "en",
                     "@value": "new-building"
-                },
-                {
-                    "@language": "en",
-                    "@value": "demolition"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -978,8 +982,8 @@
         {
             "@id": "net-additions-to-the-housing-stock-wales.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
@@ -1076,9 +1080,9 @@
         {
             "@id": "net-additions-to-the-housing-stock-wales.csv#unit/per-1-000",
             "@type": [
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
