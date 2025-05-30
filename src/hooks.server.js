@@ -1,4 +1,4 @@
-import logger from '$lib/logger.js';
+import logger from '$lib/logger';
 
 console.log = (...args) => logger.info(...args);
 console.info = (...args) => logger.info(...args);
