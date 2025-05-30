@@ -15,10 +15,10 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		...result,
 		title: `${result.indicator.metadata.label} - ONS`,
 		description: result.indicator.metadata.subtitle,
-		pageType: `els-indicator-data-page`,
+		pageType: `indicator data page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
-			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
+			{ label: 'Home', href: `/`, refresh: true },
 			{ label: 'Explore local statistics', href: `${base}/` },
 			{ label: 'Local indicators', href: `${base}/indicators` },
 			{ label: result.indicator.metadata.label }

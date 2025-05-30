@@ -56,7 +56,7 @@
 	}
 
 	.sticky-container {
-		max-height: 300px;
+		max-height: 341px;
 		overflow: auto;
 	}
 
