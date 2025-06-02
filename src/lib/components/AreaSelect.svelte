@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { onMount, createEventDispatcher } from 'svelte';
-	import { assets } from '$app/paths';
+	import { base } from '$app/paths';
 	import {
 		geoTypes,
 		geoCodesLookup,
@@ -11,14 +11,13 @@
 	} from '$lib/config/geoConfig';
 	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { Select, Button, analyticsEvent } from '@onsvisual/svelte-components';
+	import { AccessibleSelect as Select, Button, analyticsEvent } from '@onsvisual/svelte-components';
 
 	const dispatch = createEventDispatcher();
 
 	export let id = '';
 	export let mode = 'search';
 	export let placeholder = 'Type a place name or postcode';
-	export let filterText = '';
 	export let label = '';
 	export let hideLabel = false;
 	export let value = null;
@@ -27,35 +26,40 @@
 	export let idKey = 'value';
 	export let labelKey = 'label';
 	export let groupKey = 'group';
-	export let multiple = false;
-	export let maxSelected = 4;
 	export let essOnly = false;
+	export let selectElement;
 
 	let _placeholder = placeholder;
 	let selectedObject;
 
 	const startsWithFilter = (str, filter) => str.toLowerCase().startsWith(filter.toLowerCase());
-	const filterSort = (a, b) =>
-		startsWithFilter(a.areanm, filterText) && startsWithFilter(b.areanm, filterText)
+	const filterSort = (a, b, query) =>
+		startsWithFilter(a.areanm, query) && startsWithFilter(b.areanm, query)
 			? 0
-			: !startsWithFilter(a.areanm, filterText) && startsWithFilter(b.areanm, filterText)
+			: !startsWithFilter(a.areanm, query) && startsWithFilter(b.areanm, query)
 				? 1
-				: startsWithFilter(a.areanm, filterText) && !startsWithFilter(b.areanm, filterText)
+				: startsWithFilter(a.areanm, query) && !startsWithFilter(b.areanm, query)
 					? -1
 					: 0;
 
-	export async function loadOptions(filterText) {
-		if (filterText.length > 2 && /\d/.test(filterText)) {
-			let res = await fetch(`https://api.postcodes.io/postcodes/${filterText}/autocomplete`);
+	export async function loadOptions(query, populateResults) {
+		if (query.length > 2 && /\d/.test(query)) {
+			let res = await fetch(`https://api.postcodes.io/postcodes/${query}/autocomplete`);
 			let json = await res.json();
-			return json.result.map((d) => ({ areacd: d, areanm: d, group: '', postcode: true }));
-		} else if (filterText.length > 2) {
-			return items
-				.filter((p) => p.areanm.match(new RegExp(`\\b${filterText}`, 'i')))
-				.sort(filterSort);
+			populateResults(
+				json.result.map((d) => ({ areacd: d, areanm: d, group: '', postcode: true }))
+			);
+		} else {
+			populateResults(
+				!query
+					? []
+					: items
+							.filter((p) => p.areanm.match(new RegExp(`\\b${query}`, 'i')))
+							.sort((a, b) => filterSort(a, b, query))
+			);
 		}
-		return [];
 	}
+
 	async function doSelect(e) {
 		if (e.detail.postcode) {
 			let res = await fetch(`https://api.postcodes.io/postcodes/${e.detail.areacd}`);
@@ -115,12 +119,6 @@
 		dispatch('submit', selectedObject);
 	}
 
-	$: itemFilter =
-		(Array.isArray(value) && value.length >= maxSelected) ||
-		(mode == 'search' && filterText.length < 3)
-			? (label, filterText, option) => false
-			: (label, filterText, option) => true;
-
 	let el;
 	let items;
 
@@ -128,7 +126,7 @@
 		geoNames[type] ? geoNames[type].label : geoCodesLookup[type].label;
 
 	async function getPlaces() {
-		let places = await getCSV(`${assets}/data/places.csv`);
+		let places = await getCSV(`${base}/data/places.csv`);
 		if (essOnly) places = places.filter((p) => essGeocodes.includes(p.areacd.slice(0, 3)));
 		places.sort((a, b) => a.areanm.localeCompare(b.areanm));
 		let lookup = {};
@@ -158,28 +156,20 @@
 	<form class="select-container" on:submit|preventDefault={doSubmit}>
 		<div class="select-wrapper">
 			<Select
+				bind:this={selectElement}
 				{id}
 				{mode}
 				options={items}
 				bind:value
-				bind:filterText
-				{idKey}
 				{labelKey}
 				{groupKey}
 				{label}
 				{hideLabel}
-				{multiple}
 				{autoClear}
 				{loadOptions}
-				{itemFilter}
 				on:change={handleSelect}
-				on:input
-				on:focus
-				on:blur
-				on:clear
 				placeholder={_placeholder}
-				clearable={!clearable ? false : !multiple}
-				hideIcon
+				{clearable}
 			/>
 		</div>
 		<Button icon="search" type="submit" small hideLabel>Search</Button>
