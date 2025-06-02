@@ -14,6 +14,7 @@
 	import ChangeAreas from '$lib/interactivity/ChangeAreas.svelte';
 	import ChartOptions from '$lib/interactivity/ChartOptions.svelte';
 
+	import { capitalise } from '@onsvisual/robo-utils';
 	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import { geoLevelsLookup, mainChartOptionsArray } from '$lib/config';
 	import { geoTypesLookup, geoTypeMap } from '$lib/config/geoConfig';
@@ -164,7 +165,8 @@
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 
-	const refreshData = () => {
+	const refreshData = (e) => {
+		if (e?.detail) chosenIndicatorId = e.detail;
 		indicator = metadata.indicatorsObject[chosenIndicatorId.code];
 		chosenXDomainNumbStart = indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = indicator.maxXDomainNumb;
@@ -242,12 +244,12 @@
 		<div class="select-container">
 			<Select
 				id="select-indicator"
-				options={filteredIndicators}
+				options={filteredIndicators.map((d) => ({ ...d, topic: capitalise(d.topic) }))}
 				labelKey="label"
 				groupKey="topic"
 				label={null}
 				clearable={false}
-				bind:value={chosenIndicatorId}
+				value={chosenIndicatorId}
 				on:change={refreshData}
 			></Select>
 		</div>
