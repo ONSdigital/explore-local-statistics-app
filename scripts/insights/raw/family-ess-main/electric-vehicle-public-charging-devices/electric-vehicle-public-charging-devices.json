@@ -1,0 +1,94 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "Electric vehicle public charging devices",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "Publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), United Kingdom, as of 00:00 on the first day of each quarter from October 2019 to April 2025.",
+    "description": "This dataset shows publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), in the UK, as of 00:00 on the first day of each quarter from October 2019 to April 2025.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB)\n\n### Source\n\n - United Kingdom: [Department for Transport and Zapmap](https://www.gov.uk/government/collections/electric-vehicle-charging-infrastructure-statistics) \n\n\n### Source Notes and Caveats \n- Data is provided by the electric vehicle and charging point platform [Zapmap](https://www.zapmap.com/) and represents devices reported as operational at 00:00 on the first day of each quarter.\n\n- ‘Total devices’ represent publicly available charging devices at all speeds. A device can have a number of connectors of varying speeds.\n\n- There may be notable large reductions seen at local authority level in these statistics when comparing to a previous quarter. This is sometimes caused by a delay between when chargepoint operators decommission older devices in an area and when this information is reported in the source Zapmap data. Reductions caused by this often occur while chargepoint operators move their data reporting onto the open chargepoint interface to comply with the public chargepoint regulations, resulting in more accurate reporting.\n\n- The most recent population figures by Local Authority are sourced from the Office for National Statistics Population estimates for mid-year 2022. For quarters from July 2020 to April 2021, the population figures were sourced from 2019 estimates. Prior to July 2020, the population figures were sourced from the 2018 estimates.",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "transport",
+        "electric-vehicle",
+        "subnational",
+        "local-authority",
+        "region"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/department-for-transport",
+    "dataset_issued": "2025-06-02T10:34",
+    "dataset_modified": "2025-06-02T10:34",
+    "themes": "https://www.ons.gov.uk/economy/environmentalaccounts",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "gregorian-instant"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "per 100,000",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 0.001
+            },
+            "measure": {
+                "label": "Number of publicly available electric vehicle charging devices at all speeds",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion-of-population"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "Electric vehicle public charging devices",
+      "prefix": null,
+      "suffix": null,
+      "subText": "per 100,000 population",
+      "decimalPlaces": 1,
+      "subtitle": "Publicly available electric vehicle charging devices at all speeds per 100,000 people",
+      "experimentalStatistic": "T",
+      "sourceDate": "01/10/2024",
+      "sourceURL": "https://www.gov.uk/government/collections/electric-vehicle-charging-infrastructure-statistics",
+      "sourceOrg": "Department for Transport, sourced from Zapmap",
+      "longDescription": "This indicator shows publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), in the UK, as of 00:00 on the first day of each quarter from October 2019 to April 2025.",
+      "caveats": "Data is provided by the electric vehicle and charging point platform [Zapmap](https://www.zapmap.com/) and represents devices reported as operational at 00:00 on the first day of each quarter.\n\n‘Total devices’ represent publicly available charging devices at all speeds. A device can have a number of connectors of varying speeds.\n\nThere may be notable large reductions seen at local authority level in these statistics when comparing to a previous quarter. This is sometimes caused by a delay between when chargepoint operators decommission older devices in an area and when this information is reported in the source Zapmap data. Reductions caused by this often occur while chargepoint operators move their data reporting onto the open chargepoint interface to comply with the public chargepoint regulations, resulting in more accurate reporting.\n\nThe most recent population figures by Local Authority are sourced from the Office for National Statistics Population estimates for mid-year 2022. For quarters from July 2020 to April 2021, the population figures were sourced from 2019 estimates. Prior to July 2020, the population figures were sourced from the 2018 estimates.",
+      "standardised": "T"
+  }
+    
+}

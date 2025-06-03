@@ -257,6 +257,10 @@
 			"label": "5G coverage"
 		},
 		{
+			"code": "electric-vehicle-public-charging-devices",
+			"label": "Electric vehicle public charging devices"
+		},
+		{
 			"code": "average-travel-time-cycling",
 			"label": "Travel time to employment centre by bicycle"
 		},
@@ -7555,6 +7559,128 @@
 				2024
 			]
 		},
+		"electric-vehicle-public-charging-devices": {
+			"id": 93,
+			"topic": "connectivity",
+			"subTopic": "travel and transport",
+			"code": "electric-vehicle-public-charging-devices",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2025,
+			"metadata": {
+				"code": "electric-vehicle-public-charging-devices",
+				"slug": "electric-vehicle-public-charging-devices",
+				"label": "Electric vehicle public charging devices",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 100,000 population",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Publicly available electric vehicle charging devices at all speeds per 100,000 people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "T",
+				"sourceDate": "01/10/2024",
+				"sourceURL": "https://www.gov.uk/government/collections/electric-vehicle-charging-infrastructure-statistics",
+				"sourceOrg": "Department for Transport, sourced from Zapmap",
+				"longDescription": "This indicator shows publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), in the UK, as of 00:00 on the first day of each quarter from October 2019 to April 2025.",
+				"standardised": "T",
+				"caveats": "Data is provided by the electric vehicle and charging point platform [Zapmap](https://www.zapmap.com/) and represents devices reported as operational at 00:00 on the first day of each quarter.\n\n‘Total devices’ represent publicly available charging devices at all speeds. A device can have a number of connectors of varying speeds.\n\nThere may be notable large reductions seen at local authority level in these statistics when comparing to a previous quarter. This is sometimes caused by a delay between when chargepoint operators decommission older devices in an area and when this information is reported in the source Zapmap data. Reductions caused by this often occur while chargepoint operators move their data reporting onto the open chargepoint interface to comply with the public chargepoint regulations, resulting in more accurate reporting.\n\nThe most recent population figures by Local Authority are sourced from the Office for National Statistics Population estimates for mid-year 2022. For quarters from July 2020 to April 2021, the population figures were sourced from 2019 estimates. Prior to July 2020, the population figures were sourced from the 2018 estimates.",
+				"confidenceIntervals": "T",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024,
+				2025
+			]
+		},
 		"average-travel-time-cycling": {
 			"id": 66,
 			"topic": "connectivity",
@@ -9244,6 +9370,7 @@
 				{
 					"name": "travel and transport",
 					"indicatorCodes": [
+						"electric-vehicle-public-charging-devices",
 						"average-travel-time-cycling",
 						"average-travel-time-driving",
 						"average-travel-time-public transport or walking"

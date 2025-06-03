@@ -1,0 +1,122 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Electric vehicle public charging devices
+          - Label: Electric vehicle public charging devices
+          - Issued: 2025-06-02T10:34:00
+          - Modified: 2025-06-02T10:34:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/department-for-transport
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/economy/environmentalaccounts
+          - Keywords: 
+		-- transport
+		-- electric-vehicle
+		-- region
+		-- local-authority
+		-- subnational
+          - Contact Point: None
+          - Identifier: Electric vehicle public charging devices
+          - Comment: Publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), United Kingdom, as of 00:00 on the first day of each quarter from October 2019 to April 2025.
+          - Description: This dataset shows publicly available electric vehicle charging devices at all speeds per 100,000 population (official statistics in development), in the UK, as of 00:00 on the first day of each quarter from October 2019 to April 2025.
+		
+		### Coverage 
+		
+		UK
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Countries (UK, GB)
+		
+		### Source
+		
+		 - United Kingdom: [Department for Transport and Zapmap](https://www.gov.uk/government/collections/electric-vehicle-charging-infrastructure-statistics) 
+		
+		
+		### Source Notes and Caveats 
+		- Data is provided by the electric vehicle and charging point platform [Zapmap](https://www.zapmap.com/) and represents devices reported as operational at 00:00 on the first day of each quarter.
+		
+		- ‘Total devices’ represent publicly available charging devices at all speeds. A device can have a number of connectors of varying speeds.
+		
+		- There may be notable large reductions seen at local authority level in these statistics when comparing to a previous quarter. This is sometimes caused by a delay between when chargepoint operators decommission older devices in an area and when this information is reported in the source Zapmap data. Reductions caused by this often occur while chargepoint operators move their data reporting onto the open chargepoint interface to comply with the public chargepoint regulations, resulting in more accurate reporting.
+		
+		- The most recent population figures by Local Authority are sourced from the Office for National Statistics Population estimates for mid-year 2022. For quarters from July 2020 to April 2021, the population figures were sourced from 2019 estimates. Prior to July 2020, the population figures were sourced from the 2018 estimates.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Electric vehicle public charging devices
+    - Columns: 
+                              Title         Type  Required                                                                                                                      Property URL Observations Column Titles
+                             AREACD    Dimension      True                                                         electric-vehicle-public-charging-devices.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                                                                  electric-vehicle-public-charging-devices.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                                                             electric-vehicle-public-charging-devices.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                                                                              None                           
+                          Indicator   Suppressed     False                                                                                                                              None                           
+                             Period    Dimension      True                                                               electric-vehicle-public-charging-devices.csv#dimension/time-instant                Observation
+                        Observation Observations     False electric-vehicle-public-charging-devices.csv#measure/number-of-publicly-available-electric-vehicle-charging-devices-at-all-speeds                Observation
+                            Measure   Suppressed     False                                                                                                                              None                           
+                               Unit   Suppressed     False                                                                                                                              None                           
+    Lower Confidence Interval (95%)    Attribute     False                                                  electric-vehicle-public-charging-devices.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False                                                  electric-vehicle-public-charging-devices.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False                                                         electric-vehicle-public-charging-devices.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                                                                              None                           
+                              Notes   Suppressed     False                                                                                                                              None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+      time-instant.csv#code-list       Time Instant          Period
+
+- The data cube has the following dataset information:
+        - Number of Rows: 9959
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD         AREANM Geography                            Variable Name                                                                               Indicator              Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2019-10-01t00-00-00    22.752879 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2025-04-01t00-00-00   113.182262 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2025-01-01t00-00-00   108.488217 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2024-10-01t00-00-00   103.618127 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2024-07-01t00-00-00    95.614728 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2024-04-01t00-00-00    89.024747 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2024-01-01t00-00-00    80.083481 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2023-07-01t00-00-00    65.675706 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2023-04-01t00-00-00    59.901853 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2023-01-01t00-00-00    55.284263 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD              AREANM                Geography                            Variable Name                                                                               Indicator              Period  Observation                     Measure                        Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2021-07-01t00-00-00    11.724342 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2021-04-01t00-00-00    11.130005 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2020-10-01t00-00-00    10.511671 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2020-07-01t00-00-00    10.511671 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2020-04-01t00-00-00    10.567933 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2020-01-01t00-00-00    10.567933 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2019-10-01t00-00-00    10.567933 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2025-01-01t00-00-00    21.312484 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2022-04-01t00-00-00    12.341413 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Electric vehicle public charging devices Publicly available electric vehicle charging devices at all speeds (per 100,000 people) 2025-04-01t00-00-00    22.530340 Rate per 100,000 population Rate per 100,000 population                              NaN                              NaN                NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                                                                     Measure        Unit  Count
+Number of publicly available electric vehicle charging devices at all speeds per 100,000   9959
+        
