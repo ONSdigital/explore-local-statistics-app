@@ -40,6 +40,7 @@
 
 	import { makeGeoArray } from './util/geo/makeGeoArray';
 	import { getSimilarAreas } from './util/geo/getSimilarAreas';
+	import { makeNeighboursArray } from './util/geo/makeNeighboursArray';
 	import { makeClusterDescriptions } from './util/geo/makeClusterDescriptions';
 	import { findChildrenAreas } from './util/geo/findChildrenAreas';
 	import { constructRelatedAreasGroups } from './util/geo/constructRelatedAreasGroups.js';
@@ -270,7 +271,8 @@
 			region: makeGeoArray(selectedArea.areacd, 'region', metadata, selectedArea),
 			combined: makeGeoArray(selectedArea.areacd, 'combined', metadata, selectedArea),
 			upper: makeGeoArray(selectedArea.areacd, 'upper', metadata, selectedArea),
-			lower: makeGeoArray(selectedArea.areacd, 'lower', metadata, selectedArea)
+			lower: makeGeoArray(selectedArea.areacd, 'lower', metadata, selectedArea),
+			neighbours: makeNeighboursArray(metadata, selectedArea)
 		};
 
 		//set initial selections for primary comparison (e.g median of xxx), for related area group on indicator row charts (e.g. all other local authorities ) and related area group on the 'select an indicator' chart
@@ -347,7 +349,8 @@
 				selectedArea,
 				parentArea,
 				changeAreasOptionsObject,
-				selectionsObject
+				selectionsObject,
+				areaNeighbours
 			)
 		: [];
 

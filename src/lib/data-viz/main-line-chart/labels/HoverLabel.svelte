@@ -4,8 +4,6 @@
 
 	export let label, y, fontSize, labelSpace;
 
-	$: console.log(labelSpace);
-
 	$: areaName = label.areanm;
 
 	$: textArrayOptions = [
