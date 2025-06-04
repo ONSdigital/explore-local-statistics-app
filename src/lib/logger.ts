@@ -13,22 +13,19 @@ const transport = {
 	write(chunk: string) {
 		const pinoLogMessage = JSON.parse(chunk);
 
-		const level = pinoLogMessage.any as number;
+		const level = pinoLogMessage.level as number;
 
 		const is404 = pinoLogMessage?.err?.status === 404;
 		const severity = is404 ? 'debug' : levelMap[level] || level;
 
 		const log = {
-			severity,
-			timestamp: new Date(pinoLogMessage.time).toISOString(),
+			created_at: new Date(pinoLogMessage.time).toISOString(),
+			namespace: 'explore-local-statistics',
+			event: `${severity} event`,
+			severity: severity,
 			message: pinoLogMessage.msg,
-			err: pinoLogMessage.err
-			// ...pinoLogMessage
+			error: pinoLogMessage.err
 		};
-
-		// delete log.msg;
-		// delete log.level;
-		// delete log.time;
 
 		const newlineDelimitedJson = JSON.stringify(log) + '\n';
 		process.stdout.write(newlineDelimitedJson);
