@@ -4,7 +4,7 @@ export function createIndicatorRowsAccordionArray(
 	selectedArea,
 	parentArea,
 	changeAreasOptionsObject,
-	selectionsObject,
+	selectionsObject
 ) {
 	return [
 		{
@@ -56,11 +56,6 @@ export function createIndicatorRowsAccordionArray(
 					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
-				},
-				{
-					label: 'Demographically similar areas',
-					data: changeAreasOptionsObject.neighbours,
-					accordion: true,
 				}
 			]
 		},
@@ -122,11 +117,6 @@ export function createIndicatorRowsAccordionArray(
 					label: 'Lower-tier/unitary authorities',
 					data: changeAreasOptionsObject.lower,
 					accordion: true
-				},
-				{
-					label: 'Demographically similar areas',
-					data: changeAreasOptionsObject.neighbours,
-					accordion: true,
 				}
 			].map((el) => ({
 				...el,

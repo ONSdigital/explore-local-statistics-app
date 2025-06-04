@@ -306,6 +306,8 @@
 		}
 	];
 
+	$: console.log(accordionArrayMap);
+
 	$: accordionArrayLineBarBeeswarm = [
 		{
 			label: 'Selected areas',

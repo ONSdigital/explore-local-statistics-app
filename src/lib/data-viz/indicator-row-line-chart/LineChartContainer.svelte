@@ -97,6 +97,8 @@
 		(indicator.metadata?.subText ? ` (${indicator.metadata?.subText}) ` : ` `) +
 		`in ${selectedArea.areanm} ${latestValue?.value - initialValue.value > 0 ? 'increased' : 'decreased'} by ` +
 		`${indicator.metadata?.prefix}${roundNumber(Math.abs(latestValue?.value - initialValue.value), indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix == '%' ? ' percentage points' : indicator.metadata?.suffix}.`;
+
+	$: console.log(lineChartAltText);
 </script>
 
 <div class="svg-container" bind:clientWidth={width}>

@@ -35,7 +35,7 @@ ifeq ($(ENABLE_S3_ASSETS),true)
 ifeq      ($(AWS_PROFILE),dp-prod)
 export SVELTEKIT_ASSETS_PATH=https://cdn.ons.gov.uk/$(S3_PREFIX)
 else ifeq ($(AWS_PROFILE),dp-sandbox)
-export SVELTEKIT_ASSETS_PATH=https://cdn.sandbox.onsdigital.co.uk/$(S3_PREFIX)
+export SVELTEKIT_ASSETS_PATH=https://$(S3_CDN_BUCKET).s3.$(AWS_REGION).amazonaws.com/$(S3_PREFIX)
 else ifeq ($(AWS_PROFILE),dp-staging)
 export SVELTEKIT_ASSETS_PATH=https://cdn.staging.onsdigital.co.uk/$(S3_PREFIX)
 else

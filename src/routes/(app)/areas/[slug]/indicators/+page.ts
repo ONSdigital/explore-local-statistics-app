@@ -16,7 +16,7 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 		pageType: `area data page`,
 		component: Breadcrumb,
 		breadcrumbLinks: [
-			{ label: 'Home', href: `/`, refresh: true },
+			{ label: 'Home', href: 'https://www.ons.gov.uk/', refresh: true },
 			{ label: 'Explore local statistics', href: `${base}/` },
 			...[...place.parents].reverse().map((p) => ({
 				label: getName(p),
