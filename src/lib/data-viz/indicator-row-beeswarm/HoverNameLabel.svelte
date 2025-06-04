@@ -65,8 +65,8 @@
 						style="font-size: 20px; stroke-width: 0.5px"
 						y={-textArray.length * 10 + j * 20 + 10}
 						text-anchor={labelPinPoint}
-						fill={colorsLookup['darkerSelected'].contrast}
-						stroke={colorsLookup['darkerSelected'].contrast}>{line}</text
+						fill={colorsLookup['selected'].contrast}
+						stroke={colorsLookup['selected'].contrast}>{line}</text
 					>
 				{/each}
 			</g>

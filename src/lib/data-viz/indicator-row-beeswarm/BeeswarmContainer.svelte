@@ -94,19 +94,11 @@
 
 	// create an array of all the area codes for the indicator that are at the same geog level as the selected area
 	$: areaCodesToArrowThrough = filteredChartDataBeeswarm
-		.filter(
-			(el) =>
-				selectionsObject['related-rows-visible'].codes.includes(el.areacd) &&
-				![
-					selectedArea.areacd,
-					selectionsObject['areas-rows-comparison-chosen'],
-					...selectionsObject['areas-rows-additional-chosen']
-				].includes(el.areacd)
-		)
+		.filter((el) => selectionsObject['related-rows-visible'].codes.includes(el.areacd))
 		.sort((a, b) => a.value - b.value)
 		.map((el) => el.areacd);
 
-	let currentIndex = 0;
+	let currentIndex = null;
 	function handleKeyDown(e) {
 		if (e.key === 'ArrowLeft') {
 			e.preventDefault();
@@ -142,10 +134,14 @@
 			on:blur={() => {
 				hoverAreaId = null;
 				hoverIndicatorId = null;
+				currentIndex = null;
 			}}
 			on:focus={() => {
-				hoverAreaId = 'something';
-				hoverIndicatorId = 'something';
+				hoverAreaId = selectedArea.areacd;
+				hoverIndicatorId = indicator.code;
+				currentIndex = areaCodesToArrowThrough.indexOf(hoverAreaId);
+
+				console.log({ areaCodesToArrowThrough, hoverAreaId, currentIndex });
 			}}
 		>
 			<desc id={indicator.metadata.slug + '-beeswarm-description'}>{beeswarmAltText}</desc>
@@ -182,12 +178,9 @@
 		</svg>
 	</div>
 
-	<div
-		class="robo-text-container"
-		style="opacity: {hoverAreaId ? 0 : 1}; display: {hoverAreaId ? 'none' : 'block'};"
-	>
+	<div class="robo-text-container">
 		<div class="robo-text-inline">
-			<span>
+			<span style="display: {hoverAreaId ? 'none' : 'block'};">
 				{#if selectionsObject['areas-rows-comparison-visible'] && includeComparisonText}
 					{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
 						No
@@ -211,11 +204,14 @@
 
 				<span>{latestTimePeriod.label}</span>
 			</span>
+			<span style="display: {hoverAreaId ? 'block' : 'none'};">
+				{#if currentIndex !== null}
+					Use the arrow keys to move through the different areas
+				{:else}
+					&nbsp;
+				{/if}
+			</span>
 		</div>
-	</div>
-
-	<div class="robo-text-container" style="display: {hoverAreaId ? 'block' : 'none'};">
-		<p>Use the arrow keys to move through the different areas</p>
 	</div>
 </figure>
 
@@ -243,7 +239,7 @@
 		color: #414042;
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		/* gap: 5px; */
 	}
 
 	.robo-text-inline {
