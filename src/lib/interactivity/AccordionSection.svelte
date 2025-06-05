@@ -22,6 +22,10 @@
 	let searchText = '';
 	$: regex = searchText ? new RegExp(searchText, 'i') : null;
 	let isSearchTextFilled = false;
+
+	// Generate a label based on the accordion section
+	$: searchLabel = `Find ${accordionSection.label.toLowerCase()}`;
+	$: searchPlaceholder = `Type to filter ${accordionSection.label.toLowerCase()}`;
 </script>
 
 <AccordionInner title={accordionSection.label}>
@@ -36,7 +40,12 @@
 	{#if accordionedOptions.length > 0}
 		<div class="sticky-container">
 			<div class="sticky">
-				<Select bind:searchText bind:isSearchTextFilled></Select>
+				<Select
+					bind:searchText
+					bind:isSearchTextFilled
+					label={searchLabel}
+					placeholder={searchPlaceholder}
+				></Select>
 			</div>
 
 			{#each accordionedOptions as option, i}
