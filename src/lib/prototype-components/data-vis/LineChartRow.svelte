@@ -15,6 +15,7 @@
 		comparisonFilteredChartData,
 		chartWidth,
 		chartHeight,
+		hoverAreaId,
 		hoverChartData,
 		yAxisMaxTickWidth,
 		xAxisFinalTickWidth,
@@ -118,7 +119,7 @@
 <AxisX {timePeriodsArray} {chartHeight} {chartWidth} {xDomain} {x} bind:xAxisFinalTickWidth></AxisX>
 
 <g class="lines-container">
-	<g class="primary-lines" style="opacity :{hoverChartData.length > 0 ? 0.2 : 1}">
+	<g class="primary-lines" style="opacity :{hoverAreaId ? 0.2 : 1}">
 		{#if showConfidenceIntervals}
 			{#each linesArray as area, i}
 				<ConfidenceIntervals {area} {xDomain} {x} {y} {customLookup}></ConfidenceIntervals>
@@ -146,7 +147,7 @@
 </g>
 
 <g class="label-container" transform="translate({chartWidth},0)">
-	{#if hoverChartData.length > 1}
+	{#if hoverAreaId && hoverChartData.length > 1}
 		<Label
 			{indicator}
 			{xDomain}
@@ -157,7 +158,7 @@
 			hover={true}
 			{chartHeight}
 		></Label>
-	{:else if selectedFilteredChartData.length > 1}
+	{:else if !hoverAreaId && selectedFilteredChartData.length > 1}
 		<Label
 			{indicator}
 			{xDomain}

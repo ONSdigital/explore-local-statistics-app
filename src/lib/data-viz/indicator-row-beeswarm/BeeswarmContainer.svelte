@@ -94,7 +94,13 @@
 
 	// create an array of all the area codes for the indicator that are at the same geog level as the selected area
 	$: areaCodesToArrowThrough = filteredChartDataBeeswarm
-		.filter((el) => selectionsObject['related-rows-visible'].codes.includes(el.areacd))
+		.filter(
+			(el) =>
+				selectionsObject['related-rows-visible']?.codes.includes(el.areacd) ||
+				selectionsObject['areas-rows-additional-chosen']?.includes(el.areacd) ||
+				selectionsObject['areas-rows-comparison-visible']?.areacd === el.areacd ||
+				selectedArea.areacd === el.areacd
+		)
 		.sort((a, b) => a.value - b.value)
 		.map((el) => el.areacd);
 
@@ -120,6 +126,8 @@
 			hoverIndicatorId = null;
 		}
 	}
+
+	$: console.log({ selectionsObject });
 </script>
 
 <figure class="beeswarm-figure">
