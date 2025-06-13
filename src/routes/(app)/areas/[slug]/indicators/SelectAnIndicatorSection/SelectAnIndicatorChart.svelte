@@ -3,7 +3,7 @@
 	import {
 		// Tabs,
 		// Tab,
-		Select
+		AccessibleSelect as Select
 	} from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
@@ -14,6 +14,7 @@
 	import ChangeAreas from '$lib/interactivity/ChangeAreas.svelte';
 	import ChartOptions from '$lib/interactivity/ChartOptions.svelte';
 
+	import { capitalise } from '@onsvisual/robo-utils';
 	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import { geoLevelsLookup, mainChartOptionsArray } from '$lib/config';
 	import { geoTypesLookup, geoTypeMap } from '$lib/config/geoConfig';
@@ -28,8 +29,8 @@
 		chartData,
 		metadata,
 		selectedArea,
-		chosenIndicatorId,
 		accordionArray;
+	export let chosenIndicatorId = filteredIndicators[0];
 
 	let el = {},
 		indicator,
@@ -164,7 +165,8 @@
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 
-	const refreshData = () => {
+	const refreshData = (e) => {
+		if (e?.detail) chosenIndicatorId = e.detail;
 		indicator = metadata.indicatorsObject[chosenIndicatorId.code];
 		chosenXDomainNumbStart = indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = indicator.maxXDomainNumb;
@@ -235,20 +237,16 @@
 </script>
 
 <div class="main-chart-column-container">
-	<label for="select-indicator" style:display="block" style:margin-bottom="8px"
-		>Select an indicator to explore:</label
-	>
 	<div class="row-container title-buttons-container">
 		<div class="select-container">
 			<Select
 				id="select-indicator"
-				options={filteredIndicators}
-				idKey="code"
+				options={filteredIndicators.map((d) => ({ ...d, topic: capitalise(d.topic) }))}
 				labelKey="label"
 				groupKey="topic"
-				clusterByGroup
+				label="Select an indicator to explore:"
 				clearable={false}
-				bind:value={chosenIndicatorId}
+				value={chosenIndicatorId}
 				on:change={refreshData}
 			></Select>
 		</div>
@@ -378,6 +376,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		align-items: flex-end;
 		width: 100%;
 		gap: 4px;
 		margin-bottom: 20px;
@@ -385,7 +384,7 @@
 
 	.select-container {
 		width: 100%;
-		max-width: 450px;
+		max-width: 410px;
 		flex-grow: 1;
 	}
 
@@ -405,6 +404,7 @@
 		flex-wrap: nowrap;
 		justify-content: flex-end;
 		gap: 4px;
+		margin-bottom: 2px;
 	}
 
 	.title-buttons-container {
@@ -414,5 +414,8 @@
 	.main-chart-column-container :global(.ons-tabs__panel) {
 		border-bottom-left-radius: 0 !important;
 		border-bottom-right-radius: 0 !important;
+	}
+	.select-container :global(.ons-label) {
+		font-weight: normal;
 	}
 </style>

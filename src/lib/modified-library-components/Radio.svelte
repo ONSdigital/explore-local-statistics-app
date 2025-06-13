@@ -8,9 +8,9 @@
 		columns = 1;
 </script>
 
-<div class="radio-container">
+<fieldset class="radio-container">
 	{#if title}
-		<p class="radio-title">{title}</p>
+		<legend class="radio-title ons-u-vh">{title}</legend>
 	{/if}
 
 	<div class="radio-container radio-labels-container-{columns}-columns">
@@ -24,7 +24,7 @@
 			</label>
 		{/each}
 	</div>
-</div>
+</fieldset>
 
 <style>
 	.radio-container {

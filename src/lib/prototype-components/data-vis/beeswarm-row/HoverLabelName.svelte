@@ -27,7 +27,7 @@
 
 	let labelRectArray = [];
 
-	$: console.log(labelSpace);
+	// $: console.log(labelSpace);
 </script>
 
 {#each textArrayOptions as textArray, i}

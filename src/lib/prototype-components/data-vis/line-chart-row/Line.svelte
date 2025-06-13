@@ -18,7 +18,7 @@
 				? colorsLookup.customExceedThreshold
 				: colorsLookup.custom[area.areacd in customLookup ? customLookup[area.areacd] : 0]
 			: area.role === 'selected'
-				? colorsLookup['darkerSelected']
+				? colorsLookup['selected']
 				: colorsLookup[area.role]
 		: { color: null, constrast: null };
 

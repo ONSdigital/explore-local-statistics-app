@@ -11,21 +11,19 @@ Typically, this process will be conducted when a member of the ELS team asks for
 
 Knowing what has changed will make it easier to check that updates have been processed correctly.
 
-## Step 2
+## Step 2 - Download the data
 
-Create a new branch off `Develop`. We are following the structure of `updates/MM-YY/brief-description` e.g. `updates/04-25/homicides-attendance-traveltime`.
+Navigate to the folder local-statistics/scripts/insights/raw and delete the folder 'family-ess-main'. If you wish to do this using the terminal the command is:
 
-## Step 3 - Download the data
+`rmdir /s /q family-ess-main`
 
-Use the npm command
+Next, copy the family-ess-main folder from github and place it in local-statistics/scripts/insights/raw. If you wish to do this using the terminal the command is:
 
-`npm run data:download`
+`git clone https://github.com/ONSdigital/explore-local-statistics-data.git`
 
-to download the data. 
+There is also a script to download the data. Use `npm run data:download`
 
-This script deletes the folder 'family-ess-main' from scripts/insights/raw. Then it grabs the repo `explore-local-statistics-data` and moves it into scripts/insights/raw/family-ess-main.
-
-## Step 4 - Give it a go and see what happens
+## Step 3 - Give it a go and see what happens
 
 Once the raw data has been moved to the scripts/insights/raw folder, we are now ready to attempt our data generating step. This step manipulates the data in this folder - combined with other initial configuration data - into json files that can be easily read in by our app.
 
@@ -97,12 +95,3 @@ It is recommended to open up the csv file to make edits in vscode rather than ex
 Note: The unique time periods file has been derived from the time periods in the raw data. However, there is one issue where a dataset has missing years - for example, persistent-absences-for-all-pupils currently has data for 2018 and 2020 but not for 2019. The way the app is currently coded, this causes an error if the user adjusts the slider to show data for 2019, since it can't find labels for that year.
 
 The current work around is that we add a additional-periods-lookup-for-sliders.csv input which includes these missing time periods. Therefore, if more indicators with missing years are added, or data for these missing years is added for existing indicators - then this file will need updating.
-
-## Step 5
-Push changes to your branch. Then go to [deployments](https://github.com/ONSdigital/explore-local-statistics-app/deployments) to get the preview link to share back with the data team.
-
-Once they are happy with the changes it's time to merge that branch. 
-
-Update from Develop to see if there are changes that have happened in the time since we've been waiting for approval, then do a pull request into Develop. 
-
-Once that's been approved, do a pull request from Develop into Beta. 

@@ -28,6 +28,8 @@
 			chosenTimePeriodDropdownLabel = timePeriodsArray.find((el) => el.xDomainNumb === max).label;
 		}
 	}
+
+	$: console.log(timePeriodsArray);
 </script>
 
 <Slider

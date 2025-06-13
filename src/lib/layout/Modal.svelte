@@ -2,23 +2,33 @@
 	//based on https://svelte.dev/examples/modal
 	import { Button } from '@onsvisual/svelte-components';
 	import Icon from '$lib/components/Icon.svelte';
+	import { onMount } from 'svelte';
 
 	export let showModal, accordionOpen;
 
 	let dialog; // HTMLDialogElement
 
 	$: if (dialog && showModal) dialog.showModal();
+
+	onMount(() => {
+		dialog.addEventListener('click', function (event) {
+			const rect = dialog.getBoundingClientRect();
+			const isInDialog =
+				rect.top <= event.clientY &&
+				event.clientY <= rect.top + rect.height &&
+				rect.left <= event.clientX &&
+				event.clientX <= rect.left + rect.width;
+			if (!isInDialog) {
+				dialog.close();
+			}
+		});
+	});
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={() => ((showModal = false), (accordionOpen = false))}
-	on:mousedown|self={() => dialog.close()}
-	on:touchstart|self={() => dialog.close()}
->
+<dialog bind:this={dialog} on:close={() => ((showModal = false), (accordionOpen = false))}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation>
+	<div>
 		<div class="row-container title-exit-button-container">
 			<slot name="title" />
 			<Button on:click={() => dialog.close()} small={true} hideLabel variant="secondary">

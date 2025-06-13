@@ -30,6 +30,8 @@
 
 	export let data: PageData;
 
+	// $: console.log(data.place);
+
 	let childType = data?.childTypes?.[0];
 	let postcode, searchValue;
 

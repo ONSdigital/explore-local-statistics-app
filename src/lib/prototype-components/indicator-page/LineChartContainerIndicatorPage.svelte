@@ -18,7 +18,7 @@
 
 	const getUnit = (ind) => ind.subText || ind.suffix || ind.prefix;
 
-	$: console.log('chartData', chartData);
+	// $: console.log('chartData', chartData);
 
 	$: indicatorCalculationsArray = metadata['_newStyleIndicatorsCalculationsArray'].filter(
 		(el) => el.code === indicator.code
