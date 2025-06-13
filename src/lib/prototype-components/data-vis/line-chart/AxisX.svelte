@@ -18,7 +18,7 @@
 
 	$: filteredTicks = timePeriodsArray.filter((el) => ticks.includes(parseInt(el.xDomainNumb)));
 
-	$: console.log(maxWidth);
+	// $: console.log(maxWidth);
 </script>
 
 <g class="x-axis-container" transform="translate(0,{chartHeight})">

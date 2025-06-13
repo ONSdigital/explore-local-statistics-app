@@ -4,7 +4,7 @@
 
 	export let label, maxLabelWidth, y, isHoverLabelVisible, fontSize, labelSpace;
 
-	$: console.log(label);
+	// $: console.log(label);
 
 	$: areaName = label.areanm;
 

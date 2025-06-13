@@ -125,13 +125,13 @@
 			el.xDomainNumb <= indicator.maxXDomainNumb
 	);
 
-	$: console.log(
-		visibleAreasXDomain,
-		chosenXDomain,
-		xDomain,
-		chosenTimePeriodsArray,
-		timePeriodsArray
-	);
+	// $: console.log(
+	// 	visibleAreasXDomain,
+	// 	chosenXDomain,
+	// 	xDomain,
+	// 	chosenTimePeriodsArray,
+	// 	timePeriodsArray
+	// );
 
 	$: chosenTimePeriodsArray = timePeriodsArray.filter(
 		(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]

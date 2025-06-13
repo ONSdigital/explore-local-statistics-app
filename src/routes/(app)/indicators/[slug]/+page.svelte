@@ -306,7 +306,7 @@
 		}
 	];
 
-	$: console.log(accordionArrayMap);
+	// $: console.log(accordionArrayMap);
 
 	$: accordionArrayLineBarBeeswarm = [
 		{
