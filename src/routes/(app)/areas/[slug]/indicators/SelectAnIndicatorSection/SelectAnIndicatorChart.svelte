@@ -3,7 +3,7 @@
 	import {
 		// Tabs,
 		// Tab,
-		Select
+		AccessibleSelect as Select
 	} from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
@@ -14,6 +14,7 @@
 	import ChangeAreas from '$lib/interactivity/ChangeAreas.svelte';
 	import ChartOptions from '$lib/interactivity/ChartOptions.svelte';
 
+	import { capitalise } from '@onsvisual/robo-utils';
 	import { makeMapData } from '$lib/util/datasets/datasetsHelpers';
 	import { geoLevelsLookup, mainChartOptionsArray } from '$lib/config';
 	import { geoTypesLookup, geoTypeMap } from '$lib/config/geoConfig';
@@ -28,8 +29,8 @@
 		chartData,
 		metadata,
 		selectedArea,
-		chosenIndicatorId,
 		accordionArray;
+	export let chosenIndicatorId = filteredIndicators[0];
 
 	let el = {},
 		indicator,
@@ -164,7 +165,8 @@
 	$: sourceOrgs = indicator.metadata.sourceOrg.split('|');
 	$: sourceLinks = indicator.metadata.sourceURL.split('|');
 
-	const refreshData = () => {
+	const refreshData = (e) => {
+		if (e?.detail) chosenIndicatorId = e.detail;
 		indicator = metadata.indicatorsObject[chosenIndicatorId.code];
 		chosenXDomainNumbStart = indicator.minXDomainNumb;
 		chosenXDomainNumbEnd = indicator.maxXDomainNumb;
@@ -242,13 +244,12 @@
 		<div class="select-container">
 			<Select
 				id="select-indicator"
-				options={filteredIndicators}
-				idKey="code"
+				options={filteredIndicators.map((d) => ({ ...d, topic: capitalise(d.topic) }))}
 				labelKey="label"
 				groupKey="topic"
-				clusterByGroup
+				label={null}
 				clearable={false}
-				bind:value={chosenIndicatorId}
+				value={chosenIndicatorId}
 				on:change={refreshData}
 			></Select>
 		</div>
@@ -385,7 +386,7 @@
 
 	.select-container {
 		width: 100%;
-		max-width: 450px;
+		max-width: 410px;
 		flex-grow: 1;
 	}
 
