@@ -237,9 +237,6 @@
 </script>
 
 <div class="main-chart-column-container">
-	<label for="select-indicator" style:display="block" style:margin-bottom="8px"
-		>Select an indicator to explore:</label
-	>
 	<div class="row-container title-buttons-container">
 		<div class="select-container">
 			<Select
@@ -247,7 +244,7 @@
 				options={filteredIndicators.map((d) => ({ ...d, topic: capitalise(d.topic) }))}
 				labelKey="label"
 				groupKey="topic"
-				label={null}
+				label="Select an indicator to explore:"
 				clearable={false}
 				value={chosenIndicatorId}
 				on:change={refreshData}
@@ -379,6 +376,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		align-items: flex-end;
 		width: 100%;
 		gap: 4px;
 		margin-bottom: 20px;
@@ -406,6 +404,7 @@
 		flex-wrap: nowrap;
 		justify-content: flex-end;
 		gap: 4px;
+		margin-bottom: 2px;
 	}
 
 	.title-buttons-container {
@@ -415,5 +414,8 @@
 	.main-chart-column-container :global(.ons-tabs__panel) {
 		border-bottom-left-radius: 0 !important;
 		border-bottom-right-radius: 0 !important;
+	}
+	.select-container :global(.ons-label) {
+		font-weight: normal;
 	}
 </style>
