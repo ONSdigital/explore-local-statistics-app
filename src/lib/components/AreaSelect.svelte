@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { onMount, createEventDispatcher } from 'svelte';
-	import { base } from '$app/paths';
+	import { assets } from '$app/paths';
 	import {
 		geoTypes,
 		geoCodesLookup,
@@ -126,7 +126,7 @@
 		geoNames[type] ? geoNames[type].label : geoCodesLookup[type].label;
 
 	async function getPlaces() {
-		let places = await getCSV(`${base}/data/places.csv`);
+		let places = await getCSV(`${assets}/data/places.csv`);
 		if (essOnly) places = places.filter((p) => essGeocodes.includes(p.areacd.slice(0, 3)));
 		places.sort((a, b) => a.areanm.localeCompare(b.areanm));
 		let lookup = {};

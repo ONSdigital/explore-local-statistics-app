@@ -29,7 +29,7 @@
 		}
 	}
 
-	$: console.log(timePeriodsArray);
+	// $: console.log(timePeriodsArray);
 </script>
 
 <Slider

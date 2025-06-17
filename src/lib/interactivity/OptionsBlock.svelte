@@ -20,7 +20,7 @@
 	$: idKey = 'idKey' in option ? option.idKey : 'areacd';
 
 	$: optionsArray = option.data.filter((el) => (!regex ? true : regex.test(el[labelKey])));
-	$: if (option.accordion) console.log(slugify(option?.label));
+	// $: if (option.accordion) console.log(slugify(option?.label));
 </script>
 
 {#if optionsArray.length > 0}
