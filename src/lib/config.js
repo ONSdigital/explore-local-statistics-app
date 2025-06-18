@@ -75,8 +75,7 @@ export const colorsLookup = {
 		{ color: '#27a0cc', contrast: '#222' }
 	],
 	customExceedThreshold: { color: 'grey', contrast: 'white' },
-	selected: { color: '#F4A148', contrast: '#222' },
-	darkerSelected: { color: '#DE790D', contrast: '#222' },
+	selected: { color: '#DE790D', contrast: '#222' },
 	comparison: { color: '#746CB1', contrast: 'white' },
 	related: { color: '#b0b0b0', contrast: '#222' }
 };
@@ -88,7 +87,7 @@ export const madRangeLookup = {
 
 export const chartConfigurations = {
 	lineChart: { markerRadius: { first: 4.5, last: 5, other: 4.5 } },
-	lineChartRow: { markerRadius: { first: 3.5, last: 5, other: 3.25 } },
+	lineChartRow: { markerRadius: { first: 0, last: 5, other: 0 } },
 	beeswarmRow: {
 		backgroundRadius: { 20: 6.4, 50: 6, 100: 5.5, 200: 5, default: 5 },
 		primaryRadius: 8

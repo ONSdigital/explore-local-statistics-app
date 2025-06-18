@@ -7,7 +7,7 @@
 	let labelRectCheck;
 	let labelRect;
 
-	$: color = role === 'selected' ? colorsLookup['darkerSelected'].color : colorsLookup[role].color;
+	$: color = role === 'selected' ? colorsLookup['selected'].color : colorsLookup[role].color;
 
 	$: maxLabelWidth = labelRect ? labelRect.width + 45 : 60;
 

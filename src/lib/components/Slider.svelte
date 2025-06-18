@@ -63,6 +63,7 @@
 		setPos(value);
 		setValue(pos);
 	}
+
 	$: multipleTimePeriodsSelected = Math.min(...value) != Math.max(...value);
 </script>
 

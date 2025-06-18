@@ -91,6 +91,43 @@
 		(comparisonFilteredChartDataBeeswarmWithRole?.value
 			? `The ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm} value was ${indicator.metadata?.prefix}${roundNumber(comparisonFilteredChartDataBeeswarmWithRole.value, indicator.metadata.decimalPlaces)}${indicator.metadata?.suffix}.`
 			: `No value available for ${selectionsObject['areas-rows-comparison-visible']?.label || selectionsObject['areas-rows-comparison-visible']?.areanm}.`);
+
+	// create an array of all the area codes for the indicator that are at the same geog level as the selected area
+	$: areaCodesToArrowThrough = filteredChartDataBeeswarm
+		.filter(
+			(el) =>
+				selectionsObject['related-rows-visible']?.codes.includes(el.areacd) ||
+				selectionsObject['areas-rows-additional-chosen']?.includes(el.areacd) ||
+				selectionsObject['areas-rows-comparison-visible']?.areacd === el.areacd ||
+				selectedArea.areacd === el.areacd
+		)
+		.sort((a, b) => a.value - b.value)
+		.map((el) => el.areacd);
+
+	let currentIndex = null;
+	function handleKeyDown(e) {
+		if (e.key === 'ArrowLeft') {
+			e.preventDefault();
+			if (areaCodesToArrowThrough && areaCodesToArrowThrough.length > 0) {
+				currentIndex =
+					(currentIndex - 1 + areaCodesToArrowThrough.length) % areaCodesToArrowThrough.length;
+				hoverAreaId = areaCodesToArrowThrough[currentIndex];
+				hoverIndicatorId = indicator.code;
+			}
+		} else if (e.key === 'ArrowRight') {
+			e.preventDefault();
+			if (areaCodesToArrowThrough && areaCodesToArrowThrough.length > 0) {
+				currentIndex = (currentIndex + 1) % areaCodesToArrowThrough.length;
+				hoverAreaId = areaCodesToArrowThrough[currentIndex];
+				hoverIndicatorId = indicator.code;
+			}
+		} else if (e.key === 'Tab') {
+			hoverAreaId = null;
+			hoverIndicatorId = null;
+		}
+	}
+
+	$: console.log({ selectionsObject });
 </script>
 
 <figure class="beeswarm-figure">
@@ -100,6 +137,20 @@
 			aria-labelledby={indicator.metadata.slug + '-beeswarm-description'}
 			{width}
 			{height}
+			tabindex="0"
+			on:keydown={handleKeyDown}
+			on:blur={() => {
+				hoverAreaId = null;
+				hoverIndicatorId = null;
+				currentIndex = null;
+			}}
+			on:focus={() => {
+				hoverAreaId = selectedArea.areacd;
+				hoverIndicatorId = indicator.code;
+				currentIndex = areaCodesToArrowThrough.indexOf(hoverAreaId);
+
+				console.log({ areaCodesToArrowThrough, hoverAreaId, currentIndex });
+			}}
 		>
 			<desc id={indicator.metadata.slug + '-beeswarm-description'}>{beeswarmAltText}</desc>
 			{#if chartWidth && chartHeight}
@@ -135,9 +186,9 @@
 		</svg>
 	</div>
 
-	<div class="robo-text-container" style="opacity: {hoverAreaId ? 0 : 1};">
+	<div class="robo-text-container">
 		<div class="robo-text-inline">
-			<span>
+			<span style="display: {hoverAreaId ? 'none' : 'block'};">
 				{#if selectionsObject['areas-rows-comparison-visible'] && includeComparisonText}
 					{#if ['No comparison', 'No selected'].includes(selectedComparisonDifference)}
 						No
@@ -161,6 +212,13 @@
 
 				<span>{latestTimePeriod.label}</span>
 			</span>
+			<span style="display: {hoverAreaId ? 'block' : 'none'};">
+				{#if currentIndex !== null}
+					Use the arrow keys to move through the different areas
+				{:else}
+					&nbsp;
+				{/if}
+			</span>
 		</div>
 	</div>
 </figure>
@@ -176,6 +234,10 @@
 		margin: 0px;
 	}
 
+	svg:focus {
+		outline: none;
+	}
+
 	.robo-text-container {
 		margin: 15px 0px 2px 0px;
 		padding: 0px;
@@ -185,7 +247,7 @@
 		color: #414042;
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		/* gap: 5px; */
 	}
 
 	.robo-text-inline {

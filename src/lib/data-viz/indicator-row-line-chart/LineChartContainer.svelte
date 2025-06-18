@@ -117,6 +117,7 @@
 					{comparisonFilteredChartData}
 					{chartWidth}
 					{chartHeight}
+					{hoverAreaId}
 					{hoverChartData}
 					bind:yAxisMaxTickWidth
 					bind:xAxisFinalTickWidth
