@@ -17,7 +17,7 @@
 	// import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
-	import ChangeAreas from '$lib/prototype-components/change-areas/ChangeAreas.svelte';
+	import ChangeAreas from '$lib/interactivity/ChangeAreas.svelte';
 	import { constructVisibleAreasArray, updateCustomLookup, arrayJoin } from '$lib/utils.js';
 	import LineChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/LineChartContainerIndicatorPage.svelte';
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
@@ -305,6 +305,8 @@
 			].filter((op) => op.key === geoGroup?.key)
 		}
 	];
+
+	// $: console.log(accordionArrayMap);
 
 	$: accordionArrayLineBarBeeswarm = [
 		{

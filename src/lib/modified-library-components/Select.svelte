@@ -1,5 +1,7 @@
 <script>
 	export let searchText;
+	export let label = 'Find areas'; // Default label with fallback
+	export let placeholder = 'Type to filter areas'; // Make placeholder configurable too
 
 	const onClickEvent = () => {
 		searchText = '';
@@ -7,10 +9,10 @@
 </script>
 
 <label
-	>Find areas
+	>{label}
 	<div class="input-container-focused-border">
 		<div class="input-container">
-			<input placeholder="Type to filter areas" bind:value={searchText} />
+			<input {placeholder} bind:value={searchText} />
 
 			{#if searchText === ''}
 				<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 14 14" width="20"

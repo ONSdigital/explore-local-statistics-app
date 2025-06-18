@@ -62,7 +62,7 @@
 		}
 	});
 
-	let postcode, searchValue;
+	let selectElement, postcode, searchValue;
 	let mapColors = null;
 
 	let navigated;
@@ -102,7 +102,11 @@
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
-			goto(`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}`, options);
+			selectElement.clearInput();
+			goto(
+				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
+				options
+			);
 		}
 	}
 
@@ -442,6 +446,7 @@
 				placeholder="Eg. Fareham or PO15 5RR"
 				essOnly
 				hideIcon
+				bind:selectElement
 				bind:value={searchValue}
 				on:submit={navTo}
 				on:clear={() => (postcode = null)}

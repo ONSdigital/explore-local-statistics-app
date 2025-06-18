@@ -45,6 +45,7 @@
 		>
 			{#if accordionSection.type === 'radio'}
 				<Radio
+					title="Select {(option.label || accordionSection.label).toLowerCase()}"
 					{optionsArray}
 					bind:valueId={chosen}
 					{labelKey}
@@ -53,6 +54,7 @@
 				></Radio>
 			{:else if accordionSection.type === 'checkbox'}
 				<Checkbox
+					title="Select {(option.label || accordionSection.label).toLowerCase()}"
 					{optionsArray}
 					bind:valueArray={chosen}
 					{labelKey}

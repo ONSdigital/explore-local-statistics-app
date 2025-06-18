@@ -26,7 +26,7 @@
 			cx={circle.x}
 			cy={y(circle.y)}
 			r={radius}
-			fill={colorsLookup.darkerSelected.color}
+			fill={colorsLookup.selected.color}
 			stroke={'white'}
 			stroke-width="1.5px"
 			pointer-events="none"

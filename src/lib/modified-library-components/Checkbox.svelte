@@ -18,9 +18,9 @@
 	}
 </script>
 
-<div class="checkbox-container">
+<fieldset class="checkbox-container">
 	{#if title}
-		<p class="checkbox-title">{title}</p>
+		<legend class="checkbox-title ons-u-vh">{title}</legend>
 	{/if}
 
 	<div class="checkbox-labels-container checkbox-labels-container-{columns}-columns">
@@ -38,7 +38,7 @@
 			</label>
 		{/each}
 	</div>
-</div>
+</fieldset>
 
 <style>
 	.checkbox-title {
