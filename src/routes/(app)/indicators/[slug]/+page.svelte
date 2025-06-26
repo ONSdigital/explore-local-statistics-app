@@ -648,9 +648,11 @@
 			<ul>
 				{#each sourceOrgs as org, i}
 					<li>
-						<a href={sourceLinks[i]} rel="_blank">{org}</a><span class="ons-u-ml-xs"
-							><Icon type="launch" /></span
-						>
+						<a href={sourceLinks[i]} target="_blank">{org}</a>
+						<span class="ons-u-ml-xs"><Icon type="launch" /></span>
+						<span class="ons-external-link__new-window-description ons-u-vh">
+							(opens in a new tab)
+						</span>
 					</li>
 				{/each}
 			</ul>

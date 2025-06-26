@@ -504,7 +504,7 @@
 					These clusters of areas are based on
 					<a
 						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
-						target="_blank">an analysis carried out by the ONS</a
+						>an analysis carried out by the ONS</a
 					>.
 				</p>
 				<ContentBlock showActions={false}>
@@ -582,7 +582,7 @@
 					based on a specific group of indicators. This ranking is derived from
 					<a
 						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
-						target="_blank">an analysis carried out by the ONS</a
+						>an analysis carried out by the ONS</a
 					>.
 				</p>
 				<ContentBlock showActions={false}>

@@ -10,9 +10,15 @@
 	export let selectedArea, accordionArray, selectionsObject, customLookup;
 	export let label = 'Change areas';
 
+	let colContainer;
+
 	let showModal = false;
 	const onClickEventOpen = () => {
 		showModal = true;
+		const firstTwisty = colContainer.getElementsByTagName('summary')[0];
+		firstTwisty.focus();
+
+		console.log('open modal', firstTwisty);
 	};
 
 	let accordionOpen = null;
@@ -44,7 +50,7 @@
 		{/if}
 	</div>
 
-	<div slot="content" class="column-container">
+	<div slot="content" class="column-container" bind:this={colContainer}>
 		{#each accordionArray as accordionSection, index}
 			<div
 				style:display="block"

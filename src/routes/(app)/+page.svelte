@@ -111,14 +111,17 @@
 		<li>
 			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer">Wales</a>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 		<li>
 			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">Scotland</a>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 		<li>
 			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">Northern Ireland</a>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 	</List>
 </Section>
