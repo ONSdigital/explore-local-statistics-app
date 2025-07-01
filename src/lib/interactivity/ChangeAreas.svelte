@@ -13,8 +13,12 @@
 	let colContainer;
 
 	let showModal = false;
-	const onClickEventOpen = () => {
+
+	const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
+	const onClickEventOpen = async () => {
 		showModal = true;
+		await sleep();
 		const firstTwisty = colContainer.getElementsByTagName('summary')[0];
 		firstTwisty.focus();
 
