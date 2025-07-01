@@ -610,7 +610,7 @@
 
 		<NavSection title="Get the data">
 			<p>
-				Download available indicators for all areas in our <a
+				Download <a
 					href="{assets}/insights/datadownload.ods"
 					rel="external"
 					on:click={() =>
@@ -618,20 +618,20 @@
 							event: 'fileDownload',
 							extension: 'ods',
 							chartType: 'all'
-						})}>accompanying dataset (ODS, 4MB)</a
+						})}>accompanying datasets with indicators for all areas (ODS, 4MB)</a
 				>.
 			</p>
 			<p>
-				If you would like a CSV of the data displayed in the <a href="#select-an-indicator"
-					>select an indicator</a
-				> chart above, you can click the "download data" link immediately below it.
+				To download a CSV of the <a href="#select-an-indicator">Select an indicator</a> data, click the
+				"download the data" link immediately below the chart.
 			</p>
 			<p>
+				Information on the strengths and limitations of the Explore Local Statistics (ELS) service
+				and methods used is available in
 				<a
 					href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
-					>Quality and Methodology Information</a
-				> for the Explore Local Statistics service details the strengths and limitations of the service,
-				methods used, data uses and users.
+					>ELS quality and methodology information (QMI) report</a
+				>.
 			</p>
 		</NavSection>
 	</NavSections>
