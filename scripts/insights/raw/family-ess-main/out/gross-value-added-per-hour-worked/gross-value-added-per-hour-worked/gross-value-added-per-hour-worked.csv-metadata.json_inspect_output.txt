@@ -6,7 +6,7 @@
           - Title: Gross value added per hour worked
           - Label: Gross value added per hour worked
           - Issued: 2023-05-19T09:29:33.324488
-          - Modified: 2024-07-15T13:51:00
+          - Modified: 2025-06-25T13:51:00
           - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
           - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
           - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
@@ -14,15 +14,16 @@
           - Themes: 
 		-- https://www.ons.gov.uk/economy/economicoutputandproductivity
           - Keywords: 
+		-- combined-authority
 		-- subregional-productivity
-		-- local-authority
 		-- subnational
-		-- international-territorial-level
+		-- local-authority
 		-- region
+		-- international-territorial-level
           - Contact Point: None
           - Identifier: Gross value added per hour worked
-          - Comment: Measure of business productivity (estimate of the volume of goods and services produced) in £ per hour worked (official statistics in development), UK, 2004-2022.
-          - Description: This dataset shows the measure of business productivity (estimate of the volume of goods and services produced) in £ per hour worked (official statistics in development), in the UK, for 2004-2022.
+          - Comment: Measure of business productivity (estimate of the volume of goods and services produced) in £ per hour worked (official statistics in development), UK, 2004 to 2023.
+          - Description: This dataset shows the measure of business productivity (estimate of the volume of goods and services produced) in £ per hour worked (official statistics in development), in the UK, for 2004 to 2023.
 		
 		### Coverage 
 		
@@ -31,6 +32,7 @@
 		#### Geography definition
 		
 		Local Authority Districts and Unitary Authorities,
+		Combined Authorities,
 		ITL1 (UK Nations, English Regions, UK less Extra-Regio)
 		
 		### Source
@@ -50,8 +52,6 @@
                           Geography    Dimension      True                  gross-value-added-per-hour-worked.csv#dimension/geography-type                Observation
                       Variable Name   Suppressed     False                                                                            None                           
                           Indicator   Suppressed     False                                                                            None                           
-                            Mission   Suppressed     False                                                                            None                           
-                           Category   Suppressed     False                                                                            None                           
                              Period    Dimension      True                            gross-value-added-per-hour-worked.csv#dimension/year                Observation
                         Observation Observations     False gross-value-added-per-hour-worked.csv#measure/gross-value-added-per-hour-worked                Observation
                             Measure   Suppressed     False                                                                            None                           
@@ -64,8 +64,6 @@
     - Columns where suppress output is true: 
     		-- Variable Name
     		-- Indicator
-    		-- Mission
-    		-- Category
     		-- Measure
     		-- Unit
     		-- Polarity
@@ -81,36 +79,36 @@ ons-geography-code.csv#code-list ONS Geography Code          AREACD
               year.csv#code-list               Year          Period
 
 - The data cube has the following dataset information:
-        - Number of Rows: 7125
+        - Number of Rows: 7800
         - Number of Duplicates: 0
         - First 10 Rows: 
-   AREACD        AREANM                   Geography                     Variable Name                         Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2004         22.7  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2022         33.5  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2021         32.8  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2020         31.8  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2019         30.2  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2018         29.1  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2016         27.5  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2015         27.0  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2014         26.9  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-e06000047 county-durham county-or-unitary-authority Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2017         28.1  Pounds    £                              NaN                              NaN                 NaN         1    NaN
+   AREACD      AREANM                         Geography                     Variable Name                         Indicator  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2010    26.549391  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2006    24.046167  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2004    23.116028  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2005    22.992212  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2007    24.792770  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2008    25.446241  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2009    26.061314  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2011    27.053862  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2012    27.560102  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+e47000006 tees-valley combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2023    35.367615  Pounds    £                              NaN                              NaN                 NaN         1   NaN
         - Last 10 Rows: 
-AREACD           AREANM   Geography                     Variable Name                         Indicator   Mission                                              Category  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity  Notes
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2022         34.7  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2011         24.5  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2004         20.7  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2005         20.6  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2006         21.7  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2012         25.1  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2008         23.0  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2009         23.4  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2010         23.9  Pounds    £                              NaN                              NaN                 NaN         1    NaN
-   tln northern-ireland itl-level-1 Gross Value Added per hour worked Gross value added per hour worked Mission 1 Boosting productivity, pay, jobs and living standards    2007         22.4  Pounds    £                              NaN                              NaN                 NaN         1    NaN
+   AREACD              AREANM                         Geography                     Variable Name                         Indicator  Period  Observation Measure Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%)  Observation Status  Polarity Notes
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2010    25.190224  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2008    24.522089  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2007    24.046076  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2006    23.393255  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2005    22.278044  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2004    22.328093  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2013    27.209433  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2009    24.766413  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2023    38.563126  Pounds    £                              NaN                              NaN                 NaN         1   NaN
+n34000001 belfast-city-region combined-authority-or-city-region Gross value added per hour worked Gross value added per hour worked    2022    37.663216  Pounds    £                              NaN                              NaN                 NaN         1   NaN
         
 
 - The data cube has the following value counts:
         - Value counts broken-down by measure and unit (of measure):
                           Measure            Unit  Count
-Gross value added per hour worked Pounds Sterling   7125
+Gross value added per hour worked Pounds Sterling   7800
         
