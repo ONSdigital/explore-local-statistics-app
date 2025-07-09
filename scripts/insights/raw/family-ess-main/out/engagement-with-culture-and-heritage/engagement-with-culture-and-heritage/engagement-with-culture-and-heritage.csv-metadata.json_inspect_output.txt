@@ -1,0 +1,122 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Engagement with culture and heritage
+          - Label: Engagement with culture and heritage
+          - Issued: 2025-07-08T10:20:00
+          - Modified: 2025-07-08T12:50:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/department-for-culture-media-and-sport
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity
+          - Keywords: 
+		-- local-authority
+		-- culture
+		-- region
+		-- heritage
+		-- library
+		-- museum
+		-- arts
+		-- combined-authority
+          - Contact Point: None
+          - Identifier: Engagement with culture and heritage
+          - Comment: Percentage of adults who reported engaging in person with the arts (by attending an event or participating in an activity), visiting a heritage site, a museum or gallery, or a public or mobile library in the last 12 months, England, financial year ending 2024.
+          - Description: This dataset shows the percentage of adults who reported engaging in person with the arts (by attending an event or participating in an activity), visiting a heritage site, a museum or gallery, or a public or mobile library in the last 12 months, in England, for the financial year ending 2024.
+		
+		### Coverage 
+		
+		England 
+		
+		### Geography definition
+		
+		 Local Authority Districts and Unitary Authorities, 
+		Counties, 
+		Combined Authorities, 
+		Regions, 
+		Nation (England)
+		
+		### Source
+		
+		 - England: [Department for Culture, Media and Sport](https://www.gov.uk/government/collections/participation-survey-statistical-releases)
+		
+		
+		### Source Notes and Caveats 
+		
+		- Examples of physical arts engagement include reading, performing music, or going to a comedy event.  The full list of qualifying activities and events asked of respondents can be found in [Annex 3](https://www.gov.uk/government/statistics/participation-survey-2023-24-annual-publication/main-report-for-the-participation-survey-may-2023-to-march-2024#Arts) of the data source.
+		
+		- Physical engagement with the heritage sector is defined as visiting one of a variety of places with celebrated histories, such as those connected with industrial history, or ancient monuments, or archaeological sites.
+		
+		- Respondents were asked about their visits to museums and galleries in the 12 months prior to completing the survey.
+		
+		- Physical library engagement includes visiting a public library building or mobile library in-person during leisure time, being visited by a home library service and using another library outreach service (for example attending a community event where the library staff or volunteers were present).
+		
+		- The Participation Survey is asked of adults (16+) in England and the data has been weighted to compensate for differences in both sampling probability and response probability. Please see the [weighting methodology](https://www.gov.uk/government/statistics/participation-survey-2023-24-annual-publication/participation-survey-2023-to-2024-annual-technical-report#weighting) for further details.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Engagement with culture and heritage
+    - Columns: 
+                           Title         Type  Required                                                                    Property URL Observations Column Titles
+                          areacd    Dimension      True           engagement-with-culture-and-heritage.csv#dimension/ons-geography-code                observation
+                          areanm    Dimension      True                    engagement-with-culture-and-heritage.csv#dimension/area-name                observation
+                       geography    Dimension      True               engagement-with-culture-and-heritage.csv#dimension/geography-type                observation
+                       indicator    Dimension      True                    engagement-with-culture-and-heritage.csv#dimension/indicator                observation
+                          period    Dimension      True              engagement-with-culture-and-heritage.csv#dimension/government-year                observation
+                         measure   Suppressed     False                                                                            None                           
+                            unit   Suppressed     False                                                                            None                           
+                     observation Observations     False                     engagement-with-culture-and-heritage.csv#measure/percentage                observation
+    lower_confidence_interval_95    Attribute     False engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95                observation
+    upper_confidence_interval_95    Attribute     False engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95                observation
+              observation_status    Attribute     False           engagement-with-culture-and-heritage.csv#attribute/observation-status                observation
+    - Columns where suppress output is true: 
+    		-- measure
+    		-- unit
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 5
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          areanm
+    geography-type.csv#code-list     Geography Type       geography
+   government-year.csv#code-list    Government Year          period
+         indicator.csv#code-list          Indicator       indicator
+ons-geography-code.csv#code-list ONS Geography Code          areacd
+
+- The data cube has the following dataset information:
+        - Number of Rows: 1376
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   areacd       areanm                geography                   indicator    period    measure unit  observation  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+e07000223         adur local-authority-district       engaged-with-the-arts 2023-2024 Percentage    %         94.0                          91.0                          97.0                 NaN
+e07000223         adur local-authority-district     visited-a-heritage-site 2023-2024 Percentage    %         72.0                          65.0                          78.0                 NaN
+e07000223         adur local-authority-district visited-a-museum-or-gallery 2023-2024 Percentage    %         46.0                          41.0                          52.0                 NaN
+e07000223         adur local-authority-district    visited-a-public-library 2023-2024 Percentage    %         33.0                          28.0                          38.0                 NaN
+e07000032 amber-valley local-authority-district       engaged-with-the-arts 2023-2024 Percentage    %         92.0                          88.0                          94.0                 NaN
+e07000032 amber-valley local-authority-district     visited-a-heritage-site 2023-2024 Percentage    %         75.0                          68.0                          81.0                 NaN
+e07000032 amber-valley local-authority-district visited-a-museum-or-gallery 2023-2024 Percentage    %         39.0                          34.0                          44.0                 NaN
+e07000032 amber-valley local-authority-district    visited-a-public-library 2023-2024 Percentage    %         21.0                          17.0                          25.0                 NaN
+e07000224         arun local-authority-district       engaged-with-the-arts 2023-2024 Percentage    %         91.0                          87.0                          94.0                 NaN
+e07000224         arun local-authority-district     visited-a-heritage-site 2023-2024 Percentage    %         69.0                          62.0                          75.0                 NaN
+        - Last 10 Rows: 
+   areacd                   areanm                   geography                   indicator    period    measure unit  observation  lower_confidence_interval_95  upper_confidence_interval_95  observation_status
+e06000014                     york county-or-unitary-authority visited-a-museum-or-gallery 2023-2024 Percentage    %         59.0                          53.0                          64.0                 NaN
+e06000014                     york county-or-unitary-authority    visited-a-public-library 2023-2024 Percentage    %         31.0                          26.0                          36.0                 NaN
+e47000012 york-and-north-yorkshire                 itl-level-2       engaged-with-the-arts 2023-2024 Percentage    %         92.0                          91.0                          93.0                 NaN
+e47000012 york-and-north-yorkshire                 itl-level-2     visited-a-heritage-site 2023-2024 Percentage    %         76.0                          74.0                          79.0                 NaN
+e47000012 york-and-north-yorkshire                 itl-level-2 visited-a-museum-or-gallery 2023-2024 Percentage    %         49.0                          47.0                          51.0                 NaN
+e47000012 york-and-north-yorkshire                 itl-level-2    visited-a-public-library 2023-2024 Percentage    %         27.0                          25.0                          29.0                 NaN
+      tle yorkshire-and-the-humber                 itl-level-1       engaged-with-the-arts 2023-2024 Percentage    %         89.0                          88.0                          88.0                 NaN
+      tle yorkshire-and-the-humber                 itl-level-1     visited-a-heritage-site 2023-2024 Percentage    %         65.0                          64.0                          67.0                 NaN
+      tle yorkshire-and-the-humber                 itl-level-1 visited-a-museum-or-gallery 2023-2024 Percentage    %         40.0                          39.0                          41.0                 NaN
+      tle yorkshire-and-the-humber                 itl-level-1    visited-a-public-library 2023-2024 Percentage    %         22.0                          21.0                          23.0                 NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+   Measure    Unit  Count
+Percentage percent   1376
+        

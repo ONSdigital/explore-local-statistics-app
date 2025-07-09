@@ -1,0 +1,96 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "title": "First-time buyer mortgage sales",
+    "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "summary": "First-time buyer mortgage sales per 1,000 dwellings, United Kingdom, 2013 to 2024.",
+    "description": "This dataset shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023) \n\n\n### Source Notes and Caveats \n\n-Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\n-This data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\n-The first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for, individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\n-The dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\n-Some of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area. \n\n\n",
+    "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "keywords": [
+        "first-time-buyer",
+        "mortgage",
+        "housing",
+        "dwelling",
+        "subnational",
+        "local-authority",
+        "county"
+    ],
+    "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "dataset_issued": "2025-07-08T08:40:00",
+    "dataset_modified": "2025-07-08T08:40:00",
+    "themes": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing",
+    "columns": {
+        "Period": {
+            "type": "dimension",
+            "from_template": "year"
+        },
+        "AREACD": {
+            "type": "dimension",
+            "from_template": "statistical-geography",
+            "label": "ONS Geography Code",
+            "code_list": true
+        },
+        "AREANM": {
+            "type": "dimension",
+            "label": "Area Name"
+        },
+        "Geography": {
+            "type": "dimension",
+            "label": "Geography Type"
+        },
+        "Variable Name": false,
+        "Indicator": false,
+        "Observation": {
+            "type": "observations",
+            "data_type": "decimal",
+            "unit": {
+                "label": "per 1,000",
+                "from_existing": "http://qudt.org/vocab/unit/PERCENT",
+                "scaling_factor": 0.1
+            },
+            "measure": {
+                "label": "Rate per 1,000 dwelling stock",
+                "from_existing": "https://purl.org/csv-cubed/resources/measures#portion"
+            }
+        },
+        "Measure": false,
+        "Unit": false,
+        "Lower Confidence Interval (95%)": {
+            "label": "Lower Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Upper Confidence Interval (95%)": {
+            "label": "Upper Confidence Interval",
+            "type": "attribute",
+            "data_type": "decimal",
+            "describes_observations": "Observation",
+            "required": false
+        },
+        "Observation Status": {
+            "type": "attribute",
+            "label": "Observation Status",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+            "cell_uri_template": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}"
+        },
+        "Polarity": false,
+        "Notes": false
+    },
+    "ess-beta-metadata": {
+      "label": "First-time buyer mortgage sales",
+      "prefix": null,
+      "suffix": null,
+      "subText": "per 1,000 stock",
+      "decimalPlaces": 1,
+      "subtitle": "First-time buyer mortgage sales per 1,000 dwellings",
+      "experimentalStatistic": "F",
+      "sourceDate": "11/06/2025",
+      "sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023",
+      "sourceOrg": "Office for National Statistics",
+      "longDescription": "This indicator shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.",
+      "caveats": "Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\nThis data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\nThe first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for, individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\nThe dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\nSome of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area.",
+      "standardised": "T"
+  }
+
+}
