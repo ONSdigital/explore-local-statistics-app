@@ -235,9 +235,9 @@
         {
             "@id": "first-time-buyer-mortgage-sales.csv#component/geography-type",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -257,169 +257,18 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#structure",
+            "@id": "first-time-buyer-mortgage-sales.csv#class/area-name",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataStructureDefinition"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/area-name"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/rate-per-1-000-dwelling-stock"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/unit"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/upper-confidence-interval"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/measure-type"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/lower-confidence-interval"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/observation-status"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/year"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/geography-type"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#component/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/geography-type"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/lower-confidence-interval"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
-                },
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/area-name",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 2
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/ons-geography-code",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#class/year",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "area-name.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Area Name"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#class/area-name"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#slice/cross-measures",
             "@type": [
+                "http://purl.org/linked-data/cube#SliceKey",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#SliceKey"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -429,73 +278,21 @@
                     "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
                 },
                 {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
                 },
                 {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#attribute/lower-confidence-interval",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Lower Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#class/geography-type",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#MeasureProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Rate per 1,000 dwelling stock"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
-                {
-                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
                 }
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -520,37 +317,122 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/measure-type",
+            "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#MeasureProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Rate per 1,000 dwelling stock"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#structure",
             "@type": [
                 "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/geography-type"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/unit"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/upper-confidence-interval"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/year"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/lower-confidence-interval"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/area-name"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/rate-per-1-000-dwelling-stock"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/observation-status"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#component/measure-type"
+                }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
                     "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/lower-confidence-interval"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
                 }
             ],
-            "http://purl.org/linked-data/cube#dimension": [
+            "http://purl.org/linked-data/cube#sliceKey": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 5
+                    "@id": "first-time-buyer-mortgage-sales.csv#slice/cross-measures"
                 }
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#dimension/year",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                 "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -575,31 +457,155 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status",
+            "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#AttributeProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Observation Status"
+                    "@value": "Upper Confidence Interval"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#component/upper-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#attribute/lower-confidence-interval",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#component/rate-per-1-000-dwelling-stock",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
                 }
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#component/lower-confidence-interval",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -625,18 +631,35 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#class/ons-geography-code",
+            "@id": "first-time-buyer-mortgage-sales.csv#component/measure-type",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#component/unit",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -662,124 +685,88 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/year",
+            "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/year"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 4
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#dimension/geography-type",
-            "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#CodedProperty",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://purl.org/linked-data/cube#ComponentProperty",
-                "http://purl.org/linked-data/cube#DimensionProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "geography-type.csv#code-list"
-                }
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#AttributeProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Geography Type"
+                    "@value": "Observation Status"
                 }
             ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
                 {
-                    "@id": "first-time-buyer-mortgage-sales.csv#class/geography-type"
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
                 }
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/observation-status",
+            "@id": "first-time-buyer-mortgage-sales.csv#component/area-name",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#attribute": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentRequired": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
-                    "@value": false
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 10
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/rate-per-1-000-dwelling-stock",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "first-time-buyer-mortgage-sales.csv#measure/rate-per-1-000-dwelling-stock"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "first-time-buyer-mortgage-sales.csv#class/area-name",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
                 "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#component/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
             ]
         },
         {
             "@id": "first-time-buyer-mortgage-sales.csv#qbDataSet",
             "@type": [
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
                 "http://www.w3.org/ns/dcat#Distribution",
-                "http://purl.org/linked-data/cube#Attachable"
+                "http://purl.org/linked-data/cube#DataSet"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -794,7 +781,7 @@
             "http://purl.org/dc/terms/issued": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2025-07-08T08:40:00"
+                    "@value": "2025-07-14T09:25:00"
                 }
             ],
             "http://purl.org/dc/terms/title": [
@@ -826,40 +813,27 @@
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval",
+            "@id": "first-time-buyer-mortgage-sales.csv#class/year",
             "@type": [
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#AttributeProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Upper Confidence Interval"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
-            "@id": "first-time-buyer-mortgage-sales.csv#component/upper-confidence-interval",
+            "@id": "first-time-buyer-mortgage-sales.csv#component/observation-status",
             "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://purl.org/linked-data/cube#ComponentSet",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSpecification"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/upper-confidence-interval"
+                    "@id": "first-time-buyer-mortgage-sales.csv#attribute/observation-status"
                 }
             ],
             "http://purl.org/linked-data/cube#componentRequired": [
@@ -871,7 +845,33 @@
             "http://purl.org/linked-data/cube#order": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#integer",
-                    "@value": 9
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "first-time-buyer-mortgage-sales.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "first-time-buyer-mortgage-sales.csv#class/geography-type"
                 }
             ]
         },
@@ -879,8 +879,8 @@
             "@id": "first-time-buyer-mortgage-sales.csv#dataset",
             "@type": [
                 "http://www.w3.org/ns/dcat#Resource",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/dcat#Dataset"
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://purl.org/dc/terms/creator": [
                 {
@@ -890,7 +890,7 @@
             "http://purl.org/dc/terms/description": [
                 {
                     "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
-                    "@value": "This dataset shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023) \n\n\n### Source Notes and Caveats \n\n-Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\n-This data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\n-The first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for, individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\n-The dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\n-Some of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area. \n\n\n"
+                    "@value": "This dataset shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.\n\n### Coverage \n\nUK\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nCombined Authorities,\nRegions,\nNations (England, Wales, Scotland, Northern Ireland),\nCountries (UK, GB, England and Wales) \n\n### Source\n\n - England: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023) \n\n\n### Source Notes and Caveats \n\n-Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\n-This data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\n-The first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\n-The dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\n-Some of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area. \n\n\n"
                 }
             ],
             "http://purl.org/dc/terms/identifier": [
@@ -901,7 +901,7 @@
             "http://purl.org/dc/terms/issued": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2025-07-08T08:40:00"
+                    "@value": "2025-07-14T09:25:00"
                 }
             ],
             "http://purl.org/dc/terms/license": [
@@ -912,7 +912,7 @@
             "http://purl.org/dc/terms/modified": [
                 {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2025-07-08T08:40:00"
+                    "@value": "2025-07-14T09:25:00"
                 }
             ],
             "http://purl.org/dc/terms/publisher": [
@@ -946,23 +946,7 @@
             "http://www.w3.org/ns/dcat#keyword": [
                 {
                     "@language": "en",
-                    "@value": "local-authority"
-                },
-                {
-                    "@language": "en",
-                    "@value": "county"
-                },
-                {
-                    "@language": "en",
-                    "@value": "mortgage"
-                },
-                {
-                    "@language": "en",
                     "@value": "dwelling"
-                },
-                {
-                    "@language": "en",
-                    "@value": "housing"
                 },
                 {
                     "@language": "en",
@@ -970,7 +954,23 @@
                 },
                 {
                     "@language": "en",
+                    "@value": "county"
+                },
+                {
+                    "@language": "en",
                     "@value": "first-time-buyer"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "housing"
+                },
+                {
+                    "@language": "en",
+                    "@value": "mortgage"
                 }
             ],
             "http://www.w3.org/ns/dcat#theme": [
@@ -982,8 +982,8 @@
         {
             "@id": "first-time-buyer-mortgage-sales.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://www.w3.org/ns/prov#Activity"
+                "http://www.w3.org/ns/prov#Activity",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
@@ -1080,9 +1080,9 @@
         {
             "@id": "first-time-buyer-mortgage-sales.csv#unit/per-1-000",
             "@type": [
+                "http://qudt.org/schema/qudt/Unit",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://qudt.org/schema/qudt/Unit"
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
