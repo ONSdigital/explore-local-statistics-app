@@ -156,6 +156,11 @@
 			>ELS quality and methodology information (QMI) report</a
 		>.
 	</p>
+	<p>
+		We value your feedback on these statistics. If you would like to get in touch, please email <a
+			href="mailto:explore.local.statistics@ons.gov.uk">explore.local.statistics@ons.gov.uk</a
+		>.
+	</p>
 </Section>
 
 <style>
