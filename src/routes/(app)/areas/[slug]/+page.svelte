@@ -115,6 +115,7 @@
 							: i === data.place.replaces.length - 2
 								? ' and '
 								: ', '}
+						{data.place.areanm === rep.areanm ? 'due to a boundary change' : ''}
 					{/each}
 				</p>
 			{/if}
