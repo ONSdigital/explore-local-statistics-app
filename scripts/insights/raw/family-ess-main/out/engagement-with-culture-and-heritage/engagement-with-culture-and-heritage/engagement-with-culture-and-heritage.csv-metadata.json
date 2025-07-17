@@ -1,0 +1,1210 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "engagement-with-culture-and-heritage.csv#qbDataSet",
+    "tables": [
+        {
+            "url": "engagement-with-culture-and-heritage.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "areacd",
+                        "name": "areacd",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}",
+                        "required": true
+                    },
+                    {
+                        "titles": "areanm",
+                        "name": "areanm",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}",
+                        "required": true
+                    },
+                    {
+                        "titles": "geography",
+                        "name": "geography",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "indicator",
+                        "name": "indicator",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/indicator",
+                        "valueUrl": "indicator.csv#{+indicator}",
+                        "required": true
+                    },
+                    {
+                        "titles": "period",
+                        "name": "period",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/government-year",
+                        "valueUrl": "government-year.csv#{+period}",
+                        "required": true
+                    },
+                    {
+                        "titles": "measure",
+                        "name": "measure",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "unit",
+                        "name": "unit",
+                        "suppressOutput": true
+                    },
+                    {
+                        "titles": "observation",
+                        "name": "observation",
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#measure/percentage",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "lower_confidence_interval_95",
+                        "name": "lower_confidence_interval_95",
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "upper_confidence_interval_95",
+                        "name": "upper_confidence_interval_95",
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95",
+                        "datatype": "decimal",
+                        "required": false
+                    },
+                    {
+                        "titles": "observation_status",
+                        "name": "observation_status",
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#attribute/observation-status",
+                        "valueUrl": "https://purl.org/csv-cubed/resources/attributes/af-obs-marker#{+observation_status}",
+                        "required": false
+                    },
+                    {
+                        "name": "virt_slice",
+                        "virtual": true,
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Slice"
+                    },
+                    {
+                        "name": "virt_slice_structure",
+                        "virtual": true,
+                        "propertyUrl": "qb:sliceStructure",
+                        "valueUrl": "engagement-with-culture-and-heritage.csv#slice/cross-measures"
+                    },
+                    {
+                        "name": "virt_obs_observation",
+                        "virtual": true,
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage"
+                    },
+                    {
+                        "name": "virt_obs_observation_meas",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "qb:measureType",
+                        "valueUrl": "engagement-with-culture-and-heritage.csv#measure/percentage"
+                    },
+                    {
+                        "name": "virt_obs_observation_unit",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "engagement-with-culture-and-heritage.csv#unit/percent"
+                    },
+                    {
+                        "name": "virt_dim_observation_areacd",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code",
+                        "valueUrl": "ons-geography-code.csv#{+areacd}"
+                    },
+                    {
+                        "name": "virt_dim_observation_areanm",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/area-name",
+                        "valueUrl": "area-name.csv#{+areanm}"
+                    },
+                    {
+                        "name": "virt_dim_observation_geography",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/geography-type",
+                        "valueUrl": "geography-type.csv#{+geography}"
+                    },
+                    {
+                        "name": "virt_dim_observation_indicator",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/indicator",
+                        "valueUrl": "indicator.csv#{+indicator}"
+                    },
+                    {
+                        "name": "virt_dim_observation_period",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "engagement-with-culture-and-heritage.csv#dimension/government-year",
+                        "valueUrl": "government-year.csv#{+period}"
+                    },
+                    {
+                        "name": "virt_obs_observation_type",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "rdf:type",
+                        "valueUrl": "qb:Observation"
+                    },
+                    {
+                        "name": "virt_dataSet_observation",
+                        "virtual": true,
+                        "aboutUrl": "engagement-with-culture-and-heritage.csv#obs/{areacd},{areanm},{geography},{indicator},{period}@percentage",
+                        "propertyUrl": "qb:dataSet",
+                        "valueUrl": "engagement-with-culture-and-heritage.csv#qbDataSet"
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "areacd",
+                        "reference": {
+                            "resource": "ons-geography-code.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "areanm",
+                        "reference": {
+                            "resource": "area-name.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "geography",
+                        "reference": {
+                            "resource": "geography-type.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "indicator",
+                        "reference": {
+                            "resource": "indicator.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    },
+                    {
+                        "columnReference": "period",
+                        "reference": {
+                            "resource": "government-year.csv",
+                            "columnReference": "uri_identifier"
+                        }
+                    }
+                ],
+                "primaryKey": [
+                    "areacd",
+                    "areanm",
+                    "geography",
+                    "indicator",
+                    "period"
+                ],
+                "aboutUrl": "engagement-with-culture-and-heritage.csv#slice/{areacd},{areanm},{geography},{indicator},{period}"
+            }
+        },
+        {
+            "url": "ons-geography-code.csv",
+            "tableSchema": "ons-geography-code.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "area-name.csv",
+            "tableSchema": "area-name.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "geography-type.csv",
+            "tableSchema": "geography-type.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "indicator.csv",
+            "tableSchema": "indicator.table.json",
+            "suppressOutput": true
+        },
+        {
+            "url": "government-year.csv",
+            "tableSchema": "government-year.table.json",
+            "suppressOutput": true
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#slice/cross-measures",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#SliceKey",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/government-year"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/area-name"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/indicator"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 6
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/lower-confidence-interval-95",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#class/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dimension/government-year",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "government-year.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Government Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#class/government-year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dimension/area-name",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "area-name.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Area Name"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#class/area-name"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#qbDataSet",
+            "@type": [
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Distribution",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2025-07-08T10:20:00"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#isDistributionOf": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dataset"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Upper Confidence Interval (95%)"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#class/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#measure/percentage",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#MeasureProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Percentage"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "https://purl.org/csv-cubed/resources/measures#portion"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dimension/indicator",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "indicator.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Indicator"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#class/indicator"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#class/indicator",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/unit",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": true
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 7
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "ons-geography-code.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "ONS Geography Code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#class/ons-geography-code"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/observation-status"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 11
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 5
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/upper-confidence-interval-95",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+                    "@value": false
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 10
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#attribute/observation-status",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Observation Status"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#AttributeProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Lower Confidence Interval (95%)"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#class/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/geography-type"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 3
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dimension/geography-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#CodedProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "geography-type.csv#code-list"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Geography Type"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#class/geography-type"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/percentage",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#measure/percentage"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#measure/percentage"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 8
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/area-name"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 2
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#class/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#structure",
+            "@type": [
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/area-name"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/lower-confidence-interval-95"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/measure-type"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/percentage"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/observation-status"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/geography-type"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/upper-confidence-interval-95"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/unit"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/indicator"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/ons-geography-code"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#component/government-year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/geography-type"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/area-name"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/government-year"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/observation-status"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/indicator"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#measure/percentage"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/ons-geography-code"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/upper-confidence-interval-95"
+                },
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#attribute/lower-confidence-interval-95"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#component/indicator",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#dimension/indicator"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                    "@value": 4
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dataset",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://www.w3.org/ns/dcat#Dataset"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": "This dataset shows the percentage of adults who reported engaging in person with the arts (by attending an event or participating in an activity), visiting a heritage site, a museum or gallery, or a public or mobile library in the last 12 months, in England, for the financial year ending 2024.\n\n### Coverage \n\nEngland \n\n### Geography definition\n\n Local Authority Districts and Unitary Authorities, \nCounties, \nCombined Authorities, \nRegions, \nNation (England)\n\n### Source\n\n - England: [Department for Culture, Media and Sport](https://www.gov.uk/government/collections/participation-survey-statistical-releases)\n\n\n### Source Notes and Caveats \n\n- Examples of physical arts engagement include reading, performing music, or going to a comedy event.  The full list of qualifying activities and events asked of respondents can be found in [Annex 3](https://www.gov.uk/government/statistics/participation-survey-2023-24-annual-publication/main-report-for-the-participation-survey-may-2023-to-march-2024#Arts) of the data source.\n\n- Physical engagement with the heritage sector is defined as visiting one of a variety of places with celebrated histories, such as those connected with industrial history, or ancient monuments, or archaeological sites.\n\n- Respondents were asked about their visits to museums and galleries in the 12 months prior to completing the survey.\n\n- Physical library engagement includes visiting a public library building or mobile library in-person during leisure time, being visited by a home library service and using another library outreach service (for example attending a community event where the library staff or volunteers were present).\n\n- The Participation Survey is asked of adults (16+) in England and the data has been weighted to compensate for differences in both sampling probability and response probability. Please see the [weighting methodology](https://www.gov.uk/government/statistics/participation-survey-2023-24-annual-publication/participation-survey-2023-to-2024-annual-technical-report#weighting) for further details."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2025-07-08T10:20:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2025-07-08T12:50:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/department-for-culture-media-and-sport"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "Percentage of adults who reported engaging in person with the arts (by attending an event or participating in an activity), visiting a heritage site, a museum or gallery, or a public or mobile library in the last 12 months, England, financial year ending 2024."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Engagement with culture and heritage"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#distribution": [
+                {
+                    "@id": "engagement-with-culture-and-heritage.csv#qbDataSet"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "region"
+                },
+                {
+                    "@language": "en",
+                    "@value": "local-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "combined-authority"
+                },
+                {
+                    "@language": "en",
+                    "@value": "culture"
+                },
+                {
+                    "@language": "en",
+                    "@value": "heritage"
+                },
+                {
+                    "@language": "en",
+                    "@value": "museum"
+                },
+                {
+                    "@language": "en",
+                    "@value": "library"
+                },
+                {
+                    "@language": "en",
+                    "@value": "arts"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#csvcubed-build-activity",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
+            ],
+            "http://www.w3.org/ns/prov#used": [
+                {
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1"
+                }
+            ]
+        },
+        {
+            "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.5.1",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Entity"
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "csvcubed v0.5.1"
+                }
+            ],
+            "http://www.w3.org/ns/prov#hasPrimarySource": [
+                {
+                    "@id": "https://pypi.org/project/csvcubed/0.5.1/"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dependency/ons-geography-code",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./ons-geography-code.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "ons-geography-code.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dependency/area-name",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./area-name.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "area-name.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dependency/geography-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./geography-type.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "geography-type.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dependency/indicator",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./indicator.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "indicator.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#dependency/government-year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
+            ],
+            "http://rdfs.org/ns/void#dataDump": [
+                {
+                    "@id": "./government-year.csv-metadata.json"
+                }
+            ],
+            "http://rdfs.org/ns/void#uriSpace": [
+                {
+                    "@value": "government-year.csv#"
+                }
+            ]
+        },
+        {
+            "@id": "engagement-with-culture-and-heritage.csv#unit/percent",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://qudt.org/schema/qudt/Unit",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "1.0"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/PERCENT"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "percent"
+                }
+            ]
+        }
+    ]
+}

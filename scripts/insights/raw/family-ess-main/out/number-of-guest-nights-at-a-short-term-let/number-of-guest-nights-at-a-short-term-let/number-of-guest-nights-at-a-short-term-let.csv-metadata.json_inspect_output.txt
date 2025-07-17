@@ -1,0 +1,123 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Number of guest nights at a short-term let
+          - Label: Number of guest nights at a short-term let
+          - Issued: 2025-07-04T16:44:00
+          - Modified: 2025-07-07T16:07:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/housing
+          - Keywords: 
+		-- short-term-lets
+		-- guest-nights
+		-- subnational
+		-- region
+		-- local-authority
+		-- county
+          - Contact Point: None
+          - Identifier: Number of guest nights at a short-term let
+          - Comment: The number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group, United Kingdom, monthly periods July 2023 to December 2024.
+          - Description: This dataset shows the number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group, in the United Kingdom, for monthly periods July 2023 to December 2024.
+		
+		### Coverage 
+		
+		UK 
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Countries (UK) 
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases) 
+		
+		
+		### Source Notes and Caveats 
+		-Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. 
+		
+		-The number of nights spent during a stay, with a night counted per individual member of the visiting group. This can be influenced by guest group size and length of stay. For example, a family of four staying for 2 nights would be 8 guest nights. 
+		
+		-The data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. 
+		
+		-While these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Number of guest nights at a short-term let
+    - Columns: 
+                              Title         Type  Required                                                                       Property URL Observations Column Titles
+                             AREACD    Dimension      True        number-of-guest-nights-at-a-short-term-let.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                 number-of-guest-nights-at-a-short-term-let.csv#dimension/area-name                Observation
+                          Geography    Dimension      True            number-of-guest-nights-at-a-short-term-let.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                               None                           
+                          Indicator   Suppressed     False                                                                               None                           
+                             Period    Dimension      True                     number-of-guest-nights-at-a-short-term-let.csv#dimension/month                Observation
+                        Observation Observations     False      number-of-guest-nights-at-a-short-term-let.csv#measure/number-of-guest-nights                Observation
+                            Measure   Suppressed     False                                                                               None                           
+                               Unit   Suppressed     False                                                                               None                           
+    Lower Confidence Interval (95%)    Attribute     False number-of-guest-nights-at-a-short-term-let.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False number-of-guest-nights-at-a-short-term-let.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False        number-of-guest-nights-at-a-short-term-let.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                               None                           
+                              Notes   Suppressed     False                                                                               None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+             month.csv#code-list              Month          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 6750
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD         AREANM Geography                              Variable Name                                  Indicator  Period  Observation                Measure                   Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-07   10254340.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-12    6666350.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-11    5691910.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-10    7387910.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-09    7884360.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-07   11492910.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-06    8495170.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-05    8689630.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-04    6709610.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-08   12788560.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD              AREANM                Geography                              Variable Name                                  Indicator  Period  Observation                Measure                   Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-11       4710.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-01       2750.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-12       6690.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-10       7270.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-09       9520.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-08      17820.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2023-07      16400.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-11       4500.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-02       3970.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Number of guest nights at a short-term let Number of guest nights at a short-term let 2024-12       6920.0 Number of guest nights Number of guest nights                              NaN                              NaN                NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+               Measure                   Unit  Count
+Number of guest nights Number of guest nights   6750
+        
