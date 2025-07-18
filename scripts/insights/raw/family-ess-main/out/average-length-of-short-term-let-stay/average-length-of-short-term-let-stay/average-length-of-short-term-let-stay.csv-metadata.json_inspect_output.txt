@@ -1,0 +1,124 @@
+
+- This file is a data cube.
+
+
+        - The data cube has the following catalog metadata:
+          - Title: Average length of short-term let stay
+          - Label: Average length of short-term let stay
+          - Issued: 2025-07-07T14:29:00
+          - Modified: 2025-07-08T11:30:00
+          - License: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+          - Creator: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Publisher: https://www.gov.uk/government/organisations/office-for-national-statistics
+          - Landing Pages: None
+          - Themes: 
+		-- https://www.ons.gov.uk/peoplepopulationandcommunity/housing
+          - Keywords: 
+		-- length-of-stay
+		-- short-term-lets
+		-- guest-nights
+		-- region
+		-- local-authority
+		-- subnational
+		-- county
+          - Contact Point: None
+          - Identifier: Average length of short-term let stay
+          - Comment: The average length of stay (in nights), United Kingdom, monthly periods July 2023 to December 2024.
+          - Description: This dataset shows the average length of stay (in nights), in the United Kingdom, for monthly periods July 2023 to December 2024.
+		
+		### Coverage 
+		
+		UK 
+		
+		#### Geography definition
+		
+		Local Authority Districts and Unitary Authorities,
+		Counties,
+		Regions,
+		Nations (England, Wales, Scotland, Northern Ireland),
+		Countries (UK) 
+		
+		### Source
+		
+		 - United Kingdom: [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases) 
+		
+		
+		### Source Notes and Caveats 
+		-Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. 
+		
+		-Average length of stay is calculated by dividing the number of nights by the number of stays. 
+		
+		-The data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. 
+		
+		-While these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.
+        
+
+ - The data cube has the following column component information: 
+    - Dataset Label: Average length of short-term let stay
+    - Columns: 
+                              Title         Type  Required                                                                       Property URL Observations Column Titles
+                             AREACD    Dimension      True             average-length-of-short-term-let-stay.csv#dimension/ons-geography-code                Observation
+                             AREANM    Dimension      True                      average-length-of-short-term-let-stay.csv#dimension/area-name                Observation
+                          Geography    Dimension      True                 average-length-of-short-term-let-stay.csv#dimension/geography-type                Observation
+                      Variable Name   Suppressed     False                                                                               None                           
+                          Indicator   Suppressed     False                                                                               None                           
+                             Period    Dimension      True                          average-length-of-short-term-let-stay.csv#dimension/month                Observation
+                        Observation Observations     False average-length-of-short-term-let-stay.csv#measure/average-length-of-stay-in-nights                Observation
+                            Measure   Suppressed     False                                                                               None                           
+                               Unit   Suppressed     False                                                                               None                           
+    Lower Confidence Interval (95%)    Attribute     False      average-length-of-short-term-let-stay.csv#attribute/lower-confidence-interval                Observation
+    Upper Confidence Interval (95%)    Attribute     False      average-length-of-short-term-let-stay.csv#attribute/upper-confidence-interval                Observation
+                 Observation Status    Attribute     False             average-length-of-short-term-let-stay.csv#attribute/observation-status                Observation
+                           Polarity   Suppressed     False                                                                               None                           
+                              Notes   Suppressed     False                                                                               None                           
+    - Columns where suppress output is true: 
+    		-- Variable Name
+    		-- Indicator
+    		-- Measure
+    		-- Unit
+    		-- Polarity
+    		-- Notes
+
+- The data cube has the following code list information:
+        - Number of Code Lists: 4
+        - Code Lists:
+                       Code List    Code List Label Columns Used In
+         area-name.csv#code-list          Area Name          AREANM
+    geography-type.csv#code-list     Geography Type       Geography
+             month.csv#code-list              Month          Period
+ons-geography-code.csv#code-list ONS Geography Code          AREACD
+
+- The data cube has the following dataset information:
+        - Number of Rows: 6750
+        - Number of Duplicates: 0
+        - First 10 Rows: 
+   AREACD         AREANM Geography                         Variable Name                             Indicator  Period  Observation                          Measure                             Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2023-07          3.6 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-12          3.4 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-11          3.3 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-10          3.4 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-09          3.5 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-07          3.5 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-06          3.3 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-05          3.2 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-04          3.4 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+k02000001 united-kingdom   country Average length of short-term let stay Average length of short-term let stay 2024-08          3.5 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+        - Last 10 Rows: 
+   AREACD              AREANM                Geography                         Variable Name                             Indicator  Period  Observation                          Measure                             Unit  Lower Confidence Interval (95%)  Upper Confidence Interval (95%) Observation Status  Polarity Notes
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-11          3.1 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2024-01          3.0 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-12          3.1 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-10          3.2 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-09          3.3 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-08          3.4 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2023-07          3.9 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2024-11          2.9 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2024-02          2.6 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+n09000011 ards-and-north-down local-authority-district Average length of short-term let stay Average length of short-term let stay 2024-12          3.3 Average length of stay in nights Average length of stay in nights                              NaN                              NaN                NaN         1   NaN
+        
+
+- The data cube has the following value counts:
+        - Value counts broken-down by measure and unit (of measure):
+                         Measure                             Unit  Count
+Average length of stay in nights Average length of stay in nights   6750
+        

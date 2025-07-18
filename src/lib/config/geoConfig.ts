@@ -28,7 +28,7 @@ export const sources = [
 	{
 		id: 'la',
 		type: 'vector',
-		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2024/authorities-all/v1/boundaries/{z}/{x}/{y}.pbf',
+		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2025/authorities-all/{z}/{x}/{y}.pbf',
 		layer: 'boundaries',
 		minzoom: 4
 	},
@@ -54,7 +54,7 @@ export const sources = [
 	{
 		id: 'wd',
 		type: 'vector',
-		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2024/wd/v1/boundaries/{z}/{x}/{y}.pbf',
+		url: 'https://cdn.ons.gov.uk/maptiles/administrative/2025/wd/{z}/{x}/{y}.pbf',
 		layer: 'boundaries',
 		minzoom: 6
 	},
