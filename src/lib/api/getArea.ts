@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { geoTypes, geoCodesLookup } from '$lib/config/geoConfig';
 
-const cdnUrl = 'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/ap-geos/v3';
+const cdnUrl = 'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/ap-geos/v4';
 
 type GetAreaResult =
 	| { kind: 'Success'; place: any; geoType: any; childTypes: any; geometry: any }
@@ -31,7 +31,12 @@ export const getArea = async (
 
 const makeChildTypes = (childcds) => {
 	let childTypes = Array.from(
-		new Set(childcds.sort((a, b) => a.localeCompare(b)).map((cd) => geoCodesLookup[cd]))
+		new Set(
+			childcds
+				.sort((a, b) => a.localeCompare(b))
+				.filter((cd) => geoCodesLookup[cd])
+				.map((cd) => geoCodesLookup[cd])
+		)
 	).filter((d, i, arr) => arr.map((a) => a.key).indexOf(d.key) === i);
 	const filterKeys = ['cauth', 'utla', 'ltla'].filter((key) =>
 		childTypes.map((t) => t.key).includes(key)
