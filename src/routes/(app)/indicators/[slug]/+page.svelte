@@ -111,11 +111,7 @@
 
 	$: mapData =
 		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
-			? makeMapData(
-					data.chartData.filter((d) => !d.areanm.includes('(obsolete)')),
-					geoGroup?.codes,
-					chosenXDomainNumbEnd
-				)
+			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
 			: { data: [], breaks: [] };
 
 	$: chosenTimePeriodsArray = timePeriodsArray
