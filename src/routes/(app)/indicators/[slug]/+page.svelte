@@ -111,7 +111,11 @@
 
 	$: mapData =
 		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
-			? makeMapData(data.chartData, geoGroup?.codes, chosenXDomainNumbEnd)
+			? makeMapData(
+					data.chartData.filter((d) => !d.areanm.includes('(obsolete)')),
+					geoGroup?.codes,
+					chosenXDomainNumbEnd
+				)
 			: { data: [], breaks: [] };
 
 	$: chosenTimePeriodsArray = timePeriodsArray
@@ -126,7 +130,11 @@
 
 	let metadata = data.metadata;
 
-	$: codesForAreasWithData = [...new Set(data.chartData.map((el) => el.areacd))];
+	$: codesForAreasWithData = [
+		...new Set(
+			data.chartData.filter((d) => !d.areanm.includes('(obsolete)')).map((el) => el.areacd)
+		)
+	];
 
 	$: lowerTierLocalAuthoritiesWithDataCodes = metadata.areasGeogLevelObject.lower.filter((el) =>
 		codesForAreasWithData.includes(el)
@@ -531,7 +539,7 @@
 
 				<LineChartContainerIndicatorPage
 					indicator={data.indicator}
-					chartData={data.chartData}
+					chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
 					{selectionsObject}
 					customLookup={customLookup['indicator-additional-visible']}
 					{metadata}
@@ -581,7 +589,7 @@
 			</div>
 			<BarChartContainerIndicatorPage
 				indicator={data.indicator}
-				chartData={data.chartData}
+				chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
 				{selectionsObject}
 				customLookup={customLookup['indicator-additional-visible']}
 				{metadata}
