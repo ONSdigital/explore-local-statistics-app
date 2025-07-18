@@ -126,11 +126,7 @@
 
 	let metadata = data.metadata;
 
-	$: codesForAreasWithData = [
-		...new Set(
-			data.chartData.filter((d) => !d.areanm.includes('(obsolete)')).map((el) => el.areacd)
-		)
-	];
+	$: codesForAreasWithData = [...new Set(data.chartData.map((el) => el.areacd))];
 
 	$: lowerTierLocalAuthoritiesWithDataCodes = metadata.areasGeogLevelObject.lower.filter((el) =>
 		codesForAreasWithData.includes(el)
@@ -535,7 +531,7 @@
 
 				<LineChartContainerIndicatorPage
 					indicator={data.indicator}
-					chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
+					chartData={data.chartData}
 					{selectionsObject}
 					customLookup={customLookup['indicator-additional-visible']}
 					{metadata}
@@ -585,7 +581,7 @@
 			</div>
 			<BarChartContainerIndicatorPage
 				indicator={data.indicator}
-				chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
+				chartData={data.chartData}
 				{selectionsObject}
 				customLookup={customLookup['indicator-additional-visible']}
 				{metadata}
