@@ -43,10 +43,13 @@ export function makeMapData(data, types, year) {
 	);
 	if (filtered.length === 0) return { data: [], breaks: [] };
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
-	const breaks = uniqueRoundedNumbers({
-		numbers: [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]],
-		decimalPlaces: 0
-	});
+	const breaksRaw = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]]
+	
+	const breaks = breaksRaw.map((n, i) => {
+    	if (i === 0) return Math.floor(Math.min(...values));
+    	if (i === breaksRaw.length - 1) return Math.ceil(Math.max(...values));
+    	return roundNumber({ number: n, decimalPlaces: 0 });
+});
 	const codes = [];
 	for (const d of filtered) {
 		d.cluster = getBreak(breaks, d.value);
@@ -54,6 +57,7 @@ export function makeMapData(data, types, year) {
 	}
 	return { data: filtered, breaks, codes };
 }
+
 // stolen these functions from census maps
 // https://github.com/ONSdigital/dp-census-atlas/blob/develop/src/util/numberUtil.ts
 /*
