@@ -64,11 +64,6 @@
 		border-radius: 2px;
 	}
 
-	.sticky-container {
-		max-height: 300px;
-		overflow: auto;
-	}
-
 	.sticky {
 		padding: 5px 0px;
 		position: sticky;

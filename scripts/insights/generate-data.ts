@@ -568,7 +568,7 @@ function makeAreasGeogLevelObject(areas, areasGeogLevel) {
 
 function findGlobalXDomainExtent(indicatorsArray) {
 	const years = indicatorsArray.flatMap((e) => e.years);
-	return [Math.min(...years), Math.max(...years)];
+	return [Math.floor(Math.min(...years)), Math.floor(Math.max(...years))];
 }
 
 function readConfigFromCsvs() {
