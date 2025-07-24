@@ -43,13 +43,17 @@ export function makeMapData(data, types, year) {
 	);
 	if (filtered.length === 0) return { data: [], breaks: [] };
 	const values = filtered.map((d) => d.value).sort((a, b) => a - b);
+	// use kmeans clustering to define breaks:
 	const breaksRaw = [...ckmeans(values, Math.min(values.length, 5)), values[values.length - 1]]
-	
-	const breaks = breaksRaw.map((n, i) => {
+	// floor the min value, ceiling the max value, round all other values:
+	const breaksAll = breaksRaw.map((n, i) => {
     	if (i === 0) return Math.floor(Math.min(...values));
     	if (i === breaksRaw.length - 1) return Math.ceil(Math.max(...values));
     	return roundNumber({ number: n, decimalPlaces: 0 });
-});
+	});
+	// remove duplicates:
+	const breaks = [...new Set(breaksAll)]
+	
 	const codes = [];
 	for (const d of filtered) {
 		d.cluster = getBreak(breaks, d.value);
