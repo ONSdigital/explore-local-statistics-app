@@ -327,6 +327,10 @@
 		{
 			"code": "engagement-with-culture-and-heritage-Visited a public library",
 			"label": "Visited a public library"
+		},
+		{
+			"code": "first-time-buyer-mortgage-sales",
+			"label": "First-time buyer mortgage sales"
 		}
 	],
 	"indicatorsObject": {
@@ -7097,7 +7101,7 @@
 			"code": "greenhouse-gas-emissions",
 			"": null,
 			"minXDomainNumb": 2005,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "greenhouse-gas-emissions",
 				"slug": "greenhouse-gas-emissions",
@@ -7111,10 +7115,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "27/06/2024",
+				"sourceDate": "03/07/2025",
 				"sourceURL": "https://www.gov.uk/government/collections/uk-local-authority-and-regional-greenhouse-gas-emissions-national-statistics",
 				"sourceOrg": "Department for Energy Security and Net Zero",
-				"longDescription": "This indicator shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2022.",
+				"longDescription": "This indicator shows greenhouse gas emissions (tCO2e) per capita, in the UK, for 2005 to 2023.",
 				"standardised": "T",
 				"caveats": "Greenhouse gas emissions (tCO2e) per capita refers to the average amount of greenhouse gas emissions produced by each person in a specific area over a year. This metric is calculated by dividing the total greenhouse gas emissions of an area by its population. The result is expressed in tonnes of CO2 equivalent (tCO2e) per person.\n\nGreenhouse gas emissions here include territorial emissions of carbon dioxide (CO2), methane (CH4) and nitrous oxide (N2O).\n\nEmissions are reported against the areas where they occurred except for emissions associated with energy supply that are distributed to the areas based on where the 'end-use' of the energy occurred and emissions from waste that have been distributed based on the waste arising in each area.\n\nEmissions data is from UK local authority greenhouse gas emissions estimates where some emissions can't be fully allocated to individual local authorities for technical or disclosure reasons.\n\nSome of this data has been aggregated and may show differences to other published figures.\n\nEmissions data is also visualised on [Local Authority Greenhouse Gas Map.](https://naei.energysecurity.gov.uk/laghgapp/)",
 				"confidenceIntervals": "F",
@@ -7229,7 +7233,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"gigabit-capable-broadband": {
@@ -9615,6 +9620,142 @@
 			"years": [
 				2023
 			]
+		},
+		"first-time-buyer-mortgage-sales": {
+			"id": 98,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "first-time-buyer-mortgage-sales",
+			"": null,
+			"minXDomainNumb": 2013,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "first-time-buyer-mortgage-sales",
+				"slug": "first-time-buyer-mortgage-sales",
+				"label": "First-time buyer mortgage sales",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 1,000 stock",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "First-time buyer mortgage sales per 1,000 dwellings",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "11/06/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.",
+				"standardised": "T",
+				"caveats": "Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\nThis data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\nThe first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\nThe dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\nSome of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
 		}
 	},
 	"topicsArray": [
@@ -9681,7 +9822,8 @@
 					"indicatorCodes": [
 						"additions-to-the-housing-stock",
 						"net-additions-to-the-housing-stock-wales",
-						"net-additions-to-the-housing-stock-northern-ireland"
+						"net-additions-to-the-housing-stock-northern-ireland",
+						"first-time-buyer-mortgage-sales"
 					]
 				}
 			]
