@@ -155,7 +155,7 @@
 				? '-2px'
 				: '-50%'});"
 		>
-			{format(breaks[i])}
+			{prefix}{format(breaks[i])}{suffix}
 		</div>
 	{/each}
 	<div class="line" style="right: 0;" />
