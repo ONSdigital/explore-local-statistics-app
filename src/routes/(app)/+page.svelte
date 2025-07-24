@@ -95,7 +95,7 @@
 
 <Section>
 	<p>
-		You can also start from <a href="{base}/areas/E92000001-england">England</a>,
+		You can also start your search from <a href="{base}/areas/E92000001-england">England</a>,
 		<a href="{base}/areas/W92000004-wales">Wales</a>,
 		<a href="{base}/areas/S92000003-scotland">Scotland</a>
 		or <a href="{base}/areas/N92000002-northern-ireland">Northern Ireland</a>.
@@ -105,20 +105,32 @@
 <Divider hr="full" />
 
 <Section title="Other sources of local statistics">
-	<p>Wales, Scotland and Northern Ireland also have their own producers of official statistics.</p>
+	<p>
+		Wales, Scotland and Northern Ireland also have their own producers of official statistics (links
+		open in a new tab).
+	</p>
 
 	<List mode="dash">
 		<li>
-			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer">Wales</a>
+			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer"
+				>StatsWales</a
+			>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 		<li>
-			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">Scotland</a>
+			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer"
+				>Statistics.gov.scot</a
+			>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 		<li>
-			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">Northern Ireland</a>
+			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer"
+				>Northern Ireland Statistics and Research Agency</a
+			>
 			<span class="inline-icon"><Icon type="launch" /></span>
+			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</li>
 	</List>
 </Section>
@@ -128,20 +140,26 @@
 	<p>
 		The vision for the ESS service was launched in the <a
 			href="https://analysisfunction.civilservice.gov.uk/policy-store/gss-subnational-data-strategy/"
-			>GSS subnational data strategy</a
-		>, which provides a framework to guide the UK Government Statistical Service (GSS) in producing
-		and disseminating subnational statistics in a more timely, granular and harmonised way.
+			>Government Statistical Service (GSS) subnational data strategy</a
+		>, which provides a framework to guide the GSS in producing and disseminating subnational
+		statistics in a more timely, granular and harmonised way.
 	</p>
 	<p>
 		The ESS service aims to provide one place for users to find, visualise, compare and download
 		subnational statistics by standardised geographies and customer-defined areas.
 	</p>
 	<p>
+		Information on the strengths and limitations of the Explore Local Statistics (ELS) service and
+		methods used is available in
 		<a
 			href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
-			>Quality and Methodology Information</a
-		> for the Explore Local Statistics service details the strengths and limitations of the service,
-		methods used, data uses and users.
+			>ELS quality and methodology information (QMI) report</a
+		>.
+	</p>
+	<p>
+		We value your feedback on these statistics. If you would like to get in touch, please email <a
+			href="mailto:explore.local.statistics@ons.gov.uk">explore.local.statistics@ons.gov.uk</a
+		>.
 	</p>
 </Section>
 

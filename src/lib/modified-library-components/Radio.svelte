@@ -6,6 +6,8 @@
 		labelKey,
 		idKey,
 		columns = 1;
+
+	const slugify = (str) => str.toLowerCase().replaceAll(' ', '-');
 </script>
 
 <fieldset class="radio-container">
@@ -15,13 +17,18 @@
 
 	<div class="radio-container radio-labels-container-{columns}-columns">
 		{#each optionsArray as option, i}
-			<label>
-				<input type="radio" value={idKey ? option[idKey] : option} {name} bind:group={valueId} />
-
-				<div class="option-label">
-					<span>{labelKey ? option[labelKey] : option}</span>
-				</div>
-			</label>
+			<div class="radio-option">
+				<input
+					id="{slugify(title)}-{i}"
+					type="radio"
+					value={idKey ? option[idKey] : option}
+					{name}
+					bind:group={valueId}
+				/>
+				<label for="{slugify(title)}-{i}">
+					{labelKey ? option[labelKey] : option}
+				</label>
+			</div>
 		{/each}
 	</div>
 </fieldset>
@@ -35,29 +42,18 @@
 		width: 100%;
 	}
 
-	label {
+	.radio-option {
 		display: flex;
 		flex-direction: row;
 		gap: 8px;
 		min-width: 250px;
 	}
 
-	.option-label {
-		width: 100%;
-	}
-
-	span {
-		padding: 0px;
-		margin: 0px;
-		font-size: 18px;
-		line-height: 20px;
-	}
-
-	.radio-labels-container-1-columns label {
+	.radio-labels-container-1-columns .radio-option {
 		width: calc(100% - 10px);
 	}
 
-	.radio-labels-container-2-columns label {
+	.radio-labels-container-2-columns .radio-option {
 		width: calc(50% - 10px);
 	}
 </style>
