@@ -117,6 +117,7 @@
 					chosenXDomainNumbEnd
 				)
 			: { data: [], breaks: [] };
+	//	$: console.log(mapData);
 
 	$: chosenTimePeriodsArray = timePeriodsArray
 		? timePeriodsArray.filter(
