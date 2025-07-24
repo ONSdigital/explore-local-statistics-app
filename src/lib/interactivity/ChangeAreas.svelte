@@ -10,9 +10,19 @@
 	export let selectedArea, accordionArray, selectionsObject, customLookup;
 	export let label = 'Change areas';
 
+	let colContainer;
+
 	let showModal = false;
-	const onClickEventOpen = () => {
+
+	const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
+	const onClickEventOpen = async () => {
 		showModal = true;
+		await sleep();
+		const firstTwisty = colContainer.getElementsByTagName('summary')[0];
+		firstTwisty.focus();
+
+		console.log('open modal', firstTwisty);
 	};
 
 	let accordionOpen = null;
@@ -44,7 +54,7 @@
 		{/if}
 	</div>
 
-	<div slot="content" class="column-container">
+	<div slot="content" class="column-container" bind:this={colContainer}>
 		{#each accordionArray as accordionSection, index}
 			<div
 				style:display="block"
