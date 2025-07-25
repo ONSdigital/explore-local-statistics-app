@@ -48,9 +48,12 @@
 		...filteredChartDataAreaGroup
 	];
 
+	//find max and min values for visible areas - so the y-scale can be determined
 	$: values = showConfidenceIntervals
-		? [].concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci])).filter((el) => el)
-		: combinedChartData.map((el) => el.value).filter((el) => el);
+		? []
+				.concat(...combinedChartData.map((el) => [el.value, el.lci, el.uci]))
+				.filter((el) => el !== null && el !== undefined)
+		: combinedChartData.map((el) => el.value).filter((el) => el !== null && el !== undefined);
 
 	$: minValue = Math.min(...values);
 	$: maxValue = Math.max(...values);
