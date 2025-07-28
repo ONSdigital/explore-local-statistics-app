@@ -1,4 +1,5 @@
 <script lang="ts">
+	// check if/where this file is being used might need weeding
 	import TitleAdditionalDescription from '$lib/prototype-components/area-page/indicator-rows/TitleAdditionalDescription.svelte';
 	import Divider from '$lib/prototype-components/layout/Divider.svelte';
 	import BeeswarmRowContainer from '$lib/prototype-components/area-page/indicator-rows/BeeswarmRowContainer.svelte';
