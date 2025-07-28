@@ -35,7 +35,7 @@
 	let el = {},
 		indicator,
 		geoGroup;
-
+	
 	//tracks the selected time period range
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
 	let chosenXDomainNumbEnd = metadata.globalXDomainExtent[1];
