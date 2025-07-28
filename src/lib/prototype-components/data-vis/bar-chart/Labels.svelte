@@ -30,7 +30,7 @@
 				linesWithLabelText,
 				[0, chartHeight],
 				(d) => d.labelPosition + 6,
-				(d) => d.labelText.length * fontSize + 8
+				(d) => d.labelText.length * fontSize + 16
 			).map((el) => ({
 				...el,
 				labelOffset: Math.abs(el.y - el.targetY) < 4 ? 'mid' : el.y > el.targetY ? 'down' : 'up'
