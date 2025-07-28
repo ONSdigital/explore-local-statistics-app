@@ -26,8 +26,10 @@
 	value={[chosenXDomainNumbStart, chosenXDomainNumbEnd]}
 	min={timePeriodsArray
 		? timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb
-		: metadata.globalXDomainExtent[0]}
-	max={timePeriodsArray ? timePeriodsArray[0].xDomainNumb : metadata.globalXDomainExtent[1]}
+		: Math.floor(metadata.globalXDomainExtent[0])}
+	max={timePeriodsArray
+		? timePeriodsArray[0].xDomainNumb
+		: Math.floor(metadata.globalXDomainExtent[1])}
 	on:input={debounce(setChosenXDomain, 100)}
 	{timePeriodsArray}
 />
