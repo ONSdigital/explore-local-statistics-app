@@ -111,6 +111,7 @@
 	{/each}
 
 	{#if hoverAreaWithDataAdded && !linesWithLabelTextCodes.includes(hoverAreaWithDataAdded.areacd)}
+		<!-- {#if hoverAreaWithDataAdded} this fixes the issue so permanent labels get the orange rect, but causes buggy behaviour when hovering over the selected area, likely as duplicate is being drawn -->
 		<HoverLabel
 			label={hoverAreaWithDataAdded}
 			bind:isHoverLabelVisible
