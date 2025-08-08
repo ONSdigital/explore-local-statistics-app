@@ -30,7 +30,7 @@
 				linesWithLabelText,
 				[0, chartHeight],
 				(d) => d.labelPosition + 6,
-				(d) => d.labelText.length * fontSize + 8
+				(d) => d.labelText.length * fontSize + 16
 			).map((el) => ({
 				...el,
 				labelOffset: Math.abs(el.y - el.targetY) < 4 ? 'mid' : el.y > el.targetY ? 'down' : 'up'
@@ -110,7 +110,7 @@
 		></Label>
 	{/each}
 
-	{#if hoverAreaWithDataAdded && !linesWithLabelTextCodes.includes(hoverAreaWithDataAdded.areacd)}
+	{#if hoverAreaWithDataAdded}
 		<HoverLabel
 			label={hoverAreaWithDataAdded}
 			bind:isHoverLabelVisible
@@ -121,14 +121,3 @@
 		></HoverLabel>
 	{/if}
 </g>
-
-<!-- <g class="labels-container" transform="translate({chartWidth + 13},0)">
-	{#each permanentLabels as label, i}
-		<Label {label} bind:hoverId bind:labelBBox={permanentLabelsBBoxArray[i]} {customLookup}></Label>
-	{/each}
-
-	{#if hoverAreaWithDataAdded && !linesCodes.includes(hoverAreaWithDataAdded.areacd)}
-		<HoverLabel label={hoverAreaWithDataAdded} bind:isHoverLabelVisible {maxLabelWidth} {y}
-		></HoverLabel>
-	{/if}
-</g> -->
