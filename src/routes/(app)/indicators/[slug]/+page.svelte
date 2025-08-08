@@ -101,12 +101,17 @@
 		refreshData();
 
 		selectionsObject['indicator-related-chosen'] = data.indicator.metadata.initialGeographyLevel;
+
 		selectionsObject['indicator-additional-chosen'] =
 			data.indicator.metadata.standardised === 'F'
 				? []
 				: codesForAreasWithData.includes('K02000001')
 					? ['K02000001']
-					: countriesWithDataCodes;
+					: codesForAreasWithData.includes('K03000001')
+						? ['K03000001']
+						: countriesWithDataCodes.length === 1
+							? countriesWithDataCodes
+							: [];
 	});
 
 	$: mapData =
