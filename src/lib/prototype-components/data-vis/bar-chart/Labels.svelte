@@ -110,9 +110,7 @@
 		></Label>
 	{/each}
 
-	<!-- {#if hoverAreaWithDataAdded && !linesWithLabelTextCodes.includes(hoverAreaWithDataAdded.areacd)} -->
 	{#if hoverAreaWithDataAdded}
-		<!--this fixes the issue so permanent labels get the orange rect, but causes buggy behaviour when hovering over the selected area, likely as duplicate is being drawn -->
 		<HoverLabel
 			label={hoverAreaWithDataAdded}
 			bind:isHoverLabelVisible
@@ -123,14 +121,3 @@
 		></HoverLabel>
 	{/if}
 </g>
-
-<!-- <g class="labels-container" transform="translate({chartWidth + 13},0)">
-	{#each permanentLabels as label, i}
-		<Label {label} bind:hoverId bind:labelBBox={permanentLabelsBBoxArray[i]} {customLookup}></Label>
-	{/each}
-
-	{#if hoverAreaWithDataAdded && !linesCodes.includes(hoverAreaWithDataAdded.areacd)}
-		<HoverLabel label={hoverAreaWithDataAdded} bind:isHoverLabelVisible {maxLabelWidth} {y}
-		></HoverLabel>
-	{/if}
-</g> -->
