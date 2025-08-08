@@ -144,13 +144,13 @@ function toCSVW(datasets, measure, url) {
 			datatype: 'number'
 		},
 		{
-			titles: 'Value',
-			name: 'value',
+			titles: 'Upper confidence interval',
+			name: 'uci',
 			datatype: 'number'
 		},
 		{
-			titles: 'Upper confidence interval',
-			name: 'uci',
+			titles: 'Value',
+			name: 'value',
 			datatype: 'number'
 		}
 	];
