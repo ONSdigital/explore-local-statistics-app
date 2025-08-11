@@ -14,14 +14,15 @@ const transport = {
 		const pinoLogMessage = JSON.parse(chunk);
 
 		const level = pinoLogMessage.level as number;
-
+		// reduce severity of 404s to avoid overwhelming the logs
 		const is404 = pinoLogMessage?.err?.status === 404;
-		const severity = is404 ? 'debug' : levelMap[level] || level;
+		const severity = is404 ? 20 : level;
+		const severityName = levelMap[severity] || severity;
 
 		const log = {
 			created_at: new Date(pinoLogMessage.time).toISOString(),
 			namespace: 'explore-local-statistics',
-			event: `${severity} event`,
+			event: `${severityName} event`,
 			severity: severity,
 			message: pinoLogMessage.msg,
 			error: pinoLogMessage.err

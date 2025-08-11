@@ -79,81 +79,8 @@
 	</g>
 </g>
 
-<!-- <g class="label-group" transform="translate(0,{y(label.data[0].value) + 6})">
-	<g
-		class="one-line-label-group"
-		transform="translate({oneLineLabelBBox && oneLineLabelBBox.width > maxLabelWidth ? 9999 : 0},0)"
-	>
-		{#if oneLineLabelBBox}
-			<rect
-				x={-3}
-				width={oneLineLabelBBox.width + 6}
-				y={oneLineLabelBBox.y - 18}
-				height={oneLineLabelBBox.height}
-				rx="2px"
-				stroke="none"
-				fill={backgroundColor}
-			></rect>
-		{/if}
-
-		<g bind:contentRect={oneLineLabelBBox}>
-			{#each oneLineLabelArray as line, i}
-				<text y={18 * i} fill={textColor}>{line}</text>
-			{/each}
-		</g>
-	</g>
-
-	{#if showTwoLineLabel}
-		<g
-			class="two-line-label-group"
-			transform="translate({twoLineLabelBBox && twoLineLabelBBox.width > maxLabelWidth
-				? 9999
-				: 0},0)"
-		>
-			{#if twoLineLabelBBox}
-				<rect
-					x={-3}
-					width={twoLineLabelBBox.width + 6}
-					y={twoLineLabelBBox.y - 18}
-					height={twoLineLabelBBox.height}
-					rx="2px"
-					stroke="none"
-					fill={backgroundColor}
-				></rect>
-			{/if}
-
-			<g bind:contentRect={twoLineLabelBBox}>
-				{#each twoLineLabelArray as line, i}
-					<text y={18 * i} fill={textColor}>{line}</text>
-				{/each}
-			</g>
-		</g>
-	{/if}
-
-	{#if showThreeLineLabel}
-		<g
-			class="three-line-label-group"
-			transform="translate({threeLineLabelBBox && threeLineLabelBBox.width > maxLabelWidth
-				? 9999
-				: 0},0)"
-		>
-			{#if threeLineLabelBBox}
-				<rect
-					x={-3}
-					width={threeLineLabelBBox.width + 6}
-					y={threeLineLabelBBox.y - 18}
-					height={threeLineLabelBBox.height}
-					rx="2px"
-					stroke="none"
-					fill={backgroundColor}
-				></rect>
-			{/if}
-
-			<g bind:contentRect={threeLineLabelBBox}>
-				{#each threeLineLabelArray as line, i}
-					<text y={18 * i} fill={textColor}>{line}</text>
-				{/each}
-			</g>
-		</g>
-	{/if}
-</g> -->
+<style>
+	.hover-label-container {
+		pointer-events: none;
+	}
+</style>

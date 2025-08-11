@@ -75,14 +75,14 @@
 		>
 			{#if labelRect && (!['related'].includes(label.datum.role) || label.datum.groupLabel)}
 				<rect
-					x={-labelRect.width}
-					y={-labelRect.height / 2 - fontSize / 4.5}
-					width={labelRect.width + 6}
+					x={-4 + -labelRect.width}
+					y={-4 + -labelRect.height / 2 - fontSize / 4.5}
+					width={labelRect.width + 14}
 					height={Math.max(
 						0,
 						labelRect.height -
 							fontSize / 4.5 +
-							(/[qgyp]/.test(textArray[textArray.length - 1]) ? 2 : 0)
+							(/[qgyp]/.test(textArray[textArray.length - 1]) ? 10 : 8)
 					)}
 					fill={color.color}
 					stroke="none"
