@@ -15,6 +15,8 @@
 		Button,
 		Dropdown,
 		Twisty,
+		Container,
+		Notice,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
 
@@ -117,7 +119,7 @@
 
 		// merges together data for our selected area
 		selectedArea = {
-			...nonObsoleteAreas[data.place.areacd],
+			...metadata.areasObject[data.place.areacd],
 			role: 'main',
 			similarCluster:
 				metadata.clustersLookup.data.demographic[
@@ -396,9 +398,73 @@
 </script>
 
 {#if navigated}
-	<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
-		<Lede>Explore local indicators, trends and get data for {getName(data.place, 'the')}</Lede>
+	<Titleblock
+		title="Local indicators for {getName(data.place, 'the')}"
+		background="#eaeaea"
+		titleBadge={data.place.areacd}
+		titleBadgeAriaLabel="Area code: {data.place.areacd}"
+	>
+		<Lede>
+			Explore local indicators, trends and get data
+			<span style:white-space="nowrap">
+				for {getName(data.place, 'the')}
+				{#if data.place.end}
+					<span class="inactive-badge">Inactive</span>
+				{/if}
+			</span>
+		</Lede>
 	</Titleblock>
+
+	{#if data.place.end}
+		<Container width="medium" marginTop>
+			<Notice>
+				<p>
+					This geographic area is no longer active.
+					{#if data.place.successor && data.place.end === new Date().getFullYear() - 1}
+						However, for a period it may continue to have more data available than its successor
+						area, {getName(data.place.successor, 'the', 'prefix')}
+						<a
+							data-sveltekit-reload
+							href="{base}/areas/{makeCanonicalSlug(
+								data.place.successor.areacd,
+								data.place.successor.areanm
+							)}/indicators">{getName(data.place.successor)}</a
+						>
+						({data.place.successor.areacd}).
+					{:else if data.place.successor}
+						You may find more data available for its successor area,
+						{getName(data.place.successor, 'the', 'prefix')}
+						<a
+							data-sveltekit-reload
+							href="{base}/areas/{makeCanonicalSlug(
+								data.place.successor.areacd,
+								data.place.successor.areanm
+							)}/indicators">{getName(data.place.successor)}</a
+						>
+						({data.place.successor.areacd}).
+					{/if}
+				</p>
+			</Notice>
+		</Container>
+	{:else if data.place.replaces?.[0]?.areacd && data.place?.start === new Date().getFullYear()}
+		<Container width="medium" marginTop>
+			<Notice>
+				<p>
+					This is a newly defined geographic area. For a period you may find more data for
+					{#each data.place.replaces as rep, i}
+						{data.place.areanm === rep.areanm ? 'the previous' : getName(rep, 'the', 'prefix')}
+						<a
+							data-sveltekit-reload
+							href="{base}/areas/{makeCanonicalSlug(rep.areacd, rep.areanm)}/indicators"
+							data-sveltekit-noscroll>{getName(rep)}</a
+						>
+						({rep.areacd}){i === data.place.replaces.length - 2 ? ' and ' : ', '}
+					{/each}
+					which it superseded.
+				</p>
+			</Notice>
+		</Container>
+	{/if}
 
 	<Cards marginTop>
 		<Card noBackground>
@@ -414,7 +480,8 @@
 		</Card>
 		<Card title="About this area">
 			<p>
-				{getName(data.place)} ({data.place.areacd}) is {aAn(data.place.typenm)}
+				{getName(data.place)} ({data.place.areacd}) {data.place.end ? 'was' : 'is'}
+				{aAn(data.place.typenm)}
 				{getName(data.place.parents[0], 'in', 'prefix')}
 				<a
 					href="{base}/areas/{makeCanonicalSlug(
@@ -655,5 +722,14 @@
 	}
 	:global(.no-display-hidden-header h3.ons-u-vh) {
 		display: none;
+	}
+
+	.inactive-badge {
+		font-weight: bold;
+		color: white;
+		padding: 0 8px 2px 8px;
+		border-radius: 4px;
+		background-color: #fa6401;
+		margin-right: 2px;
 	}
 </style>
