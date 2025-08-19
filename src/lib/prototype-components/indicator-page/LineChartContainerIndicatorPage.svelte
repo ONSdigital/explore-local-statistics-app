@@ -143,7 +143,7 @@
 			</p>
 		</div>
 	</ContentBlock>
-{:else if chosenTimePeriodsArray.length === 1}
+{:else if chosenTimePeriodsArray.length === 1 || indicator.code === 'population-indicators-5-year population change'}
 	<ContentBlock showActions={false}>
 		<div class="no-chart-container">
 			<p>
