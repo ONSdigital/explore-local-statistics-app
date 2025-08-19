@@ -1,4 +1,5 @@
-<script>
+<!-- check this one with Ahmad! -->
+<!-- <script>
 	import { getContext } from 'svelte';
 	
 	export let mode = getContext("mode");
@@ -6,4 +7,4 @@
 
 <p class="{mode == 'neutral' ? 'page-neutral-intro__content' : 'page-intro__content'}">
 	<slot/>
-</p>
+</p> -->
