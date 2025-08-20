@@ -19,7 +19,7 @@
 		Notice,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
-
+	import UKMap from '$lib/components/UKMap.svelte';
 	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
@@ -395,25 +395,31 @@
 		chartData.clusterData,
 		parentArea
 	);
+
+	$: console.log(chartData);
 </script>
 
 {#if navigated}
-	<Titleblock
-		title="Local indicators for {getName(data.place, 'the')}"
-		background="#eaeaea"
-		titleBadge={data.place.areacd}
-		titleBadgeAriaLabel="Area code: {data.place.areacd}"
-	>
-		<Lede>
-			Explore local indicators, trends and get data
-			<span style:white-space="nowrap">
-				for {getName(data.place, 'the')}
+	<div class="titleblock-container">
+		<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
+			<Lede>
+				Local indicators, trends and data for {getName(data.place, 'the', 'prefix')}
+				<a href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+					>{getName(data.place)}</a
+				>
+				({data.place.areacd})
 				{#if data.place.end}
 					<span class="inactive-badge">Inactive</span>
 				{/if}
-			</span>
-		</Lede>
-	</Titleblock>
+			</Lede>
+		</Titleblock>
+
+		<AreaLocMap
+			geometry={data.geometry}
+			bounds={data.place.bounds}
+			mapDescription={'Map of ' + getName(data.place, 'the')}
+		/>
+	</div>
 
 	{#if data.place.end}
 		<Container width="medium" marginTop>
@@ -466,7 +472,7 @@
 		</Container>
 	{/if}
 
-	<Cards marginTop>
+	<!-- <Cards marginTop>
 		<Card noBackground>
 			<div style:height="200px">
 				{#key data.geometry}
@@ -529,7 +535,26 @@
 				/>
 			{/if}
 		</Card>
+	</Cards> -->
+
+	<Cards marginTop>
+		<Card title="Total population">
+			<p class="ons-card__subtitle">2024</p>
+			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">581,363</p>
+			<p id="text1" class="ons-card__body ons-u-mb-no">people</p>
+		</Card>
+		<Card title="Population change">
+			<p class="ons-card__subtitle">2024</p>
+			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">+0.4%</p>
+			<p id="text1" class="ons-card__body ons-u-mb-no">5-year change from 2019</p>
+		</Card>
+		<Card title="Average (median) age">
+			<p class="ons-card__subtitle">2024</p>
+			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">47</p>
+			<p id="text1" class="ons-card__body ons-u-mb-no">years</p>
+		</Card>
 	</Cards>
+
 	<div
 		use:viewport
 		on:enterViewport={() => {
@@ -722,6 +747,20 @@
 	}
 	:global(.no-display-hidden-header h3.ons-u-vh) {
 		display: none;
+	}
+
+	.titleblock-container {
+		position: relative;
+	}
+
+	:global(.title-container) {
+		position: relative;
+		max-width: 700px;
+		z-index: 1;
+	}
+
+	:global(.ons-breadcrumb__items) {
+		z-index: 1;
 	}
 
 	.inactive-badge {
