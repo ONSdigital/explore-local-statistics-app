@@ -6,14 +6,27 @@
 	export let bounds;
 	export let mapDescription;
 	export let primaryColor = 'rgb(32, 96, 149)';
+
+	let map, w, h;
+
+	const padding = { left: 40, top: 40, right: 20, bottom: 20 };
+
+	function refitMap(w, h, bounds) {
+		if (map) map.fitBounds(bounds, { animate: false, padding });
+	}
+
+	$: refitMap(w, h, bounds);
 </script>
 
-<div class="map-container">
+<div class="map-container" bind:clientWidth={w} bind:clientHeight={h}>
 	<Map
+		bind:map
 		style="{assets}/data/mapstyle-nav.json"
 		location={{ bounds }}
 		interactive={false}
-		options={{ fitBoundsOptions: { padding: { left: 40, top: 40, right: 20, bottom: 20 } } }}
+		options={{
+			fitBoundsOptions: { padding }
+		}}
 		{mapDescription}
 	>
 		{#key geometry}
