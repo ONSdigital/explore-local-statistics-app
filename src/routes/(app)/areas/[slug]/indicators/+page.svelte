@@ -27,6 +27,7 @@
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import Legend from '$lib/viz/Legend.svelte';
+	import BigNumber from '$lib/viz/BigNumber.svelte';
 
 	import SelectAnIndicatorSection from './SelectAnIndicatorSection.svelte';
 	import IndicatorRowsSection from './IndicatorRowsSection.svelte';
@@ -396,7 +397,7 @@
 		parentArea
 	);
 
-	$: console.log(chartData);
+	$: console.log('popData', chartData.combinedDataObject['population-indicators-Population count']);
 </script>
 
 {#if navigated}
@@ -412,6 +413,37 @@
 					<span class="inactive-badge">Inactive</span>
 				{/if}
 			</Lede>
+			<div style:margin="32px 0 -24px" style:max-width="450px" style:z-index={1}>
+				<Twisty title="Find another area">
+					<label for="search" style:display="block" style:margin-bottom="8px"
+						>Search for a place name or postcode</label
+					>
+					<AreaSelect
+						id="search"
+						mode="search"
+						idKey="areacd"
+						labelKey="areanm"
+						groupKey="group"
+						placeholder="Eg. Fareham or PO15 5RR"
+						essOnly
+						hideIcon
+						bind:selectElement
+						bind:value={searchValue}
+						on:submit={navTo}
+						on:clear={() => (postcode = null)}
+					/>
+					{#if postcode}
+						<AreaList
+							{postcode}
+							on:clear={() => {
+								postcode = null;
+								searchValue = null;
+							}}
+							urlSuffix="/indicators"
+						/>
+					{/if}
+				</Twisty>
+			</div>
 		</Titleblock>
 
 		<AreaLocMap
@@ -471,6 +503,17 @@
 			</Notice>
 		</Container>
 	{/if}
+
+	<Cards marginTop>
+		{#each ['population-indicators-Population count', 'population-indicators-5-year population change', 'population-indicators-Median age'] as indicator}
+			{@const value = chartData.combinedDataObject[indicator]
+				.filter((d) => d.areacd === data.place.areacd)
+				.sort((a, b) => b.xDomainNumb - a.xDomainNumb)[0]}
+			{#if value}
+				<BigNumber {indicator} {value} metadata={metadata.indicatorsObject[indicator].metadata} />
+			{/if}
+		{/each}
+	</Cards>
 
 	<!-- <Cards marginTop>
 		<Card noBackground>
@@ -536,24 +579,6 @@
 			{/if}
 		</Card>
 	</Cards> -->
-
-	<Cards marginTop>
-		<Card title="Total population">
-			<p class="ons-card__subtitle">2024</p>
-			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">581,363</p>
-			<p id="text1" class="ons-card__body ons-u-mb-no">people</p>
-		</Card>
-		<Card title="Population change">
-			<p class="ons-card__subtitle">2024</p>
-			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">+0.4%</p>
-			<p id="text1" class="ons-card__body ons-u-mb-no">5-year change from 2019</p>
-		</Card>
-		<Card title="Average (median) age">
-			<p class="ons-card__subtitle">2024</p>
-			<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">47</p>
-			<p id="text1" class="ons-card__body ons-u-mb-no">years</p>
-		</Card>
-	</Cards>
 
 	<div
 		use:viewport

@@ -116,7 +116,12 @@
 	let observed = false;
 </script>
 
-<div class="indicator-row-container" style="margin-bottom: 20px;">
+<div
+	id={indicator.metadata.slug}
+	class="indicator-row-container"
+	style:margin-bottom="20px"
+	style:scroll-margin-top="140px"
+>
 	<TitleAndAdditionalDescription {showVisuals} {indicator}></TitleAndAdditionalDescription>
 </div>
 
