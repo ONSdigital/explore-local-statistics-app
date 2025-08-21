@@ -32,7 +32,9 @@
 
 	// allow negative values to be drawn
 	$: yMin = indicator.metadata.canBeNegative === 'F' ? 0 : yDomain[0];
-	$: y = scaleLinear().domain([yMin, yDomain[1]]).range([0, chartWidth]);
+	$: y = scaleLinear()
+		.domain([Math.min(0, yMin), yDomain[1]])
+		.range([0, chartWidth]);
 
 	$: selectedBar = selectedArea
 		? {
@@ -74,6 +76,7 @@
 
 	let relatedBarHeight = 20;
 	$: primaryBarHeight = relatedBars.length > 200 ? 140 : relatedBars.length > 40 ? 40 : 20;
+	$: console.log(relatedBars.length);
 	$: yAxisPadding = relatedBars.length > 200 ? 30 : relatedBars.length > 40 ? 20 : 10;
 
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
@@ -92,6 +95,7 @@
 			height: el.role === 'related' ? relatedBarHeight : primaryBarHeight
 		};
 	});
+	$: console.log(dataArrayStep2);
 
 	$: totalHeight =
 		dataArrayStep2[dataArrayStep2.length - 1].position +
@@ -163,7 +167,13 @@
 	$: fontSize = width < 600 || labels.length > 12 ? 16 : 18;
 </script>
 
-<AxisX {indicator} {chartWidth} {y} yDomain={[yMin, yDomain[1]]} bind:xAxisFinalTickWidth></AxisX>
+<AxisX
+	{indicator}
+	{chartWidth}
+	{y}
+	yDomain={[Math.min(0, yMin), yDomain[1]]}
+	bind:xAxisFinalTickWidth
+></AxisX>
 
 {#each dataArrayStep3 as area, index}
 	<g transform="translate(0,{area.position})">
