@@ -66,6 +66,7 @@
 	});
 
 	let selectElement, postcode, searchValue;
+	let areaSearchOpen = false;
 	let mapColors = null;
 
 	let navigated;
@@ -105,6 +106,7 @@
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
+			areaSearchOpen = false;
 			selectElement.clearInput();
 			goto(
 				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
@@ -414,7 +416,7 @@
 				{/if}
 			</Lede>
 			<div style:margin="32px 0 -24px" style:max-width="450px" style:z-index={1}>
-				<Twisty title="Find another area">
+				<Twisty title="Find another area" bind:open={areaSearchOpen}>
 					<label for="search" style:display="block" style:margin-bottom="8px"
 						>Search for a place name or postcode</label
 					>
