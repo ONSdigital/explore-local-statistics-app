@@ -397,7 +397,7 @@
 		parentArea
 	);
 
-	$: console.log('popData', chartData.combinedDataObject['population-indicators-Population count']);
+	$: console.log('chartData', chartData);
 </script>
 
 {#if navigated}
@@ -509,8 +509,10 @@
 			{@const value = chartData.combinedDataObject[indicator]
 				.filter((d) => d.areacd === data.place.areacd)
 				.sort((a, b) => b.xDomainNumb - a.xDomainNumb)[0]}
+			{@const meta = metadata.indicatorsObject[indicator].metadata}
+			{@const periods = metadata.periodsLookupObject[metadata.indicatorsObject[indicator].id]}
 			{#if value}
-				<BigNumber {indicator} {value} metadata={metadata.indicatorsObject[indicator].metadata} />
+				<BigNumber {indicator} {value} {meta} {periods} />
 			{/if}
 		{/each}
 	</Cards>
