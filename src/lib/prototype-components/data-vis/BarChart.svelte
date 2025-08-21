@@ -5,6 +5,7 @@
 	import Labels from '$lib/prototype-components/data-vis/bar-chart/Labels.svelte';
 
 	import { scaleLinear } from 'd3-scale';
+	import { areaPluralObject } from '$lib/config';
 
 	export let indicator,
 		latestPeriod,
@@ -29,7 +30,9 @@
 		width,
 		xAxisFinalTickWidth;
 
-	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
+	// allow negative values to be drawn
+	$: yMin = indicator.metadata.canBeNegative === 'F' ? 0 : yDomain[0];
+	$: y = scaleLinear().domain([yMin, yDomain[1]]).range([0, chartWidth]);
 
 	$: selectedBar = selectedArea
 		? {
@@ -160,7 +163,7 @@
 	$: fontSize = width < 600 || labels.length > 12 ? 16 : 18;
 </script>
 
-<AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]} bind:xAxisFinalTickWidth></AxisX>
+<AxisX {indicator} {chartWidth} {y} yDomain={[yMin, yDomain[1]]} bind:xAxisFinalTickWidth></AxisX>
 
 {#each dataArrayStep3 as area, index}
 	<g transform="translate(0,{area.position})">
@@ -177,7 +180,7 @@
 	</g>
 {/each}
 
-<line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
+<line x1={y(0)} x2={y(0)} y1="0" y2={chartHeight} stroke="#222"></line>
 
 <PlaceholderLabels lines={labels} {labelSpace} bind:labelArray {fontSize}></PlaceholderLabels>
 
