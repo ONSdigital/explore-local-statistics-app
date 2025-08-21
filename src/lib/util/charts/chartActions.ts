@@ -31,7 +31,10 @@ function makeColumns(data, indicator, metadata) {
 		}
 		return key;
 	};
-	let keys = Object.keys(data[0]).filter((key) => typeof +key === 'number' && !isNaN(+key));
+	let keys = Array.from(
+    	new Set(
+        	data.flatMap(d => Object.keys(d))
+    	)).filter((key) => typeof +key === 'number' && !isNaN(+key));
 	//Formatting the dates in the csv table download
 	const xDomainArr = keys[0]
 		? metadata.periodsLookupArray.filter(
@@ -79,6 +82,7 @@ export function downloadCSV(
 		'data.csv'
 ) {
 	const cols = makeColumns(data, indicator, metadata);
+
 	const xDomain = cols.keys.includes('xDomainNumb')
 		? Array.from(new Set(data.map((d) => d.xDomainNumb))).sort((a, b) => a - b)
 		: null;

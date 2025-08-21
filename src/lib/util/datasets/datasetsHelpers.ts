@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-nocheck
 import ckmeans from 'ckmeans';
+import { geoCodesLookup, geoTypes } from '$lib/config/geoConfig';
 
 const yearKey = 'xDomainNumb';
 
@@ -97,6 +98,13 @@ export function filterExtremeAreas(data, threshold = 700) {
 		return [];
 	}
 
+	// match over geotype
+	data = data.map(d => ({
+		...d,
+		geoType: geoCodesLookup[d.areacd.slice(0,3)]?.key
+	}))
+
+
 	// Group values by year
 	const yearGroups = data.reduce((acc, item) => {
 		if (!acc[item.xDomainNumb]) {
@@ -127,6 +135,6 @@ export function filterExtremeAreas(data, threshold = 700) {
 		}
 	});
 
-	// Filter out areas with extreme values
-	return data.filter((item) => !extremeAreas.has(item.areacd));
+	// Filter out areas with extreme values, but only for ltlas
+	return data.filter((item) => !extremeAreas.has(item.areacd) || item.geoType !== 'ltla');
 }

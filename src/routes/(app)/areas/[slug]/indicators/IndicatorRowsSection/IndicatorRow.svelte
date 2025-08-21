@@ -47,10 +47,11 @@
 	$: comparisonXDomain = [Math.min(...comparisonPeriods), Math.max(...comparisonPeriods)];
 
 	//the time period range based on combined data from our selected area and primary comparison
-	$: selectedAndComparisonXDomain = [
-		Math.min(selectedXDomain[0], comparisonXDomain[0]),
-		Math.max(selectedXDomain[1], comparisonXDomain[1])
-	];
+	// $: selectedAndComparisonXDomain = [
+	// 	Math.min(selectedXDomain[0], comparisonXDomain[0]),
+	// 	Math.max(selectedXDomain[1], comparisonXDomain[1])
+	// ];
+	$: selectedAndComparisonXDomain = selectedXDomain;
 
 	//determine xDomain for time series chart and latest time period - used for the beeswarm.
 	$: xDomainInit = [
