@@ -127,7 +127,7 @@
 		}
 	}
 
-	$: console.log({ selectionsObject });
+	// $: console.log({ selectionsObject });
 </script>
 
 <figure class="beeswarm-figure">
