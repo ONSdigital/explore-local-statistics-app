@@ -75,9 +75,8 @@
 		.sort((a, b) => b.data.value - a.data.value);
 
 	let relatedBarHeight = 20;
-	$: primaryBarHeight = relatedBars.length > 200 ? 140 : relatedBars.length > 40 ? 40 : 20;
-	$: console.log(relatedBars.length);
-	$: yAxisPadding = relatedBars.length > 200 ? 30 : relatedBars.length > 40 ? 20 : 10;
+	$: primaryBarHeight = dataArrayStep1.length > 200 ? 140 : dataArrayStep1.length > 40 ? 40 : 20;
+	$: yAxisPadding = dataArrayStep1.length > 200 ? 30 : dataArrayStep1.length > 40 ? 20 : 10;
 
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
 		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
@@ -95,7 +94,6 @@
 			height: el.role === 'related' ? relatedBarHeight : primaryBarHeight
 		};
 	});
-	$: console.log(dataArrayStep2);
 
 	$: totalHeight =
 		dataArrayStep2[dataArrayStep2.length - 1].position +
