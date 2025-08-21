@@ -519,7 +519,7 @@
 			</NavSection>
 		{/if}
 
-		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb}
+		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb && data.indicator.code !== 'population-indicators-5-year population change'}
 			<NavSection title="Line chart">
 				<div class="row-container">
 					<div class="buttons-container">
