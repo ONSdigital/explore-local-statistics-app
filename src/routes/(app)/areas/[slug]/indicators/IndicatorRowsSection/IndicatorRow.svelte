@@ -47,10 +47,11 @@
 	$: comparisonXDomain = [Math.min(...comparisonPeriods), Math.max(...comparisonPeriods)];
 
 	//the time period range based on combined data from our selected area and primary comparison
-	$: selectedAndComparisonXDomain = [
-		Math.min(selectedXDomain[0], comparisonXDomain[0]),
-		Math.max(selectedXDomain[1], comparisonXDomain[1])
-	];
+	// $: selectedAndComparisonXDomain = [
+	// 	Math.min(selectedXDomain[0], comparisonXDomain[0]),
+	// 	Math.max(selectedXDomain[1], comparisonXDomain[1])
+	// ];
+	$: selectedAndComparisonXDomain = selectedXDomain;
 
 	//determine xDomain for time series chart and latest time period - used for the beeswarm.
 	$: xDomainInit = [
@@ -149,7 +150,7 @@
 				<div class="divider-vertical"></div>
 
 				<div class="line-chart-container">
-					{#if xDomain[0] != xDomain[1]}
+					{#if xDomain[0] != xDomain[1] && indicator.code != 'population-indicators-5-year population change'}
 						<LineChartContainer
 							filteredChartData={filteredChartDataObject.timeSeries.filtered}
 							{metadata}

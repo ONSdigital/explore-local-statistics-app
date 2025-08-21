@@ -38,7 +38,8 @@
 		<rect
 			on:mouseenter={onMouseEnterEvent}
 			on:mouseleave={onMouseLeaveEvent}
-			width={Math.max(0, y(area.data.value))}
+			width={y(Math.abs(area.data.value)) - y(0)}
+			x={area.data.value < 0 ? y(area.data.value) : y(0)}
 			y={-Math.min(area.height / 2, 50)}
 			height={Math.min(area.height, 100)}
 			fill={color.color}
@@ -48,7 +49,8 @@
 		<rect
 			on:mouseenter={onMouseEnterEvent}
 			on:mouseleave={onMouseLeaveEvent}
-			width={Math.max(0, y(area.data.value))}
+			width={y(Math.abs(area.data.value)) - y(0)}
+			x={area.data.value < 0 ? y(area.data.value) : y(0)}
 			y={-Math.min(area.height / 2, 50)}
 			height={Math.min(area.height, 100)}
 			fill={color.color}
