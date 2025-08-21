@@ -14,7 +14,7 @@
 	export let data;
 	export let childType;
 	export let mapDescription;
-	export let primaryColor = 'rgb(32, 96, 149)';
+	export let primaryColor = 'rgb(17, 140, 123)';
 
 	let map;
 	let hovered;

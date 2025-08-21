@@ -5,7 +5,7 @@
 	export let geometry;
 	export let bounds;
 	export let mapDescription;
-	export let primaryColor = 'rgb(32, 96, 149)';
+	export let primaryColor = 'rgb(17, 140, 123)';
 
 	let map, w, h;
 
