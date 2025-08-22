@@ -11,10 +11,12 @@
 
 <style>
 	.page-neutral-intro__content {
+		position: relative;
+		z-index: 1;
 		font-size: 22px;
 		padding: 2px 0 0;
 		line-height: 1.4;
-		max-width: 608px;
+		max-width: 700px;
 		margin: -8px auto -12px 0;
 	}
 	.margin-bottom {
