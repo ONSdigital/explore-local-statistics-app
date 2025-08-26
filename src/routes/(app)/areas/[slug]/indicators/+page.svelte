@@ -298,7 +298,7 @@
 		// Set data for big numbers
 		bigNumberData = [
 			'population-indicators-Population count',
-			'population-indicators-5-year population change',
+			// 'population-indicators-5-year population change',
 			'population-indicators-Median age'
 		]
 			.map((indicator) => ({
