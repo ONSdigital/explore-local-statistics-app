@@ -14,6 +14,7 @@
 	export let data;
 	export let childType;
 	export let mapDescription;
+	export let primaryColor = 'rgb(17, 140, 123)';
 
 	let map;
 	let hovered;
@@ -43,7 +44,7 @@
 <div style:height="450px">
 	<Map
 		bind:map
-		style="{assets}/data/mapstyle.json"
+		style="{assets}/data/mapstyle-nav.json"
 		location={{ bounds: data.place.bounds }}
 		options={{
 			fitBoundsOptions: { padding: 20 },
@@ -72,9 +73,19 @@
 						paint={{
 							'fill-color':
 								l.key === data.geoType.key
-									? ['case', ['==', ['feature-state', 'selected'], true], 'rgb(17,140,123)', 'grey']
-									: 'rgb(17,140,123)',
-							'fill-opacity': ['case', ['==', ['feature-state', 'hovered'], true], 0.3, 0.1]
+									? ['case', ['==', ['feature-state', 'selected'], true], primaryColor, 'grey']
+									: primaryColor,
+							'fill-opacity':
+								l.key === data.geoType.key
+									? [
+											'case',
+											['==', ['feature-state', 'hovered'], true],
+											0.4,
+											['==', ['feature-state', 'selected'], true],
+											0.2,
+											0.1
+										]
+									: ['case', ['==', ['feature-state', 'hovered'], true], 0.4, 0.2]
 						}}
 						visible={l.key === data.geoType.key || l.key === childType?.key}
 						filter={!childType
@@ -96,7 +107,7 @@
 						id="{l.key}-line"
 						type="line"
 						paint={{
-							'line-color': l.key === data.geoType.key ? 'grey' : 'rgb(17,140,123)',
+							'line-color': l.key === data.geoType.key ? 'grey' : primaryColor,
 							'line-width': 1
 						}}
 						visible={l.key === data.geoType.key || l.key === childType?.key}
@@ -109,7 +120,7 @@
 					<MapLayer
 						id="{l.key}-active"
 						type="line"
-						paint={{ 'line-color': 'rgb(17,140,123)', 'line-width': 2 }}
+						paint={{ 'line-color': primaryColor, 'line-width': 2 }}
 						visible={l.key === data.geoType.key}
 						filter={['==', 'areacd', data.place.areacd]}
 					/>
@@ -121,7 +132,7 @@
 				<MapLayer
 					id="place-line"
 					type="line"
-					paint={{ 'line-color': 'rgb(17,140,123)', 'line-width': 2 }}
+					paint={{ 'line-color': primaryColor, 'line-width': 2 }}
 				></MapLayer>
 			</MapSource>
 		{/if}

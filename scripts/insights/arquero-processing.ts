@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { median, mad } from './stats.ts';
-import aq from 'arquero';
+import aq from "arquero";
 import ColumnTable from 'arquero/dist/types/table/column-table';
 import { loadCsvWithoutBom, readJsonSync, readCsvAutoType } from './io.ts';
 import {
@@ -41,7 +41,12 @@ export default async function main() {
 
 	let jsonAdditionalMetadata = processJSONs(file_paths, excludedIndicators);
 
-	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME);
+	// remove excluded indicators from previousIndicators object
+	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME)
+		.filter(aq.escape(
+			row => !excludedIndicators.includes(row.code)
+		));
+
 	let periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME, {
 		stringColumns: ['period', 'label', 'labelShort']
 	});
@@ -57,7 +62,7 @@ export default async function main() {
 
 	const [indicators, indicators_calculations, _oldStyleIndicatorsCalculations] =
 		getIndicatorsCalculations(previousIndicators, combined_data, areas_geog_level);
-
+		
 	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code');
 
 	const unique_periods_for_each_indicator = combined_data
@@ -218,6 +223,7 @@ function processFiles(file_paths, excludedIndicators: string[], areas_geog_level
 	for (const f of file_paths.objects()) {
 		const code = f.filePath.replace(/^.*[/]/, '').replace(/.csv$/, '');
 
+		// this removes indicators at the file-level - i.e. works for single-indicator codes, but not multi-indicator codes:
 		if (!excludedIndicators.includes(code)) {
 			[combined_data, combined_metadata] = processFile(
 				f,
@@ -226,7 +232,8 @@ function processFiles(file_paths, excludedIndicators: string[], areas_geog_level
 				areas_geog_level,
 				combined_data,
 				combined_metadata,
-				unknownAreaCodes
+				unknownAreaCodes,
+				excludedIndicators
 			);
 		}
 	}
@@ -247,7 +254,8 @@ function processFile(
 	areas_geog_level,
 	combined_data,
 	combined_metadata,
-	unknownAreaCodes
+	unknownAreaCodes,
+	excludedIndicators
 ) {
 	let jsonAdditionalMetadataForIndicator = JSON.parse(
 		fs.readFileSync(f.filePath.replace(/.csv$/, '.json'))
@@ -289,6 +297,14 @@ function processFile(
 		)
 	});
 
+	// remove excludedIndicators from multi-category indicators
+	if (indicator_data.columnNames().includes("code") && excludedIndicators.length) {
+  		indicator_data = indicator_data.filter(aq.escape (
+			row =>
+    		!excludedIndicators.includes(row.code))
+  		);
+	}
+
 	let indicator_metadata = indicator_data
 		.select(...metadata_columns)
 		.select(aq.not('areacd'))
@@ -303,6 +319,14 @@ function processFile(
 	}
 
 	indicator_metadata = indicator_metadata.dedupe();
+	
+	// remove excludedIndicators from *metadata* for multi-category indicators
+	if (indicator_metadata.columnNames().includes("code") && excludedIndicators.length) {
+  		indicator_metadata = indicator_metadata.filter(aq.escape (
+			row =>
+    		!excludedIndicators.includes(row.code))
+  		);
+	}
 
 	indicator_data = indicator_data.select(
 		...CONFIG.COMBINED_DATA_COLUMN_NAMES.filter((n) => indicator_data.columnNames().includes(n))
@@ -317,6 +341,7 @@ function processFile(
 	combined_metadata = combined_metadata.concat(indicator_metadata);
 
 	return [combined_data, combined_metadata];
+	
 }
 
 function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
