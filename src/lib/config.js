@@ -1,5 +1,10 @@
 ///
 
+export const extremeAreas = {
+  "gdp-per-head-Gross domestic product per head at current market price": ["E09000001"],
+  "gdp-per-head-Gross domestic product per head in chained volume measure": ["E09000001"]
+};
+
 export const geoLevelsLookup = {
 	lower: 'ltla',
 	upper: 'utla',
