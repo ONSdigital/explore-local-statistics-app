@@ -4,7 +4,7 @@
 
 To work on ELS, you need to get set up on ONSdigital. Here what you need to do.
 
-- Add your ONS email to your github account, it can be a secondary email address.
+- [Add your ONS email to your github account](https://docs.github.com/en/account-and-profile/how-tos/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account), it can be a secondary email address.
 - [Set up two factor authentication on GitHub](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)
 - [Generate a GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [Add GPG key to your github account](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
