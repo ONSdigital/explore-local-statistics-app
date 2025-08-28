@@ -5,7 +5,7 @@
 	"scripts": {
 		"find-unused-files": "tsx scripts/find-unused-files.ts",
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
 		"preview": "vite preview",
 		"test": "npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"@onsvisual/robo-utils": "^0.3.3",
-		"@onsvisual/svelte-components": "0.1.105",
+		"@onsvisual/svelte-components": "^0.1.110",
 		"@onsvisual/svelte-maps": "^1.2.25",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",

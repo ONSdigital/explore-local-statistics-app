@@ -5,6 +5,7 @@
 	import Labels from '$lib/prototype-components/data-vis/bar-chart/Labels.svelte';
 
 	import { scaleLinear } from 'd3-scale';
+	import { areaPluralObject } from '$lib/config';
 
 	export let indicator,
 		latestPeriod,
@@ -29,7 +30,11 @@
 		width,
 		xAxisFinalTickWidth;
 
-	$: y = scaleLinear().domain([0, yDomain[1]]).range([0, chartWidth]);
+	// allow negative values to be drawn
+	$: yMin = indicator.metadata.canBeNegative === 'F' ? 0 : yDomain[0];
+	$: y = scaleLinear()
+		.domain([Math.min(0, yMin), yDomain[1]])
+		.range([0, chartWidth]);
 
 	$: selectedBar = selectedArea
 		? {
@@ -70,8 +75,8 @@
 		.sort((a, b) => b.data.value - a.data.value);
 
 	let relatedBarHeight = 20;
-	$: primaryBarHeight = relatedBars.length > 200 ? 140 : relatedBars.length > 40 ? 40 : 20;
-	$: yAxisPadding = relatedBars.length > 200 ? 30 : relatedBars.length > 40 ? 20 : 10;
+	$: primaryBarHeight = dataArrayStep1.length > 200 ? 140 : dataArrayStep1.length > 40 ? 40 : 20;
+	$: yAxisPadding = dataArrayStep1.length > 200 ? 30 : dataArrayStep1.length > 40 ? 20 : 10;
 
 	$: dataArrayStep2 = dataArrayStep1.map((el, index) => {
 		let previousBars = dataArrayStep1.filter((elm, i) => i < index);
@@ -160,7 +165,13 @@
 	$: fontSize = width < 600 || labels.length > 12 ? 16 : 18;
 </script>
 
-<AxisX {indicator} {chartWidth} {y} yDomain={[0, yDomain[1]]} bind:xAxisFinalTickWidth></AxisX>
+<AxisX
+	{indicator}
+	{chartWidth}
+	{y}
+	yDomain={[Math.min(0, yMin), yDomain[1]]}
+	bind:xAxisFinalTickWidth
+></AxisX>
 
 {#each dataArrayStep3 as area, index}
 	<g transform="translate(0,{area.position})">
@@ -177,7 +188,7 @@
 	</g>
 {/each}
 
-<line x1="0" x2="0" y1="0" y2={chartHeight} stroke="#222"></line>
+<line x1={y(0)} x2={y(0)} y1="0" y2={chartHeight} stroke="#222"></line>
 
 <PlaceholderLabels lines={labels} {labelSpace} bind:labelArray {fontSize}></PlaceholderLabels>
 

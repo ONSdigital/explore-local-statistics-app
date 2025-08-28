@@ -101,23 +101,44 @@
 		refreshData();
 
 		selectionsObject['indicator-related-chosen'] = data.indicator.metadata.initialGeographyLevel;
+
 		selectionsObject['indicator-additional-chosen'] =
 			data.indicator.metadata.standardised === 'F'
 				? []
 				: codesForAreasWithData.includes('K02000001')
 					? ['K02000001']
-					: countriesWithDataCodes;
+					: codesForAreasWithData.includes('K03000001')
+						? ['K03000001']
+						: countriesWithDataCodes.length === 1
+							? countriesWithDataCodes
+							: [];
 	});
+
+	function filterDuplicateAreas(data, areasObject) {
+		const areacds = Array.from(new Set(data.map((d) => d.areacd)));
+		const areas = areacds.map((cd) => areasObject[cd]);
+		const obsolete = new Set(
+			areas
+				.filter((area) => area.areanm.endsWith('(obsolete)'))
+				.map((area) => `${area.areacd.slice(0, 3)}_${area.areanm.slice(0, -11)}`)
+		);
+		const remove = new Set(
+			areas
+				.filter((area) => obsolete.has(`${area.areacd.slice(0, 3)}_${area.areanm}`))
+				.map((area) => area.areacd)
+		);
+
+		return data.filter((d) => !remove.has(d.areacd));
+	}
 
 	$: mapData =
 		geoGroup?.codes && chosenXDomainNumbEnd && data.indicator.years.includes(chosenXDomainNumbEnd)
 			? makeMapData(
-					data.chartData.filter((d) => !d.areanm.includes('(obsolete)')),
+					filterDuplicateAreas(data.chartData, data.metadata.areasObject),
 					geoGroup?.codes,
 					chosenXDomainNumbEnd
 				)
 			: { data: [], breaks: [] };
-	//	$: console.log(mapData);
 
 	$: chosenTimePeriodsArray = timePeriodsArray
 		? timePeriodsArray.filter(
@@ -133,7 +154,7 @@
 
 	$: codesForAreasWithData = [
 		...new Set(
-			data.chartData.filter((d) => !d.areanm.includes('(obsolete)')).map((el) => el.areacd)
+			filterDuplicateAreas(data.chartData, data.metadata.areasObject).map((el) => el.areacd)
 		)
 	];
 
@@ -514,7 +535,7 @@
 			</NavSection>
 		{/if}
 
-		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb}
+		{#if data.indicator.maxXDomainNumb != data.indicator.minXDomainNumb && data.indicator.code !== 'population-indicators-5-year population change'}
 			<NavSection title="Line chart">
 				<div class="row-container">
 					<div class="buttons-container">
@@ -540,7 +561,7 @@
 
 				<LineChartContainerIndicatorPage
 					indicator={data.indicator}
-					chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
+					chartData={filterDuplicateAreas(data.chartData, data.metadata.areasObject)}
 					{selectionsObject}
 					customLookup={customLookup['indicator-additional-visible']}
 					{metadata}
@@ -590,7 +611,7 @@
 			</div>
 			<BarChartContainerIndicatorPage
 				indicator={data.indicator}
-				chartData={data.chartData.filter((d) => !d.areanm.includes('(obsolete)'))}
+				chartData={filterDuplicateAreas(data.chartData, data.metadata.areasObject)}
 				{selectionsObject}
 				customLookup={customLookup['indicator-additional-visible']}
 				{metadata}

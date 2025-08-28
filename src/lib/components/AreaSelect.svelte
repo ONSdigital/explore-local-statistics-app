@@ -61,7 +61,7 @@
 	}
 
 	async function doSelect(e) {
-		if (e.detail.postcode) {
+		if (e.detail?.postcode) {
 			let res = await fetch(`https://api.postcodes.io/postcodes/${e.detail.areacd}`);
 			let json = await res.json();
 			if (json.result) {
