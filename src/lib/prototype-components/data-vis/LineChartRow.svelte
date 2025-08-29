@@ -58,7 +58,7 @@
 
 	function findSmallestDivisibleBelow(targetNumber, divisor) {
 		// Calculate the remainder when dividing the target number by the divisor
-		let remainder = targetNumber % divisor;
+		const remainder = targetNumber % divisor;
 
 		// If the remainder is 0, the target number is already divisible by the divisor
 		if (remainder === 0) {
