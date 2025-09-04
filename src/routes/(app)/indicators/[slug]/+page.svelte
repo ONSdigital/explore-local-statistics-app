@@ -23,6 +23,7 @@
 	import BarChartContainerIndicatorPage from '$lib/prototype-components/indicator-page/BarChartContainerIndicatorPage.svelte';
 	import ChartOptions from '$lib/prototype-components/ChartOptions.svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import { filterGeoGroups } from '$lib/util/geo/filterGeoGroups.js';
 
 	export let data;
 
@@ -61,13 +62,6 @@
 		chosenXDomainNumbStart = Math.min(chosenXDomainNumbStart, chosenXDomainNumbEnd);
 
 		pivotedData = geoGroup?.codes ? pivotData(data.chartData, geoGroup?.codes) : [];
-	};
-
-	const filterGeoGroups = (geos) => {
-		let groups = [...geos.groups];
-		if (!geos.ctrys.includes('E')) groups = groups.filter((g) => !['rgn', 'ltla'].includes(g.key));
-		if (geos.ctrys.length < 2) groups = groups.filter((g) => g.key !== 'ctry');
-		return groups;
 	};
 
 	afterNavigate(() => {
