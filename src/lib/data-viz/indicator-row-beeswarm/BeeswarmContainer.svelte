@@ -127,7 +127,7 @@
 		}
 	}
 
-	$: console.log({ selectionsObject });
+	// $: console.log({ selectionsObject });
 </script>
 
 <figure class="beeswarm-figure">
@@ -149,7 +149,7 @@
 				hoverIndicatorId = indicator.code;
 				currentIndex = areaCodesToArrowThrough.indexOf(hoverAreaId);
 
-				console.log({ areaCodesToArrowThrough, hoverAreaId, currentIndex });
+				// console.log({ areaCodesToArrowThrough, hoverAreaId, currentIndex });
 			}}
 		>
 			<desc id={indicator.metadata.slug + '-beeswarm-description'}>{beeswarmAltText}</desc>

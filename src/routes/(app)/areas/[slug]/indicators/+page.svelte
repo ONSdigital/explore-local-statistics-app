@@ -19,7 +19,7 @@
 		Notice,
 		analyticsEvent
 	} from '@onsvisual/svelte-components';
-
+	import UKMap from '$lib/components/UKMap.svelte';
 	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
 	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
@@ -27,6 +27,7 @@
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
 	import Legend from '$lib/viz/Legend.svelte';
+	import BigNumber from '$lib/viz/BigNumber.svelte';
 
 	import SelectAnIndicatorSection from './SelectAnIndicatorSection.svelte';
 	import IndicatorRowsSection from './IndicatorRowsSection.svelte';
@@ -65,6 +66,7 @@
 	});
 
 	let selectElement, postcode, searchValue;
+	let areaSearchOpen = false;
 	let mapColors = null;
 
 	let navigated;
@@ -97,14 +99,18 @@
 		areaNeighbours,
 		clusterDescriptions,
 		similarAreas,
-		demographicallySimilarAreas;
+		demographicallySimilarAreas,
+		bigNumberData;
 
 	//The same function as used on the /areas/[slug] page - was removed to a separate function but not working because of issues passing data - could possibly be fixed with stores?
 	function navTo(e, options = {}, type = 'search') {
 		if (e.detail.type === 'postcode') {
 			postcode = e.detail;
 		} else {
+			areaSearchOpen = false;
 			selectElement.clearInput();
+
+			// window.location.href = `${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`;
 			goto(
 				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
 				options
@@ -185,6 +191,7 @@
 		areaClusters = data.chartData.clusterData.find((d) => d.areacd === data.place.areacd);
 		// Find nearest neighbours for the selected area
 		areaNeighbours = data.chartData.neighbourData?.[data.place.areacd] || null;
+		console.log({ areaClusters, areaNeighbours });
 		// Get the cluster descriptions
 		clusterDescriptions = makeClusterDescriptions(data.metadata.clustersLookup.descriptions);
 		similarAreas = getSimilarAreas(
@@ -287,6 +294,23 @@
 				selectionsObject[el] = preSelectedComparisonAreasAndGroups[el][selectedArea.geogLevel];
 			}
 		);
+
+		// Set data for big numbers
+		bigNumberData = [
+			'population-indicators-Population count',
+			// 'population-indicators-5-year population change',
+			'population-indicators-Median age'
+		]
+			.map((indicator) => ({
+				indicator,
+				value: chartData.combinedDataObject[indicator]
+					.filter((d) => d.areacd === data.place.areacd)
+					.sort((a, b) => b.xDomainNumb - a.xDomainNumb)[0],
+				meta: metadata.indicatorsObject[indicator].metadata,
+				periods: metadata.periodsLookupObject[metadata.indicatorsObject[indicator].id]
+			}))
+			.filter((d) => d.value);
+		console.log({ bigNumberData });
 
 		//once the after navigate actions have been run we set navigate to true so that the html components are rendered
 		navigated = true;
@@ -395,25 +419,62 @@
 		chartData.clusterData,
 		parentArea
 	);
+
+	$: console.log('chartData', chartData);
 </script>
 
 {#if navigated}
-	<Titleblock
-		title="Local indicators for {getName(data.place, 'the')}"
-		background="#eaeaea"
-		titleBadge={data.place.areacd}
-		titleBadgeAriaLabel="Area code: {data.place.areacd}"
-	>
-		<Lede>
-			Explore local indicators, trends and get data
-			<span style:white-space="nowrap">
-				for {getName(data.place, 'the')}
+	<div class="titleblock-container">
+		<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
+			<Lede>
+				Local indicators, trends and data for {getName(data.place, 'the', 'prefix')}
+				<a href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
+					>{getName(data.place)}</a
+				>
+				({data.place.areacd})
 				{#if data.place.end}
 					<span class="inactive-badge">Inactive</span>
 				{/if}
-			</span>
-		</Lede>
-	</Titleblock>
+			</Lede>
+			<div style:margin="32px 0 -24px" style:max-width="450px" style:z-index={1}>
+				<Twisty title="Find another area" bind:open={areaSearchOpen}>
+					<label for="search" style:display="block" style:margin-bottom="8px"
+						>Search for a place name or postcode</label
+					>
+					<AreaSelect
+						id="search"
+						mode="search"
+						idKey="areacd"
+						labelKey="areanm"
+						groupKey="group"
+						placeholder="Eg. Fareham or PO15 5RR"
+						essOnly
+						hideIcon
+						bind:selectElement
+						bind:value={searchValue}
+						on:submit={navTo}
+						on:clear={() => (postcode = null)}
+					/>
+					{#if postcode}
+						<AreaList
+							{postcode}
+							on:clear={() => {
+								postcode = null;
+								searchValue = null;
+							}}
+							urlSuffix="/indicators"
+						/>
+					{/if}
+				</Twisty>
+			</div>
+		</Titleblock>
+
+		<AreaLocMap
+			geometry={data.geometry}
+			bounds={data.place.bounds}
+			mapDescription={'Map of ' + getName(data.place, 'the')}
+		/>
+	</div>
 
 	{#if data.place.end}
 		<Container width="medium" marginTop>
@@ -466,70 +527,14 @@
 		</Container>
 	{/if}
 
-	<Cards marginTop>
-		<Card noBackground>
-			<div style:height="200px">
-				{#key data.geometry}
-					<AreaLocMap
-						geometry={data.geometry}
-						bounds={data.place.bounds}
-						mapDescription={'Map of ' + getName(data.place, 'the')}
-					/>
-				{/key}
-			</div>
-		</Card>
-		<Card title="About this area">
-			<p>
-				{getName(data.place)} ({data.place.areacd}) {data.place.end ? 'was' : 'is'}
-				{aAn(data.place.typenm)}
-				{getName(data.place.parents[0], 'in', 'prefix')}
-				<a
-					href="{base}/areas/{makeCanonicalSlug(
-						data.place.parents[0].areacd,
-						data.place.parents[0].areanm
-					)}"
-					data-sveltekit-noscroll>{getName(data.place.parents[0])}</a
-				>.
-			</p>
-			<Button
-				variant="secondary"
-				icon="arrow"
-				iconPosition="after"
-				href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
-				arialabel="Read more about {getName(data.place, 'the')}"
-				small>Read more</Button
-			>
-		</Card>
-		<Card title="Other areas">
-			<label for="search" style:display="block" style:margin-bottom="8px"
-				>Search for a place name or postcode</label
-			>
-			<AreaSelect
-				id="search"
-				mode="search"
-				idKey="areacd"
-				labelKey="areanm"
-				groupKey="group"
-				placeholder="Eg. Fareham or PO15 5RR"
-				essOnly
-				hideIcon
-				bind:selectElement
-				bind:value={searchValue}
-				on:submit={navTo}
-				on:clear={() => (postcode = null)}
-			/>
-			{#if postcode}
-				<AreaList
-					{postcode}
-					on:clear={() => {
-						postcode = null;
-						searchValue = null;
-					}}
-					urlSuffix="/indicators"
-				/>
-			{/if}
-		</Card>
-	</Cards>
+	{#if bigNumberData.length > 0}
+		<Cards marginTop marginBottom={false}>
+			{#each bigNumberData as props}
+				<BigNumber {...props} />
+			{/each}
+		</Cards>
+	{/if}
+
 	<div
 		use:viewport
 		on:enterViewport={() => {
@@ -539,93 +544,127 @@
 			stickyZIndex = 10;
 		}}
 	></div>
-	<NavSections cls="no-display-hidden-header" contentsLabel="Contents">
-		<IndicatorRowsSection
-			{selectedArea}
-			{metadata}
-			{chartData}
-			{filteredIndicatorsCodes}
-			bind:selectionsObject
-			accordionArray={rowsAccordionArray}
-			customLookup={customLookup['areas-rows-additional-visible']}
-			bind:stickyZIndex
-		></IndicatorRowsSection>
 
-		<NavSection title="Select an indicator">
-			<SelectAnIndicatorSection
-				customLookup={customLookup['areas-single-additional-visible']}
-				bind:selectionsObject
-				accordionArray={singleAccordionArray}
-				{filteredIndicators}
-				{chartData}
-				{metadata}
+	{#key filteredIndicators}
+		<NavSections cls="no-display-hidden-header" contentsLabel="Contents" marginTop>
+			<IndicatorRowsSection
 				{selectedArea}
-				{chosenIndicatorId}
-			></SelectAnIndicatorSection>
-		</NavSection>
+				{metadata}
+				{chartData}
+				{filteredIndicatorsCodes}
+				bind:selectionsObject
+				accordionArray={rowsAccordionArray}
+				customLookup={customLookup['areas-rows-additional-visible']}
+				bind:stickyZIndex
+			></IndicatorRowsSection>
 
-		{#if areaClusters && areaNeighbours}
-			<NavSection title="Similar areas">
-				<p>
-					See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
-					These clusters of areas are based on
-					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
-						>an analysis carried out by the ONS</a
-					>.
-				</p>
-				<ContentBlock showActions={false}>
-					<Dropdown
-						label="Select a group of indicators:"
-						options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
-						bind:value={clusterGroup}
-					/>
-					{#if mapColors}
-						<Legend
-							items={[
-								{
-									colour: mapColors[areaClusters[clusterGroup.id]] || 'lightgrey',
-									label: 'Areas in cluster',
-									type: 'circle'
-								},
-								{ colour: 'black', label: 'Statistically similar areas', type: 'refline' }
-							]}
+			<NavSection title="Select an indicator">
+				<SelectAnIndicatorSection
+					customLookup={customLookup['areas-single-additional-visible']}
+					bind:selectionsObject
+					accordionArray={singleAccordionArray}
+					{filteredIndicators}
+					{chartData}
+					{metadata}
+					{selectedArea}
+					{chosenIndicatorId}
+				></SelectAnIndicatorSection>
+			</NavSection>
+
+			{#if areaClusters && areaNeighbours}
+				<NavSection title="Similar areas">
+					<p>
+						See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
+						These clusters of areas are based on
+						<a
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							>an analysis carried out by the ONS</a
+						>.
+					</p>
+					<ContentBlock showActions={false}>
+						<Dropdown
+							label="Select a group of indicators:"
+							options={clusterGroupsArray.filter((c) => areaClusters[c.id])}
+							bind:value={clusterGroup}
 						/>
-					{/if}
-					<Map
-						data={data.chartData.clusterData}
-						clusterKey={clusterGroup.id}
-						legendType={null}
-						selected={[data.place]}
-						neighbours={data.chartData.neighbourData[data.place.areacd][clusterGroup.id].map(
-							(d) => ({
+						{#if mapColors}
+							<Legend
+								items={[
+									{
+										colour: mapColors[areaClusters[clusterGroup.id]] || 'lightgrey',
+										label: 'Areas in cluster',
+										type: 'circle'
+									},
+									{ colour: 'black', label: 'Statistically similar areas', type: 'refline' }
+								]}
+							/>
+						{/if}
+						<Map
+							data={data.chartData.clusterData}
+							clusterKey={clusterGroup.id}
+							legendType={null}
+							selected={[data.place]}
+							neighbours={areaNeighbours[clusterGroup.id].map((d) => ({
 								areacd: d,
 								global: 'a'
-							})
-						)}
-						bind:colors={mapColors}
-						mapDescription="Map showing clusters of similar areas"
-					/>
+							}))}
+							bind:colors={mapColors}
+							mapDescription="Map showing clusters of similar areas"
+						/>
 
-					{#if areaClusters[clusterGroup.id] && mapColors}
+						{#if areaClusters[clusterGroup.id] && mapColors}
+							<p style:margin-top="12px">
+								<strong
+									class="cluster-highlight"
+									style:background={mapColors[areaClusters[clusterGroup.id]]}
+								>
+									{capitalizeFirstLetter(getName(data.place, 'the'))} is in {clusterGroup.id} cluster
+									{areaClusters[clusterGroup.id].toUpperCase()}.
+								</strong>
+							</p>
+						{/if}
+						<Twisty
+							title={clusterGroup.id === 'global'
+								? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
+								: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
+						>
+							<ol>
+								{#each areaNeighbours[clusterGroup.id] as neighbour}
+									<li>
+										<a
+											href="{base}/areas/{makeCanonicalSlug(
+												neighbour,
+												metadata.areasObject[neighbour].areanm
+											)}/indicators">{metadata.areasObject[neighbour].areanm}</a
+										>
+									</li>
+								{/each}
+							</ol>
+						</Twisty>
 						<p style:margin-top="12px">
-							<strong
-								class="cluster-highlight"
-								style:background={mapColors[areaClusters[clusterGroup.id]]}
-							>
-								{capitalizeFirstLetter(getName(data.place, 'the'))} is in {clusterGroup.id} cluster {areaClusters[
-									clusterGroup.id
-								].toUpperCase()}.
-							</strong>
+							{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
 						</p>
-					{/if}
-					<Twisty
-						title={clusterGroup.id === 'global'
-							? `Show the twenty most statistically similar areas for ${getName(data.place, 'the')}`
-							: `Show the twenty most similar areas to ${getName(data.place, 'the')}, according to ${clusterGroup.id} statistics.`}
-					>
+					</ContentBlock>
+				</NavSection>
+			{:else if areaNeighbours}
+				<NavSection title="Similar areas">
+					<p>
+						Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
+						based on a specific group of indicators. This ranking is derived from
+						<a
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							>an analysis carried out by the ONS</a
+						>.
+					</p>
+					<ContentBlock showActions={false}>
+						<Dropdown
+							label="Select a group of indicators:"
+							options={clusterGroupsArray.filter((c) => areaNeighbours[c.id])}
+							bind:value={clusterGroup}
+						/>
+
 						<ol>
-							{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
+							{#each areaNeighbours[clusterGroup.id] as neighbour}
 								<li>
 									<a
 										href="{base}/areas/{makeCanonicalSlug(
@@ -636,77 +675,44 @@
 								</li>
 							{/each}
 						</ol>
-					</Twisty>
-					<p style:margin-top="12px">
-						{clusterDescriptions?.[clusterGroup.id]?.[areaClusters[clusterGroup.id]] || ''}
-					</p>
-				</ContentBlock>
-			</NavSection>
-		{:else if areaNeighbours}
-			<NavSection title="Similar areas">
+					</ContentBlock>
+				</NavSection>
+			{/if}
+
+			<NavSection title="Get the data">
 				<p>
-					Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
-					based on a specific group of indicators. This ranking is derived from
-					<a
-						href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
-						>an analysis carried out by the ONS</a
+					Download <a
+						href="{assets}/insights/datadownload.ods"
+						rel="external"
+						on:click={() =>
+							analyticsEvent({
+								event: 'fileDownload',
+								extension: 'ods',
+								chartType: 'all'
+							})}>accompanying datasets with indicators for all areas (ODS, 4MB)</a
 					>.
 				</p>
-				<ContentBlock showActions={false}>
-					<Dropdown
-						label="Select a group of indicators:"
-						options={clusterGroupsArray.filter((c) => areaNeighbours[c.id])}
-						bind:value={clusterGroup}
-					/>
-
-					<ol>
-						{#each data.chartData.neighbourData[data.place.areacd][clusterGroup.id] as neighbour}
-							<li>
-								<a
-									href="{base}/areas/{makeCanonicalSlug(
-										neighbour,
-										metadata.areasObject[neighbour].areanm
-									)}/indicators">{metadata.areasObject[neighbour].areanm}</a
-								>
-							</li>
-						{/each}
-					</ol>
-				</ContentBlock>
+				<p>
+					To download a CSV of the <a href="#select-an-indicator">Select an indicator</a> data, click
+					the "download the data" link immediately below the chart.
+				</p>
+				<p>
+					Information on the strengths and limitations of the Explore Local Statistics (ELS) service
+					and methods used is available in
+					<a
+						href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
+						>ELS quality and methodology information (QMI) report</a
+					>.
+				</p>
+				<p>
+					We value your feedback on these statistics. If you would like to get in touch, please
+					email <a href="mailto:explore.local.statistics@ons.gov.uk"
+						>explore.local.statistics@ons.gov.uk</a
+					>.
+				</p>
 			</NavSection>
-		{/if}
-
-		<NavSection title="Get the data">
-			<p>
-				Download <a
-					href="{assets}/insights/datadownload.ods"
-					rel="external"
-					on:click={() =>
-						analyticsEvent({
-							event: 'fileDownload',
-							extension: 'ods',
-							chartType: 'all'
-						})}>accompanying datasets with indicators for all areas (ODS, 4MB)</a
-				>.
-			</p>
-			<p>
-				To download a CSV of the <a href="#select-an-indicator">Select an indicator</a> data, click the
-				"download the data" link immediately below the chart.
-			</p>
-			<p>
-				Information on the strengths and limitations of the Explore Local Statistics (ELS) service
-				and methods used is available in
-				<a
-					href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi"
-					>ELS quality and methodology information (QMI) report</a
-				>.
-			</p>
-			<p>
-				We value your feedback on these statistics. If you would like to get in touch, please email <a
-					href="mailto:explore.local.statistics@ons.gov.uk">explore.local.statistics@ons.gov.uk</a
-				>.
-			</p>
-		</NavSection>
-	</NavSections>
+		</NavSections>
+	{/key}
 {/if}
 
 <style>
@@ -722,6 +728,20 @@
 	}
 	:global(.no-display-hidden-header h3.ons-u-vh) {
 		display: none;
+	}
+
+	.titleblock-container {
+		position: relative;
+	}
+
+	:global(.title-container) {
+		position: relative;
+		max-width: 700px;
+		z-index: 1;
+	}
+
+	:global(.ons-breadcrumb__items) {
+		z-index: 1;
 	}
 
 	.inactive-badge {

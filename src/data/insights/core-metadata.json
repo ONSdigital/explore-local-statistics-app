@@ -1,6 +1,30 @@
 {
 	"indicatorsCodeLabelArray": [
 		{
+			"code": "population-indicators-Population count",
+			"label": "Total population"
+		},
+		{
+			"code": "population-indicators-Population density",
+			"label": "Population density"
+		},
+		{
+			"code": "population-indicators-Median age",
+			"label": "Median age"
+		},
+		{
+			"code": "population-indicators-Percentage of the population aged 0 to 15",
+			"label": "Population aged 0 to 15"
+		},
+		{
+			"code": "population-indicators-Percentage of the population aged 16 to 64",
+			"label": "Population aged 16 to 64"
+		},
+		{
+			"code": "population-indicators-Percentage of the population aged 65+",
+			"label": "Population aged 65 and over"
+		},
+		{
 			"code": "employment-rate-Economic Inactivity Rate",
 			"label": "Economic inactivity rate (Great Britain)"
 		},
@@ -334,6 +358,944 @@
 		}
 	],
 	"indicatorsObject": {
+		"population-indicators-Population count": {
+			"id": 99,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Population count",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Population count",
+				"slug": "population-count",
+				"label": "Total population",
+				"prefix": "",
+				"suffix": "",
+				"subText": "people",
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Mid-year estimate of the total number of people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the mid-year estimate of the total population, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "F",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"population-indicators-Population density": {
+			"id": 102,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Population density",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Population density",
+				"slug": "population-density",
+				"label": "Population density",
+				"prefix": "",
+				"suffix": "",
+				"subText": "persons per square kilometre",
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Number of people resident per square kilometre",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the number of usual residents per square kilometre, calculated based on total land area excluding inland water, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "T",
+				"caveats": "[Standard Area Measurements for Administrative Areas (December 2023) in the UK](https://geoportal.statistics.gov.uk/datasets/da8590c5f55f4664b32ad4339f43419c/about) was used to calculate population density by dividing the total population by the area in square kilometres.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"population-indicators-Median age": {
+			"id": 106,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Median age",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Median age",
+				"slug": "median-age",
+				"label": "Median age",
+				"prefix": "",
+				"suffix": "",
+				"subText": "years",
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Median age of people",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the median age of people, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "T",
+				"caveats": "Median age is calculated as the age category in which the mid-point of the population distribution falls. There may be slight differences when compared with other sources, as these may reflect where the mid-point falls within the given age category. These reflect differences in precision, not accuracy.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"population-indicators-Percentage of the population aged 0 to 15": {
+			"id": 109,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Percentage of the population aged 0 to 15",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Percentage of the population aged 0 to 15",
+				"slug": "percentage-of-the-population-aged-0-to-15",
+				"label": "Population aged 0 to 15",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of the population aged 0 to 15",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of the population aged 0 to 15, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "T",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"population-indicators-Percentage of the population aged 16 to 64": {
+			"id": 112,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Percentage of the population aged 16 to 64",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Percentage of the population aged 16 to 64",
+				"slug": "percentage-of-the-population-aged-16-to-64",
+				"label": "Population aged 16 to 64",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of the population aged 16 to 64",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of the population aged 16 to 64, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "T",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"population-indicators-Percentage of the population aged 65+": {
+			"id": 115,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-Percentage of the population aged 65+",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "population-indicators-Percentage of the population aged 65+",
+				"slug": "percentage-of-the-population-aged-65-plus",
+				"label": "Population aged 65 and over",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of the population aged 65 and over",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "30/07/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the percentage of the population aged 65 and over, in the United Kingdom, for 1991 to 2024.",
+				"standardised": "T",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available and are planned for publication on Nomis in September 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in September 2025 and will be updated in ELS in October 2025.\n\nMid-2011 to mid-2022 revisions for Scotland published in January 2025 are available in Nomis and ELS. These are due to be updated in the Office for National Statistics UK population estimates in September 2025.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
 		"employment-rate-Economic Inactivity Rate": {
 			"id": 13,
 			"topic": "economy",
@@ -9760,6 +10722,22 @@
 		}
 	},
 	"topicsArray": [
+		{
+			"name": "population",
+			"subTopics": [
+				{
+					"name": "population",
+					"indicatorCodes": [
+						"population-indicators-Population count",
+						"population-indicators-Population density",
+						"population-indicators-Median age",
+						"population-indicators-Percentage of the population aged 0 to 15",
+						"population-indicators-Percentage of the population aged 16 to 64",
+						"population-indicators-Percentage of the population aged 65+"
+					]
+				}
+			]
+		},
 		{
 			"name": "economy",
 			"subTopics": [

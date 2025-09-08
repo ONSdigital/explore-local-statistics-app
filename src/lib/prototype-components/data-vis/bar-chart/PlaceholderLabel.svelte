@@ -1,20 +1,12 @@
 <script lang="ts">
 	import { splitString } from '$lib/segmentTextForLabels';
 	import { colorsLookup } from '$lib/config.js';
+	import { replaceIfStartsWithAll } from '$lib/util/charts/replaceIfStartsWithAll.js';
+
 	export let line, labelSpace, label, fontSize;
 
 	let labelRectArray = [];
 	$: areaName = line.groupLabel ? replaceIfStartsWithAll(line.areanm) : line.areanm;
-
-	function replaceIfStartsWithAll(str) {
-		if (str.startsWith('All ')) {
-			// Remove the first four characters and capitalize the first character of the resulting string
-			const slicedString = str.slice(4);
-			const capitalizedString = slicedString.charAt(0).toUpperCase() + slicedString.slice(1);
-			return capitalizedString;
-		}
-		return str; // Return the original string if it doesn't start with "All "
-	}
 
 	$: index = labelRectArray
 		? Array.from(Array(labelRectArray.length).keys()).find((i) => {

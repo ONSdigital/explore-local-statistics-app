@@ -35,7 +35,7 @@
 			No <span style="font-weight: bold;">{indicator.metadata.label}</span> data to display for {chosenXDomainNumbEnd}.
 		</p>
 	</div>
-{:else if chosenTimePeriodsArray.length === 1}
+{:else if chosenTimePeriodsArray.length === 1 || indicator.code === 'population-indicators-5-year population change'}
 	<div class="no-chart-container">
 		<p>
 			Time series not displayed as selected date range includes only one time period with <span
