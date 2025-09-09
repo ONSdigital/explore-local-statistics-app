@@ -4,6 +4,7 @@
 
 To work on ELS, you need to get set up on ONSdigital. Here what you need to do.
 
+- [Add your ONS email to your github account](https://docs.github.com/en/account-and-profile/how-tos/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account), it can be a secondary email address.
 - [Set up two factor authentication on GitHub](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)
 - [Generate a GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [Add GPG key to your github account](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
@@ -12,7 +13,9 @@ To work on ELS, you need to get set up on ONSdigital. Here what you need to do.
 - Log a servicenow request to be added to the ONSdigital GitHub Organisation
 - Ask Pete Montgomery to add you to the [ELS repo](https://github.com/ONSdigital/explore-local-statistics-app).
 
-If generating a GPG key on windows, I recommend downloading [gpg4win](https://gpg4win.org/download.html). Then you can run the `gpg` commands through powershell.
+If generating a GPG key on windows, I recommend downloading [gpg4win](https://gpg4win.org/download.html). Then you can run the `gpg` commands through powershell. There are also GPG extensions for VS code.
+
+You need to setup git on your computer to use the email address registered with your GPG key, if not already set up like this, to sign the commit (verify that the person doing the commit really is you). You can do this with `git config --global user.email "first.last@ons.gov.uk"`.
 
 ## Data Processing Guide
 
