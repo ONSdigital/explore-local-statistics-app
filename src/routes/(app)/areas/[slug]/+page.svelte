@@ -329,17 +329,17 @@
 		flex-wrap: wrap;
 		gap: 1rem;
 	}
-	.local-indicators-card {
+	.grid-cell-flex > div {
 		flex-basis: 0;
 		flex-grow: 1;
+		min-width: 300px;
 		padding: 1rem;
+	}
+	.local-indicators-card {
 		color: var(--ons-color-page-light);
 		background-color: var(--ons-color-branded-secondary);
 	}
 	.area-search-card {
-		flex-basis: 0;
-		flex-grow: 1;
-		padding: 1rem;
 		background: var(--ons-color-banner-bg);
 	}
 	.additional-area-info {
