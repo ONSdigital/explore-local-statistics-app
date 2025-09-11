@@ -5,7 +5,7 @@
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug.js';
 	import {
 		Breadcrumb,
-		Titleblock,
+		Hero,
 		Section,
 		Divider,
 		List,
@@ -37,12 +37,12 @@
 	}
 </script>
 
-<Titleblock title="Explore local statistics" background="#e9eff4">
+<Hero title="Explore local statistics" background="#e9eff4">
 	<UKMap />
 	<p class="ons-hero__text">
 		Find, compare and visualise statistics about places in the United Kingdom.
 	</p>
-</Titleblock>
+</Hero>
 
 <Grid marginTop id="nav-cards" colWidth="wide">
 	<Card title="Find an area" mode="featured">

@@ -11,7 +11,7 @@
 	} from '$lib/config/geoConfig';
 	import { getCSV } from '$lib/api/getCSV';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { AccessibleSelect as Select, Button, analyticsEvent } from '@onsvisual/svelte-components';
+	import { Select, Button, analyticsEvent } from '@onsvisual/svelte-components';
 
 	const dispatch = createEventDispatcher();
 

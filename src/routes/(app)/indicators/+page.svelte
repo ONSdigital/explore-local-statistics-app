@@ -1,7 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { base } from '$app/paths';
-	import { Titleblock, NavSections, NavSection } from '@onsvisual/svelte-components';
+	import { Hero, NavSections, NavSection } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 
 	export let data;
@@ -39,14 +39,14 @@
 	$: filteredTopics = filterTopics(filterText);
 </script>
 
-<Titleblock width="medium" title="Local indicators" cls="titleblock-transparent">
+<Hero width="medium" title="Local indicators" cls="titleblock-transparent">
 	<p class="ons-hero__text">
 		Explore our {datasetsCount} local indicators, including <b>disposable household income</b>,
 		<b>participation in further education</b>
 		and
 		<b>life satisfaction</b>.
 	</p>
-</Titleblock>
+</Hero>
 
 <!-- <Section marginTop marginBottom={false}>
 	<Input label="Type to filter indicators" bind:value={filterText} />

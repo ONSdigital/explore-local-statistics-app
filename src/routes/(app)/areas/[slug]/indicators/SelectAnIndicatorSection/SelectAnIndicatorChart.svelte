@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import {
-		// Tabs,
-		// Tab,
-		AccessibleSelect as Select
-	} from '@onsvisual/svelte-components';
+	import { Select } from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
 	import LineChartWrapper from './LineChartWrapper.svelte';

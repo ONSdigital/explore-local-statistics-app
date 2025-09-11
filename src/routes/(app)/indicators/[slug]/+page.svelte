@@ -4,7 +4,7 @@
 	import { base, assets } from '$app/paths';
 	import { afterNavigate } from '$app/navigation';
 	import {
-		Titleblock,
+		Hero,
 		NavSections,
 		NavSection,
 		Dropdown,
@@ -410,7 +410,7 @@
 		: null;
 </script>
 
-<Titleblock
+<Hero
 	title={data.indicator.metadata.label}
 	width="medium"
 	meta={[
@@ -444,7 +444,7 @@
 	<p class="ons-hero__text">
 		{data.indicator.metadata.longDescription}
 	</p>
-</Titleblock>
+</Hero>
 
 {#if mapData && pivotedData}
 	<NavSections cls="wider-nav-sections" contentsLabel="Contents" marginTop>

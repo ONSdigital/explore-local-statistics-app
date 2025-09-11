@@ -9,7 +9,7 @@
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 	import { filterChildren } from '$lib/util/geo/filterChildren';
 	import {
-		Titleblock,
+		Hero,
 		Section,
 		Button,
 		Grid,
@@ -71,7 +71,7 @@
 	{/if}
 </svelte:head>
 
-<Titleblock
+<Hero
 	title={getName(data.place)}
 	titleBadge={{
 		label: data.place.areacd,
@@ -143,7 +143,7 @@
 			{/if}
 		{/if}
 	</p>
-</Titleblock>
+</Hero>
 
 <Grid id="related-areas">
 	<GridCell colspan={2}>
