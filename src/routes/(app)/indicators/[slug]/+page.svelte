@@ -13,7 +13,6 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { pivotData, makeMapData } from '$lib/util/datasets/datasetsHelpers';
-	import Lede from '$lib/components/Lede.svelte';
 	// import Indicators from '$lib/components/Indicators.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
 	import Map from '$lib/viz/Map.svelte';
@@ -413,6 +412,7 @@
 
 <Titleblock
 	title={data.indicator.metadata.label}
+	width="medium"
 	meta={[
 		{
 			key: sourceOrgs.length === 1 ? 'Data source' : 'Data sources',
@@ -430,17 +430,20 @@
 		}
 	]}
 	background="#eaeaea"
-	titleBadge={!experimental ? capitalise(data.indicator.topic) : null}
-	titleBadgeAriaLabel="Topic: {capitalise(data.indicator.topic)}"
+	titleBadge={{
+		label: !experimental ? capitalise(data.indicator.topic) : null,
+		ariaLabel: `Topic: ${capitalise(data.indicator.topic)}`,
+		color: "#003c57"
+		}}
 >
 	{#if experimental}
 		<div class="stat-in-dev">
 			<div>Official statistics in development</div>
 		</div>
 	{/if}
-	<Lede marginBottom>
+	<p class="ons-hero__text">
 		{data.indicator.metadata.longDescription}
-	</Lede>
+	</p>
 </Titleblock>
 
 {#if mapData && pivotedData}
@@ -767,6 +770,11 @@
 		gap: 10px;
 		padding-bottom: 10px;
 		align-items: flex-end;
+	}
+
+	.buttons-container :global(button .ons-btn__text) {
+		font-size: 16px !important;
+		margin-left: 6px !important;
 	}
 
 	.subtitle {

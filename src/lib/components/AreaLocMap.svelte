@@ -49,7 +49,7 @@
 <style>
 	.map-container {
 		position: absolute;
-		top: -55.7px;
+		top: -52px;
 		right: 0;
 		height: calc(100% + 55.7px);
 		width: 35%;
@@ -63,8 +63,8 @@
 		left: 0;
 		right: 0;
 		background-image:
-			linear-gradient(to right, #eaeaea, #00000000 25%),
-			linear-gradient(to bottom, #eaeaea, #00000000 25%);
+			linear-gradient(to right, #f5f5f6, #00000000 25%),
+			linear-gradient(to bottom, #f5f5f6, #00000000 25%);
 	}
 	@media (max-width: 800px) {
 		.map-container {

@@ -10,7 +10,7 @@
 		Titleblock,
 		NavSections,
 		NavSection,
-		Cards,
+		Grid,
 		Card,
 		Button,
 		Dropdown,
@@ -21,7 +21,6 @@
 	} from '@onsvisual/svelte-components';
 	import UKMap from '$lib/components/UKMap.svelte';
 	import AreaLocMap from '$lib/components/AreaLocMap.svelte';
-	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import ContentBlock from '$lib/components/ContentBlock.svelte';
@@ -425,8 +424,8 @@
 
 {#if navigated}
 	<div class="titleblock-container">
-		<Titleblock title="Local indicators for {getName(data.place, 'the')}" background="#eaeaea">
-			<Lede>
+		<Titleblock width="medium" title="Local indicators for {getName(data.place, 'the')}" background="#f5f5f6">
+			<p class="ons-hero__text">
 				Local indicators, trends and data for {getName(data.place, 'the', 'prefix')}
 				<a href="{base}/areas/{makeCanonicalSlug(data.place.areacd, data.place.areanm)}"
 					>{getName(data.place)}</a
@@ -435,8 +434,8 @@
 				{#if data.place.end}
 					<span class="inactive-badge">Inactive</span>
 				{/if}
-			</Lede>
-			<div style:margin="32px 0 -24px" style:max-width="450px" style:z-index={1}>
+			</p>
+			<div style:margin="20px 0 -36px" style:max-width="450px" style:z-index={1}>
 				<Twisty title="Find another area" bind:open={areaSearchOpen}>
 					<label for="search" style:display="block" style:margin-bottom="8px"
 						>Search for a place name or postcode</label
@@ -528,11 +527,11 @@
 	{/if}
 
 	{#if bigNumberData.length > 0}
-		<Cards marginTop marginBottom={false}>
+		<Grid colWidth="wide" marginTop marginBottom={false}>
 			{#each bigNumberData as props}
 				<BigNumber {...props} />
 			{/each}
-		</Cards>
+		</Grid>
 	{/if}
 
 	<div
@@ -546,7 +545,7 @@
 	></div>
 
 	{#key filteredIndicators}
-		<NavSections cls="no-display-hidden-header" contentsLabel="Contents" marginTop>
+		<NavSections cls="no-display-hidden-header wider-nav-sections" contentsLabel="Contents" marginTop>
 			<IndicatorRowsSection
 				{selectedArea}
 				{metadata}
@@ -679,7 +678,7 @@
 				</NavSection>
 			{/if}
 
-			<NavSection title="Get the data">
+			<NavSection title="Get the data" cls="ons-u-mt-xl">
 				<p>
 					Download <a
 						href="{assets}/insights/datadownload.ods"

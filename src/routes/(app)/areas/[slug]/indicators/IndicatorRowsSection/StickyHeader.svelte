@@ -141,6 +141,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 10px;
+		margin-bottom: 24px;
 	}
 
 	.grid-container {
@@ -153,9 +154,15 @@
 	.buttons-container {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: nowrap;
+		flex-wrap: wrap-reverse;
+		flex-shrink: 1;
 		justify-content: flex-end;
 		gap: 4px;
+	}
+
+	.buttons-container :global(button .ons-btn__text) {
+		font-size: 16px !important;
+		margin-left: 6px !important;
 	}
 
 	.btn-link {

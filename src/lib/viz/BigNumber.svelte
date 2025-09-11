@@ -19,8 +19,9 @@
 		? 'Population change'
 		: meta.label}
 	id="{meta.slug}-card"
+	mode="featured"
 >
-	<p class="ons-card__subtitle ons-u-mb-xs">{periodsLookup[value.xDomainNumb].label}</p>
+	<p class="ons-card__subtitle ons-u-mb-xs" style:margin-top="-12px">{periodsLookup[value.xDomainNumb].label}</p>
 	<p class="ons-card__figure ons-u-fs-3xl ons-u-fw-b ons-u-mb-no">
 		{meta.canBeNegative === 'T' && value.value > 0
 			? '+'
