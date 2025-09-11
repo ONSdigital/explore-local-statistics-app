@@ -433,8 +433,8 @@
 	titleBadge={{
 		label: !experimental ? capitalise(data.indicator.topic) : null,
 		ariaLabel: `Topic: ${capitalise(data.indicator.topic)}`,
-		color: "#003c57"
-		}}
+		color: '#003c57'
+	}}
 >
 	{#if experimental}
 		<div class="stat-in-dev">
@@ -447,7 +447,7 @@
 </Titleblock>
 
 {#if mapData && pivotedData}
-	<NavSections contentsLabel="Contents" marginTop>
+	<NavSections cls="wider-nav-sections" contentsLabel="Contents" marginTop>
 		{#if data.indicator.metadata.standardised === 'T'}
 			<NavSection title="Map">
 				<div class="row-container">
