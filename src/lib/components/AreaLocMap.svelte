@@ -1,21 +1,23 @@
+<svelte:options runes={true} />
+
 <script>
 	import { assets } from '$app/paths';
 	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
 
-	export let geometry;
-	export let bounds;
-	export let mapDescription;
-	export let primaryColor = 'rgb(17, 140, 123)';
+	let { geometry, bounds, mapDescription, primaryColor = 'rgb(17, 140, 123)' } = $props();
 
-	let map, w, h;
+	let map = $state();
+	let h = $state();
+	let w = $state();
 
 	const padding = { left: 40, top: 40, right: 20, bottom: 20 };
+	const sleep = (ms = 10) => new Promise((resolve) => setTimeout(resolve, ms));
 
-	function refitMap(w, h, bounds) {
-		if (map) map.fitBounds(bounds, { animate: false, padding });
-	}
-
-	$: refitMap(w, h, bounds);
+	$effect(() => {
+		if (map && w && h) {
+			sleep().then(() => map.fitBounds(bounds, { animate: false, padding }));
+		}
+	});
 </script>
 
 <div class="map-container" bind:clientWidth={w} bind:clientHeight={h}>
