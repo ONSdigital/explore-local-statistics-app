@@ -684,7 +684,7 @@
 							event: 'fileDownload',
 							extension: 'ods',
 							chartType: 'all'
-						})}>accompanying dataset (ODS, 4MB)</a
+						})}>accompanying dataset (ODS, 7MB)</a
 				>.
 			</p>
 			<p>

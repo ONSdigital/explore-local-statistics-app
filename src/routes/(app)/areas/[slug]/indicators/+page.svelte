@@ -696,7 +696,7 @@
 								event: 'fileDownload',
 								extension: 'ods',
 								chartType: 'all'
-							})}>accompanying datasets with indicators for all areas (ODS, 4MB)</a
+							})}>accompanying datasets with indicators for all areas (ODS, 7MB)</a
 					>.
 				</p>
 				<p>
