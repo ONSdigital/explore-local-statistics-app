@@ -8,7 +8,7 @@
 		markerRadius,
 		markerShape = 'circle',
 		button = true,
-		fontSize = '18.66px',
+		fontSize = '18px',
 		fontWeight = 'normal',
 		backgroundColor = 'contrast',
 		color = 'color',

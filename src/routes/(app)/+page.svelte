@@ -5,15 +5,14 @@
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug.js';
 	import {
 		Breadcrumb,
-		Titleblock,
+		Hero,
 		Section,
 		Divider,
 		List,
-		Cards,
+		Grid,
 		Card,
 		Button
 	} from '@onsvisual/svelte-components';
-	import Lede from '$lib/components/Lede.svelte';
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import Icon from '$lib/components/Icon.svelte';
@@ -38,14 +37,15 @@
 	}
 </script>
 
-<Titleblock title="Explore local statistics" background="#e9eff4">
+<Hero title="Explore local statistics" background="#e9eff4">
 	<UKMap />
-	<Lede>Find, compare and visualise statistics about places in the United Kingdom.</Lede>
-	<div style:height="32px" />
-</Titleblock>
+	<p class="ons-hero__text">
+		Find, compare and visualise statistics about places in the United Kingdom.
+	</p>
+</Hero>
 
-<Cards marginTop id="nav-cards">
-	<Card title="Find an area">
+<Grid marginTop id="nav-cards" colWidth="wide">
+	<Card title="Find an area" mode="featured">
 		<p style:margin-bottom="28px">
 			<label for="search"
 				>Search for a postcode, local authority, region, parliamentary constituency or other named
@@ -75,14 +75,14 @@
 			/>
 		{/if}
 	</Card>
-	<Card title="Local indicators">
+	<Card title="Local indicators" mode="featured">
 		<p style:margin-bottom="28px">
 			Explore {datasetsCount} indicators, including
 			<a href="{base}/indicators/gross-disposable-household-income-per-head" class="no-wrap"
 				>household income</a
 			>,
 			<a href="{base}/indicators/further-education-and-skills-participation"
-				>participation in further education</a
+				>further education participation</a
 			>
 			and
 			<a href="{base}/indicators/wellbeing-satisfaction">life satisfaction</a>.
@@ -91,7 +91,7 @@
 			>Explore indicators</Button
 		>
 	</Card>
-</Cards>
+</Grid>
 
 <Section>
 	<p>
