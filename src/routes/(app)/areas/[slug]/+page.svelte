@@ -158,7 +158,9 @@
 		{#if data.place.areacd !== 'K02000001'}
 			<div class="local-indicators-card">
 				{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
-					<h3 style:margin-bottom="12px">Local indicators for {getName(place, 'the')}</h3>
+					<h2 class="ons-card__title ons-u-fs-m" style:margin-bottom="12px">
+						Local indicators for {getName(place, 'the')}
+					</h2>
 					<p style:margin-bottom="20px">Health, education, economy, life satisfaction and more.</p>
 					<Button
 						icon="arrow"
@@ -171,6 +173,7 @@
 			</div>
 		{/if}
 		<div class="area-search-card">
+			<h2 class="ons-card__title ons-u-fs-m">Find another area</h2>
 			<label for="search" style:display="block" style:margin-bottom="8px"
 				>Search for a place name or postcode</label
 			>
@@ -259,7 +262,12 @@
 	<Grid title="Explore statistics about {getName(data.place, 'the')}" id="interactive">
 		{#each productLinks as link}
 			{#if link.title === 'Local indicators'}
-				<Card title={link.title} href={parseTemplate(link.url, link.place)} mode="featured">
+				<Card
+					title={link.title}
+					href={parseTemplate(link.url, link.place)}
+					mode="featured"
+					headingTag="h3"
+				>
 					<div slot="image" style:display="contents"><ESSMap geometry={data.geometry} /></div>
 					{@html parseTemplate(link.description, link.place)}
 				</Card>
@@ -269,6 +277,7 @@
 					href={parseTemplate(link.url, link.place)}
 					image={link.image}
 					mode="featured"
+					headingTag="h3"
 					imageAlt=""
 				>
 					{@html parseTemplate(link.description, link.place)}
