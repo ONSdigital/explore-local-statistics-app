@@ -81,12 +81,11 @@
 		).label;
 
 		columns = [
-			{ key: 'areacd', label: 'Area code', sortable: true },
-			{ key: 'areanm', label: 'Area name', sortable: true },
+			{ key: 'areacd', label: 'Area code' },
+			{ key: 'areanm', label: 'Area name' },
 			...timePeriodsArray.map((t) => ({
 				key: t.xDomainNumb,
 				label: t.label,
-				sortable: true,
 				numeric: true,
 				dp: +data.indicator.metadata.decimalPlaces
 			}))
@@ -651,7 +650,7 @@
 				</p>
 
 				{#key pivotedData}
-					<Table data={pivotedData} {columns} height={500} stickyHeader compact />
+					<Table data={pivotedData} {columns} height={500} stickyHeader compact sortable />
 				{/key}
 			</ContentBlock>
 		</NavSection>
