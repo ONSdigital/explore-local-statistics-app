@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import {
-		// Tabs,
-		// Tab,
-		AccessibleSelect as Select
-	} from '@onsvisual/svelte-components';
+	import { Select } from '@onsvisual/svelte-components';
 	import Tabs from '$lib/modified-library-components/Tabs.svelte';
 	import Tab from '$lib/modified-library-components/Tab.svelte';
 	import LineChartWrapper from './LineChartWrapper.svelte';
@@ -35,7 +31,7 @@
 	let el = {},
 		indicator,
 		geoGroup;
-	
+
 	//tracks the selected time period range
 	let chosenXDomainNumbStart = metadata.globalXDomainExtent[0];
 	let chosenXDomainNumbEnd = metadata.globalXDomainExtent[1];
@@ -384,7 +380,7 @@
 
 	.select-container {
 		width: 100%;
-		max-width: 410px;
+		max-width: 405px;
 		flex-grow: 1;
 	}
 
@@ -404,7 +400,12 @@
 		flex-wrap: nowrap;
 		justify-content: flex-end;
 		gap: 4px;
-		margin-bottom: 2px;
+		margin-bottom: 3px;
+	}
+
+	.buttons-container :global(button .ons-btn__text) {
+		font-size: 16px !important;
+		margin-left: 6px !important;
 	}
 
 	.title-buttons-container {

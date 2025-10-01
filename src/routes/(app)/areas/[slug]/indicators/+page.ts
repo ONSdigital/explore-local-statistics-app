@@ -28,6 +28,6 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 			},
 			{ label: `Local indicators` }
 		],
-		background: '#eaeaea'
+		background: '#f5f5f6'
 	};
 };

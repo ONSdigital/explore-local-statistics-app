@@ -50,25 +50,21 @@
 	<meta property="og:image:type" content="image/png" />
 </svelte:head>
 
-<div class="flex flex-col min-h-screen">
-	<div class="flex-grow">
-		<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-		<Header bilingual={false}></Header>
-		{#if $page.data.component}
-			<svelte:component
-				this={$page.data.component}
-				links={$page.data.breadcrumbLinks}
-				background={$page.data.background ?? ''}
-			/>
-		{:else}
-			<p>$page.data.component is undefined</p>
-		{/if}
-		<Main>
-			<slot />
-		</Main>
-	</div>
-	<Footer theme="dark" />
-</div>
+<AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
+<Header bilingual={false}></Header>
+{#if $page.data.component}
+	<svelte:component
+		this={$page.data.component}
+		links={$page.data.breadcrumbLinks}
+		background={$page.data.background ?? ''}
+	/>
+{:else}
+	<p>$page.data.component is undefined</p>
+{/if}
+<Main>
+	<slot />
+</Main>
+<Footer theme="dark" />
 
 <style>
 	:global(a:focus > svg.logo) {

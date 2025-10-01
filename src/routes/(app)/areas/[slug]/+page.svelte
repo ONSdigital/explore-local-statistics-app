@@ -9,13 +9,12 @@
 	import { makeCanonicalSlug } from '$lib/util/areas/makeCanonicalSlug';
 	import { filterChildren } from '$lib/util/geo/filterChildren';
 	import {
-		Titleblock,
+		Hero,
 		Section,
 		Button,
-		Cards,
+		Grid,
+		GridCell,
 		Card,
-		// Tabs,
-		// Tab,
 		Accordion,
 		AccordionItem,
 		analyticsEvent
@@ -25,7 +24,6 @@
 	import AreaSelect from '$lib/components/AreaSelect.svelte';
 	import AreaList from '$lib/components/AreaList.svelte';
 	import AreaNavMap from '$lib/components/AreaNavMap.svelte';
-	import Lede from '$lib/components/Lede.svelte';
 	import ESSMap from '$lib/components/ESSMap.svelte';
 
 	export let data: PageData;
@@ -73,12 +71,16 @@
 	{/if}
 </svelte:head>
 
-<Titleblock
+<Hero
 	title={getName(data.place)}
-	titleBadge={data.place.areacd}
-	titleBadgeAriaLabel="Area code: {data.place.areacd}"
+	titleBadge={{
+		label: data.place.areacd,
+		ariaLabel: `Area code: ${data.place.areacd}`,
+		color: '#003c57'
+	}}
+	cls="titleblock-transparent"
 >
-	<Lede>
+	<p class="ons-hero__text">
 		{#if data.place.areacd === 'K02000001'}
 			Explore areas within the United Kingdom.
 		{:else}
@@ -140,67 +142,65 @@
 				</p>
 			{/if}
 		{/if}
-	</Lede>
-</Titleblock>
+	</p>
+</Hero>
 
-<Cards id="related-areas" height="auto">
-	<Card colspan={2} rowspan={2} noBackground>
+<Grid id="related-areas">
+	<GridCell colspan={2}>
 		<AreaNavMap
 			{data}
 			{childType}
 			on:select={mapSelect}
 			mapDescription={'Map of ' + getName(data.place, 'the')}
 		/>
-	</Card>
-
-	{#if data.place.areacd !== 'K02000001'}
-		<div class="local-indicators-card">
-			{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
-				<Section theme="dark" background="#003c57" marginBottom={false}>
-					<div style:margin="24px 0">
-						<h3 style:margin-bottom="12px">Local indicators for {getName(place, 'the')}</h3>
-						<p style:margin-bottom="20px">
-							Health, education, economy, life satisfaction and more.
-						</p>
-						<Button
-							icon="arrow"
-							iconPosition="after"
-							variant="ghost"
-							href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
-							small>Explore local indicators</Button
-						>
-					</div>
-				</Section>
-			{/each}
-		</div>
-	{/if}
-	<Card title="Find another area">
-		<label for="search" style:display="block" style:margin-bottom="8px"
-			>Search for a place name or postcode</label
-		>
-		<AreaSelect
-			id="search"
-			mode="search"
-			idKey="areacd"
-			labelKey="areanm"
-			groupKey="group"
-			placeholder="Eg. Fareham or PO15 5RR"
-			hideIcon
-			bind:value={searchValue}
-			on:submit={navTo}
-			on:clear={() => (postcode = null)}
-		/>
-		{#if postcode}
-			<AreaList
-				{postcode}
-				on:clear={() => {
-					postcode = null;
-					searchValue = null;
-				}}
-			/>
+	</GridCell>
+	<div class="ons-grid__col ons-col-4@l grid-cell-flex">
+		{#if data.place.areacd !== 'K02000001'}
+			<div class="local-indicators-card">
+				{#each [essGeocodes.includes(data.place.typecd) ? data.place : getParent(data.place, essGeocodes)] as place}
+					<h2 class="ons-card__title ons-u-fs-m" style:margin-bottom="12px">
+						Local indicators for {getName(place, 'the')}
+					</h2>
+					<p style:margin-bottom="20px">Health, education, economy, life satisfaction and more.</p>
+					<Button
+						icon="arrow"
+						iconPosition="after"
+						variant="ghost"
+						href="{base}/areas/{makeCanonicalSlug(place.areacd, place.areanm)}/indicators"
+						small>Explore local indicators</Button
+					>
+				{/each}
+			</div>
 		{/if}
-	</Card>
-	<Card colspan={3} noBackground>
+		<div class="area-search-card">
+			<h2 class="ons-card__title ons-u-fs-m">Find another area</h2>
+			<label for="search" style:display="block" style:margin-bottom="8px"
+				>Search for a place name or postcode</label
+			>
+			<AreaSelect
+				id="search"
+				mode="search"
+				idKey="areacd"
+				labelKey="areanm"
+				groupKey="group"
+				placeholder="Eg. Fareham or PO15 5RR"
+				hideIcon
+				bind:value={searchValue}
+				on:submit={navTo}
+				on:clear={() => (postcode = null)}
+			/>
+			{#if postcode}
+				<AreaList
+					{postcode}
+					on:clear={() => {
+						postcode = null;
+						searchValue = null;
+					}}
+				/>
+			{/if}
+		</div>
+	</div>
+	<GridCell colspan={3}>
 		<!-- Removed the "ons-u-d-no" class that was hiding the tab panel at 400% zoom -->
 		<div style:margin-top="10px" class="ons-u-d-b@s" bind:clientWidth={tabsWidth}>
 			{#key childType}
@@ -255,14 +255,19 @@
 				{/if}
 			{/key}
 		</div>
-	</Card>
-</Cards>
+	</GridCell>
+</Grid>
 
 {#if productLinks[0]}
-	<Cards title="Explore statistics about {getName(data.place, 'the')}" id="interactive">
+	<Grid title="Explore statistics about {getName(data.place, 'the')}" id="interactive">
 		{#each productLinks as link}
 			{#if link.title === 'Local indicators'}
-				<Card title={link.title} href={parseTemplate(link.url, link.place)} bgcolor={link.bgcolor}>
+				<Card
+					title={link.title}
+					href={parseTemplate(link.url, link.place)}
+					mode="featured"
+					headingTag="h3"
+				>
 					<div slot="image" style:display="contents"><ESSMap geometry={data.geometry} /></div>
 					{@html parseTemplate(link.description, link.place)}
 				</Card>
@@ -271,14 +276,15 @@
 					title={link.title}
 					href={parseTemplate(link.url, link.place)}
 					image={link.image}
-					bgcolor={link.bgcolor}
+					mode="featured"
+					headingTag="h3"
 					imageAlt=""
 				>
 					{@html parseTemplate(link.description, link.place)}
 				</Card>
 			{/if}
 		{/each}
-	</Cards>
+	</Grid>
 {/if}
 
 <style>
@@ -326,8 +332,24 @@
 	:global(a.ons-card__link > h3) {
 		padding-top: 0 !important;
 	}
+	.grid-cell-flex {
+		display: inline-flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+	.grid-cell-flex > div {
+		flex-basis: 0;
+		flex-grow: 1;
+		min-width: 300px;
+		padding: 1rem;
+	}
 	.local-indicators-card {
-		background-color: #003c57;
+		color: var(--ons-color-page-light);
+		background-color: var(--ons-color-branded-secondary);
+	}
+	.area-search-card {
+		background: var(--ons-color-banner-bg);
 	}
 	.additional-area-info {
 		margin-top: 12px;

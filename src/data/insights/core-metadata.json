@@ -53,6 +53,10 @@
 			"label": "Gross median weekly pay"
 		},
 		{
+			"code": "children-in-relative-poverty",
+			"label": "Children in relative poverty"
+		},
+		{
 			"code": "total-value-of-uk-exports",
 			"label": "Value of UK exports"
 		},
@@ -2168,6 +2172,105 @@
 				2022,
 				2023,
 				2024
+			]
+		},
+		"children-in-relative-poverty": {
+			"id": 118,
+			"topic": "economy",
+			"subTopic": "pay and income",
+			"code": "children-in-relative-poverty",
+			"": null,
+			"minXDomainNumb": 2014,
+			"maxXDomainNumb": 2023,
+			"metadata": {
+				"code": "children-in-relative-poverty",
+				"slug": "children-in-relative-poverty",
+				"label": "Children in relative poverty",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of children aged 0 to 15 living in relative low income families Before Housing Costs (BHC)",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "27/03/2025",
+				"sourceURL": "https://www.gov.uk/government/collections/children-in-low-income-families-local-area-statistics",
+				"sourceOrg": "Department for Work and Pensions",
+				"longDescription": "This indicator shows the percentage of children aged 0 to 15 living in relative low income families Before Housing Costs (BHC), in the UK, for financial years ending 2015 to 2024.",
+				"standardised": "T",
+				"caveats": "Relative low income is defined as a family in low income Before Housing Costs (BHC) in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nRates have been derived by dividing the number of children aged 0 to 15 in low income families by the number of all children aged 0-15 (sourced from latest available mid-year population estimates).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023
 			]
 		},
 		"total-value-of-uk-exports": {
@@ -10755,7 +10858,8 @@
 					"name": "pay and income",
 					"indicatorCodes": [
 						"gross-disposable-household-income-per-head",
-						"gross-median-weekly-pay"
+						"gross-median-weekly-pay",
+						"children-in-relative-poverty"
 					]
 				},
 				{
