@@ -355,7 +355,7 @@
 			showInfo={false}
 		></SubtitleAdditionalDescription>
 	</div>
-	<Table data={pivotedData} columns={tableColumns} height={500} stickyHeader compact />
+	<Table data={pivotedData} columns={tableColumns} height={500} stickyHeader compact sortable />
 {/if}
 
 <style>
