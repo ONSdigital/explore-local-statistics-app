@@ -1,0 +1,30 @@
+name: Reopen issue
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 1 * *'  # Runs at 00:00 UTC on the 1st of every month
+
+env:
+  ISSUE_NUMBER: 212
+
+jobs:
+  reopen-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+      - name: Reopen issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = parseInt(process.env.ISSUE_NUMBER); 
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              state: 'open'
+            });
+
