@@ -119,7 +119,7 @@
 </div>
 <input
 	type="range"
-	class="visuallyhidden"
+	class="ons-u-vh"
 	on:focus={() => (focusLeft = true)}
 	on:blur={() => (focusLeft = false)}
 	bind:value={value[0]}
@@ -132,7 +132,7 @@
 {#if range}
 	<input
 		type="range"
-		class="visuallyhidden"
+		class="ons-u-vh"
 		on:focus={() => (focusRight = true)}
 		on:blur={() => (focusRight = false)}
 		bind:value={value[1]}
