@@ -430,16 +430,11 @@
 	]}
 	background="#eaeaea"
 	titleBadge={{
-		label: !experimental ? capitalise(data.indicator.topic) : null,
-		ariaLabel: `Topic: ${capitalise(data.indicator.topic)}`,
+		label: experimental ? 'Official statistics in development' : capitalise(data.indicator.topic),
+		ariaLabel: !experimental ? `Topic: ${capitalise(data.indicator.topic)}` : null,
 		color: '#003c57'
 	}}
 >
-	{#if experimental}
-		<div class="stat-in-dev">
-			<div>Official statistics in development</div>
-		</div>
-	{/if}
 	<p class="ons-hero__text">
 		{data.indicator.metadata.longDescription}
 	</p>
