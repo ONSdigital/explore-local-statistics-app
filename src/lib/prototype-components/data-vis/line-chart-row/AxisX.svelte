@@ -18,11 +18,11 @@
 		<g class="tick" transform="translate({x(d.xDomainNumb)},0)">
 			<line y1={[3, 0][i]} y2="12"></line>
 
-			{#if maxWidth + 20 < chartWidth}
-				<text bind:contentRect={xAxisTickRects[i]} text-anchor="middle" y={26}>{d.labelShort}</text>
-			{:else}
-				<text text-anchor="middle" y={26}>{String(d.label).substring(2, 4)}</text>
-			{/if}
+			<!-- {#if maxWidth + 20 < chartWidth} -->
+			<text bind:contentRect={xAxisTickRects[i]} text-anchor="middle" y={26}>{d.labelShort}</text>
+			<!-- {:else} -->
+			<!-- <text text-anchor="middle" y={26}>{String(d.label).substring(2, 4)}</text> -->
+			<!-- {/if} -->
 		</g>
 	{/each}
 </g>

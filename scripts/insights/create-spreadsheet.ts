@@ -13,7 +13,7 @@ export function createSpreadsheet(data, metadata, periods, filename) {
 			'[Visit Explore Local Statistics on the ONS website](http://ons.gov.uk/explore-local-statistics/)',
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
-			'Some indicators use custom time intervals format for periods, YYYY-MM-DDT00:00:00/PnI, where P tells that this is period; n is the number of intervals and I is interval type which can be Y(year), M(month), W(week), D(day).',
+			"This dataset uses a custom format to show time periods. Each period is written as 'YYYY-MM-DD/PnI', where 'P' means it's a period, 'n' is the number of time units and 'I' is the type of time unit (Y = year, M = month, W = week, D = day).",
 			'[Quality and Methodology Information](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi) for the Explore Local Statistics service details the strengths and limitations of the service, methods used, data uses and users.'
 		],
 		notes: [],
