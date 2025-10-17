@@ -38,8 +38,8 @@ const sortedPeriods = [...uniquePeriods].sort((a, b) => a.localeCompare(b));
 // Format time periods and output CSV lookup
 const monthFormatter = utcFormat('%b %Y');
 const monthFormatterShort = utcFormat('%b %y');
-const quarterFormatter = utcFormat('%q %Y');
-const quarterFormatterShort = utcFormat('%q %y');
+const quarterFormatter = utcFormat('Q%q %Y');
+const quarterFormatterShort = utcFormat('Q%q %y');
 // const yearFormatter = utcFormat("%Y");
 const yearFormatterShort = utcFormat('%y');
 
