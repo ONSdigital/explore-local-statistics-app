@@ -83,8 +83,13 @@ function parsePeriod(str) {
 		period: str,
 		xDomainNumb,
 		label: end && end !== startShort ? `${start}-${end}` : start,
-		labelShort: end && end !== startShort ? `${startShort}-${end}` : start,
-		labelVeryShort: end ? end : startShort
+		labelShort:
+			end && end !== startShort
+				? `${startShort}-${end}`
+				: granularity == 'year'
+					? start
+					: startShort,
+		labelVeryShort: end ? end : startShort.slice(-2)
 	};
 }
 
