@@ -29,7 +29,7 @@
 		top: 10,
 		right: Math.max(0, xAxisFinalTickWidth / 2, maxLabelWidth + 20),
 		bottom: 30,
-		left: 10 + yAxisMaxTickWidth
+		left: 10 + Math.max(yAxisMaxTickWidth, xAxisFinalTickWidth / 2)
 	};
 
 	$: chartWidth = width - padding.left - padding.right;
