@@ -181,7 +181,7 @@
 		<LineChartContainer
 			{indicator}
 			{metadata}
-			{timePeriodsArray}
+			timePeriodsArray={chosenTimePeriodsArray}
 			filteredChartDataSelected={filteredChartDataSelected.filter(
 				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
 			)}

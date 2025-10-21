@@ -31,20 +31,22 @@ function makeColumns(data, indicator, metadata) {
 		}
 		return key;
 	};
-	let keys = Array.from(
-    	new Set(
-        	data.flatMap(d => Object.keys(d))
-    	)).filter((key) => typeof +key === 'number' && !isNaN(+key));
+
+	let keys = Array.from(new Set(data.flatMap((d) => Object.keys(d))))
+		.filter((key) => typeof +key === 'number' && !isNaN(+key))
+		.sort((a, b) => +a - +b);
+
 	//Formatting the dates in the csv table download
 	const xDomainArr = keys[0]
 		? metadata.periodsLookupArray.filter(
 				(t) =>
 					t.id === indicator.id &&
-					t.xDomainNumb >= keys[0] &&
-					t.xDomainNumb <= keys[keys.length - 1]
+					t.xDomainNumb >= +keys[0] &&
+					t.xDomainNumb <= +keys[+keys.length - 1]
 			)
 		: null;
 
+	console.log({ data });
 	const xDomainMap = xDomainArr
 		? (() => {
 				const map = {};
@@ -60,6 +62,9 @@ function makeColumns(data, indicator, metadata) {
 	const labels = xDomainArr
 		? keys.map(formatKeys).map((d) => xDomainMap[d] ?? d)
 		: keys.map(formatKeys);
+
+	console.log({ xDomainArr });
+	console.log({ xDomainMap });
 	return { keys, labels };
 }
 
@@ -104,6 +109,8 @@ export function downloadCSV(
 	const mappedData = xDomainMap
 		? data.map((d) => ({ ...d, xDomainNumb: xDomainMap[d.xDomainNumb] }))
 		: data;
+	console.log({ cols });
+	console.log(mappedData[0]);
 	let csv = `"${indicator.metadata.label}"
 "${indicator.metadata.subtitle}"
 "Source: ${arrayJoin(indicator.metadata.sourceOrg.split('|'))}"
