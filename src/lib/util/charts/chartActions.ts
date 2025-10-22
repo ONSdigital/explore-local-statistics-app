@@ -63,14 +63,12 @@ function makeColumns(data, indicator, metadata) {
 		? keys.map(formatKeys).map((d) => xDomainMap[d] ?? d)
 		: keys.map(formatKeys);
 
-	console.log({ xDomainArr });
-	console.log({ xDomainMap });
 	return { keys, labels };
 }
 
 function sortData(data) {
 	const sorted = [...data];
-	if (data[0].xDomainNumb) sorted.sort((a, b) => a.xDomainNumb.localeCompare(b.xDomainNumb));
+	// if (data[0].xDomainNumb) sorted.sort((a, b) => a.xDomainNumb.localeCompare(b.xDomainNumb));
 	sorted.sort((a, b) => a.areacd.localeCompare(b.areacd));
 	return sorted;
 }
@@ -106,11 +104,12 @@ export function downloadCSV(
 				return map;
 			})()
 		: null;
+	console.log({ xDomainArr });
+	console.log({ xDomainMap });
 	const mappedData = xDomainMap
 		? data.map((d) => ({ ...d, xDomainNumb: xDomainMap[d.xDomainNumb] }))
 		: data;
-	console.log({ cols });
-	console.log(mappedData[0]);
+	console.log(mappedData);
 	let csv = `"${indicator.metadata.label}"
 "${indicator.metadata.subtitle}"
 "Source: ${arrayJoin(indicator.metadata.sourceOrg.split('|'))}"
