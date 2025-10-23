@@ -3,9 +3,11 @@
 
 	export let timePeriodsArray, chartHeight, xDomain, x, xAxisFinalTickWidth, fontSize, chartWidth;
 
+	$: isDecimal = timePeriodsArray.some((n) => n.xDomainNumb % 1 !== 0);
+
 	$: xDistance = Math.abs(xDomain[1] - xDomain[0]);
 
-	$: tickInterval = xDistance >= 15 ? 5 : xDistance >= 6 ? 2 : 1;
+	$: tickInterval = (xDistance >= 15 ? 5 : xDistance >= 6 ? 2 : 1) * (isDecimal ? 0.25 : 1);
 
 	$: ticks = generateNumbersIncrementFromMaxValue(xDomain, tickInterval);
 
@@ -17,8 +19,6 @@
 	$: maxWidth = xAxisTickRects.length > 0 ? Math.max(...xAxisTickRects.map((el) => el.width)) : 0;
 
 	$: filteredTicks = timePeriodsArray.filter((el) => ticks.includes(parseInt(el.xDomainNumb)));
-
-	// $: console.log(maxWidth);
 </script>
 
 <g class="x-axis-container" transform="translate(0,{chartHeight})">

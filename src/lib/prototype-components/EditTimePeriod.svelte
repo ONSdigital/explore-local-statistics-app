@@ -29,6 +29,8 @@
 		}
 	}
 
+	let isDecimal = timePeriodsArray.some((n) => n.xDomainNumb % 1 !== 0);
+
 	// $: console.log(timePeriodsArray);
 </script>
 
@@ -38,6 +40,7 @@
 		? timePeriodsArray[timePeriodsArray.length - 1].xDomainNumb
 		: metadata.globalXDomainExtent[0]}
 	max={timePeriodsArray ? timePeriodsArray[0].xDomainNumb : metadata.globalXDomainExtent[1]}
+	step={isDecimal ? 0.25 : 1}
 	on:input={debounce(setChosenXDomain, 100)}
 	{timePeriodsArray}
 />
