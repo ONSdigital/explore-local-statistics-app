@@ -20,6 +20,8 @@
 			chosenTimePeriodDropdownLabel = timePeriodsArray.find((el) => el.xDomainNumb === max).label;
 		}
 	}
+	$: console.log(timePeriodsArray);
+	$: isDecimal = timePeriodsArray?.some((n) => n.xDomainNumb % 1 !== 0) ?? false;
 </script>
 
 <Slider
@@ -30,6 +32,7 @@
 	max={timePeriodsArray
 		? timePeriodsArray[0].xDomainNumb
 		: Math.floor(metadata.globalXDomainExtent[1])}
+	step={isDecimal ? 0.25 : 1}
 	on:input={debounce(setChosenXDomain, 100)}
 	{timePeriodsArray}
 />
