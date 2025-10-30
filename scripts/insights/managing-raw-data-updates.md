@@ -95,14 +95,14 @@ This should update the unique periods lookup file to include the new time period
 
 This script replaces the need to follow the below steps.
 
-~~you need to copy these into raw/config-data/periods/unique-periods-lookup.csv and give them:
+~~you need to copy these into raw/config-data/periods/unique-periods-lookup.csv and give them:~~
 
-_a xDomainNumb_ - This is used to chart data. We typically use the first year from the time period (e.g. for June 2022-May 2023 we'd set xDomainNumb = 2022).
-_label, labelShort, labelVeryShort_ - These labels will be used on different charts, depending on available pixel space.
+~~_a xDomainNumb_ - This is used to chart data. We typically use the first year from the time period (e.g. for June 2022-May 2023 we'd set xDomainNumb = 2022).~~
+~~_label, labelShort, labelVeryShort_ - These labels will be used on different charts, depending on available pixel space.~~
 
-It is recommended to open up the csv file to make edits in vscode rather than excel, as excel will interpret certain labels (e.g. 07-08) as dates and then save them as a datetime. However, if you do open and save the file in excel, you can fix this issue by applying the following formulas to column D.
+~~It is recommended to open up the csv file to make edits in vscode rather than excel, as excel will interpret certain labels (e.g. 07-08) as dates and then save them as a datetime. However, if you do open and save the file in excel, you can fix this issue by applying the following formulas to column D.~~
 
-=IF(LEN(C2)=4,C2,MID(C2,3,2)&"-"&RIGHT(C2,2))~~
+~~=IF(LEN(C2)=4,C2,MID(C2,3,2)&"-"&RIGHT(C2,2))~~
 
 Note: The unique time periods file has been derived from the time periods in the raw data. However, there is one issue where a dataset has missing years - for example, persistent-absences-for-all-pupils currently has data for 2018 and 2020 but not for 2019. The way the app is currently coded, this causes an error if the user adjusts the slider to show data for 2019, since it can't find labels for that year.
 
