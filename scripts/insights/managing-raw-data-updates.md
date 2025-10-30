@@ -21,7 +21,7 @@ Use the npm command
 
 `npm run data:download`
 
-to download the data. 
+to download the data.
 
 This script deletes the folder 'family-ess-main' from scripts/insights/raw. Then it grabs the repo `explore-local-statistics-data` and moves it into scripts/insights/raw/family-ess-main.
 
@@ -85,24 +85,35 @@ If a new indicator is added or more data is provided for an existing indicator, 
 
 _unique-periods-lookup warning - The data includes some periods which are not included in our list of unique periods. Please add these and give them a xDomainNumb and labels. The list of new periods is copied above._
 
-Above this will be an array of time periods - you need to copy these into raw/config-data/periods/unique-periods-lookup.csv and give them:
+Above this will be an array of the new time periods.
+
+To regenerate the unique-periods-lookup.csv, run the command:
+
+`npm run data:periods`
+
+This should update the unique periods lookup file to include the new time periods (they will be added as new rows at the bottom of the csv, it is sensible to double-check these look correct).
+
+This script replaces the need to follow the below steps.
+
+~~you need to copy these into raw/config-data/periods/unique-periods-lookup.csv and give them:
 
 _a xDomainNumb_ - This is used to chart data. We typically use the first year from the time period (e.g. for June 2022-May 2023 we'd set xDomainNumb = 2022).
 _label, labelShort, labelVeryShort_ - These labels will be used on different charts, depending on available pixel space.
 
 It is recommended to open up the csv file to make edits in vscode rather than excel, as excel will interpret certain labels (e.g. 07-08) as dates and then save them as a datetime. However, if you do open and save the file in excel, you can fix this issue by applying the following formulas to column D.
 
-=IF(LEN(C2)=4,C2,MID(C2,3,2)&"-"&RIGHT(C2,2))
+=IF(LEN(C2)=4,C2,MID(C2,3,2)&"-"&RIGHT(C2,2))~~
 
 Note: The unique time periods file has been derived from the time periods in the raw data. However, there is one issue where a dataset has missing years - for example, persistent-absences-for-all-pupils currently has data for 2018 and 2020 but not for 2019. The way the app is currently coded, this causes an error if the user adjusts the slider to show data for 2019, since it can't find labels for that year.
 
 The current work around is that we add a additional-periods-lookup-for-sliders.csv input which includes these missing time periods. Therefore, if more indicators with missing years are added, or data for these missing years is added for existing indicators - then this file will need updating.
 
 ## Step 5
+
 Push changes to your branch. Then go to [deployments](https://github.com/ONSdigital/explore-local-statistics-app/deployments) to get the preview link to share back with the data team.
 
-Once they are happy with the changes it's time to merge that branch. 
+Once they are happy with the changes it's time to merge that branch.
 
-Update from Develop to see if there are changes that have happened in the time since we've been waiting for approval, then do a pull request into Develop. 
+Update from Develop to see if there are changes that have happened in the time since we've been waiting for approval, then do a pull request into Develop.
 
-Once that's been approved, do a pull request from Develop into Beta. 
+Once that's been approved, do a pull request from Develop into Beta.
