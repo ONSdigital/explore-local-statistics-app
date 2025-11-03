@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-nocheck
-import html2canvas from 'html2canvas';
+// import html2canvas from 'html2canvas';
+import { snapdom } from '@zumer/snapdom';
 import { csvFormatBody } from 'd3-dsv';
 import { arrayJoin } from '$lib/utils';
 
@@ -132,14 +133,17 @@ export async function downloadPNG(
 	type,
 	filename = slug + '-' + type + (type == 'map' || type == 'table' ? '-' : '-chart-') + 'image.png'
 ) {
-	html2canvas(el, {
-		windowWidth: el.scrollWidth,
-		windowHeight: el.scrollHeight,
-		onclone: (document) => {
-			const panel = document.querySelector('.ons-tabs__panel');
-			if (panel) panel.style.border = 'none';
-		}
-	}).then((canvas) => doDownload(canvas.toDataURL(), filename));
+	snapdom
+		.toCanvas(el, { backgroundColor: '#fff' })
+		// html2canvas(el, {
+		// 	windowWidth: el.scrollWidth,
+		// 	windowHeight: el.scrollHeight,
+		// 	onclone: (document) => {
+		// 		const panel = document.querySelector('.ons-tabs__panel');
+		// 		if (panel) panel.style.border = 'none';
+		// 	}
+		// })
+		.then((canvas) => doDownload(canvas.toDataURL(), filename));
 }
 
 export function clip(str, msg) {
