@@ -3,7 +3,7 @@ import { utcDay, utcFormat, csvParse, csvFormat } from 'd3';
 import { round } from '@onsvisual/robo-utils';
 
 const inDir = './scripts/insights/raw/family-ess-main';
-const outPath = './scripts/insights/raw/config-data/periods/unique-periods-lookup-generated.csv';
+const outPath = './scripts/insights/raw/config-data/periods/unique-periods-lookup.csv';
 
 // STEP 1:
 // Get unique time periods from CSV data files
