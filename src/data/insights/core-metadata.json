@@ -9,6 +9,10 @@
 			"label": "Population density"
 		},
 		{
+			"code": "population-indicators-5-year population change",
+			"label": "Five-year population change"
+		},
+		{
 			"code": "population-indicators-Median age",
 			"label": "Median age"
 		},
@@ -391,12 +395,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the mid-year estimate of the total population, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "F",
-				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -549,12 +553,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the number of usual residents per square kilometre, calculated based on total land area excluding inland water, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "[Standard Area Measurements for Administrative Areas (December 2023) in the UK](https://geoportal.statistics.gov.uk/datasets/da8590c5f55f4664b32ad4339f43419c/about) was used to calculate population density by dividing the total population by the area in square kilometres.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "[Standard Area Measurements (December 2024) in the UK](https://geoportal.statistics.gov.uk/datasets/ons::standard-area-measurements-for-the-local-authority-districts-december-2024-in-the-united-kingdom/about) was used to calculate population density by dividing the total population by the area in square kilometres.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -686,6 +690,159 @@
 				2024
 			]
 		},
+		"population-indicators-5-year population change": {
+			"id": 105,
+			"topic": "population",
+			"subTopic": "population",
+			"code": "population-indicators-5-year population change",
+			"": null,
+			"minXDomainNumb": 1991,
+			"maxXDomainNumb": 2019,
+			"metadata": {
+				"code": "population-indicators-5-year population change",
+				"slug": "five-year-population-change",
+				"label": "Five-year population change",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage growth or decline over a five-year period",
+				"zeroBaseline": "F",
+				"canBeNegative": "T",
+				"experimentalStatistic": "F",
+				"sourceDate": "26/09/2025",
+				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the five-year percentage change in population, in the United Kingdom, for 1996 to 2024.",
+				"standardised": "T",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1991,
+				1992,
+				1993,
+				1994,
+				1995,
+				1996,
+				1997,
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019
+			]
+		},
 		"population-indicators-Median age": {
 			"id": 106,
 			"topic": "population",
@@ -707,12 +864,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the median age of people, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "Median age is calculated as the age category in which the mid-point of the population distribution falls. There may be slight differences when compared with other sources, as these may reflect where the mid-point falls within the given age category. These reflect differences in precision, not accuracy.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "Median age is calculated as the age category in which the mid-point of the population distribution falls. There may be slight differences when compared with other sources, as these may reflect where the mid-point falls within the given age category. These reflect differences in precision, not accuracy.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -865,12 +1022,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the percentage of the population aged 0 to 15, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1023,12 +1180,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the percentage of the population aged 16 to 64, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -1181,12 +1338,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "30/07/2025",
+				"sourceDate": "26/09/2025",
 				"sourceURL": "https://www.nomisweb.co.uk/datasets/pestsyoala",
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the percentage of the population aged 65 and over, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.\n\nFor Northern Ireland, estimates for mid-2024 are not yet available on Nomis but are planned for publication in October 2025. For Scotland, Nomis does not yet include estimates for mid-2024 or reflect revisions for mid-2023 published in August 2025. These are also planned for publication on Nomis in October 2025 and will be updated in ELS in November 2025.",
+				"caveats": "Population estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2067,7 +2224,7 @@
 			"code": "gross-median-weekly-pay",
 			"": null,
 			"minXDomainNumb": 2008,
-			"maxXDomainNumb": 2024,
+			"maxXDomainNumb": 2025,
 			"metadata": {
 				"code": "gross-median-weekly-pay",
 				"slug": "gross-median-weekly-pay",
@@ -2081,12 +2238,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "29/10/2024|29/10/2024",
+				"sourceDate": "23/10/2025|23/10/2025",
 				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/previousreleases|https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/annual-survey-hours-and-earnings",
 				"sourceOrg": "Office for National Statistics|Northern Ireland Statistics and Research Agency",
-				"longDescription": "This indicator shows the average (median) weekly pay based on where people live, in the UK, for a pay period that included a specified date in April 2008 to April 2024.",
+				"longDescription": "This indicator shows the average (median) weekly pay for all employee jobs (full-time and part-time) based on where people live, in the UK, for a pay period that included a specified date in April 2008 to April 2025.",
 				"standardised": "T",
-				"caveats": "For Great Britain data, 2024 estimates are provisional and relate to the pay period that includes 17 April 2024. Estimates for 2023 have been revised and relate to the pay period that includes 19 April 2023.\n\nThe country level figure for Northern Ireland has been sourced from Nomis rather than NISRA. This is to allow for confidence intervals.",
+				"caveats": "For Great Britain data, 2025 estimates are provisional and relate to the pay period that includes 30 April 2025. Estimates for 2024 have been revised and relate to the pay period that includes 17 April 2024.\n\nThe country level figure for Northern Ireland has been sourced from Nomis rather than NISRA. This is to allow for confidence intervals.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2190,7 +2347,8 @@
 				2021,
 				2022,
 				2023,
-				2024
+				2024,
+				2025
 			]
 		},
 		"children-in-relative-poverty": {
@@ -5745,7 +5903,7 @@
 			"code": "child-obesity-Aged four to five years healthy weight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years healthy weight",
 				"slug": "healthy-weight-children-reception",
@@ -5759,12 +5917,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as healthy weight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 4 to 5 years (reception age) classified as healthy weight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -5858,7 +6016,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged 10 to 11 years healthy weight": {
@@ -5868,7 +6027,7 @@
 			"code": "child-obesity-Aged 10 to 11 years healthy weight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years healthy weight",
 				"slug": "healthy-weight-children-year-6",
@@ -5882,12 +6041,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as healthy weight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 10 to 11 years (Year 6 age) classified as healthy weight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -5981,7 +6140,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged four to five years obese": {
@@ -5991,7 +6151,7 @@
 			"code": "child-obesity-Aged four to five years obese",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years obese",
 				"slug": "obese-children-reception",
@@ -6005,12 +6165,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 4 to 5 years (reception age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6104,7 +6264,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged 10 to 11 years obese": {
@@ -6114,7 +6275,7 @@
 			"code": "child-obesity-Aged 10 to 11 years obese",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years obese",
 				"slug": "obese-children-year-6",
@@ -6128,12 +6289,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as living with obesity (including severe obesity), in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6227,7 +6388,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged four to five years overweight": {
@@ -6237,7 +6399,7 @@
 			"code": "child-obesity-Aged four to five years overweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years overweight",
 				"slug": "overweight-children-reception",
@@ -6251,12 +6413,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 4 to 5 years (reception age) classified as overweight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6350,7 +6512,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged 10 to 11 years overweight": {
@@ -6360,7 +6523,7 @@
 			"code": "child-obesity-Aged 10 to 11 years overweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years overweight",
 				"slug": "overweight-children-year-6",
@@ -6374,12 +6537,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 10 to 11 years (Year 6 age) classified as overweight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6473,7 +6636,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged four to five years underweight": {
@@ -6483,7 +6647,7 @@
 			"code": "child-obesity-Aged four to five years underweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged four to five years underweight",
 				"slug": "underweight-children-reception",
@@ -6497,12 +6661,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 4-5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 4 to 5 years (reception age) classified as underweight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6596,7 +6760,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"child-obesity-Aged 10 to 11 years underweight": {
@@ -6606,7 +6771,7 @@
 			"code": "child-obesity-Aged 10 to 11 years underweight",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "child-obesity-Aged 10 to 11 years underweight",
 				"slug": "underweight-children-year-6",
@@ -6620,12 +6785,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/obesity-physical-activity-nutrition/data#page/1/gid/8000011/pat/159/par/K02000001/ati/15/are/E92000001/yrr/1/cid/4/tbm/1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the percentage of children aged 10-11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of children aged 10 to 11 years (Year 6 age) classified as underweight, in England, for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data. \n\n Impact of Covid: Usually 95% of the state sector pupils are covered by these data. Coverage reduced in 2019/20 to 75% and further in 2020/21 to around 10%. As a result completeness is low especially in 2020/21 when few Local Authorities can be published. By 2021/22 coverage, at 92%, was almost back to normal levels. Further information is available from the data supplier.",
+				"caveats": "The data presented only includes children participating in the National Child Measurement Programme (NCMP) in state maintained schools, any measurements taken at independent and special schools are excluded from the analysis.\n\nChildren are classified as (centiles are of the British 1990 growth reference (UK90) according to age and sex):\n\n- Underweight if their body mass index (BMI) is less than the 2nd centile.\n\n- Healthy weight if their body mass index (BMI) is between the 2nd and less than the 85th centile.\n\n- Overweight if their body mass index (BMI) is on or above the 85th centile, but less than the 95th centile.\n\n- Living with obesity if their body mass index (BMI) is on or above the 95th centile.\n\nLocal authority and region geographies are derived from the postcode of child residency; only children with valid geographical coding (postcode of residence) have been included in the analysis.\n\n The data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6719,7 +6884,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"adult-obesity-prevalence-aged-18-years-and-over": {
@@ -6843,7 +7009,7 @@
 			"code": "cancer-diagnosis-at-stage-1-and-2",
 			"": null,
 			"minXDomainNumb": 2013,
-			"maxXDomainNumb": 2021,
+			"maxXDomainNumb": 2022,
 			"metadata": {
 				"code": "cancer-diagnosis-at-stage-1-and-2",
 				"slug": "cancer-diagnosis-at-stage-1-and-2",
@@ -6857,12 +7023,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "06/02/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/4/gid/1000042/pat/15/par/E92000001/ati/6/are/E12000004/iid/93671/age/1/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1/page-options/car-ao-0_car-do-0_tre-ao-1",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2021.",
+				"longDescription": "This indicator shows new cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage, in England, for 2013 to 2022.",
 				"standardised": "T",
-				"caveats": "Due to the impact of the COVID-19 pandemic on both clinical and data quality arrangements, the ability to obtain stage data for cancer registrations was reduced for the 2019 and 2020 diagnosis years. In 2019, the proportion of stageable cancer diagnoses with a registered stage fell from 85% in 2018 to 76%. For the 2020 diagnosis year, stage completeness increased to 81%.\n\nThe data source combines the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
+				"caveats": "New cases of cancer diagnosed at stages 1 and 2 as a percentage of all new cases of cancer diagnosed at any known stage (1, 2, 3, and 4) for the following cancer sites: invasive malignancies of lung, oesophagus, colon, rectum, pancreas, invasive melanomas of the skin, breast, uterus, ovary, prostate, testis, kidney, bladder, Hodgkin Lymphoma, larynx, oropharynx, oral cavity, and non Hodgkin lymphoma.\n\nSome cancer groups are excluded from the indicator due to higher levels of missing stage at diagnosis data over the last three years (2020-2022). They were excluded on the basis that their inclusion would compromise the statistical robustness of the measure.\n\nThe data source combines the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6947,7 +7113,8 @@
 				2018,
 				2019,
 				2020,
-				2021
+				2021,
+				2022
 			]
 		},
 		"preventable-cardiovascular-mortality-england": {
@@ -6957,7 +7124,7 @@
 			"code": "preventable-cardiovascular-mortality-england",
 			"": null,
 			"minXDomainNumb": 2001,
-			"maxXDomainNumb": 2021,
+			"maxXDomainNumb": 2022,
 			"metadata": {
 				"code": "preventable-cardiovascular-mortality-england",
 				"slug": "cardiovascular-mortality-considered-preventable",
@@ -6971,12 +7138,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "05/11/2024",
+				"sourceDate": "04/11/2025",
 				"sourceURL": "https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/4/gid/1000044/pat/159/par/K02000001/ati/15/are/E92000001/iid/93722/age/163/sex/4/cat/-1/ctp/-1/yrr/3/cid/4/tbm/1/page-options/car-do-0",
 				"sourceOrg": "Office for Health Improvement and Disparities",
-				"longDescription": "This indicator shows the age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population, in England, for three-year rolling periods 2001-2003 to 2021-2023.",
+				"longDescription": "This indicator shows the age-standardised mortality rate from cardiovascular diseases considered preventable for those aged under 75 per 100,000 population, in England, for three-year rolling periods 2001-2003 to 2022-2024.",
 				"standardised": "T",
-				"caveats": "Population estimates produced by the Office for National Statistics for mid-2022 have been revised, to account for updated estimates of international migration for England and Wales. Data for all geographies covering the 2022 period have been revised to use the revised population estimates. The resultant revisions to rates are very small and do not introduce any meaningful changes to results previously presented. \n\nThis indicator covers the period since March 2020 and includes the impact of the COVID-19 pandemic.\n\nThe data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
+				"caveats": "Population estimates produced by the Office for National Statistics for mid-2022 and mid-2023 have been revised, to account for updated estimates of international migration for England and Wales. Data for England, regions and local authorities covering the 2022 and 2023 period have been revised to use the revised population estimates. The resultant revisions to rates are very small and do not introduce any meaningful changes to results previously presented.\n\nThis indicator covers the period since March 2020 and includes the impact of the COVID-19 pandemic.\n\nThe data source combines the City of London totals with Hackney, and the Isles of Scilly totals with Cornwall to prevent potential disclosure of individuals. Explore Local Statistics cannot visualise data for combined areas so please refer to the original data source for this data.",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -7065,7 +7232,8 @@
 				2018,
 				2019,
 				2020,
-				2021
+				2021,
+				2022
 			]
 		},
 		"preventable-cardiovascular-mortality-ni": {
@@ -11090,6 +11258,7 @@
 					"indicatorCodes": [
 						"population-indicators-Population count",
 						"population-indicators-Population density",
+						"population-indicators-5-year population change",
 						"population-indicators-Median age",
 						"population-indicators-Percentage of the population aged 0 to 15",
 						"population-indicators-Percentage of the population aged 16 to 64",

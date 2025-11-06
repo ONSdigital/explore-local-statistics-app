@@ -297,7 +297,7 @@
 		// Set data for big numbers
 		bigNumberData = [
 			'population-indicators-Population count',
-			// 'population-indicators-5-year population change',
+			'population-indicators-5-year population change',
 			'population-indicators-Median age'
 		]
 			.map((indicator) => ({
@@ -531,7 +531,7 @@
 	{/if}
 
 	{#if bigNumberData.length > 0}
-		<Grid colWidth="wide" marginTop marginBottom={false}>
+		<Grid colWidth="medium" marginTop marginBottom={false}>
 			{#each bigNumberData as props}
 				<BigNumber {...props} />
 			{/each}
