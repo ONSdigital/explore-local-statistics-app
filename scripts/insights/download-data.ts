@@ -3,7 +3,7 @@ import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import datarepo from './raw/config-data/data-repo-version.json';
-console.log(datarepo);
+console.log(datarepo['branch']);
 
 const execAsync = promisify(exec);
 
@@ -31,7 +31,17 @@ async function removeDirectory(dir: string): Promise<void> {
 async function cloneRepo(): Promise<void> {
 	try {
 		console.log('Cloning repository...');
-		await execAsync(`git clone --single-branch --branch ${HERE} ${REPO_URL} ${TEMP_DIR}`);
+		if (datarepo['commitHash']) {
+			console.log(`Cloning commit ${datarepo['commitHash']} from branch: ${datarepo['branch']}`);
+			await execAsync(
+				`git clone --branch ${datarepo['branch']} ${REPO_URL} ${TEMP_DIR} && git -C ${TEMP_DIR} reset --hard ${datarepo['commitHash']}`
+			);
+		} else {
+			console.log(`Cloning latest commit from branch: ${datarepo['branch']}`);
+			await execAsync(
+				`git clone --single-branch --branch ${datarepo['branch']} ${REPO_URL} ${TEMP_DIR}`
+			);
+		}
 		console.log('Repository cloned successfully');
 	} catch (error) {
 		console.error('Error cloning repository:', error);
