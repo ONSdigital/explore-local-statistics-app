@@ -3,7 +3,6 @@ import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import datarepo from './raw/config-data/data-repo-version.json';
-console.log(datarepo['branch']);
 
 const execAsync = promisify(exec);
 
