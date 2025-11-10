@@ -155,7 +155,7 @@
 				<div class="divider-vertical"></div>
 
 				<div class="line-chart-container">
-					{#if xDomain[0] != xDomain[1] && indicator.code != 'population-indicators-5-year population change'}
+					{#if xDomain[0] != xDomain[1]}
 						<LineChartContainer
 							filteredChartData={filteredChartDataObject.timeSeries.filtered}
 							{metadata}
