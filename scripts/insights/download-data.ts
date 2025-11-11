@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 import datarepo from './raw/config-data/data-repo-version.json';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 // Get the project root directory (where package.json lives)
 const PROJECT_ROOT = process.cwd();
@@ -32,14 +32,18 @@ async function cloneRepo(): Promise<void> {
 		console.log('Cloning repository...');
 		if (datarepo['commitHash']) {
 			console.log(`Cloning commit ${datarepo['commitHash']} from branch: ${datarepo['branch']}`);
-			await execAsync(
-				`git clone --branch ${datarepo['branch']} ${REPO_URL} ${TEMP_DIR} && git -C ${TEMP_DIR} reset --hard ${datarepo['commitHash']}`
-			);
+			await execFileAsync('git', ['clone', '--branch', datarepo['branch'], REPO_URL, TEMP_DIR]);
+			await execFileAsync('git', ['-C', TEMP_DIR, 'reset', '--hard', datarepo['commitHash']]);
 		} else {
 			console.log(`Cloning latest commit from branch: ${datarepo['branch']}`);
-			await execAsync(
-				`git clone --single-branch --branch ${datarepo['branch']} ${REPO_URL} ${TEMP_DIR}`
-			);
+			await execFileAsync('git', [
+				'clone',
+				'--single-branch',
+				'--branch',
+				datarepo['branch'],
+				REPO_URL,
+				TEMP_DIR
+			]);
 		}
 		console.log('Repository cloned successfully');
 	} catch (error) {
