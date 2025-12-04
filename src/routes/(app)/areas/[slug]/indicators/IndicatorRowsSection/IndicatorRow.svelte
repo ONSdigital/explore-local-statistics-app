@@ -69,10 +69,13 @@
 		)
 	];
 
-	$: xDomain = [
-		Math.min(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el >= xDomainInit[0])),
-		Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
-	];
+	// $: xDomain = [
+	// 	Math.min(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el >= xDomainInit[0])),
+	// 	Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
+	// ];
+
+	$: xDomain = xDomainInit;
+	$: console.log(xDomain);
 
 	// get calculations for latest time period. our preference is to use calculations for
 	$: latestIndicatorCalculations = indicatorCalculationsArray.find(

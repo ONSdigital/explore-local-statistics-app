@@ -5,28 +5,30 @@ export function filterDataForCharts(
 	xDomain,
 	selectionsObject
 ) {
+	let xDomainMax = 
 	//filter chart data to only include data within selected time period range
 	let filteredChartData =
 		xDomain[1] && xDomain[0]
 			? indicatorChartData.filter(
-					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1]
+					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1
 				)
 			: null;
 
 	let selectedFilteredChartData = selectedChartData
-		? selectedChartData.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1])
+		? selectedChartData.filter(
+				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1
+			)
 		: null;
 
 	let comparisonFilteredChartData = comparisonChartData
 		? comparisonChartData
-				.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomain[1])
+				.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1)
 				.sort((a, b) => a.xDomainNumb - b.xDomainNumb)
 		: null;
 
 	//filter chart data for beeswarm to only include latest time period within selected time period range
 	let filteredChartDataBeeswarm = filteredChartData.filter((el) => el.xDomainNumb === xDomain[1]);
-
-	//filter to get beeswarm data for selected area
+	//filter to get beeswarm data for selected areas
 	let selectedFilteredChartDataBeeswarm = selectedFilteredChartData
 		? selectedFilteredChartData.find((el) => el.xDomainNumb === xDomain[1])
 		: null;
