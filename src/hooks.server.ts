@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import logger from '$lib/logger';
 
 // hook up the logger
@@ -18,4 +18,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	return response;
+};
+
+export const handleError: HandleServerError = async ({ status, message }) => {
+	return {
+		message: status === 404 ? "Page not found" : message || 'Sorry, there is a problem with the service',
+		errorId: status || 500
+	};
 };
