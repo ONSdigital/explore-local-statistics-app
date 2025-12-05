@@ -5,32 +5,34 @@ export function filterDataForCharts(
 	xDomain,
 	selectionsObject
 ) {
-	let xDomainMax = 
+	let xDomainMax = indicatorChartData.find((el) => el.xDomainNumb < xDomain[1] + 1)?.xDomainNumb;
+
+	$: console.log(xDomain[0], xDomainMax);
 	//filter chart data to only include data within selected time period range
 	let filteredChartData =
-		xDomain[1] && xDomain[0]
+		xDomainMax && xDomain[0]
 			? indicatorChartData.filter(
-					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1
+					(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomainMax
 				)
 			: null;
 
 	let selectedFilteredChartData = selectedChartData
-		? selectedChartData.filter(
-				(el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1
-			)
+		? selectedChartData.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomainMax)
 		: null;
 
 	let comparisonFilteredChartData = comparisonChartData
 		? comparisonChartData
-				.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb < xDomain[1] + 1)
+				.filter((el) => el.xDomainNumb >= xDomain[0] && el.xDomainNumb <= xDomainMax)
 				.sort((a, b) => a.xDomainNumb - b.xDomainNumb)
 		: null;
 
 	//filter chart data for beeswarm to only include latest time period within selected time period range
-	let filteredChartDataBeeswarm = filteredChartData.filter((el) => el.xDomainNumb === xDomain[1]);
+	let filteredChartDataBeeswarm = filteredChartData
+		? filteredChartData.filter((el) => el.xDomainNumb === xDomainMax)
+		: null;
 	//filter to get beeswarm data for selected areas
 	let selectedFilteredChartDataBeeswarm = selectedFilteredChartData
-		? selectedFilteredChartData.find((el) => el.xDomainNumb === xDomain[1])
+		? selectedFilteredChartData.find((el) => el.xDomainNumb === xDomainMax)
 		: null;
 
 	let selectedFilteredChartDataBeeswarmWithRole = selectedFilteredChartDataBeeswarm
@@ -39,7 +41,7 @@ export function filterDataForCharts(
 
 	//filter to get beeswarm data for comparison
 	let comparisonFilteredChartDataBeeswarm = comparisonFilteredChartData
-		? comparisonFilteredChartData.find((el) => parseFloat(el.xDomainNumb) === xDomain[1])
+		? comparisonFilteredChartData.find((el) => parseFloat(el.xDomainNumb) === xDomainMax)
 		: null;
 
 	let comparisonFilteredChartDataBeeswarmWithRole = comparisonFilteredChartDataBeeswarm
@@ -52,14 +54,16 @@ export function filterDataForCharts(
 
 	//filter to get beeswarm data for additional selected areas
 	let additionalFilteredChartDataBeeswarm = filteredChartDataBeeswarm
-		.filter((el) => selectionsObject['areas-rows-additional-chosen'].includes(el.areacd))
-		.map((el) => ({
-			...el,
-			role: selectionsObject['areas-rows-additional-visible'].find(
-				(elm) => elm.areacd === el.areacd
-			).role,
-			priority: false
-		}));
+		? filteredChartDataBeeswarm
+				.filter((el) => selectionsObject['areas-rows-additional-chosen'].includes(el.areacd))
+				.map((el) => ({
+					...el,
+					role: selectionsObject['areas-rows-additional-visible'].find(
+						(elm) => elm.areacd === el.areacd
+					).role,
+					priority: false
+				}))
+		: null;
 
 	return {
 		timeSeries: {
