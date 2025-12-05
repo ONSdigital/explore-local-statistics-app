@@ -20,9 +20,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handleError: HandleServerError = async ({ status, message }) => {
+export const handleError: HandleServerError = async ({ status }) => {
 	return {
-		message: status === 404 ? "Page not found" : message || 'Sorry, there is a problem with the service',
+		message: status === 404 ? "Page not found" : 'Sorry, there is a problem with the service',
 		errorId: status || 500
 	};
 };
