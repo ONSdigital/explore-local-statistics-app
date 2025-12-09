@@ -43,44 +43,34 @@
 					)
 			: []
 		: null;
-	$: comparisonPeriods = comparisonChartData ? comparisonChartData.map((el) => el.xDomainNumb) : [];
-	$: comparisonXDomain = [Math.min(...comparisonPeriods), Math.max(...comparisonPeriods)];
+	// $: comparisonPeriods = comparisonChartData ? comparisonChartData.map((el) => el.xDomainNumb) : [];
+	// $: comparisonXDomain = [Math.min(...comparisonPeriods), Math.max(...comparisonPeriods)];
 
 	//the time period range based on combined data from our selected area and primary comparison
 	// $: selectedAndComparisonXDomain = [
 	// 	Math.min(selectedXDomain[0], comparisonXDomain[0]),
 	// 	Math.max(selectedXDomain[1], comparisonXDomain[1])
 	// ];
-	$: selectedAndComparisonXDomain = selectedXDomain;
+	// $: selectedAndComparisonXDomain = selectedXDomain;
 
 	//determine xDomain for time series chart and latest time period - used for the beeswarm.
-	$: xDomainInit = [
+	$: xDomain = [
 		Math.min(
 			chosenXDomain[1],
-			chosenXDomain[0] > selectedAndComparisonXDomain[0]
-				? chosenXDomain[0]
-				: selectedAndComparisonXDomain[0]
+			chosenXDomain[0] > selectedXDomain[0] ? chosenXDomain[0] : selectedXDomain[0]
 		),
 		Math.max(
 			chosenXDomain[0],
-			chosenXDomain[1] < selectedAndComparisonXDomain[1]
-				? chosenXDomain[1]
-				: selectedAndComparisonXDomain[1]
+			chosenXDomain[1] < selectedXDomain[1] ? chosenXDomain[1] : selectedXDomain[1]
 		)
 	];
 
-	$: xDomain = [
-		Math.min(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el >= xDomainInit[0])),
-		Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
-	];
+	// $: xDomain = [
+	// 	Math.min(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el >= xDomainInit[0])),
+	// 	Math.max(...[...selectedPeriods, ...comparisonPeriods].filter((el) => el <= xDomainInit[1]))
+	// ];
 
-	// get calculations for latest time period. our preference is to use calculations for
-	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
-		(el) => el.period === xDomain[1]
-	);
-
-	$: indicatorCalculations =
-		latestIndicatorCalculations?.calcsByGeogLevel?.[selectedArea.geogLevel];
+	// $: xDomain = xDomainInit;
 
 	//filter time periods
 	$: timePeriodsArrayGlobal = metadata.periodsLookupArray.filter(
@@ -96,12 +86,20 @@
 			el.id === indicator.id &&
 			indicator.years.includes(el.xDomainNumb) &&
 			el.xDomainNumb >= chosenXDomain[0] &&
-			el.xDomainNumb <= chosenXDomain[1] &&
+			el.xDomainNumb <= chosenXDomain[1] + 1 &&
 			el.xDomainNumb >= xDomain[0] &&
-			el.xDomainNumb <= xDomain[1]
+			el.xDomainNumb < xDomain[1] + 1
 	);
 
-	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb == xDomain[1]);
+	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb < xDomain[1] + 1);
+
+	// get calculations for latest time period. our preference is to use calculations for
+	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
+		(el) => el.period === latestTimePeriod?.xDomainNumb
+	);
+
+	$: indicatorCalculations =
+		latestIndicatorCalculations?.calcsByGeogLevel?.[selectedArea.geogLevel];
 
 	//filter data so that it's ready to be used for beeswarm and time series charts
 	$: filteredChartDataObject = filterDataForCharts(
