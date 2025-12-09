@@ -93,8 +93,6 @@
 
 	$: latestTimePeriod = timePeriodsArray.find((el) => el.xDomainNumb < xDomain[1] + 1);
 
-	$: console.log(indicator.metadata.label, xDomain, timePeriodsArray, latestTimePeriod);
-
 	// get calculations for latest time period. our preference is to use calculations for
 	$: latestIndicatorCalculations = indicatorCalculationsArray.find(
 		(el) => el.period === latestTimePeriod?.xDomainNumb
@@ -111,8 +109,6 @@
 		xDomain,
 		selectionsObject
 	);
-
-	$: console.log(filteredChartDataObject);
 
 	$: showVisuals = filteredChartDataObject && latestTimePeriod;
 

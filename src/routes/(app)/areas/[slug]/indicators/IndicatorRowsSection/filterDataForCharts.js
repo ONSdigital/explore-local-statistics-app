@@ -7,7 +7,6 @@ export function filterDataForCharts(
 ) {
 	let xDomainMax = indicatorChartData.find((el) => el.xDomainNumb < xDomain[1] + 1)?.xDomainNumb;
 
-	$: console.log(xDomain[0], xDomainMax);
 	//filter chart data to only include data within selected time period range
 	let filteredChartData =
 		xDomainMax && xDomain[0]
