@@ -94,6 +94,8 @@
 
 		selectionsObject['indicator-related-chosen'] = data.indicator.metadata.initialGeographyLevel;
 
+		$: console.log(data.indicator);
+
 		selectionsObject['indicator-additional-chosen'] =
 			data.indicator.metadata.standardised === 'F'
 				? []
@@ -319,8 +321,6 @@
 			].filter((op) => op.key === geoGroup?.key)
 		}
 	];
-
-	// $: console.log(accordionArrayMap);
 
 	$: accordionArrayLineBarBeeswarm = [
 		{
