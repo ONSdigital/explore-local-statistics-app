@@ -83,7 +83,7 @@ Note that _standardised_ impacts whether the user can view the data as a map (si
 
 If a new indicator is added or more data is provided for an existing indicator, data:generate might provide the following error:
 
-_unique-periods-lookup warning - The data includes some periods which are not included in our list of unique periods. Please add these and give them a xDomainNumb and labels. The list of new periods is copied above._
+_unique-periods-lookup warning - The data includes some periods which are not included in our list of unique periods. To regenerate the unique-periods-lookup.csv, run the command: npm run data:periods._
 
 Above this will be an array of the new time periods.
 
