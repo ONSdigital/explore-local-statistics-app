@@ -2,9 +2,7 @@ import { readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 const dir = 'scripts/insights/raw/family-ess-main/';
-const csvs = readdirSync(dir, { recursive: true })
-	.filter((f) => f.endsWith('.csv'))
-	.filter((f) => !f.includes('uk-small-area-gross-value-added-estimates'));
+const csvs = readdirSync(dir, { recursive: true }).filter((f) => f.endsWith('.csv'));
 
 // filePath:
 const paths = csvs.map((f) => join(dir, f));
@@ -36,7 +34,12 @@ console.log(
 );
 
 // Define datasets to exclude
-const toExclude = []; // currently none!
+const toExclude = [
+	// currently none!
+];
+
+// There are three data files that sit within the same folder and currently need excluding
+const weirdExlude = csvs.filter((f) => f.includes('uk-small-area-gross-value-added-estimates'));
 
 // multiIndicatorCategory:
 const m = multi.map((m) => m + '/' + m + '.csv');
@@ -44,7 +47,7 @@ const mind = csvs.map((f) => (m.includes(f) ? 'indicator' : ''));
 
 // include:
 const exc = toExclude.map((e) => e + '/' + e + '.csv');
-const include = csvs.map((f) => (exc.includes(f) ? 'N' : 'Y'));
+const include = csvs.map((f) => (exc.includes(f) || weirdExlude.includes(f) ? 'N' : 'Y'));
 
 // valueField - don't need this any more
 
