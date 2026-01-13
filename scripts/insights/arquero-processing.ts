@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { median, mad } from './stats.ts';
-import aq from "arquero";
+import aq from 'arquero';
 import ColumnTable from 'arquero/dist/types/table/column-table';
 import { loadCsvWithoutBom, readJsonSync, readCsvAutoType } from './io.ts';
 import {
@@ -42,10 +42,9 @@ export default async function main() {
 	let jsonAdditionalMetadata = processJSONs(file_paths, excludedIndicators);
 
 	// remove excluded indicators from previousIndicators object
-	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME)
-		.filter(aq.escape(
-			row => !excludedIndicators.includes(row.code)
-		));
+	const previousIndicators = loadCsvWithoutBom(CONFIG.PREVIOUS_INDICATORS_FILENAME).filter(
+		aq.escape((row) => !excludedIndicators.includes(row.code))
+	);
 
 	let periods = loadCsvWithoutBom(CONFIG.PREVIOUS_PERIODS_FILENAME, {
 		stringColumns: ['period', 'label', 'labelShort']
@@ -62,7 +61,7 @@ export default async function main() {
 
 	const [indicators, indicators_calculations, _oldStyleIndicatorsCalculations] =
 		getIndicatorsCalculations(previousIndicators, combined_data, areas_geog_level);
-		
+
 	combined_data = checkedJoin(indicators.select('id', 'code'), combined_data, 'code');
 
 	const unique_periods_for_each_indicator = combined_data
@@ -262,15 +261,13 @@ function processFile(
 	);
 
 	let indicator_data = loadCsvWithoutBom(f.filePath, { stringColumns: ['period', 'Period'] });
-	indicator_data = indicator_data.rename(
-		Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))
-	);
+	// indicator_data = indicator_data.rename(
+	// 	Object.fromEntries(indicator_data.columnNames().map((n) => [n, n.toLowerCase()]))
+	// );
 
 	indicator_data = renameColumns(indicator_data, [
-		{ old: 'lower confidence interval (95%)', new: 'lci' },
-		{ old: 'upper confidence interval (95%)', new: 'uci' },
-		{ old: 'lower_confidence_interval_95', new: 'lci' },
-		{ old: 'upper_confidence_interval_95', new: 'uci' }
+		{ old: 'lci_95', new: 'lci' },
+		{ old: 'uci_95', new: 'uci' }
 	]);
 
 	if (f.valueField) {
@@ -289,7 +286,7 @@ function processFile(
 
 	const metadata_columns = getMetadataColNames(indicator_data, f.multiIndicatorCategory);
 
-	indicator_data = tmpFixForMissingVarName(indicator_data, code);
+	// indicator_data = tmpFixForMissingVarName(indicator_data, code);
 
 	indicator_data = indicator_data.derive({
 		code: aq.escape((d) =>
@@ -298,11 +295,10 @@ function processFile(
 	});
 
 	// remove excludedIndicators from multi-category indicators
-	if (indicator_data.columnNames().includes("code") && excludedIndicators.length) {
-  		indicator_data = indicator_data.filter(aq.escape (
-			row =>
-    		!excludedIndicators.includes(row.code))
-  		);
+	if (indicator_data.columnNames().includes('code') && excludedIndicators.length) {
+		indicator_data = indicator_data.filter(
+			aq.escape((row) => !excludedIndicators.includes(row.code))
+		);
 	}
 
 	let indicator_metadata = indicator_data
@@ -319,13 +315,12 @@ function processFile(
 	}
 
 	indicator_metadata = indicator_metadata.dedupe();
-	
+
 	// remove excludedIndicators from *metadata* for multi-category indicators
-	if (indicator_metadata.columnNames().includes("code") && excludedIndicators.length) {
-  		indicator_metadata = indicator_metadata.filter(aq.escape (
-			row =>
-    		!excludedIndicators.includes(row.code))
-  		);
+	if (indicator_metadata.columnNames().includes('code') && excludedIndicators.length) {
+		indicator_metadata = indicator_metadata.filter(
+			aq.escape((row) => !excludedIndicators.includes(row.code))
+		);
 	}
 
 	indicator_data = indicator_data.select(
@@ -341,7 +336,6 @@ function processFile(
 	combined_metadata = combined_metadata.concat(indicator_metadata);
 
 	return [combined_data, combined_metadata];
-	
 }
 
 function uniqueValuesInColumn(table: ColumnTable, columnName: string): any[] {
@@ -393,14 +387,14 @@ function getMetadataColNames(indicator_data, multiIndicatorCategory) {
 	return metadata_columns.filter((c) => indicator_data.columnNames().includes(c));
 }
 
-function tmpFixForMissingVarName(indicator_data, code) {
-	// bespoke code because some of the Northern Ireland areas accidentally have the variable name
-	// left blank - hopefully will be able to remove for a future release
-	if (code === 'gross-median-weekly-pay') {
-		return indicator_data.derive({
-			'variable name': (d) => d['variable name'] || 'Gross median weekly pay'
-		});
-	}
+// function tmpFixForMissingVarName(indicator_data, code) {
+// 	// bespoke code because some of the Northern Ireland areas accidentally have the variable name
+// 	// left blank - hopefully will be able to remove for a future release
+// 	if (code === 'gross-median-weekly-pay') {
+// 		return indicator_data.derive({
+// 			'variable name': (d) => d['variable name'] || 'Gross median weekly pay'
+// 		});
+// 	}
 
-	return indicator_data;
-}
+// 	return indicator_data;
+// }
