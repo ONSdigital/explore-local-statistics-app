@@ -113,6 +113,10 @@
 			"label": "Net additions to the housing stock (Northern Ireland)"
 		},
 		{
+			"code": "average-house-price",
+			"label": "Average house price"
+		},
+		{
 			"code": "further-education-and-skills-learner-achievements",
 			"label": "Further education and skills learner achievements"
 		},
@@ -3889,6 +3893,143 @@
 				2022,
 				2023,
 				2024
+			]
+		},
+		"average-house-price": {
+			"id": 121,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "average-house-price",
+			"": null,
+			"minXDomainNumb": 2005,
+			"maxXDomainNumb": 2025,
+			"metadata": {
+				"code": "average-house-price",
+				"slug": "average-house-price",
+				"label": "Average house price",
+				"prefix": "£",
+				"suffix": "",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "Average monthly price of a property",
+				"zeroBaseline": null,
+				"canBeNegative": null,
+				"experimentalStatistic": "F",
+				"sourceDate": "21/01/2026",
+				"sourceURL": "https://www.gov.uk/government/collections/uk-house-price-index-reports-2025",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the average (geometric mean) monthly house price, in the United Kingdom, for January 2005 to November 2025.",
+				"standardised": "T",
+				"caveats": "For the UK House Price Index (UK HPI), the standard average house price is calculated by taking the average (geometric mean) price in January 2015 and then recalculating it in accordance with the index change back in time and forward to the present day. The geometric mean reduces the weighting given to high value properties when compared to the arithmetic mean and is typically lower, usually closer to that of the median.\n\nEstimates for the most recent months are provisional and are likely to be updated as more data is incorporated into the index. Read [Revisions to the UK HPI data](https://www.gov.uk/government/publications/about-the-uk-house-price-index/about-the-uk-house-price-index#monthly-revision).\n\nThe UK House Price Index (UK HPI) is calculated by the Office for National Statistics and Land & Property Services Northern Ireland. Find out about the [methodology used](https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology#methods-used-to-produce-the-uk-hpi) to create the UK HPI.\n\nData for the UK House Price Index is provided by HM Land Registry, Registers of Scotland, The Land & Property Services Northern Ireland Statistics & Research Agency and the Valuation Office Agency. Find out more [about the UK House Price Index](https://www.gov.uk/government/publications/about-the-uk-house-price-index).",
+				"confidenceIntervals": null,
+				"initialGeographyLevel": null,
+				"beeswarmRowUseMinMax": null
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024,
+				2025
 			]
 		},
 		"further-education-and-skills-learner-achievements": {
@@ -11365,6 +11506,7 @@
 						"net-additions-to-the-housing-stock",
 						"net-additions-to-the-housing-stock-wales",
 						"net-additions-to-the-housing-stock-northern-ireland",
+						"average-house-price",
 						"first-time-buyer-mortgage-sales",
 						"short-term-let-average-length-of-stay",
 						"short-term-let-number-of-guests-nights"
