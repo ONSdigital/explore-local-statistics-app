@@ -371,6 +371,10 @@
 		{
 			"code": "short-term-let-number-of-guests-nights",
 			"label": "Number of guest nights at a short-term let"
+		},
+		{
+			"code": "housing-affordability-ratio",
+			"label": "Housing affordability ratio"
 		}
 	],
 	"indicatorsObject": {
@@ -11280,6 +11284,130 @@
 				2025,
 				2025.25
 			]
+		},
+		"housing-affordability-ratio": {
+			"id": 121,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "housing-affordability-ratio",
+			"": null,
+			"minXDomainNumb": 2002,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "housing-affordability-ratio",
+				"slug": "housing-affordability-ratio",
+				"label": "Housing affordability ratio",
+				"prefix": "",
+				"suffix": "",
+				"subText": "affordability ratio",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Ratio of median house price to median gross annual residence-based earnings",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "10/10/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the median affordability ratio calculated by dividing house prices by gross annual residence-based earnings, in England and Wales, for 2002 to 2024.",
+				"standardised": "T",
+				"caveats": "Housing affordability estimates are calculated by dividing house prices by annual earnings to create a ratio.\n\nHousing affordability can be compared between areas and by using a ratio it is possible to compare affordability over time without the need to adjust for inflation. A larger housing affordability ratio reflects a less affordable area.\n\nEarnings data are from the Annual Survey of Hours and Earnings, which provides a snapshot of earnings at April in each year. Earnings relate to gross full-time individual earnings for people who live in the area, though they may work elsewhere. A snapshot of the annual earnings of all full-time employees is used, or an annualised version of the weekly estimate where annual data are not available.\n\nHouse price statistics are from house prices for small areas, which report the median price paid for residential property and refer to a 12 month period with April in the middle (year ending September).\n\nThese affordability ratio statistics are revised annually to reflect revisions to the house price statistics and earnings data.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K04",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
 		}
 	},
 	"topicsArray": [
@@ -11367,7 +11495,8 @@
 						"net-additions-to-the-housing-stock-northern-ireland",
 						"first-time-buyer-mortgage-sales",
 						"short-term-let-average-length-of-stay",
-						"short-term-let-number-of-guests-nights"
+						"short-term-let-number-of-guests-nights",
+						"housing-affordability-ratio"
 					]
 				}
 			]
