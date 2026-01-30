@@ -1,3 +1,4 @@
+import { resolve } from '$app/paths';
 import { geoLevelsAllLookup, geoCodesArray } from '$lib/config/geoLevels';
 import { getName } from '@onsvisual/robo-utils';
 import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
@@ -55,7 +56,8 @@ function renderTemplate(template, area) {
 function formatLink(link, area) {
 	const formattedLink = { ...link };
 	formattedLink.description = renderTemplate(link.description, area);
-	formattedLink.href = renderTemplate(link.href, area);
+	formattedLink.href = resolve(renderTemplate(link.href, area));
+	formattedLink.image = resolve(formattedLink.image);
 	return formattedLink;
 }
 
