@@ -3,7 +3,7 @@
 	import { Header, Main, ErrorPage, Footer } from '@onsvisual/svelte-components';
 </script>
 
-<Header bilingual={false}></Header>
+<Header />
 <Main>
 	<ErrorPage {page} />
 </Main>
