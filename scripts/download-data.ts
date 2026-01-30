@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 // Get the project root directory (where package.json lives)
 const PROJECT_ROOT = process.cwd();
@@ -29,7 +29,14 @@ async function removeDirectory(dir: string): Promise<void> {
 async function cloneRepo(): Promise<void> {
 	try {
 		console.log('Cloning repository...');
-		await execAsync(`git clone --single-branch --branch csvw-metadata ${REPO_URL} ${TEMP_DIR}`);
+		await execFileAsync('git', [
+			'clone',
+			'--single-branch',
+			'--branch',
+			'csvw-metadata',
+			REPO_URL,
+			TEMP_DIR
+		]);
 		console.log('Repository cloned successfully');
 	} catch (error) {
 		console.error('Error cloning repository:', error);
