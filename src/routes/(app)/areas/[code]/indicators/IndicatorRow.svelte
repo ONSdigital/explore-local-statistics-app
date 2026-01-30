@@ -5,6 +5,7 @@
 	import Beeswarm from '$lib/components/charts/Beeswarm.svelte';
 	import Sparkline from '$lib/components/charts/Sparkline.svelte';
 	import Pyramid from '$lib/components/charts/Pyramid.svelte';
+	import ChartDataLoader from '$lib/components/charts/ChartDataLoader.svelte';
 
 	let {
 		indicator,
@@ -20,48 +21,52 @@
 	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
 	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
 
-	let chartData = {}; // cached chart data
-	let loadedDataUrl = $state({});
 	let chartMode = $state('simple');
 
-	async function fetchData(
-		chartType,
-		visible,
-		indicator,
-		timeRange,
-		selected,
-		geoLevel = null,
-		geoExtent = null,
-		geoCluster = null
-	) {
-		if (!visible && chartData[chartType]) return chartData[chartType];
-		else if (!visible) return null;
-		const args =
-			chartType === 'sparkline'
-				? [indicator, timeRange, null, selected]
-				: [
-						indicator,
-						timeRange[1],
-						'latest',
-						selected,
-						geoLevel,
-						geoExtent,
-						geoCluster,
-						chartType === 'pyramid' ? { sex: ['female', 'male'] } : null
-					];
-		const chartDataUrl = makeDataUrl(...args);
-		if (chartDataUrl !== loadedDataUrl[chartType]) {
-			loadedDataUrl[chartType] = chartDataUrl;
-			try {
-				chartData[chartType] = await (await fetch(chartDataUrl)).json();
-				console.log(`Loaded ${indicator} ${chartType} data`);
-				return chartData[chartType];
-			} catch {
-				console.log(`Failed to load ${indicator} ${chartType} data`);
-				return null;
-			}
-		} else return chartData[chartType];
-	}
+	const chartTypes =
+		indicator === 'population-by-age-and-sex' ? ['pyramid'] : ['beeswarm', 'sparkline'];
+
+	let dataUrl = $derived(
+		Object.fromEntries(
+			chartTypes.map((key) => {
+				const args =
+					key === 'sparkline'
+						? [indicator, timeRange, null, selected]
+						: key === 'beeswarm'
+							? [
+									indicator,
+									timeRange[1],
+									'latest',
+									selected,
+									geoGroup.geoLevel,
+									geoGroup.geoExtent,
+									geoGroup.geoCluster
+								]
+							: chartMode === 'advanced'
+								? [
+										indicator,
+										timeRange[1],
+										'latest',
+										selected,
+										geoGroup.geoLevel,
+										geoGroup.geoExtent,
+										geoGroup.geoCluster,
+										{ sex: ['female', 'male'] }
+									]
+								: [
+										indicator,
+										timeRange[1],
+										'latest',
+										selected,
+										null,
+										null,
+										null,
+										{ sex: ['female', 'male'] }
+									];
+				return [key, makeDataUrl(...args)];
+			})
+		)
+	);
 </script>
 
 {#snippet downloadUrl(url, format, formatLabel = null)}
@@ -70,10 +75,10 @@
 {/snippet}
 
 {#snippet downloadLinks(chartType)}
-	{@render downloadUrl(loadedDataUrl[chartType], 'csv')},
-	{@render downloadUrl(loadedDataUrl[chartType], 'csvw')},
-	{@render downloadUrl(loadedDataUrl[chartType], 'xlsx')} or
-	{@render downloadUrl(loadedDataUrl[chartType], 'json', 'JSON-Stat')}
+	{@render downloadUrl(dataUrl[chartType], 'csv')},
+	{@render downloadUrl(dataUrl[chartType], 'csvw')},
+	{@render downloadUrl(dataUrl[chartType], 'xlsx')} or
+	{@render downloadUrl(dataUrl[chartType], 'json', 'JSON-Stat')}
 {/snippet}
 
 <Observe bind:visible rootMargin={200}>
@@ -135,36 +140,42 @@
 					<ButtonGroupItem value="simple" label="Show selected areas" />
 					<ButtonGroupItem value="advanced" label="Show all areas" />
 				</ButtonGroup>
-				{#await fetchData('pyramid', ...dataArgs) then data}
-					<Pyramid {data} {formatValue} {selected} bind:hovered />
-				{/await}
+				<ChartDataLoader id="{indicator} pyramid" dataUrl={dataUrl['pyramid']} {visible}>
+					{#snippet chart(data)}
+						<Pyramid {data} {formatValue} {selected} bind:hovered />
+					{/snippet}
+				</ChartDataLoader>
 			</div>
 		{:else}
 			<div class="indicator-charts">
 				<div class="indicator-beeswarm">
-					{#await fetchData('beeswarm', visible && !hidden, indicator, timeRange, selected, geoGroup.geoLevel, geoGroup.geoExtent, geoGroup.geoCluster) then data}
-						<Beeswarm
-							{data}
-							{formatPeriod}
-							{formatValue}
-							valuePrefix={metadata.prefix}
-							valueSuffix={metadata.suffix}
-							{selected}
-							bind:hovered
-						/>
-					{/await}
+					<ChartDataLoader id="{indicator} beeswarm" dataUrl={dataUrl['beeswarm']} {visible}>
+						{#snippet chart(data)}
+							<Beeswarm
+								{data}
+								{formatPeriod}
+								{formatValue}
+								valuePrefix={metadata.prefix}
+								valueSuffix={metadata.suffix}
+								{selected}
+								bind:hovered
+							/>
+						{/snippet}
+					</ChartDataLoader>
 				</div>
 				<div class="indicator-sparkline">
-					{#await fetchData('sparkline', visible && !hidden, indicator, timeRange, selected) then data}
-						<Sparkline
-							{data}
-							{formatPeriod}
-							{formatValue}
-							valuePrefix={metadata.prefix}
-							valueSuffix={metadata.suffix}
-							{selected}
-						/>
-					{/await}
+					<ChartDataLoader id="{indicator} sparkline" dataUrl={dataUrl['sparkline']} {visible}>
+						{#snippet chart(data)}
+							<Sparkline
+								{data}
+								{formatPeriod}
+								{formatValue}
+								valuePrefix={metadata.prefix}
+								valueSuffix={metadata.suffix}
+								{selected}
+							/>
+						{/snippet}
+					</ChartDataLoader>
 				</div>
 			</div>
 		{/if}

@@ -6,7 +6,7 @@
 	import Bar from '$lib/components/charts/Bar.svelte';
 	import Table from '$lib/components/charts/Table.svelte';
 	import ChartActions from './ChartActions.svelte';
-	import Spinner from '../visuals/Spinner.svelte';
+	import ChartDataLoader from './ChartDataLoader.svelte';
 
 	const chartComponents = {
 		map: Map,
@@ -37,9 +37,6 @@
 		['line', 'table'].includes(chartType) && timeRange[0] !== timeRange[1]
 	);
 
-	let loadedDataUrl: string | null = null;
-	let loadedData: jsonDataCols | errorObject | null = null;
-
 	let dataUrl = $derived(
 		makeDataUrl(
 			indicator,
@@ -49,25 +46,6 @@
 			geoLevel?.id
 		)
 	);
-
-	async function fetchData(dataUrl: string, visible: boolean) {
-		if (!visible && loadedData) return loadedData;
-		else if (!visible) return null;
-		if (dataUrl !== loadedDataUrl) {
-			console.log(`Loading ${indicator} ${chartType} data`);
-			loadedDataUrl = dataUrl;
-			try {
-				loadedData = await (await fetch(dataUrl)).json();
-				console.log(`Loaded ${indicator} ${chartType} data`);
-				return loadedData;
-			} catch {
-				console.log(`Failed to load ${indicator} ${chartType} data`);
-				return { message: 'Failed to load chart data' };
-			}
-		} else return loadedData;
-	}
-	// svelte-ignore await_waterfall
-	let data = $derived(await fetchData(dataUrl, visible));
 
 	function toggleFullScreen() {
 		if (!fullScreenMode) {
@@ -112,22 +90,20 @@
 		{/if}
 		<Observe bind:visible>
 			<div class="indicator-chart">
-				{#if data?.message}
-					{data.message}
-				{:else if data}
-					{@const Component = chartComponents[chartType]}
-					<Component
-						{data}
-						{metadata}
-						{formatValue}
-						{selected}
-						bind:hovered
-						{formatPeriod}
-						{geoLevel}
-					/>
-				{:else}
-					<Spinner message="Loading chart data" />
-				{/if}
+				<ChartDataLoader id="{indicator} {chartType}" {dataUrl} {visible}>
+					{#snippet chart(data)}
+						{@const Component = chartComponents[chartType]}
+						<Component
+							{data}
+							{metadata}
+							{formatValue}
+							{selected}
+							bind:hovered
+							{formatPeriod}
+							{geoLevel}
+						/>
+					{/snippet}
+				</ChartDataLoader>
 			</div>
 		</Observe>
 		{#if metadata.source.length > 0}

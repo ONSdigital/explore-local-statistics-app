@@ -4,7 +4,7 @@
 
 <div class="loading-spinner-container">
 	<div class="loading-spinner"></div>
-	{#if message}<div class="ons-u-fs-r--b">{message}</div>{/if}
+	{#if message}<div>{message}</div>{/if}
 </div>
 
 <style>
@@ -20,11 +20,11 @@
 		justify-content: center;
 	}
 	.loading-spinner {
-		border: 12px solid var(--ons-color-branded-tint);
+		border: 8px solid var(--ons-color-branded-tint);
 		border-radius: 50%;
 		border-top-color: var(--ons-color-branded);
-		width: 80px;
-		height: 80px;
+		width: 50px;
+		height: 50px;
 		-webkit-animation: spin 2s linear infinite;
 		animation: spin 2s linear infinite;
 	}
