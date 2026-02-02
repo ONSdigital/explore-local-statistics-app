@@ -19,7 +19,7 @@
 		selected = [],
 		hoveredArea = null,
 		geoLevel,
-		confidenceIntervals
+		showIntervals
 	} = $props();
 
 	const height = 500;
@@ -39,7 +39,7 @@
 
 	let yDomain = $derived(
 		_data
-			? confidenceIntervals
+			? showIntervals
 				? nice(
 						Math.min(...data.lci.filter((el) => el !== null && el !== undefined)),
 						Math.max(...data.uci.filter((el) => el !== null && el !== undefined)),
@@ -86,17 +86,13 @@
 	}
 	const yScaleVar = (d) => yScale(d);
 
-	let maxValueLatestDate = $derived(
-		_data ? Math.max(...Object.values(_data.keyed).map((d) => d[d.length - 1].value)) : 0
-	);
-
 	const getCIArea = area()
 		.x((d) => xScale(d.date))
 		.y0((d) => yScale(d.lci))
 		.y1((d) => yScale(d.uci))
 		.curve(curveLinear);
 
-	$inspect({ labelLookup });
+	$inspect({ showIntervals });
 	console.log(data);
 </script>
 
@@ -163,7 +159,7 @@
 	style:padding-bottom="25px"
 	style:padding-right="{rightMargin}px"
 >
-	{#if confidenceIntervals}
+	{#if showIntervals}
 		<svg aria-hidden="true" {width} height="50" class="bar-chart-legend">
 			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
 			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
@@ -243,7 +239,7 @@
 					{#each Object.values(_data.keyed) as arr, i}
 						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey])}
 					{/each}
-					{#if confidenceIntervals}
+					{#if showIntervals}
 						{#each _selected as arr, i}
 							{@render ribbon(arr, ONSpalette[i], 0.3, arr[0][idKey])}
 						{/each}
@@ -266,7 +262,7 @@
 				</g>
 				<g>
 					{#if hoveredArea}
-						{#if confidenceIntervals}
+						{#if showIntervals}
 							{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
 						{/if}
 						{@render line(hovered, 4.5, ONScolours.white, 1, hoveredArea)}

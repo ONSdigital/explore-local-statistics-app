@@ -278,6 +278,7 @@
 					</div>
 				{/each}
 			{/if}
+			{#key _selected}
 			<div
 				class="margin-labels-selected"
 				use:makeLabelLookup={{ selected: _selected, yScaleVar, yKey: idKey }}
@@ -298,6 +299,7 @@
 					{/each}
 				{/if}
 			</div>
+			{/key}
 		</div>
 		<svg
 			viewBox="0 0 {widthInner} {height}"
