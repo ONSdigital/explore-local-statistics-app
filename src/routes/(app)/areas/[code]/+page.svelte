@@ -107,8 +107,8 @@
 				<Card
 					title={link.title}
 					mode="featured"
-					image={link.image}
-					href={link.href}
+					image={link.image.startsWith('/') ? resolve(link.image) : link.image}
+					href={link.image.startsWith('/') ? resolve(link.href) : link.href}
 					headingTag="h3"
 				>
 					{@html link.description}

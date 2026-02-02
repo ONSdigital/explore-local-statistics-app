@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"find-unused-files": "tsx scripts/find-unused-files.ts",
-		"dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 vite dev",
+		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:unit",
@@ -17,7 +17,7 @@
 		"test:unit": "vitest --watch=false",
 		"data:download": "tsx ./scripts/download-data.ts",
 		"data:generate": "tsx ./scripts/generate-data.ts",
-		"data:geo": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 tsx ./scripts/make-geo-data.ts",
+		"data:geo": "tsx ./scripts/make-geo-data.ts",
 		"data:clusters": "tsx ./scripts/make-clusters.ts",
 		"data:redirects": "tsx ./scripts/make-redirects.ts"
 	},
@@ -47,7 +47,6 @@
 		"arquero": "^8.0.3",
 		"auditjs": "^4.0.46",
 		"autoprefixer": "^10.4.16",
-		"cross-env": "^10.1.0",
 		"d3-array": "^3.2.4",
 		"d3-dsv": "^3.0.1",
 		"d3-format": "^3.1.2",

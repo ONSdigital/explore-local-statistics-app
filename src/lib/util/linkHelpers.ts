@@ -56,8 +56,7 @@ function renderTemplate(template, area) {
 function formatLink(link, area) {
 	const formattedLink = { ...link };
 	formattedLink.description = renderTemplate(link.description, area);
-	formattedLink.href = resolve(renderTemplate(link.href, area));
-	formattedLink.image = resolve(formattedLink.image);
+	formattedLink.href = renderTemplate(link.href, area);
 	return formattedLink;
 }
 
