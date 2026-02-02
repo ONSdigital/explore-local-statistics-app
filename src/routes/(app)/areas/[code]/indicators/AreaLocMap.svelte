@@ -1,0 +1,75 @@
+<script>
+	import { resolve } from '$app/paths';
+	import { Map, MapSource, MapLayer } from '@onsvisual/svelte-maps';
+
+	let { geometry, bounds, mapDescription, primaryColor = 'rgb(17, 140, 123)' } = $props();
+
+	let map = $state();
+	let h = $state();
+	let w = $state();
+
+	const padding = { left: 40, top: 40, right: 20, bottom: 20 };
+	const sleep = (ms = 10) => new Promise((resolve) => setTimeout(resolve, ms));
+
+	$effect(() => {
+		if (map && w && h) {
+			sleep().then(() => map.fitBounds(bounds, { animate: false, padding }));
+		}
+	});
+</script>
+
+<div class="map-container" bind:clientWidth={w} bind:clientHeight={h}>
+	<Map
+		bind:map
+		css={resolve('/css/maplibre-gl.css')}
+		style={resolve('/data/mapstyle-nav.json')}
+		location={{ bounds }}
+		interactive={false}
+		options={{
+			fitBoundsOptions: { padding }
+		}}
+		{mapDescription}
+	>
+		{#key geometry}
+			<MapSource id="boundary" type="geojson" data={geometry}>
+				<MapLayer
+					id="boundary-fill"
+					type="fill"
+					paint={{ 'fill-color': primaryColor, 'fill-opacity': 0.2 }}
+				/>
+				<MapLayer
+					id="boundary-line"
+					type="line"
+					paint={{ 'line-color': primaryColor, 'line-width': 2 }}
+				/>
+			</MapSource>
+		{/key}
+	</Map>
+</div>
+
+<style>
+	.map-container {
+		position: absolute;
+		top: -52px;
+		right: 0;
+		height: calc(100% + 52px);
+		width: 35%;
+		min-width: 250px;
+	}
+	.map-container::after {
+		position: absolute;
+		content: ' ';
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-image:
+			linear-gradient(to right, #f5f5f6, #00000000 25%),
+			linear-gradient(to bottom, #f5f5f6, #00000000 25%);
+	}
+	@media (max-width: 800px) {
+		.map-container {
+			display: none;
+		}
+	}
+</style>

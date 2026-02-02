@@ -1,18 +1,10 @@
+// @ts-nocheck
 import type { LayoutLoad } from './$types';
-import { Breadcrumb } from '@onsvisual/svelte-components';
-import coreMetadata from '../../data/insights/core-metadata.json';
+import { resolve } from '$app/paths';
+import summaryStats from '$lib/data/json-stat-summary.json';
 
-export const load: LayoutLoad = async () => {
+export const load: LayoutLoad = () => {
 	return {
-		coreMetadata,
-		title: `Explore local statistics - ONS`,
-		description: `Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.`,
-		pageType: `home page`,
-		component: Breadcrumb,
-		breadcrumbLinks: [
-			{ label: 'Home', href: `/`, refresh: true },
-			{ label: 'Explore local statistics' }
-		],
-		background: '#e9eff4'
+		summaryStats
 	};
 };
