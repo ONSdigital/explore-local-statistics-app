@@ -33,7 +33,7 @@ function makeCombinedFilter(name, geo, year) {
 }
 
 export default function getAreasByName(params = {}) {
-	if (typeof params.name !== 'string') return { error: 400, message: 'No search string provided' };
+	if (typeof params.name !== 'string') return { error: 200, message: 'No search string provided' };
 
 	const limit = params.limit || 10;
 	const offset = params.offset || 0;

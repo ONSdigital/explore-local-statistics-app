@@ -45,7 +45,7 @@ export default async function getPostcodesList(params = {}) {
 		};
 	} catch {
 		return {
-			error: 400,
+			error: 200,
 			message: `No postcodes found for ${params.code}`
 		};
 	}
