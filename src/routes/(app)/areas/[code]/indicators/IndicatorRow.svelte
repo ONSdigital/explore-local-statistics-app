@@ -190,6 +190,11 @@
 		width: 100%;
 		height: 150px;
 	}
+	.indicator-beeswarm,
+	.indicator-sparkline,
+	.indicator-pyramid {
+		position: relative;
+	}
 	.indicator-pyramid {
 		min-height: 412px;
 	}
