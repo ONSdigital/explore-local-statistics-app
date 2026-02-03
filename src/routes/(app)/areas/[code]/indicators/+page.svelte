@@ -230,7 +230,10 @@
 	.titleblock-container {
 		position: relative;
 	}
-	.hidden {
-		display: none;
+	@media (min-width: 800px) {
+		.titleblock-container :global(.ons-hero__content) {
+			width: calc(100vw - 38%);
+			max-width: calc(100vw - 280px);
+		}
 	}
 </style>

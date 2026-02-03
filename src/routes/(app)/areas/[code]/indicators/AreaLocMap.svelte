@@ -48,6 +48,7 @@
 <style>
 	.map-container {
 		position: absolute;
+		display: none;
 		top: -52px;
 		right: 0;
 		height: calc(100% + 52px);
@@ -65,9 +66,9 @@
 			linear-gradient(to right, #f5f5f6, #00000000 25%),
 			linear-gradient(to bottom, #f5f5f6, #00000000 25%);
 	}
-	@media (max-width: 800px) {
+	@media (min-width: 800px) {
 		.map-container {
-			display: none;
+			display: block;
 		}
 	}
 </style>
