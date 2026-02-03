@@ -9,7 +9,8 @@
 		placeholder = `Eg. "Fareham" or "PO15 5RR"`,
 		action = '/areas/search',
 		allAreas = true,
-		onSelect
+		onSelect,
+		autoClear = false
 	} = $props();
 
 	let selected = $state(null);
@@ -49,6 +50,7 @@
 			{name}
 			{loadOptions}
 			{placeholder}
+			{autoClear}
 			label={null}
 			on:change={(e) => {
 				selected = e.detail;
@@ -57,7 +59,6 @@
 			labelKey="areanm"
 			groupKey="description"
 			mode="search"
-			autoClear={false}
 			renderFallback
 			clearable
 		/>

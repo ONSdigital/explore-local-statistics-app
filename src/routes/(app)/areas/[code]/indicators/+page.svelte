@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { goto } from '$app/navigation';
+	import { goto, afterNavigate } from '$app/navigation';
 	import {
 		Hero,
 		Grid,
 		NavSections,
 		NavSection,
 		Dropdown,
-		Button,
 		Details
 	} from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
@@ -27,20 +26,28 @@
 	let { data } = $props();
 
 	let areaProps = $derived(data.area.properties);
+	let pageState = $state(makeInitialPageState(data));
 
-	let defaultComparisonArea = data.areas.find((a) => a.areacd === data.parent.areacd);
-
-	let pageState = $state({
-		selectedAreas: [defaultComparisonArea],
-		selectedGeoGroup: data.geoGroups[0],
-		selectedPeriodRange: [data.periods[0], data.periods[data.periods.length - 1]],
-		selectedCluster: data.related.similar[0],
-		showConfidenceIntervals: false
-	});
-
+	let areaSearchOpen = $state(true);
 	let hiddenTopics = $state(Object.fromEntries(data.taxonomy.map((t) => [t?.slug, true])));
-
 	let hovered = $state();
+
+	function makeInitialPageState(data) {
+		const defaultComparisonArea = data.areas.find((a) => a.areacd === data.parent.areacd);
+		return {
+			selectedAreas: [defaultComparisonArea],
+			selectedGeoGroup: data.geoGroups[0],
+			selectedPeriodRange: [data.periods[0], data.periods[data.periods.length - 1]],
+			selectedCluster: data?.related?.similar?.[0],
+			showConfidenceIntervals: false
+		};
+	}
+
+	afterNavigate(() => {
+		console.log('related', data.related);
+		pageState = makeInitialPageState(data);
+		areaSearchOpen = false;
+	});
 
 	function handleSelect(area) {
 		const url = `/areas/${makeCanonicalSlug(area)}/indicators`;
@@ -74,7 +81,7 @@
 			{/if}
 		</p>
 		<div style:margin="20px 0 -36px" style:max-width="450px" style:z-index={1}>
-			<Details title="Find another area">
+			<Details title="Find another area" bind:open={areaSearchOpen}>
 				<label for="search" style:display="block" style:margin-bottom="8px"
 					>Search for a place name</label
 				>
@@ -83,6 +90,7 @@
 					placeholder={`Eg. "Newport" or "Fareham"`}
 					allAreas={false}
 					onSelect={handleSelect}
+					autoClear={true}
 				/>
 			</Details>
 		</div>
@@ -184,27 +192,18 @@
 		<p>
 			Download all datasets that include {getName(areaProps, 'the')} in an
 			<a
-				href={resolve(
-					`/api/v1/data.xlsx?hasGeo=${areaProps.areacd}&excludeMultivariate=true&time=all`
-				)}
+				href={resolve(`/api/v1/data.xlsx?hasGeo=${areaProps.areacd}&time=all`)}
 				download="data.xlsx">XLSX</a
 			>,
-			<a
-				href={resolve(
-					`/api/v1/data.csv?hasGeo=${areaProps.areacd}&excludeMultivariate=true&time=all`
-				)}
-				download="data.csv">CSV</a
+			<a href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)} download="data.csv"
+				>CSV</a
 			>,
 			<a
-				href={resolve(
-					`/api/v1/data.csv?hasGeo=${areaProps.areacd}&excludeMultivariate=true&time=all`
-				)}
+				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
 				download="data.csv-metadata.json">CSVW</a
 			>, or
 			<a
-				href={resolve(
-					`/api/v1/data.json?hasGeo=${areaProps.areacd}&excludeMultivariate=true&time=all`
-				)}
+				href={resolve(`/api/v1/data.json?hasGeo=${areaProps.areacd}&time=all`)}
 				download="data.json">JSON-Stat</a
 			> format.
 		</p>

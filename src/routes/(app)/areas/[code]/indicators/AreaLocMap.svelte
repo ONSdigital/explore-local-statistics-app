@@ -12,7 +12,7 @@
 	const sleep = (ms = 10) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	$effect(() => {
-		if (map && w && h) {
+		if (map && bounds && w && h) {
 			sleep().then(() => map.fitBounds(bounds, { animate: false, padding }));
 		}
 	});
@@ -30,20 +30,18 @@
 		}}
 		{mapDescription}
 	>
-		{#key geometry}
-			<MapSource id="boundary" type="geojson" data={geometry}>
-				<MapLayer
-					id="boundary-fill"
-					type="fill"
-					paint={{ 'fill-color': primaryColor, 'fill-opacity': 0.2 }}
-				/>
-				<MapLayer
-					id="boundary-line"
-					type="line"
-					paint={{ 'line-color': primaryColor, 'line-width': 2 }}
-				/>
-			</MapSource>
-		{/key}
+		<MapSource id="boundary" type="geojson" data={geometry}>
+			<MapLayer
+				id="boundary-fill"
+				type="fill"
+				paint={{ 'fill-color': primaryColor, 'fill-opacity': 0.2 }}
+			/>
+			<MapLayer
+				id="boundary-line"
+				type="line"
+				paint={{ 'line-color': primaryColor, 'line-width': 2 }}
+			/>
+		</MapSource>
 	</Map>
 </div>
 
