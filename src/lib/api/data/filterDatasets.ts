@@ -126,7 +126,7 @@ export default function filterDatasets(datasets: jsonStatDataset[], params: pars
 	}
 
 	if (!filtered?.length)
-		return { error: 200, message: 'No data available for the selected filters.' };
+		return { error: 400, message: 'No data available for the selected filters.' };
 	if (format === 'csv') return filtered.map((f) => f[1]);
 	if (format === 'xlsx') return filtered;
 
