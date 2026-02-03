@@ -28,7 +28,7 @@
 	let areaProps = $derived(data.area.properties);
 	let pageState = $state(makeInitialPageState(data));
 
-	let areaSearchOpen = $state(true);
+	let areaSearchOpen = $state(false);
 	let hiddenTopics = $state(Object.fromEntries(data.taxonomy.map((t) => [t?.slug, true])));
 	let hovered = $state();
 
