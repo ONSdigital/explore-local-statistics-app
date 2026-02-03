@@ -1,15 +1,20 @@
 // Workaround to override default font + size in ExcelJS
 // See issue: https://github.com/exceljs/exceljs/issues/572#issuecomment-631788521
 import StylesXform from 'exceljs/lib/xlsx/xform/style/styles-xform.js';
+const defaultFont = { size: 12, color: { theme: 1 }, name: 'Arial', family: 2, scheme: 'minor' };
 const origStylesXformInit = StylesXform.prototype.init;
 StylesXform.prototype.init = function () {
 	origStylesXformInit.apply(this, arguments);
-	this._addFont({ size: 12, color: { theme: 1 }, name: 'Arial', family: 2, scheme: 'minor' });
+	this._addFont(defaultFont);
 };
 
 import ExcelJS from 'exceljs';
 import { PassThrough } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
+
+const oneTableMessage = 'This worksheet contains one table.';
+const statusMessage =
+	'Some shorthand is used in this table, [x] = unavailable, [c] = confidential and [u] = low reliability.';
 
 // This function grabs the metadata from the JSON-Stat required to populate the XLSX spreadsheet
 export function getSpreadsheetMetadata(ds, dims) {
@@ -41,17 +46,17 @@ function addTextRow(sheet, text, options = {}) {
 	const cell = row.getCell(1);
 	if (text.startsWith('# ')) {
 		cell.value = text.slice(2);
-		cell.style.font = { ...cell.style.font, size: 18, bold: true };
+		cell.font = { ...defaultFont, size: 18, bold: true };
 	} else if (text.startsWith('## ')) {
 		row.height = 40;
 		cell.value = text.slice(3);
-		cell.style.font = { ...cell.style.font, size: 14, bold: true };
+		cell.font = { ...defaultFont, size: 14, bold: true };
 	} else if (text.startsWith('[')) {
 		cell.value = {
 			text: text.match(/(?<=\[).*(?=\])/)[0],
 			hyperlink: text.match(/(?<=\().*(?=\))/)[0]
 		};
-		cell.style.font = { ...cell.style.font, underline: true, color: { argb: '0000FF' } };
+		cell.font = { ...defaultFont, underline: true, color: { argb: '0000FF' } };
 	} else {
 		cell.value = text;
 	}
@@ -67,7 +72,6 @@ function formatTableData(ds) {
 	const colKeys = Object.keys(ds.data[1]).filter(
 		(key) => !['period', 'value', 'status'].includes(key)
 	);
-	const hasMeasureCol = colKeys.includes('measure');
 	let i = 0;
 	for (const key of [...colKeys, ...ds.meta.uniquePeriods]) {
 		const isNumeric = ds.meta.uniquePeriods.includes(key);
@@ -90,15 +94,20 @@ function formatTableData(ds) {
 		i++;
 	}
 
-	const getRowKey = (data, i, keys) => keys.map((key) => data[key][i]).join('_');
 	const data = ds.data[1];
+	const hasStatusCol = 'status' in data;
+	const getRowKey = (data, i, keys) => keys.map((key) => data[key][i]).join('_');
+	const getValue = hasStatusCol
+		? (i) => data.value[i] || (data.status[i] ? `[${data.status[i]}]` : null)
+		: (i) => data.value[i];
+
 	for (let i = 0; i < data[colKeys[0]].length; i++) {
 		const rowKey = getRowKey(data, i, colKeys);
 		if (!rows[rowKey]) {
 			rows[rowKey] = Array(columns.length).fill(null);
 			for (let j = 0; j < colKeys.length; j++) rows[rowKey][j] = data[colKeys[j]][i];
 		}
-		rows[rowKey][columnsLookup[data.period[i]].index] = data.value[i];
+		rows[rowKey][columnsLookup[data.period[i]].index] = getValue(i);
 	}
 
 	return { columns, rows: Object.values(rows) };
@@ -119,8 +128,6 @@ function getColWidth(values = null) {
 }
 
 export async function dataToSpreadsheet(data) {
-	const oneTableMessage = 'This worksheet contains one table.';
-
 	const workbook = new ExcelJS.Workbook();
 
 	workbook.creator = data.creator;
@@ -160,7 +167,7 @@ export async function dataToSpreadsheet(data) {
 			d.sheetName
 		])
 	});
-	contentsSheet.getRow(3).font = { bold: true };
+	contentsSheet.getRow(3).font = { ...defaultFont, bold: true };
 
 	if (data.notes.length > 0) {
 		const notesSheet = workbook.addWorksheet('Notes');
@@ -178,7 +185,7 @@ export async function dataToSpreadsheet(data) {
 			columns: [{ name: 'Number' }, { name: 'Note', style: { alignment: { wrapText: true } } }],
 			rows: data.notes.map((n) => [n.name, n.text])
 		});
-		notesSheet.getRow(3).font = { bold: true };
+		notesSheet.getRow(3).font = { ...defaultFont, bold: true };
 	}
 
 	for (let i = 0; i < data.sheets.length; i++) {
@@ -186,10 +193,13 @@ export async function dataToSpreadsheet(data) {
 		const sheet = workbook.addWorksheet(String(i + 1));
 
 		addTextRow(sheet, `# ${s.sheetName}`);
-		for (const text of s.sheetIntroText) {
-			addTextRow(sheet, `${text}`);
+		for (let j = 0; j < s.sheetIntroText.length; j++) {
+			addTextRow(
+				sheet,
+				`${s.sheetIntroText[j]}`,
+				j === s.sheetIntroText.length - 1 ? { height: 40, alignment: { vertical: 'top' } } : {}
+			);
 		}
-		addTextRow(sheet, oneTableMessage, { height: 40, alignment: { vertical: 'top' } });
 
 		const tableRowNumber = sheet.rowCount + 1;
 		sheet.addTable({
@@ -203,7 +213,7 @@ export async function dataToSpreadsheet(data) {
 			columns: s.columns.map((c) => ({ name: c.heading })),
 			rows: s.rows
 		});
-		sheet.getRow(tableRowNumber).font = { bold: true };
+		sheet.getRow(tableRowNumber).font = { ...defaultFont, bold: true };
 		sheet.getRow(tableRowNumber).alignment = { wrapText: true };
 
 		for (let i = 0; i < s.columns.length; i++) {
@@ -258,6 +268,7 @@ export default async function generateXLSX(datasets) {
 		}
 
 		const { columns, rows } = formatTableData(ds);
+		const hasStatus = 'status' in ds.data[1];
 
 		data.sheets.push({
 			sheetName: ds.meta.note ? `${ds.meta.sheetName} [note ${i}]` : ds.meta.sheetName,
@@ -267,7 +278,9 @@ export default async function generateXLSX(datasets) {
 				...ds.meta.source.map(
 					(s, j) =>
 						`[Source${ds.meta.source.length > 1 ? ` ${j + 1}` : ''}: ${s.name}, published on ${s.date.split('-').reverse().join('/')}](${s.href})`
-				)
+				),
+				oneTableMessage,
+				...(hasStatus ? [statusMessage] : [])
 			],
 			columns,
 			rows
