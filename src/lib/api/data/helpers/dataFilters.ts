@@ -113,9 +113,11 @@ export function getTimeRange(values, params = {}) {
 		(p) => Temporal.PlainDate.compare(p.period[0], range[0]) !== -1
 	);
 	let lastIndex = periods.findLastIndex(
-		(p) => Temporal.PlainDate.compare(p.period[p.period.length - 1], range[1]) !== 1
+		// Double check this
+		// (p) => Temporal.PlainDate.compare(p.period[p.period.length - 1], range[1]) !== 1
+		(p) => Temporal.PlainDate.compare(p.period[0], range[1]) !== 1
 	);
-	if ((firstIndex === lastIndex) === -1) return [];
+	if (firstIndex === -1 && lastIndex === -1) return [];
 	if (firstIndex === -1) firstIndex = 0;
 	if (lastIndex === -1) lastIndex = periods.length - 1;
 
