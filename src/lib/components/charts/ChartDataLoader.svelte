@@ -24,10 +24,11 @@
 	}
 	// svelte-ignore await_waterfall
 	let data = $derived(await fetchData(dataUrl, visible));
+	$inspect({ data });
 </script>
 
 {#if data?.message}
-	{noDataMessage || data.message}
+	<p class="ons-u-fs-s">{noDataMessage || data.message}</p>
 {:else if data}
 	{@render chart(data)}
 {:else}

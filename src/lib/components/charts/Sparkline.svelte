@@ -18,14 +18,19 @@
 		selected = []
 	} = $props();
 
+	// Ensure that there are at least 2 unique time periods in the data
+	function isValidLineData(data) {
+		return data?.[xKey] && new Set(data[xKey]).size > 1;
+	}
+
 	const formatYTick = format('~s');
 
-	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
+	let _data = $derived(isValidLineData(data) ? parseChartData(data, yKey, xKey, idKey) : null);
 	let _selected = $derived(
 		_data
 			? selected
 					.map((cd, i) => ({ i, data: _data.keyed[cd] }))
-					.filter((d) => d.data && d.data.length > 1)
+					.filter((d) => Array.isArray(d.data) && d.data.length > 1)
 					.reverse()
 			: []
 	);
@@ -81,7 +86,7 @@
 	style:padding-bottom="25px"
 >
 	<div class="sparkline-container">
-		{#if xScale && yScale && _selected.length > 0}
+		{#if _data && _selected?.length && xScale && yScale}
 			<svg
 				viewBox="0 0 100 100"
 				class="sparkline-svg"
@@ -89,13 +94,13 @@
 				style:height="90px"
 			>
 				<g class="sparkline-lines">
-					{#each _selected as d}
+					{#each _selected || [] as d}
 						{@render line(d.data, 2, ONSpalette[d.i])}
 					{/each}
 				</g>
 			</svg>
 			<div class="sparkline-x-axis">
-				{#each _data?.dateDomain as xTick}
+				{#each _data?.dateDomain || [] as xTick}
 					<div class="sparkline-x-tick" style:left="{xScale(xTick)}%"></div>
 					<div class="sparkline-x-tick-label" style:left="{xScale(xTick)}%">
 						{formatPeriod(xTick.toISOString())}
@@ -104,7 +109,7 @@
 			</div>
 			<div class="sparkline-y-axis">
 				<div class="sparkline-y-baseline"></div>
-				{#each yDomain as yTick, i}
+				{#each yDomain || [] as yTick, i}
 					<div class="sparkline-y-tick" style:top="{yScale(yTick)}%"></div>
 					<div
 						use:updateMargins={{ side: 'left' }}
@@ -116,7 +121,7 @@
 				{/each}
 			</div>
 			<div class="sparkline-annotations">
-				{#each _selected as d}
+				{#each _selected || [] as d}
 					{@const datum = d.data[d.data.length - 1]}
 					{@const diff = datum[yKey] - d.data[0][yKey]}
 					{@render marker(datum, d.i)}
