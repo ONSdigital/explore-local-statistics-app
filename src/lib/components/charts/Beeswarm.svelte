@@ -12,6 +12,7 @@
 		formatValue = (d) => d,
 		valuePrefix = null,
 		valueSuffix = null,
+		showIntervals = false,
 		selected = [],
 		hovered = $bindable()
 	} = $props();
@@ -82,12 +83,24 @@
 	</svg>
 {/snippet}
 
+{#snippet confidenceRect(d, i, color)}
+	{#if showIntervals && i === 0 && d.lci_95 != null && d.uci_95 != null}
+		{@const valueToX = (val) =>
+			((val - _data.domain[0]) / (_data.domain[1] - _data.domain[0])) * 100}
+		{@const lciX = valueToX(d.lci_95)}
+		{@const uciX = valueToX(d.uci_95)}
+		<rect x={lciX} y="90" width={uciX - lciX} height="20" fill={color} opacity="0.5" />
+		<rect x={lciX} y="90" width="1" height="20" fill={color} />
+		<rect x={uciX - 1} y="90" width="1" height="20" fill={color} />
+	{/if}
+{/snippet}
+
 {#snippet label(d, i, color, showName = false)}
 	{#key d[idKey]}
 		<div
 			class="beeswarm-label"
-			style:background={color}
-			style:color={contrastColor(color)}
+			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
+			style:color={i === 0 ? 'white' : color}
 			style:left="{labels?.[i]?.x ?? d.x}%"
 			use:labelDodge={{ i, d }}
 		>
@@ -111,6 +124,7 @@
 						{@const d = { ...sel.datum, y: 0 }}
 						{#if !hovered && i < 2}
 							{@render line(d, i, ONSpalette[sel.i])}
+							{@render confidenceRect(d, i, ONSpalette[sel.i])}
 						{/if}
 					{/each}
 				</g>
@@ -143,6 +157,11 @@
 			)}
 		{:else}
 			Data for comparison area not available
+		{/if}
+	</p>
+	<p class="indicator-confidence ons-u-fs-s">
+		{#if showIntervals && _data?.keyed?.[selected[0]] && (_data.keyed[selected[0]].lci_95 == null || _data.keyed[selected[0]].lci_95 === '')}
+			Confidence intervals not available
 		{/if}
 	</p>
 </div>
@@ -204,5 +223,10 @@
 		display: block;
 		text-align: center;
 		margin-top: 10px;
+	}
+	.indicator-confidence {
+		display: block;
+		text-align: center;
+		margin-top: -20px;
 	}
 </style>
