@@ -3,6 +3,7 @@
 	import { Hero, NavSections, NavSection, List, Li } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { makePeriodFormatter, makeValueFormatter } from '$lib/utils';
+	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
 	import AreasLegend from '$lib/components/modals/AreasLegend.svelte';
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
@@ -13,14 +14,7 @@
 
 	let formatPeriod = $derived(makePeriodFormatter(data.indicator.periodFormat));
 
-	let charts = $derived(
-		[
-			data.indicator.standardised ? { key: 'map', label: 'Map' } : null,
-			data.periods.length > 1 ? { key: 'line', label: 'Line chart' } : null,
-			{ key: 'bar', label: 'Bar chart' },
-			{ key: 'table', label: 'Table' }
-		].filter((c) => c)
-	);
+	let charts = $derived(getChartTypesForIndicator(data.indicator));
 
 	function arrayJoin(arr, separators = [', ', ' and ']) {
 		if (arr.length < 2) return arr.join(separators[0]);

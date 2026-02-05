@@ -2,10 +2,10 @@ import type { Handle, HandleServerError } from '@sveltejs/kit';
 import logger from '$lib/logger';
 
 // hook up the logger
-console.log = (...args) => logger.info(...args);
-console.info = (...args) => logger.info(...args);
-console.warn = (...args) => logger.warn(...args);
-console.error = (...args) => logger.error(...args);
+// console.log = (...args) => logger.info(...args);
+// console.info = (...args) => logger.info(...args);
+// console.warn = (...args) => logger.warn(...args);
+// console.error = (...args) => logger.error(...args);
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
@@ -20,9 +20,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handleError: HandleServerError = async ({ status }) => {
-	return {
-		message: status === 404 ? "Page not found" : 'Sorry, there is a problem with the service',
-		errorId: status || 500
-	};
-};
+// export const handleError: HandleServerError = async ({ status }) => {
+// 	return {
+// 		message: status === 404 ? "Page not found" : 'Sorry, there is a problem with the service',
+// 		errorId: status || 500
+// 	};
+// };

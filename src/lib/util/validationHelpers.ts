@@ -1,3 +1,4 @@
+import { geoLevels } from '$lib/config/geoLevels';
 import { dataFormats, geoFormats, chartTypes } from '$lib/api/config';
 
 export function isValidAreaCode(code: string): boolean {
@@ -6,6 +7,10 @@ export function isValidAreaCode(code: string): boolean {
 
 export function isValidAreaTypeCode(code: string): boolean {
 	return !!code.match(/^[EKNSW]\d{2}$/);
+}
+
+export function isValidGeoLevel(code: string): boolean {
+	return code in geoLevels;
 }
 
 export function isValidPostcode(code: string): boolean {

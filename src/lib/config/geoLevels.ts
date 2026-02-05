@@ -86,6 +86,11 @@ function makeOrderedCodes(arr) {
 	return Array.from(codes);
 }
 
+export function getGeoLevel(key: string) {
+	if (key in geoLevels) return { id: key, ...geoLevels[key] };
+	return null;
+}
+
 export const geoLevelsArray = makeArray(geoLevels);
 export const geoLevelsLookup = makeLookup(geoLevelsArray);
 export const geoCodesArray = makeOrderedCodes(geoLevelsArray);

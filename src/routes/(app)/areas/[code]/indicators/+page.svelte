@@ -20,6 +20,7 @@
 	import IndicatorRow from './IndicatorRow.svelte';
 	import MoreIndicators from './MoreIndicators.svelte';
 	import SimilarAreas from './SimilarAreas.svelte';
+	import SelectAnIndicator from './SelectAnIndicator.svelte';
 
 	const maxIndicators = 3;
 
@@ -161,15 +162,14 @@
 			</NavSection>
 			<div style:margin-bottom="2rem"></div>
 		{/each}
+		<NavSection title="Select an indicator">
+			<SelectAnIndicator
+				{pageState}
+				{areaProps}
+				indicators={Object.values(data.metadata).filter((ind) => !ind?.isMultivariate)}
+			/>
+		</NavSection>
 	</div>
-	<NavSection title="Select an indicator">
-		<div
-			style="display: block; height: 400px; background: var(--ons-color-banner-bg);"
-			class="ons-u-mb-l ons-u-p-m"
-		>
-			Indicator section to be added.
-		</div>
-	</NavSection>
 	{#if data.related.similar[0]}
 		<NavSection title="Similar areas">
 			<p>
