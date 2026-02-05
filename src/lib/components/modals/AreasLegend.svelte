@@ -1,16 +1,22 @@
 <script lang="ts">
 	import { getName, pluralise } from '@onsvisual/robo-utils';
-	import { ONSpalette, ONStextPalette, markerPathsArray } from '$lib/config';
+	import { ONSpalette, ONStextPalette, markerPathsArray, ONScolours } from '$lib/config';
 
-	let { selectedAreas = [], selectedGeoGroup = null } = $props();
+	let {
+		selectedAreas = [],
+		selectedGeoGroup = null,
+		useMarkerShapes = true,
+		inlineItems = false,
+		hovered = false
+	} = $props();
 </script>
 
 {#snippet marker(i: number | null = null)}
 	<svg viewBox="-4 -4 8 8" class="area-marker">
 		<path
-			d={markerPathsArray[i ?? 0]}
-			fill={i != null ? ONSpalette[i] : '#ddd'}
-			stroke={i != null ? ONSpalette[i] : '#aaa'}
+			d={useMarkerShapes ? markerPathsArray[i ?? 0] : markerPathsArray[0]}
+			fill={hovered ? ONScolours.highlightOrangeDark : i != null ? ONSpalette[i] : '#ddd'}
+			stroke={hovered ? ONScolours.highlightOrangeDark : i != null ? ONSpalette[i] : '#aaa'}
 			opacity={i == null ? 0.9 : 1}
 		/>
 	</svg>
@@ -20,17 +26,15 @@
 	<p class="ons-u-vh">Selected areas:</p>
 	<ul>
 		{#each selectedAreas as area, i}
-			<li class="ons-u-fs-r--b" style:color={ONStextPalette[i]}>
+			<li
+				class:inline={inlineItems}
+				class="ons-u-fs-r--b"
+				style:color={hovered ? ONScolours.highlightOrangeDark : ONStextPalette[i]}
+			>
 				{@render marker(i)}
 				{getName(area)}
 			</li>
 		{/each}
-		{#if selectedGeoGroup}
-			<li style:color="#707070">
-				{@render marker()}
-				{pluralise(selectedGeoGroup.label)}
-			</li>
-		{/if}
 	</ul>
 </div>
 
@@ -46,6 +50,10 @@
 	.areas-legend > ul > li {
 		margin: 0;
 		line-height: 1.5;
+	}
+	.areas-legend li.inline {
+		display: inline-flex;
+		margin-right: 0.75rem;
 	}
 	.area-marker {
 		display: inline-block;

@@ -6,7 +6,7 @@
 	import { parseChartData, contrastColor, makeCurlyBrace } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { markerPaths, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
-	import { pluralise } from '@onsvisual/robo-utils';
+	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
 		data,
@@ -19,7 +19,8 @@
 		selected = [],
 		hoveredArea = null,
 		geoLevel,
-		showIntervals
+		showIntervals,
+		mode = 'default'
 	} = $props();
 
 	const height = 500;
@@ -29,25 +30,20 @@
 
 	let width = $state(680);
 	let leftMargin = 30;
-	let rightMargin = $derived(width < widthThreshold ? 20 : 150);
+	let rightMargin = $derived(width < widthThreshold ? 20 : 180);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
 	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
-	let _selected = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
+	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
+	let selectedCodesNames = $derived(
+		selectedData.map((d) => {
+			return { areacd: d[0].areacd, areanm: d[0].areanm };
+		})
+	);
 
 	let xScale = $derived(_data ? scaleTime().domain(_data.dateDomain).range([0, widthInner]) : null);
 
-	let yDomain = $derived(
-		_data
-			? showIntervals
-				? nice(
-						Math.min(...data.lci.filter((el) => el !== null && el !== undefined)),
-						Math.max(...data.uci.filter((el) => el !== null && el !== undefined)),
-						2
-					)
-				: nice(..._data.valueDomain, 2)
-			: null
-	);
+	let yDomain = $derived(_data ? nice(..._data.valueDomain, 2) : null);
 	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([height, 0]) : null);
 
 	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : null);
@@ -55,6 +51,9 @@
 	let lineStroke = $derived(linesCount < 30 ? '2px' : linesCount < 100 ? '1.75px' : '1.5px');
 
 	let hovered = $derived(_data?.keyed?.[hoveredArea]);
+	let hoveredCodesNames = $derived(
+		hovered ? [{ areacd: hovered[0].areacd, areanm: hovered[0].areanm }] : []
+	);
 	let finalHoveredValue = $derived(hovered ? hovered[hovered.length - 1][yKey] : null);
 
 	const formatYTick = format(',.0f');
@@ -80,20 +79,32 @@
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
+	// this function checks if the selected areas are already present in the labelLookup (and in the correct order)
+	// avoids needlessly rerunning marginLabels function when selection causes new data to be added
+	function labelLookupMatchesSelected(labelLookup, selectedData) {
+		if (!labelLookup?.length) return false;
+		const labelCodes = labelLookup.map((d) => d.value);
+		const selectedCodes = selectedData.map((d) => d[0][idKey]);
+		if (labelCodes.every((d, i) => d === selectedCodes[i])) return true;
+		return false;
+	}
+
 	let labelLookup = $state();
 	async function makeLabelLookup(el, params) {
-		labelLookup = await marginLabels(el, params);
+		console.log('line chart label lookup');
+		if (!labelLookupMatchesSelected(labelLookup, selectedData)) {
+			labelLookup = await marginLabels(el, params);
+		}
 	}
 	const yScaleVar = (d) => yScale(d);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.date))
-		.y0((d) => yScale(d.lci))
-		.y1((d) => yScale(d.uci))
+		.y0((d) => yScale(d.lci_95))
+		.y1((d) => yScale(d.uci_95))
 		.curve(curveLinear);
 
-	$inspect({ showIntervals });
-	console.log(data);
+	$inspect({ labelLookup });
 </script>
 
 {#snippet line(arr, width = 1, color = ONScolours.grey40, opacity = 1, id = '')}
@@ -128,26 +139,23 @@
 	/>
 {/snippet}
 
-{#if width < widthThreshold}
+{#if width < widthThreshold && mode == 'embed'}
 	<ul class="top-labels">
-		<!-- {#if !hoveredArea}
-      <li class="top-label-geo" style="background:{'grey'}">
-        {pluralise(geoLevel.label)}
-      </li>
-    {/if} -->
-
-		{#if _selected.length && !hoveredArea}
-			{#each _selected as a, i}
-				<li class="top-label-selected" style="background:{ONSpalette[i]}">
-					{a[0]?.areanm}
-				</li>
-			{/each}
+		{#if selectedData.length && !hoveredArea}
+			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={true} inlineItems={true}
+			></AreasLegend>
 		{/if}
 
 		{#if hoveredArea}
-			<li class="top-label-hovered" style="background:#f39431">
+			<AreasLegend
+				selectedAreas={hoveredCodesNames}
+				useMarkerShapes={true}
+				inlineItems={true}
+				hovered={true}
+			></AreasLegend>
+			<!-- <li class="top-label-hovered" style="background:#f39431">
 				{hovered?.[0]?.areanm}
-			</li>
+			</li> -->
 		{/if}
 	</ul>
 {/if}
@@ -160,7 +168,7 @@
 	style:padding-right="{rightMargin}px"
 >
 	{#if showIntervals}
-		<svg aria-hidden="true" {width} height="50" class="bar-chart-legend">
+		<svg aria-hidden="true" width="200" height="50" class="bar-chart-legend">
 			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
 			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
 			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
@@ -198,41 +206,42 @@
 					</div>
 				{/each}
 			</div>
-			<div class="margin-labels">
+			<div class="margin-labels" style:right="-{rightMargin}px">
 				{#if width >= widthThreshold && hoveredArea}
 					<div
 						class="margin-label-hovered"
-						style="color: {ONScolours.highlightOrangeDark}; left: {xScale(_data.dateDomain[1]) +
-							10}px;top: {yScale(finalHoveredValue)}px;"
+						style:color={ONScolours.highlightOrangeDark}
+						style:left="{xScale(_data.dateDomain[1]) + 10}px"
+						style:top="{yScale(finalHoveredValue)}px"
+						style:max-width="{rightMargin - dodgedLabelGap}px"
 					>
 						{hovered?.[0]?.areanm}
 					</div>
 				{/if}
-				<!-- {#if width >= widthThreshold}
-          <div class="margin-label-geo" style="left: {xScale(_data.dateDomain[1]) + 10}px;top: {yScale(maxValueLatestDate)}px;">
-            {pluralise(geoLevel.label)}
-          </div>
-        {/if} -->
-				<div
-					class="margin-labels-selected"
-					use:makeLabelLookup={{ selected: _selected, yScaleVar, yKey }}
-				>
-					{#if width >= widthThreshold && !hoveredArea}
-						{#each _selected as arr, i}
-							{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
-							{@const isLabelDodged = labelLookup?.[i]?.y !== yScale(arr[arr.length - 1][yKey])}
-							<div
-								class="margin-label-selected"
-								style="left: {isLabelDodged
-									? xScale(_data.dateDomain[1]) + dodgedLabelGap
-									: xScale(_data.dateDomain[1]) +
-										dodgedLabelGap / 2}px;top: {yPos}px;color:{ONStextPalette[i]}"
-							>
-								{arr?.[0][labelKey]}
-							</div>
-						{/each}
-					{/if}
-				</div>
+				{#key selectedData}
+					<div
+						class="margin-labels-selected"
+						use:makeLabelLookup={{ selected: selectedData, yScaleVar, yKey }}
+					>
+						{#if width >= widthThreshold && !hoveredArea}
+							{#each selectedData as arr, i}
+								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
+								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
+								<div
+									class="margin-label-selected"
+									style:left="{isLabelDodged
+										? xScale(_data.dateDomain[1]) + dodgedLabelGap
+										: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
+									style:top="{yPos}px"
+									style:color={ONStextPalette[i]}
+									style:max-width="{rightMargin - dodgedLabelGap}px"
+								>
+									{arr?.[0][labelKey]}
+								</div>
+							{/each}
+						{/if}
+					</div>
+				{/key}
 			</div>
 			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
 				<g opacity={hoveredArea ? 0.2 : 1}>
@@ -240,15 +249,15 @@
 						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey])}
 					{/each}
 					{#if showIntervals}
-						{#each _selected as arr, i}
+						{#each selectedData as arr, i}
 							{@render ribbon(arr, ONSpalette[i], 0.3, arr[0][idKey])}
 						{/each}
 					{/if}
-					{#each _selected as arr, i}
+					{#each selectedData as arr, i}
 						{@render line(arr, 4.5, 'white', 1, arr[0][idKey])}
 						{@render line(arr, 3, ONSpalette[i], 1, arr[0][idKey])}
 					{/each}
-					{#each _selected as s, sIndex}
+					{#each selectedData as s, sIndex}
 						{#each s as c}
 							<circle
 								cx={xScale(c.date)}
@@ -278,9 +287,9 @@
 						{/each}
 					{/if}
 				</g>
-				{#if labelLookup?.[0] && !hovered}
+				{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
 					<g>
-						{#each _selected as arr, i}
+						{#each selectedData as arr, i}
 							{@const yPosAdj = labelLookup?.[i]?.y}
 							{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
 							{@const elbowX =
@@ -426,8 +435,15 @@
 		transform: translateY(-50%);
 		font-size: 16px;
 		font-weight: bold;
-		max-width: 140px;
+		text-align: left;
 		line-height: 1.1;
+	}
+	.margin-labels-selected {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 	}
 
 	.margin-label-selected {
@@ -435,19 +451,9 @@
 		transform: translateY(-50%);
 		font-size: 16px;
 		font-weight: bold;
-		max-width: 140px;
 		line-height: 0.95;
 		padding-top: 4px;
 		padding-bottom: 4px;
-	}
-
-	.margin-label-geo {
-		position: absolute;
-		transform: translateY(-50%);
-		font-size: 16px;
-		font-weight: bold;
-		color: grey;
-		max-width: 140px;
-		line-height: 1.1;
+		text-align: left;
 	}
 </style>

@@ -3,7 +3,7 @@
 	import { parseChartData, contrastColor, makeCurlyBrace } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
-	import { pluralise } from '@onsvisual/robo-utils';
+	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
 		data,
@@ -13,22 +13,31 @@
 		labelKey = 'areanm',
 		formatValue = (d) => d,
 		formatPeriod = (d) => d,
-		confidenceIntervals,
+		showIntervals,
 		selected = [],
 		hoveredArea = null,
-		geoLevel
+		geoLevel,
+		mode = 'default'
 	} = $props();
 
 	let width = $state();
 	const widthThreshold = 550;
-	let leftMargin = $derived(width < widthThreshold ? 20 : 150);
+	let leftMargin = $derived(width < widthThreshold ? 20 : 170);
 	const rightMargin = 30;
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
-	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
-	let sorted = $derived(_data ? [..._data.array].sort((a, b) => b[yKey] - a[yKey]) : []);
+	let _data = $derived(parseChartData(data, yKey, xKey, idKey, true));
 	let hovered = $derived(_data.keyed[hoveredArea]?.[0]);
-	let _selected = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
+	let hoveredCodesNames = $derived(
+		hovered ? [{ areacd: hovered.areacd, areanm: hovered.areanm }] : []
+	);
+
+	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
+	let selectedCodesNames = $derived(
+		selectedData.map((d) => {
+			return { areacd: d[0].areacd, areanm: d[0].areanm };
+		})
+	);
 
 	const maxHeight = 500;
 	const maxBarHeight = 30;
@@ -81,36 +90,40 @@
 		return ONSpalette[index % ONSpalette.length];
 	}
 
-	let yScale = $derived(sorted ? makeYScale(sorted, selected) : null);
+	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
+
+	// this function checks if the selected areas are already present in the labelLookup (and in the correct order)
+	// avoids needlessly rerunning marginLabels function when selection causes new data to be added
+	function labelLookupMatchesSelected(labelLookup, selectedData) {
+		if (!labelLookup?.length) return false;
+		const labelCodes = labelLookup.map((d) => d.value);
+		const selectedCodes = selectedData.map((d) => d[0][idKey]);
+		if (labelCodes.every((d, i) => d === selectedCodes[i])) return true;
+		return false;
+	}
 
 	let labelLookup = $state();
 	async function makeLabelLookup(el, params) {
-		labelLookup = await marginLabels(el, params);
+		console.log('bar chart label lookup');
+		if (!labelLookupMatchesSelected(labelLookup, selectedData)) {
+			labelLookup = await marginLabels(el, params);
+		}
 	}
-
-	const yScaleVar = (d) => yScale(d).y;
 
 	let xScale = $derived(
 		_data
-			? confidenceIntervals
-				? scaleLinear()
-						.domain([
-							Math.min(0, Math.min(...data.lci.filter((el) => el !== null && el !== undefined))),
-							Math.max(...data.uci.filter((el) => el !== null && el !== undefined))
-						])
-						.range([0, widthInner])
-				: scaleLinear()
-						.domain([Math.min(0, _data.valueDomain[0]), _data.valueDomain[1]])
-						.range([0, widthInner])
+			? scaleLinear()
+					.domain([Math.min(0, _data.valueDomain[0]), _data.valueDomain[1]])
+					.range([0, widthInner])
 			: null
 	);
 
-	let hoveredIndex = $derived(hoveredArea ? sorted.findIndex((d) => d[idKey] === hoveredArea) : -1);
-
 	$inspect({ labelLookup });
+	$inspect({ selected });
+	$inspect({ hoveredCodesNames });
 </script>
 
-{#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', i)}
+{#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '')}
 	<rect
 		class="chart-bars"
 		x={0}
@@ -129,7 +142,7 @@
 	/>
 {/snippet}
 
-{#snippet estimate(b, fill = ONScolours.grey40, width = 2, opacity = 1, id = '', i)}
+{#snippet estimate(b, fill = ONScolours.grey40, width = 2, opacity = 1, id = '')}
 	<rect
 		class="chart-estimate"
 		x={xScale(b[yKey]) - width / 2}
@@ -150,12 +163,12 @@
 	/>
 {/snippet}
 
-{#snippet confidence(b, fill = ONScolours.grey40, opacity = 1, id = '', i)}
+{#snippet confidence(b, fill = ONScolours.grey40, opacity = 1, id = '')}
 	<rect
 		class="chart-estimate"
-		x={xScale(b.lci)}
+		x={xScale(b.lci_95)}
 		y={yScale(b[idKey]).y}
-		width={xScale(b.uci) - xScale(b.lci)}
+		width={xScale(b.uci_95) - xScale(b.lci_95)}
 		height={yScale(b[idKey]).height}
 		{fill}
 		stroke-width="0.2"
@@ -170,27 +183,19 @@
 	/>
 {/snippet}
 
-{#if width < widthThreshold}
+{#if width < widthThreshold && mode == 'embed'}
 	<ul class="top-labels">
-		<!-- {#if !hoveredArea}
-      <li class="top-label-geo" style="background:{'grey'}">
-        {pluralise(geoLevel.label)}
-      </li>
-    {/if} -->
-
-		{#if _selected.length && !hoveredArea}
-			{#each _selected as a, i}
-				<li class="top-label-selected" style="background:{ONSpalette[i]}">
-					{a?.[0]?.areanm}
-				</li>
-			{/each}
+		{#if selectedData.length && !hovered}
+			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
+			></AreasLegend>
 		{/if}
-
-		{#if hoveredArea}
-			<li class="top-label-hovered" style="background:#f39431">
-				{hovered?.areanm}
-			</li>
-		{/if}
+		<AreasLegend
+			selectedAreas={hoveredCodesNames}
+			useMarkerShapes={true}
+			inlineItems={true}
+			hovered={true}
+		></AreasLegend>
+		{#if hovered}{/if}
 	</ul>
 {/if}
 
@@ -202,9 +207,9 @@
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
 >
-	{#if confidenceIntervals}
+	{#if showIntervals}
 		<div class="legend-container">
-			<svg aria-hidden="true" {width} height="90" class="bar-chart-legend">
+			<svg aria-hidden="true" width="200" height="90" class="bar-chart-legend">
 				<line x1="10" y1="15" x2="170" y2="15" stroke="#222" opacity="0.2" stroke-width="20px"
 				></line>
 				<!-- <rect x="8" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"></rect> -->
@@ -254,52 +259,60 @@
 			{/each}
 		</div>
 		<div class="margin-labels">
-			{#if width >= widthThreshold && hoveredArea}
-				<div
-					class="margin-label-hovered"
-					style="top: {yScale(hovered[idKey]).y +
-						yScale(hovered[idKey]).height / 2}px; color: {ONScolours.highlightOrange}"
-				>
-					{hovered?.[labelKey]}
-				</div>
-			{/if}
-			<!-- {#if width >= widthThreshold}
-        <div class="margin-label-geo" style="top: {yScale(sorted[0][idKey]).y + yScale(sorted[0][idKey]).height / 2}px;">
-          {pluralise(geoLevel.label)}
-        </div>
-      {/if} -->
-			{#if width >= widthThreshold && sorted.length <= maxUnscaledBarsCount && !hovered}
-				{#each sorted as s}
+			{#if width >= widthThreshold}
+				{#if hovered}
 					<div
-						class="margin-label-geo-all"
-						style="top:{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px;"
+						class="margin-label-hovered"
+						style:top="{yScale(hovered[idKey]).y + yScale(hovered[idKey]).height / 2}px"
+						style:color={ONScolours.highlightOrangeDark}
+						style:max-width="{leftMargin - 16}px"
+						style:left="-8px"
 					>
-						{s[labelKey]}
+						{hovered?.[labelKey]}
 					</div>
-				{/each}
-			{/if}
-			{#key _selected}
-			<div
-				class="margin-labels-selected"
-				use:makeLabelLookup={{ selected: _selected, yScaleVar, yKey: idKey }}
-			>
-				{#if width >= widthThreshold && !hoveredArea}
-					{#each _selected as a, i (a[0][idKey])}
-						{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
-						{@const height = yScale?.(a[0][idKey])?.height}
-						{@const isLabelDodged = labelLookup?.[i]?.y !== yScale?.(a[0][idKey])?.y}
+				{/if}
+
+				{#if _data.array.length <= maxUnscaledBarsCount && !hovered}
+					<!-- add a filtering stage here to ensure selected areas aren't shown -->
+					{#each _data.array as s}
 						<div
-							class="margin-label-selected"
-							style="top: {yPos ? yPos + height / 2 : 0}px;right:{isLabelDodged
-								? 'calc(100% + 16px)'
-								: 'calc(100% + 8px)'};color:{ONStextPalette[i]}"
+							class="margin-label-geo-all"
+							style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
+							style:max-width="{leftMargin - 16}px"
+							style:left="-8px"
 						>
-							{a[0][labelKey]}
+							{s[labelKey]}
 						</div>
 					{/each}
 				{/if}
-			</div>
-			{/key}
+
+				{#key selectedData}
+					<div
+						class="margin-labels-selected"
+						class:hidden={hovered}
+						use:makeLabelLookup={{
+							selected: selectedData,
+							yScaleVar: (d) => yScale(d).y,
+							yKey: idKey
+						}}
+					>
+						{#each selectedData as a, i}
+							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
+							{@const height = yScale?.(a[0][idKey])?.height || 0}
+							{@const isLabelDodged = yPos !== yScale?.(a[0][idKey])?.y}
+							<div
+								class="margin-label-selected"
+								style:top="{yPos ? yPos + height / 2 : 0}px"
+								style:left={isLabelDodged ? '-16px' : '-8px'}
+								style:color={ONStextPalette[i]}
+								style:max-width="{leftMargin - 16}px"
+							>
+								{a[0][labelKey]}
+							</div>
+						{/each}
+					</div>
+				{/key}
+			{/if}
 		</div>
 		<svg
 			viewBox="0 0 {widthInner} {height}"
@@ -308,12 +321,12 @@
 			style:height="{height}px"
 		>
 			{#if _data && xScale && yScale}
-				<g opacity={hoveredArea ? 0.5 : 1}>
-					{#each sorted as b, i (b[idKey])}
-						{#if !confidenceIntervals}
-							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey], i)}
+				<g opacity={hovered ? 0.5 : 1}>
+					{#each _data.array as b, i (b[idKey])}
+						{#if !showIntervals}
+							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey])}
 						{:else}
-							{@render bar(b, setBarColour(b[idKey]), 0.3, b[idKey], i)}
+							{@render bar(b, setBarColour(b[idKey]), 0.3, b[idKey])}
 							{@render confidence(b, ONScolours.white, 1, b[idKey], i)}
 							{@render confidence(b, setBarColour(b[idKey]), 0.6, b[idKey], i)}
 							{@render estimate(b, setBarColour(b[idKey]), 3, 1, b[idKey], i)}
@@ -321,34 +334,21 @@
 					{/each}
 				</g>
 				<g>
-					{#if hoveredArea && hoveredIndex !== -1}
-						{#if !confidenceIntervals}
-							{@render bar(hovered, ONScolours.highlightOrangeDark, 1, hoveredArea, hoveredIndex)}
+					{#if hovered}
+						{#if !showIntervals}
+							{@render bar(hovered, ONScolours.highlightOrangeDark, 1, hoveredArea)}
 						{:else}
-							{@render bar(hovered, ONScolours.highlightOrangeDark, 0.2, hoveredArea, hoveredIndex)}
-							{@render confidence(hovered, ONScolours.white, 1, hoveredArea, hoveredIndex)}
-							{@render confidence(
-								hovered,
-								ONScolours.highlightOrangeDark,
-								0.6,
-								hoveredArea,
-								hoveredIndex
-							)}
-							{@render estimate(
-								hovered,
-								ONScolours.highlightOrangeDark,
-								3,
-								1,
-								hoveredArea,
-								hoveredIndex
-							)}
+							{@render bar(hovered, ONScolours.highlightOrangeDark, 0.2, hoveredArea)}
+							{@render confidence(hovered, ONScolours.white, 1, hoveredArea)}
+							{@render confidence(hovered, ONScolours.highlightOrangeDark, 0.6, hoveredArea)}
+							{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 1, hoveredArea)}
 						{/if}
 					{/if}
 				</g>
 			{/if}
-			{#if labelLookup?.[0] && !hovered}
+			{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
 				<g>
-					{#each _selected as a, i (a[0][idKey])}
+					{#each selectedData as a, i (a[0][idKey])}
 						{@const yPosAdj = labelLookup?.[i]?.y}
 						{@const yPosOrig = yScale(a[0][idKey]).y}
 						{@const height = yScale(a[0][idKey]).height}
@@ -380,6 +380,9 @@
 </div>
 
 <style>
+	.hidden {
+		visibility: hidden;
+	}
 	.legend-container {
 		position: relative;
 		height: 100px;
@@ -457,7 +460,6 @@
 		font-weight: bold;
 	}
 	.top-label-selected,
-	.top-label-geo,
 	.top-label-hovered {
 		display: inline-block;
 		padding: 0.2rem 0.5rem;
@@ -474,39 +476,42 @@
 		pointer-events: none;
 	}
 
+	.margin-labels-selected {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
 	.margin-label-hovered {
 		position: absolute;
-		transform: translateY(-50%);
+		transform: translate(-100%, -50%);
 		font-size: 16px;
 		font-weight: bold;
-		max-width: 140px;
 		text-align: right;
 		line-height: 1.1;
-		right: calc(100% + 8px);
 	}
 
 	.margin-label-selected {
 		position: absolute;
-		transform: translateY(-50%);
+		transform: translate(-100%, -50%);
 		font-size: 16px;
 		font-weight: bold;
-		max-width: 140px;
 		text-align: right;
 		line-height: 0.95;
 		padding-top: 4px;
 		padding-bottom: 4px;
 	}
 
-	.margin-label-geo,
 	.margin-label-geo-all {
 		position: absolute;
-		transform: translateY(-50%);
+		transform: translate(-100%, -50%);
 		font-size: 16px;
 		font-weight: bold;
 		color: grey;
 		max-width: 140px;
 		text-align: right;
 		line-height: 1.1;
-		right: calc(100% + 8px);
 	}
 </style>

@@ -1,4 +1,5 @@
 import { tick } from 'svelte';
+import { sleep } from '$lib/utils';
 
 export function labelPlacer(zs) {
 	let batches = [];
@@ -28,20 +29,17 @@ export async function marginLabels(el, params = {}) {
 	await tick();
 
 	const divs = el.getElementsByTagName('div');
-	const labelHeights = [...divs].map((d) => d.clientHeight);
+	// const labelHeights = [...divs].map((d) => d.clientHeight);
 
 	if (divs.length < 2) {
-		lookup: [];
-		yLabelPositions: null;
-		elbowOffset: [];
 		console.log('fewer than 2 areas selected');
 		return;
 	}
 
 	//////////////// Calculate dodged y positions for labels ///////////////
 	let sortedYs = selected
-		.map((s) => yScaleVar(s[s.length - 1][yKey]))
-		.map((y, i) => ({ y, i })) //retain index of original selection order prior to sorting
+		.map((s) => ({ y: yScaleVar(s[s.length - 1][yKey]), value: s[s.length - 1][yKey] }))
+		.map((d, i) => ({ y: d.y, i, value: d.value })) //retain index of original selection order prior to sorting
 		.sort((a, b) => a.y - b.y);
 
 	const cumulativeHeights = Array(selected.length).fill(0);
@@ -63,7 +61,6 @@ export async function marginLabels(el, params = {}) {
 	// Group together proximate selected labels (after dodging)
 	// to allow for elbow offsetting
 	const leaderLineGroups = [];
-	console.log({ sortedYs });
 	sortedYs.forEach((arr, i) => {
 		const y = yLabelPositions[i];
 		let group = leaderLineGroups.find((g) => Math.abs(g.y - y) < labelProximityThreshold);
@@ -96,6 +93,9 @@ export async function marginLabels(el, params = {}) {
 
 	// const lookup = selected.map((_, i) => ({ y: yLabelPositions[i], elbow: elbowOffsets[i] }));
 	const lookup = Array(selected.length).fill(null);
-	sortedYs.forEach((d, i) => (lookup[d.i] = { y: yLabelPositions[i], elbow: elbowOffsets[i] }));
+	sortedYs.forEach(
+		(d, i) =>
+			(lookup[d.i] = { value: sortedYs[i].value, y: yLabelPositions[i], elbow: elbowOffsets[i] })
+	);
 	return lookup;
 }

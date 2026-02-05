@@ -28,7 +28,13 @@ export function medMad(xs, constant = 1.4826) {
 	return { med, mad };
 }
 
-export function parseChartData(data, valueKey = 'value', periodKey = 'period', idKey = 'areacd') {
+export function parseChartData(
+	data,
+	valueKey = 'value',
+	periodKey = 'period',
+	idKey = 'areacd',
+	sortByValue = false
+) {
 	if (!data || data.message) return null;
 	if (!data[valueKey] || !data[periodKey] || !data[idKey])
 		throw new Error('Columns missing from data.');
@@ -38,6 +44,10 @@ export function parseChartData(data, valueKey = 'value', periodKey = 'period', i
 	const valueDomain = [Infinity, -Infinity];
 	const dateDomain = [Infinity, -Infinity];
 
+	const hasConfidenceIntervals = data.lci_95 && data.uci_95;
+	const minValueKey = hasConfidenceIntervals ? 'lci_95' : valueKey;
+	const maxValueKey = hasConfidenceIntervals ? 'uci_95' : valueKey;
+
 	const cols = Object.keys(data);
 	for (let i = 0; i < data[cols[0]].length; i++) {
 		if (data[valueKey][i] == null) continue;
@@ -46,8 +56,12 @@ export function parseChartData(data, valueKey = 'value', periodKey = 'period', i
 		for (const col of cols) row[col] = data[col][i];
 		row.date = new Date(row[periodKey].slice(0, 10));
 
-		if (row[valueKey] < valueDomain[0]) valueDomain[0] = row[valueKey];
-		if (row[valueKey] > valueDomain[1]) valueDomain[1] = row[valueKey];
+		const minVal = row[minValueKey];
+		const maxVal = row[maxValueKey];
+		const valid = (d) => d !== null && d !== undefined && d !== '';
+
+		if (valid(minVal)) valueDomain[0] = Math.min(valueDomain[0], minVal);
+		if (valid(maxVal)) valueDomain[1] = Math.max(valueDomain[1], maxVal);
 		if (row.date < dateDomain[0]) dateDomain[0] = row.date;
 		if (row.date > dateDomain[1]) dateDomain[1] = row.date;
 
@@ -56,7 +70,12 @@ export function parseChartData(data, valueKey = 'value', periodKey = 'period', i
 		array.push(row);
 	}
 
-	return { array, keyed, valueDomain, dateDomain };
+	return {
+		array: sortByValue ? array.sort((a, b) => b[valueKey] - a[valueKey]) : array,
+		keyed,
+		valueDomain,
+		dateDomain
+	};
 }
 
 export function parseBeeswarmData(data, xKey, zKey, width = 400, height = 100, radius = 3) {

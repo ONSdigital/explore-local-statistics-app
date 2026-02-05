@@ -7,6 +7,7 @@
 	import Table from '$lib/components/charts/Table.svelte';
 	import ChartActions from './ChartActions.svelte';
 	import ChartDataLoader from './ChartDataLoader.svelte';
+	import { pluralise } from '@onsvisual/robo-utils';
 
 	const chartComponents = {
 		map: Map,
@@ -75,6 +76,7 @@
 		<h3 class="content-title">{metadata.label}</h3>
 		<p class="content-subtitle">
 			{metadata.subtitle},
+			{pluralise(geoLevel.label).toLowerCase()},
 			{#if hasTimeRange}{formatPeriod(timeRange[0])} to{/if}
 			{formatPeriod(timeRange[timeRange.length - 1])}
 		</p>
@@ -101,6 +103,8 @@
 							bind:hovered
 							{formatPeriod}
 							{geoLevel}
+							{showIntervals}
+							{mode}
 						/>
 					{/snippet}
 				</ChartDataLoader>

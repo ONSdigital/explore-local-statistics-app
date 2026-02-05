@@ -44,6 +44,8 @@
 		showConfidenceIntervals: false,
 		formatPeriod: () => formatPeriod
 	});
+
+	$inspect(pageState.selectedAreas);
 </script>
 
 <Hero
