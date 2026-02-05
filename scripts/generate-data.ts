@@ -17,6 +17,10 @@ const RAW_DATA_DIR = 'scripts/raw-data';
 const CONFIG_DIR = `scripts/config`;
 const MANIFEST = `${CONFIG_DIR}/manifest_metadata.csv`; // equivalent to FILE_NAMES_LOG
 
+function sortMeasures(a, b) {
+	return a === b ? 0 : a === 'value' ? -1 : b === 'value' ? 1 : a.localeCompare(b, 'en-GB');
+}
+
 export default async function main() {
 	// ensure correct version of node
 	const nodeVersion = process.version
@@ -165,7 +169,9 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 
 	indicatorTableLong = indicatorTableLong.orderby(
 		...['areacd', 'period', ...otherDimensions, 'measure'].map((col) =>
-			aq.collate(col, 'en-GB', { numeric: true })
+			col === 'measure'
+				? aq.collate(col, sortMeasures)
+				: aq.collate(col, 'en-GB', { numeric: true })
 		)
 	);
 
