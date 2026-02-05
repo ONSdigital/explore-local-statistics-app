@@ -11,6 +11,7 @@
 		indicator,
 		metadata,
 		timeRange,
+		showIntervals = false,
 		selected = [],
 		geoGroup,
 		hovered = $bindable(),
@@ -157,7 +158,7 @@
 								{formatValue}
 								valuePrefix={metadata.prefix}
 								valueSuffix={metadata.suffix}
-								showIntervals
+								{showIntervals}
 								{selected}
 								bind:hovered
 							/>

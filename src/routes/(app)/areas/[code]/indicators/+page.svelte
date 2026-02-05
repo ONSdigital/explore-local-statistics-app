@@ -120,6 +120,7 @@
 		indicator={item.slug}
 		metadata={data.metadata[item.slug]}
 		timeRange={pageState.selectedPeriodRange}
+		showIntervals={pageState.showConfidenceIntervals}
 		selected={[areaProps.areacd, ...pageState.selectedAreas.map((a) => a.areacd)]}
 		geoGroup={pageState.selectedGeoGroup}
 		{hidden}
