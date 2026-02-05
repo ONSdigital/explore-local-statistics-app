@@ -24,7 +24,6 @@
 	}
 	// svelte-ignore await_waterfall
 	let data = $derived(await fetchData(dataUrl, visible));
-	$inspect({ data });
 </script>
 
 {#if data?.message}
