@@ -107,18 +107,21 @@
 	$inspect({ labelLookup });
 </script>
 
-{#snippet line(arr, width = 1, color = ONScolours.grey40, opacity = 1, id = '')}
+{#snippet line(
+	arr,
+	width = 1,
+	color = ONScolours.grey40,
+	opacity = 1,
+	id = '',
+	hoverableBuffer = false
+)}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
 		stroke={color}
 		stroke-width={width}
 		{opacity}
-		onpointerenter={() => {
-			hoveredArea = id;
-		}}
-		onpointerleave={() => {
-			hoveredArea = null;
-		}}
+		onpointerenter={() => hoverableBuffer && (hoveredArea = id)}
+		onpointerleave={() => hoverableBuffer && (hoveredArea = null)}
 		style:pointer-events={color === ONScolours.grey40 ? null : 'none'}
 	/>
 {/snippet}
@@ -246,7 +249,8 @@
 			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
 				<g opacity={hoveredArea ? 0.2 : 1}>
 					{#each Object.values(_data.keyed) as arr, i}
-						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey])}
+						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey], false)}
+						{@render line(arr, 20, ONScolours.grey40, 0, arr[0][idKey], true)}
 					{/each}
 					{#if showIntervals}
 						{#each selectedData as arr, i}
