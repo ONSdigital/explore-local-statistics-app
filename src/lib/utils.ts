@@ -40,8 +40,12 @@ export function makeValueFormatter(dp) {
 	return format(`,.${dp ?? 0}f`);
 }
 
+export function parsePeriod(period) {
+	if (typeof period === 'string') return new Date(period.split('/')[0]);
+	return period;
+}
+
 export function makePeriodFormatter(periodFormat: string) {
-	const parsePeriod = (p) => new Date(p.split('/')[0]);
 	const range = +periodFormat?.match?.(/^\d+/)?.[0];
 	const formatter =
 		periodFormat === 'month'
