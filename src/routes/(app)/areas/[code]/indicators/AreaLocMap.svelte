@@ -12,7 +12,7 @@
 	const sleep = (ms = 10) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	$effect(() => {
-		if (map && w && h) {
+		if (map && bounds && w && h) {
 			sleep().then(() => map.fitBounds(bounds, { animate: false, padding }));
 		}
 	});
@@ -30,26 +30,25 @@
 		}}
 		{mapDescription}
 	>
-		{#key geometry}
-			<MapSource id="boundary" type="geojson" data={geometry}>
-				<MapLayer
-					id="boundary-fill"
-					type="fill"
-					paint={{ 'fill-color': primaryColor, 'fill-opacity': 0.2 }}
-				/>
-				<MapLayer
-					id="boundary-line"
-					type="line"
-					paint={{ 'line-color': primaryColor, 'line-width': 2 }}
-				/>
-			</MapSource>
-		{/key}
+		<MapSource id="boundary" type="geojson" data={geometry}>
+			<MapLayer
+				id="boundary-fill"
+				type="fill"
+				paint={{ 'fill-color': primaryColor, 'fill-opacity': 0.2 }}
+			/>
+			<MapLayer
+				id="boundary-line"
+				type="line"
+				paint={{ 'line-color': primaryColor, 'line-width': 2 }}
+			/>
+		</MapSource>
 	</Map>
 </div>
 
 <style>
 	.map-container {
 		position: absolute;
+		display: none;
 		top: -52px;
 		right: 0;
 		height: calc(100% + 52px);
@@ -67,9 +66,9 @@
 			linear-gradient(to right, #f5f5f6, #00000000 25%),
 			linear-gradient(to bottom, #f5f5f6, #00000000 25%);
 	}
-	@media (max-width: 800px) {
+	@media (min-width: 800px) {
 		.map-container {
-			display: none;
+			display: block;
 		}
 	}
 </style>

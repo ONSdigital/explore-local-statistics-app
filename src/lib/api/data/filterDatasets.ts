@@ -48,7 +48,14 @@ export function filterJSONStat(
 
 	// Generate the filtered dataset in the requested format
 	if (format === 'xlsx') {
-		const data = toCols(cube, dims, params.includeNames, params.includeStatus, false, false);
+		const data = toCols(
+			cube,
+			dims,
+			params.includeNames,
+			params.includeStatus && Object.keys(cube.status).length > 0,
+			false,
+			false
+		);
 		return data ? { data, meta: getSpreadsheetMetadata(cube, dims) } : null;
 	}
 	if (format === 'csv')

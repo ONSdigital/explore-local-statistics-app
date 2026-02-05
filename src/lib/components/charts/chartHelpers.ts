@@ -35,9 +35,8 @@ export function parseChartData(
 	idKey = 'areacd',
 	sortByValue = false
 ) {
-	if (!data || data.message) return null;
-	if (!data[valueKey] || !data[periodKey] || !data[idKey])
-		throw new Error('Columns missing from data.');
+	if (!data || data?.message) return null; // No data
+	if (!data[valueKey] || !data[periodKey] || !data[idKey]) return null; // Dimensions missing from data
 
 	const array = [];
 	const keyed = {};
@@ -80,6 +79,7 @@ export function parseChartData(
 
 export function parseBeeswarmData(data, xKey, zKey, width = 400, height = 100, radius = 3) {
 	if (!data || data?.message) return null;
+	if (!data[xKey] || !data[zKey]) return null; // Dimensions missing from data
 
 	const vals = data[xKey].filter((d) => d != null);
 	const sorted = [...vals].sort((a, b) => a - b);

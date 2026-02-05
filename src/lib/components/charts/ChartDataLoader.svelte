@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Spinner from '../visuals/Spinner.svelte';
 
-	let { chart, dataUrl, id = dataUrl, visible = true } = $props();
+	let { chart, dataUrl, id = dataUrl, visible = true, noDataMessage = null } = $props();
 
 	let loadedDataUrl: string | null = null;
 	let loadedData: jsonDataCols | errorObject | null = null;
@@ -27,7 +27,7 @@
 </script>
 
 {#if data?.message}
-	{data.message}
+	<p class="ons-u-fs-s">{noDataMessage || data.message}</p>
 {:else if data}
 	{@render chart(data)}
 {:else}

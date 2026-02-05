@@ -149,8 +149,11 @@ function makeColFill(
 	};
 	const pushName = (data: jsonDataCols, item: dataItem) =>
 		data.areanm.push(areaNameLookup[item[1]] || null);
-	const pushStatus = (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-		data.status.push(cube.status[item[0] * measuresCount] || null);
+	const pushStatus = pivotMeasures
+		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
+				data.status.push(cube.status[item[0] * measuresCount] || null)
+		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
+				data.status.push(cube.status[item[0]] || null);
 
 	return includeNames && includeStatus
 		? (data: jsonDataCols, item: dataItem, dims: filteredDimension[], cube: jsonStatDataset) => {
