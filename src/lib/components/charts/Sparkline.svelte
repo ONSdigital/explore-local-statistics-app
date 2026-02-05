@@ -94,9 +94,11 @@
 				style:height="90px"
 			>
 				<g class="sparkline-lines">
-					{#each _selected || [] as d}
-						{@render line(d.data, 2, ONSpalette[d.i])}
-					{/each}
+					{#key _selected}
+						{#each _selected || [] as d}
+							{@render line(d.data, 2, ONSpalette[d.i])}
+						{/each}
+					{/key}
 				</g>
 			</svg>
 			<div class="sparkline-x-axis">
@@ -121,12 +123,14 @@
 				{/each}
 			</div>
 			<div class="sparkline-annotations">
-				{#each _selected || [] as d}
-					{@const datum = d.data[d.data.length - 1]}
-					{@const diff = datum[yKey] - d.data[0][yKey]}
-					{@render marker(datum, d.i)}
-					{#if d.i === 0}{@render label(datum, diff, d.i)}{/if}
-				{/each}
+				{#key _selected}
+					{#each _selected || [] as d}
+						{@const datum = d.data[d.data.length - 1]}
+						{@const diff = datum[yKey] - d.data[0][yKey]}
+						{@render marker(datum, d.i)}
+						{#if d.i === 0}{@render label(datum, diff, d.i)}{/if}
+					{/each}
+				{/key}
 			</div>
 		{:else}
 			<p class="ons-u-fs-s">No time series data to display</p>
