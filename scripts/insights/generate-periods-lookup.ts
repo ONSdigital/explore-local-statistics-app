@@ -52,13 +52,15 @@ function parsePeriod(str) {
 	if (date[2] === '-') date = date.split('-').reverse().join('-');
 	const parsedDate = new Date(date);
 	const granularity =
-		period && period.slice(-3) === 'P3M'
-			? 'quarter'
-			: period
-				? 'year'
-				: date.slice(-2) === '01'
-					? 'month'
-					: 'year';
+		period && period.slice(-3) === 'P1M'
+			? 'month'
+			: period && period.slice(-3) === 'P3M'
+				? 'quarter'
+				: period
+					? 'year'
+					: date.slice(-2) === '01'
+						? 'month'
+						: 'year';
 	const year = date.slice(0, 4);
 	const xDomainNumb = ['month', 'quarter'].includes(granularity) ? getMonthNumb(date, year) : +year;
 	const start =
