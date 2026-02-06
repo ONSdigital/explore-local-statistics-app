@@ -28,7 +28,7 @@
 		{#if selectedGeoGroup}
 			<li style:color="#707070">
 				{@render marker()}
-				{pluralise(selectedGeoGroup.label)}
+				{selectedGeoGroup.label}
 			</li>
 		{/if}
 	</ul>

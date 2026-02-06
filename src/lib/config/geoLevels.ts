@@ -72,7 +72,7 @@ function makeLookup(arr) {
 		for (const code of level.codes)
 			lookup[code] = {
 				...level,
-				label: altLabels[code] || level.label
+				altLabel: altLabels[code] || null
 			};
 	}
 	return lookup;
