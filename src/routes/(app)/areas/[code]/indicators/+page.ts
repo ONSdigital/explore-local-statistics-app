@@ -32,27 +32,29 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			parentLevel.codes.includes(p.areacd.slice(0, 3))
 		);
 
-		const geoGroups = [
+		const geoGroups: any[] = [
 			{
 				id: 'level',
-				label: `All ${pluralise(geoLevel.label)}`,
+				label: `All ${pluralise(geoLevel.label.toLowerCase())}`,
 				geoLevel: geoLevel.key
 			}
 		];
 		if (geoLevel && related?.siblings?.parent)
 			geoGroups.push({
 				id: 'siblings',
-				label: `All ${pluralise(geoLevel.label)} ${getName(related.siblings.parent, 'in')}`,
+				label: `All ${pluralise(geoLevel.label.toLowerCase())} ${getName(related.siblings.parent, 'in')}`,
 				geoLevel: geoLevel.key,
 				geoExtent: related.siblings.parent.areacd
 			});
-		if (related.similar?.[2]?.cluster)
-			geoGroups.push({
-				id: 'cluster',
-				label: `Similar demographics to ${getName(area.properties, 'the')}`,
-				geoCluster: `demographic_${related.similar[2].cluster.key}`
-			});
-
+		if (related.similar?.[0]?.cluster) {
+			for (const sim of related.similar) {
+				geoGroups.push({
+					id: `cluster-${sim.key}`,
+					label: `Areas similar to ${getName(area.properties, 'the')} across ${sim.label.toLowerCase()}`,
+					geoCluster: `demographic_${sim.cluster.key}`
+				});
+			}
+		}
 		return {
 			taxonomy: taxonomy.data,
 			metadata,

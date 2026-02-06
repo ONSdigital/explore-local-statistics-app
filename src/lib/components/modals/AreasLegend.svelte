@@ -35,6 +35,12 @@
 				{getName(area)}
 			</li>
 		{/each}
+		{#if selectedGeoGroup}
+			<li style:color="#707070">
+				{@render marker()}
+				{selectedGeoGroup.label}
+			</li>
+		{/if}
 	</ul>
 </div>
 

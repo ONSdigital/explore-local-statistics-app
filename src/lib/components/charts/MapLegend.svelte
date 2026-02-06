@@ -158,8 +158,9 @@
 	<div class="tick" style="right: 0; transform: translateX({snapTicks ? '2px' : '50%'});">
 		{prefix}{format(breaks[breaks.length - 1])}{suffix}
 	</div>
-	{#if Array.isArray(positionedData?.labels)}
-		{#each positionedData.labels as d, i}
+
+	{#key data}
+		{#each positionedData?.labels || [] as d, i}
 			<div style:opacity={d.areacd === hovered ? null : hovered ? '30%' : null}>
 				<div
 					class="marker"
@@ -185,7 +186,7 @@
 				</div>
 			</div>
 		{/each}
-	{/if}
+	{/key}
 	{#each data as d, i (d.areacd)}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<div

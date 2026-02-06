@@ -8,6 +8,8 @@
 	import ChartActions from './ChartActions.svelte';
 	import ChartDataLoader from './ChartDataLoader.svelte';
 	import { pluralise } from '@onsvisual/robo-utils';
+	import { getGeoLevel } from '$lib/config/geoLevels';
+	import { isValidGeoLevel } from '$lib/util/validationHelpers';
 
 	const chartComponents = {
 		map: Map,
@@ -37,6 +39,15 @@
 	let hasTimeRange = $derived(
 		['line', 'table'].includes(chartType) && timeRange[0] !== timeRange[1]
 	);
+	let geoLevelObj = $derived(
+		getGeoLevel(
+			geoLevel?.geoLevel || geoLevel.geoCluster
+				? 'ltla'
+				: isValidGeoLevel(geoLevel?.id)
+					? geoLevel.id
+					: null
+		)
+	);
 
 	let dataUrl = $derived(
 		makeDataUrl(
@@ -44,7 +55,9 @@
 			hasTimeRange ? timeRange : timeRange[timeRange.length - 1],
 			'latest',
 			selected,
-			geoLevel?.id
+			geoLevelObj?.id,
+			geoLevel?.geoExtent,
+			geoLevel?.geoCluster
 		)
 	);
 
@@ -102,7 +115,7 @@
 							{selected}
 							bind:hovered
 							{formatPeriod}
-							{geoLevel}
+							geoLevel={geoLevelObj}
 							{showIntervals}
 							{mode}
 						/>

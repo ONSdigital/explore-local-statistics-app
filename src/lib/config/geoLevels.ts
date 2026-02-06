@@ -72,7 +72,7 @@ function makeLookup(arr) {
 		for (const code of level.codes)
 			lookup[code] = {
 				...level,
-				label: altLabels[code] || level.label
+				altLabel: altLabels[code] || null
 			};
 	}
 	return lookup;
@@ -84,6 +84,11 @@ function makeOrderedCodes(arr) {
 		for (const code of level.codes) codes.add(code);
 	}
 	return Array.from(codes);
+}
+
+export function getGeoLevel(key: string) {
+	if (key in geoLevels) return { id: key, ...geoLevels[key] };
+	return null;
 }
 
 export const geoLevelsArray = makeArray(geoLevels);

@@ -34,6 +34,7 @@
 			label="Geography type"
 			options={data.geoLevels}
 			bind:value={_pageState.selectedGeoLevel}
+			width={null}
 		/>
 	{/if}
 	{#if mode === 'area'}
@@ -42,6 +43,7 @@
 			label="Geography group"
 			options={data.geoGroups}
 			bind:value={_pageState.selectedGeoGroup}
+			width={null}
 		/>
 	{/if}
 	<div class="select-container">
@@ -75,7 +77,5 @@
 	}
 	.select-container {
 		margin-top: 1em;
-		width: 22.5rem;
-		max-width: 100%;
 	}
 </style>

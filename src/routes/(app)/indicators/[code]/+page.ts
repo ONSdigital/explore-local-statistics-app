@@ -1,6 +1,7 @@
 import type { PageLoad } from './$types';
 import { resolve } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
+import { pluralise } from '@onsvisual/robo-utils';
 import { geoLevels } from '$lib/config/geoLevels';
 import { countryLetterLookup } from '$lib/config/geoLookups';
 import indicatorRedirects from '$lib/data/indicator_redirects.json';
@@ -30,10 +31,14 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 		const periods = Object.keys(periodsRaw.category.index);
 		const gLevels = indicator.geography.levels
 			.filter((id) => id !== 'uk')
-			.map((id) => ({
-				id,
-				...geoLevels[id]
-			}));
+			.map((id) => {
+				const geoLevel = geoLevels[id];
+				return {
+					id,
+					...geoLevel,
+					label: pluralise(geoLevel.label)
+				};
+			});
 
 		const initialAreaCode = url.searchParams.get('initialArea') || null;
 		const initialArea = getInitialArea(indicator, areas, initialAreaCode);

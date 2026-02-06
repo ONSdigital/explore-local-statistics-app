@@ -159,6 +159,13 @@ export function parsePyramidData(
 	};
 }
 
+export function getChartTypesForIndicator(indicator = null) {
+	const chartTypes = [];
+	if (!indicator || indicator.standardised) chartTypes.push({ key: 'map', label: 'Map' });
+	if (!indicator || indicator.hasTimeseries) chartTypes.push({ key: 'line', label: 'Line chart' });
+	return [...chartTypes, { key: 'bar', label: 'Bar chart' }, { key: 'table', label: 'Table' }];
+}
+
 export const contrastColor = (color) => {
 	if (!color || typeof color !== 'string') return 'black';
 	const rgb = parse(color).rgb;
