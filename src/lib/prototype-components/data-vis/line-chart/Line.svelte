@@ -70,7 +70,7 @@
 
 	{#if !background}
 		<g class="markers-group">
-			{#each area.data as point}
+			{#each area.data.length > 35 ? [area.data[0]] : area.data as point}
 				<g transform="translate({x(point.xDomainNumb)},{y(point.value)})">
 					{#if ['parent', 'country', 'uk'].includes(area.role)}
 						<rect
