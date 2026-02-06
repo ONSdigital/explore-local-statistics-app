@@ -28,7 +28,6 @@
 					: `/api/v1/geo/search/${query.toLowerCase()}?geoLevel=ctry,rgn,cauth,utla,ltla`
 			);
 			const results = await (await fetch(url)).json();
-			console.log(results);
 			populateResults(
 				results.data.map((d) => {
 					if (!d.areanm) d.areanm = d.areacd;
