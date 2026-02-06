@@ -23,7 +23,7 @@
 
 	<ButtonGroup legend="Select a chart type" visuallyHideLegend bind:value={selectedChartTypeKey}>
 		{#each chartTypes as chartType}
-			<ButtonGroupItem value={chartType.key} label={chartType.label} />
+			<ButtonGroupItem id="{chartType.key}-radio" value={chartType.key} label={chartType.label} />
 		{/each}
 	</ButtonGroup>
 
