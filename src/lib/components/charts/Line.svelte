@@ -26,10 +26,14 @@
 	const height = 500;
 	const widthThreshold = 550;
 	const pointRadius = 5;
-	const dodgedLabelGap = 16;
+	const dodgedLabelGap = 26;
 
 	let width = $state(680);
-	let leftMargin = 30;
+	let leftMargin = $state(40);
+	function updateLeftMargin(el) {
+		const width = el.getBoundingClientRect().width;
+		if (width > leftMargin) leftMargin = width;
+	}
 	let rightMargin = $derived(width < widthThreshold ? 20 : 180);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
@@ -105,6 +109,7 @@
 		.curve(curveLinear);
 
 	$inspect({ labelLookup });
+	$inspect({ leftMargin });
 </script>
 
 {#snippet line(
@@ -113,13 +118,17 @@
 	color = ONScolours.grey40,
 	opacity = 1,
 	id = '',
-	hoverableBuffer = false
+	hoverableBuffer = false,
+	marker = null
 )}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
 		stroke={color}
 		stroke-width={width}
 		{opacity}
+		marker-start="url(#{marker})"
+		marker-mid="url(#{marker})"
+		marker-end="url(#{marker})"
 		onpointerenter={() => hoverableBuffer && (hoveredArea = id)}
 		onpointerleave={() => hoverableBuffer && (hoveredArea = null)}
 		style:pointer-events={color === ONScolours.grey40 ? null : 'none'}
@@ -166,7 +175,7 @@
 <div
 	bind:clientWidth={width}
 	class="line-wrapper"
-	style:padding-left="{leftMargin + 10}px"
+	style:padding-left="{leftMargin}px"
 	style:padding-bottom="25px"
 	style:padding-right="{rightMargin}px"
 >
@@ -204,7 +213,7 @@
 				<div class="y-baseline"></div>
 				{#each yScale.ticks(5) as yTick, i}
 					<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
-					<div class="line-y-tick-label" style:top="{yScale(yTick)}px">
+					<div use:updateLeftMargin class="line-y-tick-label" style:top="{yScale(yTick)}px">
 						{formatYTick(yTick)}
 					</div>
 				{/each}
@@ -247,21 +256,38 @@
 				{/key}
 			</div>
 			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
+				<defs>
+					{#each Object.entries(markerPaths) as path, i}
+						<marker
+							id={path[0]}
+							viewBox="-4 -4 8 8"
+							markerWidth="14"
+							markerHeight="14"
+							markerUnits="userSpaceOnUse"
+							stroke="white"
+							stroke-width="0.4"
+						>
+							<path d={path[1]} style:fill={ONSpalette[i]} />
+						</marker>
+					{/each}
+				</defs>
 				<g opacity={hoveredArea ? 0.2 : 1}>
 					{#each Object.values(_data.keyed) as arr, i}
 						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey], false)}
-						{@render line(arr, 20, ONScolours.grey40, 0, arr[0][idKey], true)}
+						{@render line(arr, 30, ONScolours.grey40, 0, arr[0][idKey], true)}
 					{/each}
 					{#if showIntervals}
 						{#each selectedData as arr, i}
 							{@render ribbon(arr, ONSpalette[i], 0.3, arr[0][idKey])}
 						{/each}
 					{/if}
-					{#each selectedData as arr, i}
-						{@render line(arr, 4.5, 'white', 1, arr[0][idKey])}
-						{@render line(arr, 3, ONSpalette[i], 1, arr[0][idKey])}
+					{#each selectedData as arr}
+						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+						{@const marker = Object.keys(markerPaths)[selectedIndex]}
+						{@render line(arr, 4.5, 'white', 1, arr[0][idKey], false, marker)}
+						{@render line(arr, 3, ONSpalette[selectedIndex], 1, arr[0][idKey], false, marker)}
 					{/each}
-					{#each selectedData as s, sIndex}
+					<!-- {#each selectedData as s, sIndex}
 						{#each s as c}
 							<circle
 								cx={xScale(c.date)}
@@ -271,7 +297,7 @@
 								stroke="white"
 							></circle>
 						{/each}
-					{/each}
+					{/each} -->
 				</g>
 				<g>
 					{#if hoveredArea}
