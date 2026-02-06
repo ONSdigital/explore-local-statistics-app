@@ -25,7 +25,7 @@
 	{id}
 	class="more-indicators"
 	hidden={hidden ? 'until-found' : null}
-	tabindex="0"
+	tabindex="-1"
 	bind:this={el}
 	use:makeObserver={(e) => {
 		if (hidden && e?.target?.hidden === false) hidden = false;
