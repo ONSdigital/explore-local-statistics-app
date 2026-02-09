@@ -173,7 +173,11 @@ export function getPaletteColor(i: number, count: number = 1, mode: string = 'de
 }
 
 export function getMarkerPath(i: number | null, count: number = 1) {
-	return !i || count > markerPathsArray.length ? markerPathsArray[0] : markerPathsArray[i];
+	return i === 0 || !i
+		? markerPathsArray[0]
+		: count > markerPathsArray.length
+			? markerPathsArray[1]
+			: markerPathsArray[i];
 }
 
 export const contrastColor = (color) => {
