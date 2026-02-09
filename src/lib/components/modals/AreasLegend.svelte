@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { getName, pluralise } from '@onsvisual/robo-utils';
-	import { ONSpalette, ONStextPalette, markerPathsArray, ONScolours } from '$lib/config';
+	import { getName } from '@onsvisual/robo-utils';
+	import { ONScolours } from '$lib/config';
+	import { getPaletteColor, getMarkerPath } from '../charts/chartHelpers';
 
 	let {
 		selectedAreas = [],
@@ -14,9 +15,19 @@
 {#snippet marker(i: number | null = null)}
 	<svg viewBox="-4 -4 8 8" class="area-marker">
 		<path
-			d={useMarkerShapes ? markerPathsArray[i ?? 0] : markerPathsArray[0]}
-			fill={hovered ? ONScolours.highlightOrangeDark : i != null ? ONSpalette[i] : '#ddd'}
-			stroke={hovered ? ONScolours.highlightOrangeDark : i != null ? ONSpalette[i] : '#aaa'}
+			d={useMarkerShapes
+				? getMarkerPath(selectedAreas.length, i)
+				: getMarkerPath(selectedAreas.length, 0)}
+			fill={hovered
+				? ONScolours.highlightOrangeDark
+				: i != null
+					? getPaletteColor(selectedAreas.length, i)
+					: '#ddd'}
+			stroke={hovered
+				? ONScolours.highlightOrangeDark
+				: i != null
+					? getPaletteColor(selectedAreas.length, i)
+					: '#aaa'}
 			opacity={i == null ? 0.9 : 1}
 		/>
 	</svg>
@@ -29,7 +40,9 @@
 			<li
 				class:inline={inlineItems}
 				class="ons-u-fs-r--b"
-				style:color={hovered ? ONScolours.highlightOrangeDark : ONStextPalette[i]}
+				style:color={hovered
+					? ONScolours.highlightOrangeDark
+					: getPaletteColor(selectedAreas.length, i, 'text')}
 			>
 				{@render marker(i)}
 				{getName(area)}
