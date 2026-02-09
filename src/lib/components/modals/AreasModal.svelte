@@ -26,7 +26,7 @@
 	function getColor(count, i) {
 		const _count = mode === 'area' ? count + 1 : count;
 		const _i = mode === 'area' ? i + 1 : i;
-		return getPaletteColor(_count, _i);
+		return getPaletteColor(_i, _count);
 	}
 </script>
 

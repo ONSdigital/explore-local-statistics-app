@@ -15,18 +15,16 @@
 {#snippet marker(i: number | null = null)}
 	<svg viewBox="-4 -4 8 8" class="area-marker">
 		<path
-			d={useMarkerShapes
-				? getMarkerPath(selectedAreas.length, i)
-				: getMarkerPath(selectedAreas.length, 0)}
+			d={useMarkerShapes ? getMarkerPath(i, selectedAreas.length) : getMarkerPath(0)}
 			fill={hovered
 				? ONScolours.highlightOrangeDark
 				: i != null
-					? getPaletteColor(selectedAreas.length, i)
+					? getPaletteColor(i, selectedAreas.length)
 					: '#ddd'}
 			stroke={hovered
 				? ONScolours.highlightOrangeDark
 				: i != null
-					? getPaletteColor(selectedAreas.length, i)
+					? getPaletteColor(i, selectedAreas.length)
 					: '#aaa'}
 			opacity={i == null ? 0.9 : 1}
 		/>
@@ -42,7 +40,7 @@
 				class="ons-u-fs-r--b"
 				style:color={hovered
 					? ONScolours.highlightOrangeDark
-					: getPaletteColor(selectedAreas.length, i, 'text')}
+					: getPaletteColor(i, selectedAreas.length, 'text')}
 			>
 				{@render marker(i)}
 				{getName(area)}

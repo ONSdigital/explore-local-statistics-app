@@ -167,12 +167,12 @@ export function getChartTypesForIndicator(indicator = null) {
 	return [...chartTypes, { key: 'bar', label: 'Bar chart' }, { key: 'table', label: 'Table' }];
 }
 
-export function getPaletteColor(count: number, i: number, mode: string = 'default') {
+export function getPaletteColor(i: number, count: number = 1, mode: string = 'default') {
 	const palette = mode === 'text' ? ONStextPalette : ONSpalette;
 	return i === 0 ? palette[0] : !i || count > palette.length ? ONScolours.grey75 : palette[i];
 }
 
-export function getMarkerPath(count: number, i: number | null) {
+export function getMarkerPath(i: number | null, count: number = 1) {
 	return !i || count > markerPathsArray.length ? markerPathsArray[0] : markerPathsArray[i];
 }
 
