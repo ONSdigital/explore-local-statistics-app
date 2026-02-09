@@ -78,15 +78,15 @@
 	</div>
 {/snippet}
 
-<div
-	class="sparkline-wrapper"
-	style:padding-left="{margins.left + 10}px"
-	style:padding-right="{margins.right + 10}px"
-	style:padding-top="10px"
-	style:padding-bottom="25px"
->
-	<div class="sparkline-container">
-		{#if _data && _selected?.length && xScale && yScale}
+{#if _data && _selected?.length && xScale && yScale}
+	<div
+		class="sparkline-wrapper"
+		style:padding-left="{margins.left + 10}px"
+		style:padding-right="{margins.right + 10}px"
+		style:padding-top="10px"
+		style:padding-bottom="25px"
+	>
+		<div class="sparkline-container">
 			<svg
 				viewBox="0 0 100 100"
 				class="sparkline-svg"
@@ -132,11 +132,11 @@
 					{/each}
 				{/key}
 			</div>
-		{:else}
-			<p class="ons-u-fs-s">No time series data to display</p>
-		{/if}
+		</div>
 	</div>
-</div>
+{:else}
+	<p class="ons-u-fs-s">Time series data not available.</p>
+{/if}
 
 <style>
 	.sparkline-wrapper {

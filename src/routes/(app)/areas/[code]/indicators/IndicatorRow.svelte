@@ -143,7 +143,12 @@
 					<ButtonGroupItem value="simple" label="Show selected areas" />
 					<ButtonGroupItem value="advanced" label="Show all areas" />
 				</ButtonGroup>
-				<ChartDataLoader id="{indicator} pyramid" dataUrl={dataUrl['pyramid']} {visible}>
+				<ChartDataLoader
+					id="{indicator} pyramid"
+					dataUrl={dataUrl['pyramid']}
+					noDataMessage="Chart data not available."
+					{visible}
+				>
 					{#snippet chart(data)}
 						<Pyramid {data} {formatValue} {selected} bind:hovered />
 					{/snippet}
@@ -152,7 +157,12 @@
 		{:else}
 			<div class="indicator-charts">
 				<div class="indicator-beeswarm">
-					<ChartDataLoader id="{indicator} beeswarm" dataUrl={dataUrl['beeswarm']} {visible}>
+					<ChartDataLoader
+						id="{indicator} beeswarm"
+						dataUrl={dataUrl['beeswarm']}
+						noDataMessage="Chart data not available."
+						{visible}
+					>
 						{#snippet chart(data)}
 							<Beeswarm
 								{data}
@@ -168,7 +178,12 @@
 					</ChartDataLoader>
 				</div>
 				<div class="indicator-sparkline">
-					<ChartDataLoader id="{indicator} sparkline" dataUrl={dataUrl['sparkline']} {visible}>
+					<ChartDataLoader
+						id="{indicator} sparkline"
+						dataUrl={dataUrl['sparkline']}
+						noDataMessage="Time series data not available."
+						{visible}
+					>
 						{#snippet chart(data)}
 							<Sparkline
 								{data}
