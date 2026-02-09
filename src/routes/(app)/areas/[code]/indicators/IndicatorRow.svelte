@@ -115,11 +115,13 @@
 						</li>
 					</ul>
 				{/if}
-				<p>
-					For more data and charts, visit our page on <a
-						href={resolve(`/indicators/${metadata.slug}`)}>{metadata.label}</a
-					>.
-				</p>
+				{#if !metadata.isMultivariate}
+					<p>
+						For more data and charts, visit our page on <a
+							href={resolve(`/indicators/${metadata.slug}`)}>{metadata.label}</a
+						>.
+					</p>
+				{/if}
 			</div>
 		</details>
 		{#if indicator === 'population-by-age-and-sex'}
