@@ -32,7 +32,7 @@
 	let leftMargin = $state(40);
 	function updateLeftMargin(el) {
 		const width = el.getBoundingClientRect().width;
-		if (width > leftMargin) leftMargin = width;
+		if (width > leftMargin) leftMargin = width + 15;
 	}
 	let rightMargin = $derived(width < widthThreshold ? 20 : 180);
 	let widthInner = $derived(width - rightMargin - leftMargin);
