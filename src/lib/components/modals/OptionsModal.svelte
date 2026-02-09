@@ -31,7 +31,6 @@
 		label="Show confidence intervals"
 		disabled={!hasIntervals}
 		compact
-		disabled={!hasIntervals}
 	/>
 	{#if !hasIntervals}
 		<p class="ons-chart__caption">Note: Confidence intervals not available for this indicator</p>
