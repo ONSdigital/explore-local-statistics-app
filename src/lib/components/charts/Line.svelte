@@ -47,7 +47,7 @@
 
 	let xScale = $derived(_data ? scaleTime().domain(_data.dateDomain).range([0, widthInner]) : null);
 
-	let yDomain = $derived(_data ? nice(..._data.valueDomain, 2) : null);
+	let yDomain = $derived(_data ? nice(..._data.valueDomain, 5) : null);
 	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([height, 0]) : null);
 
 	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : null);
@@ -109,7 +109,8 @@
 		.curve(curveLinear);
 
 	$inspect({ labelLookup });
-	$inspect({ leftMargin });
+	$inspect({ _data });
+	$inspect({ yDomain });
 </script>
 
 {#snippet line(

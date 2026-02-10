@@ -44,8 +44,14 @@ export function parseChartData(
 	const dateDomain = [Infinity, -Infinity];
 
 	const hasConfidenceIntervals = data.lci_95 && data.uci_95;
-	const minValueKey = hasConfidenceIntervals ? 'lci_95' : valueKey;
-	const maxValueKey = hasConfidenceIntervals ? 'uci_95' : valueKey;
+	function getRowMin(row) {
+		if (!hasConfidenceIntervals) return row[valueKey];
+		return Math.min(row[valueKey], row.lci_95 ?? Infinity);
+	}
+	function getRowMax(row) {
+		if (!hasConfidenceIntervals) return row[valueKey];
+		return Math.max(row[valueKey], row.uci_95 ?? -Infinity);
+	}
 
 	const cols = Object.keys(data);
 	for (let i = 0; i < data[cols[0]].length; i++) {
@@ -55,8 +61,8 @@ export function parseChartData(
 		for (const col of cols) row[col] = data[col][i];
 		row.date = new Date(row[periodKey].slice(0, 10));
 
-		const minVal = row[minValueKey];
-		const maxVal = row[maxValueKey];
+		const minVal = getRowMin(row);
+		const maxVal = getRowMax(row);
 		const valid = (d) => d !== null && d !== undefined && d !== '';
 
 		if (valid(minVal)) valueDomain[0] = Math.min(valueDomain[0], minVal);
