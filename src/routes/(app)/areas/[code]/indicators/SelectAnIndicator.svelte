@@ -45,11 +45,7 @@
 			selected={[areaProps.areacd, ...pageState.selectedAreas.map((a) => a.areacd)]}
 			geoLevel={pageState.selectedGeoGroup}
 			showIntervals={pageState.showConfidenceIntervals}
-			suppressedChartMessage={makeChartMessage(
-				selectedIndicator,
-				selectedChartType,
-				includedChartKeys
-			)}
+			noChartMessage={makeChartMessage(selectedIndicator, selectedChartType, includedChartKeys)}
 		/>
 	{/key}
 </div>

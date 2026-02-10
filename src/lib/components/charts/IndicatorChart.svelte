@@ -28,7 +28,7 @@
 		showIntervals = false,
 		hovered = $bindable(),
 		mode = 'default',
-		suppressedChartMessage = null
+		noChartMessage = null
 	} = $props();
 
 	let visible = $state(false);
@@ -79,10 +79,10 @@
 	class:content-border={mode === 'default' && !fullScreenMode}
 	bind:this={el}
 >
-	{#if suppressedChartMessage}
+	{#if noChartMessage}
 		<div class="no-chart-container">
 			<p>
-				{@html suppressedChartMessage}
+				{@html noChartMessage}
 			</p>
 		</div>
 	{:else if chartType === 'line' && timeRange[0] === timeRange[1]}
