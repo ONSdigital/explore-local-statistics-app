@@ -74,10 +74,7 @@
 <NavSections cls="wider-nav-sections" marginTop>
 	<div class="indicators-nav-sections">
 		<div class="legend-sticky">
-			<AreasLegend
-				selectedAreas={pageState.selectedAreas}
-				selectedGeoGroup={pageState.selectedGeoLevel}
-			/>
+			<AreasLegend selectedAreas={pageState.selectedAreas} />
 			<div class="legend-modals">
 				<AreasModal mode="indicator" {data} bind:pageState />
 				<OptionsModal {data} hasIntervals={data.indicator.confidenceIntervals} bind:pageState />
