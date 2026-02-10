@@ -3,9 +3,9 @@
 	import { nice } from 'd3-array';
 	import { area, curveLinear } from 'd3-shape';
 	import { format } from 'd3-format';
-	import { parseChartData, contrastColor, makeCurlyBrace } from './chartHelpers';
+	import { parseChartData, getPaletteColor, getMarkerPath, makeCurlyBrace } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
-	import { markerPaths, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
+	import { markerPaths, ONScolours } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
@@ -246,7 +246,7 @@
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap
 										: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
 									style:top="{yPos}px"
-									style:color={ONStextPalette[i]}
+									style:color={getPaletteColor(i, selectedData.length, 'text')}
 									style:max-width="{rightMargin - dodgedLabelGap}px"
 								>
 									{arr?.[0][labelKey]}
@@ -268,7 +268,7 @@
 							stroke="white"
 							stroke-width="0.4"
 						>
-							<path d={path[1]} style:fill={ONSpalette[i]} />
+							<path d={path[1]} style:fill={getPaletteColor(i, selectedData.length)} />
 						</marker>
 					{/each}
 				</defs>
@@ -279,14 +279,24 @@
 					{/each}
 					{#if showIntervals}
 						{#each selectedData as arr, i}
-							{@render ribbon(arr, ONSpalette[i], 0.3, arr[0][idKey])}
+							{@render ribbon(arr, getPaletteColor(i, selectedData.length), 0.3, arr[0][idKey])}
 						{/each}
 					{/if}
 					{#each selectedData as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-						{@const marker = Object.keys(markerPaths)[selectedIndex]}
+						{@const marker = Object.keys(markerPaths).find(
+							(key) => markerPaths[key] === getMarkerPath(selectedIndex, selectedData.length)
+						)}
 						{@render line(arr, 4.5, 'white', 1, arr[0][idKey], false, marker)}
-						{@render line(arr, 3, ONSpalette[selectedIndex], 1, arr[0][idKey], false, marker)}
+						{@render line(
+							arr,
+							3,
+							getPaletteColor(selectedIndex, selectedData.length),
+							1,
+							arr[0][idKey],
+							false,
+							marker
+						)}
 					{/each}
 					<!-- {#each selectedData as s, sIndex}
 						{#each s as c}
