@@ -19,29 +19,42 @@
 		align-items: center;
 		justify-content: center;
 	}
+	/* CSS adapted from https://cssloaders.github.io */
 	.loading-spinner {
-		border: 6px solid var(--ons-color-branded-tint);
-		border-radius: 50%;
-		border-top-color: var(--ons-color-branded);
 		width: 40px;
-		height: 40px;
-		-webkit-animation: spin 2s linear infinite;
-		animation: spin 2s linear infinite;
+		height: 25px;
+		background:
+			linear-gradient(
+				var(--ons-color-branded-tint) calc(1 * 100% / 6),
+				var(--ons-color-branded) 0 calc(3 * 100% / 6),
+				var(--ons-color-branded-tint) 0
+			),
+			linear-gradient(
+				var(--ons-color-branded-tint) calc(2 * 100% / 6),
+				var(--ons-color-branded) 0 calc(4 * 100% / 6),
+				var(--ons-color-branded-tint) 0
+			),
+			linear-gradient(
+				var(--ons-color-branded-tint) calc(3 * 100% / 6),
+				var(--ons-color-branded) 0 calc(5 * 100% / 6),
+				var(--ons-color-branded-tint) 0
+			);
+		background-size: 10px 400%;
+		background-repeat: no-repeat;
+		animation: matrix 1.5s infinite linear;
 	}
-	@-webkit-keyframes spin {
+	@keyframes matrix {
 		0% {
-			-webkit-transform: rotate(0deg);
+			background-position:
+				0% 100%,
+				50% 100%,
+				100% 100%;
 		}
 		100% {
-			-webkit-transform: rotate(360deg);
-		}
-	}
-	@keyframes spin {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
+			background-position:
+				0% 0%,
+				50% 0%,
+				100% 0%;
 		}
 	}
 </style>

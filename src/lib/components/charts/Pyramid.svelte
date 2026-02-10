@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { scaleLinear, scaleBand } from 'd3-scale';
 	import { parsePyramidData } from './chartHelpers';
-	import { ONSpalette } from '$lib/config';
-	import { contrastColor } from './chartHelpers';
+	import { contrastColor, getPaletteColor } from './chartHelpers';
 
 	let {
 		data,
@@ -69,7 +68,7 @@
 		y={yScale(d[yKey])}
 		width={xScale(d[xKey])}
 		height={yScale.bandwidth()}
-		fill={ONSpalette[0]}
+		fill={getPaletteColor(0)}
 	/>
 {/snippet}
 
@@ -174,12 +173,12 @@
 						{#if _data?.keyed?.[area]}
 							{@render polyline(
 								makeLine(_data.keyed[area], xScale, 'female'),
-								ONSpalette[maxIndex - i],
+								getPaletteColor(maxIndex - i, selected.length),
 								i === maxIndex ? 3 : 2
 							)}
 							{@render polyline(
 								makeLine(_data.keyed[area], xScale, 'male'),
-								ONSpalette[maxIndex - i],
+								getPaletteColor(maxIndex - i, selected.length),
 								i === maxIndex ? 3 : 2
 							)}
 						{/if}
@@ -204,7 +203,7 @@
 			>
 				<span>{group}</span>
 				{#if hovered || selected.length}
-					{@const color = hovered ? 'orange' : ONSpalette[0]}
+					{@const color = hovered ? 'orange' : getPaletteColor(0)}
 					{@const sum = sumBySex(hovered || selected[0], group)}
 					{#if sum}
 						<br /><span

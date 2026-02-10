@@ -1,6 +1,7 @@
 import { scaleLinear } from 'd3-scale';
 import { AccurateBeeswarm } from 'accurate-beeswarm-plot';
 import parse from 'parse-color';
+import { ONScolours, ONSpalette, ONStextPalette, markerPathsArray } from '$lib/config';
 
 // Gets the median for a sorted array of numbers
 export function median(xs) {
@@ -170,6 +171,19 @@ export function getChartTypesForIndicator(indicator = null) {
 	if (!indicator || indicator.standardised) chartTypes.push({ key: 'map', label: 'Map' });
 	if (!indicator || indicator.hasTimeseries) chartTypes.push({ key: 'line', label: 'Line chart' });
 	return [...chartTypes, { key: 'bar', label: 'Bar chart' }, { key: 'table', label: 'Table' }];
+}
+
+export function getPaletteColor(i: number, count: number = 1, mode: string = 'default') {
+	const palette = mode === 'text' ? ONStextPalette : ONSpalette;
+	return i === 0 ? palette[0] : !i || count > palette.length ? ONScolours.grey75 : palette[i];
+}
+
+export function getMarkerPath(i: number | null, count: number = 1) {
+	return i === 0 || !i
+		? markerPathsArray[0]
+		: count > markerPathsArray.length
+			? markerPathsArray[1]
+			: markerPathsArray[i];
 }
 
 export const contrastColor = (color) => {

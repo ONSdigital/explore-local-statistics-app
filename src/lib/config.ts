@@ -98,3 +98,5 @@ export const markerPaths = {
 };
 
 export const markerPathsArray = Object.values(markerPaths);
+
+export const maxAreasSelectable = 10;

@@ -2,8 +2,7 @@
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { nice } from 'd3-array';
 	import { format } from 'd3-format';
-	import { parseChartData, contrastColor } from './chartHelpers';
-	import { ONSpalette, markerPathsArray } from '$lib/config';
+	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 
 	let {
 		data,
@@ -54,19 +53,18 @@
 	/>
 {/snippet}
 
-{#snippet marker(d, i)}
+{#snippet marker(d, path, color)}
 	<svg
 		viewBox="-4 -4 8 8"
 		class="sparkline-marker"
 		style:top="{yScale(d[yKey])}%"
 		style:left="{xScale(d.date)}%"
 	>
-		<path d={markerPathsArray[i]} fill={ONSpalette[i]} vector-effect="non-scaling-stroke" />
+		<path d={path} fill={color} vector-effect="non-scaling-stroke" />
 	</svg>
 {/snippet}
 
-{#snippet label(d, diff, i)}
-	{@const color = ONSpalette[i]}
+{#snippet label(d, diff, color)}
 	<div
 		use:updateMargins={{ side: 'right' }}
 		class="sparkline-label"
@@ -78,15 +76,15 @@
 	</div>
 {/snippet}
 
-<div
-	class="sparkline-wrapper"
-	style:padding-left="{margins.left + 10}px"
-	style:padding-right="{margins.right + 10}px"
-	style:padding-top="10px"
-	style:padding-bottom="25px"
->
-	<div class="sparkline-container">
-		{#if _data && _selected?.length && xScale && yScale}
+{#if _data && _selected?.length && xScale && yScale}
+	<div
+		class="sparkline-wrapper"
+		style:padding-left="{margins.left + 10}px"
+		style:padding-right="{margins.right + 10}px"
+		style:padding-top="10px"
+		style:padding-bottom="25px"
+	>
+		<div class="sparkline-container">
 			<svg
 				viewBox="0 0 100 100"
 				class="sparkline-svg"
@@ -96,7 +94,7 @@
 				<g class="sparkline-lines">
 					{#key _selected}
 						{#each _selected || [] as d}
-							{@render line(d.data, 2, ONSpalette[d.i])}
+							{@render line(d.data, 2, getPaletteColor(d.i, _selected.length))}
 						{/each}
 					{/key}
 				</g>
@@ -124,19 +122,20 @@
 			</div>
 			<div class="sparkline-annotations">
 				{#key _selected}
+					{@const count = _selected.length}
 					{#each _selected || [] as d}
 						{@const datum = d.data[d.data.length - 1]}
 						{@const diff = datum[yKey] - d.data[0][yKey]}
-						{@render marker(datum, d.i)}
-						{#if d.i === 0}{@render label(datum, diff, d.i)}{/if}
+						{@render marker(datum, getMarkerPath(d.i, count), getPaletteColor(d.i, count))}
+						{#if d.i === 0}{@render label(datum, diff, getPaletteColor(d.i, count))}{/if}
 					{/each}
 				{/key}
 			</div>
-		{:else}
-			<p class="ons-u-fs-s">No time series data to display</p>
-		{/if}
+		</div>
 	</div>
-</div>
+{:else}
+	<p class="ons-u-fs-s">Time series data not available.</p>
+{/if}
 
 <style>
 	.sparkline-wrapper {

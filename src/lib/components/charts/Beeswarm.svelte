@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { parseBeeswarmData, contrastColor } from './chartHelpers';
-	import { ONSpalette, markerPathsArray } from '$lib/config';
+	import { parseBeeswarmData, getPaletteColor, getMarkerPath } from './chartHelpers';
 
 	let {
 		data,
@@ -123,8 +122,8 @@
 					{#each _selected as sel, i}
 						{@const d = { ...sel.datum, y: 0 }}
 						{#if !hovered && i < 2}
-							{@render line(d, i, ONSpalette[sel.i])}
-							{@render confidenceRect(d, i, ONSpalette[sel.i])}
+							{@render line(d, i, getPaletteColor(sel.i, _selected.length))}
+							{@render confidenceRect(d, i, getPaletteColor(sel.i, _selected.length))}
 						{/if}
 					{/each}
 				</g>
@@ -143,8 +142,9 @@
 					{@render label(_hovered, 0, 'orange', true)}
 				{:else}
 					{#each _selected as d, i}
-						{#if i < 2}{@render label(d.datum, i, ONSpalette[d.i], false)}{/if}
-						{@render marker(d.datum, markerPathsArray[d.i], ONSpalette[d.i])}
+						{@const color = getPaletteColor(d.i, _selected.length)}
+						{#if i < 2}{@render label(d.datum, i, color, false)}{/if}
+						{@render marker(d.datum, getMarkerPath(d.i, _selected.length), color)}
 					{/each}
 				{/if}
 			{/if}

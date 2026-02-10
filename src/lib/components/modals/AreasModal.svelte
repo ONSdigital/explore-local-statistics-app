@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { Button, Dropdown, Select } from '@onsvisual/svelte-components';
 	import Modal from './Modal.svelte';
-	import { ONSpalette } from '$lib/config';
+	import { maxAreasSelectable } from '$lib/config';
 	import { cloneState } from './modalHelpers';
+	import { getPaletteColor } from '../charts/chartHelpers';
 	import { getAreaType } from '$lib/utils';
 
 	let { data, pageState = $bindable(), mode } = $props();
@@ -11,12 +12,21 @@
 	let _areas = $derived(data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
 
 	function addArea(area) {
-		if (!_pageState.selectedAreas.find((d) => d.areacd === area.areacd))
+		if (
+			_pageState.selectedAreas.length < maxAreasSelectable &&
+			!_pageState.selectedAreas.find((d) => d.areacd === area.areacd)
+		)
 			_pageState.selectedAreas.push(area);
 	}
 
 	function removeArea(area) {
 		_pageState.selectedAreas = _pageState.selectedAreas.filter((d) => d.areacd !== area.areacd);
+	}
+
+	function getColor(count, i) {
+		const _count = mode === 'area' ? count + 1 : count;
+		const _i = mode === 'area' ? i + 1 : i;
+		return getPaletteColor(_i, _count);
 	}
 </script>
 
@@ -61,7 +71,7 @@
 	{#each _pageState.selectedAreas as area, i}
 		<Button
 			icon="cross"
-			color={(mode === 'area' ? ONSpalette[i + 1] : ONSpalette[i]) || 'darkgrey'}
+			color={getColor(_pageState.selectedAreas.length, i)}
 			small
 			on:click={() => removeArea(area)}>{area.areanm}</Button
 		>
