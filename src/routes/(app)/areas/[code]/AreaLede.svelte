@@ -26,7 +26,7 @@
 				The official name of this area is <strong>{areaProps.areanm}</strong>.
 			{/if}
 		</p>
-		{#if areaProps.start && areaProps.replaces?.[0]?.areacd}
+		{#if areaProps.replaces?.[0]?.areacd && areaProps.start > new Date().getFullYear() - 2}
 			<Notice>
 				In {areaProps.start}, this area replaced
 				{#each areaProps.replaces as rep, i}
@@ -34,13 +34,12 @@
 					<a href={resolve(`/areas/${makeCanonicalSlug(rep)}`)} data-sveltekit-noscroll
 						>{getName(rep)}</a
 					>
-					({rep.areacd})
-					{i === areaProps.replaces.length - 1
-						? ''
+					({rep.areacd}){i === areaProps.replaces.length - 1
+						? '.'
 						: i === areaProps.replaces.length - 2
 							? ' and '
 							: ', '}
-					{areaProps.areanm === rep.areanm ? 'due to a boundary change.' : '.'}
+					{areaProps.areanm === rep.areanm ? 'due to a boundary change.' : ''}
 				{/each}
 			</Notice>
 		{/if}
