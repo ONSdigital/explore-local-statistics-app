@@ -10,6 +10,15 @@
 
 	let selectedIndicator = $state(indicators[0]);
 	let selectedChartTypeKey = $state(chartTypes[0].key);
+	let selectedChartType = $derived(chartTypes.find((chart) => chart.key === selectedChartTypeKey));
+	let includedChartKeys = $derived(
+		getChartTypesForIndicator(selectedIndicator).map((chart) => chart.key)
+	);
+
+	function makeChartMessage(indicator, chart, includedChartKeys) {
+		if (includedChartKeys.includes(chart.key)) return null;
+		return `${chart.label} could not be displayed for <strong>${indicator.label}</strong>. ${chart.key === 'map' ? 'Data is not standardised' : 'Only one year of data available'}.`;
+	}
 </script>
 
 <div class="select-an-indicator">
@@ -36,6 +45,11 @@
 			selected={[areaProps.areacd, ...pageState.selectedAreas.map((a) => a.areacd)]}
 			geoLevel={pageState.selectedGeoGroup}
 			showIntervals={pageState.showConfidenceIntervals}
+			suppressedChartMessage={makeChartMessage(
+				selectedIndicator,
+				selectedChartType,
+				includedChartKeys
+			)}
 		/>
 	{/key}
 </div>

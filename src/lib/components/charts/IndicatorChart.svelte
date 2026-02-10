@@ -27,7 +27,8 @@
 		geoLevel = null,
 		showIntervals = false,
 		hovered = $bindable(),
-		mode = 'default'
+		mode = 'default',
+		suppressedChartMessage = null
 	} = $props();
 
 	let visible = $state(false);
@@ -78,11 +79,17 @@
 	class:content-border={mode === 'default' && !fullScreenMode}
 	bind:this={el}
 >
-	{#if chartType === 'line' && timeRange[0] === timeRange[1]}
+	{#if suppressedChartMessage}
 		<div class="no-chart-container">
 			<p>
-				Time series not displayed as selected date range includes only one time period with
-				<span style="font-weight: bold;">{metadata.label}</span> data.
+				{@html suppressedChartMessage}
+			</p>
+		</div>
+	{:else if chartType === 'line' && timeRange[0] === timeRange[1]}
+		<div class="no-chart-container">
+			<p>
+				Line chart could not be displayed for <strong>{metadata.label}</strong>. Only one year of
+				data selected.
 			</p>
 		</div>
 	{:else}
@@ -177,7 +184,7 @@
 	}
 	.no-chart-container {
 		display: flex;
-		min-height: 160px;
+		min-height: 400px;
 		align-items: center;
 	}
 	.source-notes-container {
