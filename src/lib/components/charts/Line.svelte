@@ -181,7 +181,7 @@
 	style:padding-right="{rightMargin}px"
 >
 	{#if showIntervals}
-		<svg aria-hidden="true" width="200" height="50" class="bar-chart-legend">
+		<svg aria-hidden="true" width="350" height="50" class="bar-chart-legend">
 			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
 			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
 			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>

@@ -207,34 +207,38 @@
 >
 	{#if showIntervals}
 		<div class="legend-container">
-			<svg aria-hidden="true" width="200" height="90" class="bar-chart-legend">
-				<line x1="10" y1="15" x2="170" y2="15" stroke="#222" opacity="0.2" stroke-width="20px"
+			<svg
+				aria-hidden="true"
+				width="200"
+				height="90"
+				class="bar-chart-legend"
+				style="overflow: visible;"
+			>
+				<line x1="10" y1="15" x2="100" y2="15" stroke="#222" opacity="0.2" stroke-width="15px"
 				></line>
-				<!-- <rect x="8" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"></rect> -->
-				<!-- <rect x="168" width="4" y="7" height="16" fill="#222" stroke="white" stroke-width="1px"></rect> -->
-				<rect x="87" width="6" y="3" height="24" fill="#222" stroke="white" stroke-width="1.5px"
+				<rect x="52" width="5" y="5" height="20" fill="#222" stroke="white" stroke-width="1.3px"
 				></rect>
 
 				<path
-					d={makeCurlyBrace(10, 30, 170, 30, 10, 0.5)}
+					d={makeCurlyBrace(10, 30, 100, 30, 10, 0.5)}
 					stroke="#222"
 					fill="none"
 					stroke-width="1.5px"
 				></path>
 
 				<text
-					x="90"
+					x="55"
 					y="60"
-					font-size="18px"
+					font-size="16px"
 					stroke="#222"
 					fill="#222"
 					stroke-width="0px"
 					text-anchor="middle">95% confidence</text
 				>
 				<text
-					x="90"
+					x="55"
 					y="80"
-					font-size="18px"
+					font-size="16px"
 					stroke="#222"
 					fill="#222"
 					stroke-width="0px"
