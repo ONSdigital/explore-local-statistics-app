@@ -39,13 +39,13 @@
 						: i === areaProps.replaces.length - 2
 							? ' and '
 							: ', '}
-					{areaProps.areanm === rep.areanm ? 'due to a boundary change' : ''}
+					{areaProps.areanm === rep.areanm ? 'due to a boundary change.' : '.'}
 				{/each}
 			</p>
 		{/if}
 		{#if areaProps.end && areaProps.successor?.areacd}
 			<p class="ons-u-fs-s additional-area-info">
-				In {areaProps.end + 1}, it was replaced by
+				In {areaProps.end + 1}, this area was replaced by
 				{areaProps.areanm === areaProps.successor.areanm
 					? 'the new'
 					: getName(areaProps.successor, 'the', 'prefix')}
@@ -53,7 +53,7 @@
 					href={resolve(`/areas/${makeCanonicalSlug(areaProps.successor)}`)}
 					data-sveltekit-noscroll>{getName(areaProps.successor)}</a
 				>
-				({areaProps.successor.areacd})
+				({areaProps.successor.areacd}) due to a boundary change.
 			</p>
 		{:else if areaProps.end}
 			<p class="ons-u-fs-s additional-area-info">
