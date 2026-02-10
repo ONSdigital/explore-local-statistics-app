@@ -235,10 +235,14 @@
 	.titleblock-container {
 		position: relative;
 	}
+	:global(.breadcrumb-wrap) {
+		z-index: 1;
+	}
 	@media (min-width: 800px) {
-		.titleblock-container :global(.ons-hero__content) {
-			width: calc(100vw - 38%);
-			max-width: calc(100vw - 280px);
+		.titleblock-container :global(.ons-hero .ons-grid__col),
+		:global(.breadcrumb-wrap .ons-breadcrumbs) {
+			width: 75% !important;
+			max-width: 75% !important;
 		}
 	}
 </style>
