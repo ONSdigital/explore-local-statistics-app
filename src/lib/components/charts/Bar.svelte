@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import { parseChartData, contrastColor, makeCurlyBrace } from './chartHelpers';
+	import { parseChartData, makeCurlyBrace, getPaletteColor } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
-	import { ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
+	import { ONScolours } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
@@ -87,7 +87,7 @@
 			return ONScolours.grey40;
 		}
 
-		return ONSpalette[index % ONSpalette.length];
+		return getPaletteColor(index, selected.length);
 	}
 
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
@@ -119,8 +119,6 @@
 	);
 
 	$inspect({ labelLookup });
-	$inspect({ selected });
-	$inspect({ hoveredCodesNames });
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '')}
@@ -304,7 +302,7 @@
 								class="margin-label-selected"
 								style:top="{yPos ? yPos + height / 2 : 0}px"
 								style:left={isLabelDodged ? '-16px' : '-8px'}
-								style:color={ONStextPalette[i]}
+								style:color={getPaletteColor(i, selectedData.length, 'text')}
 								style:max-width="{leftMargin - 16}px"
 							>
 								{a[0][labelKey]}
