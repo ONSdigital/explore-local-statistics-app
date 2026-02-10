@@ -43,7 +43,7 @@
 </script>
 
 <Hero
-	title={areaProps.areanm}
+	title={getName(areaProps)}
 	titleBadge={{
 		label: areaProps.areacd,
 		ariaLabel: `Area code: ${areaProps.areacd}`,
