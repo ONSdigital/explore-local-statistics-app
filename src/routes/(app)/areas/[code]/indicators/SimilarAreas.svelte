@@ -11,11 +11,13 @@
 
 <div class="ons-u-mb-l">
 	<ul class="map-legend">
-		<li>
-			<span class="map-legend-marker" style:color={ONSpalette[0]} style:background={ONSpalette[0]}
-			></span>
-			Areas in {selectedCluster.key} cluster {selectedCluster.cluster.label}
-		</li>
+		{#if selectedCluster.cluster}
+			<li>
+				<span class="map-legend-marker" style:color={ONSpalette[0]} style:background={ONSpalette[0]}
+				></span>
+				Areas in {selectedCluster.key} cluster {selectedCluster.cluster.label}
+			</li>
+		{/if}
 		<li>
 			<span class="map-legend-marker" style:background="#eee"></span>
 			20 areas most similar to {getName(areaProps, 'the')}

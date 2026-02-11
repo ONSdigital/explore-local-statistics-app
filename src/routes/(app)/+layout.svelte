@@ -60,6 +60,7 @@
 	<Breadcrumb
 		links={page.data.breadcrumbLinks}
 		background={page.data.breadcrumbBackground || null}
+		cls={page.data.breadcrumbClass || null}
 	/>
 {/if}
 <Main>

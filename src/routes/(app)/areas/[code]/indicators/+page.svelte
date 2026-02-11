@@ -7,7 +7,8 @@
 		NavSections,
 		NavSection,
 		Dropdown,
-		Details
+		Details,
+		Em
 	} from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
@@ -16,6 +17,7 @@
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
 	import AreasLegend from '$lib/components/modals/AreasLegend.svelte';
+	import AreaChangeNotice from './AreaChangeNotice.svelte';
 	import BigNumber from './BigNumber.svelte';
 	import IndicatorRow from './IndicatorRow.svelte';
 	import MoreIndicators from './MoreIndicators.svelte';
@@ -102,6 +104,8 @@
 		mapDescription={'Map of ' + getName(areaProps, 'the')}
 	/>
 </div>
+
+<AreaChangeNotice {areaProps} />
 
 <Grid marginTop>
 	{#each ['population-count', 'five-year-population-change', 'median-age'].filter((slug) => slug in data.metadata) as slug}
@@ -231,10 +235,14 @@
 	.titleblock-container {
 		position: relative;
 	}
+	:global(.breadcrumb-wrap) {
+		z-index: 1;
+	}
 	@media (min-width: 800px) {
-		.titleblock-container :global(.ons-hero__content) {
-			width: calc(100vw - 38%);
-			max-width: calc(100vw - 280px);
+		.titleblock-container :global(.ons-hero .ons-grid__col),
+		:global(.breadcrumb-wrap .ons-breadcrumbs) {
+			width: 75% !important;
+			max-width: 75% !important;
 		}
 	}
 </style>

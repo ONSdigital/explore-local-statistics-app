@@ -14,8 +14,8 @@ export default function getSimilarAreas(params = {}) {
 	if (!similar) return [];
 
 	const clusters = [];
+	const clusterTypes = Object.keys(similar);
 	const clusterLookup = areasClusters.lookup[cdUpper];
-	const clusterTypes = Object.keys(clusterLookup);
 
 	for (const type of clusterTypes) {
 		const similarAreas = similar[type];

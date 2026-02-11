@@ -20,6 +20,14 @@
 	const bottomMargin = 20;
 
 	let _data = $derived(parsePyramidData(data, idKey));
+	let _selected = $derived(
+		_data
+			? selected
+					.map((cd, i) => ({ i, data: _data.keyed[cd] }))
+					.filter((d) => Array.isArray(d.data) && d.data.length > 1)
+					.reverse()
+			: []
+	);
 	let mode = $derived(_data?.keysLength <= selected.length ? 'simple' : 'advanced');
 
 	let w = $state(400);
@@ -167,21 +175,18 @@
 			{/if}
 
 			{#if selected.length}
-				{@const maxIndex = selected.length - 1}
 				<g class="chart-selected">
-					{#each [...selected].reverse() as area, i}
-						{#if _data?.keyed?.[area]}
-							{@render polyline(
-								makeLine(_data.keyed[area], xScale, 'female'),
-								getPaletteColor(maxIndex - i, selected.length),
-								i === maxIndex ? 3 : 2
-							)}
-							{@render polyline(
-								makeLine(_data.keyed[area], xScale, 'male'),
-								getPaletteColor(maxIndex - i, selected.length),
-								i === maxIndex ? 3 : 2
-							)}
-						{/if}
+					{#each _selected as d}
+						{@render polyline(
+							makeLine(d.data, xScale, 'female'),
+							getPaletteColor(d.i, selected.length),
+							d.i === 0 ? 3 : 2
+						)}
+						{@render polyline(
+							makeLine(d.data, xScale, 'male'),
+							getPaletteColor(d.i, selected.length),
+							d.i === 0 ? 3 : 2
+						)}
 					{/each}
 				</g>
 			{/if}

@@ -76,7 +76,8 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 					href: resolve(`/areas/${p.areacd}`)
 				}))
 			],
-			breadcrumbBackground: 'var(--ons-color-banner-bg)'
+			breadcrumbBackground: 'var(--ons-color-banner-bg)',
+			breadcrumbClass: 'breadcrumb-wrap'
 		};
 	} catch (err) {
 		error(404, { message: 'Area data not found.' });
