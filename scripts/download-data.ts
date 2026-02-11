@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
+import DATA_REPO from './config/data-repo-version.json';
 
 const execFileAsync = promisify(execFile);
 
@@ -28,16 +29,22 @@ async function removeDirectory(dir: string): Promise<void> {
 
 async function cloneRepo(): Promise<void> {
 	try {
-		console.log('Cloning repository...');
+		const branch = DATA_REPO.branch || 'main';
+		console.log(`Cloning branch "${branch}" from data repository...`);
 		await execFileAsync('git', [
 			'clone',
 			'--single-branch',
 			'--branch',
-			'csvw-metadata',
+			branch,
 			REPO_URL,
 			TEMP_DIR
 		]);
-		console.log('Repository cloned successfully');
+		console.log('Repository cloned successfully!');
+		const hash = DATA_REPO.commitHash;
+		if (hash) {
+			console.log(`Resetting to commit hash ${hash}...`);
+			await execFileAsync('git', ['-C', TEMP_DIR, 'reset', '--hard', DATA_REPO.commitHash]);
+		}
 	} catch (error) {
 		console.error('Error cloning repository:', error);
 		throw error;

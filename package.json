@@ -3,7 +3,6 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"find-unused-files": "tsx scripts/find-unused-files.ts",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -15,11 +14,14 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest --watch=false",
+		"geo:all": "npm run geo:generate && npm run geo:clusters",
+		"geo:generate": "tsx ./scripts/make-geo-data.ts",
+		"geo:clusters": "tsx ./scripts/make-clusters.ts",
+		"data:all": "npm run data:download && npm run data:metadata && npm run data:generate",
 		"data:download": "tsx ./scripts/download-data.ts",
+		"data:metadata": "tsx ./scripts/generate-metadata.ts",
 		"data:generate": "tsx ./scripts/generate-data.ts",
-		"data:geo": "tsx ./scripts/make-geo-data.ts",
-		"data:clusters": "tsx ./scripts/make-clusters.ts",
-		"data:redirects": "tsx ./scripts/make-redirects.ts"
+		"meta:redirects": "tsx ./scripts/make-redirects.ts"
 	},
 	"devDependencies": {
 		"@mapbox/tilebelt": "^2.0.3",

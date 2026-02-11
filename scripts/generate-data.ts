@@ -1,16 +1,7 @@
 import * as aq from 'arquero';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { descending } from 'd3-array';
-import { loadCsvWithoutBom, readJsonSync, readCsvAutoType } from './io.ts';
-import {
-	abortIfMissingMetadata,
-	abortIfNewIndicatorCodesExist,
-	abortIfNewPeriodsExist,
-	abortIfMultiplePeriodGroupsForOneIndicator,
-	abortIfNewFilesExist
-} from './data-processing-warnings.ts';
-import { table } from 'console';
-import { parse } from 'path';
+import { loadCsvWithoutBom } from './util/io.ts';
 
 // config.ts
 const RAW_DATA_DIR = 'scripts/raw-data';
@@ -339,6 +330,7 @@ console.log(`Wrote ${output}.`);
 
 const metadataOutput = './src/lib/data/json-stat-metadata.json';
 cube.link.item = cube.link.item.map((item) => {
+	console.log(item.label);
 	item.value = [];
 	delete item.status;
 	return item;

@@ -46,7 +46,7 @@ export function readCsvAutoType(filename: string, { stringColumns = [] } = {}) {
 // A modified version of
 // https://github.com/d3/d3-dsv/blob/main/src/autoType.js
 // that always leaves dates as strings.
-function autoTypeWithoutDates(object: { [key: string]: any }) {
+export function autoTypeWithoutDates(object: { [key: string]: any }) {
 	for (const key in object) {
 		const value = object[key].trim();
 		if (!value) object[key] = null;
@@ -79,4 +79,13 @@ export function stripBom(string: string): string {
 	}
 
 	return string;
+}
+
+export function reverseDate(str) {
+	return str.split('/').reverse().join('-');
+}
+
+export function titleFromSlug(str) {
+	str = str.replaceAll('-', ' ');
+	return str[0].toUpperCase() + str.slice(1);
 }
