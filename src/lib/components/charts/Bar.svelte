@@ -40,7 +40,7 @@
 	);
 
 	const maxHeight = 500;
-	const maxBarHeight = 30;
+	const maxBarHeight = 25;
 	const barGapRatio = 0.5; // Proportion of bar height
 	const minSelectedBarHeight = 10; // Number of pixels
 	const maxUnscaledBarsCount = Math.floor(500 / (maxBarHeight * (1 + barGapRatio)));
