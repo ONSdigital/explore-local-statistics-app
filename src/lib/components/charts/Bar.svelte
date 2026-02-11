@@ -169,7 +169,6 @@
 		width={xScale(b.uci_95) - xScale(b.lci_95)}
 		height={yScale(b[idKey]).height}
 		{fill}
-		stroke-width="0.2"
 		{opacity}
 		on:pointerenter={() => {
 			hoveredArea = id;
@@ -332,6 +331,14 @@
 							{@render confidence(b, ONScolours.white, 1, b[idKey], i)}
 							{@render confidence(b, setBarColour(b[idKey]), 0.6, b[idKey], i)}
 							{@render estimate(b, setBarColour(b[idKey]), 3, 1, b[idKey], i)}
+							<rect
+								x={xScale(b.lci_95) - 0.25}
+								y={yScale(b[idKey]).y}
+								width="0.5"
+								height={yScale(b[idKey]).height}
+								fill="white"
+							>
+							</rect>
 						{/if}
 					{/each}
 				</g>
