@@ -136,10 +136,10 @@ function makeIndicators(ds, meta, data, cols) {
 	return indicators;
 }
 
-async function makeMetadata(ds, meta, data, cols) {
+async function makeMetadata(ds, meta, data, cols, timestamps) {
 	const metadata = await makeBaseMetadata(meta, data, cols);
+	metadata.metadataModified = timestamps.jsonModified;
 	metadata.indicators = makeIndicators(ds, meta, data, cols);
-
 	return metadata;
 }
 
@@ -155,18 +155,19 @@ for (const ds of datasets) {
 	const dataPath = `${DATA_DIR}/${ds}/${ds}.csv`;
 	const metaPath = `${DATA_DIR}/${ds}/${ds}.json`;
 	const csvwPath = `${DATA_DIR}/${ds}/${ds}.csv-metadata.json`;
+	const timestampPath = `${DATA_DIR}/${ds}/timestamps.json`;
 
 	const data = csvParse(
 		stripBom(readFileSync(dataPath, { encoding: 'utf-8' })),
 		autoTypeWithoutDates
 	);
 	const meta = JSON.parse(readFileSync(metaPath, { encoding: 'utf-8' }));
-	const modifedDate = execSync(`git log -1 --pretty="format:%cs" ${dataPath}`, {
-		encoding: 'utf-8'
-	});
+	// get date of latest commit for data from timestamps json
+	const timestamps = JSON.parse(readFileSync(timestampPath, { encoding: 'utf-8' }));
+	const modifedDateData = timestamps.csvModified;
 
 	const columns = formatColumns(data.columns);
-	const metadata = await makeMetadata(ds, meta['ess-beta-metadata'], data, columns);
+	const metadata = await makeMetadata(ds, meta['ess-beta-metadata'], data, columns, timestamps);
 
 	const csvw = {
 		'@context': ['http://www.w3.org/ns/csvw', { '@language': 'en' }],
@@ -177,7 +178,7 @@ for (const ds of datasets) {
 		// The most recent publication date of underlying data sources
 		'dc:issued': metadata.source.map((s) => s.date).sort((a, b) => b.localeCompare(a))[0],
 		// The date the CSV file was committed to git
-		'dc:modified': modifedDate,
+		'dc:modified': modifedDateData,
 		'dc:license': 'http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
 		tableSchema: {
 			columns
