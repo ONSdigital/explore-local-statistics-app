@@ -1,5 +1,6 @@
 <script>
 	import { Table } from '@onsvisual/svelte-components';
+	import { shortenPeriodFormatter } from '$lib/utils';
 
 	let {
 		data,
@@ -9,6 +10,8 @@
 		hovered = $bindable(),
 		geoLevel = null
 	} = $props();
+
+	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 
 	function pivotData(data) {
 		const piv = {};
@@ -24,7 +27,8 @@
 	function makeColumns(data) {
 		return Object.keys(data[0]).map((key) => ({
 			key,
-			label: key === 'areacd' ? 'Area code' : key === 'areanm' ? 'Area name' : formatPeriod(key),
+			label:
+				key === 'areacd' ? 'Area code' : key === 'areanm' ? 'Area name' : formatPeriodShort(key),
 			numeric: !['areacd', 'areanm'].includes(key),
 			formatter: formatValue
 		}));

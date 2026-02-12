@@ -3,6 +3,7 @@
 	import { nice } from 'd3-array';
 	import { format } from 'd3-format';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
+	import { shortenPeriodFormatter } from '$lib/utils';
 
 	let {
 		data,
@@ -37,6 +38,8 @@
 	let xScale = $derived(_data ? scaleTime().domain(_data.dateDomain).range([0, 100]) : null);
 	let yDomain = $derived(_data ? nice(..._data.valueDomain, 2) : null);
 	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([100, 0]) : null);
+
+	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 
 	let margins = $state({ left: 0, right: 0 });
 	function updateMargins(el, params) {
@@ -103,7 +106,7 @@
 				{#each _data?.dateDomain || [] as xTick}
 					<div class="sparkline-x-tick" style:left="{xScale(xTick)}%"></div>
 					<div class="sparkline-x-tick-label" style:left="{xScale(xTick)}%">
-						{formatPeriod(xTick.toISOString())}
+						{formatPeriodShort(xTick)}
 					</div>
 				{/each}
 			</div>

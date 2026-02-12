@@ -73,6 +73,10 @@ export function makePeriodFormatter(periodFormat: string) {
 	return (p) => formatter(parsePeriod(p));
 }
 
+export function shortenPeriodFormatter(formatter) {
+	return (p) => formatter(p).replace(/^[A-Z]{2} /, '');
+}
+
 export function sleep(ms = 1000) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }

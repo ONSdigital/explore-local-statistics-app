@@ -5,6 +5,7 @@
 	import { format } from 'd3-format';
 	import { parseChartData, getPaletteColor, getMarkerPath, makeCurlyBrace } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
+	import { shortenPeriodFormatter } from '$lib/utils';
 	import { markerPaths, ONScolours } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';
 
@@ -60,6 +61,7 @@
 	);
 	let finalHoveredValue = $derived(hovered ? hovered[hovered.length - 1][yKey] : null);
 
+	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 	// function updateLeftMargin(el) {
 	//   const width = el.getBoundingClientRect().width;
@@ -206,7 +208,7 @@
 				{#each xTicks as xTick}
 					<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 					<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-						{formatPeriod(xTick.toISOString())}
+						{formatPeriodShort(xTick)}
 					</div>
 				{/each}
 			</div>
