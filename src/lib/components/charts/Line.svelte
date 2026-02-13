@@ -225,9 +225,9 @@
 						{hovered?.[0]?.areanm}
 					</div>
 				{/if}
-				{#key _data}
-					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
-						{#if width >= widthThreshold}
+				{#if width >= widthThreshold}
+					{#key _data}
+						<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
 							{console.log({ labelLookup })}
 							{#each selectedData as arr, i}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
@@ -245,9 +245,9 @@
 									{arr?.[0][labelKey]}
 								</div>
 							{/each}
-						{/if}
-					</div>
-				{/key}
+						</div>
+					{/key}
+				{/if}
 			</div>
 			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
 				<defs>
