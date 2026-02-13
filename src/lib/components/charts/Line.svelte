@@ -91,7 +91,7 @@
 		const siblings = parent?.getElementsByTagName?.('div');
 		if (siblings?.length === params.selected?.length) {
 			console.log('updating line chart label lookup');
-			labelLookup = await marginLabels(parent, params);
+			labelLookup = marginLabels(parent, params);
 		}
 	}
 	const yScaleVar = (d) => yScale(d);
