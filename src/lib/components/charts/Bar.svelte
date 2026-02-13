@@ -92,21 +92,13 @@
 
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
 
-	// this function checks if the selected areas are already present in the labelLookup (and in the correct order)
-	// avoids needlessly rerunning marginLabels function when selection causes new data to be added
-	function labelLookupMatchesSelected(labelLookup, selectedData) {
-		if (!labelLookup?.length) return false;
-		const labelCodes = labelLookup.map((d) => d.value);
-		const selectedCodes = selectedData.map((d) => d[0][idKey]);
-		if (labelCodes.every((d, i) => d === selectedCodes[i])) return true;
-		return false;
-	}
-
-	let labelLookup = $state();
+	let labelLookup: any[] | null = $state.raw(null);
 	async function makeLabelLookup(el, params) {
-		console.log('bar chart label lookup');
-		if (!labelLookupMatchesSelected(labelLookup, selectedData)) {
-			labelLookup = await marginLabels(el, params);
+		const parent = el.parentNode;
+		const siblings = parent?.getElementsByTagName?.('div');
+		if (siblings?.length === params.selected?.length) {
+			console.log('updating bar chart label lookup');
+			labelLookup = await marginLabels(parent, params);
 		}
 	}
 
@@ -287,16 +279,8 @@
 					{/each}
 				{/if}
 
-				{#key selectedData}
-					<div
-						class="margin-labels-selected"
-						class:hidden={hovered}
-						use:makeLabelLookup={{
-							selected: selectedData,
-							yScaleVar: (d) => yScale(d).y,
-							yKey: idKey
-						}}
-					>
+				{#key _data}
+					<div class="margin-labels-selected" style:visibility={hovered ? 'hidden' : null}>
 						{#each selectedData as a, i}
 							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
 							{@const height = yScale?.(a[0][idKey])?.height || 0}
@@ -307,6 +291,11 @@
 								style:left={isLabelDodged ? '-16px' : '-8px'}
 								style:color={getPaletteColor(i, selectedData.length, 'text')}
 								style:max-width="{leftMargin - 16}px"
+								use:makeLabelLookup={{
+									selected: selectedData,
+									yScaleVar: (d) => yScale(d).y,
+									yKey: idKey
+								}}
 							>
 								{a[0][labelKey]}
 							</div>

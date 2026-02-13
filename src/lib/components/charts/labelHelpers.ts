@@ -33,7 +33,11 @@ export async function marginLabels(el, params = {}) {
 
 	if (divs.length < 2) {
 		console.log('fewer than 2 areas selected');
-		return;
+		return null;
+	}
+	if (divs.length !== selected.length) {
+		console.log('divs not matching selected');
+		return null;
 	}
 
 	//////////////// Calculate dodged y positions for labels ///////////////

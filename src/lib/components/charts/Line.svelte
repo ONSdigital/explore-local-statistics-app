@@ -85,21 +85,13 @@
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
-	// this function checks if the selected areas are already present in the labelLookup (and in the correct order)
-	// avoids needlessly rerunning marginLabels function when selection causes new data to be added
-	function labelLookupMatchesSelected(labelLookup, selectedData) {
-		if (!labelLookup?.length) return false;
-		const labelCodes = labelLookup.map((d) => d.value);
-		const selectedCodes = selectedData.map((d) => d[0][idKey]);
-		if (labelCodes.every((d, i) => d === selectedCodes[i])) return true;
-		return false;
-	}
-
-	let labelLookup = $state();
-	async function makeLabelLookup(el, params) {
-		console.log('line chart label lookup');
-		if (!labelLookupMatchesSelected(labelLookup, selectedData)) {
-			labelLookup = await marginLabels(el, params);
+	let labelLookup: any[] | null = $state.raw(null);
+	async function makeLabelLookup(el: HTMLElement, params: { [key: string]: any }) {
+		const parent = el.parentNode;
+		const siblings = parent?.getElementsByTagName?.('div');
+		if (siblings?.length === params.selected?.length) {
+			console.log('updating line chart label lookup');
+			labelLookup = await marginLabels(parent, params);
 		}
 	}
 	const yScaleVar = (d) => yScale(d);
@@ -233,16 +225,15 @@
 						{hovered?.[0]?.areanm}
 					</div>
 				{/if}
-				{#key selectedData}
-					<div
-						class="margin-labels-selected"
-						use:makeLabelLookup={{ selected: selectedData, yScaleVar, yKey }}
-					>
-						{#if width >= widthThreshold && !hoveredArea}
+				{#key _data}
+					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
+						{#if width >= widthThreshold}
+							{console.log({ labelLookup })}
 							{#each selectedData as arr, i}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
 								<div
+									use:makeLabelLookup={{ selected: selectedData, yScaleVar, yKey }}
 									class="margin-label-selected"
 									style:left="{isLabelDodged
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap
