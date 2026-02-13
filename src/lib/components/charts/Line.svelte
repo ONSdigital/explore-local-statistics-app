@@ -86,13 +86,20 @@
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
 	let labelLookup: any[] | null = $state.raw(null);
-	async function makeLabelLookup(el: HTMLElement, params: { [key: string]: any }) {
+	function makeLabelLookup(el: HTMLElement, params: { [key: string]: any }) {
 		const parent = el.parentNode;
 		const siblings = parent?.getElementsByTagName?.('div');
 		if (siblings?.length === params.selected?.length) {
 			console.log('updating line chart label lookup');
 			labelLookup = marginLabels(parent, params);
 		}
+		return {
+			destroy: () =>
+				(labelLookup = marginLabels(parent, {
+					...params,
+					selected: params.selected.filter((d) => d[0][idKey] !== params.id)
+				}))
+		};
 	}
 	const yScaleVar = (d) => yScale(d);
 
@@ -230,10 +237,11 @@
 						<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
 							{console.log({ labelLookup })}
 							{#each selectedData as arr, i}
+								{@const id = arr[0][idKey]}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
 								<div
-									use:makeLabelLookup={{ selected: selectedData, yScaleVar, yKey }}
+									use:makeLabelLookup={{ id, selected: selectedData, yScaleVar, yKey }}
 									class="margin-label-selected"
 									style:left="{isLabelDodged
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap

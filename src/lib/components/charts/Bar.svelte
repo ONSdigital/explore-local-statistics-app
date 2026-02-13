@@ -93,13 +93,20 @@
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
 
 	let labelLookup: any[] | null = $state.raw(null);
-	async function makeLabelLookup(el, params) {
+	function makeLabelLookup(el, params) {
 		const parent = el.parentNode;
 		const siblings = parent?.getElementsByTagName?.('div');
 		if (siblings?.length === params.selected?.length) {
 			console.log('updating bar chart label lookup');
 			labelLookup = marginLabels(parent, params);
 		}
+		return {
+			destroy: () =>
+				(labelLookup = marginLabels(parent, {
+					...params,
+					selected: params.selected.filter((d) => d[0][idKey] !== params.id)
+				}))
+		};
 	}
 
 	let xScale = $derived(
@@ -282,6 +289,7 @@
 				{#key _data}
 					<div class="margin-labels-selected" style:visibility={hovered ? 'hidden' : null}>
 						{#each selectedData as a, i}
+							{@const id = a[0][idKey]}
 							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
 							{@const height = yScale?.(a[0][idKey])?.height || 0}
 							{@const isLabelDodged = yPos !== yScale?.(a[0][idKey])?.y}
@@ -292,6 +300,7 @@
 								style:color={getPaletteColor(i, selectedData.length, 'text')}
 								style:max-width="{leftMargin - 16}px"
 								use:makeLabelLookup={{
+									id,
 									selected: selectedData,
 									yScaleVar: (d) => yScale(d).y,
 									yKey: idKey
