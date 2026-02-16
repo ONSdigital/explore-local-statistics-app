@@ -64,10 +64,6 @@
 
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
-	// function updateLeftMargin(el) {
-	//   const width = el.getBoundingClientRect().width;
-	//   if (width > leftMargin) leftMargin = width;
-	// }
 
 	const maxTickGap = 100; // in pixels
 	let nXTicks = $derived(Math.floor(width / maxTickGap));

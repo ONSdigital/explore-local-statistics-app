@@ -25,13 +25,13 @@ export function marginLabels(params = {}) {
 	const elbowRoom = params.elbowRoom || 6;
 
 	if (selected.length < 2) {
-		console.log('fewer than 2 areas selected');
+		// console.log('fewer than 2 areas selected');
 		return null;
 	}
-	if (heights.filter((h) => h).length !== selected.length) {
-		console.log('heights not available for all selections');
-		return null;
-	}
+	// if (heights.filter((h) => h).length !== selected.length) {
+	// 	console.log('heights not available for all selections');
+	// 	return null;
+	// }
 
 	//////////////// Calculate dodged y positions for labels ///////////////
 	let sortedYs = selected
