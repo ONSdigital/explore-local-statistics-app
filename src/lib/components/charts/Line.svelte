@@ -64,7 +64,6 @@
 			yScale ? (d) => yScale(d[yKey]) : null
 		)
 	);
-	$inspect({ quadtree });
 
 	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : 0);
 	let lineOpacity = $derived(linesCount && linesCount < 30 ? 0.8 : linesCount < 100 ? 0.5 : 0.2);
@@ -272,8 +271,7 @@
 				class="line-chart"
 				preserveAspectRatio="none"
 				onmousemove={(ev) => {
-					const datum = quadtree.find(ev.layerX, ev.layerY);
-					// console.log(ev.layerX, ev.layerY, datum);
+					const datum = quadtree?.find?.(ev.layerX, ev.layerY);
 					if (datum) hoveredArea = datum[idKey];
 				}}
 				onmouseout={() => (hoveredArea = null)}

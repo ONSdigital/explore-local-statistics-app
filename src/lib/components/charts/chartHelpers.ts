@@ -174,7 +174,6 @@ export function parsePyramidData(
 }
 
 export function makeQuadtree(data, xScale, yScale) {
-	console.log('quadtree', { data, xScale, yScale });
 	if (data && xScale && yScale) {
 		const tree = quadtree().x(xScale).y(yScale).addAll(data);
 		return tree;
