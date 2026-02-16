@@ -1,4 +1,5 @@
 import { scaleLinear } from 'd3-scale';
+import { quadtree } from 'd3-quadtree';
 import { AccurateBeeswarm } from 'accurate-beeswarm-plot';
 import parse from 'parse-color';
 import {
@@ -170,6 +171,15 @@ export function parsePyramidData(
 		groupDomain: Array.from(groupDomain).sort((a, b) => a.localeCompare(b, 'en-GB')),
 		categoryDomain: Array.from(categoryDomain)
 	};
+}
+
+export function makeQuadtree(data, xScale, yScale) {
+	console.log('quadtree', { data, xScale, yScale });
+	if (data && xScale && yScale) {
+		const tree = quadtree().x(xScale).y(yScale).addAll(data);
+		return tree;
+	}
+	return null;
 }
 
 export function getChartTypesForIndicator(indicator = null) {

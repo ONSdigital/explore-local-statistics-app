@@ -3,7 +3,13 @@
 	import { nice } from 'd3-array';
 	import { area, curveLinear } from 'd3-shape';
 	import { format } from 'd3-format';
-	import { parseChartData, getPaletteColor, getMarkerKey, makeCurlyBrace } from './chartHelpers';
+	import {
+		parseChartData,
+		getPaletteColor,
+		getMarkerKey,
+		makeCurlyBrace,
+		makeQuadtree
+	} from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { markerPaths, ONScolours } from '$lib/config';
@@ -50,11 +56,19 @@
 
 	let yDomain = $derived(_data ? nice(..._data.valueDomain, 5) : null);
 	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([height, 0]) : null);
-	const yScaleVar = (d) => yScale(d);
 
-	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : null);
-	let lineOpacity = $derived(linesCount && linesCount < 30 ? 0.5 : linesCount < 100 ? 0.35 : 0.2);
-	let lineStroke = $derived(linesCount < 30 ? '2px' : linesCount < 100 ? '1.75px' : '1.5px');
+	let quadtree = $derived(
+		makeQuadtree(
+			_data?.array,
+			xScale ? (d) => xScale(d.date) : null,
+			yScale ? (d) => yScale(d[yKey]) : null
+		)
+	);
+	$inspect({ quadtree });
+
+	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : 0);
+	let lineOpacity = $derived(linesCount && linesCount < 30 ? 0.8 : linesCount < 100 ? 0.5 : 0.2);
+	let lineStroke = $derived(linesCount < 30 ? '1.5px' : linesCount < 100 ? '1.25px' : '1px');
 
 	let hovered = $derived(_data?.keyed?.[hoveredArea]);
 	let hoveredCodesNames = $derived(
@@ -108,38 +122,22 @@
 	width = 1,
 	color = ONScolours.grey40,
 	opacity = 1,
-	id = '',
-	hoverableBuffer = false,
 	marker: string | null = null
 )}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
 		stroke={color}
 		stroke-width={width}
+		stroke-linecap="round"
+		marker-start={marker ? `url(#${marker})` : null}
+		marker-mid={marker ? `url(#${marker})` : null}
+		marker-end={marker ? `url(#${marker})` : null}
 		{opacity}
-		marker-start="url(#{marker})"
-		marker-mid="url(#{marker})"
-		marker-end="url(#{marker})"
-		onpointerenter={() => hoverableBuffer && (hoveredArea = id)}
-		onpointerleave={() => hoverableBuffer && (hoveredArea = null)}
-		style:pointer-events={color === ONScolours.grey40 ? null : 'none'}
 	/>
 {/snippet}
 
 {#snippet ribbon(arr, color = ONScolours.grey40, opacity = 0.3, id = '')}
-	<path
-		d={getCIArea(arr)}
-		fill={color}
-		stroke="none"
-		{opacity}
-		onpointerenter={() => {
-			hoveredArea = id;
-		}}
-		onpointerleave={() => {
-			hoveredArea = null;
-		}}
-		style:pointer-events={color === ONScolours.grey40 ? null : 'none'}
-	/>
+	<path d={getCIArea(arr)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 {/snippet}
 
 {#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, xMax: number)}
@@ -147,19 +145,19 @@
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
-			points="
-                {xMax + 2 + 14 + pointRadius},{yPosAdj}
-                {elbowX},{yPosAdj}
-                {elbowX},{yPosOrig} 
-                {xMax + 2 + pointRadius},{yPosOrig}"
+			points={[
+				`${xMax + 2 + 14 + pointRadius},${yPosAdj}`,
+				`${elbowX},${yPosAdj}`,
+				`${elbowX},${yPosOrig}`,
+				`${xMax + 2 + pointRadius},${yPosOrig}"`
+			].join(' ')}
 		>
 		</polyline>
 	{:else if false}
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
-			points="-14,{yPosAdj}
-                -2,{yPosOrig}"
+			points={[`-14,${yPosAdj}`, `-2,${yPosOrig}`].join(' ')}
 		>
 		</polyline>
 	{/if}
@@ -269,7 +267,19 @@
 					</div>
 				{/if}
 			</div>
-			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
+			<svg
+				viewBox="0 0 {widthInner} {height}"
+				class="line-chart"
+				preserveAspectRatio="none"
+				onmousemove={(ev) => {
+					const datum = quadtree.find(ev.layerX, ev.layerY);
+					// console.log(ev.layerX, ev.layerY, datum);
+					if (datum) hoveredArea = datum[idKey];
+				}}
+				onmouseout={() => (hoveredArea = null)}
+				onblur={() => (hoveredArea = null)}
+				role="tooltip"
+			>
 				<defs>
 					{#each Object.entries(markerPaths) as path, i}
 						<marker
@@ -287,8 +297,7 @@
 				</defs>
 				<g opacity={hoveredArea ? 0.2 : 1}>
 					{#each Object.values(_data.keyed) as arr, i}
-						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity, arr[0][idKey], false)}
-						{@render line(arr, 30, ONScolours.grey40, 0, arr[0][idKey], true)}
+						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity)}
 					{/each}
 					{#if showIntervals}
 						{#each selectedData as arr, i}
@@ -298,36 +307,17 @@
 					{#each selectedData as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 						{@const marker = getMarkerKey(selectedIndex, selected.length)}
-						{@render line(arr, 4.5, 'white', 1, arr[0][idKey], false, marker)}
-						{@render line(
-							arr,
-							3,
-							getPaletteColor(selectedIndex, selected.length),
-							1,
-							arr[0][idKey],
-							false,
-							marker
-						)}
+						{@render line(arr, 4.5, 'white', 1, marker)}
+						{@render line(arr, 3, getPaletteColor(selectedIndex, selected.length), 1, marker)}
 					{/each}
-					<!-- {#each selectedData as s, sIndex}
-						{#each s as c}
-							<circle
-								cx={xScale(c.date)}
-								cy={yScale(c[yKey])}
-								r={pointRadius}
-								fill={ONSpalette[sIndex]}
-								stroke="white"
-							></circle>
-						{/each}
-					{/each} -->
 				</g>
 				<g>
 					{#if hoveredArea}
 						{#if showIntervals}
 							{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
 						{/if}
-						{@render line(hovered, 4.5, ONScolours.white, 1, hoveredArea)}
-						{@render line(hovered, 3, ONScolours.highlightOrangeDark, 1, hoveredArea)}
+						{@render line(hovered, 4.5, ONScolours.white)}
+						{@render line(hovered, 3, ONScolours.highlightOrangeDark)}
 						{#each hovered as c}
 							<circle
 								cx={xScale(c.date)}
@@ -371,10 +361,11 @@
 		overflow: visible;
 		display: block;
 	}
-	.line-chart polyline,
-	.line-chart line {
+	.line-chart polyline {
 		vector-effect: non-scaling-stroke;
+		stroke-linecap: round;
 		fill: none;
+		pointer-events: none;
 	}
 
 	.line-chart circle {
