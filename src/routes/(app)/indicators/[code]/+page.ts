@@ -7,7 +7,8 @@ import { countryLetterLookup } from '$lib/config/geoLookups';
 import indicatorRedirects from '$lib/data/indicator_redirects.json';
 
 function getInitialArea(indicator, areas, areacd) {
-	let area =
+	if (!indicator.standardised) return null;
+	const area =
 		areas.find((d) => d.areacd === areacd) ||
 		(indicator.geography.countries.length === 1
 			? areas.find((d) => d.areacd === countryLetterLookup[indicator.geography.countries[0]])
