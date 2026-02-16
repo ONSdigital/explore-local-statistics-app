@@ -93,26 +93,15 @@
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
 	let yScaleFn = $derived(yScale ? (d) => yScale?.(d)?.y : () => null);
 
-	let labelsDiv: HTMLElement | undefined = $state();
-	let labelLookup: any[] | null = $state.raw(null);
-	function makeLabelLookup(el) {
-		const divs = labelsDiv?.getElementsByTagName?.('div');
-		console.log({ selectedData, divs });
-		if (divs?.length === selectedData?.length) {
-			console.log('adding bar chart labels');
-			labelLookup = marginLabels(divs, { selected: selectedData, yScale: yScaleFn, yKey: idKey });
-			console.log({ labelLookup });
-		}
-		return {
-			destroy: () => {
-				console.log('removing line chart labels');
-				const divs = labelsDiv?.getElementsByTagName?.('div');
-				const divIds = divs ? [...divs].map((d) => d.dataset?.id) : [];
-				const selected = selectedData.filter((d) => divIds.includes(d[0][idKey]));
-				labelLookup = marginLabels(divs, { selected, yScale: yScaleFn, yKey: idKey });
-			}
-		};
-	}
+	let labelHeights: { [key: string]: number } = $state({});
+	let labelLookup: any[] | null = $derived(
+		marginLabels({
+			selected: selectedData,
+			heights: selectedData.map((d) => labelHeights[d[0][idKey]] || 10),
+			yScale: yScaleFn,
+			yKey: idKey
+		})
+	);
 
 	let xScale = $derived(
 		_data
@@ -312,19 +301,15 @@
 						</div>
 					{/each}
 				{/if}
-				<div
-					bind:this={labelsDiv}
-					class="margin-labels-selected"
-					style:visibility={hovered ? 'hidden' : null}
-				>
+				<div class="margin-labels-selected" style:visibility={hovered ? 'hidden' : null}>
 					{#key _data}
-						{#each selectedData as a, i}
+						{#each selectedData as a, i (a[0][idKey])}
 							{@const id = a[0][idKey]}
 							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
 							{@const height = yScale?.(a[0][idKey])?.height || 0}
 							{@const isLabelDodged = yPos !== yScale?.(a[0][idKey])?.y}
 							<div
-								use:makeLabelLookup
+								bind:clientHeight={labelHeights[id]}
 								data-id={id}
 								class="margin-label-selected"
 								style:top="{yPos ? yPos + height / 2 : 0}px"

@@ -16,19 +16,20 @@ export function labelPlacer(zs) {
 	return xs;
 }
 
-export function marginLabels(divs, params = {}) {
+export function marginLabels(params = {}) {
 	const selected = params.selected || [];
+	const heights = params.heights || [];
 	const yScale = params.yScale || null;
 	const yKey = params.yKey || 'value';
 	const labelProximityThreshold = params.labelProximityThreshold || 50;
 	const elbowRoom = params.elbowRoom || 6;
 
-	if (divs.length < 2) {
+	if (selected.length < 2) {
 		console.log('fewer than 2 areas selected');
 		return null;
 	}
-	if (divs.length !== selected.length) {
-		console.log('divs not matching selected');
+	if (heights.filter((h) => h).length !== selected.length) {
+		console.log('heights not available for all selections');
 		return null;
 	}
 
@@ -43,7 +44,7 @@ export function marginLabels(divs, params = {}) {
 		const current = sortedYs[j].i;
 		const previous = sortedYs[j - 1].i;
 		cumulativeHeights[current] =
-			cumulativeHeights[previous] + (divs[previous].clientHeight + divs[current].clientHeight) / 2;
+			cumulativeHeights[previous] + (heights[previous] + heights[current]) / 2;
 	}
 	// subtract offsets
 	let baselinedYs = sortedYs.map(({ y, i }) => y - cumulativeHeights[i]);

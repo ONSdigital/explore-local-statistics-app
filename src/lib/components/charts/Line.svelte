@@ -86,24 +86,15 @@
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
-	let labelsDiv: HTMLElement | undefined = $state();
-	let labelLookup: any[] | null = $state.raw(null);
-	function makeLabelLookup(el) {
-		const divs = labelsDiv?.getElementsByTagName?.('div');
-		if (divs?.length === selectedData?.length) {
-			console.log('adding line chart labels');
-			labelLookup = marginLabels(divs, { selected: selectedData, yScale: yScaleVar, yKey });
-		}
-		return {
-			destroy: () => {
-				console.log('removing line chart labels');
-				const divs = labelsDiv?.getElementsByTagName?.('div');
-				const divIds = divs ? [...divs].map((d) => d.dataset?.id) : [];
-				const selected = selectedData.filter((d) => divIds.includes(d[0][idKey]));
-				labelLookup = marginLabels(divs, { selected, yScale: yScaleVar, yKey });
-			}
-		};
-	}
+	let labelHeights: { [key: string]: number } = $state({});
+	let labelLookup: any[] | null = $derived(
+		marginLabels({
+			selected: selectedData,
+			heights: selectedData.map((d) => labelHeights[d[0][idKey]] || 10),
+			yScale,
+			yKey
+		})
+	);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.date))
@@ -258,18 +249,14 @@
 					</div>
 				{/if}
 				{#if width >= widthThreshold}
-					<div
-						bind:this={labelsDiv}
-						class="margin-labels-selected"
-						style:visibility={hoveredArea ? 'hidden' : null}
-					>
+					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
 						{#key _data}
 							{#each selectedData as arr, i}
 								{@const id = arr[0][idKey]}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
 								<div
-									use:makeLabelLookup
+									bind:clientHeight={labelHeights[id]}
 									data-id={id}
 									class="margin-label-selected"
 									style:left="{isLabelDodged
