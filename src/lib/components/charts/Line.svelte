@@ -3,7 +3,7 @@
 	import { nice } from 'd3-array';
 	import { area, curveLinear } from 'd3-shape';
 	import { format } from 'd3-format';
-	import { parseChartData, getPaletteColor, getMarkerPath, makeCurlyBrace } from './chartHelpers';
+	import { parseChartData, getPaletteColor, getMarkerKey, makeCurlyBrace } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { markerPaths, ONScolours } from '$lib/config';
@@ -50,6 +50,7 @@
 
 	let yDomain = $derived(_data ? nice(..._data.valueDomain, 5) : null);
 	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([height, 0]) : null);
+	const yScaleVar = (d) => yScale(d);
 
 	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : null);
 	let lineOpacity = $derived(linesCount && linesCount < 30 ? 0.5 : linesCount < 100 ? 0.35 : 0.2);
@@ -85,23 +86,24 @@
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
+	let labelsDiv: HTMLElement | undefined = $state();
 	let labelLookup: any[] | null = $state.raw(null);
-	function makeLabelLookup(el: HTMLElement, params: { [key: string]: any }) {
-		const parent = el.parentNode;
-		const siblings = parent?.getElementsByTagName?.('div');
-		if (siblings?.length === params.selected?.length) {
-			console.log('updating line chart label lookup');
-			labelLookup = marginLabels(parent, params);
+	function makeLabelLookup(el) {
+		const divs = labelsDiv?.getElementsByTagName?.('div');
+		if (divs?.length === selectedData?.length) {
+			console.log('adding line chart labels');
+			labelLookup = marginLabels(divs, { selected: selectedData, yScale: yScaleVar, yKey });
 		}
 		return {
-			destroy: () =>
-				(labelLookup = marginLabels(parent, {
-					...params,
-					selected: params.selected.filter((d) => d[0][idKey] !== params.id)
-				}))
+			destroy: () => {
+				console.log('removing line chart labels');
+				const divs = labelsDiv?.getElementsByTagName?.('div');
+				const divIds = divs ? [...divs].map((d) => d.dataset?.id) : [];
+				const selected = selectedData.filter((d) => divIds.includes(d[0][idKey]));
+				labelLookup = marginLabels(divs, { selected, yScale: yScaleVar, yKey });
+			}
 		};
 	}
-	const yScaleVar = (d) => yScale(d);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.date))
@@ -115,13 +117,13 @@
 </script>
 
 {#snippet line(
-	arr,
+	arr: any[],
 	width = 1,
 	color = ONScolours.grey40,
 	opacity = 1,
 	id = '',
 	hoverableBuffer = false,
-	marker = null
+	marker: string | null = null
 )}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
@@ -151,6 +153,29 @@
 		}}
 		style:pointer-events={color === ONScolours.grey40 ? null : 'none'}
 	/>
+{/snippet}
+
+{#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, xMax: number)}
+	{#if yPosAdj !== yPosOrig}
+		<polyline
+			stroke={ONScolours.grey60}
+			fill="none"
+			points="
+                {xMax + 2 + 14 + pointRadius},{yPosAdj}
+                {elbowX},{yPosAdj}
+                {elbowX},{yPosOrig} 
+                {xMax + 2 + pointRadius},{yPosOrig}"
+		>
+		</polyline>
+	{:else if false}
+		<polyline
+			stroke={ONScolours.grey60}
+			fill="none"
+			points="-14,{yPosAdj}
+                -2,{yPosOrig}"
+		>
+		</polyline>
+	{/if}
 {/snippet}
 
 {#if width < widthThreshold && mode == 'embed'}
@@ -233,15 +258,19 @@
 					</div>
 				{/if}
 				{#if width >= widthThreshold}
-					{#key _data}
-						<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
-							{console.log({ labelLookup })}
+					<div
+						bind:this={labelsDiv}
+						class="margin-labels-selected"
+						style:visibility={hoveredArea ? 'hidden' : null}
+					>
+						{#key _data}
 							{#each selectedData as arr, i}
 								{@const id = arr[0][idKey]}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
 								<div
-									use:makeLabelLookup={{ id, selected: selectedData, yScaleVar, yKey }}
+									use:makeLabelLookup
+									data-id={id}
 									class="margin-label-selected"
 									style:left="{isLabelDodged
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap
@@ -253,8 +282,8 @@
 									{arr?.[0][labelKey]}
 								</div>
 							{/each}
-						</div>
-					{/key}
+						{/key}
+					</div>
 				{/if}
 			</div>
 			<svg viewBox="0 0 {widthInner} {height}" class="line-chart" preserveAspectRatio="none">
@@ -285,14 +314,12 @@
 					{/if}
 					{#each selectedData as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-						{@const marker = Object.keys(markerPaths).find(
-							(key) => markerPaths[key] === getMarkerPath(selectedIndex, selectedData.length)
-						)}
+						{@const marker = getMarkerKey(selectedIndex, selected.length)}
 						{@render line(arr, 4.5, 'white', 1, arr[0][idKey], false, marker)}
 						{@render line(
 							arr,
 							3,
-							getPaletteColor(selectedIndex, selectedData.length),
+							getPaletteColor(selectedIndex, selected.length),
 							1,
 							arr[0][idKey],
 							false,
@@ -332,31 +359,12 @@
 				{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
 					<g>
 						{#each selectedData as arr, i}
-							{@const yPosAdj = labelLookup?.[i]?.y}
+							{@const yPosAdj = labelLookup?.[i]?.y || yScale(arr[arr.length - 1][yKey])}
 							{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
+							{@const xMax = xScale(_data.dateDomain[1])}
 							{@const elbowX =
 								xScale(_data.dateDomain[1]) + pointRadius + 6 + labelLookup?.[i]?.elbow}
-							<!-- {@const labelHeight = labelHeights?.[i]} -->
-							{#if Math.abs(yPosAdj - yPosOrig) > 0.7}
-								<polyline
-									stroke={ONScolours.grey60}
-									fill="none"
-									points="
-                {xScale(_data.dateDomain[1]) + 2 + 14 + pointRadius},{yPosAdj}
-                {elbowX},{yPosAdj}
-                {elbowX},{yPosOrig} 
-                {xScale(_data.dateDomain[1]) + 2 + pointRadius},{yPosOrig}"
-								>
-								</polyline>
-							{:else if Math.abs(yPosAdj - yPosOrig) > 0}
-								<polyline
-									stroke={ONScolours.grey60}
-									fill="none"
-									points="-14,{yPosAdj}
-                -2,{yPosOrig}"
-								>
-								</polyline>
-							{:else}{/if}
+							{@render elbow(yPosOrig, yPosAdj, elbowX, xMax)}
 						{/each}
 					</g>
 				{/if}

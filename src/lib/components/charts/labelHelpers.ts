@@ -16,15 +16,12 @@ export function labelPlacer(zs) {
 	return xs;
 }
 
-export function marginLabels(el, params = {}) {
+export function marginLabels(divs, params = {}) {
 	const selected = params.selected || [];
-	const yScaleVar = params.yScaleVar || null;
+	const yScale = params.yScale || null;
 	const yKey = params.yKey || 'value';
 	const labelProximityThreshold = params.labelProximityThreshold || 50;
 	const elbowRoom = params.elbowRoom || 6;
-
-	const divs = el.getElementsByTagName('div');
-	// const labelHeights = [...divs].map((d) => d.clientHeight);
 
 	if (divs.length < 2) {
 		console.log('fewer than 2 areas selected');
@@ -37,7 +34,7 @@ export function marginLabels(el, params = {}) {
 
 	//////////////// Calculate dodged y positions for labels ///////////////
 	let sortedYs = selected
-		.map((s) => ({ y: yScaleVar(s[s.length - 1][yKey]), value: s[s.length - 1][yKey] }))
+		.map((s) => ({ y: yScale(s[s.length - 1][yKey]), value: s[s.length - 1][yKey] }))
 		.map((d, i) => ({ y: d.y, i, value: d.value })) //retain index of original selection order prior to sorting
 		.sort((a, b) => a.y - b.y);
 

@@ -97,6 +97,7 @@ export const markerPaths = {
 		'M1.9092,3.0406L3.0406,1.9092L1.1314,0L3.0406,-1.9092L1.9092,-3.0406L0,-1.1314L-1.9092,-3.0406L-3.0406,-1.9092L-1.1314,0L-3.0406,1.9092L-1.9092,3.0406L0,1.1314Z'
 };
 
+export const markerPathsKeys = Object.keys(markerPaths);
 export const markerPathsArray = Object.values(markerPaths);
 
 export const maxAreasSelectable = 10;
