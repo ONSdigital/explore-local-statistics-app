@@ -1,6 +1,4 @@
 <script lang="ts">
-	//@ts-nocheck
-	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { parseData, makeMapFeatures, valuesToBreaks } from '$lib/utils';
