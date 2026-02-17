@@ -81,17 +81,30 @@
 	const maxTickGap = 100; // in pixels
 	let nXTicks = $derived(Math.floor(width / maxTickGap));
 
+	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
+	function snapXTicks(ticks, _data) {
+		const uniqueDates: number[] = Array.from(new Set(_data.array.map((d) => +d.date)));
+		const newTicks = [];
+		for (const tick of ticks) {
+			if (!uniqueDates.includes(+tick)) {
+				const diffs = uniqueDates.map((d) => Math.abs(+tick - d));
+				const minDiff = Math.min(...diffs);
+				const snappedTick = uniqueDates[diffs.indexOf(minDiff)];
+				newTicks.push(snappedTick);
+			} else newTicks.push(+tick);
+		}
+		return Array.from(new Set(newTicks)).map((d) => new Date(d));
+	}
+
 	function makeXTicks(xScale, _data) {
 		if (!xScale || !_data) return [];
 		const initialTicks = xScale.ticks(nXTicks);
 		const tickDiff = _data.dateDomain[1] - initialTicks[initialTicks.length - 1];
-		// fix gap appearing on left hand side
-		// STILL TO FIX - LEAP YEARS ISSUE
 		const newTicks = initialTicks.map((d) => new Date(+d + tickDiff));
 		const tickGap = newTicks[1] - newTicks[0];
 		const firstGap = newTicks[0] - _data.dateDomain[0];
 		if (firstGap > tickGap) newTicks.unshift(new Date(newTicks[0] - tickGap));
-		return newTicks;
+		return snapXTicks(newTicks, _data);
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
