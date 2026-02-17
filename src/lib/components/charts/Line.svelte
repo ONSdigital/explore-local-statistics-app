@@ -371,6 +371,7 @@
 		width: 100%;
 		overflow: visible;
 		display: block;
+		position: relative;
 	}
 	.line-chart polyline {
 		vector-effect: non-scaling-stroke;
