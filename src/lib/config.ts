@@ -55,7 +55,7 @@ export const ONScolours = {
 };
 
 export const ONSpalette = [
-	ONScolours.oceanBlue,
+	ONScolours.nightBlue,
 	ONScolours.springGreen,
 	ONScolours.beetrootPurple,
 	ONScolours.coralPink,
@@ -63,7 +63,7 @@ export const ONSpalette = [
 	ONScolours.skyBlue
 ];
 export const ONStextPalette = [
-	ONScolours.oceanBlue,
+	ONScolours.nightBlue,
 	ONScolours.springGreenDark,
 	ONScolours.beetrootPurple,
 	ONScolours.coralPink,
@@ -79,7 +79,7 @@ export const ONSdivPlatte = [
 	ONScolours.oceanBlue
 ];
 export const ONSlinePalette = [
-	ONScolours.oceanBlue,
+	ONScolours.nightBlue,
 	ONScolours.springGreen,
 	ONScolours.beetrootPurple,
 	ONScolours.coralPink,

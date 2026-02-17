@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { getName } from '@onsvisual/robo-utils';
-	import { ONSpalette } from '$lib/config';
+	import { ONScolours } from '$lib/config';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import { Details, Em } from '@onsvisual/svelte-components';
 	import ClusterMap from './ClusterMap.svelte';
@@ -13,7 +13,10 @@
 	<ul class="map-legend">
 		{#if selectedCluster.cluster}
 			<li>
-				<span class="map-legend-marker" style:color={ONSpalette[0]} style:background={ONSpalette[0]}
+				<span
+					class="map-legend-marker"
+					style:color={ONScolours.oceanBlue}
+					style:background={ONScolours.oceanBlue}
 				></span>
 				Areas in {selectedCluster.key} cluster {selectedCluster.cluster.label}
 			</li>
@@ -30,7 +33,7 @@
 	{#if selectedCluster.cluster}
 		<p>
 			<strong>{getName(areaProps)}</strong> is in
-			<Em color={ONSpalette[0]}>
+			<Em color={ONScolours.oceanBlue}>
 				{selectedCluster.key} cluster {selectedCluster.cluster.label}
 			</Em>.
 			{selectedCluster.cluster.description}

@@ -4,7 +4,7 @@
 	import bbox from '@turf/bbox';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import topo from '$lib/data/topo.json';
-	import { ONSpalette } from '$lib/config';
+	import { ONScolours } from '$lib/config';
 
 	const features = (() => {
 		const features = {};
@@ -66,7 +66,7 @@
 				<MapLayer
 					id="cluster-fill"
 					type="fill"
-					paint={{ 'fill-color': ONSpalette[0], 'fill-opacity': 0.7 }}
+					paint={{ 'fill-color': ONScolours.oceanBlue, 'fill-opacity': 0.7 }}
 					order="place_other"
 					hover
 					bind:hovered
