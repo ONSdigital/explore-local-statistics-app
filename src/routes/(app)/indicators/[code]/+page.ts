@@ -31,8 +31,15 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 		areas.sort((a, b) => a.areanm.localeCompare(b.areanm));
 		const periods = Object.keys(periodsRaw.category.index);
 		const gLevels = indicator.geography.levels
-			.filter((id) => id !== 'uk')
-			.map((id) => {
+			.filter(
+				(id: string) =>
+					!(
+						id === 'uk' ||
+						(id === 'ctry' && indicator.geography.countries.length === 1) ||
+						(['rgn', 'utla'].includes(id) && !indicator.geography.countries.includes('E'))
+					)
+			)
+			.map((id: string) => {
 				const geoLevel = geoLevels[id];
 				return {
 					id,
