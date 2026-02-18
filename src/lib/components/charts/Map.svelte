@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
-	import { parseData, makeMapFeatures, valuesToBreaks } from '$lib/utils';
+	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
 	import { ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
 	import { validYear } from '$lib/util/linkHelpers';
-	import topo from '$lib/data/topo.json';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
 
@@ -26,20 +25,14 @@
 		]
 	} = $props();
 
-	const topoPath = resolve('/data/topo.json');
 	const ukBounds = [-8.65, 49.867, 1.761, 60.856];
 	const fitBoundsOptions = { padding: 10 };
 	const noHighlight = ['K02', 'K03', 'K04']; // Don't highlight UK, GB or England & Wales on map
-
-	const features = makeMapFeatures(topo);
+	const features = await getMapFeatures();
 
 	let map = $state();
 	let _data = $derived(parseData(data));
 	let breaks = $derived(valuesToBreaks(_data.map((d) => d.value)));
-	let { renderedFeatures, bounds } = $derived(
-		makeRenderedFeatures(features, _data, geoLevel, metadata.geography.year)
-	);
-	let selectedFeatures = $derived(makeSelectedFeatures(features, _data, selected));
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
@@ -56,7 +49,7 @@
 
 	const featureCollection = (features) => ({ type: 'FeatureCollection', features });
 
-	const makeRenderedFeatures = (features, data, geoLevel, geoYear) => {
+	const makeRenderedFeatures = (data, geoLevel, geoYear) => {
 		const renderedFeatures = [];
 
 		if (!data)
@@ -82,7 +75,7 @@
 		return { renderedFeatures, bounds };
 	};
 
-	const makeSelectedFeatures = (features, data, selected) => {
+	const makeSelectedFeatures = (data, selected) => {
 		const selectedFeatures = [];
 
 		for (const cd of selected) {
@@ -101,6 +94,11 @@
 		}
 		return selectedFeatures;
 	};
+
+	let { renderedFeatures, bounds } = $derived(
+		makeRenderedFeatures(_data, geoLevel, metadata.geography.year)
+	);
+	let selectedFeatures = $derived(makeSelectedFeatures(_data, selected));
 
 	function fitBounds(bounds) {
 		map?.fitBounds?.(bounds, fitBoundsOptions);

@@ -141,7 +141,10 @@ export function makeGeoJSON(topojson, layer: string) {
 	return feature(topojson, layer);
 }
 
-export function makeMapFeatures(topo) {
+export async function getMapFeatures() {
+	const topo = await (
+		await fetch(resolve('/api/v1/geo/boundaries.topojson?year=all&geoLevel=all'))
+	).json();
 	const features = {};
 
 	for (const layer of Object.keys(topo.objects)) {

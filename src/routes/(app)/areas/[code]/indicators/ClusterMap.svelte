@@ -1,19 +1,11 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { feature } from 'topojson-client';
 	import bbox from '@turf/bbox';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
-	import topo from '$lib/data/topo.json';
+	import { getMapFeatures } from '$lib/utils';
 	import { ONScolours } from '$lib/config';
 
-	const features = (() => {
-		const features = {};
-		for (const key in topo.objects) {
-			const geojson = feature(topo, key);
-			for (const f of geojson.features) features[f.properties.areacd] = f;
-		}
-		return features;
-	})();
+	const features = await getMapFeatures();
 
 	const fitBoundsOptions = { padding: 10 };
 
