@@ -100,6 +100,7 @@ export function makeDataUrl(
 	geoExtent: string | null = null,
 	geoCluster: string | null = null,
 	otherDims: object | null = null,
+	measure: string | string[] | null = null,
 	format: string = 'cols.json'
 ): string {
 	const base = `/api/v1/data.${format}`;
@@ -117,13 +118,6 @@ export function makeDataUrl(
 	if (geo.length > 0) chunks.push({ key: 'geo', value: geo.join(',') });
 	if (geoExtent) chunks.push({ key: 'geoExtent', value: geoExtent });
 	if (geoCluster) chunks.push({ key: 'geoCluster', value: geoCluster });
-	if (otherDims)
-		chunks.push(
-			...Object.entries(otherDims).map((dim) => ({
-				key: `dimension_${dim[0]}`,
-				value: [dim[1]].flat().join(',')
-			}))
-		);
 
 	const time = [timeRange]
 		.flat()
@@ -132,6 +126,15 @@ export function makeDataUrl(
 	if (time) chunks.push({ key: 'time', value: time });
 	if (!Array.isArray(timeRange) && timeNearest)
 		chunks.push({ key: 'timeNearest', value: timeNearest });
+
+	if (otherDims)
+		chunks.push(
+			...Object.entries(otherDims).map((dim) => ({
+				key: `dimension_${dim[0]}`,
+				value: [dim[1]].flat().join(',')
+			}))
+		);
+	if (measure) chunks.push({ key: 'measure', value: [measure].join(',') });
 
 	const url = `${base}?${chunks.map((ch) => `${ch.key}=${ch.value}`).join('&')}`;
 	return resolve(url);
