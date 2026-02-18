@@ -1,4 +1,4 @@
-import { makeAreaListFilter } from './helpers/geoFilters';
+import makeAreaListFilter from './helpers/makeAreaListFilter';
 import groupAreasByLevel from './helpers/groupAreasByLevel';
 import makeAreasLookup from './helpers/makeAreasLookup';
 import readData from '$lib/data';

@@ -1,9 +1,6 @@
 // Functions to filter geography metadata
 import { geoLevels, geoLevelsAll } from '$lib/config/geoLevels';
 import { isValidAreaCode } from '$lib/util/validationHelpers';
-import readData from '$lib/data';
-
-const metadata = await readData('json-stat-metadata');
 
 export function geoYearFilter(area: areaObject, year: number | null) {
 	return !year || ((!area.start || year >= area.start) && (!area.end || year <= area.end));
@@ -39,17 +36,4 @@ export function makeGeoLevelFilter(levels) {
 export function makeCountryFilter(countries) {
 	const codes = new Set([countries].flat());
 	return (cd) => codes.has(cd[0]);
-}
-
-export function makeGeoDatasetFilter(slug) {
-	const ds = metadata.link.item.find((ds) => ds.extension.slug === slug);
-	return ds ? (d) => ds.dimension.areacd.category.index[d.areacd] : () => false;
-}
-
-export function makeAreaListFilter(geo, year, indicator) {
-	if (geo === 'all' && year === 'all' && indicator === 'all') return null;
-	const yFilter = year === 'all' ? () => true : geoYearFilter;
-	const gFilter = geo === 'all' ? () => true : makeGeoFilter([geo].flat());
-	const iFilter = indicator === 'all' ? () => true : makeGeoDatasetFilter(indicator);
-	return (d) => yFilter(d, year) && gFilter(d) && iFilter(d);
 }

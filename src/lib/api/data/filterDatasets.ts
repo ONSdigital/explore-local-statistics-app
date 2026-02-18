@@ -1,4 +1,5 @@
-import { filterTime, filterTimeForGeo, makeFilter, makeGeoFilter } from './helpers/dataFilters';
+import { filterTime, filterTimeForGeo, makeFilter } from './helpers/dataFilters';
+import makeGeoFilter from './helpers/makeGeoFilter';
 import { toJSONStat, toRows, toCols } from './helpers/dataFormatters';
 import { getSpreadsheetMetadata } from './helpers/generateXLSX';
 import generateCSVW from './helpers/generateCSVW';
