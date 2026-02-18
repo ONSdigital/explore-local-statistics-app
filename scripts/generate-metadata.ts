@@ -76,6 +76,25 @@ async function makeBaseMetadata(meta, data, cols) {
 	return metadata;
 }
 
+function makeValueDomain(valueCol, rows, hasConfidenceIntervals) {
+	const valueDomain = [Infinity, -Infinity];
+
+	for (const row of rows) {
+		const minVal =
+			hasConfidenceIntervals && row.lci_95 != null ? row.lci_95 : row[valueCol.titles[0]];
+		const maxVal =
+			hasConfidenceIntervals && row.uci_95 != null ? row.uci_95 : row[valueCol.titles[0]];
+
+		if (minVal != null && minVal !== '') {
+			valueDomain[0] = Math.min(valueDomain[0], minVal);
+		}
+		if (maxVal != null && maxVal !== '') {
+			valueDomain[1] = Math.max(valueDomain[1], maxVal);
+		}
+	}
+	return valueDomain;
+}
+
 function makeIndicators(ds, meta, data, cols) {
 	const indicators = [];
 	const valueCol = cols.find((col) => col.name === 'value');
@@ -91,6 +110,26 @@ function makeIndicators(ds, meta, data, cols) {
 	for (const code of codes) {
 		const base = isSingleIndicator ? meta : { ...(meta.shared || {}), ...meta[code] };
 		const rows = isSingleIndicator ? data : data.filter((d) => d[indicatorCol.titles[0]] === code);
+		const canBeNegative = rows.map((d) => d[valueCol.titles[0]]).sort((a, b) => a - b)[0] < 0;
+		const zeroBaseline = !canBeNegative; // use d3 nice ticks - if lowest is 0 then TRUE
+		const confidenceIntervals = hasIntervals(rows, cols);
+
+		// Periodicity and date format are inferred from the period strings in the CSV
+		const periods = Array.from(
+			new Set(
+				rows.map((d) => {
+					const period = d[periodCol.titles[0]];
+					return period.toISOString ? period.toISOString().slice(0, 10) : period;
+				})
+			)
+		);
+		const { frequency, periodFormat } = inferPeriodFormat(periods);
+		const dates = periods.map((p) => new Date(p.split('/')[0]));
+		const periodDomain = [
+			new Date(Math.min(...dates)).toISOString().slice(0, 10),
+			new Date(Math.max(...dates)).toISOString().slice(0, 10)
+		];
+
 		const indicator = {
 			code,
 			dataset: ds,
@@ -103,30 +142,17 @@ function makeIndicators(ds, meta, data, cols) {
 			subtitle: base.subtitle,
 			longDescription: base.longDescription,
 			caveats: base.caveats,
+			canBeNegative: canBeNegative,
+			zeroBaseline: zeroBaseline,
+			frequency: frequency,
+			periodFormat: periodFormat,
+			periodDomain: periodDomain,
+			valueDomain: makeValueDomain(valueCol, rows, confidenceIntervals),
 			// The below are calculated from the columns and values in the CSV
 			isMultivariate: isMultivariate(rows, cols),
 			hasTimeseries: hasTimeseries(rows, cols),
-			confidenceIntervals: hasIntervals(rows, cols),
-			canBeNegative: rows.map((d) => d[valueCol.titles[0]]).sort((a, b) => a - b)[0] < 0
+			confidenceIntervals: confidenceIntervals
 		};
-
-		// These seem to be the inverse of each other. Maybe can get rid of one?
-		// (Current usage also seems to be inconsistent with the definition)
-		indicator.zeroBaseline = !indicator.canBeNegative;
-
-		// Periodicity and date format are inferred from the period strings in the CSV
-		const periods = Array.from(
-			new Set(
-				rows.map((d) => {
-					const period = d[periodCol.titles[0]];
-					return period.toISOString ? period.toISOString().slice(0, 10) : period;
-				})
-			)
-		);
-		const { frequency, periodFormat } = inferPeriodFormat(periods);
-
-		indicator.frequency = frequency;
-		indicator.periodFormat = periodFormat;
 
 		for (const col of metaCols) {
 			indicator[col.name] = rows[0][col.titles[0]];
