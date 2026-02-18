@@ -93,15 +93,16 @@ export function slugify(text: string) {
 
 export function makeDataUrl(
 	indicator: string,
-	timeRange: string | string[],
+	timeRange: string | string[] = [],
 	timeNearest: string | null = null,
 	geoSelected: string[] = [],
 	geoLevel: string | null = null,
 	geoExtent: string | null = null,
 	geoCluster: string | null = null,
-	otherDims: object | null = null
+	otherDims: object | null = null,
+	format: string = 'cols.json'
 ): string {
-	const base = '/api/v1/data.cols.json';
+	const base = `/api/v1/data.${format}`;
 	const chunks: { key: string; value: string }[] = [];
 
 	if (indicator) chunks.push({ key: 'indicator', value: indicator });
@@ -118,19 +119,21 @@ export function makeDataUrl(
 	if (geoCluster) chunks.push({ key: 'geoCluster', value: geoCluster });
 	if (otherDims)
 		chunks.push(
-			...Object.keys(otherDims).map((key) => ({
-				key: `dimension_${key}`,
-				value: [otherDims[key]].flat().join(',')
+			...Object.entries(otherDims).map((dim) => ({
+				key: `dimension_${dim[0]}`,
+				value: [dim[1]].flat().join(',')
 			}))
 		);
 
-	const time = Array.isArray(timeRange)
-		? timeRange.map((p) => String(p).slice(0, 10)).join(',')
-		: String(timeRange).slice(0, 10);
+	const time = [timeRange]
+		.flat()
+		.map((p) => String(p).slice(0, 10))
+		.join(',');
 	if (time) chunks.push({ key: 'time', value: time });
-	if (timeNearest) chunks.push({ key: 'timeNearest', value: timeNearest });
+	if (!Array.isArray(timeRange) && timeNearest)
+		chunks.push({ key: 'timeNearest', value: timeNearest });
 
-	const url = `${base}?${chunks.map((ch) => `${ch.key}=${ch.value}`).join('&')}&includeNames=true`;
+	const url = `${base}?${chunks.map((ch) => `${ch.key}=${ch.value}`).join('&')}`;
 	return resolve(url);
 }
 
@@ -162,6 +165,6 @@ export function valuesToBreaks(values: number[], count = 5) {
 	return Array.from(new Set(breaks)); // de-duplicate breaks
 }
 
-export function getAreaType(area) {
+export function getAreaType(area: areaObject) {
 	return geoLevelsAllLookup[area.areacd?.slice?.(0, 3)]?.label || null;
 }
