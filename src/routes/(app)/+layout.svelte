@@ -55,7 +55,7 @@
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
 <PhaseBanner phase="prototype" />
-<Header bilingual={false}></Header>
+<Header />
 {#if page.data.breadcrumbLinks}
 	<Breadcrumb
 		links={page.data.breadcrumbLinks}
