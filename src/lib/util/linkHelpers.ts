@@ -1,12 +1,10 @@
 import { geoLevelsAllLookup, geoCodesArray } from '$lib/config/geoLevels';
 import { getName } from '@onsvisual/robo-utils';
 import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 import productLinks from '$lib/data/product-links.json';
 
-export const validYear = (area, year) =>
-	!year || ((!area.start || year >= area.start) && (!area.end || year <= area.end));
-
-export function getNearestRelatedParent(area, geocodes = geoCodesArray, year = null) {
+export function getNearestRelatedParent(area: areaObject, geocodes = geoCodesArray, year = null) {
 	const parents = [area, ...area.parents];
 	if (['E', 'W'].includes(area.areacd[0]))
 		parents.push({
@@ -15,7 +13,7 @@ export function getNearestRelatedParent(area, geocodes = geoCodesArray, year = n
 		});
 	for (const parent of parents) {
 		const typecd = parent.areacd.slice(0, 3);
-		if (geocodes.includes(typecd) && validYear(parent, year)) {
+		if (geocodes.includes(typecd) && geoYearFilter(parent, year)) {
 			parent.groupcd = geoLevelsAllLookup[typecd]?.key ? geoLevelsAllLookup[typecd].key : 'ew';
 			return parent;
 		}

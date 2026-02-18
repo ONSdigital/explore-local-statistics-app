@@ -5,7 +5,7 @@ function dimsToIndex(dims) {
 }
 
 // Checks if one or more non-NULL observations exist for a set of dimensions
-export default function hasObservation(ds, dimVals) {
+export default function hasObservation(ds: jsonStatDataset, dimVals) {
 	const dims = [];
 	for (let i = 0; i < ds.id.length; i++) {
 		const key = ds.id[i];

@@ -4,7 +4,7 @@
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
 	import { ukBounds, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
-	import { validYear } from '$lib/util/linkHelpers';
+	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
 
@@ -62,7 +62,7 @@
 		for (const d of data) {
 			const ft = features[d.areacd] ? { ...features[d.areacd] } : null;
 			if (!ft) continue;
-			if (geoLevelCodes.has(d.areacd.slice(0, 3)) && validYear(ft.properties, geoYear)) {
+			if (geoLevelCodes.has(d.areacd.slice(0, 3)) && geoYearFilter(ft.properties, geoYear)) {
 				ft.properties = {
 					...ft.properties,
 					...d,

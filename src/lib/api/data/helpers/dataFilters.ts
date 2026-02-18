@@ -12,7 +12,7 @@ export function makeFilter(param) {
 	return (d) => set.has(d[0]);
 }
 
-export function makeGeoFilter(geo, geoExtent, geoCluster) {
+export function makeGeoFilter(geo: string, geoExtent: string, geoCluster: string) {
 	const codes = new Set();
 	const types = new Set();
 	for (const g of [geo].flat()) {
@@ -41,14 +41,14 @@ export function makeGeoFilter(geo, geoExtent, geoCluster) {
 				: () => false;
 }
 
-function toPlainDate(str, upperBound = false) {
+function toPlainDate(str: string, upperBound: boolean = false) {
 	if (isValidYear(str)) return Temporal.PlainDate.from(`${str}-${upperBound ? '12-31' : '01-01'}`);
 	if (isValidMonth(str))
 		return Temporal.PlainDate.from(`${str}-01`).add({ months: 1 }).subtract({ days: 1 });
 	return Temporal.PlainDate.from(str.slice(0, 10));
 }
 
-function periodToDateRange(period) {
+function periodToDateRange(period: string) {
 	const parts = period.split('/');
 	const start = Temporal.PlainDate.from(parts[0]);
 	if (!parts[1]) return [start];
@@ -58,7 +58,7 @@ function periodToDateRange(period) {
 }
 
 // Get a single time period
-export function getTime(values, params = {}) {
+export function getTime(values: string[], params = {}) {
 	if (params.time === 'latest') return [values[values.length - 1]];
 	if (params.time === 'earliest') return [values[0]];
 
@@ -102,7 +102,7 @@ export function getTime(values, params = {}) {
 }
 
 // Get a range of time periods
-export function getTimeRange(values, params = {}) {
+export function getTimeRange(values: string[], params = {}) {
 	const periods = values.map((v) => ({ value: v, period: periodToDateRange(v[0]) }));
 	const range = [
 		toPlainDate(params.time[0] === 'earliest' ? values[0][0] : params.time[0]),
@@ -123,7 +123,7 @@ export function getTimeRange(values, params = {}) {
 }
 
 // Filter time dimension based on time parameters
-export function filterTime(values, params = {}) {
+export function filterTime(values: string[], params = {}) {
 	if (params.time === 'all' || values.length === 0) return values;
 
 	const range = [params.time].flat();
@@ -132,9 +132,15 @@ export function filterTime(values, params = {}) {
 	return getTimeRange(values, params);
 }
 
-export function filterTimeForGeo(ds, values, geo) {
+export function filterTimeForGeo(ds: jsonStatDataset, values: string[], geo: string) {
 	if (geo in geoLevels) return values;
 	return values.filter((val) =>
 		hasObservation(ds, { areacd: geo, period: val[0], measure: 'value' })
 	);
+}
+
+export function timeRangesOverlap(range1: [string, string], range2: [string, string]) {
+	const r1 = range1.map((t) => +String(t).slice(0, 4));
+	const r2 = range2.map((t) => +String(t).slice(0, 4));
+	return (r1[0] <= r2[1] && r1[0] >= r1[0]) || (r1[1] >= r2[1] && r1[1] <= r1[0]);
 }

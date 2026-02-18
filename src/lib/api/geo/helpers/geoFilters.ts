@@ -5,12 +5,8 @@ import readData from '$lib/data';
 
 const metadata = await readData('json-stat-metadata');
 
-export function geoYearFilter(item, year) {
-	if (!item.start && !item.end) return true;
-	if (!item.end && item.start <= year) return true;
-	if (!item.start && item.end >= year) return true;
-	if (item.start <= year && item.end >= year) return true;
-	return false;
+export function geoYearFilter(area: areaObject, year: number | null) {
+	return !year || ((!area.start || year >= area.start) && (!area.end || year <= area.end));
 }
 
 export function makeGeoFilter(param) {
