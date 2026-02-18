@@ -6,7 +6,7 @@ import { geoLevels } from '$lib/config/geoLevels';
 import { countryLetterLookup } from '$lib/config/geoLookups';
 import indicatorRedirects from '$lib/data/indicator_redirects.json';
 
-function getInitialArea(indicator, areas, areacd) {
+function getInitialArea(indicator, areas: areaObject[], areacd: string) {
 	if (!indicator.standardised) return null;
 	const area =
 		areas.find((d) => d.areacd === areacd) ||
@@ -19,17 +19,15 @@ function getInitialArea(indicator, areas, areacd) {
 
 export const load: PageLoad = async ({ params, url, fetch }) => {
 	const path = resolve(`/api/v1/metadata/indicators/${params.code}?fullDims=true`);
-	const periodPath = resolve(`/api/v1/metadata/indicators/${params.code}/dimensions/period`);
 	const areasPath = resolve(`/api/v1/geo/list?indicator=${params.code}&year=all`);
 
 	try {
-		const [indicator, periodsRaw, areas] = await Promise.all([
+		const [indicator, areas] = await Promise.all([
 			(await fetch(path)).json(),
-			(await fetch(periodPath)).json(),
 			(await fetch(areasPath)).json()
 		]);
 		areas.sort((a, b) => a.areanm.localeCompare(b.areanm));
-		const periods = Object.keys(periodsRaw.category.index);
+		const periods = Object.keys(indicator.dimensions.period.category.index);
 		const gLevels = indicator.geography.levels
 			.filter(
 				(id: string) =>
