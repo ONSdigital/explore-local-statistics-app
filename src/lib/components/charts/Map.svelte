@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
-	import { ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
+	import { ukBounds, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
 	import { validYear } from '$lib/util/linkHelpers';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -25,12 +26,11 @@
 		]
 	} = $props();
 
-	const ukBounds = [-8.65, 49.867, 1.761, 60.856];
 	const fitBoundsOptions = { padding: 10 };
 	const noHighlight = ['K02', 'K03', 'K04']; // Don't highlight UK, GB or England & Wales on map
-	const features = await getMapFeatures();
 
 	let map = $state();
+	let features = $state.raw();
 	let _data = $derived(parseData(data));
 	let breaks = $derived(valuesToBreaks(_data.map((d) => d.value)));
 
@@ -49,10 +49,10 @@
 
 	const featureCollection = (features) => ({ type: 'FeatureCollection', features });
 
-	const makeRenderedFeatures = (data, geoLevel, geoYear) => {
+	const makeRenderedFeatures = (features, data, geoLevel, geoYear) => {
 		const renderedFeatures = [];
 
-		if (!data)
+		if (!features || !data)
 			return {
 				renderedFeatures,
 				bounds: ukBounds
@@ -75,8 +75,9 @@
 		return { renderedFeatures, bounds };
 	};
 
-	const makeSelectedFeatures = (data, selected) => {
+	const makeSelectedFeatures = (features, data, selected) => {
 		const selectedFeatures = [];
+		if (!features) return selectedFeatures;
 
 		for (const cd of selected) {
 			const ft = features[cd] ? { ...features[cd] } : null;
@@ -96,14 +97,16 @@
 	};
 
 	let { renderedFeatures, bounds } = $derived(
-		makeRenderedFeatures(_data, geoLevel, metadata.geography.year)
+		makeRenderedFeatures(features, _data, geoLevel, metadata.geography.year)
 	);
-	let selectedFeatures = $derived(makeSelectedFeatures(_data, selected));
+	let selectedFeatures = $derived(features ? makeSelectedFeatures(features, _data, selected) : []);
 
 	function fitBounds(bounds) {
-		map?.fitBounds?.(bounds, fitBoundsOptions);
+		if (bounds && map?.fitBounds) map.fitBounds(bounds, fitBoundsOptions);
 	}
 	$effect(() => fitBounds(bounds));
+
+	onMount(async () => (features = await getMapFeatures()));
 </script>
 
 <div aria-hidden="true" class="map-outer">

@@ -1,27 +1,32 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import { getMapFeatures } from '$lib/utils';
-	import { ONScolours } from '$lib/config';
+	import { ukBounds, ONScolours } from '$lib/config';
 
-	const features = await getMapFeatures();
+	let features = $state.raw();
 
 	const fitBoundsOptions = { padding: 10 };
 
 	let { selectedCluster, mapDescription } = $props();
 
-	let similarAreas = $derived(selectedCluster.similar.map((area) => features[area.areacd]));
+	let similarAreas = $derived(
+		features ? selectedCluster.similar.map((area) => features[area.areacd]) : []
+	);
 	let clusterAreas = $derived(
-		selectedCluster.cluster
+		features && selectedCluster.cluster
 			? selectedCluster.cluster.areas.map((area) => features[area.areacd])
 			: []
 	);
 	let bounds = $derived(
-		bbox({
-			type: 'FeatureCollection',
-			features: [...similarAreas, ...clusterAreas]
-		})
+		features
+			? bbox({
+					type: 'FeatureCollection',
+					features: [...similarAreas, ...clusterAreas]
+				})
+			: ukBounds
 	);
 
 	let map = $state();
@@ -31,6 +36,8 @@
 		if (map) map.fitBounds(bounds, fitBoundsOptions);
 	}
 	$effect(() => fitBounds(bounds));
+
+	onMount(async () => (features = await getMapFeatures()));
 </script>
 
 <div class="map-container">

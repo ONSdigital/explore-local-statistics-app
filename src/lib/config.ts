@@ -101,3 +101,5 @@ export const markerPathsKeys = Object.keys(markerPaths);
 export const markerPathsArray = Object.values(markerPaths);
 
 export const maxAreasSelectable = 10;
+
+export const ukBounds = [-8.65, 49.867, 1.761, 60.856];
