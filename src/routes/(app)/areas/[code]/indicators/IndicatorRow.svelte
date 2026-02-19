@@ -19,6 +19,7 @@
 	} = $props();
 
 	let visible = $state(false);
+	let expanded = $state(false);
 	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
 	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
 
@@ -84,11 +85,14 @@
 
 <Observe bind:visible rootMargin={200}>
 	<div id={indicator} class="indicator-row">
-		<details class="indicator-header">
-			<summary class="indicator-title"
+		<details class="indicator-header" bind:open={expanded}>
+			<summary
+				class="indicator-title"
+				aria-controls="{indicator}-description"
+				aria-expanded={expanded ? 'true' : 'false'}
 				><strong>{metadata.label}</strong>{metadata.subText ? `, ${metadata.subText}` : ''}</summary
 			>
-			<div class="indicator-description">
+			<div id="{indicator}-description" class="indicator-description">
 				{#if metadata.experimentalStatistic}
 					<p>
 						<Em color="#003c57">Official statistics in development</Em>
