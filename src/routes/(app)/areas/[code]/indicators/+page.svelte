@@ -147,13 +147,13 @@
 		</div>
 		<NavSection title="Topics" />
 		{#each data.taxonomy.map((t) => flattenTopic(t)) as topic}
-			<NavSection title={topic.label} id={topic.id} subsection>
+			<NavSection title={topic.label} id={topic.slug} subsection>
 				{#each topic.items.slice(0, maxIndicators) as item}
 					{@render indicator(item, topic)}
 				{/each}
 				{#if topic.count > maxIndicators}
 					<MoreIndicators
-						id="{topic.id}-more"
+						id="{topic.slug}-more"
 						bind:hidden={hiddenTopics[topic.slug]}
 						buttonText="Show {hiddenTopics[topic.slug]
 							? `${topic.count - maxIndicators} more`
@@ -186,6 +186,7 @@
 				>.
 			</p>
 			<Dropdown
+				id="select-cluster-group"
 				label="Select a group of indicators"
 				options={data.related.similar}
 				bind:value={pageState.selectedCluster}
