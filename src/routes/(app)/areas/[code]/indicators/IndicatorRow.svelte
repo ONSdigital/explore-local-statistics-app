@@ -108,7 +108,7 @@
 					<p><strong>Download data:</strong></p>
 					<ul>
 						<li>
-							Beeswarm data as {@render downloadLinks('beeswarm')}.
+							Distribution chart data as {@render downloadLinks('beeswarm')}.
 						</li>
 						<li>
 							Line chart data as {@render downloadLinks('sparkline')}.
