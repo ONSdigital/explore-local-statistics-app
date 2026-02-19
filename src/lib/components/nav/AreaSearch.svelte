@@ -62,7 +62,7 @@
 			clearable
 		/>
 	</div>
-	<Button type="submit" text="Search" icon="search" small hideLabel>Search</Button>
+	<Button type="submit" arialabel="Search" aria icon="search" small hideLabel>Search</Button>
 </form>
 
 <style>
