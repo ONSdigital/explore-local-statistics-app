@@ -71,16 +71,23 @@
 	);
 </script>
 
-{#snippet downloadUrl(url, format, formatLabel = null)}
+{#snippet downloadUrl(chartType, format, formatLabel = null)}
 	{@const label = formatLabel || format.toUpperCase()}
-	<a href={url?.replace?.('.cols.json', `.${format}`)} download="{indicator}.{format}">{label}</a>
+	{@const chartName =
+		chartType === 'beeswarm' ? 'distribution' : chartType === 'sparkline' ? 'line' : chartType}
+	{@const url = dataUrl[chartType]}
+	<a
+		href={url?.replace?.('.cols.json', `.${format}`)}
+		aria-label="Download the {metadata.label} {chartName} chart data as a {label} file"
+		download="{indicator}.{format}">{label}</a
+	>
 {/snippet}
 
 {#snippet downloadLinks(chartType)}
-	{@render downloadUrl(dataUrl[chartType], 'csv')},
-	{@render downloadUrl(dataUrl[chartType], 'csvw')},
-	{@render downloadUrl(dataUrl[chartType], 'xlsx')} or
-	{@render downloadUrl(dataUrl[chartType], 'json', 'JSON-Stat')}
+	{@render downloadUrl(chartType, 'csv')},
+	{@render downloadUrl(chartType, 'csvw')},
+	{@render downloadUrl(chartType, 'xlsx')} or
+	{@render downloadUrl(chartType, 'json', 'JSON-Stat')}
 {/snippet}
 
 <Observe bind:visible rootMargin={200}>
@@ -90,8 +97,10 @@
 				class="indicator-title"
 				aria-controls="{indicator}-description"
 				aria-expanded={expanded ? 'true' : 'false'}
-				><strong>{metadata.label}</strong>{metadata.subText ? `, ${metadata.subText}` : ''}</summary
 			>
+				<strong>{metadata.label}</strong>{metadata.subText ? `, ${metadata.subText}` : ''}
+				<span class="ons-u-vh">Expand to show details and data for this indicator</span>
+			</summary>
 			<div id="{indicator}-description" class="indicator-description">
 				{#if metadata.experimentalStatistic}
 					<p>

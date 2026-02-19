@@ -15,6 +15,7 @@
 		dataUrl
 	} = $props();
 
+	let chartName = $derived(chartType === 'map' ? chartType : `${chartType} chart`);
 	let showEmbed = $state(false);
 	let embedCode = $derived(
 		makeEmbedCode(indicator, metadata, timeRange, selected, geoLevel, chartType, showIntervals)
@@ -70,8 +71,10 @@
 
 {#snippet downloadUrl(url: string, format: string, formatLabel: string | null = null)}
 	{@const label = formatLabel || format.toUpperCase()}
-	<a href={url?.replace?.('.cols.json', `.${format}`)} download="{indicator}-{chartType}.{format}"
-		>{label}</a
+	<a
+		href={url?.replace?.('.cols.json', `.${format}`)}
+		aria-label="Download the {metadata.label} {chartName} data as a {label} file"
+		download="{indicator}-{chartType}.{format}">{label}</a
 	>
 {/snippet}
 
@@ -89,7 +92,11 @@
 			<Icon type="download" />
 			Download as
 			{#if chartDiv && chartType !== 'table'}
-				<a href="#0" onclick={downloadPNG}>PNG</a>,
+				<a
+					href="#0"
+					aria-label="Download the {metadata.label} {chartName} as a PNG image"
+					onclick={downloadPNG}>PNG</a
+				>,
 			{/if}
 			{@render downloadLinks(dataUrl)}
 		</li>
