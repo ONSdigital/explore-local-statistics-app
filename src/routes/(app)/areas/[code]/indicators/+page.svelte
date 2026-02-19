@@ -8,7 +8,7 @@
 		NavSection,
 		Dropdown,
 		Details,
-		Em
+		Icon
 	} from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
@@ -179,11 +179,15 @@
 		<NavSection title="Similar areas">
 			<p>
 				See which areas are statistically similar to {getName(areaProps, 'the')}
-				based on specific groups of indicators. These clusters of areas are based on
+				based on specific sets of indicators. These groups of areas are based on
 				<a
 					href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
-					target="_blank">an analysis carried out by the ONS</a
-				>.
+					target="_blank"
+					>a clustering analysis carried out by the ONS
+					<span class="ons-external-link__new-window-description ons-u-vh"
+						>(methodolgy opens in a new tab)</span
+					></a
+				>.<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 			</p>
 			<Dropdown
 				id="select-cluster-group"

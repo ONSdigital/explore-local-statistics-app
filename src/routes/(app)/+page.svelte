@@ -89,25 +89,25 @@
 
 	<List mode="dash">
 		<Li>
-			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer"
-				>StatsWales</a
-			>
+			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer">
+				StatsWales
+				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
-			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</Li>
 		<Li>
-			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer"
-				>Statistics.gov.scot</a
-			>
+			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">
+				Statistics.gov.scot
+				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
-			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</Li>
 		<Li>
-			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer"
-				>Northern Ireland Statistics and Research Agency</a
-			>
+			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">
+				Northern Ireland Statistics and Research Agency
+				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
-			<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 		</Li>
 	</List>
 </Section>
