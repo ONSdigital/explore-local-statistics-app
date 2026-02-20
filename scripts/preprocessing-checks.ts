@@ -155,7 +155,7 @@ export function writeUpdateLog(
 	log += section(
 		'5. The periodDomain for the below indicators has changed:',
 		newPeriods,
-		'Run period generation script: `npm run data:periods`'
+		'Validate.'
 	);
 	log += '----------------------------------------\n';
 	log += 'Fin.\n';
