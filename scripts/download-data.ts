@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { execFile } from 'child_process';
+import { execFile, execSync } from 'child_process';
 import { promisify } from 'util';
+import DATA_REPO from './config/data-repo-version.json';
 
 const execFileAsync = promisify(execFile);
 
@@ -28,27 +29,75 @@ async function removeDirectory(dir: string): Promise<void> {
 
 async function cloneRepo(): Promise<void> {
 	try {
-		console.log('Cloning repository...');
+		const branch = DATA_REPO.branch || 'main';
+		console.log(`Cloning branch "${branch}" from data repository...`);
 		await execFileAsync('git', [
 			'clone',
 			'--single-branch',
 			'--branch',
-			'csvw-metadata',
+			branch,
 			REPO_URL,
 			TEMP_DIR
 		]);
-		console.log('Repository cloned successfully');
+		console.log('Repository cloned successfully!');
+		const hash = DATA_REPO.commitHash;
+		if (hash) {
+			console.log(`Resetting to commit hash ${hash}...`);
+			await execFileAsync('git', ['-C', TEMP_DIR, 'reset', '--hard', DATA_REPO.commitHash]);
+		}
 	} catch (error) {
 		console.error('Error cloning repository:', error);
 		throw error;
 	}
 }
 
+async function getTimestamps(): Promise<void> {
+	try {
+		console.log('Getting data and metadata timestamps for each directory from latest commits');
+		const datasets = fs
+			.readdirSync(TEMP_DIR)
+			.filter((item) => !item.includes('.'))
+			.filter(
+				(item) =>
+					fs.existsSync(`${TEMP_DIR}/${item}/${item}.csv`) &&
+					fs.existsSync(`${TEMP_DIR}/${item}/${item}.json`)
+			);
+		for (const ds of datasets) {
+			const dataPath = `${ds}/${ds}.csv`;
+			const metaPath = `${ds}/${ds}.json`;
+			const timestampPath = `${TARGET_DIR}/${ds}/timestamps.json`;
+			const modifiedDateData = execSync(
+				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${dataPath}`,
+				{
+					encoding: 'utf-8'
+				}
+			);
+			const modifiedDateMeta = execSync(
+				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${metaPath}`,
+				{
+					encoding: 'utf-8'
+				}
+			);
+			const timestamps = {
+				csvModified: modifiedDateData,
+				jsonModified: modifiedDateMeta
+			};
+
+			const timestampDir = path.dirname(timestampPath);
+			console.log(`Creating directory for timestamps if it doesn't exist: ${timestampDir}`);
+			await fs.promises.mkdir(timestampDir, { recursive: true });
+
+			await fs.promises.writeFile(timestampPath, JSON.stringify(timestamps, null, 2));
+			console.log(`Wrote ${timestampPath}`);
+		}
+	} catch (error) {
+		console.error('Error getting timestamps:', error);
+		throw error;
+	}
+}
+
 async function moveContents(): Promise<void> {
 	try {
-		console.log("Creating target directory if it doesn't exist...");
-		await fs.promises.mkdir(TARGET_DIR, { recursive: true });
-
 		console.log('Moving contents to target directory...');
 		await fs.promises.cp(TEMP_DIR, TARGET_DIR, { recursive: true });
 		console.log('Contents moved successfully');
@@ -79,6 +128,9 @@ async function main(): Promise<void> {
 
 		// Clone repository to temporary directory
 		await cloneRepo();
+
+		// Generate timestamp
+		await getTimestamps();
 
 		// Move contents to target directory
 		await moveContents();

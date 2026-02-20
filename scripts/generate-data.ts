@@ -1,16 +1,7 @@
 import * as aq from 'arquero';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { descending } from 'd3-array';
-import { loadCsvWithoutBom, readJsonSync, readCsvAutoType } from './io.ts';
-import {
-	abortIfMissingMetadata,
-	abortIfNewIndicatorCodesExist,
-	abortIfNewPeriodsExist,
-	abortIfMultiplePeriodGroupsForOneIndicator,
-	abortIfNewFilesExist
-} from './data-processing-warnings.ts';
-import { table } from 'console';
-import { parse } from 'path';
+import { loadCsvWithoutBom } from './util/io.ts';
 
 // config.ts
 const RAW_DATA_DIR = 'scripts/raw-data';
@@ -120,6 +111,8 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 			description: longDescription,
 			source: meta_data.metadata.source,
 			slug: manifest_metadata_indicator[0].slug,
+			dataModified: meta_data['dc:modified'],
+			metadataModified: meta_data.metadata.metadataModified,
 			...restOfMetadata,
 			experimentalStatistic: meta_data.metadata.experimentalStatistic,
 			geography: meta_data.metadata.geography
@@ -271,6 +264,7 @@ function processFile(file) {
 	// Filter out indicators that are not present in the manifest
 	const includedIndicators = manifest_metadata
 		.filter(aq.escape((d) => d.dataset === dataset_name))
+		.filter(aq.escape((d) => d.include === true))
 		.array('code');
 	if (indicatorsList.length !== includedIndicators.length) {
 		const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
@@ -295,22 +289,16 @@ function processFile(file) {
 }
 
 const manifest_metadata = loadCsvWithoutBom(MANIFEST);
-const indicator_slugs = manifest_metadata
-	// .filter((f) => f.include)
-	.array('slug');
+const indicator_slugs = manifest_metadata.filter((f) => f.include).array('slug');
 
 // Throw error if new indicator files have been downloaded and need to be added to the manifest
 // await abortIfNewFilesExist(manifest_metadata, CSV_PREPROCESS_DIR)
 
 // remove indicators based on boolean in manifest
 // extract distinct filepaths
-var file_paths = [
-	...new Set(
-		manifest_metadata
-			// .filter((f) => f.include)
-			.array('dataset')
-	)
-].map((code) => `${RAW_DATA_DIR}/${code}/${code}.csv`);
+var file_paths = [...new Set(manifest_metadata.filter((f) => f.include).array('dataset'))].map(
+	(code) => `${RAW_DATA_DIR}/${code}/${code}.csv`
+);
 
 const cube = {
 	version: '2.0',
@@ -339,6 +327,7 @@ console.log(`Wrote ${output}.`);
 
 const metadataOutput = './src/lib/data/json-stat-metadata.json';
 cube.link.item = cube.link.item.map((item) => {
+	console.log(item.label);
 	item.value = [];
 	delete item.status;
 	return item;
