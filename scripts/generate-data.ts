@@ -264,6 +264,7 @@ function processFile(file) {
 	// Filter out indicators that are not present in the manifest
 	const includedIndicators = manifest_metadata
 		.filter(aq.escape((d) => d.dataset === dataset_name))
+		.filter(aq.escape((d) => d.include === true))
 		.array('code');
 	if (indicatorsList.length !== includedIndicators.length) {
 		const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
@@ -288,22 +289,16 @@ function processFile(file) {
 }
 
 const manifest_metadata = loadCsvWithoutBom(MANIFEST);
-const indicator_slugs = manifest_metadata
-	// .filter((f) => f.include)
-	.array('slug');
+const indicator_slugs = manifest_metadata.filter((f) => f.include).array('slug');
 
 // Throw error if new indicator files have been downloaded and need to be added to the manifest
 // await abortIfNewFilesExist(manifest_metadata, CSV_PREPROCESS_DIR)
 
 // remove indicators based on boolean in manifest
 // extract distinct filepaths
-var file_paths = [
-	...new Set(
-		manifest_metadata
-			// .filter((f) => f.include)
-			.array('dataset')
-	)
-].map((code) => `${RAW_DATA_DIR}/${code}/${code}.csv`);
+var file_paths = [...new Set(manifest_metadata.filter((f) => f.include).array('dataset'))].map(
+	(code) => `${RAW_DATA_DIR}/${code}/${code}.csv`
+);
 
 const cube = {
 	version: '2.0',

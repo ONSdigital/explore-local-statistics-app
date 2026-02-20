@@ -1,5 +1,11 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
+import { csvParse } from 'd3-dsv';
 import { DATA_DIR, skipDatasets } from './util/config';
+import { stripBom, autoTypeWithoutDates } from './util/io';
+
+const CONFIG_DIR = `scripts/config`;
+const MANIFEST = `${CONFIG_DIR}/manifest_metadata.csv`;
+const metadataJsonStatPath = './src/lib/data/json-stat-metadata.json';
 
 // define incoming datasets
 const newDatasets = readdirSync(DATA_DIR)
@@ -11,24 +17,25 @@ const newDatasets = readdirSync(DATA_DIR)
 	);
 
 // read in existing big metadata
-// can add error here if this file is missing?
-const existingMeta = JSON.parse(readFileSync('./src/lib/data/json-stat-metadata.json'));
+if (!existsSync(metadataJsonStatPath))
+	throw new Error('Existing JSON-stat metadata file not found. Cannot compare incoming data.');
+
+const existingMeta = JSON.parse(readFileSync(metadataJsonStatPath));
+
+// read in existing manifest_metadata (manually updated)
+const manifest_metadata = csvParse(
+	stripBom(readFileSync(MANIFEST, { encoding: 'utf-8' })),
+	autoTypeWithoutDates
+);
 
 const existingDatasets = [...new Set(existingMeta.link.item.map((d) => d.extension.dataset))];
-const existingIndicators = [...new Set(existingMeta.link.item.map((d) => d.extension.code))];
-
-if (existingDatasets.length !== newDatasets.length) {
-	// don't think this needs to be an error
-	// console log, or written to a logfile
-	console.log('Number of incoming datasets does not match existing number of datasets');
-}
 
 console.log(
-	'Comparing existing',
+	'Comparing',
 	existingDatasets.length,
-	'datasets to',
+	'existing datasets to',
 	newDatasets.length,
-	'new datasets...'
+	'incoming datasets...'
 );
 
 // loop through all new datasets and compare to existing metadata
@@ -42,7 +49,6 @@ for (const ds of newDatasets) {
 	// Dataset-level comparison
 
 	// note datasets that are present in new but not in old (new datasets)
-	//// do we care about existing datasets that aren't in the newly added???
 	const existingDataset = existingMeta.link.item.filter((d) => d.extension.dataset === ds);
 	if (!existingDataset.length) {
 		missingDatasets.push(ds);
@@ -81,11 +87,6 @@ for (const ds of newDatasets) {
 					existingIndicatorDomain[0] !== newIndicatorDomain[0] ||
 					existingIndicatorDomain[1] !== newIndicatorDomain[1]
 				) {
-					console.log(
-						'Incoming and existing period domains do not match for',
-						ind,
-						'. Run period generation script (npm run data:periods).'
-					);
 					newPeriods.push(ind);
 				}
 			} else {
@@ -95,6 +96,14 @@ for (const ds of newDatasets) {
 		}
 	}
 }
+
+// Filter missing indicators based on manifest_metadata
+const excludedIndicators = [
+	...new Set(manifest_metadata.filter((f) => !f.include).map((d) => d.code))
+];
+const missingIndicatorsFiltered = missingIndicators.filter((d) => !excludedIndicators.includes(d));
+
+// should also consider search for completely excluded datasets and filtering missingDatasets to exclude these
 
 function section(title, items, message) {
 	let out = '';
@@ -106,7 +115,7 @@ function section(title, items, message) {
 		return out;
 	}
 	for (const item of items) {
-		out += `- ${item}\n`;
+		out += `${item}\n`;
 	}
 	out += `\nAction: ${message}\n`;
 
@@ -124,18 +133,22 @@ export function writeUpdateLog(
 	log += '----- Data update - inferred changes ------\n\n';
 	log += `${new Date().toISOString()}\n\n`;
 	log += section(
-		'1. The below datasets are not already preset in the app:',
+		'1. The below datasets are not already present in the app:',
 		missingDatasets,
-		'Add relevant information to manifest_metadata.csv.'
+		'Add relevant information for each indicator therein to manifest_metadata.csv.'
 	);
 	log += section(
-		'2. The below indicators are not already present in the app:',
+		'2. The below indicators are from existing datasets but are not present in the manifest:',
 		missingIndicators,
-		'Add relevant information to manifest_metadata.csv.'
+		'Add relevant information on missing indicators to manifest_metadata.csv.'
 	);
-	log += section('3. The data for the below indicators has been edited:', editsData, 'Validate.');
 	log += section(
-		'4. The metadata for the below indicators has been edited:',
+		'3. The data .csv for the below datasets has been edited:',
+		editsData,
+		'Validate.'
+	);
+	log += section(
+		'4. The metadata .json for the below datasets has been edited:',
 		editsMetadata,
 		'Validate.'
 	);
@@ -150,4 +163,5 @@ export function writeUpdateLog(
 	writeFileSync('./scripts/data-update-changelog.txt', log, 'utf-8');
 }
 
-writeUpdateLog(missingDatasets, missingIndicators, editsData, editsMetadata, newPeriods);
+writeUpdateLog(missingDatasets, missingIndicatorsFiltered, editsData, editsMetadata, newPeriods);
+console.log('Log file written to ./scripts/data-update-changelog.txt');
