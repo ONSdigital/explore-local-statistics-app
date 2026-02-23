@@ -12,7 +12,6 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	const geoExtent = getParam(url, 'geoExtent', 'all');
 	const geoCluster = getParam(url, 'geoCluster', 'all');
 	const hasGeo = getParam(url, 'hasGeo', 'any');
-	const groupByArea = getParam(url, 'groupByArea', false);
 	const time = getParam(url, 'time', 'latest');
 	const timeNearest = getParam(url, 'timeNearest', 'none');
 	const measure = getParam(url, 'measure', 'all');
@@ -29,7 +28,6 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		geoExtent,
 		geoCluster,
 		hasGeo,
-		groupByArea,
 		time,
 		timeNearest,
 		measure,

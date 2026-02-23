@@ -105,7 +105,6 @@ function getValueDimIndex(measures: filteredDimension) {
 // This function runs once to generate the most optimal function to fill columns based on the global params
 // Running this saves a number of condiditional tests for each individual row added
 function makeColFill(
-	groupByArea: boolean,
 	includeNames: boolean,
 	includeStatus: boolean,
 	dims: filteredDimension[],
@@ -136,7 +135,6 @@ function makeColFill(
 		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
 				data.value.push(cube.value[item.index]);
 
-	const dimStart = groupByArea ? 1 : 0;
 	const dimEnd = !pivotMeasures && measuresCount > 1 ? dims.length : dims.length - 1;
 	const pushVals = (
 		data: jsonDataCols,
@@ -144,7 +142,7 @@ function makeColFill(
 		dims: filteredDimension[],
 		cube: jsonStatDataset
 	) => {
-		for (let i = dimStart; i < dimEnd; i++) data[dims[i].key].push(item.values[i]);
+		for (let i = 0; i < dimEnd; i++) data[dims[i].key].push(item.values[i]);
 		pushMeasures(data, item, cube);
 	};
 	const pushName = (data: jsonDataCols, item: dataItem) =>
@@ -199,56 +197,23 @@ export function itemsToCols(
 	measures: filteredDimension,
 	pivotMeasures: boolean,
 	includeNames: boolean,
-	includeStatus: boolean,
-	groupByArea: boolean
+	includeStatus: boolean
 ): jsonDataCols | jsonDataColsByArea {
-	const colFill = makeColFill(
-		groupByArea,
-		groupByArea ? false : includeNames,
-		includeStatus,
-		dims,
-		measures,
-		pivotMeasures
-	);
+	const colFill = makeColFill(includeNames, includeStatus, dims, measures, pivotMeasures);
 	const measuresLength = measures.values.length;
 	const dimsEnd = !pivotMeasures && measuresLength > 1 ? undefined : -1;
 
-	if (groupByArea) {
-		const data: jsonDataColsByArea = [];
-		const cols = dims.slice(1, dimsEnd);
-		let currentArea = null;
-		for (const item of items) {
-			if (item.values[0] !== currentArea?.areacd) {
-				const newArea = {
-					areacd: item.values[0],
-					...(includeNames && { areanm: areaNameLookup[item.values[0]] || null }),
-					values: {}
-				};
-				for (const col of cols) {
-					newArea.values[col.key] = [];
-				}
-				for (const val of pivotMeasures ? measures.values : [['value']])
-					newArea.values[val[0]] = [];
-				if (includeStatus) newArea.values.status = [];
-				data.push(newArea);
-				currentArea = data[data.length - 1];
-			}
-			colFill(currentArea.values, item, dims, cube);
-		}
-		return data;
-	} else {
-		const data: jsonDataCols = {};
-		for (const dim of dims.slice(0, dimsEnd)) {
-			data[dim.key] = [];
-			if (includeNames && dim.key === 'areacd') data.areanm = [];
-		}
-		for (const val of pivotMeasures ? measures.values : [['value']]) data[val[0]] = [];
-		if (includeStatus) data.status = [];
-		for (const item of items) {
-			colFill(data, item, dims, cube);
-		}
-		return data;
+	const data: jsonDataCols = {};
+	for (const dim of dims.slice(0, dimsEnd)) {
+		data[dim.key] = [];
+		if (includeNames && dim.key === 'areacd') data.areanm = [];
 	}
+	for (const val of pivotMeasures ? measures.values : [['value']]) data[val[0]] = [];
+	if (includeStatus) data.status = [];
+	for (const item of items) {
+		colFill(data, item, dims, cube);
+	}
+	return data;
 }
 
 export function toCols(
@@ -256,22 +221,12 @@ export function toCols(
 	dims: filteredDimension[],
 	includeNames: boolean,
 	includeStatus: boolean,
-	groupByArea = false,
 	pivotMeasures = true
 ) {
 	const measures = dims[dims.length - 1];
 
 	const items = dimsToItems(!pivotMeasures ? dims : dims.slice(0, -1), cube);
-	const data = itemsToCols(
-		cube,
-		dims,
-		items,
-		measures,
-		pivotMeasures,
-		includeNames,
-		includeStatus,
-		groupByArea
-	);
+	const data = itemsToCols(cube, dims, items, measures, pivotMeasures, includeNames, includeStatus);
 
 	return [cube.extension.slug, data];
 }
@@ -301,34 +256,15 @@ export function toRows(
 	includeIndicator: boolean,
 	includeNames: boolean,
 	includeStatus: boolean,
-	groupByArea = false,
 	pivotMeasures = true
 ): jsonDataRow[] | jsonDataRowsByArea {
 	const measures = dims[dims.length - 1];
 	if (measures.values.length === 0) return [];
 
 	const items = dimsToItems(!pivotMeasures ? dims : dims.slice(0, -1), cube);
-	const cols = itemsToCols(
-		cube,
-		dims,
-		items,
-		measures,
-		pivotMeasures,
-		includeNames,
-		includeStatus,
-		groupByArea
-	);
+	const cols = itemsToCols(cube, dims, items, measures, pivotMeasures, includeNames, includeStatus);
 
-	const rows = groupByArea
-		? cols.map((d) => {
-				const area = {
-					areacd: d.areacd,
-					...(includeNames && { areanm: d.areanm }),
-					values: colsToRows(d.values)
-				};
-				return area;
-			})
-		: colsToRows(cols, includeIndicator ? cube.label : null);
+	const rows = colsToRows(cols, includeIndicator ? cube.label : null);
 
 	return [cube.extension.slug, rows];
 }

@@ -54,7 +54,6 @@ export function filterJSONStat(
 			dims,
 			params.includeNames,
 			params.includeStatus && Object.keys(cube.status).length > 0,
-			false,
 			false
 		);
 		return data ? { data, meta: getSpreadsheetMetadata(cube, dims) } : null;
@@ -62,9 +61,9 @@ export function filterJSONStat(
 	if (format === 'csv')
 		return toRows(cube, dims, !singleIndicator, params.includeNames, params.includeStatus);
 	if (format.slice(0, 4) === 'cols')
-		return toCols(cube, dims, params.includeNames, params.includeStatus, params.groupByArea);
+		return toCols(cube, dims, params.includeNames, params.includeStatus);
 	if (format.slice(0, 4) === 'rows')
-		return toRows(cube, dims, false, params.includeNames, params.includeStatus, params.groupByArea);
+		return toRows(cube, dims, false, params.includeNames, params.includeStatus);
 	return toJSONStat(cube, dims, params.includeNames, params.includeStatus);
 }
 
