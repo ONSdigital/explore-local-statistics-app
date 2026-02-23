@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { Observe, Em, ButtonGroup, ButtonGroupItem } from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
+	import { timeRangesOverlap } from '$lib/api/data/helpers/dataFilters';
 	import Beeswarm from '$lib/components/charts/Beeswarm.svelte';
 	import Sparkline from '$lib/components/charts/Sparkline.svelte';
 	import Pyramid from '$lib/components/charts/Pyramid.svelte';
@@ -23,55 +24,57 @@
 	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
 	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
 
+	let chartTypes = $derived(
+		indicator === 'population-by-age-and-sex' ? ['pyramid'] : ['beeswarm', 'sparkline']
+	);
 	let chartMode = $state('simple');
 
-	const chartTypes =
-		indicator === 'population-by-age-and-sex' ? ['pyramid'] : ['beeswarm', 'sparkline'];
+	function makeChartArgs(
+		chartType: string,
+		chartMode: string,
+		indicator: string,
+		timeRange: string[],
+		geoGroup: { [key: string]: string },
+		selected: string[]
+	) {
+		const adv = chartMode === 'advanced';
+		return chartType === 'beeswarm'
+			? [
+					indicator,
+					timeRange[1],
+					'latest',
+					selected,
+					geoGroup.geoLevel,
+					geoGroup.geoExtent,
+					geoGroup.geoCluster
+				]
+			: chartType === 'pyramid'
+				? [
+						indicator,
+						timeRange[1],
+						'latest',
+						selected,
+						adv ? geoGroup.geoLevel : null,
+						adv ? geoGroup.geoExtent : null,
+						adv ? geoGroup.geoCluster : null,
+						{ sex: ['female', 'male'] }
+					]
+				: [indicator, timeRange, null, selected];
+	}
 
 	let dataUrl = $derived(
 		Object.fromEntries(
-			chartTypes.map((key) => {
-				const args =
-					key === 'sparkline'
-						? [indicator, timeRange, null, selected]
-						: key === 'beeswarm'
-							? [
-									indicator,
-									timeRange[1],
-									'latest',
-									selected,
-									geoGroup.geoLevel,
-									geoGroup.geoExtent,
-									geoGroup.geoCluster
-								]
-							: chartMode === 'advanced'
-								? [
-										indicator,
-										timeRange[1],
-										'latest',
-										selected,
-										geoGroup.geoLevel,
-										geoGroup.geoExtent,
-										geoGroup.geoCluster,
-										{ sex: ['female', 'male'] }
-									]
-								: [
-										indicator,
-										timeRange[1],
-										'latest',
-										selected,
-										null,
-										null,
-										null,
-										{ sex: ['female', 'male'] }
-									];
-				return [key, makeDataUrl(...args)];
-			})
+			timeRangesOverlap(metadata.periodDomain, timeRange)
+				? chartTypes.map((key) => {
+						const args = makeChartArgs(key, chartMode, indicator, timeRange, geoGroup, selected);
+						return [key, makeDataUrl(...args)];
+					})
+				: chartTypes.map((key) => [key, null])
 		)
 	);
 </script>
 
-{#snippet downloadUrl(chartType, format, formatLabel = null)}
+{#snippet downloadUrl(chartType: string, format: string, formatLabel: string | null = null)}
 	{@const label = formatLabel || format.toUpperCase()}
 	{@const chartName =
 		chartType === 'beeswarm' ? 'distribution' : chartType === 'sparkline' ? 'line' : chartType}
@@ -83,7 +86,7 @@
 	>
 {/snippet}
 
-{#snippet downloadLinks(chartType)}
+{#snippet downloadLinks(chartType: string)}
 	{@render downloadUrl(chartType, 'csv')},
 	{@render downloadUrl(chartType, 'csvw')},
 	{@render downloadUrl(chartType, 'xlsx')} or

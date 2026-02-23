@@ -7,8 +7,11 @@
 	let loadedData: jsonDataCols | errorObject | null = null;
 
 	async function fetchData(dataUrl: string, visible: boolean) {
-		if (!visible && loadedData) return loadedData;
-		else if (!visible) return null;
+		if (!visible) return loadedData;
+		if (!dataUrl) {
+			loadedData = { message: 'Data not available' };
+			return loadedData;
+		}
 		if (dataUrl !== loadedDataUrl) {
 			console.log(`Loading data for ${id}`);
 			loadedDataUrl = dataUrl;
