@@ -18,7 +18,7 @@ declare global {
 	type jsonDataCols = { [key: string]: any[] };
 	type jsonDataColsByArea = { areacd: string; areanm?: string; values: jsonDataCols }[];
 	type jsonDataRowsKeyed = { [key: string]: jsonDataRow[] };
-	type dataItem = [number, ...string[]];
+	type dataItem = { index: number; values: string[] };
 
 	// JSON-Stat (based on sub-set of full spec)
 	type jsonStatDimension = {

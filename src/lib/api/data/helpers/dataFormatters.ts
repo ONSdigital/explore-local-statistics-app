@@ -15,13 +15,13 @@ function dimValuesToLabels(dim: filteredDimension, cube: jsonStatDataset) {
 
 // Take filtered dims and expand to array of all the values they represent
 export function dimsToItems(dims: filteredDimension[], cube: jsonStatDataset) {
-	let items: dataItem[] = [[0]];
+	let items: dataItem[] = [{ index: 0, values: [] }];
 	for (const dim of dims) {
 		dimValuesToLabels(dim, cube);
 		const newItems: dataItem[] = [];
 		for (const item of items) {
 			for (const val of dim.values) {
-				newItems.push([item[0] * dim.count + val[1], ...item.slice(1), val[0]]);
+				newItems.push({ index: item.index * dim.count + val[1], values: [...item.values, val[0]] });
 			}
 		}
 		items = newItems;
@@ -116,8 +116,8 @@ function makeColFill(
 
 	const valueDimIndex = getValueDimIndex(measures);
 	const getIndex = pivotMeasures
-		? (item) => item[0] * measuresCount + valueDimIndex
-		: (item) => item[0];
+		? (item) => item.index * measuresCount + valueDimIndex
+		: (item) => item.index;
 	const hasVals = includeStatus
 		? (item: dataItem, cube: jsonStatDataset) => {
 				const index = getIndex(item);
@@ -129,12 +129,12 @@ function makeColFill(
 		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) => {
 				for (let j = 0; j < measures.values.length; j++) {
 					data[measures.values[j][0]].push(
-						cube.value[item[0] * measuresCount + measures.values[j][1]]
+						cube.value[item.index * measuresCount + measures.values[j][1]]
 					);
 				}
 			}
 		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.value.push(cube.value[item[0]]);
+				data.value.push(cube.value[item.index]);
 
 	const dimStart = groupByArea ? 1 : 0;
 	const dimEnd = !pivotMeasures && measuresCount > 1 ? dims.length : dims.length - 1;
@@ -144,16 +144,16 @@ function makeColFill(
 		dims: filteredDimension[],
 		cube: jsonStatDataset
 	) => {
-		for (let i = dimStart; i < dimEnd; i++) data[dims[i].key].push(item[i + 1]);
+		for (let i = dimStart; i < dimEnd; i++) data[dims[i].key].push(item.values[i]);
 		pushMeasures(data, item, cube);
 	};
 	const pushName = (data: jsonDataCols, item: dataItem) =>
-		data.areanm.push(areaNameLookup[item[1]] || null);
+		data.areanm.push(areaNameLookup[item.values[0]] || null);
 	const pushStatus = pivotMeasures
 		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.status.push(cube.status[item[0] * measuresCount] || null)
+				data.status.push(cube.status[item.index * measuresCount] || null)
 		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.status.push(cube.status[item[0]] || null);
+				data.status.push(cube.status[item.index] || null);
 
 	return includeNames && includeStatus
 		? (data: jsonDataCols, item: dataItem, dims: filteredDimension[], cube: jsonStatDataset) => {
@@ -218,10 +218,10 @@ export function itemsToCols(
 		const cols = dims.slice(1, dimsEnd);
 		let currentArea = null;
 		for (const item of items) {
-			if (item[1] !== currentArea?.areacd) {
+			if (item.values[0] !== currentArea?.areacd) {
 				const newArea = {
-					areacd: item[1],
-					...(includeNames && { areanm: areaNameLookup[item[1]] || null }),
+					areacd: item.values[0],
+					...(includeNames && { areanm: areaNameLookup[item.values[0]] || null }),
 					values: {}
 				};
 				for (const col of cols) {
