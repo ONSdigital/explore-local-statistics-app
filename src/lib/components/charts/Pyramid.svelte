@@ -11,7 +11,8 @@
 		idKey = 'areacd',
 		xKey = 'value',
 		yKey = 'age',
-		zKey = 'sex'
+		zKey = 'sex',
+		valueDomain = []
 	} = $props();
 
 	const barHeight = 18;
@@ -34,9 +35,10 @@
 	let hoveredPos = $state();
 
 	let xRange = $derived([0, (w - gutter) / 2]);
-	let xDomain = $derived(
-		!_data?.valueDomain || _data?.valueDomain?.[1] < 5 ? [0, 5] : _data?.valueDomain
-	);
+	// let xDomain = $derived(
+	// 	!_data?.valueDomain || _data?.valueDomain?.[1] < 5 ? [0, 5] : _data?.valueDomain
+	// );
+	let xDomain = valueDomain;
 	let xScale = $derived(scaleLinear().domain(xDomain).range(xRange));
 	let yRange = $derived([barHeight * (_data?.categoryDomain?.length || 18), 0]);
 	let yScale = $derived(

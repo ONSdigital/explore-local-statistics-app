@@ -20,6 +20,7 @@
 
 	let visible = $state(false);
 	let expanded = $state(false);
+	let valueDomain = $derived(metadata?.valueDomain);
 	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
 	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
 
@@ -163,7 +164,7 @@
 					{visible}
 				>
 					{#snippet chart(data)}
-						<Pyramid {data} {formatValue} {selected} bind:hovered />
+						<Pyramid {data} {formatValue} {selected} bind:hovered {valueDomain} />
 					{/snippet}
 				</ChartDataLoader>
 			</div>
