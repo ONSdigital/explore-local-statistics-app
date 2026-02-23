@@ -113,6 +113,8 @@
 					.range([0, widthInner])
 			: null
 	);
+	const maxTickGap = 140; // in pixels
+	let nXTicks = $derived(Math.floor(width / maxTickGap));
 
 	$inspect({ labelLookup });
 </script>
@@ -270,7 +272,7 @@
 		</div>
 		<div class="line-x-axis">
 			<div class="x-baseline" style:top="0"></div>
-			{#each xScale.ticks(5) as xTick}
+			{#each xScale.ticks(nXTicks) as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
 					{prefix}{formatValue(xTick)}{suffix}
