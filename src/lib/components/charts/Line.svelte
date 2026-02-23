@@ -81,7 +81,7 @@
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 
-	const maxTickGap = 100; // in pixels
+	const maxTickGap = 140; // in pixels
 	let nXTicks = $derived(Math.floor(width / maxTickGap));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
