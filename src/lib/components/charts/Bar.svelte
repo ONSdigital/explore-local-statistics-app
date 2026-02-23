@@ -22,7 +22,7 @@
 
 	let width = $state();
 	const widthThreshold = 550;
-	let leftMargin = $derived(width < widthThreshold ? 20 : 190);
+	let leftMargin = $derived(width < widthThreshold ? 20 : 250);
 	const rightMargin = 30;
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
