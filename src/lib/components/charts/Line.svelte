@@ -417,7 +417,7 @@
 	.line-x-tick {
 		position: absolute;
 		top: 100%;
-		height: 10px;
+		height: 8px;
 		border-left: 1px solid grey;
 	}
 
