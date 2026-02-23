@@ -435,7 +435,7 @@
 		position: absolute;
 		width: 100%;
 		border-bottom: 2px solid grey;
-		transform: translateY(-1px);
+		transform: translateY(-0.5px);
 	}
 
 	.line-y-tick {
