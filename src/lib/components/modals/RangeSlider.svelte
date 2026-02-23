@@ -155,6 +155,15 @@
 	.range-marker-overlay {
 		background-color: transparent;
 		pointer-events: all;
+		cursor: move; /* fallback if grab cursor is unsupported */
+		cursor: grab;
+		cursor: -moz-grab;
+		cursor: -webkit-grab;
+	}
+	.range-marker-overlay:active {
+		cursor: grabbing;
+		cursor: -moz-grabbing;
+		cursor: -webkit-grabbing;
 	}
 	.range-ticks {
 		position: absolute;
