@@ -445,7 +445,7 @@
 		position: absolute;
 		top: calc(100% + 10px);
 		transform: translateX(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 	}
 
@@ -453,7 +453,7 @@
 		position: absolute;
 		right: calc(100% + 10px);
 		transform: translateY(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 	}
 
@@ -469,7 +469,7 @@
 	.margin-label-hovered {
 		position: absolute;
 		transform: translateY(-50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: left;
 		line-height: 1.1;
@@ -485,7 +485,7 @@
 	.margin-label-selected {
 		position: absolute;
 		transform: translateY(-50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		line-height: 0.95;
 		padding-top: 4px;

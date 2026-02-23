@@ -438,7 +438,7 @@
 		position: absolute;
 		bottom: calc(100% + 14px);
 		transform: translateX(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 		line-height: 1;
 	}
@@ -487,7 +487,7 @@
 	.margin-label-hovered {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: right;
 		line-height: 1.1;
@@ -496,7 +496,7 @@
 	.margin-label-selected {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: right;
 		line-height: 0.95;
@@ -507,7 +507,7 @@
 	.margin-label-geo-all {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		color: grey;
 		max-width: 140px;
