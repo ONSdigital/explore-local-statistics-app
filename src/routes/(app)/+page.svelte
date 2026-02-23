@@ -89,7 +89,7 @@
 
 	<List mode="dash">
 		<Li>
-			<a href="https://statswales.gov.wales/Catalogue" target="_blank" rel="noreferrer">
+			<a href="https://stats.gov.wales" target="_blank" rel="noreferrer">
 				StatsWales
 				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
 			</a>
