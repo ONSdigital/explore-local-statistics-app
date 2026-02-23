@@ -362,6 +362,7 @@
 		display: block;
 		position: relative;
 		overflow: visible;
+		padding-top: 8px;
 	}
 	.line-inner {
 		display: block;
@@ -472,7 +473,7 @@
 		font-size: 18px;
 		font-weight: bold;
 		text-align: left;
-		line-height: 1.1;
+		line-height: 0.95;
 	}
 	.margin-labels-selected {
 		position: absolute;

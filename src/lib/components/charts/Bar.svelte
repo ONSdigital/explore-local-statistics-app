@@ -490,7 +490,7 @@
 		font-size: 18px;
 		font-weight: bold;
 		text-align: right;
-		line-height: 1.1;
+		line-height: 0.95;
 	}
 
 	.margin-label-selected {
@@ -512,6 +512,6 @@
 		color: grey;
 		max-width: 140px;
 		text-align: right;
-		line-height: 1.1;
+		line-height: 0.95;
 	}
 </style>
