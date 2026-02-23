@@ -135,7 +135,7 @@ export async function dataToSpreadsheet(data) {
 	workbook.created = data.created;
 	workbook.modified = data.created;
 
-	const coverSheet = workbook.addWorksheet('Cover sheet');
+	const coverSheet = workbook.addWorksheet('Cover_sheet');
 	coverSheet.columns = [{ width: 80, style: { alignment: { wrapText: true } } }];
 	addTextRow(coverSheet, `# ${data.coverSheetTitle}`);
 
@@ -143,7 +143,7 @@ export async function dataToSpreadsheet(data) {
 		addTextRow(coverSheet, data.coverSheetContents[i]);
 	}
 
-	const contentsSheet = workbook.addWorksheet('Table of contents');
+	const contentsSheet = workbook.addWorksheet('Table_of_contents');
 	contentsSheet.columns = [{ width: 10 }, { width: 70 }];
 	addTextRow(contentsSheet, `# Table of contents`);
 	addTextRow(contentsSheet, oneTableMessage, { height: 40, alignment: { vertical: 'top' } });
@@ -248,7 +248,7 @@ export default async function generateXLSX(datasets) {
 			'[Visit Explore Local Statistics on the ONS website](https://www.ons.gov.uk)',
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
-			"Dates follow the ISO 8601 standard. Some use an extended 'YYYY-MM-DD/PnI' format, where 'P' means it's a period, 'n' is the number of time units and 'I' is the type of time unit (Y = year, M = month, W = week, D = day).",
+			"Dates follow the ISO 8601 standard. Some dates express time periods in an extended 'YYYY-MM-DD/PnI' format, where 'P' means it's a period, 'n' is the number of time units and 'I' is the type of time unit (Y = year, M = month, W = week, D = day).",
 			'## Quality and methodology',
 			'Details of the Explore Local Statistics service are available at the link below, including its strengths and limitations, methods used, data uses and users.',
 			'[Quality and methodology information](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi)'
