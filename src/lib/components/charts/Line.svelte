@@ -37,10 +37,13 @@
 	const dodgedLabelGap = 26;
 
 	let width = $state(680);
-	let leftMargin = $state(40);
-	function updateLeftMargin(el) {
-		const width = el.getBoundingClientRect().width;
-		if (width > leftMargin) leftMargin = width + 15;
+	let leftMargin = $state(0);
+	let yTickLabelWidths = $state({});
+
+	function updateLeftMargin(el, index) {
+		yTickLabelWidths[index] = el.getBoundingClientRect().width;
+		const maxWidth = Math.max(...Object.values(yTickLabelWidths));
+		leftMargin = maxWidth + 12;
 	}
 	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
@@ -240,7 +243,7 @@
 				<div class="y-baseline"></div>
 				{#each yScale.ticks(5) as yTick, i}
 					<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
-					<div use:updateLeftMargin class="line-y-tick-label" style:top="{yScale(yTick)}px">
+					<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
 						{prefix}{formatYTick(yTick)}{suffix}
 					</div>
 				{/each}
