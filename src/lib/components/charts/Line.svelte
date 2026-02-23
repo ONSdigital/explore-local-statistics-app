@@ -17,6 +17,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -43,6 +44,8 @@
 	}
 	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
+	let suffix = $derived(metadata.suffix);
+	let prefix = $derived(metadata.prefix);
 
 	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
 	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
@@ -238,7 +241,7 @@
 				{#each yScale.ticks(5) as yTick, i}
 					<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
 					<div use:updateLeftMargin class="line-y-tick-label" style:top="{yScale(yTick)}px">
-						{formatYTick(yTick)}
+						{prefix}{formatYTick(yTick)}{suffix}
 					</div>
 				{/each}
 			</div>

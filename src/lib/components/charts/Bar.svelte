@@ -7,6 +7,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -31,6 +32,8 @@
 	let hoveredCodesNames = $derived(
 		hovered ? [{ areacd: hovered.areacd, areanm: hovered.areanm }] : []
 	);
+	let suffix = $derived(metadata.suffix);
+	let prefix = $derived(metadata.prefix);
 
 	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
 	let selectedCodesNames = $derived(
@@ -270,7 +273,7 @@
 			{#each xScale.ticks(5) as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{formatValue(xTick)}
+					{prefix}{formatValue(xTick)}{suffix}
 				</div>
 			{/each}
 		</div>
