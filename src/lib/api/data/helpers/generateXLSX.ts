@@ -1,6 +1,6 @@
 // Workaround to override default font + size in ExcelJS
 // See issue: https://github.com/exceljs/exceljs/issues/572#issuecomment-631788521
-import StylesXform from 'exceljs/lib/xlsx/xform/style/styles-xform.js';
+import StylesXform from '@protobi/exceljs/lib/xlsx/xform/style/styles-xform.js';
 const defaultFont = { size: 12, color: { theme: 1 }, name: 'Arial', family: 2, scheme: 'minor' };
 const origStylesXformInit = StylesXform.prototype.init;
 StylesXform.prototype.init = function () {
@@ -8,7 +8,7 @@ StylesXform.prototype.init = function () {
 	this._addFont(defaultFont);
 };
 
-import ExcelJS from 'exceljs';
+import ExcelJS from '@protobi/exceljs';
 import { PassThrough } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
 
