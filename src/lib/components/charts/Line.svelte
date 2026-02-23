@@ -41,7 +41,7 @@
 		const width = el.getBoundingClientRect().width;
 		if (width > leftMargin) leftMargin = width + 15;
 	}
-	let rightMargin = $derived(width < widthThreshold ? 20 : 180);
+	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
 	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
@@ -200,7 +200,7 @@
 	bind:clientWidth={width}
 	class="line-wrapper"
 	style:padding-left="{leftMargin}px"
-	style:padding-bottom="25px"
+	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
 >
 	{#if showIntervals}
