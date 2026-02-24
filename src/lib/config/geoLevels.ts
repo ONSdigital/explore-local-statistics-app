@@ -29,7 +29,8 @@ const altLabels = {
 	W06: 'Unitary authority'
 };
 
-// Overlapping groupings of geographies for visualising data
+// Groupings of geographies for visualising data
+// These also represent the areas that have dedicated area indicators pages
 export const geoLevels = {
 	ctry: { label: ctry.label, codes: [...uk.codes, ...ctry.codes] },
 	rgn: { label: 'Region/country', codes: ['N92', 'S92', 'W92', ...rgn.codes] },
@@ -37,6 +38,11 @@ export const geoLevels = {
 	utla,
 	ltla
 };
+export const geoCodesViz = new Set(
+	Object.values(geoLevels)
+		.map((g) => g.codes)
+		.flat()
+);
 
 // Alternative groupings for navigation
 export const geoLevelsNav = {
@@ -55,8 +61,16 @@ export const geoLevelsNav = {
 	oa
 };
 
+// Types to be indexed by Google
+export const geoLevelsIndexed = { uk, ctry, rgn, cauth, cty, ltla, wpc, sener, senc };
+export const geoCodesIndexed = new Set(
+	Object.values(geoLevelsIndexed)
+		.map((g) => g.codes)
+		.flat()
+);
+
 // Mutually exclusive groupings for area search and selection
-export const geoLevelsNamed = { uk, ctry, rgn, cauth, cty, ltla, wpc, wd, par, sener, senc };
+export const geoLevelsNamed = { ...geoLevelsIndexed, wd, par };
 export const geoLevelsAll = { ...geoLevelsNamed, msoa, lsoa, oa };
 
 function makeArray(obj) {

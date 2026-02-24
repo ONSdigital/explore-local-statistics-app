@@ -3,6 +3,7 @@
 	import { Tabs, Tab, Accordion, AccordionItem } from '@onsvisual/svelte-components';
 	import { getName, capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+	import { geoCodesIndexed } from '$lib/config/geoLevels';
 
 	let { areaProps, selected = $bindable() } = $props();
 </script>
@@ -16,7 +17,11 @@
 						<ul class="list-columns">
 							{#each childGroup.areas as child}
 								<li>
-									<a href={resolve(`/areas/${makeCanonicalSlug(child)}`)} data-sveltekit-noscroll>
+									<a
+										href={resolve(`/areas/${makeCanonicalSlug(child)}`)}
+										rel={!geoCodesIndexed.has(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+										data-sveltekit-noscroll
+									>
 										{getName(child)}
 									</a>
 								</li>
@@ -38,7 +43,11 @@
 						<ul class="list-columns">
 							{#each childGroup.areas as child}
 								<li>
-									<a href={resolve(`/areas/${makeCanonicalSlug(child)}`)} data-sveltekit-noscroll>
+									<a
+										href={resolve(`/areas/${makeCanonicalSlug(child)}`)}
+										rel={!geoCodesIndexed.has(child.areacd.slice(0, 3)) ? 'nofollow' : null}
+										data-sveltekit-noscroll
+									>
 										{getName(child)}
 									</a>
 								</li>

@@ -1,5 +1,3 @@
-export let colours = ['#206095', '#746cb1', '#a8bd3a', '#871a5b', '#27a0cc'];
-
 export const ONScolours = {
 	black: '#222',
 	grey100: '#414042',

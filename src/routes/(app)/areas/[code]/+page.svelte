@@ -4,6 +4,7 @@
 	import { goto, afterNavigate } from '$app/navigation';
 	import { getName, capitalise } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+	import { geoCodesIndexed } from '$lib/config/geoLevels';
 	import { getNearestRelatedParent } from '$lib/util/linkHelpers';
 	import {
 		analyticsEvent,
@@ -41,6 +42,12 @@
 		goto(resolve(url), { noScroll: !isPostcode });
 	}
 </script>
+
+<svelte:head>
+	{#if !geoCodesIndexed.has(areaProps.typecd)}
+		<meta name="robots" content="noindex" />
+	{/if}
+</svelte:head>
 
 <Hero
 	title={getName(areaProps)}
