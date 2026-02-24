@@ -15,7 +15,7 @@
 	let dialog = $state();
 
 	function clickOutsideToCancel(el) {
-		el.addEventListener('click', function (event) {
+		el.addEventListener('pointerup', (event) => {
 			const rect = el.getBoundingClientRect();
 			const isInDialog =
 				rect.top < event.clientY &&
@@ -25,6 +25,16 @@
 			if (!isInDialog) {
 				el.close();
 				onCancel();
+			}
+		});
+		el.addEventListener('keydown', (event) => {
+			if (
+				event.keyCode === 37 ||
+				event.keyCode === 38 ||
+				event.keyCode === 39 ||
+				event.keyCode === 40
+			) {
+				event.preventDefault();
 			}
 		});
 	}
