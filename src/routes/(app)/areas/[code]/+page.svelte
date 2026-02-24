@@ -23,6 +23,7 @@
 	import AreaLede from './AreaLede.svelte';
 	import AreaNavMap from './AreaNavMap.svelte';
 	import ChildAreas from './ChildAreas.svelte';
+	import IndicatorsCard from './IndicatorsCard.svelte';
 	import AreaSearch from '$lib/components/nav/AreaSearch.svelte';
 	import ESSMap from '$lib/components/visuals/ESSMap.svelte';
 
@@ -73,19 +74,7 @@
 	</GridCell>
 	<div class="ons-grid__col ons-col-4@l grid-cell-flex">
 		{#if areaProps.areacd !== 'K02000001'}
-			<div class="local-indicators-card">
-				<h2 class="ons-card__title ons-u-fs-m" style:margin-bottom="12px">
-					Local indicators for {getName(indicatorsArea, 'the')}
-				</h2>
-				<p style:margin-bottom="20px">Health, education, economy, life satisfaction and more.</p>
-				<Button
-					icon="arrow"
-					iconPosition="after"
-					variant="ghost"
-					href={resolve(`/areas/${makeCanonicalSlug(indicatorsArea)}/indicators`)}
-					small>Explore local indicators</Button
-				>
-			</div>
+			<IndicatorsCard areaProps={indicatorsArea} />
 		{/if}
 		<div class="area-search-card">
 			<h2 class="ons-card__title ons-u-fs-m">Find another area</h2>
@@ -163,15 +152,11 @@
 		flex-wrap: wrap;
 		gap: 1rem;
 	}
-	.grid-cell-flex > div {
+	.grid-cell-flex > :global(div) {
 		flex-basis: 0;
 		flex-grow: 1;
 		min-width: 300px;
 		padding: 1rem;
-	}
-	.local-indicators-card {
-		color: var(--ons-color-page-light);
-		background-color: var(--ons-color-branded-secondary);
 	}
 	.area-search-card {
 		background: var(--ons-color-banner-bg);

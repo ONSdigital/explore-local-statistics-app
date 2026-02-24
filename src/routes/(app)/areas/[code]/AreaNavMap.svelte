@@ -35,7 +35,7 @@
 	$effect(() => fitBounds(bounds));
 </script>
 
-<div style:height="450px">
+<div style:height="460px">
 	<Map
 		bind:map
 		css={resolve('/css/maplibre-gl.css')}
