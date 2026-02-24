@@ -30,7 +30,7 @@
 	<h2 class="ons-card__title ons-u-fs-m" style:margin-bottom="12px">
 		Local data for {getName(areaProps, 'the')}
 	</h2>
-	<p style:margin-bottom="20px" style:min-height="80px">
+	<p style:margin-bottom="20px" style:min-height="80px" style:position="relative">
 		{#await fetchData(dataUrls)}
 			<Spinner />
 		{:then data}
