@@ -49,6 +49,10 @@
 			"label": "Modelled unemployment rate"
 		},
 		{
+			"code": "claimant-count",
+			"label": "Claimant Count"
+		},
+		{
 			"code": "gross-disposable-household-income-per-head",
 			"label": "Gross disposable household income per head"
 		},
@@ -67,6 +71,14 @@
 		{
 			"code": "gross-value-added-per-hour-worked",
 			"label": "Gross value added per hour worked"
+		},
+		{
+			"code": "gdp-per-head-Gross domestic product per head at current market price",
+			"label": "Gross domestic product per head at current market prices"
+		},
+		{
+			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+			"label": "Gross domestic product per head in chained volume measures"
 		},
 		{
 			"code": "foreign-direct-investment-Inward foreign direct investment",
@@ -115,6 +127,22 @@
 		{
 			"code": "average-house-price",
 			"label": "Average house price"
+		},
+		{
+			"code": "housing-affordability-ratio",
+			"label": "Housing affordability ratio (residence-based)"
+		},
+		{
+			"code": "first-time-buyer-mortgage-sales",
+			"label": "First-time buyer mortgage sales"
+		},
+		{
+			"code": "short-term-let-average-length-of-stay",
+			"label": "Average length of short-term let stay"
+		},
+		{
+			"code": "short-term-let-number-of-guests-nights",
+			"label": "Number of guest nights at a short-term let"
 		},
 		{
 			"code": "further-education-and-skills-learner-achievements",
@@ -293,6 +321,10 @@
 			"label": "5G coverage"
 		},
 		{
+			"code": "premises-below-30",
+			"label": "Premises below 30Mbps"
+		},
+		{
 			"code": "electric-vehicle-public-charging-devices",
 			"label": "Electric vehicle public charging devices"
 		},
@@ -307,10 +339,6 @@
 		{
 			"code": "average-travel-time-Public transport or walk to work",
 			"label": "Travel time to employment centre by public transport and walking"
-		},
-		{
-			"code": "homicide-offences",
-			"label": "Homicide offences"
 		},
 		{
 			"code": "supermarkets",
@@ -333,22 +361,6 @@
 			"label": "Residents within a 30 minute walk of their nearest railway station"
 		},
 		{
-			"code": "premises-below-30",
-			"label": "Premises below 30Mbps"
-		},
-		{
-			"code": "claimant-count",
-			"label": "Claimant Count"
-		},
-		{
-			"code": "gdp-per-head-Gross domestic product per head at current market price",
-			"label": "Gross domestic product per head at current market prices"
-		},
-		{
-			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
-			"label": "Gross domestic product per head in chained volume measures"
-		},
-		{
 			"code": "engagement-with-culture-and-heritage-Engaged with the arts",
 			"label": "Engaged with the arts"
 		},
@@ -365,16 +377,8 @@
 			"label": "Visited a public library"
 		},
 		{
-			"code": "first-time-buyer-mortgage-sales",
-			"label": "First-time buyer mortgage sales"
-		},
-		{
-			"code": "short-term-let-average-length-of-stay",
-			"label": "Average length of short-term let stay"
-		},
-		{
-			"code": "short-term-let-number-of-guests-nights",
-			"label": "Number of guest nights at a short-term let"
+			"code": "homicide-offences",
+			"label": "Homicide offences"
 		}
 	],
 	"indicatorsObject": {
@@ -2070,6 +2074,155 @@
 				2023
 			]
 		},
+		"claimant-count": {
+			"id": 84,
+			"topic": "economy",
+			"subTopic": "employment",
+			"code": "claimant-count",
+			"": null,
+			"minXDomainNumb": 2001,
+			"maxXDomainNumb": 2025,
+			"metadata": {
+				"code": "claimant-count",
+				"slug": "claimant-count",
+				"label": "Claimant Count",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of people aged 16 to 64 who are claiming unemployment-related benefits",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "T",
+				"sourceDate": "20/01/2026",
+				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows Claimant Count as a percentage of residents aged 16 to 64 (official statistics in development), in the UK, for 2001 to 2025.",
+				"standardised": "T",
+				"caveats": "Proportions of people claiming are the number of claimants in a year divided by the population aged from 16 to 64 from mid-year 2023 population estimates.\n\nThe experimental Claimant Count consists of claimants of Jobseekers Allowance (JSA) and some Universal Credit (UC) Claimants. The UC claimants that are included are 1) those that were recorded as not in employment (May 2013-April 2015), and 2) those claimants of Universal Credit who are required to search for work, i.e. within the Searching for Work conditionality regime as defined by the Department for Work & Pensions (from April 2015 onwards).\n\nThe count is based on live claims on the second Thursday of the reference month.\n\nUnder certain circumstances, some people are able to claim both contribution-based JSA and UC at the same time. Consequently, there has been a small amount of double counting. Information from DWP suggests this double counting increased at the start of the pandemic and has stabilised at approximately 1.0 to 1.5% of the Claimant Count.\n\nNorthern Ireland local government districts Claimant Count figures are only available from 2013 onwards.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024,
+				2025
+			]
+		},
 		"gross-disposable-household-income-per-head": {
 			"id": 2,
 			"topic": "economy",
@@ -2653,6 +2806,274 @@
 				"year": 2023
 			},
 			"years": [
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023
+			]
+		},
+		"gdp-per-head-Gross domestic product per head at current market price": {
+			"id": 85,
+			"topic": "economy",
+			"subTopic": "productivity",
+			"code": "gdp-per-head-Gross domestic product per head at current market price",
+			"": null,
+			"minXDomainNumb": 1998,
+			"maxXDomainNumb": 2023,
+			"metadata": {
+				"code": "gdp-per-head-Gross domestic product per head at current market price",
+				"slug": "gross-domestic-product-per-head-at-current-market-price",
+				"label": "Gross domestic product per head at current market prices",
+				"prefix": "£",
+				"suffix": "",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "GDP per head including the effects of inflation",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "10/10/2025",
+				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows gross domestic product (GDP) per head at current market prices in pounds, in the UK, for 1998 to 2023.",
+				"standardised": "T",
+				"caveats": "This time series includes the effects of inflation and is most useful for comparison of levels between different areas.\n\n2023 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
+				2004,
+				2005,
+				2006,
+				2007,
+				2008,
+				2009,
+				2010,
+				2011,
+				2012,
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023
+			]
+		},
+		"gdp-per-head-Gross domestic product per head in chained volume measure": {
+			"id": 86,
+			"topic": "economy",
+			"subTopic": "productivity",
+			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+			"": null,
+			"minXDomainNumb": 1998,
+			"maxXDomainNumb": 2023,
+			"metadata": {
+				"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
+				"slug": "gross-domestic-product-per-head-in-chained-volume-measure",
+				"label": "Gross domestic product per head in chained volume measures",
+				"prefix": "£",
+				"suffix": "",
+				"subText": null,
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "GDP per head with the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "10/10/2025",
+				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows gross domestic product (GDP) per head in chained volume measures (CVM) in 2019 money value, in pounds, in the UK, for 1998 to 2023.",
+				"standardised": "T",
+				"caveats": "This time series has the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.\n\n2023 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				1998,
+				1999,
+				2000,
+				2001,
+				2002,
+				2003,
 				2004,
 				2005,
 				2006,
@@ -3902,7 +4323,7 @@
 			"code": "average-house-price",
 			"": null,
 			"minXDomainNumb": 2005,
-			"maxXDomainNumb": 2025.83,
+			"maxXDomainNumb": 2025.92,
 			"metadata": {
 				"code": "average-house-price",
 				"slug": "average-house-price",
@@ -3916,10 +4337,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "21/01/2026",
+				"sourceDate": "18/02/2026",
 				"sourceURL": "https://www.gov.uk/government/collections/uk-house-price-index-reports-2025",
 				"sourceOrg": "HM Land Registry",
-				"longDescription": "This indicator shows the average (geometric mean) monthly house price, in the United Kingdom, for January 2005 to November 2025.",
+				"longDescription": "This indicator shows the average (geometric mean) monthly house price, in the United Kingdom, for January 2005 to December 2025.",
 				"standardised": "T",
 				"caveats": "For the UK House Price Index (UK HPI), the standard average house price is calculated by taking the average (geometric mean) price in January 2015 and then recalculating it in accordance with the index change back in time and forward to the present day. The geometric mean reduces the weighting given to high value properties when compared to the arithmetic mean and is typically lower, usually closer to that of the median.\n\nEstimates for the most recent months are provisional and are likely to be updated as more data is incorporated into the index. Read [Revisions to the UK HPI data](https://www.gov.uk/government/publications/about-the-uk-house-price-index/about-the-uk-house-price-index#monthly-revision).\n\nThe UK House Price Index (UK HPI) is calculated by the Office for National Statistics and Land & Property Services Northern Ireland. Find out about the [methodology used](https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology#methods-used-to-produce-the-uk-hpi) to create the UK HPI.\n\nData for the UK House Price Index is provided by HM Land Registry, Registers of Scotland, The Land & Property Services Northern Ireland Statistics & Research Agency and the Valuation Office Agency. Find out more [about the UK House Price Index](https://www.gov.uk/government/publications/about-the-uk-house-price-index).",
 				"confidenceIntervals": "F",
@@ -4259,7 +4680,530 @@
 				2025.58,
 				2025.67,
 				2025.75,
-				2025.83
+				2025.83,
+				2025.92
+			]
+		},
+		"housing-affordability-ratio": {
+			"id": 122,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "housing-affordability-ratio",
+			"": null,
+			"minXDomainNumb": 2002.25,
+			"maxXDomainNumb": 2024.25,
+			"metadata": {
+				"code": "housing-affordability-ratio",
+				"slug": "housing-affordability-ratio",
+				"label": "Housing affordability ratio (residence-based)",
+				"prefix": "",
+				"suffix": "",
+				"subText": "affordability ratio",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Ratio of median house price to median gross annual residence-based earnings",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "24/03/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the median affordability ratio calculated by dividing house sales prices by gross annual residence-based earnings, in England and Wales, for 2002 to 2024.",
+				"standardised": "T",
+				"caveats": "A threshold of five years of earnings is used as a broad indicator of affordability.\n\nHousing affordability estimates are calculated by dividing house sales prices for an area by average earnings to create a ratio. This ratio allows comparisons between areas and over time without needing to adjust for inflation. A higher housing affordability ratio reflects a less affordable area.\n\nEarnings data are from the [Annual Survey of Hours and Earnings (ASHE)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/placeofresidencebylocalauthorityashetable8), which provides a snapshot of earnings at April in each year. Earnings relate to gross full-time individual earnings for people who live in the area, though they may work elsewhere. A snapshot of the annual earnings of all full-time employees is used, or an annualised version of the weekly estimate where annual data are not available.\n\nHouse price statistics are from [house prices for small areas](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2024/relateddata), which report the median price paid for residential property and refer to a 12 month period with April in the middle (year ending September).\n\nThe House price statistics for small areas (HPSSA) data used here are not mix adjusted, so price variations may be a combination of true price changes and differences in the mix of housing types and trends. They will therefore differ from those in the [Private rent and house prices, UK bulletins](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/previousreleases), which are mix adjusted and comparable over time.\n\nThese affordability ratio statistics are revised annually to reflect revisions to the house price statistics and earnings data.\n\nPlease refer to the [Housing affordability in England and Wales bulletin](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest) for further information. This bulletin includes analysis of workplace‑based earnings affordability for all dwellings, which is used in England within the updated standard method for [assessing local housing need](https://www.gov.uk/guidance/housing-and-economic-development-needs-assessments).",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K04",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2002.25,
+				2003.25,
+				2004.25,
+				2005.25,
+				2006.25,
+				2007.25,
+				2008.25,
+				2009.25,
+				2010.25,
+				2011.25,
+				2012.25,
+				2013.25,
+				2014.25,
+				2015.25,
+				2016.25,
+				2017.25,
+				2018.25,
+				2019.25,
+				2020.25,
+				2021.25,
+				2022.25,
+				2023.25,
+				2024.25
+			]
+		},
+		"first-time-buyer-mortgage-sales": {
+			"id": 98,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "first-time-buyer-mortgage-sales",
+			"": null,
+			"minXDomainNumb": 2013,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "first-time-buyer-mortgage-sales",
+				"slug": "first-time-buyer-mortgage-sales",
+				"label": "First-time buyer mortgage sales",
+				"prefix": "",
+				"suffix": "",
+				"subText": "per 1,000 stock",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "First-time buyer mortgage sales per 1,000 dwellings",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "11/06/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.",
+				"standardised": "T",
+				"caveats": "Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\nThis data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\nThe first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\nThe dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\nSome of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2013,
+				2014,
+				2015,
+				2016,
+				2017,
+				2018,
+				2019,
+				2020,
+				2021,
+				2022,
+				2023,
+				2024
+			]
+		},
+		"short-term-let-average-length-of-stay": {
+			"id": 119,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "short-term-let-average-length-of-stay",
+			"": null,
+			"minXDomainNumb": 2023.5,
+			"maxXDomainNumb": 2025.25,
+			"metadata": {
+				"code": "short-term-let-average-length-of-stay",
+				"slug": "average-length-of-short-term-let-stay",
+				"label": "Average length of short-term let stay",
+				"prefix": "",
+				"suffix": "",
+				"subText": "average length of stay in nights",
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Average length of stay (in nights) at a short-term let",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "04/12/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the average length of stay (in nights) at a short-term let, in the United Kingdom, for Quarter 3 (July to Sept) 2023 to Quarter 2 (Apr to Jun) 2025.",
+				"standardised": "T",
+				"caveats": "Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. \n\nAverage length of stay is calculated by dividing the number of nights by the number of stays. \n\nThe data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. \n\nWhile these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2023.5,
+				2023.75,
+				2024,
+				2024.25,
+				2024.5,
+				2024.75,
+				2025,
+				2025.25
+			]
+		},
+		"short-term-let-number-of-guests-nights": {
+			"id": 120,
+			"topic": "housing",
+			"subTopic": "housing",
+			"code": "short-term-let-number-of-guests-nights",
+			"": null,
+			"minXDomainNumb": 2023.5,
+			"maxXDomainNumb": 2025.25,
+			"metadata": {
+				"code": "short-term-let-number-of-guests-nights",
+				"slug": "number-of-guest-nights-at-a-short-term-let",
+				"label": "Number of guest nights at a short-term let",
+				"prefix": "",
+				"suffix": "",
+				"subText": "number of guest nights",
+				"decimalPlaces": 0,
+				"howToMeasureChange": null,
+				"subtitle": "The number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "04/12/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group, in the United Kingdom, for Quarter 3 (July to Sept) 2023 to Quarter 2 (Apr to Jun) 2025.",
+				"standardised": "F",
+				"caveats": "Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. \n\nThe number of nights spent during a stay, with a night counted per individual member of the visiting group. This can be influenced by guest group size and length of stay. For example, a family of four staying for 2 nights would be 8 guest nights. \n\nThe data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. \n\nWhile these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2023.5,
+				2023.75,
+				2024,
+				2024.25,
+				2024.5,
+				2024.75,
+				2025,
+				2025.25
 			]
 		},
 		"further-education-and-skills-learner-achievements": {
@@ -7824,7 +8768,7 @@
 			"code": "healthy-life-expectancy-Female healthy life expectancy",
 			"": null,
 			"minXDomainNumb": 2011,
-			"maxXDomainNumb": 2021,
+			"maxXDomainNumb": 2022,
 			"metadata": {
 				"code": "healthy-life-expectancy-Female healthy life expectancy",
 				"slug": "female-healthy-life-expectancy",
@@ -7834,16 +8778,16 @@
 				"subText": "years",
 				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Average years expected to be lived in good health for females born during year",
+				"subtitle": "Average years expected to be lived in good health for females born in the given year",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "T",
-				"sourceDate": "16/01/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousreleases#",
+				"sourceDate": "19/02/2026",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousreleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.",
+				"longDescription": "This indicator shows the average years expected to be lived in good health for females born during the reference period (official statistics in development), in the United Kingdom, for three-year rolling periods between 2011 to 2013 and 2022 to 2024.",
 				"standardised": "T",
-				"caveats": "Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logistic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.",
+				"caveats": "Healthy life expectancy is a summary measure of health that adds a quality dimension to estimates of life expectancy by dividing expected lifespan into time spent in different states of health. Healthy life expectancy measures health-related wellbeing and represents the average time an individual is expected to live in \"very good\" or \"good\" general health, based on how individuals perceive their general health.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of \"good\" general health by local authority. We therefore used logistic regression to estimate \"good\" health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.\n\nFigures are based on the number of deaths registered, mid-year population estimates, and health state prevalence aggregated over three consecutive years. Figures exclude deaths of non-residents.\n\nEstimates for Isles of Scilly and City of London are excluded because of insufficient population counts.\n\nEstimates for Northern Ireland’s local government districts are available only from 2014 to 2016 onward.\n\nThese estimates of healthy life expectancy in Northern Ireland use different methods and data sources compared to those produced by the Northern Ireland Department of Health; please see their [Health inequalities annual report](https://www.health-ni.gov.uk/news/health-inequalities-annual-report-2025) for more information.\n\nMore quality and methodology information on strengths, limitations, appropriate uses, and how the data were created is available in the [Health state life expectancies, UK quality and methodology information (QMI) report](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/methodologies/healthstatelifeexpectanciesukqmi2020to2022).",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -7851,6 +8795,8 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
+					"N",
+					"S",
 					"W"
 				],
 				"types": [
@@ -7859,11 +8805,24 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
 					"W06",
 					"W92"
 				],
 				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
 					{
 						"key": "ctry",
 						"codes": [
@@ -7883,6 +8842,13 @@
 							"W92"
 						],
 						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -7911,7 +8877,8 @@
 				2018,
 				2019,
 				2020,
-				2021
+				2021,
+				2022
 			]
 		},
 		"healthy-life-expectancy-Male healthy life expectancy": {
@@ -7921,7 +8888,7 @@
 			"code": "healthy-life-expectancy-Male healthy life expectancy",
 			"": null,
 			"minXDomainNumb": 2011,
-			"maxXDomainNumb": 2021,
+			"maxXDomainNumb": 2022,
 			"metadata": {
 				"code": "healthy-life-expectancy-Male healthy life expectancy",
 				"slug": "male-healthy-life-expectancy",
@@ -7931,16 +8898,16 @@
 				"subText": "years",
 				"decimalPlaces": 1,
 				"howToMeasureChange": "abs",
-				"subtitle": "Average years expected to be lived in good health for males born during year",
+				"subtitle": "Average years expected to be lived in good health for males born in the given year",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "T",
-				"sourceDate": "16/01/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousreleases#",
+				"sourceDate": "19/02/2026",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/previousreleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period (official statistics in development), in England and Wales, for three-year rolling periods between 2011 to 2013 and 2021 to 2023.",
+				"longDescription": "This indicator shows the average years expected to be lived in good health for males born during the reference period (official statistics in development), in the United Kingdom, for three-year rolling periods between 2011 to 2013 and 2022 to 2024.",
 				"standardised": "T",
-				"caveats": "Coverage is limited to England and Wales. Estimates for Scotland and Northern Ireland will be added when Scottish 2022 census health data and 2023 population estimates for Northern Irish local government districts are available.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of good general health by local authority. We therefore used logistic regression to estimate good health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.",
+				"caveats": "Healthy life expectancy is a summary measure of health that adds a quality dimension to estimates of life expectancy by dividing expected lifespan into time spent in different states of health. Healthy life expectancy measures health-related wellbeing and represents the average time an individual is expected to live in \"very good\" or \"good\" general health, based on how individuals perceive their general health.\n\nThe estimates in this indicator have been produced using an interim methodological fix. The decline in sample size of the Annual Population Survey has impaired our ability to continue using the previous method to estimate age-specific prevalence of \"good\" general health by local authority. We therefore used logistic regression to estimate \"good\" health prevalence instead of using the survey's observed prevalence. This enables continuity in local area reporting with a viable, comparable time series. ONS is currently conducting a review of data sources to assess their future potential to provide robust, reliable and durable measures of health status.\n\nFigures are based on the number of deaths registered, mid-year population estimates, and health state prevalence aggregated over three consecutive years. Figures exclude deaths of non-residents.\n\nEstimates for Isles of Scilly and City of London are excluded because of insufficient population counts.\n\nEstimates for Northern Ireland’s local government districts are available only from 2014 to 2016 onward.\n\nThese estimates of healthy life expectancy in Northern Ireland use different methods and data sources compared to those produced by the Northern Ireland Department of Health; please see their [Health inequalities annual report](https://www.health-ni.gov.uk/news/health-inequalities-annual-report-2025) for more information.\n\nMore quality and methodology information on strengths, limitations, appropriate uses, and how the data were created is available in the [Health state life expectancies, UK quality and methodology information (QMI) report](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/methodologies/healthstatelifeexpectanciesukqmi2020to2022).",
 				"confidenceIntervals": "T",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -7948,6 +8915,8 @@
 			"inferredGeos": {
 				"ctrys": [
 					"E",
+					"N",
+					"S",
 					"W"
 				],
 				"types": [
@@ -7956,11 +8925,24 @@
 					"E09",
 					"E10",
 					"E12",
+					"E47",
 					"E92",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
 					"W06",
 					"W92"
 				],
 				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
 					{
 						"key": "ctry",
 						"codes": [
@@ -7980,6 +8962,13 @@
 							"W92"
 						],
 						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -8008,7 +8997,8 @@
 				2018,
 				2019,
 				2020,
-				2021
+				2021,
+				2022
 			]
 		},
 		"personal-wellbeing-estimates-Anxiety": {
@@ -9244,6 +10234,131 @@
 				2025.5
 			]
 		},
+		"premises-below-30": {
+			"id": 83,
+			"topic": "connectivity",
+			"subTopic": "digital connectivity",
+			"code": "premises-below-30",
+			"": null,
+			"minXDomainNumb": 2025.5,
+			"maxXDomainNumb": 2025.5,
+			"metadata": {
+				"code": "premises-below-30",
+				"slug": "premises-below-30",
+				"label": "Premises below 30Mbps",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of premises that do not have access to services above 30Mbps",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "19/11/2025",
+				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-20252",
+				"sourceOrg": "Ofcom",
+				"longDescription": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of July 2025.",
+				"standardised": "T",
+				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
+				2025.5
+			]
+		},
 		"electric-vehicle-public-charging-devices": {
 			"id": 93,
 			"topic": "connectivity",
@@ -9688,86 +10803,6 @@
 				2016,
 				2017,
 				2019
-			]
-		},
-		"homicide-offences": {
-			"id": 69,
-			"topic": "crime",
-			"subTopic": "crime",
-			"code": "homicide-offences",
-			"": null,
-			"minXDomainNumb": 2014,
-			"maxXDomainNumb": 2022,
-			"metadata": {
-				"code": "homicide-offences",
-				"slug": "homicide-offences",
-				"label": "Homicide offences",
-				"prefix": "",
-				"suffix": "",
-				"subText": "per million population",
-				"decimalPlaces": 1,
-				"howToMeasureChange": "abs",
-				"subtitle": "Homicide offences per million people",
-				"zeroBaseline": "T",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "05/02/2026|28/11/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousreleases#|https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
-				"sourceOrg": "Office for National Statistics|Police Service of Northern Ireland",
-				"longDescription": "This indicator shows the rate of homicide offences per million population, in England, Wales and Northern Ireland, for three-year rolling periods 04/2014-03/2017 to 04/2022-03/2025.",
-				"standardised": "T",
-				"caveats": "England and Wales data has been extracted from the Home Office Homicide Index, which contains detailed record-level information about each homicide recorded by police in England and Wales. This index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 5 December 2025 and will change as subsequent court hearings take place or as further information is received. In contrast, the Northern Ireland homicide figures represent those initially recorded as homicide, with no revisions based on further police or court decisions.\n\nNorthern Ireland statistics on police recorded crime are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/sites/default/files/2025-11/Police%20Recorded%20Crime%20User%20Guide.pdf).\n\nMid-year population estimates covering the years 2015 to 2023 have been used to create rate per milion population. The mid-year estimate in the middle of the three-year period  was used, for example the period 04/2022 to 03/2025 used 2023 mid-year population estimates.\n\nSome of this data has been aggregated and may show differences to other published figures.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "region",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"W"
-				],
-				"types": [
-					"E12",
-					"E92",
-					"K04",
-					"N92",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					}
-				],
-				"year": 2018
-			},
-			"years": [
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022
 			]
 		},
 		"supermarkets": {
@@ -10346,548 +11381,6 @@
 				2024
 			]
 		},
-		"premises-below-30": {
-			"id": 83,
-			"topic": "connectivity",
-			"subTopic": "digital connectivity",
-			"code": "premises-below-30",
-			"": null,
-			"minXDomainNumb": 2025.5,
-			"maxXDomainNumb": 2025.5,
-			"metadata": {
-				"code": "premises-below-30",
-				"slug": "premises-below-30",
-				"label": "Premises below 30Mbps",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Percentage of premises that do not have access to services above 30Mbps",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "19/11/2025",
-				"sourceURL": "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/connected-nations-20252",
-				"sourceOrg": "Ofcom",
-				"longDescription": "This dataset shows the percentage of premises that do not have access to services above 30Mbps, UK, as of July 2025.",
-				"standardised": "T",
-				"caveats": "Some of this data has been aggregated and may show differences to other published figures.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2025.5
-			]
-		},
-		"claimant-count": {
-			"id": 84,
-			"topic": "economy",
-			"subTopic": "employment",
-			"code": "claimant-count",
-			"": null,
-			"minXDomainNumb": 2001,
-			"maxXDomainNumb": 2025,
-			"metadata": {
-				"code": "claimant-count",
-				"slug": "claimant-count",
-				"label": "Claimant Count",
-				"prefix": "",
-				"suffix": "%",
-				"subText": null,
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Percentage of people aged 16 to 64 who are claiming unemployment-related benefits",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "T",
-				"sourceDate": "20/01/2026",
-				"sourceURL": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/regionallabourmarket/previousreleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows Claimant Count as a percentage of residents aged 16 to 64 (official statistics in development), in the UK, for 2001 to 2025.",
-				"standardised": "T",
-				"caveats": "Proportions of people claiming are the number of claimants in a year divided by the population aged from 16 to 64 from mid-year 2023 population estimates.\n\nThe experimental Claimant Count consists of claimants of Jobseekers Allowance (JSA) and some Universal Credit (UC) Claimants. The UC claimants that are included are 1) those that were recorded as not in employment (May 2013-April 2015), and 2) those claimants of Universal Credit who are required to search for work, i.e. within the Searching for Work conditionality regime as defined by the Department for Work & Pensions (from April 2015 onwards).\n\nThe count is based on live claims on the second Thursday of the reference month.\n\nUnder certain circumstances, some people are able to claim both contribution-based JSA and UC at the same time. Consequently, there has been a small amount of double counting. Information from DWP suggests this double counting increased at the start of the pandemic and has stabilised at approximately 1.0 to 1.5% of the Claimant Count.\n\nNorthern Ireland local government districts Claimant Count figures are only available from 2013 onwards.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"K04",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2001,
-				2002,
-				2003,
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023,
-				2024,
-				2025
-			]
-		},
-		"gdp-per-head-Gross domestic product per head at current market price": {
-			"id": 85,
-			"topic": "economy",
-			"subTopic": "productivity",
-			"code": "gdp-per-head-Gross domestic product per head at current market price",
-			"": null,
-			"minXDomainNumb": 1998,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "gdp-per-head-Gross domestic product per head at current market price",
-				"slug": "gross-domestic-product-per-head-at-current-market-price",
-				"label": "Gross domestic product per head at current market prices",
-				"prefix": "£",
-				"suffix": "",
-				"subText": null,
-				"decimalPlaces": 0,
-				"howToMeasureChange": null,
-				"subtitle": "GDP per head including the effects of inflation",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "10/10/2025",
-				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows gross domestic product (GDP) per head at current market prices in pounds, in the UK, for 1998 to 2023.",
-				"standardised": "T",
-				"caveats": "This time series includes the effects of inflation and is most useful for comparison of levels between different areas.\n\n2023 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				1998,
-				1999,
-				2000,
-				2001,
-				2002,
-				2003,
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023
-			]
-		},
-		"gdp-per-head-Gross domestic product per head in chained volume measure": {
-			"id": 86,
-			"topic": "economy",
-			"subTopic": "productivity",
-			"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
-			"": null,
-			"minXDomainNumb": 1998,
-			"maxXDomainNumb": 2023,
-			"metadata": {
-				"code": "gdp-per-head-Gross domestic product per head in chained volume measure",
-				"slug": "gross-domestic-product-per-head-in-chained-volume-measure",
-				"label": "Gross domestic product per head in chained volume measures",
-				"prefix": "£",
-				"suffix": "",
-				"subText": null,
-				"decimalPlaces": 0,
-				"howToMeasureChange": null,
-				"subtitle": "GDP per head with the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "10/10/2025",
-				"sourceURL": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows gross domestic product (GDP) per head in chained volume measures (CVM) in 2019 money value, in pounds, in the UK, for 1998 to 2023.",
-				"standardised": "T",
-				"caveats": "This time series has the effects of inflation removed by considering changes in quantity between consecutive periods, holding prices from previous periods constant and is most useful for monitoring growth over time within any given area.\n\n2023 data are provisional.\n\nData for the City of London has been excluded from the visualisations on this service due to its very high GDP figures and very low population, which distort the overall representation. Please refer to the accompanying dataset below or the [data source](https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/regionaleconomicactivitybygrossdomesticproductuk/previousreleases) for this information.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				1998,
-				1999,
-				2000,
-				2001,
-				2002,
-				2003,
-				2004,
-				2005,
-				2006,
-				2007,
-				2008,
-				2009,
-				2010,
-				2011,
-				2012,
-				2013,
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
-				2021,
-				2022,
-				2023
-			]
-		},
 		"engagement-with-culture-and-heritage-Engaged with the arts": {
 			"id": 94,
 			"topic": "connectivity",
@@ -11256,71 +11749,51 @@
 				2023
 			]
 		},
-		"first-time-buyer-mortgage-sales": {
-			"id": 98,
-			"topic": "housing",
-			"subTopic": "housing",
-			"code": "first-time-buyer-mortgage-sales",
+		"homicide-offences": {
+			"id": 69,
+			"topic": "crime",
+			"subTopic": "crime",
+			"code": "homicide-offences",
 			"": null,
-			"minXDomainNumb": 2013,
-			"maxXDomainNumb": 2024,
+			"minXDomainNumb": 2014,
+			"maxXDomainNumb": 2022,
 			"metadata": {
-				"code": "first-time-buyer-mortgage-sales",
-				"slug": "first-time-buyer-mortgage-sales",
-				"label": "First-time buyer mortgage sales",
+				"code": "homicide-offences",
+				"slug": "homicide-offences",
+				"label": "Homicide offences",
 				"prefix": "",
 				"suffix": "",
-				"subText": "per 1,000 stock",
+				"subText": "per million population",
 				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "First-time buyer mortgage sales per 1,000 dwellings",
-				"zeroBaseline": "F",
+				"howToMeasureChange": "abs",
+				"subtitle": "Homicide offences per million people",
+				"zeroBaseline": "T",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "11/06/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/firsttimebuyermortgagesalesbylocalauthorityuk2006to2023",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows first-time buyer mortgage sales per 1,000 dwellings, in the United Kingdom, for 2013 to 2024.",
+				"sourceDate": "05/02/2026|28/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/homicideinenglandandwales/previousreleases#|https://www.psni.police.uk/about-us/our-publications-and-reports/official-statistics/police-recorded-crime-statistics",
+				"sourceOrg": "Office for National Statistics|Police Service of Northern Ireland",
+				"longDescription": "This indicator shows the rate of homicide offences per million population, in England, Wales and Northern Ireland, for three-year rolling periods 04/2014-03/2017 to 04/2022-03/2025.",
 				"standardised": "T",
-				"caveats": "Mortgage Product Sales Data (PSD001) is regulatory data reported to the Financial Conduct Authority (FCA) by regulated mortgage lenders.\n\nThis data reflects the number of mortgages taken out by first-time buyers, either individually or jointly, but does not include first-time buyers who purchased a property without a mortgage.\n\nThe first-time buyer indicator in the FCA data is reported by the mortgage providers and its definition may vary across firms. For example, for individuals who are not remortgaging but have previously owned a property may or may not be counted as first-time buyers. Additionally, if a mortgage is taken out jointly by one first-time buyer and one non-first-time buyer, it may or may not be counted as a first-time buyer.\n\nThe dwelling stock estimates used are published by MHCLG, Welsh Government, Scottish Government and the Northern Ireland Department of Finance.\n\nSome of this data has been aggregated and may differ from other published figures. Data for the Isles of Scilly is unavailable for all years due to low counts. Mortgage sales for Isles of Scilly have been excluded from aggregated areas that would normally include data from this area.",
+				"caveats": "England and Wales data has been extracted from the Home Office Homicide Index, which contains detailed record-level information about each homicide recorded by police in England and Wales. This index is continually updated with revised information from the police as investigations continue and as cases are heard by the courts. The data refer to the position as at 5 December 2025 and will change as subsequent court hearings take place or as further information is received. In contrast, the Northern Ireland homicide figures represent those initially recorded as homicide, with no revisions based on further police or court decisions.\n\nNorthern Ireland statistics on police recorded crime are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA). They are recorded in compliance with the Home Office Counting Rules and further details of recording practices are available in the [User Guide to Police Recorded Crime Statistics](https://www.psni.police.uk/sites/default/files/2025-11/Police%20Recorded%20Crime%20User%20Guide.pdf).\n\nMid-year population estimates covering the years 2015 to 2023 have been used to create rate per milion population. The mid-year estimate in the middle of the three-year period  was used, for example the period 04/2022 to 03/2025 used 2023 mid-year population estimates.\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
+				"initialGeographyLevel": "region",
 				"beeswarmRowUseMinMax": "F"
 			},
 			"inferredGeos": {
 				"ctrys": [
 					"E",
 					"N",
-					"S",
 					"W"
 				],
 				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
 					"E12",
-					"E47",
 					"E92",
-					"K02",
-					"K03",
 					"K04",
-					"N09",
 					"N92",
-					"S12",
-					"S92",
-					"W06",
 					"W92"
 				],
 				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
 					{
 						"key": "ctry",
 						"codes": [
@@ -11340,45 +11813,11 @@
 							"W92"
 						],
 						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
 					}
 				],
-				"year": 2023
+				"year": 2018
 			},
 			"years": [
-				2013,
 				2014,
 				2015,
 				2016,
@@ -11387,271 +11826,7 @@
 				2019,
 				2020,
 				2021,
-				2022,
-				2023,
-				2024
-			]
-		},
-		"short-term-let-average-length-of-stay": {
-			"id": 119,
-			"topic": "housing",
-			"subTopic": "housing",
-			"code": "short-term-let-average-length-of-stay",
-			"": null,
-			"minXDomainNumb": 2023.5,
-			"maxXDomainNumb": 2025.25,
-			"metadata": {
-				"code": "short-term-let-average-length-of-stay",
-				"slug": "average-length-of-short-term-let-stay",
-				"label": "Average length of short-term let stay",
-				"prefix": "",
-				"suffix": "",
-				"subText": "average length of stay in nights",
-				"decimalPlaces": 1,
-				"howToMeasureChange": null,
-				"subtitle": "Average length of stay (in nights) at a short-term let",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "04/12/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the average length of stay (in nights) at a short-term let, in the United Kingdom, for Quarter 3 (July to Sept) 2023 to Quarter 2 (Apr to Jun) 2025.",
-				"standardised": "T",
-				"caveats": "Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. \n\nAverage length of stay is calculated by dividing the number of nights by the number of stays. \n\nThe data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. \n\nWhile these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2023.5,
-				2023.75,
-				2024,
-				2024.25,
-				2024.5,
-				2024.75,
-				2025,
-				2025.25
-			]
-		},
-		"short-term-let-number-of-guests-nights": {
-			"id": 120,
-			"topic": "housing",
-			"subTopic": "housing",
-			"code": "short-term-let-number-of-guests-nights",
-			"": null,
-			"minXDomainNumb": 2023.5,
-			"maxXDomainNumb": 2025.25,
-			"metadata": {
-				"code": "short-term-let-number-of-guests-nights",
-				"slug": "number-of-guest-nights-at-a-short-term-let",
-				"label": "Number of guest nights at a short-term let",
-				"prefix": "",
-				"suffix": "",
-				"subText": "number of guest nights",
-				"decimalPlaces": 0,
-				"howToMeasureChange": null,
-				"subtitle": "The number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group",
-				"zeroBaseline": "F",
-				"canBeNegative": "F",
-				"experimentalStatistic": "F",
-				"sourceDate": "04/12/2025",
-				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/previousreleases",
-				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the number of guest nights spent during a stay at a short-term let, with a night counted per individual member of the visiting group, in the United Kingdom, for Quarter 3 (July to Sept) 2023 to Quarter 2 (Apr to Jun) 2025.",
-				"standardised": "F",
-				"caveats": "Analysis uses data from online collaborative economy platforms Airbnb, Booking.com and Expedia Group. \n\nThe number of nights spent during a stay, with a night counted per individual member of the visiting group. This can be influenced by guest group size and length of stay. For example, a family of four staying for 2 nights would be 8 guest nights. \n\nThe data have a strong seasonal trend. Therefore, changes over time should generally be compared year-on-year, rather than month-on-month or quarter-on-quarter. \n\nWhile these statistics are believed to cover a large proportion of short-term lets activity in the UK, they do not cover all activity, as data from other providers and platforms are not included.",
-				"confidenceIntervals": "F",
-				"initialGeographyLevel": "ltla",
-				"beeswarmRowUseMinMax": "F"
-			},
-			"inferredGeos": {
-				"ctrys": [
-					"E",
-					"N",
-					"S",
-					"W"
-				],
-				"types": [
-					"E06",
-					"E07",
-					"E08",
-					"E09",
-					"E10",
-					"E12",
-					"E47",
-					"E92",
-					"K02",
-					"K03",
-					"N09",
-					"N92",
-					"S12",
-					"S92",
-					"W06",
-					"W92"
-				],
-				"groups": [
-					{
-						"key": "uk",
-						"codes": [
-							"K02"
-						],
-						"label": "United Kingdom"
-					},
-					{
-						"key": "ctry",
-						"codes": [
-							"E92",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries"
-					},
-					{
-						"key": "rgn",
-						"codes": [
-							"E12",
-							"S92",
-							"N92",
-							"W92"
-						],
-						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
-						"key": "utla",
-						"codes": [
-							"E06",
-							"E08",
-							"E09",
-							"E10",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Upper-tier/unitary authorities"
-					},
-					{
-						"key": "ltla",
-						"codes": [
-							"E06",
-							"E07",
-							"E08",
-							"E09",
-							"N09",
-							"S12",
-							"W06"
-						],
-						"label": "Lower-tier/unitary authorities"
-					}
-				],
-				"year": 2023
-			},
-			"years": [
-				2023.5,
-				2023.75,
-				2024,
-				2024.25,
-				2024.5,
-				2024.75,
-				2025,
-				2025.25
+				2022
 			]
 		}
 	},
@@ -11739,6 +11914,7 @@
 						"net-additions-to-the-housing-stock-wales",
 						"net-additions-to-the-housing-stock-northern-ireland",
 						"average-house-price",
+						"housing-affordability-ratio",
 						"first-time-buyer-mortgage-sales",
 						"short-term-let-average-length-of-stay",
 						"short-term-let-number-of-guests-nights"
