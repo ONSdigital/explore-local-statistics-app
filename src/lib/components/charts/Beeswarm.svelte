@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ONScolours } from '$lib/config';
 	import { parseBeeswarmData, getPaletteColor, getMarkerPath } from './chartHelpers';
 
 	let {
@@ -56,11 +57,11 @@
 
 {#snippet point(d, radius = 8, color)}
 	<g class="beeswarm-point" transform="translate({d.x} {100 - d.y})" opacity={color ? 1 : 0.9}>
-		<polyline points="0,0 0,0" stroke="white" stroke-width={radius + 2} />
-		<polyline points="0,0 0,0" stroke={color || '#aaa'} stroke-width={radius} />
+		<polyline points="0,0 0,0" stroke={ONScolours.white} stroke-width={radius + 2} />
+		<polyline points="0,0 0,0" stroke={color || ONScolours.grey40} stroke-width={radius} />
 		<polyline
 			points="0,0 0,0"
-			stroke={color || '#ddd'}
+			stroke={color || ONScolours.grey20}
 			stroke-width={radius - 2}
 			onmouseenter={() => (hovered = d[idKey])}
 		/>
@@ -99,7 +100,7 @@
 		<div
 			class="beeswarm-label"
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
-			style:color={i === 0 ? 'white' : color}
+			style:color={i === 0 ? ONScolours.white : color}
 			style:left="{labels?.[i]?.x ?? d.x}%"
 			use:labelDodge={{ i, d }}
 		>
@@ -130,8 +131,8 @@
 				<g class="beeswarm-hovered">
 					{#if _hovered}
 						{@const d = _hovered}
-						{@render line(d, 0, 'orange')}
-						{@render point(d, 14, 'orange')}
+						{@render line(d, 0, ONScolours.highlightOrange)}
+						{@render point(d, 14, ONScolours.highlightOrange)}
 					{/if}
 				</g>
 			{/if}
@@ -139,7 +140,7 @@
 		<div class="beeswarm-annotations">
 			{#if _data}
 				{#if _hovered}
-					{@render label(_hovered, 0, 'orange', true)}
+					{@render label(_hovered, 0, ONScolours.highlightOrange, true)}
 				{:else}
 					{#each _selected as d, i}
 						{@const color = getPaletteColor(d.i, _selected.length)}

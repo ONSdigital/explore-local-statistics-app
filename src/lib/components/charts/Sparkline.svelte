@@ -4,6 +4,7 @@
 	import { format } from 'd3-format';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
+	import { ONScolours } from '$lib/config';
 
 	let {
 		data,
@@ -48,7 +49,7 @@
 	}
 </script>
 
-{#snippet line(arr, width = 2, color = 'grey')}
+{#snippet line(arr, width = 2, color = ONScolours.grey60)}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
 		stroke={color}
@@ -162,7 +163,7 @@
 		position: absolute;
 		top: 100%;
 		height: 8px;
-		border-left: 1px solid #b3b3b3;
+		border-left: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-x-tick-label {
 		position: absolute;
@@ -176,13 +177,13 @@
 		top: 0;
 		left: 0;
 		height: 100%;
-		border-left: 1px solid #b3b3b3;
+		border-left: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-y-tick {
 		position: absolute;
 		right: 100%;
 		width: 8px;
-		border-top: 1px solid #b3b3b3;
+		border-top: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-y-tick-label {
 		position: absolute;
@@ -210,7 +211,7 @@
 		width: 18px;
 		height: 18px;
 		transform: translate(-50%, -50%);
-		stroke: white;
+		stroke: var(--ons-color-white);
 		stroke-width: 1px;
 	}
 	.sparkline-label {

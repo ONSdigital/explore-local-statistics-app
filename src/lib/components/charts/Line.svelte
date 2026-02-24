@@ -202,25 +202,47 @@
 	</ul>
 {/if}
 
+<p class="ons-u-vh">Line chart for {metadata.label}. The data is available to download below.</p>
 <div
 	bind:clientWidth={width}
 	class="line-wrapper"
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
+	aria-hidden="true"
 >
 	{#if showIntervals}
-		<svg aria-hidden="true" width="350" height="50" class="bar-chart-legend">
-			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
-			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
-			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
-			<circle cx="50" cy="30" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
-			<text x="70" y="35" font-size="18px" stroke="#222" fill="#222" stroke-width="0px"
-				>95% confidence interval range</text
+		<svg width="350" height="50" class="bar-chart-legend">
+			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill={ONScolours.black} opacity="0.2"
+			></path>
+			<path d="M10 25  L50 30" stroke={ONScolours.black} fill="none" stroke-width="2px"></path>
+			<circle
+				cx="10"
+				cy="25"
+				r="4"
+				stroke={ONScolours.white}
+				fill={ONScolours.black}
+				stroke-width="1px"
+			></circle>
+			<circle
+				cx="50"
+				cy="30"
+				r="4"
+				stroke={ONScolours.white}
+				fill={ONScolours.black}
+				stroke-width="1px"
+			></circle>
+			<text
+				x="70"
+				y="35"
+				font-size="18px"
+				stroke={ONScolours.black}
+				fill={ONScolours.black}
+				stroke-width="0px">95% confidence interval range</text
 			>
 			<path
 				d={makeCurlyBrace(55, 15, 55, 45, -10, 0.5)}
-				stroke="#222"
+				stroke={ONScolours.black}
 				fill="none"
 				stroke-width="1px"
 			></path>
@@ -252,7 +274,6 @@
 				{#if width >= widthThreshold && hoveredArea}
 					<div
 						class="margin-label-hovered"
-						style:color={ONScolours.highlightOrangeDark}
 						style:left="{xScale(_data.dateDomain[1]) + 10}px"
 						style:top="{yScale(finalHoveredValue)}px"
 						style:max-width="{rightMargin - dodgedLabelGap}px"
@@ -305,7 +326,7 @@
 							markerWidth="14"
 							markerHeight="14"
 							markerUnits="userSpaceOnUse"
-							stroke="white"
+							stroke={ONScolours.white}
 							stroke-width="0.4"
 						>
 							<path d={path[1]} style:fill={getPaletteColor(i, selectedData.length)} />
@@ -324,7 +345,7 @@
 					{#each selectedData as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 						{@const marker = getMarkerKey(selectedIndex, selected.length)}
-						{@render line(arr, 4.5, 'white', 1, marker)}
+						{@render line(arr, 4.5, ONScolours.white, 1, marker)}
 						{@render line(arr, 3, getPaletteColor(selectedIndex, selected.length), 1, marker)}
 					{/each}
 				</g>
@@ -397,7 +418,7 @@
 		padding: 0;
 		margin: 0 0 20px 0;
 		min-height: 40px;
-		color: white;
+		color: var(--ons-color-white);
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -424,20 +445,20 @@
 		position: absolute;
 		top: 100%;
 		height: 8px;
-		border-left: 1px solid grey;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.y-baseline {
 		position: absolute;
 		height: 100%;
 		left: 0%;
-		border-left: 1px solid grey;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.x-baseline {
 		position: absolute;
 		width: 100%;
-		border-bottom: 2px solid grey;
+		border-bottom: 2px solid var(--ons-color-grey-60);
 		transform: translateY(-0.5px);
 	}
 
@@ -445,7 +466,7 @@
 		position: absolute;
 		right: 100%;
 		width: 8px;
-		border-top: 1px solid grey;
+		border-top: 1px solid var(--ons-color-grey-60);
 	}
 
 	.line-x-tick-label {
@@ -480,6 +501,7 @@
 		font-weight: bold;
 		text-align: left;
 		line-height: 0.95;
+		color: var(--ons-color-highlight-orange-dark);
 	}
 	.margin-labels-selected {
 		position: absolute;
