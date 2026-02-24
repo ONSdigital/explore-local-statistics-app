@@ -6,8 +6,6 @@
 	import { Button } from '@onsvisual/svelte-components';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 
-	const defaultText = 'Health, education, economy, life satisfaction and more.';
-
 	let { areaProps } = $props();
 
 	async function fetchData(urls: string[]) {
@@ -39,7 +37,7 @@
 				<strong>{data[0].value[0].toLocaleString('en-GB')}</strong>
 				and a median age of <strong>{data[1].value[0].toLocaleString('en-GB')} years</strong>.
 			{:else}
-				{defaultText}
+				Health, education, economy, life satisfaction and more.
 			{/if}
 		{/await}
 	</p>
