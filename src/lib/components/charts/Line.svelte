@@ -17,6 +17,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -36,13 +37,18 @@
 	const dodgedLabelGap = 26;
 
 	let width = $state(680);
-	let leftMargin = $state(40);
-	function updateLeftMargin(el) {
-		const width = el.getBoundingClientRect().width;
-		if (width > leftMargin) leftMargin = width + 15;
+	let leftMargin = $state(0);
+	let yTickLabelWidths = $state({});
+
+	function updateLeftMargin(el, index) {
+		yTickLabelWidths[index] = el.getBoundingClientRect().width;
+		const maxWidth = Math.max(...Object.values(yTickLabelWidths));
+		leftMargin = maxWidth + 12;
 	}
-	let rightMargin = $derived(width < widthThreshold ? 20 : 180);
+	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
+	let suffix = $derived(metadata.suffix);
+	let prefix = $derived(metadata.prefix);
 
 	let _data = $derived(parseChartData(data, yKey, xKey, idKey));
 	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
@@ -78,8 +84,8 @@
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 
-	const maxTickGap = 100; // in pixels
-	let nXTicks = $derived(Math.floor(width / maxTickGap));
+	const maxTickGap = 140; // in pixels
+	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
 	function snapXTicks(ticks, _data) {
@@ -196,25 +202,47 @@
 	</ul>
 {/if}
 
+<p class="ons-u-vh">Line chart for {metadata.label}. The data is available to download below.</p>
 <div
 	bind:clientWidth={width}
 	class="line-wrapper"
 	style:padding-left="{leftMargin}px"
-	style:padding-bottom="25px"
+	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
+	aria-hidden="true"
 >
 	{#if showIntervals}
-		<svg aria-hidden="true" width="350" height="50" class="bar-chart-legend">
-			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill="#222" opacity="0.2"></path>
-			<path d="M10 25  L50 30" stroke="#222" fill="none" stroke-width="2px"></path>
-			<circle cx="10" cy="25" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
-			<circle cx="50" cy="30" r="4" stroke="white" fill="#222" stroke-width="1px"></circle>
-			<text x="70" y="35" font-size="18px" stroke="#222" fill="#222" stroke-width="0px"
-				>95% confidence interval range</text
+		<svg width="350" height="50" class="bar-chart-legend">
+			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill={ONScolours.black} opacity="0.2"
+			></path>
+			<path d="M10 25  L50 30" stroke={ONScolours.black} fill="none" stroke-width="2px"></path>
+			<circle
+				cx="10"
+				cy="25"
+				r="4"
+				stroke={ONScolours.white}
+				fill={ONScolours.black}
+				stroke-width="1px"
+			></circle>
+			<circle
+				cx="50"
+				cy="30"
+				r="4"
+				stroke={ONScolours.white}
+				fill={ONScolours.black}
+				stroke-width="1px"
+			></circle>
+			<text
+				x="70"
+				y="35"
+				font-size="18px"
+				stroke={ONScolours.black}
+				fill={ONScolours.black}
+				stroke-width="0px">95% confidence interval range</text
 			>
 			<path
 				d={makeCurlyBrace(55, 15, 55, 45, -10, 0.5)}
-				stroke="#222"
+				stroke={ONScolours.black}
 				fill="none"
 				stroke-width="1px"
 			></path>
@@ -237,8 +265,8 @@
 				<div class="y-baseline"></div>
 				{#each yScale.ticks(5) as yTick, i}
 					<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
-					<div use:updateLeftMargin class="line-y-tick-label" style:top="{yScale(yTick)}px">
-						{formatYTick(yTick)}
+					<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
+						{prefix}{formatYTick(yTick)}{suffix}
 					</div>
 				{/each}
 			</div>
@@ -246,7 +274,6 @@
 				{#if width >= widthThreshold && hoveredArea}
 					<div
 						class="margin-label-hovered"
-						style:color={ONScolours.highlightOrangeDark}
 						style:left="{xScale(_data.dateDomain[1]) + 10}px"
 						style:top="{yScale(finalHoveredValue)}px"
 						style:max-width="{rightMargin - dodgedLabelGap}px"
@@ -299,7 +326,7 @@
 							markerWidth="14"
 							markerHeight="14"
 							markerUnits="userSpaceOnUse"
-							stroke="white"
+							stroke={ONScolours.white}
 							stroke-width="0.4"
 						>
 							<path d={path[1]} style:fill={getPaletteColor(i, selectedData.length)} />
@@ -318,7 +345,7 @@
 					{#each selectedData as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 						{@const marker = getMarkerKey(selectedIndex, selected.length)}
-						{@render line(arr, 4.5, 'white', 1, marker)}
+						{@render line(arr, 4.5, ONScolours.white, 1, marker)}
 						{@render line(arr, 3, getPaletteColor(selectedIndex, selected.length), 1, marker)}
 					{/each}
 				</g>
@@ -362,6 +389,7 @@
 		display: block;
 		position: relative;
 		overflow: visible;
+		padding-top: 8px;
 	}
 	.line-inner {
 		display: block;
@@ -390,7 +418,7 @@
 		padding: 0;
 		margin: 0 0 20px 0;
 		min-height: 40px;
-		color: white;
+		color: var(--ons-color-white);
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -416,36 +444,36 @@
 	.line-x-tick {
 		position: absolute;
 		top: 100%;
-		height: 10px;
-		border-left: 1px solid grey;
+		height: 8px;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.y-baseline {
 		position: absolute;
 		height: 100%;
 		left: 0%;
-		border-left: 1px solid grey;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.x-baseline {
 		position: absolute;
 		width: 100%;
-		border-bottom: 2px solid grey;
-		transform: translateY(-1px);
+		border-bottom: 2px solid var(--ons-color-grey-60);
+		transform: translateY(-0.5px);
 	}
 
 	.line-y-tick {
 		position: absolute;
 		right: 100%;
 		width: 8px;
-		border-top: 1px solid grey;
+		border-top: 1px solid var(--ons-color-grey-60);
 	}
 
 	.line-x-tick-label {
 		position: absolute;
-		top: calc(100% + 10px);
+		top: calc(100% + 5px);
 		transform: translateX(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 	}
 
@@ -453,7 +481,7 @@
 		position: absolute;
 		right: calc(100% + 10px);
 		transform: translateY(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 	}
 
@@ -469,10 +497,11 @@
 	.margin-label-hovered {
 		position: absolute;
 		transform: translateY(-50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: left;
-		line-height: 1.1;
+		line-height: 0.95;
+		color: var(--ons-color-highlight-orange-dark);
 	}
 	.margin-labels-selected {
 		position: absolute;
@@ -485,7 +514,7 @@
 	.margin-label-selected {
 		position: absolute;
 		transform: translateY(-50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		line-height: 0.95;
 		padding-top: 4px;

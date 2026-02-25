@@ -4,9 +4,11 @@
 	import { format } from 'd3-format';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
+	import { ONScolours } from '$lib/config';
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -48,7 +50,7 @@
 	}
 </script>
 
-{#snippet line(arr, width = 2, color = 'grey')}
+{#snippet line(arr, width = 2, color = ONScolours.grey60)}
 	<polyline
 		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
 		stroke={color}
@@ -80,12 +82,23 @@
 {/snippet}
 
 {#if _data && _selected?.length && xScale && yScale}
+	{@const target = _selected[_selected.length - 1].data}
+	{@const diff = target[target.length - 1][yKey] - target[0][yKey]}
+	{@const direction = diff < 0 ? 'decreased' : 'increased'}
+	<p class="ons-u-vh">
+		Line chart for {metadata.label} ({metadata.subText}) in {data.areanm[0]}. Between {formatPeriodShort(
+			_data.dateDomain[0]
+		)} and {formatPeriodShort(_data.dateDomain[1])}
+		{metadata.label}
+		{direction} by {formatValue(Math.abs(diff))}.
+	</p>
 	<div
 		class="sparkline-wrapper"
 		style:padding-left="{margins.left + 10}px"
 		style:padding-right="{margins.right + 10}px"
 		style:padding-top="10px"
 		style:padding-bottom="25px"
+		aria-hidden="true"
 	>
 		<div class="sparkline-container">
 			<svg
@@ -162,7 +175,7 @@
 		position: absolute;
 		top: 100%;
 		height: 8px;
-		border-left: 1px solid #b3b3b3;
+		border-left: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-x-tick-label {
 		position: absolute;
@@ -176,13 +189,13 @@
 		top: 0;
 		left: 0;
 		height: 100%;
-		border-left: 1px solid #b3b3b3;
+		border-left: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-y-tick {
 		position: absolute;
 		right: 100%;
 		width: 8px;
-		border-top: 1px solid #b3b3b3;
+		border-top: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-y-tick-label {
 		position: absolute;
@@ -210,7 +223,7 @@
 		width: 18px;
 		height: 18px;
 		transform: translate(-50%, -50%);
-		stroke: white;
+		stroke: var(--ons-color-white);
 		stroke-width: 1px;
 	}
 	.sparkline-label {

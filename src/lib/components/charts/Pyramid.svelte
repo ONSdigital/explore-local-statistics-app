@@ -9,9 +9,11 @@
 		hovered = $bindable(),
 		formatValue = (d) => d,
 		idKey = 'areacd',
+		labelKey = 'areanm',
 		xKey = 'value',
 		yKey = 'age',
-		zKey = 'sex'
+		zKey = 'sex',
+		valueDomain = []
 	} = $props();
 
 	const barHeight = 18;
@@ -34,9 +36,10 @@
 	let hoveredPos = $state();
 
 	let xRange = $derived([0, (w - gutter) / 2]);
-	let xDomain = $derived(
-		!_data?.valueDomain || _data?.valueDomain?.[1] < 5 ? [0, 5] : _data?.valueDomain
-	);
+	// let xDomain = $derived(
+	// 	!_data?.valueDomain || _data?.valueDomain?.[1] < 5 ? [0, 5] : _data?.valueDomain
+	// );
+	let xDomain = valueDomain[0] > 0 ? [0, valueDomain[1]] : valueDomain;
 	let xScale = $derived(scaleLinear().domain(xDomain).range(xRange));
 	let yRange = $derived([barHeight * (_data?.categoryDomain?.length || 18), 0]);
 	let yScale = $derived(
@@ -65,6 +68,8 @@
 			.map((p) => p.join(','))
 			.join(' ');
 	}
+
+	let nXTicks = $derived(Math.max(2, Math.floor(w / 150)));
 </script>
 
 {#snippet bar(d)}
@@ -114,7 +119,14 @@
 	</text>
 {/snippet}
 
-<div class="chart-container" bind:clientWidth={w}>
+<p class="ons-u-vh">
+	Population pyramid chart showing the percentage distribution of the total population by five-year
+	age band and sex. In {_data?.keyed?.[selected[0]][0][labelKey]}, the population was {formatValue(
+		sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Female')
+	)}% female and {formatValue(sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Male'))}% male.
+</p>
+
+<div class="chart-container" bind:clientWidth={w} aria-hidden="true">
 	<svg class="chart" viewBox="0 0 {w} {yRange[0] + bottomMargin}">
 		{#if _data}
 			<g class="chart-y-axis">
@@ -139,7 +151,7 @@
 				/>
 			</g>
 			<g class="chart-x-axis">
-				{#each xScale.ticks(3) as t}
+				{#each xScale.ticks(nXTicks) as t}
 					{@render tick(t, 'female')}
 					{@render tick(t, 'male')}
 				{/each}

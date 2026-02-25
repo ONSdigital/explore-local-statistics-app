@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { ONScolours } from '$lib/config';
 	import { parseBeeswarmData, getPaletteColor, getMarkerPath } from './chartHelpers';
 
 	let {
 		data,
+		metadata,
 		xKey = 'value',
 		idKey = 'areacd',
 		labelKey = 'areanm',
@@ -52,15 +54,19 @@
 		labels[params.i] = { x, rect };
 		return { destroy: () => (labels[params.i] = null) };
 	}
+	let target = $derived(_selected[_selected.length - 1].data);
+	let diff = $derived(target[target.length - 1][yKey] - target[0][yKey]);
+	let direction = $derived(diff < 0 ? 'decreased' : 'increased');
+	$inspect(_data);
 </script>
 
 {#snippet point(d, radius = 8, color)}
 	<g class="beeswarm-point" transform="translate({d.x} {100 - d.y})" opacity={color ? 1 : 0.9}>
-		<polyline points="0,0 0,0" stroke="white" stroke-width={radius + 2} />
-		<polyline points="0,0 0,0" stroke={color || '#aaa'} stroke-width={radius} />
+		<polyline points="0,0 0,0" stroke={ONScolours.white} stroke-width={radius + 2} />
+		<polyline points="0,0 0,0" stroke={color || ONScolours.grey40} stroke-width={radius} />
 		<polyline
 			points="0,0 0,0"
-			stroke={color || '#ddd'}
+			stroke={color || ONScolours.grey20}
 			stroke-width={radius - 2}
 			onmouseenter={() => (hovered = d[idKey])}
 		/>
@@ -99,7 +105,7 @@
 		<div
 			class="beeswarm-label"
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
-			style:color={i === 0 ? 'white' : color}
+			style:color={i === 0 ? ONScolours.white : color}
 			style:left="{labels?.[i]?.x ?? d.x}%"
 			use:labelDodge={{ i, d }}
 		>
@@ -109,7 +115,23 @@
 	{/key}
 {/snippet}
 
-<div class="beeswarm-wrapper">
+{#if selected.length == 1}
+	<p class="ons-u-vh">
+		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
+			?.keyed?.[selected[0]]?.[labelKey]} was
+		{formatValue(_data?.keyed?.[selected[0]]?.[xKey])}.
+	</p>
+{:else}
+	<p class="ons-u-vh">
+		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
+			?.keyed?.[selected[0]]?.[labelKey]} was {formatValue(_data?.keyed?.[selected[0]]?.[xKey])},
+		the value for {_data?.keyed?.[selected[1]]?.[labelKey]} was {formatValue(
+			_data?.keyed?.[selected[1]]?.[xKey]
+		)}
+	</p>
+{/if}
+
+<div class="beeswarm-wrapper" aria-hidden="true">
 	<div class="beeswarm-chart">
 		<svg viewBox="0 0 100 100" class="beeswarm-svg" preserveAspectRatio="none">
 			{#if _data}
@@ -130,8 +152,8 @@
 				<g class="beeswarm-hovered">
 					{#if _hovered}
 						{@const d = _hovered}
-						{@render line(d, 0, 'orange')}
-						{@render point(d, 14, 'orange')}
+						{@render line(d, 0, ONScolours.highlightOrange)}
+						{@render point(d, 14, ONScolours.highlightOrange)}
 					{/if}
 				</g>
 			{/if}
@@ -139,7 +161,7 @@
 		<div class="beeswarm-annotations">
 			{#if _data}
 				{#if _hovered}
-					{@render label(_hovered, 0, 'orange', true)}
+					{@render label(_hovered, 0, ONScolours.highlightOrange, true)}
 				{:else}
 					{#each _selected as d, i}
 						{@const color = getPaletteColor(d.i, _selected.length)}

@@ -109,6 +109,7 @@
 	onMount(async () => (features = await getMapFeatures()));
 </script>
 
+<p class="ons-u-vh">Map of {metadata.label}. The data is available to download below.</p>
 <div aria-hidden="true" class="map-outer">
 	<div class="map-container">
 		<Map
