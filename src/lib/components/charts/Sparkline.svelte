@@ -8,6 +8,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -81,12 +82,23 @@
 {/snippet}
 
 {#if _data && _selected?.length && xScale && yScale}
+	{@const target = _selected[_selected.length - 1].data}
+	{@const diff = target[target.length - 1][yKey] - target[0][yKey]}
+	{@const direction = diff < 0 ? 'decreased' : 'increased'}
+	<p class="ons-u-vh">
+		Line chart for {metadata.label} ({metadata.subText}) in {data.areanm[0]}. Between {formatPeriodShort(
+			_data.dateDomain[0]
+		)} and {formatPeriodShort(_data.dateDomain[1])}
+		{metadata.label}
+		{direction} by {formatValue(diff)}.
+	</p>
 	<div
 		class="sparkline-wrapper"
 		style:padding-left="{margins.left + 10}px"
 		style:padding-right="{margins.right + 10}px"
 		style:padding-top="10px"
 		style:padding-bottom="25px"
+		aria-hidden="true"
 	>
 		<div class="sparkline-container">
 			<svg

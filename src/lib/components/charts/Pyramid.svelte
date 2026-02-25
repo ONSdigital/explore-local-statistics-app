@@ -9,6 +9,7 @@
 		hovered = $bindable(),
 		formatValue = (d) => d,
 		idKey = 'areacd',
+		labelKey = 'areanm',
 		xKey = 'value',
 		yKey = 'age',
 		zKey = 'sex',
@@ -67,6 +68,9 @@
 			.map((p) => p.join(','))
 			.join(' ');
 	}
+
+	$inspect(_data);
+	$inspect(_data?.keyed?.[selected[0]][0][idKey]);
 </script>
 
 {#snippet bar(d)}
@@ -116,7 +120,14 @@
 	</text>
 {/snippet}
 
-<div class="chart-container" bind:clientWidth={w}>
+<p class="ons-u-vh">
+	Population pyramid chart showing the percentage distribution of the total population by five-year
+	age band and sex. In {_data?.keyed?.[selected[0]][0][labelKey]}, the population was {formatValue(
+		sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Female')
+	)}% female and {formatValue(sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Male'))}% male.
+</p>
+
+<div class="chart-container" bind:clientWidth={w} aria-hidden="true">
 	<svg class="chart" viewBox="0 0 {w} {yRange[0] + bottomMargin}">
 		{#if _data}
 			<g class="chart-y-axis">

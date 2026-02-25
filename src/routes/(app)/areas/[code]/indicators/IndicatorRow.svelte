@@ -180,6 +180,7 @@
 						{#snippet chart(data)}
 							<Beeswarm
 								{data}
+								{metadata}
 								{formatPeriod}
 								{formatValue}
 								valuePrefix={metadata.prefix}
@@ -201,6 +202,7 @@
 						{#snippet chart(data)}
 							<Sparkline
 								{data}
+								{metadata}
 								{formatPeriod}
 								{formatValue}
 								valuePrefix={metadata.prefix}

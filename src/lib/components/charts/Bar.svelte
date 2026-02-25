@@ -217,6 +217,7 @@
 	</ul>
 {/if}
 
+<p class="ons-u-vh">Bar chart for {metadata.label}. The data is available to download below.</p>
 <div
 	bind:clientWidth={width}
 	class="bar-wrapper"
@@ -224,6 +225,7 @@
 	style:padding-top="36px"
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
+	aria-hidden="true"
 >
 	{#if showIntervals}
 		<div class="legend-container">

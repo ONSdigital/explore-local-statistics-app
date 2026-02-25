@@ -4,6 +4,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'value',
 		idKey = 'areacd',
 		labelKey = 'areanm',
@@ -53,6 +54,10 @@
 		labels[params.i] = { x, rect };
 		return { destroy: () => (labels[params.i] = null) };
 	}
+	let target = $derived(_selected[_selected.length - 1].data);
+	let diff = $derived(target[target.length - 1][yKey] - target[0][yKey]);
+	let direction = $derived(diff < 0 ? 'decreased' : 'increased');
+	$inspect(_data);
 </script>
 
 {#snippet point(d, radius = 8, color)}
@@ -110,7 +115,23 @@
 	{/key}
 {/snippet}
 
-<div class="beeswarm-wrapper">
+{#if selected.length == 1}
+	<p class="ons-u-vh">
+		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
+			?.keyed?.[selected[0]]?.[labelKey]} was
+		{formatValue(_data?.keyed?.[selected[0]]?.[xKey])}.
+	</p>
+{:else}
+	<p class="ons-u-vh">
+		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
+			?.keyed?.[selected[0]]?.[labelKey]} was {formatValue(_data?.keyed?.[selected[0]]?.[xKey])},
+		the value for {_data?.keyed?.[selected[1]]?.[labelKey]} was {formatValue(
+			_data?.keyed?.[selected[1]]?.[xKey]
+		)}
+	</p>
+{/if}
+
+<div class="beeswarm-wrapper" aria-hidden="true">
 	<div class="beeswarm-chart">
 		<svg viewBox="0 0 100 100" class="beeswarm-svg" preserveAspectRatio="none">
 			{#if _data}
