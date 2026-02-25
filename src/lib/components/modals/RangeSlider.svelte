@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Em } from '@onsvisual/svelte-components';
 	let { label, options, selectedRange = $bindable(), formatTick = (d) => d } = $props();
 
 	let selectedIndices = $state([
