@@ -8,7 +8,7 @@
 
 	const chartTypes = getChartTypesForIndicator();
 
-	let selectedIndicator = $state(indicators[0]);
+	let selectedIndicator = $state(indicators.find((ind) => ind.standardised)); // Default to an indicator that displays on a map
 	let selectedChartTypeKey = $state(chartTypes[0].key);
 	let selectedChartType = $derived(chartTypes.find((chart) => chart.key === selectedChartTypeKey));
 	let includedChartKeys = $derived(
