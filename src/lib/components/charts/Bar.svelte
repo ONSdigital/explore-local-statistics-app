@@ -7,6 +7,7 @@
 
 	let {
 		data,
+		metadata,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
@@ -22,7 +23,7 @@
 
 	let width = $state();
 	const widthThreshold = 550;
-	let leftMargin = $derived(width < widthThreshold ? 20 : 170);
+	let leftMargin = $derived(width < widthThreshold ? 20 : 250);
 	const rightMargin = 30;
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
@@ -31,6 +32,8 @@
 	let hoveredCodesNames = $derived(
 		hovered ? [{ areacd: hovered.areacd, areanm: hovered.areanm }] : []
 	);
+	let suffix = $derived(metadata.suffix);
+	let prefix = $derived(metadata.prefix);
 
 	let selectedData = $derived(_data ? selected.map((cd) => _data.keyed[cd]).filter((d) => d) : []);
 	let selectedCodesNames = $derived(
@@ -41,7 +44,8 @@
 
 	const maxHeight = 500;
 	const maxBarHeight = 25;
-	const barGapRatio = 0.5; // Proportion of bar height
+	// const barGapRatio = 0.5; // Proportion of bar height
+	const barGapRatio = $derived(_data.array.length > 100 ? 0 : 0.5);
 	const minSelectedBarHeight = 10; // Number of pixels
 	const maxUnscaledBarsCount = Math.floor(500 / (maxBarHeight * (1 + barGapRatio)));
 
@@ -110,6 +114,8 @@
 					.range([0, widthInner])
 			: null
 	);
+	const maxTickGap = 140; // in pixels
+	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	$inspect({ labelLookup });
 </script>
@@ -141,7 +147,7 @@
 		{width}
 		height={yScale(b[idKey]).height}
 		{fill}
-		stroke="white"
+		stroke={ONScolours.white}
 		stroke-width="0.5"
 		{opacity}
 		on:pointerenter={() => {
@@ -211,6 +217,7 @@
 	</ul>
 {/if}
 
+<p class="ons-u-vh">Bar chart for {metadata.label}. The data is available to download below.</p>
 <div
 	bind:clientWidth={width}
 	class="bar-wrapper"
@@ -218,6 +225,7 @@
 	style:padding-top="36px"
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
+	aria-hidden="true"
 >
 	{#if showIntervals}
 		<div class="legend-container">
@@ -228,14 +236,28 @@
 				class="bar-chart-legend"
 				style="overflow: visible;"
 			>
-				<line x1="10" y1="15" x2="100" y2="15" stroke="#222" opacity="0.2" stroke-width="15px"
+				<line
+					x1="10"
+					y1="15"
+					x2="100"
+					y2="15"
+					stroke={ONScolours.black}
+					opacity="0.2"
+					stroke-width="15px"
 				></line>
-				<rect x="52" width="5" y="5" height="20" fill="#222" stroke="white" stroke-width="1.3px"
+				<rect
+					x="52"
+					width="5"
+					y="5"
+					height="20"
+					fill={ONScolours.black}
+					stroke={ONScolours.white}
+					stroke-width="1.3px"
 				></rect>
 
 				<path
 					d={makeCurlyBrace(10, 30, 100, 30, 10, 0.5)}
-					stroke="#222"
+					stroke={ONScolours.black}
 					fill="none"
 					stroke-width="1.5px"
 				></path>
@@ -244,8 +266,8 @@
 					x="55"
 					y="60"
 					font-size="16px"
-					stroke="#222"
-					fill="#222"
+					stroke={ONScolours.black}
+					fill={ONScolours.black}
 					stroke-width="0px"
 					text-anchor="middle">95% confidence</text
 				>
@@ -253,8 +275,8 @@
 					x="55"
 					y="80"
 					font-size="16px"
-					stroke="#222"
-					fill="#222"
+					stroke={ONScolours.black}
+					fill={ONScolours.black}
 					stroke-width="0px"
 					text-anchor="middle">interval range</text
 				>
@@ -267,10 +289,10 @@
 		</div>
 		<div class="line-x-axis">
 			<div class="x-baseline" style:top="0"></div>
-			{#each xScale.ticks(5) as xTick}
+			{#each xScale.ticks(nXTicks) as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{formatValue(xTick)}
+					{prefix}{formatValue(xTick)}{suffix}
 				</div>
 			{/each}
 		</div>
@@ -280,7 +302,6 @@
 					<div
 						class="margin-label-hovered"
 						style:top="{yScale(hovered[idKey]).y + yScale(hovered[idKey]).height / 2}px"
-						style:color={ONScolours.highlightOrangeDark}
 						style:max-width="{leftMargin - 16}px"
 						style:left="-8px"
 					>
@@ -345,7 +366,7 @@
 								y={yScale(b[idKey]).y}
 								width="0.5"
 								height={yScale(b[idKey]).height}
-								fill="white"
+								fill={ONScolours.white}
 							>
 							</rect>
 						{/if}
@@ -413,7 +434,7 @@
 		position: absolute;
 		height: 100%;
 		left: 0%;
-		border-left: 1px solid grey;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.line-x-axis,
@@ -430,15 +451,15 @@
 		position: absolute;
 		width: 1px;
 		bottom: 100%;
-		height: 10px;
-		border-left: 1px solid grey;
+		height: 8px;
+		border-left: 1px solid var(--ons-color-grey-60);
 	}
 
 	.line-x-tick-label {
 		position: absolute;
-		bottom: calc(100% + 14px);
+		bottom: calc(100% + 12px);
 		transform: translateX(-50%);
-		font-size: 14px;
+		font-size: 18px;
 		white-space: nowrap;
 		line-height: 1;
 	}
@@ -446,7 +467,7 @@
 	.x-baseline {
 		position: absolute;
 		width: 100%;
-		border-bottom: 2px solid grey;
+		border-bottom: 2px solid var(--ons-color-grey-60);
 		transform: translateY(-1px);
 	}
 
@@ -455,7 +476,7 @@
 		padding: 0;
 		margin: 0 0 20px 0;
 		min-height: 40px;
-		color: white;
+		color: var(--ons-color-white);
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -487,16 +508,17 @@
 	.margin-label-hovered {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: right;
-		line-height: 1.1;
+		line-height: 0.95;
+		color: var(--ons-color-highlight-orange-dark);
 	}
 
 	.margin-label-selected {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		text-align: right;
 		line-height: 0.95;
@@ -507,11 +529,11 @@
 	.margin-label-geo-all {
 		position: absolute;
 		transform: translate(-100%, -50%);
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
-		color: grey;
+		color: var(--ons-color-grey-60);
 		max-width: 140px;
 		text-align: right;
-		line-height: 1.1;
+		line-height: 0.95;
 	}
 </style>

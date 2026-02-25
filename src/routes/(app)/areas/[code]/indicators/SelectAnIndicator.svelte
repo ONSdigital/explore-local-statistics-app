@@ -36,7 +36,7 @@
 		{/each}
 	</ButtonGroup>
 
-	{#key selectedChartTypeKey}
+	{#key [selectedChartTypeKey, selectedIndicator]}
 		<IndicatorChart
 			chartType={selectedChartTypeKey}
 			indicator={selectedIndicator.slug}

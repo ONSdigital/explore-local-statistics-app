@@ -80,6 +80,7 @@ function makeValueDomain(valueCol, rows, hasConfidenceIntervals) {
 	const valueDomain = [Infinity, -Infinity];
 
 	for (const row of rows) {
+		if (row.indicator === 'Population by age and sex' && row.sex === 'All') continue;
 		const minVal =
 			hasConfidenceIntervals && row.lci_95 != null ? row.lci_95 : row[valueCol.titles[0]];
 		const maxVal =
