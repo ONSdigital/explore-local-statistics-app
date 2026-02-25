@@ -91,21 +91,21 @@
 		<Li>
 			<a href="https://stats.gov.wales" target="_blank" rel="noreferrer">
 				StatsWales
-				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+				<span class="ons-u-vh">(opens in a new tab)</span>
 			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 		</Li>
 		<Li>
 			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">
 				Statistics.gov.scot
-				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+				<span class="ons-u-vh">(opens in a new tab)</span>
 			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 		</Li>
 		<Li>
 			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">
 				Northern Ireland Statistics and Research Agency
-				<span class="ons-external-link__new-window-description ons-u-vh">(opens in a new tab)</span>
+				<span class="ons-u-vh">(opens in a new tab)</span>
 			</a>
 			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 		</Li>

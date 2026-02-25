@@ -184,9 +184,7 @@
 					href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
 					target="_blank"
 					>a clustering analysis carried out by the ONS
-					<span class="ons-external-link__new-window-description ons-u-vh"
-						>(methodolgy opens in a new tab)</span
-					></a
+					<span class="ons-u-vh">(methodolgy opens in a new tab)</span></a
 				>.<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 			</p>
 			<Dropdown
