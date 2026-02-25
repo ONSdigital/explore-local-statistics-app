@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { Hero, NavSections, NavSection, List, Li } from '@onsvisual/svelte-components';
+	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { makePeriodFormatter, makeValueFormatter } from '$lib/utils';
 	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
@@ -49,7 +49,10 @@
 		{
 			key: data.indicator.source.length === 1 ? 'Data source' : 'Data sources',
 			value: arrayJoin(
-				data.indicator.source.map((s) => `<a href="${s.href}" target="_blank">${s.name}</a>`)
+				data.indicator.source.map(
+					(s) =>
+						`<a href="${s.href}" target="_blank">${s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a>`
+				)
 			)
 		},
 		{
@@ -95,12 +98,6 @@
 		{/each}
 	</div>
 	<NavSection title="Get the data">
-		<p>The original data source for this indicator can be found here:</p>
-		<List mode="dash">
-			{#each data.indicator.source as s}
-				<Li><a href={s.href} target="_blank">{s.name}</a></Li>
-			{/each}
-		</List>
 		<p>
 			You can download this dataset in an <a
 				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
@@ -129,6 +126,20 @@
 				download="all-datasets.xlsx"
 				aria-label="Download all datasets as an XLSX file">all available datasets (XLSX, ~10MB)</a
 			>.
+		</p>
+		<p>
+			The original source data for this indicator can be found on the following
+			{data.indicator.source.length > 1 ? 'pages' : 'page'}:
+			{#each data.indicator.source as s, i}
+				<a href={s.href} target="_blank"
+					>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+				><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
+				data.indicator.source.length - 1
+					? '.'
+					: i === data.indicator.source.length - 2
+						? ' and '
+						: ', '}
+			{/each}
 		</p>
 		<p>
 			Information on the strengths and limitations of the Explore Local Statistics service and

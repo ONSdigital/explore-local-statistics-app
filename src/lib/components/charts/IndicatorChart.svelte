@@ -136,7 +136,10 @@
 				<p class="source-container">
 					<span style="font-weight: bold">Source:</span>
 					{#each metadata.source as s, i}
-						<a href={s.href} target="_blank">{s.name}</a>{i < metadata.source.length - 1
+						<a href={s.href} target="_blank"
+							>{s.name}<span class="ons-u-vh"> (link opens in a new tab)</span></a
+						><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i <
+						metadata.source.length - 1
 							? ' and '
 							: ''}
 					{/each}

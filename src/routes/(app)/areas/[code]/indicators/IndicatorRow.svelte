@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { Observe, Em, ButtonGroup, ButtonGroupItem } from '@onsvisual/svelte-components';
+	import { Observe, Em, ButtonGroup, ButtonGroupItem, Icon } from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import { timeRangesOverlap } from '$lib/api/data/helpers/dataFilters';
 	import Beeswarm from '$lib/components/charts/Beeswarm.svelte';
@@ -114,7 +114,9 @@
 				<p>
 					<strong>{metadata.source.length > 1 ? 'Data sources' : 'Data source'}:</strong>
 					{#each metadata.source as s, i}
-						<a href={s.href} target="_blank">{s.name}</a>
+						<a href={s.href} target="_blank"
+							>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+						><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
 						({s.date.split('-').reverse().join('/')}){i === metadata.source.length - 1 ? '' : ', '}
 					{/each}
 				</p>

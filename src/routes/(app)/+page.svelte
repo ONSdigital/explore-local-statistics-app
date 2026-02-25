@@ -90,24 +90,20 @@
 	<List mode="dash">
 		<Li>
 			<a href="https://stats.gov.wales" target="_blank" rel="noreferrer">
-				StatsWales
-				<span class="ons-u-vh">(opens in a new tab)</span>
-			</a>
-			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
+				StatsWales<span class="ons-u-vh"> (opens in a new tab)</span>
+			</a><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>
 		</Li>
 		<Li>
 			<a href="https://statistics.gov.scot/home" target="_blank" rel="noreferrer">
-				Statistics.gov.scot
-				<span class="ons-u-vh">(opens in a new tab)</span>
-			</a>
-			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
+				Statistics.gov.scot<span class="ons-u-vh"> (opens in a new tab)</span>
+			</a><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>
 		</Li>
 		<Li>
 			<a href="https://data.nisra.gov.uk/" target="_blank" rel="noreferrer">
-				Northern Ireland Statistics and Research Agency
-				<span class="ons-u-vh">(opens in a new tab)</span>
-			</a>
-			<span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
+				Northern Ireland Statistics and Research Agency<span class="ons-u-vh">
+					(opens in a new tab)</span
+				>
+			</a><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>
 		</Li>
 	</List>
 </Section>
@@ -151,9 +147,12 @@
 	<p>
 		The vision for the ESS service was launched in the <a
 			href="https://analysisfunction.civilservice.gov.uk/policy-store/gss-subnational-data-strategy/"
-			>Government Statistical Service (GSS) subnational data strategy</a
-		>, which provides a framework to guide the GSS in producing and disseminating subnational
-		statistics in a more timely, granular and harmonised way.
+			>Government Statistical Service (GSS) subnational data strategy<span class="ons-u-vh">
+				(opens in a new tab)</span
+			></a
+		><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>, which provides a
+		framework to guide the GSS in producing and disseminating subnational statistics in a more
+		timely, granular and harmonised way.
 	</p>
 	<p>
 		The ESS service aims to provide one place for users to find, visualise, compare and download
