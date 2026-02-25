@@ -76,7 +76,12 @@
 	dialog {
 		width: 760px;
 		max-width: calc(100% - 2rem);
-		overflow: visible;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	dialog :global(.ons-btn__text) {
+		text-align: left;
+		white-space: initial;
 	}
 	.modal-contents {
 		margin-bottom: 2rem;
