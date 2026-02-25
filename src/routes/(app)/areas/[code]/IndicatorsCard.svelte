@@ -46,7 +46,7 @@
 		iconPosition="after"
 		variant="primary"
 		href={resolve(`/areas/${makeCanonicalSlug(areaProps)}/indicators`)}
-		small>View local indicators</Button
+		small>Explore local indicators</Button
 	>
 </div>
 
