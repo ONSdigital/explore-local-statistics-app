@@ -28,12 +28,7 @@
 			}
 		});
 		el.addEventListener('keydown', (event) => {
-			if (
-				event.keyCode === 37 ||
-				event.keyCode === 38 ||
-				event.keyCode === 39 ||
-				event.keyCode === 40
-			) {
+			if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
 				event.preventDefault();
 			}
 		});
