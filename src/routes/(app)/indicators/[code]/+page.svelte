@@ -104,25 +104,30 @@
 		<p>
 			You can download this dataset in an <a
 				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
-				download={`${data.indicator.slug}.xlsx`}>XLSX</a
+				download={`${data.indicator.slug}.xlsx`}
+				aria-label="Download {data.indicator.label} data as an XLSX file">XLSX</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`)}
-				download={`${data.indicator.slug}.csv`}>CSV</a
+				download={`${data.indicator.slug}.csv`}
+				aria-label="Download {data.indicator.label} data as a CSV file">CSV</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
-				download={`${data.indicator.slug}.csv-metadata.json`}>CSVW</a
+				download={`${data.indicator.slug}.csv-metadata.json`}
+				aria-label="Download {data.indicator.label} metadata as an CSVW file">CSVW</a
 			>
 			or
 			<a
 				href={resolve(`/api/v1/data.json?indicator=${data.indicator.slug}&time=all`)}
-				download={`${data.indicator.slug}.json`}>JSON-Stat</a
+				download={`${data.indicator.slug}.json`}
+				aria-label="Download {data.indicator.label} data as a JSON-Stat file">JSON-Stat</a
 			>
 			format, or download
 			<a
-				href={resolve(`/api/v1/data.xlsx?excludeMultivariate=true&time=all`)}
-				download="datasets.xlsx">all available datasets (XLSX, ~10MB)</a
+				href={resolve(`/api/v1/data.xlsx?time=all`)}
+				download="all-datasets.xlsx"
+				aria-label="Download all datasets as an XLSX file">all available datasets (XLSX, ~10MB)</a
 			>.
 		</p>
 		<p>

@@ -203,18 +203,25 @@
 			Download all datasets that include {getName(areaProps, 'the')} in an
 			<a
 				href={resolve(`/api/v1/data.xlsx?hasGeo=${areaProps.areacd}&time=all`)}
-				download="data.xlsx">XLSX</a
-			>,
-			<a href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)} download="data.csv"
-				>CSV</a
+				download="datasets-{areaProps.areacd}.xlsx"
+				aria-label="Download datasets for {getName(areaProps, 'the')} as an XLSX file">XLSX</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
-				download="data.csv-metadata.json">CSVW</a
+				download="datasets-{areaProps.areacd}.csv"
+				aria-label="Download datasets for {getName(areaProps, 'the')} as a CSV file">CSV</a
+			>,
+			<a
+				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
+				download="datasets-{areaProps.areacd}.csv-metadata.json"
+				aria-label="Download dataset metadata for {getName(areaProps, 'the')} as a CSVW file"
+				>CSVW</a
 			>, or
 			<a
 				href={resolve(`/api/v1/data.json?hasGeo=${areaProps.areacd}&time=all`)}
-				download="data.json">JSON-Stat</a
+				download="datasets-{areaProps.areacd}.json"
+				aria-label="Download datasets for {getName(areaProps, 'the')} as an JSON-Stat file"
+				>JSON-Stat</a
 			> format.
 		</p>
 		<p>

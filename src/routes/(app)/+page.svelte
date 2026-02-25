@@ -114,11 +114,27 @@
 <Section title="Get the data">
 	<p>
 		You can download all of the data available on the Explore Local Statistics service in an
-		<a href={resolve('/api/v1/data.xlsx?time=all')} download="data.xlsx">XLSX</a>,
-		<a href={resolve('/api/v1/data.csv?time=all')} download="data.csv">CSV</a>,
-		<a href={resolve('/api/v1/data.csvw?time=all')} download="data.csvw.json">CSVW</a>
+		<a
+			href={resolve('/api/v1/data.xlsx?time=all')}
+			download="all-datasets.xlsx"
+			aria-label="Download all datasets as an XLSX file">XLSX</a
+		>,
+		<a
+			href={resolve('/api/v1/data.csv?time=all')}
+			download="all-datasets.csv"
+			aria-label="Download all datasets as a CSV file">CSV</a
+		>,
+		<a
+			href={resolve('/api/v1/data.csvw?time=all')}
+			download="all-datasets.csv-metadata.json"
+			aria-label="Download metadata for all datasets as a CSVW file">CSVW</a
+		>
 		or
-		<a href={resolve('/api/v1/data.json?time=all')} download="data.json">JSON-Stat</a> format.
+		<a
+			href={resolve('/api/v1/data.json?time=all')}
+			download="all-datasets.json"
+			aria-label="Download all datasets as a JSON-Stat file">JSON-Stat</a
+		> format.
 	</p>
 	<p>
 		Information on the strengths and limitations of the Explore Local Statistics service and methods

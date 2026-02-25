@@ -82,7 +82,7 @@
 	<a
 		href={url?.replace?.('.cols.json', `.${format}`)}
 		aria-label="Download the {metadata.label} {chartName} chart data as a {label} file"
-		download="{indicator}.{format}">{label}</a
+		download="{indicator}.{format === 'csvw' ? 'csv-metadata.json' : format}">{label}</a
 	>
 {/snippet}
 
@@ -118,17 +118,21 @@
 						({s.date.split('-').reverse().join('/')}){i === metadata.source.length - 1 ? '' : ', '}
 					{/each}
 				</p>
-				{#if indicator === 'population-by-age-and-sex'}
+				{#if dataUrl.pyramid}
 					<p><strong>Download data:</strong> {@render downloadLinks('pyramid')}.</p>
-				{:else}
+				{:else if dataUrl.beeswarm || dataUrl.sparkline}
 					<p><strong>Download data:</strong></p>
 					<ul>
-						<li>
-							Distribution chart data as {@render downloadLinks('beeswarm')}.
-						</li>
-						<li>
-							Line chart data as {@render downloadLinks('sparkline')}.
-						</li>
+						{#if dataUrl.beeswarm}
+							<li>
+								Distribution chart data as {@render downloadLinks('beeswarm')}.
+							</li>
+						{/if}
+						{#if dataUrl.sparkline}
+							<li>
+								Line chart data as {@render downloadLinks('sparkline')}.
+							</li>
+						{/if}
 					</ul>
 				{/if}
 				{#if !metadata.isMultivariate}

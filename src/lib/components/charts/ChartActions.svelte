@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import snapdom from '@zumer/snapdom';
 	import { Icon, Textarea, Button } from '@onsvisual/svelte-components';
 
@@ -74,7 +73,7 @@
 	<a
 		href={url?.replace?.('.cols.json', `.${format}`)}
 		aria-label="Download the {metadata.label} {chartName} data as a {label} file"
-		download="{indicator}-{chartType}.{format}">{label}</a
+		download="{indicator}-{chartType}.{format === 'csvw' ? 'csv-metadata.json' : format}">{label}</a
 	>
 {/snippet}
 
