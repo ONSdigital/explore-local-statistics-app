@@ -471,7 +471,7 @@
 
 	.line-x-tick-label {
 		position: absolute;
-		top: calc(100% + 10px);
+		top: calc(100% + 5px);
 		transform: translateX(-50%);
 		font-size: 18px;
 		white-space: nowrap;

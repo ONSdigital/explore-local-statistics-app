@@ -90,7 +90,7 @@
 			_data.dateDomain[0]
 		)} and {formatPeriodShort(_data.dateDomain[1])}
 		{metadata.label}
-		{direction} by {formatValue(diff)}.
+		{direction} by {formatValue(Math.abs(diff))}.
 	</p>
 	<div
 		class="sparkline-wrapper"
