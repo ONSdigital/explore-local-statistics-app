@@ -76,6 +76,7 @@
 <div
 	class="content-block"
 	class:content-fullscreen={fullScreenMode}
+	class:content-padding={mode === 'default'}
 	class:content-border={mode === 'default' && !fullScreenMode}
 	bind:this={el}
 >
@@ -163,9 +164,11 @@
 		position: relative;
 		background: var(--ons-color-page-light);
 	}
+	.content-padding {
+		padding: 12px;
+	}
 	.content-border {
 		border: 1px solid #909090;
-		padding: 12px;
 	}
 	.fullscreen-toggle {
 		position: absolute;
