@@ -3,10 +3,19 @@
 	import throttle from 'throttleit';
 	import { Select, Button } from '@onsvisual/svelte-components';
 
+	const placeholders = [
+		`Eg. "Fareham" or "PO15 5RR"`,
+		`Eg. "Newport" or "NP10 8XG"`,
+		`Eg. "Manchester" or "M2 5LE`,
+		`Eg. "Westminster" or "SW1P 4DF"`,
+		`Eg. "Darlington" or "DL1 5AD"`,
+		`Eg. "Edinburgh" or "EH8 8FT"`
+	];
+
 	let {
 		id = 'search',
 		name = 'q',
-		placeholder = `Eg. "Fareham" or "PO15 5RR"`,
+		placeholder = placeholders[Math.floor(Math.random() * placeholders.length)],
 		action = '/areas/search',
 		allAreas = true,
 		onSelect,
