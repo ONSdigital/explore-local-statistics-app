@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { parseBeeswarmData, getPaletteColor, getMarkerPath } from './chartHelpers';
+	import { ONScolours } from '$lib/config';
 
 	let {
 		data,
@@ -130,8 +131,8 @@
 				<g class="beeswarm-hovered">
 					{#if _hovered}
 						{@const d = _hovered}
-						{@render line(d, 0, 'orange')}
-						{@render point(d, 14, 'orange')}
+						{@render line(d, 0, ONScolours.highlightOrangeDark)}
+						{@render point(d, 14, ONScolours.highlightOrangeDark)}
 					{/if}
 				</g>
 			{/if}
@@ -139,7 +140,7 @@
 		<div class="beeswarm-annotations">
 			{#if _data}
 				{#if _hovered}
-					{@render label(_hovered, 0, 'orange', true)}
+					{@render label(_hovered, 0, ONScolours.highlightOrangeDark, true)}
 				{:else}
 					{#each _selected as d, i}
 						{@const color = getPaletteColor(d.i, _selected.length)}

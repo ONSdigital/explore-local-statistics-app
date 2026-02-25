@@ -85,7 +85,7 @@
 						'line-color': [
 							'case',
 							['==', ['feature-state', 'hovered'], true],
-							'orange',
+							ONScolours.highlightOrangeDark,
 							'rgba(255,255,255,0)'
 						],
 						'line-width': 2

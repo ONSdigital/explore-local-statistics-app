@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { scaleLinear, scaleBand } from 'd3-scale';
-	import { parsePyramidData } from './chartHelpers';
-	import { contrastColor, getPaletteColor } from './chartHelpers';
+	import { parsePyramidData, contrastColor, getPaletteColor } from './chartHelpers';
+	import { ONScolours } from '$lib/config';
 
 	let {
 		data,
@@ -192,8 +192,16 @@
 			{/if}
 			{#if _data?.keyed?.[hovered]}
 				<g class="chart-hovered">
-					{@render polyline(makeLine(_data.keyed[hovered], xScale, 'female'), 'orange', 3)}
-					{@render polyline(makeLine(_data.keyed[hovered], xScale, 'male'), 'orange', 3)}
+					{@render polyline(
+						makeLine(_data.keyed[hovered], xScale, 'female'),
+						ONScolours.highlightOrangeDark,
+						3
+					)}
+					{@render polyline(
+						makeLine(_data.keyed[hovered], xScale, 'male'),
+						ONScolours.highlightOrangeDark,
+						3
+					)}
 				</g>
 			{/if}
 		{/if}
@@ -208,7 +216,7 @@
 			>
 				<span>{group}</span>
 				{#if hovered || selected.length}
-					{@const color = hovered ? 'orange' : getPaletteColor(0)}
+					{@const color = hovered ? ONScolours.highlightOrangeDark : getPaletteColor(0)}
 					{@const sum = sumBySex(hovered || selected[0], group)}
 					{#if sum}
 						<br /><span
@@ -265,7 +273,7 @@
 	}
 	.chart-area-label {
 		position: absolute;
-		background-color: orange;
+		background-color: var(--ons-color-highlight-orange-dark);
 	}
 	.chart-baseline {
 		stroke: #b3b3b3;
