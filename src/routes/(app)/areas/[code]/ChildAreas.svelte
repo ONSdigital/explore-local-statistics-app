@@ -39,7 +39,10 @@
 				}}
 			>
 				{#each areaProps.children as childGroup (childGroup.key)}
-					<AccordionItem title={capitalise(pluralise(childGroup.label))} id={childGroup.key}>
+					<AccordionItem
+						title={capitalise(pluralise(childGroup.label))}
+						id="{childGroup.key}-accordion"
+					>
 						<ul class="list-columns">
 							{#each childGroup.areas as child}
 								<li>
