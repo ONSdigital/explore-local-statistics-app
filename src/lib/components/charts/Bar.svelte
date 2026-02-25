@@ -115,7 +115,7 @@
 			: null
 	);
 	const maxTickGap = 140; // in pixels
-	let nXTicks = $derived(Math.floor(width / maxTickGap));
+	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	$inspect({ labelLookup });
 </script>

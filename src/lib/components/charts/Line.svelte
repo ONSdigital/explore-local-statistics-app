@@ -85,7 +85,7 @@
 	const formatYTick = format(',.0f');
 
 	const maxTickGap = 140; // in pixels
-	let nXTicks = $derived(Math.floor(width / maxTickGap));
+	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
 	function snapXTicks(ticks, _data) {
