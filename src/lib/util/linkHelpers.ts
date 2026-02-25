@@ -51,9 +51,12 @@ function renderTemplate(template, area) {
 }
 
 function formatLink(link, area) {
-	const formattedLink = { ...link };
-	formattedLink.description = renderTemplate(link.description, area);
-	formattedLink.href = renderTemplate(link.href, area);
+	const formattedLink = {
+		...link,
+		description: renderTemplate(link.description, area),
+		href: renderTemplate(link.href, area),
+		isExternal: link.description.endsWith('(external link).')
+	};
 	return formattedLink;
 }
 

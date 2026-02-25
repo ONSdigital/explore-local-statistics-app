@@ -1,25 +1,11 @@
 <script lang="ts">
-	// @ts-nocheck
 	import { resolve } from '$app/paths';
-	import { goto, afterNavigate } from '$app/navigation';
-	import { getName, capitalise } from '@onsvisual/robo-utils';
+	import { goto } from '$app/navigation';
+	import { getName } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import { geoCodesIndexed } from '$lib/config/geoLevels';
 	import { getNearestRelatedParent } from '$lib/util/linkHelpers';
-	import {
-		analyticsEvent,
-		Hero,
-		Grid,
-		GridCell,
-		Button,
-		Select,
-		Card,
-		PhaseBanner,
-		Header,
-		Breadcrumb,
-		Tabs,
-		Tab
-	} from '@onsvisual/svelte-components';
+	import { analyticsEvent, Hero, Grid, GridCell, Card, Icon } from '@onsvisual/svelte-components';
 	import AreaLede from './AreaLede.svelte';
 	import AreaNavMap from './AreaNavMap.svelte';
 	import ChildAreas from './ChildAreas.svelte';
@@ -30,7 +16,6 @@
 	let { data } = $props();
 	let areaProps = $derived(data.area.properties);
 
-	let clientWidth = $state();
 	let selectedChildGroupKey = $derived(areaProps.children[0]?.key || null);
 	let selectedChildGroup = $derived(
 		areaProps.children.find((c) => c.key === selectedChildGroupKey)
@@ -107,7 +92,9 @@
 					href={link.image.startsWith('/') ? resolve(link.href) : link.href}
 					headingTag="h3"
 				>
-					{@html link.description}
+					{@html link.description}{#if link.isExternal}<span class="inline-icon ons-u-ml-3xs"
+							><Icon type="external" /></span
+						>{/if}
 				</Card>
 			{/if}
 		{/each}
