@@ -58,4 +58,8 @@
 	.more-indicators {
 		scroll-margin-top: 116px;
 	}
+	.ons-btn__text {
+		text-align: left;
+		white-space: initial;
+	}
 </style>
