@@ -8,11 +8,11 @@
 	let { areaProps, selected = $bindable() } = $props();
 </script>
 
-{#if areaProps.children[0]}
-	{#key areaProps}
+{#key areaProps}
+	{#if areaProps.children[0]}
 		<div class="child-areas-tabs">
 			<Tabs bind:selected compact>
-				{#each areaProps.children as childGroup, i}
+				{#each areaProps.children as childGroup (childGroup.key)}
 					<Tab title={capitalise(pluralise(childGroup.label))} id={childGroup.key} hideTitle>
 						<ul class="list-columns">
 							{#each childGroup.areas as child}
@@ -38,7 +38,7 @@
 					if (e?.detail?.open) selected = e?.detail?.id;
 				}}
 			>
-				{#each areaProps.children as childGroup, i}
+				{#each areaProps.children as childGroup (childGroup.key)}
 					<AccordionItem title={capitalise(pluralise(childGroup.label))} id={childGroup.key}>
 						<ul class="list-columns">
 							{#each childGroup.areas as child}
@@ -57,10 +57,10 @@
 				{/each}
 			</Accordion>
 		</div>
-	{/key}
-{:else}
-	<p>No smaller areas available within {getName(areaProps, 'the')}.</p>
-{/if}
+	{:else}
+		<p>No smaller areas available within {getName(areaProps, 'the')}.</p>
+	{/if}
+{/key}
 
 <style>
 	.child-areas-tabs {
