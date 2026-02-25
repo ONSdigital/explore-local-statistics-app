@@ -13,7 +13,7 @@
 	} = $props();
 
 	let _selectedAreas = $derived(selectedAreas.map((s, i) => ({ ...s, i })));
-	let maxVisibleAreas = $derived(inlineItems ? maxAreasSelectable : selectedGeoGroup ? 3 : 4);
+	let maxVisibleAreas = $derived(inlineItems ? maxAreasSelectable : selectedGeoGroup ? 2 : 3);
 	let moreAreasHidden = $state(true);
 </script>
 
