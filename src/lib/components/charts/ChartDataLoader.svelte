@@ -13,7 +13,6 @@
 			return loadedData;
 		}
 		if (dataUrl !== loadedDataUrl) {
-			console.log(`Loading data for ${id}`);
 			loadedDataUrl = dataUrl;
 			try {
 				loadedData = await (await fetch(dataUrl)).json();
