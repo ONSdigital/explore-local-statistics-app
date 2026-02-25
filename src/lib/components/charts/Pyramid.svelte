@@ -39,7 +39,7 @@
 	// let xDomain = $derived(
 	// 	!_data?.valueDomain || _data?.valueDomain?.[1] < 5 ? [0, 5] : _data?.valueDomain
 	// );
-	let xDomain = valueDomain;
+	let xDomain = valueDomain[0] > 0 ? [0, valueDomain[1]] : valueDomain;
 	let xScale = $derived(scaleLinear().domain(xDomain).range(xRange));
 	let yRange = $derived([barHeight * (_data?.categoryDomain?.length || 18), 0]);
 	let yScale = $derived(
@@ -69,8 +69,7 @@
 			.join(' ');
 	}
 
-	$inspect(_data);
-	$inspect(_data?.keyed?.[selected[0]][0][idKey]);
+	let nXTicks = $derived(Math.max(2, Math.floor(w / 150)));
 </script>
 
 {#snippet bar(d)}
@@ -152,7 +151,7 @@
 				/>
 			</g>
 			<g class="chart-x-axis">
-				{#each xScale.ticks(3) as t}
+				{#each xScale.ticks(nXTicks) as t}
 					{@render tick(t, 'female')}
 					{@render tick(t, 'male')}
 				{/each}
