@@ -28,7 +28,7 @@
 			}
 		});
 		el.addEventListener('keydown', (event) => {
-			if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+			if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
 				event.preventDefault();
 			}
 		});

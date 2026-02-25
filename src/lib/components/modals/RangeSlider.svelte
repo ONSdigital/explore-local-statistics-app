@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Em } from '@onsvisual/svelte-components';
 	let { label, options, selectedRange = $bindable(), formatTick = (d) => d } = $props();
 
 	let selectedIndices = $state([
@@ -24,6 +25,16 @@
 		const dragover = (e) => {
 			const clamp = (val) => (val < 0 ? 0 : val > 100 ? 100 : val);
 			xPercent[i] = clamp(((e.clientX - xDomain[0]) * 100) / (xDomain[1] - xDomain[0]));
+
+			const newIndex = Math.round((xPercent[i] * (options.length - 1)) / 100);
+			if (i === 0 && newIndex > selectedIndices[1]) {
+				selectedIndices[0] = selectedIndices[1];
+				selectedIndices[1] = newIndex;
+			} else if (i === 1 && newIndex < selectedIndices[0]) {
+				selectedIndices[1] = selectedIndices[0];
+				selectedIndices[0] = newIndex;
+			} else selectedIndices[i] = newIndex;
+			updateRange();
 		};
 
 		el.addEventListener('dragstart', (e) => {
@@ -37,15 +48,6 @@
 			console.log('dragend');
 			window.removeEventListener('dragover', dragover);
 			dragging[i] = false;
-			const newIndex = Math.round((xPercent[i] * (options.length - 1)) / 100);
-			if (i === 0 && newIndex > selectedIndices[1]) {
-				selectedIndices[0] = selectedIndices[1];
-				selectedIndices[1] = newIndex;
-			} else if (i === 1 && newIndex < selectedIndices[0]) {
-				selectedIndices[1] = selectedIndices[0];
-				selectedIndices[0] = newIndex;
-			} else selectedIndices[i] = newIndex;
-			updateRange();
 		});
 	}
 </script>
