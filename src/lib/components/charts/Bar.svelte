@@ -94,6 +94,41 @@
 		return getPaletteColor(index, selected.length);
 	}
 
+	function setEstimateColour(id) {
+		const index = selected.indexOf(id);
+		if (index === -1) {
+			return ONScolours.grey40;
+		}
+
+		return ONScolours.black;
+	}
+
+	function setEstimateStroke(id) {
+		const index = selected.indexOf(id);
+		if (index === -1) {
+			return '0.4';
+		}
+
+		return '1';
+	}
+
+	function setConfidenceStroke(id) {
+		const index = selected.indexOf(id);
+		if (index === -1) {
+			return '0.1';
+		}
+
+		return '1.3';
+	}
+
+	function setBarOpacity(id) {
+		const index = selected.indexOf(id);
+		if (index === -1) {
+			return '0.3';
+		}
+		return '0.55';
+	}
+
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
 	let yScaleFn = $derived(yScale ? (d) => yScale?.(d)?.y : () => null);
 
@@ -139,7 +174,7 @@
 	/>
 {/snippet}
 
-{#snippet estimate(b, fill = ONScolours.grey40, width = 2, opacity = 1, id = '')}
+{#snippet estimate(b, fill = ONScolours.black, width = 2, strokeWidth = 0.5, opacity = 1, id = '')}
 	<rect
 		class="chart-estimate"
 		x={xScale(b[yKey]) - width / 2}
@@ -148,7 +183,7 @@
 		height={yScale(b[idKey]).height}
 		{fill}
 		stroke={ONScolours.white}
-		stroke-width="0.5"
+		stroke-width={strokeWidth}
 		{opacity}
 		on:pointerenter={() => {
 			hoveredArea = id;
@@ -156,11 +191,11 @@
 		on:pointerleave={() => {
 			hoveredArea = null;
 		}}
-		style:pointer-events={fill === ONScolours.grey40 ? null : 'none'}
+		style:pointer-events={fill === ONScolours.black ? null : 'none'}
 	/>
 {/snippet}
 
-{#snippet confidence(b, fill = ONScolours.grey40, opacity = 1, id = '')}
+{#snippet confidence(b, fill = ONScolours.grey40, opacity = 1, strokeWidth = 0.1, id = '')}
 	<rect
 		class="chart-estimate"
 		x={xScale(b.lci_95)}
@@ -169,6 +204,8 @@
 		height={yScale(b[idKey]).height}
 		{fill}
 		{opacity}
+		stroke="white"
+		stroke-width={strokeWidth}
 		on:pointerenter={() => {
 			hoveredArea = id;
 		}}
@@ -357,14 +394,29 @@
 						{#if !showIntervals}
 							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey])}
 						{:else}
-							{@render bar(b, setBarColour(b[idKey]), 0.3, b[idKey])}
-							{@render confidence(b, ONScolours.white, 1, b[idKey], i)}
-							{@render confidence(b, setBarColour(b[idKey]), 0.6, b[idKey], i)}
-							{@render estimate(b, setBarColour(b[idKey]), 3, 1, b[idKey], i)}
+							{@render bar(b, setBarColour(b[idKey]), setBarOpacity(b[idKey]), b[idKey])}
+							{@render confidence(b, ONScolours.white, 1, 0, b[idKey], i)}
+							{@render confidence(
+								b,
+								setBarColour(b[idKey]),
+								1,
+								setConfidenceStroke(b[idKey]),
+								b[idKey],
+								i
+							)}
+							{@render estimate(
+								b,
+								setEstimateColour(b[idKey]),
+								3,
+								setEstimateStroke(b[idKey]),
+								1,
+								b[idKey],
+								i
+							)}
 							<rect
 								x={xScale(b.lci_95) - 0.25}
 								y={yScale(b[idKey]).y}
-								width="0.5"
+								width="0.8"
 								height={yScale(b[idKey]).height}
 								fill={ONScolours.white}
 							>
@@ -380,7 +432,7 @@
 							{@render bar(hovered, ONScolours.highlightOrangeDark, 0.2, hoveredArea)}
 							{@render confidence(hovered, ONScolours.white, 1, hoveredArea)}
 							{@render confidence(hovered, ONScolours.highlightOrangeDark, 0.6, hoveredArea)}
-							{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 1, hoveredArea)}
+							{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 0.5, 1, hoveredArea)}
 						{/if}
 					{/if}
 				</g>
