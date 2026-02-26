@@ -18,11 +18,20 @@
 		hovered = $bindable()
 	} = $props();
 
+	let keyboardMode = $state(false);
+
 	let _data = $derived(parseBeeswarmData(data, xKey, idKey));
+	let _sorted = $derived(_data ? [..._data.array].sort((a, b) => a[xKey] - b[xKey]) : null);
 	let _selected = $derived(
 		_data ? selected.map((cd, i) => ({ i, datum: _data.keyed[cd] })).filter((d) => d.datum) : []
 	);
 	let _hovered = $derived(_data ? _data.keyed[hovered] : null);
+
+	function getSelectedIndex(data, id) {
+		const index = data.findIndex((d) => d[idKey] === id);
+		return index === -1 ? 0 : index;
+	}
+	let activeIndex = $derived(_sorted ? getSelectedIndex(_sorted, selected[0]) : 0);
 	let comparison = $derived.by(() => {
 		const val1 = _data?.keyed?.[selected[0]]?.[xKey];
 		const val2 = _data?.keyed?.[selected[1]]?.[xKey];
@@ -54,9 +63,17 @@
 		labels[params.i] = { x, rect };
 		return { destroy: () => (labels[params.i] = null) };
 	}
-	let target = $derived(_selected[_selected.length - 1].data);
-	let diff = $derived(target[target.length - 1][yKey] - target[0][yKey]);
-	let direction = $derived(diff < 0 ? 'decreased' : 'increased');
+
+	function doKeydown(e) {
+		if (['ArrowLeft', 'ArrowDown'].includes(e.key) && activeIndex !== 0) {
+			activeIndex -= 1;
+			_hovered = _sorted[activeIndex];
+		}
+		if (['ArrowRight', 'ArrowUp'].includes(e.key) && activeIndex !== _sorted.length - 1) {
+			activeIndex += 1;
+			_hovered = _sorted[activeIndex];
+		}
+	}
 	$inspect(_data);
 </script>
 
@@ -131,8 +148,25 @@
 	</p>
 {/if}
 
-<div class="beeswarm-wrapper" aria-hidden="true">
-	<div class="beeswarm-chart">
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<div
+	class="beeswarm-wrapper"
+	class:keyboard-mode={keyboardMode}
+	tabindex="0"
+	onfocus={() => {
+		keyboardMode = true;
+		_hovered = _sorted[activeIndex];
+	}}
+	onblur={() => {
+		keyboardMode = false;
+		_hovered = null;
+		activeIndex = getSelectedIndex(_sorted, selected[0]);
+	}}
+	onmousedown={(e) => e.preventDefault()}
+	role="figure"
+>
+	<div class="beeswarm-chart" aria-hidden="true">
 		<svg viewBox="0 0 100 100" class="beeswarm-svg" preserveAspectRatio="none">
 			{#if _data}
 				<g class="beeswarm-points" onmouseleave={() => (hovered = null)}>
@@ -143,7 +177,7 @@
 				<g class="beeswarm-selected">
 					{#each _selected as sel, i}
 						{@const d = { ...sel.datum, y: 0 }}
-						{#if !hovered && i < 2}
+						{#if !_hovered && i < 2}
 							{@render line(d, i, getPaletteColor(sel.i, _selected.length))}
 							{@render confidenceRect(d, i, getPaletteColor(sel.i, _selected.length))}
 						{/if}
@@ -173,7 +207,9 @@
 		</div>
 	</div>
 	<p class="beeswarm-comparison ons-u-fs-s">
-		{#if comparison}
+		{#if keyboardMode}
+			Use the arrow keys to move through the different areas
+		{:else if comparison}
 			{comparison} <strong>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong> in {formatPeriod(
 				_data?.keyed?.[selected[1]]?.[periodKey]
 			)}
@@ -181,7 +217,7 @@
 			Data for comparison area not available
 		{/if}
 	</p>
-	<p class="indicator-confidence ons-u-fs-s">
+	<p class="indicator-confidence ons-u-fs-s" aria-hidden="true">
 		{#if showIntervals && _data?.keyed?.[selected[0]] && (_data.keyed[selected[0]].lci_95 == null || _data.keyed[selected[0]].lci_95 === '')}
 			Confidence intervals not available
 		{/if}
@@ -192,8 +228,17 @@
 	.beeswarm-wrapper {
 		display: block;
 		position: relative;
-		margin: 30px 0 20px;
-		padding: 0 7px;
+		margin: 4 0 20px;
+		padding: 26px 6px 7px;
+		border-radius: 2px;
+	}
+	.beeswarm-wrapper:focus {
+		outline: 2px solid var(--ons-color-text);
+		box-shadow:
+			6px 6px var(--ons-color-focus),
+			6px -6px var(--ons-color-focus),
+			-6px -6px var(--ons-color-focus),
+			-6px 6px var(--ons-color-focus);
 	}
 	.beeswarm-chart {
 		display: block;
@@ -250,5 +295,8 @@
 		display: block;
 		text-align: center;
 		margin-top: -20px;
+	}
+	.keyboard-mode {
+		pointer-events: none;
 	}
 </style>
