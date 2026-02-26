@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ONScolours } from '$lib/config';
 	import { parseBeeswarmData, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { ONScolours } from '$lib/config';
 
