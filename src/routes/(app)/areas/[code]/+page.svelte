@@ -58,14 +58,6 @@
 </Hero>
 
 <Grid marginTop>
-	<GridCell colspan={2}>
-		<AreaNavMap
-			area={data.area}
-			children={selectedChildGroup}
-			onSelect={(area) => handleSelect(area, 'mapSelect')}
-			mapDescription={'Map of ' + getName(areaProps, 'the')}
-		/>
-	</GridCell>
 	<div class="ons-grid__col ons-col-4@l grid-cell-flex">
 		{#if areaProps.areacd !== 'K02000001'}
 			<IndicatorsCard areaProps={indicatorsArea} />
@@ -78,6 +70,14 @@
 			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'searchSelect')} />
 		</div>
 	</div>
+	<GridCell colspan={2}>
+		<AreaNavMap
+			area={data.area}
+			children={selectedChildGroup}
+			onSelect={(area) => handleSelect(area, 'mapSelect')}
+			mapDescription={'Map of ' + getName(areaProps, 'the')}
+		/>
+	</GridCell>
 	<GridCell colspan={3}>
 		<ChildAreas {areaProps} bind:selected={selectedChildGroupKey} />
 	</GridCell>
@@ -111,19 +111,6 @@
 {/if}
 
 <style>
-	.link-parent {
-		display: block;
-	}
-	/* :global(#related-areas .ons-tab[aria-selected='true']:not(:focus)) {
-		background: #f3f3f3 !important;
-	}
-	:global(#related-areas .ons-tab[aria-selected='true']:focus) {
-		box-shadow:
-			inset 0 0 0 4px #f3f3f3,
-			inset 12px 0 0 0 #f3f3f3,
-			inset -12px 0 0 0 #f3f3f3,
-			inset 0 -8px 0 0 #222 !important;
-	} */
 	:global(.select-wrapper label.ons-label) {
 		font-weight: normal;
 	}
