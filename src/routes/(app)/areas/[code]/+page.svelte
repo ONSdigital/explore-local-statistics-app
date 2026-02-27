@@ -23,11 +23,12 @@
 	);
 	let indicatorsArea = $derived(getNearestRelatedParent(areaProps));
 
-	function handleSelect(area, eventType) {
+	function handleSelect(area, interactionType) {
 		const isPostcode = area.type === 'postcode';
 		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
 		const eventData = {
-			event: eventType,
+			event: 'interaction',
+			interactionType,
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
 			areaType: isPostcode ? 'postcode' : geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label

@@ -184,11 +184,15 @@ export function downloadEvent(
 	const eventData = {
 		event: 'fileDownload',
 		extension: format,
-		...(chartType ? { chartType } : {}),
-		indicatorCode: indicator === 'all' ? 'all' : indicator.slug,
-		indicatorName: indicator === 'all' ? 'All indicators' : indicator.label,
-		indicatorTopic: indicator === 'all' ? 'All topics' : indicator.topic,
-		indicatorSubtopic: indicator === 'all' ? 'All sub-topics' : indicator.subTopic
+		filename: `${indicator === 'all' ? 'all-datasets' : indicator.slug}.${format}`,
+		linkText: `Download data as ${format.toUpperCase()}`,
+		linkDomain: 'www.ons.gov.uk',
+		...(chartType
+			? {
+					chartType,
+					chartTitle: indicator?.label
+				}
+			: {})
 	};
 	analyticsEvent(eventData);
 }

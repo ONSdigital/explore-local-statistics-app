@@ -2,6 +2,7 @@
 	import snapdom from '@zumer/snapdom';
 	import { Icon, Textarea, Button } from '@onsvisual/svelte-components';
 	import { downloadEvent } from '$lib/utils';
+	import { analyticsEvent } from '@onsvisual/svelte-components';
 
 	let {
 		indicator,
@@ -17,13 +18,13 @@
 
 	let chartName = $derived(chartType === 'map' ? chartType : `${chartType} chart`);
 	let showEmbed = $state(false);
-	let embedCode = $derived(
-		makeEmbedCode(indicator, metadata, timeRange, selected, geoLevel, chartType, showIntervals)
+	let embedUrl = $derived(
+		makeEmbedUrl(metadata, timeRange, selected, geoLevel, chartType, showIntervals)
 	);
+	let embedCode = $derived(makeEmbedCode(embedUrl, metadata, chartType));
 	let clipped = $state(false);
 
-	function makeEmbedCode(
-		indicator: string,
+	function makeEmbedUrl(
 		metadata: any,
 		timeRange: [string, string],
 		selected: string[],
@@ -44,8 +45,10 @@
 				.join(',')
 		});
 		if (showIntervals) chunks.push({ key: 'intervals', value: 'true' });
-		const url = `https://www.ons.gov.uk/explore-local-statistics/indicators/${indicator}/embed?type=${chartType}&${chunks.map((c) => `${c.key}=${c.value}`).join('&')}`;
-		const id = `${chartType}-${indicator}`;
+		return `https://www.ons.gov.uk/explore-local-statistics/indicators/${metadata.slug}/embed?type=${chartType}&${chunks.map((c) => `${c.key}=${c.value}`).join('&')}`;
+	}
+	function makeEmbedCode(url, metadata, chartType) {
+		const id = `${chartType}-${metadata.slug}`;
 		return (
 			`<div id="${id}"></div>
 <scr` +
@@ -60,6 +63,12 @@
 	async function copyEmbedCode() {
 		await navigator.clipboard.writeText(embedCode);
 		clipped = true;
+		console.log({
+			event: 'embed',
+			pageUrl: embedUrl,
+			chartTitle: metadata.label,
+			chartType
+		});
 	}
 
 	async function downloadPNG(e) {

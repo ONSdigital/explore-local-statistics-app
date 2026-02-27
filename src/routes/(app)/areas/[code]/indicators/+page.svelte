@@ -57,7 +57,8 @@
 	function handleSelect(area) {
 		const url = `/areas/${makeCanonicalSlug(area)}/indicators`;
 		const eventData = {
-			event: 'searchSelect',
+			event: 'interaction',
+			interactionType: 'searchSelect',
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
 			areaType: geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
