@@ -38,18 +38,14 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	});
 	if (datasets.error) error(datasets.error, datasets.message);
 
-	// NOTE: This should be replaced with a more limited list of origins in production
-	const headers = { 'Access-Control-Allow-Origin': '*' };
-
 	return datasets.format === 'xlsx'
 		? new Response(datasets.data, {
 				headers: {
-					...headers,
 					'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-					// "Content-Length": String(datasets.data._readableState.length),
+					// "Content-Length": String(datasets.data._readableState.length)
 				}
 			})
 		: datasets.format === 'text'
-			? text(datasets.data, { headers })
-			: json(datasets.data, { headers });
+			? text(datasets.data)
+			: json(datasets.data);
 };
