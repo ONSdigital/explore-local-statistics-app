@@ -72,7 +72,7 @@ async function getYear(codes, groups, countries) {
 	const endDates = await getEndDates(groups, countries);
 	if (!endDates.endDates) return endDates.latestYear;
 
-	for (const year of endDates.endDates) {
+	for (const year of [...endDates.endDates].reverse()) {
 		if (year.codes.some((cd) => codes.includes(cd))) return year.year - 1;
 	}
 	return endDates.latestYear;
