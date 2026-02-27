@@ -5,6 +5,7 @@
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import { geoCodesIndexed } from '$lib/config/geoLevels';
 	import { getNearestRelatedParent } from '$lib/util/linkHelpers';
+	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 	import { analyticsEvent, Hero, Grid, GridCell, Card, Icon } from '@onsvisual/svelte-components';
 	import AreaLede from './AreaLede.svelte';
 	import AreaNavMap from './AreaNavMap.svelte';
@@ -22,9 +23,16 @@
 	);
 	let indicatorsArea = $derived(getNearestRelatedParent(areaProps));
 
-	function handleSelect(area) {
+	function handleSelect(area, eventType) {
 		const isPostcode = area.type === 'postcode';
 		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
+		const eventData = {
+			event: eventType,
+			areaCode: area.areacd,
+			areaName: area.areanm || area.areacd,
+			areaType: isPostcode ? 'postcode' : geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
+		};
+		analyticsEvent(eventData);
 		goto(resolve(url), { noScroll: !isPostcode });
 	}
 </script>
@@ -53,7 +61,7 @@
 		<AreaNavMap
 			area={data.area}
 			children={selectedChildGroup}
-			onSelect={handleSelect}
+			onSelect={(area) => handleSelect(area, 'mapSelect')}
 			mapDescription={'Map of ' + getName(areaProps, 'the')}
 		/>
 	</GridCell>
@@ -66,7 +74,7 @@
 			<label for="search" style:display="block" style:margin-bottom="8px"
 				>Search for a place name or postcode</label
 			>
-			<AreaSearch id="search" onSelect={handleSelect} />
+			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'searchSelect')} />
 		</div>
 	</div>
 	<GridCell colspan={3}>

@@ -1,8 +1,6 @@
 <script lang="ts">
-	// @ts-nocheck
 	import { resolve } from '$app/paths';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
-	import { analyticsEvent } from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
 	import navMapSources from '$lib/config/navMapSources';
 	import { geoLevelsNavLookup } from '$lib/config/geoLevels';
@@ -19,13 +17,6 @@
 
 	function doSelect(e) {
 		const props = e.detail.feature.properties;
-		const eventData = {
-			event: 'mapSelect',
-			areaCode: props.areacd,
-			areaName: props.areanm || props.areacd
-			// areaType: geoCodesLookup[props.areacd.slice(0, 3)]?.label
-		};
-		analyticsEvent(eventData);
 		onSelect(props);
 	}
 
