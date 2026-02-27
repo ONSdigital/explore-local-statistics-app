@@ -268,13 +268,7 @@
 >
 	{#if showIntervals}
 		<div class="legend-container">
-			<svg
-				aria-hidden="true"
-				width="200"
-				height="90"
-				class="bar-chart-legend"
-				style="overflow: visible;"
-			>
+			<svg width="200" height="90" class="bar-chart-legend" style="overflow: visible;">
 				<line
 					x1="10"
 					y1="15"
@@ -340,6 +334,7 @@
 				{#if hovered}
 					<div
 						class="margin-label-hovered"
+						aria-live="assertive"
 						style:top="{yScale(hovered[idKey]).y + yScale(hovered[idKey]).height / 2}px"
 						style:max-width="{leftMargin - 16}px"
 						style:left="-8px"

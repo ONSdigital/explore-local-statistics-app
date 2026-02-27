@@ -278,6 +278,7 @@
 				{#if width >= widthThreshold && hoveredArea}
 					<div
 						class="margin-label-hovered"
+						aria-live="assertive"
 						style:left="{xScale(_data.dateDomain[1]) + 10}px"
 						style:top="{yScale(finalHoveredValue)}px"
 						style:max-width="{rightMargin - dodgedLabelGap}px"

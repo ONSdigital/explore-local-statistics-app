@@ -1,5 +1,4 @@
 <script>
-	//@ts-nocheck
 	import { ONScolours } from '$lib/config';
 
 	let {
@@ -27,7 +26,6 @@
 
 	let container = $state();
 	let width = $state();
-	let hoveredLabel = $state();
 	let hoverLeft = $state();
 	let labels = $state([]);
 
@@ -204,6 +202,7 @@
 			></div>
 			<div
 				class="value value-hovered"
+				aria-live="assertive"
 				style:left="{pos(d.value, breaks)}%"
 				style:bottom="{-labelHeight}px"
 				style:padding="0 {markerPadding}px"
