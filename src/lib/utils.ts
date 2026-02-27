@@ -190,5 +190,5 @@ export function downloadEvent(
 		indicatorTopic: indicator === 'all' ? 'All topics' : indicator.topic,
 		indicatorSubtopic: indicator === 'all' ? 'All sub-topics' : indicator.subTopic
 	};
-	console.log(eventData);
+	analyticsEvent(eventData);
 }
