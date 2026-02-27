@@ -106,10 +106,10 @@
 	function setEstimateStroke(id) {
 		const index = selected.indexOf(id);
 		if (index === -1) {
-			return '0.4';
+			return '0.3';
 		}
 
-		return '1';
+		return '0.6';
 	}
 
 	function setConfidenceStroke(id) {
@@ -196,24 +196,26 @@
 {/snippet}
 
 {#snippet confidence(b, fill = ONScolours.grey40, opacity = 1, strokeWidth = 0.1, id = '')}
-	<rect
-		class="chart-estimate"
-		x={xScale(b.lci_95)}
-		y={yScale(b[idKey]).y}
-		width={xScale(b.uci_95) - xScale(b.lci_95)}
-		height={yScale(b[idKey]).height}
-		{fill}
-		{opacity}
-		stroke="white"
-		stroke-width={strokeWidth}
-		on:pointerenter={() => {
-			hoveredArea = id;
-		}}
-		on:pointerleave={() => {
-			hoveredArea = null;
-		}}
-		style:pointer-events={fill === ONScolours.grey40 ? null : 'none'}
-	/>
+	{#if b.lci_95 != null && b.uci_95 != null}
+		<rect
+			class="chart-estimate"
+			x={xScale(b.lci_95)}
+			y={yScale(b[idKey]).y}
+			width={xScale(b.uci_95) - xScale(b.lci_95)}
+			height={yScale(b[idKey]).height}
+			{fill}
+			{opacity}
+			stroke="white"
+			stroke-width={strokeWidth}
+			on:pointerenter={() => {
+				hoveredArea = id;
+			}}
+			on:pointerleave={() => {
+				hoveredArea = null;
+			}}
+			style:pointer-events={fill === ONScolours.grey40 ? null : 'none'}
+		/>
+	{/if}
 {/snippet}
 
 {#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, height: number)}
@@ -422,14 +424,16 @@
 								b[idKey],
 								i
 							)}
-							<rect
-								x={xScale(b.lci_95) - 0.25}
-								y={yScale(b[idKey]).y}
-								width="0.8"
-								height={yScale(b[idKey]).height}
-								fill={ONScolours.white}
-							>
-							</rect>
+							{#if b.uci_95 > 0 && b.lci_95 > 0}
+								<rect
+									x={xScale(b.lci_95) - 0.25}
+									y={yScale(b[idKey]).y}
+									width="0.8"
+									height={yScale(b[idKey]).height}
+									fill={ONScolours.white}
+								>
+								</rect>
+							{/if}
 						{/if}
 					{/each}
 				</g>
@@ -443,15 +447,16 @@
 							{@render confidence(hovered, ONScolours.highlightOrangeDark, 1, 0.1, hoveredArea)}
 							{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 0.5, 1, hoveredArea)}
 							{@render estimate(hovered, ONScolours.black, 3, 0.5, 0.6, hoveredArea)}
-
-							<rect
-								x={xScale(hovered.lci_95) - 0.25}
-								y={yScale(hovered[idKey]).y}
-								width="0.8"
-								height={yScale(hovered[idKey]).height}
-								fill={ONScolours.white}
-							>
-							</rect>
+							{#if hovered.uci_95 && hovered.lci_95}
+								<rect
+									x={xScale(hovered.lci_95) - 0.25}
+									y={yScale(hovered[idKey]).y}
+									width="0.8"
+									height={yScale(hovered[idKey]).height}
+									fill={ONScolours.white}
+								>
+								</rect>
+							{/if}
 						{/if}
 					{/if}
 				</g>
