@@ -74,6 +74,7 @@
 	let linesCount = $derived(_data ? Object.keys(_data.keyed).length : 0);
 	let lineOpacity = $derived(linesCount && linesCount < 30 ? 0.8 : linesCount < 100 ? 0.5 : 0.2);
 	let lineStroke = $derived(linesCount < 30 ? '1.5px' : linesCount < 100 ? '1.25px' : '1px');
+	let linesGrey = $derived(linesCount < 30 ? ONScolours.grey40 : ONScolours.grey50);
 
 	let hovered = $derived(_data?.keyed?.[hoveredArea]);
 	let hoveredCodesNames = $derived(
@@ -84,7 +85,7 @@
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 
-	const maxTickGap = 140; // in pixels
+	const maxTickGap = 160; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
@@ -138,7 +139,7 @@
 {#snippet line(
 	arr: any[],
 	width = 1,
-	color = ONScolours.grey40,
+	color = ONScolours.grey60,
 	opacity = 1,
 	marker: string | null = null
 )}
@@ -159,7 +160,7 @@
 {/snippet}
 
 {#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, xMax: number)}
-	{#if yPosAdj !== yPosOrig}
+	{#if elbowX && yPosAdj !== yPosOrig}
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
@@ -167,7 +168,7 @@
 				`${xMax + 2 + 14 + pointRadius},${yPosAdj}`,
 				`${elbowX},${yPosAdj}`,
 				`${elbowX},${yPosOrig}`,
-				`${xMax + 2 + pointRadius},${yPosOrig}"`
+				`${xMax + 2 + pointRadius},${yPosOrig}`
 			].join(' ')}
 		>
 		</polyline>
@@ -335,14 +336,14 @@
 				</defs>
 				<g opacity={hoveredArea ? 0.2 : 1}>
 					{#each Object.values(_data.keyed) as arr, i}
-						{@render line(arr, lineStroke, ONScolours.grey40, lineOpacity)}
+						{@render line(arr, lineStroke, linesGrey, lineOpacity)}
 					{/each}
 					{#if showIntervals}
 						{#each selectedData as arr, i}
 							{@render ribbon(arr, getPaletteColor(i, selectedData.length), 0.3, arr[0][idKey])}
 						{/each}
 					{/if}
-					{#each selectedData as arr}
+					{#each [...selectedData].reverse() as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 						{@const marker = getMarkerKey(selectedIndex, selected.length)}
 						{@render line(arr, 4.5, ONScolours.white, 1, marker)}
