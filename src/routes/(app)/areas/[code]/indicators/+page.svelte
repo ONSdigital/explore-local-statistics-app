@@ -8,10 +8,13 @@
 		NavSection,
 		Dropdown,
 		Details,
-		Icon
+		Icon,
+		analyticsEvent
 	} from '@onsvisual/svelte-components';
 	import { getName } from '@onsvisual/robo-utils';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
+	import { downloadEvent } from '$lib/utils';
 	import AreaLocMap from './AreaLocMap.svelte';
 	import AreaSearch from '$lib/components/nav/AreaSearch.svelte';
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
@@ -47,13 +50,19 @@
 	}
 
 	afterNavigate(() => {
-		console.log('related', data.related);
 		pageState = makeInitialPageState(data);
 		areaSearchOpen = false;
 	});
 
 	function handleSelect(area) {
 		const url = `/areas/${makeCanonicalSlug(area)}/indicators`;
+		const eventData = {
+			event: 'searchSelect',
+			areaCode: area.areacd,
+			areaName: area.areanm || area.areacd,
+			areaType: geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
+		};
+		analyticsEvent(eventData);
 		goto(resolve(url));
 	}
 
@@ -203,24 +212,26 @@
 			<a
 				href={resolve(`/api/v1/data.xlsx?hasGeo=${areaProps.areacd}&time=all`)}
 				download="datasets-{areaProps.areacd}.xlsx"
-				aria-label="Download datasets for {getName(areaProps, 'the')} as an XLSX file">XLSX</a
+				aria-label="Download datasets for {getName(areaProps, 'the')} as an XLSX file"
+				onclick={() => downloadEvent('xlsx')}>XLSX</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
 				download="datasets-{areaProps.areacd}.csv"
-				aria-label="Download datasets for {getName(areaProps, 'the')} as a CSV file">CSV</a
+				aria-label="Download datasets for {getName(areaProps, 'the')} as a CSV file"
+				onclick={() => downloadEvent('csv')}>CSV</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
 				download="datasets-{areaProps.areacd}.csv-metadata.json"
 				aria-label="Download dataset metadata for {getName(areaProps, 'the')} as a CSVW file"
-				>CSVW</a
+				onclick={() => downloadEvent('csvw')}>CSVW</a
 			>, or
 			<a
 				href={resolve(`/api/v1/data.json?hasGeo=${areaProps.areacd}&time=all`)}
 				download="datasets-{areaProps.areacd}.json"
 				aria-label="Download datasets for {getName(areaProps, 'the')} as an JSON-Stat file"
-				>JSON-Stat</a
+				onclick={() => downloadEvent('json')}>JSON-Stat</a
 			> format.
 		</p>
 		<p>

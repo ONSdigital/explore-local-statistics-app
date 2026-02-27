@@ -1,6 +1,7 @@
 <script lang="ts">
 	import snapdom from '@zumer/snapdom';
 	import { Icon, Textarea, Button } from '@onsvisual/svelte-components';
+	import { downloadEvent } from '$lib/utils';
 
 	let {
 		indicator,
@@ -65,6 +66,7 @@
 		e.preventDefault();
 		const result = await snapdom(chartDiv);
 		await result.download({ format: 'png', filename: `${indicator}-${chartType}.png` });
+		downloadEvent('png', metadata, chartType);
 	}
 </script>
 
@@ -73,7 +75,8 @@
 	<a
 		href={url?.replace?.('.cols.json', `.${format}`)}
 		aria-label="Download the {metadata.label} {chartName} data as a {label} file"
-		download="{indicator}-{chartType}.{format === 'csvw' ? 'csv-metadata.json' : format}">{label}</a
+		download="{indicator}-{chartType}.{format === 'csvw' ? 'csv-metadata.json' : format}"
+		onclick={() => downloadEvent(format, metadata, chartType)}>{label}</a
 	>
 {/snippet}
 

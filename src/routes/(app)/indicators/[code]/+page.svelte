@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { makePeriodFormatter, makeValueFormatter } from '$lib/utils';
+	import { makePeriodFormatter, downloadEvent } from '$lib/utils';
 	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
 	import AreasLegend from '$lib/components/modals/AreasLegend.svelte';
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
@@ -102,29 +102,34 @@
 			You can download this dataset in an <a
 				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
 				download={`${data.indicator.slug}.xlsx`}
-				aria-label="Download {data.indicator.label} data as an XLSX file">XLSX</a
+				aria-label="Download {data.indicator.label} data as an XLSX file"
+				onclick={() => downloadEvent('xlsx', data.indicator)}>XLSX</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`)}
 				download={`${data.indicator.slug}.csv`}
-				aria-label="Download {data.indicator.label} data as a CSV file">CSV</a
+				aria-label="Download {data.indicator.label} data as a CSV file"
+				onclick={() => downloadEvent('csv', data.indicator)}>CSV</a
 			>,
 			<a
 				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
 				download={`${data.indicator.slug}.csv-metadata.json`}
-				aria-label="Download {data.indicator.label} metadata as an CSVW file">CSVW</a
+				aria-label="Download {data.indicator.label} metadata as an CSVW file"
+				onclick={() => downloadEvent('csvw', data.indicator)}>CSVW</a
 			>
 			or
 			<a
 				href={resolve(`/api/v1/data.json?indicator=${data.indicator.slug}&time=all`)}
 				download={`${data.indicator.slug}.json`}
-				aria-label="Download {data.indicator.label} data as a JSON-Stat file">JSON-Stat</a
+				aria-label="Download {data.indicator.label} data as a JSON-Stat file"
+				onclick={() => downloadEvent('json', data.indicator)}>JSON-Stat</a
 			>
 			format, or download
 			<a
 				href={resolve(`/api/v1/data.xlsx?time=all`)}
 				download="all-datasets.xlsx"
-				aria-label="Download all datasets as an XLSX file">all available datasets (XLSX, ~10MB)</a
+				aria-label="Download all datasets as an XLSX file"
+				onclick={() => downloadEvent('xlsx')}>all available datasets (XLSX, ~10MB)</a
 			>.
 		</p>
 		<p>

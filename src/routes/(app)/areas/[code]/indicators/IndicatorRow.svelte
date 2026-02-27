@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { Observe, Em, ButtonGroup, ButtonGroupItem, Icon } from '@onsvisual/svelte-components';
-	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
+	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, downloadEvent } from '$lib/utils';
 	import { timeRangesOverlap } from '$lib/api/data/helpers/dataFilters';
 	import Beeswarm from '$lib/components/charts/Beeswarm.svelte';
 	import Sparkline from '$lib/components/charts/Sparkline.svelte';
@@ -83,7 +83,8 @@
 	<a
 		href={url?.replace?.('.cols.json', `.${format}`)}
 		aria-label="Download the {metadata.label} {chartName} chart data as a {label} file"
-		download="{indicator}.{format === 'csvw' ? 'csv-metadata.json' : format}">{label}</a
+		download="{indicator}.{format === 'csvw' ? 'csv-metadata.json' : format}"
+		onclick={() => downloadEvent(format, metadata, chartType)}>{label}</a
 	>
 {/snippet}
 

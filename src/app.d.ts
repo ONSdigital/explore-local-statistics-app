@@ -47,6 +47,40 @@ declare global {
 		link: { item: jsonStatDataset[] };
 	};
 
+	// Indicator metadata
+	type indicatorMetadata = {
+		slug: string;
+		label: string;
+		topic: string;
+		subTopic: string;
+		measure: string;
+		unit: string;
+		prefix: string | null;
+		suffix: string | null;
+		subtitle: string;
+		description: string;
+		subText: string;
+		valueDomain: [number, number];
+		periodDomain: [string, string];
+		periodFormat: string;
+		decimalPlaces: number;
+		experimentalStatistic: boolean;
+		canBeNegative: boolean;
+		confidenceIntervals: boolean;
+		hasTimeseries: boolean;
+		isMultivariate: boolean;
+		source: { name: string; href: string; date: string }[];
+		updated: string;
+		geography: {
+			countries: string[];
+			levels: string[];
+			types: string[];
+			year: number;
+			initialLevel: string;
+		};
+		[key: string]: any;
+	};
+
 	// Config for XLSX spreadsheet generation
 	type spreadsheetTableCol = { index: number; key: string; heading: string; format?: string };
 	type spreadsheetTableRow = (string | number | null)[];

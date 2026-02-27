@@ -4,6 +4,7 @@ import { utcFormat } from 'd3-time-format';
 import { geoLevels } from './config/geoLevels';
 import { feature } from 'topojson-client';
 import { ckmeans } from 'simple-statistics';
+import { analyticsEvent } from '@onsvisual/svelte-components';
 import { oldGeoCodesLookup } from './config/geoLookups';
 import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 
@@ -173,4 +174,21 @@ export function valuesToBreaks(values: number[], count = 5) {
 
 export function getAreaType(area: areaObject) {
 	return geoLevelsAllLookup[area.areacd?.slice?.(0, 3)]?.label || null;
+}
+
+export function downloadEvent(
+	format: string,
+	indicator: indicatorMetadata | string = 'all',
+	chartType: string | null = null
+) {
+	const eventData = {
+		event: 'fileDownload',
+		extension: format,
+		...(chartType ? { chartType } : {}),
+		indicatorCode: indicator === 'all' ? 'all' : indicator.slug,
+		indicatorName: indicator === 'all' ? 'All indicators' : indicator.label,
+		indicatorTopic: indicator === 'all' ? 'All topics' : indicator.topic,
+		indicatorSubtopic: indicator === 'all' ? 'All sub-topics' : indicator.subTopic
+	};
+	console.log(eventData);
 }

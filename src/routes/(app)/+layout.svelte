@@ -10,6 +10,7 @@
 		Main,
 		Footer
 	} from '@onsvisual/svelte-components';
+	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 
 	const analyticsId = 'GTM-MBCBVQS';
 	const analyticsProps = {
@@ -30,7 +31,7 @@
 		if (['area page', 'area data page'].includes(page.data.pageType) && areaProps) {
 			eventData.areaCode = areaProps.areacd;
 			eventData.areaName = areaProps.areanm || areaProps.areacd;
-			eventData.areaType = areaProps.typenm;
+			eventData.areaType = geoLevelsAllLookup?.[areaProps.areacd.slice(0, 3)]?.label;
 		} else if (page.data.pageType === 'indicator data page' && indicator) {
 			eventData.indicatorCode = indicator.slug;
 			eventData.indicatorName = indicator.label;

@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+	import { downloadEvent } from '$lib/utils.js';
 	import {
 		Breadcrumb,
 		Hero,
@@ -113,23 +114,27 @@
 		<a
 			href={resolve('/api/v1/data.xlsx?time=all')}
 			download="all-datasets.xlsx"
-			aria-label="Download all datasets as an XLSX file">XLSX</a
+			aria-label="Download all datasets as an XLSX file"
+			onclick={() => downloadEvent('xlsx')}>XLSX</a
 		>,
 		<a
 			href={resolve('/api/v1/data.csv?time=all')}
 			download="all-datasets.csv"
-			aria-label="Download all datasets as a CSV file">CSV</a
+			aria-label="Download all datasets as a CSV file"
+			onclick={() => downloadEvent('csv')}>CSV</a
 		>,
 		<a
 			href={resolve('/api/v1/data.csvw?time=all')}
 			download="all-datasets.csv-metadata.json"
-			aria-label="Download metadata for all datasets as a CSVW file">CSVW</a
+			aria-label="Download metadata for all datasets as a CSVW file"
+			onclick={() => downloadEvent('csvw')}>CSVW</a
 		>
 		or
 		<a
 			href={resolve('/api/v1/data.json?time=all')}
 			download="all-datasets.json"
-			aria-label="Download all datasets as a JSON-Stat file">JSON-Stat</a
+			aria-label="Download all datasets as a JSON-Stat file"
+			onclick={() => downloadEvent('json')}>JSON-Stat</a
 		> format.
 	</p>
 	<p>
