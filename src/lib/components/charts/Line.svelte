@@ -85,9 +85,10 @@
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 
-	let pointsCount = $derived(_data ? Object.keys(_data.keyed).length : 0);
-	const maxPointGap = 50;
-	const nPoints = $derived(Math.floor(width / maxPointGap));
+	let pointsCount = $derived(_data ? new Set(_data.array.map((d) => d.period)).size : 0);
+	const pointGap = 22;
+	let pointSpace = $derived(width / (pointsCount - 1));
+
 	const maxTickGap = 160; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
@@ -146,16 +147,28 @@
 	opacity = 1,
 	marker: string | null = null
 )}
-	<polyline
-		points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
-		stroke={color}
-		stroke-width={width}
-		stroke-linecap="round"
-		marker-start={marker ? `url(#${marker})` : null}
-		marker-mid={marker ? `url(#${marker})` : null}
-		marker-end={marker ? `url(#${marker})` : null}
-		{opacity}
-	/>
+	{#if pointSpace > pointGap}
+		<polyline
+			points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
+			stroke={color}
+			stroke-width={width}
+			stroke-linecap="round"
+			marker-start={marker ? `url(#${marker})` : null}
+			marker-mid={marker ? `url(#${marker})` : null}
+			marker-end={marker ? `url(#${marker})` : null}
+			{opacity}
+		/>
+	{:else}
+		<polyline
+			points={arr.map((d) => [xScale(d.date), yScale(d[yKey])].join(',')).join(' ')}
+			stroke={color}
+			stroke-width={width}
+			stroke-linecap="round"
+			marker-start={marker ? `url(#${marker})` : null}
+			marker-end={marker ? `url(#${marker})` : null}
+			{opacity}
+		/>
+	{/if}
 {/snippet}
 
 {#snippet ribbon(arr, color = ONScolours.grey40, opacity = 0.3, id = '')}
@@ -359,17 +372,34 @@
 						{#if showIntervals}
 							{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
 						{/if}
-						{@render line(hovered, 4.5, ONScolours.white)}
-						{@render line(hovered, 3, ONScolours.highlightOrangeDark)}
-						{#each hovered as c}
+						{@render line(hovered, 4.5, ONScolours.white, 1)}
+						{@render line(hovered, 3, ONScolours.highlightOrangeDark, 1)}
+						{#if pointSpace > pointGap}
+							{#each hovered as c}
+								<circle
+									cx={xScale(c.date)}
+									cy={yScale(c[yKey])}
+									r="5"
+									fill={ONScolours.highlightOrangeDark}
+									stroke={ONScolours.white}
+								></circle>
+							{/each}
+						{:else}
 							<circle
-								cx={xScale(c.date)}
-								cy={yScale(c[yKey])}
+								cx={xScale(hovered[0].date)}
+								cy={yScale(hovered[0][yKey])}
 								r="5"
 								fill={ONScolours.highlightOrangeDark}
 								stroke={ONScolours.white}
 							></circle>
-						{/each}
+							<circle
+								cx={xScale(hovered[hovered.length - 1].date)}
+								cy={yScale(hovered[hovered.length - 1][yKey])}
+								r="5"
+								fill={ONScolours.highlightOrangeDark}
+								stroke={ONScolours.white}
+							></circle>
+						{/if}
 					{/if}
 				</g>
 				{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
