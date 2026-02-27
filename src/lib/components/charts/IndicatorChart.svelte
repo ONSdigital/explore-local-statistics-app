@@ -42,11 +42,13 @@
 	);
 	let geoLevelObj = $derived(
 		getGeoLevel(
-			geoLevel?.geoLevel || geoLevel.geoCluster
+			geoLevel.geoCluster
 				? 'ltla'
-				: isValidGeoLevel(geoLevel?.id)
-					? geoLevel.id
-					: null
+				: isValidGeoLevel(geoLevel?.geoLevel)
+					? geoLevel.geoLevel
+					: isValidGeoLevel(geoLevel?.id)
+						? geoLevel.id
+						: 'ltla'
 		)
 	);
 
