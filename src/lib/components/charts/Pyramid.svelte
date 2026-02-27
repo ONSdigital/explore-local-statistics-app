@@ -311,10 +311,6 @@
 		fill: none;
 	}
 
-	.chart-x-axis text {
-		fill: #333;
-		font-family: 'Open Sans';
-	}
 	.chart-x-axis line {
 		stroke: #999;
 	}

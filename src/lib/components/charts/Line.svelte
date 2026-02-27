@@ -85,6 +85,9 @@
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	const formatYTick = format(',.0f');
 
+	let pointsCount = $derived(_data ? Object.keys(_data.keyed).length : 0);
+	const maxPointGap = 50;
+	const nPoints = $derived(Math.floor(width / maxPointGap));
 	const maxTickGap = 160; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
