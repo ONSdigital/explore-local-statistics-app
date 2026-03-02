@@ -268,52 +268,18 @@
 >
 	{#if showIntervals}
 		<div class="legend-container">
-			<svg width="200" height="90" class="bar-chart-legend" style="overflow: visible;">
-				<line
-					x1="10"
-					y1="15"
-					x2="100"
-					y2="15"
-					stroke={ONScolours.black}
-					opacity="0.2"
-					stroke-width="15px"
-				></line>
-				<rect
-					x="52"
-					width="5"
-					y="5"
-					height="20"
-					fill={ONScolours.black}
-					stroke={ONScolours.white}
-					stroke-width="1.3px"
-				></rect>
-
-				<path
-					d={makeCurlyBrace(10, 30, 100, 30, 10, 0.5)}
-					stroke={ONScolours.black}
-					fill="none"
-					stroke-width="1.5px"
-				></path>
-
-				<text
-					x="55"
-					y="60"
-					font-size="16px"
-					stroke={ONScolours.black}
-					fill={ONScolours.black}
-					stroke-width="0px"
-					text-anchor="middle">95% confidence</text
-				>
-				<text
-					x="55"
-					y="80"
-					font-size="16px"
-					stroke={ONScolours.black}
-					fill={ONScolours.black}
-					stroke-width="0px"
-					text-anchor="middle">interval range</text
-				>
-			</svg>
+			<div class="legend-ci">
+				<div class="legend--icon--rect"></div>
+				<div>
+					<p class="legend-text">95% confidence interval</p>
+				</div>
+			</div>
+			<div class="legend-est">
+				<div class="legend--icon--line"></div>
+				<div>
+					<p class="legend-text">Estimate</p>
+				</div>
+			</div>
 		</div>
 	{/if}
 	<div class="bar-inner">
@@ -472,12 +438,43 @@
 </div>
 
 <style>
+	.legend-container {
+		display: flex;
+		height: 20px;
+		padding-bottom: 80px;
+	}
+	.legend-ci,
+	.legend-est {
+		display: flex;
+		padding-right: 40px;
+		padding-bottom: 12px;
+	}
+	.legend-text {
+		color: var(--ons-color-black);
+		line-height: 16px;
+		font-size: 16px;
+		padding-left: 12px;
+		margin: 0;
+	}
+	.legend--icon--rect {
+		height: 20px;
+		width: 35px;
+		/* align-self: center; */
+		flex-shrink: 0;
+		forced-color-adjust: none;
+		opacity: 0.3;
+		background-color: black;
+	}
+	.legend--icon--line {
+		height: 20px;
+		width: 3.25px;
+		/* align-self: center; */
+		flex-shrink: 0;
+		forced-color-adjust: none;
+		background-color: black;
+	}
 	.hidden {
 		visibility: hidden;
-	}
-	.legend-container {
-		position: relative;
-		height: 100px;
 	}
 
 	.bar-chart-legend {
