@@ -97,6 +97,13 @@
 			</NavSection>
 		{/each}
 	</div>
+	{#if data.indicator.caveats.length > 0}
+		<NavSection title="Interpretation">
+			{#each data.indicator.caveats as caveat}
+				<p>{caveat}</p>
+			{/each}
+		</NavSection>
+	{/if}
 	<NavSection title="Get the data">
 		<p>
 			You can download this dataset in an <a
