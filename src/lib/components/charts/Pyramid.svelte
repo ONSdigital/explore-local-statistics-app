@@ -2,12 +2,15 @@
 	import { scaleLinear, scaleBand } from 'd3-scale';
 	import { parsePyramidData, contrastColor, getPaletteColor } from './chartHelpers';
 	import { ONScolours } from '$lib/config';
+	import { shortenPeriodFormatter } from '$lib/utils';
 
 	let {
 		data,
 		selected = [],
 		hovered = $bindable(),
 		formatValue = (d) => d,
+		formatPeriod = (d) => d,
+		periodKey = 'period',
 		idKey = 'areacd',
 		labelKey = 'areanm',
 		xKey = 'value',
@@ -34,6 +37,8 @@
 
 	let w = $state(400);
 	let hoveredPos = $state();
+
+	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 
 	let xRange = $derived([0, (w - gutter) / 2]);
 	// let xDomain = $derived(
@@ -252,6 +257,9 @@
 			</div>
 		{/if}
 	</div>
+	<p class="pyramid-year ons-u-fs-s">
+		Showing values for {formatPeriodShort(_data?.array[0][periodKey])}
+	</p>
 </div>
 
 <style>
@@ -322,5 +330,11 @@
 
 	.chart-x-axis line {
 		stroke: #999;
+	}
+
+	.pyramid-year {
+		display: block;
+		text-align: center;
+		margin-top: 10px;
 	}
 </style>
