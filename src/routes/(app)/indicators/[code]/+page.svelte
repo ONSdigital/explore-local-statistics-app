@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
 	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
@@ -38,6 +39,8 @@
 		showConfidenceIntervals: false,
 		formatPeriod: () => formatPeriod
 	});
+
+	let caveats = $derived(new MarkdownIt().render(data.indicator.caveats[0]));
 
 	$inspect(pageState.selectedAreas);
 </script>
@@ -99,9 +102,7 @@
 	</div>
 	{#if data.indicator.caveats.length > 0}
 		<NavSection title="Interpretation">
-			{#each data.indicator.caveats as caveat}
-				<p>{caveat}</p>
-			{/each}
+			<p>{@html caveats}</p>
 		</NavSection>
 	{/if}
 	<NavSection title="Get the data">
