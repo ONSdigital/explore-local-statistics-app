@@ -36,6 +36,7 @@
 		analyticsEvent(eventData);
 		goto(resolve(url), { noScroll: !isPostcode });
 	}
+	$inspect(data);
 </script>
 
 <svelte:head>
@@ -98,7 +99,7 @@
 					title={link.title}
 					mode="featured"
 					image={link.image.startsWith('/') ? resolve(link.image) : link.image}
-					href={link.image.startsWith('/') ? resolve(link.href) : link.href}
+					href={link.href.startsWith('/') ? resolve(link.href) : link.href}
 					headingTag="h3"
 				>
 					{@html link.description}{#if link.isExternal}<span class="inline-icon ons-u-ml-3xs"
