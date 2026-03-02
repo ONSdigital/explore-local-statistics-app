@@ -243,6 +243,7 @@
 		{#if hovered && hoveredPos}
 			<div
 				class="chart-label chart-area-label"
+				aria-live="assertive"
 				style:left="{hoveredPos.x}px"
 				style:top="{hoveredPos.y}px"
 				style:transform="translate({hoveredPos.x < w / 2 ? -100 : 0}%,-100%)"
@@ -319,10 +320,6 @@
 		fill: none;
 	}
 
-	.chart-x-axis text {
-		fill: #333;
-		font-family: 'Open Sans';
-	}
 	.chart-x-axis line {
 		stroke: #999;
 	}
