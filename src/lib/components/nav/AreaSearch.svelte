@@ -34,7 +34,7 @@
 			const url = resolve(
 				allAreas
 					? `/api/v1/geo/search/${query.toLowerCase()}?searchPostcodes=true`
-					: `/api/v1/geo/search/${query.toLowerCase()}?geoLevel=ctry,rgn,cauth,utla,ltla`
+					: `/api/v1/geo/search/${query.toLowerCase()}?geoLevel=ctry,cty,rgn,cauth,utla,ltla`
 			);
 			const results = await (await fetch(url)).json();
 			populateResults(
