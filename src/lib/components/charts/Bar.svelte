@@ -129,6 +129,14 @@
 		return '0.55';
 	}
 
+	function setBarStroke(id) {
+		const index = selected.indexOf(id);
+		if (index === -1) {
+			return '0';
+		}
+		return '0.7';
+	}
+
 	let yScale = $derived(_data.array ? makeYScale(_data.array, selected) : null);
 	let yScaleFn = $derived(yScale ? (d) => yScale?.(d)?.y : () => null);
 
@@ -155,13 +163,15 @@
 	$inspect({ labelLookup });
 </script>
 
-{#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '')}
+{#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
 	<rect
 		class="chart-bars"
 		x={0}
 		y={yScale(b[idKey]).y}
 		width={xScale(b[yKey])}
 		height={yScale(b[idKey]).height}
+		stroke-width={strokeWidth}
+		stroke={ONScolours.white}
 		{fill}
 		{opacity}
 		on:pointerenter={() => {
@@ -371,9 +381,15 @@
 				<g opacity={hovered ? 0.5 : 1}>
 					{#each _data.array as b, i (b[idKey])}
 						{#if !showIntervals}
-							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey])}
+							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey], setBarStroke(b[idKey]))}
 						{:else}
-							{@render bar(b, setBarColour(b[idKey]), setBarOpacity(b[idKey]), b[idKey])}
+							{@render bar(
+								b,
+								setBarColour(b[idKey]),
+								setBarOpacity(b[idKey]),
+								b[idKey],
+								setBarStroke(b[idKey])
+							)}
 							{@render confidence(b, ONScolours.white, 1, 0, b[idKey], i)}
 							{@render confidence(
 								b,
