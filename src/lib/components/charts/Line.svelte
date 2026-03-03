@@ -468,7 +468,7 @@
 	.legend--icon--line {
 		height: 3.25px;
 		width: 100%;
-		background-color: black;
+		background-color: var(--ons-color-black);
 	}
 	.legend--icon--circle {
 		position: absolute;

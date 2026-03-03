@@ -268,18 +268,34 @@
 >
 	{#if showIntervals}
 		<div class="legend-container">
-			<div class="legend-ci">
-				<div class="legend--icon--rect"></div>
-				<div>
-					<p class="legend-text">95% confidence interval</p>
-				</div>
-			</div>
-			<div class="legend-est">
-				<div class="legend--icon--line"></div>
-				<div>
-					<p class="legend-text">Estimate</p>
-				</div>
-			</div>
+			<svg width="300" height="60">
+				<rect x="0" y="1" width="50" height="16" fill={ONScolours.grey40}></rect>
+				<line x1="25" y1="1" x2="25" y2="17" stroke={ONScolours.grey75} stroke-width="2.5" />
+				<!-- arrow estimate -->
+				<path
+					d="
+					M25,20 L25,35 L68,35 
+					M25,20 L19,26 
+					M25,20 L31,26"
+					stroke="#414042"
+					fill="none"
+					stroke-width="1.5"
+				>
+				</path>
+				<text x="73" y="52" text-anchor="start" class="legend-text">
+					<tspan y="52" x="73" dy="-0.7500000000000001em">Estimated value</tspan>
+				</text>
+				<!-- arrow ci -->
+				<path
+					d="M -5.5 0 L 5.5 -0 M -5.5 0 L -1.5 -4 M -5.5 0 L -1.5 4"
+					stroke="#414042"
+					transform="translate(60,10)"
+					stroke-width="1.5"
+				></path>
+				<text x="71" y="10" text-anchor="start" class="legend-text">
+					<tspan y="10" x="71" dy="0.35em">95% confidence interval</tspan>
+				</text></svg
+			>
 		</div>
 	{/if}
 	<div class="bar-inner">
@@ -441,14 +457,7 @@
 	.legend-container {
 		display: flex;
 		height: 20px;
-		padding-bottom: 80px;
-	}
-	.legend-ci,
-	.legend-est {
-		display: flex;
-		padding-right: 40px;
-		padding-bottom: 12px;
-		align-items: center;
+		padding-bottom: 100px;
 	}
 	.legend-text {
 		color: var(--ons-color-black);
@@ -457,17 +466,7 @@
 		padding-left: 12px;
 		margin: 0;
 	}
-	.legend--icon--rect {
-		height: 20px;
-		width: 35px;
-		opacity: 0.3;
-		background-color: black;
-	}
-	.legend--icon--line {
-		height: 20px;
-		width: 3.25px;
-		background-color: black;
-	}
+
 	.hidden {
 		visibility: hidden;
 	}
