@@ -31,8 +31,9 @@
 
 	let map = $state();
 	let features = $state.raw();
-	let _data = $derived(parseData(data));
+	let _data = $derived(parseData(data).filter((d) => d.areacd !== 'K02000001'));
 	let breaks = $derived(valuesToBreaks(_data.map((d) => d.value)));
+	$inspect(data);
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
