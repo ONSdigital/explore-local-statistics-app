@@ -226,62 +226,52 @@
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
-	style:padding-top="25px"
+	style:padding-top={showIntervals ? '0px' : '20px'}
 	aria-hidden="true"
 >
 	{#if showIntervals}
 		<div class="legend-container">
-			<div class="legend-ci">
-				<div class="legend--icon--rect"></div>
-				<div>
-					<p class="legend-text">95% confidence interval</p>
-				</div>
-			</div>
-			<div class="legend-est">
-				<div class="legend-icon-wrapper">
-					<div class="legend--icon--line"></div>
-					<div class="legend--icon--circle"></div>
-				</div>
-				<div>
-					<p class="legend-text">Estimate</p>
-				</div>
-			</div>
+			<svg width="300" height="60">
+				<!-- <rect x="2.5" y="1" width="25" height="25" fill={ONScolours.grey35}></rect> -->
+				<path d="M14 15  L46 15 L46 45  L14 35" stroke="none" fill={ONScolours.grey35}></path>
+				<line x1="10" y1="22.5" x2="50" y2="28.5" stroke={ONScolours.grey100} stroke-width="3.5" />
+				<circle
+					cx="30"
+					cy="25.5"
+					r="5"
+					fill={ONScolours.grey100}
+					stroke={ONScolours.white}
+					stroke-width="1"
+				/>
+				<!-- arrow ci -->
+				<path
+					d="
+					M30,42 L30,54 L75,54
+        			M30,42 L26,48
+        			M30,42 L34,48
+					"
+					stroke={ONScolours.grey100}
+					fill="none"
+					stroke-width="1.5"
+				>
+				</path>
+				<text x="80" y="54" text-anchor="start" class="legend-text">
+					<tspan y="54" x="80" dy="0.35em">95% confidence interval</tspan>
+				</text>
+				<!-- arrow estimate -->
+				<path
+					d="
+					M75,28.5 L54,28.5
+        			M54,28.5 L60,24.5
+        			M54,28.5 L60,32.5"
+					stroke={ONScolours.grey100}
+					stroke-width="1.5"
+				></path>
+				<text x="80" y="29" text-anchor="start" class="legend-text">
+					<tspan y="29" x="80" dy="0.35em">Estimated value</tspan>
+				</text>
+			</svg>
 		</div>
-		<!-- <svg width="350" height="50" class="bar-chart-legend">
-			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill={ONScolours.black} opacity="0.2"
-			></path>
-			<path d="M10 25  L50 30" stroke={ONScolours.black} fill="none" stroke-width="2px"></path>
-			<circle
-				cx="10"
-				cy="25"
-				r="4"
-				stroke={ONScolours.white}
-				fill={ONScolours.black}
-				stroke-width="1px"
-			></circle>
-			<circle
-				cx="50"
-				cy="30"
-				r="4"
-				stroke={ONScolours.white}
-				fill={ONScolours.black}
-				stroke-width="1px"
-			></circle>
-			<text
-				x="70"
-				y="35"
-				font-size="18px"
-				stroke={ONScolours.black}
-				fill={ONScolours.black}
-				stroke-width="0px">95% confidence interval range</text
-			>
-			<path
-				d={makeCurlyBrace(55, 15, 55, 45, -10, 0.5)}
-				stroke={ONScolours.black}
-				fill="none"
-				stroke-width="1px"
-			></path>
-		</svg> -->
 	{/if}
 	<div class="line-inner">
 		{#if _data && xScale && yScale}
@@ -443,51 +433,12 @@
 		height: 20px;
 		padding-bottom: 80px;
 	}
-	.legend-ci,
-	.legend-est {
-		display: flex;
-		padding-right: 40px;
-		padding-bottom: 12px;
-		align-items: center;
-		justify-content: space-between;
-	}
 	.legend-text {
 		color: var(--ons-color-black);
 		line-height: 16px;
 		font-size: 16px;
 		padding-left: 12px;
 		margin: 0;
-	}
-	.legend--icon--rect {
-		height: 30px;
-		width: 20px;
-		opacity: 0.3;
-		background-color: black;
-	}
-
-	.legend--icon--line {
-		height: 3.25px;
-		width: 100%;
-		background-color: var(--ons-color-black);
-	}
-	.legend--icon--circle {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		height: 12px;
-		width: 12px;
-		transform: translate(-50%, -50%);
-		background-color: black;
-		border: 1.7px solid white;
-		border-radius: 50%;
-		min-width: 10px;
-	}
-	.legend-icon-wrapper {
-		position: relative;
-		width: 30px;
-		height: 20px;
-		display: flex;
-		align-items: center;
 	}
 	.line-wrapper {
 		display: block;

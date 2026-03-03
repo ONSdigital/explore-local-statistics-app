@@ -261,7 +261,7 @@
 	bind:clientWidth={width}
 	class="bar-wrapper"
 	style:padding-right="{rightMargin}px"
-	style:padding-top="25px"
+	style:padding-top={showIntervals ? '10px' : '30px'}
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
 	aria-hidden="true"
@@ -277,7 +277,7 @@
 					M25,20 L25,35 L68,35 
 					M25,20 L19,26 
 					M25,20 L31,26"
-					stroke="#414042"
+					stroke={ONScolours.grey100}
 					fill="none"
 					stroke-width="1.5"
 				>
@@ -288,14 +288,14 @@
 				<!-- arrow ci -->
 				<path
 					d="M -5.5 0 L 5.5 -0 M -5.5 0 L -1.5 -4 M -5.5 0 L -1.5 4"
-					stroke="#414042"
+					stroke={ONScolours.grey100}
 					transform="translate(60,10)"
 					stroke-width="1.5"
 				></path>
 				<text x="71" y="10" text-anchor="start" class="legend-text">
 					<tspan y="10" x="71" dy="0.35em">95% confidence interval</tspan>
-				</text></svg
-			>
+				</text>
+			</svg>
 		</div>
 	{/if}
 	<div class="bar-inner">
