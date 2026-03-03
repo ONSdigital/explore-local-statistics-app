@@ -255,6 +255,10 @@
 	.indicators-nav-sections > :global(section) {
 		scroll-margin-top: 116px;
 	}
+
+	:global(.indicator-row) {
+		scroll-margin-top: 116px;
+	}
 	.titleblock-container {
 		position: relative;
 	}
