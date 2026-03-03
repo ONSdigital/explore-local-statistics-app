@@ -226,10 +226,28 @@
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
+	style:padding-top="25px"
 	aria-hidden="true"
 >
 	{#if showIntervals}
-		<svg width="350" height="50" class="bar-chart-legend">
+		<div class="legend-container">
+			<div class="legend-ci">
+				<div class="legend--icon--rect"></div>
+				<div>
+					<p class="legend-text">95% confidence interval</p>
+				</div>
+			</div>
+			<div class="legend-est">
+				<div class="legend-icon-wrapper">
+					<div class="legend--icon--line"></div>
+					<div class="legend--icon--circle"></div>
+				</div>
+				<div>
+					<p class="legend-text">Estimate</p>
+				</div>
+			</div>
+		</div>
+		<!-- <svg width="350" height="50" class="bar-chart-legend">
 			<path d="M10 15  L50 15 L50 45  L10 35" stroke="none" fill={ONScolours.black} opacity="0.2"
 			></path>
 			<path d="M10 25  L50 30" stroke={ONScolours.black} fill="none" stroke-width="2px"></path>
@@ -263,7 +281,7 @@
 				fill="none"
 				stroke-width="1px"
 			></path>
-		</svg>
+		</svg> -->
 	{/if}
 	<div class="line-inner">
 		{#if _data && xScale && yScale}
@@ -420,11 +438,61 @@
 </div>
 
 <style>
+	.legend-container {
+		display: flex;
+		height: 20px;
+		padding-bottom: 80px;
+	}
+	.legend-ci,
+	.legend-est {
+		display: flex;
+		padding-right: 40px;
+		padding-bottom: 12px;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.legend-text {
+		color: var(--ons-color-black);
+		line-height: 16px;
+		font-size: 16px;
+		padding-left: 12px;
+		margin: 0;
+	}
+	.legend--icon--rect {
+		height: 30px;
+		width: 20px;
+		opacity: 0.3;
+		background-color: black;
+	}
+
+	.legend--icon--line {
+		height: 3.25px;
+		width: 100%;
+		background-color: black;
+	}
+	.legend--icon--circle {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 12px;
+		width: 12px;
+		transform: translate(-50%, -50%);
+		background-color: black;
+		border: 1.7px solid white;
+		border-radius: 50%;
+		min-width: 10px;
+	}
+	.legend-icon-wrapper {
+		position: relative;
+		width: 30px;
+		height: 20px;
+		display: flex;
+		align-items: center;
+	}
 	.line-wrapper {
 		display: block;
 		position: relative;
 		overflow: visible;
-		padding-top: 8px;
 	}
 	.line-inner {
 		display: block;

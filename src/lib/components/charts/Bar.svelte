@@ -261,7 +261,7 @@
 	bind:clientWidth={width}
 	class="bar-wrapper"
 	style:padding-right="{rightMargin}px"
-	style:padding-top="36px"
+	style:padding-top="25px"
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
 	aria-hidden="true"
@@ -448,6 +448,7 @@
 		display: flex;
 		padding-right: 40px;
 		padding-bottom: 12px;
+		align-items: center;
 	}
 	.legend-text {
 		color: var(--ons-color-black);
@@ -459,18 +460,12 @@
 	.legend--icon--rect {
 		height: 20px;
 		width: 35px;
-		/* align-self: center; */
-		flex-shrink: 0;
-		forced-color-adjust: none;
 		opacity: 0.3;
 		background-color: black;
 	}
 	.legend--icon--line {
 		height: 20px;
 		width: 3.25px;
-		/* align-self: center; */
-		flex-shrink: 0;
-		forced-color-adjust: none;
 		background-color: black;
 	}
 	.hidden {
