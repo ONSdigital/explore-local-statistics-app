@@ -31,9 +31,9 @@
 
 	let map = $state();
 	let features = $state.raw();
-	let _data = $derived(parseData(data).filter((d) => d.areacd !== 'K02000001'));
+	let _data = $derived(parseData(data));
 	let breaks = $derived(valuesToBreaks(_data.map((d) => d.value)));
-	$inspect(data);
+	$inspect(_data);
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
@@ -63,6 +63,7 @@
 		for (const d of data) {
 			const ft = features[d.areacd] ? { ...features[d.areacd] } : null;
 			if (!ft) continue;
+			if (d.areacd.startsWith('K02')) continue;
 			if (geoLevelCodes.has(d.areacd.slice(0, 3)) && geoYearFilter(ft.properties, geoYear)) {
 				ft.properties = {
 					...ft.properties,
