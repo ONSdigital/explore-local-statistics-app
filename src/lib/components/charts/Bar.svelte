@@ -289,7 +289,7 @@
 					M25,20 L31,26"
 					stroke={ONScolours.grey100}
 					fill="none"
-					stroke-width="1.5"
+					stroke-width="1.2"
 				>
 				</path>
 				<text x="73" y="52" text-anchor="start" class="legend-text">
@@ -300,7 +300,7 @@
 					d="M -5.5 0 L 5.5 -0 M -5.5 0 L -1.5 -4 M -5.5 0 L -1.5 4"
 					stroke={ONScolours.grey100}
 					transform="translate(60,10)"
-					stroke-width="1.5"
+					stroke-width="1.2"
 				></path>
 				<text x="71" y="10" text-anchor="start" class="legend-text">
 					<tspan y="10" x="71" dy="0.35em">95% confidence interval</tspan>

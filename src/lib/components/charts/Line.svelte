@@ -252,7 +252,7 @@
 					"
 					stroke={ONScolours.grey100}
 					fill="none"
-					stroke-width="1.5"
+					stroke-width="1.2"
 				>
 				</path>
 				<text x="80" y="54" text-anchor="start" class="legend-text">
@@ -265,7 +265,7 @@
         			M54,28.5 L60,24.5
         			M54,28.5 L60,32.5"
 					stroke={ONScolours.grey100}
-					stroke-width="1.5"
+					stroke-width="1.2"
 				></path>
 				<text x="80" y="29" text-anchor="start" class="legend-text">
 					<tspan y="29" x="80" dy="0.35em">Estimated value</tspan>
