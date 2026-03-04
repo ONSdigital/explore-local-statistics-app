@@ -165,7 +165,9 @@
 	</NavSection>
 	<NavSection title="Other indicators">
 		<p>
-			{data.indicator.label} is one of {data.summaryStats.univariateCount} local indicators on the
+			{data.indicator.label} is one of
+			<strong>{data.summaryStats.univariateCount} local indicators</strong>
+			on the
 			<a href={resolve('/')}>Explore local statistics</a>
 			service. See the
 			<a href={resolve('/indicators')}>full list of local indicators</a>.
