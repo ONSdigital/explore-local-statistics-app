@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
 	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
@@ -38,6 +39,8 @@
 		showConfidenceIntervals: false,
 		formatPeriod: () => formatPeriod
 	});
+
+	let caveats = $derived(new MarkdownIt().render(data.indicator.caveats[0]));
 
 	$inspect(pageState.selectedAreas);
 </script>
@@ -97,6 +100,11 @@
 			</NavSection>
 		{/each}
 	</div>
+	{#if data.indicator.caveats.length > 0}
+		<NavSection title="Interpretation">
+			<p>{@html caveats}</p>
+		</NavSection>
+	{/if}
 	<NavSection title="Get the data">
 		<p>
 			You can download this dataset in an <a
@@ -157,7 +165,9 @@
 	</NavSection>
 	<NavSection title="Other indicators">
 		<p>
-			{data.indicator.label} is one of {data.summaryStats.univariateCount} local indicators on the
+			{data.indicator.label} is one of
+			<strong>{data.summaryStats.univariateCount} local indicators</strong>
+			on the
 			<a href={resolve('/')}>Explore local statistics</a>
 			service. See the
 			<a href={resolve('/indicators')}>full list of local indicators</a>.

@@ -174,7 +174,7 @@
 					{visible}
 				>
 					{#snippet chart(data)}
-						<Pyramid {data} {formatValue} {selected} bind:hovered {valueDomain} />
+						<Pyramid {data} {formatValue} {formatPeriod} {selected} bind:hovered {valueDomain} />
 					{/snippet}
 				</ChartDataLoader>
 			</div>

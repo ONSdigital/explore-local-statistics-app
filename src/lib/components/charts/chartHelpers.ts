@@ -91,7 +91,15 @@ export function parseChartData(
 	};
 }
 
-export function parseBeeswarmData(data, xKey, zKey, width = 400, height = 100, radius = 3) {
+export function parseBeeswarmData(
+	data,
+	xKey,
+	zKey,
+	absDomain = false,
+	width = 400,
+	height = 100,
+	radius = 3
+) {
 	if (!data || data?.message) return null;
 	if (!data[xKey] || !data[zKey]) return null; // Dimensions missing from data
 
@@ -100,10 +108,12 @@ export function parseBeeswarmData(data, xKey, zKey, width = 400, height = 100, r
 	const { med, mad } = medMad(sorted);
 	const xLo = med - 3 * mad;
 	const xHi = med + 3 * mad;
-	const domain = [
-		xLo < sorted[0] ? sorted[0] : xLo,
-		xHi > sorted[sorted.length - 1] ? sorted[sorted.length - 1] : xHi
-	];
+	const domain = absDomain
+		? [sorted[0], sorted[sorted.length - 1]]
+		: [
+				xLo < sorted[0] ? sorted[0] : xLo,
+				xHi > sorted[sorted.length - 1] ? sorted[sorted.length - 1] : xHi
+			];
 	const range = [0, width];
 
 	const scale = scaleLinear().domain(domain).range(range).clamp(true);

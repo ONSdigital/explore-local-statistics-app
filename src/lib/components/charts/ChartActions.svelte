@@ -73,7 +73,7 @@
 
 	async function downloadPNG(e) {
 		e.preventDefault();
-		const result = await snapdom(chartDiv);
+		const result = await snapdom(chartDiv, { embedFonts: true });
 		await result.download({ format: 'png', filename: `${indicator}-${chartType}.png` });
 		downloadEvent('png', metadata, chartType);
 	}

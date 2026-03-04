@@ -20,7 +20,7 @@
 
 	let keyboardMode = $state(false);
 
-	let _data = $derived(parseBeeswarmData(data, xKey, idKey));
+	let _data = $derived(parseBeeswarmData(data, xKey, idKey, metadata.slug === '4g-coverage')); // this should be done in the metatdata
 	let _sorted = $derived(_data ? [..._data.array].sort((a, b) => a[xKey] - b[xKey]) : null);
 	let _selected = $derived(
 		_data ? selected.map((cd, i) => ({ i, datum: _data.keyed[cd] })).filter((d) => d.datum) : []
@@ -109,8 +109,8 @@
 	{#if showIntervals && i === 0 && d.lci_95 != null && d.uci_95 != null}
 		{@const valueToX = (val) =>
 			((val - _data.domain[0]) / (_data.domain[1] - _data.domain[0])) * 100}
-		{@const lciX = valueToX(d.lci_95)}
-		{@const uciX = valueToX(d.uci_95)}
+		{@const lciX = d.lci_95 < _data.domain[0] ? valueToX(_data?.domain[0]) : valueToX(d.lci_95)}
+		{@const uciX = d.uci_95 > _data.domain[1] ? valueToX(_data.domain[1]) : valueToX(d.uci_95)}
 		<rect x={lciX} y="90" width={uciX - lciX} height="20" fill={color} opacity="0.5" />
 		<rect x={lciX} y="90" width="1" height="20" fill={color} />
 		<rect x={uciX - 1} y="90" width="1" height="20" fill={color} />

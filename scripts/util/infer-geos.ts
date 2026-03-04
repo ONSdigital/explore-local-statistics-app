@@ -16,7 +16,7 @@ const groups = [
 	},
 	{
 		key: 'rgn',
-		codes: ['E12', 'S92', 'N92', 'W92'],
+		codes: ['E12'],
 		label: 'Countries and regions'
 	},
 	{
