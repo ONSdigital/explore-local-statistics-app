@@ -5,7 +5,7 @@ const metadata = await readData('json-stat-metadata');
 
 export function makeGeoDatasetFilter(slug) {
 	const ds = metadata.link.item.find((ds) => ds.extension.slug === slug);
-	return ds ? (d) => ds.dimension.areacd.category.index[d.areacd] : () => false;
+	return ds ? (d) => d.areacd in ds.dimension.areacd.category.index : () => false;
 }
 
 export default function makeAreaListFilter(geo, year, indicator) {
