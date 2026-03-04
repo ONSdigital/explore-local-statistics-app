@@ -27,7 +27,7 @@
 	} = $props();
 
 	const fitBoundsOptions = { padding: 10 };
-	const noHighlight = ['K02', 'K03', 'K04']; // Don't highlight UK, GB or England & Wales on map
+	const noHighlight = ['K02', 'K03', 'K04', 'E92', 'W92', 'S92', 'N92']; // Don't highlight UK, GB or England & Wales on map
 
 	let map = $state();
 	let features = $state.raw();
