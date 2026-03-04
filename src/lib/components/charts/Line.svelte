@@ -89,7 +89,7 @@
 	const pointGap = 22;
 	let pointSpace = $derived(width / (pointsCount - 1));
 
-	const maxTickGap = 160; // in pixels
+	const maxTickGap = 172; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
