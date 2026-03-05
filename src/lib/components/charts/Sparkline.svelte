@@ -2,6 +2,7 @@
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { nice } from 'd3-array';
 	import { format } from 'd3-format';
+	import { area, curveLinear } from 'd3-shape';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { ONScolours } from '$lib/config';
@@ -17,6 +18,7 @@
 		formatValue = (d) => d,
 		valuePrefix = null,
 		valueSuffix = null,
+		showIntervals = false,
 		selected = []
 	} = $props();
 
@@ -48,7 +50,24 @@
 		const width = el.getBoundingClientRect().width;
 		if (width > margins[params.side]) margins[params.side] = width;
 	}
+	const getCIArea = area()
+		.x((d) => xScale(d.date))
+		.y0((d) => yScale(d.lci_95))
+		.y1((d) => yScale(d.uci_95))
+		.curve(curveLinear);
 </script>
+
+{#snippet ribbon(arr, color, opacity = 0.3)}
+	{#if showIntervals && arr.i == 0 && arr.data.every((d) => d.lci_95 != null && d.uci_95 != null)}
+		<path
+			d={getCIArea(arr.data)}
+			fill={color}
+			stroke="none"
+			{opacity}
+			style:pointer-events="none"
+		/>
+	{/if}
+{/snippet}
 
 {#snippet line(arr, width = 2, color = ONScolours.grey60)}
 	<polyline
@@ -111,6 +130,7 @@
 					{#key _selected}
 						{#each _selected || [] as d}
 							{@render line(d.data, 2, getPaletteColor(d.i, _selected.length))}
+							{@render ribbon(d, getPaletteColor(d.i, _selected.length))}
 						{/each}
 					{/key}
 				</g>

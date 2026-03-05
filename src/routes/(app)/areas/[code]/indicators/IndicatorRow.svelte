@@ -217,6 +217,7 @@
 								{formatValue}
 								valuePrefix={metadata.prefix}
 								valueSuffix={metadata.suffix}
+								{showIntervals}
 								{selected}
 							/>
 						{/snippet}
