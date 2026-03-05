@@ -136,7 +136,7 @@
 		.curve(curveLinear);
 
 	$inspect({ labelLookup });
-	$inspect({ _data });
+	$inspect({ data });
 	$inspect({ yDomain });
 </script>
 
@@ -226,10 +226,10 @@
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
-	style:padding-top={showIntervals ? '0px' : '20px'}
+	style:padding-top={showIntervals && 'uci_95' in data ? '0px' : '20px'}
 	aria-hidden="true"
 >
-	{#if showIntervals}
+	{#if showIntervals && 'uci_95' in data}
 		<div class="legend-container">
 			<svg width="300" height="60">
 				<!-- <rect x="2.5" y="1" width="25" height="25" fill={ONScolours.grey35}></rect> -->
@@ -363,7 +363,7 @@
 					{#each Object.values(_data.keyed) as arr, i}
 						{@render line(arr, lineStroke, linesGrey, lineOpacity)}
 					{/each}
-					{#if showIntervals}
+					{#if showIntervals && 'uci_95' in data}
 						{#each selectedData as arr, i}
 							{@render ribbon(arr, getPaletteColor(i, selectedData.length), 0.3, arr[0][idKey])}
 						{/each}
@@ -377,7 +377,7 @@
 				</g>
 				<g>
 					{#if hoveredArea}
-						{#if showIntervals}
+						{#if showIntervals && 'uci_95' in data}
 							{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
 						{/if}
 						{@render line(hovered, 4.5, ONScolours.white, 1)}
