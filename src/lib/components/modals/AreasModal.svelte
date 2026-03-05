@@ -72,6 +72,11 @@
 			on:change={(e) => addArea(e.detail)}
 			autoClear
 		/>
+		<div aria-live="polite" aria-atomic="true" class="area-limit-notice">
+			{#if _pageState.selectedAreas.length >= maxAreasSelectable}
+				Maximum of {maxAreasSelectable} areas selected.
+			{/if}
+		</div>
 	</div>
 	{#each _pageState.selectedAreas as area, i}
 		<Button
@@ -87,10 +92,18 @@
 	:global(.area-select__listbox) {
 		/* z-index: 1 !important; */
 	}
+
 	:global(.modal-contents .ons-btn) {
 		margin: 0.5em 0.5em 0 0;
 	}
+
 	.select-container {
 		margin-top: 1em;
+	}
+
+	.area-limit-notice {
+		margin-top: 0.5em;
+		font-size: 1.1rem;
+		min-height: 1.25em; /* prevents layout shift when message appears */
 	}
 </style>
