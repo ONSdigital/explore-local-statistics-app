@@ -10,10 +10,6 @@
 
 	let _pageState = $state(cloneState(pageState));
 	let _areas = $derived(data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
-	console.log(
-		'N09000001 in _areas:',
-		_areas.find((a) => a.areacd === 'N09000001')
-	);
 
 	function addArea(area) {
 		if (

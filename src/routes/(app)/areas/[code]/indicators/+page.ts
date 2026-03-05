@@ -23,10 +23,6 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			(await fetch(areasPath)).json(),
 			(await fetch(relatedPath)).json()
 		]);
-		console.log(
-			'raw areas N09000001:',
-			areas.find((a) => a.areacd === 'N09000001')
-		);
 		areas.sort((a, b) => a.areanm.localeCompare(b.areanm, 'en-GB'));
 
 		const area = parentData.area;
