@@ -19,10 +19,10 @@
 			const rect = el.getBoundingClientRect();
 			const isInDialog =
 				rect.top < event.clientY &&
-				// event.clientY < rect.top + rect.height &&
 				rect.left < event.clientX &&
 				event.clientX < rect.left + rect.width;
 			if (!isInDialog) {
+				document.body.style.overflow = '';
 				el.close();
 				onCancel();
 			}
@@ -41,6 +41,7 @@
 	small
 	on:click={() => {
 		onOpen();
+		document.body.style.overflow = 'hidden';
 		dialog.showModal();
 	}}>{label}</Button
 >
@@ -53,6 +54,7 @@
 	<Button
 		small
 		on:click={() => {
+			document.body.style.overflow = '';
 			onConfirm();
 			dialog.close();
 		}}>Confirm changes</Button
@@ -61,6 +63,7 @@
 		variant="secondary"
 		small
 		on:click={() => {
+			document.body.style.overflow = '';
 			dialog.close();
 			onCancel();
 		}}>Cancel</Button
