@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
+	import { format } from 'd3-format';
 	import { parseChartData, makeCurlyBrace, getPaletteColor } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { ONScolours } from '$lib/config';
@@ -41,6 +42,7 @@
 			return { areacd: d[0].areacd, areanm: d[0].areanm };
 		})
 	);
+	const formatXTick = format(',.0f');
 
 	const maxHeight = 500;
 	const maxBarHeight = 25;
@@ -317,7 +319,7 @@
 			{#each xScale.ticks(nXTicks) as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{prefix}{formatValue(xTick)}{suffix}
+					{prefix}{formatXTick(xTick)}{suffix}
 				</div>
 			{/each}
 		</div>
