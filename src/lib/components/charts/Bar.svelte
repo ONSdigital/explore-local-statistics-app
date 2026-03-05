@@ -271,12 +271,12 @@
 	bind:clientWidth={width}
 	class="bar-wrapper"
 	style:padding-right="{rightMargin}px"
-	style:padding-top={showIntervals ? '10px' : '30px'}
+	style:padding-top={showIntervals && 'uci_95' in data ? '10px' : '30px'}
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
 	aria-hidden="true"
 >
-	{#if showIntervals}
+	{#if showIntervals && 'uci_95' in data}
 		<div class="legend-container">
 			<svg width="300" height="60">
 				<rect x="0" y="1" width="50" height="16" fill={ONScolours.grey40}></rect>
@@ -380,7 +380,7 @@
 			{#if _data && xScale && yScale}
 				<g opacity={hovered ? 0.5 : 1}>
 					{#each _data.array as b, i (b[idKey])}
-						{#if !showIntervals}
+						{#if !showIntervals || !('uci_95' in data)}
 							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey], setBarStroke(b[idKey]))}
 						{:else}
 							{@render bar(
@@ -432,7 +432,7 @@
 				</g>
 				<g>
 					{#if hovered}
-						{#if !showIntervals}
+						{#if !showIntervals || !('uci_95' in data)}
 							{@render bar(hovered, ONScolours.highlightOrangeDark, 1, hoveredArea)}
 						{:else}
 							{@render bar(hovered, ONScolours.highlightOrangeDark, 0.55, hoveredArea)}
