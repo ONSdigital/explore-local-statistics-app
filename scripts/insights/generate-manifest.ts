@@ -9,6 +9,7 @@ const paths = csvs.map((f) => join(dir, f));
 
 // Define multi-indicator datasets
 let multi = [
+	'environment-regulating',
 	'personal-wellbeing-estimates',
 	'average-travel-time',
 	'employment-rate-ni',
