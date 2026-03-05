@@ -27,11 +27,13 @@ export default function getSimilarAreas(params = {}) {
 
 		if (clusterLookup) {
 			const key = clusterLookup[type];
-			const areas = areasClusters.clusters[type][key];
-			obj.cluster = { key };
-			obj.cluster.label = key.toUpperCase();
-			obj.cluster.areas = params.includeNames ? addAreaNames(areas) : areas;
-			obj.cluster.description = areasClusters.descriptions[type][key];
+			if (key) {
+				const areas = areasClusters.clusters[type][key];
+				obj.cluster = { key };
+				obj.cluster.label = key.toUpperCase();
+				obj.cluster.areas = params.includeNames ? addAreaNames(areas) : areas;
+				obj.cluster.description = areasClusters.descriptions[type][key];
+			}
 		}
 		clusters.push(obj);
 	}
