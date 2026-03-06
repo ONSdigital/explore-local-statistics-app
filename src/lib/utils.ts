@@ -201,3 +201,11 @@ export function downloadEvent(
 	};
 	analyticsEvent(eventData);
 }
+
+export function filterExtremeAreas(data, extremeAreas) {
+	if (!extremeAreas) {
+		return data;
+	}
+
+	return data.filter((d) => !extremeAreas.includes(d.areacd));
+}

@@ -115,7 +115,7 @@
 		{/if}
 		<Observe bind:visible>
 			<div class="indicator-chart">
-				<ChartDataLoader id="{indicator} {chartType}" {dataUrl} {visible}>
+				<ChartDataLoader id="{indicator} {chartType}" {dataUrl} {visible} {indicator}>
 					{#snippet chart(data)}
 						{@const Component = chartComponents[chartType]}
 						<Component
