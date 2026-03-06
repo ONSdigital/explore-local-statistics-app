@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import { format } from 'd3-format';
 	import { parseChartData, makeCurlyBrace, getPaletteColor } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { ONScolours } from '$lib/config';
@@ -42,7 +41,7 @@
 			return { areacd: d[0].areacd, areanm: d[0].areanm };
 		})
 	);
-	const formatXTick = format(',.0f');
+	// const formatXTick = format(',.0f');
 
 	const maxHeight = 500;
 	const maxBarHeight = 25;
@@ -163,6 +162,7 @@
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	$inspect({ labelLookup });
+	$inspect({ formatValue });
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
@@ -319,7 +319,7 @@
 			{#each xScale.ticks(nXTicks) as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{prefix}{formatXTick(xTick)}{suffix}
+					{prefix}{formatValue(xTick)}{suffix}
 				</div>
 			{/each}
 		</div>

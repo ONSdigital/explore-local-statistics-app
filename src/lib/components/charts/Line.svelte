@@ -45,6 +45,7 @@
 		const maxWidth = Math.max(...Object.values(yTickLabelWidths));
 		leftMargin = maxWidth + 12;
 	}
+
 	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 	let suffix = $derived(metadata.suffix);
@@ -83,7 +84,7 @@
 	let finalHoveredValue = $derived(hovered ? hovered[hovered.length - 1][yKey] : null);
 
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
-	const formatYTick = format(',.0f');
+	// const formatYTick = format(',.0f');
 
 	let pointsCount = $derived(_data ? new Set(_data.array.map((d) => d.period)).size : 0);
 	const pointGap = 22;
@@ -288,12 +289,14 @@
 			</div>
 			<div class="line-y-axis">
 				<div class="y-baseline"></div>
-				{#each yScale.ticks(5) as yTick, i}
-					<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
-					<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
-						{prefix}{formatYTick(yTick)}{suffix}
-					</div>
-				{/each}
+				{#key yDomain}
+					{#each yScale.ticks(5) as yTick, i}
+						<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
+						<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
+							{prefix}{formatValue(yTick)}{suffix}
+						</div>
+					{/each}
+				{/key}
 			</div>
 			<div class="margin-labels" style:right="-{rightMargin}px">
 				{#if width >= widthThreshold && hoveredArea}
