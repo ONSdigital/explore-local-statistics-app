@@ -26,20 +26,28 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 		areas.sort((a, b) => a.areanm.localeCompare(b.areanm, 'en-GB'));
 
 		const area = parentData.area;
-		const geoLevel = geoLevelsLookup[code.slice(0, 3)];
+		const typecd = code.slice(0, 3);
+		const geoLevel = geoLevelsLookup[typecd];
 		const parentLevel = geoLevels[['ctry', 'rgn'].includes(geoLevel?.key) ? 'ctry' : 'rgn'];
 		const areaParent = area.properties.parents.find((p) =>
 			parentLevel.codes.includes(p.areacd.slice(0, 3))
 		);
 
-		const geoGroups: any[] = [
-			{
-				id: 'level',
-				label: `All ${pluralise(geoLevel.label.toLowerCase())}`,
-				geoLevel: geoLevel.key
-			}
-		];
-		if (geoLevel && related?.siblings?.parent && !geoLevels.ctry.codes.includes(code.slice(0, 3)))
+		const geoGroups: { [key: string]: string }[] = ['N92', 'S92', 'W92'].includes(typecd)
+			? [
+					{
+						id: 'level-ctry',
+						label: 'All countries',
+						geoLeve: 'ctry'
+					}
+				]
+			: [];
+		geoGroups.push({
+			id: 'level',
+			label: `All ${pluralise(geoLevel.label.toLowerCase())}`,
+			geoLevel: geoLevel.key
+		});
+		if (geoLevel && related?.siblings?.parent)
 			geoGroups.push({
 				id: 'siblings',
 				label: `All ${pluralise(geoLevel.label.toLowerCase())} ${getName(related.siblings.parent, 'in')}`,
@@ -69,7 +77,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			description: `Find facts and figures from across the ONS on ${getName(area.properties, 'the')} (${area.properties.typenm}).`,
 			pageType: `area page`,
 			breadcrumbLinks: [
-				{ label: 'Home', href: '/' },
+				{ label: 'Home', href: resolve('/') },
 				{ label: 'Explore local statistics', href: resolve('/') },
 				...[...[...area.properties.parents].reverse(), area.properties].map((p) => ({
 					label: getName(p),

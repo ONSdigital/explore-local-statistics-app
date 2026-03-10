@@ -42,7 +42,7 @@
 		const defaultComparisonArea = data.areas.find((a) => a.areacd === data.parent.areacd);
 		return {
 			selectedAreas: [defaultComparisonArea],
-			selectedGeoGroup: data.geoGroups[0],
+			selectedGeoGroup: data.geoGroups.find((g) => g.id === 'level') || data.geoGroups[0],
 			selectedPeriodRange: [data.periods[0], data.periods[data.periods.length - 1]],
 			selectedCluster: data?.related?.similar?.[0],
 			showConfidenceIntervals: false
