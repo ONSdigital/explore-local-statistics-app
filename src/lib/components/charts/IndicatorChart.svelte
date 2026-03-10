@@ -35,8 +35,8 @@
 	let el = $state();
 	let fullScreenMode = $state(false);
 
-	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
-	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
+	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
+	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 	let hasTimeRange = $derived(
 		['line', 'table'].includes(chartType) && timeRange[0] !== timeRange[1]
 	);
