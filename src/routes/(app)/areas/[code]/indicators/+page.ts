@@ -69,7 +69,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			description: `Find facts and figures from across the ONS on ${getName(area.properties, 'the')} (${area.properties.typenm}).`,
 			pageType: `area page`,
 			breadcrumbLinks: [
-				{ label: 'Home', href: resolve('/') },
+				{ label: 'Home', href: '/' },
 				{ label: 'Explore local statistics', href: resolve('/') },
 				...[...[...area.properties.parents].reverse(), area.properties].map((p) => ({
 					label: getName(p),
