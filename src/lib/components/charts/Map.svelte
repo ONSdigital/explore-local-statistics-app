@@ -205,11 +205,14 @@
 		data={_data}
 		{breaks}
 		{hovered}
+		onHover={(e) => {
+			hovered = e.id || null;
+			onHover(e);
+		}}
 		selectedAreas={selectedFeatures.map((ft) => ft.properties)}
 		prefix={metadata.prefix}
 		suffix={metadata.suffix}
 		format={formatValue}
-		on:hover={doHover}
 	/>
 </div>
 
