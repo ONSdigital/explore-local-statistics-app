@@ -26,10 +26,7 @@
 			20 areas most similar to {getName(areaProps, 'the')}
 		</li>
 	</ul>
-	<ClusterMap
-		{selectedCluster}
-		mapDescription="Map showing areas similar to {getName(areaProps, 'the')}"
-	/>
+	<ClusterMap {areaProps} {selectedCluster} />
 	{#if selectedCluster.cluster}
 		<p>
 			<strong>{getName(areaProps)}</strong> is in
