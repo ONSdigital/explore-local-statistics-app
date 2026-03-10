@@ -72,7 +72,7 @@
 				renderedFeatures.push(ft);
 			}
 		}
-		const bounds = bbox(featureCollection(renderedFeatures));
+		const bounds = renderedFeatures.length ? bbox(featureCollection(renderedFeatures)) : ukBounds;
 		return { renderedFeatures, bounds };
 	};
 

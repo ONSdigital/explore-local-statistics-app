@@ -23,7 +23,7 @@
 			: []
 	);
 	let bounds = $derived(
-		features
+		similarAreas.length || clusterAreas.length
 			? bbox({
 					type: 'FeatureCollection',
 					features: [...similarAreas, ...clusterAreas]
