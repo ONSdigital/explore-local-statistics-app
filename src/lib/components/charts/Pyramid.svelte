@@ -125,10 +125,12 @@
 {/snippet}
 
 <p class="ons-u-vh">
-	Population pyramid chart showing the percentage distribution of the total population by five-year
-	age band and sex. In {_data?.keyed?.[selected[0]][0][labelKey]}, the population was {formatValue(
-		sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Female')
-	)}% female and {formatValue(sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Male'))}% male.
+	{#if _data?.keyed?.[selected[0]]}
+		Population pyramid chart showing the percentage distribution of the total population by
+		five-year age band and sex. In {_data?.keyed?.[selected[0]][0][labelKey]}, the population was {formatValue(
+			sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Female')
+		)}% female and {formatValue(sumBySex(_data?.keyed?.[selected[0]][0][idKey], 'Male'))}% male.
+	{/if}
 </p>
 
 <div class="chart-container" bind:clientWidth={w} aria-hidden="true">
