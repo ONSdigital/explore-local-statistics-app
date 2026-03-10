@@ -74,7 +74,6 @@
 			_hovered = _sorted[activeIndex];
 		}
 	}
-	$inspect(_data);
 </script>
 
 {#snippet point(d, radius = 8, color)}

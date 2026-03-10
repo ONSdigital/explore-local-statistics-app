@@ -135,10 +135,6 @@
 		.y0((d) => yScale(d.lci_95))
 		.y1((d) => yScale(d.uci_95))
 		.curve(curveLinear);
-
-	$inspect({ labelLookup });
-	$inspect({ data });
-	$inspect({ yDomain });
 </script>
 
 {#snippet line(

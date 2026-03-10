@@ -35,7 +35,6 @@
 	}
 
 	let pivotedData = $derived(data ? pivotData(data) : null);
-	$inspect(pivotedData);
 </script>
 
 <Table data={pivotedData} columns={makeColumns(pivotedData)} sortable compact height={400} />

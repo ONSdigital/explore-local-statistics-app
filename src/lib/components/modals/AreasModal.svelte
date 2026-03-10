@@ -28,7 +28,6 @@
 		const _i = mode === 'area' ? i + 1 : i;
 		return getPaletteColor(_i, _count);
 	}
-	$inspect(data);
 </script>
 
 <Modal

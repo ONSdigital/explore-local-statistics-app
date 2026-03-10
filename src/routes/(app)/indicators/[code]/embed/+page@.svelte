@@ -3,8 +3,6 @@
 	import IndicatorChart from '$lib/components/charts/IndicatorChart.svelte';
 
 	let { data } = $props();
-
-	$inspect({ data });
 </script>
 
 <Embed>
