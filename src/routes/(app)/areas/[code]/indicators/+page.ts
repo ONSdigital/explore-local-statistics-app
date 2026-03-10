@@ -39,7 +39,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 				geoLevel: geoLevel.key
 			}
 		];
-		if (geoLevel && related?.siblings?.parent)
+		if (geoLevel && related?.siblings?.parent && !geoLevels.ctry.codes.includes(code.slice(0, 3)))
 			geoGroups.push({
 				id: 'siblings',
 				label: `All ${pluralise(geoLevel.label.toLowerCase())} ${getName(related.siblings.parent, 'in')}`,
