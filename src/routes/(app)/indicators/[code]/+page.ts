@@ -19,7 +19,7 @@ function getInitialArea(indicator, areas: areaObject[], areacd: string) {
 
 export const load: PageLoad = async ({ params, url, fetch }) => {
 	const path = resolve(`/api/v1/metadata/indicators/${params.code}?fullDims=true`);
-	const areasPath = resolve(`/api/v1/geo/list?indicator=${params.code}&year=all`);
+	const areasPath = resolve(`/api/v1/geo/list?indicator=${params.code}&year=latest`);
 
 	try {
 		const [indicator, areas] = await Promise.all([
