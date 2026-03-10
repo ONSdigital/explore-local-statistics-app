@@ -63,7 +63,7 @@
 	async function copyEmbedCode() {
 		await navigator.clipboard.writeText(embedCode);
 		clipped = true;
-		console.log({
+		analyticsEvent({
 			event: 'embed',
 			pageUrl: embedUrl,
 			chartTitle: metadata.label,
