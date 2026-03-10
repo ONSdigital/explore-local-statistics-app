@@ -73,7 +73,7 @@ async function getYear(codes, groups, countries) {
 	if (!endDates.endDates) return endDates.latestYear;
 
 	for (const year of [...endDates.endDates].reverse()) {
-		if (year.codes.some((cd) => codes.includes(cd))) return year.year - 1;
+		if (year.codes.some((cd) => codes.includes(cd))) return year.year;
 	}
 	return endDates.latestYear;
 }
