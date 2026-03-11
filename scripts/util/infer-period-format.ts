@@ -19,7 +19,7 @@ function getFrequency(gap) {
 }
 
 function getPeriodFormat(frequency, period) {
-	if (frequency === 'daily') return 'day';
+	if (['daily', 'weekly'].includes(frequency)) return 'day';
 
 	if (!period[1]) {
 		if (['monthly', 'quarterly'].includes(frequency)) return 'month';

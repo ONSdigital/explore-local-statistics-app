@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from 'fs';
-import { csvParse, csvFormat, autoType } from 'd3-dsv';
+import { writeFileSync } from 'fs';
+import { csvParse, autoType } from 'd3-dsv';
 import { geoLevels, geoLevelsNamed } from '../src/lib/config/geoLevels';
 
 const topoUrl =
@@ -76,12 +76,14 @@ for (const key of objectKeys) list[key] = {};
 
 for (let i = 0; i < listRaw.length; i++) {
 	const row = listRaw[i];
-	for (const key of arrayKeys) {
-		if (key !== 'parentcd' || includeParent.has(row.areacd.slice(0, 3))) list[key].push(row[key]);
-		else list[key].push(null);
-	}
-	for (const key of objectKeys) {
-		if (row[key]) list[key][i] = row[key];
+	if (!row.end) {
+		for (const key of arrayKeys) {
+			if (key !== 'parentcd' || includeParent.has(row.areacd.slice(0, 3))) list[key].push(row[key]);
+			else list[key].push(null);
+		}
+		for (const key of objectKeys) {
+			if (row[key]) list[key][i] = row[key];
+		}
 	}
 }
 const listPath = `${outputDir}/data/areas-list.json`;

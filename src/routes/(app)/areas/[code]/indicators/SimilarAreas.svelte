@@ -11,7 +11,7 @@
 
 <div class="ons-u-mb-l">
 	<ul class="map-legend">
-		{#if selectedCluster.cluster}
+		{#if selectedCluster?.cluster}
 			<li>
 				<span
 					class="map-legend-marker"
@@ -26,11 +26,8 @@
 			20 areas most similar to {getName(areaProps, 'the')}
 		</li>
 	</ul>
-	<ClusterMap
-		{selectedCluster}
-		mapDescription="Map showing areas similar to {getName(areaProps, 'the')}"
-	/>
-	{#if selectedCluster.cluster}
+	<ClusterMap {areaProps} {selectedCluster} />
+	{#if selectedCluster?.cluster}
 		<p>
 			<strong>{getName(areaProps)}</strong> is in
 			<Em color={ONScolours.oceanBlue}>

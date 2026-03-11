@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-import { resolve } from '$app/paths';
 
 export const load: PageLoad = async () => {
 	return {
@@ -8,7 +7,7 @@ export const load: PageLoad = async () => {
 		description:
 			'Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.',
 		pageType: 'home page',
-		breadcrumbLinks: [{ label: 'Home', href: resolve('/') }],
+		breadcrumbLinks: [{ label: 'Home', href: '/' }],
 		breadcrumbBackground: '#e9eff4'
 	};
 };

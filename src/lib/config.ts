@@ -101,3 +101,8 @@ export const markerPathsArray = Object.values(markerPaths);
 export const maxAreasSelectable = 10;
 
 export const ukBounds = [-8.65, 49.867, 1.761, 60.856];
+
+export const extremeAreas = {
+	'gross-domestic-product-per-head-current-market-price': ['E09000001'],
+	'gross-domestic-product-per-head-chained-volume-measure': ['E09000001']
+};

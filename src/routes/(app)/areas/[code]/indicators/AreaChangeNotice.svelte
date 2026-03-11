@@ -5,8 +5,6 @@
 	import { Container, Notice } from '@onsvisual/svelte-components';
 
 	let { areaProps } = $props();
-
-	$inspect({ areaProps });
 </script>
 
 {#if areaProps.end}

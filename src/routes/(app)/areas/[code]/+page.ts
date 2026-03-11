@@ -16,8 +16,8 @@ export const load: PageLoad = async ({ parent }) => {
 		description: `Find facts and figures from across the ONS on ${getName(area.properties, 'the')} (${area.properties.typenm}).`,
 		pageType: `area page`,
 		breadcrumbLinks: [
-			{ label: 'Home', href: resolve('/') },
-			{ label: 'Explore local statistics', href: resolve('/') },
+			{ label: 'Home', href: '/' },
+			{ label: 'Explore local statistics', href: '/' },
 			...[...area.properties.parents].reverse().map((p) => ({
 				label: getName(p),
 				href: resolve(`/areas/${p.areacd}`)

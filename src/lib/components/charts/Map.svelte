@@ -3,7 +3,8 @@
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
-	import { ukBounds, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
+	import { getPaletteColor } from './chartHelpers';
+	import { ukBounds, ONScolours } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -72,7 +73,7 @@
 				renderedFeatures.push(ft);
 			}
 		}
-		const bounds = bbox(featureCollection(renderedFeatures));
+		const bounds = renderedFeatures.length ? bbox(featureCollection(renderedFeatures)) : ukBounds;
 		return { renderedFeatures, bounds };
 	};
 
@@ -88,8 +89,8 @@
 				ft.properties = {
 					...ft.properties,
 					...d,
-					color: ONSpalette[colorIndex],
-					textColor: ONStextPalette[colorIndex]
+					color: getPaletteColor(colorIndex, selected.length),
+					textColor: getPaletteColor(colorIndex, selected.length, 'text')
 				};
 				selectedFeatures.push(ft);
 			}
@@ -122,7 +123,8 @@
 				fitBoundsOptions,
 				maxBounds: [-19, 48, 12, 62],
 				cooperativeGestures: true,
-				preserveDrawingBuffer: true
+				preserveDrawingBuffer: true,
+				dragRotate: false
 			}}
 			controls
 			mapDescription="Map of {metadata.label}"
@@ -205,11 +207,14 @@
 		data={_data}
 		{breaks}
 		{hovered}
+		onHover={(e) => {
+			hovered = e.id || null;
+			onHover(e);
+		}}
 		selectedAreas={selectedFeatures.map((ft) => ft.properties)}
 		prefix={metadata.prefix}
 		suffix={metadata.suffix}
 		format={formatValue}
-		on:hover={doHover}
 	/>
 </div>
 

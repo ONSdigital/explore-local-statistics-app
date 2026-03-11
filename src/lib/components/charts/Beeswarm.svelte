@@ -20,7 +20,7 @@
 
 	let keyboardMode = $state(false);
 
-	let _data = $derived(parseBeeswarmData(data, xKey, idKey, metadata.slug === '4g-coverage')); // this should be done in the metatdata
+	let _data = $derived(parseBeeswarmData(data, xKey, idKey, metadata?.slug === '4g-coverage')); // this should be done in the metatdata
 	let _sorted = $derived(_data ? [..._data.array].sort((a, b) => a[xKey] - b[xKey]) : null);
 	let _selected = $derived(
 		_data ? selected.map((cd, i) => ({ i, datum: _data.keyed[cd] })).filter((d) => d.datum) : []
@@ -74,7 +74,6 @@
 			_hovered = _sorted[activeIndex];
 		}
 	}
-	$inspect(_data);
 </script>
 
 {#snippet point(d, radius = 8, color)}

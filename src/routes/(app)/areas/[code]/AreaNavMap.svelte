@@ -35,7 +35,8 @@
 		options={{
 			fitBoundsOptions: { padding: 20 },
 			maxBounds: [-19, 48, 12, 62],
-			cooperativeGestures: true
+			cooperativeGestures: true,
+			dragRotate: false
 		}}
 		controls
 		{mapDescription}

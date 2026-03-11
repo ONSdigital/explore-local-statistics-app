@@ -36,7 +36,6 @@
 		analyticsEvent(eventData);
 		goto(resolve(url), { noScroll: !isPostcode });
 	}
-	$inspect(data);
 </script>
 
 <svelte:head>

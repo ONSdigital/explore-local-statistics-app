@@ -23,27 +23,31 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			(await fetch(areasPath)).json(),
 			(await fetch(relatedPath)).json()
 		]);
-		console.log(
-			'raw areas N09000001:',
-			areas.find((a) => a.areacd === 'N09000001')
-		);
 		areas.sort((a, b) => a.areanm.localeCompare(b.areanm, 'en-GB'));
 
 		const area = parentData.area;
-		const geoLevel = geoLevelsLookup[code.slice(0, 3)];
+		const typecd = code.slice(0, 3);
+		const geoLevel = geoLevelsLookup[typecd];
 		const parentLevel = geoLevels[['ctry', 'rgn'].includes(geoLevel?.key) ? 'ctry' : 'rgn'];
 		const areaParent = area.properties.parents.find((p) =>
 			parentLevel.codes.includes(p.areacd.slice(0, 3))
 		);
 
-		const geoGroups: any[] = [
-			{
-				id: 'level',
-				label: `All ${pluralise(geoLevel.label.toLowerCase())}`,
-				geoLevel: geoLevel.key
-			}
-		];
-		if (geoLevel && related?.siblings?.parent)
+		const geoGroups: { [key: string]: string }[] = ['N92', 'S92', 'W92'].includes(typecd)
+			? [
+					{
+						id: 'level-ctry',
+						label: 'All countries',
+						geoLeve: 'ctry'
+					}
+				]
+			: [];
+		geoGroups.push({
+			id: 'level',
+			label: `All ${pluralise(geoLevel.label.toLowerCase())}`,
+			geoLevel: geoLevel.key
+		});
+		if (geoLevel && related?.siblings?.parent && related.siblings.parent.areacd !== 'K02000001')
 			geoGroups.push({
 				id: 'siblings',
 				label: `All ${pluralise(geoLevel.label.toLowerCase())} ${getName(related.siblings.parent, 'in')}`,

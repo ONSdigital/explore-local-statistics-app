@@ -38,7 +38,12 @@ export function parseDataKeyed(data: jsonDataCols, zKey: string, rowTemplate: js
 }
 
 export function makeValueFormatter(dp) {
-	return format(`,.${dp ?? 0}f`);
+	const fmt = format(`,.${dp ?? 0}f`);
+
+	return (v) => {
+		const s = fmt(v);
+		return s.replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+	};
 }
 
 export function parsePeriod(period) {
@@ -195,4 +200,12 @@ export function downloadEvent(
 			: {})
 	};
 	analyticsEvent(eventData);
+}
+
+export function filterExtremeAreas(data, extremeAreas) {
+	if (!extremeAreas) {
+		return data;
+	}
+
+	return data.filter((d) => !extremeAreas.includes(d.areacd));
 }

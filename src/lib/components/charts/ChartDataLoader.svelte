@@ -1,7 +1,16 @@
 <script lang="ts">
 	import Spinner from '../visuals/Spinner.svelte';
+	import { extremeAreas } from '$lib/config';
+	import { filterExtremeAreas, parseData } from '$lib/utils';
 
-	let { chart, dataUrl, id = dataUrl, visible = true, noDataMessage = null } = $props();
+	let {
+		chart,
+		dataUrl,
+		id = dataUrl,
+		visible = true,
+		noDataMessage = null,
+		indicator = null
+	} = $props();
 
 	let loadedDataUrl: string | null = null;
 	let loadedData: jsonDataCols | errorObject | null = null;
@@ -15,7 +24,20 @@
 		if (dataUrl !== loadedDataUrl) {
 			loadedDataUrl = dataUrl;
 			try {
-				loadedData = await (await fetch(dataUrl)).json();
+				let fetchedData = await (await fetch(dataUrl)).json();
+
+				if (indicator && extremeAreas[indicator] && !fetchedData.message) {
+					const rows = parseData(fetchedData);
+					const filtered = filterExtremeAreas(rows, extremeAreas[indicator]);
+
+					const cols = Object.keys(fetchedData);
+					fetchedData = {};
+					for (const col of cols) {
+						fetchedData[col] = filtered.map((row) => row[col]);
+					}
+				}
+
+				loadedData = fetchedData;
 				console.log(`Loaded data for ${id}`);
 				return loadedData;
 			} catch {

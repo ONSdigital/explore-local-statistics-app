@@ -2,6 +2,13 @@ export const DATA_DIR = './scripts/raw-data';
 
 export const skipDatasets = ['population-under-devolution-deal-in-england'];
 
+export const definedPeriodFormats = {
+	'network-coverage-4g': { frequency: 'quarterly', periodFormat: 'month' },
+	'network-coverage-5g': { frequency: 'quarterly', periodFormat: 'month' },
+	'premises-below-30': { frequency: 'quarterly', periodFormat: 'month' },
+	'gigabit-capable-broadband': { frequency: 'quarterly', periodFormat: 'month' }
+};
+
 const cols = {
 	AREACD: {
 		name: 'areacd',

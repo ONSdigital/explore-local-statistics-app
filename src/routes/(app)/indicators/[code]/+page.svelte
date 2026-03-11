@@ -11,7 +11,6 @@
 	import IndicatorChart from '$lib/components/charts/IndicatorChart.svelte';
 
 	let { data } = $props();
-	$inspect(data);
 
 	let formatPeriod = $derived(makePeriodFormatter(data.indicator.periodFormat));
 
@@ -41,8 +40,6 @@
 	});
 
 	let caveats = $derived(new MarkdownIt().render(data.indicator.caveats[0]));
-
-	$inspect(pageState.selectedAreas);
 </script>
 
 <Hero

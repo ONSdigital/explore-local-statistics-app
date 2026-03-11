@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
+	import { getName } from '@onsvisual/robo-utils';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import { getMapFeatures } from '$lib/utils';
 	import { ukBounds, ONScolours } from '$lib/config';
@@ -10,10 +11,11 @@
 
 	const fitBoundsOptions = { padding: 10 };
 
-	let { selectedCluster, mapDescription } = $props();
+	let { areaProps, selectedCluster } = $props();
 
+	let mapDescription = $derived(`Map showing areas similar to ${getName(areaProps, 'the')}`);
 	let similarAreas = $derived(
-		features ? selectedCluster.similar.map((area) => features[area.areacd]) : []
+		features ? [areaProps, ...selectedCluster.similar].map((area) => features[area.areacd]) : []
 	);
 	let clusterAreas = $derived(
 		features && selectedCluster.cluster
@@ -21,7 +23,7 @@
 			: []
 	);
 	let bounds = $derived(
-		features
+		similarAreas.length || clusterAreas.length
 			? bbox({
 					type: 'FeatureCollection',
 					features: [...similarAreas, ...clusterAreas]
@@ -50,7 +52,8 @@
 			fitBoundsOptions,
 			maxBounds: [-19, 48, 12, 62],
 			cooperativeGestures: true,
-			preserveDrawingBuffer: true
+			preserveDrawingBuffer: true,
+			dragRotate: false
 		}}
 		controls
 		{mapDescription}
@@ -101,9 +104,15 @@
 			promoteId="areacd"
 		>
 			<MapLayer
+				id="similar-outline"
+				type="line"
+				paint={{ 'line-color': 'white', 'line-width': 3 }}
+				order="place_other"
+			/>
+			<MapLayer
 				id="similar-line"
 				type="line"
-				paint={{ 'line-color': 'black', 'line-width': 1.5 }}
+				paint={{ 'line-color': 'black', 'line-width': 2 }}
 				order="place_other"
 			/>
 		</MapSource>

@@ -17,7 +17,7 @@
 			'rgba(0,78,166,.8)',
 			'rgba(0,13,84,.8)'
 		],
-		format = (d) => d.toFixed(0),
+		format = (d) => d,
 		prefix = '',
 		suffix = '',
 		snapTicks = true,

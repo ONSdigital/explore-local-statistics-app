@@ -13,7 +13,7 @@ export const load: PageLoad = async ({ fetch }) => {
 		description: `Explore ${taxonomy.meta.count} local datasets from the ONS, including disposable household income, participation in further education and life satisfaction.`,
 		pageType: 'indicators page',
 		breadcrumbLinks: [
-			{ label: 'Home', href: resolve('/') },
+			{ label: 'Home', href: '/' },
 			{ label: 'Explore local statistics', href: resolve('/') }
 		]
 	};

@@ -10,10 +10,6 @@
 
 	let _pageState = $state(cloneState(pageState));
 	let _areas = $derived(data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
-	console.log(
-		'N09000001 in _areas:',
-		_areas.find((a) => a.areacd === 'N09000001')
-	);
 
 	function addArea(area) {
 		if (
@@ -32,7 +28,6 @@
 		const _i = mode === 'area' ? i + 1 : i;
 		return getPaletteColor(_i, _count);
 	}
-	$inspect(data);
 </script>
 
 <Modal
@@ -72,9 +67,9 @@
 			on:change={(e) => addArea(e.detail)}
 			autoClear
 		/>
-		<div aria-live="polite" aria-atomic="true" class="area-limit-notice">
+		<div aria-live="polite" aria-atomic="true">
 			{#if _pageState.selectedAreas.length >= maxAreasSelectable}
-				Maximum of {maxAreasSelectable} areas selected.
+				Maximum of {maxAreasSelectable} areas selected
 			{/if}
 		</div>
 	</div>
@@ -89,21 +84,11 @@
 </Modal>
 
 <style>
-	:global(.area-select__listbox) {
-		/* z-index: 1 !important; */
-	}
-
 	:global(.modal-contents .ons-btn) {
 		margin: 0.5em 0.5em 0 0;
 	}
 
 	.select-container {
 		margin-top: 1em;
-	}
-
-	.area-limit-notice {
-		margin-top: 0.5em;
-		font-size: 1.1rem;
-		min-height: 1.25em; /* prevents layout shift when message appears */
 	}
 </style>
