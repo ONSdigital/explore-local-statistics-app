@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleLinear } from 'd3-scale';
-	import { parseChartData, makeCurlyBrace, getPaletteColor } from './chartHelpers';
+	import { parseChartData, getPaletteColor } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { ONScolours } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';

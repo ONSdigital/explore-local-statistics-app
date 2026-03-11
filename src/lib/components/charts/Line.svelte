@@ -2,14 +2,7 @@
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { nice } from 'd3-array';
 	import { area, curveLinear } from 'd3-shape';
-	import { format } from 'd3-format';
-	import {
-		parseChartData,
-		getPaletteColor,
-		getMarkerKey,
-		makeCurlyBrace,
-		makeQuadtree
-	} from './chartHelpers';
+	import { parseChartData, getPaletteColor, getMarkerKey, makeQuadtree } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { markerPaths, ONScolours } from '$lib/config';
