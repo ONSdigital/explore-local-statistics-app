@@ -243,7 +243,7 @@ export default async function generateXLSX(datasets) {
 			'[Visit Explore Local Statistics on the ONS website](https://www.ons.gov.uk)',
 			'## Notes',
 			'Some cells are blank, indicating unavailable data.',
-			"Dates follow the ISO 8601 standard. Some dates express time periods in an extended 'YYYY-MM-DD/PnI' format, where 'P' means it's a period, 'n' is the number of time units and 'I' is the type of time unit (Y = year, M = month, W = week, D = day).",
+			"Dates follow the ISO 8601 standard, using a 'YYYY-MM-DD' format. Some dates express time periods in an extended 'YYYY-MM-DD/PnI' format, where 'P' means it's a period, 'n' is the number of time units and 'I' is the type of time unit (Y = year, M = month, W = week, D = day).",
 			'## Quality and methodology',
 			'Details of the Explore Local Statistics service are available at the link below, including its strengths and limitations, methods used, data uses and users.',
 			'[Quality and methodology information](https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/methodologies/explorelocalstatisticsserviceqmi)'
