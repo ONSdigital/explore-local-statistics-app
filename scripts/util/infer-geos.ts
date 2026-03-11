@@ -24,7 +24,9 @@ async function getStartDates(groups: areaGroupObject[], countries: string[]) {
 		startDatesCache = startDatesAll;
 	}
 
+	const earliestYear = Math.min(...startDatesAll.map((d) => d.start)) - 1;
 	const latestYear = Math.max(...startDatesAll.map((d) => d.start));
+
 	const startDatesFiltered = startDatesAll.filter(
 		(d) =>
 			countries.includes(d.newcd[0]) &&
@@ -41,7 +43,7 @@ async function getStartDates(groups: areaGroupObject[], countries: string[]) {
 			codes: startDatesFiltered.filter((d) => d.start === year).map((d) => d.newcd)
 		});
 	}
-	return { startDates, latestYear };
+	return { startDates, earliestYear, latestYear };
 }
 
 async function getYear(codes: string[], groups: areaGroupObject[], countries: string[]) {
@@ -49,9 +51,9 @@ async function getYear(codes: string[], groups: areaGroupObject[], countries: st
 	if (!startDates.startDates) return startDates.latestYear;
 
 	for (const year of [...startDates.startDates].reverse()) {
-		if (year.codes.some((cd) => codes.includes(cd))) return year.year;
+		if (year.codes.every((cd) => codes.includes(cd))) return year.year;
 	}
-	return startDates.latestYear;
+	return startDates.earliestYear;
 }
 
 function getTypes(codes: string[]) {
