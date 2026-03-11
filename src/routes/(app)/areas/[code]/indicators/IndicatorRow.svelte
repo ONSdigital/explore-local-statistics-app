@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { Observe, Em, ButtonGroup, ButtonGroupItem, Icon } from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, downloadEvent } from '$lib/utils';
@@ -13,11 +14,20 @@
 		metadata,
 		timeRange,
 		showIntervals = false,
+		selectedChart = 'beeswarm',
 		selected = [],
 		geoGroup,
 		hovered = $bindable(),
 		hidden = null
 	} = $props();
+
+	let isMobile = $state(false);
+
+	onMount(() => {
+		const mq = window.matchMedia('(max-width: 767px)');
+		isMobile = mq.matches;
+		mq.addEventListener('change', (e) => (isMobile = e.matches));
+	});
 
 	let visible = $state(false);
 	let expanded = $state(false);
@@ -180,49 +190,54 @@
 			</div>
 		{:else}
 			<div class="indicator-charts">
-				<div class="indicator-beeswarm">
-					<ChartDataLoader
-						id="{indicator} beeswarm"
-						dataUrl={dataUrl['beeswarm']}
-						noDataMessage="Chart data not available."
-						{visible}
-					>
-						{#snippet chart(data)}
-							<Beeswarm
-								{data}
-								{metadata}
-								{formatPeriod}
-								{formatValue}
-								valuePrefix={metadata.prefix}
-								valueSuffix={metadata.suffix}
-								{showIntervals}
-								{selected}
-								bind:hovered
-							/>
-						{/snippet}
-					</ChartDataLoader>
-				</div>
-				<div class="indicator-sparkline">
-					<ChartDataLoader
-						id="{indicator} sparkline"
-						dataUrl={dataUrl['sparkline']}
-						noDataMessage="Time series data not available."
-						{visible}
-					>
-						{#snippet chart(data)}
-							<Sparkline
-								{data}
-								{metadata}
-								{formatPeriod}
-								{formatValue}
-								valuePrefix={metadata.prefix}
-								valueSuffix={metadata.suffix}
-								{showIntervals}
-								{selected}
-							/>
-						{/snippet}
-					</ChartDataLoader>
-				</div>
+				{#if !isMobile || selectedChart === 'beeswarm'}
+					<div class="indicator-beeswarm">
+						<ChartDataLoader
+							id="{indicator} beeswarm"
+							dataUrl={dataUrl['beeswarm']}
+							noDataMessage="Chart data not available."
+							{visible}
+						>
+							{#snippet chart(data)}
+								<Beeswarm
+									{data}
+									{metadata}
+									{formatPeriod}
+									{formatValue}
+									valuePrefix={metadata.prefix}
+									valueSuffix={metadata.suffix}
+									{showIntervals}
+									{selected}
+									bind:hovered
+								/>
+							{/snippet}
+						</ChartDataLoader>
+					</div>
+				{/if}
+
+				{#if !isMobile || selectedChart === 'sparkline'}
+					<div class="indicator-sparkline">
+						<ChartDataLoader
+							id="{indicator} sparkline"
+							dataUrl={dataUrl['sparkline']}
+							noDataMessage="Time series data not available."
+							{visible}
+						>
+							{#snippet chart(data)}
+								<Sparkline
+									{data}
+									{metadata}
+									{formatPeriod}
+									{formatValue}
+									valuePrefix={metadata.prefix}
+									valueSuffix={metadata.suffix}
+									{showIntervals}
+									{selected}
+								/>
+							{/snippet}
+						</ChartDataLoader>
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</div>
@@ -249,11 +264,20 @@
 	}
 	.indicator-beeswarm {
 		flex-grow: 1;
-		max-width: 470px;
+		max-width: 350px;
 	}
 	.indicator-sparkline {
 		flex-shrink: 1;
-		width: 200px;
+		width: 300px;
+	}
+
+	@media (min-width: 768px) {
+		.indicator-beeswarm {
+			max-width: 470px;
+		}
+		.indicator-sparkline {
+			width: 200px;
+		}
 	}
 	.indicator-row :global(svg) {
 		overflow: visible;

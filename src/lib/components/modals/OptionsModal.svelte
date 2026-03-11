@@ -41,12 +41,11 @@
 			<ButtonGroup
 				name="primary"
 				legend="Choose a chart type"
-				value="beeswarm"
 				visuallyHideLegend
-				bind:selectedChartType={_pageState.selectedChartType}
+				bind:value={_pageState.selectedChartType}
 			>
 				<ButtonGroupItem value="beeswarm" label="Beeswarm" />
-				<ButtonGroupItem value="line" label="Line chart" />
+				<ButtonGroupItem value="sparkline" label="Line chart" />
 			</ButtonGroup>
 		</div>
 	{/if}
