@@ -3,7 +3,8 @@
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
-	import { ukBounds, ONSpalette, ONStextPalette, ONScolours } from '$lib/config';
+	import { getPaletteColor } from './chartHelpers';
+	import { ukBounds, ONScolours } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -88,8 +89,8 @@
 				ft.properties = {
 					...ft.properties,
 					...d,
-					color: ONSpalette[colorIndex],
-					textColor: ONStextPalette[colorIndex]
+					color: getPaletteColor(colorIndex, selected.length),
+					textColor: getPaletteColor(colorIndex, selected.length, 'text')
 				};
 				selectedFeatures.push(ft);
 			}
