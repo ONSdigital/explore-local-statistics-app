@@ -51,7 +51,7 @@ async function getYear(codes: string[], groups: areaGroupObject[], countries: st
 	if (!startDates.startDates) return startDates.latestYear;
 
 	for (const year of [...startDates.startDates].reverse()) {
-		if (year.codes.every((cd) => codes.includes(cd))) return year.year;
+		if (year.codes.some((cd) => codes.includes(cd))) return year.year;
 	}
 	return startDates.earliestYear;
 }
