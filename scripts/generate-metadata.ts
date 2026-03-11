@@ -1,8 +1,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
-import { execSync } from 'child_process';
 import { csvParse } from 'd3-dsv';
 import { reverseDate, stripBom, titleFromSlug, autoTypeWithoutDates } from './util/io';
-import { DATA_DIR, skipDatasets, colLookup } from './util/config';
+import { DATA_DIR, skipDatasets, colLookup, definedPeriodFormats } from './util/config';
 import inferGeos from './util/infer-geos';
 import inferPeriodFormat from './util/infer-period-format';
 
@@ -124,7 +123,7 @@ function makeIndicators(ds, meta, data, cols) {
 				})
 			)
 		);
-		const { frequency, periodFormat } = inferPeriodFormat(periods);
+		const { frequency, periodFormat } = definedPeriodFormats[ds] || inferPeriodFormat(periods);
 		const dates = periods.map((p) => new Date(p.split('/')[0]));
 		const periodDomain = [
 			new Date(Math.min(...dates)).toISOString().slice(0, 10),
