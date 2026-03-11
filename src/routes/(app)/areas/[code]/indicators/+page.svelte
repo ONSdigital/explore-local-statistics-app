@@ -45,7 +45,8 @@
 			selectedGeoGroup: data.geoGroups[0],
 			selectedPeriodRange: [data.periods[0], data.periods[data.periods.length - 1]],
 			selectedCluster: data?.related?.similar?.[0],
-			showConfidenceIntervals: false
+			showConfidenceIntervals: false,
+			selectedChartType: 'beeswarm'
 		};
 	}
 
@@ -131,11 +132,13 @@
 {#snippet indicator(item, topic)}
 	{@const hidden = hiddenTopics[topic.slug] && item.index >= maxIndicators}
 	{#if item.heading}<h4 id={item.headingSlug}>{item.heading}</h4>{/if}
+
 	<IndicatorRow
 		indicator={item.slug}
 		metadata={data.metadata[item.slug]}
 		timeRange={pageState.selectedPeriodRange}
 		showIntervals={pageState.showConfidenceIntervals}
+		selectedChart={pageState.selectedChartType}
 		selected={[areaProps.areacd, ...pageState.selectedAreas.map((a) => a.areacd)]}
 		geoGroup={pageState.selectedGeoGroup}
 		{hidden}
