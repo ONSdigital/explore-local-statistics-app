@@ -123,7 +123,8 @@
 				fitBoundsOptions,
 				maxBounds: [-19, 48, 12, 62],
 				cooperativeGestures: true,
-				preserveDrawingBuffer: true
+				preserveDrawingBuffer: true,
+				dragRotate: false
 			}}
 			controls
 			mapDescription="Map of {metadata.label}"
