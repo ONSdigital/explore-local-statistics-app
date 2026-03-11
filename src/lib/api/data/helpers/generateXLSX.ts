@@ -9,7 +9,6 @@ StylesXform.prototype.init = function () {
 };
 
 import ExcelJS from '@protobi/exceljs';
-import { PassThrough } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
 
 const oneTableMessage = 'This worksheet contains one table.';
@@ -227,11 +226,7 @@ export async function dataToSpreadsheet(data) {
 			}
 		}
 	}
-
-	const stream = new PassThrough();
-	await workbook.xlsx.write(stream);
-
-	return stream;
+	return workbook.xlsx.writeBuffer();
 }
 
 // This function generates an ODS spreadsheet given data and metadata for a series of datasets
