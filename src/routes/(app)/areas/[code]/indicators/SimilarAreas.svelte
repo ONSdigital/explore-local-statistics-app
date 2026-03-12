@@ -39,7 +39,7 @@
 	{/if}
 	<Details title="Show the 20 areas most similar to {getName(areaProps, 'the')}">
 		<ol>
-			{#each selectedCluster.similar as area}
+			{#each selectedCluster?.similar || [] as area}
 				<li>
 					<a href={resolve(`/areas/${makeCanonicalSlug(area)}/indicators`)}>{getName(area)}</a>
 				</li>
