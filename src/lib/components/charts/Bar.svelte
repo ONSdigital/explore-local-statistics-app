@@ -163,9 +163,9 @@
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
 	<rect
 		class="chart-bars"
-		x={0}
+		x={b[yKey] < 0 ? xScale(b[yKey]) : xScale(0)}
 		y={yScale(b[idKey]).y}
-		width={xScale(b[yKey])}
+		width={xScale(Math.abs(b[yKey])) - xScale(0)}
 		height={yScale(b[idKey]).height}
 		stroke-width={strokeWidth}
 		stroke={ONScolours.white}
@@ -307,7 +307,7 @@
 	{/if}
 	<div class="bar-inner">
 		<div class="line-y-axis">
-			<div class="y-baseline"></div>
+			<div class="y-baseline" style:left="{xScale(0)}px"></div>
 		</div>
 		<div class="line-x-axis">
 			<div class="x-baseline" style:top="0"></div>
