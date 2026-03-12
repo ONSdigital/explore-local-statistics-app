@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { csvParse } from 'd3-dsv';
-import { stripBom } from './io';
+import { stripBom } from './util/io';
 import { capitalise } from '@onsvisual/robo-utils';
 
 // const config_url = "https://raw.githubusercontent.com/ONSdigital/explore-local-statistics-app/refs/heads/develop/static/insights/config.json";
@@ -33,7 +33,7 @@ for (const row of [...clusters_data].sort((a, b) => a[idKey].localeCompare(b[idK
 	const areacd = row[idKey];
 	const obj = {};
 	for (const type of types) {
-		const letter = row[`${capitalise(type)} model`].slice(-1).toLowerCase();
+		const letter = row[capitalise(type)].slice(-1).toLowerCase();
 		if (letter in clusters.clusters[type]) {
 			obj[type] = letter;
 			clusters.clusters[type][letter].push(areacd);
@@ -56,7 +56,9 @@ for (const type of types) {
 	for (const row of similar_data) {
 		const areacd = row[idKey];
 		if (!similar[areacd]) similar[areacd] = Object.fromEntries(types.map((t) => [t, []]));
-		for (const col of similar_data.columns.slice(1)) similar[areacd][type].push(row[col]);
+		for (const col of similar_data.columns.slice(1)) {
+			if (row[col]) similar[areacd][type].push(row[col]);
+		}
 	}
 }
 

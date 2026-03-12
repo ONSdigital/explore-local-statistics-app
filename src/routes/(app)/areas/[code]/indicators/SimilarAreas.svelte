@@ -21,10 +21,12 @@
 				Areas in {selectedCluster.key} cluster {selectedCluster.cluster.label}
 			</li>
 		{/if}
-		<li>
-			<span class="map-legend-marker" style:background="#eee"></span>
-			20 areas most similar to {getName(areaProps, 'the')}
-		</li>
+		{#if selectedCluster?.similar}
+			<li>
+				<span class="map-legend-marker" style:background="#eee"></span>
+				{selectedCluster.similar.length} areas most similar to {getName(areaProps, 'the')}
+			</li>
+		{/if}
 	</ul>
 	<ClusterMap {areaProps} {selectedCluster} />
 	{#if selectedCluster?.cluster}
@@ -37,7 +39,12 @@
 		</p>
 		<p></p>
 	{/if}
-	<Details title="Show the 20 areas most similar to {getName(areaProps, 'the')}">
+	<Details
+		title="Show the {selectedCluster.similar.length} areas most similar to {getName(
+			areaProps,
+			'the'
+		)}"
+	>
 		<ol>
 			{#each selectedCluster?.similar || [] as area}
 				<li>

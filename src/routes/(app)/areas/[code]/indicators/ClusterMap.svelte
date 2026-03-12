@@ -22,11 +22,12 @@
 			? selectedCluster.cluster.areas.map((area) => features[area.areacd])
 			: []
 	);
+	let combinedAreas = $derived([...similarAreas, ...clusterAreas]);
 	let bounds = $derived(
 		similarAreas.length || clusterAreas.length
 			? bbox({
 					type: 'FeatureCollection',
-					features: [...similarAreas, ...clusterAreas]
+					features: combinedAreas
 				})
 			: ukBounds
 	);
@@ -70,30 +71,12 @@
 					type="fill"
 					paint={{ 'fill-color': ONScolours.oceanBlue, 'fill-opacity': 0.7 }}
 					order="place_other"
-					hover
-					bind:hovered
-				>
-					<MapTooltip content={features?.[hovered]?.properties?.areanm} />
-				</MapLayer>
+				/>
 				<MapLayer
 					id="cluster-line"
 					type="line"
 					paint={{ 'line-color': 'white', 'line-width': 0.5 }}
 					order="place_other"
-				/>
-				<MapLayer
-					id="cluster-hover"
-					type="line"
-					paint={{
-						'line-color': [
-							'case',
-							['==', ['feature-state', 'hovered'], true],
-							ONScolours.highlightOrangeDark,
-							'rgba(255,255,255,0)'
-						],
-						'line-width': 2
-					}}
-					order="place_suburb"
 				/>
 			</MapSource>
 		{/if}
@@ -107,13 +90,43 @@
 				id="similar-outline"
 				type="line"
 				paint={{ 'line-color': 'white', 'line-width': 3 }}
-				order="place_other"
+				order="place_suburb"
 			/>
 			<MapLayer
 				id="similar-line"
 				type="line"
 				paint={{ 'line-color': 'black', 'line-width': 2 }}
-				order="place_other"
+				order="place_suburb"
+			/>
+		</MapSource>
+		<MapSource
+			id="combined"
+			type="geojson"
+			data={{ type: 'FeatureCollection', features: combinedAreas }}
+			promoteId="areacd"
+		>
+			<MapLayer
+				id="combined-fill"
+				type="fill"
+				paint={{ 'fill-color': 'rgba(0,0,0,0)' }}
+				hover
+				bind:hovered
+			>
+				<MapTooltip content={features?.[hovered]?.properties?.areanm} />
+			</MapLayer>
+			<MapLayer
+				id="combined-hover"
+				type="line"
+				paint={{
+					'line-color': [
+						'case',
+						['==', ['feature-state', 'hovered'], true],
+						ONScolours.highlightOrangeDark,
+						'rgba(255,255,255,0)'
+					],
+					'line-width': 2
+				}}
+				order="place_village"
 			/>
 		</MapSource>
 	</Map>
