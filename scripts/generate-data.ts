@@ -2,6 +2,7 @@ import * as aq from 'arquero';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { descending } from 'd3-array';
 import { loadCsvWithoutBom } from './util/io.ts';
+import { itlsMap } from '../src/lib/config/geoLevels.ts';
 
 // config.ts
 const RAW_DATA_DIR = 'scripts/raw-data';
@@ -227,6 +228,12 @@ function processFile(file) {
 			.filter((col) => indicator_data.columnNames().includes(col))
 			.map((col) => [col, col.toLocaleLowerCase()])
 	);
+
+	// replace ITL codes
+	indicator_data = indicator_data.derive({
+		areacd: aq.escape((d) => itlsMap[d.areacd] || d.areacd)
+	});
+
 	const uniqueAreas = indicator_data
 		.rename(areaColsMap)
 		.select(['areacd', 'areanm'])

@@ -57,7 +57,7 @@
 		},
 		{
 			key: 'Published on',
-			value: parseDate(data.indicator.updated)
+			value: arrayJoin(data.indicator.source.map((d) => parseDate(d.date)))
 		}
 	]}
 	background="#eaeaea"

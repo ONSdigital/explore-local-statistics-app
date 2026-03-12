@@ -41,14 +41,12 @@
 			return { areacd: d[0].areacd, areanm: d[0].areanm };
 		})
 	);
-	// const formatXTick = format(',.0f');
 
 	const maxHeight = 500;
 	const maxBarHeight = 25;
-	// const barGapRatio = 0.5; // Proportion of bar height
 	const barGapRatio = $derived(_data.array.length > 100 ? 0 : 0.5);
 	const minSelectedBarHeight = 10; // Number of pixels
-	const maxUnscaledBarsCount = Math.floor(500 / (maxBarHeight * (1 + barGapRatio)));
+	const maxUnscaledBarsCount = $derived(Math.floor(600 / (maxBarHeight * (1 + barGapRatio))));
 
 	let height = $derived(
 		!_data || _data.array.length > maxUnscaledBarsCount
@@ -158,16 +156,16 @@
 					.range([0, widthInner])
 			: null
 	);
-	const maxTickGap = 140; // in pixels
+	const maxTickGap = 172; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
 	<rect
 		class="chart-bars"
-		x={0}
+		x={b[yKey] < 0 ? xScale(b[yKey]) : xScale(0)}
 		y={yScale(b[idKey]).y}
-		width={xScale(b[yKey])}
+		width={xScale(Math.abs(b[yKey])) - xScale(0)}
 		height={yScale(b[idKey]).height}
 		stroke-width={strokeWidth}
 		stroke={ONScolours.white}
@@ -309,7 +307,7 @@
 	{/if}
 	<div class="bar-inner">
 		<div class="line-y-axis">
-			<div class="y-baseline"></div>
+			<div class="y-baseline" style:left="{xScale(0)}px"></div>
 		</div>
 		<div class="line-x-axis">
 			<div class="x-baseline" style:top="0"></div>

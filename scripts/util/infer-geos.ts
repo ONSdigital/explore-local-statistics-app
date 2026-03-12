@@ -1,5 +1,5 @@
 import { csvParse, autoType } from 'd3-dsv';
-import { geoLevels } from '../../src/lib/config/geoLevels';
+import { geoLevels, itlsMap } from '../../src/lib/config/geoLevels';
 
 const changesUrl =
 	'https://raw.githubusercontent.com/ONSvisual/uk-topojson/refs/heads/main/input/changes.csv';
@@ -74,9 +74,10 @@ function getGroups(types: string[], countries: string[]) {
 }
 
 export default async function inferGeos(codes: string[]) {
-	const types = getTypes(codes);
+	const _codes = codes.map((cd) => itlsMap[cd] || cd);
+	const types = getTypes(_codes);
 	const countries = getCountries(types);
 	const groups = getGroups(types, countries);
-	const year = await getYear(codes, groups, countries);
+	const year = await getYear(_codes, groups, countries);
 	return { countries, levels: groups.map((g) => g.key), types, year };
 }
