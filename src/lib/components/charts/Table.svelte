@@ -50,4 +50,6 @@
 	);
 </script>
 
-<Table data={pivotedData} {columns} sortable compact height={400} />
+{#key pivotedData}
+	<Table data={pivotedData} {columns} sortable compact height={400} />
+{/key}
