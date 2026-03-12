@@ -13,19 +13,8 @@
 
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 
-	function pivotData(data) {
-		const piv = {};
-
-		for (let i = 0; i < data?.areacd?.length; i++) {
-			const areacd = data.areacd[i];
-			if (!piv[areacd]) piv[areacd] = { areacd, areanm: data.areanm[i] };
-			piv[areacd][data.period[i]] = data.value[i];
-		}
-		return Object.values(piv);
-	}
-
-	function makeColumns(data) {
-		const keys = Object.keys(data[0]).sort((a, b) => {
+	function makeColumns(cols) {
+		const keys = [...cols].sort((a, b) => {
 			if (a === 'areacd' || a === 'areanm') return a === 'areacd' ? -1 : b === 'areacd' ? 1 : -1;
 			if (b === 'areacd' || b === 'areanm') return 1;
 			return b.localeCompare(a);
@@ -40,10 +29,25 @@
 		}));
 	}
 
-	let pivotedData = $derived(
-		data ? pivotData(data).sort((a, b) => a.areanm.localeCompare(b.areanm)) : null
+	function pivotData(data) {
+		const piv = {};
+		const cols = new Set(['areacd', 'areanm']);
+
+		for (let i = 0; i < data?.areacd?.length; i++) {
+			const areacd = data.areacd[i];
+			if (!piv[areacd]) piv[areacd] = { areacd, areanm: data.areanm[i] };
+			piv[areacd][data.period[i]] = data.value[i];
+			cols.add(data.period[i]);
+		}
+		return {
+			pivotedData: Object.values(piv).sort((a, b) => a.areanm.localeCompare(b.areanm)),
+			columns: makeColumns(cols)
+		};
+	}
+
+	let { pivotedData, columns } = $derived(
+		data ? pivotData(data) : { pivotedData: null, columns: null }
 	);
-	$inspect(pivotedData);
 </script>
 
-<Table data={pivotedData} columns={makeColumns(pivotedData)} sortable compact height={400} />
+<Table data={pivotedData} {columns} sortable compact height={400} />
