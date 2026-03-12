@@ -15,6 +15,13 @@
 	let dialog = $state();
 
 	function initDialog(el) {
+		el.addEventListener('mousedown', (event) => {
+			if (event.target.closest('.autocomplete__menu')) {
+				event.preventDefault();
+			}
+		});
+		el.addEventListener('close', () => (document.body.style.overflow = 'visible'));
+
 		// Click outside to close dialog
 		el.addEventListener('pointerup', (event) => {
 			const rect = el.getBoundingClientRect();
@@ -80,5 +87,9 @@
 
 	.modal-contents {
 		margin-bottom: 2rem;
+	}
+
+	:global(.autocomplete__dropdown-arrow-down-wrapper) {
+		pointer-events: none;
 	}
 </style>
