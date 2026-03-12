@@ -40,6 +40,7 @@
 	});
 
 	let caveats = $derived(new MarkdownIt().render(data.indicator.caveats[0]));
+	$inspect(data.indicator);
 </script>
 
 <Hero
@@ -57,7 +58,7 @@
 		},
 		{
 			key: 'Published on',
-			value: parseDate(data.indicator.updated)
+			value: arrayJoin(data.indicator.source.map((d) => parseDate(d.date)))
 		}
 	]}
 	background="#eaeaea"
