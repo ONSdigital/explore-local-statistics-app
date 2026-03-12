@@ -41,14 +41,12 @@
 			return { areacd: d[0].areacd, areanm: d[0].areanm };
 		})
 	);
-	// const formatXTick = format(',.0f');
 
 	const maxHeight = 500;
 	const maxBarHeight = 25;
-	// const barGapRatio = 0.5; // Proportion of bar height
 	const barGapRatio = $derived(_data.array.length > 100 ? 0 : 0.5);
 	const minSelectedBarHeight = 10; // Number of pixels
-	const maxUnscaledBarsCount = Math.floor(500 / (maxBarHeight * (1 + barGapRatio)));
+	const maxUnscaledBarsCount = $derived(Math.floor(600 / (maxBarHeight * (1 + barGapRatio))));
 
 	let height = $derived(
 		!_data || _data.array.length > maxUnscaledBarsCount

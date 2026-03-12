@@ -40,7 +40,6 @@
 	});
 
 	let caveats = $derived(new MarkdownIt().render(data.indicator.caveats[0]));
-	$inspect(data.indicator);
 </script>
 
 <Hero
