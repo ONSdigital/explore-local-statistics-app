@@ -156,7 +156,7 @@
 					.range([0, widthInner])
 			: null
 	);
-	const maxTickGap = 140; // in pixels
+	const maxTickGap = 172; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 </script>
 
