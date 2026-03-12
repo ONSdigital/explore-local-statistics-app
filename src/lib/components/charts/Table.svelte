@@ -25,7 +25,13 @@
 	}
 
 	function makeColumns(data) {
-		return Object.keys(data[0]).map((key) => ({
+		const keys = Object.keys(data[0]).sort((a, b) => {
+			if (a === 'areacd' || a === 'areanm') return a === 'areacd' ? -1 : b === 'areacd' ? 1 : -1;
+			if (b === 'areacd' || b === 'areanm') return 1;
+			return b.localeCompare(a);
+		});
+
+		return keys.map((key) => ({
 			key,
 			label:
 				key === 'areacd' ? 'Area code' : key === 'areanm' ? 'Area name' : formatPeriodShort(key),
@@ -34,7 +40,10 @@
 		}));
 	}
 
-	let pivotedData = $derived(data ? pivotData(data) : null);
+	let pivotedData = $derived(
+		data ? pivotData(data).sort((a, b) => a.areanm.localeCompare(b.areanm)) : null
+	);
+	$inspect(pivotedData);
 </script>
 
 <Table data={pivotedData} columns={makeColumns(pivotedData)} sortable compact height={400} />
