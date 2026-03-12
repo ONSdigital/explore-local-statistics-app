@@ -38,7 +38,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 					{
 						id: 'level-ctry',
 						label: 'All countries',
-						geoLeve: 'ctry'
+						geoLevel: 'ctry'
 					}
 				]
 			: [];
