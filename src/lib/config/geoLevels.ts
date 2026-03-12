@@ -117,3 +117,19 @@ export const geoLevelsAllLookup = makeLookup(geoLevelsAllArray);
 export const geoCodesAllArray = makeOrderedCodes(geoLevelsAllArray);
 
 export const countriesMap = { E: 'E92000001', N: 'N92000002', S: 'S92000003', W: 'W92000004' };
+
+export const itlsMap = {
+	TLB: 'E92000001',
+	TLC: 'E12000001',
+	TLD: 'E12000002',
+	TLE: 'E12000003',
+	TLF: 'E12000004',
+	TLG: 'E12000005',
+	TLH: 'E12000006',
+	TLI: 'E12000007',
+	TLJ: 'E12000008',
+	TLK: 'E12000009',
+	TLL: 'W92000004',
+	TLM: 'S92000003',
+	TLN: 'N92000002'
+};
