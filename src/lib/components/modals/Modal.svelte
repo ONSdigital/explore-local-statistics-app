@@ -14,7 +14,8 @@
 	let id = $derived(title.toLowerCase().replaceAll(' ', '-'));
 	let dialog = $state();
 
-	function clickOutsideToCancel(el) {
+	function initDialog(el) {
+		// Click outside to close dialog
 		el.addEventListener('pointerup', (event) => {
 			const rect = el.getBoundingClientRect();
 			const isInDialog =
@@ -26,11 +27,13 @@
 				onCancel();
 			}
 		});
+		// Prevent page scroll when arrows are pressed
 		el.addEventListener('keydown', (event) => {
 			if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
 				event.preventDefault();
 			}
 		});
+		el.addEventListener('close', () => (document.body.style.overflow = 'visible'));
 	}
 </script>
 
@@ -41,10 +44,11 @@
 	on:click={() => {
 		onOpen();
 		dialog.showModal();
+		document.body.style.overflow = 'hidden';
 	}}>{label}</Button
 >
 
-<dialog aria-labelledby={id} bind:this={dialog} use:clickOutsideToCancel>
+<dialog aria-labelledby={id} bind:this={dialog} use:initDialog>
 	<h1 {id} tabindex="-1">{title}</h1>
 	<div class="modal-contents">
 		{@render children()}
