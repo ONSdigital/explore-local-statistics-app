@@ -27,12 +27,7 @@
 				onCancel();
 			}
 		});
-		// Prevent page scroll when arrows are pressed
-		el.addEventListener('keydown', (event) => {
-			if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
-				event.preventDefault();
-			}
-		});
+		// Re-enable background scroll
 		el.addEventListener('close', () => (document.body.style.overflow = 'visible'));
 	}
 </script>
@@ -44,6 +39,7 @@
 	on:click={() => {
 		onOpen();
 		dialog.showModal();
+		// Prevent background scroll
 		document.body.style.overflow = 'hidden';
 	}}>{label}</Button
 >
