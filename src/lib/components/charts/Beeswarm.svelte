@@ -67,13 +67,19 @@
 	}
 
 	function doKeydown(e) {
-		if (['ArrowLeft', 'ArrowDown'].includes(e.key) && activeIndex !== 0) {
-			activeIndex -= 1;
-			_hovered = _sorted[activeIndex];
+		if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+			e.preventDefault();
+			if (activeIndex !== 0) {
+				activeIndex -= 1;
+				_hovered = _sorted[activeIndex];
+			}
 		}
-		if (['ArrowRight', 'ArrowUp'].includes(e.key) && activeIndex !== _sorted.length - 1) {
-			activeIndex += 1;
-			_hovered = _sorted[activeIndex];
+		if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+			e.preventDefault();
+			if (activeIndex !== _sorted.length - 1) {
+				activeIndex += 1;
+				_hovered = _sorted[activeIndex];
+			}
 		}
 	}
 </script>
@@ -164,6 +170,7 @@
 		_hovered = null;
 		activeIndex = getSelectedIndex(_sorted, selected[0]);
 	}}
+	onkeydown={doKeydown}
 	onmousedown={(e) => e.preventDefault()}
 	role="figure"
 >
