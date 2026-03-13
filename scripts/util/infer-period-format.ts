@@ -25,6 +25,7 @@ function getPeriodFormat(frequency, period) {
 		if (['monthly', 'quarterly'].includes(frequency)) return 'month';
 		return 'year';
 	}
+	if (period[1] === 'P1M') return 'month';
 	if (period[1] === 'P3M') return 'quarter';
 	if (period[1].match(/P\dY/)) {
 		const years = +period[1].match(/\d+/)[0];
