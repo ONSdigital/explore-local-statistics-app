@@ -38,12 +38,7 @@ export function parseDataKeyed(data: jsonDataCols, zKey: string, rowTemplate: js
 }
 
 export function makeValueFormatter(dp) {
-	const fmt = format(`,.${dp ?? 0}f`);
-
-	return (v) => {
-		const s = fmt(v);
-		return s.replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
-	};
+	return format(`,.${dp ?? 0}f`);
 }
 
 export function parsePeriod(period) {
