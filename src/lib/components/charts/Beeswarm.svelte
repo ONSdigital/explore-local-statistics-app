@@ -67,19 +67,13 @@
 	}
 
 	function doKeydown(e) {
-		if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
-			e.preventDefault();
-			if (activeIndex !== 0) {
-				activeIndex -= 1;
-				_hovered = _sorted[activeIndex];
-			}
+		if (['ArrowLeft', 'ArrowDown'].includes(e.key) && activeIndex !== 0) {
+			activeIndex -= 1;
+			_hovered = _sorted[activeIndex];
 		}
-		if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
-			e.preventDefault();
-			if (activeIndex !== _sorted.length - 1) {
-				activeIndex += 1;
-				_hovered = _sorted[activeIndex];
-			}
+		if (['ArrowRight', 'ArrowUp'].includes(e.key) && activeIndex !== _sorted.length - 1) {
+			activeIndex += 1;
+			_hovered = _sorted[activeIndex];
 		}
 	}
 </script>
@@ -100,14 +94,20 @@
 {#snippet line(d, i, color)}
 	{@const offsetX = labels?.[i]?.x ?? d.x}
 	<polyline
-		points="{d.x},{100 - d.y} {d.x},{(100 - d.y) / 3} {offsetX},{(100 - d.y) / 3} {offsetX},0"
+		points="{d.x},{100 - (selected.includes(d[idKey]) ? 0 : d.y)} {d.x},0"
 		stroke={color}
 		stroke-width="2"
 	/>
 {/snippet}
 
 {#snippet marker(d, path, color)}
-	<svg viewBox="-4 -4 8 8" class="beeswarm-marker" style:left="{d.x}%">
+	<svg
+		viewBox="-4 -4 8 8"
+		class="beeswarm-marker"
+		style:left="{d.x}%"
+		onmouseenter={() => (hovered = d[idKey])}
+		onmouseleave={() => (hovered = null)}
+	>
 		<path d={path} fill={color} vector-effect="non-scaling-stroke" />
 	</svg>
 {/snippet}
@@ -170,8 +170,8 @@
 		_hovered = null;
 		activeIndex = getSelectedIndex(_sorted, selected[0]);
 	}}
-	onkeydown={doKeydown}
 	onmousedown={(e) => e.preventDefault()}
+	onkeydown={doKeydown}
 	role="figure"
 >
 	<div class="beeswarm-chart" aria-hidden="true">
@@ -185,7 +185,7 @@
 				<g class="beeswarm-selected">
 					{#each _selected as sel, i}
 						{@const d = { ...sel.datum, y: 0 }}
-						{#if !_hovered && i < 2}
+						{#if !_hovered && i === 0}
 							{@render line(d, i, getPaletteColor(sel.i, _selected.length))}
 							{@render confidenceRect(d, i, getPaletteColor(sel.i, _selected.length))}
 						{/if}
@@ -195,7 +195,9 @@
 					{#if _hovered}
 						{@const d = _hovered}
 						{@render line(d, 0, ONScolours.highlightOrangeDark)}
-						{@render point(d, 14, ONScolours.highlightOrangeDark)}
+						{#if !selected.includes(_hovered[idKey])}
+							{@render point(d, 14, ONScolours.highlightOrangeDark)}
+						{/if}
 					{/if}
 				</g>
 			{/if}
@@ -204,13 +206,15 @@
 			{#if _data}
 				{#if _hovered}
 					{@render label(_hovered, 0, ONScolours.highlightOrangeDark, true)}
-				{:else}
-					{#each _selected as d, i}
-						{@const color = getPaletteColor(d.i, _selected.length)}
-						{#if i < 2}{@render label(d.datum, i, color, false)}{/if}
-						{@render marker(d.datum, getMarkerPath(d.i, _selected.length), color)}
-					{/each}
 				{/if}
+				{#each _selected as d, i}
+					{@const color =
+						d.datum[idKey] === _hovered?.[idKey]
+							? ONScolours.highlightOrangeDark
+							: getPaletteColor(d.i, _selected.length)}
+					{#if i === 0 && !_hovered}{@render label(d.datum, i, color, false)}{/if}
+					{@render marker(d.datum, getMarkerPath(d.i, _selected.length), color)}
+				{/each}
 			{/if}
 		</div>
 	</div>
@@ -289,10 +293,15 @@
 	}
 	.beeswarm-marker {
 		position: absolute;
+		pointer-events: all;
 		bottom: 0;
 		width: 20px;
 		height: 20px;
 		transform: translate(-50%, 50%);
+	}
+	.beeswarm-marker > path {
+		stroke: white;
+		stroke-width: 1px;
 	}
 	.beeswarm-comparison {
 		display: block;

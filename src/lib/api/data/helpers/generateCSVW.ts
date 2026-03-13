@@ -29,21 +29,16 @@ function getMeasureColumns(datasets: jsonStatDataset[], measure: parsedParam) {
 function makeCSVWColumns(
 	datasets: jsonStatDataset[],
 	measure: parsedParam,
+	href: string,
 	singleIndicator: boolean,
 	includeNames: boolean,
 	includeStatus: boolean
 ) {
-	const cols = [
-		{
-			name: 'indicator',
-			titles: 'Indicator',
-			datatype: 'string'
-		}
-	];
-	cols.push(...getDimColumns(datasets));
-	cols.push(...getMeasureColumns(datasets, measure));
+	const cols = [...getDimColumns(datasets), ...getMeasureColumns(datasets, measure)];
+	if (!cols.length) return cols;
+
 	if (includeNames)
-		cols.splice(2, 0, {
+		cols.splice(1, 0, {
 			name: 'areanm',
 			titles: 'Area name',
 			datatype: 'string'
@@ -54,7 +49,21 @@ function makeCSVWColumns(
 			titles: 'Status',
 			datatype: 'string'
 		});
-	if (singleIndicator) cols.shift();
+	if (!singleIndicator) {
+		let aboutUrl = href.slice(0, href.lastIndexOf('/')) + '/metadata/indicators';
+		const params = href.includes('?') ? new URLSearchParams(href.slice(href.indexOf('?'))) : null;
+		if (params)
+			aboutUrl += `?${[...params.entries()]
+				.filter((e) => ['hasGeo', 'indicator', 'topic'].includes(e[0]))
+				.map((e) => `${e[0]}=${e[1]}`)
+				.join('&')}`;
+		cols.unshift({
+			name: 'indicator',
+			titles: 'Indicator',
+			datatype: 'string',
+			aboutUrl
+		});
+	}
 	return cols;
 }
 
@@ -81,13 +90,13 @@ export default function generateCSVW(
 		: {};
 
 	const tableSchema: csvwTableSchema = {
-		columns: makeCSVWColumns(datasets, measure, singleIndicator, includeNames, includeStatus)
+		columns: makeCSVWColumns(datasets, measure, href, singleIndicator, includeNames, includeStatus)
 	};
 
 	const metadata: csvwMetadata = {
 		'@context': ['http://www.w3.org/ns/csvw', { '@language': 'en' }],
 		url: href.replace('.csvw', '.csv'),
-		'rdfs:label': `Metadata generated on ${dateString} by the Explore Local Statistics service.`,
+		notes: [`Metadata generated on ${dateString} by the Explore Local Statistics service.`],
 		...singleDatasetMetadata,
 		tableSchema
 	};
