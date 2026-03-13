@@ -303,6 +303,7 @@
 					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
 						{#key _data}
 							{#each selectedData as arr, i}
+								{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 								{@const id = arr[0][idKey]}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
@@ -314,7 +315,7 @@
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap
 										: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
 									style:top="{yPos}px"
-									style:color={getPaletteColor(i, selectedData.length, 'text')}
+									style:color={getPaletteColor(selectedIndex, selected.length, 'text')}
 									style:max-width="{rightMargin - dodgedLabelGap}px"
 								>
 									{arr?.[0][labelKey]}
@@ -357,7 +358,13 @@
 					{/each}
 					{#if showIntervals && 'uci_95' in data}
 						{#each selectedData as arr, i}
-							{@render ribbon(arr, getPaletteColor(i, selectedData.length), 0.3, arr[0][idKey])}
+							{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+							{@render ribbon(
+								arr,
+								getPaletteColor(selectedIndex, selected.length),
+								0.3,
+								arr[0][idKey]
+							)}
 						{/each}
 					{/if}
 					{#each [...selectedData].reverse() as arr}
@@ -403,16 +410,18 @@
 					{/if}
 				</g>
 				{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
-					<g>
-						{#each selectedData as arr, i}
-							{@const yPosAdj = labelLookup?.[i]?.y || yScale(arr[arr.length - 1][yKey])}
-							{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
-							{@const xMax = xScale(_data.dateDomain[1])}
-							{@const elbowX =
-								xScale(_data.dateDomain[1]) + pointRadius + 6 + labelLookup?.[i]?.elbow}
-							{@render elbow(yPosOrig, yPosAdj, elbowX, xMax)}
-						{/each}
-					</g>
+					{#key _data}
+						<g>
+							{#each selectedData as arr, i}
+								{@const yPosAdj = labelLookup?.[i]?.y || yScale(arr[arr.length - 1][yKey])}
+								{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
+								{@const xMax = xScale(_data.dateDomain[1])}
+								{@const elbowX =
+									xScale(_data.dateDomain[1]) + pointRadius + 6 + (labelLookup?.[i]?.elbow ?? 0)}
+								{@render elbow(yPosOrig, yPosAdj, elbowX, xMax)}
+							{/each}
+						</g>
+					{/key}
 				{/if}
 			</svg>
 		{/if}

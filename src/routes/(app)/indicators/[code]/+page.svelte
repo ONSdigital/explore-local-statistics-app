@@ -90,7 +90,7 @@
 					indicator={data.indicator.slug}
 					metadata={data.indicator}
 					timeRange={pageState.selectedPeriodRange}
-					selected={pageState.selectedAreas.map((a) => a.areacd)}
+					selected={pageState.selectedAreas}
 					geoLevel={pageState.selectedGeoLevel}
 					showIntervals={pageState.showConfidenceIntervals}
 				/>

@@ -35,6 +35,7 @@
 	let el = $state();
 	let fullScreenMode = $state(false);
 
+	let selectedCodes = $derived(selected.map((d) => d.areacd));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 	let hasTimeRange = $derived(
@@ -57,7 +58,7 @@
 			indicator,
 			hasTimeRange ? timeRange : timeRange[timeRange.length - 1],
 			'latest',
-			selected,
+			selectedCodes,
 			geoLevelObj?.id,
 			geoLevel?.geoExtent,
 			geoLevel?.geoCluster
@@ -118,35 +119,44 @@
 				<ChartDataLoader id="{indicator} {chartType}" {dataUrl} {visible} {indicator}>
 					{#snippet chart(data)}
 						{@const Component = chartComponents[chartType]}
+						{@const selectedMissing = selected.filter((d) => !data.areacd.includes(d.areacd))}
 						<Component
 							{data}
 							{metadata}
 							{formatValue}
-							{selected}
+							selected={selectedCodes}
 							bind:hovered
 							{formatPeriod}
 							geoLevel={geoLevelObj}
 							{showIntervals}
 							{mode}
 						/>
+						{#if selectedMissing.length}
+							<p class="missing-data-note">
+								<strong>Note:</strong>
+								{#if selectedMissing.length === 1}
+									Data for {selectedMissing[0].areanm} is not available.
+								{:else}
+									Data for some selected areas is not available.
+								{/if}
+							</p>
+						{/if}
 					{/snippet}
 				</ChartDataLoader>
 			</div>
 		</Observe>
 		{#if metadata.source.length > 0}
-			<div class="source-notes-container">
-				<p class="source-container">
-					<span style="font-weight: bold">Source:</span>
-					{#each metadata.source as s, i}
-						<a href={s.href} target="_blank"
-							>{s.name}<span class="ons-u-vh"> (link opens in a new tab)</span></a
-						><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i <
-						metadata.source.length - 1
-							? ' and '
-							: ''}
-					{/each}
-				</p>
-			</div>
+			<p class="source-notes">
+				<strong>Source:</strong>
+				{#each metadata.source as s, i}
+					<a href={s.href} target="_blank"
+						>{s.name}<span class="ons-u-vh"> (link opens in a new tab)</span></a
+					><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i <
+					metadata.source.length - 1
+						? ' and '
+						: ''}
+				{/each}
+			</p>
 		{/if}
 	{/if}
 </div>
@@ -155,7 +165,7 @@
 		{indicator}
 		{metadata}
 		{timeRange}
-		{selected}
+		selected={selectedCodes}
 		{geoLevel}
 		{showIntervals}
 		{chartType}
@@ -195,18 +205,21 @@
 		min-height: 400px;
 		align-items: center;
 	}
-	.source-notes-container {
-		padding: 8px 0 4px;
+	.missing-data-note {
+		padding: 12px 0 4px;
 		font-size: 16px;
-		display: flex;
-		flex-direction: column;
 		gap: 5px;
-	}
-	.source-container {
-		padding: 0px;
-		margin: 0px;
 		line-height: 1.2;
+		margin: 0px;
 	}
+	.source-notes {
+		padding: 6px 0 4px;
+		font-size: 16px;
+		gap: 5px;
+		line-height: 1.2;
+		margin: 0px;
+	}
+
 	.content-title {
 		margin: 0;
 		display: flex;
