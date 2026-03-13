@@ -158,6 +158,8 @@
 	);
 	const maxTickGap = 172; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
+	let xTicks = $derived(xScale?.ticks?.(nXTicks) || []);
+	let xTicksAreIntegers = $derived(xTicks.every((d) => d % 1 === 0));
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
@@ -311,10 +313,10 @@
 		</div>
 		<div class="line-x-axis">
 			<div class="x-baseline" style:top="0"></div>
-			{#each xScale.ticks(nXTicks) as xTick}
+			{#each xTicks as xTick}
 				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
 				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{prefix}{formatValue(xTick)}{suffix}
+					{prefix}{xTicksAreIntegers ? xTick.toLocaleString('en-GB') : formatValue(xTick)}{suffix}
 				</div>
 			{/each}
 		</div>

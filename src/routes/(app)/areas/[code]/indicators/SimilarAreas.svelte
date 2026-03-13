@@ -39,20 +39,22 @@
 		</p>
 		<p></p>
 	{/if}
-	<Details
-		title="Show the {selectedCluster.similar.length} areas most similar to {getName(
-			areaProps,
-			'the'
-		)}"
-	>
-		<ol>
-			{#each selectedCluster?.similar || [] as area}
-				<li>
-					<a href={resolve(`/areas/${makeCanonicalSlug(area)}/indicators`)}>{getName(area)}</a>
-				</li>
-			{/each}
-		</ol>
-	</Details>
+	{#if selectedCluster?.similar}
+		<Details
+			title="Show the {selectedCluster.similar.length} areas most similar to {getName(
+				areaProps,
+				'the'
+			)}"
+		>
+			<ol>
+				{#each selectedCluster.similar as area}
+					<li>
+						<a href={resolve(`/areas/${makeCanonicalSlug(area)}/indicators`)}>{getName(area)}</a>
+					</li>
+				{/each}
+			</ol>
+		</Details>
+	{/if}
 </div>
 
 <style>
