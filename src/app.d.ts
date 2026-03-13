@@ -101,7 +101,7 @@ declare global {
 	};
 
 	// CSVW metadata schema (simplified)
-	type csvwColumn = { name: string; titles: string; datatype: string };
+	type csvwColumn = { name: string; titles: string; datatype: string; aboutUrl?: string };
 	type csvwTableSchema = { columns: csvwColumn[] };
 	type csvwMetadata = {
 		'@context': ['http://www.w3.org/ns/csvw', { '@language': 'en' }];
