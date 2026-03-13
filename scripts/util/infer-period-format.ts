@@ -40,17 +40,21 @@ function getPeriodFormat(frequency, period) {
 }
 
 export default function inferPeriodFormat(periods) {
-	if (periods.length === 1) return { frequency: 'annual', periodFormat: 'year' };
-
 	const sorted = [...periods].sort((a, b) => a.localeCompare(b));
-	const dates = sorted.map((p) => getDate(p));
 
-	const gapsInDays = [];
-	for (let i = 1; i < dates.length; i++)
-		Math.floor(gapsInDays.push((dates[i] - dates[i - 1]) / oneDay));
-	const minGapInDays = Math.min(...gapsInDays);
+	let frequency;
+	if (periods.length === 1) {
+		frequency = 'annual';
+	} else {
+		const dates = sorted.map((p) => getDate(p));
 
-	const frequency = getFrequency(minGapInDays);
+		const gapsInDays = [];
+		for (let i = 1; i < dates.length; i++)
+			Math.floor(gapsInDays.push((dates[i] - dates[i - 1]) / oneDay));
+		const minGapInDays = Math.min(...gapsInDays);
+
+		frequency = getFrequency(minGapInDays);
+	}
 	const periodFormat = getPeriodFormat(frequency, sorted[0].split('/'));
 
 	return { frequency, periodFormat };
