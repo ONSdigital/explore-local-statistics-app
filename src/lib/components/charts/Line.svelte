@@ -113,6 +113,9 @@
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
+	let yTicks = $derived(yScale?.ticks?.(5) || []);
+	let yTicksAreIntegers = $derived(yTicks.every((d) => d % 1 === 0));
+
 	let labelHeights: { [key: string]: number } = $state({});
 	let labelLookup: any[] | null = $derived(
 		marginLabels({
@@ -279,10 +282,12 @@
 			<div class="line-y-axis">
 				<div class="y-baseline"></div>
 				{#key yDomain}
-					{#each yScale.ticks(5) as yTick, i}
+					{#each yTicks as yTick, i}
 						<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
 						<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
-							{prefix}{formatValue(yTick)}{suffix}
+							{prefix}{yTicksAreIntegers
+								? yTick.toLocaleString('en-GB')
+								: formatValue(yTick)}{suffix}
 						</div>
 					{/each}
 				{/key}

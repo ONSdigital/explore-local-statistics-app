@@ -38,12 +38,7 @@ export function parseDataKeyed(data: jsonDataCols, zKey: string, rowTemplate: js
 }
 
 export function makeValueFormatter(dp) {
-	const fmt = format(`,.${dp ?? 0}f`);
-
-	return (v) => {
-		const s = fmt(v);
-		return s.replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
-	};
+	return format(`,.${dp ?? 0}f`);
 }
 
 export function parsePeriod(period) {
@@ -168,13 +163,25 @@ export async function getMapFeatures() {
 	return features;
 }
 
-export function valuesToBreaks(values: number[], count = 5) {
+export function round(val, dp, mode = 'round') {
+	const rounder = mode === 'floor' ? Math.floor : mode === 'ceil' ? Math.ceil : Math.round;
+	const multiplier = Math.pow(10, dp);
+	return rounder(val * multiplier) / multiplier;
+}
+
+export function valuesToBreaks(values: number[], dp = 0, count = 5) {
 	const clusters = ckmeans(values, values.length < count ? values.length : count);
 	const breaks = [
 		...clusters.map((c) => c[0]),
 		clusters[clusters.length - 1][clusters[clusters.length - 1].length - 1]
 	];
-	return Array.from(new Set(breaks)); // de-duplicate breaks
+	return Array.from(
+		new Set(
+			breaks.map((d, i) =>
+				round(d, dp, i === 0 ? 'floor' : i === breaks.length - 1 ? 'ceil' : 'round')
+			)
+		)
+	); // de-duplicate and round breaks
 }
 
 export function getAreaType(area: areaObject) {

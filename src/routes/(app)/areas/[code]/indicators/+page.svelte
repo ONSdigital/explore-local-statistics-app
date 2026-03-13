@@ -188,7 +188,7 @@
 			/>
 		</NavSection>
 	</div>
-	{#if data.related.similar[0]}
+	{#if data.related?.similar?.[0]}
 		<NavSection title="Similar areas">
 			<p>
 				See which areas are statistically similar to {getName(areaProps, 'the')}

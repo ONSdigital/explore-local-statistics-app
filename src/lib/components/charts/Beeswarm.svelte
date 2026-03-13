@@ -42,36 +42,44 @@
 
 	const labels = $state({});
 	function labelDodge(el, params) {
-		const rect = el.getBoundingClientRect();
-		const parent = el.parentElement.getBoundingClientRect();
-		const toPercent = (val) => (100 * val) / parent.width;
+		if (el?.getBoundingClientRect && el?.parentElement) {
+			const rect = el.getBoundingClientRect();
+			const parent = el.parentElement.getBoundingClientRect();
+			const toPercent = (val) => (100 * val) / parent.width;
 
-		const leftDiff = parent.left - rect.left;
-		const rightDiff = parent.right - rect.right;
-		let offset = leftDiff > 0 ? toPercent(leftDiff) : rightDiff < 0 ? toPercent(rightDiff) : 0;
-		let x = params.d.x + offset;
+			const leftDiff = parent.left - rect.left;
+			const rightDiff = parent.right - rect.right;
+			let offset = leftDiff > 0 ? toPercent(leftDiff) : rightDiff < 0 ? toPercent(rightDiff) : 0;
+			let x = params.d.x + offset;
 
-		if (params.i > 0 && labels[0]) {
-			const sibling = labels[0].rect;
-			const overlap = sibling.left < rect.right && sibling.right > rect.left;
-			if (overlap) {
-				const sibX = labels[0].x;
-				const labelsOffset = toPercent((rect.width + sibling.width + 6) / 2);
-				x = x > sibX ? sibX + labelsOffset : sibX - labelsOffset;
+			if (params.i > 0 && labels[0]) {
+				const sibling = labels[0].rect;
+				const overlap = sibling.left < rect.right && sibling.right > rect.left;
+				if (overlap) {
+					const sibX = labels[0].x;
+					const labelsOffset = toPercent((rect.width + sibling.width + 6) / 2);
+					x = x > sibX ? sibX + labelsOffset : sibX - labelsOffset;
+				}
 			}
+			labels[params.i] = { x, rect };
 		}
-		labels[params.i] = { x, rect };
 		return { destroy: () => (labels[params.i] = null) };
 	}
 
 	function doKeydown(e) {
-		if (['ArrowLeft', 'ArrowDown'].includes(e.key) && activeIndex !== 0) {
-			activeIndex -= 1;
-			_hovered = _sorted[activeIndex];
+		if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+			e.preventDefault();
+			if (activeIndex !== 0) {
+				activeIndex -= 1;
+				_hovered = _sorted[activeIndex];
+			}
 		}
-		if (['ArrowRight', 'ArrowUp'].includes(e.key) && activeIndex !== _sorted.length - 1) {
-			activeIndex += 1;
-			_hovered = _sorted[activeIndex];
+		if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+			e.preventDefault();
+			if (activeIndex !== _sorted.length - 1) {
+				activeIndex += 1;
+				_hovered = _sorted[activeIndex];
+			}
 		}
 	}
 </script>
@@ -162,6 +170,7 @@
 		_hovered = null;
 		activeIndex = getSelectedIndex(_sorted, selected[0]);
 	}}
+	onkeydown={doKeydown}
 	onmousedown={(e) => e.preventDefault()}
 	role="figure"
 >
