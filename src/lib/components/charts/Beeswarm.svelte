@@ -39,6 +39,7 @@
 		const diff = val1 - val2;
 		return diff > _data.mad ? 'Higher than' : diff < -_data.mad ? 'Lower than' : 'Similar to';
 	});
+	let period = $derived(_data ? _data.array[0][periodKey] : null);
 
 	const labels = $state({});
 	function labelDodge(el, params) {
@@ -222,11 +223,13 @@
 		{#if keyboardMode}
 			Use the arrow keys to move through the different areas
 		{:else if comparison}
-			{comparison} <strong>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong> in {formatPeriod(
-				_data?.keyed?.[selected[1]]?.[periodKey]
-			)}
+			{comparison}
+			<strong style:color={getPaletteColor(1, selected.length, 'text')}
+				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
+			>
+			in {formatPeriod(period)}
 		{:else}
-			Data for comparison area not available
+			No comparison area data for {formatPeriod(period)}
 		{/if}
 	</p>
 	<p class="indicator-confidence ons-u-fs-s" aria-hidden="true">
