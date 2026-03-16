@@ -414,11 +414,11 @@
 						{/if}
 					{/if}
 				</g>
-				{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
+				{#if width >= widthThreshold && !hovered}
 					{#key _data}
 						<g>
-							{#each selectedData as arr, i}
-								{@const yPosAdj = labelLookup?.[i]?.y || yScale(arr[arr.length - 1][yKey])}
+							{#each Array.isArray(selectedData) ? selectedData : [] as arr, i}
+								{@const yPosAdj = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
 								{@const xMax = xScale(_data.dateDomain[1])}
 								{@const elbowX =
