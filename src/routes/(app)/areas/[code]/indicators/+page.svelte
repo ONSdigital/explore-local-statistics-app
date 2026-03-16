@@ -194,7 +194,7 @@
 				See which areas are statistically similar to {getName(areaProps, 'the')}
 				based on specific sets of indicators. These groups of areas are based on
 				<a
-					href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+					href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheuk"
 					target="_blank"
 					>a clustering analysis carried out by the ONS<span class="ons-u-vh">
 						(opens in a new tab)</span
