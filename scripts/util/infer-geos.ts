@@ -69,7 +69,7 @@ function getCountries(types: string[]) {
 function getGroups(types: string[], countries: string[]) {
 	return groups.filter((grp) => {
 		const codes = grp.codes.filter((cd) => countries.includes(cd[0]));
-		return codes.length && codes.some((cd) => types.includes(cd));
+		return codes.length && codes.every((cd) => types.includes(cd));
 	});
 }
 
