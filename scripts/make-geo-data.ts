@@ -35,20 +35,29 @@ const topoPath = `${outputDir}/data/topo.json`;
 writeFileSync(topoPath, JSON.stringify(topo));
 console.log(`Wrote ${topoPath}`);
 
+// Convert topoJSON metadata into rows
+const topoItems = {};
+for (const layer of Object.values(topo.objects)) {
+	for (const geo of layer.geometries) topoItems[geo.properties.areacd] = geo.properties;
+}
+const topoRows = Object.values(topoItems);
+
 // Make geography lookup
 const lookupRows = csvParse(await (await fetch(metaUrl)).text(), autoType);
 const rows = lookupRows.filter((row) => geoCodes.has(row.areacd.slice(0, 3)));
 
 const lookup = {};
-for (const row of rows) {
-	const obj = {};
-	for (const key of ['areacd', 'areanm', 'start', 'end']) {
-		if (row[key]) obj[key] = row[key];
+for (const row of [...rows, ...topoRows]) {
+	if (!lookup[row.areacd]) {
+		const obj = {};
+		for (const key of ['areacd', 'areanm', 'start', 'end']) {
+			if (row[key]) obj[key] = row[key];
+		}
+		obj.level = getLevels(row.areacd);
+		obj.parents = row.parentcd ? getParents([row.parentcd], rows) : [];
+		obj.children = getChildren(row.areacd, rows);
+		lookup[row.areacd] = obj;
 	}
-	obj.level = getLevels(row.areacd);
-	obj.parents = row.parentcd ? getParents([row.parentcd], rows) : [];
-	obj.children = getChildren(row.areacd, rows);
-	lookup[row.areacd] = obj;
 }
 
 const geoPath = `${outputDir}/data/geo-metadata.json`;
