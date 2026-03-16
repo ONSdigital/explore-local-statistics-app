@@ -226,6 +226,7 @@
 			<strong style:color={getPaletteColor(1, selected.length, 'text')}
 				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
 			>
+			in {formatPeriod(_data?.array?.[0]?.[periodKey])}
 		{:else}
 			No data for comparison area
 		{/if}
