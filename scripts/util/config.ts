@@ -7,7 +7,8 @@ export const definedPeriodFormats = {
 	'network-coverage-5g': { frequency: 'quarterly', periodFormat: 'month' },
 	'premises-below-30': { frequency: 'quarterly', periodFormat: 'month' },
 	'gigabit-capable-broadband': { frequency: 'quarterly', periodFormat: 'month' },
-	'engagement-with-culture-and-heritage': { frequency: 'annual', periodFormat: '1-year' }
+	'engagement-with-culture-and-heritage': { frequency: 'annual', periodFormat: '1-year' },
+	'housing-affordability-ratio': { frequency: 'annual', periodFormat: 'month' }
 };
 
 const cols = {
