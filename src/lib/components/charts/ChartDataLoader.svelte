@@ -9,7 +9,8 @@
 		id = dataUrl,
 		visible = true,
 		noDataMessage = null,
-		indicator = null
+		indicator = null,
+		onUpdate = (data) => null
 	} = $props();
 
 	let loadedDataUrl: string | null = null;
@@ -42,18 +43,29 @@
 				return loadedData;
 			} catch {
 				console.log(`Failed to load data for ${id}`);
-				return { message: 'Failed to load chart data' };
+				loadedData = { message: 'Failed to load chart data' };
+				return loadedData;
 			}
 		} else return loadedData;
 	}
 	// svelte-ignore await_waterfall
 	let data = $derived(await fetchData(dataUrl, visible));
+	$effect(() => onUpdate(data));
 </script>
 
 {#if data?.message}
-	<p class="ons-u-fs-s">{noDataMessage || data.message}</p>
+	<div class="no-data-message ons-u-fs-s">{noDataMessage || data.message}</div>
 {:else if data}
 	{@render chart(data)}
 {:else}
 	<Spinner message="Loading chart data" />
 {/if}
+
+<style>
+	.no-data-message {
+		display: flex;
+		align-items: flex-end;
+		height: 100%;
+		padding-bottom: 24px;
+	}
+</style>

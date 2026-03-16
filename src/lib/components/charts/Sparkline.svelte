@@ -170,7 +170,7 @@
 		</div>
 	</div>
 {:else}
-	<p class="ons-u-fs-s">Time series data not available.</p>
+	<div class="no-data-message ons-u-fs-s">Time series data not available.</div>
 {/if}
 
 <style>
@@ -254,5 +254,11 @@
 		font-size: 14px;
 		font-weight: bold;
 		line-height: 1.2;
+	}
+	.no-data-message {
+		display: flex;
+		align-items: flex-end;
+		height: 100%;
+		padding-bottom: 24px;
 	}
 </style>
