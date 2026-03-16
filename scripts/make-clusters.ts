@@ -23,7 +23,6 @@ const clusters = {
 	clusters: clusters_empty,
 	descriptions
 };
-console.log(clusters);
 
 const clusters_path = `${input_dir}/cluster-allocation.csv`;
 const clusters_data = csvParse(stripBom(readFileSync(clusters_path, { encoding: 'utf8' })));
@@ -39,7 +38,6 @@ for (const row of [...clusters_data].sort((a, b) => a[idKey].localeCompare(b[idK
 			clusters.clusters[type][letter].push(areacd);
 		}
 	}
-	console.log(areacd, obj, row);
 	clusters.lookup[areacd] = obj;
 }
 
