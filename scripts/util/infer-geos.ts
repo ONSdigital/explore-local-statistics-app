@@ -27,10 +27,9 @@ async function getStartDates(groups: areaGroupObject[], countries: string[]) {
 	const earliestYear = Math.min(...startDatesAll.map((d) => d.start)) - 1;
 	const latestYear = Math.max(...startDatesAll.map((d) => d.start));
 
+	const prefixes = new Set(groups.map((g) => g.codes).flat());
 	const startDatesFiltered = startDatesAll.filter(
-		(d) =>
-			countries.includes(d.newcd[0]) &&
-			groups[groups.length - 1].codes.includes(d.newcd.slice(0, 3))
+		(d) => countries.includes(d.newcd[0]) && prefixes.has(d.newcd.slice(0, 3))
 	);
 	if (startDatesFiltered.length === 0) return { startDates: null, latestYear };
 
@@ -57,7 +56,9 @@ async function getYear(codes: string[], groups: areaGroupObject[], countries: st
 }
 
 function getTypes(codes: string[]) {
-	return Array.from(new Set(codes.map((cd) => cd.slice(0, 3)))).sort((a, b) => a.localeCompare(b));
+	return Array.from(new Set(codes.map((cd) => cd.slice(0, 3))))
+		.filter((cd) => cd.match(/^[EKNSW]\d{2}$/))
+		.sort((a, b) => a.localeCompare(b));
 }
 
 function getCountries(types: string[]) {
