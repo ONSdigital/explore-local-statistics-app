@@ -227,10 +227,7 @@
 				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
 			>
 		{:else}
-			No data for
-			<strong style:color={getPaletteColor(1, selected.length, 'text')}
-				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
-			>
+			No data for comparison area
 		{/if}
 	</p>
 	<p class="indicator-confidence ons-u-fs-s" aria-hidden="true">
