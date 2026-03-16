@@ -15,12 +15,12 @@
 	let dialog = $state();
 
 	function initDialog(el) {
+		// Prevent areas dropdown from closing when scrollbar is clicked
 		el.addEventListener('mousedown', (event) => {
 			if (event.target.closest('.autocomplete__menu')) {
 				event.preventDefault();
 			}
 		});
-		el.addEventListener('close', () => (document.body.style.overflow = 'visible'));
 
 		// Click outside to close dialog
 		el.addEventListener('pointerup', (event) => {
@@ -34,8 +34,14 @@
 				onCancel();
 			}
 		});
-		// Re-enable background scroll
-		el.addEventListener('close', () => (document.body.style.overflow = 'visible'));
+
+		// Prevent background from scrolling
+		el.addEventListener('wheel', (event) => {
+			event.preventDefault();
+		});
+		el.addEventListener('keydown', (event) => {
+			if (['ArrowUp', 'ArrowDown'].includes(event.key)) event.preventDefault();
+		});
 	}
 </script>
 
@@ -46,8 +52,6 @@
 	on:click={() => {
 		onOpen();
 		dialog.showModal();
-		// Prevent background scroll
-		document.body.style.overflow = 'hidden';
 	}}>{label}</Button
 >
 
