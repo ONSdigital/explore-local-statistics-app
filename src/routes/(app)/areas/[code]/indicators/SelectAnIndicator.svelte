@@ -42,7 +42,7 @@
 			indicator={selectedIndicator.slug}
 			metadata={selectedIndicator}
 			timeRange={pageState.selectedPeriodRange.map((t) => String(t))}
-			selected={[areaProps.areacd, ...pageState.selectedAreas.map((a) => a.areacd)]}
+			selected={[areaProps, ...pageState.selectedAreas]}
 			geoLevel={pageState.selectedGeoGroup}
 			showIntervals={pageState.showConfidenceIntervals}
 			noChartMessage={makeChartMessage(selectedIndicator, selectedChartType, includedChartKeys)}
