@@ -34,6 +34,7 @@
 	let valueDomain = $derived(metadata?.valueDomain);
 	let formatValue = $derived(makeValueFormatter(metadata.decimalPlaces));
 	let formatPeriod = $derived(makePeriodFormatter(metadata.periodFormat));
+	let period = $state(null);
 
 	let chartTypes = $derived(
 		indicator === 'population-by-age-and-sex' ? ['pyramid'] : ['beeswarm', 'sparkline']
@@ -113,7 +114,11 @@
 				aria-controls="{indicator}-description"
 				aria-expanded={expanded ? 'true' : 'false'}
 			>
-				<strong>{metadata.label}</strong>{metadata.subText ? `, ${metadata.subText}` : ''}
+				<strong>{metadata.label}</strong><span style:font-size="16px"
+					>{metadata.subText ? `, ${metadata.subText}` : ''}{period
+						? `, ${formatPeriod(period)}`
+						: ''}</span
+				>
 				<span class="ons-u-vh">Expand to show details and data for this indicator</span>
 			</summary>
 			<div id="{indicator}-description" class="indicator-description">
@@ -181,6 +186,7 @@
 					id="{indicator} pyramid"
 					dataUrl={dataUrl['pyramid']}
 					noDataMessage="Chart data not available."
+					onUpdate={(data) => (period = data?.period?.[0])}
 					{visible}
 				>
 					{#snippet chart(data)}
@@ -196,6 +202,7 @@
 							id="{indicator} beeswarm"
 							dataUrl={dataUrl['beeswarm']}
 							noDataMessage="Chart data not available."
+							onUpdate={(data) => (period = data?.period?.[0])}
 							{visible}
 						>
 							{#snippet chart(data)}
@@ -257,7 +264,7 @@
 		position: relative;
 	}
 	.indicator-pyramid {
-		min-height: 412px;
+		min-height: 420px;
 	}
 	.indicator-pyramid :global(.button-group) {
 		margin-top: 0.25rem;

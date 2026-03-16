@@ -222,11 +222,15 @@
 		{#if keyboardMode}
 			Use the arrow keys to move through the different areas
 		{:else if comparison}
-			{comparison} <strong>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong> in {formatPeriod(
-				_data?.keyed?.[selected[1]]?.[periodKey]
-			)}
+			{comparison}
+			<strong style:color={getPaletteColor(1, selected.length, 'text')}
+				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
+			>
 		{:else}
-			Data for comparison area not available
+			No data for
+			<strong style:color={getPaletteColor(1, selected.length, 'text')}
+				>{_data?.keyed?.[selected[1]]?.[labelKey]}</strong
+			>
 		{/if}
 	</p>
 	<p class="indicator-confidence ons-u-fs-s" aria-hidden="true">

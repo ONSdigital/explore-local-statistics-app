@@ -80,7 +80,12 @@
 			<AreasLegend selectedAreas={pageState.selectedAreas} />
 			<div class="legend-modals">
 				<AreasModal mode="indicator" {data} bind:pageState />
-				<OptionsModal {data} hasIntervals={data.indicator.confidenceIntervals} bind:pageState />
+				<OptionsModal
+					mode="indicator"
+					{data}
+					hasIntervals={data.indicator.confidenceIntervals}
+					bind:pageState
+				/>
 			</div>
 		</div>
 		{#each charts as chart}

@@ -259,9 +259,6 @@
 			</div>
 		{/if}
 	</div>
-	<p class="pyramid-year ons-u-fs-s">
-		Showing values for {formatPeriodShort(_data?.array[0][periodKey])}
-	</p>
 </div>
 
 <style>
@@ -332,11 +329,5 @@
 
 	.chart-x-axis line {
 		stroke: #999;
-	}
-
-	.pyramid-year {
-		display: block;
-		text-align: center;
-		margin-top: 10px;
 	}
 </style>

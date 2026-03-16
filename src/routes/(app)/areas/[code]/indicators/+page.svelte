@@ -155,7 +155,7 @@
 			/>
 			<div class="legend-modals">
 				<AreasModal mode="area" {data} bind:pageState />
-				<OptionsModal {data} bind:pageState />
+				<OptionsModal mode="area" {data} bind:pageState />
 			</div>
 		</div>
 		<NavSection title="Topics" />

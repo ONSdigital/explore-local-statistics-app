@@ -4,7 +4,7 @@
 	import RangeSlider from './RangeSlider.svelte';
 	import { cloneState } from './modalHelpers';
 
-	let { data, pageState = $bindable(), hasIntervals = true, mode = 'default' } = $props();
+	let { data, pageState = $bindable(), hasIntervals = true, mode = 'indicator' } = $props();
 
 	let _pageState = $state(cloneState(pageState));
 	let formatTick = $derived(pageState?.formatPeriod?.() || ((d) => d));
@@ -25,6 +25,19 @@
 		bind:selectedRange={_pageState.selectedPeriodRange}
 	/>
 
+	{#if mode === 'area'}
+		<div class="mobile-only">
+			<ButtonGroup
+				name="primary"
+				legend="Select chart type"
+				bind:value={_pageState.selectedChartType}
+			>
+				<ButtonGroupItem value="beeswarm" label="Distribution chart" />
+				<ButtonGroupItem value="sparkline" label="Line chart" />
+			</ButtonGroup>
+		</div>
+	{/if}
+
 	<Checkbox
 		id="ci-checkbox"
 		bind:checked={_pageState.showConfidenceIntervals}
@@ -35,30 +48,22 @@
 	{#if !hasIntervals}
 		<p class="ons-chart__caption">Note: Confidence intervals not available for this indicator</p>
 	{/if}
-
-	{#if mode === 'default'}
-		<div class="mobile-only">
-			<ButtonGroup
-				name="primary"
-				legend="Choose a chart type"
-				visuallyHideLegend
-				bind:value={_pageState.selectedChartType}
-			>
-				<ButtonGroupItem value="beeswarm" label="Beeswarm" />
-				<ButtonGroupItem value="sparkline" label="Line chart" />
-			</ButtonGroup>
-		</div>
-	{/if}
 </Modal>
 
 <style>
 	.mobile-only {
 		display: block;
+		margin-top: 0.15rem;
+		margin-bottom: 1.25rem;
 	}
 
 	@media (min-width: 768px) {
 		.mobile-only {
 			display: none;
 		}
+	}
+	.mobile-only :global(legend) {
+		margin-bottom: 0.25rem;
+		font-weight: normal;
 	}
 </style>
