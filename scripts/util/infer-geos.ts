@@ -66,9 +66,15 @@ function getCountries(types: string[]) {
 		.sort((a, b) => a.localeCompare(b));
 }
 
-function getGroups(types: string[], countries: string[]) {
+function getGroups(types: string[], countries: string[], _codes) {
+	// prefilter list of countries - if there is only one code then remove it
+	const codesPerCountry = countries.reduce((acc, d) => {
+		acc[d] = _codes.filter((code) => code.startsWith(d));
+		return acc;
+	}, {});
+	const _countries = countries.filter((d) => codesPerCountry[d].length > 1);
 	return groups.filter((grp) => {
-		const codes = grp.codes.filter((cd) => countries.includes(cd[0]));
+		const codes = grp.codes.filter((cd) => _countries.includes(cd[0]));
 		return codes.length && codes.every((cd) => types.includes(cd));
 	});
 }
@@ -77,7 +83,7 @@ export default async function inferGeos(codes: string[]) {
 	const _codes = codes.map((cd) => itlsMap[cd] || cd);
 	const types = getTypes(_codes);
 	const countries = getCountries(types);
-	const groups = getGroups(types, countries);
+	const groups = getGroups(types, countries, _codes);
 	const year = await getYear(_codes, groups, countries);
 	return { countries, levels: groups.map((g) => g.key), types, year };
 }
