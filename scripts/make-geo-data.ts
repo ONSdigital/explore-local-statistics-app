@@ -76,14 +76,12 @@ for (const key of objectKeys) list[key] = {};
 
 for (let i = 0; i < listRaw.length; i++) {
 	const row = listRaw[i];
-	if (!row.end) {
-		for (const key of arrayKeys) {
-			if (key !== 'parentcd' || includeParent.has(row.areacd.slice(0, 3))) list[key].push(row[key]);
-			else list[key].push(null);
-		}
-		for (const key of objectKeys) {
-			if (row[key]) list[key][i] = row[key];
-		}
+	for (const key of arrayKeys) {
+		if (key !== 'parentcd' || includeParent.has(row.areacd.slice(0, 3))) list[key].push(row[key]);
+		else list[key].push(null);
+	}
+	for (const key of objectKeys) {
+		if (row[key]) list[key][i] = row[key];
 	}
 }
 const listPath = `${outputDir}/data/areas-list.json`;
