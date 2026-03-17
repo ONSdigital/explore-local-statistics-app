@@ -112,12 +112,12 @@ declare global {
 	};
 
 	// Data filter/format params
-	type parsedParam = string | string[] | number | boolean | null;
-	type parsedParams = { [key: string]: parsedParam };
 	type dataFormat = 'json' | 'csv' | 'csvw' | 'xlsx' | 'cols.json' | 'rows.json';
 	type keyedDimensions = { [key: string]: string | string[] };
 	type dimensionFilters = { [key: string]: any };
 	type filteredDimension = { key: string; count: number; values: [string, number][] };
+	type parsedParam = string | string[] | number | boolean | null;
+	type parsedParams = { [key: string]: parsedParam | dimensionFilters[] };
 
 	// Miscellaneous
 	type errorObject = { error?: number; message: string };

@@ -4,6 +4,10 @@ import { json, text, error } from '@sveltejs/kit';
 import { getParam, getDimensionFilters } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
 import { files, paths } from '$lib/data';
+import {
+	isOversizedRequest,
+	isLargeSpreadsheetRequest
+} from '$lib/api/data/helpers/requestValidators';
 import { isValidAreaCode, isValidAreaTypeCode } from '$lib/util/validationHelpers';
 
 export const GET: RequestHandler = async ({ url, params }) => {
@@ -22,23 +26,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	const includeStatus = getParam(url, 'includeStatus', ['json', 'xlsx'].includes(format));
 	const dimFilters = getDimensionFilters(url);
 
-	// Return pre-generated XLSX files for large requests
-	if (
-		[topic, indicator, geo, geoExtent, geoCluster, time, measure].every((d) => d === 'all') &&
-		format === 'xlsx'
-	) {
-		const areaType = isValidAreaCode(hasGeo)
-			? hasGeo.slice(0, 3)
-			: isValidAreaTypeCode(hasGeo)
-				? hasGeo
-				: null;
-		const file = `all-datasets${areaType ? `-${areaType}` : ''}.xlsx`;
-		const path = paths.find((p) => p.endsWith(`/${file}`));
-		if (path) return read(files[path]);
-		else error(400, `No datasets available for ${hasGeo}`);
-	}
-
-	const datasets = await getFilteredData({
+	const _params: parsedParams = {
 		format,
 		topic,
 		indicator,
@@ -54,7 +42,26 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		includeStatus,
 		dimFilters,
 		href: url.href
-	});
+	};
+
+	// Return pre-generated XLSX files for large requests
+	if (isLargeSpreadsheetRequest(_params)) {
+		const areaType = isValidAreaCode(hasGeo)
+			? hasGeo.slice(0, 3)
+			: isValidAreaTypeCode(hasGeo)
+				? hasGeo
+				: null;
+		const file = `all-datasets${areaType ? `-${areaType}` : ''}.xlsx`;
+		const path = paths.find((p) => p.endsWith(`/${file}`));
+		if (path) return read(files[path]);
+		else error(400, `No datasets available for ${hasGeo}`);
+	}
+
+	// Suppress requests that may run out of memory
+	if (isOversizedRequest(_params))
+		error(400, `Too much data requested. Try narrowing your filter parameters.`);
+
+	const datasets = await getFilteredData(_params);
 	if (datasets.error) error(datasets.error, datasets.message);
 
 	return datasets.format === 'xlsx'
