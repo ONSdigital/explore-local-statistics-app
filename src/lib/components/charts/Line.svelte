@@ -37,9 +37,13 @@
 		yTickLabelWidths[index] = el.getBoundingClientRect().width;
 		const maxWidth = Math.max(...Object.values(yTickLabelWidths));
 		leftMargin = maxWidth + 12;
+		// extra padding to allow space for long x tick labels combined with short y tick labels
+		if (leftMargin < 30) {
+			leftMargin += 10;
+		}
 	}
 
-	let rightMargin = $derived(width < widthThreshold ? 20 : 200);
+	let rightMargin = $derived(width < widthThreshold ? 30 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 	let suffix = $derived(metadata.suffix);
 	let prefix = $derived(metadata.prefix);
@@ -83,7 +87,7 @@
 	const pointGap = 22;
 	let pointSpace = $derived(width / (pointsCount - 1));
 
-	const maxTickGap = 172; // in pixels
+	const maxTickGap = 220; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
@@ -109,7 +113,15 @@
 		const tickGap = newTicks[1] - newTicks[0];
 		const firstGap = newTicks[0] - _data.dateDomain[0];
 		if (firstGap > tickGap) newTicks.unshift(new Date(newTicks[0] - tickGap));
-		return snapXTicks(newTicks, _data);
+
+		let snappedTicks = snapXTicks(newTicks, _data);
+		if (snappedTicks.length < 3) {
+			const firstTick = new Date(_data.dateDomain[0]);
+			if (+snappedTicks[0] !== +firstTick) {
+				snappedTicks = [firstTick, ...snappedTicks];
+			}
+		}
+		return snappedTicks;
 	}
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
