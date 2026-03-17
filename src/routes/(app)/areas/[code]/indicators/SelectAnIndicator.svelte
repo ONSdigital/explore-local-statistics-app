@@ -41,10 +41,7 @@
 			chartType={selectedChartTypeKey}
 			indicator={selectedIndicator.slug}
 			metadata={selectedIndicator}
-			timeRange={[
-				Math.max(pageState.selectedPeriodRange[0], new Date(selectedIndicator.periodDomain[0]).getFullYear()),
-				Math.min(pageState.selectedPeriodRange[1], new Date(selectedIndicator.periodDomain[1]).getFullYear())
-			].map((t) => String(t))}
+			timeRange={pageState.selectedPeriodRange.map((t) => String(t))}
 			selected={[areaProps, ...pageState.selectedAreas]}
 			geoLevel={pageState.selectedGeoGroup}
 			showIntervals={pageState.showConfidenceIntervals}

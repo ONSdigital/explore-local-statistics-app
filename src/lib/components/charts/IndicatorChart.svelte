@@ -34,6 +34,7 @@
 	let visible = $state(false);
 	let el = $state();
 	let fullScreenMode = $state(false);
+	let dataTimeRange = $state(timeRange);
 
 	let selectedCodes = $derived(selected.map((d) => d.areacd));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
@@ -74,6 +75,15 @@
 			fullScreenMode = false;
 		}
 	}
+
+	function updateTimeRange(data) {
+		if (data?.period?.length) {
+			const periods = [...new Set(data.period)].sort();
+			dataTimeRange = [periods[0], periods[periods.length - 1]];
+		} else {
+			dataTimeRange = timeRange;
+		}
+	}
 </script>
 
 <div
@@ -89,7 +99,7 @@
 				{@html noChartMessage}
 			</p>
 		</div>
-	{:else if chartType === 'line' && timeRange[0] === timeRange[1]}
+	{:else if chartType === 'line' && dataTimeRange[0] === dataTimeRange[1]}
 		<div class="no-chart-container">
 			<p>
 				Line chart could not be displayed for <strong>{metadata.label}</strong>. Only one year of
@@ -101,8 +111,8 @@
 		<p class="content-subtitle">
 			{metadata.subtitle},
 			{pluralise(geoLevel.label).toLowerCase()},
-			{#if hasTimeRange}{formatPeriod(timeRange[0])} to{/if}
-			{formatPeriod(timeRange[timeRange.length - 1])}
+			{#if hasTimeRange}{formatPeriod(dataTimeRange[0])} to{/if}
+			{formatPeriod(dataTimeRange[dataTimeRange.length - 1])}
 		</p>
 		{#if mode === 'default'}
 			<button
@@ -116,7 +126,13 @@
 		{/if}
 		<Observe bind:visible>
 			<div class="indicator-chart">
-				<ChartDataLoader id="{indicator} {chartType}" {dataUrl} {visible} {indicator}>
+				<ChartDataLoader
+					id="{indicator} {chartType}"
+					{dataUrl}
+					{visible}
+					{indicator}
+					onUpdate={updateTimeRange}
+				>
 					{#snippet chart(data)}
 						{@const Component = chartComponents[chartType]}
 						{@const selectedMissing = selected.filter((d) => !data.areacd.includes(d.areacd))}
