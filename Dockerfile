@@ -3,6 +3,9 @@ FROM node:24.13.0 AS shared
 
 WORKDIR /app
 
+# Custom var for the Git commit
+ARG COMMIT_HASH
+ENV COMMIT_HASH=${COMMIT_HASH}
 # Custom var for the Node adapter
 ENV SVELTEKIT_ADAPTER=node
 # Custom var for the base path

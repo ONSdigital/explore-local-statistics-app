@@ -4,6 +4,9 @@ WORKDIR /app
 
 # XXX TODO                       instead of the below, use SECRETS..??
 # XXX TODO                      or does this need to be here
+# Custom var for the Git commit
+ARG COMMIT_HASH
+ENV COMMIT_HASH=${COMMIT_HASH}
 # Custom var for the Node adapter
 ENV SVELTEKIT_ADAPTER=node
 # Custom var for the base path

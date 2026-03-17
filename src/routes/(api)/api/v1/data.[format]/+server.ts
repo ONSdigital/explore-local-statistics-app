@@ -4,7 +4,10 @@ import { json, text, error } from '@sveltejs/kit';
 import { getParam, getDimensionFilters } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
 import { files, paths } from '$lib/data';
-import { isLargeSpreadsheetRequest } from '$lib/api/data/helpers/requestValidators';
+import {
+	isOversizedRequest,
+	isLargeSpreadsheetRequest
+} from '$lib/api/data/helpers/requestValidators';
 import { isValidAreaCode, isValidAreaTypeCode } from '$lib/util/validationHelpers';
 
 export const GET: RequestHandler = async ({ url, params }) => {
@@ -53,6 +56,10 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		if (path) return read(files[path]);
 		else error(400, `No datasets available for ${hasGeo}`);
 	}
+
+	// Suppress requests that may run out of memory
+	if (isOversizedRequest(_params))
+		error(400, `Too much data requested. Try narrowing your filter parameters.`);
 
 	const datasets = await getFilteredData(_params);
 	if (datasets.error) error(datasets.error, datasets.message);
