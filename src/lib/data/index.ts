@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 // Make Vite import the JSON files in this directory into the build
-export const files = import.meta.glob('./*.json', {
+export const files = import.meta.glob(['./*.json', './*.xlsx'], {
 	query: '?url',
 	import: 'default',
 	eager: true

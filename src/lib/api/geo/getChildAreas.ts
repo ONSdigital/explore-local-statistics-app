@@ -1,10 +1,7 @@
 import { geoLevels } from '$lib/config/geoLevels';
 import { isValidAreaCode } from '$lib/util/validationHelpers';
 import { addAreaNames } from './helpers/areaCodesNames';
-import readData from '$lib/data';
-
-const geoMetadata = await readData('geo-metadata');
-const geoArray = Object.values(geoMetadata);
+import geoMetadata from '$lib/data/geo-metadata.json';
 
 export default function getChildAreas(params = {}) {
 	const cdUpper = (params?.code || '').toUpperCase();

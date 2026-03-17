@@ -1,9 +1,7 @@
 import { geoLevels } from '$lib/config/geoLevels';
 import { isValidAreaCode } from '$lib/util/validationHelpers';
 import getChildAreas from '$lib/api/geo/getChildAreas';
-import readData from '$lib/data';
-
-const areasClusters = await readData('areas-clusters');
+import areasClusters from '$lib/data/areas-clusters.json';
 
 export default function makeGeoFilter(geo: string, geoExtent: string, geoCluster: string) {
 	const codes = new Set();

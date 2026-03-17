@@ -1,6 +1,4 @@
-import readData from '$lib/data';
-
-const areaNameLookup = await readData('areas-in-data');
+import areaNameLookup from '$lib/data/areas-in-data.json';
 
 // Makes a code => name lookup from an array of GSS codes
 function makeAreaLookup(codes: string[]) {
