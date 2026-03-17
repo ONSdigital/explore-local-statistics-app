@@ -18,9 +18,7 @@ async function getStartDates(groups: areaGroupObject[], countries: string[]) {
 	else {
 		console.log('Fetching geography dates from uk-topojson repo');
 		const startDatesRaw = await (await fetch(changesUrl)).text();
-		startDatesAll = csvParse(startDatesRaw, autoType).filter(
-			(d) => d.newcd && d.type !== 'new_geo'
-		);
+		startDatesAll = csvParse(startDatesRaw, autoType).filter((d) => d.newcd);
 		startDatesCache = startDatesAll;
 	}
 
