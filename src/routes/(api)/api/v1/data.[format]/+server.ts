@@ -54,7 +54,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		else error(400, `No datasets available for ${hasGeo}`);
 	}
 
-	const datasets = await getFilteredData(params);
+	const datasets = await getFilteredData(_params);
 	if (datasets.error) error(datasets.error, datasets.message);
 
 	return datasets.format === 'xlsx'
