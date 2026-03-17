@@ -1,5 +1,5 @@
 // Functions to filter JSON-Stat at a dataset level
-import { geoLevels } from '$lib/config/geoLevels';
+import { geoLevels, geoCodesViz } from '$lib/config/geoLevels';
 import { isValidAreaCode, isValidYear } from '$lib/util/validationHelpers';
 
 export function makeIndicatorFilter(indicator, topic) {
@@ -33,6 +33,7 @@ export function hasGeo(ds, geo) {
 export function makeDatasetGeoFilter(geo) {
 	if (isValidAreaCode(geo)) return (ds) => hasGeo(ds, geo);
 	if (geo in geoLevels) return (ds) => ds.extension.geography.levels.includes(geo);
+	if (geoCodesViz.has(geo)) return (ds) => ds.extension.geography.types.includes(geo);
 	return {
 		error: 400,
 		message: "Invalid 'hasGeo' parameter. Must be a valid GSS code or geography level."
