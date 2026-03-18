@@ -25,7 +25,7 @@
 		}
 		if (dataUrl !== loadedDataUrl) {
 			loadedDataUrl = dataUrl;
-			const indicator = new URLSearchParams(dataUrl?.split?.('?')?.[1]).get('indicator');
+			const indicator = id?.split?.(' ')?.[0];
 
 			try {
 				let fetchedData = await (await fetch(dataUrl)).json();

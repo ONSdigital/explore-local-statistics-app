@@ -130,7 +130,6 @@
 					id="{indicator} {chartType}"
 					{dataUrl}
 					{visible}
-					{indicator}
 					filterExtremes={!['map', 'table'].includes(chartType)}
 					onUpdate={updateTimeRange}
 				>
