@@ -1,11 +1,14 @@
 import type { Handle } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 import logger from '$lib/logger';
 
 // hook up the logger
-console.log = (...args) => logger.info(...args);
-console.info = (...args) => logger.info(...args);
-console.warn = (...args) => logger.warn(...args);
-console.error = (...args) => logger.error(...args);
+if (!dev) {
+	console.log = (...args) => logger.info(...args);
+	console.info = (...args) => logger.info(...args);
+	console.warn = (...args) => logger.warn(...args);
+	console.error = (...args) => logger.error(...args);
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);

@@ -13,9 +13,10 @@ export function isOversizedRequest(params: parsedParams) {
 		params.indicator === 'all' ||
 		[params.indicator].flat().length > 20 ||
 		[params.topic].flat().length > 1;
+	const largeGeoGroups = new Set(['all', 'ltla', 'utla']);
 	const largeGeo =
 		params.geoExtent === 'all' &&
 		params.geoCluster === 'all' &&
-		['all', 'ltla', 'utla'].some((geo) => geo === params.geo);
+		[params.geo].flat().some((geo) => largeGeoGroups.has(geo));
 	return largeTime && largeInidcators && largeGeo;
 }

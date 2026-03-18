@@ -131,6 +131,7 @@
 					{dataUrl}
 					{visible}
 					{indicator}
+					filterExtremes={!['map', 'table'].includes(chartType)}
 					onUpdate={updateTimeRange}
 				>
 					{#snippet chart(data)}
