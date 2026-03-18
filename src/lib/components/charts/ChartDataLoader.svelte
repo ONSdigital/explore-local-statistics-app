@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Spinner from '../visuals/Spinner.svelte';
 	import { extremeAreas } from '$lib/config';
-	import { filterExtremeAreas, parseData } from '$lib/utils';
+	import { filterExtremeAreas } from '$lib/utils';
 
 	let {
 		chart,
@@ -9,48 +9,44 @@
 		id = dataUrl,
 		visible = true,
 		noDataMessage = null,
-		indicator = null,
+		filterExtremes = true,
 		onUpdate = (data) => null
 	} = $props();
 
 	let loadedDataUrl: string | null = null;
-	let loadedData: jsonDataCols | errorObject | null = null;
+	let data: jsonDataCols | errorObject | null = $state.raw(null);
 
 	async function fetchData(dataUrl: string, visible: boolean) {
-		if (!visible) return loadedData;
+		if (!visible) return;
 		if (!dataUrl) {
-			loadedData = { message: 'Data not available' };
-			return loadedData;
+			data = { message: 'Data not available' };
+			onUpdate(data);
+			return;
 		}
 		if (dataUrl !== loadedDataUrl) {
 			loadedDataUrl = dataUrl;
+			const indicator = new URLSearchParams(dataUrl?.split?.('?')?.[1]).get('indicator');
+
 			try {
 				let fetchedData = await (await fetch(dataUrl)).json();
 
-				if (indicator && extremeAreas[indicator] && !fetchedData.message) {
-					const rows = parseData(fetchedData);
-					const filtered = filterExtremeAreas(rows, extremeAreas[indicator]);
+				if (filterExtremes && !fetchedData.message && extremeAreas[indicator]) {
+					data = filterExtremeAreas(fetchedData, extremeAreas[indicator]);
+				} else data = fetchedData;
 
-					const cols = Object.keys(fetchedData);
-					fetchedData = {};
-					for (const col of cols) {
-						fetchedData[col] = filtered.map((row) => row[col]);
-					}
-				}
-
-				loadedData = fetchedData;
 				console.log(`Loaded data for ${id}`);
-				return loadedData;
+				onUpdate(data);
+				return;
 			} catch {
 				console.log(`Failed to load data for ${id}`);
-				loadedData = { message: 'Failed to load chart data' };
-				return loadedData;
+				data = { message: 'Failed to load chart data' };
+				onUpdate(data);
+				return;
 			}
-		} else return loadedData;
+		}
 	}
-	// svelte-ignore await_waterfall
-	let data = $derived(await fetchData(dataUrl, visible));
-	$effect(() => onUpdate(data));
+
+	$effect(async () => await fetchData(dataUrl, visible));
 </script>
 
 {#if data?.message}

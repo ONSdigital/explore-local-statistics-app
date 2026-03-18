@@ -3,6 +3,8 @@ import { isValidAreaCode } from '$lib/util/validationHelpers';
 import { addAreaNames } from './helpers/areaCodesNames';
 import geoMetadata from '$lib/data/geo-metadata.json';
 
+const geoArray = Object.values(geoMetadata);
+
 export default function getChildAreas(params = {}) {
 	const cdUpper = (params?.code || '').toUpperCase();
 	if (!isValidAreaCode(cdUpper))
