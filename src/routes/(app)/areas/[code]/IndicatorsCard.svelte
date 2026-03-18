@@ -7,21 +7,18 @@
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 
 	let { areaProps } = $props();
+	const indicators = ['population-count', 'median-age'];
 
-	async function fetchData(urls: string[]) {
+	async function fetchData(url: string) {
 		try {
-			const data = await Promise.all(urls.map(async (url) => (await fetch(url)).json()));
-			if (data?.[0]?.message) return null;
+			const data = await (await fetch(url)).json();
+			if (!indicators.every((ind) => data[ind])) return null;
 			return data;
 		} catch {
 			return null;
 		}
 	}
-	let dataUrls = $derived(
-		['population-count', 'median-age'].map((key) =>
-			makeDataUrl(key, 'latest', null, [areaProps.areacd])
-		)
-	);
+	let dataUrl = $derived(makeDataUrl(indicators.join(','), 'latest', null, [areaProps.areacd]));
 </script>
 
 <div class="local-indicators-card">
@@ -29,13 +26,15 @@
 		Local data for {getName(areaProps, 'the')}
 	</h2>
 	<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
-		{#await fetchData(dataUrls)}
+		{#await fetchData(dataUrl)}
 			<Spinner />
 		{:then data}
 			{#if data}
-				In {data[0].period[0].slice(0, 4)}, {getName(areaProps, 'the')} had a total population of
-				<strong>{data[0].value[0].toLocaleString('en-GB')}</strong>
-				and a median age of <strong>{data[1].value[0].toLocaleString('en-GB')} years</strong>.
+				In {data['population-count'].period[0].slice(0, 4)}, {getName(areaProps, 'the')} had a total
+				population of
+				<strong>{data['population-count'].value[0].toLocaleString('en-GB')}</strong>
+				and a median age of
+				<strong>{data['median-age'].value[0].toLocaleString('en-GB')} years</strong>.
 			{:else}
 				Health, education, economy, life satisfaction and more.
 			{/if}
