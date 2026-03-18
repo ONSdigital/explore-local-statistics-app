@@ -40,30 +40,21 @@
 		return diff > _data.mad ? 'Higher than' : diff < -_data.mad ? 'Lower than' : 'Similar to';
 	});
 
-	const labels = $state({});
+	let labelPos = $state(null);
 	function labelDodge(el, params) {
 		if (el?.getBoundingClientRect && el?.parentElement) {
 			const rect = el.getBoundingClientRect();
 			const parent = el.parentElement.getBoundingClientRect();
 			const toPercent = (val) => (100 * val) / parent.width;
 
-			const leftDiff = parent.left - rect.left;
-			const rightDiff = parent.right - rect.right;
+			const leftDiff = parent.left - rect.left - 6;
+			const rightDiff = parent.right - rect.right + 6;
 			let offset = leftDiff > 0 ? toPercent(leftDiff) : rightDiff < 0 ? toPercent(rightDiff) : 0;
 			let x = params.d.x + offset;
 
-			if (params.i > 0 && labels[0]) {
-				const sibling = labels[0].rect;
-				const overlap = sibling.left < rect.right && sibling.right > rect.left;
-				if (overlap) {
-					const sibX = labels[0].x;
-					const labelsOffset = toPercent((rect.width + sibling.width + 6) / 2);
-					x = x > sibX ? sibX + labelsOffset : sibX - labelsOffset;
-				}
-			}
-			labels[params.i] = { x, rect };
+			labelPos = { x, rect };
 		}
-		return { destroy: () => (labels[params.i] = null) };
+		return { destroy: () => (labelPos = null) };
 	}
 
 	function doKeydown(e) {
@@ -92,7 +83,7 @@
 {/snippet}
 
 {#snippet line(d, i, color)}
-	{@const offsetX = labels?.[i]?.x ?? d.x}
+	{@const offsetX = labelPos?.x ?? d.x}
 	<polyline
 		points="{d.x},{100 - (selected.includes(d[idKey]) ? 0 : d.y)} {d.x},0"
 		stroke={color}
@@ -126,11 +117,15 @@
 
 {#snippet label(d, i, color, showName = false)}
 	{#key d[idKey]}
+		{@const xPos = labelPos?.x ?? d.x}
+		{@const floatRight = xPos > 50}
 		<div
 			class="beeswarm-label"
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
 			style:color={i === 0 ? ONScolours.white : color}
-			style:left="{labels?.[i]?.x ?? d.x}%"
+			style:left={!floatRight ? `${xPos}%` : null}
+			style:right={floatRight ? `${100 - xPos}%` : null}
+			style:transform="translateX({floatRight ? 50 : -50}%)"
 			use:labelDodge={{ i, d }}
 		>
 			{#if showName}{d[labelKey]},{/if}
@@ -183,11 +178,11 @@
 					{/each}
 				</g>
 				<g class="beeswarm-selected">
-					{#each _selected as sel, i}
+					{#each [..._selected].reverse() as sel}
 						{@const d = { ...sel.datum, y: 0 }}
-						{#if !_hovered && i === 0}
-							{@render line(d, i, getPaletteColor(sel.i, _selected.length))}
-							{@render confidenceRect(d, i, getPaletteColor(sel.i, _selected.length))}
+						{#if !_hovered && sel.i === 0}
+							{@render line(d, sel.i, getPaletteColor(sel.i, selected.length))}
+							{@render confidenceRect(d, sel.i, getPaletteColor(sel.i, selected.length))}
 						{/if}
 					{/each}
 				</g>
@@ -211,9 +206,9 @@
 					{@const color =
 						d.datum[idKey] === _hovered?.[idKey]
 							? ONScolours.highlightOrangeDark
-							: getPaletteColor(d.i, _selected.length)}
+							: getPaletteColor(d.i, selected.length)}
 					{#if i === 0 && !_hovered}{@render label(d.datum, i, color, false)}{/if}
-					{@render marker(d.datum, getMarkerPath(d.i, _selected.length), color)}
+					{@render marker(d.datum, getMarkerPath(d.i, selected.length), color)}
 				{/each}
 			{/if}
 		</div>
@@ -242,7 +237,7 @@
 	.beeswarm-wrapper {
 		display: block;
 		position: relative;
-		margin: 4 0 20px;
+		margin: 0 0 20px;
 		padding: 26px 6px 7px;
 		border-radius: 2px;
 	}
@@ -287,7 +282,6 @@
 	.beeswarm-label {
 		position: absolute;
 		bottom: calc(100% - 6px);
-		transform: translateX(-50%);
 		padding: 4px 6px;
 		border-radius: 4px;
 		font-weight: bold;
