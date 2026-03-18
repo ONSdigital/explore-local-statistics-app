@@ -14,13 +14,14 @@
 	} = $props();
 
 	let loadedDataUrl: string | null = null;
-	let loadedData: jsonDataCols | errorObject | null = null;
+	let data: jsonDataCols | errorObject | null = $state.raw(null);
 
 	async function fetchData(dataUrl: string, visible: boolean) {
-		if (!visible) return loadedData;
+		if (!visible) return;
 		if (!dataUrl) {
-			loadedData = { message: 'Data not available' };
-			return loadedData;
+			data = { message: 'Data not available' };
+			onUpdate(data);
+			return;
 		}
 		if (dataUrl !== loadedDataUrl) {
 			loadedDataUrl = dataUrl;
@@ -38,19 +39,20 @@
 					}
 				}
 
-				loadedData = fetchedData;
+				data = fetchedData;
 				console.log(`Loaded data for ${id}`);
-				return loadedData;
+				onUpdate(data);
+				return;
 			} catch {
 				console.log(`Failed to load data for ${id}`);
-				loadedData = { message: 'Failed to load chart data' };
-				return loadedData;
+				data = { message: 'Failed to load chart data' };
+				onUpdate(data);
+				return;
 			}
-		} else return loadedData;
+		}
 	}
-	// svelte-ignore await_waterfall
-	let data = $derived(await fetchData(dataUrl, visible));
-	$effect(() => onUpdate(data));
+
+	$effect(async () => await fetchData(dataUrl, visible));
 </script>
 
 {#if data?.message}
