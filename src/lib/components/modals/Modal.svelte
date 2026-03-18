@@ -14,6 +14,11 @@
 	let id = $derived(title.toLowerCase().replaceAll(' ', '-'));
 	let dialog = $state();
 
+	function setBodyOverflow(value) {
+		const style = document?.body?.style;
+		if (style) style.overflow = value;
+	}
+
 	function initDialog(el) {
 		// Prevent areas dropdown from closing when scrollbar is clicked
 		el.addEventListener('mousedown', (event) => {
@@ -35,13 +40,9 @@
 			}
 		});
 
-		// Prevent background from scrolling
-		el.addEventListener('wheel', (event) => {
-			event.preventDefault();
-		});
-		el.addEventListener('keydown', (event) => {
-			if (['ArrowUp', 'ArrowDown'].includes(event.key)) event.preventDefault();
-		});
+		return {
+			destroy: () => setBodyOverflow('visible')
+		};
 	}
 </script>
 
@@ -52,10 +53,16 @@
 	on:click={() => {
 		onOpen();
 		dialog.showModal();
+		setBodyOverflow('hidden');
 	}}>{label}</Button
 >
 
-<dialog aria-labelledby={id} bind:this={dialog} use:initDialog>
+<dialog
+	aria-labelledby={id}
+	bind:this={dialog}
+	use:initDialog
+	onclose={() => setBodyOverflow('visible')}
+>
 	<h1 {id} tabindex="-1">{title}</h1>
 	<div class="modal-contents">
 		{@render children()}
