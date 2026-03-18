@@ -70,7 +70,8 @@ export function marginLabels(params = {}) {
 	});
 
 	const elbowOffsets = Array(selected.length).fill(0);
-	console.log({ leaderLineGroups });
+	const isDodged = Array(selected.length).fill(false);
+	// console.log({ leaderLineGroups });
 
 	leaderLineGroups.forEach((group) => {
 		const indices = group.items;
@@ -85,6 +86,7 @@ export function marginLabels(params = {}) {
 				middleElbowOffset - Math.floor(Math.abs(groupIndex - (indices.length - 1) / 2)) * elbowGap;
 
 			elbowOffsets[labelIndex] = offset;
+			isDodged[labelIndex] = indices.length > 1;
 		});
 	});
 
@@ -92,7 +94,12 @@ export function marginLabels(params = {}) {
 	const lookup = Array(selected.length).fill(null);
 	sortedYs.forEach(
 		(d, i) =>
-			(lookup[d.i] = { value: sortedYs[i].value, y: yLabelPositions[i], elbow: elbowOffsets[i] })
+			(lookup[d.i] = {
+				value: sortedYs[i].value,
+				y: yLabelPositions[i],
+				elbow: elbowOffsets[i],
+				isDodged: isDodged[i]
+			})
 	);
 	return lookup;
 }

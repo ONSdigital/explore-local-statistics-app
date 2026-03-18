@@ -179,27 +179,20 @@
 	<path d={getCIArea(arr)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 {/snippet}
 
-{#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, xMax: number)}
-	{#if elbowX && yPosAdj !== yPosOrig}
+{#snippet elbow(yPosOrig: number, yPosAdj: number, isDodged: boolean, elbowX: number, xMax: number)}
+	{#if isDodged}
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
-			points={[
-				`${xMax + 2 + 14 + pointRadius},${yPosAdj}`,
-				`${elbowX},${yPosAdj}`,
-				`${elbowX},${yPosOrig}`,
-				`${xMax + 2 + pointRadius},${yPosOrig}`
-			].join(' ')}
-		>
-		</polyline>
-	{:else if false}
-		<polyline
-			stroke={ONScolours.grey60}
-			fill="none"
-			points={[
-				`${xMax + 2 + 14 + pointRadius},${yPosOrig}`,
-				`${xMax + 2 + pointRadius},${yPosOrig}`
-			].join(' ')}
+			points={(elbowX
+				? [
+						`${xMax + 2 + 14 + pointRadius},${yPosAdj}`,
+						`${elbowX},${yPosAdj}`,
+						`${elbowX},${yPosOrig}`,
+						`${xMax + 2 + pointRadius},${yPosOrig}`
+					]
+				: [`${xMax + 2 + 14 + pointRadius},${yPosOrig}`, `${xMax + 2 + pointRadius},${yPosOrig}`]
+			).join(' ')}
 		>
 		</polyline>
 	{/if}
@@ -325,12 +318,12 @@
 								{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 								{@const id = arr[0][idKey]}
 								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
-								{@const isLabelDodged = yPos !== yScale(arr[arr.length - 1][yKey])}
+								{@const isDodged = labelLookup?.[i]?.isDodged}
 								<div
 									bind:clientHeight={labelHeights[id]}
 									data-id={id}
 									class="margin-label-selected"
-									style:left="{isLabelDodged
+									style:left="{isDodged
 										? xScale(_data.dateDomain[1]) + dodgedLabelGap
 										: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
 									style:top="{yPos}px"
@@ -434,10 +427,11 @@
 							{#each Array.isArray(selectedData) ? selectedData : [] as arr, i}
 								{@const yPosAdj = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
 								{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
+								{@const isDodged = labelLookup?.[i]?.isDodged}
 								{@const xMax = xScale(_data.dateDomain[1])}
 								{@const elbowX =
 									xScale(_data.dateDomain[1]) + pointRadius + 6 + (labelLookup?.[i]?.elbow ?? 0)}
-								{@render elbow(yPosOrig, yPosAdj, elbowX, xMax)}
+								{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, xMax)}
 							{/each}
 						</g>
 					{/key}
