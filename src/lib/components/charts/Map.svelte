@@ -161,8 +161,8 @@
 					id="outline"
 					type="line"
 					paint={{
-						'line-color': 'grey',
-						'line-width': ['interpolate', ['linear'], ['zoom'], 6, 0.2, 11, 1]
+						'line-color': 'white',
+						'line-width': ['interpolate', ['linear'], ['zoom'], 6, 0.5, 11, 1.2]
 					}}
 					order="place_other"
 				/>

@@ -75,7 +75,10 @@
 				<MapLayer
 					id="cluster-line"
 					type="line"
-					paint={{ 'line-color': 'white', 'line-width': 0.5 }}
+					paint={{
+						'line-color': 'white',
+						'line-width': ['interpolate', ['linear'], ['zoom'], 6, 0.5, 11, 1.2]
+					}}
 					order="place_other"
 				/>
 			</MapSource>
