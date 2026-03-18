@@ -8,10 +8,12 @@
 		formatPeriod = (d) => d,
 		selected = null,
 		hovered = $bindable(),
-		geoLevel = null
+		geoLevel = null,
+		extendHeight = null
 	} = $props();
 
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
+	let height = $derived(500 + (extendHeight ?? 0));
 
 	function makeColumns(cols) {
 		const keys = [...cols].sort((a, b) => {
@@ -51,5 +53,5 @@
 </script>
 
 {#key pivotedData}
-	<Table data={pivotedData} {columns} sortable compact height={400} />
+	<Table data={pivotedData} {columns} sortable compact {height} />
 {/key}

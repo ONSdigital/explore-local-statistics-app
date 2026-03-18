@@ -18,7 +18,8 @@
 		selected = [],
 		hoveredArea = null,
 		geoLevel,
-		mode = 'default'
+		mode = 'default',
+		extendHeight = null
 	} = $props();
 
 	let width = $state();
@@ -49,7 +50,7 @@
 
 	let height = $derived(
 		!_data || _data.array.length > maxUnscaledBarsCount
-			? maxHeight
+			? maxHeight + (extendHeight ?? 0)
 			: _data.array.length * maxBarHeight + (_data.array.length + 1) * (maxBarHeight * barGapRatio)
 	);
 
@@ -62,10 +63,10 @@
 		const unselectedCount = count - selectedCount;
 
 		const rawBarHeight =
-			count > maxUnscaledBarsCount ? maxHeight / (count + (count + 1) * barGapRatio) : maxBarHeight;
+			count > maxUnscaledBarsCount ? height / (count + (count + 1) * barGapRatio) : maxBarHeight;
 		const selectedBarsScaled = selectedCount > 0 && rawBarHeight < minSelectedBarHeight;
 		const barHeight = selectedBarsScaled
-			? (maxHeight - selectedCount * minSelectedBarHeight) /
+			? (height - selectedCount * minSelectedBarHeight) /
 				(unselectedCount + (count + 1) * barGapRatio)
 			: rawBarHeight;
 		// const barGap = count < 100 ? barHeight * barGapRatio : 0;

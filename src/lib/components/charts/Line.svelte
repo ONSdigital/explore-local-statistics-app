@@ -21,13 +21,14 @@
 		hoveredArea = null,
 		geoLevel,
 		showIntervals,
-		mode = 'default'
+		mode = 'default',
+		extendHeight = null
 	} = $props();
 
-	const height = 500;
 	const pointRadius = 5;
 	const dodgedLabelGap = 26;
 
+	let height = $derived(500 + (extendHeight ?? 0));
 	let width = $state(680);
 	let leftMargin = $state(0);
 	let yTickLabelWidths = $state({});

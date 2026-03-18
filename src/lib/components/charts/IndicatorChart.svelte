@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import { Observe, Icon } from '@onsvisual/svelte-components';
 	import Line from '$lib/components/charts/Line.svelte';
@@ -33,8 +34,11 @@
 
 	let visible = $state(false);
 	let el = $state();
-	let fullScreenMode = $state(false);
+	let fullscreenMode = $state(false);
+	let fullscreenHeightDiff = $state(null);
 	let dataTimeRange = $state(timeRange);
+
+	$inspect({ fullscreenHeightDiff });
 
 	let selectedCodes = $derived(selected.map((d) => d.areacd));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
@@ -66,13 +70,17 @@
 		)
 	);
 
-	function toggleFullScreen() {
-		if (!fullScreenMode) {
+	function toggleFullscreen() {
+		if (!fullscreenMode) {
+			const contentHeight = el?.getBoundingClientRect?.()?.height;
+			fullscreenHeightDiff =
+				contentHeight && contentHeight < screen.height ? screen.height - contentHeight + 28 : null;
+			fullscreenMode = true;
 			el?.requestFullscreen?.();
-			fullScreenMode = true;
 		} else {
+			fullscreenHeightDiff = null;
+			fullscreenMode = false;
 			document?.exitFullscreen?.();
-			fullScreenMode = false;
 		}
 	}
 
@@ -84,13 +92,23 @@
 			dataTimeRange = timeRange;
 		}
 	}
+
+	onMount(() => {
+		// If full screen mode is exited using the escape key
+		document.addEventListener('fullscreenchange', () => {
+			if (fullscreenMode && !document.fullscreenElement) {
+				fullscreenMode = false;
+				fullscreenHeightDiff = null;
+			}
+		});
+	});
 </script>
 
 <div
 	class="content-block"
-	class:content-fullscreen={fullScreenMode}
+	class:content-fullscreen={fullscreenMode}
 	class:content-padding={mode === 'default'}
-	class:content-border={mode === 'default' && !fullScreenMode}
+	class:content-border={mode === 'default' && !fullscreenMode}
 	bind:this={el}
 >
 	{#if noChartMessage}
@@ -117,11 +135,11 @@
 		{#if mode === 'default'}
 			<button
 				class="fullscreen-toggle"
-				title="{fullScreenMode ? 'Exit' : 'Enter'} full screen mode"
-				onclick={toggleFullScreen}
+				title="{fullscreenMode ? 'Exit' : 'Enter'} full screen mode"
+				onclick={toggleFullscreen}
 			>
-				<Icon type={fullScreenMode ? 'shrink' : 'expand'} size="l" />
-				<span class="ons-u-vh">{fullScreenMode ? 'Exit' : 'Enter'} full screen mode</span>
+				<Icon type={fullscreenMode ? 'shrink' : 'expand'} size="l" />
+				<span class="ons-u-vh">{fullscreenMode ? 'Exit' : 'Enter'} full screen mode</span>
 			</button>
 		{/if}
 		<Observe bind:visible>
@@ -146,6 +164,7 @@
 							geoLevel={geoLevelObj}
 							{showIntervals}
 							{mode}
+							extendHeight={fullscreenHeightDiff}
 						/>
 						{#if selectedMissing.length}
 							<p class="missing-data-note">
@@ -162,7 +181,7 @@
 			</div>
 		</Observe>
 		{#if metadata.source.length > 0}
-			<p class="source-notes">
+			<div class="source-notes">
 				<strong>Source:</strong>
 				{#each metadata.source as s, i}
 					<a href={s.href} target="_blank"
@@ -172,7 +191,7 @@
 						? ' and '
 						: ''}
 				{/each}
-			</p>
+			</div>
 		{/if}
 	{/if}
 </div>
@@ -193,6 +212,8 @@
 <style>
 	.content-block {
 		position: relative;
+		display: flex;
+		flex-direction: column;
 		background: var(--ons-color-page-light);
 	}
 	.content-padding {
@@ -233,7 +254,7 @@
 		font-size: 16px;
 		gap: 5px;
 		line-height: 1.2;
-		margin: 0px;
+		margin: auto 0 0;
 	}
 
 	.content-title {
@@ -247,8 +268,5 @@
 		display: block;
 		position: relative;
 		min-height: 400px;
-	}
-	.content-fullscreen .indicator-chart {
-		min-height: 100vh;
 	}
 </style>

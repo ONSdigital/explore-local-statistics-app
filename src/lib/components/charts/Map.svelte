@@ -24,7 +24,8 @@
 			'rgb(0, 167, 186)',
 			'rgb(0, 78, 166)',
 			'rgb(0, 13, 84)'
-		]
+		],
+		extendHeight = null
 	} = $props();
 
 	const fitBoundsOptions = { padding: 10 };
@@ -39,6 +40,7 @@
 			metadata.decimalPlaces
 		)
 	);
+	let height = $derived(500 + (extendHeight ?? 0));
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
@@ -118,7 +120,7 @@
 
 <p class="ons-u-vh">Map of {metadata.label}. The data is available to download below.</p>
 <div aria-hidden="true" class="map-outer">
-	<div class="map-container">
+	<div class="map-container" style:height="{height}px">
 		<Map
 			bind:map
 			css={resolve('/css/maplibre-gl.css')}
@@ -126,7 +128,7 @@
 			location={{ bounds: bounds || ukBounds }}
 			options={{
 				fitBoundsOptions,
-				maxBounds: [-19, 48, 12, 62],
+				maxBounds: [-22, 48, 17, 62],
 				cooperativeGestures: true,
 				preserveDrawingBuffer: true,
 				dragRotate: false
@@ -227,6 +229,5 @@
 	.map-container {
 		display: block;
 		width: 100%;
-		height: 500px;
 	}
 </style>
