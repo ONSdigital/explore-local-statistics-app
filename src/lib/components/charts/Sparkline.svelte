@@ -35,7 +35,6 @@
 			? selected
 					.map((cd, i) => ({ i, data: _data.keyed[cd] }))
 					.filter((d) => Array.isArray(d.data) && d.data.length > 1)
-					.reverse()
 			: []
 	);
 
@@ -128,9 +127,10 @@
 			>
 				<g class="sparkline-lines">
 					{#key _selected}
-						{#each _selected || [] as d}
-							{@render line(d.data, 2, getPaletteColor(d.i, _selected.length))}
-							{@render ribbon(d, getPaletteColor(d.i, _selected.length))}
+						{@const count = selected.length}
+						{#each [..._selected].reverse() || [] as d}
+							{@render line(d.data, 2, getPaletteColor(d.i, count))}
+							{@render ribbon(d, getPaletteColor(d.i, count))}
 						{/each}
 					{/key}
 				</g>
@@ -158,8 +158,8 @@
 			</div>
 			<div class="sparkline-annotations">
 				{#key _selected}
-					{@const count = _selected.length}
-					{#each _selected || [] as d}
+					{@const count = selected.length}
+					{#each [..._selected].reverse() || [] as d}
 						{@const datum = d.data[d.data.length - 1]}
 						{@const diff = datum[yKey] - d.data[0][yKey]}
 						{@render marker(datum, getMarkerPath(d.i, count), getPaletteColor(d.i, count))}

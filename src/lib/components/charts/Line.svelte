@@ -196,7 +196,10 @@
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
-			points={[`-14,${yPosAdj}`, `-2,${yPosOrig}`].join(' ')}
+			points={[
+				`${xMax + 2 + 14 + pointRadius},${yPosOrig}`,
+				`${xMax + 2 + pointRadius},${yPosOrig}`
+			].join(' ')}
 		>
 		</polyline>
 	{/if}
