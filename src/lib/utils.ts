@@ -209,10 +209,17 @@ export function downloadEvent(
 	analyticsEvent(eventData);
 }
 
-export function filterExtremeAreas(data, extremeAreas) {
-	if (!extremeAreas) {
+export function filterExtremeAreas(data: jsonDataCols, extremeAreas: string[] | null) {
+	if (!extremeAreas || !data.areacd) {
 		return data;
 	}
+	const cols = Object.keys(data);
 
-	return data.filter((d) => !extremeAreas.includes(d.areacd));
+	const _data = Object.fromEntries(cols.map((c) => [c, []]));
+	for (let i = 0; i < data.areacd.length; i++) {
+		if (!extremeAreas.includes(data.areacd[i])) {
+			for (const col of cols) _data[col].push(data[col][i]);
+		}
+	}
+	return _data;
 }
