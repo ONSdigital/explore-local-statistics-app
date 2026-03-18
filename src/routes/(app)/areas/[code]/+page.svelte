@@ -98,6 +98,7 @@
 					title={link.title}
 					mode="featured"
 					image={link.image.startsWith('/') ? resolve(link.image) : link.image}
+					imageAlt=""
 					href={link.href.startsWith('/') ? resolve(link.href) : link.href}
 					headingTag="h3"
 				>
