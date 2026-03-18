@@ -4,7 +4,6 @@
 	import {
 		AnalyticsBanner,
 		analyticsEvent,
-		PhaseBanner,
 		Header,
 		Breadcrumb,
 		Main,
@@ -56,7 +55,6 @@
 </svelte:head>
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-<PhaseBanner phase="prototype" />
 <Header />
 {#if page.data.breadcrumbLinks}
 	<Breadcrumb
