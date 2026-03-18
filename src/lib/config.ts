@@ -106,3 +106,5 @@ export const extremeAreas = {
 	'gross-domestic-product-per-head-current-market-price': ['E09000001'],
 	'gross-domestic-product-per-head-chained-volume-measure': ['E09000001']
 };
+
+export const mobileBreakpoint = 510;

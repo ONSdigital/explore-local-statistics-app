@@ -2,7 +2,7 @@
 	import { scaleLinear } from 'd3-scale';
 	import { parseChartData, getPaletteColor } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
-	import { ONScolours } from '$lib/config';
+	import { ONScolours, mobileBreakpoint } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
@@ -22,8 +22,7 @@
 	} = $props();
 
 	let width = $state();
-	const widthThreshold = 550;
-	let leftMargin = $derived(width < widthThreshold ? 20 : 250);
+	let leftMargin = $derived(width < mobileBreakpoint ? 20 : 250);
 	const rightMargin = 30;
 	let widthInner = $derived(width - rightMargin - leftMargin);
 
@@ -249,7 +248,7 @@
 	{/if}
 {/snippet}
 
-{#if width < widthThreshold && mode == 'embed'}
+{#if width < mobileBreakpoint && mode == 'embed'}
 	<ul class="top-labels">
 		{#if selectedData.length && !hovered}
 			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
@@ -321,7 +320,7 @@
 			{/each}
 		</div>
 		<div class="margin-labels">
-			{#if width >= widthThreshold}
+			{#if width >= mobileBreakpoint}
 				{#if hovered}
 					<div
 						class="margin-label-hovered"
@@ -453,7 +452,7 @@
 					{/if}
 				</g>
 			{/if}
-			{#if width >= widthThreshold && labelLookup?.[0] && !hovered}
+			{#if width >= mobileBreakpoint && labelLookup?.[0] && !hovered}
 				<g>
 					{#each selectedData as a, i (a[0][idKey])}
 						{@const yPosAdj = labelLookup?.[i]?.y || yScale(a[0][idKey]).y}

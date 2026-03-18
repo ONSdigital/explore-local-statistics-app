@@ -5,7 +5,7 @@
 	import { parseChartData, getPaletteColor, getMarkerKey, makeQuadtree } from './chartHelpers';
 	import { marginLabels } from './labelHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
-	import { markerPaths, ONScolours } from '$lib/config';
+	import { markerPaths, ONScolours, mobileBreakpoint } from '$lib/config';
 	import AreasLegend from '../modals/AreasLegend.svelte';
 
 	let {
@@ -25,7 +25,6 @@
 	} = $props();
 
 	const height = 500;
-	const widthThreshold = 550;
 	const pointRadius = 5;
 	const dodgedLabelGap = 26;
 
@@ -43,7 +42,7 @@
 		}
 	}
 
-	let rightMargin = $derived(width < widthThreshold ? 30 : 200);
+	let rightMargin = $derived(width < mobileBreakpoint ? 30 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 	let suffix = $derived(metadata.suffix);
 	let prefix = $derived(metadata.prefix);
@@ -203,7 +202,7 @@
 	{/if}
 {/snippet}
 
-{#if width < widthThreshold && mode == 'embed'}
+{#if width < mobileBreakpoint && mode == 'embed'}
 	<ul class="top-labels">
 		{#if selectedData.length && !hoveredArea}
 			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={true} inlineItems={true}
@@ -305,7 +304,7 @@
 				{/key}
 			</div>
 			<div class="margin-labels" style:right="-{rightMargin}px">
-				{#if width >= widthThreshold && hoveredArea}
+				{#if width >= mobileBreakpoint && hoveredArea}
 					<div
 						class="margin-label-hovered"
 						aria-live="assertive"
@@ -316,7 +315,7 @@
 						{hovered?.[0]?.areanm}
 					</div>
 				{/if}
-				{#if width >= widthThreshold}
+				{#if width >= mobileBreakpoint}
 					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
 						{#key _data}
 							{#each selectedData as arr, i}
@@ -426,7 +425,7 @@
 						{/if}
 					{/if}
 				</g>
-				{#if width >= widthThreshold && !hovered}
+				{#if width >= mobileBreakpoint && !hovered}
 					{#key _data}
 						<g>
 							{#each Array.isArray(selectedData) ? selectedData : [] as arr, i}
