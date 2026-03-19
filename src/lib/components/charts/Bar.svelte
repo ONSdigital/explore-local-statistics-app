@@ -240,7 +240,8 @@
 			fill="none"
 			points={(elbowX
 				? [
-						`-14,${yPosAdj + height / 2}``${elbowX},${yPosAdj + height / 2}`,
+						`-14,${yPosAdj + height / 2}`,
+						`${elbowX},${yPosAdj + height / 2}`,
 						`${elbowX},${yPosOrig + height / 2}`,
 						`-2,${yPosOrig + height / 2}`
 					]
