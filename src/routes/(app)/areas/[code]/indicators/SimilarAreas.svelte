@@ -1,0 +1,81 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import { getName } from '@onsvisual/robo-utils';
+	import { ONScolours } from '$lib/config';
+	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+	import { Details, Em } from '@onsvisual/svelte-components';
+	import ClusterMap from './ClusterMap.svelte';
+
+	let { areaProps, selectedCluster } = $props();
+</script>
+
+<div class="ons-u-mb-l">
+	<ul class="map-legend">
+		{#if selectedCluster?.cluster}
+			<li>
+				<span
+					class="map-legend-marker"
+					style:color={ONScolours.oceanBlue}
+					style:background={ONScolours.oceanBlue}
+				></span>
+				Areas in {selectedCluster.key} cluster {selectedCluster.cluster.label}
+			</li>
+		{/if}
+		{#if selectedCluster?.similar}
+			<li>
+				<span class="map-legend-marker" style:background="#eee"></span>
+				{selectedCluster.similar.length} areas most similar to {getName(areaProps, 'the')}
+			</li>
+		{/if}
+	</ul>
+	<ClusterMap {areaProps} {selectedCluster} />
+	{#if selectedCluster?.cluster}
+		<p>
+			<strong>{getName(areaProps)}</strong> is in
+			<Em color={ONScolours.oceanBlue}>
+				{selectedCluster.key} cluster {selectedCluster.cluster.label}
+			</Em>.
+			{selectedCluster.cluster.description}
+		</p>
+		<p></p>
+	{/if}
+	{#if selectedCluster?.similar}
+		<Details
+			title="Show the {selectedCluster.similar.length} areas most similar to {getName(
+				areaProps,
+				'the'
+			)}"
+		>
+			<ol>
+				{#each selectedCluster.similar as area}
+					<li>
+						<a href={resolve(`/areas/${makeCanonicalSlug(area)}/indicators`)}>{getName(area)}</a>
+					</li>
+				{/each}
+			</ol>
+		</Details>
+	{/if}
+</div>
+
+<style>
+	.map-legend {
+		list-style: none;
+		padding: 0;
+		margin-top: 0.5em;
+	}
+	.map-legend > li {
+		display: inline;
+		white-space: nowrap;
+		margin-right: 0.5em;
+	}
+	.map-legend-marker {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		margin-right: 0.1em;
+		border: 2px solid currentColor;
+		background: none;
+		border-radius: 50%;
+		transform: translateY(2px);
+	}
+</style>
