@@ -7,7 +7,8 @@ import {
 	ONSpalette,
 	ONStextPalette,
 	markerPathsArray,
-	markerPathsKeys
+	markerPathsKeys,
+	markerPaths
 } from '$lib/config';
 
 // Gets the median for a sorted array of numbers
@@ -212,11 +213,16 @@ export function getMarkerKey(i: number | null, count: number = 1) {
 }
 
 export function getMarkerPath(i: number | null, count: number = 1) {
-	return i === 0 || !i
-		? markerPathsArray[0]
-		: count > markerPathsArray.length
-			? markerPathsArray[1]
-			: markerPathsArray[i];
+	const name =
+		i === 0 || !i
+			? markerPathsArray[0]
+			: count > markerPathsArray.length
+				? markerPathsArray[1]
+				: markerPathsArray[i];
+	return {
+		path: markerPaths[name],
+		hollow: name.includes('Hollow')
+	};
 }
 
 export const contrastColor = (color: string) => {

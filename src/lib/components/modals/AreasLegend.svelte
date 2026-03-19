@@ -18,20 +18,25 @@
 </script>
 
 {#snippet marker(area: areaObject | null = null, count: number | null = null)}
+	{@const markerInfo = getMarkerPath(area?.i ?? 0, count)}
+	{@const color = hovered
+		? ONScolours.highlightOrangeDark
+		: area?.i != null
+			? getPaletteColor(area?.i, count)
+			: '#aaa'}
 	<svg viewBox="-4 -4 8 8" class="area-marker">
+		<defs>
+			<clipPath id="clip-{markerInfo.name}-{area?.i}">
+				<path d={markerInfo.path} />
+			</clipPath>
+		</defs>
 		<path
-			d={useMarkerShapes ? getMarkerPath(area?.i, count) : getMarkerPath(0)}
-			fill={hovered
-				? ONScolours.highlightOrangeDark
-				: area?.i != null
-					? getPaletteColor(area?.i, count)
-					: '#ddd'}
-			stroke={hovered
-				? ONScolours.highlightOrangeDark
-				: area?.i != null
-					? getPaletteColor(area?.i, count)
-					: '#aaa'}
+			d={markerInfo.path}
+			fill={markerInfo.hollow ? ONScolours.white : color}
+			stroke={markerInfo.hollow ? color : 'none'}
+			stroke-width={markerInfo.hollow ? 2.75 : 0}
 			opacity={area?.i == null ? 0.9 : 1}
+			clip-path="url(#clip-{markerInfo.name}-{area?.i})"
 		/>
 	</svg>
 {/snippet}

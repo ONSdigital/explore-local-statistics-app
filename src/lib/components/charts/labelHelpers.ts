@@ -21,7 +21,7 @@ export function marginLabels(params = {}) {
 	const heights = params.heights || [];
 	const yScale = params.yScale || null;
 	const yKey = params.yKey || 'value';
-	const labelProximityThreshold = params.labelProximityThreshold || 40;
+	const labelProximityThreshold = params.labelProximityThreshold || 30;
 	const elbowRoom = params.elbowRoom || 6;
 
 	if (selected.length < 2) {

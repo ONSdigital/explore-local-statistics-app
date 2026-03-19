@@ -91,7 +91,7 @@
 	/>
 {/snippet}
 
-{#snippet marker(d, path, color)}
+{#snippet marker(d, markerInfo, color)}
 	<svg
 		viewBox="-4 -4 8 8"
 		class="beeswarm-marker"
@@ -99,7 +99,26 @@
 		onmouseenter={() => (hovered = d[idKey])}
 		onmouseleave={() => (hovered = null)}
 	>
-		<path d={path} fill={color} vector-effect="non-scaling-stroke" />
+		<defs>
+			<clipPath id="clip-{markerInfo.name}-{d[idKey]}">
+				<path d={markerInfo.path} />
+			</clipPath>
+		</defs>
+		<path
+			d={markerInfo.path}
+			fill={ONScolours.white}
+			stroke={ONScolours.white}
+			stroke-width={1.5}
+			vector-effect="non-scaling-stroke"
+		/>
+		<path
+			d={markerInfo.path}
+			fill={markerInfo.hollow ? ONScolours.white : color}
+			stroke={markerInfo.hollow ? color : ONScolours.white}
+			stroke-width={markerInfo.hollow ? 5.5 : 1}
+			vector-effect="non-scaling-stroke"
+			clip-path="url(#clip-{markerInfo.name}-{d[idKey]})"
+		/>
 	</svg>
 {/snippet}
 
@@ -294,10 +313,6 @@
 		width: 20px;
 		height: 20px;
 		transform: translate(-50%, 50%);
-	}
-	.beeswarm-marker > path {
-		stroke: white;
-		stroke-width: 1px;
 	}
 	.beeswarm-comparison {
 		display: block;

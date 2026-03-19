@@ -351,17 +351,27 @@
 				role="tooltip"
 			>
 				<defs>
-					{#each Object.entries(markerPaths) as path, i}
+					{#each Object.entries(markerPaths) as [name, path], i}
+						<clipPath id="clip-{name}">
+							<path d={path} />
+						</clipPath>
 						<marker
-							id={path[0]}
+							id={name}
 							viewBox="-4 -4 8 8"
 							markerWidth="14"
 							markerHeight="14"
 							markerUnits="userSpaceOnUse"
-							stroke={ONScolours.white}
-							stroke-width="0.4"
 						>
-							<path d={path[1]} style:fill={getPaletteColor(i, selectedData.length)} />
+							<path d={path} fill={ONScolours.white} stroke={ONScolours.white} stroke-width={1} />
+							<path
+								d={path}
+								fill={name.includes('Hollow')
+									? ONScolours.white
+									: getPaletteColor(i, selectedData.length)}
+								stroke={name.includes('Hollow') ? getPaletteColor(i, selectedData.length) : 'none'}
+								stroke-width={name.includes('Hollow') ? 2.75 : 0}
+								clip-path="url(#clip-{name})"
+							/>
 						</marker>
 					{/each}
 				</defs>

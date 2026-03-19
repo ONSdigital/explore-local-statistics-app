@@ -87,16 +87,15 @@ export const ONSlinePalette = [
 
 export const markerPaths = {
 	circle: 'M3,0A3,3,0,1,1,-3,0A3,3,0,1,1,3,0Z',
-	diamond: 'M0,-3.33L3.33,0L0,3.33L-3.33,0Z',
-	triangle: 'M0,-2.629L3.142,2.814L-3.142,2.814Z',
 	square: 'M2.356,2.356L2.356,-2.356L-2.356,-2.356L-2.356,2.356Z',
-	plus: 'M3.5,.8L3.5,-.8L.8,-.8L.8,-3.5L-.8,-3.5L-.8,-.8L-3.5,-.8L-3.5,.8L-.8,.8L-.8,3.5L.8,3.5L.8,.8Z',
-	cross:
-		'M1.9092,3.0406L3.0406,1.9092L1.1314,0L3.0406,-1.9092L1.9092,-3.0406L0,-1.1314L-1.9092,-3.0406L-3.0406,-1.9092L-1.1314,0L-3.0406,1.9092L-1.9092,3.0406L0,1.1314Z'
+	diamond: 'M0,-3.33L3.33,0L0,3.33L-3.33,0Z',
+	circleHollow: 'M3,0A3,3,0,1,1,-3,0A3,3,0,1,1,3,0Z',
+	squareHollow: 'M2.356,2.356L2.356,-2.356L-2.356,-2.356L-2.356,2.356Z',
+	diamondHollow: 'M0,-3.33L3.33,0L0,3.33L-3.33,0Z'
 };
 
 export const markerPathsKeys = Object.keys(markerPaths);
-export const markerPathsArray = Object.values(markerPaths);
+export const markerPathsArray = Object.keys(markerPaths);
 
 export const maxAreasSelectable = 10;
 
