@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Dropdown, Select } from '@onsvisual/svelte-components';
+	import { Button, Dropdown, Select, analyticsEvent } from '@onsvisual/svelte-components';
 	import Modal from './Modal.svelte';
 	import { maxAreasSelectable } from '$lib/config';
 	import { cloneState } from './modalHelpers';
@@ -17,6 +17,26 @@
 			!_pageState.selectedAreas.find((d) => d.areacd === area.areacd)
 		)
 			_pageState.selectedAreas.push(area);
+		const eventData = {
+			event: 'interaction',
+			interactionType: 'select',
+			interactionLabel: 'Area modal select',
+			areaCode: area.areacd,
+			areaName: area.areanm || area.areacd,
+			areaType: area.type
+		};
+		analyticsEvent(eventData);
+	}
+
+	function runAreaGroupAnalytics(value) {
+		const eventData = {
+			event: 'interaction',
+			interactionType: 'select',
+			interactionLabel: 'Area type modal select',
+			interactionValue: value.label,
+			areaType: value.id
+		};
+		analyticsEvent(eventData);
 	}
 
 	function removeArea(area) {
@@ -45,6 +65,7 @@
 			options={data.geoLevels}
 			bind:value={_pageState.selectedGeoLevel}
 			width={null}
+			on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoLevel)}
 		/>
 	{/if}
 	{#if mode === 'area'}
@@ -54,6 +75,7 @@
 			options={data.geoGroups}
 			bind:value={_pageState.selectedGeoGroup}
 			width={null}
+			on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoGroup)}
 		/>
 	{/if}
 	<div class="select-container">

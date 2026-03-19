@@ -1,5 +1,11 @@
 <script lang="ts">
-	let { label, options, selectedRange = $bindable(), formatTick = (d) => d } = $props();
+	let {
+		label,
+		options,
+		selectedRange = $bindable(),
+		formatTick = (d) => d,
+		onUpdate = () => null
+	} = $props();
 
 	let selectedIndices = $state([
 		options.indexOf(selectedRange[0]) ?? 0,
@@ -37,16 +43,15 @@
 		};
 
 		el.addEventListener('dragstart', (e) => {
-			console.log('dragstart');
 			dragging[i] = true;
 			const rect = parent.getBoundingClientRect();
 			xDomain = [Math.round(rect.left), Math.round(rect.right)];
 			window.addEventListener('dragover', dragover);
 		});
 		el.addEventListener('dragend', () => {
-			console.log('dragend');
 			window.removeEventListener('dragover', dragover);
 			dragging[i] = false;
+			onUpdate(selectedRange);
 		});
 	}
 </script>

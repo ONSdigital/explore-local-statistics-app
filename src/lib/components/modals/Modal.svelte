@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '@onsvisual/svelte-components';
+	import { Button, analyticsEvent } from '@onsvisual/svelte-components';
 
 	let {
 		title,
@@ -44,6 +44,16 @@
 			destroy: () => setBodyOverflow('visible')
 		};
 	}
+
+	function modalAnalyticsEvent(interactionValue) {
+		const eventData = {
+			event: 'interaction',
+			interactionType: 'modal',
+			interactionLabel: label,
+			interactionValue
+		};
+		analyticsEvent(eventData);
+	}
 </script>
 
 <Button
@@ -54,6 +64,7 @@
 		onOpen();
 		dialog.showModal();
 		setBodyOverflow('hidden');
+		modalAnalyticsEvent('open');
 	}}>{label}</Button
 >
 
@@ -72,6 +83,7 @@
 		on:click={() => {
 			onConfirm();
 			dialog.close();
+			modalAnalyticsEvent('confirm');
 		}}>Confirm changes</Button
 	>
 	<Button
@@ -80,6 +92,7 @@
 		on:click={() => {
 			dialog.close();
 			onCancel();
+			modalAnalyticsEvent('cancel');
 		}}>Cancel</Button
 	>
 </dialog>
