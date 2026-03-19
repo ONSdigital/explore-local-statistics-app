@@ -23,12 +23,13 @@
 	);
 	let indicatorsArea = $derived(getNearestRelatedParent(areaProps));
 
-	function handleSelect(area, interactionType) {
+	function handleSelect(area, interactionValue) {
 		const isPostcode = area.type === 'postcode';
 		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
 		const eventData = {
 			event: 'interaction',
-			interactionType,
+			interactionType: 'select',
+			interactionValue,
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
 			areaType: isPostcode ? 'postcode' : geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
@@ -67,7 +68,7 @@
 			<label for="search" style:display="block" style:margin-bottom="8px"
 				>Search for a place name or postcode</label
 			>
-			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'searchSelect')} />
+			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'areaSearchSelect')} />
 		</div>
 	</div>
 	<GridCell colspan={2}>
@@ -98,6 +99,7 @@
 					title={link.title}
 					mode="featured"
 					image={link.image.startsWith('/') ? resolve(link.image) : link.image}
+					imageAlt=""
 					href={link.href.startsWith('/') ? resolve(link.href) : link.href}
 					headingTag="h3"
 				>

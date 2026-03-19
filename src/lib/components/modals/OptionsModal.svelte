@@ -3,11 +3,22 @@
 	import Modal from './Modal.svelte';
 	import RangeSlider from './RangeSlider.svelte';
 	import { cloneState } from './modalHelpers';
+	import { analyticsEvent } from '@onsvisual/svelte-components';
 
 	let { data, pageState = $bindable(), hasIntervals = true, mode = 'indicator' } = $props();
 
 	let _pageState = $state(cloneState(pageState));
 	let formatTick = $derived(pageState?.formatPeriod?.() || ((d) => d));
+
+	function runAnalyticsEvent(interactionType, interactionLabel, interactionValue) {
+		const eventData = {
+			event: 'interaction',
+			interactionType,
+			interactionLabel,
+			interactionValue
+		};
+		analyticsEvent(eventData);
+	}
 </script>
 
 <Modal
@@ -23,6 +34,12 @@
 		options={data.periods}
 		{formatTick}
 		bind:selectedRange={_pageState.selectedPeriodRange}
+		onUpdate={(range) =>
+			runAnalyticsEvent(
+				'rangeSlider',
+				'Select time period',
+				range.map((p) => formatTick(p)).join(' to ')
+			)}
 	/>
 
 	{#if mode === 'area'}
@@ -44,6 +61,12 @@
 		label="Show confidence intervals"
 		disabled={!hasIntervals}
 		compact
+		on:change={(e) =>
+			runAnalyticsEvent(
+				'checkbox',
+				'Show confidence intervals',
+				e?.detail?.item?.checked ? 'enable' : 'disable'
+			)}
 	/>
 	{#if !hasIntervals}
 		<p class="ons-chart__caption">Note: Confidence intervals not available for this indicator</p>

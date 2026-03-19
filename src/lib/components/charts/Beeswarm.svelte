@@ -140,6 +140,7 @@
 		{@const floatRight = xPos > 50}
 		<div
 			class="beeswarm-label"
+			aria-live="assertive"
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
 			style:color={i === 0 ? ONScolours.white : color}
 			style:left={!floatRight ? `${xPos}%` : null}

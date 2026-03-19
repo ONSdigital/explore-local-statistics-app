@@ -227,25 +227,30 @@
 	{/if}
 {/snippet}
 
-{#snippet elbow(yPosOrig: number, yPosAdj: number, elbowX: number, height: number)}
-	{#if yPosAdj !== yPosOrig}
+{#snippet elbow(
+	yPosOrig: number,
+	yPosAdj: number,
+	isDodged: boolean,
+	elbowX: number,
+	height: number
+)}
+	{#if isDodged && yPosAdj !== yPosOrig}
 		<polyline
 			stroke={ONScolours.grey60}
 			fill="none"
-			points="-14,{yPosAdj + height / 2}
-                {elbowX},{yPosAdj + height / 2}
-                {elbowX},{yPosOrig + height / 2} 
-                -2,{yPosOrig + height / 2}"
+			points={(elbowX
+				? [
+						`-14,${yPosAdj + height / 2}`,
+						`${elbowX},${yPosAdj + height / 2}`,
+						`${elbowX},${yPosOrig + height / 2}`,
+						`-2,${yPosOrig + height / 2}`
+					]
+				: [`-14,${yPosOrig + height / 2}`, `-2,${yPosOrig + height / 2}`]
+			).join(' ')}
 		>
 		</polyline>
-	{:else if false}
-		<polyline
-			stroke={ONScolours.grey60}
-			fill="none"
-			points="-14,{yPosOrig + height / 2}
-                -2,{yPosOrig + height / 2}"
-		>
-		</polyline>
+	{:else if isDodged}
+		<polyline stroke={ONScolours.grey60} fill="none" points=""> </polyline>
 	{/if}
 {/snippet}
 
@@ -353,13 +358,13 @@
 							{@const id = a[0][idKey]}
 							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
 							{@const height = yScale?.(a[0][idKey])?.height || 0}
-							{@const isLabelDodged = yPos !== yScale?.(a[0][idKey])?.y}
+							{@const isDodged = labelLookup?.[i]?.isDodged}
 							<div
 								bind:clientHeight={labelHeights[id]}
 								data-id={id}
 								class="margin-label-selected"
 								style:top="{yPos ? yPos + height / 2 : 0}px"
-								style:left={isLabelDodged ? '-16px' : '-8px'}
+								style:left={isDodged ? '-16px' : '-8px'}
 								style:color={getPaletteColor(i, selectedData.length, 'text')}
 								style:max-width="{leftMargin - 16}px"
 							>
@@ -460,7 +465,8 @@
 						{@const yPosOrig = yScale(a[0][idKey]).y}
 						{@const height = yScale(a[0][idKey]).height}
 						{@const elbowX = xScale(0) - 6 - labelLookup?.[i]?.elbow}
-						{@render elbow(yPosOrig, yPosAdj, elbowX, height)}
+						{@const isDodged = labelLookup?.[i]?.isDodged}
+						{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, height)}
 					{/each}
 				</g>
 			{/if}

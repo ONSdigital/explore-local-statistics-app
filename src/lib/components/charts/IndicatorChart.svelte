@@ -38,8 +38,6 @@
 	let fullscreenHeightDiff = $state(null);
 	let dataTimeRange = $state(timeRange);
 
-	$inspect({ fullscreenHeightDiff });
-
 	let selectedCodes = $derived(selected.map((d) => d.areacd));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
