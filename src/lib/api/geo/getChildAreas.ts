@@ -1,8 +1,9 @@
 import { geoLevels } from '$lib/config/geoLevels';
 import { isValidAreaCode } from '$lib/util/validationHelpers';
 import { addAreaNames } from './helpers/areaCodesNames';
-import geoMetadata from '$lib/data/geo-metadata.json';
+import readData from '$lib/data';
 
+const geoMetadata = await readData('geo-metadata');
 const geoArray = Object.values(geoMetadata);
 
 export default function getChildAreas(params = {}) {

@@ -1,4 +1,6 @@
-import areasLookup from '$lib/data/geo-metadata.json';
+import readData from '$lib/data';
+
+const areasLookup = await readData('geo-metadata');
 
 export function removeAreaNames(areas) {
 	if (areas?.[0]?.areacd) return areas.map((a) => a.areacd);

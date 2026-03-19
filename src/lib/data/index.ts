@@ -1,13 +1,37 @@
-import { read } from '$app/server';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readdirSync } from 'node:fs';
 
-// Make Vite import the JSON files in this directory into the build
-export const files = import.meta.glob(['./*.json', './*.xlsx'], {
-	query: '?url',
-	import: 'default',
-	eager: true
-});
+// Check if environment is Vite
+const vite = import.meta.env !== undefined;
+
+// Set file reader function depending on environment
+const readJSON = vite
+	? await (async () => {
+			const { read } = await import('$app/server');
+			return async (path) => {
+				const file = read(path);
+				return await file.json();
+			};
+		})()
+	: await (async () => {
+			const { readFileSync } = await import('node:fs');
+			return async (path) => {
+				const file = readFileSync(files[path]);
+				return JSON.parse(file);
+			};
+		})();
+
+// Find all the data files in this directory (will be bundled into build)
+export const files = vite
+	? import.meta.glob(['./*.json', './*.xlsx'], {
+			query: '?url',
+			import: 'default',
+			eager: true
+		})
+	: Object.fromEntries(
+			readdirSync('./src/lib/data')
+				.filter((file) => file.endsWith('.json'))
+				.map((file) => [file, `./src/lib/data/${file}`])
+		);
 export const paths = Object.keys(files);
 
 // Read a JSON data file from disk or return cached version
@@ -17,15 +41,7 @@ export default async function (key) {
 	if (!path) return { error: 404, message: 'File not found.' };
 
 	if (cache[key]) return cache[key];
-
-	let data;
-	if (process.env.IS_NETLIFY) {
-		const file = readFileSync(join(process.cwd(), `src/lib/data/${key}.json`));
-		data = JSON.parse(file);
-	} else {
-		const file = read(files[path]);
-		data = await file.json();
-	}
+	const data = await readJSON(files[path]);
 	cache[key] = data;
 
 	return data;
