@@ -158,7 +158,7 @@
 				<OptionsModal mode="area" {data} bind:pageState />
 			</div>
 		</div>
-		<NavSection title="Topics" />
+		<NavSection title="Topics" hideTitle />
 		{#each data.taxonomy.map((t) => flattenTopic(t)) as topic}
 			<NavSection title={topic.label} id={topic.slug} subsection>
 				{#each topic.items.slice(0, maxIndicators) as item}
@@ -255,6 +255,10 @@
 </NavSections>
 
 <style>
+	.indicators-nav-sections :global(h4) {
+		font-weight: normal;
+		font-size: 20px;
+	}
 	.indicators-nav-sections > :global(section) {
 		scroll-margin-top: 116px;
 	}
