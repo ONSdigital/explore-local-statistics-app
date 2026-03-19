@@ -177,7 +177,9 @@
 {/snippet}
 
 {#snippet ribbon(arr, color = ONScolours.grey40, opacity = 0.3, id = '')}
-	<path d={getCIArea(arr)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
+	{#if showIntervals && arr.every((d) => d.lci_95 != null && d.uci_95 != null)}
+		<path d={getCIArea(arr)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
+	{/if}
 {/snippet}
 
 {#snippet elbow(yPosOrig: number, yPosAdj: number, isDodged: boolean, elbowX: number, xMax: number)}
@@ -379,17 +381,15 @@
 					{#each Object.values(_data.keyed) as arr, i}
 						{@render line(arr, lineStroke, linesGrey, lineOpacity)}
 					{/each}
-					{#if showIntervals && 'uci_95' in data}
-						{#each selectedData as arr, i}
-							{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-							{@render ribbon(
-								arr,
-								getPaletteColor(selectedIndex, selected.length),
-								0.3,
-								arr[0][idKey]
-							)}
-						{/each}
-					{/if}
+					{#each selectedData as arr, i}
+						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+						{@render ribbon(
+							arr,
+							getPaletteColor(selectedIndex, selected.length),
+							0.3,
+							arr[0][idKey]
+						)}
+					{/each}
 					{#each [...selectedData].reverse() as arr}
 						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
 						{@const marker = getMarkerKey(selectedIndex, selected.length)}
