@@ -310,7 +310,11 @@ var file_paths = [...new Set(manifest_metadata.filter((f) => f.include).array('d
 const cube = {
 	version: '2.0',
 	class: 'collection',
-	label: 'ELS datasets',
+	label: 'ONS Explore Local Statistics datasets',
+	note: [
+		`JSON-Stat file generated on ${new Date().toLocaleDateString('en-GB')} by the Explore Local Statistics service.`
+	],
+	updated: new Date().toISOString().slice(0, 10),
 	link: {}
 };
 
@@ -321,7 +325,6 @@ for (const file of file_paths) {
 	indicators.push(...indicatorDatasets);
 	areas.push(uniqueAreas);
 }
-cube.updated = indicators.map((ind) => ind.updated).sort(descending)[0];
 
 // Sort indicators to match order in manifest (ie. taxonomy order)
 cube.link = {

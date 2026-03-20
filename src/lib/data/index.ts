@@ -22,7 +22,7 @@ const readJSON = vite
 
 // Find all the data files in this directory (will be bundled into build)
 export const files = vite
-	? import.meta.glob(['./*.json', './*.xlsx'], {
+	? import.meta.glob(['./*.json', './*.xlsx', './*.gz'], {
 			query: '?url',
 			import: 'default',
 			eager: true
