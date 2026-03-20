@@ -1,14 +1,8 @@
 import type { RequestHandler } from './$types';
-import { read } from '$app/server';
 import { json, text, error } from '@sveltejs/kit';
 import { getParam, getDimensionFilters } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
-import { files, paths } from '$lib/data';
-import {
-	isOversizedRequest,
-	isLargeSpreadsheetRequest
-} from '$lib/api/data/helpers/requestValidators';
-import { isValidAreaCode, isValidAreaTypeCode } from '$lib/util/validationHelpers';
+import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
 export const GET: RequestHandler = async ({ url, params }) => {
 	const format = params.format || null;
@@ -44,22 +38,9 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		href: url.href
 	};
 
-	// Return pre-generated XLSX files for large requests
-	if (isLargeSpreadsheetRequest(_params)) {
-		const areaType = isValidAreaCode(hasGeo)
-			? hasGeo.slice(0, 3)
-			: isValidAreaTypeCode(hasGeo)
-				? hasGeo
-				: null;
-		const file = `all-datasets${areaType ? `-${areaType}` : ''}.xlsx`;
-		const path = paths.find((p) => p.endsWith(`/${file}`));
-		if (path) return read(files[path]);
-		else error(400, `No datasets available for ${hasGeo}`);
-	}
-
 	// Suppress requests that may run out of memory
 	if (isOversizedRequest(_params))
-		error(400, `Too much data requested. Try narrowing your filter parameters.`);
+		error(400, `Too much data requested. Try narrowing your parameters.`);
 
 	const datasets = await getFilteredData(_params);
 	if (datasets.error) error(datasets.error, datasets.message);
