@@ -1,6 +1,7 @@
 import type { PageLoad } from './$types';
 import { resolve } from '$app/paths';
 import { getName } from '@onsvisual/robo-utils';
+import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 import { getProductLinks } from '$lib/util/linkHelpers';
 
 export const load: PageLoad = async ({ parent }) => {
@@ -20,7 +21,7 @@ export const load: PageLoad = async ({ parent }) => {
 			{ label: 'Explore local statistics', href: '/' },
 			...[...area.properties.parents].reverse().map((p) => ({
 				label: getName(p),
-				href: resolve(`/areas/${p.areacd}`)
+				href: resolve(`/areas/${makeCanonicalSlug(p)}`)
 			}))
 		]
 	};

@@ -4,7 +4,7 @@ import { pluralise, getName } from '@onsvisual/robo-utils';
 import summaryData from '$lib/data/json-stat-summary.json';
 import { geoLevels, geoLevelsLookup } from '$lib/config/geoLevels';
 import type { PageLoad } from './$types';
-import { extractAreaCodeFromSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+import { extractAreaCodeFromSlug, makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 
 export const load: PageLoad = async ({ params, parent, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.code || '');
@@ -81,7 +81,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 				{ label: 'Explore local statistics', href: resolve('/') },
 				...[...[...area.properties.parents].reverse(), area.properties].map((p) => ({
 					label: getName(p),
-					href: resolve(`/areas/${p.areacd}`)
+					href: resolve(`/areas/${makeCanonicalSlug(p)}`)
 				}))
 			],
 			breadcrumbBackground: 'var(--ons-color-banner-bg)',

@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { getName } from '@onsvisual/robo-utils';
+	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import {
 		Hero,
 		Section,
 		DocumentList,
 		Document,
 		Input,
-		Button,
-		Divider
+		Button
 	} from '@onsvisual/svelte-components';
 	import Paginator from '$lib/components/nav/Paginator.svelte';
 
@@ -39,8 +40,8 @@
 		<DocumentList>
 			{#each data.data as area}
 				<Document
-					href={resolve(`/areas/${area?.areacd}`)}
-					title={area?.areanm || area.areacd}
+					href={resolve(`/areas/${makeCanonicalSlug(area)}`)}
+					title={getName(area)}
 					meta="GSS code: {area.areacd}"
 					description="{area?.type}{area.parent ? ` in ${area.parent}` : ''}"
 				/>

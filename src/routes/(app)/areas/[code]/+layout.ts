@@ -20,8 +20,8 @@ export const load: LayoutLoad = async ({ params, url, fetch }) => {
 
 	const canonicalSlug = makeCanonicalSlug(area.properties);
 	if (params.code !== canonicalSlug) {
-		const redirectPath = url.pathname.replace(params.code, canonicalSlug);
-		redirect(301, resolve(redirectPath));
+		const redirectURL = url.href.replace(params.code, canonicalSlug);
+		redirect(301, redirectURL);
 	}
 
 	return { area };
