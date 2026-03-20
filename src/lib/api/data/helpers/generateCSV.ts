@@ -11,7 +11,12 @@ function inferColumns(rows) {
 
 // Sort order of columns for CSV output
 function sortColumns(cols) {
-	return cols.includes('status') ? [...cols.filter((col) => col !== 'status'), 'status'] : cols;
+	const last_cols = ['value', 'lci_95', 'uci_95', 'status'];
+	const sorted = [
+		...cols.filter((col) => !last_cols.includes(col)),
+		...last_cols.filter((col) => cols.includes(col))
+	];
+	return sorted;
 }
 
 // Generate CSV as a text string (to be sent as a file)
