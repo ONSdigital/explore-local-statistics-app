@@ -59,7 +59,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 				geoGroups.push({
 					id: `cluster-${sim.key}`,
 					label: `Areas similar to ${getName(area.properties, 'the')} across ${sim.label.toLowerCase()}`,
-					geoCluster: `demographic_${sim.cluster.key}`
+					geoCluster: `${sim.key}_${sim.cluster.key}`
 				});
 			}
 		}
