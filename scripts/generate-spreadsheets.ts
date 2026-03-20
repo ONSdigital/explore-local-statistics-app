@@ -41,10 +41,10 @@ for (const code of codes) {
 	if (datasets.error) throw Error(datasets);
 
 	// Apply filters to the data within the datasets and generate the selected output format
-	// const xlsx_data = filterDatasets(datasets, params);
-	// const xlsx = await generateXLSX(xlsx_data);
-	// writeFileSync(path, xlsx);
-	// console.log(`Wrote ${path}`);
+	const xlsx_data = filterDatasets(datasets, params);
+	const xlsx = await generateXLSX(xlsx_data);
+	writeFileSync(path, xlsx);
+	console.log(`Wrote ${path}`);
 
 	if (!code) {
 		const csv_path = `${data_dir}/all-datasets.csv`;
