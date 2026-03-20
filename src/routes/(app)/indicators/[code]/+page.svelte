@@ -120,27 +120,28 @@
 				download={`${data.indicator.slug}.csv`}
 				aria-label="Download {data.indicator.label} data as a CSV file"
 				onclick={() => downloadEvent('csv', data.indicator)}>CSV</a
-			>,
+			>
+			or
 			<a
 				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
 				download={`${data.indicator.slug}.csv-metadata.json`}
 				aria-label="Download {data.indicator.label} metadata as an CSVW file"
 				onclick={() => downloadEvent('csvw', data.indicator)}>CSVW</a
 			>
-			or
+			format, or download all available datasets in an
 			<a
-				href={resolve(`/api/v1/data.json?indicator=${data.indicator.slug}&time=all`)}
-				download={`${data.indicator.slug}.json`}
-				aria-label="Download {data.indicator.label} data as a JSON-Stat file"
-				onclick={() => downloadEvent('json', data.indicator)}>JSON-Stat</a
-			>
-			format, or download
-			<a
-				href={resolve(`/api/v1/data.xlsx?time=all`)}
+				href={resolve(`/files/all-datasets.xlsx`)}
 				download="all-datasets.xlsx"
 				aria-label="Download all datasets as an XLSX file"
-				onclick={() => downloadEvent('xlsx')}>all available datasets (XLSX, ~10MB)</a
-			>.
+				onclick={() => downloadEvent('xlsx')}>XLSX</a
+			>
+			or
+			<a
+				href={resolve(`/files/json-stat.json`)}
+				download="all-datasets.json"
+				aria-label="Download all datasets as a JSON-Stat file"
+				onclick={() => downloadEvent('json')}>JSON-Stat</a
+			> format.
 		</p>
 		<p>
 			The original source data for this indicator can be found on the following

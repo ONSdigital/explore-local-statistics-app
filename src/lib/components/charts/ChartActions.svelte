@@ -91,9 +91,8 @@
 
 {#snippet downloadLinks(url: string)}
 	{@render downloadUrl(url, 'csv')},
-	{@render downloadUrl(url, 'csvw')},
-	{@render downloadUrl(url, 'xlsx')} or
-	{@render downloadUrl(url, 'json', 'JSON-Stat')}
+	{@render downloadUrl(url, 'csvw')} or
+	{@render downloadUrl(url, 'xlsx')}
 {/snippet}
 
 <div class="chart-actions">
