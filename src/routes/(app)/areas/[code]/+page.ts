@@ -18,7 +18,7 @@ export const load: PageLoad = async ({ parent }) => {
 		pageType: `area page`,
 		breadcrumbLinks: [
 			{ label: 'Home', href: '/' },
-			{ label: 'Explore local statistics', href: '/' },
+			{ label: 'Explore local statistics', href: resolve('/') },
 			...[...area.properties.parents].reverse().map((p) => ({
 				label: getName(p),
 				href: resolve(`/areas/${makeCanonicalSlug(p)}`)
