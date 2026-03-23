@@ -51,7 +51,7 @@ for (const code of codes) {
 		const csv_data = filterDatasets(datasets, { ...params, format: 'csv' });
 		const csv = generateCSV(csv_data);
 		writeFileSync(csv_path, csv);
-		await execFileAsync('gzip', [csv_path]);
+		await execFileAsync('gzip', ['-f', csv_path]);
 		console.log(`Wrote and gzipped ${csv_path}`);
 
 		const csvw_path = `${data_dir}/all-datasets.csv-metadata.json`;
