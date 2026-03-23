@@ -129,6 +129,7 @@ function getColWidth(values = null) {
 export async function dataToSpreadsheet(data) {
 	const workbook = new ExcelJS.Workbook();
 
+	workbook.title = data.coverSheetTitle;
 	workbook.creator = data.creator;
 	workbook.lastModifiedBy = data.creator;
 	workbook.created = data.created;
@@ -226,6 +227,9 @@ export async function dataToSpreadsheet(data) {
 			}
 		}
 	}
+
+	workbook.views = [{ activeTab: 0, activeCell: 'A1' }];
+
 	return workbook.xlsx.writeBuffer();
 }
 
