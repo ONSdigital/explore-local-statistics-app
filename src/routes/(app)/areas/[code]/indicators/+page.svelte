@@ -213,29 +213,35 @@
 	{/if}
 	<NavSection title="Get the data">
 		<p>
-			Download all datasets that include {getName(areaProps, 'the')} in an
+			You can download all datasets that include {getName(areaProps, 'the')} in an
 			<a
-				href={resolve(`/api/v1/data.xlsx?hasGeo=${areaProps.typecd}&time=all`)}
+				href={resolve(`/files/all-datasets-${areaProps.typecd}.xlsx`)}
 				download="all-datasets-{areaProps.typecd}.xlsx"
 				aria-label="Download datasets for {getName(areaProps, 'the')} as an XLSX file"
+				onclick={() => downloadEvent('xlsx')}>XLSX file</a
+			>. It is also possible to download all datasets for all areas in an
+			<a
+				href={resolve('/files/all-datasets.xlsx')}
+				download="all-datasets-{areaProps.typecd}.xlsx"
+				aria-label="Download all datasets as an XLSX file"
 				onclick={() => downloadEvent('xlsx')}>XLSX</a
 			>,
 			<a
-				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
-				download="all-datasets-{areaProps.areacd}.csv"
-				aria-label="Download datasets for {getName(areaProps, 'the')} as a CSV file"
+				href={resolve('/files/all-datasets.csv')}
+				download="all-datasets.csv"
+				aria-label="Download all datasets as a CSV file"
 				onclick={() => downloadEvent('csv')}>CSV</a
 			>,
 			<a
-				href={resolve(`/api/v1/data.csv?hasGeo=${areaProps.areacd}&time=all`)}
-				download="all-datasets-{areaProps.areacd}.csv-metadata.json"
-				aria-label="Download dataset metadata for {getName(areaProps, 'the')} as a CSVW file"
+				href={resolve('/files/all-datasets.csv-metadata.json')}
+				download="all-datasets.csv-metadata.json"
+				aria-label="Download all datasets as a CSVW file"
 				onclick={() => downloadEvent('csvw')}>CSVW</a
 			>, or
 			<a
-				href={resolve(`/api/v1/data.json?hasGeo=${areaProps.areacd}&time=all`)}
-				download="all-datasets-{areaProps.areacd}.json"
-				aria-label="Download datasets for {getName(areaProps, 'the')} as an JSON-Stat file"
+				href={resolve('/files/json-stat.json')}
+				download="all-datasets.json"
+				aria-label="Download all datasets as a JSON-Stat file"
 				onclick={() => downloadEvent('json')}>JSON-Stat</a
 			> format.
 		</p>

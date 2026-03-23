@@ -4,7 +4,7 @@ import { pluralise, getName } from '@onsvisual/robo-utils';
 import summaryData from '$lib/data/json-stat-summary.json';
 import { geoLevels, geoLevelsLookup } from '$lib/config/geoLevels';
 import type { PageLoad } from './$types';
-import { extractAreaCodeFromSlug } from '$lib/api/geo/helpers/areaSlugUtils';
+import { extractAreaCodeFromSlug, makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 
 export const load: PageLoad = async ({ params, parent, fetch }) => {
 	const code = extractAreaCodeFromSlug(params.code || '');
@@ -59,7 +59,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 				geoGroups.push({
 					id: `cluster-${sim.key}`,
 					label: `Areas similar to ${getName(area.properties, 'the')} across ${sim.label.toLowerCase()}`,
-					geoCluster: `demographic_${sim.cluster.key}`
+					geoCluster: `${sim.key}_${sim.cluster.key}`
 				});
 			}
 		}
@@ -77,11 +77,11 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			description: `Find facts and figures from across the ONS on ${getName(area.properties, 'the')} (${area.properties.typenm}).`,
 			pageType: `area page`,
 			breadcrumbLinks: [
-				{ label: 'Home', href: resolve('/') },
+				{ label: 'Home', href: '/' },
 				{ label: 'Explore local statistics', href: resolve('/') },
 				...[...[...area.properties.parents].reverse(), area.properties].map((p) => ({
 					label: getName(p),
-					href: resolve(`/areas/${p.areacd}`)
+					href: resolve(`/areas/${makeCanonicalSlug(p)}`)
 				}))
 			],
 			breadcrumbBackground: 'var(--ons-color-banner-bg)',

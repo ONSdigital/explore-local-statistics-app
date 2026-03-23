@@ -135,7 +135,7 @@
 {/snippet}
 
 {#snippet label(d, i, color, showName = false)}
-	{#key d[idKey]}
+	{#key d}
 		{@const xPos = labelPos?.x ?? d.x}
 		{@const floatRight = xPos > 50}
 		<div

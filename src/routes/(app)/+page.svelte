@@ -112,26 +112,26 @@
 	<p>
 		You can download all of the data available on the Explore Local Statistics service in an
 		<a
-			href={resolve('/api/v1/data.xlsx?time=all')}
+			href={resolve('/files/all-datasets.xlsx')}
 			download="all-datasets.xlsx"
 			aria-label="Download all datasets as an XLSX file"
 			onclick={() => downloadEvent('xlsx')}>XLSX</a
 		>,
 		<a
-			href={resolve('/api/v1/data.csv?time=all')}
+			href={resolve('/files/all-datasets.csv')}
 			download="all-datasets.csv"
 			aria-label="Download all datasets as a CSV file"
 			onclick={() => downloadEvent('csv')}>CSV</a
 		>,
 		<a
-			href={resolve('/api/v1/data.csvw?time=all')}
+			href={resolve('/files/all-datasets.csv-metadata.json')}
 			download="all-datasets.csv-metadata.json"
 			aria-label="Download metadata for all datasets as a CSVW file"
 			onclick={() => downloadEvent('csvw')}>CSVW</a
 		>
 		or
 		<a
-			href={resolve('/api/v1/data.json?time=all')}
+			href={resolve('/files/json-stat.json')}
 			download="all-datasets.json"
 			aria-label="Download all datasets as a JSON-Stat file"
 			onclick={() => downloadEvent('json')}>JSON-Stat</a

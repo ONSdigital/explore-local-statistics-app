@@ -101,9 +101,8 @@
 
 {#snippet downloadLinks(chartType: string)}
 	{@render downloadUrl(chartType, 'csv')},
-	{@render downloadUrl(chartType, 'csvw')},
-	{@render downloadUrl(chartType, 'xlsx')} or
-	{@render downloadUrl(chartType, 'json', 'JSON-Stat')}
+	{@render downloadUrl(chartType, 'csvw')} or
+	{@render downloadUrl(chartType, 'xlsx')}
 {/snippet}
 
 <Observe bind:visible rootMargin={200}>

@@ -10,7 +10,10 @@ const meta = {
 	description:
 		'Find local areas within the UK including countries, regions, local authorities, parliamentary constituencies, electoral wards and parishes.',
 	pageType: 'area search page',
-	breadcrumbLinks: [{ label: 'Home', href: '/' }]
+	breadcrumbLinks: [
+		{ label: 'Home', href: '/' },
+		{ label: 'Explore local statistics', href: resolve('/') }
+	]
 };
 const noResult = (query = null, page = 1) => ({
 	meta: { query, page, count: 0, total: 0, limit, offset: 0 },
