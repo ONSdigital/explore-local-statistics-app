@@ -6,6 +6,7 @@
 
 	let {
 		data,
+		metadata,
 		selected = [],
 		hovered = $bindable(),
 		formatValue = (d) => d,
@@ -124,7 +125,7 @@
 	</text>
 {/snippet}
 
-<p class="ons-u-vh">
+<p id="{metadata.slug}-pyramid-description" class="ons-u-vh">
 	{#if _data?.keyed?.[selected[0]]}
 		Population pyramid chart showing the percentage distribution of the total population by
 		five-year age band and sex. In {_data?.keyed?.[selected[0]][0][labelKey]}, the population was {formatValue(
@@ -133,8 +134,13 @@
 	{/if}
 </p>
 
-<div class="chart-container" bind:clientWidth={w} aria-hidden="true">
-	<svg class="chart" viewBox="0 0 {w} {yRange[0] + bottomMargin}">
+<div
+	class="chart-container"
+	bind:clientWidth={w}
+	role="figure"
+	aria-labelledby="{metadata.slug}-pyramid-description"
+>
+	<svg class="chart" viewBox="0 0 {w} {yRange[0] + bottomMargin}" aria-hidden="true">
 		{#if _data}
 			<g class="chart-y-axis">
 				{#each _data.categoryDomain as yTick}
@@ -225,7 +231,7 @@
 			{/if}
 		{/if}
 	</svg>
-	<div class="chart-annotations">
+	<div class="chart-annotations" aria-hidden="true">
 		{#each _data?.groupDomain || [] as group, i}
 			<div
 				class="chart-legend"

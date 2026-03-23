@@ -270,7 +270,9 @@
 	</ul>
 {/if}
 
-<p class="ons-u-vh">Bar chart for {metadata.label}. The data is available to download below.</p>
+<p id="{metadata.slug}-bar-description" class="ons-u-vh">
+	Bar chart for {metadata.label}. The data is available to download below.
+</p>
 <div
 	bind:clientWidth={width}
 	class="bar-wrapper"
@@ -278,10 +280,11 @@
 	style:padding-top={showIntervals && 'uci_95' in data ? '10px' : '30px'}
 	style:padding-bottom="25px"
 	style:padding-left="{leftMargin}px"
-	aria-hidden="true"
+	role="figure"
+	aria-labelledby="{metadata.slug}-bar-description"
 >
 	{#if showIntervals && 'uci_95' in data}
-		<div class="legend-container">
+		<div class="legend-container" aria-hidden="true">
 			<svg width="300" height="60">
 				<rect x="0" y="1" width="50" height="16" fill={ONScolours.grey40}></rect>
 				<line x1="25" y1="1" x2="25" y2="17" stroke={ONScolours.grey75} stroke-width="2.5" />
@@ -312,7 +315,7 @@
 			</svg>
 		</div>
 	{/if}
-	<div class="bar-inner">
+	<div class="bar-inner" aria-hidden="true">
 		<div class="line-y-axis">
 			<div class="y-baseline" style:left="{xScale(0)}px"></div>
 		</div>

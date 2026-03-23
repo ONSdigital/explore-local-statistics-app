@@ -140,7 +140,7 @@
 		{@const floatRight = xPos > 50}
 		<div
 			class="beeswarm-label"
-			aria-live="assertive"
+			aria-live={showName ? 'polite' : null}
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
 			style:color={i === 0 ? ONScolours.white : color}
 			style:left={!floatRight ? `${xPos}%` : null}
@@ -155,13 +155,13 @@
 {/snippet}
 
 {#if selected.length == 1}
-	<p class="ons-u-vh">
+	<p id="{metadata.slug}-beeswarm-description" class="ons-u-vh">
 		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
 			?.keyed?.[selected[0]]?.[labelKey]} was
 		{formatValue(_data?.keyed?.[selected[0]]?.[xKey])}.
 	</p>
 {:else}
-	<p class="ons-u-vh">
+	<p id="{metadata.slug}-beeswarm-description" class="ons-u-vh">
 		Distribution chart showing values for {metadata.label} ({metadata.subText}). The value for {_data
 			?.keyed?.[selected[0]]?.[labelKey]} was {formatValue(_data?.keyed?.[selected[0]]?.[xKey])},
 		the value for {_data?.keyed?.[selected[1]]?.[labelKey]} was {formatValue(
@@ -188,9 +188,10 @@
 	onmousedown={(e) => e.preventDefault()}
 	onkeydown={doKeydown}
 	role="figure"
+	aria-labelledby="{metadata.slug}-beeswarm-description"
 >
-	<div class="beeswarm-chart" aria-hidden="true">
-		<svg viewBox="0 0 100 100" class="beeswarm-svg" preserveAspectRatio="none">
+	<div class="beeswarm-chart">
+		<svg viewBox="0 0 100 100" class="beeswarm-svg" preserveAspectRatio="none" aria-hidden="true">
 			{#if _data}
 				<g class="beeswarm-points" onmouseleave={() => (hovered = null)}>
 					{#each _data.array as d (d[idKey])}
@@ -233,7 +234,7 @@
 			{/if}
 		</div>
 	</div>
-	<p class="beeswarm-comparison ons-u-fs-s">
+	<p class="beeswarm-comparison ons-u-fs-s" aria-hidden="true">
 		{#if keyboardMode}
 			Use the arrow keys to move through the different areas
 		{:else if comparison}

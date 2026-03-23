@@ -222,7 +222,9 @@
 	</ul>
 {/if}
 
-<p class="ons-u-vh">Line chart for {metadata.label}. The data is available to download below.</p>
+<p class="ons-u-vh" id="{metadata.slug}-line-description">
+	Line chart for {metadata.label}. The data is available to download below.
+</p>
 <div
 	bind:clientWidth={width}
 	class="line-wrapper"
@@ -230,10 +232,11 @@
 	style:padding-bottom="35px"
 	style:padding-right="{rightMargin}px"
 	style:padding-top={showIntervals && 'uci_95' in data ? '0px' : '20px'}
-	aria-hidden="true"
+	role="figure"
+	aria-labelledby="{metadata.slug}-line-description"
 >
 	{#if showIntervals && 'uci_95' in data}
-		<div class="legend-container">
+		<div class="legend-container" aria-hidden="true">
 			<svg width="300" height="60">
 				<!-- <rect x="2.5" y="1" width="25" height="25" fill={ONScolours.grey35}></rect> -->
 				<path d="M14 15  L46 15 L46 45  L14 35" stroke="none" fill={ONScolours.grey35}></path>
@@ -276,7 +279,7 @@
 			</svg>
 		</div>
 	{/if}
-	<div class="line-inner">
+	<div class="line-inner" aria-hidden="true">
 		{#if _data && xScale && yScale}
 			<div class="line-x-axis">
 				{#if yDomain?.[0] <= 0 && yDomain?.[1] >= 0}
