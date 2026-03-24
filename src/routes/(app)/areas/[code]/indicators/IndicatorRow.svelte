@@ -174,6 +174,7 @@
 			].slice(0, chartMode === 'simple' ? 4 : undefined)}
 			<div class="indicator-pyramid">
 				<ButtonGroup
+					name="pyramid-select"
 					legend="Select areas to show on chart"
 					visuallyHideLegend
 					bind:value={chartMode}

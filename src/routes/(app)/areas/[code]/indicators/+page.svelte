@@ -205,6 +205,7 @@
 			<Dropdown
 				id="select-cluster-group"
 				label="Select a group of indicators"
+				placeholder={null}
 				options={data.related.similar}
 				bind:value={pageState.selectedCluster}
 			/>

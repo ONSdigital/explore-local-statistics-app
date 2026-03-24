@@ -98,10 +98,12 @@
 		</div>
 		<input
 			type="range"
+			aria-label="Select start of time range"
 			name="min"
 			class="ons-u-vh"
 			min={0}
 			max={selectedIndices[1]}
+			aria-valuetext={formatTick(selectedRange[0])}
 			bind:value={selectedIndices[0]}
 			onfocus={() => (focused[0] = true)}
 			onblur={() => (focused[0] = false)}
@@ -109,10 +111,12 @@
 		/>
 		<input
 			type="range"
+			aria-label="Select end of time range"
 			name="max"
 			class="ons-u-vh"
 			min={selectedIndices[0]}
 			max={options.length - 1}
+			aria-valuetext={formatTick(selectedRange[1])}
 			bind:value={selectedIndices[1]}
 			onfocus={() => (focused[1] = true)}
 			onblur={() => (focused[1] = false)}

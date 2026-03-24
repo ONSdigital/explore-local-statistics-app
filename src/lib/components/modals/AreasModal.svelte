@@ -62,6 +62,7 @@
 		<Dropdown
 			id="geo-level-select"
 			label="Geography type"
+			placeholder={null}
 			options={data.geoLevels}
 			bind:value={_pageState.selectedGeoLevel}
 			width={null}
@@ -72,6 +73,7 @@
 		<Dropdown
 			id="geo-related-select"
 			label="Geography group"
+			placeholder={null}
 			options={data.geoGroups}
 			bind:value={_pageState.selectedGeoGroup}
 			width={null}
