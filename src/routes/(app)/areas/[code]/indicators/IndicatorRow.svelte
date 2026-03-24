@@ -174,6 +174,7 @@
 			].slice(0, chartMode === 'simple' ? 4 : undefined)}
 			<div class="indicator-pyramid">
 				<ButtonGroup
+					name="pyramid-select"
 					legend="Select areas to show on chart"
 					visuallyHideLegend
 					bind:value={chartMode}
@@ -189,7 +190,15 @@
 					{visible}
 				>
 					{#snippet chart(data)}
-						<Pyramid {data} {formatValue} {formatPeriod} {selected} bind:hovered {valueDomain} />
+						<Pyramid
+							{data}
+							{metadata}
+							{formatValue}
+							{formatPeriod}
+							{selected}
+							bind:hovered
+							{valueDomain}
+						/>
 					{/snippet}
 				</ChartDataLoader>
 			</div>

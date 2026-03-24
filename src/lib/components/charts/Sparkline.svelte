@@ -122,7 +122,7 @@
 	{@const target = _selected[_selected.length - 1].data}
 	{@const diff = target[target.length - 1][yKey] - target[0][yKey]}
 	{@const direction = diff < 0 ? 'decreased' : 'increased'}
-	<p class="ons-u-vh">
+	<p id="{metadata.slug}-sparkline-description" class="ons-u-vh">
 		Line chart for {metadata.label} ({metadata.subText}) in {data.areanm[0]}. Between {formatPeriodShort(
 			_data.dateDomain[0]
 		)} and {formatPeriodShort(_data.dateDomain[1])}
@@ -135,9 +135,10 @@
 		style:padding-right="{margins.right + 10}px"
 		style:padding-top="10px"
 		style:padding-bottom="25px"
-		aria-hidden="true"
+		role="figure"
+		aria-labelledby="{metadata.slug}-sparkline-description"
 	>
-		<div class="sparkline-container">
+		<div class="sparkline-container" aria-hidden="true">
 			<svg
 				viewBox="0 0 100 100"
 				class="sparkline-svg"

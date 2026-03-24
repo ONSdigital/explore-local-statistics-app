@@ -115,7 +115,7 @@
 			<button
 				class="ons-btn-link"
 				aria-controls="{chartType}-embed"
-				aria-expanded={showEmbed ? 'false' : 'true'}
+				aria-expanded={showEmbed ? 'true' : 'false'}
 				onclick={() => (showEmbed = !showEmbed)}
 				>{showEmbed ? 'Hide embed code' : 'Show embed code'}</button
 			>

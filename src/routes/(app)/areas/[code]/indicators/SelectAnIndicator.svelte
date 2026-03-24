@@ -30,7 +30,12 @@
 		clearable={false}
 	/>
 
-	<ButtonGroup legend="Select a chart type" visuallyHideLegend bind:value={selectedChartTypeKey}>
+	<ButtonGroup
+		name="select-chart-type"
+		legend="Select a chart type"
+		visuallyHideLegend
+		bind:value={selectedChartTypeKey}
+	>
 		{#each chartTypes as chartType}
 			<ButtonGroupItem id="{chartType.key}-radio" value={chartType.key} label={chartType.label} />
 		{/each}

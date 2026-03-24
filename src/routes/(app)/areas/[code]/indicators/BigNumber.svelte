@@ -58,7 +58,11 @@
 			{/await}
 		</div>
 		<p class="ons-u-mb-no">
-			<a href="#{indicator}"><Icon type="arrow" rotation={90} /> View indicator</a>
+			<a href="#{indicator}"
+				><Icon type="arrow" rotation={90} /> View indicator<span class="ons-u-vh">
+					({metadata.label})</span
+				></a
+			>
 		</p>
 	</Observe>
 </Card>
