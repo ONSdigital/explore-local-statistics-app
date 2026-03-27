@@ -4,7 +4,7 @@
 	import { base, assets } from '$app/paths';
 
 	import type { PageData } from './$types';
-	import { goto, afterNavigate } from '$app/navigation';
+	import { goto, afterNavigate, invalidateAll } from '$app/navigation';
 
 	import {
 		Hero,
@@ -107,13 +107,13 @@
 			postcode = e.detail;
 		} else {
 			areaSearchOpen = false;
-			selectElement.clearInput();
+			selectElement?.clearInput?.();
 
-			// window.location.href = `${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`;
-			goto(
-				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
-				options
-			);
+			window.location.href = `${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`;
+			// goto(
+			// 	`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
+			// 	options
+			// );
 		}
 	}
 
@@ -639,6 +639,7 @@
 								{#each areaNeighbours[clusterGroup.id] as neighbour}
 									<li>
 										<a
+											data-sveltekit-reload
 											href="{base}/areas/{makeCanonicalSlug(
 												neighbour,
 												metadata.areasObject[neighbour].areanm
