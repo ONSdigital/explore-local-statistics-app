@@ -660,7 +660,7 @@
 						Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
 						based on a specific group of indicators. This ranking is derived from
 						<a
-							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheuk"
 							>an analysis carried out by the ONS</a
 						>.
 					</p>
