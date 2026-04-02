@@ -584,7 +584,7 @@
 						See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
 						These clusters of areas are based on
 						<a
-							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheuk"
 							>an analysis carried out by the ONS</a
 						>.
 					</p>
