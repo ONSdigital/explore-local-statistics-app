@@ -97,7 +97,7 @@
 			"label": "Business expenditure on research and development"
 		},
 		{
-			"code": "active-enterprises",
+			"code": "business-demography-Active businesses",
 			"label": "Active businesses"
 		},
 		{
@@ -111,6 +111,26 @@
 		{
 			"code": "business-demography-High growth businesses",
 			"label": "High growth businesses"
+		},
+		{
+			"code": "business-demography-One-year survival rate",
+			"label": "One-year business survival rate"
+		},
+		{
+			"code": "business-demography-Two-year survival rate",
+			"label": "Two-year business survival rate"
+		},
+		{
+			"code": "business-demography-Three-year survival rate",
+			"label": "Three-year business survival rate"
+		},
+		{
+			"code": "business-demography-Four-year survival rate",
+			"label": "Four-year business survival rate"
+		},
+		{
+			"code": "business-demography-Five-year survival rate",
+			"label": "Five-year business survival rate"
 		},
 		{
 			"code": "net-additions-to-the-housing-stock",
@@ -578,7 +598,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the number of usual residents per square kilometre, calculated based on total land area excluding inland water, in the United Kingdom, for 1991 to 2024.",
 				"standardised": "T",
-				"caveats": "[Standard Area Measurements (December 2024) in the UK](https://geoportal.statistics.gov.uk/datasets/ons::standard-area-measurements-for-the-local-authority-districts-december-2024-in-the-united-kingdom/about) was used to calculate population density by dividing the total population by the area in square kilometres.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
+				"caveats": "[Standard Area Measurements (December 2024) in the UK](https://geoportal.statistics.gov.uk/datasets/ons::standard-area-measurements-for-the-local-authority-districts-december-2024-in-the-uk/about) was used to calculate population density by dividing the total population by the area in square kilometres.\n\nPopulation estimates in Explore Local Statistics (ELS) are informed by those available on Nomis at the time of publication on ELS.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2534,8 +2554,8 @@
 			"subTopic": "pay and income",
 			"code": "children-in-relative-poverty",
 			"": null,
-			"minXDomainNumb": 2014,
-			"maxXDomainNumb": 2023,
+			"minXDomainNumb": 2021,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "children-in-relative-poverty",
 				"slug": "children-in-relative-poverty",
@@ -2545,16 +2565,16 @@
 				"subText": null,
 				"decimalPlaces": 1,
 				"howToMeasureChange": null,
-				"subtitle": "Percentage of children aged 0 to 15 living in relative low income families Before Housing Costs (BHC)",
+				"subtitle": "Percentage of children aged under 16 living in relative low income families Before Housing Costs (BHC)",
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "27/03/2025",
+				"sourceDate": "26/03/2026",
 				"sourceURL": "https://www.gov.uk/government/collections/children-in-low-income-families-local-area-statistics",
 				"sourceOrg": "Department for Work and Pensions",
-				"longDescription": "This indicator shows the percentage of children aged 0 to 15 living in relative low income families Before Housing Costs (BHC), in the UK, for financial years ending 2015 to 2024.",
+				"longDescription": "This indicator shows the percentage of children aged under 16 living in relative low income families Before Housing Costs (BHC), in the UK, for financial years ending 2022 to 2025.",
 				"standardised": "T",
-				"caveats": "Relative low income is defined as a family in low income Before Housing Costs (BHC) in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nRates have been derived by dividing the number of children aged 0 to 15 in low income families by the number of all children aged 0-15 (sourced from latest available mid-year population estimates at the time of publication).",
+				"caveats": "Relative low income is defined as a family in low income Before Housing Costs (BHC) in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nRates have been derived by dividing the number of children aged 0 to 15 in low income families by the number of all children aged 0 to 15 (sourced from latest available mid-year population estimates at the time of publication).",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2615,16 +2635,10 @@
 				"year": 2023
 			},
 			"years": [
-				2014,
-				2015,
-				2016,
-				2017,
-				2018,
-				2019,
-				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"total-value-of-uk-exports": {
@@ -3467,16 +3481,16 @@
 				2024
 			]
 		},
-		"active-enterprises": {
+		"business-demography-Active businesses": {
 			"id": 27,
 			"topic": "economy",
 			"subTopic": "business",
-			"code": "active-enterprises",
+			"code": "business-demography-Active businesses",
 			"": null,
 			"minXDomainNumb": 2019,
 			"maxXDomainNumb": 2024,
 			"metadata": {
-				"code": "active-enterprises",
+				"code": "business-demography-Active businesses",
 				"slug": "active-businesses",
 				"label": "Active businesses",
 				"prefix": "",
@@ -3493,7 +3507,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the count of active businesses, in the UK, for 2019 to 2024.",
 				"standardised": "F",
-				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period. Some of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "The starting point for demography is the concept of a population of active businesses in a reference year (t). These are defined as businesses that had either turnover or employment at any time during the reference period.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3512,7 +3526,6 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -3551,13 +3564,6 @@
 							"W92"
 						],
 						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3623,7 +3629,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the business births as a percentage of all active businesses, in the UK, for 2019 to 2024.",
 				"standardised": "T",
-				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones. The birth rate is calculated using the number of births as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "A birth is identified as a business that was present in year t, but did not exist in year t-1 or t-2. Births are identified by making comparison of annual active population files and identifying those present in the latest file, but not the two previous ones.\n\nThe birth rate is calculated using the number of births as a proportion of the active businesses.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3642,7 +3648,6 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -3681,13 +3686,6 @@
 							"W92"
 						],
 						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3753,7 +3751,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the business deaths as a percentage of all active businesses, in the UK, for 2019 to 2024.",
 				"standardised": "T",
-				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision. The death rate is calculated using the number of deaths as a proportion of the active businesses. Some of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "A death is defined as a business that was on the active file in year t, but was no longer present in the active file in t+1 and t+2. In order to provide an early estimate of deaths, an adjustment has been made to the latest two years deaths to allow for reactivations. These figures are provisional and subject to revision.\n\nThe death rate is calculated using the number of deaths as a proportion of the active businesses.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3772,7 +3770,6 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -3811,13 +3808,6 @@
 							"W92"
 						],
 						"label": "Countries and regions"
-					},
-					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
 					},
 					{
 						"key": "utla",
@@ -3883,7 +3873,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the high growth businesses as a percentage of active businesses with 10 or more employees, in the UK, for 2019 to 2024.",
 				"standardised": "T",
-				"caveats": "High growth measures all businesses with an average growth in employment of greater than 20%, per annum, over a three-year period. The size threshold used to identify these businesses is that they have 10 or more employees. The rate of high growth businesses is calculated using the number of high growth businesses as a proportion of the active businesses with 10 or more employees. Some of this data has been aggregated and may show differences to other published figures.",
+				"caveats": "High growth measures all businesses with an average growth in employment of greater than 20%, per annum, over a three-year period. The size threshold used to identify these businesses is that they have 10 or more employees.\n\nThe rate of high growth businesses is calculated using the number of high growth businesses as a proportion of the active businesses with 10 or more employees.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -3902,7 +3892,6 @@
 					"E09",
 					"E10",
 					"E12",
-					"E47",
 					"E92",
 					"K02",
 					"K03",
@@ -3943,13 +3932,6 @@
 						"label": "Countries and regions"
 					},
 					{
-						"key": "cauth",
-						"codes": [
-							"E47"
-						],
-						"label": "Combined authorities"
-					},
-					{
 						"key": "utla",
 						"codes": [
 							"E06",
@@ -3985,6 +3967,601 @@
 				2022,
 				2023,
 				2024
+			]
+		},
+		"business-demography-One-year survival rate": {
+			"id": 126,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-One-year survival rate",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2023,
+			"metadata": {
+				"code": "business-demography-One-year survival rate",
+				"slug": "business-survival-one-year",
+				"label": "One-year business survival rate",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of newly born businesses that survived for one year",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "20/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the one-year survival rate of UK businesses born from 2019 to 2023.",
+				"standardised": "T",
+				"caveats": "A business is deemed to have survived for one year if it is active in terms of employment and/or turnover at any point during the year following its year of birth.\n\nThe one‑year business survival rate is calculated as the number of businesses that survive for one year as a proportion of businesses born in the start year.\n\nSome areas are affected by large numbers of businesses registering or de-registering at the same postcode (such as virtual offices, company formation agents, or foreign online sellers), which can distort local survival rates. The [Multiple Business Registrations methodology paper](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/articles/multiplebusinessregistrationsatasinglepostcodeuk/latest) explains this and provides tables identifying postcodes with 500 or more business births or deaths. These registrations cannot be removed from the Business Register, but users may wish to consider their impact when interpreting local figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2019,
+				2020,
+				2021,
+				2022,
+				2023
+			]
+		},
+		"business-demography-Two-year survival rate": {
+			"id": 127,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-Two-year survival rate",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2022,
+			"metadata": {
+				"code": "business-demography-Two-year survival rate",
+				"slug": "business-survival-two-year",
+				"label": "Two-year business survival rate",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of newly born businesses that survived for two years",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "20/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the two-year survival rate of UK businesses born from 2019 to 2022.",
+				"standardised": "T",
+				"caveats": "A business is deemed to have survived for two years if it is active in terms of employment and/or turnover at any point during the second calendar year following its year of birth.\n\nThe two‑year business survival rate is calculated as the number of businesses that survive for two years as a proportion of businesses born in the start year.\n\nSome areas are affected by large numbers of businesses registering or de-registering at the same postcode (such as virtual offices, company formation agents, or foreign online sellers), which can distort local survival rates. The [Multiple Business Registrations methodology paper](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/articles/multiplebusinessregistrationsatasinglepostcodeuk/latest) explains this and provides tables identifying postcodes with 500 or more business births or deaths. These registrations cannot be removed from the Business Register, but users may wish to consider their impact when interpreting local figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2019,
+				2020,
+				2021,
+				2022
+			]
+		},
+		"business-demography-Three-year survival rate": {
+			"id": 128,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-Three-year survival rate",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2021,
+			"metadata": {
+				"code": "business-demography-Three-year survival rate",
+				"slug": "business-survival-three-year",
+				"label": "Three-year business survival rate",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of newly born businesses that survived for three years",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "20/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the three-year survival rate of UK businesses born from 2019 to 2021.",
+				"standardised": "T",
+				"caveats": "A business is deemed to have survived for three years if it is active in terms of employment and/or turnover at any point during the third calendar year following its year of birth.\n\nThe three‑year business survival rate is calculated as the number of businesses that survive for three years as a proportion of businesses born in the start year.\n\nSome areas are affected by large numbers of businesses registering or de-registering at the same postcode (such as virtual offices, company formation agents, or foreign online sellers), which can distort local survival rates. The [Multiple Business Registrations methodology paper](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/articles/multiplebusinessregistrationsatasinglepostcodeuk/latest) explains this and provides tables identifying postcodes with 500 or more business births or deaths. These registrations cannot be removed from the Business Register, but users may wish to consider their impact when interpreting local figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2021
+			},
+			"years": [
+				2019,
+				2020,
+				2021
+			]
+		},
+		"business-demography-Four-year survival rate": {
+			"id": 129,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-Four-year survival rate",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2020,
+			"metadata": {
+				"code": "business-demography-Four-year survival rate",
+				"slug": "business-survival-four-year",
+				"label": "Four-year business survival rate",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of newly born businesses that survived for four years",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "20/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the four-year survival rate of UK businesses born in 2019 and 2020.",
+				"standardised": "T",
+				"caveats": "A business is deemed to have survived for four years if it is active in terms of employment and/or turnover at any point during the fourth calendar year following its year of birth.\n\nThe four‑year business survival rate is calculated as the number of businesses that survive for four years as a proportion of businesses born in the start year.\n\nSome areas are affected by large numbers of businesses registering or de-registering at the same postcode (such as virtual offices, company formation agents, or foreign online sellers), which can distort local survival rates. The [Multiple Business Registrations methodology paper](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/articles/multiplebusinessregistrationsatasinglepostcodeuk/latest) explains this and provides tables identifying postcodes with 500 or more business births or deaths. These registrations cannot be removed from the Business Register, but users may wish to consider their impact when interpreting local figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2020
+			},
+			"years": [
+				2019,
+				2020
+			]
+		},
+		"business-demography-Five-year survival rate": {
+			"id": 130,
+			"topic": "economy",
+			"subTopic": "business",
+			"code": "business-demography-Five-year survival rate",
+			"": null,
+			"minXDomainNumb": 2019,
+			"maxXDomainNumb": 2019,
+			"metadata": {
+				"code": "business-demography-Five-year survival rate",
+				"slug": "business-survival-five-year",
+				"label": "Five-year business survival rate",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of newly born businesses that survived for five years",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "20/11/2025",
+				"sourceURL": "https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/businessdemography/previousreleases",
+				"sourceOrg": "Office for National Statistics",
+				"longDescription": "This indicator shows the five-year survival rate of UK businesses born in 2019.",
+				"standardised": "T",
+				"caveats": "A business is deemed to have survived for five years if it is active in terms of employment and/or turnover at any point during the fifth calendar year following its year of birth.\n\nThe five‑year business survival rate is calculated as the number of businesses that survive for five years as a proportion of businesses born in the start year.\n\nSome areas are affected by large numbers of businesses registering or de-registering at the same postcode (such as virtual offices, company formation agents, or foreign online sellers), which can distort local survival rates. The [Multiple Business Registrations methodology paper](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/articles/multiplebusinessregistrationsatasinglepostcodeuk/latest) explains this and provides tables identifying postcodes with 500 or more business births or deaths. These registrations cannot be removed from the Business Register, but users may wish to consider their impact when interpreting local figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E92",
+					"K02",
+					"K03",
+					"K04",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "ctry",
+						"codes": [
+							"E92",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2019
+			},
+			"years": [
+				2019
 			]
 		},
 		"net-additions-to-the-housing-stock": {
@@ -4335,7 +4912,7 @@
 			"code": "average-house-price",
 			"": null,
 			"minXDomainNumb": 2005,
-			"maxXDomainNumb": 2025.92,
+			"maxXDomainNumb": 2026,
 			"metadata": {
 				"code": "average-house-price",
 				"slug": "average-house-price",
@@ -4349,10 +4926,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "18/02/2026",
-				"sourceURL": "https://www.gov.uk/government/collections/uk-house-price-index-reports-2025",
+				"sourceDate": "25/03/2026",
+				"sourceURL": "https://www.gov.uk/government/collections/uk-house-price-index-reports",
 				"sourceOrg": "HM Land Registry",
-				"longDescription": "This indicator shows the average (geometric mean) monthly house price, in the United Kingdom, for January 2005 to December 2025.",
+				"longDescription": "This indicator shows the average (geometric mean) monthly house price, in the United Kingdom, for January 2005 to January 2026.",
 				"standardised": "T",
 				"caveats": "For the UK House Price Index (UK HPI), the standard average house price is calculated by taking the average (geometric mean) price in January 2015 and then recalculating it in accordance with the index change back in time and forward to the present day. The geometric mean reduces the weighting given to high value properties when compared to the arithmetic mean and is typically lower, usually closer to that of the median.\n\nEstimates for the most recent months are provisional and are likely to be updated as more data is incorporated into the index. Read [Revisions to the UK HPI data](https://www.gov.uk/government/publications/about-the-uk-house-price-index/about-the-uk-house-price-index#monthly-revision).\n\nThe UK House Price Index (UK HPI) is calculated by the Office for National Statistics and Land & Property Services Northern Ireland. Find out about the [methodology used](https://www.gov.uk/government/publications/about-the-uk-house-price-index/quality-and-methodology#methods-used-to-produce-the-uk-hpi) to create the UK HPI.\n\nData for the UK House Price Index is provided by HM Land Registry, Registers of Scotland, The Land & Property Services Northern Ireland Statistics & Research Agency and the Valuation Office Agency. Find out more [about the UK House Price Index](https://www.gov.uk/government/publications/about-the-uk-house-price-index).",
 				"confidenceIntervals": "F",
@@ -4693,7 +5270,8 @@
 				2025.67,
 				2025.75,
 				2025.83,
-				2025.92
+				2025.92,
+				2026
 			]
 		},
 		"housing-affordability-ratio": {
@@ -4703,7 +5281,7 @@
 			"code": "housing-affordability-ratio",
 			"": null,
 			"minXDomainNumb": 2002.25,
-			"maxXDomainNumb": 2024.25,
+			"maxXDomainNumb": 2025.25,
 			"metadata": {
 				"code": "housing-affordability-ratio",
 				"slug": "housing-affordability-ratio",
@@ -4717,10 +5295,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "24/03/2025",
+				"sourceDate": "26/03/2026",
 				"sourceURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/previousreleases",
 				"sourceOrg": "Office for National Statistics",
-				"longDescription": "This indicator shows the median affordability ratio calculated by dividing house sales prices by gross annual residence-based earnings, in England and Wales, for 2002 to 2024.",
+				"longDescription": "This indicator shows the median affordability ratio calculated by dividing house sales prices by gross annual residence-based earnings, in England and Wales, for 2002 to 2025.",
 				"standardised": "T",
 				"caveats": "A threshold of five years of earnings is used as a broad indicator of affordability.\n\nHousing affordability estimates are calculated by dividing house sales prices for an area by average earnings to create a ratio. This ratio allows comparisons between areas and over time without needing to adjust for inflation. A higher housing affordability ratio reflects a less affordable area.\n\nEarnings data are from the [Annual Survey of Hours and Earnings (ASHE)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/placeofresidencebylocalauthorityashetable8), which provides a snapshot of earnings at April in each year. Earnings relate to gross full-time individual earnings for people who live in the area, though they may work elsewhere. A snapshot of the annual earnings of all full-time employees is used, or an annualised version of the weekly estimate where annual data are not available.\n\nHouse price statistics are from [house prices for small areas](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2024/relateddata), which report the median price paid for residential property and refer to a 12 month period with April in the middle (year ending September).\n\nThe House price statistics for small areas (HPSSA) data used here are not mix adjusted, so price variations may be a combination of true price changes and differences in the mix of housing types and trends. They will therefore differ from those in the [Private rent and house prices, UK bulletins](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/previousreleases), which are mix adjusted and comparable over time.\n\nThese affordability ratio statistics are revised annually to reflect revisions to the house price statistics and earnings data.\n\nPlease refer to the [Housing affordability in England and Wales bulletin](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest) for further information. This bulletin includes analysis of workplace‑based earnings affordability for all dwellings, which is used in England within the updated standard method for [assessing local housing need](https://www.gov.uk/guidance/housing-and-economic-development-needs-assessments).",
 				"confidenceIntervals": "F",
@@ -4817,7 +5395,8 @@
 				2021.25,
 				2022.25,
 				2023.25,
-				2024.25
+				2024.25,
+				2025.25
 			]
 		},
 		"first-time-buyer-mortgage-sales": {
@@ -6314,7 +6893,7 @@
 			"code": "persistent-absences-for-all-pupils",
 			"": null,
 			"minXDomainNumb": 2006,
-			"maxXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "persistent-absences-for-all-pupils",
 				"slug": "persistent-absences-for-all-pupils",
@@ -6328,12 +6907,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "21/03/2025",
+				"sourceDate": "26/03/2026",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the percentage of pupils in state-funded primary, state-funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2006/07 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of pupils in state-funded primary, state-funded secondary and special schools that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2006/07 to 2024/25.",
 				"standardised": "T",
-				"caveats": "Data is not available for academic year 2019/20.\n\nTotal includes state-funded primary, secondary and special schools. Data for special schools is available from 2016/17 to present.\n\nSessions recorded as not attending due to COVID circumstances are included as possible sessions in 2020/21 and 2021/22 only, but not as an absence within absence rates.",
+				"caveats": "Data is not available for academic year 2019/20.\n\nTotal includes state-funded primary, secondary and special schools.\n\nSessions recorded as not attending due to COVID circumstances are included as possible sessions in 2020/21 and 2021/22 only, but not as an absence within absence rates.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6404,7 +6983,8 @@
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"persistent-absences-for-pupils-eligible-for-free-school-meals": {
@@ -6413,8 +6993,8 @@
 			"subTopic": "school attendance",
 			"code": "persistent-absences-for-pupils-eligible-for-free-school-meals",
 			"": null,
-			"minXDomainNumb": 2017,
-			"maxXDomainNumb": 2023,
+			"minXDomainNumb": 2018,
+			"maxXDomainNumb": 2024,
 			"metadata": {
 				"code": "persistent-absences-for-pupils-eligible-for-free-school-meals",
 				"slug": "persistent-absences-for-pupils-eligible-for-free-school-meals",
@@ -6428,10 +7008,10 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "21/03/2025",
+				"sourceDate": "26/03/2026",
 				"sourceURL": "https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england",
 				"sourceOrg": "Department for Education",
-				"longDescription": "This indicator shows the percentage of pupils in state-funded primary, state-funded secondary and special schools who have been eligible for free school meals in the past 6 years that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2017/18 to 2023/24.",
+				"longDescription": "This indicator shows the percentage of pupils in state-funded primary, state-funded secondary and special schools who have been eligible for free school meals in the past 6 years that were persistently absent (those absent for 10% of schooling sessions) during the academic year, in England (state-funded schools), for academic years 2018/19 to 2024/25.",
 				"standardised": "T",
 				"caveats": "Data is not available for academic year 2019/20.\n\nSessions recorded as not attending due to COVID circumstances are included as possible sessions in 2020/21 and 2021/22 only, but not as an absence within absence rates.",
 				"confidenceIntervals": "F",
@@ -6488,12 +7068,12 @@
 				"year": 2023
 			},
 			"years": [
-				2017,
 				2018,
 				2020,
 				2021,
 				2022,
-				2023
+				2023,
+				2024
 			]
 		},
 		"persistent-absences-for-pupils-looked-after-by-local-authorities": {
@@ -6815,7 +7395,7 @@
 			"code": "apprenticeships-ni",
 			"": null,
 			"minXDomainNumb": 2019,
-			"maxXDomainNumb": 2022,
+			"maxXDomainNumb": 2023,
 			"metadata": {
 				"code": "apprenticeships-ni",
 				"slug": "apprenticeships-starts-ni",
@@ -6829,12 +7409,12 @@
 				"zeroBaseline": "F",
 				"canBeNegative": "F",
 				"experimentalStatistic": "F",
-				"sourceDate": "12/06/2025|31/01/2025|28/05/2025",
+				"sourceDate": "01/04/2026|15/01/2026|27/03/2026",
 				"sourceURL": "https://www.economy-ni.gov.uk/publications/apprenticeshipsni-ad-hoc-tables|https://www.economy-ni.gov.uk/publications/higher-level-apprenticeships-further-education-academic-year-202324|https://www.economy-ni.gov.uk/articles/higher-level-apprenticeships-northern-ireland-heis-statistical-fact-sheets",
 				"sourceOrg": "Department for the Economy (Northern Ireland) ApprenticeshipsNI|Further Education colleges and CAFRE|Higher Education Institutions",
-				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2019/20 to 2022/23",
+				"longDescription": "This indicator shows apprenticeships started by adults aged 16+ based on home address, rate per 100,000 population, in Northern Ireland, for full academic years 2019/20 to 2023/24",
 				"standardised": "T",
-				"caveats": "Starts refer to the number of participants who are in the first year of an apprenticeship programme.\n\nData relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\nApprenticeshipsNI includes levels 2 and 3.\n\nHigher Level Apprenticeships (HLA) at further education (FE) colleges in Northern Ireland and the College of Agriculture, Food and Rural Enterprise (CAFRE) includes levels 4, 5 and 6.\n\nHLA at Higher Education Institutions (HEIs) in Northern Ireland includes levels 6 and 7.\n\n[2023 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2023-mid-year-population-estimates-northern-ireland-and-estimates-population-aged-85) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
+				"caveats": "Starts refer to the number of participants who are in the first year of an apprenticeship programme.\n\nData relate to participants who have been on their course 28 days or more.\n\nGeography is based upon the home postcode of the learner.\n\nApprenticeshipsNI includes levels 2 and 3.\n\nHigher Level Apprenticeships (HLA) at further education (FE) colleges in Northern Ireland and the College of Agriculture, Food and Rural Enterprise (CAFRE) includes levels 4, 5 and 6.\n\nHLA at Higher Education Institutions (HEIs) in Northern Ireland includes levels 6 and 7.\n\n[2024 mid-year population estimates for Northern Ireland](https://www.nisra.gov.uk/publications/2024-mid-year-population-estimates-northern-ireland-and-estimates-population-aged-85) have been used to create a rate per 100,000 population.\n\nFigures produced by each UK nation may differ due to differing sources, time periods, age analysed or differences in methodologies so they are not directly comparable.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -6901,7 +7481,8 @@
 				2019,
 				2020,
 				2021,
-				2022
+				2022,
+				2023
 			]
 		},
 		"apprenticeships-scotland-Apprenticeship starts (Scotland)": {
@@ -9886,7 +10467,7 @@
 				"prefix": "",
 				"suffix": "",
 				"subText": "in £ millions, 2024 prices",
-				"decimalPlaces": 0,
+				"decimalPlaces": 1,
 				"howToMeasureChange": null,
 				"subtitle": "Estimated value of pollution removal by natural habitats (£ millions, 2024 prices)",
 				"zeroBaseline": "F",
@@ -9995,7 +10576,7 @@
 				"prefix": "",
 				"suffix": "",
 				"subText": "in £ millions, 2024 prices",
-				"decimalPlaces": 0,
+				"decimalPlaces": 1,
 				"howToMeasureChange": null,
 				"subtitle": "Estimated value of the net greenhouse gases removed from the atmosphere or emitted by natural habitats (£ million, 2024 prices)",
 				"zeroBaseline": "F",
@@ -10103,7 +10684,7 @@
 				"prefix": "",
 				"suffix": "",
 				"subText": "in £ millions, 2024 prices",
-				"decimalPlaces": 0,
+				"decimalPlaces": 1,
 				"howToMeasureChange": null,
 				"subtitle": "Estimated value of cooling provided by natural habitats in urban areas (£ millions, 2024 prices)",
 				"zeroBaseline": "F",
@@ -10114,7 +10695,7 @@
 				"sourceOrg": "Office for National Statistics",
 				"longDescription": "This indicator shows the estimated the value of green spaces (for example, woodlands, private gardens, parks, and grassland) and blue spaces (for example, rivers, canals, lakes and ponds) that can cool down built-up environments on hot days (official statistics in development), in Great Britain, for 1998 to 2024.",
 				"standardised": "F",
-				"caveats": "Hot days are defined as days with a maximum temperature of 28 degrees Celsius and above.\n\nThe UK and country level values for the number of hot days are the sum of the number of hot days per local authority.\n\nThere are two parts to the calculation of annual value. The value that nature provides in work productivity savings during hot days and savings on air conditioning. The air conditioning value is based on a model from 2014 and we assume a flat time series for this contribution. When there are no hot days for a local authority, this means that the only value comes from the air conditioning value.\n\nPlease refer to the [UK natural capital accounts quality and methods guide](https://www.ons.gov.uk/economy/environmentalaccounts/methodologies/uknaturalcapitalaccountsqualityandmethodsguide) for more information.",
+				"caveats": "Hot days are defined as days with a maximum temperature of 28 degrees Celsius and above.\n\nThe UK and country level values for the number of hot days are the sum of the number of hot days per local authority.\n\nThere are two parts to the calculation of annual value. The value that nature provides in work productivity savings during hot days and savings on air conditioning. The air conditioning value is based on a model from 2014 and we assume a flat time series for this contribution. When there are no hot days for a local authority, this means that the only value comes from the air conditioning value.\n\nThese values have been rounded to 1 decimal place. Some Local Authorities with 0 values may have an annual and asset value that are hidden by being rounded to 1 decimal place. Please view the Natural Capital Accounts [Detailed Summary Tables](https://www.ons.gov.uk/economy/environmentalaccounts/datasets/uknaturalcapitalaccountsdetailedsummarytables) for the full details.\n\nPlease refer to the [UK natural capital accounts quality and methods guide](https://www.ons.gov.uk/economy/environmentalaccounts/methodologies/uknaturalcapitalaccountsqualityandmethodsguide) for more information.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -12232,10 +12813,15 @@
 				{
 					"name": "business",
 					"indicatorCodes": [
-						"active-enterprises",
+						"business-demography-Active businesses",
 						"business-demography-Business births",
 						"business-demography-Business deaths",
-						"business-demography-High growth businesses"
+						"business-demography-High growth businesses",
+						"business-demography-One-year survival rate",
+						"business-demography-Two-year survival rate",
+						"business-demography-Three-year survival rate",
+						"business-demography-Four-year survival rate",
+						"business-demography-Five-year survival rate"
 					]
 				}
 			]

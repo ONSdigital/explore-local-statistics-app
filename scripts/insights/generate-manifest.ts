@@ -36,6 +36,7 @@ console.log(
 
 // Define datasets to exclude
 const toExclude = [
+	'population-by-age-and-sex'
 	// currently none!
 ];
 

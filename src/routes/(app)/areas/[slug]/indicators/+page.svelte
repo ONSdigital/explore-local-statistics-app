@@ -4,7 +4,7 @@
 	import { base, assets } from '$app/paths';
 
 	import type { PageData } from './$types';
-	import { goto, afterNavigate } from '$app/navigation';
+	import { goto, afterNavigate, invalidateAll } from '$app/navigation';
 
 	import {
 		Hero,
@@ -107,13 +107,13 @@
 			postcode = e.detail;
 		} else {
 			areaSearchOpen = false;
-			selectElement.clearInput();
+			selectElement?.clearInput?.();
 
-			// window.location.href = `${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`;
-			goto(
-				`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
-				options
-			);
+			window.location.href = `${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`;
+			// goto(
+			// 	`${base}/areas/${makeCanonicalSlug(e.detail.areacd, e.detail.areanm)}/indicators`,
+			// 	options
+			// );
 		}
 	}
 
@@ -584,7 +584,7 @@
 						See which areas are similar to {getName(data.place, 'the')} based on specific groups of indicators.
 						These clusters of areas are based on
 						<a
-							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheuk"
 							>an analysis carried out by the ONS</a
 						>.
 					</p>
@@ -639,6 +639,7 @@
 								{#each areaNeighbours[clusterGroup.id] as neighbour}
 									<li>
 										<a
+											data-sveltekit-reload
 											href="{base}/areas/{makeCanonicalSlug(
 												neighbour,
 												metadata.areasObject[neighbour].areanm
@@ -659,7 +660,7 @@
 						Below is the ranked list of areas statistically similar to {getName(data.place, 'the')},
 						based on a specific group of indicators. This ranking is derived from
 						<a
-							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheukmethodology"
+							href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/clusteringsimilarlocalauthoritiesandstatisticalnearestneighboursintheuk"
 							>an analysis carried out by the ONS</a
 						>.
 					</p>
