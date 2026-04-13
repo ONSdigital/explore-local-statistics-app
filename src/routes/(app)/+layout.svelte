@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
 	import { afterNavigate } from '$app/navigation';
 	import {
 		AnalyticsBanner,
@@ -53,7 +54,7 @@
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
 <Header bilingual={false} />
-{#if new Date() < new Date('2026-04-17')}
+{#if browser && new Date() < new Date('2026-04-17')}
 	<AnnouncementBanner
 		title="Planned maintenance"
 		description="Due to planned ONS website maintenance, you may experience difficulties accessing Explore Local Statistics on Thursday 16 April between 6pm and 8pm BST"
