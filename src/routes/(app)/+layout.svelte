@@ -3,6 +3,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import {
 		AnalyticsBanner,
+		AnnouncementBanner,
 		analyticsEvent,
 		Header,
 		Main,
@@ -51,7 +52,14 @@
 </svelte:head>
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-<Header bilingual={false}></Header>
+<Header bilingual={false} />
+{#if new Date() < new Date('2026-04-17')}
+	<AnnouncementBanner
+		title="Planned maintenance"
+		description="Due to planned ONS website maintenance, you may experience difficulties accessing Explore Local Statistics on Thursday 16 April between 6pm and 8pm BST"
+	/>
+{/if}
+
 {#if $page.data.component}
 	<svelte:component
 		this={$page.data.component}
