@@ -57,7 +57,7 @@
 {#if browser && new Date() < new Date('2026-04-17')}
 	<AnnouncementBanner
 		title="Planned maintenance"
-		description="Due to planned ONS website maintenance, you may experience difficulties accessing Explore Local Statistics on Thursday 16 April between 6pm and 8pm BST"
+		description="Due to planned website maintenance, you may experience difficulties accessing Explore Local Statistics pages on Thursday 16 April between 6pm and 9pm BST"
 	/>
 {/if}
 
