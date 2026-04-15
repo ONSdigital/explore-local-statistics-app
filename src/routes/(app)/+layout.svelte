@@ -54,10 +54,10 @@
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
 <Header bilingual={false} />
-{#if browser && new Date() < new Date('2026-04-17')}
+{#if browser && new Date() > new Date('2026-04-19') && new Date() < new Date('2026-04-28')}
 	<AnnouncementBanner
 		title="Planned maintenance"
-		description="Due to planned website maintenance, you may experience difficulties accessing Explore Local Statistics pages on Thursday 16 April between 6pm and 9pm BST"
+		description="Due to planned website maintenance, you may experience difficulties accessing Explore Local Statistics pages on Monday 27th April between 6pm and 8pm BST"
 	/>
 {/if}
 
