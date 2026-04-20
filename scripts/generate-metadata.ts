@@ -70,6 +70,7 @@ async function makeBaseMetadata(meta, data, cols) {
 	const geoCodes = Array.from(new Set(data.map((d) => d[geoCol.titles[0]])));
 
 	metadata.geography = await inferGeos(geoCodes);
+	metadata.geographyCodes = geoCodes;
 	metadata.geography.initialLevel = metadata.geography.levels.slice(-1)[0];
 
 	return metadata;

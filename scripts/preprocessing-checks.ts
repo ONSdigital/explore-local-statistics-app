@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { csvParse } from 'd3-dsv';
 import { DATA_DIR, skipDatasets } from './util/config';
 import { stripBom, autoTypeWithoutDates } from './util/io';
+import { itlsMap } from '../src/lib/config/geoLevels.ts';
 
 const CONFIG_DIR = `scripts/config`;
 const MANIFEST = `${CONFIG_DIR}/manifest_metadata.csv`;
@@ -44,6 +45,7 @@ const editsData = [];
 const editsMetadata = [];
 const missingIndicators = [];
 const newPeriods = [];
+const editsGeographies = [];
 
 for (const ds of newDatasets) {
 	// Dataset-level comparison
@@ -65,12 +67,31 @@ for (const ds of newDatasets) {
 		if (newTimestamps.jsonModified != existingDataset[0].extension.metadataModified)
 			editsMetadata.push(ds);
 
-		// Indicator-level comparison
+		// read in new metadata json
 		const metaPath = `${DATA_DIR}/${ds}/${ds}.csv-metadata.json`;
 		const newMeta = JSON.parse(readFileSync(metaPath, { encoding: 'utf-8' }));
 
-		const newIndicators = [...new Set(newMeta.metadata.indicators.map((d) => d.code))];
+		// compare geography codes:
+		const newGeographyCodes = newMeta.metadata.geographyCodes;
+		const existingGeographyCodes = Object.keys(existingDataset[0].dimension.areacd.category.index);
+		const geographiesMatch =
+			existingGeographyCodes.length === newGeographyCodes.length &&
+			existingGeographyCodes.every((d) => newGeographyCodes.includes(d));
 
+		if (!geographiesMatch) {
+			const newCodes = newGeographyCodes.filter((d) => !existingGeographyCodes.includes(d));
+
+			// don't count it as a change if all the "new" codes are just ITL ones that have been replaced in generate-data
+			const geographiesMatchFinal = newCodes.every((d) => Object.keys(itlsMap).includes(d));
+			console.log(geographiesMatchFinal);
+
+			if (!geographiesMatchFinal) {
+				editsGeographies.push(ds);
+			}
+		}
+
+		// Indicator-level comparison
+		const newIndicators = [...new Set(newMeta.metadata.indicators.map((d) => d.code))];
 		const existingIndicators = [...new Set(existingDataset.map((d) => d.extension.code))];
 
 		for (const ind of newIndicators) {
@@ -127,7 +148,8 @@ export function writeUpdateLog(
 	missingIndicators,
 	editsData,
 	editsMetadata,
-	newPeriods
+	newPeriods,
+	editsGeographies
 ) {
 	let log = '';
 	log += '----- Data update - inferred changes ------\n\n';
@@ -157,11 +179,23 @@ export function writeUpdateLog(
 		newPeriods,
 		'Validate.'
 	);
+	log += section(
+		'5. The goegraphy codes for the below indicators has changed:',
+		editsGeographies,
+		'Validate.'
+	);
 	log += '----------------------------------------\n';
 	log += 'Fin.\n';
 	log += '----------------------------------------\n';
 	writeFileSync('./scripts/data-update-changelog.txt', log, 'utf-8');
 }
 
-writeUpdateLog(missingDatasets, missingIndicatorsFiltered, editsData, editsMetadata, newPeriods);
+writeUpdateLog(
+	missingDatasets,
+	missingIndicatorsFiltered,
+	editsData,
+	editsMetadata,
+	newPeriods,
+	editsGeographies
+);
 console.log('Log file written to ./scripts/data-update-changelog.txt');
