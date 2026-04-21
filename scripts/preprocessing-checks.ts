@@ -156,12 +156,12 @@ export function writeUpdateLog(
 	log += section(
 		'1. The below datasets are not already present in the app:',
 		missingDatasets,
-		'Add relevant information for each indicator therein to manifest_metadata.csv.'
+		'Add relevant information for each indicator therein to scripts/config/manifest_metadata.csv.'
 	);
 	log += section(
 		'2. The below indicators are from existing datasets but are not present in the manifest:',
 		missingIndicators,
-		'Add relevant information on missing indicators to manifest_metadata.csv.'
+		'Add relevant information on missing indicators to scripts/config/manifest_metadata.csv.'
 	);
 	log += section(
 		'3. The data .csv for the below datasets has been edited:',
