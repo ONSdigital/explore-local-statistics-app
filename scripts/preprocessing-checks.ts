@@ -83,7 +83,6 @@ for (const ds of newDatasets) {
 
 			// don't count it as a change if all the "new" codes are just ITL ones that have been replaced in generate-data
 			const geographiesMatchFinal = newCodes.every((d) => Object.keys(itlsMap).includes(d));
-			console.log(geographiesMatchFinal);
 
 			if (!geographiesMatchFinal) {
 				editsGeographies.push(ds);
