@@ -273,8 +273,9 @@ function processFile(file) {
 		.filter(aq.escape((d) => d.dataset === dataset_name))
 		.filter(aq.escape((d) => d.include === true))
 		.array('code');
+
+	const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
 	if (indicatorsList.length !== includedIndicators.length) {
-		const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
 		console.log(
 			'Skipping ',
 			skippedIndicators.length,
@@ -292,7 +293,7 @@ function processFile(file) {
 		if (cube) indicatorDatasets.push(cube);
 	}
 
-	return { indicatorDatasets, uniqueAreas };
+	return { indicatorDatasets, uniqueAreas, skippedIndicators };
 }
 
 const manifest_metadata = loadCsvWithoutBom(MANIFEST);
@@ -320,10 +321,13 @@ const cube = {
 
 const indicators = [];
 const areas = [];
+const allSkippedIndicators = [];
+
 for (const file of file_paths) {
 	const { indicatorDatasets, uniqueAreas } = processFile(file);
 	indicators.push(...indicatorDatasets);
 	areas.push(uniqueAreas);
+	allSkippedIndicators.push(...skippedIndicators);
 }
 
 // Sort indicators to match order in manifest (ie. taxonomy order)
@@ -384,3 +388,10 @@ const summaryData = {
 const summaryOutput = './src/lib/data/json-stat-summary.json';
 writeFileSync(summaryOutput, JSON.stringify(summaryData));
 console.log(`Wrote ${summaryOutput}.`);
+
+if (allSkippedIndicators.length > 0) {
+	console.warn(
+		`⚠️  Warning: ${allSkippedIndicators.length} indicator(s) were not found in the manifest and skipped from the build.`,
+		allSkippedIndicators
+	);
+}
