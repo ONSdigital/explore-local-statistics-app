@@ -3,13 +3,13 @@ import { makeDatasetGeoFilter } from '$lib/api/metadata/helpers/datasetFilters';
 // Takes a JSON-Stat collection and returns an array of JSON-Stat datasets that meet the filter criteria
 export default function filterIndicators(datasets, params) {
 	const indicators = new Set([params.indicator].flat());
-	const topics = [params.topic].flat();
+	const topics = new Set([params.topic].flat());
 
 	// Filter datasets by indicator, and by topic OR sub-topic (additive)
 	const topicFilter =
 		params.topic === 'all'
 			? () => true
-			: (d) => topics.some((t) => [d.extension.topic, d.extension.subTopic].includes(t));
+			: (d) => topics.has(d.extension.topic) || topics.has(d.extension.subTopic);
 	const indicatorFilter =
 		params.indicator === 'all' ? () => true : (d) => indicators.has(d.extension.slug);
 	const combinedFilter = ![params.topic, params.indicator].includes('all')
