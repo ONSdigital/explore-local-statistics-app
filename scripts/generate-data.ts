@@ -23,7 +23,6 @@ export default async function main() {
 		throw new Error('A more recent node version is needed for recursive directory readdir.');
 	}
 }
-
 function getIndex(row, id, size, dimension, reverseLookup) {
 	const coords = [];
 	for (const key of id) {
@@ -83,18 +82,11 @@ function processColumns(k, metaLookup, columnValues, id, size, role, dimension) 
 }
 function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 	console.log('Processing', indicator, '........');
-	console.log({ dataset_name });
 	// filter file-level metadata to be indicator level
 	const meta_indicator = meta_data.metadata.indicators.find((d) => d.code === indicator);
 	const manifest_metadata_indicator = manifest_metadata
 		.filter(aq.escape((d) => d.dataset === dataset_name && d.code === indicator))
 		.objects();
-	if (!manifest_metadata_indicator[0]) {
-		console.log(
-			`Skipping indicator ${indicator} in dataset ${dataset_name}. No metadata in manifest.`
-		);
-		return null;
-	}
 
 	// deconstruct meta_indicator (and remove slug as using slug from csv):
 	const { label, caveats, longDescription, slug, ...restOfMetadata } = meta_indicator;
@@ -211,6 +203,37 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 
 	return { ...dataset, id, size, role, dimension, value, status };
 }
+function validateIndicators(dataFolders, manifestMetadata) {
+	const indicatorsMissingFromManifest = [];
+	for (const dataset of dataFolders) {
+		const metadataPath = `${RAW_DATA_DIR}/${dataset}/${dataset}.csv-metadata.json`;
+		if (!fs.existsSync(metadataPath)) continue;
+
+		const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+		const incomingIndicators = metadata.metadata?.indicators || [];
+		const manifestIndicators = new Set(
+			manifestMetadata.filter(aq.escape((d) => d.dataset === dataset)).array('code')
+		);
+
+		for (const indicator of incomingIndicators) {
+			if (!manifestIndicators.has(indicator.code)) {
+				indicatorsMissingFromManifest.push({
+					dataset,
+					code: indicator.code
+				});
+			}
+		}
+	}
+
+	if (indicatorsMissingFromManifest.length > 0) {
+		const details = indicatorsMissingFromManifest
+			.map((ind) => `Missing indicator: ${ind.code} (from dataset: ${ind.dataset})`)
+			.join('\n');
+		throw new Error(
+			`Found ${indicatorsMissingFromManifest.length} indicator(s) in raw data missing from manifest:\n${details}`
+		);
+	}
+}
 function processFile(file) {
 	const data_file = file.replace(`${RAW_DATA_DIR}`, '');
 	if (!fs.existsSync(`${RAW_DATA_DIR}${data_file}`))
@@ -261,8 +284,9 @@ function processFile(file) {
 		data: indicator_data.filter(aq.escape((d) => d.indicator === ind))
 	}));
 	const indicatorsList = indicatorTables.map((ind) => ind.key);
+	console.log('\nDataset:', dataset_name);
 	console.log(
-		'There are ',
+		'There are',
 		indicatorsList.length,
 		'indicator(s) present in data file: ',
 		indicatorsList
@@ -273,14 +297,9 @@ function processFile(file) {
 		.filter(aq.escape((d) => d.dataset === dataset_name))
 		.filter(aq.escape((d) => d.include === true))
 		.array('code');
+
+	const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
 	if (indicatorsList.length !== includedIndicators.length) {
-		const skippedIndicators = indicatorsList.filter((key) => !includedIndicators.includes(key));
-		console.log(
-			'Skipping ',
-			skippedIndicators.length,
-			'indicator(s) not present in manifest: ',
-			skippedIndicators
-		);
 		indicatorTables = indicatorTables.filter((table) => includedIndicators.includes(table.key));
 	}
 
@@ -292,16 +311,20 @@ function processFile(file) {
 		if (cube) indicatorDatasets.push(cube);
 	}
 
-	return { indicatorDatasets, uniqueAreas };
+	return { indicatorDatasets, uniqueAreas, skippedIndicators };
 }
 
 const manifest_metadata = loadCsvWithoutBom(MANIFEST);
 const indicator_slugs = manifest_metadata.filter((f) => f.include).array('slug');
 
-// Throw error if new indicator files have been downloaded and need to be added to the manifest
-// await abortIfNewFilesExist(manifest_metadata, CSV_PREPROCESS_DIR)
+const dataFolders = fs
+	.readdirSync(RAW_DATA_DIR)
+	.filter((d) => fs.statSync(`${RAW_DATA_DIR}/${d}`).isDirectory());
 
-// remove indicators based on boolean in manifest
+// Validate that all indicators in raw data are in the manifest
+validateIndicators(dataFolders, manifest_metadata);
+
+// filter out indicators based on boolean in manifest
 // extract distinct filepaths
 var file_paths = [...new Set(manifest_metadata.filter((f) => f.include).array('dataset'))].map(
 	(code) => `${RAW_DATA_DIR}/${code}/${code}.csv`
@@ -320,10 +343,13 @@ const cube = {
 
 const indicators = [];
 const areas = [];
+const allSkippedIndicators = [];
+
 for (const file of file_paths) {
-	const { indicatorDatasets, uniqueAreas } = processFile(file);
+	const { indicatorDatasets, uniqueAreas, skippedIndicators } = processFile(file);
 	indicators.push(...indicatorDatasets);
 	areas.push(uniqueAreas);
+	allSkippedIndicators.push(...skippedIndicators);
 }
 
 // Sort indicators to match order in manifest (ie. taxonomy order)
@@ -337,7 +363,6 @@ console.log(`Wrote ${output}.`);
 
 const metadataOutput = './src/lib/data/json-stat-metadata.json';
 cube.link.item = cube.link.item.map((item) => {
-	console.log(item.label);
 	item.value = [];
 	delete item.status;
 	return item;
@@ -384,3 +409,10 @@ const summaryData = {
 const summaryOutput = './src/lib/data/json-stat-summary.json';
 writeFileSync(summaryOutput, JSON.stringify(summaryData));
 console.log(`Wrote ${summaryOutput}.`);
+
+if (allSkippedIndicators.length > 0) {
+	console.warn(
+		`⚠️  Warning: ${allSkippedIndicators.length} indicator(s) were excluded from the build (include == false in manifest_metadata.csv)`,
+		allSkippedIndicators
+	);
+}
