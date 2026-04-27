@@ -6,6 +6,8 @@ const topoUrl =
 	'https://raw.githubusercontent.com/ONSdigital/uk-topojson/refs/heads/main/output/topo.json';
 const metaUrl =
 	'https://raw.githubusercontent.com/ONSdigital/geo-scripts/refs/heads/main/input/lookups/lookup.csv';
+const changesUrl =
+	'https://raw.githubusercontent.com/ONSvisual/uk-topojson/refs/heads/main/input/changes.csv';
 const outputDir = './src/lib';
 
 const geoCodes = new Set(
@@ -96,3 +98,14 @@ for (let i = 0; i < listRaw.length; i++) {
 const listPath = `${outputDir}/data/areas-list.json`;
 writeFileSync(listPath, JSON.stringify(list));
 console.log(`Wrote ${listPath}`);
+
+// Make new geography start dates lookup
+const changesRows = csvParse(await (await fetch(changesUrl)).text(), autoType);
+
+const startDates = {};
+for (const row of changesRows) {
+	if (row.newcd) startDates[row.newcd] = row.start;
+}
+const startPath = `${outputDir}/data/geo-start-years.json`;
+writeFileSync(startPath, JSON.stringify(startDates));
+console.log(`Wrote ${startPath}`);

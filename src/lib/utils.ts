@@ -7,6 +7,8 @@ import { ckmeans } from 'simple-statistics';
 import { analyticsEvent } from '@onsvisual/svelte-components';
 import { oldGeoCodesLookup } from './config/geoLookups';
 import { geoLevelsAllLookup } from '$lib/config/geoLevels';
+import geoLatestYear from '$lib/data/geo-latest-year.json';
+import geoStartYears from '$lib/data/geo-start-years.json';
 
 export function parseData(data: jsonDataCols) {
 	const cols = Object.keys(data);
@@ -186,6 +188,14 @@ export function valuesToBreaks(values: number[], dp = 0, count = 5) {
 
 export function getAreaType(area: areaObject) {
 	return geoLevelsAllLookup[area.areacd?.slice?.(0, 3)]?.label || null;
+}
+
+export function getGeoYear(codes) {
+	let latestYear = 0;
+	for (const cd of codes) {
+		if (geoStartYears[cd] && geoStartYears[cd] > latestYear) latestYear = geoStartYears[cd];
+	}
+	return latestYear || geoLatestYear;
 }
 
 export function downloadEvent(

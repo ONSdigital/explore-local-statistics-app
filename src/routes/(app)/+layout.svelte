@@ -55,7 +55,10 @@
 </svelte:head>
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
-<Header />
+<Header
+	headerBorder={!page.data.breadcrumbBackground}
+	menuBorder={page.data.breadcrumbBackground === 'var(--ons-color-branded-tint)'}
+/>
 {#if page.data.breadcrumbLinks}
 	<Breadcrumb
 		links={page.data.breadcrumbLinks}

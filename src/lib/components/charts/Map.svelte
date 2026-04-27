@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import bbox from '@turf/bbox';
-	import { parseData, getMapFeatures, valuesToBreaks } from '$lib/utils';
+	import { parseData, getMapFeatures, getGeoYear, valuesToBreaks } from '$lib/utils';
 	import { getPaletteColor } from './chartHelpers';
 	import { ukBounds, ONScolours } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
@@ -34,6 +34,7 @@
 	let map = $state();
 	let features = $state.raw();
 	let _data = $derived(parseData(data));
+	let geoYear = $derived(getGeoYear(data.areacd));
 	let breaks = $derived(
 		valuesToBreaks(
 			_data.map((d) => d.value),
@@ -106,7 +107,7 @@
 	};
 
 	let { renderedFeatures, bounds } = $derived(
-		makeRenderedFeatures(features, _data, geoLevel, metadata.geography.year)
+		makeRenderedFeatures(features, _data, geoLevel, geoYear)
 	);
 	let selectedFeatures = $derived(features ? makeSelectedFeatures(features, _data, selected) : []);
 
