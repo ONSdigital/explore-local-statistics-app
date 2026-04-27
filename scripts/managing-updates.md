@@ -44,15 +44,14 @@ If new indicators have been added, the changelog will highlight these in outputs
 
 In the manifest file, add a new line for each new indicator. The order of the manifest dictates the taxonomy, so add the new line according to where the indicator should appear on the `/indicators` page.
 
-| Column               | Definition                                                                                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`               | This forms the url for the indicator page. Create a unique, [sensible slug](#examples-for-making-good-slugs), consistent with those of other indicators |
-| `topic`              | Taxonomy topic                                                                                                                                          |
-| `subTopic`           | Taxonomy subtopic                                                                                                                                       |
-| `howToMeasureChange` | This isn't actually being used at the moment...                                                                                                         |
-| `dataset`            | Should match csvw-metadata.json > metadata > indicators > dataset                                                                                       |
-| `code`               | Should match csvw-metadata.json > metadata > indicators > code                                                                                          |
-| `include`            | Boolean (`true`/`false`) - whether the indicator should be included in the build.                                                                       |
+| Column     | Definition                                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`     | This forms the url for the indicator page. Create a unique, [sensible slug](#examples-for-making-good-slugs), consistent with those of other indicators |
+| `topic`    | Taxonomy topic                                                                                                                                          |
+| `subTopic` | Taxonomy subtopic                                                                                                                                       |
+| `dataset`  | Should match csvw-metadata.json > metadata > indicators > dataset                                                                                       |
+| `code`     | Should match csvw-metadata.json > metadata > indicators > code                                                                                          |
+| `include`  | Boolean (`true`/`false`) - whether the indicator should be included in the build.                                                                       |
 
 ## Step 5 - Run the build
 
