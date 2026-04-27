@@ -14,6 +14,7 @@
 	let xPercent = $state([0, 100]);
 	let dragging = $state([false, false]);
 	let focused = $state([false, false]);
+	let disabled = $derived(options.length < 2);
 
 	let scale = $derived((i) => (i * 100) / (options.length - 1));
 
@@ -43,26 +44,30 @@
 		};
 
 		el.addEventListener('dragstart', (e) => {
-			dragging[i] = true;
-			const rect = parent.getBoundingClientRect();
-			xDomain = [Math.round(rect.left), Math.round(rect.right)];
-			window.addEventListener('dragover', dragover);
+			if (!disabled) {
+				dragging[i] = true;
+				const rect = parent.getBoundingClientRect();
+				xDomain = [Math.round(rect.left), Math.round(rect.right)];
+				window.addEventListener('dragover', dragover);
+			}
 		});
 		el.addEventListener('dragend', () => {
-			window.removeEventListener('dragover', dragover);
-			dragging[i] = false;
-			onUpdate(selectedRange);
+			if (!disabled) {
+				window.removeEventListener('dragover', dragover);
+				dragging[i] = false;
+				onUpdate(selectedRange);
+			}
 		});
 	}
 </script>
 
 <fieldset>
-	{#if label}<legend
+	{#if label && !disabled}<legend
 			>{label} <strong>{formatTick(selectedRange[0])}</strong> to
 			<strong>{formatTick(selectedRange[1])}</strong></legend
 		>{/if}
 	<div class="range-container">
-		<div class="range-ticks">
+		<div class="range-ticks" style:color={disabled ? 'var(--ons-color-text-disabled)' : null}>
 			{#each options as tick, i}
 				<div
 					class="range-tick"
@@ -86,6 +91,9 @@
 				<div
 					class="range-marker"
 					class:range-marker-active={dragging[i] || focused[i]}
+					style:background-color={!disabled
+						? 'var(--ons-color-branded)'
+						: 'var(--ons-color-text-disabled)'}
 					style:left="{dragging[i] ? xPercent[i] : scale(selectedIndices[i])}%"
 				></div>
 				<div
@@ -146,7 +154,7 @@
 		top: 0;
 		bottom: 0;
 		height: 100%;
-		background-color: var(--ons-color-branded, #206095);
+		background-color: var(--ons-color-branded);
 		opacity: 0.6;
 	}
 	.range-marker {
@@ -155,12 +163,11 @@
 		height: 20px;
 		width: 20px;
 		border-radius: 50%;
-		background-color: var(--ons-color-branded, #206095);
 		transform: translate(-50%, -50%);
 		pointer-events: none;
 	}
 	.range-marker-active {
-		outline: 3px solid var(--ons-color-focus, #fbc900);
+		outline: 3px solid var(--ons-color-focus);
 	}
 	.range-marker-overlay {
 		background-color: transparent;

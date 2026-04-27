@@ -41,6 +41,11 @@
 				range.map((p) => formatTick(p)).join(' to ')
 			)}
 	/>
+	{#if data.periods.length < 2}
+		<p class="ons-chart__caption" style:margin-top="-4px">
+			Note: This indicator only includes data for <strong>{formatTick(data.periods[0])}</strong>.
+		</p>
+	{/if}
 
 	{#if mode === 'area'}
 		<div class="mobile-only">
@@ -69,7 +74,9 @@
 			)}
 	/>
 	{#if !hasIntervals}
-		<p class="ons-chart__caption">Note: Confidence intervals not available for this indicator</p>
+		<p class="ons-chart__caption">
+			Note: Confidence intervals are not available for this indicator.
+		</p>
 	{/if}
 </Modal>
 

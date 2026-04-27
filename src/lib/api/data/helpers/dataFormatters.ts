@@ -118,9 +118,9 @@ function makeColFill(
 	const hasVals = includeStatus
 		? (item: dataItem, cube: jsonStatDataset) => {
 				const index = getIndex(item);
-				return cube.value[index] != null || cube.status[index] != null;
+				return cube.value[index] || cube.status[index];
 			}
-		: (item: dataItem, cube: jsonStatDataset) => cube.value[getIndex(item)] != null;
+		: (item: dataItem, cube: jsonStatDataset) => cube.value[getIndex(item)];
 
 	const pushMeasures = pivotMeasures
 		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) => {

@@ -26,7 +26,7 @@
 	let { data } = $props();
 </script>
 
-<Hero title="Explore local statistics" background="#e9eff4" height={230}>
+<Hero title="Explore local statistics" background="var(--ons-color-branded-tint)" height={230}>
 	<UKMap />
 	<p class="ons-hero__text">
 		Find, compare and visualise statistics about places in the United Kingdom.

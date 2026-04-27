@@ -1,13 +1,18 @@
 <script lang="ts">
 	const points = [
 		[
+			[204, -46],
+			[194, -36],
+			[204, -36],
+			[184, -26],
+			[194, -26],
+			[204, -26],
+			[194, -16],
 			[164, 34],
 			[164, 34],
 			[154, 34],
 			[144, 34],
 			[134, 34],
-			[14, 34],
-			[24, 24],
 			[164, 14],
 			[174, 14],
 			[164, 14],
@@ -22,7 +27,6 @@
 			[134, 44],
 			[124, 44],
 			[94, 44],
-			[14, 44],
 			[144, 54],
 			[134, 54],
 			[124, 54],
@@ -632,9 +636,8 @@
 
 <svg
 	class="svg-map-image"
-	width="316"
-	height="248"
-	viewBox="0 0 298 378"
+	height="250"
+	viewBox="0 -40 298 408"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	alt=""
@@ -644,7 +647,7 @@
 			<circle cx={pt[0]} cy={pt[1]} r="4"></circle>
 		{/each}
 	</g>
-	<g fill-opacity="0.2" fill="#27A0CC">
+	<g fill-opacity="0.3" fill="#27A0CC">
 		{#each points[1] as pt}
 			<circle cx={pt[0]} cy={pt[1]} r="4"></circle>
 		{/each}
@@ -656,6 +659,7 @@
 		position: absolute;
 		top: -36px;
 		right: 0;
+		overflow: visible;
 	}
 	@media (max-width: 800px) {
 		.svg-map-image {

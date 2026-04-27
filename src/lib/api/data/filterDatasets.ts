@@ -99,7 +99,7 @@ export default function filterDatasets(datasets: jsonStatDataset[], params: pars
 	]) {
 		if (
 			summaryData.geoDims.includes(filter.key) &&
-			(filter.values !== 'all' || params.geoCluster !== 'all')
+			(filter.values !== 'all' || params.geoCluster !== 'all' || params.geoExtent !== 'all')
 		)
 			// Create geo filter
 			filters[filter.key] = makeGeoFilter(filter.values, params.geoExtent, params.geoCluster);

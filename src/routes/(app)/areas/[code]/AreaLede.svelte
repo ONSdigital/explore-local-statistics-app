@@ -26,7 +26,7 @@
 				The official name of this area is <strong>{areaProps.areanm}</strong>.
 			{/if}
 		</p>
-		{#if areaProps.replaces?.[0]?.areacd && areaProps.start > new Date().getFullYear() - 2}
+		{#if areaProps.replaces?.[0]?.areacd}
 			<Notice>
 				In {areaProps.start}, this area replaced
 				{#each areaProps.replaces as rep, i}

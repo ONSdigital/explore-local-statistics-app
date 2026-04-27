@@ -8,6 +8,6 @@ export const load: PageLoad = async () => {
 			'Find, compare and visualise statistics about communities in the United Kingdom. Includes data on population, economy and health.',
 		pageType: 'home page',
 		breadcrumbLinks: [{ label: 'Home', href: '/' }],
-		breadcrumbBackground: '#e9eff4'
+		breadcrumbBackground: 'var(--ons-color-branded-tint)'
 	};
 };
