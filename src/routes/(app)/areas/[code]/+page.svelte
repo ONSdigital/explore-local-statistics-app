@@ -68,14 +68,14 @@
 			<label for="search" style:display="block" style:margin-bottom="8px"
 				>Search for a place name or postcode</label
 			>
-			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'areaSearchSelect')} />
+			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'Area search select')} />
 		</div>
 	</div>
 	<GridCell colspan={2}>
 		<AreaNavMap
 			area={data.area}
 			children={selectedChildGroup}
-			onSelect={(area) => handleSelect(area, 'mapSelect')}
+			onSelect={(area) => handleSelect(area, 'Area map select')}
 			mapDescription={'Map of ' + getName(areaProps, 'the')}
 		/>
 	</GridCell>
