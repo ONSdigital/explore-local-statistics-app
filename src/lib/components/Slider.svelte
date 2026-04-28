@@ -30,26 +30,34 @@
     left: ${range ? Math.min(pos[0], pos[1]) * 100 : 0}%;
     right: ${100 - Math.max(pos[0], range ? pos[1] : pos[0]) * 100}%;
   `;
+
 	function setValue(pos) {
-		const offset = min % step;
 		const width = max - min;
-		let newvalue = pos
-			.map((v) => min + v * width)
-			.map((v) => Math.round((v - offset) / step) * step + offset);
+		let newvalue = pos.map((v) => min + v * width);
 
-		// If timePeriodsArray is provided, check if all selected values exist
 		if (timePeriodsArray) {
-			const valid = newvalue.every((val) => timePeriodsArray.some((el) => el.xDomainNumb === val));
+			// Snap to nearest valid period instead of rounding to step
+			newvalue = newvalue.map(
+				(v) =>
+					timePeriodsArray.reduce((closest, el) =>
+						Math.abs(el.xDomainNumb - v) < Math.abs(closest.xDomainNumb - v) ? el : closest
+					).xDomainNumb
+			);
 
+			const valid = newvalue.every((val) => timePeriodsArray.some((el) => el.xDomainNumb === val));
 			if (!valid) {
 				console.warn('Invalid time period(s) selected, dispatch skipped:', newvalue);
 				return;
 			}
+		} else {
+			const offset = min % step;
+			newvalue = newvalue.map((v) => Math.round((v - offset) / step) * step + offset);
 		}
 
 		value = Array.isArray(value) ? newvalue : newvalue[0];
 		dispatch('input', value);
 	}
+
 	function setPos(value) {
 		pos = Array.isArray(value)
 			? value.map((v) => Math.min(Math.max(v, min), max)).map((v) => (v - min) / (max - min))
