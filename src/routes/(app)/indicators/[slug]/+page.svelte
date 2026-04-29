@@ -707,7 +707,7 @@
 				<span style="font-weight:bold"
 					>{data.metadata.indicatorsCodeLabelArray.length} local indicators</span
 				>
-				on the <a href="{base}/">Explore local statistics</a> service. See the
+				on the <a href="{base}/">Explore Local Statistics</a> service. See the
 				<a href="{base}/indicators">full list of local indicators</a>.
 			</p>
 		</NavSection>
