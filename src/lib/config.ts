@@ -107,3 +107,25 @@ export const extremeAreas = {
 };
 
 export const mobileBreakpoint = 510;
+
+// export const mapPaletteDivering = [
+// 	'#CE321FCC',
+// 	'#E16A4Acc',
+// 	'#F09977CC',
+// 	'#FAC6A6CC',
+// 	'#FEF4D7CC',
+// 	'#CAD3C5CC',
+// 	'#96B3B3CC',
+// 	'#5F93A2CC',
+// 	'#007590CC'
+// ];
+
+export const mapPaletteDivering = ['#CE321Fcc', '#F09977cc', '#FEF4D7cc', '#96B3B3cc', '#007590cc'];
+
+export const mapPaletteSequential = [
+	'#eaecb1cc',
+	'#a9d891cc',
+	'#00a7bacc',
+	'#004ea6cc',
+	'#000d54cc'
+];

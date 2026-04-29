@@ -4,7 +4,7 @@
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, getGeoYear, valuesToBreaks } from '$lib/utils';
 	import { getPaletteColor } from './chartHelpers';
-	import { ukBounds, ONScolours } from '$lib/config';
+	import { ukBounds, ONScolours, mapPaletteSequential, mapPaletteDivering } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -18,13 +18,6 @@
 		formatValue = (d) => d,
 		formatPeriod = (d) => d,
 		geoLevel = null,
-		colors = [
-			'rgb(234, 236, 177)',
-			'rgb(169, 216, 145)',
-			'rgb(0, 167, 186)',
-			'rgb(0, 78, 166)',
-			'rgb(0, 13, 84)'
-		],
 		extendHeight = null
 	} = $props();
 
@@ -33,6 +26,7 @@
 
 	let map = $state();
 	let features = $state.raw();
+	let valuesDiverge = $derived(_data.some((d) => d.value < 0) && _data.some((d) => d.value > 0));
 	let _data = $derived(parseData(data));
 	let geoYear = $derived(getGeoYear(data.areacd));
 	let breaks = $derived(
@@ -42,6 +36,50 @@
 		)
 	);
 	let height = $derived(500 + (extendHeight ?? 0));
+
+	const NEG_RAMP = ['#CE321FCC', '#F09977CC'];
+	const NEUTRAL = '#FEF4D7cc';
+	const POS_RAMP = ['#96B3B3cc', '#007590cc'];
+
+	function pickRamp(ramp: string[], n: number): string[] {
+		if (n === 1) return [ramp[Math.floor(ramp.length / 2)]];
+		const step = (ramp.length - 1) / (n - 1);
+		return Array.from({ length: n }, (_, i) => ramp[Math.round(i * step)]);
+	}
+
+	function buildDivergingColors(breaks: number[]): string[] {
+		const bins = breaks.length - 1;
+
+		const zeroBreakIndex = breaks.indexOf(0);
+
+		if (zeroBreakIndex !== -1) {
+			const negBins = zeroBreakIndex;
+			const posBins = bins - zeroBreakIndex;
+
+			const negColors = pickRamp(NEG_RAMP, negBins);
+			const posColors = pickRamp(POS_RAMP, posBins);
+
+			return [...negColors, ...posColors];
+		}
+
+		let zeroBinIndex = -1;
+		for (let i = 0; i < bins; i++) {
+			if (breaks[i] < 0 && breaks[i + 1] > 0) {
+				zeroBinIndex = i;
+				break;
+			}
+		}
+
+		const negBins = zeroBinIndex;
+		const posBins = bins - zeroBinIndex - 1;
+
+		const negColors = pickRamp(NEG_RAMP, negBins);
+		const posColors = pickRamp(POS_RAMP, posBins);
+
+		return [...negColors, NEUTRAL, ...posColors];
+	}
+
+	let colors = $derived(valuesDiverge ? buildDivergingColors(breaks) : mapPaletteSequential);
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
@@ -117,6 +155,8 @@
 	$effect(() => fitBounds(bounds));
 
 	onMount(async () => (features = await getMapFeatures()));
+
+	$inspect(breaks);
 </script>
 
 <p class="ons-u-vh">Map of {metadata.label}. The data is available to download below.</p>
@@ -223,6 +263,7 @@
 		prefix={metadata.prefix}
 		suffix={metadata.suffix}
 		format={formatValue}
+		{colors}
 	/>
 </div>
 
