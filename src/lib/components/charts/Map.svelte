@@ -4,7 +4,14 @@
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, getGeoYear, valuesToBreaks } from '$lib/utils';
 	import { getPaletteColor } from './chartHelpers';
-	import { ukBounds, ONScolours, mapPaletteSequential, mapPaletteDivering } from '$lib/config';
+	import {
+		ukBounds,
+		ONScolours,
+		mapPaletteSequential,
+		negative_cols,
+		positive_cols,
+		neutral_col
+	} from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -37,27 +44,22 @@
 	);
 	let height = $derived(500 + (extendHeight ?? 0));
 
-	const NEG_RAMP = ['#CE321FCC', '#F09977CC'];
-	const NEUTRAL = '#FEF4D7cc';
-	const POS_RAMP = ['#96B3B3cc', '#007590cc'];
-
-	function pickRamp(ramp: string[], n: number): string[] {
-		if (n === 1) return [ramp[Math.floor(ramp.length / 2)]];
+	function pickColours(ramp, n) {
 		const step = (ramp.length - 1) / (n - 1);
 		return Array.from({ length: n }, (_, i) => ramp[Math.round(i * step)]);
 	}
 
-	function buildDivergingColors(breaks: number[]): string[] {
+	function buildDivergingColors(breaks) {
 		const bins = breaks.length - 1;
 
 		const zeroBreakIndex = breaks.indexOf(0);
 
 		if (zeroBreakIndex !== -1) {
-			const negBins = zeroBreakIndex;
-			const posBins = bins - zeroBreakIndex;
+			const nNegBins = zeroBreakIndex;
+			const nPosBins = bins - zeroBreakIndex;
 
-			const negColors = pickRamp(NEG_RAMP, negBins);
-			const posColors = pickRamp(POS_RAMP, posBins);
+			const negColors = pickColours(negative_cols, nNegBins);
+			const posColors = pickColours(positive_cols, nPosBins);
 
 			return [...negColors, ...posColors];
 		}
@@ -70,13 +72,13 @@
 			}
 		}
 
-		const negBins = zeroBinIndex;
-		const posBins = bins - zeroBinIndex - 1;
+		const nNegBins = zeroBinIndex;
+		const nPosBins = bins - zeroBinIndex - 1;
 
-		const negColors = pickRamp(NEG_RAMP, negBins);
-		const posColors = pickRamp(POS_RAMP, posBins);
+		const negColors = pickColours(negative_cols, nNegBins);
+		const posColors = pickColours(positive_cols, nPosBins);
 
-		return [...negColors, NEUTRAL, ...posColors];
+		return [...negColors, neutral_col, ...posColors];
 	}
 
 	let colors = $derived(valuesDiverge ? buildDivergingColors(breaks) : mapPaletteSequential);
