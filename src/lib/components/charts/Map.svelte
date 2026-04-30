@@ -33,7 +33,7 @@
 
 	let map = $state();
 	let features = $state.raw();
-	let valuesDiverge = $derived(_data.some((d) => d.value < 0) && _data.some((d) => d.value > 0));
+	let valuesDiverge = $derived(metadata.canBeNegative);
 	let _data = $derived(parseData(data));
 	let geoYear = $derived(getGeoYear(data.areacd));
 	let breaks = $derived(
@@ -45,6 +45,8 @@
 	let height = $derived(500 + (extendHeight ?? 0));
 
 	function pickColours(ramp, n) {
+		if (n === 1) return [ramp[Math.floor(ramp.length / 2)]];
+
 		const step = (ramp.length - 1) / (n - 1);
 		return Array.from({ length: n }, (_, i) => ramp[Math.round(i * step)]);
 	}
