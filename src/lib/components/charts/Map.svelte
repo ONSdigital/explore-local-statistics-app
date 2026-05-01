@@ -8,9 +8,8 @@
 		ukBounds,
 		ONScolours,
 		mapPaletteSequential,
-		negative_cols,
-		positive_cols,
-		neutral_col
+		mapPaletteDivergingNoNeutral,
+		mapPaletteDivergingNeutral
 	} from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
@@ -44,27 +43,10 @@
 	);
 	let height = $derived(500 + (extendHeight ?? 0));
 
-	function pickColours(ramp, n) {
-		if (n === 1) return [ramp[Math.floor(ramp.length / 2)]];
-
-		const step = (ramp.length - 1) / (n - 1);
-		return Array.from({ length: n }, (_, i) => ramp[Math.round(i * step)]);
-	}
-
 	function buildDivergingColors(breaks) {
 		const bins = breaks.length - 1;
 
-		const zeroBreakIndex = breaks.indexOf(0);
-
-		if (zeroBreakIndex !== -1) {
-			const nNegBins = zeroBreakIndex;
-			const nPosBins = bins - zeroBreakIndex;
-
-			const negColors = pickColours(negative_cols, nNegBins);
-			const posColors = pickColours(positive_cols, nPosBins);
-
-			return [...negColors, ...posColors];
-		}
+		const zeroBreakIndex = breaks.includes(0);
 
 		let zeroBinIndex = -1;
 		for (let i = 0; i < bins; i++) {
@@ -74,13 +56,14 @@
 			}
 		}
 
-		const nNegBins = zeroBinIndex;
-		const nPosBins = bins - zeroBinIndex - 1;
+		let colors = zeroBreakIndex ? mapPaletteDivergingNoNeutral : mapPaletteDivergingNeutral;
+		let neutralIndex = Math.floor(colors.length / 2);
+		let c2 = colors.slice(
+			neutralIndex - zeroBinIndex,
+			mapPaletteDivergingNeutral.length - zeroBinIndex
+		);
 
-		const negColors = pickColours(negative_cols, nNegBins);
-		const posColors = pickColours(positive_cols, nPosBins);
-
-		return [...negColors, neutral_col, ...posColors];
+		return [...c2];
 	}
 
 	let colors = $derived(valuesDiverge ? buildDivergingColors(breaks) : mapPaletteSequential);

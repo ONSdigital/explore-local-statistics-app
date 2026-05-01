@@ -108,9 +108,31 @@ export const extremeAreas = {
 
 export const mobileBreakpoint = 510;
 
-export const negative_cols = ['#CE321FCC', '#E16A4Acc', '#F09977CC', '#FAC6A6'];
-export const neutral_col = '#FEF4D7cc';
-export const positive_cols = ['#CAD3C5cc', '#96B3B3cc', '#5F93A2cc', '#007590cc'];
+export const mapPaletteDivergingNeutral = [
+	'#ce321f',
+	'#de6041',
+	'#eb8665',
+	'#f5ab89',
+	'#fbd0af',
+	'#fef4d7',
+	'#d5d9c9',
+	'#abbfbb',
+	'#81a6ac',
+	'#538d9e',
+	'#007590'
+];
+export const mapPaletteDivergingNoNeutral = [
+	'#ce321f',
+	'#de6041',
+	'#eb8665',
+	'#f5ab89',
+	'#fbd0af',
+	'#d5d9c9',
+	'#abbfbb',
+	'#81a6ac',
+	'#538d9e',
+	'#007590'
+];
 
 export const mapPaletteSequential = [
 	'#eaecb1cc',

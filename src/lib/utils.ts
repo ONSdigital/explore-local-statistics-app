@@ -186,34 +186,6 @@ export function valuesToBreaks(values: number[], dp = 0, count = 5) {
 	); // de-duplicate and round breaks
 }
 
-// export function divergingBreaks(values: number[], dp = 0, count = 6) {
-// 	if (!values.length) return [];
-
-// 	const clusters = ckmeans(values, values.length < count ? values.length : count);
-
-// 	let breaks = [
-// 		...clusters.map((c) => c[0]),
-// 		clusters[clusters.length - 1][clusters[clusters.length - 1].length - 1]
-// 	];
-
-// 	const minVal = Math.min(...values);
-// 	const maxVal = Math.max(...values);
-// 	const extent = Math.max(Math.abs(minVal), Math.abs(maxVal));
-
-// 	// Rescale breaks
-// 	const scaled = breaks.map((b) => {
-// 		return (b / (b < 0 ? Math.abs(minVal) : maxVal)) * extent;
-// 	});
-
-// 	return Array.from(
-// 		new Set(
-// 			scaled.map((d, i) =>
-// 				round(d, dp, i === 0 ? 'floor' : i === scaled.length - 1 ? 'ceil' : 'round')
-// 			)
-// 		)
-// 	);
-// }
-
 export function getAreaType(area: areaObject) {
 	return geoLevelsAllLookup[area.areacd?.slice?.(0, 3)]?.label || null;
 }
