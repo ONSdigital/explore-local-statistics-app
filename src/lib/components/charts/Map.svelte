@@ -4,7 +4,7 @@
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, getGeoYear, valuesToBreaks } from '$lib/utils';
 	import { getPaletteColor } from './chartHelpers';
-	import { ukBounds, ONScolours } from '$lib/config';
+	import { ukBounds, ONScolours, mapPaletteSequential, mapPaletteDiverging } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -18,13 +18,6 @@
 		formatValue = (d) => d,
 		formatPeriod = (d) => d,
 		geoLevel = null,
-		colors = [
-			'rgb(234, 236, 177)',
-			'rgb(169, 216, 145)',
-			'rgb(0, 167, 186)',
-			'rgb(0, 78, 166)',
-			'rgb(0, 13, 84)'
-		],
 		extendHeight = null
 	} = $props();
 
@@ -33,6 +26,7 @@
 
 	let map = $state();
 	let features = $state.raw();
+	let valuesDiverge = $derived(metadata.canBeNegative);
 	let _data = $derived(parseData(data));
 	let geoYear = $derived(getGeoYear(data.areacd));
 	let breaks = $derived(
@@ -42,6 +36,47 @@
 		)
 	);
 	let height = $derived(500 + (extendHeight ?? 0));
+
+	function buildDivergingColors(breaks) {
+		const nBins = breaks.length - 1;
+		console.log({ nBins });
+
+		const zeroBreakExists = breaks.includes(0);
+
+		let zeroBinIndex;
+		if (zeroBreakExists) {
+			zeroBinIndex = breaks.indexOf(0);
+		} else {
+			zeroBinIndex = -1;
+			for (let i = 0; i < nBins; i++) {
+				if (breaks[i] < 0 && breaks[i + 1] > 0) {
+					zeroBinIndex = i;
+					break;
+				}
+			}
+		}
+
+		const nPosBins = zeroBreakExists ? nBins - zeroBinIndex : nBins - zeroBinIndex - 1;
+		const nNegBins = zeroBreakExists ? nBins - nPosBins : nBins - nPosBins - 1;
+
+		const paletteSize = zeroBreakExists
+			? Math.min(9, Math.max(nPosBins, nNegBins) * 2)
+			: Math.min(9, Math.max(nPosBins, nNegBins) * 2 + 1);
+
+		const colors = mapPaletteDiverging[paletteSize];
+
+		const neutralIndex =
+			// force neutral colour to be used as positive or negative when all values are pos or neg
+			// (means we can use 9 colour palette instead of going up to 11 when there are five breaks above/below 0)
+			zeroBinIndex == -1 ? Math.floor(colors.length / 2) - 1 : Math.floor(colors.length / 2);
+		const c2 = zeroBreakExists
+			? colors.slice(neutralIndex - zeroBinIndex, colors.length - zeroBinIndex)
+			: colors.slice(neutralIndex - zeroBinIndex, colors.length - zeroBinIndex + 1);
+
+		return [...c2];
+	}
+
+	let colors = $derived(valuesDiverge ? buildDivergingColors(breaks) : mapPaletteSequential);
 
 	function doHover(e) {
 		const area = e.detail?.feature?.properties || e.detail?.d;
@@ -223,6 +258,7 @@
 		prefix={metadata.prefix}
 		suffix={metadata.suffix}
 		format={formatValue}
+		{colors}
 	/>
 </div>
 
