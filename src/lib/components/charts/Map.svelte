@@ -4,13 +4,7 @@
 	import bbox from '@turf/bbox';
 	import { parseData, getMapFeatures, getGeoYear, valuesToBreaks } from '$lib/utils';
 	import { getPaletteColor } from './chartHelpers';
-	import {
-		ukBounds,
-		ONScolours,
-		mapPaletteSequential,
-		mapPaletteDivergingNoNeutral,
-		mapPaletteDivergingNeutral
-	} from '$lib/config';
+	import { ukBounds, ONScolours, mapPaletteSequential, mapPaletteDiverging } from '$lib/config';
 	import { geoYearFilter } from '$lib/api/geo/helpers/geoFilters';
 	import { Map, MapSource, MapLayer, MapTooltip } from '@onsvisual/svelte-maps';
 	import MapLegend from './MapLegend.svelte';
@@ -44,24 +38,40 @@
 	let height = $derived(500 + (extendHeight ?? 0));
 
 	function buildDivergingColors(breaks) {
-		const bins = breaks.length - 1;
+		const nBins = breaks.length - 1;
+		console.log({ nBins });
 
-		const zeroBreakIndex = breaks.includes(0);
+		const zeroBreakExists = breaks.includes(0);
 
-		let zeroBinIndex = -1;
-		for (let i = 0; i < bins; i++) {
-			if (breaks[i] < 0 && breaks[i + 1] > 0) {
-				zeroBinIndex = i;
-				break;
+		let zeroBinIndex;
+		if (zeroBreakExists) {
+			zeroBinIndex = breaks.indexOf(0);
+		} else {
+			zeroBinIndex = -1;
+			for (let i = 0; i < nBins; i++) {
+				if (breaks[i] < 0 && breaks[i + 1] > 0) {
+					zeroBinIndex = i;
+					break;
+				}
 			}
 		}
 
-		let colors = zeroBreakIndex ? mapPaletteDivergingNoNeutral : mapPaletteDivergingNeutral;
-		let neutralIndex = Math.floor(colors.length / 2);
-		let c2 = colors.slice(
-			neutralIndex - zeroBinIndex,
-			mapPaletteDivergingNeutral.length - zeroBinIndex
-		);
+		const nPosBins = zeroBreakExists ? nBins - zeroBinIndex : nBins - zeroBinIndex - 1;
+		const nNegBins = zeroBreakExists ? nBins - nPosBins : nBins - nPosBins - 1;
+
+		const paletteSize = zeroBreakExists
+			? Math.min(9, Math.max(nPosBins, nNegBins) * 2)
+			: Math.min(9, Math.max(nPosBins, nNegBins) * 2 + 1);
+
+		const colors = mapPaletteDiverging[paletteSize];
+
+		const neutralIndex =
+			// force neutral colour to be used as positive or negative when all values are pos or neg
+			// (means we can use 9 colour palette instead of going up to 11 when there are five breaks above/below 0)
+			zeroBinIndex == -1 ? Math.floor(colors.length / 2) - 1 : Math.floor(colors.length / 2);
+		const c2 = zeroBreakExists
+			? colors.slice(neutralIndex - zeroBinIndex, colors.length - zeroBinIndex)
+			: colors.slice(neutralIndex - zeroBinIndex, colors.length - zeroBinIndex + 1);
 
 		return [...c2];
 	}
@@ -142,8 +152,6 @@
 	$effect(() => fitBounds(bounds));
 
 	onMount(async () => (features = await getMapFeatures()));
-
-	$inspect(breaks);
 </script>
 
 <p class="ons-u-vh">Map of {metadata.label}. The data is available to download below.</p>
