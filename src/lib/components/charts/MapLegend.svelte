@@ -10,13 +10,7 @@
 		barHeight = 15,
 		labelHeight = 20,
 		breaks,
-		colors = [
-			'rgba(234,236,177,.8)',
-			'rgba(169,216,145,.8)',
-			'rgba(0,167,186,.8)',
-			'rgba(0,78,166,.8)',
-			'rgba(0,13,84,.8)'
-		],
+		colors,
 		format = (d) => d,
 		prefix = '',
 		suffix = '',
