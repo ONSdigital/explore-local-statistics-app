@@ -23,7 +23,8 @@ let multi = [
 	'apprenticeships-scotland',
 	'gdp-per-head',
 	'engagement-with-culture-and-heritage',
-	'population-indicators'
+	'population-indicators',
+	'children-in-relative-poverty'
 ];
 
 console.log(

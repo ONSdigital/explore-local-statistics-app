@@ -61,8 +61,12 @@
 			"label": "Gross median weekly pay"
 		},
 		{
-			"code": "children-in-relative-poverty",
-			"label": "Children in relative poverty"
+			"code": "children-in-relative-poverty-Children in relative poverty before housing costs",
+			"label": "Children in relative poverty before housing costs"
+		},
+		{
+			"code": "children-in-relative-poverty-Children in relative poverty after housing costs",
+			"label": "Children in relative poverty after housing costs"
 		},
 		{
 			"code": "total-value-of-uk-exports",
@@ -2548,18 +2552,18 @@
 				2025
 			]
 		},
-		"children-in-relative-poverty": {
+		"children-in-relative-poverty-Children in relative poverty before housing costs": {
 			"id": 118,
 			"topic": "economy",
 			"subTopic": "pay and income",
-			"code": "children-in-relative-poverty",
+			"code": "children-in-relative-poverty-Children in relative poverty before housing costs",
 			"": null,
 			"minXDomainNumb": 2021,
 			"maxXDomainNumb": 2024,
 			"metadata": {
-				"code": "children-in-relative-poverty",
-				"slug": "children-in-relative-poverty",
-				"label": "Children in relative poverty",
+				"code": "children-in-relative-poverty-Children in relative poverty before housing costs",
+				"slug": "children-in-relative-poverty-before-housing",
+				"label": "Children in relative poverty before housing costs",
 				"prefix": "",
 				"suffix": "%",
 				"subText": null,
@@ -2574,7 +2578,7 @@
 				"sourceOrg": "Department for Work and Pensions",
 				"longDescription": "This indicator shows the percentage of children aged under 16 living in relative low income families Before Housing Costs (BHC), in the UK, for financial years ending 2022 to 2025.",
 				"standardised": "T",
-				"caveats": "Relative low income is defined as a family in low income Before Housing Costs (BHC) in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nRates have been derived by dividing the number of children aged 0 to 15 in low income families by the number of all children aged 0 to 15 (sourced from latest available mid-year population estimates at the time of publication).",
+				"caveats": "Relative low income is defined as a family in low income in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nFigures are provisional and may be subject to revision in subsequent releases.\n\nRates (presented as percentages) have been derived by dividing the number of children aged 0 to 15 living in low income families by the total number of children aged 0 to 15. Population figures are sourced from the mid‑2024 population estimates.\n\nFurther information is available in the [Background information and methodology for Children in low income families: local area statistics](https://www.gov.uk/government/publications/children-in-low-income-families-local-area-statistics-background-information-and-methodology/background-information-and-methodology-children-in-low-income-families-local-area-statistics).\n\nSome of this data has been aggregated and may show differences to other published figures.",
 				"confidenceIntervals": "F",
 				"initialGeographyLevel": "ltla",
 				"beeswarmRowUseMinMax": "F"
@@ -2591,7 +2595,9 @@
 					"E07",
 					"E08",
 					"E09",
+					"E10",
 					"E12",
+					"E47",
 					"K02",
 					"N09",
 					"N92",
@@ -2619,6 +2625,26 @@
 						"label": "Countries and regions"
 					},
 					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
 						"key": "ltla",
 						"codes": [
 							"E06",
@@ -2637,6 +2663,119 @@
 			"years": [
 				2021,
 				2022,
+				2023,
+				2024
+			]
+		},
+		"children-in-relative-poverty-Children in relative poverty after housing costs": {
+			"id": 131,
+			"topic": "economy",
+			"subTopic": "pay and income",
+			"code": "children-in-relative-poverty-Children in relative poverty after housing costs",
+			"": null,
+			"minXDomainNumb": 2023,
+			"maxXDomainNumb": 2024,
+			"metadata": {
+				"code": "children-in-relative-poverty-Children in relative poverty after housing costs",
+				"slug": "children-in-relative-poverty-after-housing",
+				"label": "Children in relative poverty after housing costs",
+				"prefix": "",
+				"suffix": "%",
+				"subText": null,
+				"decimalPlaces": 1,
+				"howToMeasureChange": null,
+				"subtitle": "Percentage of children aged under 16 living in relative low income families After Housing Costs (AHC)",
+				"zeroBaseline": "F",
+				"canBeNegative": "F",
+				"experimentalStatistic": "F",
+				"sourceDate": "26/03/2026",
+				"sourceURL": "https://www.gov.uk/government/collections/children-in-low-income-families-local-area-statistics",
+				"sourceOrg": "Department for Work and Pensions",
+				"longDescription": "This indicator shows the percentage of children aged under 16 living in relative low income families After Housing Costs (AHC), in the UK, for financial years ending 2024 and 2025.",
+				"standardised": "T",
+				"caveats": "Relative low income is defined as a family in low income in the reference year. A family must have claimed Child Benefit and at least one other household benefit (Universal Credit, tax credits, or Housing Benefit) at any point in the year to be classed as low income in these statistics.\n\nFigures are provisional and may be subject to revision in subsequent releases.\n\nRates (presented as percentages) have been derived by dividing the number of children aged 0 to 15 living in low income families by the total number of children aged 0 to 15. Population figures are sourced from the mid‑2024 population estimates.\n\nFurther information is available in the [Background information and methodology for Children in low income families: local area statistics](https://www.gov.uk/government/publications/children-in-low-income-families-local-area-statistics-background-information-and-methodology/background-information-and-methodology-children-in-low-income-families-local-area-statistics).\n\nSome of this data has been aggregated and may show differences to other published figures.",
+				"confidenceIntervals": "F",
+				"initialGeographyLevel": "ltla",
+				"beeswarmRowUseMinMax": "F"
+			},
+			"inferredGeos": {
+				"ctrys": [
+					"E",
+					"N",
+					"S",
+					"W"
+				],
+				"types": [
+					"E06",
+					"E07",
+					"E08",
+					"E09",
+					"E10",
+					"E12",
+					"E47",
+					"K02",
+					"N09",
+					"N92",
+					"S12",
+					"S92",
+					"W06",
+					"W92"
+				],
+				"groups": [
+					{
+						"key": "uk",
+						"codes": [
+							"K02"
+						],
+						"label": "United Kingdom"
+					},
+					{
+						"key": "rgn",
+						"codes": [
+							"E12",
+							"S92",
+							"N92",
+							"W92"
+						],
+						"label": "Countries and regions"
+					},
+					{
+						"key": "cauth",
+						"codes": [
+							"E47"
+						],
+						"label": "Combined authorities"
+					},
+					{
+						"key": "utla",
+						"codes": [
+							"E06",
+							"E08",
+							"E09",
+							"E10",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Upper-tier/unitary authorities"
+					},
+					{
+						"key": "ltla",
+						"codes": [
+							"E06",
+							"E07",
+							"E08",
+							"E09",
+							"N09",
+							"S12",
+							"W06"
+						],
+						"label": "Lower-tier/unitary authorities"
+					}
+				],
+				"year": 2023
+			},
+			"years": [
 				2023,
 				2024
 			]
@@ -12786,7 +12925,8 @@
 					"indicatorCodes": [
 						"gross-disposable-household-income-per-head",
 						"gross-median-weekly-pay",
-						"children-in-relative-poverty"
+						"children-in-relative-poverty-Children in relative poverty before housing costs",
+						"children-in-relative-poverty-Children in relative poverty after housing costs"
 					]
 				},
 				{
