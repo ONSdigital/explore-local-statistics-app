@@ -1,9 +1,12 @@
 import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
-import { getParam } from '$lib/api/utils';
+import { getParam, hasValidParams } from '$lib/api/utils';
 import getAreasByLngLat from '$lib/api/geo/getAreasByLngLat';
 
 export const GET: RequestHandler = async ({ url }) => {
+	if (!hasValidParams(url, new Set(['lng', 'lat', 'year', 'geoLevel', 'groupByLevel'])))
+		error(400, `Request contained invalid parameters.`);
+
 	const lng = getParam(url, 'lng', null);
 	const lat = getParam(url, 'lat', null);
 	const year = getParam(url, 'year', 'latest');
