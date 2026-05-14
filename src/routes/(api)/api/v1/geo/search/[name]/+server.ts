@@ -1,10 +1,18 @@
 import type { RequestHandler } from './$types';
-import { json } from '@sveltejs/kit';
-import { getParam } from '$lib/api/utils';
+import { json, error } from '@sveltejs/kit';
+import { getParam, hasValidParams } from '$lib/api/utils';
 import getAreasByName from '$lib/api/geo/getAreasByName';
 import getPostcodesList from '$lib/api/geo/getPostcodesList';
 
 export const GET: RequestHandler = async ({ url, params }) => {
+	if (
+		!hasValidParams(
+			url,
+			new Set(['year', 'limit', 'offset', 'searchPostcodes', 'groupByLevel', 'geoLevel'])
+		)
+	)
+		error(400, `Request contained invalid parameters.`);
+
 	const name = params.name || null;
 	const year = getParam(url, 'year', 'latest');
 	const limit = getParam(url, 'limit', 10);

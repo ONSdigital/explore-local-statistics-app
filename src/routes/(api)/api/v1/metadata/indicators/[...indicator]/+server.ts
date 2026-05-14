@@ -1,9 +1,25 @@
 import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
-import { getParam } from '$lib/api/utils';
+import { getParam, hasValidParams } from '$lib/api/utils';
 import getIndicators from '$lib/api/metadata/getIndicators';
 
 export const GET: RequestHandler = ({ url, params }) => {
+	if (
+		!hasValidParams(
+			url,
+			new Set([
+				'indicator',
+				'topic',
+				'excludeMultivariate',
+				'hasGeo',
+				'hasYear',
+				'fullDims',
+				'asLookup'
+			])
+		)
+	)
+		error(400, `Request contained invalid parameters.`);
+
 	const indicator = params.indicator || getParam(url, 'indicator', null);
 	const topic = getParam(url, 'topic', 'all');
 	const excludeMultivariate = getParam(url, 'excludeMultivariate', false);
