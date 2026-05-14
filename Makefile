@@ -1,3 +1,4 @@
+# TODO: now ENABLE_S3_ASSETS is always FALSE, this could be simplified
 export ENABLE_S3_ASSETS?=false
 APP=explore-local-statistics
 
@@ -15,7 +16,7 @@ IMAGE_NAME?=explore-local-statistics
 IMAGE_URL?=$(AWS_ECR_URL)/$(IMAGE_NAME)
 
 # 7 matches that from cdn-assets image put short_ref (for ECR)
-COMMIT_HASH?=$(shell git rev-parse --short=7 HEAD)
+export COMMIT_HASH?=$(shell git rev-parse --short=7 HEAD)
 
 NVM_SOURCE_PATH ?= $(HOME)/.nvm/nvm.sh
 ifneq ("$(wildcard $(NVM_SOURCE_PATH))","")
