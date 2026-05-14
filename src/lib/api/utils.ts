@@ -1,3 +1,5 @@
+import type { Url } from 'url';
+
 function parseParam(param: string): parsedParam {
 	return param === 'true'
 		? true
@@ -23,4 +25,11 @@ export function getDimensionFilters(url: URL) {
 		key: p[0].slice(10),
 		values: parseParam(p[1])
 	}));
+}
+
+export function hasValidParams(url: URL, params: Set<string>, prefixes: Set<string> = new Set()) {
+	for (const key of url.searchParams.keys()) {
+		if (!params.has(key) && !(key.includes('_') && prefixes.has(key.split('_')[0]))) return false;
+	}
+	return true;
 }
