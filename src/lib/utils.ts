@@ -200,6 +200,7 @@ export function getGeoYear(codes) {
 
 export function downloadEvent(
 	format: string,
+	href: string | null = null,
 	indicator: indicatorMetadata | string = 'all',
 	chartType: string | null = null
 ) {
@@ -209,6 +210,7 @@ export function downloadEvent(
 		filename: `${indicator === 'all' ? 'all-datasets' : indicator.slug}.${format}`,
 		linkText: `Download data as ${format.toUpperCase()}`,
 		linkDomain: 'www.ons.gov.uk',
+		...(href ? { linkUrl: href.replace(/.*\/\/[^\/]*/, '') } : {}),
 		...(chartType
 			? {
 					chartType,
