@@ -19,8 +19,8 @@
 			_pageState.selectedAreas.push(area);
 		const eventData = {
 			event: 'interaction',
-			interactionType: 'select',
-			interactionLabel: 'Area modal select',
+			interactionType: 'modal-select',
+			interactionLabel: 'area modal select',
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
 			areaType: area.type
@@ -31,8 +31,8 @@
 	function runAreaGroupAnalytics(value) {
 		const eventData = {
 			event: 'interaction',
-			interactionType: 'select',
-			interactionLabel: 'Area type modal select',
+			interactionType: 'modal-select',
+			interactionLabel: 'area type modal select',
 			interactionValue: value.label,
 			areaType: value.id
 		};

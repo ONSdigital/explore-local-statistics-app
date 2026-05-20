@@ -59,7 +59,7 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 			// Page metadata
 			title: `${indicator.label} - ONS`,
 			description: indicator.subtitle,
-			pageType: `indicator data page`,
+			pageType: `indicators`,
 			breadcrumbLinks: [
 				{ label: 'Home', href: '/' },
 				{ label: 'Explore local statistics', href: resolve('/') },

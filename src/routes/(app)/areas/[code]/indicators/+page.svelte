@@ -59,8 +59,8 @@
 		const url = `/areas/${makeCanonicalSlug(area)}/indicators`;
 		const eventData = {
 			event: 'interaction',
-			interactionType: 'select',
-			interactionLabel: 'Area search select',
+			interactionType: 'search-select',
+			interactionLabel: 'area search select',
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
 			areaType: geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
@@ -219,31 +219,32 @@
 				href={resolve(`/files/all-datasets-${areaProps.typecd}.xlsx`)}
 				download="all-datasets-{areaProps.typecd}.xlsx"
 				aria-label="Download datasets for {getName(areaProps, 'the')} as an XLSX file"
-				onclick={() => downloadEvent('xlsx')}>XLSX file</a
+				onclick={() => downloadEvent('xlsx', `/files/all-datasets-${areaProps.typecd}.xlsx`)}
+				>XLSX file</a
 			>. It is also possible to download all datasets for all areas in an
 			<a
 				href={resolve('/files/all-datasets.xlsx')}
 				download="all-datasets-{areaProps.typecd}.xlsx"
 				aria-label="Download all datasets as an XLSX file"
-				onclick={() => downloadEvent('xlsx')}>XLSX</a
+				onclick={() => downloadEvent('xlsx', '/files/all-datasets.xlsx')}>XLSX</a
 			>,
 			<a
 				href={resolve('/files/all-datasets.csv')}
 				download="all-datasets.csv"
 				aria-label="Download all datasets as a CSV file"
-				onclick={() => downloadEvent('csv')}>CSV</a
+				onclick={() => downloadEvent('csv', '/files/all-datasets.csv')}>CSV</a
 			>,
 			<a
 				href={resolve('/files/all-datasets.csv-metadata.json')}
 				download="all-datasets.csv-metadata.json"
 				aria-label="Download all datasets as a CSVW file"
-				onclick={() => downloadEvent('csvw')}>CSVW</a
+				onclick={() => downloadEvent('csvw', '/files/all-datasets.csv-metadata.json')}>CSVW</a
 			>, or
 			<a
 				href={resolve('/files/json-stat.json')}
 				download="all-datasets.json"
 				aria-label="Download all datasets as a JSON-Stat file"
-				onclick={() => downloadEvent('json')}>JSON-Stat</a
+				onclick={() => downloadEvent('json', '/files/json-stat.json')}>JSON-Stat</a
 			> format.
 		</p>
 		<p>

@@ -403,7 +403,8 @@ const summaryData = {
 		(a, b) => a - b
 	),
 	geoDims: getDimRole(cube.link.item, 'geo'),
-	timeDims: getDimRole(cube.link.item, 'time')
+	timeDims: getDimRole(cube.link.item, 'time'),
+	indicatorLookup: Object.fromEntries(cube.link.item.map((ds, i) => [ds.extension.slug, i]))
 };
 
 const summaryOutput = './src/lib/data/json-stat-summary.json';

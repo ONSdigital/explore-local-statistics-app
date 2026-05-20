@@ -75,17 +75,18 @@
 		e.preventDefault();
 		const result = await snapdom(chartDiv, { embedFonts: true });
 		await result.download({ format: 'png', filename: `${indicator}-${chartType}.png` });
-		downloadEvent('png', metadata, chartType);
+		downloadEvent('png', null, metadata, chartType);
 	}
 </script>
 
 {#snippet downloadUrl(url: string, format: string, formatLabel: string | null = null)}
 	{@const label = formatLabel || format.toUpperCase()}
+	{@const href = url?.replace?.('.cols.json', `.${format}`)}
 	<a
-		href={url?.replace?.('.cols.json', `.${format}`)}
+		{href}
 		aria-label="Download the {metadata.label} {chartName} data as a {label} file"
 		download="{indicator}-{chartType}.{format === 'csvw' ? 'csv-metadata.json' : format}"
-		onclick={() => downloadEvent(format, metadata, chartType)}>{label}</a
+		onclick={() => downloadEvent(format, href, metadata, chartType)}>{label}</a
 	>
 {/snippet}
 
