@@ -1,3 +1,5 @@
+import summaryStats from '$lib/data/json-stat-summary.json';
+
 export const areaMetadataBase =
 	'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/ap-geos/v4';
 export const areaTilesBase =
@@ -18,8 +20,8 @@ export const dataParams = new Set([
 	'timeNearest',
 	'measure',
 	'includeNames',
-	'includeStatus'
+	'includeStatus',
+	...summaryStats.otherDims.map((d) => `dimension_${d}`)
 ]);
-export const dataPrefixParams = new Set(['dimension']);
 export const geoFormats = ['geojson', 'topojson'];
 export const chartTypes = ['line', 'bar', 'map', 'table'];

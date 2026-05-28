@@ -1,13 +1,12 @@
 import type { RequestHandler } from './$types';
 import { json, text, error } from '@sveltejs/kit';
-import { dataParams, dataPrefixParams } from '$lib/api/config';
+import { dataParams } from '$lib/api/config';
 import { getParam, getDimensionFilters, hasValidParams } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
 import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
 export const GET: RequestHandler = async ({ url, params }) => {
-	if (!hasValidParams(url, dataParams, dataPrefixParams))
-		error(400, `Request contained invalid parameters.`);
+	if (!hasValidParams(url, dataParams)) error(400, `Request contained invalid parameters.`);
 
 	const format = params.format || null;
 	const topic = getParam(url, 'topic', 'all');
