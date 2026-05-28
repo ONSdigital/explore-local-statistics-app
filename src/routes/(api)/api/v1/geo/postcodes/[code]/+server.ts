@@ -6,7 +6,7 @@ import { getParam, hasValidParams } from '$lib/api/utils';
 
 export const GET: RequestHandler = async ({ url, params }) => {
 	if (!hasValidParams(url, new Set(['code', 'year', 'geoLevel', 'groupByLevel'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const code = params.code;
 	const year = getParam(url, 'year', 'latest');

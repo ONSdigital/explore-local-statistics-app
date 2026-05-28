@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ fetch }) => {
 		// Page metadata
 		title: 'Explore local indicators - ONS',
 		description: `Explore ${taxonomy.meta.count} local datasets from the ONS, including disposable household income, participation in further education and life satisfaction.`,
-		pageType: 'indicators page',
+		pageType: 'indicators',
 		breadcrumbLinks: [
 			{ label: 'Home', href: '/' },
 			{ label: 'Explore local statistics', href: resolve('/') }

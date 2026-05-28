@@ -14,16 +14,18 @@
 	const analyticsId = 'GTM-MBCBVQS';
 	const analyticsProps = {
 		contentTitle: 'Explore local statistics',
-		releaseDate: '20240326',
-		contentType: 'exploratory'
+		// releaseDate: '20240326',
+		contentType: 'explore-local-statistics'
 	};
 
 	afterNavigate(() => {
 		const eventData = {
 			event: 'pageView',
 			pageUrl: page.url.href,
+			product: 'explore-local-statistics',
 			contentTitle: page.data.title,
-			contentType: page.data.pageType
+			contentType: 'explore-local-statistics',
+			contentSubType: page.data.pageType
 		};
 		const areaProps = page.data?.area?.properties;
 		const indicator = page.data?.indicator;
@@ -32,8 +34,7 @@
 			eventData.areaName = areaProps.areanm || areaProps.areacd;
 			eventData.areaType = geoLevelsAllLookup?.[areaProps.areacd.slice(0, 3)]?.label;
 		} else if (page.data.pageType === 'indicator data page' && indicator) {
-			eventData.indicatorCode = indicator.slug;
-			eventData.indicatorName = indicator.label;
+			eventData.outputSeries = indicator.slug;
 			eventData.contentGroup = indicator.topic;
 			eventData.contentSubgroup = indicator.subTopic;
 		}

@@ -18,7 +18,7 @@ export const GET: RequestHandler = ({ url, params }) => {
 			])
 		)
 	)
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const indicator = params.indicator || getParam(url, 'indicator', null);
 	const topic = getParam(url, 'topic', 'all');

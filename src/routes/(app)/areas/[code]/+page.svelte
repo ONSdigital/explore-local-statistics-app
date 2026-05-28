@@ -23,12 +23,12 @@
 	);
 	let indicatorsArea = $derived(getNearestRelatedParent(areaProps));
 
-	function handleSelect(area, interactionValue) {
+	function handleSelect(area, interactionType, interactionValue) {
 		const isPostcode = area.type === 'postcode';
 		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
 		const eventData = {
 			event: 'interaction',
-			interactionType: 'select',
+			interactionType,
 			interactionValue,
 			areaCode: area.areacd,
 			areaName: area.areanm || area.areacd,
@@ -68,14 +68,17 @@
 			<label for="search" style:display="block" style:margin-bottom="8px"
 				>Search for a place name or postcode</label
 			>
-			<AreaSearch id="search" onSelect={(area) => handleSelect(area, 'Area search select')} />
+			<AreaSearch
+				id="search"
+				onSelect={(area) => handleSelect(area, 'search-select', 'area search select')}
+			/>
 		</div>
 	</div>
 	<GridCell colspan={2}>
 		<AreaNavMap
 			area={data.area}
 			children={selectedChildGroup}
-			onSelect={(area) => handleSelect(area, 'Area map select')}
+			onSelect={(area) => handleSelect(area, 'map-click-select', 'area map select')}
 			mapDescription={'Map of ' + getName(areaProps, 'the')}
 		/>
 	</GridCell>
@@ -88,7 +91,7 @@
 	<Grid title="Explore statistics about {getName(areaProps, 'the')}">
 		{#each data.productLinks as link}
 			{#if link.title === 'Local indicators'}
-				<Card title={link.title} mode="featured" href={link.href} headingTag="h3">
+				<Card title={link.title} mode="featured" href={resolve(link.href)} headingTag="h3">
 					<div slot="image" style:display="contents">
 						<ESSMap geometry={data.area.geometry} />
 					</div>

@@ -1,4 +1,6 @@
-import type { Url } from 'url';
+import summaryStats from '$lib/data/json-stat-summary.json';
+const minYear = summaryStats.years[0];
+const maxYear = summaryStats.years[summaryStats.years.length - 1];
 
 function parseParam(param: string): parsedParam {
 	return param === 'true'
@@ -27,9 +29,25 @@ export function getDimensionFilters(url: URL) {
 	}));
 }
 
-export function hasValidParams(url: URL, params: Set<string>, prefixes: Set<string> = new Set()) {
-	for (const key of url.searchParams.keys()) {
-		if (!params.has(key) && !(key.includes('_') && prefixes.has(key.split('_')[0]))) return false;
+export function hasValidParams(url: URL, params: Set<string>) {
+	const keys = url.searchParams.keys();
+
+	for (const key of keys) {
+		if (!params.has(key) || url.searchParams.getAll(key).length > 1) return false;
+	}
+	return true;
+}
+
+function isValidTime(value: string | number) {
+	if (['earliest', 'latest', 'all'].includes(value)) return true;
+	const year = +String(value).slice(0, 4);
+	if (year <= maxYear && year >= minYear) return true;
+	return false;
+}
+
+export function hasValidTimeParam(values: (string | number)[]) {
+	for (const value of values) {
+		if (!isValidTime(value)) return false;
 	}
 	return true;
 }

@@ -9,7 +9,7 @@ const meta = {
 	title: 'Area search - ONS',
 	description:
 		'Find local areas within the UK including countries, regions, local authorities, parliamentary constituencies, electoral wards and parishes.',
-	pageType: 'area search page',
+	pageType: 'els-search',
 	breadcrumbLinks: [
 		{ label: 'Home', href: '/' },
 		{ label: 'Explore local statistics', href: resolve('/') }

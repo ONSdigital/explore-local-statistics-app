@@ -5,7 +5,7 @@ import getAreasByLngLat from '$lib/api/geo/getAreasByLngLat';
 
 export const GET: RequestHandler = async ({ url }) => {
 	if (!hasValidParams(url, new Set(['lng', 'lat', 'year', 'geoLevel', 'groupByLevel'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const lng = getParam(url, 'lng', null);
 	const lat = getParam(url, 'lat', null);

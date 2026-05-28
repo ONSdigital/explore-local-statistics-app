@@ -60,7 +60,7 @@
 		makeDataUrl(
 			indicator,
 			hasTimeRange ? timeRange : timeRange[timeRange.length - 1],
-			'latest',
+			!hasTimeRange && String(timeRange[timeRange.length - 1]).length === 4 ? 'latest' : null,
 			selectedCodes,
 			geoLevelObj?.id,
 			geoLevel?.geoExtent,

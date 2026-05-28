@@ -75,7 +75,7 @@ export const load: PageLoad = async ({ params, parent, fetch }) => {
 			// Page metadata
 			title: `${getName(area.properties)} (${area.properties.areacd}) - ONS`,
 			description: `Find facts and figures from across the ONS on ${getName(area.properties, 'the')} (${area.properties.typenm}).`,
-			pageType: `area page`,
+			pageType: `areas`,
 			breadcrumbLinks: [
 				{ label: 'Home', href: '/' },
 				{ label: 'Explore local statistics', href: resolve('/') },

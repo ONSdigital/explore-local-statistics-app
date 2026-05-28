@@ -91,11 +91,12 @@
 	{@const chartName =
 		chartType === 'beeswarm' ? 'distribution' : chartType === 'sparkline' ? 'line' : chartType}
 	{@const url = dataUrl[chartType]}
+	{@const href = url?.replace?.('.cols.json', `.${format}`)}
 	<a
-		href={url?.replace?.('.cols.json', `.${format}`)}
+		{href}
 		aria-label="Download the {metadata.label} {chartName} chart data as a {label} file"
 		download="{indicator}.{format === 'csvw' ? 'csv-metadata.json' : format}"
-		onclick={() => downloadEvent(format, metadata, chartType)}>{label}</a
+		onclick={() => downloadEvent(format, href, metadata, chartType)}>{label}</a
 	>
 {/snippet}
 
