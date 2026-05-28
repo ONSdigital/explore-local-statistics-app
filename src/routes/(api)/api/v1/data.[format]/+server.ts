@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json, text, error } from '@sveltejs/kit';
 import { dataParams } from '$lib/api/config';
-import { getParam, getDimensionFilters, hasValidParams } from '$lib/api/utils';
+import { getParam, getDimensionFilters, hasValidParams, hasValidTimeParam } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
 import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
@@ -22,6 +22,8 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	const includeNames = getParam(url, 'includeNames', true);
 	const includeStatus = getParam(url, 'includeStatus', ['json', 'xlsx'].includes(format));
 	const dimFilters = getDimensionFilters(url);
+
+	if (!hasValidTimeParam([time].flat())) error(400, `Invalid time period requested.`);
 
 	const _params: parsedParams = {
 		format,

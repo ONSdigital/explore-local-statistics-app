@@ -1,3 +1,7 @@
+import summaryStats from '$lib/data/json-stat-summary.json';
+const minYear = summaryStats.years[0];
+const maxYear = summaryStats.years[summaryStats.years.length - 1];
+
 function parseParam(param: string): parsedParam {
 	return param === 'true'
 		? true
@@ -30,6 +34,20 @@ export function hasValidParams(url: URL, params: Set<string>) {
 
 	for (const key of keys) {
 		if (!params.has(key) || url.searchParams.getAll(key).length > 1) return false;
+	}
+	return true;
+}
+
+function isValidTime(value: string | number) {
+	if (['earliest', 'latest', 'all'].includes(value)) return true;
+	const year = +String(value).slice(0, 4);
+	if (year <= maxYear && year >= minYear) return true;
+	return false;
+}
+
+export function hasValidTimeParam(values: (string | number)[]) {
+	for (const value of values) {
+		if (!isValidTime(value)) return false;
 	}
 	return true;
 }
