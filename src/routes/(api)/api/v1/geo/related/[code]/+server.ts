@@ -5,7 +5,7 @@ import getRelatedAreas from '$lib/api/geo/getRelatedAreas';
 
 export const GET: RequestHandler = ({ url, params }) => {
 	if (!hasValidParams(url, new Set(['includeNames'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const code = params.code;
 	const includeNames = getParam(url, 'includeNames', true);

@@ -5,7 +5,7 @@ import getTaxonomy from '$lib/api/metadata/getTaxonomy';
 
 export const GET: RequestHandler = ({ url }) => {
 	if (!hasValidParams(url, new Set(['topic', 'excludeMultivariate', 'hasGeo', 'hasYear', 'flat'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const topic = getParam(url, 'topic', 'all');
 	const excludeMultivariate = getParam(url, 'excludeMultivariate', false);

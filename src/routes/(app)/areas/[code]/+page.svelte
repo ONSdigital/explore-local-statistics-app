@@ -91,7 +91,7 @@
 	<Grid title="Explore statistics about {getName(areaProps, 'the')}">
 		{#each data.productLinks as link}
 			{#if link.title === 'Local indicators'}
-				<Card title={link.title} mode="featured" href={link.href} headingTag="h3">
+				<Card title={link.title} mode="featured" href={resolve(link.href)} headingTag="h3">
 					<div slot="image" style:display="contents">
 						<ESSMap geometry={data.area.geometry} />
 					</div>

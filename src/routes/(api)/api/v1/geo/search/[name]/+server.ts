@@ -11,7 +11,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
 			new Set(['year', 'limit', 'offset', 'searchPostcodes', 'groupByLevel', 'geoLevel'])
 		)
 	)
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const name = params.name || null;
 	const year = getParam(url, 'year', 'latest');

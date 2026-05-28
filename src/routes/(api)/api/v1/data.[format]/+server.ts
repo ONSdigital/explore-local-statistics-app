@@ -1,13 +1,13 @@
 import type { RequestHandler } from './$types';
 import { json, text, error } from '@sveltejs/kit';
-import { dataParams, dataPrefixParams } from '$lib/api/config';
-import { getParam, getDimensionFilters, hasValidParams } from '$lib/api/utils';
+import { dataParams } from '$lib/api/config';
+import { getParam, getDimensionFilters, hasValidParams, hasValidTimeParam } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
 import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
 export const GET: RequestHandler = async ({ url, params }) => {
-	if (!hasValidParams(url, dataParams, dataPrefixParams))
-		error(400, `Request contained invalid parameters.`);
+	if (!hasValidParams(url, dataParams))
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const format = params.format || null;
 	const topic = getParam(url, 'topic', 'all');
@@ -23,6 +23,8 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	const includeNames = getParam(url, 'includeNames', true);
 	const includeStatus = getParam(url, 'includeStatus', ['json', 'xlsx'].includes(format));
 	const dimFilters = getDimensionFilters(url);
+
+	if (!hasValidTimeParam([time].flat())) error(400, `Request contained invalid time period.`);
 
 	const _params: parsedParams = {
 		format,

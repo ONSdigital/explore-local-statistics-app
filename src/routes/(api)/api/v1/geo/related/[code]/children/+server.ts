@@ -5,7 +5,7 @@ import getChildAreas from '$lib/api/geo/getChildAreas';
 
 export const GET: RequestHandler = ({ url, params }) => {
 	if (!hasValidParams(url, new Set(['geoLevel', 'includeNames'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const code = params.code;
 	const geoLevel = getParam(url, 'geoLevel', null);

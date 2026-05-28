@@ -20,7 +20,7 @@ export const GET: RequestHandler = ({ url }) => {
 			])
 		)
 	)
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const geo = getParam(url, 'geo', 'all');
 	const year = getParam(url, 'year', 'latest');

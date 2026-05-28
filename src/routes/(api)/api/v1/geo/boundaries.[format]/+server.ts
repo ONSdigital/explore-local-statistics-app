@@ -7,7 +7,7 @@ import topo from '$lib/data/topo.json?url';
 
 export const GET: RequestHandler = ({ url, params }) => {
 	if (!hasValidParams(url, new Set(['year', 'country', 'geoLevel'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const format = params.format || null;
 	const year = getParam(url, 'year', 'latest');
