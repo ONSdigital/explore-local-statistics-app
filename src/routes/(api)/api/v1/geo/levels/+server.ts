@@ -5,7 +5,7 @@ import getGeoLevels from '$lib/api/geo/getGeoLevels';
 
 export const GET: RequestHandler = ({ url }) => {
 	if (!hasValidParams(url, new Set(['year', 'includeAreas'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const year = getParam(url, 'year', 'latest');
 	const includeAreas = getParam(url, 'includeAreas', true);

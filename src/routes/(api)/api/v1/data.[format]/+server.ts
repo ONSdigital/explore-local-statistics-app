@@ -6,7 +6,8 @@ import getFilteredData from '$lib/api/data/getFilteredData';
 import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
 export const GET: RequestHandler = async ({ url, params }) => {
-	if (!hasValidParams(url, dataParams)) error(400, `Request contained invalid parameters.`);
+	if (!hasValidParams(url, dataParams))
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const format = params.format || null;
 	const topic = getParam(url, 'topic', 'all');
@@ -23,7 +24,7 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	const includeStatus = getParam(url, 'includeStatus', ['json', 'xlsx'].includes(format));
 	const dimFilters = getDimensionFilters(url);
 
-	if (!hasValidTimeParam([time].flat())) error(400, `Invalid time period requested.`);
+	if (!hasValidTimeParam([time].flat())) error(400, `Request contained invalid time period.`);
 
 	const _params: parsedParams = {
 		format,

@@ -5,7 +5,7 @@ import getSiblingAreas from '$lib/api/geo/getSiblingAreas';
 
 export const GET: RequestHandler = ({ url, params }) => {
 	if (!hasValidParams(url, new Set(['parentLevel', 'includeNames'])))
-		error(400, `Request contained invalid parameters.`);
+		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const code = params.code;
 	const parentLevel = getParam(url, 'parentLevel', null);
