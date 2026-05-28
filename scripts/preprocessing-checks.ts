@@ -179,7 +179,7 @@ export function writeUpdateLog(
 		'Validate.'
 	);
 	log += section(
-		'5. The goegraphy codes for the below indicators has changed:',
+		'5. The geography codes for the below indicators has changed:',
 		editsGeographies,
 		'Validate.'
 	);

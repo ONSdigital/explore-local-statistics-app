@@ -8,6 +8,7 @@ import { itlsMap } from '../src/lib/config/geoLevels.ts';
 const RAW_DATA_DIR = 'scripts/raw-data';
 const CONFIG_DIR = `scripts/config`;
 const MANIFEST = `${CONFIG_DIR}/manifest_metadata.csv`; // equivalent to FILE_NAMES_LOG
+const BASE_DIMS = ['areacd', 'period', 'measure'];
 
 function sortMeasures(a, b) {
 	return a === b ? 0 : a === 'value' ? -1 : b === 'value' ? 1 : a.localeCompare(b, 'en-GB');
@@ -36,13 +37,25 @@ function getIndex(row, id, size, dimension, reverseLookup) {
 	}
 	return index;
 }
-function getDimRole(datasets, key: string) {
-	const dims = new Set();
+function summariseDims(datasets) {
+	const allDims = new Set();
+	const geoDims = new Set();
+	const timeDims = new Set();
+	const otherDims = new Set();
 	for (const ds of datasets) {
-		const vals = ds?.role?.[key] || [];
-		for (const val of vals) dims.add(val);
+		for (const dim of ds.id) {
+			allDims.add(dim);
+			if (ds.role.geo.includes(dim)) geoDims.add(dim);
+			if (ds.role.time.includes(dim)) timeDims.add(dim);
+			if (!BASE_DIMS.includes(dim)) otherDims.add(dim);
+		}
 	}
-	return Array.from(dims);
+	return {
+		allDims: [...allDims],
+		geoDims: [...geoDims],
+		timeDims: [...timeDims],
+		otherDims: [...otherDims]
+	};
 }
 function processColumns(k, metaLookup, columnValues, id, size, role, dimension) {
 	const row = metaLookup.filter(aq.escape((d) => d.name === k)).objects()[0];
@@ -402,8 +415,7 @@ const summaryData = {
 	geoYears: Array.from(new Set(cube.link.item.map((ds) => ds.extension.geography.year))).sort(
 		(a, b) => a - b
 	),
-	geoDims: getDimRole(cube.link.item, 'geo'),
-	timeDims: getDimRole(cube.link.item, 'time'),
+	...summariseDims(cube.link.item),
 	indicatorLookup: Object.fromEntries(cube.link.item.map((ds, i) => [ds.extension.slug, i]))
 };
 
