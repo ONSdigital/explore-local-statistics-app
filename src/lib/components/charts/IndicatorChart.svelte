@@ -38,7 +38,7 @@
 	let fullscreenHeightDiff = $state(null);
 	let dataTimeRange = $state(timeRange);
 
-	let selectedCodes = $derived(selected.map((d) => d.areacd));
+	let selectedCodes = $derived(selected.map((d) => d?.areacd || d));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 	let hasTimeRange = $derived(
@@ -55,6 +55,8 @@
 						: 'ltla'
 		)
 	);
+
+	$inspect({ geoLevelObj });
 
 	let dataUrl = $derived(
 		makeDataUrl(
@@ -100,6 +102,7 @@
 			}
 		});
 	});
+	$inspect({ geoLevel });
 </script>
 
 <div
@@ -151,7 +154,7 @@
 				>
 					{#snippet chart(data)}
 						{@const Component = chartComponents[chartType]}
-						{@const selectedMissing = selected.filter((d) => !data.areacd.includes(d.areacd))}
+						{@const selectedMissing = selectedCodes.filter((cd) => !data.areacd.includes(cd))}
 						<Component
 							{data}
 							{metadata}
@@ -199,7 +202,7 @@
 		{metadata}
 		{timeRange}
 		selected={selectedCodes}
-		{geoLevel}
+		geoLevel={geoLevelObj}
 		{showIntervals}
 		{chartType}
 		chartDiv={el}
