@@ -1,16 +1,19 @@
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { resolve } from '$app/paths';
-import { getParam } from '$lib/api/utils';
+import { getParam, hasValidParams } from '$lib/api/utils';
 import { isValidChartType } from '$lib/util/validationHelpers';
 import { geoLevels } from '$lib/config/geoLevels';
 
 export const load: PageLoad = async ({ fetch, params, url }) => {
+	if (!hasValidParams(url, new Set(['type', 'geo', 'areas', 'years', 'intervals'])))
+		error(400, `Request contained invalid or duplicate parameters.`);
+
 	const chartType = getParam(url, 'type', null);
 	const geo = getParam(url, 'geo', null);
 	const selected = getParam(url, 'areas', []);
 	const timeRange = getParam(url, 'years', []);
-	const hasIntervals = getParam(url, 'intervals', false);
+	const showIntervals = getParam(url, 'intervals', false);
 	// const related = getParam(url, "related", null);
 	// const relatedLabel = getParam(url, "related_label", null);
 
@@ -25,7 +28,7 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
 		return {
 			indicator,
 			chartType,
-			hasIntervals,
+			showIntervals,
 			geoLevel: geoLevel ? { id: geo, ...geoLevel } : null,
 			selected: [selected].flat(),
 			timeRange: typeof timeRange === 'string' ? [timeRange, timeRange] : timeRange

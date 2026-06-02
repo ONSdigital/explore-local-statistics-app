@@ -36,8 +36,8 @@
 		bind:selectedRange={_pageState.selectedPeriodRange}
 		onUpdate={(range) =>
 			runAnalyticsEvent(
-				'rangeSlider',
-				'Select time period',
+				'range-slider',
+				'select time period',
 				range.map((p) => formatTick(p)).join(' to ')
 			)}
 	/>
@@ -69,7 +69,7 @@
 		on:change={(e) =>
 			runAnalyticsEvent(
 				'checkbox',
-				'Show confidence intervals',
+				'show confidence intervals',
 				e?.detail?.item?.checked ? 'enable' : 'disable'
 			)}
 	/>
