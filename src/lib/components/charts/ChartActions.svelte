@@ -128,7 +128,7 @@
 		style:display={showEmbed ? 'block' : 'none'}
 		spellcheck="false"
 	>
-		<Textarea label="Embed code" value={embedCode} hideLabel />
+		<Textarea label="Embed code" value={embedCode} hideLabel readonly />
 		<Button variant={clipped ? 'secondary' : 'primary'} on:click={copyEmbedCode} small
 			>{clipped ? 'Code copied' : 'Copy embed code'}</Button
 		>

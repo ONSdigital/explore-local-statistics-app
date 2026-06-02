@@ -15,6 +15,7 @@
 			geoLevel={data.geoLevel}
 			selected={data.selected}
 			timeRange={data.timeRange}
+			showIntervals={data.showIntervals}
 		/>
 	</Container>
 </Embed>
