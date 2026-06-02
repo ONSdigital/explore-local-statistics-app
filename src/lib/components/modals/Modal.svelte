@@ -48,7 +48,7 @@
 	function modalAnalyticsEvent(interactionValue) {
 		const eventData = {
 			event: 'interaction',
-			interactionType: 'modal',
+			interactionType: 'modal-toggle',
 			interactionLabel: label,
 			interactionValue
 		};
