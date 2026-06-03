@@ -206,7 +206,7 @@ export function downloadEvent(
 ) {
 	const eventData = {
 		event: 'fileDownload',
-		extension: format,
+		fileExtension: format,
 		filename: `${indicator === 'all' ? 'all-datasets' : indicator.slug}.${format}`,
 		linkText: `Download data as ${format.toUpperCase()}`,
 		linkDomain: 'www.ons.gov.uk',
