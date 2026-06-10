@@ -31,8 +31,10 @@
 				In {areaProps.start}, this area replaced
 				{#each areaProps.replaces as rep, i}
 					{areaProps.areanm === rep.areanm ? 'the previous' : getName(rep, 'the', 'prefix')}
-					<a href={resolve(`/areas/${makeCanonicalSlug(rep)}`)} data-sveltekit-noscroll
-						>{getName(rep)}</a
+					<a
+						href={resolve(`/areas/${makeCanonicalSlug(rep)}`)}
+						rel="nofollow"
+						data-sveltekit-noscroll>{getName(rep)}</a
 					>
 					({rep.areacd}){i === areaProps.replaces.length - 1
 						? '.'
