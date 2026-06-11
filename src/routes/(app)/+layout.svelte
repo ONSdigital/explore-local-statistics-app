@@ -70,7 +70,7 @@
 <Main>
 	<slot />
 </Main>
-<Footer theme="dark" />
+<Footer />
 
 <style>
 	:global(a:focus > svg.logo) {
