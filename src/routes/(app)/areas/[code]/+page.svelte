@@ -5,8 +5,8 @@
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import { geoCodesIndexed } from '$lib/config/geoLevels';
 	import { getNearestRelatedParent } from '$lib/util/linkHelpers';
-	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
-	import { analyticsEvent, Hero, Grid, GridCell, Card, Icon } from '@onsvisual/svelte-components';
+	import { areaSelectEvent } from '$lib/utils';
+	import { Hero, Grid, GridCell, Card, Icon } from '@onsvisual/svelte-components';
 	import AreaLede from './AreaLede.svelte';
 	import AreaNavMap from './AreaNavMap.svelte';
 	import ChildAreas from './ChildAreas.svelte';
@@ -26,15 +26,7 @@
 	function handleSelect(area, interactionType, interactionValue) {
 		const isPostcode = area.type === 'postcode';
 		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
-		const eventData = {
-			event: 'interaction',
-			interactionType,
-			interactionValue,
-			areaCode: area.areacd,
-			areaName: area.areanm || area.areacd,
-			areaType: isPostcode ? 'postcode' : geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
-		};
-		analyticsEvent(eventData);
+		areaSelectEvent(area, interactionType, interactionValue);
 		goto(resolve(url), { noScroll: !isPostcode });
 	}
 </script>
