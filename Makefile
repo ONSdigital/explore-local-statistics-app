@@ -114,7 +114,6 @@ test-component:
 
 .PHONY: build-builder-init
 build-builder-init:
-	$(NPM) install
 	$(NPM) ci
 
 .PHONY: build-builder
