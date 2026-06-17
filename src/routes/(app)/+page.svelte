@@ -68,6 +68,15 @@
 			>Explore indicators</Button
 		>
 	</Card>
+
+	<Card title="Page builder" mode="featured">
+		<label for="search" style:display="block" style:margin-bottom="28px"
+			>Create a custom report for one or more geographies and comparison areas</label
+		>
+		<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder`)} small
+			>Page builder</Button
+		>
+	</Card>
 </Grid>
 
 <Section>
