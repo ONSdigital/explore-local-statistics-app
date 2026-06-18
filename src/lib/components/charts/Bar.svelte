@@ -347,11 +347,12 @@
 				{#if _data.array.length <= maxUnscaledBarsCount && !hovered}
 					<!-- add a filtering stage here to ensure selected areas aren't shown -->
 					{#each _data.array as s}
+						{@const yVal = xScale(Math.min(0, s[yKey]))}
 						<div
 							class="margin-label-geo-all"
 							style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
 							style:max-width="{leftMargin - 16}px"
-							style:left="-8px"
+							style:left="{yVal - 8}px"
 						>
 							{s[labelKey]}
 						</div>
@@ -481,6 +482,15 @@
 </div>
 
 <style>
+	.margin-label-selected,
+	.margin-label-hovered {
+		text-shadow:
+			-1px -1px 0 white,
+			1px -1px 0 white,
+			-1px 1px 0 white,
+			1px 1px 0 white;
+	}
+
 	.legend-container {
 		display: flex;
 		height: 20px;
