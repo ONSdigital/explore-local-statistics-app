@@ -351,7 +351,7 @@
 							class="margin-label-geo-all"
 							style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
 							style:max-width="{leftMargin - 16}px"
-							style:left="8px"
+							style:left="-8px"
 						>
 							{s[labelKey]}
 						</div>
