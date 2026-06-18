@@ -242,7 +242,7 @@
 			fill="none"
 			points={(elbowX
 				? [
-						`${xScale(Math.min(yKey, 0)) - 14},${yPosAdj + height / 2}`,
+						`-14,${yPosAdj + height / 2}`,
 						`${elbowX},${yPosAdj + height / 2}`,
 						`${elbowX},${yPosOrig + height / 2}`,
 						`${xScale(Math.min(yKey, 0)) - 2},${yPosOrig + height / 2}`
@@ -347,12 +347,11 @@
 				{#if _data.array.length <= maxUnscaledBarsCount && !hovered}
 					<!-- add a filtering stage here to ensure selected areas aren't shown -->
 					{#each _data.array as s}
-						{@const yVal = xScale(Math.min(0, s[yKey]))}
 						<div
 							class="margin-label-geo-all"
 							style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
 							style:max-width="{leftMargin - 16}px"
-							style:left="{yVal - 8}px"
+							style:left="8px"
 						>
 							{s[labelKey]}
 						</div>
@@ -365,13 +364,12 @@
 							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
 							{@const height = yScale?.(a[0][idKey])?.height || 0}
 							{@const isDodged = labelLookup?.[i]?.isDodged}
-							{@const yVal = xScale(Math.min(0, a[0][yKey]))}
 							<div
 								bind:clientHeight={labelHeights[id]}
 								data-id={id}
 								class="margin-label-selected"
 								style:top="{yPos ? yPos + height / 2 : 0}px"
-								style:left="{isDodged ? yVal - 16 : yVal - 8}px"
+								style:left={isDodged ? '-16px' : '-8px'}
 								style:color={getPaletteColor(i, selectedData.length, 'text')}
 								style:max-width="{leftMargin - 16}px"
 							>
@@ -482,15 +480,6 @@
 </div>
 
 <style>
-	.margin-label-selected,
-	.margin-label-hovered {
-		text-shadow:
-			-1px -1px 0 white,
-			1px -1px 0 white,
-			-1px 1px 0 white,
-			1px 1px 0 white;
-	}
-
 	.legend-container {
 		display: flex;
 		height: 20px;
