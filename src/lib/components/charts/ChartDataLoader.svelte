@@ -13,7 +13,7 @@
 		onUpdate = (data) => null
 	} = $props();
 
-	let loadedDataUrl: string | null = null;
+	let loadedDataUrl: string | null;
 	let data: jsonDataCols | errorObject | null = $state.raw(null);
 
 	async function fetchData(dataUrl: string, visible: boolean) {
