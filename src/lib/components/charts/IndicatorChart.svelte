@@ -56,8 +56,6 @@
 		)
 	);
 
-	$inspect({ geoLevelObj });
-
 	let dataUrl = $derived(
 		makeDataUrl(
 			indicator,
@@ -102,7 +100,8 @@
 			}
 		});
 	});
-	$inspect({ geoLevel });
+
+	$inspect(metadata);
 </script>
 
 <div

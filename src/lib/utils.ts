@@ -210,7 +210,7 @@ export function downloadEvent(
 		filename: `${indicator === 'all' ? 'all-datasets' : indicator.slug}.${format}`,
 		linkText: `Download data as ${format.toUpperCase()}`,
 		linkDomain: 'www.ons.gov.uk',
-		...(href ? { linkUrl: href.replace(/.*\/\/[^\/]*/, '') } : {}),
+		...(href ? { linkURL: href.replace(/.*\/\/[^\/]*/, '') } : {}),
 		...(chartType
 			? {
 					chartType,

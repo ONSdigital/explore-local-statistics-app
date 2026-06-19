@@ -84,7 +84,7 @@ function formatTableData(ds) {
 				? {
 						format: ds.meta.decimalPlaces
 							? '#,##0.'.padEnd(ds.meta.decimalPlaces + 6, '0')
-							: '#,###'
+							: '#,##0'
 					}
 				: {})
 		};
@@ -97,7 +97,7 @@ function formatTableData(ds) {
 	const hasStatusCol = 'status' in data;
 	const getRowKey = (data, i, keys) => keys.map((key) => data[key][i]).join('_');
 	const getValue = hasStatusCol
-		? (i) => data.value[i] || (data.status[i] ? `[${data.status[i]}]` : null)
+		? (i) => (data.value[i] != null ? data.value[i] : data.status[i] ? `[${data.status[i]}]` : null)
 		: (i) => data.value[i];
 
 	for (let i = 0; i < data[colKeys[0]].length; i++) {
