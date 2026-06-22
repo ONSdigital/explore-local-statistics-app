@@ -109,6 +109,5 @@ export function filterTimeForGeo(ds: jsonStatDataset, values: string[], geo: str
 export function timeRangesOverlap(range1: [string, string], range2: [string, string]) {
 	const r1 = range1.map((t) => +String(t).slice(0, 4));
 	const r2 = range2.map((t) => +String(t).slice(0, 4));
-	console.log({ range1, range2, r1, r2 });
 	return (r1[0] <= r2[1] && r1[0] >= r1[0]) || (r1[1] <= r2[1] && r1[1] >= r1[0]);
 }
