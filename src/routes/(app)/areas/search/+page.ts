@@ -39,6 +39,6 @@ export const load: PageLoad = async ({ url, fetch }) => {
 			return { ...result, ...meta };
 		}
 	} catch (err) {
-		return { ...noResult(query, page), ...meta };
+		return { ...noResult(query, page), ...meta, noIndex: true };
 	}
 };
