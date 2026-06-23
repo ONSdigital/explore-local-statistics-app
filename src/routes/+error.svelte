@@ -12,7 +12,7 @@
 	);
 </script>
 
-<Header />
+<Header {page} />
 <Main>
 	<ErrorPage {page} />
 </Main>
