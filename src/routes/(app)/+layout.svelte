@@ -59,6 +59,7 @@
 <Header
 	headerBorder={!page.data.breadcrumbBackground}
 	menuBorder={page.data.breadcrumbBackground === 'var(--ons-color-branded-tint)'}
+	{page}
 />
 {#if page.data.breadcrumbLinks}
 	<Breadcrumb
