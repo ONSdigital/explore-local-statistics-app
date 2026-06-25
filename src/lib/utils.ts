@@ -206,17 +206,30 @@ export function downloadEvent(
 ) {
 	const eventData = {
 		event: 'fileDownload',
-		extension: format,
+		fileExtension: format,
 		filename: `${indicator === 'all' ? 'all-datasets' : indicator.slug}.${format}`,
 		linkText: `Download data as ${format.toUpperCase()}`,
 		linkDomain: 'www.ons.gov.uk',
-		...(href ? { linkUrl: href.replace(/.*\/\/[^\/]*/, '') } : {}),
+		...(href ? { linkURL: href.replace(/.*\/\/[^\/]*/, '') } : {}),
 		...(chartType
 			? {
 					chartType,
 					chartTitle: indicator?.label
 				}
 			: {})
+	};
+	analyticsEvent(eventData);
+}
+
+export function areaSelectEvent(area, interactionType, interactionValue) {
+	const isPostcode = area.type === 'postcode';
+	const eventData = {
+		event: 'interaction',
+		interactionType,
+		interactionValue,
+		areaCode: area.areacd,
+		areaName: area.areanm || area.areacd,
+		areaType: isPostcode ? 'postcode' : geoLevelsAllLookup?.[area.areacd.slice(0, 3)]?.label
 	};
 	analyticsEvent(eventData);
 }

@@ -19,14 +19,23 @@ function getInitialArea(indicator, areas: areaObject[], areacd: string) {
 
 export const load: PageLoad = async ({ params, url, fetch }) => {
 	const path = resolve(`/api/v1/metadata/indicators/${params.code}?fullDims=true`);
-	const areasPath = resolve(`/api/v1/geo/list?indicator=${params.code}&year=latest`);
+	const areasPath = resolve(`/api/v1/geo/list?indicator=${params.code}&year=all`);
 
 	try {
 		const [indicator, areas] = await Promise.all([
 			(await fetch(path)).json(),
 			(await fetch(areasPath)).json()
 		]);
-		areas.sort((a, b) => a.areanm.localeCompare(b.areanm));
+		// this sorts areas by name then code, then deduplicates taking the newer geography
+		areas
+			.sort((a, b) => a.areanm.localeCompare(b.areanm) || a.areacd.localeCompare(a.areacd))
+			.filter(
+				(d, i, arr) =>
+					!(
+						d.areanm === arr?.[i + 1]?.areanm &&
+						d.areacd.slice(0, 3) === arr?.[i + 1]?.areacd?.slice?.(0, 3)
+					)
+			);
 		const periods = Object.keys(indicator.dimensions.period.category.index);
 		const gLevels = indicator.geography.levels
 			.filter(

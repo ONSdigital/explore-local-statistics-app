@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
-	import { downloadEvent } from '$lib/utils.js';
+	import { downloadEvent, areaSelectEvent } from '$lib/utils';
 	import {
 		Breadcrumb,
 		Hero,
@@ -24,6 +24,13 @@
 	import UKMap from '$lib/components/visuals/UKMap.svelte';
 
 	let { data } = $props();
+
+	function handleSelect(area, interactionType, interactionValue) {
+		const isPostcode = area.type === 'postcode';
+		const url = isPostcode ? `/areas/search?q=${area.areacd}` : `/areas/${makeCanonicalSlug(area)}`;
+		areaSelectEvent(area, interactionType, interactionValue);
+		goto(resolve(url));
+	}
 </script>
 
 <Hero title="Explore local statistics" background="var(--ons-color-branded-tint)" height={230}>
@@ -41,13 +48,7 @@
 		>
 		<AreaSearch
 			id="search"
-			onSelect={(area) => {
-				const url =
-					area.type === 'postcode'
-						? `/areas/search?q=${area.areacd}`
-						: `/areas/${makeCanonicalSlug(area)}`;
-				goto(resolve(url));
-			}}
+			onSelect={(area) => handleSelect(area, 'search-select', 'area search select')}
 		/>
 	</Card>
 

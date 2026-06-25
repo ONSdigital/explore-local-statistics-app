@@ -13,18 +13,20 @@
 		onUpdate = (data) => null
 	} = $props();
 
-	let loadedDataUrl: string | null = null;
+	let loadedDataUrl: string | null;
 	let data: jsonDataCols | errorObject | null = $state.raw(null);
 
 	async function fetchData(dataUrl: string, visible: boolean) {
 		if (!visible) return;
-		if (!dataUrl) {
-			data = { message: 'Data not available' };
-			onUpdate(data);
-			return;
-		}
 		if (dataUrl !== loadedDataUrl) {
 			loadedDataUrl = dataUrl;
+			if (!dataUrl) {
+				console.log(`No data for ${id}`);
+				data = { message: 'Data not available' };
+				onUpdate(data);
+				return;
+			}
+
 			const indicator = id?.split?.(' ')?.[0];
 
 			try {

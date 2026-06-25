@@ -29,11 +29,11 @@
 		};
 		const areaProps = page.data?.area?.properties;
 		const indicator = page.data?.indicator;
-		if (['area page', 'area data page'].includes(page.data.pageType) && areaProps) {
+		if (page.data.pageType === 'areas' && areaProps) {
 			eventData.areaCode = areaProps.areacd;
 			eventData.areaName = areaProps.areanm || areaProps.areacd;
 			eventData.areaType = geoLevelsAllLookup?.[areaProps.areacd.slice(0, 3)]?.label;
-		} else if (page.data.pageType === 'indicator data page' && indicator) {
+		} else if (page.data.pageType === 'indicators' && indicator) {
 			eventData.outputSeries = indicator.slug;
 			eventData.contentGroup = indicator.topic;
 			eventData.contentSubgroup = indicator.subTopic;
@@ -70,7 +70,7 @@
 <Main>
 	<slot />
 </Main>
-<Footer theme="dark" />
+<Footer />
 
 <style>
 	:global(a:focus > svg.logo) {
