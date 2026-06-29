@@ -18,12 +18,14 @@
 		formatValue = (d) => d,
 		formatPeriod = (d) => d,
 		selected = [],
-		hoveredArea = null,
+		hoveredArea = $bindable(null), // made bindable for keyboard control
 		geoLevel,
 		showIntervals,
 		mode = 'default',
 		extendHeight = null
 	} = $props();
+
+	let keyboardMode = $state(false); // tracks whether user is navigating by keyboard
 
 	const pointRadius = 5;
 	const dodgedLabelGap = 26;
@@ -79,6 +81,41 @@
 		hovered ? [{ areacd: hovered[0].areacd, areanm: hovered[0].areanm }] : []
 	);
 	let finalHoveredValue = $derived(hovered ? hovered[hovered.length - 1][yKey] : null);
+
+	// --- Keyboard navigation: sorted area list and active index ---
+	let _sortedAreas = $derived(
+		_data
+			? Object.keys(_data.keyed).sort((a, b) => {
+					const aVal = _data.keyed[a]?.at(-1)?.[yKey] ?? 0;
+					const bVal = _data.keyed[b]?.at(-1)?.[yKey] ?? 0;
+					return aVal - bVal;
+				})
+			: []
+	);
+
+	function getAreaIndex(areas, id) {
+		const index = areas.findIndex((cd) => cd === id);
+		return index === -1 ? 0 : index;
+	}
+
+	let activeAreaIndex = $state(0);
+	$effect(() => {
+		activeAreaIndex = getAreaIndex(_sortedAreas, selected[0]);
+	});
+	// --- End keyboard navigation setup ---
+
+	// --- Keyboard handler ---
+	function doKeydown(e) {
+		if (['ArrowLeft', 'ArrowDown'].includes(e.key)) {
+			activeAreaIndex = (activeAreaIndex + 1) % _sortedAreas.length;
+			hoveredArea = _sortedAreas[activeAreaIndex];
+		}
+		if (['ArrowRight', 'ArrowUp'].includes(e.key)) {
+			activeAreaIndex = (activeAreaIndex - 1 + _sortedAreas.length) % _sortedAreas.length;
+			hoveredArea = _sortedAreas[activeAreaIndex];
+		}
+	}
+	// --- End keyboard handler ---
 
 	let formatPeriodShort = $derived(shortenPeriodFormatter(formatPeriod));
 	// const formatYTick = format(',.0f');
@@ -201,258 +238,288 @@
 	{/if}
 {/snippet}
 
-{#if width < mobileBreakpoint && mode == 'embed'}
-	<ul class="top-labels">
-		{#if selectedData.length && !hoveredArea}
-			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={true} inlineItems={true}
-			></AreasLegend>
-		{/if}
-
-		{#if hoveredArea}
-			<AreasLegend
-				selectedAreas={hoveredCodesNames}
-				useMarkerShapes={true}
-				inlineItems={true}
-				hovered={true}
-			></AreasLegend>
-			<!-- <li class="top-label-hovered" style="background:#f39431">
-				{hovered?.[0]?.areanm}
-			</li> -->
-		{/if}
-	</ul>
-{/if}
-
-<p class="ons-u-vh" id="{metadata.slug}-line-description">
-	Line chart for {metadata.label}. The data is available to download below.
-</p>
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-	bind:clientWidth={width}
-	class="line-wrapper"
-	style:padding-left="{leftMargin}px"
-	style:padding-bottom="35px"
-	style:padding-right="{rightMargin}px"
-	style:padding-top={showIntervals && 'uci_95' in data ? '0px' : '20px'}
+	class="line-wrapper-keyboard"
+	class:keyboard-mode={keyboardMode}
+	tabindex="0"
+	onfocus={() => {
+		keyboardMode = true;
+		hoveredArea = _sortedAreas[activeAreaIndex];
+	}}
+	onblur={() => {
+		keyboardMode = false;
+		hoveredArea = null;
+		activeAreaIndex = getAreaIndex(_sortedAreas, selected[0]);
+	}}
+	onmousedown={(e) => e.preventDefault()}
+	onkeydown={doKeydown}
 	role="figure"
 	aria-labelledby="{metadata.slug}-line-description"
 >
-	{#if showIntervals && 'uci_95' in data}
-		<div class="legend-container" aria-hidden="true">
-			<svg width="300" height="60">
-				<!-- <rect x="2.5" y="1" width="25" height="25" fill={ONScolours.grey35}></rect> -->
-				<path d="M14 15  L46 15 L46 45  L14 35" stroke="none" fill={ONScolours.grey35}></path>
-				<line x1="10" y1="22.5" x2="50" y2="28.5" stroke={ONScolours.grey100} stroke-width="3.5" />
-				<circle
-					cx="30"
-					cy="25.5"
-					r="5"
-					fill={ONScolours.grey100}
-					stroke={ONScolours.white}
-					stroke-width="1"
-				/>
-				<!-- arrow ci -->
-				<path
-					d="
-					M30,42 L30,54 L75,54
-        			M30,42 L26,48
-        			M30,42 L34,48
-					"
-					stroke={ONScolours.grey100}
-					fill="none"
-					stroke-width="1.2"
-				>
-				</path>
-				<text x="80" y="54" text-anchor="start" class="legend-text">
-					<tspan y="54" x="80" dy="0.35em">95% confidence interval</tspan>
-				</text>
-				<!-- arrow estimate -->
-				<path
-					d="
-					M75,28.5 L54,28.5
-        			M54,28.5 L60,24.5
-        			M54,28.5 L60,32.5"
-					stroke={ONScolours.grey100}
-					stroke-width="1.2"
-				></path>
-				<text x="80" y="29" text-anchor="start" class="legend-text">
-					<tspan y="29" x="80" dy="0.35em">Estimated value</tspan>
-				</text>
-			</svg>
-		</div>
+	{#if width < mobileBreakpoint && mode == 'embed'}
+		<ul class="top-labels">
+			{#if selectedData.length && !hoveredArea}
+				<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={true} inlineItems={true}
+				></AreasLegend>
+			{/if}
+
+			{#if hoveredArea}
+				<AreasLegend
+					selectedAreas={hoveredCodesNames}
+					useMarkerShapes={true}
+					inlineItems={true}
+					hovered={true}
+				></AreasLegend>
+			{/if}
+		</ul>
 	{/if}
-	<div class="line-inner" aria-hidden="true">
-		{#if _data && xScale && yScale}
-			<div class="line-x-axis">
-				{#if yDomain?.[0] <= 0 && yDomain?.[1] >= 0}
-					<div class="x-baseline" style:top="{yScale(0)}px"></div>
-				{/if}
-				{#each xTicks as xTick}
-					<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
-					<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-						{formatPeriodShort(xTick)}
-					</div>
-				{/each}
+
+	<p class="ons-u-vh" id="{metadata.slug}-line-description">
+		Line chart for {metadata.label}. The data is available to download below.
+	</p>
+	<div
+		bind:clientWidth={width}
+		class="line-wrapper"
+		tabindex="-1"
+		style:padding-left="{leftMargin}px"
+		style:padding-bottom="35px"
+		style:padding-right="{rightMargin}px"
+		style:padding-top={showIntervals && 'uci_95' in data ? '0px' : '20px'}
+	>
+		{#if showIntervals && 'uci_95' in data}
+			<div class="legend-container" aria-hidden="true">
+				<svg width="300" height="60">
+					<path d="M14 15  L46 15 L46 45  L14 35" stroke="none" fill={ONScolours.grey35}></path>
+					<line
+						x1="10"
+						y1="22.5"
+						x2="50"
+						y2="28.5"
+						stroke={ONScolours.grey100}
+						stroke-width="3.5"
+					/>
+					<circle
+						cx="30"
+						cy="25.5"
+						r="5"
+						fill={ONScolours.grey100}
+						stroke={ONScolours.white}
+						stroke-width="1"
+					/>
+					<path
+						d="
+						M30,42 L30,54 L75,54
+          			M30,42 L26,48
+          			M30,42 L34,48
+						"
+						stroke={ONScolours.grey100}
+						fill="none"
+						stroke-width="1.2"
+					>
+					</path>
+					<text x="80" y="54" text-anchor="start" class="legend-text">
+						<tspan y="54" x="80" dy="0.35em">95% confidence interval</tspan>
+					</text>
+					<path
+						d="
+						M75,28.5 L54,28.5
+          			M54,28.5 L60,24.5
+          			M54,28.5 L60,32.5"
+						stroke={ONScolours.grey100}
+						stroke-width="1.2"
+					></path>
+					<text x="80" y="29" text-anchor="start" class="legend-text">
+						<tspan y="29" x="80" dy="0.35em">Estimated value</tspan>
+					</text>
+				</svg>
 			</div>
-			<div class="line-y-axis">
-				<div class="y-baseline"></div>
-				{#key yDomain}
-					{#each yTicks as yTick, i}
-						<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
-						<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
-							{prefix}{yTicksAreIntegers
-								? yTick.toLocaleString('en-GB')
-								: formatValue(yTick)}{suffix}
+		{/if}
+		<div class="line-inner" aria-hidden="true">
+			{#if _data && xScale && yScale}
+				<div class="line-x-axis">
+					{#if yDomain?.[0] <= 0 && yDomain?.[1] >= 0}
+						<div class="x-baseline" style:top="{yScale(0)}px"></div>
+					{/if}
+					{#each xTicks as xTick}
+						<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
+						<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
+							{formatPeriodShort(xTick)}
 						</div>
 					{/each}
-				{/key}
-			</div>
-			<div class="margin-labels" style:right="-{rightMargin}px">
-				{#if width >= mobileBreakpoint && hoveredArea}
-					<div
-						class="margin-label-hovered"
-						aria-live="assertive"
-						style:left="{xScale(_data.dateDomain[1]) + 10}px"
-						style:top="{yScale(finalHoveredValue)}px"
-						style:max-width="{rightMargin - dodgedLabelGap}px"
-					>
-						{hovered?.[0]?.areanm}
-					</div>
-				{/if}
-				{#if width >= mobileBreakpoint}
-					<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
-						{#key _data}
-							{#each selectedData as arr, i}
-								{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-								{@const id = arr[0][idKey]}
-								{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
-								{@const isDodged = labelLookup?.[i]?.isDodged}
-								<div
-									bind:clientHeight={labelHeights[id]}
-									data-id={id}
-									class="margin-label-selected"
-									style:left="{isDodged
-										? xScale(_data.dateDomain[1]) + dodgedLabelGap
-										: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
-									style:top="{yPos}px"
-									style:color={getPaletteColor(selectedIndex, selected.length, 'text')}
-									style:max-width="{rightMargin - dodgedLabelGap}px"
-								>
-									{arr?.[0][labelKey]}
-								</div>
-							{/each}
-						{/key}
-					</div>
-				{/if}
-			</div>
-			<svg
-				viewBox="0 0 {widthInner} {height}"
-				class="line-chart"
-				preserveAspectRatio="none"
-				onmousemove={(ev) => {
-					const datum = quadtree?.find?.(ev.layerX, ev.layerY);
-					if (datum) hoveredArea = datum[idKey];
-				}}
-				onmouseout={() => (hoveredArea = null)}
-				onblur={() => (hoveredArea = null)}
-				role="tooltip"
-			>
-				<defs>
-					{#each Object.entries(markerPaths) as [name, path], i}
-						<clipPath id="clip-{name}">
-							<path d={path} />
-						</clipPath>
-						<marker
-							id={name}
-							viewBox="-4 -4 8 8"
-							markerWidth="14"
-							markerHeight="14"
-							markerUnits="userSpaceOnUse"
+				</div>
+				<div class="line-y-axis">
+					<div class="y-baseline"></div>
+					{#key yDomain}
+						{#each yTicks as yTick, i}
+							<div class="line-y-tick" style:top="{yScale(yTick)}px"></div>
+							<div use:updateLeftMargin={i} class="line-y-tick-label" style:top="{yScale(yTick)}px">
+								{prefix}{yTicksAreIntegers
+									? yTick.toLocaleString('en-GB')
+									: formatValue(yTick)}{suffix}
+							</div>
+						{/each}
+					{/key}
+				</div>
+				<div class="margin-labels" style:right="-{rightMargin}px">
+					{#if width >= mobileBreakpoint && hoveredArea}
+						<div
+							class="margin-label-hovered"
+							aria-live="assertive"
+							style:left="{xScale(_data.dateDomain[1]) + 10}px"
+							style:top="{yScale(finalHoveredValue)}px"
+							style:max-width="{rightMargin - dodgedLabelGap}px"
 						>
-							<path d={path} fill={ONScolours.white} stroke={ONScolours.white} stroke-width={1} />
-							<path
-								d={path}
-								fill={name.includes('Hollow')
-									? ONScolours.white
-									: getPaletteColor(i, selectedData.length)}
-								stroke={name.includes('Hollow') ? getPaletteColor(i, selectedData.length) : 'none'}
-								stroke-width={name.includes('Hollow') ? 2.75 : 0}
-								clip-path="url(#clip-{name})"
-							/>
-						</marker>
-					{/each}
-				</defs>
-				<g opacity={hoveredArea ? 0.2 : 1}>
-					{#each Object.values(_data.keyed) as arr, i}
-						{@render line(arr, lineStroke, linesGrey, lineOpacity)}
-					{/each}
-					{#each selectedData as arr, i}
-						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-						{@render ribbon(
-							arr,
-							getPaletteColor(selectedIndex, selected.length),
-							0.3,
-							arr[0][idKey]
-						)}
-					{/each}
-					{#each [...selectedData].reverse() as arr}
-						{@const selectedIndex = selected.indexOf(arr[0][idKey])}
-						{@const marker = getMarkerKey(selectedIndex, selected.length)}
-						{@render line(arr, 4.5, ONScolours.white, 1, marker)}
-						{@render line(arr, 3, getPaletteColor(selectedIndex, selected.length), 1, marker)}
-					{/each}
-				</g>
-				<g>
-					{#if hoveredArea}
-						{#if showIntervals && 'uci_95' in data}
-							{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
-						{/if}
-						{@render line(hovered, 4.5, ONScolours.white, 1)}
-						{@render line(hovered, 3, ONScolours.highlightOrangeDark, 1)}
-						{#if pointSpace > pointGap}
-							{#each hovered as c}
+							{hovered?.[0]?.areanm}
+						</div>
+					{/if}
+					{#if width >= mobileBreakpoint}
+						<div class="margin-labels-selected" style:visibility={hoveredArea ? 'hidden' : null}>
+							{#key _data}
+								{#each selectedData as arr, i}
+									{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+									{@const id = arr[0][idKey]}
+									{@const yPos = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
+									{@const isDodged = labelLookup?.[i]?.isDodged}
+									<div
+										bind:clientHeight={labelHeights[id]}
+										data-id={id}
+										class="margin-label-selected"
+										style:left="{isDodged
+											? xScale(_data.dateDomain[1]) + dodgedLabelGap
+											: xScale(_data.dateDomain[1]) + dodgedLabelGap / 2}px"
+										style:top="{yPos}px"
+										style:color={getPaletteColor(selectedIndex, selected.length, 'text')}
+										style:max-width="{rightMargin - dodgedLabelGap}px"
+									>
+										{arr?.[0][labelKey]}
+									</div>
+								{/each}
+							{/key}
+						</div>
+					{/if}
+				</div>
+				<svg
+					viewBox="0 0 {widthInner} {height}"
+					class="line-chart"
+					preserveAspectRatio="none"
+					tabindex="-1"
+					onmousemove={(ev) => {
+						const datum = quadtree?.find?.(ev.layerX, ev.layerY);
+						if (datum) hoveredArea = datum[idKey];
+					}}
+					onmouseout={() => (hoveredArea = null)}
+					onblur={() => (hoveredArea = null)}
+					role="tooltip"
+				>
+					<defs>
+						{#each Object.entries(markerPaths) as [name, path], i}
+							<clipPath id="clip-{name}">
+								<path d={path} />
+							</clipPath>
+							<marker
+								id={name}
+								viewBox="-4 -4 8 8"
+								markerWidth="14"
+								markerHeight="14"
+								markerUnits="userSpaceOnUse"
+							>
+								<path d={path} fill={ONScolours.white} stroke={ONScolours.white} stroke-width={1} />
+								<path
+									d={path}
+									fill={name.includes('Hollow')
+										? ONScolours.white
+										: getPaletteColor(i, selectedData.length)}
+									stroke={name.includes('Hollow')
+										? getPaletteColor(i, selectedData.length)
+										: 'none'}
+									stroke-width={name.includes('Hollow') ? 2.75 : 0}
+									clip-path="url(#clip-{name})"
+								/>
+							</marker>
+						{/each}
+					</defs>
+					<g opacity={hoveredArea ? 0.2 : 1}>
+						{#each Object.values(_data.keyed) as arr, i}
+							{@render line(arr, lineStroke, linesGrey, lineOpacity)}
+						{/each}
+						{#each selectedData as arr, i}
+							{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+							{@render ribbon(
+								arr,
+								getPaletteColor(selectedIndex, selected.length),
+								0.3,
+								arr[0][idKey]
+							)}
+						{/each}
+						{#each [...selectedData].reverse() as arr}
+							{@const selectedIndex = selected.indexOf(arr[0][idKey])}
+							{@const marker = getMarkerKey(selectedIndex, selected.length)}
+							{@render line(arr, 4.5, ONScolours.white, 1, marker)}
+							{@render line(arr, 3, getPaletteColor(selectedIndex, selected.length), 1, marker)}
+						{/each}
+					</g>
+					<g>
+						{#if hoveredArea}
+							{#if showIntervals && 'uci_95' in data}
+								{@render ribbon(hovered, ONScolours.highlightOrangeDark, 0.3, hoveredArea)}
+							{/if}
+							{@render line(hovered, 4.5, ONScolours.white, 1)}
+							{@render line(hovered, 3, ONScolours.highlightOrangeDark, 1)}
+							{#if pointSpace > pointGap}
+								{#each hovered as c}
+									<circle
+										cx={xScale(c.date)}
+										cy={yScale(c[yKey])}
+										r="5"
+										fill={ONScolours.highlightOrangeDark}
+										stroke={ONScolours.white}
+									></circle>
+								{/each}
+							{:else}
 								<circle
-									cx={xScale(c.date)}
-									cy={yScale(c[yKey])}
+									cx={xScale(hovered[0].date)}
+									cy={yScale(hovered[0][yKey])}
 									r="5"
 									fill={ONScolours.highlightOrangeDark}
 									stroke={ONScolours.white}
 								></circle>
-							{/each}
-						{:else}
-							<circle
-								cx={xScale(hovered[0].date)}
-								cy={yScale(hovered[0][yKey])}
-								r="5"
-								fill={ONScolours.highlightOrangeDark}
-								stroke={ONScolours.white}
-							></circle>
-							<circle
-								cx={xScale(hovered[hovered.length - 1].date)}
-								cy={yScale(hovered[hovered.length - 1][yKey])}
-								r="5"
-								fill={ONScolours.highlightOrangeDark}
-								stroke={ONScolours.white}
-							></circle>
+								<circle
+									cx={xScale(hovered[hovered.length - 1].date)}
+									cy={yScale(hovered[hovered.length - 1][yKey])}
+									r="5"
+									fill={ONScolours.highlightOrangeDark}
+									stroke={ONScolours.white}
+								></circle>
+							{/if}
 						{/if}
+					</g>
+					{#if width >= mobileBreakpoint && !hovered}
+						{#key _data}
+							<g>
+								{#each Array.isArray(selectedData) ? selectedData : [] as arr, i}
+									{@const yPosAdj = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
+									{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
+									{@const isDodged = labelLookup?.[i]?.isDodged}
+									{@const xMax = xScale(_data.dateDomain[1])}
+									{@const elbowX =
+										xScale(_data.dateDomain[1]) + pointRadius + 6 + (labelLookup?.[i]?.elbow ?? 0)}
+									{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, xMax)}
+								{/each}
+							</g>
+						{/key}
 					{/if}
-				</g>
-				{#if width >= mobileBreakpoint && !hovered}
-					{#key _data}
-						<g>
-							{#each Array.isArray(selectedData) ? selectedData : [] as arr, i}
-								{@const yPosAdj = labelLookup?.[i]?.y ?? yScale(arr[arr.length - 1][yKey])}
-								{@const yPosOrig = yScale(arr[arr.length - 1][yKey])}
-								{@const isDodged = labelLookup?.[i]?.isDodged}
-								{@const xMax = xScale(_data.dateDomain[1])}
-								{@const elbowX =
-									xScale(_data.dateDomain[1]) + pointRadius + 6 + (labelLookup?.[i]?.elbow ?? 0)}
-								{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, xMax)}
-							{/each}
-						</g>
-					{/key}
-				{/if}
-			</svg>
-		{/if}
+				</svg>
+			{/if}
+		</div>
 	</div>
+
+	{#if keyboardMode}
+		<p class="ons-u-fs-s line-keyboard-hint">
+			Use the arrow keys to move through the different areas
+		</p>
+	{/if}
 </div>
 
 <style>
@@ -602,5 +669,27 @@
 		padding-top: 4px;
 		padding-bottom: 4px;
 		text-align: left;
+	}
+
+	/* Keyboard navigation styles */
+	.line-wrapper-keyboard {
+		position: relative;
+		display: block;
+	}
+	.line-wrapper-keyboard:focus {
+		outline: 2px solid var(--ons-color-text);
+		box-shadow:
+			6px 6px var(--ons-color-focus),
+			6px -6px var(--ons-color-focus),
+			-6px -6px var(--ons-color-focus),
+			-6px 6px var(--ons-color-focus);
+	}
+	.keyboard-mode {
+		pointer-events: none;
+	}
+	.line-keyboard-hint {
+		display: block;
+		text-align: center;
+		margin-top: 10px;
 	}
 </style>
