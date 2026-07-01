@@ -19,10 +19,12 @@ const readJSON = vite
 		})();
 
 // Import directory reader if environment is not Vite
-const readdirSync = vite ? await (async () => {
-    const { readdirSync } = await import('node:fs');
-    return readdirSync;
-})() : () => [];
+const readdirSync = !vite
+	? await (async () => {
+			const { readdirSync } = await import('node:fs');
+			return readdirSync;
+		})()
+	: () => [];
 
 // Find all the data files in this directory (will be bundled into build)
 export const files = vite
