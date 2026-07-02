@@ -107,10 +107,11 @@
 	// --- Keyboard handler ---
 	function doKeydown(e) {
 		if (['ArrowLeft', 'ArrowDown'].includes(e.key)) {
+			e.preventDefault();
 			activeAreaIndex = (activeAreaIndex + 1) % _sortedAreas.length;
 			hoveredArea = _sortedAreas[activeAreaIndex];
-		}
-		if (['ArrowRight', 'ArrowUp'].includes(e.key)) {
+		} else if (['ArrowRight', 'ArrowUp'].includes(e.key)) {
+			e.preventDefault();
 			activeAreaIndex = (activeAreaIndex - 1 + _sortedAreas.length) % _sortedAreas.length;
 			hoveredArea = _sortedAreas[activeAreaIndex];
 		}
