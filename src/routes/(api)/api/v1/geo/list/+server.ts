@@ -9,6 +9,7 @@ export const GET: RequestHandler = ({ url }) => {
 			url,
 			new Set([
 				'geo',
+				'geoExtent',
 				'year',
 				'indicator',
 				'asLookup',
@@ -23,6 +24,7 @@ export const GET: RequestHandler = ({ url }) => {
 		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const geo = getParam(url, 'geo', 'all');
+	const geoExtent = getParam(url, 'geoExtent', 'all');
 	const year = getParam(url, 'year', 'latest');
 	const indicator = getParam(url, 'indicator', 'all');
 	const asLookup = getParam(url, 'asLookup', false);
@@ -34,6 +36,7 @@ export const GET: RequestHandler = ({ url }) => {
 
 	const areasList = getAreasList({
 		geo,
+		geoExtent,
 		year,
 		indicator,
 		asLookup,
