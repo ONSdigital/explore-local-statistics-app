@@ -1,7 +1,15 @@
 <script lang="ts">
 	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
-	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
+	import {
+		Hero,
+		NavSections,
+		Grid,
+		NavSection,
+		List,
+		Li,
+		Icon
+	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { makePeriodFormatter, downloadEvent } from '$lib/utils';
 	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
@@ -21,20 +29,34 @@
 		{ areacd: 'E06000002', areanm: 'Middlesborough' },
 		{ areacd: 'E06000003', areanm: 'Redcar and Cleveland' }
 	];
-	let comparisonGeographies = ['E92000001', 'E92000004'];
-	let selectedIndicators = [
-		'population-by-age-and-sex',
-		'net-additions-housing-stock',
-		'claimant-count'
+	let comparisonGeographies = [
+		{ areacd: 'E92000001', areanm: 'England' },
+		{ areacd: 'E92000004', areanm: 'East Midlands' }
 	];
+	let selectedIndicators = ['median-age', 'net-additions-housing-stock', 'claimant-count'];
+	$inspect(data);
 </script>
 
-<Hero background="#eaeaea" title="Bespoke page" width="medium">
-	<p class="ons-hero__text">
-		Custom built page for {primaryGeographies.areanm}, compared to {comparisonGeographies}, for the
-		following indicators: {selectedIndicators}.
-	</p>
-</Hero>
+<Hero
+	background="#eaeaea"
+	title="Bespoke page"
+	width="medium"
+	lede="Custom built page for:"
+	meta={[
+		{
+			key: 'Primary areas',
+			value: primaryGeographies.map((d) => d.areanm).join(', ')
+		},
+		{
+			key: 'Comparison areas',
+			value: comparisonGeographies.map((d) => d.areanm).join(', ')
+		},
+		{
+			key: 'Indicators',
+			value: selectedIndicators
+		}
+	]}
+></Hero>
 
 <NavSections cls="wider-nav-sections" marginTop>
 	<!-- {#each charts as chart}
@@ -50,4 +72,11 @@
 				/>
 			</NavSection>
 		{/each} -->
+	<Grid>
+		<!-- <NewComponentHereLikeSMbarchartOrHeatmap
+			metadata={data.indicator}
+			selected={primaryGeographies.areacd}
+			showIntervals={pageState.showConfidenceIntervals}
+		/> -->
+	</Grid>
 </NavSections>

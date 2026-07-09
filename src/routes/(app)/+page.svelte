@@ -69,9 +69,9 @@
 		>
 	</Card>
 
-	<Card title="Page builder" mode="featured">
+	<Card title="Custom Page Builder (CPB)" mode="featured">
 		<label for="search" style:display="block" style:margin-bottom="28px"
-			>Create a custom report for one or more geographies and comparison areas</label
+			>Create a custom report to compare mutiple geographies</label
 		>
 		<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder`)} small
 			>Page builder</Button
