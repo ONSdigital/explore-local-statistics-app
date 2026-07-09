@@ -6,7 +6,7 @@
 	const placeholders = [
 		`Eg. "Fareham" or "PO15 5RR"`,
 		`Eg. "Newport" or "NP10 8XG"`,
-		`Eg. "Manchester" or "M2 5LE`,
+		`Eg. "Manchester" or "M2 5LE"`,
 		`Eg. "Westminster" or "SW1P 4DF"`,
 		`Eg. "Darlington" or "DL1 5AD"`,
 		`Eg. "Edinburgh" or "EH8 8FT"`
