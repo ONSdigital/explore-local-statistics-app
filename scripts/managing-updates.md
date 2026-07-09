@@ -73,7 +73,16 @@ Commit and push the changes to generate a preview link, findable on the [deploym
 
 Once the changes are approved, the data team will merge all update branches ready to go live into the `main` branch on their repo.
 
-When this has happened, update from `develop` if there have been changes since making the update branch, then edit the `scripts/config/data-repo-version.json` file again - this time to pull in from data `main`. Rerun data:ingest and data:build and push the changes. This ensures that the go-live branch of the app is always up-to-date with the main branch of the data repo.
+When this has happened, make sure the update branch is up-to-date with `develop` (in case there have been changes since creating the update branch). The following code will checkout `develop`, update your local version from the remote version, then checkout your update branch, and merge any new changes on develop into your branch.
+
+```
+git checkout develop
+git pull
+git checkout updates/20-Apr/claimant-count-avg-house-price
+git merge develop
+```
+
+On your update branch, edit the `scripts/config/data-repo-version.json` file again - this time to pull in from data `main`. Rerun `npm run data:ingest` and `npm run data:build` and push the changes. This stage ensures that the go-live branch of the app is always up-to-date with the main branch of the data repo.
 
 Open a pull request to merge the app update branch into `develop`. Use the #els-developers slack channel to notify others to approve the PR. Once approved and ready to go live, open a PR to merge `main <-- develop`. Once approved and merged, notify the team that the app is ready to be pushed to live.
 
