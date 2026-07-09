@@ -182,7 +182,7 @@
 		</Observe>
 		{#if metadata.source.length > 0}
 			<div class="source-notes">
-				<strong>Source:</strong>
+				Source:
 				{#each metadata.source as s, i}
 					<a href={s.href} target="_blank"
 						>{s.name}<span class="ons-u-vh"> (link opens in a new tab)</span></a
