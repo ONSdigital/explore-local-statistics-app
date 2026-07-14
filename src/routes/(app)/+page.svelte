@@ -69,7 +69,7 @@
 		>
 	</Card>
 
-	<Card title="Custom Page Builder (CPB)" mode="featured">
+	<Card title="Area Comparison Page (CPB)" mode="featured">
 		<label for="search" style:display="block" style:margin-bottom="28px"
 			>Create a custom report to compare mutiple geographies</label
 		>

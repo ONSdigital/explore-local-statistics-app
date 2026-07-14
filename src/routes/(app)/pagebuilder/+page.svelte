@@ -16,13 +16,20 @@
 		Select,
 		Container,
 		Checkbox,
-		Button
+		Button,
+		Em
 	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
+	import { getAreaType } from '$lib/utils';
+	import type { D } from '@vitest/utils/dist/types.d-BCElaP-c.js';
 
 	let data = $props();
 	let checked = $state(false);
 	let value = null;
+	let buttonEnabled = $state(false);
+	let selectedAreaCode = $state(null);
+	let buildButtonEnablled = $state(false);
+	let children = $state([]);
 
 	let pageState = $state({
 		selectedAreas: [],
@@ -32,84 +39,113 @@
 		selectedIndicators: []
 	});
 
-	function addArea(area, type = 'primary') {
-		type === 'primary'
-			? pageState.selectedAreas.push(area)
-			: pageState.selectedComparison.push(area);
+	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
+
+	function enableButton() {
+		buttonEnabled = true;
 	}
 
-	function removeArea(area, type = 'primary') {
-		const areas = type === 'primary' ? pageState.selectedAreas : pageState.selectedComparison;
+	function addArea(code, type = 'parent') {
+		const area = areas.find((d) => d.areacd === code);
+		const _area = { ...area };
+		type === 'parent'
+			? pageState.selectedAreas.push(_area)
+			: pageState.selectedComparison.push(_area);
+	}
+
+	function removeArea(area, type = 'parent') {
+		const areas = type === 'parent' ? pageState.selectedAreas : pageState.selectedComparison;
 		const index = areas.findIndex((d) => d.areacd === area.areacd);
 		if (index !== -1) {
 			areas.splice(index, 1);
 		}
 	}
 
+	let childLabel = $derived(
+		selectedAreaCode
+			? 'Select children geographies'
+			: `Select children geographies in ${$selectedAreaCode}`
+	);
+
+	let childLevels = $derived(
+		children.map((d) => ({
+			label: d.label,
+			value: d.key
+		}))
+	);
+
+	async function findChildren(selectedAreaCode) {
+		const url = resolve(`/api/v1/geo/list?geoExtent=${selectedAreaCode}&groupByLevel=true`);
+		const results = await (await fetch(url)).json();
+		children = results;
+	}
+
 	$inspect(pageState);
 	$inspect(data);
-
-	// make it so only one comparison geography selectable
-	// change from having all within accordions
-	// add ability to choose indicator(?)
-	// add select all within parent - include parent as comparison(?)
-	// what about ability to add/remove
 </script>
 
-<Hero width="medium" title="Custom Page Builder" cls="titleblock-transparent">
+<Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
 	<p class="ons-hero__text">
-		Select the geographies and indicators of interest to build a dynamic report.
+		Select the geographies (and optionally any of their children geographies) to build a dynamic
+		report.
 	</p>
 </Hero>
 
 <Container>
-	<Accordion>
-		<AccordionItem title="Primary geographies">
+	<Section title="Select geographies">
+		<div class="select-container">
 			<Select
-				label="Geography"
+				label="Search for a geography:"
 				placeholder="Choose one or more"
-				autoClear="true"
-				options={data.data.geo
-					? Object.entries(data.data.geo).map(([value, obj]) => ({
-							label: obj.areanm,
-							value
-						}))
-					: []}
-				on:change={(e) => addArea(e.detail)}
-				bind:value
+				labelKey="areanm"
+				groupKey="type"
+				autoClear={false}
+				options={areas}
+				on:change={(e) => {
+					selectedAreaCode = e.detail.areacd;
+					findChildren(selectedAreaCode);
+					enableButton();
+				}}
 			></Select>
-			{#each pageState.selectedAreas as area, i}
-				<Button icon="cross" small on:click={() => removeArea(area)}>{area.label}</Button>
-			{/each}
-			<Checkbox id="average" label="Calculate average across these geographies" bind:checked compact
-			></Checkbox>
-		</AccordionItem>
+		</div>
+		<Button small="true" on:click={() => addArea(selectedAreaCode)}>Add to selection</Button>
 
-		<AccordionItem title="Comparison geographies">
+		<div class="select-container">
 			<Select
-				label="Geography"
-				placeholder="Choose a comparison geography"
-				options={data.data.geo
-					? Object.entries(data.data.geo).map(([value, obj]) => ({
-							label: obj.areanm,
-							value
-						}))
-					: []}
-				on:change={(e) => addArea(e.detail, 'comparison')}
+				label={childLabel}
+				placeholder="Lower tier/unitary authorities"
+				options={childLevels}
+				autoClear={false}
 			></Select>
-			{#each pageState.selectedComparison as area, i}
-				<Button icon="cross" small on:click={() => removeArea(area, 'comparison')}
-					>{area.label}</Button
-				>
-			{/each}
-		</AccordionItem>
-		<AccordionItem title="Indicators">
-			<Select
-				label="Indicators"
-				placeholder="Choose one or more indicators"
-				options={data.data.taxonomy.data ? data.data.taxonomy.data : []}
-			></Select>
-		</AccordionItem>
-	</Accordion>
-	<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder/build`)}>Build page</Button>
+		</div>
+		<Button
+			small="true"
+			on:click={(e) => addArea(selectedAreaCode, 'children')}
+			disabled={!buttonEnabled}>Add to selection</Button
+		>
+	</Section>
+
+	<Section title="Selected geographies:">
+		{#each pageState.selectedAreas as area, i}
+			<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}
+				>{area.areanm}</Button
+			>
+		{/each}
+	</Section>
+	<Button
+		icon="arrow"
+		iconPosition="after"
+		href={resolve(`/pagebuilder/build`)}
+		disabled={!buildButtonEnablled}>Build page</Button
+	>
 </Container>
+
+<style>
+	:global(.ons-btn) {
+		margin: 0.5em 0.5em 0 0;
+	}
+
+	.select-container {
+		margin-top: 1em;
+	}
+</style>

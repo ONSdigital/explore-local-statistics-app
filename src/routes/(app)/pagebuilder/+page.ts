@@ -3,13 +3,15 @@ import { resolve } from '$app/paths';
 
 export const load: PageLoad = async ({ fetch }) => {
 	const taxonomyPath = resolve('/api/v1/metadata/taxonomy?flat=true');
-	const geographyPath = resolve('/api/v1/geo/list?asLookup=true,year=all');
+	const areasPath = resolve('/api/v1/geo/list?year=all');
 	const taxonomy = await (await fetch(taxonomyPath)).json();
-	const geo = await (await fetch(geographyPath)).json();
+	const areas = await (await fetch(areasPath)).json();
+
+	areas.sort((a, b) => a.areanm.localeCompare(b.areanm));
 
 	return {
 		taxonomy,
-		geo,
+		areas,
 
 		// Page metadata
 		title: 'Explore local indicators - ONS',
