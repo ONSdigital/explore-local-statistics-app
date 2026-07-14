@@ -31,7 +31,8 @@ export const load: PageLoad = async ({ fetch, params, url }) => {
 			showIntervals,
 			geoLevel: geoLevel ? { id: geo, ...geoLevel } : null,
 			selected: [selected].flat(),
-			timeRange: typeof timeRange === 'string' ? [timeRange, timeRange] : timeRange
+			timeRange: typeof timeRange === 'string' ? [timeRange, timeRange] : timeRange,
+			noIndex: true
 		};
 	} catch {
 		error(404, { message: 'Selected data indicator not found.' });

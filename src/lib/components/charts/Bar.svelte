@@ -160,6 +160,7 @@
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 	let xTicks = $derived(xScale?.ticks?.(nXTicks) || []);
 	let xTicksAreIntegers = $derived(xTicks.every((d) => d % 1 === 0));
+	$inspect(labelLookup);
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
@@ -232,7 +233,8 @@
 	yPosAdj: number,
 	isDodged: boolean,
 	elbowX: number,
-	height: number
+	height: number,
+	yKey: number
 )}
 	{#if isDodged && yPosAdj !== yPosOrig}
 		<polyline
@@ -243,7 +245,7 @@
 						`-14,${yPosAdj + height / 2}`,
 						`${elbowX},${yPosAdj + height / 2}`,
 						`${elbowX},${yPosOrig + height / 2}`,
-						`-2,${yPosOrig + height / 2}`
+						`${xScale(Math.min(yKey, 0)) - 2},${yPosOrig + height / 2}`
 					]
 				: [`-14,${yPosOrig + height / 2}`, `-2,${yPosOrig + height / 2}`]
 			).join(' ')}
@@ -467,9 +469,9 @@
 						{@const yPosAdj = labelLookup?.[i]?.y || yScale(a[0][idKey]).y}
 						{@const yPosOrig = yScale(a[0][idKey]).y}
 						{@const height = yScale(a[0][idKey]).height}
-						{@const elbowX = xScale(0) - 6 - labelLookup?.[i]?.elbow}
+						{@const elbowX = xScale(Math.min(0, a[0][yKey])) - 6 - labelLookup?.[i]?.elbow}
 						{@const isDodged = labelLookup?.[i]?.isDodged}
-						{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, height)}
+						{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, height, a[0][yKey])}
 					{/each}
 				</g>
 			{/if}

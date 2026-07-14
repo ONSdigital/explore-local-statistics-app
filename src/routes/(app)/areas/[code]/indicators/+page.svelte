@@ -81,12 +81,6 @@
 	}
 </script>
 
-<svelte:head>
-	{#if areaProps.end && areaProps.successor?.areacd}
-		<meta name="robots" content="noindex" />
-	{/if}
-</svelte:head>
-
 <div class="titleblock-container">
 	<Hero
 		width="medium"

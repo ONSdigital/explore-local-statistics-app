@@ -8,7 +8,7 @@ const geoArray = Object.values(geoMetadata);
 
 export default function getAreasList(params = {}) {
 	let areasList;
-	const filter = makeAreaListFilter(params.geo, params.year, params.indicator);
+	const filter = makeAreaListFilter(params.geo, params.geoExtent, params.year, params.indicator);
 	if (filter) areasList = geoArray.filter(filter);
 	else areasList = geoArray;
 

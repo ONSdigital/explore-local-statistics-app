@@ -172,7 +172,7 @@
 						class="sparkline-y-tick-label"
 						style:top="{yScale(yTick)}%"
 					>
-						{formatYTick(yTick)}
+						{Math.abs(yTick) < 1 ? format('~f')(yTick) : formatYTick(yTick)}
 					</div>
 				{/each}
 			</div>

@@ -31,12 +31,6 @@
 	}
 </script>
 
-<svelte:head>
-	{#if !geoCodesIndexed.has(areaProps.typecd) || (areaProps.end && areaProps.successor?.areacd)}
-		<meta name="robots" content="noindex" />
-	{/if}
-</svelte:head>
-
 <Hero
 	title={getName(areaProps)}
 	titleBadge={{
