@@ -16,10 +16,12 @@
 		Select,
 		Container,
 		Checkbox,
+		Checkboxes,
 		Button,
-		Em
+		Em,
+		Indent
 	} from '@onsvisual/svelte-components';
-	import { capitalise } from '@onsvisual/robo-utils';
+	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
 	import type { D } from '@vitest/utils/dist/types.d-BCElaP-c.js';
 
@@ -28,15 +30,14 @@
 	let value = null;
 	let buttonEnabled = $state(false);
 	let selectedAreaCode = $state(null);
-	let buildButtonEnablled = $state(false);
+	let selectedChildLevels = $state([]);
+	let buildButtonEnabled = $state(false);
 	let children = $state([]);
 
 	let pageState = $state({
 		selectedAreas: [],
-		selectedComparison: [],
-		// selectedGeoLevel: data.geoLevels.find((g) => g.id === data.indicator.geography.initialLevel),
-		// selectedPeriodRange: [data.periods[0], data.periods[data.periods.length - 1]],
-		selectedIndicators: []
+		selectedComparison: []
+		// selectedIndicators: []
 	});
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
@@ -45,43 +46,97 @@
 		buttonEnabled = true;
 	}
 
-	function addArea(code, type = 'parent') {
+	function addArea(code) {
 		const area = areas.find((d) => d.areacd === code);
 		const _area = { ...area };
-		type === 'parent'
-			? pageState.selectedAreas.push(_area)
-			: pageState.selectedComparison.push(_area);
+		pageState.selectedAreas.push(_area);
 	}
 
-	function removeArea(area, type = 'parent') {
-		const areas = type === 'parent' ? pageState.selectedAreas : pageState.selectedComparison;
+	function addChildren(children) {
+		children.forEach((child) => {
+			const area = { ...child };
+			pageState.selectedAreas.push(area);
+		});
+	}
+
+	function removeArea(area) {
+		const areas = pageState.selectedAreas;
 		const index = areas.findIndex((d) => d.areacd === area.areacd);
 		if (index !== -1) {
 			areas.splice(index, 1);
 		}
 	}
 
+	function clearAllSelected() {
+		pageState.selectedAreas = [];
+	}
+
 	let childLabel = $derived(
 		selectedAreaCode
-			? 'Select children geographies'
-			: `Select children geographies in ${$selectedAreaCode}`
+			? childLevels.length
+				? `Select children geographies in ${selectedAreaCode}`
+				: `No smaller geographies available in ${selectedAreaCode}`
+			: 'Select children geographies'
 	);
 
+	// let secondButtonLabel = $derived(
+	// 	childLevels.length
+	// 		? `Add ${filteredChildren.length} ${pluralise(selectedChildLevel).toLowerCase()}`
+	// 		: 'Add to selection'
+	// );
+
+	let secondButtonLabel = $derived('Add to selection');
+
 	let childLevels = $derived(
-		children.map((d) => ({
-			label: d.label,
-			value: d.key
+		children.map((g) => ({
+			label: g.label,
+			value: g.key
 		}))
 	);
 
-	async function findChildren(selectedAreaCode) {
-		const url = resolve(`/api/v1/geo/list?geoExtent=${selectedAreaCode}&groupByLevel=true`);
+	// let filteredChildren = $derived(
+	// 	selectedChildLevels.length
+	// 		? children
+	// 				.filter((d) => selectedChildLevels.some((s) => s.label === d.label))
+	// 				.flatMap((d) =>
+	// 					d.areas.map((a) => ({
+	// 						...a,
+	// 						key: d.key,
+	// 						label: d.label
+	// 					}))
+	// 				)
+	// 		: []
+	// );
+
+	let filteredChildren = $derived(
+		selectedChildLevels.length
+			? children
+					.filter((d) => selectedChildLevels.some((s) => s.label === d.label))
+					.flatMap((d) =>
+						d.areas.map((a) => ({
+							...a,
+							key: d.key,
+							label: d.label
+						}))
+					)
+			: []
+	);
+
+	async function findChildren(code) {
+		if (!code) {
+			children = [];
+			return;
+		}
+		const url = resolve(`/api/v1/geo/list?geoExtent=${code}&groupByLevel=true`);
 		const results = await (await fetch(url)).json();
-		children = results;
+		children = Array.isArray(results) ? results : [];
 	}
 
 	$inspect(pageState);
 	$inspect(data);
+	$inspect(selectedChildLevels);
+	$inspect(filteredChildren);
+	$inspect(childLevels);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
@@ -96,13 +151,13 @@
 		<div class="select-container">
 			<Select
 				label="Search for a geography:"
-				placeholder="Choose one or more"
+				placeholder="Search for an area"
 				labelKey="areanm"
 				groupKey="type"
 				autoClear={false}
 				options={areas}
 				on:change={(e) => {
-					selectedAreaCode = e.detail.areacd;
+					selectedAreaCode = e.detail?.areacd ?? e.detail;
 					findChildren(selectedAreaCode);
 					enableButton();
 				}}
@@ -110,19 +165,50 @@
 		</div>
 		<Button small="true" on:click={() => addArea(selectedAreaCode)}>Add to selection</Button>
 
-		<div class="select-container">
-			<Select
-				label={childLabel}
-				placeholder="Lower tier/unitary authorities"
-				options={childLevels}
-				autoClear={false}
-			></Select>
-		</div>
-		<Button
-			small="true"
-			on:click={(e) => addArea(selectedAreaCode, 'children')}
-			disabled={!buttonEnabled}>Add to selection</Button
-		>
+		{#if selectedAreaCode}
+			<!-- <Indent>
+				<div class="select-container">
+					<Select
+						label={childLabel}
+						placeholder="Select geography level"
+						options={childLevels}
+						on:change={(e) => {
+							selectedChildLevel = e.detail?.label ?? e.detail;
+						}}
+						autoClear={false}
+					></Select>
+				</div>
+				<Button
+					small="true"
+					on:click={(e) => addChildren(filteredChildren)}
+					disabled={!buttonEnabled}>{secondButtonLabel}</Button
+				>
+			</Indent> -->
+			<Indent>
+				<div class="select-container">
+					<Checkboxes
+						label={childLabel}
+						items={childLevels}
+						on:change={(e) => {
+							const item = e.detail.item;
+
+							if (item.checked) {
+								selectedChildLevels = [...selectedChildLevels, item];
+							} else {
+								// REMOVE the item
+								selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
+							}
+						}}
+						compact
+					></Checkboxes>
+				</div>
+				<Button
+					small="true"
+					on:click={(e) => addChildren(filteredChildren)}
+					disabled={!buttonEnabled}>{secondButtonLabel}</Button
+				>
+			</Indent>
+		{/if}
 	</Section>
 
 	<Section title="Selected geographies:">
@@ -132,11 +218,14 @@
 			>
 		{/each}
 	</Section>
+	{#if pageState.selectedAreas.length > 1}
+		<Button on:click={clearAllSelected()} small="true">Clear all</Button>
+	{/if}
 	<Button
 		icon="arrow"
 		iconPosition="after"
 		href={resolve(`/pagebuilder/build`)}
-		disabled={!buildButtonEnablled}>Build page</Button
+		disabled={!buildButtonEnabled}>Build page</Button
 	>
 </Container>
 
