@@ -120,16 +120,12 @@ function makeIndicators(ds, meta, data, cols) {
 			new Set(
 				rows.map((d) => {
 					const period = d[periodCol.titles[0]];
-					return period.toISOString ? period.toISOString().slice(0, 10) : period;
+					return period;
 				})
 			)
-		);
+		).sort((a, b) => a.localeCompare(b, 'en-GB'));
 		const { frequency, periodFormat } = definedPeriodFormats[ds] || inferPeriodFormat(periods);
-		const dates = periods.map((p) => new Date(p.split('/')[0]));
-		const periodDomain = [
-			new Date(Math.min(...dates)).toISOString().slice(0, 10),
-			new Date(Math.max(...dates)).toISOString().slice(0, 10)
-		];
+		const periodDomain = [periods[0], periods[periods.length - 1]];
 
 		const indicator = {
 			code,

@@ -183,7 +183,7 @@
 					type="fill"
 					paint={{
 						'fill-color': ['get', 'color'],
-						'fill-opacity': 0.7
+						'fill-opacity': 1
 					}}
 					order="place_other"
 					hover
