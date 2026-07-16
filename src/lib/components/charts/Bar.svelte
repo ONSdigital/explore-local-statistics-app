@@ -16,11 +16,13 @@
 		formatPeriod = (d) => d,
 		showIntervals,
 		selected = [],
-		hoveredArea = null,
+		hoveredArea = $bindable(null), // made bindable for keyboard control
 		geoLevel,
 		mode = 'default',
 		extendHeight = null
 	} = $props();
+
+	let keyboardMode = $state(false); // tracks whether user is navigating by keyboard
 
 	let width = $state();
 	let leftMargin = $derived(width < mobileBreakpoint ? 20 : 250);
@@ -161,6 +163,35 @@
 	let xTicks = $derived(xScale?.ticks?.(nXTicks) || []);
 	let xTicksAreIntegers = $derived(xTicks.every((d) => d % 1 === 0));
 	$inspect(labelLookup);
+
+	// --- Keyboard navigation: sorted area list and active index ---
+	// _data.array is already pre-sorted large -> small, so we can reuse that order directly
+	let _sortedAreas = $derived(_data ? _data.array.map((d) => d[idKey]) : []);
+
+	function getAreaIndex(areas, id) {
+		const index = areas.findIndex((cd) => cd === id);
+		return index === -1 ? 0 : index;
+	}
+
+	let activeAreaIndex = $state(0);
+	$effect(() => {
+		activeAreaIndex = getAreaIndex(_sortedAreas, selected[0]);
+	});
+	// --- End keyboard navigation setup ---
+
+	// --- Keyboard handler ---
+	function doKeydown(e) {
+		if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+			e.preventDefault();
+			activeAreaIndex = (activeAreaIndex + 1) % _sortedAreas.length;
+			hoveredArea = _sortedAreas[activeAreaIndex];
+		} else if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+			e.preventDefault();
+			activeAreaIndex = (activeAreaIndex - 1 + _sortedAreas.length) % _sortedAreas.length;
+			hoveredArea = _sortedAreas[activeAreaIndex];
+		}
+	}
+	// --- End keyboard handler ---
 </script>
 
 {#snippet bar(b, fill = ONScolours.grey40, opacity = 1, id = '', strokeWidth = 0)}
@@ -174,10 +205,10 @@
 		stroke={ONScolours.white}
 		{fill}
 		{opacity}
-		on:pointerenter={() => {
+		onpointerenter={() => {
 			hoveredArea = id;
 		}}
-		on:pointerleave={() => {
+		onpointerleave={() => {
 			hoveredArea = null;
 		}}
 		style:pointer-events={fill === ONScolours.grey40 ? null : 'none'}
@@ -195,10 +226,10 @@
 		stroke={ONScolours.white}
 		stroke-width={strokeWidth}
 		{opacity}
-		on:pointerenter={() => {
+		onpointerenter={() => {
 			hoveredArea = id;
 		}}
-		on:pointerleave={() => {
+		onpointerleave={() => {
 			hoveredArea = null;
 		}}
 		style:pointer-events={fill === ONScolours.black ? null : 'none'}
@@ -217,10 +248,10 @@
 			{opacity}
 			stroke="white"
 			stroke-width={strokeWidth}
-			on:pointerenter={() => {
+			onpointerenter={() => {
 				hoveredArea = id;
 			}}
-			on:pointerleave={() => {
+			onpointerleave={() => {
 				hoveredArea = null;
 			}}
 			style:pointer-events={fill === ONScolours.grey40 ? null : 'none'}
@@ -256,227 +287,252 @@
 	{/if}
 {/snippet}
 
-{#if width < mobileBreakpoint && mode == 'embed'}
-	<ul class="top-labels">
-		{#if selectedData.length && !hovered}
-			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
-			></AreasLegend>
-		{/if}
-		<AreasLegend
-			selectedAreas={hoveredCodesNames}
-			useMarkerShapes={true}
-			inlineItems={true}
-			hovered={true}
-		></AreasLegend>
-		{#if hovered}{/if}
-	</ul>
-{/if}
-
-<p id="{metadata.slug}-bar-description" class="ons-u-vh">
-	Bar chart for {metadata.label}. The data is available to download below.
-</p>
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-	bind:clientWidth={width}
-	class="bar-wrapper"
-	style:padding-right="{rightMargin}px"
-	style:padding-top={showIntervals && 'uci_95' in data ? '10px' : '30px'}
-	style:padding-bottom="25px"
-	style:padding-left="{leftMargin}px"
+	class="bar-wrapper-keyboard"
+	class:keyboard-mode={keyboardMode}
+	tabindex="0"
+	onfocus={() => {
+		keyboardMode = true;
+		hoveredArea = _sortedAreas[activeAreaIndex];
+	}}
+	onblur={() => {
+		keyboardMode = false;
+		hoveredArea = null;
+		activeAreaIndex = getAreaIndex(_sortedAreas, selected[0]);
+	}}
+	onmousedown={(e) => e.preventDefault()}
+	onkeydown={doKeydown}
 	role="figure"
 	aria-labelledby="{metadata.slug}-bar-description"
 >
-	{#if showIntervals && 'uci_95' in data}
-		<div class="legend-container" aria-hidden="true">
-			<svg width="300" height="60">
-				<rect x="0" y="1" width="50" height="16" fill={ONScolours.grey40}></rect>
-				<line x1="25" y1="1" x2="25" y2="17" stroke={ONScolours.grey75} stroke-width="2.5" />
-				<!-- arrow estimate -->
-				<path
-					d="
-					M25,20 L25,35 L68,35 
-					M25,20 L19,26 
-					M25,20 L31,26"
-					stroke={ONScolours.grey100}
-					fill="none"
-					stroke-width="1.2"
-				>
-				</path>
-				<text x="73" y="52" text-anchor="start" class="legend-text">
-					<tspan y="52" x="73" dy="-0.7500000000000001em">Estimated value</tspan>
-				</text>
-				<!-- arrow ci -->
-				<path
-					d="M -5.5 0 L 5.5 -0 M -5.5 0 L -1.5 -4 M -5.5 0 L -1.5 4"
-					stroke={ONScolours.grey100}
-					transform="translate(60,10)"
-					stroke-width="1.2"
-				></path>
-				<text x="71" y="10" text-anchor="start" class="legend-text">
-					<tspan y="10" x="71" dy="0.35em">95% confidence interval</tspan>
-				</text>
-			</svg>
-		</div>
+	{#if width < mobileBreakpoint && mode == 'embed'}
+		<ul class="top-labels">
+			{#if selectedData.length && !hovered}
+				<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
+				></AreasLegend>
+			{/if}
+			<AreasLegend
+				selectedAreas={hoveredCodesNames}
+				useMarkerShapes={true}
+				inlineItems={true}
+				hovered={true}
+			></AreasLegend>
+			{#if hovered}{/if}
+		</ul>
 	{/if}
-	<div class="bar-inner" aria-hidden="true">
-		<div class="line-y-axis">
-			<div class="y-baseline" style:left="{xScale(0)}px"></div>
-		</div>
-		<div class="line-x-axis">
-			<div class="x-baseline" style:top="0"></div>
-			{#each xTicks as xTick}
-				<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
-				<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
-					{prefix}{xTicksAreIntegers ? xTick.toLocaleString('en-GB') : formatValue(xTick)}{suffix}
-				</div>
-			{/each}
-		</div>
-		<div class="margin-labels">
-			{#if width >= mobileBreakpoint}
-				{#if hovered}
-					<div
-						class="margin-label-hovered"
-						aria-live="assertive"
-						style:top="{yScale(hovered[idKey]).y + yScale(hovered[idKey]).height / 2}px"
-						style:max-width="{leftMargin - 16}px"
-						style:left="-8px"
-					>
-						{hovered?.[labelKey]}
-					</div>
-				{/if}
 
-				{#if _data.array.length <= maxUnscaledBarsCount && !hovered}
-					<!-- add a filtering stage here to ensure selected areas aren't shown -->
-					{#each _data.array as s}
+	<p id="{metadata.slug}-bar-description" class="ons-u-vh">
+		Bar chart for {metadata.label}. The data is available to download below.
+	</p>
+	<div
+		bind:clientWidth={width}
+		class="bar-wrapper"
+		style:padding-right="{rightMargin}px"
+		style:padding-top={showIntervals && 'uci_95' in data ? '10px' : '30px'}
+		style:padding-bottom="25px"
+		style:padding-left="{leftMargin}px"
+	>
+		{#if showIntervals && 'uci_95' in data}
+			<div class="legend-container" aria-hidden="true">
+				<svg width="300" height="60">
+					<rect x="0" y="1" width="50" height="16" fill={ONScolours.grey40}></rect>
+					<line x1="25" y1="1" x2="25" y2="17" stroke={ONScolours.grey75} stroke-width="2.5" />
+					<!-- arrow estimate -->
+					<path
+						d="
+						M25,20 L25,35 L68,35 
+						M25,20 L19,26 
+						M25,20 L31,26"
+						stroke={ONScolours.grey100}
+						fill="none"
+						stroke-width="1.2"
+					>
+					</path>
+					<text x="73" y="52" text-anchor="start" class="legend-text">
+						<tspan y="52" x="73" dy="-0.7500000000000001em">Estimated value</tspan>
+					</text>
+					<!-- arrow ci -->
+					<path
+						d="M -5.5 0 L 5.5 -0 M -5.5 0 L -1.5 -4 M -5.5 0 L -1.5 4"
+						stroke={ONScolours.grey100}
+						transform="translate(60,10)"
+						stroke-width="1.2"
+					></path>
+					<text x="71" y="10" text-anchor="start" class="legend-text">
+						<tspan y="10" x="71" dy="0.35em">95% confidence interval</tspan>
+					</text>
+				</svg>
+			</div>
+		{/if}
+		<div class="bar-inner" aria-hidden="true">
+			<div class="line-y-axis">
+				<div class="y-baseline" style:left="{xScale(0)}px"></div>
+			</div>
+			<div class="line-x-axis">
+				<div class="x-baseline" style:top="0"></div>
+				{#each xTicks as xTick}
+					<div class="line-x-tick" style:left="{xScale(xTick)}px"></div>
+					<div class="line-x-tick-label" style:left="{xScale(xTick)}px">
+						{prefix}{xTicksAreIntegers ? xTick.toLocaleString('en-GB') : formatValue(xTick)}{suffix}
+					</div>
+				{/each}
+			</div>
+			<div class="margin-labels">
+				{#if width >= mobileBreakpoint}
+					{#if hovered}
 						<div
-							class="margin-label-geo-all"
-							style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
+							class="margin-label-hovered"
+							aria-live="assertive"
+							style:top="{yScale(hovered[idKey]).y + yScale(hovered[idKey]).height / 2}px"
 							style:max-width="{leftMargin - 16}px"
 							style:left="-8px"
 						>
-							{s[labelKey]}
+							{hovered?.[labelKey]}
 						</div>
-					{/each}
-				{/if}
-				<div class="margin-labels-selected" style:visibility={hovered ? 'hidden' : null}>
-					{#key _data}
-						{#each selectedData as a, i (a[0][idKey])}
-							{@const id = a[0][idKey]}
-							{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
-							{@const height = yScale?.(a[0][idKey])?.height || 0}
-							{@const isDodged = labelLookup?.[i]?.isDodged}
+					{/if}
+
+					{#if _data.array.length <= maxUnscaledBarsCount && !hovered}
+						<!-- add a filtering stage here to ensure selected areas aren't shown -->
+						{#each _data.array as s}
 							<div
-								bind:clientHeight={labelHeights[id]}
-								data-id={id}
-								class="margin-label-selected"
-								style:top="{yPos ? yPos + height / 2 : 0}px"
-								style:left={isDodged ? '-16px' : '-8px'}
-								style:color={getPaletteColor(i, selectedData.length, 'text')}
+								class="margin-label-geo-all"
+								style:top="{yScale(s[idKey]).y + yScale(s[idKey]).height / 2}px"
 								style:max-width="{leftMargin - 16}px"
+								style:left="-8px"
 							>
-								{a[0][labelKey]}
+								{s[labelKey]}
 							</div>
 						{/each}
-					{/key}
-				</div>
-			{/if}
-		</div>
-		<svg
-			viewBox="0 0 {widthInner} {height}"
-			class="bar-chart"
-			preserveAspectRatio="none"
-			style:height="{height}px"
-		>
-			{#if _data && xScale && yScale}
-				<g opacity={hovered ? 0.5 : 1}>
-					{#each _data.array as b, i (b[idKey])}
-						{#if !showIntervals || !('uci_95' in data)}
-							{@render bar(b, setBarColour(b[idKey]), 1, b[idKey], setBarStroke(b[idKey]))}
-						{:else}
-							{@render bar(
-								b,
-								setBarColour(b[idKey]),
-								setBarOpacity(b[idKey]),
-								b[idKey],
-								setBarStroke(b[idKey])
-							)}
-							{@render confidence(b, ONScolours.white, 1, 0, b[idKey], i)}
-							{@render confidence(
-								b,
-								setBarColour(b[idKey]),
-								1,
-								setConfidenceStroke(b[idKey]),
-								b[idKey],
-								i
-							)}
-							{@render estimate(
-								b,
-								setBarColour(b[idKey]),
-								3,
-								setEstimateStroke(b[idKey]),
-								1,
-								b[idKey],
-								i
-							)}
-							{@render estimate(
-								b,
-								setEstimateColour(b[idKey]),
-								3,
-								setEstimateStroke(b[idKey]),
-								0.6,
-								b[idKey],
-								i
-							)}
-							{#if b.uci_95 > 0 && b.lci_95 > 0}
-								<rect
-									x={xScale(b.lci_95) - 0.25}
-									y={yScale(b[idKey]).y}
-									width="0.8"
-									height={yScale(b[idKey]).height}
-									fill={ONScolours.white}
-								>
-								</rect>
-							{/if}
-						{/if}
-					{/each}
-				</g>
-				<g>
-					{#if hovered}
-						{#if !showIntervals || !('uci_95' in data)}
-							{@render bar(hovered, ONScolours.highlightOrangeDark, 1, hoveredArea)}
-						{:else}
-							{@render bar(hovered, ONScolours.highlightOrangeDark, 0.55, hoveredArea)}
-							{@render confidence(hovered, ONScolours.white, 1, 0.1, hoveredArea)}
-							{@render confidence(hovered, ONScolours.highlightOrangeDark, 1, 0.1, hoveredArea)}
-							{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 0.5, 1, hoveredArea)}
-							{@render estimate(hovered, ONScolours.black, 3, 0.5, 0.6, hoveredArea)}
-							{#if hovered.uci_95 && hovered.lci_95}
-								<rect
-									x={xScale(hovered.lci_95) - 0.25}
-									y={yScale(hovered[idKey]).y}
-									width="0.8"
-									height={yScale(hovered[idKey]).height}
-									fill={ONScolours.white}
-								>
-								</rect>
-							{/if}
-						{/if}
 					{/if}
-				</g>
-			{/if}
-			{#if width >= mobileBreakpoint && labelLookup?.[0] && !hovered}
-				<g>
-					{#each selectedData as a, i (a[0][idKey])}
-						{@const yPosAdj = labelLookup?.[i]?.y || yScale(a[0][idKey]).y}
-						{@const yPosOrig = yScale(a[0][idKey]).y}
-						{@const height = yScale(a[0][idKey]).height}
-						{@const elbowX = xScale(Math.min(0, a[0][yKey])) - 6 - labelLookup?.[i]?.elbow}
-						{@const isDodged = labelLookup?.[i]?.isDodged}
-						{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, height, a[0][yKey])}
-					{/each}
-				</g>
-			{/if}
-		</svg>
+					<div class="margin-labels-selected" style:visibility={hovered ? 'hidden' : null}>
+						{#key _data}
+							{#each selectedData as a, i (a[0][idKey])}
+								{@const id = a[0][idKey]}
+								{@const yPos = labelLookup?.[i]?.y || yScale?.(a[0][idKey])?.y}
+								{@const height = yScale?.(a[0][idKey])?.height || 0}
+								{@const isDodged = labelLookup?.[i]?.isDodged}
+								<div
+									bind:clientHeight={labelHeights[id]}
+									data-id={id}
+									class="margin-label-selected"
+									style:top="{yPos ? yPos + height / 2 : 0}px"
+									style:left={isDodged ? '-16px' : '-8px'}
+									style:color={getPaletteColor(i, selectedData.length, 'text')}
+									style:max-width="{leftMargin - 16}px"
+								>
+									{a[0][labelKey]}
+								</div>
+							{/each}
+						{/key}
+					</div>
+				{/if}
+			</div>
+			<svg
+				viewBox="0 0 {widthInner} {height}"
+				class="bar-chart"
+				preserveAspectRatio="none"
+				style:height="{height}px"
+			>
+				{#if _data && xScale && yScale}
+					<g opacity={hovered ? 0.5 : 1}>
+						{#each _data.array as b, i (b[idKey])}
+							{#if !showIntervals || !('uci_95' in data)}
+								{@render bar(b, setBarColour(b[idKey]), 1, b[idKey], setBarStroke(b[idKey]))}
+							{:else}
+								{@render bar(
+									b,
+									setBarColour(b[idKey]),
+									setBarOpacity(b[idKey]),
+									b[idKey],
+									setBarStroke(b[idKey])
+								)}
+								{@render confidence(b, ONScolours.white, 1, 0, b[idKey], i)}
+								{@render confidence(
+									b,
+									setBarColour(b[idKey]),
+									1,
+									setConfidenceStroke(b[idKey]),
+									b[idKey],
+									i
+								)}
+								{@render estimate(
+									b,
+									setBarColour(b[idKey]),
+									3,
+									setEstimateStroke(b[idKey]),
+									1,
+									b[idKey],
+									i
+								)}
+								{@render estimate(
+									b,
+									setEstimateColour(b[idKey]),
+									3,
+									setEstimateStroke(b[idKey]),
+									0.6,
+									b[idKey],
+									i
+								)}
+								{#if b.uci_95 > 0 && b.lci_95 > 0}
+									<rect
+										x={xScale(b.lci_95) - 0.25}
+										y={yScale(b[idKey]).y}
+										width="0.8"
+										height={yScale(b[idKey]).height}
+										fill={ONScolours.white}
+									>
+									</rect>
+								{/if}
+							{/if}
+						{/each}
+					</g>
+					<g>
+						{#if hovered}
+							{#if !showIntervals || !('uci_95' in data)}
+								{@render bar(hovered, ONScolours.highlightOrangeDark, 1, hoveredArea)}
+							{:else}
+								{@render bar(hovered, ONScolours.highlightOrangeDark, 0.55, hoveredArea)}
+								{@render confidence(hovered, ONScolours.white, 1, 0.1, hoveredArea)}
+								{@render confidence(hovered, ONScolours.highlightOrangeDark, 1, 0.1, hoveredArea)}
+								{@render estimate(hovered, ONScolours.highlightOrangeDark, 3, 0.5, 1, hoveredArea)}
+								{@render estimate(hovered, ONScolours.black, 3, 0.5, 0.6, hoveredArea)}
+								{#if hovered.uci_95 && hovered.lci_95}
+									<rect
+										x={xScale(hovered.lci_95) - 0.25}
+										y={yScale(hovered[idKey]).y}
+										width="0.8"
+										height={yScale(hovered[idKey]).height}
+										fill={ONScolours.white}
+									>
+									</rect>
+								{/if}
+							{/if}
+						{/if}
+					</g>
+				{/if}
+				{#if width >= mobileBreakpoint && labelLookup?.[0] && !hovered}
+					<g>
+						{#each selectedData as a, i (a[0][idKey])}
+							{@const yPosAdj = labelLookup?.[i]?.y || yScale(a[0][idKey]).y}
+							{@const yPosOrig = yScale(a[0][idKey]).y}
+							{@const height = yScale(a[0][idKey]).height}
+							{@const elbowX = xScale(Math.min(0, a[0][yKey])) - 6 - labelLookup?.[i]?.elbow}
+							{@const isDodged = labelLookup?.[i]?.isDodged}
+							{@render elbow(yPosOrig, yPosAdj, isDodged, elbowX, height, a[0][yKey])}
+						{/each}
+					</g>
+				{/if}
+			</svg>
+		</div>
 	</div>
+
+	{#if keyboardMode}
+		<p class="ons-u-fs-s bar-keyboard-hint">
+			Use the arrow keys to move through the different areas
+		</p>
+	{/if}
 </div>
 
 <style>
@@ -623,5 +679,27 @@
 		max-width: 140px;
 		text-align: right;
 		line-height: 0.95;
+	}
+
+	/* Keyboard navigation styles */
+	.bar-wrapper-keyboard {
+		position: relative;
+		display: block;
+	}
+	.bar-wrapper-keyboard:focus {
+		outline: 2px solid var(--ons-color-text);
+		box-shadow:
+			6px 6px var(--ons-color-focus),
+			6px -6px var(--ons-color-focus),
+			-6px -6px var(--ons-color-focus),
+			-6px 6px var(--ons-color-focus);
+	}
+	.keyboard-mode {
+		pointer-events: none;
+	}
+	.bar-keyboard-hint {
+		display: block;
+		text-align: center;
+		margin-top: 10px;
 	}
 </style>
