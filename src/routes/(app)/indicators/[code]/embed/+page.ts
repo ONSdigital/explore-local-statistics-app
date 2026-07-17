@@ -6,7 +6,22 @@ import { isValidChartType } from '$lib/util/validationHelpers';
 import { geoLevels } from '$lib/config/geoLevels';
 
 export const load: PageLoad = async ({ fetch, params, url }) => {
-	if (!hasValidParams(url, new Set(['type', 'geo', 'areas', 'years', 'intervals'])))
+	if (
+		!hasValidParams(
+			url,
+			new Set([
+				'type',
+				'geo',
+				'areas',
+				'years',
+				'intervals',
+				'initialWidth',
+				'childId',
+				'parentTitle',
+				'parentUrl'
+			])
+		)
+	)
 		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const chartType = getParam(url, 'type', null);
