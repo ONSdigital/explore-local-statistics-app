@@ -40,21 +40,30 @@
 		return diff > _data.mad ? 'Higher than' : diff < -_data.mad ? 'Lower than' : 'Similar to';
 	});
 
-	let labelPos = $state(null);
-	function labelDodge(el, params) {
-		if (el?.getBoundingClientRect && el?.parentElement) {
-			const rect = el.getBoundingClientRect();
-			const parent = el.parentElement.getBoundingClientRect();
-			const toPercent = (val) => (100 * val) / parent.width;
+	let labelOffset = $state(0);
+	function labelDodge(el) {
+		const padding = 6;
 
-			const leftDiff = parent.left - rect.left - 6;
-			const rightDiff = parent.right - rect.right + 6;
-			let offset = leftDiff > 0 ? toPercent(leftDiff) : rightDiff < 0 ? toPercent(rightDiff) : 0;
-			let x = params.d.x + offset;
+		function updateLabelOffset() {
+			if (el?.getBoundingClientRect && el?.parentElement) {
+				const rect = el.getBoundingClientRect();
+				const parent = el.parentElement.getBoundingClientRect();
 
-			labelPos = { x, rect };
+				const leftDiff = parent.left - rect.left;
+				const rightDiff = parent.right - rect.right;
+				labelOffset = leftDiff > 0 ? leftDiff : rightDiff < 0 ? rightDiff : 0;
+			}
 		}
-		return { destroy: () => (labelPos = null) };
+
+		updateLabelOffset();
+		window.addEventListener('resize', updateLabelOffset);
+
+		return {
+			destroy: () => {
+				labelOffset = 0;
+				window.removeEventListener('resize', updateLabelOffset);
+			}
+		};
 	}
 
 	function doKeydown(e) {
@@ -83,7 +92,6 @@
 {/snippet}
 
 {#snippet line(d, i, color)}
-	{@const offsetX = labelPos?.x ?? d.x}
 	<polyline
 		points="{d.x},{100 - (selected.includes(d[idKey]) ? 0 : d.y)} {d.x},0"
 		stroke={color}
@@ -136,17 +144,18 @@
 
 {#snippet label(d, i, color, showName = false)}
 	{#key d}
-		{@const xPos = labelPos?.x ?? d.x}
-		{@const floatRight = xPos > 50}
+		{@const floatRight = d.x > 50}
 		<div
 			class="beeswarm-label"
 			aria-live={showName ? 'polite' : null}
 			style:background={i === 0 ? color : 'rgba(255, 255, 255, 0.4)'}
 			style:color={i === 0 ? ONScolours.white : color}
-			style:left={!floatRight ? `${xPos}%` : null}
-			style:right={floatRight ? `${100 - xPos}%` : null}
-			style:transform="translateX({floatRight ? 50 : -50}%)"
-			use:labelDodge={{ i, d }}
+			style:left={!floatRight ? `${d.x}%` : null}
+			style:right={floatRight ? `${100 - d.x}%` : null}
+			style:transform="translateX({floatRight ? 50 : -50}%){labelOffset
+				? ` translateX(${labelOffset}px)`
+				: ''}"
+			use:labelDodge
 		>
 			{#if showName}{d[labelKey]},{/if}
 			{valuePrefix}{formatValue(d[xKey])}{valueSuffix}
@@ -228,7 +237,7 @@
 						d.datum[idKey] === _hovered?.[idKey]
 							? ONScolours.highlightOrangeDark
 							: getPaletteColor(d.i, selected.length)}
-					{#if i === 0 && !_hovered}{@render label(d.datum, i, color, false)}{/if}
+					{#if d.i === 0 && !_hovered}{@render label(d.datum, i, color, false)}{/if}
 					{@render marker(d.datum, getMarkerPath(d.i, selected.length), color)}
 				{/each}
 			{/if}
