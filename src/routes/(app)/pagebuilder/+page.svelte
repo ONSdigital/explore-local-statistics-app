@@ -25,7 +25,6 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
-	import type { D } from '@vitest/utils/dist/types.d-BCElaP-c.js';
 
 	let data = $props();
 	let checked = $state(false);
@@ -76,16 +75,10 @@
 	let childLabel = $derived(
 		selectedAreaCode
 			? childLevels.length
-				? `Select children geographies in ${selectedAreaCode}`
-				: `No smaller geographies available in ${selectedAreaCode}`
-			: 'Select children geographies'
+				? `Optionally, select smaller areas within ${selectedAreaCode}:`
+				: `No smaller areas available in ${selectedAreaCode}`
+			: 'Select smaller areas'
 	);
-
-	// let secondButtonLabel = $derived(
-	// 	childLevels.length
-	// 		? `Add ${filteredChildren.length} ${pluralise(selectedChildLevel).toLowerCase()}`
-	// 		: 'Add to selection'
-	// );
 
 	let secondButtonLabel = $derived('Add to selection');
 
@@ -95,20 +88,6 @@
 			value: g.key
 		}))
 	);
-
-	// let filteredChildren = $derived(
-	// 	selectedChildLevels.length
-	// 		? children
-	// 				.filter((d) => selectedChildLevels.some((s) => s.label === d.label))
-	// 				.flatMap((d) =>
-	// 					d.areas.map((a) => ({
-	// 						...a,
-	// 						key: d.key,
-	// 						label: d.label
-	// 					}))
-	// 				)
-	// 		: []
-	// );
 
 	let filteredChildren = $derived(
 		selectedChildLevels.length
@@ -143,16 +122,16 @@
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
 	<p class="ons-hero__text">
-		Select the geographies (and optionally any of their children geographies) to build a dynamic
-		report.
+		Select areas (and optionally any smaller areas contained within) to build a report.
 	</p>
 </Hero>
 
 <Grid colWidth="wide">
-	<Card title="Select geographies">
+	<Card title="Select an area:">
+		<p>Search for a local authority, region, county, or other named area.</p>
 		<div class="select-container">
 			<Select
-				label="Search for a geography:"
+				label=""
 				placeholder="Search for an area"
 				labelKey="areanm"
 				groupKey="type"
@@ -197,7 +176,6 @@
 							if (item.checked) {
 								selectedChildLevels = [...selectedChildLevels, item];
 							} else {
-								// REMOVE the item
 								selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
 							}
 						}}

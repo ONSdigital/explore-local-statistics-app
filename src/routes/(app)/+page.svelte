@@ -69,9 +69,9 @@
 		>
 	</Card>
 
-	<Card title="Area Comparison Page (CPB)" mode="featured">
+	<Card title="Area Comparison Page (APB)" mode="featured">
 		<label for="search" style:display="block" style:margin-bottom="28px"
-			>Create a custom report to compare mutiple geographies</label
+			>Create a custom report to compare mutiple areas.</label
 		>
 		<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder`)} small
 			>Page builder</Button
