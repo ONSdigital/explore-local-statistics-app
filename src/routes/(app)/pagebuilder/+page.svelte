@@ -19,7 +19,9 @@
 		Checkboxes,
 		Button,
 		Em,
-		Indent
+		Indent,
+		Grid,
+		Card
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
@@ -146,8 +148,8 @@
 	</p>
 </Hero>
 
-<Container>
-	<Section title="Select geographies">
+<Grid colWidth="wide">
+	<Card title="Select geographies">
 		<div class="select-container">
 			<Select
 				label="Search for a geography:"
@@ -209,18 +211,25 @@
 				>
 			</Indent>
 		{/if}
-	</Section>
+	</Card>
 
-	<Section title="Selected geographies:">
-		{#each pageState.selectedAreas as area, i}
-			<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}
-				>{area.areanm}</Button
-			>
-		{/each}
-	</Section>
-	{#if pageState.selectedAreas.length > 1}
-		<Button on:click={clearAllSelected()} small="true">Clear all</Button>
-	{/if}
+	<Card title="Selected geographies:">
+		<div class="selected-geographies-list">
+			{#if pageState.selectedAreas.length > 1}
+				<Button on:click={clearAllSelected()} small="true">Clear all</Button>
+			{/if}
+			{#each pageState.selectedAreas as area, i}
+				<div class="selected-geography-item">
+					<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
+						{area.areanm}
+					</Button>
+				</div>
+			{/each}
+		</div>
+	</Card>
+</Grid>
+
+<Container>
 	<Button
 		icon="arrow"
 		iconPosition="after"
@@ -236,5 +245,17 @@
 
 	.select-container {
 		margin-top: 1em;
+	}
+
+	.selected-geographies-list {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.selected-geography-item :global(.ons-btn) {
+		margin: 0;
 	}
 </style>
