@@ -32,7 +32,6 @@
 	let selectedAreaCode = $state(null);
 	let selectedAreaName = $state(null);
 	let selectedChildLevels = $state([]);
-	let buildButtonEnabled = $state(false);
 	let children = $state([]);
 
 	let pageState = $state({
@@ -40,6 +39,7 @@
 		selectedComparison: []
 		// selectedIndicators: []
 	});
+	let buildButtonEnabled = $derived(pageState.selectedAreas.length ? true : false);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
 
@@ -52,14 +52,23 @@
 
 	function addArea(code) {
 		const area = areas.find((d) => d.areacd === code);
-		const _area = { ...area };
-		pageState.selectedAreas.push(_area);
+
+		if (!pageState.selectedAreas.find((d) => d.areacd === area.areacd))
+			pageState.selectedAreas.push({
+				areacd: area.areacd,
+				areanm: area.areanm,
+				type: area.type
+			});
 	}
 
 	function addChildren(children) {
 		children.forEach((child) => {
-			const area = { ...child };
-			pageState.selectedAreas.push(area);
+			if (!pageState.selectedAreas.find((d) => d.areacd === child.areacd))
+				pageState.selectedAreas.push({
+					areacd: child.areacd,
+					areanm: child.areanm,
+					type: child.label
+				});
 		});
 	}
 
@@ -75,25 +84,22 @@
 		pageState.selectedAreas = [];
 	}
 
-	let childLabel = $derived(
-		selectedAreaCode
-			? childLevels.length
-				? `Optionally, select smaller areas within ${selectedAreaCode}:`
-				: `No smaller areas available in ${selectedAreaCode}`
-			: 'Select smaller areas'
-	);
-
 	let childLevels = $derived(
-		children.map((g) => ({
-			label: g.label,
-			value: g.key
-		}))
+		children.map((g) => {
+			const count = Array.isArray(g.areas) ? g.areas.length : 0;
+
+			return {
+				label: `${pluralise(g.label, count)} (${count})`,
+				value: g.key,
+				count
+			};
+		})
 	);
 
 	let filteredChildren = $derived(
 		selectedChildLevels.length
 			? children
-					.filter((d) => selectedChildLevels.some((s) => s.label === d.label))
+					.filter((d) => selectedChildLevels.some((s) => s.value === d.key))
 					.flatMap((d) =>
 						d.areas.map((a) => ({
 							...a,
@@ -114,7 +120,7 @@
 		children = Array.isArray(results) ? results : [];
 	}
 
-	$inspect(selectedAreaName);
+	$inspect(pageState);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
@@ -152,7 +158,7 @@
 				<Indent>
 					<div class="select-container">
 						<Checkboxes
-							label="Optionally, select smaller areas within {selectedAreaName}"
+							label="Optionally, select smaller areas within {selectedAreaName}:"
 							items={childLevels}
 							on:change={(e) => {
 								const item = e.detail.item;
@@ -171,12 +177,12 @@
 					>
 				</Indent>
 			{:else}
-				<p>No smaller areas available in {selectedAreaName}</p>
+				<p style="margin-top:7px">No smaller areas available in {selectedAreaName}</p>
 			{/if}
 		{/if}
 	</Card>
 
-	<Card title="Selected geographies:">
+	<Card title="Selected areas:">
 		<div class="selected-geographies-list">
 			{#if pageState.selectedAreas.length > 1}
 				<Button on:click={clearAllSelected()} small="true">Clear all</Button>
@@ -186,6 +192,9 @@
 					<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
 						{area.areanm}
 					</Button>
+					<Em color="steelblue" mode="badge" fontSize="16px">
+						{area.type}
+					</Em>
 				</div>
 			{/each}
 		</div>
@@ -218,7 +227,35 @@
 		margin-bottom: 0.75rem;
 	}
 
+	.selected-geography-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
 	.selected-geography-item :global(.ons-btn) {
 		margin: 0;
+		max-width: 100%;
+		white-space: normal;
+		text-align: left;
+	}
+
+	.selected-geography-item :global(.ons-badge) {
+		margin-left: auto;
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 600px) {
+		.selected-geography-item {
+			align-items: flex-start;
+		}
+
+		.selected-geography-item :global(.ons-badge) {
+			margin-left: 0;
+			margin-top: 0.25rem;
+		}
 	}
 </style>

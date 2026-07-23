@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
+		Container,
 		NavSections,
 		Grid,
 		NavSection,
@@ -37,46 +38,8 @@
 	$inspect(data);
 </script>
 
-<Hero
-	background="#eaeaea"
-	title="Bespoke page"
-	width="medium"
-	lede="Custom built page for:"
-	meta={[
-		{
-			key: 'Primary areas',
-			value: primaryGeographies.map((d) => d.areanm).join(', ')
-		},
-		{
-			key: 'Comparison areas',
-			value: comparisonGeographies.map((d) => d.areanm).join(', ')
-		},
-		{
-			key: 'Indicators',
-			value: selectedIndicators
-		}
-	]}
-></Hero>
+<Hero background="#eaeaea" title="Area comparison page" width="medium"></Hero>
 
-<NavSections cls="wider-nav-sections" marginTop>
-	<!-- {#each charts as chart}
-			<NavSection title={chart.label}>
-				<IndicatorChart
-					chartType={chart.key}
-					indicator={data.indicator.slug}
-					metadata={data.indicator}
-					timeRange={pageState.selectedPeriodRange}
-					selected={pageState.selectedAreas}
-					geoLevel={pageState.selectedGeoLevel}
-					showIntervals={pageState.showConfidenceIntervals}
-				/>
-			</NavSection>
-		{/each} -->
-	<Grid>
-		<!-- <NewComponentHereLikeSMbarchartOrHeatmap
-			metadata={data.indicator}
-			selected={primaryGeographies.areacd}
-			showIntervals={pageState.showConfidenceIntervals}
-		/> -->
-	</Grid>
-</NavSections>
+<Container>
+	<p>this is where my area comparison page would go, if i had one</p>
+</Container>
