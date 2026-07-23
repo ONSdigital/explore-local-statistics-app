@@ -29,8 +29,8 @@
 	let data = $props();
 	let checked = $state(false);
 	let value = null;
-	let buttonEnabled = $state(false);
 	let selectedAreaCode = $state(null);
+	let selectedAreaName = $state(null);
 	let selectedChildLevels = $state([]);
 	let buildButtonEnabled = $state(false);
 	let children = $state([]);
@@ -43,8 +43,11 @@
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
 
-	function enableButton() {
-		buttonEnabled = true;
+	function resetAreaSelection() {
+		selectedAreaCode = null;
+		selectedAreaName = null;
+		children = [];
+		selectedChildLevels = [];
 	}
 
 	function addArea(code) {
@@ -80,8 +83,6 @@
 			: 'Select smaller areas'
 	);
 
-	let secondButtonLabel = $derived('Add to selection');
-
 	let childLevels = $derived(
 		children.map((g) => ({
 			label: g.label,
@@ -113,11 +114,7 @@
 		children = Array.isArray(results) ? results : [];
 	}
 
-	$inspect(pageState);
-	$inspect(data);
-	$inspect(selectedChildLevels);
-	$inspect(filteredChildren);
-	$inspect(childLevels);
+	$inspect(selectedAreaName);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
@@ -136,58 +133,46 @@
 				labelKey="areanm"
 				groupKey="type"
 				autoClear={false}
+				clearable={true}
 				options={areas}
 				on:change={(e) => {
 					selectedAreaCode = e.detail?.areacd ?? e.detail;
+					selectedAreaName = e.detail?.areanm ?? e.detail;
 					findChildren(selectedAreaCode);
-					enableButton();
+				}}
+				on:clear={() => {
+					resetAreaSelection();
 				}}
 			></Select>
 		</div>
 		<Button small="true" on:click={() => addArea(selectedAreaCode)}>Add to selection</Button>
 
 		{#if selectedAreaCode}
-			<!-- <Indent>
-				<div class="select-container">
-					<Select
-						label={childLabel}
-						placeholder="Select geography level"
-						options={childLevels}
-						on:change={(e) => {
-							selectedChildLevel = e.detail?.label ?? e.detail;
-						}}
-						autoClear={false}
-					></Select>
-				</div>
-				<Button
-					small="true"
-					on:click={(e) => addChildren(filteredChildren)}
-					disabled={!buttonEnabled}>{secondButtonLabel}</Button
-				>
-			</Indent> -->
-			<Indent>
-				<div class="select-container">
-					<Checkboxes
-						label={childLabel}
-						items={childLevels}
-						on:change={(e) => {
-							const item = e.detail.item;
+			{#if childLevels.length}
+				<Indent>
+					<div class="select-container">
+						<Checkboxes
+							label="Optionally, select smaller areas within {selectedAreaName}"
+							items={childLevels}
+							on:change={(e) => {
+								const item = e.detail.item;
 
-							if (item.checked) {
-								selectedChildLevels = [...selectedChildLevels, item];
-							} else {
-								selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
-							}
-						}}
-						compact
-					></Checkboxes>
-				</div>
-				<Button
-					small="true"
-					on:click={(e) => addChildren(filteredChildren)}
-					disabled={!buttonEnabled}>{secondButtonLabel}</Button
-				>
-			</Indent>
+								if (item.checked) {
+									selectedChildLevels = [...selectedChildLevels, item];
+								} else {
+									selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
+								}
+							}}
+							compact
+						></Checkboxes>
+					</div>
+					<Button small="true" on:click={(e) => addChildren(filteredChildren)}
+						>Add to selection</Button
+					>
+				</Indent>
+			{:else}
+				<p>No smaller areas available in {selectedAreaName}</p>
+			{/if}
 		{/if}
 	</Card>
 
