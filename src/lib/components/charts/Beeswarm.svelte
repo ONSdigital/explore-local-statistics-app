@@ -40,30 +40,19 @@
 		return diff > _data.mad ? 'Higher than' : diff < -_data.mad ? 'Lower than' : 'Similar to';
 	});
 
-	let labelOffset = $state(0);
 	function labelDodge(el) {
 		const padding = 6;
 
-		function updateLabelOffset() {
-			if (el?.getBoundingClientRect && el?.parentElement) {
-				const rect = el.getBoundingClientRect();
-				const parent = el.parentElement.getBoundingClientRect();
+		if (el?.getBoundingClientRect && el?.parentElement) {
+			const rect = el.getBoundingClientRect();
+			const parent = el.parentElement.getBoundingClientRect();
+			console.log({ rect, parent });
 
-				const leftDiff = parent.left - rect.left;
-				const rightDiff = parent.right - rect.right;
-				labelOffset = leftDiff > 0 ? leftDiff : rightDiff < 0 ? rightDiff : 0;
-			}
+			const leftDiff = parent.left - rect.left - padding;
+			const rightDiff = parent.right - rect.right + padding;
+			const labelOffset = leftDiff >= 0 ? leftDiff : rightDiff <= 0 ? rightDiff : 0;
+			el.style.transform = el.style.transform.split(' ')[0] + ` translateX(${labelOffset}px)`;
 		}
-
-		updateLabelOffset();
-		window.addEventListener('resize', updateLabelOffset);
-
-		return {
-			destroy: () => {
-				labelOffset = 0;
-				window.removeEventListener('resize', updateLabelOffset);
-			}
-		};
 	}
 
 	function doKeydown(e) {
@@ -143,8 +132,8 @@
 {/snippet}
 
 {#snippet label(d, i, color, showName = false)}
+	{@const floatRight = d.x > 50}
 	{#key d}
-		{@const floatRight = d.x > 50}
 		<div
 			class="beeswarm-label"
 			aria-live={showName ? 'polite' : null}
@@ -152,9 +141,7 @@
 			style:color={i === 0 ? ONScolours.white : color}
 			style:left={!floatRight ? `${d.x}%` : null}
 			style:right={floatRight ? `${100 - d.x}%` : null}
-			style:transform="translateX({floatRight ? 50 : -50}%){labelOffset
-				? ` translateX(${labelOffset}px)`
-				: ''}"
+			style:transform="translateX({floatRight ? 50 : -50}%)"
 			use:labelDodge
 		>
 			{#if showName}{d[labelKey]},{/if}
@@ -232,12 +219,12 @@
 				{#if _hovered}
 					{@render label(_hovered, 0, ONScolours.highlightOrangeDark, true)}
 				{/if}
-				{#each _selected as d, i}
+				{#each _selected as d (d.i)}
 					{@const color =
 						d.datum[idKey] === _hovered?.[idKey]
 							? ONScolours.highlightOrangeDark
 							: getPaletteColor(d.i, selected.length)}
-					{#if d.i === 0 && !_hovered}{@render label(d.datum, i, color, false)}{/if}
+					{#if d.i === 0 && !_hovered}{@render label(d.datum, d.i, color, false)}{/if}
 					{@render marker(d.datum, getMarkerPath(d.i, selected.length), color)}
 				{/each}
 			{/if}
