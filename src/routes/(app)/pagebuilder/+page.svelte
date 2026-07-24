@@ -202,17 +202,23 @@
 </Grid>
 
 <Container>
-	<Button
-		icon="arrow"
-		iconPosition="after"
-		href={resolve(`/pagebuilder/build`)}
-		disabled={!buildButtonEnabled}>Build page</Button
-	>
+	<div class="build-button">
+		<Button
+			icon="arrow"
+			iconPosition="after"
+			href={resolve(`/pagebuilder/build`)}
+			disabled={!buildButtonEnabled}>Build page</Button
+		>
+	</div>
 </Container>
 
 <style>
 	:global(.ons-btn) {
 		margin: 0.5em 0.5em 0 0;
+	}
+
+	.build-button {
+		margin-bottom: 1.5em;
 	}
 
 	.select-container {
