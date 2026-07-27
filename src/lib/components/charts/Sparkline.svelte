@@ -3,6 +3,7 @@
 	import { nice } from 'd3-array';
 	import { format } from 'd3-format';
 	import { area, curveLinear } from 'd3-shape';
+	import { Icon } from '@onsvisual/svelte-components';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { ONScolours } from '$lib/config';
@@ -112,7 +113,11 @@
 		style:color={contrastColor(color)}
 		style:top="{yScale(d[yKey])}%"
 	>
-		{diff > 0 ? '+' : ''}{valuePrefix}{formatValue(diff)}{valueSuffix}
+		{#if Math.abs(diff) > 0}<Icon
+				type="arrow"
+				rotation={diff > 0 ? -90 : 90}
+				size="s"
+			/>{/if}{valuePrefix}{formatValue(Math.abs(diff))}{valueSuffix}
 	</div>
 {/snippet}
 
@@ -279,6 +284,9 @@
 		font-size: 14px;
 		font-weight: bold;
 		line-height: 1.2;
+	}
+	.sparkline-label > :global(svg) {
+		margin-top: -2px;
 	}
 	.no-data-message {
 		display: flex;
