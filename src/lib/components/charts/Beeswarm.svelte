@@ -69,10 +69,10 @@
 
 {#snippet point(d, radius = 8, color)}
 	<g class="beeswarm-point" transform="translate({d.x} {100 - d.y})" opacity={color ? 1 : 0.9}>
-		<polyline points="0,0 0,0" stroke={ONScolours.white} stroke-width={radius + 2} />
-		<polyline points="0,0 0,0" stroke={color || ONScolours.grey40} stroke-width={radius} />
+		<polyline points="0,0 0.01,0" stroke={ONScolours.white} stroke-width={radius + 2} />
+		<polyline points="0,0 0.01,0" stroke={color || ONScolours.grey40} stroke-width={radius} />
 		<polyline
-			points="0,0 0,0"
+			points="0,0 0.01,0"
 			stroke={color || ONScolours.grey20}
 			stroke-width={radius - 2}
 			onmouseenter={() => (hovered = d[idKey])}
