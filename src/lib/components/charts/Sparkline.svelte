@@ -27,8 +27,6 @@
 		return data?.[xKey] && new Set(data[xKey]).size > 1;
 	}
 
-	const formatYTick = format('~s');
-
 	let _data = $derived(isValidLineData(data) ? parseChartData(data, yKey, xKey, idKey) : null);
 	let _selected = $derived(
 		_data
@@ -172,7 +170,7 @@
 						class="sparkline-y-tick-label"
 						style:top="{yScale(yTick)}%"
 					>
-						{Math.abs(yTick) < 1 ? format('~f')(yTick) : formatYTick(yTick)}
+						{Math.abs(yTick) < 1 ? format('~f')(yTick) : format('~s')(yTick)}
 					</div>
 				{/each}
 			</div>
