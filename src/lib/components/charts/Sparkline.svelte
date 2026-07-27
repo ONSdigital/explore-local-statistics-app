@@ -163,6 +163,9 @@
 			</div>
 			<div class="sparkline-y-axis">
 				<div class="sparkline-y-baseline"></div>
+				{#if yDomain[0] <= 0 && yDomain[1] >= 0}
+					<div class="sparkline-y-zeroline" style:top="{yScale(0)}%"></div>
+				{/if}
 				{#each yDomain || [] as yTick, i}
 					<div class="sparkline-y-tick" style:top="{yScale(yTick)}%"></div>
 					<div
@@ -228,6 +231,12 @@
 		left: 0;
 		height: 100%;
 		border-left: 1px solid var(--ons-color-grey-40);
+	}
+	.sparkline-y-zeroline {
+		position: absolute;
+		right: 0;
+		width: 100%;
+		border-top: 1px solid var(--ons-color-grey-40);
 	}
 	.sparkline-y-tick {
 		position: absolute;
