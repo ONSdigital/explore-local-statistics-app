@@ -83,7 +83,7 @@
 			</span><br />
 		{/each}
 	</p>
-	<div style:margin="40px 0 -36px" style:max-width="550px" style:z-index={1}>
+	<div style:margin="40px 0 -36px" style:z-index={1}>
 		<Details title="Find another indicator">
 			<IndicatorSearch
 				indicators={data.taxonomyFlat.data}

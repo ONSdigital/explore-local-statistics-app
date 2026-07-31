@@ -30,6 +30,7 @@
 		flex-direction: row;
 		align-items: end;
 		width: 100%;
+		max-width: 550px;
 		gap: 0.5rem;
 	}
 	.search-input {
