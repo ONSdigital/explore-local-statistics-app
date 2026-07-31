@@ -2,11 +2,15 @@ import type { PageLoad } from './$types';
 import { resolve } from '$app/paths';
 
 export const load: PageLoad = async ({ fetch }) => {
-	const path = resolve('/api/v1/metadata/taxonomy?excludeMultivariate=true');
-	const taxonomy = await (await fetch(path)).json();
+	const path = '/api/v1/metadata/taxonomy?excludeMultivariate=true';
+	const [taxonomy, taxonomyFlat] = await Promise.all([
+		(await fetch(resolve(path))).json(),
+		(await fetch(resolve(path + '&flat=true'))).json()
+	]);
 
 	return {
 		taxonomy,
+		taxonomyFlat,
 
 		// Page metadata
 		title: 'Explore local indicators - ONS',
@@ -15,6 +19,7 @@ export const load: PageLoad = async ({ fetch }) => {
 		breadcrumbLinks: [
 			{ label: 'Home', href: '/' },
 			{ label: 'Explore local statistics', href: resolve('/') }
-		]
+		],
+		breadcrumbBackground: 'var(--ons-color-banner-bg)'
 	};
 };
