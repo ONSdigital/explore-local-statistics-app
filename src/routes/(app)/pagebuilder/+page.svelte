@@ -21,18 +21,24 @@
 		Em,
 		Indent,
 		Grid,
-		Card
+		Card,
+		Table
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
 
 	let data = $props();
 	let checked = $state(false);
-	let value = null;
+	let selectedArea = $state(null);
 	let selectedAreaCode = $state(null);
 	let selectedAreaName = $state(null);
+	let selectedAreaType = $state(null);
+	let selectedAreaParent = $state(null);
+	let siblings = $state([]);
+	let selectedSiblingChecked = $state(false);
 	let selectedChildLevels = $state([]);
 	let children = $state([]);
+	let selectedAreaChecked = $state(false);
 
 	let pageState = $state({
 		selectedAreas: [],
@@ -44,32 +50,57 @@
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
 
 	function resetAreaSelection() {
+		selectedArea = null;
 		selectedAreaCode = null;
 		selectedAreaName = null;
+		selectedAreaType = null;
+		selectedAreaParent = null;
+		siblings = [];
+		selectedSiblingChecked = false;
 		children = [];
 		selectedChildLevels = [];
+		selectedAreaChecked = false;
 	}
 
-	function addArea(code) {
-		const area = areas.find((d) => d.areacd === code);
-
-		if (!pageState.selectedAreas.find((d) => d.areacd === area.areacd))
-			pageState.selectedAreas.push({
-				areacd: area.areacd,
-				areanm: area.areanm,
-				type: area.type
-			});
+	function addArea(areaObj) {
+		if (!pageState.selectedAreas.find((d) => d.areacd === areaObj.areacd)) {
+			pageState.selectedAreas.push(areaObj);
+		}
 	}
 
-	function addChildren(children) {
-		children.forEach((child) => {
-			if (!pageState.selectedAreas.find((d) => d.areacd === child.areacd))
-				pageState.selectedAreas.push({
-					areacd: child.areacd,
-					areanm: child.areanm,
-					type: child.label
-				});
-		});
+	async function findChildren(code) {
+		selectedChildLevels = [];
+		selectedAreaChecked = true;
+		selectedAreaParent = null;
+		if (!code) {
+			children = [];
+			return;
+		}
+		const [childrenResponse, parentResponse] = await Promise.all([
+			fetch(resolve(`/api/v1/geo/list?geoExtent=${code}&groupByLevel=true`)),
+			fetch(resolve(`/api/v1/geo/related/${code}/parents?includeNames=true`))
+		]);
+		const childrenJson = await childrenResponse.json();
+		const parentJson = await parentResponse.json();
+		children = Array.isArray(childrenJson) ? childrenJson : [];
+		selectedAreaParent =
+			Array.isArray(parentJson) && parentJson.length
+				? { ...parentJson[0], type: getAreaType(parentJson[0]) || '' }
+				: null;
+
+		siblings = [];
+		selectedSiblingChecked = false;
+		if ((!children || children.length === 0) && code) {
+			try {
+				const sresp = await fetch(
+					resolve(`/api/v1/geo/related/${code}/siblings?includeNames=true`)
+				);
+				const siblingsJson = await sresp.json();
+				if (siblingsJson && Array.isArray(siblingsJson.siblings) && siblingsJson.siblings.length) {
+					siblings = siblingsJson.siblings.map((s) => ({ ...s, type: getAreaType(s) || '' }));
+				}
+			} catch (err) {}
+		}
 	}
 
 	function removeArea(area) {
@@ -84,43 +115,71 @@
 		pageState.selectedAreas = [];
 	}
 
+	function addCheckedToSelection() {
+		if (selectedAreaChecked) {
+			const area = areas.find((d) => d.areacd === selectedAreaCode);
+			if (area) {
+				addArea({ areacd: area.areacd, areanm: area.areanm, type: area.type });
+			}
+		}
+
+		selectedChildLevels.forEach((level) => {
+			const group = children.find((g) => g.key === level.value);
+			if (group && Array.isArray(group.areas)) {
+				group.areas.forEach((child) => {
+					addArea({
+						areacd: child.areacd,
+						areanm: child.areanm,
+						type: group.label
+					});
+				});
+			}
+		});
+
+		if (selectedSiblingChecked && siblings && siblings.length) {
+			siblings.forEach((sib) => {
+				addArea({ areacd: sib.areacd, areanm: sib.areanm, type: sib.type || selectedAreaType });
+			});
+		}
+	}
+
 	let childLevels = $derived(
 		children.map((g) => {
 			const count = Array.isArray(g.areas) ? g.areas.length : 0;
-
 			return {
-				label: `${pluralise(g.label, count)} (${count})`,
+				label: `All ${pluralise(g.label, count).toLowerCase()} (${count})`,
 				value: g.key,
 				count
 			};
 		})
 	);
 
-	let filteredChildren = $derived(
-		selectedChildLevels.length
-			? children
-					.filter((d) => selectedChildLevels.some((s) => s.value === d.key))
-					.flatMap((d) =>
-						d.areas.map((a) => ({
-							...a,
-							key: d.key,
-							label: d.label
-						}))
-					)
-			: []
-	);
+	async function selectArea(area, areaName = null, areaType = null) {
+		if (!area) return resetAreaSelection();
+		let areacd;
+		let areanm;
+		let type;
 
-	async function findChildren(code) {
-		if (!code) {
-			children = [];
-			return;
+		if (typeof area === 'object') {
+			areacd = area.areacd;
+			areanm = area.areanm;
+			type = area.type || areaType;
+		} else {
+			areacd = area;
+			areanm = areaName ?? area;
+			type = areaType;
 		}
-		const url = resolve(`/api/v1/geo/list?geoExtent=${code}&groupByLevel=true`);
-		const results = await (await fetch(url)).json();
-		children = Array.isArray(results) ? results : [];
+
+		type = type || getAreaType({ areacd }) || null;
+		selectedArea = { areacd, areanm, type };
+		selectedAreaCode = areacd;
+		selectedAreaName = areanm;
+		selectedAreaType = type;
+		await findChildren(areacd);
 	}
 
 	$inspect(pageState);
+	$inspect(selectedAreaName, selectedAreaCode, selectedAreaType, selectedAreaParent);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
@@ -129,8 +188,9 @@
 	</p>
 </Hero>
 
-<Grid colWidth="wide">
-	<Card title="Select an area:">
+<Container>
+	<Section>
+		<h2>Select areas to compare</h2>
 		<p>Search for a local authority, region, county, or other named area.</p>
 		<div class="select-container">
 			<Select
@@ -141,75 +201,95 @@
 				autoClear={false}
 				clearable={true}
 				options={areas}
-				on:change={(e) => {
-					selectedAreaCode = e.detail?.areacd ?? e.detail;
-					selectedAreaName = e.detail?.areanm ?? e.detail;
-					findChildren(selectedAreaCode);
-				}}
-				on:clear={() => {
-					resetAreaSelection();
-				}}
+				bind:value={selectedArea}
+				on:change={(e) => selectArea(e.detail)}
+				on:clear={resetAreaSelection}
 			></Select>
 		</div>
-		<Button small="true" on:click={() => addArea(selectedAreaCode)}>Add to selection</Button>
 
 		{#if selectedAreaCode}
-			{#if childLevels.length}
-				<Indent>
-					<div class="select-container">
-						<Checkboxes
-							label="Optionally, select smaller areas within {selectedAreaName}:"
-							items={childLevels}
-							on:change={(e) => {
-								const item = e.detail.item;
-
-								if (item.checked) {
-									selectedChildLevels = [...selectedChildLevels, item];
-								} else {
-									selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
-								}
-							}}
-							compact
-						></Checkboxes>
-					</div>
-					<Button small="true" on:click={(e) => addChildren(filteredChildren)}
-						>Add to selection</Button
+			<p style="margin-top:15px">
+				{selectedAreaName} is a {selectedAreaType.toLowerCase()}
+				{#if selectedAreaParent}
+					in
+					<a
+						href="#"
+						class="area-link"
+						on:click={(e) => {
+							e.preventDefault();
+							selectArea(selectedAreaParent);
+						}}
 					>
-				</Indent>
-			{:else}
-				<p style="margin-top:7px">No smaller areas available in {selectedAreaName}</p>
-			{/if}
+						{selectedAreaParent.areanm}
+					</a>
+				{/if}
+			</p>
+			<h4 style="margin-top:15px">Select area(s)</h4>
+			<div class="select-container">
+				<Checkbox
+					item={{
+						id: selectedAreaCode ?? selectedAreaName,
+						label: selectedAreaName,
+						checked: selectedAreaChecked
+					}}
+					bind:checked={selectedAreaChecked}
+					compact
+				/>
+				{#if siblings && siblings.length}
+					<Checkbox
+						item={{
+							id: `siblings-${selectedAreaParent?.areacd}`,
+							label: `All ${pluralise(selectedAreaType || 'area', siblings.length).toLowerCase()} in ${selectedAreaParent?.areanm} (${siblings.length})`,
+							checked: selectedSiblingChecked
+						}}
+						bind:checked={selectedSiblingChecked}
+						compact
+					/>
+				{/if}
+				<Checkboxes
+					items={childLevels}
+					on:change={(e) => {
+						const item = e.detail.item;
+						if (item.checked) {
+							selectedChildLevels = [...selectedChildLevels, item];
+						} else {
+							selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
+						}
+					}}
+					compact
+				></Checkboxes>
+			</div>
+			<div class="select-button">
+				<Button small="true" on:click={addCheckedToSelection}>Add to selection</Button>
+			</div>
+			<Accordion>
+				<AccordionItem title="Selected areas: {pageState.selectedAreas.length}">
+					<div class="selected-geographies-list">
+						{#if pageState.selectedAreas.length > 1}
+							<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button
+							>
+						{/if}
+						{#each pageState.selectedAreas as area, i}
+							<div class="selected-geography-item">
+								<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
+									{area.areanm}
+								</Button>
+								<Em color="steelblue" mode="badge" fontSize="16px">
+									{area.type}
+								</Em>
+							</div>
+						{/each}
+					</div>
+				</AccordionItem>
+			</Accordion>
 		{/if}
-	</Card>
 
-	<Card title="Selected areas:">
-		<div class="selected-geographies-list">
-			{#if pageState.selectedAreas.length > 1}
-				<Button on:click={clearAllSelected()} small="true">Clear all</Button>
-			{/if}
-			{#each pageState.selectedAreas as area, i}
-				<div class="selected-geography-item">
-					<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
-						{area.areanm}
-					</Button>
-					<Em color="steelblue" mode="badge" fontSize="16px">
-						{area.type}
-					</Em>
-				</div>
-			{/each}
+		<div class="build-button">
+			<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
+				>Build comparison page</Button
+			>
 		</div>
-	</Card>
-</Grid>
-
-<Container>
-	<div class="build-button">
-		<Button
-			icon="arrow"
-			iconPosition="after"
-			href={resolve(`/pagebuilder/build`)}
-			disabled={!buildButtonEnabled}>Build page</Button
-		>
-	</div>
+	</Section>
 </Container>
 
 <style>
@@ -218,6 +298,9 @@
 	}
 
 	.build-button {
+		margin-bottom: 1.5em;
+	}
+	.select-button {
 		margin-bottom: 1.5em;
 	}
 
