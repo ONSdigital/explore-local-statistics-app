@@ -3,7 +3,7 @@ import { resolve } from '$app/paths';
 
 export const load: PageLoad = async ({ fetch }) => {
 	const taxonomyPath = resolve('/api/v1/metadata/taxonomy?flat=true');
-	const areasPath = resolve('/api/v1/geo/list?year=all');
+	const areasPath = resolve('/api/v1/geo/list');
 	const taxonomy = await (await fetch(taxonomyPath)).json();
 	const areas = await (await fetch(areasPath)).json();
 
