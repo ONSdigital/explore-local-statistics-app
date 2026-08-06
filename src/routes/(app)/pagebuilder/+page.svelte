@@ -26,6 +26,7 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
+	import { page } from '$app/state';
 
 	let data = $props();
 	let checked = $state(false);
@@ -178,97 +179,107 @@
 		await findChildren(areacd);
 	}
 
+	let tableData = $derived(
+		pageState.selectedAreas.map((d) => ({
+			'Selected area': d.areanm,
+			Type: d.type
+		}))
+	);
+
 	$inspect(pageState);
 	$inspect(selectedAreaName, selectedAreaCode, selectedAreaType, selectedAreaParent);
+	$inspect(areas);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
-	<p class="ons-hero__text">
-		Select areas (and optionally any smaller areas contained within) to build a report.
-	</p>
+	<!-- <p class="ons-hero__text">Select areas to build a comparison page.</p> -->
 </Hero>
 
 <Container>
 	<Section>
-		<h2>Select areas to compare</h2>
-		<p>Search for a local authority, region, county, or other named area.</p>
-		<div class="select-container">
-			<Select
-				label=""
-				placeholder="Search for an area"
-				labelKey="areanm"
-				groupKey="type"
-				autoClear={false}
-				clearable={true}
-				options={areas}
-				bind:value={selectedArea}
-				on:change={(e) => selectArea(e.detail)}
-				on:clear={resetAreaSelection}
-			></Select>
-		</div>
-
-		{#if selectedAreaCode}
-			<p style="margin-top:15px">
-				{selectedAreaName} is a {selectedAreaType.toLowerCase()}
-				{#if selectedAreaParent}
-					in
-					<a
-						href="#"
-						class="area-link"
-						on:click={(e) => {
-							e.preventDefault();
-							selectArea(selectedAreaParent);
-						}}
-					>
-						{selectedAreaParent.areanm}
-					</a>
-				{/if}
-			</p>
-			<h4 style="margin-top:15px">Select area(s)</h4>
+		<div class="entire-selection">
+			<h2>Select areas to compare</h2>
+			<p>Search for a local authority, region, county, or other named area.</p>
 			<div class="select-container">
-				<Checkbox
-					item={{
-						id: selectedAreaCode ?? selectedAreaName,
-						label: selectedAreaName,
-						checked: selectedAreaChecked
-					}}
-					bind:checked={selectedAreaChecked}
-					compact
-				/>
-				{#if siblings && siblings.length}
+				<Select
+					label=""
+					placeholder="Search for an area"
+					labelKey="areanm"
+					groupKey="type"
+					autoClear={false}
+					options={areas}
+					bind:value={selectedArea}
+					on:change={(e) => selectArea(e.detail)}
+					on:clear={resetAreaSelection}
+				></Select>
+			</div>
+
+			{#if selectedAreaCode}
+				<!-- //bodge to avoid rendering for United Kingdom, which has a type of United Kingdom -->
+				{#if selectedAreaType !== selectedAreaName}
+					<p style="margin-top:15px">
+						{selectedAreaName} is a {selectedAreaType.toLowerCase()}
+						{#if selectedAreaParent}
+							in
+							<a
+								href="#"
+								class="area-link"
+								on:click={(e) => {
+									e.preventDefault();
+									selectArea(selectedAreaParent);
+								}}
+							>
+								{selectedAreaParent.areanm}
+							</a>
+						{/if}
+					</p>
+				{/if}
+				<h4 style="margin-top:15px">Select area(s)</h4>
+				<div class="select-container">
 					<Checkbox
 						item={{
-							id: `siblings-${selectedAreaParent?.areacd}`,
-							label: `All ${pluralise(selectedAreaType || 'area', siblings.length).toLowerCase()} in ${selectedAreaParent?.areanm} (${siblings.length})`,
-							checked: selectedSiblingChecked
+							id: selectedAreaCode ?? selectedAreaName,
+							label: selectedAreaName,
+							checked: selectedAreaChecked
 						}}
-						bind:checked={selectedSiblingChecked}
+						bind:checked={selectedAreaChecked}
 						compact
 					/>
+					{#if siblings && siblings.length}
+						<Checkbox
+							item={{
+								id: `siblings-${selectedAreaParent?.areacd}`,
+								label: `All ${pluralise(selectedAreaType || 'area', siblings.length).toLowerCase()} in ${selectedAreaParent?.areanm} (${siblings.length})`,
+								checked: selectedSiblingChecked
+							}}
+							bind:checked={selectedSiblingChecked}
+							compact
+						/>
+					{/if}
+					<Checkboxes
+						items={childLevels}
+						on:change={(e) => {
+							const item = e.detail.item;
+							if (item.checked) {
+								selectedChildLevels = [...selectedChildLevels, item];
+							} else {
+								selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
+							}
+						}}
+						compact
+					></Checkboxes>
+				</div>
+				<div class="select-button">
+					<Button small="true" on:click={addCheckedToSelection}>Add to selection</Button>
+				</div>
+			{/if}
+		</div>
+		<Accordion>
+			<AccordionItem title="Selected areas: {pageState.selectedAreas.length}">
+				{#if pageState.selectedAreas.length > 1}
+					<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 				{/if}
-				<Checkboxes
-					items={childLevels}
-					on:change={(e) => {
-						const item = e.detail.item;
-						if (item.checked) {
-							selectedChildLevels = [...selectedChildLevels, item];
-						} else {
-							selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
-						}
-					}}
-					compact
-				></Checkboxes>
-			</div>
-			<div class="select-button">
-				<Button small="true" on:click={addCheckedToSelection}>Add to selection</Button>
-			</div>
-			<Accordion>
-				<AccordionItem title="Selected areas: {pageState.selectedAreas.length}">
-					<div class="selected-geographies-list">
-						{#if pageState.selectedAreas.length > 1}
-							<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button
-							>
-						{/if}
+				<!-- <div class="selected-geographies-list">
 						{#each pageState.selectedAreas as area, i}
 							<div class="selected-geography-item">
 								<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
@@ -279,11 +290,16 @@
 								</Em>
 							</div>
 						{/each}
+					</div> -->
+				{#if pageState.selectedAreas.length}
+					<div class="selected-geographies-table">
+						{#key pageState.selectedAreas.length}
+							<Table data={tableData} sortable></Table>
+						{/key}
 					</div>
-				</AccordionItem>
-			</Accordion>
-		{/if}
-
+				{/if}
+			</AccordionItem>
+		</Accordion>
 		<div class="build-button">
 			<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
 				>Build comparison page</Button
@@ -306,6 +322,10 @@
 
 	.select-container {
 		margin-top: 1em;
+	}
+
+	.entire-selection {
+		margin-bottom: 1em;
 	}
 
 	.selected-geographies-list {
