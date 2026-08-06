@@ -26,7 +26,6 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
-	import { page } from '$app/state';
 
 	let data = $props();
 	let checked = $state(false);
@@ -230,7 +229,7 @@
 								}}
 							>
 								{selectedAreaParent.areanm}
-							</a>
+							</a>.
 						{/if}
 					</p>
 				{/if}
@@ -279,24 +278,40 @@
 				{#if pageState.selectedAreas.length > 1}
 					<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 				{/if}
-				<!-- <div class="selected-geographies-list">
-						{#each pageState.selectedAreas as area, i}
-							<div class="selected-geography-item">
-								<Button icon="cross" small variant="secondary" on:click={() => removeArea(area)}>
-									{area.areanm}
-								</Button>
-								<Em color="steelblue" mode="badge" fontSize="16px">
-									{area.type}
-								</Em>
-							</div>
-						{/each}
-					</div> -->
 				{#if pageState.selectedAreas.length}
-					<div class="selected-geographies-table">
+					<!-- <div class="selected-geographies-table">
 						{#key pageState.selectedAreas.length}
 							<Table data={tableData} sortable></Table>
 						{/key}
-					</div>
+					</div> -->
+					<table class="ons-table">
+						<thead>
+							<tr>
+								<th scope="col" class="ons-table__header">Selected area</th>
+								<th scope="col" class="ons-table__header">Type</th>
+								<th scope="col" class="ons-table__header"></th>
+							</tr>
+						</thead>
+						<tbody class="ons-table__body">
+							{#each pageState.selectedAreas as area (area.areacd)}
+								<tr class="ons-table__row">
+									<td class="ons-table__cell">{area.areanm}</td>
+									<td class="ons-table__cell">{area.type}</td>
+
+									<td class="ons-table__cell">
+										<div class="area-buttons">
+											<Button
+												icon="cross"
+												small
+												variant="secondary"
+												on:click={() => removeArea(area)}
+											></Button>
+										</div>
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
 				{/if}
 			</AccordionItem>
 		</Accordion>
@@ -309,6 +324,28 @@
 </Container>
 
 <style>
+	.ons-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 1em;
+	}
+	.ons-table th {
+		text-align: left;
+		box-shadow: 0px -1px var(--ons-color-text) inset;
+		border-bottom: none;
+	}
+	.ons-table th,
+	.ons-table td {
+		padding: 4px 2px 6px;
+	}
+	.ons-table th {
+		text-align: left;
+		box-shadow: 0px -1px var(--ons-color-text) inset;
+		border-bottom: none;
+	}
+	.ons-table td {
+		border-bottom: 1px solid var(--ons-color-borders-light);
+	}
 	:global(.ons-btn) {
 		margin: 0.5em 0.5em 0 0;
 	}
@@ -366,5 +403,15 @@
 			margin-left: 0;
 			margin-top: 0.25rem;
 		}
+	}
+	.area-buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		gap: 4px;
+	}
+	.area-buttons :global(button) {
+		margin: 0;
+		line-height: 1rem !important;
 	}
 </style>
