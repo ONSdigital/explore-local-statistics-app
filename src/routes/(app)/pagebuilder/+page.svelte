@@ -26,6 +26,7 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
+	import SelectAnIndicator from '../areas/[code]/indicators/SelectAnIndicator.svelte';
 
 	let data = $props();
 	let checked = $state(false);
@@ -39,15 +40,19 @@
 	let selectedChildLevels = $state([]);
 	let children = $state([]);
 	let selectedAreaChecked = $state(false);
+	let selectedIndicator = $state(null);
 
 	let pageState = $state({
 		selectedAreas: [],
-		selectedComparison: []
-		// selectedIndicators: []
+		selectedComparison: [],
+		selectedIndicator: {}
 	});
-	let buildButtonEnabled = $derived(pageState.selectedAreas.length ? true : false);
+	let buildButtonEnabled = $derived(
+		pageState.selectedAreas.length && pageState.selectedIndicator ? true : false
+	);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
+	let indicators = $derived(data.data.taxonomy.data);
 
 	function resetAreaSelection() {
 		selectedArea = null;
@@ -66,6 +71,11 @@
 		if (!pageState.selectedAreas.find((d) => d.areacd === areaObj.areacd)) {
 			pageState.selectedAreas.push(areaObj);
 		}
+	}
+
+	function selectIndicator(indicator) {
+		pageState.selectedIndicator = indicator;
+		selectedIndicator = indicator;
 	}
 
 	async function findChildren(code) {
@@ -219,8 +229,6 @@
 	});
 
 	$inspect(pageState);
-	$inspect(selectedAreaName, selectedAreaCode, selectedAreaType, selectedAreaParent);
-	$inspect(areas);
 </script>
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
@@ -312,39 +320,6 @@
 					<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 				{/if}
 				{#if pageState.selectedAreas.length}
-					<!-- <div class="selected-geographies-table">
-						{#key pageState.selectedAreas.length}
-							<Table data={tableData} sortable></Table>
-						{/key}
-					</div> -->
-					<!-- <table class="ons-table">
-						<thead>
-							<tr>
-								<th scope="col" class="ons-table__header">Selected area</th>
-								<th scope="col" class="ons-table__header">Type</th>
-								<th scope="col" class="ons-table__header"></th>
-							</tr>
-						</thead>
-						<tbody class="ons-table__body">
-							{#each pageState.selectedAreas as area (area.areacd)}
-								<tr class="ons-table__row">
-									<td class="ons-table__cell">{area.areanm}</td>
-									<td class="ons-table__cell">{area.type}</td>
-
-									<td class="ons-table__cell">
-										<div class="area-buttons">
-											<Button
-												icon="cross"
-												small
-												variant="secondary"
-												on:click={() => removeArea(area)}
-											></Button>
-										</div>
-									</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table> -->
 					<table class="ons-table ons-table--sortable">
 						<thead class="ons-table__head">
 							<tr class="ons-table__row">
@@ -437,6 +412,25 @@
 				{/if}
 			</AccordionItem>
 		</Accordion>
+		<div class="indicator-selection">
+			<h2>Select an indicator</h2>
+			<p>Search for an indicator to compare across your selected areas.</p>
+			<div class="select-container">
+				<Select
+					label=""
+					placeholder="Search for an indicator"
+					labelKey="label"
+					groupKey="topic"
+					autoClear={false}
+					options={indicators}
+					on:change={(e) => selectIndicator(e.detail)}
+					on:clear={resetIndicatorSelection}
+				></Select>
+				{#if selectedIndicator}
+					<p style="margin-top: 1em;">{selectedIndicator.description}</p>
+				{/if}
+			</div>
+		</div>
 		<div class="build-button">
 			<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
 				>Build comparison page</Button
