@@ -185,6 +185,39 @@
 		}))
 	);
 
+	let sortColumn = $state(null); // 'areanm' | 'type' | null
+	let sortDirection = $state('none'); // 'ascending' | 'descending' | 'none'
+
+	function toggleSort(column) {
+		if (sortColumn !== column) {
+			sortColumn = column;
+			sortDirection = 'ascending';
+		} else if (sortDirection === 'ascending') {
+			sortDirection = 'descending';
+		} else if (sortDirection === 'descending') {
+			sortColumn = null;
+			sortDirection = 'none';
+		} else {
+			sortDirection = 'ascending';
+		}
+	}
+
+	function compareValues(a, b) {
+		if (a == null) return -1;
+		if (b == null) return 1;
+		if (typeof a === 'number' && typeof b === 'number') return a - b;
+		return String(a).localeCompare(String(b));
+	}
+
+	let sortedAreas = $derived.by(() => {
+		if (!sortColumn || sortDirection === 'none') return pageState.selectedAreas;
+
+		const sorted = [...pageState.selectedAreas].sort((a, b) =>
+			compareValues(a[sortColumn], b[sortColumn])
+		);
+		return sortDirection === 'descending' ? sorted.reverse() : sorted;
+	});
+
 	$inspect(pageState);
 	$inspect(selectedAreaName, selectedAreaCode, selectedAreaType, selectedAreaParent);
 	$inspect(areas);
@@ -284,7 +317,7 @@
 							<Table data={tableData} sortable></Table>
 						{/key}
 					</div> -->
-					<table class="ons-table">
+					<!-- <table class="ons-table">
 						<thead>
 							<tr>
 								<th scope="col" class="ons-table__header">Selected area</th>
@@ -304,6 +337,95 @@
 												icon="cross"
 												small
 												variant="secondary"
+												on:click={() => removeArea(area)}
+											></Button>
+										</div>
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table> -->
+					<table class="ons-table ons-table--sortable">
+						<thead class="ons-table__head">
+							<tr class="ons-table__row">
+								<th
+									scope="col"
+									class="ons-table__header"
+									aria-sort={sortColumn === 'areanm' ? sortDirection : 'none'}
+								>
+									<button
+										type="button"
+										class="ons-table__sort-button"
+										on:click={() => toggleSort('areanm')}
+									>
+										Selected area<svg
+											id="sort-sprite-id-0"
+											class="ons-icon"
+											viewBox="0 0 12 19"
+											xmlns="http://www.w3.org/2000/svg"
+											focusable="false"
+											fill="currentColor"
+											role="img"
+											title="ons-icon-sort-sprite"
+										>
+											<path
+												class="ons-topTriangle"
+												d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+											></path>
+											<path
+												class="ons-bottomTriangle"
+												d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+											></path>
+										</svg>
+									</button>
+								</th>
+								<th
+									scope="col"
+									class="ons-table__header"
+									aria-sort={sortColumn === 'type' ? sortDirection : 'none'}
+								>
+									<button
+										type="button"
+										class="ons-table__sort-button"
+										on:click={() => toggleSort('type')}
+									>
+										Type<svg
+											id="sort-sprite-id-0"
+											class="ons-icon"
+											viewBox="0 0 12 19"
+											xmlns="http://www.w3.org/2000/svg"
+											focusable="false"
+											fill="currentColor"
+											role="img"
+											title="ons-icon-sort-sprite"
+										>
+											<path
+												class="ons-topTriangle"
+												d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+											></path>
+											<path
+												class="ons-bottomTriangle"
+												d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+											></path>
+										</svg>
+									</button>
+								</th>
+								<th scope="col" class="ons-table__header"></th>
+							</tr>
+						</thead>
+						<tbody class="ons-table__body">
+							{#each sortedAreas as area (area.areacd)}
+								<tr class="ons-table__row">
+									<td class="ons-table__cell">{area.areanm}</td>
+									<td class="ons-table__cell">{area.type}</td>
+									<td class="ons-table__cell">
+										<div class="remove-button">
+											<Button
+												text="remove"
+												icon="cross"
+												small
+												variant="secondary"
+												hideLabel
 												on:click={() => removeArea(area)}
 											></Button>
 										</div>
@@ -346,14 +468,13 @@
 	.ons-table td {
 		border-bottom: 1px solid var(--ons-color-borders-light);
 	}
-	:global(.ons-btn) {
-		margin: 0.5em 0.5em 0 0;
-	}
 
 	.build-button {
+		margin: 0.5em 0.5em 0 0;
 		margin-bottom: 1.5em;
 	}
 	.select-button {
+		margin: 0.5em 0.5em 0 0;
 		margin-bottom: 1.5em;
 	}
 
@@ -365,52 +486,13 @@
 		margin-bottom: 1em;
 	}
 
-	.selected-geographies-list {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.5rem;
-		margin-bottom: 0.75rem;
-	}
-
-	.selected-geography-item {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-	}
-
-	.selected-geography-item :global(.ons-btn) {
-		margin: 0;
-		max-width: 100%;
-		white-space: normal;
-		text-align: left;
-	}
-
-	.selected-geography-item :global(.ons-badge) {
-		margin-left: auto;
-		flex-shrink: 0;
-	}
-
-	@media (max-width: 600px) {
-		.selected-geography-item {
-			align-items: flex-start;
-		}
-
-		.selected-geography-item :global(.ons-badge) {
-			margin-left: 0;
-			margin-top: 0.25rem;
-		}
-	}
-	.area-buttons {
+	.remove-button {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
 		gap: 4px;
 	}
-	.area-buttons :global(button) {
+	.remove-button :global(button) {
 		margin: 0;
 		line-height: 1rem !important;
 	}
