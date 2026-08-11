@@ -157,7 +157,7 @@
 		children.map((g) => {
 			const count = Array.isArray(g.areas) ? g.areas.length : 0;
 			return {
-				label: `All ${pluralise(g.label, count).toLowerCase()} (${count})`,
+				label: `All ${pluralise(g.label).toLowerCase()} in ${selectedAreaName} (${count})`,
 				value: g.key,
 				count
 			};
@@ -238,7 +238,7 @@
 <Container>
 	<Section>
 		<div class="entire-selection">
-			<h2>Select areas to compare</h2>
+			<h2>1. Select areas to compare</h2>
 			<p>Search for a local authority, region, county, or other named area.</p>
 			<div class="select-container">
 				<Select
@@ -285,11 +285,12 @@
 						bind:checked={selectedAreaChecked}
 						compact
 					/>
+					<span>Related areas:</span>
 					{#if siblings && siblings.length}
 						<Checkbox
 							item={{
 								id: `siblings-${selectedAreaParent?.areacd}`,
-								label: `All ${pluralise(selectedAreaType || 'area', siblings.length).toLowerCase()} in ${selectedAreaParent?.areanm} (${siblings.length})`,
+								label: `All ${pluralise(selectedAreaType).toLowerCase()} in ${selectedAreaParent?.areanm} (${siblings.length})`,
 								checked: selectedSiblingChecked
 							}}
 							bind:checked={selectedSiblingChecked}
@@ -413,7 +414,7 @@
 			</AccordionItem>
 		</Accordion>
 		<div class="indicator-selection">
-			<h2>Select an indicator</h2>
+			<h2>2. Select an indicator</h2>
 			<p>Search for an indicator to compare across your selected areas.</p>
 			<div class="select-container">
 				<Select
