@@ -1,18 +1,17 @@
-import type { PageLoad } from './$types';
-import { resolve } from '$app/paths';
+import { makeDataUrl } from '$lib/utils';
 
-export const load: PageLoad = async ({ fetch }) => {
-	const primaryPath = resolve(
-		'/api/v1/data.cols.json?indicator=median-age,net-additions-housing-stock,claimant-count&geo=E06000001,E06000002,E06000003&time=all'
-	);
-	const comparisonPath = resolve(
-		'/api/v1/data.cols.json?indicator=median-age,net-additions-housing-stock,claimant-count&geo=E92000001,E92000004&time=all'
-	);
-	const primaryData = await (await fetch(primaryPath)).json();
-	const comparisonData = await (await fetch(comparisonPath)).json();
+export async function load({ url, fetch }) {
+	const comparisonAreas = url.searchParams.get('areas')?.split(',').filter(Boolean) ?? [];
+	const indicator = url.searchParams.get('indicator') ?? null;
 
-	return {
-		primaryData,
-		comparisonData
-	};
-};
+	if (!comparisonAreas.length || !indicator) {
+		return { comparisonAreas, indicator, data: null };
+	}
+
+	const dataUrl = makeDataUrl(indicator, [], 'latest', comparisonAreas);
+
+	const response = await fetch(dataUrl);
+	const data = await response.json();
+
+	return { comparisonAreas, indicator, data };
+}

@@ -232,13 +232,26 @@
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
+	let buildHref = $derived.by(() => {
+		const params = new URLSearchParams();
+
+		if (pageState.selectedAreas.length) {
+			params.set('areas', pageState.selectedAreas.map((a) => a.areacd).join(','));
+		}
+		if (pageState.selectedIndicator?.slug) {
+			params.set('indicator', pageState.selectedIndicator.slug);
+		}
+
+		return `${resolve('/pagebuilder/build')}?${params.toString()}`;
+	});
+
 	$inspect(pageState);
 </script>
 
 {#snippet indicator(ind)}
 	<p>
 		<a
-			href={resolve(`/pagebuilder/build`)}
+			href={buildHref}
 			on:click={(e) => {
 				selectIndicator(ind);
 			}}>{ind.label}</a
@@ -448,7 +461,7 @@
 				{/if}
 			</div>
 			<div class="build-button">
-				<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
+				<Button small="true" href={buildHref} disabled={!buildButtonEnabled}
 					>Build comparison page</Button
 				>
 			</div>

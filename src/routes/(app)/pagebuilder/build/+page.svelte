@@ -20,8 +20,6 @@
 	import IndicatorChart from '$lib/components/charts/IndicatorChart.svelte';
 
 	let { data } = $props();
-	import { pageBuilderData } from '$lib/stores/buildstore.js';
-	import { page } from '$app/state';
 	$inspect(data);
 </script>
 
