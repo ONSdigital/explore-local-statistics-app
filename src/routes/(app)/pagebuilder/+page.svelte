@@ -26,7 +26,6 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
-	import SelectAnIndicator from '../areas/[code]/indicators/SelectAnIndicator.svelte';
 
 	let data = $props();
 	let checked = $state(false);
@@ -48,7 +47,7 @@
 		selectedIndicator: {}
 	});
 	let buildButtonEnabled = $derived(
-		pageState.selectedAreas.length && pageState.selectedIndicator ? true : false
+		pageState.selectedAreas.length && Object.keys(pageState.selectedIndicator).length ? true : false
 	);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
@@ -76,6 +75,11 @@
 	function selectIndicator(indicator) {
 		pageState.selectedIndicator = indicator;
 		selectedIndicator = indicator;
+	}
+
+	function removeIndicator() {
+		pageState.selectedIndicator = {};
+		selectedIndicator = null;
 	}
 
 	async function findChildren(code) {
@@ -230,6 +234,18 @@
 
 	$inspect(pageState);
 </script>
+
+{#snippet indicator(ind)}
+	<p>
+		<a
+			href={resolve(`/pagebuilder/build`)}
+			on:click={(e) => {
+				selectIndicator(ind);
+			}}>{ind.label}</a
+		><br />
+		{ind.description}
+	</p>
+{/snippet}
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
 	<!-- <p class="ons-hero__text">Select areas to build a comparison page.</p> -->
@@ -415,7 +431,7 @@
 		</Accordion>
 		<div class="indicator-selection">
 			<h2>2. Select an indicator</h2>
-			<p>Search for an indicator to compare across your selected areas.</p>
+			<p>Search or browse for an indicator to compare across your selected areas.</p>
 			<div class="select-container">
 				<Select
 					label=""
@@ -425,17 +441,35 @@
 					autoClear={false}
 					options={indicators}
 					on:change={(e) => selectIndicator(e.detail)}
-					on:clear={resetIndicatorSelection}
+					on:clear={removeIndicator}
 				></Select>
 				{#if selectedIndicator}
 					<p style="margin-top: 1em;">{selectedIndicator.description}</p>
 				{/if}
 			</div>
-		</div>
-		<div class="build-button">
-			<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
-				>Build comparison page</Button
-			>
+			<div class="build-button">
+				<Button small="true" href={resolve(`/pagebuilder/build`)} disabled={!buildButtonEnabled}
+					>Build comparison page</Button
+				>
+			</div>
+			<div class="indicator-twisties">
+				<Accordion>
+					{#each data.data.taxonomyNested.data as theme}
+						<AccordionItem title={theme.label} id={theme.slug}>
+							{#each theme.children as child}
+								{#if child.description}
+									{@render indicator(child)}
+								{:else}
+									<h3>{child.label}</h3>
+									{#each child.children as ind}
+										{@render indicator(ind)}
+									{/each}
+								{/if}
+							{/each}
+						</AccordionItem>
+					{/each}
+				</Accordion>
+			</div>
 		</div>
 	</Section>
 </Container>
