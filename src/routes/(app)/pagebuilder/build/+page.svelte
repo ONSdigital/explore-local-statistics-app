@@ -15,8 +15,14 @@
 	import { makeDataUrl, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
+	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
 
 	let selection = $state({ areas: [], indicator: null });
+	let sharedParent = $state(null);
+
+	$effect(async () => {
+		sharedParent = await findNearestSharedParent(selection.areas);
+	});
 
 	$effect(() => {
 		const stored = sessionStorage.getItem('pagebuilder-selection');
@@ -26,12 +32,23 @@
 	let data: jsonDataCols | errorObject | null = $state.raw(null);
 	async function fetchData(dataUrl: string) {
 		try {
-			data = await (await fetch(dataUrl)).json();
+			if (dataUrl) data = await (await fetch(dataUrl)).json();
 			return data;
 		} catch {
 			return null;
 		}
 	}
+
+	async function fetchComparisonData(dataUrl: string) {
+		try {
+			if (dataUrl) comparisonData = await (await fetch(dataUrl)).json();
+			return comparisonData;
+		} catch {
+			return null;
+		}
+	}
+
+	let comparisonData: jsonDataCols | errorObject | null = $state.raw(null);
 
 	let dataUrl = $derived(
 		selection.indicator && selection.areas.length
@@ -39,9 +56,13 @@
 			: null
 	);
 
+	let comparisonUrl = $derived(
+		selection.indicator && sharedParent && sharedParent.areacd
+			? makeDataUrl(selection.indicator.slug, 'latest', null, [sharedParent.areacd])
+			: null
+	);
+
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
-	$inspect(dataUrl);
-	$inspect(selection);
 
 	let metadata = $state(null);
 	let metadataUrl = $derived(
@@ -62,9 +83,11 @@
 	});
 
 	$effect(async () => await fetchData(dataUrl));
+	$effect(async () => await fetchComparisonData(comparisonUrl));
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
 	$inspect(metadata);
+	$inspect(comparisonData);
 </script>
 
 <Hero title=""></Hero>
@@ -79,6 +102,10 @@
 					{formatPeriod(data.period[0])}
 					<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
 				</p>
+				<p style:font-weight="bold">Comparison area: {sharedParent?.areanm}</p>
+				{#if comparisonData}
+					<Table data={comparisonData} extendHeight={-380}></Table>
+				{/if}
 				<Table {data}></Table>
 			{:else}
 				<Spinner message="Loading chart data" />
