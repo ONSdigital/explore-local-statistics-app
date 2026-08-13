@@ -26,6 +26,7 @@
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
+	import { goto } from '$app/navigation';
 
 	let data = $props();
 	let checked = $state(false);
@@ -232,18 +233,17 @@
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
-	let buildHref = $derived.by(() => {
-		const params = new URLSearchParams();
-
-		if (pageState.selectedAreas.length) {
-			params.set('areas', pageState.selectedAreas.map((a) => a.areacd).join(','));
-		}
-		if (pageState.selectedIndicator?.slug) {
-			params.set('indicator', pageState.selectedIndicator.slug);
-		}
-
-		return `${resolve('/pagebuilder/build')}?${params.toString()}`;
-	});
+	function goToBuildPage() {
+		sessionStorage.setItem(
+			'pagebuilder-selection',
+			JSON.stringify({
+				areas: pageState.selectedAreas.map((a) => a.areacd),
+				indicator: pageState.selectedIndicator ?? null
+				// indicatorLabel: pageState.selectedIndicator.label ?? null
+			})
+		);
+		goto(resolve('/pagebuilder/build'));
+	}
 
 	$inspect(pageState);
 </script>
@@ -251,9 +251,9 @@
 {#snippet indicator(ind)}
 	<p>
 		<a
-			href={buildHref}
 			on:click={(e) => {
 				selectIndicator(ind);
+				goToBuildPage;
 			}}>{ind.label}</a
 		><br />
 		{ind.description}
@@ -461,7 +461,7 @@
 				{/if}
 			</div>
 			<div class="build-button">
-				<Button small="true" href={buildHref} disabled={!buildButtonEnabled}
+				<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
 					>Build comparison page</Button
 				>
 			</div>

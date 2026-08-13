@@ -3,28 +3,103 @@
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
+		Section,
+		NavSection,
 		Container,
 		NavSections,
 		Grid,
-		NavSection,
 		List,
 		Li,
 		Icon
 	} from '@onsvisual/svelte-components';
-	import { capitalise } from '@onsvisual/robo-utils';
-	import { makePeriodFormatter, downloadEvent } from '$lib/utils';
-	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
-	import AreasLegend from '$lib/components/modals/AreasLegend.svelte';
-	import AreasModal from '$lib/components/modals/AreasModal.svelte';
-	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
-	import IndicatorChart from '$lib/components/charts/IndicatorChart.svelte';
+	import { makeDataUrl, makePeriodFormatter } from '$lib/utils';
+	import Table from '$lib/components/charts/Table.svelte';
 
-	let { data } = $props();
-	$inspect(data);
+	let selection = $state({ areas: [], indicator: null });
+
+	$effect(() => {
+		const stored = sessionStorage.getItem('pagebuilder-selection');
+		if (stored) selection = JSON.parse(stored);
+	});
+
+	async function fetchData(url) {
+		try {
+			return await (await fetch(url)).json();
+		} catch {
+			return null;
+		}
+	}
+
+	let dataUrl = $derived(
+		selection.indicator && selection.areas.length
+			? makeDataUrl(selection.indicator.slug, 'latest', null, selection.areas)
+			: null
+	);
+
+	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
+	$inspect(dataUrl);
+	$inspect(selection);
+
+	let metadata = $state(null);
+	let metadataUrl = $derived(
+		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
+	);
+
+	$effect(async () => {
+		if (!metadataUrl) {
+			metadata = null;
+			return;
+		}
+		try {
+			const res = await fetch(metadataUrl);
+			metadata = res.ok ? await res.json() : null;
+		} catch {
+			metadata = null;
+		}
+	});
+
+	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
+	$inspect(metadata);
 </script>
 
-<Hero background="#eaeaea" title="Area comparison page" width="medium"></Hero>
+<Hero title=""></Hero>
 
 <Container>
-	<p>this is where my area comparison page would go, if i had one</p>
+	<Section>
+		<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
+			{#await fetchData(dataUrl) then data}
+				{#if data}
+					<h2>{selection.indicator.label}</h2>
+					<p class="content-subtitle">
+						{metadata?.subtitle},
+						{formatPeriod(data.period[0])}
+						<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
+					</p>
+					<Table {data}></Table>
+				{/if}
+			{/await}
+		</div>
+	</Section>
+	{#if metadata?.caveats.length > 0}
+		<Section title="Interpretation">
+			<p>{@html caveats}</p>
+		</Section>
+	{/if}
+
+	<Section title="Get the data">
+		<p>
+			The original source data for this indicator can be found on the following
+			{metadata?.source.length > 1 ? 'pages' : 'page'}:
+			{#each metadata?.source as s, i}
+				<a href={s.href} target="_blank"
+					>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+				><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
+				metadata?.source.length - 1
+					? '.'
+					: i === metadata?.source.length - 2
+						? ' and '
+						: ', '}
+			{/each}
+		</p>
+	</Section>
 </Container>
