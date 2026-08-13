@@ -14,6 +14,7 @@
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
+	import Spinner from '$lib/components/visuals/Spinner.svelte';
 
 	let selection = $state({ areas: [], indicator: null });
 
@@ -22,9 +23,11 @@
 		if (stored) selection = JSON.parse(stored);
 	});
 
-	async function fetchData(url) {
+	let data: jsonDataCols | errorObject | null = $state.raw(null);
+	async function fetchData(dataUrl: string) {
 		try {
-			return await (await fetch(url)).json();
+			data = await (await fetch(dataUrl)).json();
+			return data;
 		} catch {
 			return null;
 		}
@@ -58,6 +61,8 @@
 		}
 	});
 
+	$effect(async () => await fetchData(dataUrl));
+
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
 	$inspect(metadata);
 </script>
@@ -67,17 +72,17 @@
 <Container>
 	<Section>
 		<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
-			{#await fetchData(dataUrl) then data}
-				{#if data}
-					<h2>{selection.indicator.label}</h2>
-					<p class="content-subtitle">
-						{metadata?.subtitle},
-						{formatPeriod(data.period[0])}
-						<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
-					</p>
-					<Table {data}></Table>
-				{/if}
-			{/await}
+			{#if data}
+				<h2>{selection.indicator.label}</h2>
+				<p class="content-subtitle">
+					{metadata?.subtitle},
+					{formatPeriod(data.period[0])}
+					<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
+				</p>
+				<Table {data}></Table>
+			{:else}
+				<Spinner message="Loading chart data" />
+			{/if}
 		</div>
 	</Section>
 	{#if metadata?.caveats.length > 0}
