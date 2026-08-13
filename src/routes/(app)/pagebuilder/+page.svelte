@@ -27,6 +27,7 @@
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType } from '$lib/utils';
 	import { goto } from '$app/navigation';
+	import { preventDefault } from 'svelte/legacy';
 
 	let data = $props();
 	let checked = $state(false);
@@ -239,7 +240,6 @@
 			JSON.stringify({
 				areas: pageState.selectedAreas.map((a) => a.areacd),
 				indicator: pageState.selectedIndicator ?? null
-				// indicatorLabel: pageState.selectedIndicator.label ?? null
 			})
 		);
 		goto(resolve('/pagebuilder/build'));
@@ -251,9 +251,12 @@
 {#snippet indicator(ind)}
 	<p>
 		<a
+			href="/pagebuilder/build"
 			on:click={(e) => {
-				selectIndicator(ind);
-				goToBuildPage;
+				e.preventDefault();
+				pageState.selectedIndicator = ind;
+				selectedIndicator = ind;
+				goToBuildPage();
 			}}>{ind.label}</a
 		><br />
 		{ind.description}

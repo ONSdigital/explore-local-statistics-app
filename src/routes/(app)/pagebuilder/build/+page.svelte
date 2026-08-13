@@ -86,8 +86,7 @@
 	$effect(async () => await fetchComparisonData(comparisonUrl));
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
-	$inspect(metadata);
-	$inspect(comparisonData);
+	$inspect(data);
 </script>
 
 <Hero title=""></Hero>
@@ -95,43 +94,50 @@
 <Container>
 	<Section>
 		<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
-			{#if data}
-				<h2>{selection.indicator.label}</h2>
+			{#if data && !data.message}
+				<h2>{selection?.indicator?.label}</h2>
 				<p class="content-subtitle">
 					{metadata?.subtitle},
 					{formatPeriod(data.period[0])}
 					<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
 				</p>
+
 				<p style:font-weight="bold">Comparison area: {sharedParent?.areanm}</p>
 				{#if comparisonData}
 					<Table data={comparisonData} extendHeight={-380}></Table>
 				{/if}
 				<Table {data}></Table>
+			{:else if data && data.message}
+				<div class="no-data">
+					<p>No {selection.indicator.label} data available for the selected areas.</p>
+				</div>
 			{:else}
 				<Spinner message="Loading chart data" />
 			{/if}
 		</div>
 	</Section>
-	{#if metadata?.caveats.length > 0}
-		<Section title="Interpretation">
-			<p>{@html caveats}</p>
+	{#if data && !data.message}
+		{#if metadata?.caveats.length > 0}
+			<Section title="Interpretation">
+				<p>{@html caveats}</p>
+			</Section>
+		{/if}
+
+		<Section title="Get the data">
+			<p>
+				The original source data for this indicator can be found on the following
+				{metadata?.source.length > 1 ? 'pages' : 'page'}:
+				{#each metadata?.source as s, i}
+					<a href={s.href} target="_blank"
+						>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+					><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
+					metadata?.source.length - 1
+						? '.'
+						: i === metadata?.source.length - 2
+							? ' and '
+							: ', '}
+				{/each}
+			</p>
 		</Section>
 	{/if}
-
-	<Section title="Get the data">
-		<p>
-			The original source data for this indicator can be found on the following
-			{metadata?.source.length > 1 ? 'pages' : 'page'}:
-			{#each metadata?.source as s, i}
-				<a href={s.href} target="_blank"
-					>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
-				><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
-				metadata?.source.length - 1
-					? '.'
-					: i === metadata?.source.length - 2
-						? ' and '
-						: ', '}
-			{/each}
-		</p>
-	</Section>
 </Container>
