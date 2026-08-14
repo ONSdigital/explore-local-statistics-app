@@ -4,13 +4,11 @@
 
 	let { data, xKey = 'value', idKey = 'areacd', xDomain } = $props();
 	let height = $derived(30);
-	let width = $state(500);
+	let width = $state(300);
 	let leftMargin = $state(0);
 	const barHeight = 20;
 
 	let xScale = $derived(xDomain ? scaleLinear().domain(xDomain).range([0, width]) : null);
-
-	$inspect(data);
 </script>
 
 <div
@@ -52,7 +50,7 @@
 				height={diamondConst * 2}
 				fill="white"
 				stroke="black"
-				stroke-width="2px"
+				stroke-width="1.75px"
 				transform="rotate(45 {xScale(data.value)} {barHeight / 2})"
 			/>
 		{/if}

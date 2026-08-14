@@ -16,7 +16,7 @@
 	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
-	import ComparisonPointrange from '$lib/components/charts/ComparisonPointrange.svelte';
+	import ComparisonRow from './ComparisonRow.svelte';
 
 	let selection = $state({ areas: [], indicator: null });
 	let sharedParent = $state(null);
@@ -83,45 +83,10 @@
 		}
 	});
 
-	function getLatestData(data) {
-		const keys = Object.keys(data);
-		const rowCount = data.period.length;
-
-		const latestIndex = {};
-		for (let i = 0; i < rowCount; i++) {
-			const areacd = data.areacd[i];
-			const period = data.period[i];
-
-			if (!(areacd in latestIndex) || period > data.period[latestIndex[areacd]]) {
-				latestIndex[areacd] = i;
-			}
-		}
-
-		return Object.values(latestIndex).map((i) =>
-			Object.fromEntries(keys.map((key) => [key, data[key][i]]))
-		);
-	}
-
 	$effect(async () => await fetchData(dataUrl));
 	$effect(async () => await fetchComparisonData(comparisonUrl));
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
-
-	// to move into comparisonrow component:
-	let latestData = $derived(data ? getLatestData(data) : null);
-	let valueRange = $derived.by(() => {
-		if (!latestData?.length) return null;
-
-		const allValues = latestData.flatMap((d) =>
-			[d.value, d.lci_95, d.uci_95].filter((v) => v != null)
-		);
-
-		if (!allValues.length) return null;
-
-		return [Math.min(...allValues), Math.max(...allValues)];
-	});
-	$inspect(latestData);
-	$inspect(valueRange);
 </script>
 
 <Hero title=""></Hero>
@@ -142,7 +107,7 @@
 					<Table data={comparisonData} extendHeight={-380}></Table>
 				{/if}
 				<Table {data}></Table>
-				<ComparisonPointrange data={latestData[0]} xDomain={valueRange} />
+				<ComparisonRow {data} />
 			{:else if data && data.message}
 				<div class="no-data">
 					<p>No {selection.indicator.label} data available for the selected areas.</p>
