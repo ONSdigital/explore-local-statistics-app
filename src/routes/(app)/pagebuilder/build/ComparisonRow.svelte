@@ -104,10 +104,11 @@
 	let areasData = $derived(data ? groupByArea(data) : []);
 	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
 
-	const labelWidth = 200;
-	const chartWidth = 300;
+	const labelWidth = 125;
+	const pointRangeWidth = 300;
+	const valueWidth = 50;
 	let xScale = $derived(
-		xValueRange ? scaleLinear().domain(xValueRange).range([0, chartWidth]) : null
+		xValueRange ? scaleLinear().domain(xValueRange).range([0, pointRangeWidth]) : null
 	);
 
 	let comparisonBar = $derived.by(() => {
@@ -133,33 +134,34 @@
 	style:padding-top="20px"
 >
 	{#if comparisonBar}
-		<div class="comparison-name" style:left="{labelWidth + comparisonBar.valueX}px">
+		<div class="comparison-name" style:left="{labelWidth + valueWidth + comparisonBar.valueX}px">
 			<span>{latestComparisonData[0].areanm}: {latestComparisonData[0].value}</span>
 		</div>
 		{#if comparisonBar.left != null}
 			<div
 				class="comparison-reference-bar"
-				style:left="{labelWidth + comparisonBar.left}px"
+				style:left="{labelWidth + valueWidth + comparisonBar.left}px"
 				style:width="{comparisonBar.width}px"
 			></div>
 		{/if}
 		{#if comparisonBar.valueX != null}
 			<div
 				class="comparison-reference-line"
-				style:left="{labelWidth + comparisonBar.valueX}px"
+				style:left="{labelWidth + valueWidth + comparisonBar.valueX}px"
 			></div>
 		{/if}
 	{/if}
 	{#each areasData as area}
 		<div
 			class="comparison-row-item"
-			style:grid-template-columns="{labelWidth}px {chartWidth}px auto"
+			style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px auto"
 		>
 			<span class="area-name">{area.areanm}</span>
+			<p class="area-value">{latestData.find((d) => d.areacd === area.areacd).value}</p>
 			<ComparisonPointrange
 				data={latestData.find((d) => d.areacd === area.areacd)}
 				xDomain={xValueRange}
-				{chartWidth}
+				{pointRangeWidth}
 			/>
 			<ComparisonSparkline
 				data={area.rows}
@@ -183,6 +185,7 @@
 	.pointrange-individual-list {
 		position: relative;
 	}
+
 	.comparison-name {
 		position: absolute;
 		transform: translateX(-50%);
@@ -191,7 +194,7 @@
 	.comparison-reference-bar {
 		position: absolute;
 		top: 50px;
-		bottom: 50px;
+		bottom: 25px;
 		background: var(--ons-color-grey-40);
 		opacity: 0.6;
 		pointer-events: none;
@@ -200,10 +203,19 @@
 	.comparison-reference-line {
 		position: absolute;
 		top: 50px;
-		bottom: 50px;
+		bottom: 25px;
 		width: 2.5px;
 		background: var(--ons-color-grey-60);
 		pointer-events: none;
 		z-index: 1;
+	}
+	.area-value {
+		margin: 0;
+		font-weight: bold;
+		color: var(--ons-color-night-blue);
+	}
+	.sparkline-svg,
+	.pointrange-svg {
+		display: block;
 	}
 </style>

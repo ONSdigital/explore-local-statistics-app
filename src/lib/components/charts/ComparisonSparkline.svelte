@@ -16,7 +16,7 @@
 	let leftMargin = $state(0);
 
 	let xScale = $derived(xDomain ? scaleTime().domain(xDomain).range([0, 100]) : null);
-	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([70, 0]) : null);
+	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([90, 0]) : null);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.period))
@@ -30,7 +30,7 @@
 		<path d={getCIArea(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 	{/if}
 {/snippet}
-{#snippet line(rows, color, dash = 'none', strokewidth = 1.25, width = 1.5)}
+{#snippet line(rows, color, dash = 'none', strokewidth = 1.5, width = 1.5)}
 	{#if rows?.length}
 		<polyline
 			points={rows.map((d) => [xScale(d.period), yScale(d.value)].join(',')).join(' ')}
@@ -45,18 +45,29 @@
 <div
 	class="sparkline-individual"
 	style:padding-left="{leftMargin}px"
-	style:padding-top="10px"
-	style:padding-bottom="10px"
+	style:padding-top="0px"
+	style:padding-bottom="0px"
 >
-	<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="90px">
+	<svg viewBox="0 0 100 90" class="sparkline-svg" style:height="90px">
 		{#if comparisonData?.length}
-			<!-- {@render ribbon(comparisonData)} -->
-			<!-- no confidence intervals for comparison line(?) ^ -->
-			{@render line(comparisonData, ONScolours.grey60, 2.5, 0.85)}
+			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
+			{@render line(comparisonData, ONScolours.grey60, 2.5, 1)}
 		{/if}
 		{#if data?.length}
-			{@render ribbon(data, ONScolours.nightBlue, 0.3)}
-			{@render line(data, ONScolours.nightBlue)}
+			{@render ribbon(data, ONScolours.oceanBlue, 0.2)}
+			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
 		{/if}
 	</svg>
 </div>
+
+<style>
+	.sparkline-individual {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 90px;
+	}
+	.sparkline-svg {
+		display: block;
+	}
+</style>
