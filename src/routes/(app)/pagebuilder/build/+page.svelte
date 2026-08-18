@@ -59,7 +59,7 @@
 
 	let comparisonUrl = $derived(
 		selection.indicator && sharedParent && sharedParent.areacd
-			? makeDataUrl(selection.indicator.slug, 'latest', null, [sharedParent.areacd])
+			? makeDataUrl(selection.indicator.slug, 'all', null, [sharedParent.areacd])
 			: null
 	);
 
@@ -92,39 +92,33 @@
 <Hero title=""></Hero>
 
 <Container>
-	<Section>
-		<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
-			{#if data && !data.message}
-				<h2>{selection?.indicator?.label}</h2>
-				<p class="content-subtitle">
-					{metadata?.subtitle},
-					{formatPeriod(data.period[0])}
-					<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
-				</p>
-
-				<p style:font-weight="bold">Comparison area: {sharedParent?.areanm}</p>
-				{#if comparisonData}
-					<Table data={comparisonData} extendHeight={-380}></Table>
-				{/if}
-				<Table {data}></Table>
-				<ComparisonRow {data} />
-			{:else if data && data.message}
-				<div class="no-data">
-					<p>No {selection.indicator.label} data available for the selected areas.</p>
-				</div>
-			{:else}
-				<Spinner message="Loading chart data" />
-			{/if}
-		</div>
-	</Section>
+	<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
+		{#if data && !data.message}
+			<h2>{selection?.indicator?.label}</h2>
+			<p class="content-subtitle">
+				{metadata?.subtitle},
+				{formatPeriod(data.period[data.period.length - 1])}
+				<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
+			</p>
+			<ComparisonRow {data} {comparisonData} />
+		{:else if data && data.message}
+			<div class="no-data">
+				<p>No {selection.indicator.label} data available for the selected areas.</p>
+			</div>
+		{:else}
+			<Spinner message="Loading chart data" />
+		{/if}
+	</div>
 	{#if data && !data.message}
 		{#if metadata?.caveats.length > 0}
-			<Section title="Interpretation">
+			<Container>
+				<h2>Interpretation</h2>
 				<p>{@html caveats}</p>
-			</Section>
+			</Container>
 		{/if}
 
-		<Section title="Get the data">
+		<Container>
+			<h2>Get the data</h2>
 			<p>
 				The original source data for this indicator can be found on the following
 				{metadata?.source.length > 1 ? 'pages' : 'page'}:
@@ -139,6 +133,6 @@
 							: ', '}
 				{/each}
 			</p>
-		</Section>
+		</Container>
 	{/if}
 </Container>
