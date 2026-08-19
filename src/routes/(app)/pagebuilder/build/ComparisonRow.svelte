@@ -155,8 +155,9 @@
 			{/if}
 		</div>
 	{/if}
-	{#each areasData as area}
+	{#each areasData as area, i}
 		<div
+			class:alternating-row={i % 2 === 0}
 			class="comparison-row-item"
 			style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px auto"
 		>
@@ -185,7 +186,6 @@
 <style>
 	.comparison-row-item {
 		position: relative;
-		z-index: 2;
 		display: grid;
 		column-gap: 20px;
 		align-items: center;
@@ -197,6 +197,7 @@
 		top: 0;
 		bottom: 0;
 		pointer-events: none;
+		z-index: 1;
 	}
 
 	.pointrange-individual-list {
@@ -211,6 +212,7 @@
 		background-color: var(--ons-color-grey-40);
 		top: 0;
 		white-space: nowrap;
+		z-index: 4;
 	}
 	.comparison-reference-bar {
 		position: absolute;
@@ -219,7 +221,7 @@
 		background: var(--ons-color-grey-40);
 		opacity: 0.6;
 		pointer-events: none;
-		z-index: 0 !important;
+		z-index: 2;
 	}
 	.comparison-reference-line {
 		position: absolute;
@@ -228,7 +230,7 @@
 		width: 2.5px;
 		background: var(--ons-color-grey-60);
 		pointer-events: none;
-		z-index: 1;
+		z-index: 3;
 	}
 	.area-value {
 		margin: 0;
@@ -241,5 +243,15 @@
 	.sparkline-svg,
 	.pointrange-svg {
 		display: block;
+	}
+	.alternating-row {
+		background-color: var(--ons-color-grey-5);
+	}
+	.comparison-row-item > .area-name,
+	.comparison-row-item > .area-value,
+	.comparison-row-item > :global(.pointrange-individual),
+	.comparison-row-item > :global(.sparkline-individual) {
+		position: relative;
+		z-index: 5;
 	}
 </style>
