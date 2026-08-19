@@ -3,10 +3,9 @@
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
 
-	let { data, comparisonData } = $props();
+	let { data, metadata, comparisonData, formatValue = (d) => d } = $props();
 	let width = $state(800);
-	let leftMargin = $state(30);
-	let height = $derived(100);
+	let leftMargin = $state(15);
 
 	function getLatestData(data) {
 		const keys = Object.keys(data);
@@ -104,12 +103,13 @@
 	let areasData = $derived(data ? groupByArea(data) : []);
 	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
 
-	const labelWidth = 125;
-	const pointRangeWidth = 300;
-	const valueWidth = 50;
+	const labelWidth = 180;
+	const pointRangeWidth = 320;
+	const valueWidth = 70;
 	let xScale = $derived(
 		xValueRange ? scaleLinear().domain(xValueRange).range([0, pointRangeWidth]) : null
 	);
+	let comaprisonOffset = $derived(labelWidth + valueWidth + 40 + leftMargin); //20 is the colgap, and is third column so needs to be 2 * 20
 
 	let comparisonBar = $derived.by(() => {
 		const cd = latestComparisonData?.[0];
@@ -123,6 +123,9 @@
 			valueX: cd.value != null ? xScale(cd.value) : null
 		};
 	});
+
+	let suffix = $derived(metadata?.suffix);
+	let prefix = $derived(metadata?.prefix);
 	$inspect(latestComparisonData);
 </script>
 
@@ -134,30 +137,32 @@
 	style:padding-top="20px"
 >
 	{#if comparisonBar}
-		<div class="comparison-name" style:left="{labelWidth + valueWidth + comparisonBar.valueX}px">
-			<span>{latestComparisonData[0].areanm}: {latestComparisonData[0].value}</span>
+		<div class="comparison-overlay" style:left="{comaprisonOffset}px">
+			<div class="comparison-name" style:left="{comparisonBar.valueX}px">
+				{latestComparisonData[0].areanm}: {prefix}
+				{formatValue(latestComparisonData[0].value)}{suffix}
+			</div>
+			{#if comparisonBar.left != null}
+				<div
+					class="comparison-reference-bar"
+					style:left="{comparisonBar.left}px"
+					style:width="{comparisonBar.width}px"
+				></div>
+			{/if}
+			{#if comparisonBar.valueX != null}
+				<div class="comparison-reference-line" style:left="{comparisonBar.valueX}px"></div>
+			{/if}
 		</div>
-		{#if comparisonBar.left != null}
-			<div
-				class="comparison-reference-bar"
-				style:left="{labelWidth + valueWidth + comparisonBar.left}px"
-				style:width="{comparisonBar.width}px"
-			></div>
-		{/if}
-		{#if comparisonBar.valueX != null}
-			<div
-				class="comparison-reference-line"
-				style:left="{labelWidth + valueWidth + comparisonBar.valueX}px"
-			></div>
-		{/if}
 	{/if}
 	{#each areasData as area}
 		<div
 			class="comparison-row-item"
 			style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px auto"
 		>
-			<span class="area-name">{area.areanm}</span>
-			<p class="area-value">{latestData.find((d) => d.areacd === area.areacd).value}</p>
+			<div class="area-name">{area.areanm}</div>
+			<p class="area-value">
+				{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
+			</p>
 			<ComparisonPointrange
 				data={latestData.find((d) => d.areacd === area.areacd)}
 				xDomain={xValueRange}
@@ -168,6 +173,9 @@
 				yDomain={yValueRange}
 				comparisonData={comparisonRows}
 				xDomain={periodRange}
+				{prefix}
+				{suffix}
+				{formatValue}
 			/>
 		</div>
 	{/each}
@@ -181,6 +189,13 @@
 		column-gap: 20px;
 		align-items: center;
 	}
+	.comparison-overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		pointer-events: none;
+	}
 
 	.pointrange-individual-list {
 		position: relative;
@@ -190,11 +205,15 @@
 		position: absolute;
 		transform: translateX(-50%);
 		text-align: center;
+		padding: 5px;
+		background-color: var(--ons-color-grey-40);
+		top: 0;
+		white-space: nowrap;
 	}
 	.comparison-reference-bar {
 		position: absolute;
 		top: 50px;
-		bottom: 25px;
+		bottom: 30px;
 		background: var(--ons-color-grey-40);
 		opacity: 0.6;
 		pointer-events: none;
@@ -203,7 +222,7 @@
 	.comparison-reference-line {
 		position: absolute;
 		top: 50px;
-		bottom: 25px;
+		bottom: 30px;
 		width: 2.5px;
 		background: var(--ons-color-grey-60);
 		pointer-events: none;
@@ -213,6 +232,9 @@
 		margin: 0;
 		font-weight: bold;
 		color: var(--ons-color-night-blue);
+	}
+	.area-name {
+		font-weight: 400;
 	}
 	.sparkline-svg,
 	.pointrange-svg {

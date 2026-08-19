@@ -2,16 +2,20 @@
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 	import { area, curveLinear } from 'd3-shape';
+	import { Icon } from '@onsvisual/svelte-components';
 
 	let {
 		data,
 		comparisonData,
+		formatValue = (d) => d,
 		xKey = 'period',
 		yKey = 'value',
 		idKey = 'areacd',
 		labelKey = 'areanm',
 		yDomain,
-		xDomain
+		xDomain,
+		prefix,
+		suffix
 	} = $props();
 	let leftMargin = $state(0);
 
@@ -23,6 +27,10 @@
 		.y0((d) => yScale(d.lci_95))
 		.y1((d) => yScale(d.uci_95))
 		.curve(curveLinear);
+
+	let diff = $derived(Math.abs(data[data.length - 1].value - data[0].value));
+	let direction = diff === 0 ? 'no change' : diff < 0 ? 'lower' : 'higher';
+	let suffix2 = $derived(suffix === '%' ? ' pp' : suffix);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -58,6 +66,11 @@
 			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
 		{/if}
 	</svg>
+	<div class="change-box">
+		<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
+		<strong>{prefix}{formatValue(diff)}{suffix2}</strong>
+		{direction}
+	</div>
 </div>
 
 <style>

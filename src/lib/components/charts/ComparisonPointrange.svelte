@@ -10,7 +10,13 @@
 </script>
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">
-	<svg viewBox="0 0 {chartWidth} 90" class="pointrange-svg" aria-hidden="true" style:height="90px">
+	<svg
+		viewBox="0 0 {chartWidth} 90"
+		class="pointrange-svg"
+		aria-hidden="true"
+		style:height="90px"
+		overflow="visible"
+	>
 		{#if xScale && data}
 			<line
 				stroke-dasharray="3"
@@ -19,19 +25,10 @@
 				y1={45}
 				y2={45}
 				stroke="black"
+				stroke-width="0.5"
 			>
 			</line>
 			{#if data.lci_95 != null && data.uci_95 != null}
-				<!-- adding white rect below to hide dashed line, but will need to make sure that comparison area line sits above this hmmm. -->
-				<!-- <rect
-					class="confidence-bar-white-trick"
-					x={xScale(data.lci_95)}
-					y="0"
-					width={xScale(data.uci_95) - xScale(data.lci_95)}
-					height={barHeight}
-					fill={ONScolours.white}
-					opacity="1"
-				/> -->
 				<rect
 					class="confidence-bar"
 					x={xScale(data.lci_95)}

@@ -12,7 +12,7 @@
 		Li,
 		Icon
 	} from '@onsvisual/svelte-components';
-	import { makeDataUrl, makePeriodFormatter } from '$lib/utils';
+	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
@@ -63,12 +63,12 @@
 			: null
 	);
 
-	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
-
 	let metadata = $state(null);
 	let metadataUrl = $derived(
 		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
 	);
+	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
+	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 
 	$effect(async () => {
 		if (!metadataUrl) {
@@ -100,7 +100,7 @@
 				{formatPeriod(data.period[data.period.length - 1])}
 				<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
 			</p>
-			<ComparisonRow {data} {comparisonData} />
+			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} />
 		{:else if data && data.message}
 			<div class="no-data">
 				<p>No {selection.indicator.label} data available for the selected areas.</p>
