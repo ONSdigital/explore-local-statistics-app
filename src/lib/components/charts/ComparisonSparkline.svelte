@@ -28,9 +28,12 @@
 		.y1((d) => yScale(d.uci_95))
 		.curve(curveLinear);
 
-	let diff = $derived(Math.abs(data[data.length - 1].value - data[0].value));
+	let diff = $derived(data[data.length - 1].value - data[0].value);
 	let direction = diff === 0 ? 'no change' : diff < 0 ? 'lower' : 'higher';
 	let suffix2 = $derived(suffix === '%' ? ' pp' : suffix);
+
+	let posCol = '#BEE2f0';
+	let negCol = '#ABBDC5';
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -66,9 +69,9 @@
 			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
 		{/if}
 	</svg>
-	<div class="change-box">
+	<div class="change-box" style:padding="5px;" style:background-color={diff > 0 ? posCol : negCol}>
 		<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
-		<strong>{prefix}{formatValue(diff)}{suffix2}</strong>
+		<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
 		{direction}
 	</div>
 </div>

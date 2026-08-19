@@ -2,6 +2,7 @@
 	import ComparisonPointrange from '$lib/components/charts/ComparisonPointrange.svelte';
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
+	import { parsePeriod } from '$lib/utils';
 
 	let { data, metadata, comparisonData, formatValue = (d) => d } = $props();
 	let width = $state(800);
@@ -78,7 +79,7 @@
 			if (period < earliest) earliest = period;
 			if (period > latest) latest = period;
 		}
-		return [new Date(earliest), new Date(latest)];
+		return [parsePeriod(earliest), parsePeriod(latest)];
 	});
 
 	function groupByArea(data) {
@@ -92,7 +93,7 @@
 				areasMap.set(areacd, { areacd, areanm: data.areanm[i], rows: [] });
 			}
 			const row = Object.fromEntries(
-				keys.map((key) => [key, key === 'period' ? new Date(data[key][i]) : data[key][i]])
+				keys.map((key) => [key, key === 'period' ? parsePeriod(data[key][i]) : data[key][i]])
 			);
 			areasMap.get(areacd).rows.push(row);
 		}
@@ -126,7 +127,7 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
-	$inspect(latestComparisonData);
+	$inspect(areasData);
 </script>
 
 <div
