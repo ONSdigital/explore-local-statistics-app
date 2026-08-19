@@ -86,4 +86,7 @@
 	.sparkline-svg {
 		display: block;
 	}
+	.change-box {
+		margin-left: 20px;
+	}
 </style>

@@ -189,6 +189,7 @@
 		display: grid;
 		column-gap: 20px;
 		align-items: center;
+		justify-content: left;
 	}
 	.comparison-overlay {
 		position: absolute;
