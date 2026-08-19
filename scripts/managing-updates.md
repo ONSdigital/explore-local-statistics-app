@@ -84,7 +84,9 @@ git merge develop
 
 On your update branch, edit the `scripts/config/data-repo-version.json` file again - this time to pull in from data `main`. Rerun `npm run data:ingest` and `npm run data:build` and push the changes. This stage ensures that the go-live branch of the app is always up-to-date with the main branch of the data repo.
 
-Open a pull request to merge the app update branch into `develop`. Use the #els-developers slack channel to notify others to approve the PR. Once approved and ready to go live, open a PR to merge `main <-- develop`. Once approved and merged, notify the team that the app is ready to be pushed to live.
+Commit and push your changes in VS Code.
+
+Open a pull request in Github to merge the app update branch into `develop`. Use the #els-developers slack channel to notify others to approve the PR. Once approved and ready to go live, open a PR to merge `main <-- develop`. Once approved and merged, notify the team that the app is ready to be pushed to live.
 
 ## Notes
 
