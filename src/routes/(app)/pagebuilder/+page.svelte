@@ -38,7 +38,6 @@
 	let selectedAreaParent = $state(null);
 	let siblings = $state([]);
 	let selectedSiblingChecked = $state(false);
-	let selectedChildLevels = $state([]);
 	let children = $state([]);
 	let selectedAreaChecked = $state(false);
 	let selectedIndicator = $state(null);
@@ -53,7 +52,9 @@
 	);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
-	let indicators = $derived(data.data.taxonomy.data);
+	let indicators = $derived(
+		data.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
+	);
 
 	function resetAreaSelection() {
 		selectedArea = null;
@@ -64,7 +65,6 @@
 		siblings = [];
 		selectedSiblingChecked = false;
 		children = [];
-		selectedChildLevels = [];
 		selectedAreaChecked = false;
 	}
 
@@ -85,8 +85,6 @@
 	}
 
 	async function findChildren(code) {
-		selectedChildLevels = [];
-		selectedAreaChecked = true;
 		selectedAreaParent = null;
 		if (!code) {
 			children = [];
@@ -127,35 +125,58 @@
 		}
 	}
 
+	$effect(() => {
+		selectedAreaChecked = pageState.selectedAreas.some((area) => area.areacd === selectedAreaCode);
+		selectedSiblingChecked =
+			siblings.length > 0 &&
+			siblings.every((sibling) =>
+				pageState.selectedAreas.some((area) => area.areacd === sibling.areacd)
+			);
+	});
+
 	function clearAllSelected() {
 		pageState.selectedAreas = [];
 	}
 
-	function addCheckedToSelection() {
+	function toggleSelectedArea() {
+		const area = areas.find((d) => d.areacd === selectedAreaCode);
+		if (!area) return;
+
 		if (selectedAreaChecked) {
-			const area = areas.find((d) => d.areacd === selectedAreaCode);
-			if (area) {
-				addArea({ areacd: area.areacd, areanm: area.areanm, type: area.type });
-			}
+			addArea({ areacd: area.areacd, areanm: area.areanm, type: area.type });
+		} else {
+			removeArea(area);
 		}
+	}
 
-		selectedChildLevels.forEach((level) => {
-			const group = children.find((g) => g.key === level.value);
-			if (group && Array.isArray(group.areas)) {
-				group.areas.forEach((child) => {
-					addArea({
-						areacd: child.areacd,
-						areanm: child.areanm,
-						type: group.label
-					});
-				});
-			}
-		});
+	function toggleSiblings() {
+		if (selectedSiblingChecked) {
+			siblings.forEach((sibling) =>
+				addArea({
+					areacd: sibling.areacd,
+					areanm: sibling.areanm,
+					type: sibling.type || selectedAreaType
+				})
+			);
+		} else {
+			siblings.forEach(removeArea);
+		}
+	}
 
-		if (selectedSiblingChecked && siblings && siblings.length) {
-			siblings.forEach((sib) => {
-				addArea({ areacd: sib.areacd, areanm: sib.areanm, type: sib.type || selectedAreaType });
-			});
+	function toggleChildLevel(item) {
+		const group = children.find((childGroup) => childGroup.key === item.value);
+		if (!group || !Array.isArray(group.areas)) return;
+
+		if (item.checked) {
+			group.areas.forEach((child) =>
+				addArea({
+					areacd: child.areacd,
+					areanm: child.areanm,
+					type: group.label
+				})
+			);
+		} else {
+			group.areas.forEach(removeArea);
 		}
 	}
 
@@ -165,7 +186,12 @@
 			return {
 				label: `All ${pluralise(g.label).toLowerCase()} in ${selectedAreaName} (${count})`,
 				value: g.key,
-				count
+				count,
+				checked:
+					count > 0 &&
+					g.areas.every((child) =>
+						pageState.selectedAreas.some((area) => area.areacd === child.areacd)
+					)
 			};
 		})
 	);
@@ -315,6 +341,7 @@
 							checked: selectedAreaChecked
 						}}
 						bind:checked={selectedAreaChecked}
+						on:change={toggleSelectedArea}
 						compact
 					/>
 					<span>Related areas:</span>
@@ -326,24 +353,17 @@
 								checked: selectedSiblingChecked
 							}}
 							bind:checked={selectedSiblingChecked}
+							on:change={toggleSiblings}
 							compact
 						/>
 					{/if}
 					<Checkboxes
 						items={childLevels}
 						on:change={(e) => {
-							const item = e.detail.item;
-							if (item.checked) {
-								selectedChildLevels = [...selectedChildLevels, item];
-							} else {
-								selectedChildLevels = selectedChildLevels.filter((i) => i.value !== item.value);
-							}
+							toggleChildLevel(e.detail.item);
 						}}
 						compact
 					></Checkboxes>
-				</div>
-				<div class="select-button">
-					<Button small="true" on:click={addCheckedToSelection}>Add to selection</Button>
 				</div>
 			{/if}
 		</div>
@@ -515,10 +535,6 @@
 	}
 
 	.build-button {
-		margin: 0.5em 0.5em 0 0;
-		margin-bottom: 1.5em;
-	}
-	.select-button {
 		margin: 0.5em 0.5em 0 0;
 		margin-bottom: 1.5em;
 	}
