@@ -60,7 +60,7 @@
 	style:padding-bottom="0px"
 	style:padding-right="20px"
 >
-	<svg viewBox="0 0 100 90" class="sparkline-svg" style:height="90px">
+	<svg viewBox="0 0 100 90" class="sparkline-svg" style:height="90px" overflow="visible">
 		{#if comparisonData?.length}
 			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
 			{@render line(comparisonData, ONScolours.grey60, 2.5, 1)}
