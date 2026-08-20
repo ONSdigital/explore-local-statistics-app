@@ -276,14 +276,16 @@ function processFile(file) {
 		.dedupe('areacd');
 
 	// get the column titles of those columns we want to suppress
-	const suppressedCols = tableSchema.filter((d) => d.suppressOutput).map((d) => d.titles[0]);
+	const suppressedCols = tableSchema
+		.filter((d) => d.suppressOutput)
+		.map((d) => (Array.isArray(d.titles) ? d.titles[0] : d.titles));
 
 	//  rename the columns in data using the information in tableschema
 	// (name is the target title, the first value of titles is the existing column name in the csv)
 	const varNames = Object.fromEntries(
 		tableSchema
-			.filter((d) => !suppressedCols.includes(d.titles[0])) // remove columns we are deselecting from this
-			.map((d) => [d.titles[0], d.name])
+			.filter((d) => !suppressedCols.includes(Array.isArray(d.titles) ? d.titles[0] : d.titles)) // remove columns we are deselecting from this
+			.map((d) => [Array.isArray(d.titles) ? d.titles[0] : d.titles, d.name])
 	);
 
 	indicator_data = indicator_data
