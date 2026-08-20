@@ -58,6 +58,7 @@
 	style:padding-left="{leftMargin}px"
 	style:padding-top="0px"
 	style:padding-bottom="0px"
+	style:padding-right="20px"
 >
 	<svg viewBox="0 0 100 90" class="sparkline-svg" style:height="90px">
 		{#if comparisonData?.length}
@@ -87,6 +88,7 @@
 		display: block;
 	}
 	.change-box {
-		margin-left: 20px;
+		margin-left: 26px;
+		/* 20px to match column gap, plus 6 to match the diamond padding around the pointrange */
 	}
 </style>

@@ -101,7 +101,16 @@
 		return Array.from(areasMap.values());
 	}
 
-	let areasData = $derived(data ? groupByArea(data) : []);
+	let areasData = $derived.by(() => {
+		if (!data || !latestData) return [];
+
+		const latestValues = new Map(latestData.map((row) => [row.areacd, row.value]));
+
+		return groupByArea(data).sort(
+			(a, b) =>
+				(latestValues.get(b.areacd) ?? -Infinity) - (latestValues.get(a.areacd) ?? -Infinity)
+		);
+	});
 	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
 
 	const labelWidth = 180;
@@ -157,7 +166,7 @@
 	{/if}
 	{#each areasData as area, i}
 		<div
-			class:alternating-row={i % 2 === 0}
+			class:alternating-row={i % 2 !== 0}
 			class="comparison-row-item"
 			style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px auto"
 		>
@@ -190,6 +199,7 @@
 		column-gap: 20px;
 		align-items: center;
 		justify-content: left;
+		width: max-content;
 	}
 	.comparison-overlay {
 		position: absolute;
@@ -209,7 +219,7 @@
 		transform: translateX(-50%);
 		text-align: center;
 		padding: 5px;
-		background-color: var(--ons-color-grey-40);
+		background-color: var(--ons-color-grey-25);
 		top: 0;
 		white-space: nowrap;
 		z-index: 4;
@@ -218,8 +228,8 @@
 		position: absolute;
 		top: 50px;
 		bottom: 30px;
-		background: var(--ons-color-grey-40);
-		opacity: 0.6;
+		background: var(--ons-color-grey-25);
+		opacity: 1;
 		pointer-events: none;
 		z-index: 2;
 	}
@@ -239,6 +249,7 @@
 	}
 	.area-name {
 		font-weight: 400;
+		margin-left: 20px;
 	}
 	.sparkline-svg,
 	.pointrange-svg {
