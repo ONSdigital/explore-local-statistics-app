@@ -51,50 +51,50 @@ async function cloneRepo(): Promise<void> {
 	}
 }
 
-async function getTimestamps(): Promise<void> {
-	try {
-		console.log('Getting data and metadata timestamps for each directory from latest commits');
-		const datasets = fs
-			.readdirSync(TEMP_DIR)
-			.filter((item) => !item.includes('.'))
-			.filter(
-				(item) =>
-					fs.existsSync(`${TEMP_DIR}/${item}/${item}.csv`) &&
-					fs.existsSync(`${TEMP_DIR}/${item}/${item}.json`)
-			);
-		for (const ds of datasets) {
-			const dataPath = `${ds}/${ds}.csv`;
-			const metaPath = `${ds}/${ds}.json`;
-			const timestampPath = `${TARGET_DIR}/${ds}/timestamps.json`;
-			const modifiedDateData = execSync(
-				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${dataPath}`,
-				{
-					encoding: 'utf-8'
-				}
-			);
-			const modifiedDateMeta = execSync(
-				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${metaPath}`,
-				{
-					encoding: 'utf-8'
-				}
-			);
-			const timestamps = {
-				csvModified: modifiedDateData,
-				jsonModified: modifiedDateMeta
-			};
+// async function getTimestamps(): Promise<void> {
+// 	try {
+// 		console.log('Getting data and metadata timestamps for each directory from latest commits');
+// 		const datasets = fs
+// 			.readdirSync(TEMP_DIR)
+// 			.filter((item) => !item.includes('.'))
+// 			.filter(
+// 				(item) =>
+// 					fs.existsSync(`${TEMP_DIR}/${item}/${item}.csv`) &&
+// 					fs.existsSync(`${TEMP_DIR}/${item}/${item}.json`)
+// 			);
+// 		for (const ds of datasets) {
+// 			const dataPath = `${ds}/${ds}.csv`;
+// 			const metaPath = `${ds}/${ds}.json`;
+// 			const timestampPath = `${TARGET_DIR}/${ds}/timestamps.json`;
+// 			const modifiedDateData = execSync(
+// 				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${dataPath}`,
+// 				{
+// 					encoding: 'utf-8'
+// 				}
+// 			);
+// 			const modifiedDateMeta = execSync(
+// 				`git -C ${TEMP_DIR} log -1 --pretty="format:%cs" ${metaPath}`,
+// 				{
+// 					encoding: 'utf-8'
+// 				}
+// 			);
+// 			const timestamps = {
+// 				csvModified: modifiedDateData,
+// 				jsonModified: modifiedDateMeta
+// 			};
 
-			const timestampDir = path.dirname(timestampPath);
-			console.log(`Creating directory for timestamps if it doesn't exist: ${timestampDir}`);
-			await fs.promises.mkdir(timestampDir, { recursive: true });
+// 			const timestampDir = path.dirname(timestampPath);
+// 			console.log(`Creating directory for timestamps if it doesn't exist: ${timestampDir}`);
+// 			await fs.promises.mkdir(timestampDir, { recursive: true });
 
-			await fs.promises.writeFile(timestampPath, JSON.stringify(timestamps, null, 2));
-			console.log(`Wrote ${timestampPath}`);
-		}
-	} catch (error) {
-		console.error('Error getting timestamps:', error);
-		throw error;
-	}
-}
+// 			await fs.promises.writeFile(timestampPath, JSON.stringify(timestamps, null, 2));
+// 			console.log(`Wrote ${timestampPath}`);
+// 		}
+// 	} catch (error) {
+// 		console.error('Error getting timestamps:', error);
+// 		throw error;
+// 	}
+// }
 
 async function moveContents(): Promise<void> {
 	try {
@@ -130,7 +130,7 @@ async function main(): Promise<void> {
 		await cloneRepo();
 
 		// Generate timestamp
-		await getTimestamps();
+		// await getTimestamps();
 
 		// Move contents to target directory
 		await moveContents();

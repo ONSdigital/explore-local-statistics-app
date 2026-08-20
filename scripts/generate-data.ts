@@ -219,7 +219,7 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 function validateIndicators(dataFolders, manifestMetadata) {
 	const indicatorsMissingFromManifest = [];
 	for (const dataset of dataFolders) {
-		const metadataPath = `${RAW_DATA_DIR}/${dataset}/${dataset}.csv-metadata.json`;
+		const metadataPath = `${RAW_DATA_DIR}/${dataset}/${dataset}.json`;
 		if (!fs.existsSync(metadataPath)) continue;
 
 		const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
@@ -253,7 +253,7 @@ function processFile(file) {
 		console.log(`Cannot find data file ${data_file}`);
 	let indicator_data = loadCsvWithoutBom(`${RAW_DATA_DIR}${data_file}`);
 	const meta_data = JSON.parse(
-		fs.readFileSync(`${RAW_DATA_DIR}${data_file.replace('.csv', '.csv-metadata.json')}`)
+		fs.readFileSync(`${RAW_DATA_DIR}${data_file.replace('.csv', '.json')}`)
 	);
 	const tableSchema = meta_data.tableSchema.columns;
 	const dataset_name = data_file.split('/')[1];
