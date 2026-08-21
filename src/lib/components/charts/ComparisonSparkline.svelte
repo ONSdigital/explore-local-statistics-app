@@ -70,9 +70,15 @@
 			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
 		{/if}
 	</svg>
-	<div class="change-box" style:padding="5px;" style:background-color={diff > 0 ? posCol : negCol}>
-		<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
-		<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
+	<div
+		class="change-box"
+		style:padding="5px;"
+		style:background-color={diff === 0 ? ONScolours.grey25 : diff > 0 ? posCol : negCol}
+	>
+		{#if diff !== 0}
+			<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
+			<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
+		{/if}
 		{direction}
 	</div>
 </div>

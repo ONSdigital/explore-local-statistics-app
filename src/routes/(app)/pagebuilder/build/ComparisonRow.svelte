@@ -149,8 +149,9 @@
 	{#if comparisonBar}
 		<div class="comparison-overlay" style:left="{comaprisonOffset}px">
 			<div class="comparison-name" style:left="{comparisonBar.valueX}px">
-				{latestComparisonData[0].areanm}: {prefix}
-				{formatValue(latestComparisonData[0].value)}{suffix}
+				{latestComparisonData[0].areanm}: {prefix}{formatValue(
+					latestComparisonData[0].value
+				)}{suffix}
 			</div>
 			{#if comparisonBar.left != null}
 				<div
