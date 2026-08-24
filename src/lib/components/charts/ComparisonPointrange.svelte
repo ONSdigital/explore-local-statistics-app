@@ -6,7 +6,7 @@
 	let leftMargin = $state(0);
 	const barHeight = 20;
 
-	let xScale = $derived(xDomain ? scaleLinear().domain(xDomain).range([0, 300]) : null);
+	let xScale = $derived(xDomain ? scaleLinear().domain(xDomain).range([0, chartWidth]) : null);
 </script>
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">
@@ -15,11 +15,12 @@
 		class="pointrange-svg"
 		aria-hidden="true"
 		style:height="90px"
+		style:width="{chartWidth}px"
 		overflow="visible"
 	>
 		{#if xScale && data}
 			<line
-				stroke-dasharray="3"
+				stroke-dasharray="5"
 				x1={xScale(xDomain[0])}
 				x2={xScale(xDomain[1])}
 				y1={45}
@@ -43,12 +44,13 @@
 				{@const centerY = 45}
 				{@const diamondConst = 6}
 				<rect
+					class={data.lci_95 != null && data.uci_95 != null
+						? 'value-diamond-within-ci'
+						: 'value-diamond'}
 					x={xScale(data.value) - diamondConst}
 					y={centerY - diamondConst}
 					width={diamondConst * 2}
 					height={diamondConst * 2}
-					fill="white"
-					stroke="black"
 					stroke-width="1.75px"
 					transform={`rotate(45 ${xScale(data.value)} ${centerY})`}
 				/>
@@ -66,5 +68,13 @@
 	}
 	.pointrange-svg {
 		display: block;
+	}
+	.value-diamond-within-ci {
+		fill: white;
+		stroke: black;
+	}
+	.value-diamond {
+		fill: var(--ons-color-ocean-blue);
+		stroke: var(--ons-color-ocean-blue);
 	}
 </style>

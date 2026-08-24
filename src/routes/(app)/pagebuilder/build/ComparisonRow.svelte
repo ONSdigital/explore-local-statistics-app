@@ -113,13 +113,64 @@
 	});
 	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
 
-	const labelWidth = 180;
-	const pointRangeWidth = 320;
-	const valueWidth = 70;
+	const sparklineWidth = 300;
+	const colGap = 20;
+	const labelMargin = colGap;
+	const nColsPreceedingPointrange = 2;
+
+	let valueWidths = $state({});
+	let valueWidth = $derived.by(() => {
+		const widths = Object.values(valueWidths);
+		if (!widths.length) return 70;
+		return Math.max(...widths);
+	});
+	function updateValueWidth(el, index) {
+		const update = () => {
+			valueWidths[index] = el.getBoundingClientRect().width;
+		};
+		update();
+		const observer = new ResizeObserver(update);
+		observer.observe(el);
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
+	}
+
+	let labelWidths = $state({});
+	let labelWidth = $derived.by(() => {
+		const widthsL = Object.values(labelWidths);
+		if (!widthsL.length) return 250;
+		return Math.max(...widthsL);
+	});
+	function updateLabelWidths(el, areacd) {
+		const update = () => {
+			labelWidths[areacd] = el.getBoundingClientRect().width + labelMargin;
+		};
+
+		update();
+		const observer = new ResizeObserver(update);
+		observer.observe(el);
+
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
+	}
+
+	let pointRangeWidth = $derived.by(() => {
+		const fixed = leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 3;
+		return Math.max(120, width - fixed);
+	});
+
 	let xScale = $derived(
 		xValueRange ? scaleLinear().domain(xValueRange).range([0, pointRangeWidth]) : null
 	);
-	let comaprisonOffset = $derived(labelWidth + valueWidth + 40 + leftMargin); //20 is the colgap, and is third column so needs to be 2 * 20
+	let comparisonOffset = $derived(
+		leftMargin + labelWidth + valueWidth + colGap * nColsPreceedingPointrange
+	);
 
 	let comparisonBar = $derived.by(() => {
 		const cd = latestComparisonData?.[0];
@@ -136,7 +187,6 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
-	$inspect(areasData);
 </script>
 
 <div
@@ -147,7 +197,7 @@
 	style:padding-top="20px"
 >
 	{#if comparisonBar}
-		<div class="comparison-overlay" style:left="{comaprisonOffset}px">
+		<div class="comparison-overlay" style:left="{comparisonOffset}px">
 			<div class="comparison-name" style:left="{comparisonBar.valueX}px">
 				{latestComparisonData[0].areanm}: {prefix}{formatValue(
 					latestComparisonData[0].value
@@ -165,32 +215,41 @@
 			{/if}
 		</div>
 	{/if}
-	{#each areasData as area, i}
-		<div
-			class:alternating-row={i % 2 !== 0}
-			class="comparison-row-item"
-			style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px auto"
-		>
-			<div class="area-name">{area.areanm}</div>
-			<p class="area-value">
-				{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
-			</p>
-			<ComparisonPointrange
-				data={latestData.find((d) => d.areacd === area.areacd)}
-				xDomain={xValueRange}
-				{pointRangeWidth}
-			/>
-			<ComparisonSparkline
-				data={area.rows}
-				yDomain={yValueRange}
-				comparisonData={comparisonRows}
-				xDomain={periodRange}
-				{prefix}
-				{suffix}
-				{formatValue}
-			/>
-		</div>
-	{/each}
+	{#key areasData}
+		{#each areasData as area, i (area.areacd)}
+			<div
+				class:alternating-row={i % 2 !== 0}
+				class="comparison-row-item"
+				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+			>
+				<div
+					class="area-name"
+					style:margin-left="{labelMargin}px"
+					use:updateLabelWidths={area.areacd}
+				>
+					{area.areanm}
+				</div>
+				<p class="area-value" use:updateValueWidth={i}>
+					{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
+				</p>
+				<ComparisonPointrange
+					data={latestData.find((d) => d.areacd === area.areacd)}
+					xDomain={xValueRange}
+					chartWidth={pointRangeWidth}
+				/>
+				<ComparisonSparkline
+					data={area.rows}
+					yDomain={yValueRange}
+					comparisonData={comparisonRows}
+					xDomain={periodRange}
+					{prefix}
+					{suffix}
+					{formatValue}
+					chartWidth={sparklineWidth}
+				/>
+			</div>
+		{/each}
+	{/key}
 </div>
 
 <style>
@@ -200,7 +259,7 @@
 		column-gap: 20px;
 		align-items: center;
 		justify-content: left;
-		width: max-content;
+		width: 100%;
 	}
 	.comparison-overlay {
 		position: absolute;
@@ -246,11 +305,15 @@
 	.area-value {
 		margin: 0;
 		font-weight: bold;
-		color: var(--ons-color-night-blue);
+		color: var(--ons-color-ocean-blue);
+		width: max-content;
+		white-space: nowrap;
 	}
 	.area-name {
 		font-weight: 400;
 		margin-left: 20px;
+		width: fit-content;
+		max-width: 250px;
 	}
 	.sparkline-svg,
 	.pointrange-svg {
