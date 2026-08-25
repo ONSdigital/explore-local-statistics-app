@@ -3,10 +3,12 @@
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
 	import { parsePeriod } from '$lib/utils';
+	import { Icon, Divider } from '@onsvisual/svelte-components';
 
 	let { data, metadata, comparisonData, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
 	let leftMargin = $state(15);
+	let headerHeight = $state(0);
 
 	function getLatestData(data) {
 		const keys = Object.keys(data);
@@ -98,10 +100,22 @@
 			areasMap.get(areacd).rows.push(row);
 		}
 
+		for (const area of areasMap.values()) {
+			area.diff = getDiff(area.rows);
+		}
+
 		return Array.from(areasMap.values());
 	}
 
-	let areasData = $derived.by(() => {
+	function getDiff(rows) {
+		if (!rows.length) return null;
+		const earliest = rows.reduce((a, b) => (a.period < b.period ? a : b));
+		const latest = rows.reduce((a, b) => (a.period > b.period ? a : b));
+		if (earliest.value == null || latest.value == null) return null;
+		return latest.value - earliest.value;
+	}
+
+	let areasDataUnsorted = $derived.by(() => {
 		if (!data || !latestData) return [];
 
 		const latestValues = new Map(latestData.map((row) => [row.areacd, row.value]));
@@ -111,6 +125,33 @@
 				(latestValues.get(b.areacd) ?? -Infinity) - (latestValues.get(a.areacd) ?? -Infinity)
 		);
 	});
+
+	let sortColumn = $state('value');
+	let sortDirection = $state('descending');
+
+	function toggleSort(column) {
+		if (sortColumn !== column) {
+			sortColumn = column;
+			sortDirection = 'ascending';
+		} else {
+			sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
+		}
+	}
+
+	function compareValues(a, b) {
+		if (a == null) return -1;
+		if (b == null) return 1;
+		if (typeof a === 'number' && typeof b === 'number') return a - b;
+		return String(a).localeCompare(String(b));
+	}
+
+	let areasData = $derived.by(() => {
+		const sorted = [...areasDataUnsorted].sort((a, b) =>
+			compareValues(a[sortColumn], b[sortColumn])
+		);
+		return sortDirection === 'descending' ? sorted.reverse() : sorted;
+	});
+
 	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
 
 	const sparklineWidth = 300;
@@ -187,7 +228,6 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
-	$inspect(data);
 </script>
 
 <div
@@ -195,75 +235,101 @@
 	class="pointrange-individual-list"
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="3px"
-	style:padding-top="20px"
 >
 	<div
 		class="comparison-row-item comparison-header-row"
 		style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+		style:margin-bottom="10px"
 	>
-		<div class="header-cell" style:margin-left="{labelMargin}px">Area</div>
-		<div class="header-cell">Value in {formatPeriod(latestData[0].period)}</div>
+		<div class="header-cell" style:margin-left="{labelMargin}px">
+			<button class="table-sort-button" on:click={() => toggleSort('areanm')}>
+				Area <Icon type="carret" size="s"></Icon>
+			</button>
+		</div>
+		<div class="header-cell">
+			<button class="table-sort-button" on:click={() => toggleSort('value')}>
+				{formatPeriod(latestData[0].period)} value <Icon type="carret" size="s"></Icon>
+			</button>
+		</div>
 		<div class="header-cell"></div>
-		<div class="header-cell">Trend since {formatPeriod(periodRange[0])}</div>
+		<div class="header-cell">
+			<button class="table-sort-button" on:click={() => toggleSort('diff')}>
+				Trend since {formatPeriod(periodRange[0])}
+				<Icon type="carret" size="s"></Icon>
+			</button>
+		</div>
 	</div>
 
-	{#if comparisonBar}
-		<div class="comparison-overlay" style:left="{comparisonOffset}px">
-			<div class="comparison-name" style:left="{comparisonBar.valueX}px">
-				{latestComparisonData[0].areanm}: {prefix}{formatValue(
-					latestComparisonData[0].value
-				)}{suffix}
-			</div>
-			{#if comparisonBar.left != null}
-				<div
-					class="comparison-reference-bar"
-					style:left="{comparisonBar.left}px"
-					style:width="{comparisonBar.width}px"
-				></div>
-			{/if}
-			{#if comparisonBar.valueX != null}
-				<div class="comparison-reference-line" style:left="{comparisonBar.valueX}px"></div>
-			{/if}
-		</div>
-	{/if}
-	{#key areasData}
-		{#each areasData as area, i (area.areacd)}
-			<div
-				class:alternating-row={i % 2 !== 0}
-				class="comparison-row-item"
-				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
-			>
-				<div
-					class="area-name"
-					style:margin-left="{labelMargin}px"
-					use:updateLabelWidths={area.areacd}
-				>
-					{area.areanm}
+	<Divider marginTop={false} marginBottom={false} mode="dark"></Divider>
+	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="10px">
+		{#if comparisonBar}
+			<div class="comparison-overlay" style:left="{comparisonOffset}px">
+				<div class="comparison-name" style:left="{comparisonBar.valueX}px">
+					{latestComparisonData[0].areanm}: {prefix}{formatValue(
+						latestComparisonData[0].value
+					)}{suffix}
 				</div>
-				<p class="area-value" use:updateValueWidth={i}>
-					{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
-				</p>
-				<ComparisonPointrange
-					data={latestData.find((d) => d.areacd === area.areacd)}
-					xDomain={xValueRange}
-					chartWidth={pointRangeWidth}
-				/>
-				<ComparisonSparkline
-					data={area.rows}
-					yDomain={yValueRange}
-					comparisonData={comparisonRows}
-					xDomain={periodRange}
-					{prefix}
-					{suffix}
-					{formatValue}
-					chartWidth={sparklineWidth}
-				/>
+				{#if comparisonBar.left != null}
+					<div
+						class="comparison-reference-bar"
+						style:left="{comparisonBar.left}px"
+						style:width="{comparisonBar.width}px"
+					></div>
+				{/if}
+				{#if comparisonBar.valueX != null}
+					<div class="comparison-reference-line" style:left="{comparisonBar.valueX}px"></div>
+				{/if}
 			</div>
-		{/each}
-	{/key}
+		{/if}
+		{#key areasData}
+			{#each areasData as area, i (area.areacd)}
+				<div
+					class:alternating-row={i % 2 !== 0}
+					class="comparison-row-item"
+					style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+				>
+					<div
+						class="area-name"
+						style:margin-left="{labelMargin}px"
+						use:updateLabelWidths={area.areacd}
+					>
+						{area.areanm}
+					</div>
+					<p class="area-value" use:updateValueWidth={i}>
+						{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
+					</p>
+					<ComparisonPointrange
+						data={latestData.find((d) => d.areacd === area.areacd)}
+						xDomain={xValueRange}
+						chartWidth={pointRangeWidth}
+					/>
+					<ComparisonSparkline
+						data={area.rows}
+						yDomain={yValueRange}
+						comparisonData={comparisonRows}
+						xDomain={periodRange}
+						{prefix}
+						{suffix}
+						{formatValue}
+						chartWidth={sparklineWidth}
+					/>
+				</div>
+			{/each}
+		{/key}
+	</div>
 </div>
 
 <style>
+	.table-sort-button {
+		font-weight: bold;
+		background: none;
+		stroke: none;
+		border: none;
+	}
+
+	.rows-wrapper {
+		position: relative;
+	}
 	.comparison-row-item {
 		position: relative;
 		display: grid;
@@ -291,14 +357,13 @@
 		text-align: center;
 		padding: 5px;
 		background-color: var(--ons-color-grey-25);
-		top: 0;
 		white-space: nowrap;
 		z-index: 4;
 	}
 	.comparison-reference-bar {
 		position: absolute;
-		top: 50px;
-		bottom: 30px;
+		top: 20px;
+		bottom: 0px;
 		background: var(--ons-color-grey-25);
 		opacity: 1;
 		pointer-events: none;
@@ -306,8 +371,8 @@
 	}
 	.comparison-reference-line {
 		position: absolute;
-		top: 50px;
-		bottom: 30px;
+		top: 20px;
+		bottom: 0px;
 		width: 2.5px;
 		background: var(--ons-color-grey-60);
 		pointer-events: none;
