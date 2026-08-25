@@ -91,7 +91,7 @@
 
 <Hero title="Multi area comparison" background="#eaeaea">
 	<div class="hero-text">
-		<p style="margin-right:20px">{[...new Set(data?.areacd)].length} areas selected</p>
+		<p>{[...new Set(data?.areacd)].length} areas selected</p>
 		<p>
 			<a href="/pagebuilder"><Icon type="arrow" rotation="180"></Icon> Back to area selection</a>
 		</p>
@@ -111,6 +111,25 @@
 				<p class="content-subtitle">
 					{metadata?.description}
 				</p>
+				<p style:font-weight="bold">
+					<!-- this will open indicator selection modal -->
+					<a
+						>Change indicator
+						<Icon type="carret"></Icon></a
+					>
+				</p>
+				<div class="header-details">
+					<div>
+						Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
+					</div>
+					<div>
+						Comparison area: {comparisonData?.areanm[0]}
+					</div>
+					<div>
+						<!-- this will open selection palette for just comparison area -->
+						<a>Change</a>
+					</div>
+				</div>
 			</Container>
 			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} />
 		{:else if data && data.message}
@@ -154,5 +173,15 @@
 		display: flex;
 		align-items: center;
 		margin-top: 20px;
+		gap: 20px;
+	}
+
+	.header-details {
+		display: flex;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		font-size: 16px;
+		justify-content: flex-end;
+		gap: 10px;
 	}
 </style>

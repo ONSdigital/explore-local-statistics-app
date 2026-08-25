@@ -34,7 +34,6 @@
 
 	let posCol = '#BEE2f0';
 	let negCol = '#ABBDC5';
-	$inspect(data);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
