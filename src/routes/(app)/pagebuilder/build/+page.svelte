@@ -89,18 +89,30 @@
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
 </script>
 
-<Hero title=""></Hero>
+<Hero title="Multi area comparison" background="#eaeaea">
+	<div class="hero-text">
+		<p style="margin-right:20px">{[...new Set(data?.areacd)].length} areas selected</p>
+		<p>
+			<a href="/pagebuilder"><Icon type="arrow" rotation="180"></Icon> Back to area selection</a>
+		</p>
+	</div>
+</Hero>
 
 <Container>
-	<div style:margin-bottom="20px" style:min-height="84px" style:position="relative">
+	<div
+		style:margin-bottom="20px"
+		style:margin-top="32px"
+		style:min-height="84px"
+		style:position="relative"
+	>
 		{#if data && !data.message}
-			<h2>{selection?.indicator?.label}</h2>
-			<p class="content-subtitle">
-				{metadata?.subtitle},
-				{formatPeriod(data.period[data.period.length - 1])}
-				<!-- {formatPeriod(dataTimeRange[dataTimeRange.length - 1])} -->
-			</p>
-			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} />
+			<Container>
+				<h2>{selection?.indicator?.label}</h2>
+				<p class="content-subtitle">
+					{metadata?.description}
+				</p>
+			</Container>
+			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} />
 		{:else if data && data.message}
 			<div class="no-data">
 				<p>No {selection.indicator.label} data available for the selected areas.</p>
@@ -136,3 +148,11 @@
 		</Container>
 	{/if}
 </Container>
+
+<style>
+	.hero-text {
+		display: flex;
+		align-items: center;
+		margin-top: 20px;
+	}
+</style>

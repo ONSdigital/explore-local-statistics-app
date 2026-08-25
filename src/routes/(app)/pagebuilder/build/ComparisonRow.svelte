@@ -4,7 +4,7 @@
 	import { scaleLinear } from 'd3-scale';
 	import { parsePeriod } from '$lib/utils';
 
-	let { data, metadata, comparisonData, formatValue = (d) => d } = $props();
+	let { data, metadata, comparisonData, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
 	let leftMargin = $state(15);
 
@@ -187,6 +187,7 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
+	$inspect(data);
 </script>
 
 <div
@@ -196,6 +197,16 @@
 	style:padding-bottom="3px"
 	style:padding-top="20px"
 >
+	<div
+		class="comparison-row-item comparison-header-row"
+		style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+	>
+		<div class="header-cell" style:margin-left="{labelMargin}px">Area</div>
+		<div class="header-cell">Value in {formatPeriod(latestData[0].period)}</div>
+		<div class="header-cell"></div>
+		<div class="header-cell">Trend since {formatPeriod(periodRange[0])}</div>
+	</div>
+
 	{#if comparisonBar}
 		<div class="comparison-overlay" style:left="{comparisonOffset}px">
 			<div class="comparison-name" style:left="{comparisonBar.valueX}px">
@@ -328,5 +339,12 @@
 	.comparison-row-item > :global(.sparkline-individual) {
 		position: relative;
 		z-index: 5;
+	}
+
+	.header-cell {
+		overflow: visible;
+		white-space: nowrap;
+		font-weight: bold;
+		font-size: 16px;
 	}
 </style>
