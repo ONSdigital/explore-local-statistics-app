@@ -42,11 +42,8 @@
 	let selectedAreaChecked = $state(false);
 	let selectedIndicator = $state(null);
 
-	let pageState = $state({
-		selectedAreas: [],
-		selectedComparison: [],
-		selectedIndicator: {}
-	});
+	let selectedAreas = syncedStore('selectedAreas', []);
+
 	let buildButtonEnabled = $derived(
 		pageState.selectedAreas.length && Object.keys(pageState.selectedIndicator).length ? true : false
 	);
@@ -135,7 +132,7 @@
 	});
 
 	function clearAllSelected() {
-		pageState.selectedAreas = [];
+		$selectedAreas = [];
 	}
 
 	function toggleSelectedArea() {
@@ -189,9 +186,7 @@
 				count,
 				checked:
 					count > 0 &&
-					g.areas.every((child) =>
-						pageState.selectedAreas.some((area) => area.areacd === child.areacd)
-					)
+					g.areas.every((child) => $selectedAreas.some((area) => area.areacd === child.areacd))
 			};
 		})
 	);
@@ -221,7 +216,7 @@
 	}
 
 	let tableData = $derived(
-		pageState.selectedAreas.map((d) => ({
+		$selectedAreas.map((d) => ({
 			'Selected area': d.areanm,
 			Type: d.type
 		}))
@@ -252,11 +247,9 @@
 	}
 
 	let sortedAreas = $derived.by(() => {
-		if (!sortColumn || sortDirection === 'none') return pageState.selectedAreas;
+		if (!sortColumn || sortDirection === 'none') return $selectedAreas;
 
-		const sorted = [...pageState.selectedAreas].sort((a, b) =>
-			compareValues(a[sortColumn], b[sortColumn])
-		);
+		const sorted = [...$selectedAreas].sort((a, b) => compareValues(a[sortColumn], b[sortColumn]));
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
@@ -271,7 +264,7 @@
 		goto(resolve('/pagebuilder/build'));
 	}
 
-	$inspect(pageState);
+	$inspect($selectedAreas);
 </script>
 
 {#snippet indicator(ind)}
