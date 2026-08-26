@@ -246,7 +246,7 @@
 		</div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('value')}>
-				{formatPeriod(latestData[0].period)} value <Icon type="carret" size="s"></Icon>
+				{formatPeriod(periodRange[1])} value <Icon type="carret" size="s"></Icon>
 			</button>
 		</div>
 		<div class="header-cell"></div>

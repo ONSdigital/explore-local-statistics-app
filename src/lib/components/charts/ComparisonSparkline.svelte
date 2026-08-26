@@ -39,7 +39,7 @@
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
-	{#if rows?.length}
+	{#if rows?.length && rows.every((d) => d.lci_95 != null && d.uci_95 != null)}
 		<path d={getCIArea(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 	{/if}
 {/snippet}
