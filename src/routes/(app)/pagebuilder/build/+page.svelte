@@ -119,9 +119,11 @@
 					>
 				</p>
 				<div class="header-details">
-					<div>
-						Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
-					</div>
+					{#if data.uci_95 && data.lci_95}
+						<div>
+							Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
+						</div>
+					{/if}
 					<div>
 						Comparison area: {comparisonData?.areanm[0]}
 					</div>

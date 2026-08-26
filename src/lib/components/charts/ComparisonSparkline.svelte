@@ -29,7 +29,9 @@
 		.curve(curveLinear);
 
 	let diff = $derived(data[data.length - 1].value - data[0].value);
-	let direction = diff === 0 ? 'no change' : diff < 0 ? 'lower' : 'higher';
+	let direction = $derived(
+		data.length === 1 ? 'no time series' : diff === 0 ? 'no change' : diff < 0 ? 'lower' : 'higher'
+	);
 	let suffix2 = $derived(suffix === '%' ? ' pp' : suffix);
 
 	let posCol = '#BEE2f0';
@@ -73,7 +75,13 @@
 	<div
 		class="change-box"
 		style:padding="5px;"
-		style:background-color={diff === 0 ? ONScolours.grey25 : diff > 0 ? posCol : negCol}
+		style:background-color={data.length === 1
+			? 'none'
+			: diff === 0
+				? ONScolours.grey25
+				: diff > 0
+					? posCol
+					: negCol}
 	>
 		{#if diff !== 0}
 			<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />

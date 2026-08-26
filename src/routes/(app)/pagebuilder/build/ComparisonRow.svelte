@@ -8,7 +8,6 @@
 	let { data, metadata, comparisonData, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
 	let leftMargin = $state(15);
-	let headerHeight = $state(0);
 
 	function getLatestData(data) {
 		const keys = Object.keys(data);
@@ -209,9 +208,7 @@
 	let xScale = $derived(
 		xValueRange ? scaleLinear().domain(xValueRange).range([0, pointRangeWidth]) : null
 	);
-	let comparisonOffset = $derived(
-		leftMargin + labelWidth + valueWidth + colGap * nColsPreceedingPointrange
-	);
+	let comparisonOffset = $derived(labelWidth + valueWidth + colGap * nColsPreceedingPointrange);
 
 	let comparisonBar = $derived.by(() => {
 		const cd = latestComparisonData?.[0];
@@ -228,6 +225,7 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
+	$inspect(comparisonData);
 </script>
 
 <div
@@ -283,6 +281,7 @@
 		{/if}
 		{#key areasData}
 			{#each areasData as area, i (area.areacd)}
+				{@const latestDataFiltered = latestData?.find((d) => d.areacd === area.areacd)}
 				<div
 					class:alternating-row={i % 2 !== 0}
 					class="comparison-row-item"
@@ -294,12 +293,15 @@
 						use:updateLabelWidths={area.areacd}
 					>
 						{area.areanm}
+						{parsePeriod(latestDataFiltered.period).getTime() !== periodRange[1].getTime()
+							? `(${formatPeriod(latestDataFiltered.period)})`
+							: ''}
 					</div>
 					<p class="area-value" use:updateValueWidth={i}>
-						{prefix}{formatValue(latestData.find((d) => d.areacd === area.areacd).value)}{suffix}
+						{prefix}{formatValue(latestDataFiltered.value)}{suffix}
 					</p>
 					<ComparisonPointrange
-						data={latestData.find((d) => d.areacd === area.areacd)}
+						data={latestDataFiltered}
 						xDomain={xValueRange}
 						chartWidth={pointRangeWidth}
 					/>
