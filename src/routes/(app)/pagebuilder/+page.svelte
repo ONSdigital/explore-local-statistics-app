@@ -28,6 +28,7 @@
 	import { getAreaType } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { preventDefault } from 'svelte/legacy';
+	import syncedStore from '$lib/synced-store.svelte';
 
 	let data = $props();
 	let checked = $state(false);
@@ -40,12 +41,11 @@
 	let selectedSiblingChecked = $state(false);
 	let children = $state([]);
 	let selectedAreaChecked = $state(false);
-	let selectedIndicator = $state(null);
-
 	let selectedAreas = syncedStore('selectedAreas', []);
+	let selectedIndicatorStore = syncedStore('selectedIndicator', null);
 
 	let buildButtonEnabled = $derived(
-		pageState.selectedAreas.length && Object.keys(pageState.selectedIndicator).length ? true : false
+		$selectedAreas.length > 0 && $selectedIndicatorStore ? true : false
 	);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
@@ -66,19 +66,17 @@
 	}
 
 	function addArea(areaObj) {
-		if (!pageState.selectedAreas.find((d) => d.areacd === areaObj.areacd)) {
-			pageState.selectedAreas.push(areaObj);
+		if (!$selectedAreas.find((d) => d.areacd === areaObj.areacd)) {
+			$selectedAreas = [...$selectedAreas, areaObj];
 		}
 	}
 
 	function selectIndicator(indicator) {
-		pageState.selectedIndicator = indicator;
-		selectedIndicator = indicator;
+		$selectedIndicatorStore = indicator;
 	}
 
 	function removeIndicator() {
-		pageState.selectedIndicator = {};
-		selectedIndicator = null;
+		$selectedIndicatorStore = null;
 	}
 
 	async function findChildren(code) {
@@ -115,20 +113,14 @@
 	}
 
 	function removeArea(area) {
-		const areas = pageState.selectedAreas;
-		const index = areas.findIndex((d) => d.areacd === area.areacd);
-		if (index !== -1) {
-			areas.splice(index, 1);
-		}
+		$selectedAreas = $selectedAreas.filter((d) => d.areacd !== area.areacd);
 	}
 
 	$effect(() => {
-		selectedAreaChecked = pageState.selectedAreas.some((area) => area.areacd === selectedAreaCode);
+		selectedAreaChecked = $selectedAreas.some((area) => area.areacd === selectedAreaCode);
 		selectedSiblingChecked =
 			siblings.length > 0 &&
-			siblings.every((sibling) =>
-				pageState.selectedAreas.some((area) => area.areacd === sibling.areacd)
-			);
+			siblings.every((sibling) => $selectedAreas.some((area) => area.areacd === sibling.areacd));
 	});
 
 	function clearAllSelected() {
@@ -254,17 +246,8 @@
 	});
 
 	function goToBuildPage() {
-		sessionStorage.setItem(
-			'pagebuilder-selection',
-			JSON.stringify({
-				areas: pageState.selectedAreas.map((a) => a.areacd),
-				indicator: pageState.selectedIndicator ?? null
-			})
-		);
 		goto(resolve('/pagebuilder/build'));
 	}
-
-	$inspect($selectedAreas);
 </script>
 
 {#snippet indicator(ind)}
@@ -273,8 +256,7 @@
 			href="/pagebuilder/build"
 			on:click={(e) => {
 				e.preventDefault();
-				pageState.selectedIndicator = ind;
-				selectedIndicator = ind;
+				$selectedIndicatorStore = ind;
 				goToBuildPage();
 			}}>{ind.label}</a
 		><br />
@@ -361,11 +343,11 @@
 			{/if}
 		</div>
 		<Accordion>
-			<AccordionItem title="Selected areas: {pageState.selectedAreas.length}">
-				{#if pageState.selectedAreas.length > 1}
+			<AccordionItem title="Selected areas: {$selectedAreas.length}">
+				{#if $selectedAreas.length > 1}
 					<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 				{/if}
-				{#if pageState.selectedAreas.length}
+				{#if $selectedAreas.length}
 					<table class="ons-table ons-table--sortable">
 						<thead class="ons-table__head">
 							<tr class="ons-table__row">
@@ -472,8 +454,8 @@
 					on:change={(e) => selectIndicator(e.detail)}
 					on:clear={removeIndicator}
 				></Select>
-				{#if selectedIndicator}
-					<p style="margin-top: 1em;">{selectedIndicator.description}</p>
+				{#if $selectedIndicatorStore}
+					<p style="margin-top: 1em;">{$selectedIndicatorStore.description}</p>
 				{/if}
 			</div>
 			<div class="build-button">

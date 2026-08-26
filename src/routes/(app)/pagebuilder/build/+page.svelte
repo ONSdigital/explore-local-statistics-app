@@ -16,18 +16,16 @@
 	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
+	import syncedStore from '$lib/synced-store.svelte';
 	import ComparisonRow from './ComparisonRow.svelte';
 
-	let selection = $state({ areas: [], indicator: null });
+	let selectedAreas = syncedStore('selectedAreas', []);
+	let selectedIndicator = syncedStore('selectedIndicator', null);
+	let selection = $derived({ areas: $selectedAreas.map((area) => area.areacd), indicator: $selectedIndicator });
 	let sharedParent = $state(null);
 
 	$effect(async () => {
 		sharedParent = await findNearestSharedParent(selection.areas);
-	});
-
-	$effect(() => {
-		const stored = sessionStorage.getItem('pagebuilder-selection');
-		if (stored) selection = JSON.parse(stored);
 	});
 
 	let data: jsonDataCols | errorObject | null = $state.raw(null);
