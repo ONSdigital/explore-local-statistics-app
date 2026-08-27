@@ -22,10 +22,11 @@
 		Indent,
 		Grid,
 		Card,
-		Table
+		Table,
+		Radios
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
-	import { getAreaType } from '$lib/utils';
+	import { getAreaType, slugify } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { preventDefault } from 'svelte/legacy';
 	import syncedStore from '$lib/synced-store.svelte';
@@ -248,6 +249,22 @@
 	function goToBuildPage() {
 		goto(resolve('/pagebuilder/build'));
 	}
+
+	let selectedTheme = $state();
+	let themeOptions = $derived(
+		data.data.taxonomyNested.data.map((theme) => ({ ...theme, id: theme.slug }))
+	);
+	let indicatorOptions = $derived(
+		selectedTheme?.children?.flatMap((child) =>
+			child.description
+				? [{ id: child.slug, label: child.label, slug: child.slug }]
+				: (child.children ?? []).map((indicator) => ({
+						id: indicator.slug,
+						label: indicator.label,
+						slug: indicator.slug
+					}))
+		) ?? []
+	);
 </script>
 
 {#snippet indicator(ind)}
@@ -463,23 +480,27 @@
 					>Build comparison page</Button
 				>
 			</div>
-			<div class="indicator-twisties">
-				<Accordion>
-					{#each data.data.taxonomyNested.data as theme}
-						<AccordionItem title={theme.label} id={theme.slug}>
-							{#each theme.children as child}
-								{#if child.description}
-									{@render indicator(child)}
-								{:else}
-									<h3>{child.label}</h3>
-									{#each child.children as ind}
-										{@render indicator(ind)}
-									{/each}
-								{/if}
-							{/each}
-						</AccordionItem>
-					{/each}
-				</Accordion>
+			<div class="radios-wrapper">
+				<div class="radios-theme">
+					<Radios
+						label="Select a theme"
+						id="themes"
+						items={themeOptions}
+						bind:value={selectedTheme}
+						compact
+					></Radios>
+				</div>
+				{#if selectedTheme}
+					<div class="radios-indicator">
+						<Radios
+							label="Select an indicator"
+							id="indicators"
+							items={indicatorOptions}
+							bind:value={$selectedIndicatorStore}
+							compact
+						></Radios>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</Section>
@@ -531,5 +552,13 @@
 	.remove-button :global(button) {
 		margin: 0;
 		line-height: 1rem !important;
+	}
+	.radios-wrapper {
+		display: flex;
+		gap: 100px;
+	}
+
+	.radios-theme {
+		width: 100%;
 	}
 </style>
