@@ -20,7 +20,7 @@
 	} = $props();
 
 	let xScale = $derived(xDomain ? scaleTime().domain(xDomain).range([0, 100]) : null);
-	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([90, 0]) : null);
+	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([70, 0]) : null);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.period))
@@ -62,7 +62,7 @@
 	style:padding-bottom="0px"
 	style:padding-right="0px"
 >
-	<svg viewBox="0 0 100 90" class="sparkline-svg" style:height="90px" overflow="visible">
+	<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="70px" overflow="visible">
 		{#if comparisonData?.length}
 			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
 			{@render line(comparisonData, ONScolours.grey60, 1.5, 1)}
@@ -95,7 +95,7 @@
 	.sparkline-individual {
 		display: flex;
 		align-items: center;
-		height: 90px;
+		height: 70px;
 		width: 100%;
 	}
 	.sparkline-svg {

@@ -11,10 +11,10 @@
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">
 	<svg
-		viewBox="0 0 {chartWidth} 90"
+		viewBox="0 0 {chartWidth} 70"
 		class="pointrange-svg"
 		aria-hidden="true"
-		style:height="90px"
+		style:height="70px"
 		style:width="{chartWidth}px"
 		overflow="visible"
 	>
@@ -23,8 +23,8 @@
 				stroke-dasharray="5"
 				x1={xScale(xDomain[0])}
 				x2={xScale(xDomain[1])}
-				y1={45}
-				y2={45}
+				y1={35}
+				y2={35}
 				stroke="black"
 				stroke-width="0.5"
 			>
@@ -33,7 +33,7 @@
 				<rect
 					class="confidence-bar"
 					x={xScale(data.lci_95)}
-					y={45 - barHeight / 2}
+					y={35 - barHeight / 2}
 					width={xScale(data.uci_95) - xScale(data.lci_95)}
 					height={barHeight}
 					fill={ONScolours.oceanBlue}
@@ -41,7 +41,7 @@
 				/>
 			{/if}
 			{#if data.value != null}
-				{@const centerY = 45}
+				{@const centerY = 35}
 				{@const diamondConst = 6}
 				<rect
 					class={data.lci_95 != null && data.uci_95 != null
@@ -64,7 +64,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 90px;
+		height: 70px;
 	}
 	.pointrange-svg {
 		display: block;
