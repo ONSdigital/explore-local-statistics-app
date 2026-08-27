@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MarkdownIt from 'markdown-it';
+	import { browser } from '$app/environment';
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
@@ -10,7 +11,11 @@
 		Grid,
 		List,
 		Li,
-		Icon
+		Icon,
+		Tab,
+		Tabs,
+		Textarea,
+		Button
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
@@ -18,10 +23,14 @@
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
 	import syncedStore from '$lib/synced-store.svelte';
 	import ComparisonRow from './ComparisonRow.svelte';
+	import Line from '$lib/components/charts/Line.svelte';
 
 	let selectedAreas = syncedStore('selectedAreas', []);
 	let selectedIndicator = syncedStore('selectedIndicator', null);
-	let selection = $derived({ areas: $selectedAreas.map((area) => area.areacd), indicator: $selectedIndicator });
+	let selection = $derived({
+		areas: $selectedAreas.map((area) => area.areacd),
+		indicator: $selectedIndicator
+	});
 	let sharedParent = $state(null);
 
 	$effect(async () => {
@@ -85,6 +94,44 @@
 	$effect(async () => await fetchComparisonData(comparisonUrl));
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
+
+	function makeShareUrl(areas, indicator, comparisonAreacd) {
+		const chunks = [];
+		if (areas.length) chunks.push({ key: 'areas', value: areas.join(',') });
+		if (indicator?.slug) chunks.push({ key: 'indicator', value: indicator.slug });
+		if (comparisonAreacd) chunks.push({ key: 'comparison', value: comparisonAreacd });
+
+		return `${window.location.origin}${resolve('/pagebuilder/build')}#?${chunks
+			.map((c) => `${c.key}=${c.value}`)
+			.join('&')}`;
+	}
+
+	let shareUrl = $derived(
+		browser ? makeShareUrl(selection.areas, selection.indicator, sharedParent?.areacd) : ''
+	);
+
+	$effect(() => {
+		const hash = window.location.hash;
+		if (!hash || hash === '#') return; // nothing to parse, fall through to IndexedDB state as normal
+
+		const params = new URLSearchParams(hash.replace(/^#\??/, ''));
+		const sharedAreas = params.get('areas')?.split(',').filter(Boolean);
+		const sharedIndicatorSlug = params.get('indicator');
+
+		if (sharedAreas?.length) {
+			selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
+		}
+		if (sharedIndicatorSlug) {
+			selectedIndicator.set({ slug: sharedIndicatorSlug });
+		}
+	});
+
+	let clipped = $state(false);
+	async function copyShareUrl() {
+		await navigator.clipboard.writeText(shareUrl);
+		clipped = true;
+		setTimeout(() => (clipped = false), 2000);
+	}
 </script>
 
 <Hero title="Multi area comparison" background="#eaeaea">
@@ -104,7 +151,7 @@
 		style:position="relative"
 	>
 		{#if data && !data.message}
-			<Container>
+			<div>
 				<h2>{selection?.indicator?.label}</h2>
 				<p class="content-subtitle">
 					{metadata?.description}
@@ -130,8 +177,16 @@
 						<a>Change</a>
 					</div>
 				</div>
-			</Container>
-			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} />
+			</div>
+			<Tabs>
+				<Tab title="Comparison chart">
+					<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} /></Tab
+				>
+				<Tab title="Line chart">
+					<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
+				</Tab>
+				<Tab title="Bar chart"></Tab>
+			</Tabs>
 		{:else if data && data.message}
 			<div class="no-data">
 				<p>No {selection.indicator.label} data available for the selected areas.</p>
@@ -142,13 +197,13 @@
 	</div>
 	{#if data && !data.message}
 		{#if metadata?.caveats.length > 0}
-			<Container>
+			<div class="caveats">
 				<h2>Interpretation</h2>
 				<p>{@html caveats}</p>
-			</Container>
+			</div>
 		{/if}
 
-		<Container>
+		<div class="get data">
 			<h2>Get the data</h2>
 			<p>
 				The original source data for this indicator can be found on the following
@@ -164,11 +219,25 @@
 							: ', '}
 				{/each}
 			</p>
-		</Container>
+		</div>
 	{/if}
+	<div class="share-link">
+		<h4>Share this page</h4>
+		<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="1" />
+		<Button variant={clipped ? 'secondary' : 'primary'} on:click={copyShareUrl} small>
+			{clipped ? 'Link copied' : 'Copy link'}
+		</Button>
+	</div>
 </Container>
 
 <style>
+	.share-link :global(.ons-input--textarea) {
+		margin: 0.5rem 0;
+		font-size: 16px;
+		line-height: 1.3;
+		max-width: 100%;
+		resize: none;
+	}
 	.hero-text {
 		display: flex;
 		align-items: center;

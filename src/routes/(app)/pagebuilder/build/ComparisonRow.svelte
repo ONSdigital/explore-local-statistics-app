@@ -7,7 +7,7 @@
 
 	let { data, metadata, comparisonData, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
-	let leftMargin = $state(15);
+	let leftMargin = $state(0);
 
 	function getLatestData(data) {
 		const keys = Object.keys(data);
@@ -259,7 +259,7 @@
 	</div>
 
 	<Divider marginTop={false} marginBottom={false} mode="dark"></Divider>
-	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="10px">
+	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="25px">
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
 				<div class="comparison-name" style:left="{comparisonBar.valueX}px">
