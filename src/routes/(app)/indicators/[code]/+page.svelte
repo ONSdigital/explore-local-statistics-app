@@ -56,7 +56,6 @@
 	title={data.indicator.label}
 	cls="indicator-hero"
 	width="medium"
-	theme="grey"
 	titleBadge={{
 		label: data.indicator.experimentalStatistic
 			? 'Official statistics in development'
@@ -64,6 +63,7 @@
 		ariaLabel: `Topic: ${capitalise(data.indicator.topic)}`,
 		color: '#003c57'
 	}}
+	background="var(--ons-color-banner-bg)"
 >
 	<p class="ons-hero__text">
 		{data.indicator.description}

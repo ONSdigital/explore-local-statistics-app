@@ -19,7 +19,12 @@
 	let { data } = $props();
 </script>
 
-<Hero theme="grey" width="medium" title="Local indicators" cls="titleblock-transparent">
+<Hero
+	width="medium"
+	title="Local indicators"
+	cls="titleblock-transparent"
+	background="var(--ons-color-banner-bg)"
+>
 	<p class="ons-hero__text">
 		Explore our {data.summaryStats.univariateCount} local indicators by topic, including
 		<a href="#population">population</a>, <a href="#economy">economy</a> and
