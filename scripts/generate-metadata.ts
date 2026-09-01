@@ -53,15 +53,15 @@ function hasIntervals(rows, cols) {
 
 async function makeBaseMetadata(meta, data, cols) {
 	const shared = meta?.shared || meta;
-	const sourceOrg = shared.sourceOrg.split('|');
-	const sourceURL = shared.sourceURL.split('|');
-	const sourceDate = shared.sourceDate.split('|').map((d) => reverseDate(d));
+	// const sourceOrg = shared.sourceOrg.split('|');
+	// const sourceURL = shared.sourceURL.split('|');
+	// const sourceDate = shared.sourceDate.split('|').map((d) => reverseDate(d));
 	const metadata = {
-		source: sourceOrg.map((org, i) => ({
-			name: org,
-			href: sourceURL[i],
-			date: sourceDate[i]
-		})),
+		// source: sourceOrg.map((org, i) => ({
+		// 	name: org,
+		// 	href: sourceURL[i],
+		// 	date: sourceDate[i]
+		// })),
 		experimentalStatistic: [true, 'T'].includes(shared.experimentalStatistic)
 	};
 
@@ -127,6 +127,28 @@ function makeIndicators(ds, meta, data, cols) {
 		const { frequency, periodFormat } = definedPeriodFormats[ds] || inferPeriodFormat(periods);
 		const periodDomain = [periods[0], periods[periods.length - 1]];
 
+		const sourceOrg = isSingleIndicator
+			? base.sourceOrg.split('|')
+			: meta.shared.sourceOrg
+				? meta.shared.sourceOrg.split('|')
+				: base.sourceOrg.split('|');
+		const sourceURL = isSingleIndicator
+			? base.sourceURL.split('|')
+			: meta.shared
+				? meta.shared.sourceURL.split('|')
+				: base.sourceURL.split('|');
+		const sourceDate = isSingleIndicator
+			? base.sourceDate.split('|').map((d) => reverseDate(d))
+			: meta.shared.sourceDate
+				? meta.shared.sourceDate.split('|').map((d) => reverseDate(d))
+				: base.sourceDate.split('|').map((d) => reverseDate(d));
+
+		const source = sourceOrg.map((org, i) => ({
+			name: org,
+			href: sourceURL[i],
+			date: sourceDate[i]
+		}));
+
 		const indicator = {
 			code,
 			dataset: ds,
@@ -138,6 +160,7 @@ function makeIndicators(ds, meta, data, cols) {
 			standardised: [true, 'T'].includes(base.standardised),
 			subtitle: base.subtitle,
 			longDescription: base.longDescription,
+			source: source,
 			caveats: base.caveats,
 			canBeNegative: canBeNegative,
 			zeroBaseline: zeroBaseline,
@@ -192,14 +215,22 @@ for (const ds of datasets) {
 	const columns = formatColumns(data.columns);
 	const metadata = await makeMetadata(ds, meta['ess-beta-metadata'], data, columns, timestamps);
 
+	const sources =
+		metadata.indicators?.flatMap((indicator) => indicator.source ?? []).filter(Boolean) ?? [];
+	const publisher = [...new Set(sources.map((s) => s.name).filter(Boolean))].join(', ');
+	const latestIssued = sources
+		.map((s) => s.date)
+		.filter(Boolean)
+		.sort((a, b) => b.localeCompare(a))[0];
+
 	const csvw = {
 		'@context': ['http://www.w3.org/ns/csvw', { '@language': 'en' }],
 		url: `${ds}.csv`,
 		'dc:title': meta.title || titleFromSlug(ds),
 		'dc:creator': 'Office for National Statistics',
-		'dc:publisher': metadata.source.map((s) => s.name).join(', '),
+		'dc:publisher': publisher,
 		// The most recent publication date of underlying data sources
-		'dc:issued': metadata.source.map((s) => s.date).sort((a, b) => b.localeCompare(a))[0],
+		'dc:issued': latestIssued,
 		// The date the CSV file was committed to git
 		'dc:modified': modifedDateData,
 		'dc:license': 'http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',

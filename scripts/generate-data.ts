@@ -115,7 +115,7 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 			topic: manifest_metadata_indicator[0].topic,
 			subTopic: manifest_metadata_indicator[0].subTopic,
 			description: longDescription,
-			source: meta_data.metadata.source,
+			// source: meta_data.metadata.source,
 			slug: manifest_metadata_indicator[0].slug,
 			dataModified: meta_data['dc:modified'],
 			metadataModified: meta_data.metadata.metadataModified,
