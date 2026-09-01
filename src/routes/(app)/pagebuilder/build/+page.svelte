@@ -134,7 +134,7 @@
 	}
 </script>
 
-<Hero title="Multi area comparison" background="#eaeaea">
+<Hero title="Compare areas" background="#eaeaea">
 	<div class="hero-text">
 		<p>{[...new Set(data?.areacd)].length} areas selected</p>
 		<p>
@@ -155,6 +155,7 @@
 				<h2>{selection?.indicator?.label}</h2>
 				<p class="content-subtitle">
 					{metadata?.description}
+					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 				</p>
 				<p style:font-weight="bold">
 					<!-- this will open indicator selection modal -->
@@ -196,18 +197,16 @@
 		{/if}
 	</div>
 	{#if data && !data.message}
-		{#if metadata?.caveats.length > 0}
+		<!-- {#if metadata?.caveats.length > 0}
 			<div class="caveats">
 				<h2>Interpretation</h2>
 				<p>{@html caveats}</p>
 			</div>
-		{/if}
+		{/if} -->
 
 		<div class="get data">
-			<h2>Get the data</h2>
 			<p>
-				The original source data for this indicator can be found on the following
-				{metadata?.source.length > 1 ? 'pages' : 'page'}:
+				Source:
 				{#each metadata?.source as s, i}
 					<a href={s.href} target="_blank"
 						>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
