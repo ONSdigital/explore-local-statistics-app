@@ -65,7 +65,7 @@
 	<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="70px" overflow="visible">
 		{#if comparisonData?.length}
 			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
-			{@render line(comparisonData, ONScolours.grey60, 1.5, 1)}
+			{@render line(comparisonData, ONScolours.grey60, 'none', 1)}
 		{/if}
 		{#if data?.length}
 			{@render ribbon(data, ONScolours.oceanBlue, 0.2)}

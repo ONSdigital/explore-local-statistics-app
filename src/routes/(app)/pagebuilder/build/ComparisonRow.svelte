@@ -38,11 +38,19 @@
 		);
 	}
 
-	// need to generate ranges based on data including the comparison area!
-	let combinedData = $derived(mergeDataAndComparisonData(data, comparisonData));
+	let includeComparison = $derived(
+		Boolean(metadata?.standardised && comparisonData && !comparisonData.message)
+	);
+
+	// need to generate ranges based on data including the comparison area where appropriate
+	let combinedData = $derived(
+		includeComparison ? mergeDataAndComparisonData(data, comparisonData) : (data ?? null)
+	);
 
 	let latestData = $derived(data ? getLatestData(data) : null);
-	let latestComparisonData = $derived(comparisonData ? getLatestData(comparisonData) : null);
+	let latestComparisonData = $derived(
+		includeComparison && comparisonData ? getLatestData(comparisonData) : null
+	);
 	let latestCombinedData = $derived(combinedData ? getLatestData(combinedData) : null);
 
 	let xValueRange = $derived.by(() => {
@@ -151,7 +159,9 @@
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
-	let comparisonRows = $derived(comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []);
+	let comparisonRows = $derived(
+		includeComparison && comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []
+	);
 
 	const sparklineWidth = 300;
 	const colGap = 20;
@@ -211,6 +221,8 @@
 	let comparisonOffset = $derived(labelWidth + valueWidth + colGap * nColsPreceedingPointrange);
 
 	let comparisonBar = $derived.by(() => {
+		if (!includeComparison) return null;
+
 		const cd = latestComparisonData?.[0];
 		if (!xScale || !cd) return null;
 
@@ -225,7 +237,6 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
-	$inspect(comparisonData);
 </script>
 
 <div

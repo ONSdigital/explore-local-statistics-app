@@ -64,13 +64,12 @@
 			: null
 	);
 
+	let metadata = $state(null);
 	let comparisonUrl = $derived(
-		selection.indicator && sharedParent && sharedParent.areacd
+		metadata?.standardised && selection.indicator && sharedParent && sharedParent.areacd
 			? makeDataUrl(selection.indicator.slug, 'all', null, [sharedParent.areacd])
 			: null
 	);
-
-	let metadata = $state(null);
 	let metadataUrl = $derived(
 		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
 	);
@@ -91,7 +90,13 @@
 	});
 
 	$effect(async () => await fetchData(dataUrl));
-	$effect(async () => await fetchComparisonData(comparisonUrl));
+	$effect(async () => {
+		if (!comparisonUrl) {
+			comparisonData = null;
+			return;
+		}
+		await fetchComparisonData(comparisonUrl);
+	});
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
 
@@ -170,13 +175,15 @@
 							Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
 						</div>
 					{/if}
-					<div>
-						Comparison area: {comparisonData?.areanm[0]}
-					</div>
-					<div>
-						<!-- this will open selection palette for just comparison area -->
-						<a>Change</a>
-					</div>
+					{#if comparisonData}
+						<div>
+							Comparison area: {comparisonData?.areanm[0]}
+						</div>
+						<div>
+							<!-- this will open selection palette for just comparison area -->
+							<a>Change</a>
+						</div>
+					{/if}
 				</div>
 			</div>
 			<Tabs>
