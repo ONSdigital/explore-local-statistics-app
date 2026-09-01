@@ -1,9 +1,9 @@
-import vercelAdapter from '@sveltejs/adapter-vercel';
+import cloudflareAdapter from '@sveltejs/adapter-cloudflare';
 import nodeAdapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 // custom var to specify the adapter from CI/CD
-const adapter = !!process.env.VERCEL ? vercelAdapter() : nodeAdapter();
+const adapter = !!process.env.CF_PAGES ? cloudflareAdapter() : nodeAdapter();
 // custom var to specify the app base path in production
 const basePath = process.env.SVELTEKIT_BASE_PATH || '';
 // custom var to specify the app assets path in production
