@@ -3,6 +3,7 @@
 	import { nice } from 'd3-array';
 	import { format } from 'd3-format';
 	import { area, curveLinear } from 'd3-shape';
+	import { Icon } from '@onsvisual/svelte-components';
 	import { parseChartData, contrastColor, getPaletteColor, getMarkerPath } from './chartHelpers';
 	import { shortenPeriodFormatter } from '$lib/utils';
 	import { ONScolours } from '$lib/config';
@@ -26,8 +27,6 @@
 	function isValidLineData(data) {
 		return data?.[xKey] && new Set(data[xKey]).size > 1;
 	}
-
-	const formatYTick = format('~s');
 
 	let _data = $derived(isValidLineData(data) ? parseChartData(data, yKey, xKey, idKey) : null);
 	let _selected = $derived(
@@ -114,7 +113,11 @@
 		style:color={contrastColor(color)}
 		style:top="{yScale(d[yKey])}%"
 	>
-		{diff > 0 ? '+' : ''}{valuePrefix}{formatValue(diff)}{valueSuffix}
+		{#if Math.abs(diff) > 0}<Icon
+				type="arrow"
+				rotation={diff > 0 ? -90 : 90}
+				size="s"
+			/>{/if}{valuePrefix}{formatValue(Math.abs(diff))}{valueSuffix}
 	</div>
 {/snippet}
 
@@ -165,6 +168,9 @@
 			</div>
 			<div class="sparkline-y-axis">
 				<div class="sparkline-y-baseline"></div>
+				{#if yDomain[0] <= 0 && yDomain[1] >= 0}
+					<div class="sparkline-y-zeroline" style:top="{yScale(0)}%"></div>
+				{/if}
 				{#each yDomain || [] as yTick, i}
 					<div class="sparkline-y-tick" style:top="{yScale(yTick)}%"></div>
 					<div
@@ -172,7 +178,7 @@
 						class="sparkline-y-tick-label"
 						style:top="{yScale(yTick)}%"
 					>
-						{Math.abs(yTick) < 1 ? format('~f')(yTick) : formatYTick(yTick)}
+						{Math.abs(yTick) < 1 ? format('~f')(yTick) : format('~s')(yTick)}
 					</div>
 				{/each}
 			</div>
@@ -231,6 +237,12 @@
 		height: 100%;
 		border-left: 1px solid var(--ons-color-grey-40);
 	}
+	.sparkline-y-zeroline {
+		position: absolute;
+		right: 0;
+		width: 100%;
+		border-top: 1px solid var(--ons-color-grey-40);
+	}
 	.sparkline-y-tick {
 		position: absolute;
 		right: 100%;
@@ -272,6 +284,9 @@
 		font-size: 14px;
 		font-weight: bold;
 		line-height: 1.2;
+	}
+	.sparkline-label > :global(svg) {
+		margin-top: -2px;
 	}
 	.no-data-message {
 		display: flex;
