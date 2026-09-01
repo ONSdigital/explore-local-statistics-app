@@ -256,20 +256,32 @@
 	{/if}
 {/snippet}
 
-{#if width < mobileBreakpoint && mode == 'embed'}
-	<ul class="top-labels">
-		{#if selectedData.length && !hovered}
-			<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
+{#if width < mobileBreakpoint}
+	{#if mode == 'embed'}
+		<ul class="top-labels">
+			{#if selectedData.length && !hovered}
+				<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
+				></AreasLegend>
+			{/if}
+			<AreasLegend
+				selectedAreas={hoveredCodesNames}
+				useMarkerShapes={true}
+				inlineItems={true}
+				hovered={true}
 			></AreasLegend>
-		{/if}
-		<AreasLegend
-			selectedAreas={hoveredCodesNames}
-			useMarkerShapes={true}
-			inlineItems={true}
-			hovered={true}
-		></AreasLegend>
-		{#if hovered}{/if}
-	</ul>
+			{#if hovered}{/if}
+		</ul>
+	{:else}
+		<ul class="top-labels">
+			<AreasLegend
+				selectedAreas={hoveredCodesNames}
+				useMarkerShapes={true}
+				inlineItems={true}
+				hovered={true}
+			></AreasLegend>
+			{#if hovered}{/if}
+		</ul>
+	{/if}
 {/if}
 
 <p id="{metadata.slug}-bar-description" class="ons-u-vh">
@@ -562,7 +574,7 @@
 	.top-labels {
 		list-style: none;
 		padding: 0;
-		margin: 0 0 20px 0;
+		margin: 0 0 10px 0;
 		min-height: 40px;
 		color: var(--ons-color-white);
 		font-size: 18px;
