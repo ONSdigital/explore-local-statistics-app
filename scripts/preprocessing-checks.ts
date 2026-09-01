@@ -14,7 +14,7 @@ const newDatasets = readdirSync(DATA_DIR)
 	.filter(
 		(item) =>
 			existsSync(`${DATA_DIR}/${item}/${item}.csv`) &&
-			existsSync(`${DATA_DIR}/${item}/${item}.csv-metadata.json`)
+			existsSync(`${DATA_DIR}/${item}/${item}.json`)
 	);
 
 // read in existing big metadata
@@ -55,21 +55,35 @@ for (const ds of newDatasets) {
 	if (!existingDataset.length) {
 		missingDatasets.push(ds);
 	} else {
+		// read in new metadata json
+		const metaPath = `${DATA_DIR}/${ds}/${ds}.json`;
+		const newMeta = JSON.parse(readFileSync(metaPath, { encoding: 'utf-8' }));
+
 		// read in timestamps for newly downloaded datasets:
-		const timestampPath = `${DATA_DIR}/${ds}/timestamps.json`;
-		const newTimestamps = JSON.parse(readFileSync(timestampPath, { encoding: 'utf-8' }));
+		// const timestampPath = `${DATA_DIR}/${ds}/timestamps.json`;
+		// const newTimestamps = JSON.parse(readFileSync(timestampPath, { encoding: 'utf-8' }));
+		const newDataModified = newMeta.metadata.dataModified;
+		const newMetadataModified = newMeta.metadata.metadataModified;
+
+		if (
+			existingDataset[0].extension.metadataModified === existingDataset[0].extension.dataModified
+		) {
+			console.log(
+				existingDataset[0].extension.dataset,
+				'json:',
+				existingDataset[0].extension.metadataModified,
+				'csv:',
+				existingDataset[0].extension.dataModified
+			);
+		}
 
 		// compare timestamp paths for csvs
-		if (newTimestamps.csvModified != existingDataset[0].extension.dataModified) {
+		if (newDataModified != existingDataset[0].extension.dataModified) {
 			editsData.push(ds);
 		}
 		// compare timestamp paths for jsons
-		if (newTimestamps.jsonModified != existingDataset[0].extension.metadataModified)
+		if (newMetadataModified != existingDataset[0].extension.metadataModified)
 			editsMetadata.push(ds);
-
-		// read in new metadata json
-		const metaPath = `${DATA_DIR}/${ds}/${ds}.csv-metadata.json`;
-		const newMeta = JSON.parse(readFileSync(metaPath, { encoding: 'utf-8' }));
 
 		// compare geography codes:
 		const newGeographyCodes = newMeta.metadata.geographyCodes;
