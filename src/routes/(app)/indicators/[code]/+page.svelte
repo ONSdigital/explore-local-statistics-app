@@ -96,7 +96,7 @@
 		<Notice cls="ons-u-mb-xs">
 			There is a degree of uncertainty in these estimates. It is important to consider confidence
 			intervals (CIs) &mdash; the upper and lower range of each estimate &mdash; when making
-			comparisons between areas or over time. You can enable CIs via the chart options menu.
+			comparisons between areas or over time. CIs can be enabled via the chart options menu.
 		</Notice>
 	{/if}
 	<div class="indicators-nav-sections">
