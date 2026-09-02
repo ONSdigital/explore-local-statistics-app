@@ -307,9 +307,9 @@
 	role="figure"
 	aria-labelledby="{metadata.slug}-bar-description"
 >
-	{#if width < mobileBreakpoint && mode == 'embed'}
+	{#if width < mobileBreakpoint}
 		<ul class="top-labels">
-			{#if selectedData.length && !hovered}
+			{#if mode === 'embed' && selectedData.length && !hovered}
 				<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={false} inlineItems={true}
 				></AreasLegend>
 			{/if}
@@ -319,7 +319,6 @@
 				inlineItems={true}
 				hovered={true}
 			></AreasLegend>
-			{#if hovered}{/if}
 		</ul>
 	{/if}
 
@@ -618,7 +617,7 @@
 	.top-labels {
 		list-style: none;
 		padding: 0;
-		margin: 0 0 20px 0;
+		margin: 0 0 10px 0;
 		min-height: 40px;
 		color: var(--ons-color-white);
 		font-size: 18px;

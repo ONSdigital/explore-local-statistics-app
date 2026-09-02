@@ -106,11 +106,11 @@
 
 	// --- Keyboard handler ---
 	function doKeydown(e) {
-		if (['ArrowLeft', 'ArrowDown'].includes(e.key)) {
+		if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
 			e.preventDefault();
 			activeAreaIndex = (activeAreaIndex + 1) % _sortedAreas.length;
 			hoveredArea = _sortedAreas[activeAreaIndex];
-		} else if (['ArrowRight', 'ArrowUp'].includes(e.key)) {
+		} else if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
 			e.preventDefault();
 			activeAreaIndex = (activeAreaIndex - 1 + _sortedAreas.length) % _sortedAreas.length;
 			hoveredArea = _sortedAreas[activeAreaIndex];
@@ -259,13 +259,12 @@
 	role="figure"
 	aria-labelledby="{metadata.slug}-line-description"
 >
-	{#if width < mobileBreakpoint && mode == 'embed'}
+	{#if width < mobileBreakpoint}
 		<ul class="top-labels">
-			{#if selectedData.length && !hoveredArea}
+			{#if mode === 'embed' && selectedData.length && !hoveredArea}
 				<AreasLegend selectedAreas={selectedCodesNames} useMarkerShapes={true} inlineItems={true}
 				></AreasLegend>
 			{/if}
-
 			{#if hoveredArea}
 				<AreasLegend
 					selectedAreas={hoveredCodesNames}
@@ -566,7 +565,7 @@
 	.top-labels {
 		list-style: none;
 		padding: 0;
-		margin: 0 0 20px 0;
+		margin: 0 0 10px 0;
 		min-height: 40px;
 		color: var(--ons-color-white);
 		font-size: 18px;
