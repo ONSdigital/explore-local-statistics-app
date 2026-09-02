@@ -43,11 +43,8 @@
 	let children = $state([]);
 	let selectedAreaChecked = $state(false);
 	let selectedAreas = syncedStore('selectedAreas', []);
-	let selectedIndicatorStore = syncedStore('selectedIndicator', null);
 
-	let buildButtonEnabled = $derived(
-		$selectedAreas.length > 0 && $selectedIndicatorStore ? true : false
-	);
+	let buildButtonEnabled = $derived($selectedAreas.length > 0 ? true : false);
 
 	let areas = $derived(data.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
 	let indicators = $derived(
@@ -70,14 +67,6 @@
 		if (!$selectedAreas.find((d) => d.areacd === areaObj.areacd)) {
 			$selectedAreas = [...$selectedAreas, areaObj];
 		}
-	}
-
-	function selectIndicator(indicator) {
-		$selectedIndicatorStore = indicator;
-	}
-
-	function removeIndicator() {
-		$selectedIndicatorStore = null;
 	}
 
 	async function findChildren(code) {
@@ -249,25 +238,9 @@
 	function goToBuildPage() {
 		goto(resolve('/pagebuilder/build'));
 	}
-
-	let selectedTheme = $state();
-	let themeOptions = $derived(
-		data.data.taxonomyNested.data.map((theme) => ({ ...theme, id: theme.slug }))
-	);
-	let indicatorOptions = $derived(
-		selectedTheme?.children?.flatMap((child) =>
-			child.description
-				? [{ id: child.slug, label: child.label, slug: child.slug }]
-				: (child.children ?? []).map((indicator) => ({
-						id: indicator.slug,
-						label: indicator.label,
-						slug: indicator.slug
-					}))
-		) ?? []
-	);
 </script>
 
-{#snippet indicator(ind)}
+<!-- {#snippet indicator(ind)}
 	<p>
 		<a
 			href="/pagebuilder/build"
@@ -279,7 +252,7 @@
 		><br />
 		{ind.description}
 	</p>
-{/snippet}
+{/snippet} -->
 
 <Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
 	<!-- <p class="ons-hero__text">Select areas to build a comparison page.</p> -->
@@ -288,7 +261,7 @@
 <Container>
 	<Section>
 		<div class="entire-selection">
-			<h2>1. Select areas to compare</h2>
+			<h2>Select areas to compare</h2>
 			<p>Search for a local authority, region, county, or other named area.</p>
 			<div class="select-container">
 				<Select
@@ -457,51 +430,10 @@
 				{/if}
 			</AccordionItem>
 		</Accordion>
-		<div class="indicator-selection">
-			<h2>2. Select an indicator</h2>
-			<p>Search or browse for an indicator to compare across your selected areas.</p>
-			<div class="select-container">
-				<Select
-					label=""
-					placeholder="Search for an indicator"
-					labelKey="label"
-					groupKey="topic"
-					autoClear={false}
-					options={indicators}
-					on:change={(e) => selectIndicator(e.detail)}
-					on:clear={removeIndicator}
-				></Select>
-				{#if $selectedIndicatorStore}
-					<p style="margin-top: 1em;">{$selectedIndicatorStore.description}</p>
-				{/if}
-			</div>
-			<div class="build-button">
-				<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
-					>Build comparison page</Button
-				>
-			</div>
-			<div class="radios-wrapper">
-				<div class="radios-theme">
-					<Radios
-						label="Select a theme"
-						id="themes"
-						items={themeOptions}
-						bind:value={selectedTheme}
-						compact
-					></Radios>
-				</div>
-				{#if selectedTheme}
-					<div class="radios-indicator">
-						<Radios
-							label="Select an indicator"
-							id="indicators"
-							items={indicatorOptions}
-							bind:value={$selectedIndicatorStore}
-							compact
-						></Radios>
-					</div>
-				{/if}
-			</div>
+		<div class="build-button">
+			<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
+				>Build comparison page</Button
+			>
 		</div>
 	</Section>
 </Container>
@@ -552,13 +484,5 @@
 	.remove-button :global(button) {
 		margin: 0;
 		line-height: 1rem !important;
-	}
-	.radios-wrapper {
-		display: flex;
-		gap: 100px;
-	}
-
-	.radios-theme {
-		width: 100%;
 	}
 </style>

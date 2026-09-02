@@ -4,18 +4,16 @@
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
-		Section,
-		NavSection,
+		Accordion,
+		AccordionItem,
 		Container,
-		NavSections,
-		Grid,
-		List,
-		Li,
 		Icon,
 		Tab,
 		Tabs,
 		Textarea,
-		Button
+		Select,
+		Button,
+		Radios
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
@@ -25,11 +23,12 @@
 	import ComparisonRow from './ComparisonRow.svelte';
 	import Line from '$lib/components/charts/Line.svelte';
 
+	let taxData = $props();
 	let selectedAreas = syncedStore('selectedAreas', []);
-	let selectedIndicator = syncedStore('selectedIndicator', null);
+	let selectedIndicatorStore = syncedStore('selectedIndicator', null);
 	let selection = $derived({
 		areas: $selectedAreas.map((area) => area.areacd),
-		indicator: $selectedIndicator
+		indicator: $selectedIndicatorStore
 	});
 	let sharedParent = $state(null);
 
@@ -127,7 +126,7 @@
 			selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
 		}
 		if (sharedIndicatorSlug) {
-			selectedIndicator.set({ slug: sharedIndicatorSlug });
+			selectedIndicatorStore.set({ slug: sharedIndicatorSlug });
 		}
 	});
 
@@ -137,6 +136,33 @@
 		clipped = true;
 		setTimeout(() => (clipped = false), 2000);
 	}
+
+	let indicators = $derived(
+		taxData.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
+	);
+	function selectIndicator(indicator) {
+		$selectedIndicatorStore = indicator;
+	}
+
+	function removeIndicator() {
+		$selectedIndicatorStore = null;
+	}
+
+	let selectedTheme = $state();
+	let themeOptions = $derived(
+		taxData.data.taxonomyNested.data.map((theme) => ({ ...theme, id: theme.slug }))
+	);
+	let indicatorOptions = $derived(
+		selectedTheme?.children?.flatMap((child) =>
+			child.description
+				? [{ id: child.slug, label: child.label, slug: child.slug }]
+				: (child.children ?? []).map((indicator) => ({
+						id: indicator.slug,
+						label: indicator.label,
+						slug: indicator.slug
+					}))
+		) ?? []
+	);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea">
@@ -149,6 +175,77 @@
 </Hero>
 
 <Container>
+	<div class="indicator-select">
+		<h4>Select an indicator</h4>
+		<!-- <p>Search or browse for an indicator to compare across your selected areas.</p> -->
+		<div class="select-container">
+			<Select
+				label=""
+				placeholder="Search for an indicator"
+				labelKey="label"
+				groupKey="topic"
+				autoClear={false}
+				options={indicators}
+				on:change={(e) => selectIndicator(e.detail)}
+				on:clear={removeIndicator}
+			></Select>
+			{#if $selectedIndicatorStore}
+				<p style="margin-top: 1em;">{$selectedIndicatorStore.description}</p>
+			{/if}
+			<Accordion>
+				<AccordionItem title="Show all indicators">
+					<div class="radios-wrapper">
+						<div class="radios-theme">
+							<Radios
+								label="Select a theme"
+								id="themes"
+								items={themeOptions}
+								bind:value={selectedTheme}
+								compact
+							></Radios>
+						</div>
+						{#if selectedTheme}
+							<div class="radios-indicator">
+								<Radios
+									label="Select an indicator"
+									id="indicators"
+									items={indicatorOptions}
+									bind:value={$selectedIndicatorStore}
+									compact
+								></Radios>
+							</div>
+						{/if}
+					</div>
+				</AccordionItem>
+			</Accordion>
+		</div>
+	</div>
+	{#if data && !data.message}
+		<div class="indicator-info">
+			<h2>{selection?.indicator?.label}</h2>
+			<p class="content-subtitle">
+				{metadata?.subtitle}
+				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
+			</p>
+		</div>
+		<div class="header-details">
+			{#if data.uci_95 && data.lci_95}
+				<div>
+					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
+				</div>
+			{/if}
+			{#if comparisonData}
+				<div>
+					Comparison area: {comparisonData?.areanm[0]}
+				</div>
+				<div>
+					<!-- this will open selection palette for just comparison area -->
+					<a>Change</a>
+				</div>
+			{/if}
+		</div>
+	{/if}
+
 	<div
 		style:margin-bottom="20px"
 		style:margin-top="32px"
@@ -156,45 +253,15 @@
 		style:position="relative"
 	>
 		{#if data && !data.message}
-			<div>
-				<h2>{selection?.indicator?.label}</h2>
-				<p class="content-subtitle">
-					{metadata?.description}
-					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
-				</p>
-				<p style:font-weight="bold">
-					<!-- this will open indicator selection modal -->
-					<a
-						>Change indicator
-						<Icon type="carret"></Icon></a
-					>
-				</p>
-				<div class="header-details">
-					{#if data.uci_95 && data.lci_95}
-						<div>
-							Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
-						</div>
-					{/if}
-					{#if comparisonData}
-						<div>
-							Comparison area: {comparisonData?.areanm[0]}
-						</div>
-						<div>
-							<!-- this will open selection palette for just comparison area -->
-							<a>Change</a>
-						</div>
-					{/if}
-				</div>
-			</div>
-			<Tabs>
-				<Tab title="Comparison chart">
-					<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} /></Tab
-				>
-				<Tab title="Line chart">
-					<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
-				</Tab>
-				<Tab title="Bar chart"></Tab>
-			</Tabs>
+			<!-- <Tabs>
+				<Tab title="Comparison chart"> -->
+			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} />
+			<!-- </Tab> -->
+			<!-- <Tab title="Line chart"> -->
+			<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
+			<!-- </Tab> -->
+			<!-- <Tab title="Bar chart"></Tab> -->
+			<!-- </Tabs> -->
 		{:else if data && data.message}
 			<div class="no-data">
 				<p>No {selection.indicator.label} data available for the selected areas.</p>
@@ -237,6 +304,9 @@
 </Container>
 
 <style>
+	.indicator-select {
+		margin-top: 20px;
+	}
 	.share-link :global(.ons-input--textarea) {
 		margin: 0.5rem 0;
 		font-size: 16px;
@@ -258,5 +328,21 @@
 		font-size: 16px;
 		justify-content: flex-end;
 		gap: 10px;
+	}
+
+	.indicator-info {
+		margin-top: 20px;
+	}
+	.radios-wrapper {
+		display: flex;
+		gap: 100px;
+		justify-content: flex-start;
+	}
+
+	.radios-theme {
+		width: 100%;
+	}
+	.select-container {
+		margin-top: 1em;
 	}
 </style>
