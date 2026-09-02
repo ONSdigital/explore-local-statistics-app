@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
 		NavSections,
 		NavSection,
-		List,
-		Li,
+		Notice,
 		Icon,
 		Details
 	} from '@onsvisual/svelte-components';
@@ -94,6 +92,13 @@
 </Hero>
 
 <NavSections cls="wider-nav-sections" marginTop>
+	{#if data.indicator.confidenceIntervals}
+		<Notice cls="ons-u-mb-xs">
+			There is a degree of uncertainty in these estimates. It is important to consider confidence
+			intervals (CIs) &mdash; the upper and lower range of each estimate &mdash; when making
+			comparisons between areas or over time. You can enable CIs via the chart options menu.
+		</Notice>
+	{/if}
 	<div class="indicators-nav-sections">
 		<div class="legend-sticky">
 			<AreasLegend selectedAreas={pageState.selectedAreas} />
