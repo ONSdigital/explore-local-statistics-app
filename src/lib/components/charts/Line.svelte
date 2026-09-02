@@ -87,7 +87,7 @@
 	const pointGap = 22;
 	let pointSpace = $derived(width / (pointsCount - 1));
 
-	const maxTickGap = 220; // in pixels
+	const maxTickGap = 210; // in pixels
 	let nXTicks = $derived(Math.max(2, Math.floor(width / maxTickGap)));
 
 	// Shift ticks if necessary to ensure that they match actual values in the dataset (and de-dupe)
@@ -103,6 +103,21 @@
 			} else newTicks.push(+tick);
 		}
 		return Array.from(new Set(newTicks)).map((d) => new Date(d));
+	}
+
+	// snapping the ticks falls down if the available dates are uneven/missing dates (e.g. apprenticeships achievements wales) so adding this:
+	function enforceMinPixelGap(ticks, xScale, minGap = maxTickGap * 0.5) {
+		if (ticks.length < 2) return ticks;
+		const sorted = [...ticks].sort((a, b) => +a - +b);
+		const kept = [sorted[0]];
+		for (let i = 1; i < sorted.length; i++) {
+			const prevPx = xScale(kept[kept.length - 1]);
+			const currPx = xScale(sorted[i]);
+			if (currPx - prevPx >= minGap) {
+				kept.push(sorted[i]);
+			}
+		}
+		return kept;
 	}
 
 	function makeXTicks(xScale, _data) {
@@ -121,8 +136,9 @@
 				snappedTicks = [firstTick, ...snappedTicks];
 			}
 		}
-		return snappedTicks;
+		return enforceMinPixelGap(snappedTicks, xScale);
 	}
+
 	let xTicks = $derived(makeXTicks(xScale, _data));
 
 	let yTicks = $derived(yScale?.ticks?.(5) || []);
