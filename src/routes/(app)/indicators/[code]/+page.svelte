@@ -94,9 +94,9 @@
 <NavSections cls="wider-nav-sections" marginTop>
 	{#if data.indicator.confidenceIntervals}
 		<Notice cls="ons-u-mb-xs">
-			There is a degree of uncertainty in these estimates. It is important to consider confidence
-			intervals (CIs) &mdash; the upper and lower range of each estimate &mdash; when making
-			comparisons between areas or over time. CIs can be enabled via the chart options menu.
+			Confidence intervals (CIs) &mdash; an upper and lower range for each estimate &mdash; are
+			available for this indicator. CIs can be enabled via the chart options menu, and should be
+			considered when making comparisons between areas or over time.
 		</Notice>
 	{/if}
 	<div class="indicators-nav-sections">
