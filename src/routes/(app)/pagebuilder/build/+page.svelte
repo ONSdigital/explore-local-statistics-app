@@ -4,8 +4,7 @@
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
-		Accordion,
-		AccordionItem,
+		Details,
 		Container,
 		Icon,
 		Tab,
@@ -13,7 +12,10 @@
 		Textarea,
 		Select,
 		Button,
-		Radios
+		Radios,
+		Grid,
+		GridCell,
+		Divider
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
@@ -140,6 +142,17 @@
 	let indicators = $derived(
 		taxData.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
 	);
+
+	$effect(() => {
+		if (!indicators.length) return;
+
+		selectedIndicatorStore.ready.then(() => {
+			if ($selectedIndicatorStore) return;
+			$selectedIndicatorStore =
+				indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this selected median age - i.e. the first standardised indicator. we can discuss
+		});
+	});
+
 	function selectIndicator(indicator) {
 		$selectedIndicatorStore = indicator;
 	}
@@ -185,46 +198,43 @@
 				labelKey="label"
 				groupKey="topic"
 				autoClear={false}
+				clearable={false}
 				options={indicators}
 				on:change={(e) => selectIndicator(e.detail)}
 				on:clear={removeIndicator}
 			></Select>
-			{#if $selectedIndicatorStore}
-				<p style="margin-top: 1em;">{$selectedIndicatorStore.description}</p>
-			{/if}
-			<Accordion>
-				<AccordionItem title="Show all indicators">
-					<div class="radios-wrapper">
-						<div class="radios-theme">
-							<Radios
-								label="Select a theme"
-								id="themes"
-								items={themeOptions}
-								bind:value={selectedTheme}
-								compact
-							></Radios>
-						</div>
-						{#if selectedTheme}
-							<div class="radios-indicator">
-								<Radios
-									label="Select an indicator"
-									id="indicators"
-									items={indicatorOptions}
-									bind:value={$selectedIndicatorStore}
-									compact
-								></Radios>
-							</div>
-						{/if}
-					</div>
-				</AccordionItem>
-			</Accordion>
 		</div>
+		<Details title="Show all indicators">
+			<Grid width="wide" colWidth="wide">
+				<GridCell>
+					<Radios
+						label="Select a theme"
+						id="themes"
+						items={themeOptions}
+						bind:value={selectedTheme}
+						compact
+					></Radios>
+				</GridCell>
+				{#if selectedTheme}
+					<GridCell>
+						<Radios
+							label="Select an indicator"
+							id="indicators"
+							items={indicatorOptions}
+							bind:value={$selectedIndicatorStore}
+							compact
+						></Radios>
+					</GridCell>
+				{/if}
+			</Grid>
+		</Details>
 	</div>
+	<Divider></Divider>
 	{#if data && !data.message}
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
-				{metadata?.subtitle}
+				{metadata?.subtitle}.
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>
 		</div>
@@ -323,7 +333,7 @@
 
 	.header-details {
 		display: flex;
-		margin-top: 50px;
+		margin-top: 10px;
 		margin-bottom: 20px;
 		font-size: 16px;
 		justify-content: flex-end;
@@ -344,5 +354,7 @@
 	}
 	.select-container {
 		margin-top: 1em;
+		margin-bottom: 20px;
+		width: 500px;
 	}
 </style>

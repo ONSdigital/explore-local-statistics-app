@@ -11,13 +11,13 @@ function syncState(key, val) {
 export default function syncedStore(key, initialValue = null) {
 	const { set, update, subscribe } = writable(initialValue);
 
-	if (browser) {
-		get(key)
-			.then((storedValue) => {
-				if (storedValue !== undefined) set(storedValue);
-			})
-			.catch(() => {});
-	}
+	const ready = browser
+		? get(key)
+				.then((storedValue) => {
+					if (storedValue !== undefined) set(storedValue);
+				})
+				.catch(() => {})
+		: Promise.resolve(initialValue);
 
 	return {
 		subscribe,
@@ -25,6 +25,7 @@ export default function syncedStore(key, initialValue = null) {
 			set(val);
 			syncState(key, $state.snapshot(val));
 		},
-		update
+		update,
+		ready
 	};
 }
