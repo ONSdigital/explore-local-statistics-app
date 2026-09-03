@@ -17,7 +17,7 @@
 		GridCell,
 		Divider
 	} from '@onsvisual/svelte-components';
-	import { makeDataUrl, makeValueFormatter, makePeriodFormatter } from '$lib/utils';
+	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, parsePeriod } from '$lib/utils';
 	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
@@ -149,7 +149,7 @@
 		selectedIndicatorStore.ready.then(() => {
 			if ($selectedIndicatorStore) return;
 			$selectedIndicatorStore =
-				indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this selected median age - i.e. the first standardised indicator. we can discuss
+				indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this should(!?) select the first standardised indicator. we can discuss
 		});
 	});
 
@@ -175,6 +175,11 @@
 						slug: indicator.slug
 					}))
 		) ?? []
+	);
+	let uniquePeriods = $derived(
+		[...new Set([...(data?.period ?? []), ...(comparisonData?.period ?? [])])].sort(
+			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
+		)
 	);
 </script>
 
@@ -233,9 +238,9 @@
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
-				{metadata?.subtitle}, {formatPeriod(data.period[0])} to {formatPeriod(
-					data.period[data.period.length - 1]
-				)}.
+				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}{#if uniquePeriods.length > 1}to {formatPeriod(
+						uniquePeriods[uniquePeriods.length - 1]
+					)}{/if}.
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>
 		</div>
@@ -282,13 +287,6 @@
 		{/if}
 	</div>
 	{#if data && !data.message}
-		<!-- {#if metadata?.caveats.length > 0}
-			<div class="caveats">
-				<h2>Interpretation</h2>
-				<p>{@html caveats}</p>
-			</div>
-		{/if} -->
-
 		<div class="get data">
 			<p>
 				Source:

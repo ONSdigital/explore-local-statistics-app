@@ -241,20 +241,6 @@
 	}
 </script>
 
-<!-- {#snippet indicator(ind)}
-	<p>
-		<a
-			href="/pagebuilder/build"
-			on:click={(e) => {
-				e.preventDefault();
-				$selectedIndicatorStore = ind;
-				goToBuildPage();
-			}}>{ind.label}</a
-		><br />
-		{ind.description}
-	</p>
-{/snippet} -->
-
 <Hero title="Compare areas" background="#eaeaea">
 	<p class="ons-hero__text">
 		Select your own custom group of areas and compare them for any indicator.
