@@ -268,6 +268,7 @@
 		font-weight: normal;
 		font-size: 20px;
 		margin-bottom: 10px;
+		font-weight: bold;
 	}
 	.indicators-nav-sections > :global(section) {
 		scroll-margin-top: 116px;
