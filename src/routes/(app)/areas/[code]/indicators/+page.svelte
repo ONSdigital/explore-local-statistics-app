@@ -267,6 +267,7 @@
 	.indicators-nav-sections :global(h4) {
 		font-weight: normal;
 		font-size: 20px;
+		margin-bottom: 10px;
 	}
 	.indicators-nav-sections > :global(section) {
 		scroll-margin-top: 116px;
