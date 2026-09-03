@@ -23,7 +23,8 @@
 		Grid,
 		Card,
 		Table,
-		Radios
+		Radios,
+		Icon
 	} from '@onsvisual/svelte-components';
 	import { capitalise, pluralise } from '@onsvisual/robo-utils';
 	import { getAreaType, slugify } from '$lib/utils';
@@ -254,14 +255,16 @@
 	</p>
 {/snippet} -->
 
-<Hero width="medium" title="Area Comparison Page" cls="titleblock-transparent">
-	<!-- <p class="ons-hero__text">Select areas to build a comparison page.</p> -->
+<Hero title="Compare areas" background="#eaeaea">
+	<p class="ons-hero__text">
+		Select your own custom group of areas and compare them for any indicator.
+	</p>
 </Hero>
 
 <Container>
 	<Section>
 		<div class="entire-selection">
-			<h2>Select areas to compare</h2>
+			<h4 style:margin-bottom="0px" style:margin-top="30px">Select areas</h4>
 			<p>Search for a local authority, region, county, or other named area.</p>
 			<div class="select-container">
 				<Select
@@ -432,7 +435,7 @@
 		</Accordion>
 		<div class="build-button">
 			<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
-				>Build comparison page</Button
+				>Select an indicator <Icon type="arrow"></Icon></Button
 			>
 		</div>
 	</Section>

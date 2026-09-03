@@ -178,12 +178,11 @@
 	);
 </script>
 
-<Hero title="Compare areas" background="#eaeaea">
+<Hero title="Compare areas" background="#eaeaea" height="200px">
 	<div class="hero-text">
+		<h4>Select areas</h4>
 		<p>{[...new Set(data?.areacd)].length} areas selected</p>
-		<p>
-			<a href="/pagebuilder"><Icon type="arrow" rotation="180"></Icon> Back to area selection</a>
-		</p>
+		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
 </Hero>
 
@@ -229,12 +228,14 @@
 			</Grid>
 		</Details>
 	</div>
-	<Divider></Divider>
+	<Divider margin-top={false}></Divider>
 	{#if data && !data.message}
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
-				{metadata?.subtitle}.
+				{metadata?.subtitle}, {formatPeriod(data.period[0])} to {formatPeriod(
+					data.period[data.period.length - 1]
+				)}.
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>
 		</div>
@@ -327,8 +328,9 @@
 	.hero-text {
 		display: flex;
 		align-items: center;
-		margin-top: 20px;
+		/* margin-top: 20px; */
 		gap: 20px;
+		justify-content: space-around;
 	}
 
 	.header-details {
@@ -342,15 +344,6 @@
 
 	.indicator-info {
 		margin-top: 20px;
-	}
-	.radios-wrapper {
-		display: flex;
-		gap: 100px;
-		justify-content: flex-start;
-	}
-
-	.radios-theme {
-		width: 100%;
 	}
 	.select-container {
 		margin-top: 1em;

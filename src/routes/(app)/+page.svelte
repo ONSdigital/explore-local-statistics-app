@@ -69,12 +69,12 @@
 		>
 	</Card>
 
-	<Card title="Area Comparison Page" mode="featured">
+	<Card title="Compare areas" mode="featured">
 		<label for="search" style:display="block" style:margin-bottom="28px"
-			>Create a custom page to compare local statistics for mutiple areas.</label
+			>Select your own custom group of areas and compare them for any indicator.</label
 		>
 		<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder`)} small
-			>Page builder</Button
+			>Select areas</Button
 		>
 	</Card>
 </Grid>
