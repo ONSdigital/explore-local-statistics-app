@@ -32,74 +32,30 @@
 		areas: $selectedAreas.map((area) => area.areacd),
 		indicator: $selectedIndicatorStore
 	});
-	let sharedParent = $state(null);
+	let sharedParent = $derived(await findNearestSharedParent(selection.areas));
 
-	$effect(async () => {
-		sharedParent = await findNearestSharedParent(selection.areas);
-	});
-
-	let data: jsonDataCols | errorObject | null = $state.raw(null);
-	async function fetchData(dataUrl: string) {
-		try {
-			if (dataUrl) data = await (await fetch(dataUrl)).json();
-			return data;
-		} catch {
-			return null;
-		}
-	}
-
-	async function fetchComparisonData(dataUrl: string) {
-		try {
-			if (dataUrl) comparisonData = await (await fetch(dataUrl)).json();
-			return comparisonData;
-		} catch {
-			return null;
-		}
-	}
-
-	let comparisonData: jsonDataCols | errorObject | null = $state.raw(null);
+	let metadataUrl = $derived(
+		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
+	);
+	let metadata = $derived(metadataUrl ? await (await fetch(metadataUrl)).json() : null);
 
 	let dataUrl = $derived(
 		selection.indicator && selection.areas.length
 			? makeDataUrl(selection.indicator.slug, 'all', null, selection.areas)
 			: null
 	);
+	let data = $derived(dataUrl ? await (await fetch(dataUrl)).json() : null);
 
-	let metadata = $state(null);
 	let comparisonUrl = $derived(
 		metadata?.standardised && selection.indicator && sharedParent && sharedParent.areacd
 			? makeDataUrl(selection.indicator.slug, 'all', null, [sharedParent.areacd])
 			: null
 	);
-	let metadataUrl = $derived(
-		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
-	);
-	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
-	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
-
-	$effect(async () => {
-		if (!metadataUrl) {
-			metadata = null;
-			return;
-		}
-		try {
-			const res = await fetch(metadataUrl);
-			metadata = res.ok ? await res.json() : null;
-		} catch {
-			metadata = null;
-		}
-	});
-
-	$effect(async () => await fetchData(dataUrl));
-	$effect(async () => {
-		if (!comparisonUrl) {
-			comparisonData = null;
-			return;
-		}
-		await fetchComparisonData(comparisonUrl);
-	});
+	let comparisonData = $derived(comparisonUrl ? await (await fetch(comparisonUrl)).json() : null);
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
+	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
+	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 
 	function makeShareUrl(areas, indicator, comparisonAreacd) {
 		const chunks = [];
