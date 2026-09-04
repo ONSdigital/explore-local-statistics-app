@@ -68,6 +68,15 @@
 			>Explore indicators</Button
 		>
 	</Card>
+
+	<Card title="Compare areas" mode="featured">
+		<label for="search" style:display="block" style:margin-bottom="28px"
+			>Select your own custom group of areas and compare them for any indicator.</label
+		>
+		<Button icon="arrow" iconPosition="after" href={resolve(`/pagebuilder`)} small
+			>Select areas</Button
+		>
+	</Card>
 </Grid>
 
 <Section>

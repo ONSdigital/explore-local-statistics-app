@@ -7,7 +7,8 @@
 		Header,
 		Breadcrumb,
 		Main,
-		Footer
+		Footer,
+		PhaseBanner
 	} from '@onsvisual/svelte-components';
 	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 
