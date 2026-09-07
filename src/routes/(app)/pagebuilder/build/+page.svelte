@@ -27,12 +27,16 @@
 
 	let taxData = $props();
 	let selectedAreas = syncedStore('selectedAreas', []);
-	let selectedIndicatorStore = syncedStore('selectedIndicator', null);
+	let selectedIndicator = syncedStore('selectedIndicator', null);
 	let selection = $derived({
 		areas: $selectedAreas.map((area) => area.areacd),
-		indicator: $selectedIndicatorStore
+		indicator: $selectedIndicator
 	});
+	let chosenComparisonArea = $state(null);
 	let sharedParent = $derived(await findNearestSharedParent(selection.areas));
+	let comparisonArea = $derived(
+		chosenComparisonArea !== null ? chosenComparisonArea : sharedParent
+	);
 
 	let metadataUrl = $derived(
 		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
@@ -41,17 +45,15 @@
 
 	let dataUrl = $derived(
 		selection.indicator && selection.areas.length
-			? makeDataUrl(selection.indicator.slug, 'all', null, selection.areas)
+			? makeDataUrl(selection.indicator.slug, 'all', null, [
+					...new Set([
+						...selection.areas,
+						...(comparisonArea?.areacd ? [comparisonArea.areacd] : [])
+					])
+				])
 			: null
 	);
 	let data = $derived(dataUrl ? await (await fetch(dataUrl)).json() : null);
-
-	let comparisonUrl = $derived(
-		metadata?.standardised && selection.indicator && sharedParent && sharedParent.areacd
-			? makeDataUrl(selection.indicator.slug, 'all', null, [sharedParent.areacd])
-			: null
-	);
-	let comparisonData = $derived(comparisonUrl ? await (await fetch(comparisonUrl)).json() : null);
 
 	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
@@ -69,7 +71,7 @@
 	}
 
 	let shareUrl = $derived(
-		browser ? makeShareUrl(selection.areas, selection.indicator, sharedParent?.areacd) : ''
+		browser ? makeShareUrl(selection.areas, selection.indicator, comparisonArea?.areacd) : ''
 	);
 
 	$effect(() => {
@@ -84,7 +86,7 @@
 			selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
 		}
 		if (sharedIndicatorSlug) {
-			selectedIndicatorStore.set({ slug: sharedIndicatorSlug });
+			selectedIndicator.set({ slug: sharedIndicatorSlug });
 		}
 	});
 
@@ -102,19 +104,18 @@
 	$effect(() => {
 		if (!indicators.length) return;
 
-		selectedIndicatorStore.ready.then(() => {
-			if ($selectedIndicatorStore) return;
-			$selectedIndicatorStore =
-				indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this should(!?) select the first standardised indicator. we can discuss
+		selectedIndicator.ready.then(() => {
+			if ($selectedIndicator) return;
+			$selectedIndicator = indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this should(!?) select the first standardised indicator. we can discuss
 		});
 	});
 
 	function selectIndicator(indicator) {
-		$selectedIndicatorStore = indicator;
+		$selectedIndicator = indicator;
 	}
 
 	function removeIndicator() {
-		$selectedIndicatorStore = null;
+		$selectedIndicator = null;
 	}
 
 	let selectedTheme = $state();
@@ -133,7 +134,7 @@
 		) ?? []
 	);
 	let uniquePeriods = $derived(
-		[...new Set([...(data?.period ?? []), ...(comparisonData?.period ?? [])])].sort(
+		[...new Set([...(data?.period ?? [])])].sort(
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
@@ -181,7 +182,7 @@
 							label="Select an indicator"
 							id="indicators"
 							items={indicatorOptions}
-							bind:value={$selectedIndicatorStore}
+							bind:value={$selectedIndicator}
 							compact
 						></Radios>
 					</GridCell>
@@ -194,9 +195,8 @@
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
-				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}{#if uniquePeriods.length > 1}to {formatPeriod(
-						uniquePeriods[uniquePeriods.length - 1]
-					)}{/if}.
+				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}{#if uniquePeriods.length > 1}
+					to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>
 		</div>
@@ -206,9 +206,9 @@
 					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
 				</div>
 			{/if}
-			{#if comparisonData}
+			{#if comparisonArea && metadata?.standardised}
 				<div>
-					Comparison area: {comparisonData?.areanm[0]}
+					Comparison area: {comparisonArea?.areanm}
 				</div>
 				<div>
 					<!-- this will open selection palette for just comparison area -->
@@ -227,7 +227,7 @@
 		{#if data && !data.message}
 			<!-- <Tabs>
 				<Tab title="Comparison chart"> -->
-			<ComparisonRow {data} {metadata} {comparisonData} {formatValue} {formatPeriod} />
+			<ComparisonRow {data} {metadata} {comparisonArea} {formatValue} {formatPeriod} />
 			<!-- </Tab> -->
 			<!-- <Tab title="Line chart"> -->
 			<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->

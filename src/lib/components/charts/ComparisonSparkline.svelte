@@ -101,8 +101,10 @@
 	.sparkline-svg {
 		min-width: 0;
 		display: block;
+		width: auto;
 	}
 	.change-box {
+		flex: 0 0 auto;
 		margin-left: 26px;
 		/* 20px to match column gap, plus 6 to match the diamond padding around the pointrange */
 	}

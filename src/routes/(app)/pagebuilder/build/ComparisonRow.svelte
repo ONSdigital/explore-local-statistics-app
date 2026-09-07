@@ -2,135 +2,153 @@
 	import ComparisonPointrange from '$lib/components/charts/ComparisonPointrange.svelte';
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
-	import { parsePeriod } from '$lib/utils';
+	import { parsePeriod, parseData } from '$lib/utils';
 	import { Icon, Divider } from '@onsvisual/svelte-components';
 
-	let { data, metadata, comparisonData, formatValue = (d) => d, formatPeriod } = $props();
+	let { data, metadata, comparisonArea, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
+	let chosenYear = $state(null); //user will be able to select this
 
-	function getLatestData(data) {
-		const keys = Object.keys(data);
-		const rowCount = data.period.length;
-
-		const latestIndex = {};
-		for (let i = 0; i < rowCount; i++) {
-			const areacd = data.areacd[i];
-			const period = data.period[i];
-
-			if (!(areacd in latestIndex) || period > data.period[latestIndex[areacd]]) {
-				latestIndex[areacd] = i;
-			}
-		}
-
-		return Object.values(latestIndex).map((i) =>
-			Object.fromEntries(keys.map((key) => [key, data[key][i]]))
-		);
-	}
-	function mergeDataAndComparisonData(a, b) {
-		if (!a) return b;
-		if (!b) return a;
-
-		const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
-
-		return Object.fromEntries(
-			Array.from(keys).map((key) => [key, [...(a[key] ?? []), ...(b[key] ?? [])]])
-		);
-	}
-
-	let includeComparison = $derived(
-		Boolean(metadata?.standardised && comparisonData && !comparisonData.message)
-	);
-
-	// need to generate ranges based on data including the comparison area where appropriate
-	let combinedData = $derived(
-		includeComparison ? mergeDataAndComparisonData(data, comparisonData) : (data ?? null)
-	);
-
-	let latestData = $derived(data ? getLatestData(data) : null);
-	let latestComparisonData = $derived(
-		includeComparison && comparisonData ? getLatestData(comparisonData) : null
-	);
-	let latestCombinedData = $derived(combinedData ? getLatestData(combinedData) : null);
-
-	let xValueRange = $derived.by(() => {
-		if (!latestCombinedData?.length) return null;
-
-		const allValues = latestCombinedData.flatMap((d) =>
-			[d.value, d.lci_95, d.uci_95].filter((v) => v != null)
-		);
-
-		if (!allValues.length) return null;
-
-		return [Math.min(...allValues), Math.max(...allValues)];
-	});
-
-	// this assumes we want a fixed y axis across all sparklines, rather than free y axes
-	let yValueRange = $derived.by(() => {
-		if (!combinedData) return null;
-
-		const allValues = [
-			...(combinedData.value ?? []),
-			...(combinedData.lci_95 ?? []),
-			...(combinedData.uci_95 ?? [])
-		].filter((v) => v != null);
-
-		if (!allValues.length) return null;
-
-		return [Math.min(...allValues), Math.max(...allValues)];
-	});
-
-	let periodRange = $derived.by(() => {
-		if (!combinedData?.period?.length) return null;
-		let earliest = combinedData.period[0];
-		let latest = combinedData.period[0];
-		for (const period of combinedData.period) {
-			if (period < earliest) earliest = period;
-			if (period > latest) latest = period;
-		}
-		return [parsePeriod(earliest), parsePeriod(latest)];
-	});
-
-	function groupByArea(data) {
-		const keys = Object.keys(data);
+	// find whatever the latest available period with data is for each area
+	function getLatestPeriodPerArea(data) {
 		const rowCount = data.areacd.length;
-		const areasMap = new Map();
+		const latestByArea = new Map();
 
 		for (let i = 0; i < rowCount; i++) {
 			const areacd = data.areacd[i];
-			if (!areasMap.has(areacd)) {
-				areasMap.set(areacd, { areacd, areanm: data.areanm[i], rows: [] });
+			const period = new Date(data.period[i]);
+			const current = latestByArea.get(areacd);
+			if (!current || period > current) latestByArea.set(areacd, period);
+		}
+		return latestByArea;
+	}
+	let latestPerArea = $derived(data ? getLatestPeriodPerArea(data) : new Map());
+
+	function processData(data, chosenYear, standardised, comparisonCd) {
+		const areaDataSparkline = [];
+		const areaDataPointrange = [];
+		const comparisonDataSparkline = [];
+		const comparisonDataPointrange = [];
+		const pointrangeXDomain = [Infinity, -Infinity];
+		const sparklineXDomain = [null, null];
+		const sparklineYDomain = [Infinity, -Infinity];
+
+		const rows = parseData(data).map((row) => ({
+			...row,
+			period: parsePeriod(row.period)
+		}));
+
+		for (const d of rows) {
+			const period = d.period;
+			const periodTime = period.getTime();
+
+			// push to the sparkline datasets - comparison
+			// generate sparkline domains (remember CIs) - comparison so only if indicator is standardised
+			if (d.areacd === comparisonCd) {
+				comparisonDataSparkline.push(d);
+
+				if (standardised) {
+					for (const v of [d.value, d.lci_95, d.uci_95]) {
+						if (v != null) {
+							sparklineYDomain[0] = Math.min(sparklineYDomain[0], v);
+							sparklineYDomain[1] = Math.max(sparklineYDomain[1], v);
+						}
+					}
+					if (!sparklineXDomain[0] || periodTime < sparklineXDomain[0].getTime())
+						sparklineXDomain[0] = period;
+					if (!sparklineXDomain[1] || periodTime > sparklineXDomain[1].getTime())
+						sparklineXDomain[1] = period;
+				}
+			} else {
+				// push to the sparkline datasets - data
+				// generate sparkline domains (remember CIs)
+				areaDataSparkline.push(d);
+
+				for (const v of [d.value, d.lci_95, d.uci_95]) {
+					if (v != null) {
+						sparklineYDomain[0] = Math.min(sparklineYDomain[0], v);
+						sparklineYDomain[1] = Math.max(sparklineYDomain[1], v);
+					}
+				}
+				if (!sparklineXDomain[0] || periodTime < sparklineXDomain[0].getTime())
+					sparklineXDomain[0] = period;
+				if (!sparklineXDomain[1] || periodTime > sparklineXDomain[1].getTime())
+					sparklineXDomain[1] = period;
 			}
-			const row = Object.fromEntries(
-				keys.map((key) => [key, key === 'period' ? parsePeriod(data[key][i]) : data[key][i]])
-			);
-			areasMap.get(areacd).rows.push(row);
+			// filter to desired period (chosen by user or defaults to latest available date for the area indicator)
+			const targetPeriod = chosenYear != null ? chosenYear : latestPerArea.get(d.areacd);
+			if (targetPeriod && d.period.getTime() === parsePeriod(targetPeriod).getTime()) {
+				// push to pointrange dataset - comparison
+				if (d.areacd === comparisonCd) {
+					comparisonDataPointrange.push(d);
+					// add comparison to pointrange x domain (remember CIs) but only if standardised
+					if (standardised) {
+						for (const v of [d.value, d.lci_95, d.uci_95]) {
+							if (v != null) {
+								pointrangeXDomain[0] = Math.min(pointrangeXDomain[0], v);
+								pointrangeXDomain[1] = Math.max(pointrangeXDomain[1], v);
+							}
+						}
+					}
+				} else {
+					// push area to pointrange dataset
+					areaDataPointrange.push(d);
+					for (const v of [d.value, d.lci_95, d.uci_95]) {
+						if (v != null) {
+							pointrangeXDomain[0] = Math.min(pointrangeXDomain[0], v);
+							pointrangeXDomain[1] = Math.max(pointrangeXDomain[1], v);
+						}
+					}
+				}
+			}
 		}
 
-		for (const area of areasMap.values()) {
-			area.diff = getDiff(area.rows);
+		return {
+			areaDataSparkline,
+			areaDataPointrange,
+			comparisonDataSparkline,
+			comparisonDataPointrange,
+			pointrangeXDomain,
+			sparklineXDomain,
+			sparklineYDomain
+		};
+	}
+
+	let {
+		areaDataSparkline,
+		areaDataPointrange,
+		comparisonDataSparkline,
+		comparisonDataPointrange,
+		pointrangeXDomain,
+		sparklineXDomain,
+		sparklineYDomain
+	} = $derived(processData(data, chosenYear, metadata?.standardised, comparisonArea.areacd));
+
+	let areaCodes = $derived([...new Set(areaDataSparkline.map((d) => d.areacd))]);
+
+	let areasData = $derived.by(() => {
+		const rowsByArea = new Map();
+
+		for (const d of areaDataSparkline) {
+			if (!rowsByArea.has(d.areacd)) {
+				rowsByArea.set(d.areacd, { areacd: d.areacd, areanm: d.areanm, rows: [] });
+			}
+			rowsByArea.get(d.areacd).rows.push(d);
 		}
 
-		return Array.from(areasMap.values());
-	}
+		const pointrangeByArea = new Map(areaDataPointrange.map((d) => [d.areacd, d]));
 
-	function getDiff(rows) {
-		if (!rows.length) return null;
-		const earliest = rows.reduce((a, b) => (a.period < b.period ? a : b));
-		const latest = rows.reduce((a, b) => (a.period > b.period ? a : b));
-		if (earliest.value == null || latest.value == null) return null;
-		return latest.value - earliest.value;
-	}
+		for (const group of rowsByArea.values()) {
+			group.pointrangeRow = pointrangeByArea.get(group.areacd) ?? null;
 
-	let areasDataUnsorted = $derived.by(() => {
-		if (!data || !latestData) return [];
+			const earliest = group.rows.reduce((a, b) => (a.period < b.period ? a : b));
+			const latest = group.rows.reduce((a, b) => (a.period > b.period ? a : b));
+			group.diff =
+				earliest.value != null && latest.value != null ? latest.value - earliest.value : null;
+		}
 
-		const latestValues = new Map(latestData.map((row) => [row.areacd, row.value]));
-
-		return groupByArea(data).sort(
-			(a, b) =>
-				(latestValues.get(b.areacd) ?? -Infinity) - (latestValues.get(a.areacd) ?? -Infinity)
-		);
+		return Array.from(rowsByArea.values());
 	});
 
 	let sortColumn = $state('value');
@@ -152,16 +170,42 @@
 		return String(a).localeCompare(String(b));
 	}
 
-	let areasData = $derived.by(() => {
-		const sorted = [...areasDataUnsorted].sort((a, b) =>
-			compareValues(a[sortColumn], b[sortColumn])
+	function getSortValue(area, column) {
+		if (column === 'value') return area.pointrangeRow?.value ?? null;
+		return area[column];
+	}
+
+	let sortedAreasData = $derived.by(() => {
+		const sorted = [...areasData].sort((a, b) =>
+			compareValues(getSortValue(a, sortColumn), getSortValue(b, sortColumn))
 		);
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
-	let comparisonRows = $derived(
-		includeComparison && comparisonData ? (groupByArea(comparisonData)[0]?.rows ?? []) : []
-	);
+	let comparisonGroup = $derived.by(() => {
+		if (!comparisonDataSparkline.length && !comparisonDataPointrange.length) return null;
+		return {
+			areacd: comparisonArea?.areacd,
+			areanm: comparisonDataSparkline[0]?.areanm ?? comparisonArea?.areanm,
+			rows: comparisonDataSparkline,
+			pointrangeRow: comparisonDataPointrange[0] ?? null
+		};
+	});
+
+	let comparisonRows = $derived(metadata?.standardised ? (comparisonGroup?.rows ?? []) : []);
+
+	let comparisonBar = $derived.by(() => {
+		const cd = comparisonGroup?.pointrangeRow;
+		if (!cd || !xScale) return null;
+
+		const hasInterval = cd.lci_95 != null && cd.uci_95 != null;
+
+		return {
+			left: hasInterval ? xScale(cd.lci_95) : null,
+			width: hasInterval ? xScale(cd.uci_95) - xScale(cd.lci_95) : null,
+			valueX: cd.value != null ? xScale(cd.value) : null
+		};
+	});
 
 	const sparklineWidth = 300;
 	const colGap = 20;
@@ -174,9 +218,9 @@
 		if (!widths.length) return 70;
 		return Math.max(...widths);
 	});
-	function updateValueWidth(el, index) {
+	function updateValueWidth(el, areacd) {
 		const update = () => {
-			valueWidths[index] = el.getBoundingClientRect().width;
+			valueWidths[areacd] = el.getBoundingClientRect().width;
 		};
 		update();
 		const observer = new ResizeObserver(update);
@@ -216,24 +260,10 @@
 	});
 
 	let xScale = $derived(
-		xValueRange ? scaleLinear().domain(xValueRange).range([0, pointRangeWidth]) : null
+		pointrangeXDomain ? scaleLinear().domain(pointrangeXDomain).range([0, pointRangeWidth]) : null
 	);
+
 	let comparisonOffset = $derived(labelWidth + valueWidth + colGap * nColsPreceedingPointrange);
-
-	let comparisonBar = $derived.by(() => {
-		if (!includeComparison) return null;
-
-		const cd = latestComparisonData?.[0];
-		if (!xScale || !cd) return null;
-
-		const hasInterval = cd.lci_95 != null && cd.uci_95 != null;
-
-		return {
-			left: hasInterval ? xScale(cd.lci_95) : null,
-			width: hasInterval ? xScale(cd.uci_95) - xScale(cd.lci_95) : null,
-			valueX: cd.value != null ? xScale(cd.value) : null
-		};
-	});
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
@@ -257,13 +287,13 @@
 		</div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('value')}>
-				{formatPeriod(periodRange[1])} value <Icon type="carret" size="s"></Icon>
+				{formatPeriod(sparklineXDomain[1])} value <Icon type="carret" size="s"></Icon>
 			</button>
 		</div>
 		<div class="header-cell"></div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('diff')}>
-				Trend since {formatPeriod(periodRange[0])}
+				Trend since {formatPeriod(sparklineXDomain[0])}
 				<Icon type="carret" size="s"></Icon>
 			</button>
 		</div>
@@ -274,8 +304,8 @@
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
 				<div class="comparison-name" style:left="{comparisonBar.valueX}px">
-					{latestComparisonData[0].areanm}: {prefix}{formatValue(
-						latestComparisonData[0].value
+					{comparisonDataPointrange[0].areanm}: {prefix}{formatValue(
+						comparisonDataPointrange[0].value
 					)}{suffix}
 				</div>
 				{#if comparisonBar.left != null}
@@ -290,45 +320,42 @@
 				{/if}
 			</div>
 		{/if}
-		{#key areasData}
-			{#each areasData as area, i (area.areacd)}
-				{@const latestDataFiltered = latestData?.find((d) => d.areacd === area.areacd)}
+		{#each sortedAreasData as area, i (area.areacd)}
+			<div
+				class:alternating-row={i % 2 !== 0}
+				class="comparison-row-item"
+				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+			>
 				<div
-					class:alternating-row={i % 2 !== 0}
-					class="comparison-row-item"
-					style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+					class="area-name"
+					style:margin-left="{labelMargin}px"
+					use:updateLabelWidths={area.areacd}
 				>
-					<div
-						class="area-name"
-						style:margin-left="{labelMargin}px"
-						use:updateLabelWidths={area.areacd}
-					>
-						{area.areanm}
-						{parsePeriod(latestDataFiltered.period).getTime() !== periodRange[1].getTime()
-							? `(${formatPeriod(latestDataFiltered.period)})`
-							: ''}
-					</div>
-					<p class="area-value" use:updateValueWidth={i}>
-						{prefix}{formatValue(latestDataFiltered.value)}{suffix}
-					</p>
-					<ComparisonPointrange
-						data={latestDataFiltered}
-						xDomain={xValueRange}
-						chartWidth={pointRangeWidth}
-					/>
-					<ComparisonSparkline
-						data={area.rows}
-						yDomain={yValueRange}
-						comparisonData={comparisonRows}
-						xDomain={periodRange}
-						{prefix}
-						{suffix}
-						{formatValue}
-						chartWidth={sparklineWidth}
-					/>
+					{area.areanm}
+					{area.pointrangeRow.period.getTime() !== sparklineXDomain[1].getTime()
+						? `(${formatPeriod(area.pointrangeRow.period)})`
+						: ''}
 				</div>
-			{/each}
-		{/key}
+				<p class="area-value" use:updateValueWidth={area.areacd}>
+					{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
+				</p>
+				<ComparisonPointrange
+					data={area.pointrangeRow}
+					xDomain={pointrangeXDomain}
+					chartWidth={pointRangeWidth}
+				/>
+				<ComparisonSparkline
+					data={area.rows}
+					yDomain={sparklineYDomain}
+					comparisonData={comparisonRows}
+					xDomain={sparklineXDomain}
+					{prefix}
+					{suffix}
+					{formatValue}
+					chartWidth={sparklineWidth}
+				/>
+			</div>
+		{/each}
 	</div>
 </div>
 
