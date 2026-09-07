@@ -195,7 +195,8 @@
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
-				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}{#if uniquePeriods.length > 1}
+				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
+				{#if uniquePeriods.length > 1}
 					to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>

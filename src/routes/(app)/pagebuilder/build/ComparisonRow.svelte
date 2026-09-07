@@ -4,6 +4,7 @@
 	import { scaleLinear } from 'd3-scale';
 	import { parsePeriod, parseData } from '$lib/utils';
 	import { Icon, Divider } from '@onsvisual/svelte-components';
+	import { ONScolours } from '$lib/config';
 
 	let { data, metadata, comparisonArea, formatValue = (d) => d, formatPeriod } = $props();
 	let width = $state(800);
@@ -275,7 +276,20 @@
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
 
-	$inspect(areaDataPointrange);
+	function sortIconFill(column) {
+		if (sortColumn !== column) {
+			return {
+				upperFill: ONScolours.grey75,
+				lowerFill: ONScolours.grey75
+			};
+		}
+
+		return sortDirection === 'ascending'
+			? { upperFill: ONScolours.grey75, lowerFill: ONScolours.grey25 }
+			: { upperFill: ONScolours.grey25, lowerFill: ONScolours.grey75 };
+	}
+
+	$inspect(sortColumn);
 </script>
 
 <div
@@ -291,19 +305,78 @@
 	>
 		<div class="header-cell" style:margin-left="{labelMargin}px">
 			<button class="table-sort-button" on:click={() => toggleSort('areanm')}>
-				Area <Icon type="carret" size="s"></Icon>
+				Area
+				<svg
+					class="ons-icon"
+					viewBox="0 0 12 19"
+					xmlns="http://www.w3.org/2000/svg"
+					focusable="false"
+					fill="currentColor"
+					role="img"
+					aria-hidden="true"
+				>
+					<path
+						class="ons-topTriangle"
+						fill={sortIconFill('areanm').upperFill}
+						d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+					<path
+						class="ons-bottomTriangle"
+						fill={sortIconFill('areanm').lowerFill}
+						d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+				</svg>
 			</button>
 		</div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('value')}>
-				{formatPeriod(sparklineXDomain[1])} value <Icon type="carret" size="s"></Icon>
+				{formatPeriod(sparklineXDomain[1])} value
+				<svg
+					class="ons-icon"
+					viewBox="0 0 12 19"
+					xmlns="http://www.w3.org/2000/svg"
+					focusable="false"
+					fill="currentColor"
+					role="img"
+					aria-hidden="true"
+				>
+					<path
+						class="ons-topTriangle"
+						fill={sortIconFill('value').upperFill}
+						d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+					<path
+						class="ons-bottomTriangle"
+						fill={sortIconFill('value').lowerFill}
+						d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+				</svg>
 			</button>
 		</div>
 		<div class="header-cell"></div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('diff')}>
 				Trend since {formatPeriod(sparklineXDomain[0])}
-				<Icon type="carret" size="s"></Icon>
+				<svg
+					class="ons-icon"
+					viewBox="0 0 12 19"
+					xmlns="http://www.w3.org/2000/svg"
+					focusable="false"
+					fill="currentColor"
+					role="img"
+					aria-hidden="true"
+				>
+					<path
+						class="ons-topTriangle"
+						fill={sortIconFill('diff').upperFill}
+						d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+					<path
+						class="ons-bottomTriangle"
+						fill={sortIconFill('diff').lowerFill}
+						d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+					/>
+				</svg>
 			</button>
 		</div>
 	</div>
