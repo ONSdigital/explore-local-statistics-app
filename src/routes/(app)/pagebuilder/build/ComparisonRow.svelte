@@ -17,9 +17,12 @@
 
 		for (let i = 0; i < rowCount; i++) {
 			const areacd = data.areacd[i];
-			const period = new Date(data.period[i]);
+			if (data.value[i] == null) continue;
+			const period = parsePeriod(data.period[i]);
 			const current = latestByArea.get(areacd);
-			if (!current || period > current) latestByArea.set(areacd, period);
+			if (!Number.isNaN(period.getTime()) && (!current || period > current)) {
+				latestByArea.set(areacd, period);
+			}
 		}
 		return latestByArea;
 	}
@@ -78,7 +81,11 @@
 			}
 			// filter to desired period (chosen by user or defaults to latest available date for the area indicator)
 			const targetPeriod = chosenYear != null ? chosenYear : latestPerArea.get(d.areacd);
-			if (targetPeriod && d.period.getTime() === parsePeriod(targetPeriod).getTime()) {
+			if (
+				d.value != null &&
+				targetPeriod &&
+				d.period.getTime() === parsePeriod(targetPeriod).getTime()
+			) {
 				// push to pointrange dataset - comparison
 				if (d.areacd === comparisonCd) {
 					comparisonDataPointrange.push(d);
@@ -267,6 +274,8 @@
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
+
+	$inspect(areaDataPointrange);
 </script>
 
 <div

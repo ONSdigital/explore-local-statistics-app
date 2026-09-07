@@ -227,7 +227,9 @@
 		{#if data && !data.message}
 			<!-- <Tabs>
 				<Tab title="Comparison chart"> -->
-			<ComparisonRow {data} {metadata} {comparisonArea} {formatValue} {formatPeriod} />
+			{#key selection.indicator?.slug}
+				<ComparisonRow {data} {metadata} {comparisonArea} {formatValue} {formatPeriod} />
+			{/key}
 			<!-- </Tab> -->
 			<!-- <Tab title="Line chart"> -->
 			<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
