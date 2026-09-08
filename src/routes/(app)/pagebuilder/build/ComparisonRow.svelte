@@ -6,7 +6,14 @@
 	import { Icon, Divider } from '@onsvisual/svelte-components';
 	import { ONScolours } from '$lib/config';
 
-	let { data, metadata, comparisonArea, formatValue = (d) => d, formatPeriod } = $props();
+	let {
+		data,
+		metadata,
+		selectedAreas,
+		comparisonArea,
+		formatValue = (d) => d,
+		formatPeriod
+	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
 	let chosenYear = $state(null); //user will be able to select this
@@ -64,7 +71,8 @@
 					if (!sparklineXDomain[1] || periodTime > sparklineXDomain[1].getTime())
 						sparklineXDomain[1] = period;
 				}
-			} else {
+			}
+			if (selectedAreas.includes(d.areacd)) {
 				// push to the sparkline datasets - data
 				// generate sparkline domains (remember CIs)
 				areaDataSparkline.push(d);
@@ -99,7 +107,8 @@
 							}
 						}
 					}
-				} else {
+				}
+				if (selectedAreas.includes(d.areacd)) {
 					// push area to pointrange dataset
 					areaDataPointrange.push(d);
 					for (const v of [d.value, d.lci_95, d.uci_95]) {
@@ -288,8 +297,8 @@
 			? { upperFill: ONScolours.grey75, lowerFill: ONScolours.grey25 }
 			: { upperFill: ONScolours.grey25, lowerFill: ONScolours.grey75 };
 	}
-
-	$inspect(sortColumn);
+	$inspect(areaDataPointrange); // everything going here (same for sparkline)
+	$inspect(comparisonDataPointrange); // nothing going here (same for sparkline)
 </script>
 
 <div
@@ -398,7 +407,10 @@
 					></div>
 				{/if}
 				{#if comparisonBar.valueX != null}
-					<div class="comparison-reference-line" style:left="{comparisonBar.valueX}px"></div>
+					<div
+						class="comparison-reference-line"
+						style:left="{comparisonBar.valueX - 2.5 / 2}px"
+					></div>
 				{/if}
 			</div>
 		{/if}
@@ -414,7 +426,9 @@
 					use:updateLabelWidths={area.areacd}
 				>
 					{area.areanm}
-					{area.pointrangeRow.period.getTime() !== sparklineXDomain[1].getTime()
+					{area.pointrangeRow?.period &&
+					sparklineXDomain[1] &&
+					area.pointrangeRow.period.getTime() !== sparklineXDomain[1].getTime()
 						? `(${formatPeriod(area.pointrangeRow.period)})`
 						: ''}
 				</div>
