@@ -138,16 +138,12 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
-
-	let chosenAreaCodes = $derived(
-		data != null ? [...new Set(data?.areacd)].filter((d) => d != comparisonArea.areacd) : null
-	);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
 	<div class="hero-text">
 		<h4>Select areas</h4>
-		<p>{chosenAreaCodes?.length} areas selected</p>
+		<p>{selection.areas.length} areas selected</p>
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
 </Hero>

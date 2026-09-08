@@ -297,8 +297,8 @@
 			? { upperFill: ONScolours.grey75, lowerFill: ONScolours.grey25 }
 			: { upperFill: ONScolours.grey25, lowerFill: ONScolours.grey75 };
 	}
-	$inspect(areaDataPointrange); // everything going here (same for sparkline)
-	$inspect(comparisonDataPointrange); // nothing going here (same for sparkline)
+
+	let CIsStyle = $derived(areaDataPointrange.some((d) => d.lci_95 != null && d.uci_95 != null));
 </script>
 
 <div
@@ -439,6 +439,7 @@
 					data={area.pointrangeRow}
 					xDomain={pointrangeXDomain}
 					chartWidth={pointRangeWidth}
+					{CIsStyle}
 				/>
 				<ComparisonSparkline
 					data={area.rows}

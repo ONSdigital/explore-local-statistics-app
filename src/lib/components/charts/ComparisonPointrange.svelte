@@ -2,7 +2,7 @@
 	import { scaleLinear } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 
-	let { data, xKey = 'value', idKey = 'areacd', xDomain, chartWidth } = $props();
+	let { data, xKey = 'value', idKey = 'areacd', xDomain, chartWidth, CIsStyle } = $props();
 	let leftMargin = $state(0);
 	const barHeight = 20;
 
@@ -44,7 +44,7 @@
 				{@const centerY = 35}
 				{@const diamondConst = 6}
 				<rect
-					class={data.lci_95 != null && data.uci_95 != null
+					class={(data.lci_95 != null && data.uci_95 != null) || CIsStyle
 						? 'value-diamond-within-ci'
 						: 'value-diamond'}
 					x={xScale(data.value) - diamondConst}
