@@ -44,19 +44,15 @@ export function toJSONStat(
 		const dim = dims[i];
 		const size = dim.values.length;
 
-		if (dim.values.length !== 1) {
+		if (dim.count !== 1) {
 			const newIndices = [];
-			// const newIndices = Array(indices.length * size);
-			// let j = 0;
+
 			for (const index of indices) {
 				for (const val of dim.values) {
 					newIndices.push(index * dim.count + val[1]);
-					// newIndices[j] = (index * dim.count) + val[1];
-					// j ++;
 				}
 			}
 			indices = newIndices;
-			// indices = indices.flatMap(index => dim.values.map(val => (index * dim.count) + val[1]));
 		}
 
 		cube.dimension[dim.key].category.index = Object.fromEntries(

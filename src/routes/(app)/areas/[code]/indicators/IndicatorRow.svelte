@@ -127,16 +127,22 @@
 						<Em color="#003c57">Official statistics in development</Em>
 					</p>
 				{/if}
-				<p><strong>Definition:</strong> {metadata.description}</p>
+				<p>{metadata.description}</p>
 				<p>
 					<strong>{metadata.source.length > 1 ? 'Data sources' : 'Data source'}:</strong>
-					{#each metadata.source as s, i}
-						<a href={s.href} target="_blank"
-							>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
-						><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
-						({s.date.split('-').reverse().join('/')}){i === metadata.source.length - 1 ? '' : ', '}
-					{/each}
 				</p>
+				<ul>
+					{#each metadata.source as s, i}
+						<li>
+							<a href={s.href} target="_blank"
+								>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+							><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>
+							({s.date.split('-').reverse().join('/')}){i === metadata.source.length - 1
+								? ''
+								: ', '}
+						</li>
+					{/each}
+				</ul>
 				{#if dataUrl.pyramid}
 					<p><strong>Download data:</strong> {@render downloadLinks('pyramid')}.</p>
 				{:else if dataUrl.beeswarm || dataUrl.sparkline}

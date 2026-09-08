@@ -1,30 +1,40 @@
 <script lang="ts">
 	// @ts-nocheck
 	import { resolve } from '$app/paths';
-	import { base } from '$app/paths';
+	import { goto } from '$app/navigation';
 	import {
 		PhaseBanner,
 		Hero,
 		Header,
 		Breadcrumb,
+		Select,
 		Section,
 		NavSections,
 		NavSection,
 		Footer
 	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
+	import IndicatorSearch from '$lib/components/nav/IndicatorSearch.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
-<Hero width="medium" title="Local indicators" cls="titleblock-transparent">
+<Hero
+	width="medium"
+	title="Local indicators"
+	cls="titleblock-transparent"
+	background="var(--ons-color-banner-bg)"
+>
 	<p class="ons-hero__text">
-		Explore our {data.summaryStats.univariateCount} local indicators, including
-		<b>disposable household income</b>,
-		<b>participation in further education</b>
-		and
-		<b>life satisfaction</b>.
+		Explore our {data.summaryStats.univariateCount} local indicators by topic, including
+		<a href="#population">population</a>, <a href="#economy">economy</a> and
+		<a href="#environment">environment</a>, or select an indicator from the dropdown below.
 	</p>
+	<IndicatorSearch
+		cls="ons-u-mb-2xl"
+		indicators={data.taxonomyFlat.data}
+		onSelect={(ind) => goto(resolve(`/indicators/${ind.slug}`))}
+	/>
 </Hero>
 <!-- too much space between hero and sections -->
 
