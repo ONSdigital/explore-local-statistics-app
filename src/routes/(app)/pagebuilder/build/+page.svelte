@@ -24,8 +24,13 @@
 	import syncedStore from '$lib/synced-store.svelte';
 	import ComparisonRow from './ComparisonRow.svelte';
 	import Line from '$lib/components/charts/Line.svelte';
+	import { getAreaType, slugify } from '$lib/utils';
 
 	let taxData = $props();
+	let areas = $derived(
+		taxData?.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' }))
+	);
+
 	let selectedAreas = syncedStore('selectedAreas', []);
 	let selectedIndicator = syncedStore('selectedIndicator', null);
 	let selection = $derived({
@@ -143,7 +148,7 @@
 <Hero title="Compare areas" background="#eaeaea" height="200px">
 	<div class="hero-text">
 		<h4>Select areas</h4>
-		<p>{selection.areas.length} areas selected</p>
+		<p>{selection.areas?.length} areas selected</p>
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
 </Hero>
@@ -209,12 +214,22 @@
 			{/if}
 			{#if comparisonArea && metadata?.standardised}
 				<div>
-					Comparison area: {comparisonArea?.areanm}
+					<!-- Comparison area: {comparisonArea?.areanm} -->
+					Comparison area:
+					<Select
+						label=""
+						placeholder={comparisonArea?.areanm}
+						labelKey="areanm"
+						groupKey="type"
+						autoClear={false}
+						clearable={false}
+						options={areas}
+						bind:value={comparisonArea}
+					></Select>
 				</div>
-				<div>
-					<!-- this will open selection palette for just comparison area -->
+				<!-- <div>
 					<a>Change</a>
-				</div>
+				</div> -->
 			{/if}
 		</div>
 	{/if}

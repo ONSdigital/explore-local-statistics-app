@@ -6,10 +6,13 @@ export const load: PageLoad = async ({ fetch }) => {
 	const taxonomyNestedPath = resolve('/api/v1/metadata/taxonomy?excludeMultivariate=true');
 	const taxonomy = await (await fetch(taxonomyPath)).json();
 	const taxonomyNested = await (await fetch(taxonomyNestedPath)).json();
+	const areasPath = resolve('/api/v1/geo/list');
+	const areas = await (await fetch(areasPath)).json();
 
 	return {
 		taxonomy,
 		taxonomyNested,
+		areas,
 
 		// Page metadata
 		title: 'Explore local indicators - ONS',
