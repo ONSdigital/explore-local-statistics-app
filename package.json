@@ -14,6 +14,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest --watch=false",
+		"test:bench": "vitest bench --run",
 		"geo:generate": "tsx ./scripts/make-geo-data.ts",
 		"geo:clusters": "tsx ./scripts/make-clusters.ts",
 		"geo:all": "npm run geo:generate && npm run geo:clusters",
