@@ -1,4 +1,4 @@
-import { makeDatasetGeoFilter } from '$lib/api/metadata/helpers/datasetFilters';
+import { makeDatasetGeoFilter, hasGeo } from '$lib/api/metadata/helpers/datasetFilters';
 import summaryStats from '$lib/data/json-stat-summary.json';
 
 // Takes a JSON-Stat collection and returns an array of JSON-Stat datasets that meet the filter criteria
@@ -6,12 +6,12 @@ export default function filterIndicators(datasets, params) {
 	if (
 		params.topic === 'all' &&
 		params.indicator !== 'all' &&
-		params.hasGeo === 'any' &&
 		typeof params.indicator === 'string'
 	) {
 		// Quicker way to return a single indicator
 		const index = summaryStats.indicatorLookup[params.indicator];
-		return index >= 0 ? [datasets[index]] : [];
+		const ds = index >= 0 ? datasets[index] : null;
+		return ds && (params.hasGeo === 'any' || hasGeo(ds, params.hasGeo)) ? [ds] : [];
 	}
 	const indicators = new Set([params.indicator].flat());
 	const topics = new Set([params.topic].flat());
