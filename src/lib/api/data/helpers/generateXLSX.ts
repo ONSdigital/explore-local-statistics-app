@@ -1,5 +1,6 @@
 import { Workbook, Worksheet, Cell, Row, Column, Table } from 'documonster/excel';
 import type { Font, WorkbookView } from 'documonster/excel';
+import type { Readable } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
 
 // The library's own default (Excel's own default, Calibri 11) isn't what this workbook
@@ -154,7 +155,7 @@ function getColWidth(values = null) {
 	return maxLength < minColWidth ? minColWidth : maxLength > maxColWidth ? maxColWidth : maxLength;
 }
 
-export async function dataToSpreadsheet(data) {
+export async function dataToSpreadsheet(data): Promise<Readable> {
 	const workbook = Workbook.create();
 
 	// Sets the actual workbook-wide default font (only genuinely unstyled cells pick
@@ -283,11 +284,21 @@ export async function dataToSpreadsheet(data) {
 	// (documonster merges a partial view onto its own defaults) is cast here.
 	workbook.views = [{ activeTab: 0 } as WorkbookView];
 
-	return Workbook.toBuffer(workbook, { validate: false });
+	// `Workbook.toStream` serializes the exact same buffered/`Table`-backed workbook model
+	// `Workbook.toBuffer` does (same push-shaped XLSX serializer underneath - see
+	// `xlsx-stream.d.ts` - so it keeps the native Excel Tables the buffered API is used for
+	// in the first place), it just exposes the output as a demand-driven `Readable` instead
+	// of accumulating it into one `Buffer` first. Every caller streams it onward from here:
+	// `+server.ts` converts it to a Web `ReadableStream` for the HTTP response, and
+	// `generate-spreadsheets.ts` pipes it straight to a file - so there's no reason to ever
+	// materialize the whole file in memory as a `Buffer`, live or pre-generated.
+	return Workbook.toStream(workbook, { validate: false });
 }
 
-// This function generates an ODS spreadsheet given data and metadata for a series of datasets
-export default async function generateXLSX(datasets) {
+// This function generates an ODS spreadsheet given data and metadata for a series of datasets.
+// Returns a `Readable` (see `dataToSpreadsheet` above) - pipe it to a file or convert it to a
+// Web `ReadableStream` (`Readable.toWeb`) for an HTTP response, rather than buffering it first.
+export default async function generateXLSX(datasets): Promise<Readable> {
 	// Note: This cover sheet is currently hard-coded. Possibly better to move somewhere else?
 	const data: spreadsheetData = {
 		creator: 'Office for National Statistics',
