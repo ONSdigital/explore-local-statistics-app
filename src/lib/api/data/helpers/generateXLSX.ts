@@ -283,7 +283,7 @@ export async function dataToSpreadsheet(data) {
 	// (documonster merges a partial view onto its own defaults) is cast here.
 	workbook.views = [{ activeTab: 0 } as WorkbookView];
 
-	return Workbook.toBuffer(workbook);
+	return Workbook.toBuffer(workbook, { validate: false });
 }
 
 // This function generates an ODS spreadsheet given data and metadata for a series of datasets
