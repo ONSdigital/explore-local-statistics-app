@@ -213,7 +213,7 @@
 
 	let comparisonBar = $derived.by(() => {
 		const cd = comparisonGroup?.pointrangeRow;
-		if (!cd || !xScale) return null;
+		if (!cd || !xScale || !metadata?.standardised) return null;
 
 		const hasInterval = cd.lci_95 != null && cd.uci_95 != null;
 

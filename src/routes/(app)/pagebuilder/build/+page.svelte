@@ -37,11 +37,10 @@
 		areas: $selectedAreas.map((area) => area.areacd),
 		indicator: $selectedIndicator
 	});
-	let chosenComparisonArea = $state(null);
+
+	let chosenComparisonArea = syncedStore('chosenComparisonArea', null);
 	let sharedParent = $derived(await findNearestSharedParent(selection.areas));
-	let comparisonArea = $derived(
-		chosenComparisonArea !== null ? chosenComparisonArea : sharedParent
-	);
+	let comparisonArea = $derived($chosenComparisonArea ?? sharedParent);
 
 	let metadataUrl = $derived(
 		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
@@ -115,6 +114,12 @@
 		});
 	});
 
+	// clelar the chosen comparison area if selected areas change - so defaults back to shared parent
+	$effect(() => {
+		selection.areas;
+		chosenComparisonArea.set(null);
+	});
+
 	function selectIndicator(indicator) {
 		$selectedIndicator = indicator;
 	}
@@ -143,6 +148,7 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
+	$inspect(comparisonArea);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -222,14 +228,13 @@
 						labelKey="areanm"
 						groupKey="type"
 						autoClear={false}
-						clearable={false}
 						options={areas}
-						bind:value={comparisonArea}
+						bind:value={$chosenComparisonArea}
+						on:clear={() => chosenComparisonArea.set(null)}
 					></Select>
 				</div>
-				<!-- <div>
-					<a>Change</a>
-				</div> -->
+			{:else}
+				<div>Comparison area disabled for non-standardised indicator.</div>
 			{/if}
 		</div>
 	{/if}
