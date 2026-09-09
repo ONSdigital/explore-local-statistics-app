@@ -18,9 +18,35 @@ export function toJSONStat(
 	includeNames = false,
 	includeStatus = false
 ) {
+	// `qb` is the shared, in-memory-cached cube (see CLAUDE.md) - it must never be
+	// mutated in place, but `structuredClone`-ing every top-level key generically
+	// (including things like `extension`/`note`/`id`/`role`, which this function
+	// never touches) is unnecessary recursive-clone work on every request. `dimension`
+	// and `size` are the only structures actually written to below, so those are the
+	// only ones that need copying - and only as deep as the write goes: each dim's
+	// `category` object gets a fresh shallow copy (its `index`/`label` values are
+	// always replaced wholesale, never mutated in place), `size` just needs to be a
+	// new array since individual entries are reassigned.
+	// Copy keys in their original order so the output is identical to before (JSON
+	// key order isn't meaningful, but there's no reason to shuffle it either).
 	const cube: jsonStatDataset = {};
-	for (const key of Object.keys(qb).filter((key: string) => !['value', 'status'].includes(key)))
-		cube[key] = structuredClone(qb[key]);
+	for (const key of Object.keys(qb)) {
+		if (key === 'value' || key === 'status') continue;
+		if (key === 'size') {
+			cube.size = qb.size.slice();
+		} else if (key === 'dimension') {
+			cube.dimension = {};
+			// `dims` always has one entry per `qb.id`/`qb.dimension` key (see
+			// filterJSONStat), so building `dimension` from it covers every key.
+			for (const dim of dims)
+				cube.dimension[dim.key] = {
+					...qb.dimension[dim.key],
+					category: { ...qb.dimension[dim.key].category }
+				};
+		} else {
+			cube[key] = qb[key];
+		}
+	}
 
 	let indices = [0];
 
@@ -48,11 +74,13 @@ export function toJSONStat(
 			cube.dimension[dim.key].category.label = label;
 		}
 		cube.size[i] = size;
-		if (includeNames)
-			cube.dimension.areacd.category.label = makeAreaLookup(
-				Object.keys(cube.dimension.areacd.category.index)
-			);
 	}
+	// Only needs computing once, using the areacd dimension's now-finalized index -
+	// not once per dimension in the loop above (all dims share the same lookup result).
+	if (includeNames)
+		cube.dimension.areacd.category.label = makeAreaLookup(
+			Object.keys(cube.dimension.areacd.category.index)
+		);
 
 	const value = Array(indices.length).fill(null);
 
