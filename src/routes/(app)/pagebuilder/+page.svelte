@@ -30,7 +30,7 @@
 	import { getAreaType, slugify } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { preventDefault } from 'svelte/legacy';
-	import syncedStore from '$lib/synced-store.svelte';
+	import { getContext, onMount } from 'svelte';
 
 	let data = $props();
 	let checked = $state(false);
@@ -43,7 +43,8 @@
 	let selectedSiblingChecked = $state(false);
 	let children = $state([]);
 	let selectedAreaChecked = $state(false);
-	let selectedAreas = syncedStore('selectedAreas', []);
+	let selectedAreas = getContext('selectedAreas')();
+	let chosenComparisonArea = getContext('chosenComparisonArea')();
 
 	let buildButtonEnabled = $derived($selectedAreas.length > 0 ? true : false);
 
@@ -236,7 +237,15 @@
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
+	let existingSelectedAreas;
+	onMount(() => {
+		existingSelectedAreas = $selectedAreas;
+	});
+
 	function goToBuildPage() {
+		if ($selectedAreas !== existingSelectedAreas) {
+			chosenComparisonArea.set(null);
+		}
 		goto(resolve('/pagebuilder/build'));
 	}
 </script>

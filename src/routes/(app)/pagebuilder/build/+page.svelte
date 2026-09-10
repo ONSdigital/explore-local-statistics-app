@@ -16,12 +16,13 @@
 		Radios,
 		Grid,
 		GridCell,
-		Divider
+		Divider,
+		Tooltip
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, parsePeriod } from '$lib/utils';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
-	import syncedStore from '$lib/synced-store.svelte';
+	import { getContext, onMount } from 'svelte';
 	import ComparisonRow from './ComparisonRow.svelte';
 	import Line from '$lib/components/charts/Line.svelte';
 	import { getAreaType } from '$lib/utils';
@@ -31,9 +32,9 @@
 		taxData?.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' }))
 	);
 
-	let selectedAreas = syncedStore('selectedAreas', []);
-	let selectedIndicator = syncedStore('selectedIndicator', null);
-	let chosenComparisonArea = syncedStore('chosenComparisonArea', null);
+	let selectedAreas = getContext('selectedAreas')();
+	let selectedIndicator = getContext('selectedIndicator')();
+	let chosenComparisonArea = getContext('chosenComparisonArea')();
 	let selection = $derived({
 		areas: $selectedAreas.map((area) => area.areacd),
 		indicator: $selectedIndicator
@@ -87,21 +88,21 @@
 		browser ? makeShareUrl(selection.areas, selection.indicator, comparisonArea?.areacd) : ''
 	);
 
-	$effect(() => {
-		const hash = window.location.hash;
-		if (!hash || hash === '#') return;
+	// $effect(() => {
+	// 	const hash = window.location.hash;
+	// 	if (!hash || hash === '#') return;
 
-		const params = new URLSearchParams(hash.replace(/^#\??/, ''));
-		const sharedAreas = params.get('areas')?.split(',').filter(Boolean);
-		const sharedIndicatorSlug = params.get('indicator');
+	// 	const params = new URLSearchParams(hash.replace(/^#\??/, ''));
+	// 	const sharedAreas = params.get('areas')?.split(',').filter(Boolean);
+	// 	const sharedIndicatorSlug = params.get('indicator');
 
-		if (sharedAreas?.length) {
-			selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
-		}
-		if (sharedIndicatorSlug) {
-			selectedIndicator.set({ slug: sharedIndicatorSlug });
-		}
-	});
+	// 	if (sharedAreas?.length) {
+	// 		selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
+	// 	}
+	// 	if (sharedIndicatorSlug) {
+	// 		selectedIndicator.set({ slug: sharedIndicatorSlug });
+	// 	}
+	// });
 
 	let clipped = $state(false);
 	async function copyShareUrl() {
@@ -114,27 +115,18 @@
 		taxData.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
 	);
 
-	$effect(() => {
-		if (!indicators.length) return;
-
-		selectedIndicator.ready.then(() => {
-			if ($selectedIndicator) return;
-			$selectedIndicator = indicators.find((indicator) => indicator.standardised) ?? indicators[0]; // this should(!?) select the first standardised indicator. we can discuss
-		});
+	onMount(() => {
+		if (!$selectedIndicator) $selectedIndicator = indicators[1];
 	});
 
 	// clelar the chosen comparison area if selected areas change - so defaults back to shared parent
-	$effect(() => {
-		selection.areas;
-		chosenComparisonArea.set(null);
-	});
+	// $effect(() => {
+	// 	selection.areas;
+	// 	chosenComparisonArea.set(null);
+	// });
 
 	function selectIndicator(indicator) {
 		$selectedIndicator = indicator;
-	}
-
-	function removeIndicator() {
-		$selectedIndicator = null;
 	}
 
 	let selectedTheme = $state();
@@ -179,10 +171,8 @@
 				labelKey="label"
 				groupKey="topic"
 				autoClear={false}
-				clearable={false}
 				options={indicators}
 				on:change={(e) => selectIndicator(e.detail)}
-				on:clear={removeIndicator}
 			></Select>
 		</div>
 		<Details title="Show all indicators">
@@ -236,11 +226,19 @@
 						No data available for {areasMissingData.join(', ')}
 					{/if} -->
 					{#if areasMissingData.length > 1 && areasMissingData.includes(comparisonArea.areanm)}
-						No data available for {areasMissingData.length} areas, including comparison area {comparisonArea.areanm}.
+						Data unavailable for
+						<Tooltip text={areasMissingData.join(', ')}>
+							{areasMissingData.length} areas,
+						</Tooltip> including comparison area {comparisonArea.areanm}.
 					{:else if areasMissingData.length > 1}
-						No data available for {areasMissingData.length} areas.
+						Data unavailable for
+						<Tooltip text={areasMissingData.join(', ')}>
+							{areasMissingData.length} areas.
+						</Tooltip>
+					{:else if areasMissingData.includes(comparisonArea.areanm)}
+						Data unavailable for comparison area {comparisonArea.areanm}.
 					{:else}
-						No data available for {areasMissingData}
+						Data unavailable for {areasMissingData}.
 					{/if}
 				</div>
 			{/if}
@@ -260,7 +258,8 @@
 						groupKey="type"
 						autoClear={false}
 						options={areas}
-						bind:value={$chosenComparisonArea}
+						value={$chosenComparisonArea}
+						on:change={(e) => chosenComparisonArea.set(e.detail)}
 						on:clear={() => chosenComparisonArea.set(null)}
 					></Select>
 				</div>
