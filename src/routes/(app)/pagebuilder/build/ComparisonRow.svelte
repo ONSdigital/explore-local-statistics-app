@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import ComparisonPointrange from '$lib/components/charts/ComparisonPointrange.svelte';
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
@@ -44,12 +45,12 @@
 		const pointrangeXDomain = [Infinity, -Infinity];
 		const sparklineXDomain = [null, null];
 		const sparklineYDomain = [Infinity, -Infinity];
+		const emptyAreas = [];
 
 		const rows = parseData(data).map((row) => ({
 			...row,
 			period: parsePeriod(row.period)
 		}));
-
 		for (const d of rows) {
 			const period = d.period;
 			const periodTime = period.getTime();
@@ -141,8 +142,6 @@
 		sparklineXDomain,
 		sparklineYDomain
 	} = $derived(processData(data, chosenYear, metadata?.standardised, comparisonArea.areacd));
-
-	let areaCodes = $derived([...new Set(areaDataSparkline.map((d) => d.areacd))]);
 
 	let areasData = $derived.by(() => {
 		const rowsByArea = new Map();

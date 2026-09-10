@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import MarkdownIt from 'markdown-it';
 	import { browser } from '$app/environment';
 	import { resolve } from '$app/paths';
@@ -18,13 +19,12 @@
 		Divider
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, parsePeriod } from '$lib/utils';
-	import Table from '$lib/components/charts/Table.svelte';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 	import { findNearestSharedParent } from '$lib/api/geo/helpers/findNearestSharedParent';
 	import syncedStore from '$lib/synced-store.svelte';
 	import ComparisonRow from './ComparisonRow.svelte';
 	import Line from '$lib/components/charts/Line.svelte';
-	import { getAreaType, slugify } from '$lib/utils';
+	import { getAreaType } from '$lib/utils';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -33,33 +33,42 @@
 
 	let selectedAreas = syncedStore('selectedAreas', []);
 	let selectedIndicator = syncedStore('selectedIndicator', null);
+	let chosenComparisonArea = syncedStore('chosenComparisonArea', null);
 	let selection = $derived({
 		areas: $selectedAreas.map((area) => area.areacd),
 		indicator: $selectedIndicator
 	});
 
-	let chosenComparisonArea = syncedStore('chosenComparisonArea', null);
-	let sharedParent = $derived(await findNearestSharedParent(selection.areas));
-	let comparisonArea = $derived($chosenComparisonArea ?? sharedParent);
-
-	let metadataUrl = $derived(
-		selection.indicator ? resolve(`/api/v1/metadata/indicators/${selection.indicator.slug}`) : null
-	);
-	let metadata = $derived(metadataUrl ? await (await fetch(metadataUrl)).json() : null);
-
-	let dataUrl = $derived(
-		selection.indicator && selection.areas.length
-			? makeDataUrl(selection.indicator.slug, 'all', null, [
-					...new Set([
-						...selection.areas,
-						...(comparisonArea?.areacd ? [comparisonArea.areacd] : [])
+	async function getData(indicator, areas, chosenComparisonArea = null) {
+		const comparisonArea =
+			chosenComparisonArea != null ? chosenComparisonArea : await findNearestSharedParent(areas);
+		const dataUrl =
+			indicator && areas.length
+				? makeDataUrl(indicator.slug, 'all', null, [
+						...new Set([...areas, ...(comparisonArea?.areacd ? [comparisonArea.areacd] : [])])
 					])
-				])
-			: null
-	);
-	let data = $derived(dataUrl ? await (await fetch(dataUrl)).json() : null);
+				: null;
+		const data = dataUrl ? await (await fetch(dataUrl)).json() : null;
+		const metadataUrl = indicator ? resolve(`/api/v1/metadata/indicators/${indicator.slug}`) : null;
+		const metadata = metadataUrl ? await (await fetch(metadataUrl)).json() : null;
 
-	let caveats = $derived(new MarkdownIt().render(metadata?.caveats[0]));
+		return { data, dataUrl, comparisonArea, metadata };
+	}
+
+	let { data, dataUrl, comparisonArea, metadata } = $derived(
+		await getData(selection.indicator, selection.areas, $chosenComparisonArea)
+	);
+
+	let allAreas = $derived([
+		...new Set([
+			...new Set($selectedAreas.map((d) => d.areanm)),
+			...(comparisonArea?.areanm ? [comparisonArea.areanm] : [])
+		])
+	]);
+
+	let areasWithData = $derived([...new Set(data?.areanm)]);
+	let areasMissingData = $derived(allAreas.filter((d) => !areasWithData.includes(d)));
+
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 
@@ -80,7 +89,7 @@
 
 	$effect(() => {
 		const hash = window.location.hash;
-		if (!hash || hash === '#') return; // nothing to parse, fall through to IndexedDB state as normal
+		if (!hash || hash === '#') return;
 
 		const params = new URLSearchParams(hash.replace(/^#\??/, ''));
 		const sharedAreas = params.get('areas')?.split(',').filter(Boolean);
@@ -148,7 +157,7 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
-	$inspect(comparisonArea);
+	// $inspect(comparisonArea);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -212,7 +221,29 @@
 				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 			</p>
 		</div>
+
 		<div class="header-details">
+			{#if areasMissingData.length}
+				<div class="missing-data-message">
+					<!-- {#if areasMissingData.length > 3} -->
+					<!-- No data available for {areasMissingData.length} areas -->
+					<!-- {:else} -->
+					<!-- No data available for {areasMissingData.join(', ')} -->
+					<!-- {/if} -->
+					<!-- {#if areasMissingData.length > 1}
+						No data available for {areasMissingData[0]} and {areasMissingData.length - 1} other areas.
+					{:else}
+						No data available for {areasMissingData.join(', ')}
+					{/if} -->
+					{#if areasMissingData.length > 1 && areasMissingData.includes(comparisonArea.areanm)}
+						No data available for {areasMissingData.length} areas, including comparison area {comparisonArea.areanm}.
+					{:else if areasMissingData.length > 1}
+						No data available for {areasMissingData.length} areas.
+					{:else}
+						No data available for {areasMissingData}
+					{/if}
+				</div>
+			{/if}
 			{#if data.uci_95 && data.lci_95}
 				<div>
 					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
@@ -315,6 +346,13 @@
 		/* margin-top: 20px; */
 		gap: 20px;
 		justify-content: space-around;
+	}
+
+	.missing-data-message {
+		font-size: 16px;
+		gap: 10px;
+		font-weight: bold;
+		margin-right: auto;
 	}
 
 	.header-details {
