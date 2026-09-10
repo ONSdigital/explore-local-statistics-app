@@ -1,5 +1,5 @@
 import { Workbook, Worksheet, Cell, Row, Column, Table } from 'documonster/excel';
-import type { Font, WorkbookView } from 'documonster/excel';
+import type { Font, NamedStyle, WorkbookView } from 'documonster/excel';
 import type { Readable } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
 
@@ -20,6 +20,18 @@ const defaultFont: Partial<Font> = {
 	name: 'Arial',
 	family: 2,
 	scheme: 'minor'
+};
+
+// Named cell styles, not just visual formatting: GOV.UK accessibility guidance requires
+// headings to be tagged as such (screen readers announce a cell's named style, e.g.
+// jumping between headings), not just rendered large/bold - large/bold text alone reads
+// as plain text to assistive tech. Registered on the workbook via `Workbook.defineCellStyle`
+// and applied with `Cell.applyCellStyle` in `addTextRow` below, alongside (not instead of)
+// the matching explicit font - applying a named style alone doesn't guarantee every reader
+// renders it correctly, so the visual formatting is still set explicitly too.
+const cellStyles: Record<string, NamedStyle> = {
+	'Heading 1': { font: { ...defaultFont, size: 18, bold: true } },
+	'Heading 2': { font: { ...defaultFont, size: 14, bold: true } }
 };
 
 // documonster's public `TableStyleProperties.theme` type is `string | undefined`, but the
@@ -62,11 +74,13 @@ function addTextRow(sheet, text, options = {}) {
 	const row = Worksheet.rowCount(sheet) + 1;
 	if (text.startsWith('# ')) {
 		Cell.setValue(sheet, row, 1, text.slice(2));
-		Cell.setFont(sheet, row, 1, { ...defaultFont, size: 18, bold: true });
+		Cell.applyCellStyle(sheet, row, 1, 'Heading 1');
+		Cell.setFont(sheet, row, 1, cellStyles['Heading 1'].font);
 	} else if (text.startsWith('## ')) {
 		Row.setHeight(sheet, row, 40);
 		Cell.setValue(sheet, row, 1, text.slice(3));
-		Cell.setFont(sheet, row, 1, { ...defaultFont, size: 14, bold: true });
+		Cell.applyCellStyle(sheet, row, 1, 'Heading 2');
+		Cell.setFont(sheet, row, 1, cellStyles['Heading 2'].font);
 	} else if (text.startsWith('[')) {
 		Cell.setValue(sheet, row, 1, {
 			text: text.match(/(?<=\[).*(?=\])/)[0],
@@ -163,6 +177,11 @@ export async function dataToSpreadsheet(data): Promise<Readable> {
 	const model = Workbook.getModel(workbook);
 	model.defaultFont = defaultFont;
 	Workbook.setModel(workbook, model);
+
+	// Must be registered before any row referencing them is committed - done once here,
+	// before any sheet/row is added below.
+	for (const [name, style] of Object.entries(cellStyles))
+		Workbook.defineCellStyle(workbook, name, style);
 
 	workbook.title = data.coverSheetTitle;
 	workbook.creator = data.creator;
