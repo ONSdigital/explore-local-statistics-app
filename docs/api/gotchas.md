@@ -93,10 +93,11 @@ unless you pass `fullDims=true` — it's expensive to include (every dimension, 
 route that's often called just for descriptive metadata.
 
 `GET /metadata/indicators/{indicator}/dimensions/{dimension}` **always** includes `category`
-(that's the entire point of the route) — there's no `fullDims` parameter on it at all, and
-passing one is silently ignored (see below). If you need the valid values of one specific
-dimension (e.g. to build a `dimension_{code}` filter for the data endpoint), this route — not
-`fullDims=true` on the indicator route — is the cheap, targeted way to get them:
+(that's the entire point of the route) — there's no `fullDims` parameter on it at all, and it
+takes no query parameters whatsoever (`?fullDims=true` there is a `400`, same as any other
+unrecognised parameter). If you need the valid values of one specific dimension (e.g. to build a
+`dimension_{code}` filter for the data endpoint), this route — not `fullDims=true` on the
+indicator route — is the cheap, targeted way to get them:
 
 ```
 GET /api/v1/metadata/indicators/employment-rate/dimensions/period
@@ -109,19 +110,6 @@ GET /api/v1/metadata/indicators/employment-rate/dimensions/period
 	"category": { "index": { "2004-01-01/P1Y": 0, "...": "..." } }
 }
 ```
-
-## Routes with no parameter validation
-
-Most routes reject unknown/duplicate query parameters with `400` (see
-[Conventions](./README.md#request-format)). Two routes skip that check entirely, so an unknown
-parameter (a typo, or a parameter that only exists on a _different_ route) is silently ignored
-rather than flagged:
-
-- `GET /api/v1/geo/lookup/{code}`
-- `GET /api/v1/metadata/indicators/{indicator}/dimensions/{dimension}`
-
-If a request to either of these isn't behaving as expected, don't assume a `200` means your
-parameters were understood — check the response content itself.
 
 ## `files/{file}` is not a v1 endpoint
 

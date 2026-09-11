@@ -80,12 +80,11 @@ most importantly, a boolean parameter only turns "on" when the value is the lite
 `true` — `?excludeMultivariate=1` or `?excludeMultivariate=yes` silently parse to a _non-boolean_
 value and are treated as falsy wherever the code checks `=== true`.
 
-**Unknown or duplicate query parameters are usually rejected with `400`** — most routes call
+**Unknown or duplicate query parameters are rejected with `400`** — every route calls
 `hasValidParams(url, <allow-list>)` before doing anything else, which rejects the whole request
-if any query key isn't in that route's specific allow-list, or appears more than once (so
-`?geo=A&geo=B` is invalid — comma-separate instead: `?geo=A,B`). A few routes skip this check
-entirely; see [gotchas.md](./gotchas.md#routes-with-no-parameter-validation) for exactly which
-ones, because on those, typos in parameter names fail silently instead of loudly.
+if any query key isn't in that route's specific allow-list (an empty list for the handful of
+routes that take no query parameters at all), or appears more than once (so `?geo=A&geo=B` is
+invalid — comma-separate instead: `?geo=A,B`).
 
 ### Response format
 

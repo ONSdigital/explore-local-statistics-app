@@ -85,8 +85,7 @@ not the 5-key set — with combined-authority/upper-tier/lower-tier levels merge
 `cauth` group for navigation purposes). Implementation: `getAreaByCode.ts`. **Fetches from an
 external CDN at request time** — see
 [Conventions](./README.md#external-data-endpoints-different-failure-mode). No query parameters
-(unknown ones are silently ignored — see
-[gotchas.md](./gotchas.md#routes-with-no-parameter-validation)).
+accepted (any are rejected with `400`).
 
 ```
 GET /api/v1/geo/lookup/E07000148

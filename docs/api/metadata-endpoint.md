@@ -125,9 +125,8 @@ making a data request, whether a given `hasGeo`/`geo` filter is even possible fo
 Every valid value of one dimension of one indicator — **the** cheap, targeted way to discover
 what values to pass as a `dimension_{code}=...` filter on
 [the data endpoint](./data-endpoint.md#dimension_code), rather than pulling a whole indicator's
-`fullDims=true` metadata just to read one dimension. No query parameters accepted (unknown ones
-are silently ignored — see
-[gotchas.md](./gotchas.md#routes-with-no-parameter-validation)); always includes `category`
+`fullDims=true` metadata just to read one dimension. No query parameters accepted (any are
+rejected with `400`); always includes `category`
 regardless (there's no `fullDims` toggle here — see
 [gotchas.md](./gotchas.md#fulldims-asymmetry-between-the-two-dimension-metadata-routes)).
 
