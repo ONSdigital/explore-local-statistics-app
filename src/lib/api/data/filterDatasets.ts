@@ -27,9 +27,9 @@ export function filterJSONStat(
 		};
 		const filter = filters[key];
 		if (filter && cube.role.time.includes(dim.key)) {
-			if (filters.hasGeo)
+			if (params.hasGeo !== 'any')
 				// If "hasGeo" param is applied. Only years with the requested geography are included
-				dim.values = filterTimeForGeo(cube, dim.values, filters.hasGeo);
+				dim.values = filterTimeForGeo(cube, dim.values, params.hasGeo);
 
 			// Time filtering depends on the time period format and range for the specific indicator
 			dim.values = filterTime(dim.values, {
