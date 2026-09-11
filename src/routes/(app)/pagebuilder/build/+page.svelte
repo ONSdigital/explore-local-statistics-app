@@ -137,6 +137,7 @@
 	}
 
 	onMount(async () => {
+		if (!$selectedIndicator) $selectedIndicator = indicators[1];
 		await getSharedFromHash();
 	});
 
@@ -150,10 +151,6 @@
 	let indicators = $derived(
 		taxData.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
 	);
-
-	onMount(() => {
-		if (!$selectedIndicator) $selectedIndicator = indicators[1];
-	});
 
 	function selectIndicator(indicator) {
 		$selectedIndicator = indicator;
