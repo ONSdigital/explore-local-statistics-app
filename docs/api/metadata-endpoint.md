@@ -1,27 +1,27 @@
 # Metadata
 
-Indicator metadata and the topic taxonomy. All served from data bundled at build time — none of
-these routes touch the network. See [Conventions](./README.md#conventions-read-this-first) first.
+Indicator metadata and the topic taxonomy. All answered immediately — none of these routes look
+anything up externally. See [Conventions](./README.md#conventions-read-this-first) first.
 
 > Structural metadata for a specific _request_ (not a whole indicator) is also available from the
-> data endpoint itself via `format=csvw` — see
+> data endpoints via `format=csvw` — see
 > [data-formats.md](./data-formats.md#csvw--csv-on-the-web-metadata). Use that instead of this
 > page's routes if what you actually need is "describe the CSV I just downloaded", not "describe
 > this indicator in general".
 
 ## `GET /api/v1/metadata/indicators`
 
-Metadata for indicators, filterable, as a list. Implementation: `getIndicators.ts`.
+Metadata for indicators, filterable, as a list.
 
-| Parameter             | Default | Description                                                                                                                                                                                                           |
-| --------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `indicator`           | `all`   | One or more indicator slugs                                                                                                                                                                                           |
-| `topic`               | `all`   | One or more topic/sub-topic codes                                                                                                                                                                                     |
-| `hasGeo`              | `any`   | Restrict to indicators covering a GSS code, level, or type — `any` (the default) means "no filter", same sentinel as [the data endpoint](./data-endpoint.md#hasgeo); `all` is not accepted (`400`)                    |
-| `hasYear`             | `all`   | Restrict to indicators covering a given year (`YYYY`)                                                                                                                                                                 |
-| `excludeMultivariate` | `false` | Drop multivariate indicators pulled in via `topic`/`all`; a multivariate indicator named explicitly in `indicator` is kept regardless (same semantics as [the data endpoint](./data-endpoint.md#excludemultivariate)) |
-| `fullDims`            | `false` | Include each dimension's full `category` value list (expensive; see below)                                                                                                                                            |
-| `asLookup`            | `false` | Return `{ [slug]: {...} }` instead of an array                                                                                                                                                                        |
+| Parameter             | Default | Description                                                                                                                                                                                                            |
+| --------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `indicator`           | `all`   | One or more indicator slugs                                                                                                                                                                                            |
+| `topic`               | `all`   | One or more topic/sub-topic codes                                                                                                                                                                                      |
+| `hasGeo`              | `any`   | Restrict to indicators covering a GSS code, level, or type — `any` (the default) means "no filter", same setting as [the data endpoints](./data-endpoint.md#hasgeo); `all` is not accepted (`400`)                     |
+| `hasYear`             | `all`   | Restrict to indicators covering a given year (`YYYY`)                                                                                                                                                                  |
+| `excludeMultivariate` | `false` | Drop multivariate indicators pulled in via `topic`/`all`; a multivariate indicator named explicitly in `indicator` is kept regardless (same behaviour as [the data endpoints](./data-endpoint.md#excludemultivariate)) |
+| `fullDims`            | `false` | Include each dimension's full `category` value list (expensive; see below)                                                                                                                                             |
+| `asLookup`            | `false` | Return `{ [slug]: {...} }` instead of a list                                                                                                                                                                           |
 
 ```
 GET /api/v1/metadata/indicators?topic=employment
@@ -68,7 +68,7 @@ indicator's or one dimension's values.
 ## `GET /api/v1/metadata/indicators/{indicator}`
 
 Metadata for one indicator. Same parameters and `fullDims` behaviour as the list route above
-(minus `indicator`, `asLookup`); returns a bare object, not wrapped in an array, and `404`s
+(minus `indicator`, `asLookup`); returns a single object, not wrapped in a list, and `404`s
 (`Indicator "<x>" not found.`) rather than filtering to zero results.
 
 ```
@@ -116,7 +116,7 @@ GET /api/v1/metadata/indicators/employment-rate
 
 `geography.types` here is this **indicator's own** coverage (which GSS type prefixes it actually
 has data for) — a different, indicator-specific list from
-[the fixed set `hasGeo` type-code matching checks against](./data-endpoint.md#hasgeo) globally;
+[the fixed set `hasGeo` type-code matching checks against](./data-endpoint.md#hasgeo) generally;
 don't confuse the two. `geography.levels`/`.types` together are the fastest way to check, before
 making a data request, whether a given `hasGeo`/`geo` filter is even possible for this indicator.
 
@@ -124,11 +124,10 @@ making a data request, whether a given `hasGeo`/`geo` filter is even possible fo
 
 Every valid value of one dimension of one indicator — **the** cheap, targeted way to discover
 what values to pass as a `dimension_{code}=...` filter on
-[the data endpoint](./data-endpoint.md#dimension_code), rather than pulling a whole indicator's
+[the data endpoints](./data-endpoint.md#dimension_code), rather than pulling a whole indicator's
 `fullDims=true` metadata just to read one dimension. No query parameters accepted (any are
-rejected with `400`); always includes `category`
-regardless (there's no `fullDims` toggle here — see
-[gotchas.md](./gotchas.md#fulldims-asymmetry-between-the-two-dimension-metadata-routes)).
+rejected with `400`); always includes `category` regardless (there's no `fullDims` toggle here —
+see [important-notes.md](./important-notes.md#fulldims-asymmetry-between-the-two-dimension-metadata-routes)).
 
 ```
 GET /api/v1/metadata/indicators/employment-rate/dimensions/period
@@ -149,16 +148,14 @@ dimension of that indicator: `404` (`Dimension code "<x>" not found.`).
 
 ## `GET /api/v1/metadata/taxonomy`
 
-The topic → sub-topic → indicator hierarchy that drives the app's own navigation. Implementation:
-`getTaxonomy.ts` (built from the same underlying indicator metadata as
-`/metadata/indicators?minimalMetadata` internally).
+The topic → sub-topic → indicator hierarchy that drives the site's own navigation.
 
 | Parameter             | Default | Description                                                                         |
 | --------------------- | ------- | ----------------------------------------------------------------------------------- |
 | `topic`               | `all`   | Restrict to a topic/sub-topic                                                       |
-| `hasGeo`              | `any`   | Same semantics as [`/metadata/indicators`'s `hasGeo`](#get-apiv1metadataindicators) |
+| `hasGeo`              | `any`   | Same behaviour as [`/metadata/indicators`'s `hasGeo`](#get-apiv1metadataindicators) |
 | `hasYear`             | `all`   | Restrict to indicators covering a given year                                        |
-| `excludeMultivariate` | `false` | Same "unconditional drop" semantics as `/metadata/indicators`                       |
+| `excludeMultivariate` | `false` | Same "unconditional drop" behaviour as `/metadata/indicators`                       |
 | `flat`                | `false` | Return a flat list instead of nesting by topic                                      |
 
 ```
@@ -196,7 +193,7 @@ Nested (the default): each top-level entry is a topic, with either indicators di
 on a leaf indicator is its position within its immediate parent (topic or sub-topic), not a
 global index.
 
-With `flat=true`, `data` is instead a flat array of indicators (the same minimal fields —
+With `flat=true`, `data` is instead a flat list of indicators (the same minimal fields —
 `label`, `slug`, `topic`, `subTopic`, `description` — each with explicit `topic`/`subTopic`
 fields since there's no nesting to imply them):
 

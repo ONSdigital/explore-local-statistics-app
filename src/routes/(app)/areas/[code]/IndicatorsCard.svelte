@@ -18,7 +18,7 @@
 			return null;
 		}
 	}
-	let dataUrl = $derived(makeDataUrl(indicators.join(','), 'latest', null, [areaProps.areacd]));
+	let dataUrl = $derived(makeDataUrl(indicators, 'latest', null, [areaProps.areacd]));
 </script>
 
 <div class="local-indicators-card">

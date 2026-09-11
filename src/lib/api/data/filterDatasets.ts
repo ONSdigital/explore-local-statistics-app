@@ -43,9 +43,13 @@ export function filterJSONStat(
 		dims.push(dim);
 	}
 
-	// Calculate the number of values/observations in the filtered dataset
-	const length = dims.map((dim) => dim.values.length).reduce((a, b) => a * b, 1);
-	if (length === 0) return null;
+	// A genuinely empty `measure` dimension (always the last dim - see `toCols`/`toRows`/
+	// `toJSONStat`, which all assume this) means there's no `value` column left to emit at
+	// all - nothing sensible to format, so this dataset is excluded entirely. Any other dim
+	// (geo, time, ...) filtering to zero values is a normal "filters matched no
+	// observations" result, not a reason to exclude the dataset - `toJSONStat`/`dimsToCols`
+	// already degrade to a correctly-empty (not wrong) output for that case.
+	if (dims[dims.length - 1].values.length === 0) return null;
 
 	// Generate the filtered dataset in the requested format
 	if (format === 'xlsx') {
@@ -67,11 +71,14 @@ export function filterJSONStat(
 	return toJSONStat(cube, dims, params.includeNames, params.includeStatus);
 }
 
-// Filter and format the data within an array of JSON-Stat datasets
+// Filter and format the data within an array of JSON-Stat datasets. `params.singleIndicator`
+// is an explicit flag set by the caller (the item route `/api/v1/data/{indicator}.{format}`
+// sets it `true`; the collection route `/api/v1/data.{format}` never sets it, so it's always
+// `false` there) - it's no longer inferred from whether `indicator`/`topic` happen to resolve
+// to exactly one indicator, so the collection route is unconditionally collection-shaped
+// regardless of how many indicators actually match.
 export default function filterDatasets(datasets: jsonStatDataset[], params: parsedParams) {
-	// Check if request is for a single indicator
-	const singleIndicator =
-		params.topic === 'all' && params.indicator !== 'all' && [params.indicator].flat().length === 1;
+	const singleIndicator = params.singleIndicator === true;
 
 	const format: dataFormat = params.format || 'json';
 
@@ -125,13 +132,20 @@ export default function filterDatasets(datasets: jsonStatDataset[], params: pars
 		if (data) filtered.push(data);
 	}
 
-	if (!filtered?.length)
+	// An empty result on the collection route is a valid empty collection, not an error -
+	// `filtered` just flows through to the collection shape below. On the item route,
+	// `getFilteredData.ts` already 404s before this function runs if the indicator itself
+	// couldn't be resolved, so the only way to still land here with nothing is a filter that
+	// leaves no measure to report at all (e.g. an unrecognised `measure=` value) - there's no
+	// sensible empty shape to build for that (no `value` column exists to be empty), so it's
+	// still a `400` rather than a fabricated empty item.
+	if (!filtered.length && singleIndicator)
 		return { error: 400, message: 'No data available for the selected filters.' };
 	if (format === 'csv') return filtered.map((f) => f[1]);
 	if (format === 'xlsx') return filtered;
 
 	if (['rows', 'cols'].includes(format.slice(0, 4)))
-		return singleIndicator && filtered.length === 1 ? filtered[0][1] : Object.fromEntries(filtered);
+		return singleIndicator ? filtered[0][1] : Object.fromEntries(filtered);
 	return singleIndicator
 		? filtered[0]
 		: {

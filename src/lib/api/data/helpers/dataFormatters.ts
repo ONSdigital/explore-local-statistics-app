@@ -54,7 +54,16 @@ export function toJSONStat(
 		const dim = dims[i];
 		const size = dim.values.length;
 
-		if (dim.count !== 1) {
+		// The `dim.count !== 1` skip is a no-op shortcut for a dim whose category never
+		// varies (`index * 1 + 0 === index`) - safe only while that dim's *filtered* values
+		// still has exactly the one entry it started with. A dim can have `count === 1` and
+		// still filter down to zero values (e.g. an indicator only ever published for one
+		// time period, and the requested `time` doesn't match it) - skipping the loop there
+		// would silently leave `indices` unchanged instead of correctly collapsing to `[]`,
+		// producing a non-empty result for a filter that matched nothing. `size === 0` forces
+		// the loop to run (and correctly produce no indices) for that case; a normal
+		// `count === 1, size === 1` dim still takes the identical fast path as before.
+		if (dim.count !== 1 || size === 0) {
 			const newIndices = [];
 
 			for (const index of indices) {
@@ -147,7 +156,8 @@ function makeColFill(
 
 	const pushMeasures = pivotMeasures
 		? (item: dataItem, cube: jsonStatDataset) => {
-				for (const [arr, offset] of measureArrays) arr.push(cube.value[item.index * measuresCount + offset]);
+				for (const [arr, offset] of measureArrays)
+					arr.push(cube.value[item.index * measuresCount + offset]);
 			}
 		: (item: dataItem, cube: jsonStatDataset) => valueArr.push(cube.value[item.index]);
 
@@ -161,7 +171,8 @@ function makeColFill(
 
 	const statusArr = data.status;
 	const pushStatus = pivotMeasures
-		? (item: dataItem, cube: jsonStatDataset) => statusArr.push(cube.status[item.index * measuresCount] || null)
+		? (item: dataItem, cube: jsonStatDataset) =>
+				statusArr.push(cube.status[item.index * measuresCount] || null)
 		: (item: dataItem, cube: jsonStatDataset) => statusArr.push(cube.status[item.index] || null);
 
 	return includeNames && includeStatus

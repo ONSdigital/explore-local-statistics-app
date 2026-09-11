@@ -8,10 +8,7 @@ export const postcodeLookupBase =
 	'https://ons-dp-prod-cdn.s3.eu-west-2.amazonaws.com/maptiles/postcode-lookup/v1';
 
 export const dataFormats = ['json', 'xlsx', 'csv', 'csvw', 'cols.json', 'rows.json'];
-export const dataParams = new Set([
-	'topic',
-	'indicator',
-	'excludeMultivariate',
+export const dataItemParams = new Set([
 	'geo',
 	'geoExtent',
 	'geoCluster',
@@ -23,5 +20,6 @@ export const dataParams = new Set([
 	'includeStatus',
 	...summaryStats.otherDims.map((d) => `dimension_${d}`)
 ]);
+export const dataParams = new Set([...dataItemParams, 'topic', 'indicator', 'excludeMultivariate']);
 export const geoFormats = ['geojson', 'topojson'];
 export const chartTypes = ['line', 'bar', 'map', 'table'];
