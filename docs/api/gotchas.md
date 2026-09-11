@@ -10,7 +10,17 @@ from a bug that only shows up on some parameter combinations.
 
 There is no single canonical list of "geography levels" — three different, **non-nested** key
 sets exist in the codebase, and which one a given `geoLevel`/`geo`/`hasGeo`/`parentLevel`
-parameter resolves against depends entirely on which route you're calling:
+parameter resolves against depends entirely on which route you're calling. This is a real,
+load-bearing distinction rather than an oversight, so it's documented here rather than treated as
+something to fix: the 5-key `geoLevels` set is the **statistical geography** the app aggregates
+indicator data by (the data endpoint, `/geo/list`, and `/geo/related`'s `children`/`siblings`,
+which mirror that same data-oriented hierarchy) — it stops at `ltla` because that's the finest
+level any indicator is actually published at. `geoLevelsAll` (and `topo.json`'s own boundary
+layers, separately) instead serve **area-to-area navigation and lookup** — finding what a
+postcode or coordinate resolves to, or searching by name — which has no reason to stop at `ltla`
+and legitimately needs ward/MSOA/LSOA/OA granularity that no indicator data uses. Unifying the two
+would mean either losing that navigation-level granularity or pretending indicator data exists
+where it doesn't, so the sets are kept genuinely separate rather than reconciled.
 
 | Set                                    | Keys                                                                                                                                     | Used by                                                                                                                                                      |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
