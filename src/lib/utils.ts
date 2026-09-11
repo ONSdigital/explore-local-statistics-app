@@ -10,6 +10,15 @@ import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 import geoLatestYear from '$lib/data/geo-latest-year.json';
 import geoStartYears from '$lib/data/geo-start-years.json';
 
+// A `cols.json` response with no observations - either because the API returned a genuine
+// error-shaped body (`{ message: '...' }` or a `200` with every column present but zero-length
+export function isEmptyColsData(data: jsonDataCols | errorObject | null | undefined): boolean {
+	if (!data) return true;
+	const cols = Object.values(data);
+	if (cols.length === 0) return true;
+	return cols.every((col) => !Array.isArray(col) || col.length === 0);
+}
+
 export function parseData(data: jsonDataCols) {
 	const cols = Object.keys(data);
 	const rows: jsonDataRow[] = [];

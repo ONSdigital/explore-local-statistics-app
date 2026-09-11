@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { makeCanonicalSlug } from '$lib/api/geo/helpers/areaSlugUtils';
 	import { getName } from '@onsvisual/robo-utils';
-	import { makeDataUrl } from '$lib/utils';
+	import { makeDataUrl, isEmptyColsData } from '$lib/utils';
 	import { Button } from '@onsvisual/svelte-components';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
 
@@ -12,7 +12,11 @@
 	async function fetchData(url: string) {
 		try {
 			const data = await (await fetch(url)).json();
-			if (!indicators.every((ind) => data[ind])) return null;
+			// Each indicator's key is always present in a multi-indicator response, even when
+			// it has no observations for this area (an empty-columns object, not a missing
+			// key) - checking the key alone isn't enough, every indicator's data has to be
+			// non-empty too.
+			if (!indicators.every((ind) => !isEmptyColsData(data[ind]))) return null;
 			return data;
 		} catch {
 			return null;
