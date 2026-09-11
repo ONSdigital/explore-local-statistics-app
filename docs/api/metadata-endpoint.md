@@ -13,15 +13,15 @@ these routes touch the network. See [Conventions](./README.md#conventions-read-t
 
 Metadata for indicators, filterable, as a list. Implementation: `getIndicators.ts`.
 
-| Parameter             | Default | Description                                                                                                                                                                                              |
-| --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `indicator`           | `all`   | One or more indicator slugs                                                                                                                                                                              |
-| `topic`               | `all`   | One or more topic/sub-topic codes                                                                                                                                                                        |
-| `hasGeo`              | `any`   | Restrict to indicators covering a GSS code, level, or type — `any` (the default) means "no filter", same sentinel as [the data endpoint](./data-endpoint.md#hasgeo); `all` is not accepted (`400`)       |
-| `hasYear`             | `all`   | Restrict to indicators covering a given year (`YYYY`)                                                                                                                                                    |
-| `excludeMultivariate` | `false` | Drop every multivariate indicator unconditionally (no "unless named in `indicator`" exception — see [gotchas.md](./gotchas.md#excludemultivariate-means-two-different-things-depending-on-the-endpoint)) |
-| `fullDims`            | `false` | Include each dimension's full `category` value list (expensive; see below)                                                                                                                               |
-| `asLookup`            | `false` | Return `{ [slug]: {...} }` instead of an array                                                                                                                                                           |
+| Parameter             | Default | Description                                                                                                                                                                                                           |
+| --------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `indicator`           | `all`   | One or more indicator slugs                                                                                                                                                                                           |
+| `topic`               | `all`   | One or more topic/sub-topic codes                                                                                                                                                                                     |
+| `hasGeo`              | `any`   | Restrict to indicators covering a GSS code, level, or type — `any` (the default) means "no filter", same sentinel as [the data endpoint](./data-endpoint.md#hasgeo); `all` is not accepted (`400`)                    |
+| `hasYear`             | `all`   | Restrict to indicators covering a given year (`YYYY`)                                                                                                                                                                 |
+| `excludeMultivariate` | `false` | Drop multivariate indicators pulled in via `topic`/`all`; a multivariate indicator named explicitly in `indicator` is kept regardless (same semantics as [the data endpoint](./data-endpoint.md#excludemultivariate)) |
+| `fullDims`            | `false` | Include each dimension's full `category` value list (expensive; see below)                                                                                                                                            |
+| `asLookup`            | `false` | Return `{ [slug]: {...} }` instead of an array                                                                                                                                                                        |
 
 ```
 GET /api/v1/metadata/indicators?topic=employment

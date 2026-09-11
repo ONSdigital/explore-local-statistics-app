@@ -86,16 +86,6 @@ these apply uniformly:
   worth knowing if you're constructing the raw query string yourself outside a browser's own
   `URLSearchParams`.
 
-## `excludeMultivariate` means two different things depending on the endpoint
-
-- **Data endpoint**: keeps a multivariate indicator if it's _explicitly named_ in `indicator`,
-  even with `excludeMultivariate=true` — the exclusion only applies to indicators pulled in via
-  `topic`/`all`.
-- **Metadata endpoints** (`/metadata/indicators`, `/metadata/taxonomy`): drops every multivariate
-  indicator unconditionally when `excludeMultivariate=true`, regardless of `indicator`/`topic`.
-
-Same parameter name and default (`false`), different semantics.
-
 ## `fullDims` asymmetry between the two dimension-metadata routes
 
 `GET /metadata/indicators/{indicator}` omits each dimension's `category` (its full value list)

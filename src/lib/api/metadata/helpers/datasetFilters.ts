@@ -43,8 +43,14 @@ export function makeDatasetGeoFilter(geo) {
 export function makeDatasetFilter(indicator, topic, excludeMultivariate, geo, year) {
 	if (!indicator && topic === 'all' && geo === 'any' && year === 'all' && !excludeMultivariate)
 		return () => true;
+	// A multivariate indicator named explicitly in `indicator` is kept even with
+	// excludeMultivariate=true - the exclusion only applies to indicators pulled in broadly via
+	// `topic`/`all`. Matches the data endpoint's `filterIndicators.ts` behaviour.
+	const indicators = new Set([indicator].flat());
 	const multivariateFilter =
-		excludeMultivariate === true ? (ds) => !ds.extension.isMultivariate : () => true;
+		excludeMultivariate === true
+			? (ds) => !ds.extension.isMultivariate || indicators.has(ds.extension.slug)
+			: () => true;
 	const indicatorFilter = makeIndicatorFilter(indicator, topic);
 	const yearFilter = year === 'all' ? () => true : makeYearFilter(year);
 	if (yearFilter.error) return yearFilter;
