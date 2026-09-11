@@ -10,21 +10,21 @@ route never touches the network.
 
 ## `{format}`
 
-| Value | Output |
-|---|---|
-| `geojson` | A `FeatureCollection`, coordinates rounded to 4 decimal places (~11m precision) |
-| `topojson` | The equivalent TopoJSON topology for just the requested `geoLevel`'s layer |
+| Value      | Output                                                                          |
+| ---------- | ------------------------------------------------------------------------------- |
+| `geojson`  | A `FeatureCollection`, coordinates rounded to 4 decimal places (~11m precision) |
+| `topojson` | The equivalent TopoJSON topology for just the requested `geoLevel`'s layer      |
 
 Any other value is `404` (`Requested data format "<x>" not found. Only geojson, topojson
 available.`).
 
 ## Parameters
 
-| Parameter | Default | Description |
-|---|---|---|
-| `year` | `latest` | Only include areas valid in this year, or `all` |
-| `country` | `all` | Restrict to one or more single-letter country codes (`E`, `N`, `S`, `W`) |
-| `geoLevel` | `ltla` | Which layer to return |
+| Parameter  | Default  | Description                                                              |
+| ---------- | -------- | ------------------------------------------------------------------------ |
+| `year`     | `latest` | Only include areas valid in this year, or `all`                          |
+| `country`  | `all`    | Restrict to one or more single-letter country codes (`E`, `N`, `S`, `W`) |
+| `geoLevel` | `ltla`   | Which layer to return                                                    |
 
 `geoLevel` is resolved directly against the bundled boundary file's own layers, **not** against
 any of the three `geoLevels`/`geoLevelsAll`/`geoLevelsNav` sets used elsewhere in the API — see
@@ -46,22 +46,24 @@ postcode routes) have no boundary data and return `400` here
 ```
 GET /api/v1/geo/boundaries.geojson?geoLevel=cauth
 ```
+
 ```json
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": { "areacd": "E47000006", "areanm": "Tees Valley" },
-      "geometry": { "type": "MultiPolygon", "coordinates": ["..."] }
-    }
-  ]
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": { "areacd": "E47000006", "areanm": "Tees Valley" },
+			"geometry": { "type": "MultiPolygon", "coordinates": ["..."] }
+		}
+	]
 }
 ```
 
 ```
 GET /api/v1/geo/boundaries.topojson?geoLevel=ltla&country=E
 ```
+
 Returns a TopoJSON topology object (`{ type: "Topology", objects: { ltla: {...} }, arcs: [...] }`)
 restricted to English areas only.
 

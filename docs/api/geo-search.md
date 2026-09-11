@@ -7,7 +7,7 @@ All three of these routes fetch from an external CDN at request time (postcode/c
 lookups need tile data that isn't bundled into the app) — see
 [Conventions](./README.md#external-data-endpoints-different-failure-mode) for what that means for
 failure modes. Name search (`/geo/search/{name}`) is the exception — it's served from bundled,
-in-memory data, with an optional fallback to postcode search (which *does* hit the network) if
+in-memory data, with an optional fallback to postcode search (which _does_ hit the network) if
 nothing matches by name.
 
 All three share the same response envelope: `{ meta: {...}, data: [...] }`. On the three routes
@@ -22,31 +22,33 @@ Search areas by name (word-boundary match, so `norwich` matches "Norwich" but al
 North"/"Norwich South"). Implementation: `getAreasByName.ts` (+ `getPostcodesList.ts` for the
 postcode fallback).
 
-| Parameter | Default | Description |
-|---|---|---|
-| `year` | `latest` | Only match areas valid in this year, or `all` |
-| `limit` | `10` | Max results |
-| `offset` | `0` | Pagination offset |
-| `searchPostcodes` | `false` | If the name search returns zero results, fall back to postcode search using the same string |
-| `groupByLevel` | `false` | Group results as `[{ key, label, areas: [...] }]` instead of a flat list |
-| `geoLevel` | `all` | Restrict to one geography level — **14-key `geoLevelsAll` set**, not the 5-key set the data endpoint uses; see [gotchas.md](./gotchas.md#geolevel-means-a-different-set-of-keys-depending-on-the-route) |
+| Parameter         | Default  | Description                                                                                                                                                                                             |
+| ----------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `year`            | `latest` | Only match areas valid in this year, or `all`                                                                                                                                                           |
+| `limit`           | `10`     | Max results                                                                                                                                                                                             |
+| `offset`          | `0`      | Pagination offset                                                                                                                                                                                       |
+| `searchPostcodes` | `false`  | If the name search returns zero results, fall back to postcode search using the same string                                                                                                             |
+| `groupByLevel`    | `false`  | Group results as `[{ key, label, areas: [...] }]` instead of a flat list                                                                                                                                |
+| `geoLevel`        | `all`    | Restrict to one geography level — **14-key `geoLevelsAll` set**, not the 5-key set the data endpoint uses; see [gotchas.md](./gotchas.md#geolevel-means-a-different-set-of-keys-depending-on-the-route) |
 
 ```
 GET /api/v1/geo/search/norwich
 ```
+
 ```json
 {
-  "meta": { "query": "norwich", "count": 3, "total": 3, "limit": 10, "offset": 0 },
-  "data": [
-    { "areacd": "E07000148", "areanm": "Norwich", "type": "Lower tier/unitary authority" },
-    { "areacd": "E14001408", "areanm": "Norwich North", "type": "Parliamentary constituency" },
-    { "areacd": "E14001409", "areanm": "Norwich South", "type": "Parliamentary constituency" }
-  ]
+	"meta": { "query": "norwich", "count": 3, "total": 3, "limit": 10, "offset": 0 },
+	"data": [
+		{ "areacd": "E07000148", "areanm": "Norwich", "type": "Lower tier/unitary authority" },
+		{ "areacd": "E14001408", "areanm": "Norwich North", "type": "Parliamentary constituency" },
+		{ "areacd": "E14001409", "areanm": "Norwich South", "type": "Parliamentary constituency" }
+	]
 }
 ```
+
 A query string containing digits skips name matching entirely (returns zero name matches — this
 is deliberate, since a digit-containing query is assumed to be a postcode-shaped one), which is
-exactly the case `searchPostcodes=true` exists to handle: send a query that might be a name *or*
+exactly the case `searchPostcodes=true` exists to handle: send a query that might be a name _or_
 a postcode, and let this route fall back automatically instead of trying both yourself.
 
 ## `GET /api/v1/geo/reverse`
@@ -57,33 +59,45 @@ ordering — country first, output area last) — this is a real, deliberate ord
 incidental artefact of how the underlying vector tile happens to list features. Implementation:
 `getAreasByLngLat.ts`.
 
-| Parameter | Default | Description |
-|---|---|---|
-| `lng` | *(required)* | Longitude, `-180` to `180` |
-| `lat` | *(required)* | Latitude, `-90` to `90` |
-| `year` | `latest` | Filter to areas valid in this year, or `all` |
-| `geoLevel` | `all` | Restrict to one level — **14-key `geoLevelsAll` set** |
-| `groupByLevel` | `false` | Group results as `[{ key, label, areas: [...] }]` |
+| Parameter      | Default      | Description                                           |
+| -------------- | ------------ | ----------------------------------------------------- |
+| `lng`          | _(required)_ | Longitude, `-180` to `180`                            |
+| `lat`          | _(required)_ | Latitude, `-90` to `90`                               |
+| `year`         | `latest`     | Filter to areas valid in this year, or `all`          |
+| `geoLevel`     | `all`        | Restrict to one level — **14-key `geoLevelsAll` set** |
+| `groupByLevel` | `false`      | Group results as `[{ key, label, areas: [...] }]`     |
 
 ```
 GET /api/v1/geo/reverse?lng=1.29384&lat=52.62813
 ```
+
 ```json
 {
-  "meta": { "lng": 1.29384, "lat": 52.62813, "count": 9, "total": 9 },
-  "data": [
-    { "areacd": "E92000001", "areanm": "England", "type": "Country" },
-    { "areacd": "E12000006", "areanm": "East of England", "type": "Region" },
-    { "areacd": "E10000020", "areanm": "Norfolk", "type": "County" },
-    { "areacd": "E07000148", "areanm": "Norwich", "type": "Lower tier/unitary authority" },
-    { "areacd": "E14001409", "areanm": "Norwich South", "type": "Parliamentary constituency" },
-    { "areacd": "E05012906", "areanm": "Mancroft", "type": "Electoral ward", "parent": "Norwich" },
-    { "areacd": "E02007053", "areanm": "Norwich 017", "type": "Middle-layer super output area", "parent": "Norwich" },
-    { "areacd": "E01026823", "areanm": "Norwich 017A", "type": "Lower-layer super output area", "parent": "Norwich" },
-    { "areacd": "..." , "type": "Output area", "parent": "Norwich" }
-  ]
+	"meta": { "lng": 1.29384, "lat": 52.62813, "count": 9, "total": 9 },
+	"data": [
+		{ "areacd": "E92000001", "areanm": "England", "type": "Country" },
+		{ "areacd": "E12000006", "areanm": "East of England", "type": "Region" },
+		{ "areacd": "E10000020", "areanm": "Norfolk", "type": "County" },
+		{ "areacd": "E07000148", "areanm": "Norwich", "type": "Lower tier/unitary authority" },
+		{ "areacd": "E14001409", "areanm": "Norwich South", "type": "Parliamentary constituency" },
+		{ "areacd": "E05012906", "areanm": "Mancroft", "type": "Electoral ward", "parent": "Norwich" },
+		{
+			"areacd": "E02007053",
+			"areanm": "Norwich 017",
+			"type": "Middle-layer super output area",
+			"parent": "Norwich"
+		},
+		{
+			"areacd": "E01026823",
+			"areanm": "Norwich 017A",
+			"type": "Lower-layer super output area",
+			"parent": "Norwich"
+		},
+		{ "areacd": "...", "type": "Output area", "parent": "Norwich" }
+	]
 }
 ```
+
 Small-area entries (ward, MSOA, LSOA, OA) get a `parent` field (the containing local authority's
 name); larger areas don't. Coordinates out of range are `400`
 (`Invalid lng/lat coordinates.`); coordinates that don't resolve to any known tile/area (e.g. out
@@ -100,21 +114,30 @@ Implementation: `getPostcode.ts` + `getAreasByPostcode.ts`. `{code}` can be give
 the internal space (`NR21AA` and `NR2 1AA` both work — validated against
 `^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$` after removing surrounding whitespace).
 
-| Parameter | Default | Description |
-|---|---|---|
-| `year` | `latest` | Filter areas by year, or `all` |
-| `geoLevel` | `all` | Restrict to one level — **14-key `geoLevelsAll` set** |
-| `groupByLevel` | `false` | Group results as `[{ key, label, areas: [...] }]` |
+| Parameter      | Default  | Description                                           |
+| -------------- | -------- | ----------------------------------------------------- |
+| `year`         | `latest` | Filter areas by year, or `all`                        |
+| `geoLevel`     | `all`    | Restrict to one level — **14-key `geoLevelsAll` set** |
+| `groupByLevel` | `false`  | Group results as `[{ key, label, areas: [...] }]`     |
 
 ```
 GET /api/v1/geo/postcodes/NR21AA
 ```
+
 ```json
 {
-  "meta": { "query": "NR21AA", "areacd": "NR2 1AA", "lng": 1.293569, "lat": 52.627547, "count": 9, "total": 9 },
-  "data": [{ "areacd": "E92000001", "areanm": "England", "type": "Country" }, "..."]
+	"meta": {
+		"query": "NR21AA",
+		"areacd": "NR2 1AA",
+		"lng": 1.293569,
+		"lat": 52.627547,
+		"count": 9,
+		"total": 9
+	},
+	"data": [{ "areacd": "E92000001", "areanm": "England", "type": "Country" }, "..."]
 }
 ```
+
 `meta` carries the resolved, canonically-spaced postcode (`areacd`) and its coordinates alongside
 the usual `count`/`total`. A malformed postcode is `404`
 (`"Postcode not found. <x>" is not a valid postcode."` — note the unusual quote placement, a
@@ -126,23 +149,25 @@ upstream lookup doesn't recognise is also `404` but with `Postcode "<x>" not fou
 Partial-postcode matching for a type-ahead UI — `{code}` can be as short as an outward-code
 prefix (e.g. `NR2`). Implementation: `getPostcodesList.ts`.
 
-| Parameter | Default | Description |
-|---|---|---|
-| `limit` | `10` | Max results |
-| `offset` | `0` | Pagination offset |
+| Parameter | Default | Description       |
+| --------- | ------- | ----------------- |
+| `limit`   | `10`    | Max results       |
+| `offset`  | `0`     | Pagination offset |
 
 ```
 GET /api/v1/geo/postcodes/NR2/autocomplete
 ```
+
 ```json
 {
-  "meta": { "query": "NR2", "count": 10, "total": null, "limit": 10, "offset": 0 },
-  "data": [
-    { "areacd": "NR2 1AA", "type": "postcode", "lng": 1.293569, "lat": 52.627547 },
-    { "areacd": "NR2 1AB", "type": "postcode", "lng": 1.285996, "lat": 52.629448 }
-  ]
+	"meta": { "query": "NR2", "count": 10, "total": null, "limit": 10, "offset": 0 },
+	"data": [
+		{ "areacd": "NR2 1AA", "type": "postcode", "lng": 1.293569, "lat": 52.627547 },
+		{ "areacd": "NR2 1AB", "type": "postcode", "lng": 1.285996, "lat": 52.629448 }
+	]
 }
 ```
+
 `meta.total` is deliberately `null` (not omitted, not `0`) for a short query — 3 characters or
 fewer once non-alphanumerics are stripped (e.g. `NR2`, an outward-code-only query) — even though
 the true match count is fully computed internally; it's suppressed rather than returned, presumably

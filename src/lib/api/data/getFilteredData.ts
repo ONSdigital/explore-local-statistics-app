@@ -18,6 +18,7 @@ export default async function getFilteredData(params = {}) {
 
 	// Filter datasets by indicator, topic and included geographies
 	let datasets = filterIndicators(cube.link.item, params);
+	if (datasets.error) return datasets;
 
 	// Apply filters to the data within the datasets and generate the selected output format
 	datasets = filterDatasets(datasets, params);
