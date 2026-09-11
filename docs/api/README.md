@@ -1,5 +1,7 @@
 # Explore Local Statistics API (v1)
 
+> **IMPORTANT NOTE: This API is not intended for use by non-ONS web applications. Its structure may change without notice, and it has a CORS policy that prevents cross-origin HTTP requests in web browsers.**
+
 This is the reference documentation for the HTTP API behind the ONS "Explore Local
 Statistics" service. It documents everything under `/api/v1/` as implemented in this repo
 (`src/routes/(api)/api/v1/`), verified against the running app rather than transcribed from
