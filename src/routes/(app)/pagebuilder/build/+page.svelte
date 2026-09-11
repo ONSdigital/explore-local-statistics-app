@@ -66,7 +66,6 @@
 			...(comparisonArea?.areanm ? [comparisonArea.areanm] : [])
 		])
 	]);
-
 	let areasWithData = $derived([...new Set(data?.areanm)]);
 	let areasMissingData = $derived(allAreas.filter((d) => !areasWithData.includes(d)));
 
@@ -88,21 +87,58 @@
 		browser ? makeShareUrl(selection.areas, selection.indicator, comparisonArea?.areacd) : ''
 	);
 
-	// $effect(() => {
-	// 	const hash = window.location.hash;
-	// 	if (!hash || hash === '#') return;
+	async function getSharedFromHash() {
+		const hash = window.location.hash;
+		if (!hash || hash === '#') return;
 
-	// 	const params = new URLSearchParams(hash.replace(/^#\??/, ''));
-	// 	const sharedAreas = params.get('areas')?.split(',').filter(Boolean);
-	// 	const sharedIndicatorSlug = params.get('indicator');
+		const params = new URLSearchParams(hash.replace(/^#\??/, ''));
+		const sharedAreaCodes = params.get('areas')?.split(',').filter(Boolean);
+		const sharedIndicatorSlug = params.get('indicator');
+		const sharedComparisonCode = params.get('comparison');
 
-	// 	if (sharedAreas?.length) {
-	// 		selectedAreas.set(sharedAreas.map((areacd) => ({ areacd, areanm: areacd, type: '' })));
-	// 	}
-	// 	if (sharedIndicatorSlug) {
-	// 		selectedIndicator.set({ slug: sharedIndicatorSlug });
-	// 	}
-	// });
+		const lookupUrl = resolve('/api/v1/geo/list?asLookup=true');
+		const lookup = await (await fetch(lookupUrl)).json();
+
+		let hashValid = false;
+
+		if (sharedAreaCodes?.length) {
+			const sharedAreas = sharedAreaCodes
+				.map((areacd) => lookup[areacd])
+				.filter(Boolean)
+				.map((area) => ({ ...area, type: getAreaType(area) || 'null' }));
+
+			if (sharedAreas.length) {
+				selectedAreas.set(sharedAreas);
+				hashValid = true;
+			}
+		}
+
+		if (sharedComparisonCode) {
+			const sharedComparison = sharedComparisonCode
+				.map((areacd) => lookup[areacd])
+				.fitler(Boolean)
+				.map((area) => ({ ...area, type: getAreaType(area) || 'null' }));
+			if (sharedComparison) {
+				chosenComparisonArea.set(sharedComparison);
+			}
+		}
+
+		if (sharedIndicatorSlug) {
+			const sharedIndicator = indicators.find((ind) => ind.slug === sharedIndicatorSlug);
+			if (sharedIndicator) {
+				selectedIndicator.set(sharedIndicator);
+				hashValid = true;
+			}
+		}
+
+		if (!hashIsValid) {
+			history.replaceState(null, '', window.location.pathname + window.location.search);
+		}
+	}
+
+	onMount(async () => {
+		await getSharedFromHash();
+	});
 
 	let clipped = $state(false);
 	async function copyShareUrl() {
@@ -118,12 +154,6 @@
 	onMount(() => {
 		if (!$selectedIndicator) $selectedIndicator = indicators[1];
 	});
-
-	// clelar the chosen comparison area if selected areas change - so defaults back to shared parent
-	// $effect(() => {
-	// 	selection.areas;
-	// 	chosenComparisonArea.set(null);
-	// });
 
 	function selectIndicator(indicator) {
 		$selectedIndicator = indicator;
@@ -149,7 +179,6 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
-	// $inspect(comparisonArea);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">

@@ -181,15 +181,9 @@
 		let areanm;
 		let type;
 
-		if (typeof area === 'object') {
-			areacd = area.areacd;
-			areanm = area.areanm;
-			type = area.type || areaType;
-		} else {
-			areacd = area;
-			areanm = areaName ?? area;
-			type = areaType;
-		}
+		areacd = area.areacd;
+		areanm = area.areanm;
+		type = area.type || areaType;
 
 		type = type || getAreaType({ areacd }) || null;
 		selectedArea = { areacd, areanm, type };
@@ -237,6 +231,7 @@
 		return sortDirection === 'descending' ? sorted.reverse() : sorted;
 	});
 
+	//clear chosenComparisonArea (hence revert to sharedParent) if the selectedAreas have changed
 	let existingSelectedAreas;
 	onMount(() => {
 		existingSelectedAreas = $selectedAreas;
