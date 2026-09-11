@@ -83,10 +83,8 @@ GET /api/v1/data.csv?topic=population&excludeMultivariate=true
 ### `geo` / `geoExtent` / `geoCluster`
 
 `geo` accepts GSS codes and/or the five geography-level keys `ctry`, `rgn`, `cauth`, `utla`,
-`ltla` (comma-separated, mixable). Values must be **uppercase** GSS codes — unlike the `/geo/*`
-lookup routes, this endpoint does not upper-case for you, so a lowercase code silently matches
-nothing rather than erroring (see
-[gotchas.md](./gotchas.md#uppercase-matters-here-and-only-here)).
+`ltla` (comma-separated, mixable). GSS codes are case-insensitive, same as every other route in
+this API.
 
 ```
 GET /api/v1/data.csv?geo=ltla,K02000001

@@ -6,24 +6,6 @@ here is speculative. If you're writing a generic client against this API (includ
 one, e.g. an MCP tool layer from the endpoint list), this is the page most likely to save you
 from a bug that only shows up on some parameter combinations.
 
-## Uppercase matters here, and only here
-
-`GET /api/v1/geo/lookup/{code}` and every other `/geo/*` route that takes a GSS code
-upper-cases it before use (`code.toUpperCase()` in each `getX.ts`), so
-`/api/v1/geo/lookup/e07000148` works exactly like the uppercase form (`200`).
-
-The **data endpoint's** own geo filter (`makeGeoFilter` in `src/lib/api/data/helpers/`, distinct
-from the geo lib's own `makeGeoFilter`) does **not** upper-case. `?geo=e07000148` silently
-matches nothing — you get the ordinary "no data" `400`, not a helpful "did you mean uppercase"
-message:
-
-```
-GET /api/v1/data.json?indicator=employment-rate&geo=e07000148   → 400, "No data available..."
-GET /api/v1/data.json?indicator=employment-rate&geo=E07000148   → 200
-```
-
-Always upper-case GSS codes yourself before sending them to the data endpoint.
-
 ## `geoLevel` means a different set of keys depending on the route
 
 There is no single canonical list of "geography levels" — three different, **non-nested** key

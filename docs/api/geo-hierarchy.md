@@ -5,9 +5,7 @@ Areas, geography levels, and parent/child/sibling relationships between them. Se
 [gotchas.md](./gotchas.md#geolevel-means-a-different-set-of-keys-depending-on-the-route) for the
 `geoLevel` key-set table these routes are referenced in.
 
-All GSS codes accepted by routes on this page are upper-cased automatically by the route itself —
-unlike [the data endpoint](./data-endpoint.md#geo--geoextent--geocluster), lowercase input works
-fine here.
+GSS codes are case-insensitive throughout this API, including on this page's routes.
 
 ## `GET /api/v1/geo/list`
 
