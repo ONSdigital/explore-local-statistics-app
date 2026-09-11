@@ -6,12 +6,18 @@ export default function filterIndicators(datasets, params) {
 	if (
 		params.topic === 'all' &&
 		params.indicator !== 'all' &&
-		params.hasGeo === 'any' &&
 		typeof params.indicator === 'string'
 	) {
 		// Quicker way to return a single indicator
 		const index = summaryStats.indicatorLookup[params.indicator];
-		return index >= 0 ? [datasets[index]] : [];
+		const ds = index >= 0 ? datasets[index] : null;
+		if (!ds) return [];
+		if (params.hasGeo !== 'any') {
+			const geoFilter = makeDatasetGeoFilter(params.hasGeo);
+			if (geoFilter.error) return geoFilter;
+			if (!geoFilter(ds)) return [];
+		}
+		return [ds];
 	}
 	const indicators = new Set([params.indicator].flat());
 	const topics = new Set([params.topic].flat());
