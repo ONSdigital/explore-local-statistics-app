@@ -235,30 +235,33 @@
 					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
 				</div>
 			{/if}
-			{#if comparisonArea && metadata?.standardised}
-				<div>
-					<!-- Comparison area: {comparisonArea?.areanm} -->
-					Comparison area:
-					<Select
-						label=""
-						placeholder={comparisonArea?.areanm}
-						labelKey="areanm"
-						groupKey="type"
-						autoClear={false}
-						options={areas}
-						value={$chosenComparisonArea}
-						on:change={(e) => chosenComparisonArea.set(e.detail)}
-						on:clear={() => chosenComparisonArea.set(null)}
-					></Select>
-				</div>
-			{:else}
-				<div>Comparison area disabled for non-standardised indicator.</div>
-			{/if}
+			{#key comparisonArea}
+				{#if comparisonArea && metadata?.standardised}
+					<div>
+						<!-- Comparison area: {comparisonArea?.areanm} -->
+						Comparison area:
+						<Select
+							label=""
+							placeholder={comparisonArea?.areanm}
+							labelKey="areanm"
+							groupKey="type"
+							autoClear={false}
+							options={areas}
+							value={$chosenComparisonArea}
+							on:change={(e) => chosenComparisonArea.set(e.detail)}
+							on:clear={() => chosenComparisonArea.set(null)}
+						></Select>
+					</div>
+				{:else}
+					<div>Comparison area disabled for non-standardised indicator.</div>
+				{/if}
+			{/key}
 		</div>
 
 		{#if ![...new Set(data?.areacd)].includes(comparisonArea.areacd)}
 			<div class="missing-data-message">
-				Comparison data unavailable for {comparisonArea.areanm}
+				<!-- Comparison data unavailable for {comparisonArea.areanm} -->
+				Comparison data unavailable
 			</div>
 		{/if}
 	{/if}
@@ -345,7 +348,9 @@
 		font-size: 16px;
 		gap: 10px;
 		font-weight: bold;
-		margin-right: auto;
+		float: right;
+		margin-top: -10px;
+		margin-bottom: 10px;
 	}
 
 	.header-details {
