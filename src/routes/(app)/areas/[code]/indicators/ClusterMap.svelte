@@ -46,7 +46,6 @@
 <div class="map-container">
 	<Map
 		bind:map
-		css={resolve('/css/maplibre-gl.css')}
 		style={resolve('/data/mapstyle.json')}
 		location={{ bounds }}
 		options={{

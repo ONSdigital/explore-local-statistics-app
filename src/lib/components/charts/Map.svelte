@@ -159,7 +159,6 @@
 	<div class="map-container" style:height="{height}px">
 		<Map
 			bind:map
-			css={resolve('/css/maplibre-gl.css')}
 			style={resolve('/data/mapstyle.json')}
 			location={{ bounds: bounds || ukBounds }}
 			options={{
