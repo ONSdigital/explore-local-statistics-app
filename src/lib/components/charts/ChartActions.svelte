@@ -1,5 +1,5 @@
 <script lang="ts">
-	import snapdom from '@zumer/snapdom';
+	import { snapdom } from '@zumer/snapdom';
 	import { Icon, Textarea, Button } from '@onsvisual/svelte-components';
 	import { downloadEvent } from '$lib/utils';
 	import { analyticsEvent } from '@onsvisual/svelte-components';

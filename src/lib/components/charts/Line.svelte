@@ -45,6 +45,8 @@
 		}
 	}
 
+	$inspect(data);
+
 	let rightMargin = $derived(width < mobileBreakpoint ? 30 : 200);
 	let widthInner = $derived(width - rightMargin - leftMargin);
 	let suffix = $derived(metadata.suffix);
