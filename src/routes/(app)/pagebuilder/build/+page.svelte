@@ -60,15 +60,6 @@
 		await getData(selection.indicator, selection.areas, $chosenComparisonArea)
 	);
 
-	let allAreas = $derived([
-		...new Set([
-			...new Set($selectedAreas.map((d) => d.areanm)),
-			...(comparisonArea?.areanm ? [comparisonArea.areanm] : [])
-		])
-	]);
-	let areasWithData = $derived([...new Set(data?.areanm)]);
-	let areasMissingData = $derived(allAreas.filter((d) => !areasWithData.includes(d)));
-
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 
@@ -239,35 +230,6 @@
 		</div>
 
 		<div class="header-details">
-			{#if areasMissingData.length}
-				<div class="missing-data-message">
-					<!-- {#if areasMissingData.length > 3} -->
-					<!-- No data available for {areasMissingData.length} areas -->
-					<!-- {:else} -->
-					<!-- No data available for {areasMissingData.join(', ')} -->
-					<!-- {/if} -->
-					<!-- {#if areasMissingData.length > 1}
-						No data available for {areasMissingData[0]} and {areasMissingData.length - 1} other areas.
-					{:else}
-						No data available for {areasMissingData.join(', ')}
-					{/if} -->
-					{#if areasMissingData.length > 1 && areasMissingData.includes(comparisonArea.areanm)}
-						Data unavailable for
-						<Tooltip text={areasMissingData.join(', ')}>
-							{areasMissingData.length} areas,
-						</Tooltip> including comparison area {comparisonArea.areanm}.
-					{:else if areasMissingData.length > 1}
-						Data unavailable for
-						<Tooltip text={areasMissingData.join(', ')}>
-							{areasMissingData.length} areas.
-						</Tooltip>
-					{:else if areasMissingData.includes(comparisonArea.areanm)}
-						Data unavailable for comparison area {comparisonArea.areanm}.
-					{:else}
-						Data unavailable for {areasMissingData}.
-					{/if}
-				</div>
-			{/if}
 			{#if data.uci_95 && data.lci_95}
 				<div>
 					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
@@ -293,6 +255,12 @@
 				<div>Comparison area disabled for non-standardised indicator.</div>
 			{/if}
 		</div>
+
+		{#if ![...new Set(data?.areacd)].includes(comparisonArea.areacd)}
+			<div class="missing-data-message">
+				Comparison data unavailable for {comparisonArea.areanm}
+			</div>
+		{/if}
 	{/if}
 
 	<div
@@ -308,7 +276,7 @@
 				<ComparisonRow
 					{data}
 					{metadata}
-					selectedAreas={selection.areas}
+					selectedAreas={$selectedAreas}
 					{comparisonArea}
 					{formatValue}
 					{formatPeriod}

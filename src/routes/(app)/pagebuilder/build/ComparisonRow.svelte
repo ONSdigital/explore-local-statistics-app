@@ -18,6 +18,10 @@
 	let width = $state(800);
 	let leftMargin = $state(0);
 	let chosenYear = $state(null); //user will be able to select this
+	let selectedAreaCodes = $derived(selectedAreas.map((d) => d.areacd));
+
+	let areasWithData = $derived([...new Set(data?.areacd)]);
+	let areasMissingData = $derived(selectedAreas.filter((d) => !areasWithData.includes(d.areacd)));
 
 	// find whatever the latest available period with data is for each area
 	function getLatestPeriodPerArea(data) {
@@ -73,7 +77,7 @@
 						sparklineXDomain[1] = period;
 				}
 			}
-			if (selectedAreas.includes(d.areacd)) {
+			if (selectedAreaCodes.includes(d.areacd)) {
 				// push to the sparkline datasets - data
 				// generate sparkline domains (remember CIs)
 				areaDataSparkline.push(d);
@@ -109,7 +113,7 @@
 						}
 					}
 				}
-				if (selectedAreas.includes(d.areacd)) {
+				if (selectedAreaCodes.includes(d.areacd)) {
 					// push area to pointrange dataset
 					areaDataPointrange.push(d);
 					for (const v of [d.value, d.lci_95, d.uci_95]) {
@@ -148,7 +152,12 @@
 
 		for (const d of areaDataSparkline) {
 			if (!rowsByArea.has(d.areacd)) {
-				rowsByArea.set(d.areacd, { areacd: d.areacd, areanm: d.areanm, rows: [] });
+				rowsByArea.set(d.areacd, {
+					areacd: d.areacd,
+					areanm: d.areanm,
+					rows: [],
+					isMissing: false
+				});
 			}
 			rowsByArea.get(d.areacd).rows.push(d);
 		}
@@ -162,6 +171,18 @@
 			const latest = group.rows.reduce((a, b) => (a.period > b.period ? a : b));
 			group.diff =
 				earliest.value != null && latest.value != null ? latest.value - earliest.value : null;
+		}
+
+		// add in missing areas
+		for (const missing of areasMissingData) {
+			rowsByArea.set(missing.areacd, {
+				areacd: missing.areacd,
+				areanm: missing.areanm,
+				rows: [],
+				pointrangeRow: null,
+				diff: null,
+				isMissing: true
+			});
 		}
 
 		return Array.from(rowsByArea.values());
@@ -431,31 +452,44 @@
 						? `(${formatPeriod(area.pointrangeRow.period)})`
 						: ''}
 				</div>
-				<p class="area-value" use:updateValueWidth={area.areacd}>
-					{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
-				</p>
-				<ComparisonPointrange
-					data={area.pointrangeRow}
-					xDomain={pointrangeXDomain}
-					chartWidth={pointRangeWidth}
-					{CIsStyle}
-				/>
-				<ComparisonSparkline
-					data={area.rows}
-					yDomain={sparklineYDomain}
-					comparisonData={comparisonRows}
-					xDomain={sparklineXDomain}
-					{prefix}
-					{suffix}
-					{formatValue}
-					chartWidth={sparklineWidth}
-				/>
+				{#if area.isMissing}
+					<div class="data-unavilable">Data unavailable</div>
+				{:else}
+					<p class="area-value" use:updateValueWidth={area.areacd}>
+						{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
+					</p>
+					<ComparisonPointrange
+						data={area.pointrangeRow}
+						xDomain={pointrangeXDomain}
+						chartWidth={pointRangeWidth}
+						{CIsStyle}
+					/>
+					<ComparisonSparkline
+						data={area.rows}
+						yDomain={sparklineYDomain}
+						comparisonData={comparisonRows}
+						xDomain={sparklineXDomain}
+						{prefix}
+						{suffix}
+						{formatValue}
+						chartWidth={sparklineWidth}
+					/>
+				{/if}
 			</div>
 		{/each}
 	</div>
 </div>
 
 <style>
+	.data-unavilable {
+		grid-column: 4;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--ons-color-grey-75);
+		min-height: 70px;
+		font-style: italic;
+	}
 	.table-sort-button {
 		font-weight: bold;
 		background: none;
