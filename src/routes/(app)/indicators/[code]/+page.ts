@@ -74,7 +74,7 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 				{ label: 'Explore local statistics', href: resolve('/') },
 				{ label: 'Local indicators', href: resolve('/indicators') }
 			],
-			breadcrumbBackground: '#eaeaea'
+			breadcrumbBackground: 'var(--ons-color-banner-bg)'
 		};
 	} catch {
 		if (indicatorRedirects[params.code])

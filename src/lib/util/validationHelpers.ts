@@ -1,3 +1,4 @@
+import { Temporal } from 'temporal-polyfill';
 import { geoLevels } from '$lib/config/geoLevels';
 import { dataFormats, geoFormats, chartTypes } from '$lib/api/config';
 
@@ -29,12 +30,30 @@ export function isValidYear(str: string): boolean {
 	return !!`${str}`.match(/^\d{4}$/);
 }
 
+// Shape check first (cheap, and gives a clean false for non-matching input rather than a thrown
+// error), then a real calendar-validity check via Temporal - a string can match the YYYY-MM or
+// YYYY-MM-DD shape while naming a month/day that doesn't exist (eg. "2020-13", "2020-02-30").
+// Downstream date parsing (`dataFilters.ts`'s `toPlainDate`) assumes anything that passes these
+// checks is a real, parseable date and doesn't itself guard against `Temporal.PlainDate.from`
+// throwing - so these need to reject calendar-invalid input, not just wrong-shaped input.
 export function isValidMonth(str: string): boolean {
-	return !!`${str}`.match(/^\d{4}-\d{2}$/);
+	if (!`${str}`.match(/^\d{4}-\d{2}$/)) return false;
+	try {
+		Temporal.PlainYearMonth.from(str);
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 export function isValidDay(str: string): boolean {
-	return !!`${str}`.match(/^\d{4}-\d{2}-\d{2}$/);
+	if (!`${str}`.match(/^\d{4}-\d{2}-\d{2}$/)) return false;
+	try {
+		Temporal.PlainDate.from(str);
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 export function isValidDate(str: string): boolean {

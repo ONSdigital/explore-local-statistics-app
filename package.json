@@ -14,6 +14,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest --watch=false",
+		"test:bench": "vitest bench --run",
 		"geo:generate": "tsx ./scripts/make-geo-data.ts",
 		"geo:clusters": "tsx ./scripts/make-clusters.ts",
 		"geo:all": "npm run geo:generate && npm run geo:clusters",
@@ -31,9 +32,8 @@
 		"@mapbox/tilebelt": "^2.0.3",
 		"@onsvisual/robo-utils": "^0.3.9",
 		"@onsvisual/svelte-components": "^1.1.35",
-		"@onsvisual/svelte-maps": "^1.2.28",
+		"@onsvisual/svelte-maps": "^2.0.3",
 		"@playwright/test": "^1.28.1",
-		"@protobi/exceljs": "^4.4.0-protobi.9",
 		"@sveltejs/adapter-node": "^5.5.4",
 		"@sveltejs/adapter-vercel": "^6.3.3",
 		"@sveltejs/kit": "^2.60.1",
@@ -51,7 +51,7 @@
 		"@zumer/snapdom": "^2.0.2",
 		"accurate-beeswarm-plot": "^1.0.12",
 		"arquero": "^8.0.3",
-		"auditjs": "^4.0.46",
+		"auditjs": "^5.0.2",
 		"autoprefixer": "^10.4.16",
 		"d3-array": "^3.2.4",
 		"d3-dsv": "^3.0.1",
@@ -61,6 +61,7 @@
 		"d3-scale": "^4.0.2",
 		"d3-time": "^3.1.0",
 		"d3-time-format": "^4.1.0",
+		"documonster": "^0.14.0",
 		"eslint": "^9.39.4",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.17.1",
@@ -82,7 +83,7 @@
 		"typescript": "^5.9.3",
 		"vite": "^8.0.13",
 		"vitest": "^4.1.8",
-		"xmlbuilder2": "^3.1.1"
+		"xmlbuilder2": "^4.0.3"
 	},
 	"type": "module"
 }

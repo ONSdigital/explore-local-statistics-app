@@ -9,7 +9,7 @@ export const GET: RequestHandler = ({ url }) => {
 
 	const topic = getParam(url, 'topic', 'all');
 	const excludeMultivariate = getParam(url, 'excludeMultivariate', false);
-	const hasGeo = getParam(url, 'hasGeo', 'all');
+	const hasGeo = getParam(url, 'hasGeo', 'any');
 	const hasYear = getParam(url, 'hasYear', 'all');
 	const flat = getParam(url, 'flat', false);
 
@@ -20,6 +20,7 @@ export const GET: RequestHandler = ({ url }) => {
 		hasYear,
 		flat
 	});
+	if (taxonomy.error) error(taxonomy.error, taxonomy.message);
 
 	return json(taxonomy);
 };

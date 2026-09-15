@@ -11,22 +11,6 @@ function dimValuesToLabels(dim: filteredDimension, cube: jsonStatDataset) {
 		dim.values = dim.values.map((v) => [cube.dimension[dim.key].category.label[v[0]], v[1]]);
 }
 
-// Take filtered dims and expand to array of all the values they represent
-export function dimsToItems(dims: filteredDimension[], cube: jsonStatDataset) {
-	let items: dataItem[] = [{ index: 0, values: [] }];
-	for (const dim of dims) {
-		dimValuesToLabels(dim, cube);
-		const newItems: dataItem[] = [];
-		for (const item of items) {
-			for (const val of dim.values) {
-				newItems.push({ index: item.index * dim.count + val[1], values: [...item.values, val[0]] });
-			}
-		}
-		items = newItems;
-	}
-	return items;
-}
-
 // Take filtered dims and use them to return a filtered JSON-Stat dataset
 export function toJSONStat(
 	qb: jsonStatDataset,
@@ -34,9 +18,29 @@ export function toJSONStat(
 	includeNames = false,
 	includeStatus = false
 ) {
+	// `qb` is the shared, in-memory-cached cube (see CLAUDE.md) and must never be
+	// mutated in place. Only `dimension` and `size` are written to below, so only those
+	// need copying - each dim's `category` gets a shallow copy (its `index`/`label` are
+	// always replaced wholesale, never mutated), and `size` just needs a new array.
+	// Everything else is reference-copied rather than deep-cloned.
 	const cube: jsonStatDataset = {};
-	for (const key of Object.keys(qb).filter((key: string) => !['value', 'status'].includes(key)))
-		cube[key] = structuredClone(qb[key]);
+	for (const key of Object.keys(qb)) {
+		if (key === 'value' || key === 'status') continue;
+		if (key === 'size') {
+			cube.size = qb.size.slice();
+		} else if (key === 'dimension') {
+			cube.dimension = {};
+			// `dims` always has one entry per `qb.id`/`qb.dimension` key (see
+			// filterJSONStat), so building `dimension` from it covers every key.
+			for (const dim of dims)
+				cube.dimension[dim.key] = {
+					...qb.dimension[dim.key],
+					category: { ...qb.dimension[dim.key].category }
+				};
+		} else {
+			cube[key] = qb[key];
+		}
+	}
 
 	let indices = [0];
 
@@ -44,7 +48,11 @@ export function toJSONStat(
 		const dim = dims[i];
 		const size = dim.values.length;
 
-		if (dim.count !== 1) {
+		// `dim.count !== 1` is a no-op shortcut for a dim whose category never varies -
+		// but a `count === 1` dim can still filter down to zero values (e.g. a time filter
+		// matching none of an indicator's one published period), so `size === 0` must also
+		// force the loop to run, or `indices` would wrongly stay non-empty.
+		if (dim.count !== 1 || size === 0) {
 			const newIndices = [];
 
 			for (const index of indices) {
@@ -64,11 +72,13 @@ export function toJSONStat(
 			cube.dimension[dim.key].category.label = label;
 		}
 		cube.size[i] = size;
-		if (includeNames)
-			cube.dimension.areacd.category.label = makeAreaLookup(
-				Object.keys(cube.dimension.areacd.category.index)
-			);
 	}
+	// Only needs computing once, using the areacd dimension's now-finalized index -
+	// not once per dimension in the loop above (all dims share the same lookup result).
+	if (includeNames)
+		cube.dimension.areacd.category.label = makeAreaLookup(
+			Object.keys(cube.dimension.areacd.category.index)
+		);
 
 	const value = Array(indices.length).fill(null);
 
@@ -96,9 +106,11 @@ function getValueDimIndex(measures: filteredDimension) {
 	return valueIndex > -1 ? valueIndex : 0;
 }
 
-// This function runs once to generate the most optimal function to fill columns based on the global params
-// Running this saves a number of condiditional tests for each individual row added
+// Builds a specialized fill function once per request instead of branching per row.
+// Captures direct references to each output array (`colArrays`, `measureArrays`, etc.)
+// up front so the hot loop never does a `data[dims[i].key]`-style lookup per item.
 function makeColFill(
+	data: jsonDataCols,
 	includeNames: boolean,
 	includeStatus: boolean,
 	dims: filteredDimension[],
@@ -106,94 +118,89 @@ function makeColFill(
 	pivotMeasures: boolean
 ) {
 	const measuresCount = measures.count;
-
 	const valueDimIndex = getValueDimIndex(measures);
-	const getIndex = pivotMeasures
-		? (item) => item.index * measuresCount + valueDimIndex
-		: (item) => item.index;
-	const hasVals = includeStatus
-		? (item: dataItem, cube: jsonStatDataset) => {
-				const index = getIndex(item);
-				return cube.value[index] != null || cube.status[index];
-			}
-		: (item: dataItem, cube: jsonStatDataset) => cube.value[getIndex(item)] != null;
 
-	const pushMeasures = pivotMeasures
-		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) => {
-				for (let j = 0; j < measures.values.length; j++) {
-					data[measures.values[j][0]].push(
-						cube.value[item.index * measuresCount + measures.values[j][1]]
-					);
+	const hasVals = pivotMeasures
+		? includeStatus
+			? (item: dataItem, cube: jsonStatDataset) => {
+					const index = item.index * measuresCount + valueDimIndex;
+					return cube.value[index] != null || cube.status[index];
 				}
-			}
-		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.value.push(cube.value[item.index]);
+			: (item: dataItem, cube: jsonStatDataset) =>
+					cube.value[item.index * measuresCount + valueDimIndex] != null
+		: includeStatus
+			? (item: dataItem, cube: jsonStatDataset) =>
+					cube.value[item.index] != null || cube.status[item.index]
+			: (item: dataItem, cube: jsonStatDataset) => cube.value[item.index] != null;
 
 	const dimEnd = !pivotMeasures && measuresCount > 1 ? dims.length : dims.length - 1;
-	const pushVals = (
-		data: jsonDataCols,
-		item: dataItem,
-		dims: filteredDimension[],
-		cube: jsonStatDataset
-	) => {
-		for (let i = 0; i < dimEnd; i++) data[dims[i].key].push(item.values[i]);
-		pushMeasures(data, item, cube);
+	const colArrays = dims.slice(0, dimEnd).map((dim) => data[dim.key]);
+	const measureArrays = measures.values.map((val) => [data[val[0]], val[1]] as [unknown[], number]);
+	const valueArr = data.value;
+
+	const pushMeasures = pivotMeasures
+		? (item: dataItem, cube: jsonStatDataset) => {
+				for (const [arr, offset] of measureArrays)
+					arr.push(cube.value[item.index * measuresCount + offset]);
+			}
+		: (item: dataItem, cube: jsonStatDataset) => valueArr.push(cube.value[item.index]);
+
+	const pushVals = (item: dataItem, cube: jsonStatDataset) => {
+		for (let i = 0; i < dimEnd; i++) colArrays[i].push(item.values[i]);
+		pushMeasures(item, cube);
 	};
-	const pushName = (data: jsonDataCols, item: dataItem) =>
-		data.areanm.push(areaNameLookup[item.values[0]] || null);
+
+	const areanmArr = data.areanm;
+	const pushName = (item: dataItem) => areanmArr.push(areaNameLookup[item.values[0]] || null);
+
+	const statusArr = data.status;
 	const pushStatus = pivotMeasures
-		? (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.status.push(cube.status[item.index * measuresCount] || null)
-		: (data: jsonDataCols, item: dataItem, cube: jsonStatDataset) =>
-				data.status.push(cube.status[item.index] || null);
+		? (item: dataItem, cube: jsonStatDataset) =>
+				statusArr.push(cube.status[item.index * measuresCount] || null)
+		: (item: dataItem, cube: jsonStatDataset) => statusArr.push(cube.status[item.index] || null);
 
 	return includeNames && includeStatus
-		? (data: jsonDataCols, item: dataItem, dims: filteredDimension[], cube: jsonStatDataset) => {
+		? (item: dataItem, cube: jsonStatDataset) => {
 				if (hasVals(item, cube)) {
-					pushVals(data, item, dims, cube);
-					pushName(data, item);
-					pushStatus(data, item, cube);
+					pushVals(item, cube);
+					pushName(item);
+					pushStatus(item, cube);
 				}
 			}
 		: includeNames
-			? (data: jsonDataCols, item: dataItem, dims: filteredDimension[], cube: jsonStatDataset) => {
+			? (item: dataItem, cube: jsonStatDataset) => {
 					if (hasVals(item, cube)) {
-						pushVals(data, item, dims, cube);
-						pushName(data, item);
+						pushVals(item, cube);
+						pushName(item);
 					}
 				}
 			: includeStatus
-				? (
-						data: jsonDataCols,
-						item: dataItem,
-						dims: filteredDimension[],
-						cube: jsonStatDataset
-					) => {
+				? (item: dataItem, cube: jsonStatDataset) => {
 						if (hasVals(item, cube)) {
-							pushVals(data, item, dims, cube);
-							pushStatus(data, item, cube);
+							pushVals(item, cube);
+							pushStatus(item, cube);
 						}
 					}
-				: (
-						data: jsonDataCols,
-						item: dataItem,
-						dims: filteredDimension[],
-						cube: jsonStatDataset
-					) => {
-						if (hasVals(item, cube)) pushVals(data, item, dims, cube);
+				: (item: dataItem, cube: jsonStatDataset) => {
+						if (hasVals(item, cube)) pushVals(item, cube);
 					};
 }
 
-export function itemsToCols(
+// Expands the (non-measure) dims into every combination and fills the output columns
+// directly, one dimension at a time, rather than first materializing a flat array of
+// `{ index, values }` items and walking that separately - avoids an allocation per
+// combination by reusing a single index/values buffer instead.
+export function dimsToCols(
 	cube: jsonStatDataset,
 	dims: filteredDimension[],
-	items: dataItem[],
 	measures: filteredDimension,
 	pivotMeasures: boolean,
 	includeNames: boolean,
 	includeStatus: boolean
 ): jsonDataCols | jsonDataColsByArea {
-	const colFill = makeColFill(includeNames, includeStatus, dims, measures, pivotMeasures);
+	const iterDims = pivotMeasures ? dims.slice(0, -1) : dims;
+	for (const dim of iterDims) dimValuesToLabels(dim, cube);
+
 	const measuresLength = measures.values.length;
 	const dimsEnd = !pivotMeasures && measuresLength > 1 ? undefined : -1;
 
@@ -204,9 +211,34 @@ export function itemsToCols(
 	}
 	for (const val of pivotMeasures ? measures.values : [['value']]) data[val[0]] = [];
 	if (includeStatus) data.status = [];
-	for (const item of items) {
-		colFill(data, item, dims, cube);
+
+	// `data`'s arrays already exist by this point, so `colFill` can capture direct
+	// references to them instead of doing a fresh property lookup per item.
+	const colFill = makeColFill(data, includeNames, includeStatus, dims, measures, pivotMeasures);
+
+	// A single item is reused across every combination - colFill only ever reads
+	// primitive values out of it before the next combination overwrites them.
+	const item: dataItem = { index: 0, values: new Array(iterDims.length) };
+	const depthEnd = iterDims.length - 1;
+
+	function fill(depth: number, index: number) {
+		const dim = iterDims[depth];
+		if (depth === depthEnd) {
+			for (const val of dim.values) {
+				item.values[depth] = val[0];
+				item.index = index * dim.count + val[1];
+				colFill(item, cube);
+			}
+		} else {
+			for (const val of dim.values) {
+				item.values[depth] = val[0];
+				fill(depth + 1, index * dim.count + val[1]);
+			}
+		}
 	}
+	if (iterDims.length > 0) fill(0, 0);
+	else colFill(item, cube);
+
 	return data;
 }
 
@@ -218,9 +250,7 @@ export function toCols(
 	pivotMeasures = true
 ) {
 	const measures = dims[dims.length - 1];
-
-	const items = dimsToItems(!pivotMeasures ? dims : dims.slice(0, -1), cube);
-	const data = itemsToCols(cube, dims, items, measures, pivotMeasures, includeNames, includeStatus);
+	const data = dimsToCols(cube, dims, measures, pivotMeasures, includeNames, includeStatus);
 
 	return [cube.extension.slug, data];
 }
@@ -255,8 +285,7 @@ export function toRows(
 	const measures = dims[dims.length - 1];
 	if (measures.values.length === 0) return [];
 
-	const items = dimsToItems(!pivotMeasures ? dims : dims.slice(0, -1), cube);
-	const cols = itemsToCols(cube, dims, items, measures, pivotMeasures, includeNames, includeStatus);
+	const cols = dimsToCols(cube, dims, measures, pivotMeasures, includeNames, includeStatus);
 
 	const rows = colsToRows(cols, includeIndicator ? cube.label : null);
 

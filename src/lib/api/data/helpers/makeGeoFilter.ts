@@ -6,15 +6,23 @@ import areasClusters from '$lib/data/areas-clusters.json';
 export default function makeGeoFilter(geo: string, geoExtent: string, geoCluster: string) {
 	const codes = new Set();
 	const types = new Set();
+	const geoExtentUpper = String(geoExtent).toUpperCase();
 	for (const g of [geo].flat()) {
 		if (geoLevels[g] && geoCluster === 'all') {
-			if (isValidAreaCode(geoExtent)) {
-				const children = getChildAreas({ code: geoExtent, geoLevel: g, includeNames: false });
+			if (isValidAreaCode(geoExtentUpper)) {
+				const children = getChildAreas({
+					code: geoExtentUpper,
+					geoLevel: g,
+					includeNames: false
+				});
 				for (const child of children) codes.add(child);
 			} else {
 				for (const code of geoLevels[g].codes) types.add(code);
 			}
-		} else if (isValidAreaCode(g) && !types.has(g.slice(0, 3))) codes.add(g);
+		} else {
+			const gUpper = String(g).toUpperCase();
+			if (isValidAreaCode(gUpper) && !types.has(gUpper.slice(0, 3))) codes.add(gUpper);
+		}
 	}
 	if (geoCluster) {
 		const [grouping, cluster] = geoCluster.split('_');

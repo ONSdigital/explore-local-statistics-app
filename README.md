@@ -48,3 +48,7 @@ To simulate this locally, copy the client build output from the container to a l
     docker cp (container-name):/app/build/client/explore-local-statistics ../liveserv/some-path
 
 The app's assets will be available at `http://localhost:8080/some-path/`.
+
+## API documentation
+
+The HTTP API is documented in [`docs/api/`](./docs/api/README.md).
