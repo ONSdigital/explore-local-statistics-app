@@ -18,6 +18,14 @@ export default async function getFilteredData(params = {}) {
 
 	// Filter datasets by indicator, topic and included geographies
 	let datasets = filterIndicators(cube.link.item, params);
+	if (datasets.error) return datasets;
+
+	// `params.singleIndicator` is only set by the item route - it names one specific
+	// resource, so an unresolved indicator (unknown slug, or excluded by `hasGeo`) is a
+	// 404 there, matching `/metadata/indicators/{indicator}`'s convention. The collection
+	// route never sets this flag, so an empty match there is just an empty collection.
+	if (params.singleIndicator === true && datasets.length === 0)
+		return { error: 404, message: `Indicator "${params.indicator}" not found.` };
 
 	// Apply filters to the data within the datasets and generate the selected output format
 	datasets = filterDatasets(datasets, params);

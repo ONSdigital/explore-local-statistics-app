@@ -117,7 +117,7 @@
 				type="arrow"
 				rotation={diff > 0 ? -90 : 90}
 				size="s"
-			/>{/if}{valuePrefix}{formatValue(Math.abs(diff))}{valueSuffix}
+			/>{/if}{valuePrefix}{formatValue(Math.abs(diff))}{valueSuffix === '%' ? ' pp' : valueSuffix}
 	</div>
 {/snippet}
 

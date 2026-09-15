@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { Card, Icon, Observe } from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
-	import { makePeriodFormatter, makeValueFormatter, makeDataUrl } from '$lib/utils';
+	import {
+		makePeriodFormatter,
+		makeValueFormatter,
+		makeDataUrl,
+		isEmptyColsData
+	} from '$lib/utils';
 
 	let { indicator, metadata, geography, period } = $props();
 
@@ -22,6 +27,9 @@
 			loadedDataUrl = dataUrl;
 			try {
 				loadedData = await (await fetch(dataUrl)).json();
+				// An empty result (every column present, zero-length) means there's nothing
+				// to show for this area/period - same as the fetch itself failing below.
+				if (isEmptyColsData(loadedData)) loadedData = null;
 				console.log(`Loaded ${indicator} big number data`);
 				return loadedData;
 			} catch {

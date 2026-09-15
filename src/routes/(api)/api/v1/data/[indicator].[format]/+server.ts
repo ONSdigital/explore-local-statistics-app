@@ -1,19 +1,26 @@
 import type { RequestHandler } from './$types';
 import { json, text, error } from '@sveltejs/kit';
 import { Readable } from 'node:stream';
-import { dataParams } from '$lib/api/config';
+import { dataItemParams } from '$lib/api/config';
 import { getParam, getDimensionFilters, hasValidParams, hasValidTimeParam } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
-import { isOversizedRequest } from '$lib/api/data/helpers/requestValidators';
 
+// The item route: one specific indicator, named in the path, always returns the bare
+// (non-collection) shape - the counterpart to `/api/v1/data.{format}` (the collection route,
+// `../data.[format]/+server.ts`), which is unconditionally collection-shaped. See
+// `docs/api/data-endpoint.md`/`data-item-endpoint.md` for the full behaviour writeup.
+//
+// `topic`, `indicator` and `excludeMultivariate` are not accepted here at all (the path
+// already pins the one indicator) - `dataItemParams` is `dataParams` minus those three, so
+// passing any of them is the same `400` as any other unrecognised parameter. There's also no
+// `isOversizedRequest` check: that heuristic can never fire for a single named indicator (its
+// "large indicators" axis is permanently false here), so it would just be dead weight.
 export const GET: RequestHandler = async ({ url, params }) => {
-	if (!hasValidParams(url, dataParams))
+	if (!hasValidParams(url, dataItemParams))
 		error(400, `Request contained invalid or duplicate parameters.`);
 
 	const format = params.format || null;
-	const topic = getParam(url, 'topic', 'all');
-	const indicator = getParam(url, 'indicator', 'all');
-	const excludeMultivariate = getParam(url, 'excludeMultivariate', false);
+	const indicator = params.indicator || null;
 	const geo = getParam(url, 'geo', 'all');
 	const geoExtent = getParam(url, 'geoExtent', 'all');
 	const geoCluster = getParam(url, 'geoCluster', 'all');
@@ -29,9 +36,10 @@ export const GET: RequestHandler = async ({ url, params }) => {
 
 	const _params: parsedParams = {
 		format,
-		topic,
+		topic: 'all',
 		indicator,
-		excludeMultivariate,
+		excludeMultivariate: false,
+		singleIndicator: true,
 		geo,
 		geoExtent,
 		geoCluster,
@@ -45,23 +53,13 @@ export const GET: RequestHandler = async ({ url, params }) => {
 		href: url.href
 	};
 
-	// Suppress requests that may run out of memory
-	if (isOversizedRequest(_params))
-		error(400, `Too much data requested. Try narrowing your parameters.`);
-
 	const datasets = await getFilteredData(_params);
 	if (datasets.error) error(datasets.error, datasets.message);
 
 	return datasets.format === 'xlsx'
 		? new Response(
-				// `generateXLSX` now returns a `Readable`, not a `Buffer` - the workbook is
-				// serialized (XML + ZIP compression, still with native Excel Tables intact)
-				// as the client reads it, rather than being fully built in memory first.
-				// `Readable.toWeb` is the standard bridge to the Web `ReadableStream` a Fetch
-				// API `Response` body takes; SvelteKit's Node adapter already reads and writes
-				// that incrementally, and propagates an early client disconnect back to
-				// `.cancel()`/`.destroy()` on this stream. Content-Length can't be set - the
-				// compressed size isn't known until the last byte is written.
+				// See `../data.[format]/+server.ts` for why this streams rather than buffers -
+				// identical handling here.
 				Readable.toWeb(datasets.data) as ReadableStream<Uint8Array>,
 				{
 					headers: {

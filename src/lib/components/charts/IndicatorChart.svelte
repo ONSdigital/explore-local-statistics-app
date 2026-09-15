@@ -100,8 +100,6 @@
 			}
 		});
 	});
-
-	$inspect(metadata);
 </script>
 
 <div

@@ -48,6 +48,7 @@ function nestTaxonomy(taxonomy) {
 
 export default function getTaxonomy(params = {}) {
 	const taxonomy = getIndicators({ ...params, minimalMetadata: true });
+	if (taxonomy.error) return taxonomy;
 	const meta = { count: taxonomy.length, total: summaryData.datasetCount };
 	const data = params.flat ? taxonomy : nestTaxonomy(taxonomy);
 	return { meta, data };
