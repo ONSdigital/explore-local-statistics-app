@@ -4,13 +4,10 @@ import summaryStats from '$lib/data/json-stat-summary.json';
 // Takes a JSON-Stat collection and returns an array of JSON-Stat datasets that meet the filter criteria
 export default function filterIndicators(datasets, params) {
 	if (params.topic === 'all' && params.indicator !== 'all') {
-		// Quicker way to resolve one or more explicitly-named indicators: look each one up
-		// directly via the precomputed slug->index lookup instead of scanning/filtering the
-		// full dataset array (100+ entries). Covers a single indicator (string) and an
-		// explicit list (array) alike - `excludeMultivariate` never excludes anything here,
-		// since every indicator in this branch is explicitly named (see the general path
-		// below for where that exclusion actually applies), so there's nothing else to apply
-		// beyond an optional per-dataset `hasGeo` check.
+		// Resolve one or more explicitly-named indicators via the precomputed slug->index
+		// lookup instead of scanning the full dataset array. `excludeMultivariate` never
+		// applies here since everything in this branch is named explicitly (see the
+		// general path below for where that exclusion actually applies).
 		const slugs = [params.indicator].flat();
 		const seen = new Set();
 		const found = [];

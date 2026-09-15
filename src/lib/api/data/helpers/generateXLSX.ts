@@ -3,17 +3,10 @@ import type { Font, NamedStyle, WorkbookView } from 'documonster/excel';
 import type { Readable } from 'node:stream';
 import { toWords } from '@onsvisual/robo-utils';
 
-// The library's own default (Excel's own default, Calibri 11) isn't what this workbook
-// should look like - ONS branding is Arial 12. `Workbook.getModel`/`setModel`'s
-// `defaultFont` field (set in `dataToSpreadsheet` below) replaces the exceljs version's
-// monkey-patch of an internal `StylesXform` class to the same end (see
-// https://github.com/exceljs/exceljs/issues/572#issuecomment-631788521).
-//
-// That default only applies to genuinely unstyled cells, though: the moment a cell gets
-// *any* explicit font property, it gets its own independent font record that does not
-// inherit from the default - `Cell.setFont(ws, addr, { bold: true })` alone renders in
-// Excel's own default face (Calibri), not Arial. So every explicit font override below
-// still spreads `...defaultFont` in alongside whatever it's actually overriding.
+// ONS branding is Arial 12, not Excel's Calibri 11 default. Set workbook-wide via
+// `Workbook.getModel`/`setModel`'s `defaultFont` (below) - but that only applies to
+// genuinely unstyled cells, since any explicit font override drops the inherited
+// default. So every explicit font override below still spreads `...defaultFont` in.
 const defaultFont: Partial<Font> = {
 	size: 12,
 	color: { theme: 1 },
@@ -23,22 +16,18 @@ const defaultFont: Partial<Font> = {
 };
 
 // Named cell styles, not just visual formatting: GOV.UK accessibility guidance requires
-// headings to be tagged as such (screen readers announce a cell's named style, e.g.
-// jumping between headings), not just rendered large/bold - large/bold text alone reads
-// as plain text to assistive tech. Registered on the workbook via `Workbook.defineCellStyle`
-// and applied with `Cell.applyCellStyle` in `addTextRow` below, alongside (not instead of)
-// the matching explicit font - applying a named style alone doesn't guarantee every reader
-// renders it correctly, so the visual formatting is still set explicitly too.
+// headings be tagged as such so screen readers can announce/navigate them - large/bold
+// text alone reads as plain text to assistive tech. Applied in `addTextRow` alongside
+// (not instead of) the matching explicit font, since a named style alone isn't
+// guaranteed to render correctly in every reader.
 const cellStyles: Record<string, NamedStyle> = {
 	'Heading 1': { font: { ...defaultFont, size: 18, bold: true } },
 	'Heading 2': { font: { ...defaultFont, size: 14, bold: true } }
 };
 
-// documonster's public `TableStyleProperties.theme` type is `string | undefined`, but the
-// runtime genuinely distinguishes `null` from `undefined`: passing `null` is what suppresses
-// the library's own default table theme (`TableStyleMedium2`) - omitting the key, or passing
-// `undefined`, falls back to it (verified against `table-style-info-xform.js`). There is no
-// type that expresses this, so it's cast at the one place it's needed.
+// documonster's `TableStyleProperties.theme` type is `string | undefined`, but the
+// runtime distinguishes `null` (suppresses the library's default table theme) from
+// `undefined` (falls back to it) - no type expresses this, so it's cast here.
 const noTableTheme = null as unknown as string;
 
 const oneTableMessage = 'This worksheet contains one table.';
@@ -127,10 +116,8 @@ function formatTableData(ds) {
 
 	const data = ds.data[1];
 	const hasStatusCol = 'status' in data;
-	// Avoid the array allocation `.map().join('_')` did per row (profiled as a measurable
-	// cost - see CPU profile notes). The single-key case (the common one - most indicators
-	// have just `areacd`) skips the join entirely; the general case avoids the intermediate
-	// array `.map()` creates.
+	// Avoids the array allocation a generic `.map().join('_')` would do per row; the
+	// single-key case (most indicators have just `areacd`) skips the join entirely.
 	const getRowKey =
 		colKeys.length === 1
 			? (data, i, keys) => data[keys[0]][i]
@@ -209,14 +196,11 @@ export async function dataToSpreadsheet(data): Promise<Readable> {
 			theme: noTableTheme,
 			showRowStripes: false
 		},
-		// `filterButton: false` on every column - Excel adds a filter dropdown to each
-		// table header automatically; GOV.UK accessibility guidance requires this be
-		// turned off (analysisfunction.civilservice.gov.uk "Making spreadsheets
-		// accessible: a brief checklist of the basics"). This is a known trigger for
-		// documonster's own dev-mode OOXML self-check (every column with a bare
-		// `filterButton: false` matches a pattern it flags as "Excel drops tables with
-		// a fully-hidden autoFilter on load") - verified against real Excel to open
-		// correctly with the table intact, so the warning is expected and not a bug.
+		// `filterButton: false` on every column: GOV.UK accessibility guidance requires
+		// Excel's auto-added header filter dropdowns be turned off. This triggers a
+		// documonster dev-mode self-check warning ("Excel drops tables with a
+		// fully-hidden autoFilter") - false positive, verified the table still opens
+		// intact in real Excel, so the warning is expected here and safe to ignore.
 		columns: [
 			{
 				name: 'Table',
@@ -296,21 +280,15 @@ export async function dataToSpreadsheet(data): Promise<Readable> {
 		Row.setAlignment(sheet, tableRowNumber, { wrapText: true });
 	}
 
-	// `activeCell` isn't part of a workbook-level view in documonster's `WorkbookView` type
-	// (it's a worksheet-level `sheetView` concept in the OOXML spec) - the exceljs version of
-	// this call included it, but nothing reads a workbook-level `activeCell`, so dropping it
-	// changes nothing observable. `WorkbookView` requires every field, so the partial object
-	// (documonster merges a partial view onto its own defaults) is cast here.
+	// `activeCell` is a worksheet-level OOXML concept, not part of documonster's
+	// `WorkbookView` type - nothing reads a workbook-level one, so it's safe to omit.
+	// `WorkbookView` requires every field, hence the cast for this partial object.
 	workbook.views = [{ activeTab: 0 } as WorkbookView];
 
-	// `Workbook.toStream` serializes the exact same buffered/`Table`-backed workbook model
-	// `Workbook.toBuffer` does (same push-shaped XLSX serializer underneath - see
-	// `xlsx-stream.d.ts` - so it keeps the native Excel Tables the buffered API is used for
-	// in the first place), it just exposes the output as a demand-driven `Readable` instead
-	// of accumulating it into one `Buffer` first. Every caller streams it onward from here:
-	// `+server.ts` converts it to a Web `ReadableStream` for the HTTP response, and
-	// `generate-spreadsheets.ts` pipes it straight to a file - so there's no reason to ever
-	// materialize the whole file in memory as a `Buffer`, live or pre-generated.
+	// Serializes the same buffered/`Table`-backed model `Workbook.toBuffer` would (so
+	// Tables stay intact) but as a demand-driven `Readable` instead of one big `Buffer`
+	// - callers stream it onward (HTTP response or straight to a file) rather than
+	// materializing the whole XLSX in memory.
 	return Workbook.toStream(workbook, { validate: false });
 }
 

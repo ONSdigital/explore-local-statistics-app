@@ -18,17 +18,11 @@ export function toJSONStat(
 	includeNames = false,
 	includeStatus = false
 ) {
-	// `qb` is the shared, in-memory-cached cube (see CLAUDE.md) - it must never be
-	// mutated in place, but `structuredClone`-ing every top-level key generically
-	// (including things like `extension`/`note`/`id`/`role`, which this function
-	// never touches) is unnecessary recursive-clone work on every request. `dimension`
-	// and `size` are the only structures actually written to below, so those are the
-	// only ones that need copying - and only as deep as the write goes: each dim's
-	// `category` object gets a fresh shallow copy (its `index`/`label` values are
-	// always replaced wholesale, never mutated in place), `size` just needs to be a
-	// new array since individual entries are reassigned.
-	// Copy keys in their original order so the output is identical to before (JSON
-	// key order isn't meaningful, but there's no reason to shuffle it either).
+	// `qb` is the shared, in-memory-cached cube (see CLAUDE.md) and must never be
+	// mutated in place. Only `dimension` and `size` are written to below, so only those
+	// need copying - each dim's `category` gets a shallow copy (its `index`/`label` are
+	// always replaced wholesale, never mutated), and `size` just needs a new array.
+	// Everything else is reference-copied rather than deep-cloned.
 	const cube: jsonStatDataset = {};
 	for (const key of Object.keys(qb)) {
 		if (key === 'value' || key === 'status') continue;
@@ -54,15 +48,10 @@ export function toJSONStat(
 		const dim = dims[i];
 		const size = dim.values.length;
 
-		// The `dim.count !== 1` skip is a no-op shortcut for a dim whose category never
-		// varies (`index * 1 + 0 === index`) - safe only while that dim's *filtered* values
-		// still has exactly the one entry it started with. A dim can have `count === 1` and
-		// still filter down to zero values (e.g. an indicator only ever published for one
-		// time period, and the requested `time` doesn't match it) - skipping the loop there
-		// would silently leave `indices` unchanged instead of correctly collapsing to `[]`,
-		// producing a non-empty result for a filter that matched nothing. `size === 0` forces
-		// the loop to run (and correctly produce no indices) for that case; a normal
-		// `count === 1, size === 1` dim still takes the identical fast path as before.
+		// `dim.count !== 1` is a no-op shortcut for a dim whose category never varies -
+		// but a `count === 1` dim can still filter down to zero values (e.g. a time filter
+		// matching none of an indicator's one published period), so `size === 0` must also
+		// force the loop to run, or `indices` would wrongly stay non-empty.
 		if (dim.count !== 1 || size === 0) {
 			const newIndices = [];
 
@@ -117,14 +106,9 @@ function getValueDimIndex(measures: filteredDimension) {
 	return valueIndex > -1 ? valueIndex : 0;
 }
 
-// This function runs once to generate the most optimal function to fill columns based on the global params
-// Running this saves a number of condiditional tests for each individual row added.
-// It's also where the actual output arrays get resolved: `data` already has all its
-// (empty) column arrays created by the caller, and every push function below captures
-// a direct reference to the array it fills (`colArrays`, `measureArrays`, `areanmArr`,
-// `statusArr`) once here, rather than doing a `data[dims[i].key]`-style property lookup
-// on every single item - the lookup is the same for every item, so there's no need to
-// repeat it per item.
+// Builds a specialized fill function once per request instead of branching per row.
+// Captures direct references to each output array (`colArrays`, `measureArrays`, etc.)
+// up front so the hot loop never does a `data[dims[i].key]`-style lookup per item.
 function makeColFill(
 	data: jsonDataCols,
 	includeNames: boolean,
@@ -202,13 +186,10 @@ function makeColFill(
 					};
 }
 
-// Expand the (non-measure) dims into every combination they represent and fill the
-// output columns directly, one dimension at a time, instead of first materializing
-// a flat array of `{ index, values }` items (one object + one copied array per
-// combination) and then walking that to fill columns. For a cartesian product of any
-// real size that intermediate array is by far the most expensive part of building
-// cols/rows output - fusing the two steps means only a single reused index/values
-// buffer is needed, not one allocation per combination.
+// Expands the (non-measure) dims into every combination and fills the output columns
+// directly, one dimension at a time, rather than first materializing a flat array of
+// `{ index, values }` items and walking that separately - avoids an allocation per
+// combination by reusing a single index/values buffer instead.
 export function dimsToCols(
 	cube: jsonStatDataset,
 	dims: filteredDimension[],
