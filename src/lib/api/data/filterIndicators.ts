@@ -3,21 +3,27 @@ import summaryStats from '$lib/data/json-stat-summary.json';
 
 // Takes a JSON-Stat collection and returns an array of JSON-Stat datasets that meet the filter criteria
 export default function filterIndicators(datasets, params) {
-	if (
-		params.topic === 'all' &&
-		params.indicator !== 'all' &&
-		typeof params.indicator === 'string'
-	) {
-		// Quicker way to return a single indicator
-		const index = summaryStats.indicatorLookup[params.indicator];
-		const ds = index >= 0 ? datasets[index] : null;
-		if (!ds) return [];
+	if (params.topic === 'all' && params.indicator !== 'all') {
+		// Resolve one or more explicitly-named indicators via the precomputed slug->index
+		// lookup instead of scanning the full dataset array. `excludeMultivariate` never
+		// applies here since everything in this branch is named explicitly (see the
+		// general path below for where that exclusion actually applies).
+		const slugs = [params.indicator].flat();
+		const seen = new Set();
+		const found = [];
+		for (const slug of slugs) {
+			const index = summaryStats.indicatorLookup[slug];
+			if (index >= 0 && !seen.has(index)) {
+				seen.add(index);
+				found.push(datasets[index]);
+			}
+		}
 		if (params.hasGeo !== 'any') {
 			const geoFilter = makeDatasetGeoFilter(params.hasGeo);
 			if (geoFilter.error) return geoFilter;
-			if (!geoFilter(ds)) return [];
+			return found.filter(geoFilter);
 		}
-		return [ds];
+		return found;
 	}
 	const indicators = new Set([params.indicator].flat());
 	const topics = new Set([params.topic].flat());

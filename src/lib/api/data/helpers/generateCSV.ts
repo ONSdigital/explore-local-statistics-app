@@ -1,20 +1,9 @@
-// A comma, not a generic delimiter - this replaces d3-dsv's `csvFormat`, which is
-// always called with the default comma delimiter here. See `csvFormatRows` below for
-// why this is hand-rolled rather than delegated to the library.
 const DELIMITER = ',';
 
 // Same quoting rule as d3-dsv's `formatValue` (quote only if the value contains a
-// quote, the delimiter, or a line break; double any internal quotes) but without the
-// per-cell cost the library pays on every one of a large download's cells:
-//   - `value instanceof Date` - always false here, our row values are the string/number/
-//     null values a JSON-Stat cube produces, never Date objects
-//   - `value += ""` - unconditional string coercion, even for values already strings
-//   - a regex `.test()` per cell - a couple of `indexOf` checks do the same job for a
-//     single, known delimiter character, without regex engine call overhead
-// Numbers skip the quoting check entirely: a JS number's string form never contains a
-// quote, comma or line break, so there's nothing to check.
-// Profiled: this was ~86% of `generateCSV`'s total time on a large real download,
-// almost entirely inside d3-dsv's own `formatValue`/`preformatBody`/`format`.
+// quote, the delimiter, or a line break) but skips its per-cell `Date` check and regex
+// test - JSON-Stat values are only ever string/number/null, and numbers can never need
+// quoting, so a couple of `indexOf` checks are enough.
 function formatValue(value: unknown): string {
 	if (value == null) return '';
 	if (typeof value === 'number') return String(value);
@@ -36,10 +25,8 @@ function formatRow(row: Record<string, unknown>, cols: string[]): string {
 	return out;
 }
 
-// Equivalent to d3-dsv's `csvFormat(rows, cols)`, given an explicit (non-null) `cols`
-// array - which is the only way this is ever called here (see `generateCSV` below).
-// Avoids the per-row `columns.map(...).join(delimiter)` d3-dsv's `preformatBody` does
-// (one array allocation per row) in favour of direct string concatenation.
+// Equivalent to d3-dsv's `csvFormat(rows, cols)` with an explicit `cols` array, avoiding
+// the per-row array allocation `preformatBody`'s `.map().join()` does.
 function csvFormatRows(rows: Record<string, unknown>[], cols: string[]): string {
 	const lines = new Array(rows.length + 1);
 	lines[0] = cols.map(formatValue).join(DELIMITER);
@@ -48,12 +35,8 @@ function csvFormatRows(rows: Record<string, unknown>[], cols: string[]): string 
 }
 
 // Infer columns from row data. `datasets` is an array of one rows-array per dataset
-// (not yet flattened) - every row within a single dataset is built from the same fixed
-// key set (see `colsToRows` in dataFormatters.ts, which always writes every declared
-// column onto every row), so it's enough to inspect one row per dataset rather than
-// scanning every row across every dataset - profiled as ~8% of total generateCSV time
-// for a large single-dataset download, entirely avoidable since the extra rows never
-// contribute a new key.
+// (not yet flattened) - every row in a dataset shares the same key set (see
+// `colsToRows` in dataFormatters.ts), so it's enough to inspect one row per dataset.
 function inferColumns(datasets) {
 	const cols = new Set();
 	for (const rows of datasets) {

@@ -1,23 +1,23 @@
-# Requesting data
+# Requesting data for multiple indicators
 
 ```
 GET /api/v1/data.{format}?{parameters}
 ```
 
-The main data endpoint. Filters the underlying JSON-Stat data cube by indicator, geography, time
-and any other dimension, then returns the result in one of six formats. Read
-[Conventions](./README.md#conventions-read-this-first) first if you haven't.
-
-Implementation, if you need to trace behaviour beyond what's documented here:
-`src/routes/(api)/api/v1/data.[format]/+server.ts` → `getFilteredData.ts` → `filterIndicators.ts`
-(which datasets match) → `filterDatasets.ts` → `filterJSONStat` per dataset (dimension-level
-filtering + formatting, in `dataFormatters.ts`).
+Filters the statistical data by indicator, geography, time and any other dimension, then returns
+every matching indicator's data in one of six formats. **Always returns data grouped by
+indicator**, even if your request only ever matches one — see [What you get back](#what-you-get-back)
+below. If you want just one indicator, named up front, use
+[the single-indicator endpoint](./data-item-endpoint.md) (`/api/v1/data/{indicator}.{format}`)
+instead — it returns that indicator's data directly, without the grouping, and has a couple of
+other differences of its own. Read [Conventions](./README.md#conventions-read-this-first) first if
+you haven't.
 
 ## `{format}`
 
 | Value       | Output                                                                             |
 | ----------- | ---------------------------------------------------------------------------------- |
-| `json`      | JSON-Stat 2.0 (the cube format used internally)                                    |
+| `json`      | JSON-Stat 2.0 (a standard format for statistical data cubes)                       |
 | `cols.json` | JSON, column-oriented: `{ areacd: [...], value: [...], ... }`                      |
 | `rows.json` | JSON, row-oriented: `[{ areacd, value, ... }, ...]`                                |
 | `csv`       | Plain-text CSV                                                                     |
@@ -27,7 +27,7 @@ filtering + formatting, in `dataFormatters.ts`).
 Any other value returns `404` (`Requested data format "<x>" not found. Only json, xlsx, csv,
 csvw, cols.json, rows.json available.`). Full descriptions and worked examples of each format's
 actual content are in [data-formats.md](./data-formats.md) — this page focuses on parameters and
-which format gets which response _shape_.
+what you get back overall.
 
 ## Parameters
 
@@ -39,7 +39,7 @@ which format gets which response _shape_.
 | `geo`                 | `all`                                       | One or more area GSS codes, or geography level keys (`ctry`, `rgn`, `cauth`, `utla`, `ltla`)                                                                                                   |
 | `geoExtent`           | `all`                                       | Restrict `geo` level keys to areas within this parent GSS code                                                                                                                                 |
 | `geoCluster`          | `all`                                       | Restrict to a named cluster, `{grouping}_{cluster}`                                                                                                                                            |
-| `hasGeo`              | `any`                                       | Only include datasets/observations covering a given GSS code, level, or geography type                                                                                                         |
+| `hasGeo`              | `any`                                       | Only include indicators/observations covering a given GSS code, level, or geography type                                                                                                       |
 | `time`                | `latest`                                    | A date, date range, or `earliest`/`latest`/`all`                                                                                                                                               |
 | `timeNearest`         | `none`                                      | Whether to substitute the nearest available date if the requested one is out of range                                                                                                          |
 | `measure`             | `all`                                       | Which measure column(s) to include (e.g. `value`, `lci_95`, `uci_95`)                                                                                                                          |
@@ -49,7 +49,7 @@ which format gets which response _shape_.
 
 > **Corrections to the old wiki**: `includeNames` defaults to `true` here (not excluded by
 > default as previously documented), and `geoExtent`'s default is the string `all` (not a UK GSS
-> code) — see [gotchas.md](./gotchas.md) for this and other corrected defaults.
+> code) — see [important-notes.md](./important-notes.md) for this and other corrected defaults.
 
 ### `topic` / `indicator`
 
@@ -63,16 +63,15 @@ GET /api/v1/data.csv?topic=housing,crime
 GET /api/v1/data.json?indicator=employment-rate
 ```
 
-Whether a request counts as "single indicator" (which changes the response _shape_ for
-`json`/`cols.json`/`rows.json` — see [Response shape](#response-shape-single-indicator-vs-collection)
-below) is a specific, narrow condition: `topic` must be `all`, `indicator` must be a single slug
-(not a list, not `all`). A topic-filtered request that happens to match only one indicator still
-gets the multi-indicator (collection) shape.
+Naming a single specific indicator here still groups it under that one indicator's name in the
+response — this endpoint's response never changes shape depending on how many indicators end up
+matching. If you want the data for one indicator returned directly, without that grouping, use
+[`/api/v1/data/{indicator}.{format}`](./data-item-endpoint.md) instead.
 
 ### `excludeMultivariate`
 
-Must be the literal string `true` to take effect (see
-[coercion rules](./README.md#request-format)) — `?excludeMultivariate=1` is silently ignored.
+Must be the exact word `true` to take effect (see
+[value-parsing rules](./README.md#request-format)) — `?excludeMultivariate=1` is silently ignored.
 When `true`, drops any multivariate indicator (one broken down by an extra dimension such as age
 or sex) _unless_ it's named explicitly in `indicator`.
 
@@ -83,7 +82,7 @@ GET /api/v1/data.csv?topic=population&excludeMultivariate=true
 ### `geo` / `geoExtent` / `geoCluster`
 
 `geo` accepts GSS codes and/or the five geography-level keys `ctry`, `rgn`, `cauth`, `utla`,
-`ltla` (comma-separated, mixable). GSS codes are case-insensitive, same as every other route in
+`ltla` (comma-separated, mixable). GSS codes are case-insensitive, same as everywhere else in
 this API.
 
 ```
@@ -98,9 +97,9 @@ GET /api/v1/data.csv?geo=ltla&geoExtent=N92000002
 ```
 
 `geoCluster` restricts to a named cluster (`{grouping}_{cluster}`, e.g. `economic_a`) — see
-[data-endpoint.md#discovering-geocluster-values](#discovering-geocluster-values) below. It
-doesn't remove individually-requested GSS codes from `geo` even if they're outside the cluster,
-but it does override level keys in `geo`.
+[Discovering `geoCluster` values](#discovering-geocluster-values) below. It doesn't remove
+individually-requested GSS codes from `geo` even if they're outside the cluster, but it does
+override level keys in `geo`.
 
 ```
 GET /api/v1/data.cols.json?indicator=employment-rate&geoCluster=global_a
@@ -110,37 +109,37 @@ GET /api/v1/data.cols.json?indicator=employment-rate&geoCluster=global_a
 
 There's no dedicated endpoint for cluster codes; the three valid `{grouping}` values as shipped
 are `global`, `economic` and `demographic`, each with clusters `a`–`d` (i.e. `global_a` …
-`demographic_d`). This is app data, not a fixed enum — treat it as illustrative rather than a
-permanent contract.
+`demographic_d`). This list is drawn from live service data, not a fixed set — treat it as
+illustrative rather than a permanent contract.
 
 ### `hasGeo`
 
-Restricts to datasets/observations that cover a specific area. Unlike `geo` (which filters
+Restricts to indicators/observations that cover a specific area. Unlike `geo` (which filters
 _which observations come back_), `hasGeo` is closer to "does this indicator exist for this
 place at all" — and it accepts three different kinds of value, resolved in this order:
 
-1. A GSS code (`E07000148`) — datasets that include that exact area.
-2. One of the five geography-level keys (`ctry`, `rgn`, `cauth`, `utla`, `ltla`) — datasets whose
+1. A GSS code (`E07000148`) — indicators that include that exact area.
+2. One of the five geography-level keys (`ctry`, `rgn`, `cauth`, `utla`, `ltla`) — indicators whose
    coverage includes that level.
 3. A geography **type** code (the 3-character GSS prefix, e.g. `E07`, `E06`, `cauth`'s `E47`) —
-   datasets whose coverage includes that type. The full set of type codes recognised here is
+   indicators whose coverage includes that type. The full set of type codes recognised here is
    `K02`, `E92`, `N92`, `S92`, `W92`, `E12`, `E47`, `E10`, `E06`, `E08`, `E09`, `N09`, `S12`,
    `W06`, `E07`.
 
 Anything else, including `all`, is a `400` (`Invalid 'hasGeo' parameter...`). The default, `any`,
-means "no filter" — the same sentinel the [metadata endpoints](./metadata-endpoint.md) use for
+means "no filter" — the same setting the [metadata endpoints](./metadata-endpoint.md) use for
 `hasGeo`, so a value can be reused across both without translating it.
 
-`hasGeo` interacts with `time`: a **level** key (`ltla` etc.) filters at the dataset level only
+`hasGeo` interacts with `time`: a **level** key (`ltla` etc.) filters at the indicator level only
 and leaves time filtering untouched, but a **GSS code or type code** additionally restricts which
 _time periods_ are considered to ones where that specific area/type actually has an observation —
 so combining a type-code `hasGeo` with the default `time=latest` can come back empty even though
-the same request with `time=all` succeeds, because "latest" for the _unfiltered_ dataset isn't
+the same request with `time=all` succeeds, because "latest" for the _unfiltered_ indicator isn't
 necessarily a period where that type has data:
 
 ```
-GET /api/v1/data.json?indicator=employment-rate&hasGeo=E07                → 400, no data (with default time=latest)
-GET /api/v1/data.json?indicator=employment-rate&hasGeo=E07&time=all       → 200
+GET /api/v1/data.json?indicator=employment-rate&hasGeo=E07                → 200, empty (value: []) with default time=latest
+GET /api/v1/data.json?indicator=employment-rate&hasGeo=E07&time=all       → 200, populated
 ```
 
 ### `time` / `timeNearest`
@@ -160,8 +159,7 @@ GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&time=2019,202
 ```
 
 `timeNearest` only applies to a **single** time value, not a range — passing it alongside a
-`time` range is accepted but silently has no effect (confirmed by reading `filterTime`/
-`getTimeRange` in `dataFilters.ts`: the range code path never reads `nearest` at all).
+`time` range is accepted but silently has no effect.
 
 | `timeNearest` value | Behaviour (single `time` value only)                                                         |
 | ------------------- | -------------------------------------------------------------------------------------------- |
@@ -174,10 +172,10 @@ GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&time=2019,202
 GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&time=2030&timeNearest=latest
 ```
 
-A `time` value has to be a real year within the dataset's overall range (checked against the
-cube's known year span before any per-dataset filtering runs) or the request is a flat `400`
-(`Request contained invalid time period.`) — this applies even to values inside a range, so an
-out-of-bounds range endpoint fails validation before `timeNearest` would ever come into play.
+A `time` value has to be a real year within the service's known data range or the request is a
+flat `400` (`Request contained invalid time period.`) — this applies even to values inside a
+range, so an out-of-bounds range endpoint fails validation before `timeNearest` would ever come
+into play.
 
 ### `measure`
 
@@ -194,17 +192,14 @@ GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&measure=value
 ### `dimension_{code}`
 
 Filters any dimension that isn't geography or time — e.g. `age`, `sex` on a multivariate
-indicator. The set of valid `{code}` suffixes isn't a fixed list in code: it's
-`summaryStats.otherDims` — an array baked into the bundled `json-stat-summary.json` by the data
-pipeline (`scripts/data:generate`), listing every non-geo/non-time dimension key that appears
-_anywhere_ across the whole data cube. As shipped, that's exactly two: `sex` and `age` (so
-`dimension_sex` and `dimension_age` are the only two accepted `dimension_*` parameter names right
-now) — this will grow if a future dataset adds a new dimension, without any code change. Any
-`dimension_{code}` not in that list is rejected outright by
-[parameter validation](./README.md#request-format) (`400`, unknown parameter) before filtering
-even runs — so an unrecognised `dimension_*` name fails the same generic way a typo'd unrelated
-parameter would, not with a dimension-specific error message. Comma-separate multiple values for
-the same dimension.
+indicator. The set of valid `{code}` suffixes isn't a fixed list — it's generated from the
+underlying data and lists every non-geography/non-time dimension key that appears _anywhere_
+across the whole data set. As shipped, that's exactly two: `sex` and `age` (so `dimension_sex`
+and `dimension_age` are the only two accepted `dimension_*` parameter names right now) — this
+list will grow if a future data update adds a new dimension. Any `dimension_{code}` not in that
+list is rejected outright (`400`, unrecognised parameter) before filtering even runs — so a
+misspelled `dimension_*` name fails the same generic way a typo'd unrelated parameter would, not
+with a dimension-specific error message. Comma-separate multiple values for the same dimension.
 
 ```
 GET /api/v1/data.cols.json?indicator=population-by-age-and-sex&geo=E07000148&dimension_sex=female&dimension_age=0-4,5-9
@@ -224,52 +219,28 @@ GET /api/v1/data.cols.json?indicator=population-by-age-and-sex&geo=E07000148&dim
 ### `includeNames` / `includeStatus`
 
 `includeNames=true` (the default) adds an `areanm` field/column alongside `areacd`.
-`includeStatus` adds an observation-level status flag where the underlying dataset has one
+`includeStatus` adds an observation-level status flag where the underlying indicator has one
 (defaults to `true` for `json`/`xlsx`, `false` for the other four formats — the one parameter
 whose default genuinely varies by `{format}`).
 
-## Response shape: single indicator vs. collection
+## What you get back
 
-This is the sharpest edge in the whole API and the one most likely to break a client that assumes
-one consistent shape. Whether a request is "single indicator" is decided once, by the narrow rule
-in [`topic`/`indicator`](#topic--indicator) above (`topic=all` **and** a single `indicator`
-slug) — and it changes the top-level shape for three of the six formats:
+Every format here groups results by indicator, whether one indicator matched or many — this
+endpoint's response never changes structure depending on how many indicators end up matching.
+(This wasn't always true — see
+[important-notes.md](./important-notes.md#the-two-data-endpoints-and-what-they-replaced) if you're looking for
+the older, less predictable behaviour this replaced.)
 
-| Format      | Single indicator                                                                                                  | Multiple / all indicators                                                                                                         |
-| ----------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `json`      | A bare JSON-Stat **dataset** object (`class: "dataset"`)                                                          | A JSON-Stat **collection** (`class: "collection"`, datasets under `link.item[]`)                                                  |
-| `cols.json` | The bare columns object directly (`{ areacd: [...], value: [...] }`)                                              | An object keyed by indicator slug, each value a columns object (`{ "employment-rate": {...}, "claimant-count": {...} }`)          |
-| `rows.json` | A bare array of row objects                                                                                       | An object keyed by indicator slug, each value an array of row objects                                                             |
-| `csv`       | No `indicator` column                                                                                             | An `indicator` column (the indicator's display label) is prepended to every row                                                   |
-| `csvw`      | Dataset-specific Dublin Core fields (`dc:title`, `dc:description`, etc.) present; no `indicator` column described | No dataset-specific fields; an `indicator` column with an `aboutUrl` pointing back at `/metadata/indicators` is described instead |
-| `xlsx`      | One data sheet                                                                                                    | One sheet per indicator (plus a table-of-contents and notes sheet)                                                                |
+| Format      | What you get                                                                                                                            |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `json`      | A wrapper object with every matched indicator's full data listed inside it (possibly an empty list)                                     |
+| `cols.json` | An object keyed by indicator slug, each value a columns object (`{ "employment-rate": {...}, "claimant-count": {...} }`, possibly `{}`) |
+| `rows.json` | Same keyed-by-slug shape, each value a list of row objects                                                                              |
+| `csv`       | An `indicator` column (the indicator's display name) is included in every row                                                           |
+| `csvw`      | Describes an `indicator` column rather than one indicator's own details                                                                 |
+| `xlsx`      | One sheet per matched indicator (plus a table-of-contents and notes sheet), possibly no data sheets at all                              |
 
-**`json`, single indicator** (`?indicator=employment-rate&geo=E07000148`):
-
-```json
-{
-	"version": "2.0",
-	"class": "dataset",
-	"label": "Employment rate (Great Britain)",
-	"id": ["areacd", "period", "measure"],
-	"size": [1, 1, 3],
-	"dimension": {
-		"areacd": {
-			"label": "Area code",
-			"category": { "index": { "E07000148": 0 }, "label": { "E07000148": "Norwich" } }
-		},
-		"period": { "label": "Time period", "category": { "index": { "2023-01-01/P1Y": 0 } } },
-		"measure": {
-			"label": "Measure",
-			"category": { "index": { "value": 0, "lci_95": 1, "uci_95": 2 } }
-		}
-	},
-	"status": {},
-	"value": [82.7, 75, 90.4]
-}
-```
-
-**`json`, multiple indicators** (`?topic=employment&geo=E07000148`):
+**`json`, one matched indicator** (`?indicator=employment-rate&geo=E07000148`) — still grouped:
 
 ```json
 {
@@ -278,7 +249,10 @@ slug) — and it changes the top-level shape for three of the six formats:
 	"label": "ONS Explore Local Statistics API response",
 	"link": {
 		"item": [
-			{ "class": "dataset", "...": "one full dataset object per indicator, same shape as above" }
+			{
+				"class": "dataset",
+				"...": "the full indicator data - same structure the single-indicator endpoint returns directly"
+			}
 		]
 	}
 }
@@ -324,19 +298,24 @@ columns.)
 
 ## No matching data
 
-If every filter passes validation but nothing actually matches (wrong combination of `geo` +
-`time` + indicator, for instance), the response is **`400`**, not an empty `200` or a `404`:
-
-```json
-{ "message": "No data available for the selected filters." }
-```
+An empty result — whether because no indicator matched `topic`/`indicator`/`hasGeo` at all, or
+because matched indicators' `geo`/`time`/`measure`/`dimension_*` filters left no observations —
+is a valid `200`, not an error: an empty list of indicators (`link.item: []` for `json`, `{}` for
+`cols.json`/`rows.json`, a header-only `csv`, no data sheets for `xlsx`). This endpoint never
+returns the older `400 No data available for the selected filters.` message — that message is
+specific to [the single-indicator endpoint](./data-item-endpoint.md#empty-results), where it means
+something narrower. An actually malformed request (bad `hasGeo`, bad `time` shape, too broad a
+request — see below) still `400`s exactly as before; only "valid filters, nothing left" changed.
 
 ## Requests that get rejected as too large
 
-Before filtering runs, `isOversizedRequest` (`requestValidators.ts`) rejects a request with `400`
-(`Too much data requested. Try narrowing your parameters.`) if **all three** of these are true at
-once — this is a deliberate `&&`, not an accidental one; a request only needs to be narrow on
-_one_ of the three axes to be allowed:
+This check is specific to this endpoint — [the single-indicator endpoint](./data-item-endpoint.md)
+never applies it at all, since a request for one named indicator can't be broad on the indicator
+axis (see below).
+
+A request is rejected with `400` (`Too much data requested. Try narrowing your parameters.`) if
+**all three** of these are true at once — this is deliberate, not accidental; a request only
+needs to be narrow on _one_ of the three axes to be allowed:
 
 - **time** is broad: `time=all`, or a range/list of more than one period.
 - **indicator selection** is broad: `indicator=all`, more than 20 comma-separated indicators, or
@@ -347,8 +326,8 @@ _one_ of the three axes to be allowed:
 `format=csvw` is exempt from this check entirely (it returns metadata only, not observation
 data, regardless of how broad the filters are).
 
-Because it's an AND, plenty of individually-large requests are allowed through: `time=all` across
-every indicator for one small area, or one broad `geo` group for a single time period, are both
-fine. If you're building a client that needs to avoid `400`s on large pulls, narrow at least one
-axis — `geoExtent` or `geoCluster` to make `geo` non-broad is usually the cheapest lever, since it
+Plenty of individually-large requests are allowed through: `time=all` across every indicator for
+one small area, or one broad `geo` group for a single time period, are both fine. If you're
+building a client that needs to avoid `400`s on large pulls, narrow at least one axis —
+`geoExtent` or `geoCluster` to make `geo` non-broad is usually the cheapest lever, since it
 doesn't require giving up `time=all` or `indicator=all`.
