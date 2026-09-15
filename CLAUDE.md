@@ -58,6 +58,12 @@ Each domain's `getX.ts` files are the public entry points; `helpers/` subfolders
 
 **Logging**: `src/lib/logger.ts` (pino) is wired into `console.*` globally in `src/hooks.server.ts` for non-dev environments — don't reintroduce raw `console.log` calls expecting dev-only behaviour.
 
+## Code comments
+
+Keep in-code comments short and focused on the non-obvious *why* — a hidden constraint, a correctness invariant, a library quirk that would otherwise get "fixed" back into a bug. A line or two is usually enough; if a comment needs a paragraph, that's a sign the content belongs elsewhere.
+
+Don't use code comments to narrate investigation or optimization history: profiling numbers, before/after timings, "confirmed by testing", session-by-session changelogs, or links followed while debugging. That belongs in this file instead — in "Performance notes for the data API" / "Correctness notes for `/api/v1/`" below, `docs/api/gotchas.md` for API-specific behaviour, or a new section here if the area being touched doesn't have one yet. Leave at most a short pointer in the code (e.g. "see CLAUDE.md" or a doc filename) rather than duplicating the write-up inline — duplicated detail drifts out of sync as the code changes further.
+
 ## Build/deploy notes
 
 - The SvelteKit adapter is chosen at config time in `svelte.config.js`: Vercel adapter if `VERCEL` env var is set, otherwise the Node adapter — relevant if changing build/runtime behaviour.
