@@ -165,7 +165,7 @@
 				fitBoundsOptions,
 				maxBounds: [-22, 48, 17, 62],
 				cooperativeGestures: true,
-				preserveDrawingBuffer: true,
+				canvasContextAttributes: { preserveDrawingBuffer: true },
 				dragRotate: false
 			}}
 			controls
