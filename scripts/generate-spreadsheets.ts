@@ -1,6 +1,7 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, createWriteStream } from 'fs';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
+import { pipeline } from 'stream/promises';
 import generateXLSX from '$lib/api/data/helpers/generateXLSX';
 import generateCSV from '$lib/api/data/helpers/generateCSV';
 import filterIndicators from '$lib/api/data/filterIndicators';
@@ -40,10 +41,13 @@ for (const code of codes) {
 	const datasets = filterIndicators(cube.link.item, params);
 	if (datasets.error) throw Error(datasets);
 
-	// Apply filters to the data within the datasets and generate the selected output format
+	// Apply filters to the data within the datasets and generate the selected output format.
+	// `generateXLSX` returns a stream, not a buffer - piped straight to disk, the largest of
+	// these files (every indicator, every geography, every time period) never needs to sit
+	// fully in memory at once, live or pre-generated.
 	const xlsx_data = filterDatasets(datasets, params);
-	const xlsx = await generateXLSX(xlsx_data);
-	writeFileSync(path, xlsx);
+	const xlsxStream = await generateXLSX(xlsx_data);
+	await pipeline(xlsxStream, createWriteStream(path));
 	console.log(`Wrote ${path}`);
 
 	if (!code) {

@@ -1,5 +1,6 @@
 import type { RequestHandler } from './$types';
 import { json, text, error } from '@sveltejs/kit';
+import { Readable } from 'node:stream';
 import { dataParams } from '$lib/api/config';
 import { getParam, getDimensionFilters, hasValidParams, hasValidTimeParam } from '$lib/api/utils';
 import getFilteredData from '$lib/api/data/getFilteredData';
@@ -52,12 +53,22 @@ export const GET: RequestHandler = async ({ url, params }) => {
 	if (datasets.error) error(datasets.error, datasets.message);
 
 	return datasets.format === 'xlsx'
-		? new Response(datasets.data, {
-				headers: {
-					'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-					// "Content-Length": String(datasets.data._readableState.length)
+		? new Response(
+				// `generateXLSX` now returns a `Readable`, not a `Buffer` - the workbook is
+				// serialized (XML + ZIP compression, still with native Excel Tables intact)
+				// as the client reads it, rather than being fully built in memory first.
+				// `Readable.toWeb` is the standard bridge to the Web `ReadableStream` a Fetch
+				// API `Response` body takes; SvelteKit's Node adapter already reads and writes
+				// that incrementally, and propagates an early client disconnect back to
+				// `.cancel()`/`.destroy()` on this stream. Content-Length can't be set - the
+				// compressed size isn't known until the last byte is written.
+				Readable.toWeb(datasets.data) as ReadableStream<Uint8Array>,
+				{
+					headers: {
+						'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+					}
 				}
-			})
+			)
 		: datasets.format === 'text'
 			? text(datasets.data)
 			: json(datasets.data);

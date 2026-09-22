@@ -1,7 +1,16 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
-	import { Hero, NavSections, NavSection, List, Li, Icon } from '@onsvisual/svelte-components';
+	import {
+		Hero,
+		NavSections,
+		NavSection,
+		List,
+		Li,
+		Icon,
+		Details
+	} from '@onsvisual/svelte-components';
 	import { capitalise } from '@onsvisual/robo-utils';
 	import { makePeriodFormatter, downloadEvent } from '$lib/utils';
 	import { getChartTypesForIndicator } from '$lib/components/charts/chartHelpers';
@@ -9,6 +18,7 @@
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
 	import IndicatorChart from '$lib/components/charts/IndicatorChart.svelte';
+	import IndicatorSearch from '$lib/components/nav/IndicatorSearch.svelte';
 
 	let { data } = $props();
 
@@ -44,23 +54,8 @@
 
 <Hero
 	title={data.indicator.label}
+	cls="indicator-hero"
 	width="medium"
-	meta={[
-		{
-			key: data.indicator.source.length === 1 ? 'Data source' : 'Data sources',
-			value: arrayJoin(
-				data.indicator.source.map(
-					(s) =>
-						`<a href="${s.href}" target="_blank">${s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a>`
-				)
-			)
-		},
-		{
-			key: 'Published on',
-			value: arrayJoin(data.indicator.source.map((d) => parseDate(d.date)))
-		}
-	]}
-	background="#eaeaea"
 	titleBadge={{
 		label: data.indicator.experimentalStatistic
 			? 'Official statistics in development'
@@ -68,10 +63,34 @@
 		ariaLabel: `Topic: ${capitalise(data.indicator.topic)}`,
 		color: '#003c57'
 	}}
+	background="var(--ons-color-banner-bg)"
 >
 	<p class="ons-hero__text">
 		{data.indicator.description}
 	</p>
+	<p class="ons-u-mb-no">
+		{#if data.indicator.source.length === 1}
+			<strong>Data source:</strong>
+		{:else}
+			<strong>Data sources:</strong><br />
+		{/if}
+		{#each data.indicator.source as s}
+			<span>
+				<a href={s.href} target="_blank"
+					>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+				><span class="inline-icon ons-u-ml-3xs ons-u-mr-3xs"><Icon type="external" /></span>
+				published {parseDate(s.date)}
+			</span><br />
+		{/each}
+	</p>
+	<div style:margin="40px 0 -36px" style:z-index={1}>
+		<Details title="Find another indicator">
+			<IndicatorSearch
+				indicators={data.taxonomyFlat.data}
+				onSelect={(ind) => (window.location.href = resolve(`/indicators/${ind.slug}`))}
+			/>
+		</Details>
+	</div>
 </Hero>
 
 <NavSections cls="wider-nav-sections" marginTop>
@@ -110,36 +129,33 @@
 	<NavSection title="Get the data">
 		<p>
 			You can download this dataset in an <a
-				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`)}
 				download={`${data.indicator.slug}.xlsx`}
 				aria-label="Download {data.indicator.label} data as an XLSX file"
 				onclick={() =>
 					downloadEvent(
 						'xlsx',
-						resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`),
+						resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`),
 						data.indicator
 					)}>XLSX</a
 			>,
 			<a
-				href={resolve(`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csv?time=all`)}
 				download={`${data.indicator.slug}.csv`}
 				aria-label="Download {data.indicator.label} data as a CSV file"
 				onclick={() =>
-					downloadEvent(
-						'csv',
-						`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`,
-						data.indicator
-					)}>CSV</a
+					downloadEvent('csv', `/api/v1/data/${data.indicator.slug}.csv?time=all`, data.indicator)}
+				>CSV</a
 			>
 			or
 			<a
-				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csvw?time=all`)}
 				download={`${data.indicator.slug}.csv-metadata.json`}
 				aria-label="Download {data.indicator.label} metadata as an CSVW file"
 				onclick={() =>
 					downloadEvent(
 						'csvw',
-						`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`,
+						`/api/v1/data/${data.indicator.slug}.csvw?time=all`,
 						data.indicator
 					)}>CSVW</a
 			>
@@ -192,3 +208,10 @@
 		</p>
 	</NavSection>
 </NavSections>
+
+<style>
+	:global(.indicator-hero) {
+		position: relative;
+		z-index: 10;
+	}
+</style>
