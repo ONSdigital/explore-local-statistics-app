@@ -117,7 +117,7 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 			description: longDescription,
 			source: meta_data.metadata.source,
 			slug: manifest_metadata_indicator[0].slug,
-			dataModified: meta_data['dc:modified'],
+			dataModified: meta_data.metadata.dataModified,
 			metadataModified: meta_data.metadata.metadataModified,
 			...restOfMetadata,
 			experimentalStatistic: meta_data.metadata.experimentalStatistic,
@@ -247,6 +247,7 @@ function validateIndicators(dataFolders, manifestMetadata) {
 		);
 	}
 }
+
 function processFile(file) {
 	const data_file = file.replace(`${RAW_DATA_DIR}`, '');
 	if (!fs.existsSync(`${RAW_DATA_DIR}${data_file}`))
@@ -275,17 +276,13 @@ function processFile(file) {
 		.select(['areacd', 'areanm'])
 		.dedupe('areacd');
 
-	// get the column titles of those columns we want to suppress
-	const suppressedCols = tableSchema
-		.filter((d) => d.suppressOutput)
-		.map((d) => (Array.isArray(d.titles) ? d.titles[0] : d.titles));
+	const rawHeader = (d: any) => (Array.isArray(d.titles) ? d.titles[0] : d.name);
+	const suppressedCols = tableSchema.filter((d) => d.suppressOutput).map(rawHeader);
 
-	//  rename the columns in data using the information in tableschema
-	// (name is the target title, the first value of titles is the existing column name in the csv)
 	const varNames = Object.fromEntries(
 		tableSchema
-			.filter((d) => !suppressedCols.includes(Array.isArray(d.titles) ? d.titles[0] : d.titles)) // remove columns we are deselecting from this
-			.map((d) => [Array.isArray(d.titles) ? d.titles[0] : d.titles, d.name])
+			.filter((d) => !suppressedCols.includes(rawHeader(d)))
+			.map((d) => [rawHeader(d), d.name])
 	);
 
 	indicator_data = indicator_data
