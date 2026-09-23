@@ -26,6 +26,7 @@
 	import ComparisonRow from './ComparisonRow.svelte';
 	import Line from '$lib/components/charts/Line.svelte';
 	import { getAreaType } from '$lib/utils';
+	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -38,6 +39,15 @@
 	let selection = $derived({
 		areas: $selectedAreas.map((area) => area.areacd),
 		indicator: $selectedIndicator
+	});
+
+	let modalPageState = $state({
+		selectedAreas: $selectedAreas,
+		selectedComparisonArea: $chosenComparisonArea
+	});
+
+	$effect(() => {
+		chosenComparisonArea.set(modalPageState.selectedComparisonArea);
 	});
 
 	async function getData(indicator, areas, chosenComparisonArea = null) {
@@ -167,6 +177,7 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
+	$inspect(data);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -180,7 +191,6 @@
 <Container>
 	<div class="indicator-select">
 		<h4>Select an indicator</h4>
-		<!-- <p>Search or browse for an indicator to compare across your selected areas.</p> -->
 		<div class="select-container">
 			<Select
 				label=""
@@ -232,36 +242,22 @@
 		<div class="header-details">
 			{#if data.uci_95 && data.lci_95}
 				<div>
-					Blue band shows 95% confidence interval <a style:font-weight="bold">&#9432</a>
+					Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
 				</div>
 			{/if}
-			{#key comparisonArea}
-				{#if comparisonArea && metadata?.standardised}
-					<div>
-						<!-- Comparison area: {comparisonArea?.areanm} -->
-						Comparison area:
-						<Select
-							label=""
-							placeholder={comparisonArea?.areanm}
-							labelKey="areanm"
-							groupKey="type"
-							autoClear={false}
-							options={areas}
-							value={$chosenComparisonArea}
-							on:change={(e) => chosenComparisonArea.set(e.detail)}
-							on:clear={() => chosenComparisonArea.set(null)}
-						></Select>
-					</div>
+			<div class="legend-modals">
+				{#if metadata.standardised}
+					<AreasModal mode="comparison" {data} bind:pageState={modalPageState} areaslist={areas} />
 				{:else}
-					<div>Comparison area disabled for non-standardised indicator.</div>
+					<p>Comparison area disabled for non-standardised indicator.</p>
 				{/if}
-			{/key}
+			</div>
 		</div>
 
 		{#if ![...new Set(data?.areacd)].includes(comparisonArea.areacd)}
 			<div class="missing-data-message">
 				<!-- Comparison data unavailable for {comparisonArea.areanm} -->
-				Comparison data unavailable
+				Data unavailable for selected comparison area.
 			</div>
 		{/if}
 	{/if}
@@ -358,8 +354,16 @@
 		margin-top: 10px;
 		margin-bottom: 20px;
 		font-size: 16px;
-		justify-content: flex-end;
+		justify-content: space-between;
+		align-items: center;
 		gap: 10px;
+	}
+
+	.legend-modals {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-left: auto;
 	}
 
 	.indicator-info {

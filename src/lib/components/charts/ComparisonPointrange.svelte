@@ -2,7 +2,7 @@
 	import { scaleLinear } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 
-	let { data, xKey = 'value', idKey = 'areacd', xDomain, chartWidth, CIsStyle } = $props();
+	let { data, xDomain, chartWidth, CIsStyle } = $props();
 	let leftMargin = $state(0);
 	const barHeight = 20;
 
