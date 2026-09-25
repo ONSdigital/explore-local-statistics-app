@@ -10,6 +10,15 @@ import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 import geoLatestYear from '$lib/data/geo-latest-year.json';
 import geoStartYears from '$lib/data/geo-start-years.json';
 
+// A `cols.json` response with no observations - either because the API returned a genuine
+// error-shaped body (`{ message: '...' }` or a `200` with every column present but zero-length
+export function isEmptyColsData(data: jsonDataCols | errorObject | null | undefined): boolean {
+	if (!data) return true;
+	const cols = Object.values(data);
+	if (cols.length === 0) return true;
+	return cols.every((col) => !Array.isArray(col) || col.length === 0);
+}
+
 export function parseData(data: jsonDataCols) {
 	const cols = Object.keys(data);
 	const rows: jsonDataRow[] = [];
@@ -95,7 +104,7 @@ export function slugify(text: string) {
 }
 
 export function makeDataUrl(
-	indicator: string,
+	indicator: string | string[],
 	timeRange: string | string[] = [],
 	timeNearest: string | null = null,
 	geoSelected: string[] = [],
@@ -106,10 +115,18 @@ export function makeDataUrl(
 	measure: string | string[] | null = null,
 	format: string = 'cols.json'
 ): string {
-	const base = `/api/v1/data.${format}`;
+	// A single indicator (a plain string) uses the item route (`/api/v1/data/{indicator}.
+	// {format}`), which always returns the bare/non-nested shape - the same shape every
+	// single-indicator caller here already expects. An array (even a one-element one) uses
+	// the collection route (`/api/v1/data.{format}`), which always returns the collection
+	// shape. It's the *type* of `indicator` that decides this, not how many entries an array
+	// happens to have - see docs/api/ for the full route split.
+	const isItem = typeof indicator === 'string' && indicator.length > 0;
+	const base = isItem ? `/api/v1/data/${indicator}.${format}` : `/api/v1/data.${format}`;
 	const chunks: { key: string; value: string }[] = [];
 
-	if (indicator) chunks.push({ key: 'indicator', value: indicator });
+	if (!isItem && Array.isArray(indicator) && indicator.length > 0)
+		chunks.push({ key: 'indicator', value: indicator.join(',') });
 
 	const geoLevelObj = geoLevels[geoLevel];
 	const geo = geoLevelObj ? [geoLevel] : [];

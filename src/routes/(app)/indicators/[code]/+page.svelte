@@ -134,36 +134,33 @@
 	<NavSection title="Get the data">
 		<p>
 			You can download this dataset in an <a
-				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`)}
 				download={`${data.indicator.slug}.xlsx`}
 				aria-label="Download {data.indicator.label} data as an XLSX file"
 				onclick={() =>
 					downloadEvent(
 						'xlsx',
-						resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`),
+						resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`),
 						data.indicator
 					)}>XLSX</a
 			>,
 			<a
-				href={resolve(`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csv?time=all`)}
 				download={`${data.indicator.slug}.csv`}
 				aria-label="Download {data.indicator.label} data as a CSV file"
 				onclick={() =>
-					downloadEvent(
-						'csv',
-						`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`,
-						data.indicator
-					)}>CSV</a
+					downloadEvent('csv', `/api/v1/data/${data.indicator.slug}.csv?time=all`, data.indicator)}
+				>CSV</a
 			>
 			or
 			<a
-				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csvw?time=all`)}
 				download={`${data.indicator.slug}.csv-metadata.json`}
 				aria-label="Download {data.indicator.label} metadata as an CSVW file"
 				onclick={() =>
 					downloadEvent(
 						'csvw',
-						`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`,
+						`/api/v1/data/${data.indicator.slug}.csvw?time=all`,
 						data.indicator
 					)}>CSVW</a
 			>

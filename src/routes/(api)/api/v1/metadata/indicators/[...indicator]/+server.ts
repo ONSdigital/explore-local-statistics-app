@@ -23,7 +23,7 @@ export const GET: RequestHandler = ({ url, params }) => {
 	const indicator = params.indicator || getParam(url, 'indicator', null);
 	const topic = getParam(url, 'topic', 'all');
 	const excludeMultivariate = getParam(url, 'excludeMultivariate', false);
-	const hasGeo = getParam(url, 'hasGeo', 'all');
+	const hasGeo = getParam(url, 'hasGeo', 'any');
 	const hasYear = getParam(url, 'hasYear', 'all');
 	const fullDims = getParam(url, 'fullDims', false);
 	const asLookup = getParam(url, 'asLookup', false);
