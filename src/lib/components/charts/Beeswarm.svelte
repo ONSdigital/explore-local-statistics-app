@@ -46,7 +46,7 @@
 		if (el?.getBoundingClientRect && el?.parentElement) {
 			const rect = el.getBoundingClientRect();
 			const parent = el.parentElement.getBoundingClientRect();
-			console.log({ rect, parent });
+			// console.log({ rect, parent });
 
 			const leftDiff = parent.left - rect.left - padding;
 			const rightDiff = parent.right - rect.right + padding;
