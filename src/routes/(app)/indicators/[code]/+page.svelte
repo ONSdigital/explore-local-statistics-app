@@ -94,9 +94,13 @@
 <NavSections cls="wider-nav-sections" marginTop>
 	{#if data.indicator.confidenceIntervals}
 		<Notice cls="ons-u-mb-xs">
-			Confidence intervals (CIs) &mdash; an upper and lower range for each estimate &mdash; are
-			available for this indicator. CIs can be enabled via the chart options menu, and should be
-			considered when making comparisons between areas or over time.
+			An upper and lower range for each estimate, also known as <a
+				href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/uncertaintyandhowwemeasureit#confidence-interval"
+				target="_blank"
+				>confidence intervals (CIs)<span class="ons-u-vh"> (opens in a new tab)</span>
+			</a><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>, can be shown on
+			the charts for this indicator through “Chart options”. Consider this uncertainty when
+			comparing between areas or over time.
 		</Notice>
 	{/if}
 	<div class="indicators-nav-sections">
@@ -127,7 +131,7 @@
 		{/each}
 	</div>
 	{#if data.indicator.caveats.length > 0}
-		<NavSection title="Interpretation">
+		<NavSection title="About these estimates">
 			<p>{@html caveats}</p>
 		</NavSection>
 	{/if}
