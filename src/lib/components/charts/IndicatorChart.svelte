@@ -123,23 +123,27 @@
 			</p>
 		</div>
 	{:else}
-		<h3 class="content-title">{metadata.label}</h3>
-		<p class="content-subtitle">
-			{metadata.subtitle},
-			{pluralise(geoLevel.label).toLowerCase()},
-			{#if hasTimeRange}{formatPeriod(dataTimeRange[0])} to{/if}
-			{formatPeriod(dataTimeRange[dataTimeRange.length - 1])}
-		</p>
-		{#if mode === 'default'}
-			<button
-				class="fullscreen-toggle"
-				title="{fullscreenMode ? 'Exit' : 'Enter'} full screen mode"
-				onclick={toggleFullscreen}
-			>
-				<Icon type={fullscreenMode ? 'shrink' : 'expand'} size="l" />
-				<span class="ons-u-vh">{fullscreenMode ? 'Exit' : 'Enter'} full screen mode</span>
-			</button>
-		{/if}
+		<div class="content-header">
+			<div>
+				<h3 class="content-title">{metadata.label}</h3>
+				<p class="content-subtitle">
+					{metadata.subtitle},
+					{pluralise(geoLevel.label).toLowerCase()},
+					{#if hasTimeRange}{formatPeriod(dataTimeRange[0])} to{/if}
+					{formatPeriod(dataTimeRange[dataTimeRange.length - 1])}
+				</p>
+			</div>
+			{#if mode === 'default'}
+				<button
+					class="fullscreen-toggle"
+					title="{fullscreenMode ? 'Exit' : 'Enter'} full screen mode"
+					onclick={toggleFullscreen}
+				>
+					<Icon type={fullscreenMode ? 'shrink' : 'expand'} size="l" />
+					<span class="ons-u-vh">{fullscreenMode ? 'Exit' : 'Enter'} full screen mode</span>
+				</button>
+			{/if}
+		</div>
 		<Observe bind:visible>
 			<div class="indicator-chart">
 				<ChartDataLoader
@@ -221,10 +225,8 @@
 		border: 1px solid #909090;
 	}
 	.fullscreen-toggle {
-		position: absolute;
+		flex: none;
 		cursor: pointer;
-		top: 12px;
-		right: 8px;
 		color: var(--ons-color-text-link);
 		background: none;
 		border: none;
@@ -255,6 +257,12 @@
 		margin: auto 0 0;
 	}
 
+	.content-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 8px;
+	}
 	.content-title {
 		margin: 0;
 		display: flex;
