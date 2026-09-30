@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Spinner from '../visuals/Spinner.svelte';
 	import { extremeAreas } from '$lib/config';
-	import { filterExtremeAreas } from '$lib/utils';
+	import { filterExtremeAreas, isEmptyColsData } from '$lib/utils';
 
 	let {
 		chart,
@@ -32,7 +32,15 @@
 			try {
 				let fetchedData = await (await fetch(dataUrl)).json();
 
-				if (filterExtremes && !fetchedData.message && extremeAreas[indicator]) {
+				// A `message` field means the API returned an error-shaped body; an empty
+				// `cols.json` body (every column present, zero-length - the API's own "no
+				// observations for this request" response, not an error) needs the same
+				// no-data treatment even though it isn't shaped like an error.
+				if (fetchedData.message) {
+					data = fetchedData;
+				} else if (isEmptyColsData(fetchedData)) {
+					data = { message: 'Data not available' };
+				} else if (filterExtremes && extremeAreas[indicator]) {
 					data = filterExtremeAreas(fetchedData, extremeAreas[indicator]);
 				} else data = fetchedData;
 

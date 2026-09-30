@@ -21,7 +21,6 @@
 <div class="map-container" bind:clientWidth={w} bind:clientHeight={h}>
 	<Map
 		bind:map
-		css={resolve('/css/maplibre-gl.css')}
 		style={resolve('/data/mapstyle-nav.json')}
 		location={{ bounds }}
 		interactive={false}

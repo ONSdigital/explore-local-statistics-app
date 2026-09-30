@@ -8,17 +8,18 @@
 // Notes for interpreting results:
 //   - `cols.json` is the format actually used by every chart in the app - treat
 //     regressions there as higher priority than the other formats.
-//   - The `xlsx`/`csv` "download all data" benchmarks exist mainly as a baseline to
-//     compare against after swapping the `@protobi/exceljs` dependency (see
-//     `helpers/generateXLSX.ts`) - re-run these before/after that change.
 //   - These measure the whole pipeline (dataset filter + dimension filter + format),
 //     not just formatting - a regression could come from any stage.
+//   - Fixtures with `singleIndicator: true` represent the item route
+//     (`/api/v1/data/{indicator}.{format}`); the rest represent the collection route
+//     (`/api/v1/data.{format}`) - see `__fixtures__/queryShapes.ts`.
 import { bench, describe } from 'vitest';
 import getFilteredData from './getFilteredData';
 import {
 	chartTimeSeriesBroadGeo,
 	chartLatestBroadGeo,
 	singleValueSingleArea,
+	multiIndicatorSingleArea,
 	downloadAllDataXLSX,
 	downloadAllDataCSV
 } from './__fixtures__/queryShapes';
@@ -34,6 +35,10 @@ describe('getFilteredData - real usage shapes', () => {
 
 	bench('single value, single area (cols.json)', async () => {
 		await getFilteredData(singleValueSingleArea);
+	});
+
+	bench('multiple indicators, single area (cols.json)', async () => {
+		await getFilteredData(multiIndicatorSingleArea);
 	});
 
 	bench('download: single indicator, all geo, all time (xlsx)', async () => {

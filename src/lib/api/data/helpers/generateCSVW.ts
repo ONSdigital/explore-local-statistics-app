@@ -77,7 +77,12 @@ export default function generateCSVW(
 ) {
 	const dateString = new Date().toISOString().slice(0, 10);
 
-	const singleDataset = datasets.length === 1 ? datasets[0] : null;
+	// Driven by the explicit `singleIndicator` flag (same one `makeCSVWColumns` uses below for
+	// the `indicator` column), not by `datasets.length === 1` - the two used to agree by
+	// coincidence when "single indicator" was inferred from the query, but the collection
+	// route can now genuinely match exactly one indicator and still be collection-shaped, and
+	// the item route is guaranteed exactly one dataset either way.
+	const singleDataset = singleIndicator ? datasets[0] : null;
 	const singleDatasetMetadata = singleDataset
 		? {
 				'dc:title': singleDataset.label,

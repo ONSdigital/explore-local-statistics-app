@@ -58,7 +58,7 @@
 			<a href={resolve(`/indicators/gross-disposable-household-income-per-head`)} class="no-wrap"
 				>household income</a
 			>,
-			<a href={resolve(`/indicators/further-education-and-skills-participation`)}
+			<a href={resolve(`/indicators/further-education-skills-participation`)}
 				>further education participation</a
 			>
 			and

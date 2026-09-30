@@ -4,9 +4,8 @@
 GET /api/v1/geo/boundaries.{format}?{parameters}
 ```
 
-Generalised (simplified) boundary polygons for a geography level, in GeoJSON or TopoJSON.
-Implementation: `getBoundaries.ts`, reading a single bundled `topo.json` file at startup — this
-route never touches the network.
+Generalised (simplified) boundary polygons for a geography level, in GeoJSON or TopoJSON. Answers
+immediately — this route doesn't look anything up externally.
 
 ## `{format}`
 
@@ -26,20 +25,19 @@ available.`).
 | `country`  | `all`    | Restrict to one or more single-letter country codes (`E`, `N`, `S`, `W`) |
 | `geoLevel` | `ltla`   | Which layer to return                                                    |
 
-`geoLevel` is resolved directly against the bundled boundary file's own layers, **not** against
-any of the three `geoLevels`/`geoLevelsAll`/`geoLevelsNav` sets used elsewhere in the API — see
-[gotchas.md](./gotchas.md#geolevel-means-a-different-set-of-keys-depending-on-the-route) for the
-full comparison. The valid values here are:
+`geoLevel`'s valid values here are specific to this route and don't match any other route's set
+exactly — see [important-notes.md](./important-notes.md#geolevel-means-a-different-set-of-values-depending-on-the-route)
+for the full comparison. The valid values here are:
 
 ```
 cauth, ctry, cty, ltla, mcty, rgn, uk, utla
 ```
 
 Note `mcty` (metropolitan county) and `uk` are valid **only** here — they don't appear in any
-other route's level set. Conversely, boundaries are **not** available below `ltla` — `wd`,
-`msoa`, `lsoa`, `oa`, `wpc`, `sener`, `senc` (all valid `geoLevel` values on the search/reverse/
-postcode routes) have no boundary data and return `400` here
-(`Geography level "<x>" not available.`).
+other route's set of geography levels. Conversely, boundaries are **not** available below `ltla`
+— `wd`, `msoa`, `lsoa`, `oa`, `wpc`, `sener`, `senc` (all valid `geoLevel` values on the search/
+reverse/postcode routes) have no boundary data and return `400` here (`Geography level "<x>" not
+available.`).
 
 ## Examples
 
@@ -70,7 +68,7 @@ restricted to English areas only.
 ### The whole-file short-circuit
 
 One exact parameter combination — `format=topojson&year=all&country=all&geoLevel=all` — bypasses
-filtering entirely and streams the bundled `topo.json` file back unmodified (every layer, every
-year, every country, as originally built). This is the only place `geoLevel=all` is accepted; any
-other combination that includes `geoLevel=all` (e.g. `format=geojson&geoLevel=all`, or adding a
-`country` filter) is `400`, since `all` isn't a real layer name in the boundary file.
+filtering entirely and returns every layer, year and country unfiltered in a single file. This is
+the only place `geoLevel=all` is accepted; any other combination that includes `geoLevel=all`
+(e.g. `format=geojson&geoLevel=all`, or adding a `country` filter) is `400`, since `all` isn't a
+real layer name otherwise.

@@ -43,9 +43,11 @@ export function filterJSONStat(
 		dims.push(dim);
 	}
 
-	// Calculate the number of values/observations in the filtered dataset
-	const length = dims.map((dim) => dim.values.length).reduce((a, b) => a * b, 1);
-	if (length === 0) return null;
+	// A genuinely empty `measure` dim (always last - see `toCols`/`toRows`/`toJSONStat`)
+	// means no `value` column to emit, so the dataset is excluded entirely. Any other dim
+	// filtering to zero values is a normal empty result, not a reason to exclude it -
+	// `toJSONStat`/`dimsToCols` already degrade to a correctly-empty output for that.
+	if (dims[dims.length - 1].values.length === 0) return null;
 
 	// Generate the filtered dataset in the requested format
 	if (format === 'xlsx') {
@@ -67,11 +69,12 @@ export function filterJSONStat(
 	return toJSONStat(cube, dims, params.includeNames, params.includeStatus);
 }
 
-// Filter and format the data within an array of JSON-Stat datasets
+// Filter and format the data within an array of JSON-Stat datasets. `params.singleIndicator`
+// is an explicit flag set by the caller (`true` from the item route, always `false` from the
+// collection route) - not inferred from match count, so the collection route stays
+// collection-shaped regardless of how many indicators actually match.
 export default function filterDatasets(datasets: jsonStatDataset[], params: parsedParams) {
-	// Check if request is for a single indicator
-	const singleIndicator =
-		params.topic === 'all' && params.indicator !== 'all' && [params.indicator].flat().length === 1;
+	const singleIndicator = params.singleIndicator === true;
 
 	const format: dataFormat = params.format || 'json';
 
@@ -125,13 +128,18 @@ export default function filterDatasets(datasets: jsonStatDataset[], params: pars
 		if (data) filtered.push(data);
 	}
 
-	if (!filtered?.length)
+	// An empty result on the collection route is a valid empty collection - `filtered`
+	// just flows through below. On the item route, `getFilteredData.ts` already 404s if
+	// the indicator itself didn't resolve, so landing here empty only happens when a
+	// filter (e.g. an unrecognised `measure=`) leaves no `value` column to report - no
+	// sensible empty shape exists for that, so it stays a `400`.
+	if (!filtered.length && singleIndicator)
 		return { error: 400, message: 'No data available for the selected filters.' };
 	if (format === 'csv') return filtered.map((f) => f[1]);
 	if (format === 'xlsx') return filtered;
 
 	if (['rows', 'cols'].includes(format.slice(0, 4)))
-		return singleIndicator && filtered.length === 1 ? filtered[0][1] : Object.fromEntries(filtered);
+		return singleIndicator ? filtered[0][1] : Object.fromEntries(filtered);
 	return singleIndicator
 		? filtered[0]
 		: {

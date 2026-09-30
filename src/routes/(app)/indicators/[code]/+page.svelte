@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import MarkdownIt from 'markdown-it';
 	import { resolve } from '$app/paths';
 	import {
 		Hero,
 		NavSections,
 		NavSection,
-		List,
-		Li,
+		Notice,
 		Icon,
 		Details
 	} from '@onsvisual/svelte-components';
@@ -94,6 +92,17 @@
 </Hero>
 
 <NavSections cls="wider-nav-sections" marginTop>
+	{#if data.indicator.confidenceIntervals}
+		<Notice cls="ons-u-mb-xs">
+			You can switch on an upper and lower range for each estimate, also known as <a
+				href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/uncertaintyandhowwemeasureit#confidence-interval"
+				target="_blank"
+				>confidence intervals (CIs)<span class="ons-u-vh"> (opens in a new tab)</span>
+			</a><span class="inline-icon ons-u-ml-2xs"><Icon type="external" /></span>, on the charts for
+			this indicator in “Chart options”. Consider this uncertainty when comparing between areas or
+			over time.
+		</Notice>
+	{/if}
 	<div class="indicators-nav-sections">
 		<div class="legend-sticky">
 			<AreasLegend selectedAreas={pageState.selectedAreas} />
@@ -122,43 +131,40 @@
 		{/each}
 	</div>
 	{#if data.indicator.caveats.length > 0}
-		<NavSection title="Interpretation">
+		<NavSection title="About these estimates">
 			<p>{@html caveats}</p>
 		</NavSection>
 	{/if}
 	<NavSection title="Get the data">
 		<p>
 			You can download this dataset in an <a
-				href={resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`)}
 				download={`${data.indicator.slug}.xlsx`}
 				aria-label="Download {data.indicator.label} data as an XLSX file"
 				onclick={() =>
 					downloadEvent(
 						'xlsx',
-						resolve(`/api/v1/data.xlsx?indicator=${data.indicator.slug}&time=all`),
+						resolve(`/api/v1/data/${data.indicator.slug}.xlsx?time=all`),
 						data.indicator
 					)}>XLSX</a
 			>,
 			<a
-				href={resolve(`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csv?time=all`)}
 				download={`${data.indicator.slug}.csv`}
 				aria-label="Download {data.indicator.label} data as a CSV file"
 				onclick={() =>
-					downloadEvent(
-						'csv',
-						`/api/v1/data.csv?indicator=${data.indicator.slug}&time=all`,
-						data.indicator
-					)}>CSV</a
+					downloadEvent('csv', `/api/v1/data/${data.indicator.slug}.csv?time=all`, data.indicator)}
+				>CSV</a
 			>
 			or
 			<a
-				href={resolve(`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`)}
+				href={resolve(`/api/v1/data/${data.indicator.slug}.csvw?time=all`)}
 				download={`${data.indicator.slug}.csv-metadata.json`}
 				aria-label="Download {data.indicator.label} metadata as an CSVW file"
 				onclick={() =>
 					downloadEvent(
 						'csvw',
-						`/api/v1/data.csvw?indicator=${data.indicator.slug}&time=all`,
+						`/api/v1/data/${data.indicator.slug}.csvw?time=all`,
 						data.indicator
 					)}>CSVW</a
 			>

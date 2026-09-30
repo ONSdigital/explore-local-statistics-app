@@ -1,15 +1,16 @@
 # Data output formats
 
-The six `{format}` values available on [the data endpoint](./data-endpoint.md), with full
-worked examples. All examples below are for the same request family — indicator
-`employment-rate`, area `E07000148` (Norwich) — so you can compare the same underlying data
-across formats. See [data-endpoint.md](./data-endpoint.md#response-shape-single-indicator-vs-collection)
-for how these shapes change for a multi-indicator request.
+The six `{format}` values available on both the [multiple-indicators](./data-endpoint.md) and
+[single-indicator](./data-item-endpoint.md) data endpoints, with full worked examples. All
+examples below use the same request family — indicator `employment-rate`, area `E07000148`
+(Norwich) — via [the single-indicator endpoint](./data-item-endpoint.md), so you can compare the
+same underlying data across formats without the extra grouping in the way; each section notes
+exactly what differs on [the multiple-indicators endpoint](./data-endpoint.md) instead.
 
 ## `json` — JSON-Stat
 
 ```
-GET /api/v1/data.json?indicator=employment-rate&geo=E07000148
+GET /api/v1/data/employment-rate.json?geo=E07000148
 ```
 
 ```json
@@ -51,19 +52,24 @@ GET /api/v1/data.json?indicator=employment-rate&geo=E07000148
 }
 ```
 
-The [JSON-Stat 2.0](https://json-stat.org/) cube format: `size` gives each dimension's cardinality
+The [JSON-Stat 2.0](https://json-stat.org/) format: `size` gives each dimension's cardinality
 (in `id` order), `dimension.<key>.category.index` maps each category value to its position, and
-`value` is a flat array in row-major order over all dimensions — so `value[i]` for a given
+`value` is a flat list in row-major order over all dimensions — so `value[i]` for a given
 `measure` position is found by `areacd_index * (period_count * measure_count) + period_index *
 measure_count + measure_index`. This is the richest format (full dimension metadata, indicator
-`extension` metadata inline) and the most space-efficient one for genuinely multi-dimensional
-data, but the least convenient to consume directly — most consumers want `cols.json`/`rows.json`
-instead unless they specifically need dimension metadata alongside the data.
+description inline) and the most space-efficient one for genuinely multi-dimensional data, but
+the least convenient to consume directly — most consumers want `cols.json`/`rows.json` instead
+unless they specifically need dimension metadata alongside the data.
+
+**On [the multiple-indicators endpoint](./data-endpoint.md)**
+(`/api/v1/data.json?indicator=employment-rate`), this exact object appears grouped instead:
+`{ version, class: "collection", label, link: { item: [<this object>] } }` — see
+[its "what you get back" table](./data-endpoint.md#what-you-get-back).
 
 ## `cols.json` — column-oriented JSON
 
 ```
-GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&time=all
+GET /api/v1/data/employment-rate.cols.json?geo=E07000148&time=all
 ```
 
 ```json
@@ -77,15 +83,19 @@ GET /api/v1/data.cols.json?indicator=employment-rate&geo=E07000148&time=all
 }
 ```
 
-One array per field, all the same length, index-aligned — `areacd[i]`/`period[i]`/`value[i]` all
-describe the same observation. This is the format every chart in the app itself actually requests
-(see the root `CLAUDE.md`'s performance notes) — it's compact (no repeated keys per row) and
-trivial to feed straight into a charting library that wants columnar series data.
+One list per field, all the same length, index-aligned — `areacd[i]`/`period[i]`/`value[i]` all
+describe the same observation. This is the format every chart on the site actually requests —
+it's compact (no repeated keys per row) and trivial to feed straight into a charting library that
+wants columnar series data.
+
+**On the multiple-indicators endpoint**, this appears keyed by indicator slug instead:
+`{ "employment-rate": <this object> }` — see
+[the two-indicator example](./data-endpoint.md#what-you-get-back).
 
 ## `rows.json` — row-oriented JSON
 
 ```
-GET /api/v1/data.rows.json?indicator=employment-rate&geo=E07000148
+GET /api/v1/data/employment-rate.rows.json?geo=E07000148
 ```
 
 ```json
@@ -101,15 +111,16 @@ GET /api/v1/data.rows.json?indicator=employment-rate&geo=E07000148
 ]
 ```
 
-Each observation as its own object — the most conventional shape for feeding into a dataframe
-library or a generic JSON→table tool, at the cost of repeating every key on every row. For a
-single-indicator request this is exactly `cols.json`'s data "transposed" row by row (same
-fields, same values, same order).
+Each observation as its own object — the most conventional shape for feeding into a spreadsheet
+or a generic JSON→table tool, at the cost of repeating every key on every row. On the
+single-indicator endpoint this is exactly `cols.json`'s data "transposed" row by row (same
+fields, same values, same order); on the multiple-indicators endpoint it's keyed by indicator
+slug, same as `cols.json`.
 
 ## `csv` — plain-text CSV
 
 ```
-GET /api/v1/data.csv?indicator=employment-rate&geo=E07000148&time=2020,2023
+GET /api/v1/data/employment-rate.csv?geo=E07000148&time=2020,2023
 ```
 
 ```csv
@@ -120,24 +131,26 @@ E07000148,Norwich,2022-01-01/P1Y,81.5,74.5,88.5
 E07000148,Norwich,2023-01-01/P1Y,82.7,75,90.4
 ```
 
-Standard comma-separated, header row included, `"`-quoted only where a value actually contains a
-`"`, comma or line break. Column order is `areacd`, `areanm` (if `includeNames`), then remaining
-non-`value`/`status` dimension columns, then `value`, then any other measures, then `status` (if
-`includeStatus`) last. For a multi-indicator request, an `indicator` column is prepended (see
-[data-endpoint.md](./data-endpoint.md#response-shape-single-indicator-vs-collection)) and the
-column set becomes the **union** across all included indicators — an indicator missing a
-particular measure gets empty cells for it, not a dropped column.
+Standard comma-separated, header row included, values are quoted only where actually needed
+(containing a comma, quote mark, or line break). Column order is `areacd`, `areanm` (if
+`includeNames`), then remaining non-`value`/`status` dimension columns, then `value`, then any
+other measures, then `status` (if `includeStatus`) last. **On the multiple-indicators endpoint**,
+an `indicator` column is always included first (see
+[its "what you get back" table](./data-endpoint.md#what-you-get-back)) and the column set becomes
+the **union** across all included indicators — an indicator missing a particular measure gets
+empty cells for it, not a dropped column. The single-indicator endpoint never has an `indicator`
+column at all (redundant — it's the URL).
 
 ## `csvw` — CSV on the Web metadata
 
 ```
-GET /api/v1/data.csvw?indicator=employment-rate
+GET /api/v1/data/employment-rate.csvw
 ```
 
 ```json
 {
 	"@context": ["http://www.w3.org/ns/csvw", { "@language": "en" }],
-	"url": "https://<host>/api/v1/data.csv?indicator=employment-rate",
+	"url": "https://<host>/api/v1/data/employment-rate.csv",
 	"notes": ["Metadata generated on <date> by the Explore Local Statistics service."],
 	"dc:title": "Employment rate (Great Britain)",
 	"dc:description": "This indicator shows the proportion of people aged between 16 and 64 years in paid work...",
@@ -158,27 +171,27 @@ GET /api/v1/data.csvw?indicator=employment-rate
 ```
 
 [CSVW](https://csvw.org/)-compliant structural metadata describing the equivalent `.csv` request
-(same query parameters, `.csv` in place of `.csvw`) — `url` is built directly from the request
-that produced it, so it always points back at the exact filtered CSV that matches. Not affected
-by `time`/`geo`/etc. beyond what's needed to build `url` and (for a single indicator) the Dublin
-Core description fields — `tableSchema.columns` describes the CSV's structure, not its data.
-Exempt from [the oversized-request check](./data-endpoint.md#requests-that-get-rejected-as-too-large)
-since it never touches observation data. For a multi-indicator request, the Dublin Core fields
-(`dc:title` etc.) are omitted and an `indicator` column is described instead, with an `aboutUrl`
-pointing at `/metadata/indicators` filtered to match the request.
+(same query parameters, `.csv` in place of `.csvw`, same endpoint) — `url` is built directly from
+the request that produced it, so it always points back at the exact filtered CSV that matches.
+Not affected by `time`/`geo`/etc. beyond what's needed to build `url` — `tableSchema.columns`
+describes the CSV's structure, not its data. Exempt from
+[the "too much data" check](./data-endpoint.md#requests-that-get-rejected-as-too-large) since it
+never touches observation data (the single-indicator endpoint has no such check to be exempt from
+in the first place). **On the multiple-indicators endpoint**, the indicator-specific fields shown
+above (`dc:title` etc.) are omitted entirely and an `indicator` column is described instead — the
+single-indicator endpoint always has the indicator-specific fields and never the `indicator`
+column.
 
 ## `xlsx` — accessible spreadsheet
 
 ```
-GET /api/v1/data.xlsx?indicator=employment-rate&geo=E07000148
+GET /api/v1/data/employment-rate.xlsx?geo=E07000148
 ```
 
-Returns `Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` and a
-binary XLSX workbook body — streamed, not buffered (see the root `CLAUDE.md`'s performance notes
-for the streaming implementation details, which don't affect the format or content, only how the
-bytes are delivered). One sheet per indicator in the request, plus a table-of-contents sheet and
-a notes sheet, each marked up as a native Excel Table (not just styled cells) with named heading
-styles — built to satisfy
+Returns a binary Excel workbook file. Cover sheet + table-of-contents sheet + notes sheet (if
+any) + one data sheet per matched indicator (exactly one, on the single-indicator endpoint), each
+marked up as a native Excel Table (not just styled cells) with named heading styles — built to
+satisfy
 [GOV.UK's accessible-spreadsheets guidance](https://analysisfunction.civilservice.gov.uk/policy-store/making-spreadsheets-accessible-a-brief-checklist-of-the-basics/).
 Column content and layout mirror the `cols.json`/CSV data for the same request. This is the
-format used by the "download data" links on indicator pages in the app itself.
+format used by the "download data" links on indicator pages on the site itself.
