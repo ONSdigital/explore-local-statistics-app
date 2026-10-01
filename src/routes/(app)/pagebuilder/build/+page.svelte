@@ -211,8 +211,6 @@
 		}
 		return out;
 	});
-
-	$inspect(filteredData);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -314,7 +312,8 @@
 				<Tab title="Comparison chart"> -->
 			{#key selection.indicator?.slug}
 				<ComparisonRow
-					data={filteredData}
+					{data}
+					{filteredData}
 					{metadata}
 					selectedAreas={$selectedAreas}
 					{comparisonArea}

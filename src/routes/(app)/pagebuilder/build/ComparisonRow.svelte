@@ -8,6 +8,7 @@
 	import { ONScolours } from '$lib/config';
 
 	let {
+		filteredData,
 		data,
 		metadata,
 		selectedAreas,
@@ -17,7 +18,6 @@
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
-	let chosenYear = $state(null); //user will be able to select this
 	let selectedAreaCodes = $derived(selectedAreas.map((d) => d.areacd));
 
 	let areasWithData = $derived([...new Set(data?.areacd)]);
@@ -39,17 +39,13 @@
 		}
 		return latestByArea;
 	}
-	let latestPerArea = $derived(data ? getLatestPeriodPerArea(data) : new Map());
+	let latestPerArea = $derived(filteredData ? getLatestPeriodPerArea(filteredData) : new Map());
 
-	function processData(data, chosenYear, standardised, comparisonCd) {
+	function processDataSparkline(data, standardised, comparisonCd) {
 		const areaDataSparkline = [];
-		const areaDataPointrange = [];
 		const comparisonDataSparkline = [];
-		const comparisonDataPointrange = [];
-		const pointrangeXDomain = [Infinity, -Infinity];
 		const sparklineXDomain = [null, null];
 		const sparklineYDomain = [Infinity, -Infinity];
-		const emptyAreas = [];
 
 		const rows = parseData(data).map((row) => ({
 			...row,
@@ -93,8 +89,28 @@
 				if (!sparklineXDomain[1] || periodTime > sparklineXDomain[1].getTime())
 					sparklineXDomain[1] = period;
 			}
+		}
+
+		return {
+			areaDataSparkline,
+			comparisonDataSparkline,
+			sparklineXDomain,
+			sparklineYDomain
+		};
+	}
+
+	function processDataPointrange(filteredData, standardised, comparisonCd) {
+		const areaDataPointrange = [];
+		const comparisonDataPointrange = [];
+		const pointrangeXDomain = [Infinity, -Infinity];
+
+		const rows = parseData(data).map((row) => ({
+			...row,
+			period: parsePeriod(row.period)
+		}));
+		for (const d of rows) {
 			// filter to desired period (chosen by user or defaults to latest available date for the area indicator)
-			const targetPeriod = chosenYear != null ? chosenYear : latestPerArea.get(d.areacd);
+			const targetPeriod = latestPerArea.get(d.areacd);
 			if (
 				d.value != null &&
 				targetPeriod &&
@@ -127,25 +143,19 @@
 		}
 
 		return {
-			areaDataSparkline,
 			areaDataPointrange,
-			comparisonDataSparkline,
 			comparisonDataPointrange,
-			pointrangeXDomain,
-			sparklineXDomain,
-			sparklineYDomain
+			pointrangeXDomain
 		};
 	}
 
-	let {
-		areaDataSparkline,
-		areaDataPointrange,
-		comparisonDataSparkline,
-		comparisonDataPointrange,
-		pointrangeXDomain,
-		sparklineXDomain,
-		sparklineYDomain
-	} = $derived(processData(data, chosenYear, metadata?.standardised, comparisonArea.areacd));
+	let { areaDataSparkline, comparisonDataSparkline, sparklineXDomain, sparklineYDomain } = $derived(
+		processDataSparkline(data, metadata?.standardised, comparisonArea.areacd)
+	);
+
+	let { areaDataPointrange, comparisonDataPointrange, pointrangeXDomain } = $derived(
+		processDataPointrange(filteredData, metadata?.standardised, comparisonArea.areacd)
+	);
 
 	let areasData = $derived.by(() => {
 		const rowsByArea = new Map();
@@ -318,6 +328,9 @@
 			: { upperFill: ONScolours.grey25, lowerFill: ONScolours.grey75 };
 	}
 
+	let valuePeriod = $derived(
+		areaDataPointrange.reduce((max, d) => (!max || d.period > max ? d.period : max), null)
+	);
 	let CIsStyle = $derived(areaDataPointrange.some((d) => d.lci_95 != null && d.uci_95 != null));
 </script>
 
@@ -359,7 +372,7 @@
 		</div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('value')}>
-				{formatPeriod(sparklineXDomain[1])} value
+				{formatPeriod(valuePeriod)} value
 				<svg
 					class="ons-icon"
 					viewBox="0 0 12 19"
@@ -447,8 +460,8 @@
 				>
 					{area.areanm}
 					{area.pointrangeRow?.period &&
-					sparklineXDomain[1] &&
-					area.pointrangeRow.period.getTime() !== sparklineXDomain[1].getTime()
+					valuePeriod &&
+					area.pointrangeRow.period.getTime() !== valuePeriod.getTime()
 						? `(${formatPeriod(area.pointrangeRow.period)})`
 						: ''}
 				</div>
@@ -469,6 +482,7 @@
 						yDomain={sparklineYDomain}
 						comparisonData={comparisonRows}
 						xDomain={sparklineXDomain}
+						{valuePeriod}
 						{prefix}
 						{suffix}
 						{formatValue}

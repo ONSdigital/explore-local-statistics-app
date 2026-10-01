@@ -3,6 +3,7 @@
 	import { ONScolours } from '$lib/config';
 	import { area, curveLinear } from 'd3-shape';
 	import { Icon } from '@onsvisual/svelte-components';
+	import type { valuesToBreaks } from '$lib/utils';
 
 	let {
 		data,
@@ -16,7 +17,8 @@
 		xDomain,
 		prefix,
 		suffix,
-		chartWidth
+		chartWidth,
+		valuePeriod
 	} = $props();
 
 	let xScale = $derived(xDomain ? scaleTime().domain(xDomain).range([0, 100]) : null);
@@ -36,6 +38,8 @@
 
 	let posCol = '#BEE2f0';
 	let negCol = '#ABBDC5';
+
+	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -68,8 +72,26 @@
 			{@render line(comparisonData, ONScolours.grey60, 'none', 1)}
 		{/if}
 		{#if data?.length}
+			<line
+				x1={xScale(valuePeriodData[0].period)}
+				x2={xScale(valuePeriodData[0].period)}
+				y1="5"
+				y2="80"
+				stroke={ONScolours.grey15}
+				stroke-width="1.5"
+				stroke-dasharray="4"
+			>
+			</line>
 			{@render ribbon(data, ONScolours.oceanBlue, 0.2)}
 			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
+			<circle
+				cx={xScale(valuePeriodData[0].period)}
+				cy={yScale(valuePeriodData[0].value)}
+				r="4"
+				fill={ONScolours.oceanBlue}
+				stroke="white"
+			>
+			</circle>
 		{/if}
 	</svg>
 	<div
