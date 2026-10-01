@@ -27,6 +27,7 @@
 	import Line from '$lib/components/charts/Line.svelte';
 	import { getAreaType } from '$lib/utils';
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
+	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -44,6 +45,10 @@
 	let modalPageState = $state({
 		selectedAreas: $selectedAreas,
 		selectedComparisonArea: $chosenComparisonArea
+	});
+
+	let timePageState = $state({
+		selectedPeriodRange: [null, null]
 	});
 
 	$effect(() => {
@@ -177,7 +182,37 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
-	$inspect(data);
+
+	$effect(() => {
+		if (!uniquePeriods.length) return;
+		if (!uniquePeriods.includes(timePageState.selectedPeriodRange[1])) {
+			timePageState.selectedPeriodRange = [
+				uniquePeriods[0],
+				uniquePeriods[uniquePeriods.length - 1]
+			];
+		}
+	});
+
+	let filteredData = $derived.by(() => {
+		if (!data || data.message || !data.period) return data;
+
+		const end = timePageState.selectedPeriodRange?.[1];
+		if (!end) return data;
+
+		const endTime = parsePeriod(end).getTime();
+		const keep = data.period.map((p) => parsePeriod(p).getTime() <= endTime);
+
+		const out = {};
+		for (const [key, val] of Object.entries(data)) {
+			out[key] =
+				key !== 'periods' && Array.isArray(val) && val.length === data.period.length
+					? val.filter((_, i) => keep[i])
+					: val;
+		}
+		return out;
+	});
+
+	$inspect(filteredData);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -251,6 +286,12 @@
 				{:else}
 					<p>Comparison area disabled for non-standardised indicator.</p>
 				{/if}
+				<OptionsModal
+					mode="comparison"
+					data={{ periods: uniquePeriods }}
+					hasIntervals="null"
+					bind:pageState={timePageState}
+				/>
 			</div>
 		</div>
 
@@ -273,7 +314,7 @@
 				<Tab title="Comparison chart"> -->
 			{#key selection.indicator?.slug}
 				<ComparisonRow
-					{data}
+					data={filteredData}
 					{metadata}
 					selectedAreas={$selectedAreas}
 					{comparisonArea}

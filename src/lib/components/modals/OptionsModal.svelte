@@ -22,18 +22,19 @@
 </script>
 
 <Modal
-	title="Chart options"
-	label="Chart options"
-	icon="cog"
+	title={mode == 'comparison' ? 'Change time period' : 'Chart options'}
+	label={mode == 'comparison' ? 'Change time period' : 'Chart options'}
+	icon={mode == 'comparison' ? null : 'cog'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}
 	onCancel={() => (_pageState = cloneState(pageState))}
 >
 	<RangeSlider
-		label="Selected time range"
+		label={mode == 'comparison' ? 'Selected time period' : 'Selected time range'}
 		options={data.periods}
 		{formatTick}
 		bind:selectedRange={_pageState.selectedPeriodRange}
+		range={mode == 'comparison' ? false : true}
 		onUpdate={(range) =>
 			runAnalyticsEvent(
 				'range-slider',
