@@ -334,13 +334,14 @@
 	let CIsStyle = $derived(areaDataPointrange.some((d) => d.lci_95 != null && d.uci_95 != null));
 
 	let nameWidth = $state(0);
+	let labelHeight = $state(0);
 
 	// keep the label inside the point range column
 	let nameLeft = $derived.by(() => {
 		const x = comparisonBar?.valueX ?? 0;
 		const half = nameWidth / 2;
-		const min = half; // left edge of the column
-		const max = pointRangeWidth - half; // right edge of the column
+		const min = half - 5;
+		const max = pointRangeWidth - half + 5;
 		return Math.max(min, Math.min(x, max));
 	});
 </script>
@@ -438,11 +439,27 @@
 	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="25px">
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
-				<div class="comparison-name" bind:clientWidth={nameWidth} style:left="{nameLeft}px">
+				<div
+					class="comparison-name"
+					bind:clientWidth={nameWidth}
+					bind:clientHeight={labelHeight}
+					style:left="{nameLeft}px"
+				>
 					{comparisonDataPointrange[0].areanm}: {prefix}{formatValue(
 						comparisonDataPointrange[0].value
 					)}{suffix}
 				</div>
+				<svg
+					class="comparison-arrow"
+					width="12"
+					height="8"
+					viewBox="0 0 12 8"
+					aria-hidden="true"
+					style:left="{comparisonBar.valueX}px"
+					style:top="{labelHeight}px"
+				>
+					<path d="M0 0 L12 0 L6 8 Z" fill="var(--ons-color-grey-25)" />
+				</svg>
 				{#if comparisonBar.left != null}
 					<div
 						class="comparison-reference-bar"
@@ -569,6 +586,13 @@
 		opacity: 1;
 		pointer-events: none;
 		z-index: 2;
+	}
+
+	.comparison-arrow {
+		position: absolute;
+		transform: translateX(-50%);
+		z-index: 4;
+		display: block;
 	}
 	.comparison-reference-line {
 		position: absolute;
