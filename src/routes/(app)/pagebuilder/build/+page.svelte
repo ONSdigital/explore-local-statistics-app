@@ -296,7 +296,9 @@
 		{#if ![...new Set(data?.areacd)].includes(comparisonArea.areacd)}
 			<div class="missing-data-message">
 				<!-- Comparison data unavailable for {comparisonArea.areanm} -->
-				Data unavailable for selected comparison area: {comparisonArea.areanm}.
+				Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
+					timePageState.selectedPeriodRange[1]
+				)}.
 			</div>
 		{/if}
 	{/if}

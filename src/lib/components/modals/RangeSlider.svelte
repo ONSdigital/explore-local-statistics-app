@@ -8,10 +8,21 @@
 		onUpdate = () => null
 	} = $props();
 
+	function indexOrDefault(value, fallback) {
+		const i = options.indexOf(value);
+		return i === -1 ? fallback : i;
+	}
+
 	let selectedIndices = $state([
-		range ? Math.max(options.indexOf(selectedRange[0]), 0) : 0,
-		Math.max(options.indexOf(selectedRange[1]), 0)
+		range ? indexOrDefault(selectedRange[0], 0) : 0,
+		indexOrDefault(selectedRange[1], options.length - 1)
 	]);
+
+	$effect(() => {
+		selectedIndices[0] = range ? indexOrDefault(selectedRange[0], 0) : 0;
+		selectedIndices[1] = indexOrDefault(selectedRange[1], options.length - 1);
+	});
+
 	let xPercent = $state([0, 100]);
 	let dragging = $state([false, false]);
 	let focused = $state([false, false]);
