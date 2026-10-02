@@ -6,7 +6,7 @@
 	import { getPaletteColor } from '../charts/chartHelpers';
 	import { getAreaType } from '$lib/utils';
 
-	let { data, pageState = $bindable(), mode } = $props();
+	let { data, pageState = $bindable(), mode, areaslist = null } = $props();
 
 	let _pageState = $state(cloneState(pageState));
 	let _areas = $derived(data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' })));
@@ -51,60 +51,78 @@
 </script>
 
 <Modal
-	title="Select areas"
-	label="Change areas"
-	icon="pin"
+	title={mode === 'comparison' ? 'Select comparison area' : 'Select areas'}
+	label={mode === 'comparison' ? 'Change comparison area' : 'Change areas'}
+	icon={mode === 'comparison' ? null : 'pin'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}
 	onCancel={() => (_pageState = cloneState(pageState))}
 >
-	{#if mode === 'indicator'}
-		<Dropdown
-			id="geo-level-select"
-			label="Geography type"
-			placeholder={null}
-			options={data.geoLevels}
-			bind:value={_pageState.selectedGeoLevel}
-			width={null}
-			on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoLevel)}
-		/>
-	{/if}
-	{#if mode === 'area'}
-		<Dropdown
-			id="geo-related-select"
-			label="Geography group"
-			placeholder={null}
-			options={data.geoGroups}
-			bind:value={_pageState.selectedGeoGroup}
-			width={null}
-			on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoGroup)}
-		/>
-	{/if}
-	<div class="select-container">
-		<Select
-			id="area-select"
-			label={mode === 'area' ? 'Comparison areas' : 'Individual areas'}
-			placeholder="Choose one or more"
-			options={_areas}
-			labelKey="areanm"
-			groupKey="type"
-			on:change={(e) => addArea(e.detail)}
-			autoClear
-		/>
-		<div aria-live="polite" aria-atomic="true">
-			{#if _pageState.selectedAreas.length >= maxAreasSelectable}
-				Maximum of {maxAreasSelectable} areas selected
-			{/if}
+	{#if mode != 'comparison'}
+		{#if mode === 'indicator'}
+			<Dropdown
+				id="geo-level-select"
+				label="Geography type"
+				placeholder={null}
+				options={data.geoLevels}
+				bind:value={_pageState.selectedGeoLevel}
+				width={null}
+				on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoLevel)}
+			/>
+		{/if}
+		{#if mode === 'area'}
+			<Dropdown
+				id="geo-related-select"
+				label="Geography group"
+				placeholder={null}
+				options={data.geoGroups}
+				bind:value={_pageState.selectedGeoGroup}
+				width={null}
+				on:change={() => runAreaGroupAnalytics(_pageState.selectedGeoGroup)}
+			/>
+		{/if}
+		<div class="select-container">
+			<Select
+				id="area-select"
+				label={mode === 'area' ? 'Comparison areas' : 'Individual areas'}
+				placeholder="Choose one or more"
+				options={_areas}
+				labelKey="areanm"
+				groupKey="type"
+				on:change={(e) => addArea(e.detail)}
+				autoClear
+			/>
+			<div aria-live="polite" aria-atomic="true">
+				{#if _pageState.selectedAreas.length >= maxAreasSelectable}
+					Maximum of {maxAreasSelectable} areas selected
+				{/if}
+			</div>
 		</div>
-	</div>
-	{#each _pageState.selectedAreas as area, i}
-		<Button
-			icon="cross"
-			color={getColor(_pageState.selectedAreas.length, i)}
-			small
-			on:click={() => removeArea(area)}>{area.areanm}</Button
-		>
-	{/each}
+		{#each _pageState.selectedAreas as area, i}
+			<Button
+				icon="cross"
+				color={getColor(_pageState.selectedAreas.length, i)}
+				small
+				on:click={() => removeArea(area)}>{area.areanm}</Button
+			>
+		{/each}
+	{:else}
+		{#key _pageState.selectedComparisonArea}
+			<div class="select-container">
+				<Select
+					id="comparison-area-select"
+					label={'Comparison area'}
+					placeholder={_pageState.selectedComparisonArea?.areanm}
+					options={areaslist}
+					labelKey="areanm"
+					groupKey="type"
+					value={_pageState.selectedComparisonArea}
+					on:change={(e) => (_pageState.selectedComparisonArea = e.detail)}
+					on:clear={() => (_pageState.selectedComparisonArea = null)}
+				/>
+			</div>
+		{/key}
+	{/if}
 </Modal>
 
 <style>
