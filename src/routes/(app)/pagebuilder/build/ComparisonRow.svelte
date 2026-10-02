@@ -468,15 +468,20 @@
 				{#if area.isMissing}
 					<div class="data-unavilable">Data unavailable</div>
 				{:else}
-					<p class="area-value" use:updateValueWidth={area.areacd}>
-						{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
-					</p>
-					<ComparisonPointrange
-						data={area.pointrangeRow}
-						xDomain={pointrangeXDomain}
-						chartWidth={pointRangeWidth}
-						{CIsStyle}
-					/>
+					{#if area.pointrangeRow}
+						<p class="area-value" use:updateValueWidth={area.areacd}>
+							{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
+						</p>
+						<ComparisonPointrange
+							data={area.pointrangeRow}
+							xDomain={pointrangeXDomain}
+							chartWidth={pointRangeWidth}
+							{CIsStyle}
+						/>
+					{:else}
+						<p class="area-value" use:updateValueWidth={area.areacd}>–</p>
+						<div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div>
+					{/if}
 					<ComparisonSparkline
 						data={area.rows}
 						yDomain={sparklineYDomain}

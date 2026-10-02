@@ -40,6 +40,7 @@
 	let negCol = '#ABBDC5';
 
 	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
+	$inspect(valuePeriodData);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -67,31 +68,33 @@
 	style:padding-right="0px"
 >
 	<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="70px" overflow="visible">
+		<line
+			x1={xScale(valuePeriod)}
+			x2={xScale(valuePeriod)}
+			y1="5"
+			y2="80"
+			stroke={ONScolours.grey15}
+			stroke-width="1.5"
+			stroke-dasharray="4"
+		>
+		</line>
 		{#if comparisonData?.length}
 			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
 			{@render line(comparisonData, ONScolours.grey60, 'none', 1)}
 		{/if}
 		{#if data?.length}
-			<line
-				x1={xScale(valuePeriodData[0].period)}
-				x2={xScale(valuePeriodData[0].period)}
-				y1="5"
-				y2="80"
-				stroke={ONScolours.grey15}
-				stroke-width="1.5"
-				stroke-dasharray="4"
-			>
-			</line>
 			{@render ribbon(data, ONScolours.oceanBlue, 0.2)}
 			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
-			<circle
-				cx={xScale(valuePeriodData[0].period)}
-				cy={yScale(valuePeriodData[0].value)}
-				r="4"
-				fill={ONScolours.oceanBlue}
-				stroke="white"
-			>
-			</circle>
+			{#if valuePeriodData.length}
+				<circle
+					cx={xScale(valuePeriodData[0]?.period)}
+					cy={yScale(valuePeriodData[0]?.value)}
+					r="4"
+					fill={ONScolours.oceanBlue}
+					stroke="white"
+				>
+				</circle>
+			{/if}
 		{/if}
 	</svg>
 	<div

@@ -61,23 +61,25 @@
 		</div>
 	{/if}
 
-	<Checkbox
-		id="ci-checkbox"
-		bind:checked={_pageState.showConfidenceIntervals}
-		label="Show confidence intervals"
-		disabled={!hasIntervals}
-		compact
-		on:change={(e) =>
-			runAnalyticsEvent(
-				'checkbox',
-				'show confidence intervals',
-				e?.detail?.item?.checked ? 'enable' : 'disable'
-			)}
-	/>
-	{#if !hasIntervals}
-		<p class="ons-chart__caption">
-			Note: Confidence intervals are not available for this indicator.
-		</p>
+	{#if mode != 'comparison'}
+		<Checkbox
+			id="ci-checkbox"
+			bind:checked={_pageState.showConfidenceIntervals}
+			label="Show confidence intervals"
+			disabled={!hasIntervals}
+			compact
+			on:change={(e) =>
+				runAnalyticsEvent(
+					'checkbox',
+					'show confidence intervals',
+					e?.detail?.item?.checked ? 'enable' : 'disable'
+				)}
+		/>
+		{#if !hasIntervals}
+			<p class="ons-chart__caption">
+				Note: Confidence intervals are not available for this indicator.
+			</p>
+		{/if}
 	{/if}
 </Modal>
 
