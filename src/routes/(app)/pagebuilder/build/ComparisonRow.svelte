@@ -332,6 +332,17 @@
 		areaDataPointrange.reduce((max, d) => (!max || d.period > max ? d.period : max), null)
 	);
 	let CIsStyle = $derived(areaDataPointrange.some((d) => d.lci_95 != null && d.uci_95 != null));
+
+	let nameWidth = $state(0);
+
+	// keep the label inside the point range column
+	let nameLeft = $derived.by(() => {
+		const x = comparisonBar?.valueX ?? 0;
+		const half = nameWidth / 2;
+		const min = half; // left edge of the column
+		const max = pointRangeWidth - half; // right edge of the column
+		return Math.max(min, Math.min(x, max));
+	});
 </script>
 
 <div
@@ -427,7 +438,7 @@
 	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="25px">
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
-				<div class="comparison-name" style:left="{comparisonBar.valueX}px">
+				<div class="comparison-name" bind:clientWidth={nameWidth} style:left="{nameLeft}px">
 					{comparisonDataPointrange[0].areanm}: {prefix}{formatValue(
 						comparisonDataPointrange[0].value
 					)}{suffix}
