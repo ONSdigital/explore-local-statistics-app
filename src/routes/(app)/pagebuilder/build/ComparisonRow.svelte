@@ -398,7 +398,7 @@
 		<div class="header-cell"></div>
 		<div class="header-cell">
 			<button class="table-sort-button" on:click={() => toggleSort('diff')}>
-				Trend since {formatPeriod(sparklineXDomain[0])}
+				Trend {formatPeriod(sparklineXDomain[0])} to {formatPeriod(sparklineXDomain[1])}
 				<svg
 					class="ons-icon"
 					viewBox="0 0 12 19"
@@ -480,7 +480,8 @@
 						/>
 					{:else}
 						<p class="area-value" use:updateValueWidth={area.areacd}>–</p>
-						<div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div>
+						<!-- <div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div> -->
+						<div class="no-data-to-date"></div>
 					{/if}
 					<ComparisonSparkline
 						data={area.rows}
