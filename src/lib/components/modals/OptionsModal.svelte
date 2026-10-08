@@ -22,18 +22,19 @@
 </script>
 
 <Modal
-	title="Chart options"
-	label="Chart options"
-	icon="cog"
+	title={mode == 'comparison' ? 'Change time period' : 'Chart options'}
+	label={mode == 'comparison' ? 'Change time period' : 'Chart options'}
+	icon={mode == 'comparison' ? null : 'cog'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}
 	onCancel={() => (_pageState = cloneState(pageState))}
 >
 	<RangeSlider
-		label="Selected time range"
+		label={mode == 'comparison' ? 'Selected time period' : 'Selected time range'}
 		options={data.periods}
 		{formatTick}
 		bind:selectedRange={_pageState.selectedPeriodRange}
+		range={mode == 'comparison' ? false : true}
 		onUpdate={(range) =>
 			runAnalyticsEvent(
 				'range-slider',
@@ -60,23 +61,25 @@
 		</div>
 	{/if}
 
-	<Checkbox
-		id="ci-checkbox"
-		bind:checked={_pageState.showConfidenceIntervals}
-		label="Show confidence intervals"
-		disabled={!hasIntervals}
-		compact
-		on:change={(e) =>
-			runAnalyticsEvent(
-				'checkbox',
-				'show confidence intervals',
-				e?.detail?.item?.checked ? 'enable' : 'disable'
-			)}
-	/>
-	{#if !hasIntervals}
-		<p class="ons-chart__caption">
-			Note: Confidence intervals are not available for this indicator.
-		</p>
+	{#if mode != 'comparison'}
+		<Checkbox
+			id="ci-checkbox"
+			bind:checked={_pageState.showConfidenceIntervals}
+			label="Show confidence intervals"
+			disabled={!hasIntervals}
+			compact
+			on:change={(e) =>
+				runAnalyticsEvent(
+					'checkbox',
+					'show confidence intervals',
+					e?.detail?.item?.checked ? 'enable' : 'disable'
+				)}
+		/>
+		{#if !hasIntervals}
+			<p class="ons-chart__caption">
+				Note: Confidence intervals are not available for this indicator.
+			</p>
+		{/if}
 	{/if}
 </Modal>
 

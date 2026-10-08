@@ -3,14 +3,26 @@
 		label,
 		options,
 		selectedRange = $bindable(),
+		range = true,
 		formatTick = (d) => d,
 		onUpdate = () => null
 	} = $props();
 
+	function indexOrDefault(value, fallback) {
+		const i = options.indexOf(value);
+		return i === -1 ? fallback : i;
+	}
+
 	let selectedIndices = $state([
-		options.indexOf(selectedRange[0]) ?? 0,
-		options.indexOf(selectedRange[1]) ?? options.length - 1
+		range ? indexOrDefault(selectedRange[0], 0) : 0,
+		indexOrDefault(selectedRange[1], options.length - 1)
 	]);
+
+	$effect(() => {
+		selectedIndices[0] = range ? indexOrDefault(selectedRange[0], 0) : 0;
+		selectedIndices[1] = indexOrDefault(selectedRange[1], options.length - 1);
+	});
+
 	let xPercent = $state([0, 100]);
 	let dragging = $state([false, false]);
 	let focused = $state([false, false]);
@@ -62,10 +74,16 @@
 </script>
 
 <fieldset>
-	{#if label && !disabled}<legend
-			>{label} <strong>{formatTick(selectedRange[0])}</strong> to
-			<strong>{formatTick(selectedRange[1])}</strong></legend
-		>{/if}
+	{#if label && !disabled}
+		<legend>
+			{#if range}
+				{label} <strong>{formatTick(selectedRange[0])}</strong> to
+				<strong>{formatTick(selectedRange[1])}</strong>
+			{:else}
+				{label} <strong>{formatTick(selectedRange[1])}</strong>
+			{/if}
+		</legend>
+	{/if}
 	<div class="range-container">
 		<div class="range-ticks" style:color={disabled ? 'var(--ons-color-text-disabled)' : null}>
 			{#each options as tick, i}
@@ -84,10 +102,10 @@
 		<div class="range-track">
 			<div
 				class="range-progress"
-				style:left="{dragging[0] ? xPercent[0] : scale(selectedIndices[0])}%"
+				style:left="{range ? (dragging[0] ? xPercent[0] : scale(selectedIndices[0])) : 0}%"
 				style:right="{dragging[1] ? 100 - xPercent[1] : 100 - scale(selectedIndices[1])}%"
 			></div>
-			{#each [0, 1] as i}
+			{#each range ? [0, 1] : [1] as i}
 				<div
 					class="range-marker"
 					class:range-marker-active={dragging[i] || focused[i]}
@@ -104,22 +122,24 @@
 				></div>
 			{/each}
 		</div>
+		{#if range}
+			<input
+				type="range"
+				aria-label="Select start of time range"
+				name="min"
+				class="ons-u-vh"
+				min={0}
+				max={selectedIndices[1]}
+				aria-valuetext={formatTick(selectedRange[0])}
+				bind:value={selectedIndices[0]}
+				onfocus={() => (focused[0] = true)}
+				onblur={() => (focused[0] = false)}
+				onchange={updateRange}
+			/>
+		{/if}
 		<input
 			type="range"
-			aria-label="Select start of time range"
-			name="min"
-			class="ons-u-vh"
-			min={0}
-			max={selectedIndices[1]}
-			aria-valuetext={formatTick(selectedRange[0])}
-			bind:value={selectedIndices[0]}
-			onfocus={() => (focused[0] = true)}
-			onblur={() => (focused[0] = false)}
-			onchange={updateRange}
-		/>
-		<input
-			type="range"
-			aria-label="Select end of time range"
+			aria-label={range ? 'Select end of time range' : 'Select time period'}
 			name="max"
 			class="ons-u-vh"
 			min={selectedIndices[0]}
