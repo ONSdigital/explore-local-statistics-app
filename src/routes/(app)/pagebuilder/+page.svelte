@@ -425,7 +425,7 @@
 		</Accordion>
 		<div class="build-button">
 			<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
-				>Select an indicator <Icon type="arrow"></Icon></Button
+				>Compare areas <Icon type="arrow"></Icon></Button
 			>
 		</div>
 	</Section>
