@@ -14,7 +14,8 @@
 		selectedAreas,
 		comparisonArea,
 		formatValue = (d) => d,
-		formatPeriod
+		formatPeriod,
+		selectedPeriod = null
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -23,23 +24,26 @@
 	let areasWithData = $derived([...new Set(data?.areacd)]);
 	let areasMissingData = $derived(selectedAreas.filter((d) => !areasWithData.includes(d.areacd)));
 
-	// find whatever the latest available period with data is for each area
-	function getLatestPeriodPerArea(data) {
-		const rowCount = data.areacd.length;
-		const latestByArea = new Map();
-
-		for (let i = 0; i < rowCount; i++) {
-			const areacd = data.areacd[i];
-			if (data.value[i] == null) continue;
-			const period = parsePeriod(data.period[i]);
-			const current = latestByArea.get(areacd);
-			if (!Number.isNaN(period.getTime()) && (!current || period > current)) {
-				latestByArea.set(areacd, period);
-			}
+	// The period being displayed. Areas without an observation for exactly this period stay blank.
+	let latestPeriod = $derived.by(() => {
+		if (selectedPeriod) {
+			const p = parsePeriod(selectedPeriod);
+			if (!Number.isNaN(p.getTime())) return p;
 		}
-		return latestByArea;
-	}
-	let latestPerArea = $derived(filteredData ? getLatestPeriodPerArea(filteredData) : new Map());
+
+		// Fallback until selectedPeriodRange has been initialised
+		if (!filteredData?.areacd || !filteredData.period || !filteredData.value) return null;
+		let latest = null;
+		for (let i = 0; i < filteredData.areacd.length; i++) {
+			if (!selectedAreaCodes.includes(filteredData.areacd[i]) || filteredData.value[i] == null)
+				continue;
+			const period = parsePeriod(filteredData.period[i]);
+			if (!Number.isNaN(period.getTime()) && (!latest || period > latest)) latest = period;
+		}
+		return latest;
+	});
+
+	let selectedKey = $derived(latestPeriod ? formatPeriod(latestPeriod) : null);
 
 	function processDataSparkline(data, standardised, comparisonCd) {
 		const areaDataSparkline = [];
@@ -99,7 +103,7 @@
 		};
 	}
 
-	function processDataPointrange(filteredData, standardised, comparisonCd) {
+	function processDataPointrange(data, standardised, comparisonCd, selectedKey, formatPeriod) {
 		const areaDataPointrange = [];
 		const comparisonDataPointrange = [];
 		const pointrangeXDomain = [Infinity, -Infinity];
@@ -109,13 +113,7 @@
 			period: parsePeriod(row.period)
 		}));
 		for (const d of rows) {
-			// filter to desired period (chosen by user or defaults to latest available date for the area indicator)
-			const targetPeriod = latestPerArea.get(d.areacd);
-			if (
-				d.value != null &&
-				targetPeriod &&
-				d.period.getTime() === parsePeriod(targetPeriod).getTime()
-			) {
+			if (d.value != null && selectedKey && formatPeriod(d.period) === selectedKey) {
 				// push to pointrange dataset - comparison
 				if (d.areacd === comparisonCd) {
 					comparisonDataPointrange.push(d);
@@ -154,7 +152,13 @@
 	);
 
 	let { areaDataPointrange, comparisonDataPointrange, pointrangeXDomain } = $derived(
-		processDataPointrange(filteredData, metadata?.standardised, comparisonArea.areacd)
+		processDataPointrange(
+			data,
+			metadata?.standardised,
+			comparisonArea.areacd,
+			selectedKey,
+			formatPeriod
+		)
 	);
 
 	let areasData = $derived.by(() => {
@@ -328,9 +332,7 @@
 			: { upperFill: ONScolours.grey25, lowerFill: ONScolours.grey75 };
 	}
 
-	let valuePeriod = $derived(
-		areaDataPointrange.reduce((max, d) => (!max || d.period > max ? d.period : max), null)
-	);
+	let valuePeriod = $derived(latestPeriod);
 	let CIsStyle = $derived(areaDataPointrange.some((d) => d.lci_95 != null && d.uci_95 != null));
 
 	let nameWidth = $state(0);
@@ -487,11 +489,6 @@
 					use:updateLabelWidths={area.areacd}
 				>
 					{area.areanm}
-					{area.pointrangeRow?.period &&
-					valuePeriod &&
-					area.pointrangeRow.period.getTime() !== valuePeriod.getTime()
-						? `(${formatPeriod(area.pointrangeRow.period)})`
-						: ''}
 				</div>
 				{#if area.isMissing}
 					<div class="data-unavilable">Data unavailable</div>
@@ -508,8 +505,8 @@
 						/>
 					{:else}
 						<p class="area-value" use:updateValueWidth={area.areacd}>–</p>
-						<!-- <div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div> -->
-						<div class="no-data-to-date"></div>
+						<div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div>
+						<!-- <div class="no-data-to-date"></div>  -->
 					{/if}
 					<ComparisonSparkline
 						data={area.rows}

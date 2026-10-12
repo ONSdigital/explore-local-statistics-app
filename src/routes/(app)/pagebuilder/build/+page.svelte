@@ -123,7 +123,7 @@
 		if (sharedComparisonCode) {
 			const sharedComparison = sharedComparisonCode
 				.map((areacd) => lookup[areacd])
-				.fitler(Boolean)
+				.filter(Boolean)
 				.map((area) => ({ ...area, type: getAreaType(area) || 'null' }));
 			if (sharedComparison) {
 				chosenComparisonArea.set(sharedComparison);
@@ -138,7 +138,7 @@
 			}
 		}
 
-		if (!hashIsValid) {
+		if (!hashValid) {
 			history.replaceState(null, '', window.location.pathname + window.location.search);
 		}
 	}
@@ -188,6 +188,19 @@
 			(areacd, index) => selection.areas.includes(areacd) && data.value?.[index] != null
 		) ?? false
 	);
+	let comparisonHasSelectedPeriodData = $derived.by(() => {
+		const sel = timePageState.selectedPeriodRange?.[1];
+		if (!data?.areacd || !sel || !comparisonArea?.areacd) return true;
+
+		const selectedLabel = formatPeriod(sel);
+
+		return data.areacd.some(
+			(cd, i) =>
+				cd === comparisonArea.areacd &&
+				data.value?.[i] != null &&
+				formatPeriod(data.period[i]) === selectedLabel
+		);
+	});
 
 	$effect(() => {
 		if (!uniquePeriods.length) return;
@@ -206,7 +219,11 @@
 		if (!end) return data;
 
 		const endTime = parsePeriod(end).getTime();
-		const keep = data.period.map((p) => parsePeriod(p).getTime() <= endTime);
+		const endLabel = formatPeriod(end);
+
+		const keep = data.period.map(
+			(p) => parsePeriod(p).getTime() <= endTime || formatPeriod(p) === endLabel
+		);
 
 		const out = {};
 		for (const [key, val] of Object.entries(data)) {
@@ -306,7 +323,7 @@
 			</div>
 		</div>
 
-		{#if ![...new Set(data?.areacd)].includes(comparisonArea.areacd)}
+		{#if metadata.standardised && !comparisonHasSelectedPeriodData}
 			<div class="missing-data-message">
 				<!-- Comparison data unavailable for {comparisonArea.areanm} -->
 				Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
@@ -334,6 +351,7 @@
 					{comparisonArea}
 					{formatValue}
 					{formatPeriod}
+					selectedPeriod={timePageState.selectedPeriodRange[1]}
 				/>
 			{/key}
 			<!-- </Tab> -->
