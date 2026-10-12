@@ -182,6 +182,11 @@
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
 		)
 	);
+	let hasSelectedAreaData = $derived(
+		data?.areacd?.some(
+			(areacd, index) => selection.areas.includes(areacd) && data.value?.[index] != null
+		) ?? false
+	);
 
 	$effect(() => {
 		if (!uniquePeriods.length) return;
@@ -211,6 +216,11 @@
 		}
 		return out;
 	});
+
+	// $inspect(metadata);
+	// $inspect(timePageState);
+	$inspect(uniquePeriods);
+	$inspect(data);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -261,7 +271,7 @@
 		</Details>
 	</div>
 	<Divider margin-top={false}></Divider>
-	{#if data && !data.message}
+	{#if data && !data.message && hasSelectedAreaData}
 		<div class="indicator-info">
 			<h2>{selection?.indicator?.label}</h2>
 			<p class="content-subtitle">
@@ -310,7 +320,7 @@
 		style:min-height="84px"
 		style:position="relative"
 	>
-		{#if data && !data.message}
+		{#if data && !data.message && hasSelectedAreaData}
 			<!-- <Tabs>
 				<Tab title="Comparison chart"> -->
 			{#key selection.indicator?.slug}
@@ -330,7 +340,7 @@
 			<!-- </Tab> -->
 			<!-- <Tab title="Bar chart"></Tab> -->
 			<!-- </Tabs> -->
-		{:else if data && data.message}
+		{:else if data && (data.message || !hasSelectedAreaData)}
 			<div class="no-data">
 				<p>No {selection.indicator.label} data available for the selected areas.</p>
 			</div>
@@ -338,7 +348,7 @@
 			<Spinner message="Loading chart data" />
 		{/if}
 	</div>
-	{#if data && !data.message}
+	{#if data && !data.message && hasSelectedAreaData}
 		<div class="get data">
 			<p>
 				Source:
