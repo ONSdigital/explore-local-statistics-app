@@ -42,19 +42,6 @@
 		indicator: $selectedIndicator
 	});
 
-	let modalPageState = $state({
-		selectedAreas: $selectedAreas,
-		selectedComparisonArea: $chosenComparisonArea
-	});
-
-	let timePageState = $state({
-		selectedPeriodRange: [null, null]
-	});
-
-	$effect(() => {
-		chosenComparisonArea.set(modalPageState.selectedComparisonArea);
-	});
-
 	async function getData(indicator, areas, chosenComparisonArea = null) {
 		const comparisonArea =
 			chosenComparisonArea != null ? chosenComparisonArea : await findNearestSharedParent(areas);
@@ -88,6 +75,20 @@
 			.map((c) => `${c.key}=${c.value}`)
 			.join('&')}`;
 	}
+
+	let modalPageState = $state({
+		selectedAreas: $selectedAreas,
+		selectedComparisonArea: $chosenComparisonArea
+	});
+
+	let timePageState = $state({
+		selectedPeriodRange: [null, null],
+		formatPeriod: () => formatPeriod
+	});
+
+	$effect(() => {
+		chosenComparisonArea.set(modalPageState.selectedComparisonArea);
+	});
 
 	let shareUrl = $derived(
 		browser ? makeShareUrl(selection.areas, selection.indicator, comparisonArea?.areacd) : ''
@@ -299,6 +300,7 @@
 					data={{ periods: uniquePeriods }}
 					hasIntervals="null"
 					bind:pageState={timePageState}
+					{formatPeriod}
 					changeText={metadata.periodFormat.replace('-', ' ')}
 				/>
 			</div>
