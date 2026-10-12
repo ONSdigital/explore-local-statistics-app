@@ -100,11 +100,13 @@
 			{/each}
 		</div>
 		<div class="range-track">
-			<div
-				class="range-progress"
-				style:left="{range ? (dragging[0] ? xPercent[0] : scale(selectedIndices[0])) : 0}%"
-				style:right="{dragging[1] ? 100 - xPercent[1] : 100 - scale(selectedIndices[1])}%"
-			></div>
+			{#if range}
+				<div
+					class="range-progress"
+					style:left="{range ? (dragging[0] ? xPercent[0] : scale(selectedIndices[0])) : 0}%"
+					style:right="{dragging[1] ? 100 - xPercent[1] : 100 - scale(selectedIndices[1])}%"
+				></div>
+			{/if}
 			{#each range ? [0, 1] : [1] as i}
 				<div
 					class="range-marker"
