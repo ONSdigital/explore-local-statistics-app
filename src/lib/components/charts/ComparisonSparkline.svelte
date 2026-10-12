@@ -40,7 +40,6 @@
 	let negCol = '#ABBDC5';
 
 	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
-	$inspect(valuePeriodData);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}

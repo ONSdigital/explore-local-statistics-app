@@ -289,6 +289,7 @@
 					data={{ periods: uniquePeriods }}
 					hasIntervals="null"
 					bind:pageState={timePageState}
+					changeText={metadata.periodFormat.replace('-', ' ')}
 				/>
 			</div>
 		</div>

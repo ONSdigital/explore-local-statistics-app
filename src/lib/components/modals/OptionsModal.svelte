@@ -5,7 +5,13 @@
 	import { cloneState } from './modalHelpers';
 	import { analyticsEvent } from '@onsvisual/svelte-components';
 
-	let { data, pageState = $bindable(), hasIntervals = true, mode = 'indicator' } = $props();
+	let {
+		data,
+		pageState = $bindable(),
+		hasIntervals = true,
+		mode = 'indicator',
+		changeText = null
+	} = $props();
 
 	let _pageState = $state(cloneState(pageState));
 	let formatTick = $derived(pageState?.formatPeriod?.() || ((d) => d));
@@ -22,15 +28,15 @@
 </script>
 
 <Modal
-	title={mode == 'comparison' ? 'Change time period' : 'Chart options'}
-	label={mode == 'comparison' ? 'Change time period' : 'Chart options'}
+	title={mode == 'comparison' ? 'Change ' + changeText : 'Chart options'}
+	label={mode == 'comparison' ? 'Change ' + changeText : 'Chart options'}
 	icon={mode == 'comparison' ? null : 'cog'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}
 	onCancel={() => (_pageState = cloneState(pageState))}
 >
 	<RangeSlider
-		label={mode == 'comparison' ? 'Selected time period' : 'Selected time range'}
+		label={mode == 'comparison' ? 'Selected ' + changeText : 'Selected time range'}
 		options={data.periods}
 		{formatTick}
 		bind:selectedRange={_pageState.selectedPeriodRange}
