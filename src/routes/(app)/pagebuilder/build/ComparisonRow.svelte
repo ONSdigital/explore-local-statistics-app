@@ -6,6 +6,8 @@
 	import { parsePeriod, parseData } from '$lib/utils';
 	import { Icon, Divider } from '@onsvisual/svelte-components';
 	import { ONScolours } from '$lib/config';
+	import { flip } from 'svelte/animate';
+	import { prefersReducedMotion } from 'svelte/motion';
 
 	let {
 		filteredData,
@@ -471,6 +473,7 @@
 		{/if}
 		{#each sortedAreasData as area, i (area.areacd)}
 			<div
+				animate:flip={{ duration: prefersReducedMotion.current ? 0 : 500 }}
 				class:alternating-row={i % 2 !== 0}
 				class="comparison-row-item"
 				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
