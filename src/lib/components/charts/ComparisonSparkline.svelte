@@ -36,8 +36,10 @@
 	);
 	let suffix2 = $derived(suffix === '%' ? ' pp' : suffix);
 
-	let posCol = '#BEE2f0';
-	let negCol = '#ABBDC5';
+	let posColBox = '#B6E9FB';
+	let negColBox = '#76A2B7';
+	let posColText = '#106B8C';
+	let negColText = '#00344D';
 
 	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
 </script>
@@ -104,14 +106,17 @@
 			: diff === 0
 				? ONScolours.grey25
 				: diff > 0
-					? posCol
-					: negCol}
+					? posColBox
+					: negColBox}
+		style:color={diff === 0 ? ONScolours.black : diff > 0 ? posColText : negColText}
 	>
-		{#if diff !== 0}
-			<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
-			<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
-		{/if}
-		{direction}
+		<div class="change-text">
+			{#if diff !== 0}
+				<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
+				<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
+			{/if}
+			{direction}
+		</div>
 	</div>
 </div>
 
