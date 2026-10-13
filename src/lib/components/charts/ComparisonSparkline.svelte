@@ -24,14 +24,19 @@
 
 	let combined = $derived([...data, ...comparisonData]);
 
+	let height = 70;
+	let padding = 12;
+
 	let xScale = $derived(xDomain ? scaleTime().domain(xDomain).range([0, 100]) : null);
 	let yScale = $derived(
 		yAxisFree
 			? scaleLinear()
-					.domain(extent(combined, (d) => d.value))
-					.range([70, 0])
+					.domain(extent(combined.flatMap((d) => [d.value, d.lci_95, d.uci_95])))
+					.range([height - padding, padding])
 			: yDomain
-				? scaleLinear().domain(yDomain).range([70, 0])
+				? scaleLinear()
+						.domain(yDomain)
+						.range([height - padding, padding])
 				: null
 	);
 
