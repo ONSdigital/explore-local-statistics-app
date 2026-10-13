@@ -462,7 +462,7 @@
 					height="8"
 					viewBox="0 0 12 8"
 					aria-hidden="true"
-					style:left="{comparisonBar.valueX}px"
+					style:left="{comparisonBar?.valueX ?? 0}px"
 					style:top="{labelHeight}px"
 				>
 					<path d="M0 0 L12 0 L6 8 Z" fill="var(--ons-color-grey-25)" />

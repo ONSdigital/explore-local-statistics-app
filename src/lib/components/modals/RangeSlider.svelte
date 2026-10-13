@@ -13,6 +13,10 @@
 		return i === -1 ? fallback : i;
 	}
 
+	function formatTickLabel(value) {
+		return value == null ? '' : formatTick(value);
+	}
+
 	let selectedIndices = $state([
 		range ? indexOrDefault(selectedRange[0], 0) : 0,
 		indexOrDefault(selectedRange[1], options.length - 1)
@@ -77,10 +81,10 @@
 	{#if label && !disabled}
 		<legend>
 			{#if range}
-				{label} <strong>{formatTick(selectedRange[0])}</strong> to
-				<strong>{formatTick(selectedRange[1])}</strong>
+				{label} <strong>{formatTickLabel(selectedRange[0])}</strong> to
+				<strong>{formatTickLabel(selectedRange[1])}</strong>
 			{:else}
-				{label} <strong>{formatTick(selectedRange[1])}</strong>
+				{label} <strong>{formatTickLabel(selectedRange[1])}</strong>
 			{/if}
 		</legend>
 	{/if}
@@ -95,7 +99,7 @@
 			{/each}
 			{#each [0, options.length - 1] as i}
 				<div class="range-tick-text" style={i === 0 ? 'left: 0' : 'right: 0'}>
-					{formatTick(options[i])}
+					{formatTickLabel(options[i])}
 				</div>
 			{/each}
 		</div>
@@ -132,7 +136,7 @@
 				class="ons-u-vh"
 				min={0}
 				max={selectedIndices[1]}
-				aria-valuetext={formatTick(selectedRange[0])}
+				aria-valuetext={formatTickLabel(selectedRange[0])}
 				bind:value={selectedIndices[0]}
 				onfocus={() => (focused[0] = true)}
 				onblur={() => (focused[0] = false)}
@@ -146,7 +150,7 @@
 			class="ons-u-vh"
 			min={selectedIndices[0]}
 			max={options.length - 1}
-			aria-valuetext={formatTick(selectedRange[1])}
+			aria-valuetext={formatTickLabel(selectedRange[1])}
 			bind:value={selectedIndices[1]}
 			onfocus={() => (focused[1] = true)}
 			onblur={() => (focused[1] = false)}
