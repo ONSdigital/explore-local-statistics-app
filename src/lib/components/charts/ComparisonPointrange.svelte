@@ -2,22 +2,56 @@
 	import { scaleLinear } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 
-	let { data, xDomain, chartWidth, CIsStyle } = $props();
+	let { data, xDomain, comparisonData = null, refInset = 0, chartWidth, CIsStyle } = $props();
 	let leftMargin = $state(0);
 	const barHeight = 20;
+	const rowHeight = 70;
+	const refLineWidth = 2.5;
 
 	let xScale = $derived(xDomain ? scaleLinear().domain(xDomain).range([0, chartWidth]) : null);
+
+	let reference = $derived.by(() => {
+		if (!xScale || !comparisonData) return null;
+		const hasInterval = comparisonData.lci_95 != null && comparisonData.uci_95 != null;
+		return {
+			barX: hasInterval ? xScale(comparisonData.lci_95) : null,
+			barWidth: hasInterval ? xScale(comparisonData.uci_95) - xScale(comparisonData.lci_95) : null,
+			lineX: comparisonData.value != null ? xScale(comparisonData.value) : null
+		};
+	});
+	let refY = $derived(refInset > 0 ? refInset : -0.5);
+	let refHeight = $derived(rowHeight + 0.5 - refY);
 </script>
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">
 	<svg
-		viewBox="0 0 {chartWidth} 70"
+		viewBox="0 0 {chartWidth} {rowHeight}"
 		class="pointrange-svg"
 		aria-hidden="true"
-		style:height="70px"
+		style:height="{rowHeight}px"
 		style:width="{chartWidth}px"
 		overflow="visible"
 	>
+		{#if reference}
+			{#if reference.barX != null}
+				<rect
+					class="reference-bar"
+					x={reference.barX}
+					y={refY}
+					width={reference.barWidth}
+					height={refHeight}
+				/>
+			{/if}
+			{#if reference.lineX != null}
+				<rect
+					class="reference-line"
+					x={reference.lineX - refLineWidth / 2}
+					y={refY}
+					width={refLineWidth}
+					height={refHeight}
+				/>
+			{/if}
+		{/if}
 		{#if xScale && data}
 			<line
 				stroke-dasharray="5"
@@ -76,5 +110,11 @@
 	.value-diamond {
 		fill: var(--ons-color-ocean-blue);
 		stroke: var(--ons-color-ocean-blue);
+	}
+	.reference-bar {
+		fill: var(--ons-color-grey-25);
+	}
+	.reference-line {
+		fill: var(--ons-color-grey-60);
 	}
 </style>

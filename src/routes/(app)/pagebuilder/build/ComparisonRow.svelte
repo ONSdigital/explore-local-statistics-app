@@ -346,6 +346,10 @@
 		const max = pointRangeWidth - half + 5;
 		return Math.max(min, Math.min(x, max));
 	});
+
+	const rowsPaddingTop = 35;
+	// how far the arrow tip reaches into the first row
+	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
 </script>
 
 <div
@@ -438,7 +442,7 @@
 	</div>
 
 	<Divider marginTop={false} marginBottom={false} mode="dark"></Divider>
-	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="25px">
+	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="{rowsPaddingTop}px">
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
 				<div
@@ -462,19 +466,6 @@
 				>
 					<path d="M0 0 L12 0 L6 8 Z" fill="var(--ons-color-grey-25)" />
 				</svg>
-				{#if comparisonBar.left != null}
-					<div
-						class="comparison-reference-bar"
-						style:left="{comparisonBar.left}px"
-						style:width="{comparisonBar.width}px"
-					></div>
-				{/if}
-				{#if comparisonBar.valueX != null}
-					<div
-						class="comparison-reference-line"
-						style:left="{comparisonBar.valueX - 2.5 / 2}px"
-					></div>
-				{/if}
 			</div>
 		{/if}
 		{#each sortedAreasData as area, i (area.areacd)}
@@ -499,9 +490,11 @@
 						</p>
 						<ComparisonPointrange
 							data={area.pointrangeRow}
+							comparisonData={metadata?.standardised ? comparisonGroup?.pointrangeRow : null}
 							xDomain={pointrangeXDomain}
 							chartWidth={pointRangeWidth}
 							{CIsStyle}
+							refInset={i === 0 ? firstRowInset : 0}
 						/>
 					{:else}
 						<p class="area-value" use:updateValueWidth={area.areacd}>–</p>
@@ -561,7 +554,6 @@
 		pointer-events: none;
 		z-index: 1;
 	}
-
 	.pointrange-individual-list {
 		position: relative;
 	}
