@@ -15,7 +15,8 @@
 		comparisonArea,
 		formatValue = (d) => d,
 		formatPeriod,
-		selectedPeriod = null
+		selectedPeriod = null,
+		yAxisFree
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -511,6 +512,7 @@
 						{suffix}
 						{formatValue}
 						chartWidth={sparklineWidth}
+						{yAxisFree}
 					/>
 				{/if}
 			</div>

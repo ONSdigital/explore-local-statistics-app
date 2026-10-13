@@ -3,7 +3,7 @@
 	import { ONScolours } from '$lib/config';
 	import { area, curveLinear } from 'd3-shape';
 	import { Icon } from '@onsvisual/svelte-components';
-	import type { valuesToBreaks } from '$lib/utils';
+	import { extent } from 'd3-array';
 
 	let {
 		data,
@@ -18,11 +18,22 @@
 		prefix,
 		suffix,
 		chartWidth,
-		valuePeriod
+		valuePeriod,
+		yAxisFree
 	} = $props();
 
+	let combined = $derived([...data, ...comparisonData]);
+
 	let xScale = $derived(xDomain ? scaleTime().domain(xDomain).range([0, 100]) : null);
-	let yScale = $derived(yDomain ? scaleLinear().domain(yDomain).range([70, 0]) : null);
+	let yScale = $derived(
+		yAxisFree
+			? scaleLinear()
+					.domain(extent(combined, (d) => d.value))
+					.range([70, 0])
+			: yDomain
+				? scaleLinear().domain(yDomain).range([70, 0])
+				: null
+	);
 
 	const getCIArea = area()
 		.x((d) => xScale(d.period))

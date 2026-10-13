@@ -28,6 +28,7 @@
 	import { getAreaType } from '$lib/utils';
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
+	import { Checkbox } from '@onsvisual/svelte-components';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -235,10 +236,7 @@
 		return out;
 	});
 
-	// $inspect(metadata);
-	// $inspect(timePageState);
-	$inspect(uniquePeriods);
-	$inspect(data);
+	let yAxisFree = $state(false);
 </script>
 
 <Hero title="Compare areas" background="#eaeaea" height="200px">
@@ -320,6 +318,11 @@
 					{formatPeriod}
 					changeText={metadata.periodFormat.replace('-', ' ')}
 				/>
+				<Checkbox
+					item={{ id: 'free-y-axis', label: 'Free y axis', checked: yAxisFree }}
+					bind:checked={yAxisFree}
+					compact
+				/>
 			</div>
 		</div>
 
@@ -352,6 +355,7 @@
 					{formatValue}
 					{formatPeriod}
 					selectedPeriod={timePageState.selectedPeriodRange[1]}
+					{yAxisFree}
 				/>
 			{/key}
 			<!-- </Tab> -->
