@@ -1,5 +1,5 @@
 // Benchmarks for the full /api/v1/data.[format] request pipeline (this is what
-// `+server.ts` calls). See `CLAUDE.md` "Performance notes for the data API" for the
+// `+server.ts` calls). See `src/lib/api/CLAUDE.md` and `docs/DECISIONS.md` (Performance) for the
 // architecture this exercises, and `__fixtures__/queryShapes.ts` for what each shape
 // represents in terms of real app usage.
 //
