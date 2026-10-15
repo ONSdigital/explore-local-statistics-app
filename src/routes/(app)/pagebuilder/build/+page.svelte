@@ -357,6 +357,7 @@
 					{formatPeriod}
 					selectedPeriod={timePageState.selectedPeriodRange[1]}
 					{yAxisFree}
+					{uniquePeriods}
 				/>
 			{/key}
 			<!-- </Tab> -->

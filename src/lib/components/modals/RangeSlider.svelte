@@ -95,6 +95,7 @@
 					class="range-tick"
 					class:range-tick-end={i === 0 || i === options.length - 1}
 					style:left="{scale(i)}%"
+					style:display={options.length > 25 ? 'none' : 'block'}
 				></div>
 			{/each}
 			{#each [0, options.length - 1] as i}

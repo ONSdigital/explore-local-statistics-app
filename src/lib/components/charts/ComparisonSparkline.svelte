@@ -19,7 +19,8 @@
 		suffix,
 		chartWidth,
 		valuePeriod,
-		yAxisFree
+		yAxisFree,
+		uniquePeriods
 	} = $props();
 
 	let combined = $derived([...data, ...comparisonData]);
@@ -58,6 +59,8 @@
 	let negColText = '#00344D';
 
 	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
+
+	$inspect(data);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -65,7 +68,7 @@
 		<path d={getCIArea(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 	{/if}
 {/snippet}
-{#snippet line(rows, color, dash = 'none', strokewidth = 1.5, width = 1.5)}
+{#snippet line(rows, color, dash = 'none', strokewidth = 1.5)}
 	{#if rows?.length}
 		<polyline
 			points={rows.map((d) => [xScale(d.period), yScale(d.value)].join(',')).join(' ')}
@@ -73,7 +76,6 @@
 			stroke-width={strokewidth}
 			fill="none"
 			stroke-dasharray={dash}
-			{width}
 		/>
 	{/if}
 {/snippet}

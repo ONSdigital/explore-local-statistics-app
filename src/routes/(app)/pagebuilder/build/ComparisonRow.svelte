@@ -19,7 +19,8 @@
 		formatValue = (d) => d,
 		formatPeriod,
 		selectedPeriod = null,
-		yAxisFree
+		yAxisFree,
+		uniquePeriods
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -528,6 +529,7 @@
 						{formatValue}
 						chartWidth={sparklineWidth}
 						{yAxisFree}
+						{uniquePeriods}
 					/>
 				{/if}
 			</div>
