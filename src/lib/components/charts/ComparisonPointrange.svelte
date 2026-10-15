@@ -32,6 +32,17 @@
 		style:width="{chartWidth}px"
 		overflow="visible"
 	>
+		{#if xScale && data}
+			<rect
+				x={xScale(xDomain[0])}
+				width={xScale(xDomain[1]) - xScale(xDomain[0])}
+				y={10}
+				height={rowHeight - 20}
+				fill={ONScolours.grey10}
+				opacity="01"
+			>
+			</rect>
+		{/if}
 		{#if reference}
 			{#if reference.barX != null}
 				<rect
@@ -63,15 +74,6 @@
 				stroke-width="0.5"
 			>
 			</line> -->
-			<rect
-				x={xScale(xDomain[0])}
-				width={xScale(xDomain[1]) - xScale(xDomain[0])}
-				y={rowHeight + 10}
-				height={rowHeight - 20}
-				fill={ONScolours.grey10}
-				opacity="0.7"
-			>
-			</rect>
 			{#if data.lci_95 != null && data.uci_95 != null}
 				<rect
 					class="confidence-bar"
