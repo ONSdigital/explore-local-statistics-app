@@ -17,7 +17,8 @@
 		Grid,
 		GridCell,
 		Divider,
-		Tooltip
+		Tooltip,
+		Section
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, parsePeriod } from '$lib/utils';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
@@ -434,13 +435,42 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 10px;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: flex-start;
+		padding: 0.5em 0;
 	}
 
 	.legend-modals {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: 10px;
 		margin-left: auto;
+		width: 100%;
+		min-width: 0;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.legend-modals :global(.ons-btn) {
+		max-width: 100%;
+		white-space: normal;
+		box-sizing: border-box;
+	}
+	.legend-modals :global(.ons-btn__inner) {
+		white-space: normal;
+	}
+	@media (max-width: 600px) {
+		.header-details {
+			flex-direction: column;
+			align-items: stretch;
+		}
+		.legend-modals {
+			flex-direction: column;
+			align-items: flex-end;
+			margin-left: 0;
+			justify-content: flex-end;
+		}
 	}
 
 	.indicator-info {
@@ -449,6 +479,9 @@
 	.select-container {
 		margin-top: 1em;
 		margin-bottom: 20px;
-		width: 500px;
+		width: 100%;
+		max-width: 500px;
+		min-width: 0;
+		box-sizing: border-box;
 	}
 </style>

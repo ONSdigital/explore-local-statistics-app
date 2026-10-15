@@ -313,6 +313,9 @@
 		const fixed = leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 3;
 		return Math.max(120, width - fixed);
 	});
+	let contentWidth = $derived(
+		labelWidth + valueWidth + pointRangeWidth + sparklineWidth + colGap * 3
+	);
 
 	let xScale = $derived(
 		pointrangeXDomain ? scaleLinear().domain(pointrangeXDomain).range([0, pointRangeWidth]) : null
@@ -361,6 +364,9 @@
 	class="pointrange-individual-list"
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="3px"
+	style:width="100%"
+	style:overflow-x="auto;"
+	style:-webkit-overflow-scrolling="touch;"
 >
 	<div
 		class="comparison-row-item comparison-header-row"
@@ -445,7 +451,8 @@
 		</div>
 	</div>
 
-	<Divider marginTop={false} marginBottom={false} mode="dark"></Divider>
+	<!-- <Divider marginTop={false} marginBottom={false} mode="dark" width="full"></Divider> -->
+	<hr style:min-width="{contentWidth}px" />
 	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="{rowsPaddingTop}px">
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
@@ -529,6 +536,9 @@
 </div>
 
 <style>
+	hr {
+		overflow-x: auto;
+	}
 	.data-unavilable {
 		grid-column: 4;
 		display: flex;
