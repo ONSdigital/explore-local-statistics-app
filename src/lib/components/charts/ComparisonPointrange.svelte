@@ -53,16 +53,25 @@
 			{/if}
 		{/if}
 		{#if xScale && data}
-			<line
+			<!-- <line
 				stroke-dasharray="5"
 				x1={xScale(xDomain[0])}
 				x2={xScale(xDomain[1])}
-				y1={35}
-				y2={35}
+				y1={rowHeight/2}
+				y2={rowHeight/2}
 				stroke="black"
 				stroke-width="0.5"
 			>
-			</line>
+			</line> -->
+			<rect
+				x={xScale(xDomain[0])}
+				width={xScale(xDomain[1]) - xScale(xDomain[0])}
+				y={rowHeight + 10}
+				height={rowHeight - 20}
+				fill={ONScolours.grey10}
+				opacity="0.7"
+			>
+			</rect>
 			{#if data.lci_95 != null && data.uci_95 != null}
 				<rect
 					class="confidence-bar"

@@ -487,9 +487,10 @@
 					duration: prefersReducedMotion.current ? 0 : 900,
 					easing: sineInOut
 				}}
-				class:alternating-row={i % 2 !== 0}
+				// class:alternating-row={i % 2 !== 0}
 				class="comparison-row-item"
 				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+				style:border-bottom="0.5px solid black"
 			>
 				<div
 					class="area-name"
@@ -542,6 +543,13 @@
 		overflow-x: auto;
 		margin-top: 10px;
 	}
+
+	.no-data-to-date {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.data-unavilable {
 		grid-column: 4;
 		display: flex;
