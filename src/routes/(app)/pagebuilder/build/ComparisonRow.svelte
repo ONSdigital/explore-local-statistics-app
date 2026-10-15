@@ -538,6 +538,7 @@
 <style>
 	hr {
 		overflow-x: auto;
+		margin-top: 10px;
 	}
 	.data-unavilable {
 		grid-column: 4;
