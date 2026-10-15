@@ -31,7 +31,7 @@
 	let yScale = $derived(
 		yAxisFree
 			? scaleLinear()
-					.domain(extent(combined.flatMap((d) => [d.value, d.lci_95, d.uci_95])))
+					.domain(extent(data.flatMap((d) => [d.value, d.lci_95, d.uci_95])))
 					.range([height - padding, padding])
 			: yDomain
 				? scaleLinear()
@@ -95,7 +95,7 @@
 			stroke-dasharray="4"
 		>
 		</line>
-		{#if comparisonData?.length}
+		{#if comparisonData?.length && !yAxisFree}
 			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
 			{@render line(comparisonData, ONScolours.grey60, 'none', 1)}
 		{/if}
