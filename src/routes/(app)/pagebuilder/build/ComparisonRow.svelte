@@ -490,7 +490,7 @@
 				// class:alternating-row={i % 2 !== 0}
 				class="comparison-row-item"
 				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
-				style:border-bottom="0.5px solid black"
+				style:border-bottom="0.5px solid {ONScolours.grey35}"
 			>
 				<div
 					class="area-name"
