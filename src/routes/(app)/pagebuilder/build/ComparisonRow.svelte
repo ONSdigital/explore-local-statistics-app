@@ -374,13 +374,14 @@
 	style:padding-left="{leftMargin}px"
 	style:padding-bottom="3px"
 	style:width="100%"
-	style:overflow-x="auto;"
-	style:-webkit-overflow-scrolling="touch;"
+	style:overflow-x="auto"
+	style:-webkit-overflow-scrolling="touch"
 >
 	<div
 		class="comparison-row-item comparison-header-row"
 		style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
 		style:margin-bottom="10px"
+		style:min-width="{contentWidth}px"
 	>
 		<div class="header-cell" style:margin-left="{labelMargin}px">
 			<button class="table-sort-button" on:click={() => toggleSort('areanm')}>
@@ -462,7 +463,12 @@
 
 	<!-- <Divider marginTop={false} marginBottom={false} mode="dark" width="full"></Divider> -->
 	<hr style:min-width="{contentWidth}px" />
-	<div class="rows-wrapper" style:margin-top="10px" style:padding-top="{rowsPaddingTop}px">
+	<div
+		class="rows-wrapper"
+		style:margin-top="10px"
+		style:padding-top="{rowsPaddingTop}px"
+		style:min-width="{contentWidth}px"
+	>
 		{#if comparisonBar}
 			<div class="comparison-overlay" style:left="{comparisonOffset}px">
 				<div

@@ -90,14 +90,23 @@
 	{/if}
 	<div class="range-container">
 		<div class="range-ticks" style:color={disabled ? 'var(--ons-color-text-disabled)' : null}>
-			{#each options as tick, i}
-				<div
-					class="range-tick"
-					class:range-tick-end={i === 0 || i === options.length - 1}
-					style:left="{scale(i)}%"
-					style:display={options.length > 25 ? 'none' : 'block'}
-				></div>
-			{/each}
+			{#if options.length < 25}
+				{#each options as tick, i}
+					<div
+						class="range-tick"
+						class:range-tick-end={i === 0 || i === options.length - 1}
+						style:left="{scale(i)}%"
+					></div>
+				{/each}
+			{:else}
+				{#each [options[0], options[options.length - 1]] as tick, i}
+					<div
+						class="range-tick"
+						style:height="15px"
+						style={i === 0 ? 'left: 0' : 'right: 0'}
+					></div>
+				{/each}
+			{/if}
 			{#each [0, options.length - 1] as i}
 				<div class="range-tick-text" style={i === 0 ? 'left: 0' : 'right: 0'}>
 					{formatTickLabel(options[i])}
