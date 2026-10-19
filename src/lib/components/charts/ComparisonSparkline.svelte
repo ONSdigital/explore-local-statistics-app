@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
-	import { area, curveLinear } from 'd3-shape';
+	import { area, line as d3line, curveLinear } from 'd3-shape';
 	import { Icon } from '@onsvisual/svelte-components';
 	import { extent } from 'd3-array';
 
@@ -17,13 +17,12 @@
 		xDomain,
 		prefix,
 		suffix,
-		chartWidth,
 		valuePeriod,
 		yAxisFree,
-		uniquePeriods
+		allPeriods
 	} = $props();
 
-	let combined = $derived([...data, ...comparisonData]);
+	// let combined = $derived([...data, ...comparisonData]); currently we are excluding the comparison area from the sparklin when y axis free, so not needed
 
 	let height = 70;
 	let padding = 12;
@@ -41,11 +40,45 @@
 				: null
 	);
 
-	const getCIArea = area()
-		.x((d) => xScale(d.period))
-		.y0((d) => yScale(d.lci_95))
-		.y1((d) => yScale(d.uci_95))
-		.curve(curveLinear);
+	const hasValue = (d) => d != null && d.value != null;
+	const hasCI = (d) => hasValue(d) && d.lci_95 != null && d.uci_95 != null;
+
+	function fillSeries(rows, periods) {
+		if (!rows?.length) return [];
+		if (!periods?.length) return rows;
+
+		const byTime = new Map(rows.map((r) => [r.period.getTime(), r]));
+		return periods.map(
+			(period) =>
+				byTime.get(period.getTime()) ?? { period, value: null, lci_95: null, uci_95: null }
+		);
+	}
+
+	function isolatedPoints(filled) {
+		return filled.filter(
+			(d, i) => hasValue(d) && !hasValue(filled[i - 1]) && !hasValue(filled[i + 1])
+		);
+	}
+
+	let filledData = $derived(fillSeries(data, allPeriods));
+	let filledComparison = $derived(fillSeries(comparisonData, allPeriods));
+
+	let lineGen = $derived(
+		d3line()
+			.defined(hasValue)
+			.x((d) => xScale(d.period))
+			.y((d) => yScale(d.value))
+			.curve(curveLinear)
+	);
+
+	let ciAreaGen = $derived(
+		area()
+			.defined(hasCI)
+			.x((d) => xScale(d.period))
+			.y0((d) => yScale(d.lci_95))
+			.y1((d) => yScale(d.uci_95))
+			.curve(curveLinear)
+	);
 
 	let diff = $derived(data[data.length - 1].value - data[0].value);
 	let direction = $derived(
@@ -62,11 +95,32 @@
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
-	{#if rows?.length && rows.every((d) => d.lci_95 != null && d.uci_95 != null)}
-		<path d={getCIArea(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
+	{#if rows?.some(hasCI)}
+		<path d={ciAreaGen(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
 	{/if}
 {/snippet}
 {#snippet line(rows, color, dash = 'none', strokewidth = 1.5)}
+	{#if rows?.some(hasValue)}
+		<path
+			d={lineGen(rows)}
+			stroke={color}
+			stroke-width={strokewidth}
+			fill="none"
+			stroke-dasharray={dash}
+		/>
+		{#each isolatedPoints(rows) as d (d.period.getTime())}
+			<circle
+				cx={xScale(d.period)}
+				cy={yScale(d.value)}
+				r={2.5}
+				fill={color}
+				stroke={ONScolours.white}
+			/>
+		{/each}
+	{/if}
+{/snippet}
+<!-- if wanting to fill in the gaps with a dashed line? -->
+{#snippet linedash(rows, color, dash, strokewidth)}
 	{#if rows?.length}
 		<polyline
 			points={rows.map((d) => [xScale(d.period), yScale(d.value)].join(',')).join(' ')}
@@ -95,13 +149,14 @@
 			stroke-dasharray="4"
 		>
 		</line>
-		{#if comparisonData?.length && !yAxisFree}
-			{@render ribbon(comparisonData, ONScolours.grey60, 0.3)}
-			{@render line(comparisonData, ONScolours.grey60, 'none', 1)}
+		{#if filledComparison?.length && !yAxisFree}
+			{@render ribbon(filledComparison, ONScolours.grey60, 0.3)}
+			{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
 		{/if}
 		{#if data?.length}
-			{@render ribbon(data, ONScolours.oceanBlue, 0.2)}
-			{@render line(data, ONScolours.oceanBlue, 'none', 2)}
+			{@render ribbon(filledData, ONScolours.oceanBlue, 0.2)}
+			{@render linedash(data, ONScolours.oceanBlue, 3, 1)}
+			{@render line(filledData, ONScolours.oceanBlue, 'none', 2)}
 			{#if valuePeriodData.length}
 				<circle
 					cx={xScale(valuePeriodData[0]?.period)}

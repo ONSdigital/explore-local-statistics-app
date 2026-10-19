@@ -19,8 +19,7 @@
 		formatValue = (d) => d,
 		formatPeriod,
 		selectedPeriod = null,
-		yAxisFree,
-		uniquePeriods
+		yAxisFree
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -165,6 +164,14 @@
 			formatPeriod
 		)
 	);
+	let allPeriods = $derived.by(() => {
+		const rows = [...areaDataSparkline, ...(metadata?.standardised ? comparisonDataSparkline : [])];
+		const byTime = new Map();
+		for (const d of rows) {
+			if (d.value != null) byTime.set(d.period.getTime(), d.period);
+		}
+		return [...byTime.values()].sort((a, b) => a - b);
+	});
 
 	let areasData = $derived.by(() => {
 		const rowsByArea = new Map();
@@ -532,7 +539,7 @@
 						{formatValue}
 						chartWidth={sparklineWidth}
 						{yAxisFree}
-						{uniquePeriods}
+						{allPeriods}
 					/>
 				{:else}
 					<div class="data-unavilable">Data unavailable</div>
