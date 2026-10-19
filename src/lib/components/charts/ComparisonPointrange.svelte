@@ -2,7 +2,17 @@
 	import { scaleLinear } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 
-	let { data, xDomain, comparisonData = null, refInset = 0, chartWidth, CIsStyle } = $props();
+	let {
+		data,
+		xDomain,
+		comparisonData = null,
+		refInset = 0,
+		chartWidth,
+		CIsStyle,
+		formatPeriod = (d) => d,
+		valuePeriod,
+		fullSeriesMissing
+	} = $props();
 	let leftMargin = $state(0);
 	const barHeight = 20;
 	const rowHeight = 70;
@@ -21,6 +31,7 @@
 	});
 	let refY = $derived(refInset > 0 ? refInset : -0.5);
 	let refHeight = $derived(rowHeight + 0.5 - refY);
+	$inspect(data);
 </script>
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">
@@ -63,7 +74,7 @@
 				/>
 			{/if}
 		{/if}
-		{#if xScale && data}
+		{#if data}
 			<!-- <line
 				stroke-dasharray="5"
 				x1={xScale(xDomain[0])}
@@ -100,11 +111,33 @@
 					transform={`rotate(45 ${xScale(data.value)} ${centerY})`}
 				/>
 			{/if}
+		{:else if !fullSeriesMissing}
+			<!-- adding as foreign object because we are within svg now -->
+			<foreignObject x="0" y="0" width={chartWidth} height={rowHeight}>
+				<div xmlns="http://www.w3.org/1999/xhtml" class="no-data-to-date">
+					<span class="no-data-label">Data unavailable for {formatPeriod(valuePeriod)}</span>
+				</div>
+			</foreignObject>
 		{/if}
 	</svg>
 </div>
 
 <style>
+	.no-data-to-date {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		color: var(--ons-color-grey-75);
+		text-align: center;
+	}
+
+	.no-data-label {
+		padding: 0.25rem 0.5rem;
+		background-color: rgba(255, 255, 255, 0.85);
+	}
 	.pointrange-individual {
 		display: flex;
 		align-items: center;

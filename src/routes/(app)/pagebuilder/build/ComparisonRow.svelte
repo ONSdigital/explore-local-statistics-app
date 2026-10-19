@@ -358,6 +358,7 @@
 	const rowsPaddingTop = 35;
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
+	$inspect(areasData);
 </script>
 
 <div
@@ -499,26 +500,27 @@
 				>
 					{area.areanm}
 				</div>
-				{#if area.isMissing}
-					<div class="data-unavilable">Data unavailable</div>
+				{#if area.pointrangeRow?.value != null}
+					<p class="area-value" use:updateValueWidth={area.areacd}>
+						{prefix}{formatValue(area.pointrangeRow.value)}{suffix}
+					</p>
+				{:else if !area.isMissing}
+					<p class="area-value" use:updateValueWidth={area.areacd}>-</p>
 				{:else}
-					{#if area.pointrangeRow}
-						<p class="area-value" use:updateValueWidth={area.areacd}>
-							{prefix}{formatValue(area.pointrangeRow?.value)}{suffix}
-						</p>
-						<ComparisonPointrange
-							data={area.pointrangeRow}
-							comparisonData={metadata?.standardised ? comparisonGroup?.pointrangeRow : null}
-							xDomain={pointrangeXDomain}
-							chartWidth={pointRangeWidth}
-							{CIsStyle}
-							refInset={i === 0 ? firstRowInset : 0}
-						/>
-					{:else}
-						<p class="area-value" use:updateValueWidth={area.areacd}>–</p>
-						<div class="no-data-to-date">Data unavailable for {formatPeriod(valuePeriod)}</div>
-						<!-- <div class="no-data-to-date"></div>  -->
-					{/if}
+					<p></p>
+				{/if}
+				<ComparisonPointrange
+					data={area.isMissing ? null : area.pointrangeRow}
+					comparisonData={metadata?.standardised ? comparisonGroup?.pointrangeRow : null}
+					xDomain={pointrangeXDomain}
+					chartWidth={pointRangeWidth}
+					{CIsStyle}
+					refInset={i === 0 ? firstRowInset : 0}
+					{formatPeriod}
+					{valuePeriod}
+					fullSeriesMissing={area.isMissing}
+				/>
+				{#if !area.isMissing}
 					<ComparisonSparkline
 						data={area.rows}
 						yDomain={sparklineYDomain}
@@ -532,6 +534,8 @@
 						{yAxisFree}
 						{uniquePeriods}
 					/>
+				{:else}
+					<div class="data-unavilable">Data unavailable</div>
 				{/if}
 			</div>
 		{/each}
@@ -544,12 +548,6 @@
 		margin-top: 10px;
 	}
 
-	.no-data-to-date {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
 	.data-unavilable {
 		grid-column: 4;
 		display: flex;
@@ -557,7 +555,6 @@
 		justify-content: center;
 		color: var(--ons-color-grey-75);
 		min-height: 70px;
-		font-style: italic;
 	}
 	.table-sort-button {
 		font-weight: bold;
