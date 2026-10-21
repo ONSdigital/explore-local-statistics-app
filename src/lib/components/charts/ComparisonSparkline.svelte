@@ -9,17 +9,14 @@
 		data,
 		comparisonData,
 		formatValue = (d) => d,
-		xKey = 'period',
-		yKey = 'value',
-		idKey = 'areacd',
-		labelKey = 'areanm',
 		yDomain,
 		xDomain,
 		prefix,
 		suffix,
 		valuePeriod,
 		yAxisFree,
-		allPeriods
+		allPeriods,
+		isMobile
 	} = $props();
 
 	// let combined = $derived([...data, ...comparisonData]); currently we are excluding the comparison area from the sparklin when y axis free, so not needed
@@ -151,6 +148,7 @@
 		</line>
 		{#if filledComparison?.length && !yAxisFree}
 			{@render ribbon(filledComparison, ONScolours.grey60, 0.3)}
+			{@render linedash(comparisonData, ONScolours.grey60, 3, 1)}
 			{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
 		{/if}
 		{#if data?.length}
@@ -186,7 +184,9 @@
 				<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
 				<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
 			{/if}
-			{direction}
+			{#if !isMobile}
+				{direction}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -207,5 +207,10 @@
 		flex: 0 0 auto;
 		margin-left: 26px;
 		/* 20px to match column gap, plus 6 to match the diamond padding around the pointrange */
+	}
+	@media (max-width: 600px) {
+		.change-text {
+			margin-right: 5px;
+		}
 	}
 </style>

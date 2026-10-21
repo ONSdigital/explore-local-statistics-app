@@ -137,7 +137,9 @@
 	.no-data-label {
 		padding: 0.25rem 0.5rem;
 		background-color: rgba(255, 255, 255, 0.85);
+		line-height: 1.2;
 	}
+
 	.pointrange-individual {
 		display: flex;
 		align-items: center;

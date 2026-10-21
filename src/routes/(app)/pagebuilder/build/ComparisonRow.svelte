@@ -272,7 +272,7 @@
 
 	const sparklineWidth = 300;
 	const colGap = 20;
-	const labelMargin = colGap;
+	const labelMargin = $derived(isMobile ? 8 : colGap);
 	const nColsPreceedingPointrange = 2;
 
 	let valueWidths = $state({});
@@ -291,9 +291,12 @@
 		return {
 			destroy() {
 				observer.disconnect();
+				delete valueWidths[areacd];
 			}
 		};
 	}
+	let isMobile = $derived(width < 600);
+	let maxLabelWidth = $derived(isMobile ? 150 : 250);
 
 	let labelWidths = $state({});
 	let labelWidth = $derived.by(() => {
@@ -313,6 +316,7 @@
 		return {
 			destroy() {
 				observer.disconnect();
+				delete labelWidths[areacd];
 			}
 		};
 	}
@@ -509,6 +513,7 @@
 				<div
 					class="area-name"
 					style:margin-left="{labelMargin}px"
+					style:max-width="{maxLabelWidth}px"
 					use:updateLabelWidths={area.areacd}
 				>
 					{area.areanm}
@@ -546,6 +551,7 @@
 						chartWidth={sparklineWidth}
 						{yAxisFree}
 						{allPeriods}
+						{isMobile}
 					/>
 				{:else}
 					<div class="data-unavilable">Data unavailable</div>
@@ -642,9 +648,8 @@
 	}
 	.area-name {
 		font-weight: 400;
-		margin-left: 20px;
-		width: fit-content;
-		max-width: 250px;
+		width: max-content;
+		overflow-wrap: anywhere;
 	}
 	.sparkline-svg,
 	.pointrange-svg {
