@@ -270,7 +270,6 @@
 		};
 	});
 
-	const sparklineWidth = 300;
 	const colGap = 20;
 	const labelMargin = $derived(isMobile ? 8 : colGap);
 	const nColsPreceedingPointrange = 2;
@@ -321,6 +320,26 @@
 		};
 	}
 
+	let sparklineWidths = $state({});
+	let sparklineWidth = $derived.by(() => {
+		const widths = Object.values(sparklineWidths);
+		if (!widths.length) return 300; // fallback until first measure
+		return Math.max(...widths);
+	});
+	function updateSparklineWidth(el, areacd) {
+		const update = () => {
+			sparklineWidths[areacd] = el.getBoundingClientRect().width;
+		};
+		update();
+		const observer = new ResizeObserver(update);
+		observer.observe(el);
+		return {
+			destroy() {
+				observer.disconnect();
+				delete sparklineWidths[areacd];
+			}
+		};
+	}
 	let pointRangeWidth = $derived.by(() => {
 		const fixed = leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 3;
 		return Math.max(120, width - fixed);
@@ -539,20 +558,21 @@
 					fullSeriesMissing={area.isMissing}
 				/>
 				{#if !area.isMissing}
-					<ComparisonSparkline
-						data={area.rows}
-						yDomain={sparklineYDomain}
-						comparisonData={comparisonRows}
-						xDomain={sparklineXDomain}
-						{valuePeriod}
-						{prefix}
-						{suffix}
-						{formatValue}
-						chartWidth={sparklineWidth}
-						{yAxisFree}
-						{allPeriods}
-						{isMobile}
-					/>
+					<div class="sparkline-cell" use:updateSparklineWidth={area.areacd}>
+						<ComparisonSparkline
+							data={area.rows}
+							yDomain={sparklineYDomain}
+							comparisonData={comparisonRows}
+							xDomain={sparklineXDomain}
+							{valuePeriod}
+							{prefix}
+							{suffix}
+							{formatValue}
+							{yAxisFree}
+							{allPeriods}
+							{isMobile}
+						/>
+					</div>
 				{:else}
 					<div class="data-unavilable">Data unavailable</div>
 				{/if}
@@ -660,8 +680,7 @@
 	}
 	.comparison-row-item > .area-name,
 	.comparison-row-item > .area-value,
-	.comparison-row-item > :global(.pointrange-individual),
-	.comparison-row-item > :global(.sparkline-individual) {
+	.comparison-row-item > :global(.pointrange-individual) {
 		position: relative;
 		z-index: 5;
 	}
@@ -671,5 +690,12 @@
 		white-space: nowrap;
 		font-weight: bold;
 		font-size: 16px;
+	}
+
+	.sparkline-cell {
+		grid-column: 4;
+		width: max-content;
+		position: relative;
+		z-index: 5;
 	}
 </style>
