@@ -17,7 +17,7 @@
 //   - indicators/[code]/+page.svelte "Download data" links: `/api/v1/data/{indicator}.xlsx`
 //     and `.csv`/`.csvw` for one indicator with `time=all` and the default `geo=all` (i.e.
 //     every geography level at once) — the broadest real request shape, and not rejected by
-//     `isOversizedRequest` since the item route never calls it at all (see gotchas.md).
+//     `isOversizedRequest` since the item route never calls it at all (see docs/DECISIONS.md).
 
 const indicator = 'population-count';
 
