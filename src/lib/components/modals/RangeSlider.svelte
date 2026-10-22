@@ -31,6 +31,8 @@
 		let xDomain;
 
 		const move = (e) => {
+			// Self-heal if the button was released without a pointerup reaching us
+			if (e.pointerType === 'mouse' && e.buttons === 0) return end();
 			const clamp = (val) => (val < 0 ? 0 : val > 100 ? 100 : val);
 			xPercent[i] = clamp(((e.clientX - xDomain[0]) * 100) / (xDomain[1] - xDomain[0]));
 
@@ -46,7 +48,7 @@
 		};
 
 		const start = (e) => {
-			if (disabled || e.button !== 0) return;
+			if (disabled || dragging[i] || e.button !== 0) return;
 			e.preventDefault();
 			// Capture keeps pointermove firing even once the finger/cursor leaves the small thumb
 			el.setPointerCapture(e.pointerId);
@@ -66,12 +68,15 @@
 		el.addEventListener('pointerdown', start);
 		el.addEventListener('pointerup', end);
 		el.addEventListener('pointercancel', end);
+		// Fires however capture ends, including cases where pointerup/pointercancel don't
+		el.addEventListener('lostpointercapture', end);
 
 		return {
 			destroy() {
 				el.removeEventListener('pointerdown', start);
 				el.removeEventListener('pointerup', end);
 				el.removeEventListener('pointercancel', end);
+				el.removeEventListener('lostpointercapture', end);
 				el.removeEventListener('pointermove', move);
 			}
 		};
@@ -155,6 +160,9 @@
 		position: relative;
 		width: 100%;
 		height: 64px;
+		/* Rapid clicks would otherwise select tick text, which the browser can then start a native drag of */
+		-webkit-user-select: none;
+		user-select: none;
 	}
 	.range-track {
 		position: absolute;
