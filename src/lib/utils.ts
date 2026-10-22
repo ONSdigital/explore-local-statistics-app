@@ -82,7 +82,14 @@ export function makePeriodFormatter(periodFormat: string) {
 										return `${year}-${String((year + range) % 100).padStart(2, '0')}`;
 									}
 								: utcFormat('%-d %b %Y');
-	return (p) => formatter(parsePeriod(p));
+	return (p) => {
+		if (p == null) return '';
+
+		const date = parsePeriod(p);
+		if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
+
+		return formatter(date);
+	};
 }
 
 export function shortenPeriodFormatter(formatter) {
