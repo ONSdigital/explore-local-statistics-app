@@ -27,14 +27,23 @@
 			}
 		});
 
-		// Click outside to close dialog
-		el.addEventListener('pointerup', (event) => {
+		const isInDialog = (event) => {
 			const rect = el.getBoundingClientRect();
-			const isInDialog =
+			return (
 				rect.top < event.clientY &&
 				rect.left < event.clientX &&
-				event.clientX < rect.left + rect.width;
-			if (!isInDialog) {
+				event.clientX < rect.left + rect.width
+			);
+		};
+
+		// Click outside to close dialog. The press must also start outside, so that a drag
+		// begun inside (e.g. a range slider thumb) and released outside doesn't close it
+		let pointerDownInDialog = false;
+		el.addEventListener('pointerdown', (event) => {
+			pointerDownInDialog = isInDialog(event);
+		});
+		el.addEventListener('pointerup', (event) => {
+			if (!pointerDownInDialog && !isInDialog(event)) {
 				el.close();
 				onCancel();
 			}
