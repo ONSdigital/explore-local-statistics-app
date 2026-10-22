@@ -11,6 +11,7 @@
 	import { pluralise } from '@onsvisual/robo-utils';
 	import { getGeoLevel } from '$lib/config/geoLevels';
 	import { isValidGeoLevel } from '$lib/util/validationHelpers';
+	import areaNameLookup from '$lib/data/areas-in-data.json';
 
 	const chartComponents = {
 		map: Map,
@@ -168,7 +169,7 @@
 							<p class="missing-data-note">
 								<strong>Note:</strong>
 								{#if selectedMissing.length === 1}
-									Data for {selectedMissing[0].areanm} is not available.
+									Data for {areaNameLookup[selectedMissing]} is not available.
 								{:else}
 									Data for some selected areas is not available.
 								{/if}
