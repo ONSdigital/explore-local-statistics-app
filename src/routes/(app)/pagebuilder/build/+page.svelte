@@ -240,7 +240,7 @@
 	let yAxisFree = $state(false);
 </script>
 
-<Hero title="Compare areas" background="#eaeaea" height="200px">
+<Hero width={'wider'} title="Compare areas" background="#eaeaea" height="200px">
 	<div class="hero-text">
 		<h4>Select areas</h4>
 		<p>{selection.areas?.length} areas selected</p>
@@ -248,7 +248,7 @@
 	</div>
 </Hero>
 
-<Container>
+<Container width={'wider'}>
 	<div class="indicator-select">
 		<h4>Select an indicator</h4>
 		<div class="select-container">
