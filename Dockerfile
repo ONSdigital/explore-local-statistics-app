@@ -1,5 +1,5 @@
 # Stage 0 - Shared
-FROM node:24.19.0 AS shared
+FROM node:24.21.0 AS shared
 
 WORKDIR /app
 
