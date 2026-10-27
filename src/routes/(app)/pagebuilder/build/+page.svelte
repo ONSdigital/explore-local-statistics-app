@@ -30,6 +30,7 @@
 	import AreasModal from '$lib/components/modals/AreasModal.svelte';
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
 	import { Checkbox } from '@onsvisual/svelte-components';
+	import SidebarLayout from '$lib/components/SidebarLayout.svelte';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -238,33 +239,38 @@
 	});
 
 	let yAxisFree = $state(false);
+	let sidebarOpen = $state(true);
 </script>
 
-<Hero width={'wider'} title="Compare areas" background="#eaeaea" height="200px">
+<!-- <Hero width={'wider'} title="Compare areas" background="#eaeaea" height="200px">
 	<div class="hero-text">
 		<h4>Select areas</h4>
 		<p>{selection.areas?.length} areas selected</p>
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
-</Hero>
+</Hero> -->
 
 <Container width={'wider'}>
-	<div class="indicator-select">
-		<h4>Select an indicator</h4>
-		<div class="select-container">
-			<Select
-				label=""
-				placeholder="Search for an indicator"
-				labelKey="label"
-				groupKey="topic"
-				autoClear={false}
-				options={indicators}
-				on:change={(e) => selectIndicator(e.detail)}
-			></Select>
-		</div>
-		<Details title="Show all indicators">
-			<Grid width="wide" colWidth="wide">
-				<GridCell>
+	<SidebarLayout bind:open={sidebarOpen} label="indicator">
+		{#snippet sidebar()}
+			<div class="change-area-text">
+				<h4>{selection.areas?.length} areas selected</h4>
+				<p><a href="/pagebuilder">Change areas</a></p>
+			</div>
+			<div class="indicator-select">
+				<h4>Select an indicator</h4>
+				<div class="select-container">
+					<Select
+						label=""
+						placeholder="Search for an indicator"
+						labelKey="label"
+						groupKey="topic"
+						autoClear={false}
+						options={indicators}
+						on:change={(e) => selectIndicator(e.detail)}
+					></Select>
+				</div>
+				<Details title="Show all indicators">
 					<Radios
 						label="Select a theme"
 						id="themes"
@@ -272,9 +278,7 @@
 						bind:value={selectedTheme}
 						compact
 					></Radios>
-				</GridCell>
-				{#if selectedTheme}
-					<GridCell>
+					{#if selectedTheme}
 						<Radios
 							label="Select an indicator"
 							id="indicators"
@@ -282,122 +286,126 @@
 							bind:value={$selectedIndicator}
 							compact
 						></Radios>
-					</GridCell>
-				{/if}
-			</Grid>
-		</Details>
-	</div>
-	<Divider margin-top={false}></Divider>
-	{#if data && !data.message && hasSelectedAreaData}
-		<div class="indicator-info">
-			<h2>{selection?.indicator?.label}</h2>
-			<p class="content-subtitle">
-				{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
-				{#if uniquePeriods.length > 1}
-					to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
-				<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
-			</p>
-		</div>
+					{/if}
+				</Details>
+			</div>
+		{/snippet}
+		{#if data && !data.message && hasSelectedAreaData}
+			<div class="indicator-info">
+				<h2>{selection?.indicator?.label}</h2>
+				<p class="content-subtitle">
+					{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
+					{#if uniquePeriods.length > 1}
+						to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
+					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
+				</p>
+			</div>
 
-		<div class="header-details">
-			{#if data.uci_95 && data.lci_95}
-				<div>
-					Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+			<div class="header-details">
+				{#if data.uci_95 && data.lci_95}
+					<div>
+						Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+					</div>
+				{/if}
+				<div class="legend-modals">
+					{#if metadata.standardised}
+						<AreasModal
+							mode="comparison"
+							{data}
+							bind:pageState={modalPageState}
+							areaslist={areas}
+						/>
+					{:else}
+						<p>Comparison area disabled for non-standardised indicator.</p>
+					{/if}
+					<OptionsModal
+						mode="comparison"
+						data={{ periods: uniquePeriods }}
+						hasIntervals="null"
+						bind:pageState={timePageState}
+						{formatPeriod}
+						changeText={metadata.periodFormat.replace('-', ' ')}
+					/>
+					<Checkbox
+						item={{ id: 'free-y-axis', label: 'Free y axis', checked: yAxisFree }}
+						bind:checked={yAxisFree}
+						compact
+					/>
+				</div>
+			</div>
+
+			{#if metadata.standardised && !comparisonHasSelectedPeriodData}
+				<div class="missing-data-message">
+					<!-- Comparison data unavailable for {comparisonArea.areanm} -->
+					Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
+						timePageState.selectedPeriodRange[1]
+					)}.
 				</div>
 			{/if}
-			<div class="legend-modals">
-				{#if metadata.standardised}
-					<AreasModal mode="comparison" {data} bind:pageState={modalPageState} areaslist={areas} />
-				{:else}
-					<p>Comparison area disabled for non-standardised indicator.</p>
-				{/if}
-				<OptionsModal
-					mode="comparison"
-					data={{ periods: uniquePeriods }}
-					hasIntervals="null"
-					bind:pageState={timePageState}
-					{formatPeriod}
-					changeText={metadata.periodFormat.replace('-', ' ')}
-				/>
-				<Checkbox
-					item={{ id: 'free-y-axis', label: 'Free y axis', checked: yAxisFree }}
-					bind:checked={yAxisFree}
-					compact
-				/>
-			</div>
-		</div>
-
-		{#if metadata.standardised && !comparisonHasSelectedPeriodData}
-			<div class="missing-data-message">
-				<!-- Comparison data unavailable for {comparisonArea.areanm} -->
-				Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
-					timePageState.selectedPeriodRange[1]
-				)}.
-			</div>
 		{/if}
-	{/if}
 
-	<div
-		style:margin-bottom="20px"
-		style:margin-top="32px"
-		style:min-height="84px"
-		style:position="relative"
-	>
-		{#if data && !data.message && hasSelectedAreaData}
-			<!-- <Tabs>
+		<div
+			style:margin-bottom="20px"
+			style:margin-top="32px"
+			style:min-height="84px"
+			style:position="relative"
+		>
+			{#if data && !data.message && hasSelectedAreaData}
+				<!-- <Tabs>
 				<Tab title="Comparison chart"> -->
-			{#key selection.indicator?.slug}
-				<ComparisonRow
-					{data}
-					{filteredData}
-					{metadata}
-					selectedAreas={$selectedAreas}
-					{comparisonArea}
-					{formatValue}
-					{formatPeriod}
-					selectedPeriod={timePageState.selectedPeriodRange[1]}
-					{yAxisFree}
-					{uniquePeriods}
-				/>
-			{/key}
-			<!-- </Tab> -->
-			<!-- <Tab title="Line chart"> -->
-			<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
-			<!-- </Tab> -->
-			<!-- <Tab title="Bar chart"></Tab> -->
-			<!-- </Tabs> -->
-		{:else if data && (data.message || !hasSelectedAreaData)}
-			<div class="no-data">
-				<p>No {selection.indicator.label} data available for the selected areas.</p>
-			</div>
-		{:else}
-			<Spinner message="Loading chart data" />
-		{/if}
-	</div>
-	{#if data && !data.message && hasSelectedAreaData}
-		<div class="get data">
-			<p>
-				Source:
-				{#each metadata?.source as s, i}
-					<a href={s.href} target="_blank"
-						>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
-					><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
-					metadata?.source.length - 1
-						? '.'
-						: i === metadata?.source.length - 2
-							? ' and '
-							: ', '}
-				{/each}
-			</p>
+				{#key selection.indicator?.slug}
+					<ComparisonRow
+						{data}
+						{filteredData}
+						{metadata}
+						selectedAreas={$selectedAreas}
+						{comparisonArea}
+						{formatValue}
+						{formatPeriod}
+						selectedPeriod={timePageState.selectedPeriodRange[1]}
+						{yAxisFree}
+						{uniquePeriods}
+					/>
+				{/key}
+				<!-- </Tab> -->
+				<!-- <Tab title="Line chart"> -->
+				<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
+				<!-- </Tab> -->
+				<!-- <Tab title="Bar chart"></Tab> -->
+				<!-- </Tabs> -->
+			{:else if data && (data.message || !hasSelectedAreaData)}
+				<div class="no-data">
+					<p>No {selection.indicator.label} data available for the selected areas.</p>
+				</div>
+			{:else}
+				<Spinner message="Loading chart data" />
+			{/if}
 		</div>
-	{/if}
-	<div class="share-link">
-		<h4>Share this page</h4>
-		<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="1" />
-		<Button variant={clipped ? 'secondary' : 'primary'} on:click={copyShareUrl} small>
-			{clipped ? 'Link copied' : 'Copy link'}
-		</Button>
-	</div>
+		{#if data && !data.message && hasSelectedAreaData}
+			<div class="get-data">
+				<p>
+					Source:
+					{#each metadata?.source as s, i}
+						<a href={s.href} target="_blank"
+							>{s.name}<span class="ons-u-vh"> (opens in a new tab)</span></a
+						><span class="inline-icon ons-u-ml-3xs"><Icon type="external" /></span>{i ===
+						metadata?.source.length - 1
+							? '.'
+							: i === metadata?.source.length - 2
+								? ' and '
+								: ', '}
+					{/each}
+				</p>
+			</div>
+		{/if}
+		<div class="share-link">
+			<h4>Share this page</h4>
+			<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="1" />
+			<Button variant={clipped ? 'secondary' : 'primary'} on:click={copyShareUrl} small>
+				{clipped ? 'Link copied' : 'Copy link'}
+			</Button>
+		</div>
+	</SidebarLayout>
 </Container>
 
 <style>
