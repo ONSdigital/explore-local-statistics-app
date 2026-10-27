@@ -471,7 +471,7 @@
 	.legend-modals :global(.ons-btn__inner) {
 		white-space: normal;
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 768px) {
 		.header-details {
 			flex-direction: column;
 			align-items: stretch;

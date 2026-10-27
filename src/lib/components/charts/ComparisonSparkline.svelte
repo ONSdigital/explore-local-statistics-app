@@ -89,6 +89,21 @@
 	let negColText = '#00344D';
 
 	let valuePeriodData = $derived(data.filter((d) => d.period.getTime() === valuePeriod.getTime()));
+
+	let changeBoxBg = $derived(
+		data.length === 1
+			? 'transparent'
+			: diff === 0
+				? ONScolours.grey25
+				: diff > 0
+					? posColBox
+					: negColBox
+	);
+
+	let changeBoxText = $derived(diff === 0 ? ONScolours.black : diff > 0 ? posColText : negColText);
+	let showChangeText = $derived(
+		!isMobile ? true : diff === 0 ? true : data.length === 1 ? true : false
+	);
 </script>
 
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
@@ -135,56 +150,53 @@
 	style:padding-bottom="0px"
 	style:padding-right="0px"
 >
-	<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="70px" overflow="visible">
-		<line
-			x1={xScale(valuePeriod)}
-			x2={xScale(valuePeriod)}
-			y1="5"
-			y2="80"
-			stroke={ONScolours.grey15}
-			stroke-width="1.5"
-			stroke-dasharray="4"
-		>
-		</line>
-		{#if filledComparison?.length && !yAxisFree}
-			{@render ribbon(filledComparison, ONScolours.grey60, 0.3)}
-			{@render linedash(comparisonData, ONScolours.grey60, 3, 1)}
-			{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
-		{/if}
-		{#if data?.length}
-			{@render ribbon(filledData, ONScolours.oceanBlue, 0.2)}
-			{@render linedash(data, ONScolours.oceanBlue, 3, 1)}
-			{@render line(filledData, ONScolours.oceanBlue, 'none', 2)}
-			{#if valuePeriodData.length}
-				<circle
-					cx={xScale(valuePeriodData[0]?.period)}
-					cy={yScale(valuePeriodData[0]?.value)}
-					r="4"
-					fill={ONScolours.oceanBlue}
-					stroke="white"
-				>
-				</circle>
+	{#if data.length > 1}
+		<!-- move if statement to within svg if want to preserve the sparkline spacing??? -->
+		<svg viewBox="0 0 100 70" class="sparkline-svg" style:height="70px" overflow="visible">
+			<line
+				x1={xScale(valuePeriod)}
+				x2={xScale(valuePeriod)}
+				y1="5"
+				y2="80"
+				stroke={ONScolours.grey15}
+				stroke-width="1.5"
+				stroke-dasharray="4"
+			>
+			</line>
+			{#if filledComparison?.length && !yAxisFree}
+				{@render ribbon(filledComparison, ONScolours.grey60, 0.3)}
+				{@render linedash(comparisonData, ONScolours.grey60, 3, 1)}
+				{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
 			{/if}
-		{/if}
-	</svg>
+			{#if data?.length}
+				{@render ribbon(filledData, ONScolours.oceanBlue, 0.2)}
+				{@render linedash(data, ONScolours.oceanBlue, 3, 1)}
+				{@render line(filledData, ONScolours.oceanBlue, 'none', 2)}
+				{#if valuePeriodData.length}
+					<circle
+						cx={xScale(valuePeriodData[0]?.period)}
+						cy={yScale(valuePeriodData[0]?.value)}
+						r="4"
+						fill={ONScolours.oceanBlue}
+						stroke="white"
+					>
+					</circle>
+				{/if}
+			{/if}
+		</svg>
+	{/if}
 	<div
 		class="change-box"
 		style:padding="5px;"
-		style:background-color={data.length === 1
-			? 'none'
-			: diff === 0
-				? ONScolours.grey25
-				: diff > 0
-					? posColBox
-					: negColBox}
-		style:color={diff === 0 ? ONScolours.black : diff > 0 ? posColText : negColText}
+		style:background-color={changeBoxBg}
+		style:color={changeBoxText}
 	>
 		<div class="change-text">
 			{#if diff !== 0}
 				<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
 				<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
 			{/if}
-			{#if !isMobile}
+			{#if showChangeText}
 				{direction}
 			{/if}
 		</div>

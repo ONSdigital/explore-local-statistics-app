@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Icon } from '@onsvisual/svelte-components';
 	let { sidebarTop, sidebar, children, open = $bindable(true), label = 'indicator' } = $props();
 
 	$effect(() => {
@@ -46,16 +47,7 @@
 			aria-expanded={open}
 			onclick={() => (open = !open)}
 		>
-			<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
-				<path
-					d={open ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'}
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-			</svg>
+			<Icon type="chevron" rotation={open ? 180 : 0}></Icon>
 		</button>
 	</aside>
 

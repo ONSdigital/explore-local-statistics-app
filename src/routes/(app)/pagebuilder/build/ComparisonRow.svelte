@@ -388,7 +388,7 @@
 	const rowsPaddingTop = 35;
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
-	$inspect(areasData);
+	$inspect(sortedAreasData);
 </script>
 
 <div
@@ -458,29 +458,34 @@
 		</div>
 		<div class="header-cell"></div>
 		<div class="header-cell">
-			<button class="table-sort-button" on:click={() => toggleSort('diff')}>
-				Trend {formatPeriod(sparklineXDomain[0])} to {formatPeriod(sparklineXDomain[1])}
-				<svg
-					class="ons-icon"
-					viewBox="0 0 12 19"
-					xmlns="http://www.w3.org/2000/svg"
-					focusable="false"
-					fill="currentColor"
-					role="img"
-					aria-hidden="true"
-				>
-					<path
-						class="ons-topTriangle"
-						fill={sortIconFill('diff').upperFill}
-						d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-					/>
-					<path
-						class="ons-bottomTriangle"
-						fill={sortIconFill('diff').lowerFill}
-						d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-					/>
-				</svg>
-			</button>
+			{#if sparklineXDomain[0] !== sparklineXDomain[1]}
+				<button class="table-sort-button" on:click={() => toggleSort('diff')}>
+					Trend {formatPeriod(sparklineXDomain[0])} to {formatPeriod(sparklineXDomain[1])}
+
+					<svg
+						class="ons-icon"
+						viewBox="0 0 12 19"
+						xmlns="http://www.w3.org/2000/svg"
+						focusable="false"
+						fill="currentColor"
+						role="img"
+						aria-hidden="true"
+					>
+						<path
+							class="ons-topTriangle"
+							fill={sortIconFill('diff').upperFill}
+							d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+						/>
+						<path
+							class="ons-bottomTriangle"
+							fill={sortIconFill('diff').lowerFill}
+							d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+						/>
+					</svg>
+				</button>
+			{:else}
+				Trend
+			{/if}
 		</div>
 	</div>
 
