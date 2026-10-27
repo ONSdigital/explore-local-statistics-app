@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { sidebar, children, open = $bindable(true), label = 'indicator' } = $props();
+	let { sidebarTop, sidebar, children, open = $bindable(true), label = 'indicator' } = $props();
 
 	$effect(() => {
 		if (typeof window === 'undefined') return;
@@ -28,8 +28,15 @@
 	></button>
 
 	<aside id="page-sidebar" class:open>
-		<div class="sidebar-scroll">
-			{@render sidebar()}
+		<div class="sidebar-inner">
+			{#if sidebarTop}
+				<div class="sidebar-top">
+					{@render sidebarTop()}
+				</div>
+			{/if}
+			<div class="sidebar-scroll">
+				{@render sidebar()}
+			</div>
 		</div>
 
 		<button
@@ -69,10 +76,22 @@
 		position: sticky;
 		top: 0;
 	}
-	.sidebar-scroll {
+	.sidebar-inner {
+		display: flex;
+		flex-direction: column;
 		max-height: 100vh;
-		overflow-y: auto;
+		box-sizing: border-box;
 		padding: 1rem 1rem 1rem 0;
+	}
+	.sidebar-top {
+		position: relative;
+		z-index: 2; /* lets dropdown sit above the scrolling area */
+		flex: none;
+	}
+	.sidebar-scroll {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow-y: auto;
 	}
 	.backdrop,
 	.tab {
@@ -99,20 +118,16 @@
 			transform: translateX(0);
 		}
 
-		.sidebar-scroll {
+		.sidebar-inner {
 			height: 100%;
 			max-height: none;
-			box-sizing: border-box;
 			padding: 1rem;
 			background: #fff;
-			overflow-y: auto;
-			-webkit-overflow-scrolling: touch;
 		}
-		aside.open .sidebar-scroll {
+		aside.open .sidebar-inner {
 			box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
 		}
-
-		aside:not(.open) .sidebar-scroll {
+		aside:not(.open) .sidebar-inner {
 			visibility: hidden;
 			transition: visibility 0s linear 0.25s;
 		}

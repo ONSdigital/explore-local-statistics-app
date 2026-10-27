@@ -252,7 +252,7 @@
 
 <Container width={'wider'}>
 	<SidebarLayout bind:open={sidebarOpen} label="indicator">
-		{#snippet sidebar()}
+		{#snippet sidebarTop()}
 			<div class="change-area-text">
 				<h4>{selection.areas?.length} areas selected</h4>
 				<p><a href="/pagebuilder">Change areas</a></p>
@@ -270,25 +270,27 @@
 						on:change={(e) => selectIndicator(e.detail)}
 					></Select>
 				</div>
-				<Details title="Show all indicators">
+			</div>
+		{/snippet}
+		{#snippet sidebar()}
+			<Details title="Show all indicators">
+				<Radios
+					label="Select a theme"
+					id="themes"
+					items={themeOptions}
+					bind:value={selectedTheme}
+					compact
+				></Radios>
+				{#if selectedTheme}
 					<Radios
-						label="Select a theme"
-						id="themes"
-						items={themeOptions}
-						bind:value={selectedTheme}
+						label="Select an indicator"
+						id="indicators"
+						items={indicatorOptions}
+						bind:value={$selectedIndicator}
 						compact
 					></Radios>
-					{#if selectedTheme}
-						<Radios
-							label="Select an indicator"
-							id="indicators"
-							items={indicatorOptions}
-							bind:value={$selectedIndicator}
-							compact
-						></Radios>
-					{/if}
-				</Details>
-			</div>
+				{/if}
+			</Details>
 		{/snippet}
 		{#if data && !data.message && hasSelectedAreaData}
 			<div class="indicator-info">
@@ -492,5 +494,8 @@
 		max-width: 500px;
 		min-width: 0;
 		box-sizing: border-box;
+	}
+	.select-container :global(.the-list-class) {
+		max-height: min(60vh, 400px) !important;
 	}
 </style>
