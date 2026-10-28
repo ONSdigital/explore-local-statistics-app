@@ -13,12 +13,15 @@
 		Textarea,
 		Select,
 		Button,
+		Radio,
 		Radios,
 		Grid,
 		GridCell,
 		Divider,
 		Tooltip,
-		Section
+		Section,
+		Accordion,
+		AccordionItem
 	} from '@onsvisual/svelte-components';
 	import { makeDataUrl, makeValueFormatter, makePeriodFormatter, parsePeriod } from '$lib/utils';
 	import Spinner from '$lib/components/visuals/Spinner.svelte';
@@ -240,6 +243,8 @@
 
 	let yAxisFree = $state(false);
 	let sidebarOpen = $state(true);
+	$inspect(themeOptions);
+	$inspect($selectedIndicator);
 </script>
 
 <!-- <Hero width={'wider'} title="Compare areas" background="#eaeaea" height="200px">
@@ -258,7 +263,7 @@
 				<p><a href="/pagebuilder">Change areas</a></p>
 			</div>
 			<div class="indicator-select">
-				<h4>Select an indicator</h4>
+				<h3>Select an indicator</h3>
 				<div class="select-container">
 					<Select
 						label=""
@@ -273,8 +278,8 @@
 			</div>
 		{/snippet}
 		{#snippet sidebar()}
-			<Details title="Show all indicators">
-				<Radios
+			<!-- <Details title="Show all indicators"> -->
+			<!-- <Radios
 					label="Select a theme"
 					id="themes"
 					items={themeOptions}
@@ -289,8 +294,28 @@
 						bind:value={$selectedIndicator}
 						compact
 					></Radios>
-				{/if}
-			</Details>
+				{/if} 
+				</Details> -->
+			<h4>Browse for an indicator</h4>
+			{#each themeOptions as theme}
+				<div class="twisty">
+					<Details title={theme.label} id={theme.slug} cls={'twisty'}>
+						{#if theme.children[0].description}
+							<Radios items={theme.children} bind:value={$selectedIndicator} compact={true}
+							></Radios>
+						{:else}
+							{#each theme.children as subtopic}
+								<div class="twisty">
+									<Details title={subtopic.label} cls={'twisty'}>
+										<Radios items={subtopic.children} bind:value={$selectedIndicator} compact={true}
+										></Radios>
+									</Details>
+								</div>
+							{/each}
+						{/if}
+					</Details>
+				</div>
+			{/each}
 		{/snippet}
 		{#if data && !data.message && hasSelectedAreaData}
 			<div class="indicator-info">
@@ -411,6 +436,14 @@
 </Container>
 
 <style>
+	.twisty {
+		margin-bottom: 15px;
+	}
+
+	.ons-details--open .ons-details__content {
+		border-left: 0px !important;
+	}
+
 	.indicator-select {
 		margin-top: 20px;
 	}

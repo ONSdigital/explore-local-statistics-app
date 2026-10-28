@@ -31,7 +31,6 @@
 	});
 	let refY = $derived(refInset > 0 ? refInset : -0.5);
 	let refHeight = $derived(rowHeight + 0.5 - refY);
-	$inspect(data);
 </script>
 
 <div class="pointrange-individual" style:padding-left="{leftMargin}px">

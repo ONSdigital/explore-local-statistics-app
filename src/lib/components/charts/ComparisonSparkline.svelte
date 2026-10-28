@@ -169,7 +169,7 @@
 				{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
 			{/if}
 			{#if data?.length}
-				{@render ribbon(filledData, ONScolours.oceanBlue, 0.4)}
+				{@render ribbon(filledData, ONScolours.oceanBlue, 0.35)}
 				{@render linedash(data, ONScolours.oceanBlue, 3, 1)}
 				{@render line(filledData, ONScolours.oceanBlue, 'none', 2)}
 				{#if valuePeriodData.length}

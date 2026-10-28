@@ -388,7 +388,6 @@
 	const rowsPaddingTop = 35;
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
-	$inspect(sortedAreasData);
 </script>
 
 <div
