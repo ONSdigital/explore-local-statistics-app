@@ -5,7 +5,13 @@
 	import { cloneState } from './modalHelpers';
 	import { analyticsEvent } from '@onsvisual/svelte-components';
 
-	let { data, pageState = $bindable(), hasIntervals = true, mode = 'indicator' } = $props();
+	let {
+		data,
+		pageState = $bindable(),
+		hasIntervals = true,
+		mode = 'indicator',
+		changeText = null
+	} = $props();
 
 	let _pageState = $state(cloneState(pageState));
 	let formatTick = $derived(pageState?.formatPeriod?.() || ((d) => d));
@@ -22,18 +28,19 @@
 </script>
 
 <Modal
-	title="Chart options"
-	label="Chart options"
-	icon="cog"
+	title={mode == 'comparison' ? 'Change ' + changeText : 'Chart options'}
+	label={mode == 'comparison' ? 'Change ' + changeText : 'Chart options'}
+	icon={mode == 'comparison' ? null : 'cog'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}
 	onCancel={() => (_pageState = cloneState(pageState))}
 >
 	<RangeSlider
-		label="Selected time range"
+		label={mode == 'comparison' ? 'Selected ' + changeText : 'Selected time range'}
 		options={data.periods}
 		{formatTick}
 		bind:selectedRange={_pageState.selectedPeriodRange}
+		range={mode == 'comparison' ? false : true}
 		onUpdate={(range) =>
 			runAnalyticsEvent(
 				'range-slider',
@@ -60,23 +67,25 @@
 		</div>
 	{/if}
 
-	<Checkbox
-		id="ci-checkbox"
-		bind:checked={_pageState.showConfidenceIntervals}
-		label="Show confidence intervals"
-		disabled={!hasIntervals}
-		compact
-		on:change={(e) =>
-			runAnalyticsEvent(
-				'checkbox',
-				'show confidence intervals',
-				e?.detail?.item?.checked ? 'enable' : 'disable'
-			)}
-	/>
-	{#if !hasIntervals}
-		<p class="ons-chart__caption">
-			Note: Confidence intervals are not available for this indicator.
-		</p>
+	{#if mode != 'comparison'}
+		<Checkbox
+			id="ci-checkbox"
+			bind:checked={_pageState.showConfidenceIntervals}
+			label="Show confidence intervals"
+			disabled={!hasIntervals}
+			compact
+			on:change={(e) =>
+				runAnalyticsEvent(
+					'checkbox',
+					'show confidence intervals',
+					e?.detail?.item?.checked ? 'enable' : 'disable'
+				)}
+		/>
+		{#if !hasIntervals}
+			<p class="ons-chart__caption">
+				Note: Confidence intervals are not available for this indicator.
+			</p>
+		{/if}
 	{/if}
 </Modal>
 
