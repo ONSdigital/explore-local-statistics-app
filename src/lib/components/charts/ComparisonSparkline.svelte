@@ -14,13 +14,12 @@
 		prefix,
 		suffix,
 		valuePeriod,
-		yAxisFree,
 		allPeriods,
 		isMobile
 	} = $props();
 
 	// let combined = $derived([...data, ...comparisonData]); currently we are excluding the comparison area from the sparklin when y axis free, so not needed
-
+	let yAxisFree = false;
 	let height = 70;
 	let padding = 12;
 

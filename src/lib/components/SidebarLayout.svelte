@@ -62,19 +62,21 @@
 		grid-template-columns: 320px minmax(0, 1fr);
 		gap: 2rem;
 		align-items: start;
+		column-rule: 1px solid var(--ons-color-grey-25);
 	}
 
 	aside {
 		position: sticky;
 		top: 0;
-		border-right: 1px solid var(--ons-color-borders-light);
+		border-bottom: 1px solid var(--ons-color-grey-25);
 	}
+
 	.sidebar-inner {
 		display: flex;
 		flex-direction: column;
 		max-height: 100vh;
 		box-sizing: border-box;
-		padding: 1rem 1rem 1rem 0;
+		padding: 1rem 0 1rem 0;
 	}
 	.sidebar-top {
 		position: relative;

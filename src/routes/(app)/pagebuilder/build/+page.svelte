@@ -271,7 +271,6 @@
 		return out;
 	});
 
-	let yAxisFree = $state(false);
 	let sidebarOpen = $state(true);
 	// $inspect(openThemes);
 	// $inspect(taxData.data.taxonomyNested.data);
@@ -370,62 +369,59 @@
 			{/each}
 		{/snippet}
 		{#if data && !data.message && hasSelectedAreaData}
-			<div class="indicator-info">
-				<h2>{selection?.indicator?.label}</h2>
-				<p class="content-subtitle">
-					{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
-					{#if uniquePeriods.length > 1}
-						to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
-					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
-				</p>
-			</div>
+			<div class="above-table">
+				<div class="indicator-info">
+					<h2>{selection?.indicator?.label}</h2>
+					<p class="content-subtitle">
+						{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
+						{#if uniquePeriods.length > 1}
+							to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
+						<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
+					</p>
+				</div>
 
-			<div class="header-details">
-				{#if data.uci_95 && data.lci_95}
-					<div>
-						Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+				<div class="header-details">
+					{#if data.uci_95 && data.lci_95}
+						<div>
+							Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+						</div>
+					{/if}
+					<div class="legend-modals">
+						{#if metadata.standardised}
+							<AreasModal
+								mode="comparison"
+								{data}
+								bind:pageState={modalPageState}
+								areaslist={areas}
+							/>
+						{:else}
+							<p>Comparison area disabled for non-standardised indicator.</p>
+						{/if}
+						<OptionsModal
+							mode="comparison"
+							data={{ periods: uniquePeriods }}
+							hasIntervals="null"
+							bind:pageState={timePageState}
+							{formatPeriod}
+							changeText={metadata.periodFormat.replace('-', ' ')}
+						/>
+					</div>
+				</div>
+
+				{#if metadata.standardised && !comparisonHasSelectedPeriodData}
+					<div class="missing-data-message">
+						<!-- Comparison data unavailable for {comparisonArea.areanm} -->
+						Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
+							timePageState.selectedPeriodRange[1]
+						)}.
 					</div>
 				{/if}
-				<div class="legend-modals">
-					{#if metadata.standardised}
-						<AreasModal
-							mode="comparison"
-							{data}
-							bind:pageState={modalPageState}
-							areaslist={areas}
-						/>
-					{:else}
-						<p>Comparison area disabled for non-standardised indicator.</p>
-					{/if}
-					<OptionsModal
-						mode="comparison"
-						data={{ periods: uniquePeriods }}
-						hasIntervals="null"
-						bind:pageState={timePageState}
-						{formatPeriod}
-						changeText={metadata.periodFormat.replace('-', ' ')}
-					/>
-					<Checkbox
-						item={{ id: 'free-y-axis', label: 'Free y axis', checked: yAxisFree }}
-						bind:checked={yAxisFree}
-						compact
-					/>
-				</div>
 			</div>
-
-			{#if metadata.standardised && !comparisonHasSelectedPeriodData}
-				<div class="missing-data-message">
-					<!-- Comparison data unavailable for {comparisonArea.areanm} -->
-					Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
-						timePageState.selectedPeriodRange[1]
-					)}.
-				</div>
-			{/if}
 		{/if}
 
 		<div
 			style:margin-bottom="20px"
-			style:margin-top="32px"
+			style:margin-top="20px"
 			style:min-height="84px"
 			style:position="relative"
 		>
@@ -442,7 +438,6 @@
 						{formatValue}
 						{formatPeriod}
 						selectedPeriod={timePageState.selectedPeriodRange[1]}
-						{yAxisFree}
 						{uniquePeriods}
 					/>
 				{/key}
@@ -488,6 +483,9 @@
 </Container>
 
 <style>
+	.above-table {
+		/* background-color: var(--ons-color-grey-5); */
+	}
 	.twisty {
 		margin-bottom: 15px;
 	}
@@ -552,7 +550,6 @@
 	.header-details {
 		display: flex;
 		margin-top: 10px;
-		margin-bottom: 20px;
 		font-size: 16px;
 		justify-content: space-between;
 		align-items: center;

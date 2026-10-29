@@ -18,8 +18,7 @@
 		comparisonArea,
 		formatValue = (d) => d,
 		formatPeriod,
-		selectedPeriod = null,
-		yAxisFree
+		selectedPeriod = null
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -402,7 +401,6 @@
 	<div
 		class="comparison-row-item comparison-header-row"
 		style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
-		style:margin-bottom="10px"
 		style:min-width="{contentWidth}px"
 	>
 		<div class="header-cell" style:margin-left="{labelMargin}px">
@@ -489,7 +487,7 @@
 	</div>
 
 	<!-- <Divider marginTop={false} marginBottom={false} mode="dark" width="full"></Divider> -->
-	<hr style:min-width="{contentWidth}px" />
+	<!-- <hr style:min-width="{contentWidth}px" /> -->
 	<div
 		class="rows-wrapper"
 		style:margin-top="10px"
@@ -572,7 +570,6 @@
 							{prefix}
 							{suffix}
 							{formatValue}
-							{yAxisFree}
 							{allPeriods}
 							{isMobile}
 						/>
@@ -608,6 +605,13 @@
 
 	.rows-wrapper {
 		position: relative;
+	}
+
+	.comparison-header-row {
+		border-bottom: 1px solid var(--ons-color-grey-35);
+		border-top: 1px solid var(--ons-color-grey-35);
+		padding-bottom: 10px;
+		padding-top: 10px;
 	}
 	.comparison-row-item {
 		position: relative;
