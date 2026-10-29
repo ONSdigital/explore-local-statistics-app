@@ -174,7 +174,17 @@
 
 	let selectedTheme = $state();
 	let openThemes = $state({});
-	let openSubtopics = $state({});
+	// Seed every subtopic as closed so Details' open prop and its chevron class start in sync.
+	// Taxonomy is static for this page instance, so initialize this state from the loaded tree.
+	let openSubtopics = $state(
+		Object.fromEntries(
+			taxData.data.taxonomyNested.data.flatMap((theme) =>
+				theme.children.flatMap((subtopic) =>
+					subtopic.children ? [[`${theme.slug}/${subtopic.slug}`, false]] : []
+				)
+			)
+		)
+	);
 	// add id into taxdata to be used by radios
 	let themeOptions = $derived(
 		taxData.data.taxonomyNested.data.map((theme) => ({
@@ -339,7 +349,7 @@
 									<div class="twisty">
 										<Details
 											title={subtopic.label}
-											cls="twisty"
+											cls="twisty subtopic-details"
 											bind:open={openSubtopics[subtopicKey]}
 										>
 											{#if openSubtopics[subtopicKey]}
@@ -482,19 +492,33 @@
 		margin-bottom: 15px;
 	}
 
-	/* .ons-details--open .ons-details__content {
+	:global(.ons-details--open .ons-details__content) {
 		border-left: 0px !important;
 	}
 
-	.ons-label__description ons-radio__label--with-description {
-		display: none !important;
-	} */
-
-	.ons-input--textarea {
-		word-wrap: break-word;
+	:global(.ons-input--textarea) {
+		word-wrap: break-word !important;
 	}
 
-	.ons-hero__details {
+	:global(.ons-details--initialised .ons-details__title) {
+		font-weight: 400 !important;
+		color: black;
+	}
+
+	:global(.ons-details--initialised .ons-details__icon) {
+		fill: black !important;
+		color: black !important;
+	}
+	:global(details.subtopic-details:not([open]) .ons-details__icon) {
+		top: -0.2rem !important;
+		transform: rotate(0deg) !important;
+	}
+	:global(details.subtopic-details[open] .ons-details__icon) {
+		top: 0.2rem !important;
+		transform: rotate(90deg) !important;
+	}
+
+	:global(.ons-hero__details) {
 		padding-bottom: 2rem;
 	}
 
@@ -511,9 +535,9 @@
 	.hero-text {
 		display: flex;
 		align-items: center;
-		/* margin-top: 20px; */
 		gap: 20px;
 		justify-content: space-around;
+		/* justify-content: flex-end; */
 	}
 
 	.missing-data-message {

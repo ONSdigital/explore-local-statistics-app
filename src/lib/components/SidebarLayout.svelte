@@ -67,6 +67,7 @@
 	aside {
 		position: sticky;
 		top: 0;
+		border-right: 1px solid var(--ons-color-borders-light);
 	}
 	.sidebar-inner {
 		display: flex;
