@@ -150,7 +150,8 @@
 	}
 
 	onMount(async () => {
-		if (!$selectedIndicator) $selectedIndicator = indicators[1];
+		$selectedIndicator =
+			indicators.find((indicator) => indicator.slug === $selectedIndicator?.slug) ?? indicators[1];
 		await getSharedFromHash();
 	});
 
@@ -162,7 +163,9 @@
 	}
 
 	let indicators = $derived(
-		taxData.data.taxonomy.data.filter((ind) => ind.slug !== 'population-by-age-and-sex')
+		taxData.data.taxonomy.data
+			.filter((ind) => ind.slug !== 'population-by-age-and-sex')
+			.map((ind) => ({ ...ind, id: ind.slug }))
 	);
 
 	function selectIndicator(indicator) {
@@ -170,20 +173,37 @@
 	}
 
 	let selectedTheme = $state();
+	let openThemes = $state({});
+	let openSubtopics = $state({});
+	// add id into taxdata to be used by radios
 	let themeOptions = $derived(
-		taxData.data.taxonomyNested.data.map((theme) => ({ ...theme, id: theme.slug }))
+		taxData.data.taxonomyNested.data.map((theme) => ({
+			...theme,
+			id: theme.slug,
+			children: theme.children.map((child) => ({
+				...child,
+				id: child.slug,
+				children: child.children?.map((indicator) => ({
+					...indicator,
+					id: indicator.slug
+				}))
+			}))
+		}))
 	);
-	let indicatorOptions = $derived(
-		selectedTheme?.children?.flatMap((child) =>
-			child.description
-				? [{ id: child.slug, label: child.label, slug: child.slug }]
-				: (child.children ?? []).map((indicator) => ({
-						id: indicator.slug,
-						label: indicator.label,
-						slug: indicator.slug
-					}))
-		) ?? []
+
+	const toRadioItems = (items) => items.map(({ id, label }) => ({ id, label }));
+
+	let indicatorLookup = $derived(
+		Object.fromEntries(
+			themeOptions.flatMap((theme) =>
+				theme.children.flatMap((child) =>
+					child.children ? child.children.map((i) => [i.slug, i]) : [[child.slug, child]]
+				)
+			)
+		)
 	);
+	const setSelected = (slug) => ($selectedIndicator = indicatorLookup[slug]);
+
 	let uniquePeriods = $derived(
 		[...new Set([...(data?.period ?? [])])].sort(
 			(a, b) => parsePeriod(a).getTime() - parsePeriod(b).getTime()
@@ -243,25 +263,25 @@
 
 	let yAxisFree = $state(false);
 	let sidebarOpen = $state(true);
-	$inspect(themeOptions);
+	// $inspect(openThemes);
+	// $inspect(taxData.data.taxonomyNested.data);
 	$inspect($selectedIndicator);
 </script>
 
-<!-- <Hero width={'wider'} title="Compare areas" background="#eaeaea" height="200px">
+<Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
 	<div class="hero-text">
-		<h4>Select areas</h4>
-		<p>{selection.areas?.length} areas selected</p>
+		<h4>{selection.areas?.length} areas selected</h4>
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
-</Hero> -->
+</Hero>
 
 <Container width={'wider'}>
 	<SidebarLayout bind:open={sidebarOpen} label="indicator">
 		{#snippet sidebarTop()}
-			<div class="change-area-text">
+			<!-- <div class="change-area-text">
 				<h4>{selection.areas?.length} areas selected</h4>
 				<p><a href="/pagebuilder">Change areas</a></p>
-			</div>
+			</div> -->
 			<div class="indicator-select">
 				<h3>Select an indicator</h3>
 				<div class="select-container">
@@ -296,22 +316,44 @@
 					></Radios>
 				{/if} 
 				</Details> -->
-			<h4>Browse for an indicator</h4>
+			<h4>Browse by category</h4>
 			{#each themeOptions as theme}
 				<div class="twisty">
-					<Details title={theme.label} id={theme.slug} cls={'twisty'}>
-						{#if theme.children[0].description}
-							<Radios items={theme.children} bind:value={$selectedIndicator} compact={true}
-							></Radios>
-						{:else}
-							{#each theme.children as subtopic}
-								<div class="twisty">
-									<Details title={subtopic.label} cls={'twisty'}>
-										<Radios items={subtopic.children} bind:value={$selectedIndicator} compact={true}
-										></Radios>
-									</Details>
-								</div>
-							{/each}
+					<Details
+						title={theme.label}
+						id={theme.slug}
+						cls="twisty"
+						bind:open={openThemes[theme.slug]}
+					>
+						{#if openThemes[theme.slug]}
+							{#if theme.children[0].description}
+								<Radios
+									id={theme.slug}
+									items={theme.children}
+									bind:value={$selectedIndicator}
+									compact={true}
+								/>
+							{:else}
+								{#each theme.children as subtopic}
+									{@const subtopicKey = `${theme.slug}/${subtopic.slug}`}
+									<div class="twisty">
+										<Details
+											title={subtopic.label}
+											cls="twisty"
+											bind:open={openSubtopics[subtopicKey]}
+										>
+											{#if openSubtopics[subtopicKey]}
+												<Radios
+													id={subtopicKey}
+													items={subtopic.children}
+													bind:value={$selectedIndicator}
+													compact={true}
+												/>
+											{/if}
+										</Details>
+									</div>
+								{/each}
+							{/if}
 						{/if}
 					</Details>
 				</div>
@@ -427,8 +469,8 @@
 		{/if}
 		<div class="share-link">
 			<h4>Share this page</h4>
-			<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="1" />
-			<Button variant={clipped ? 'secondary' : 'primary'} on:click={copyShareUrl} small>
+			<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
+			<Button variant="secondary" on:click={copyShareUrl} small>
 				{clipped ? 'Link copied' : 'Copy link'}
 			</Button>
 		</div>
@@ -440,8 +482,20 @@
 		margin-bottom: 15px;
 	}
 
-	.ons-details--open .ons-details__content {
+	/* .ons-details--open .ons-details__content {
 		border-left: 0px !important;
+	}
+
+	.ons-label__description ons-radio__label--with-description {
+		display: none !important;
+	} */
+
+	.ons-input--textarea {
+		word-wrap: break-word;
+	}
+
+	.ons-hero__details {
+		padding-bottom: 2rem;
 	}
 
 	.indicator-select {

@@ -600,7 +600,7 @@
 		min-height: 70px;
 	}
 	.table-sort-button {
-		font-weight: bold;
+		font-weight: 400;
 		background: none;
 		stroke: none;
 		border: none;
@@ -671,7 +671,7 @@
 		white-space: nowrap;
 	}
 	.area-name {
-		font-weight: 400;
+		font-weight: bold;
 		width: max-content;
 		overflow-wrap: anywhere;
 	}
