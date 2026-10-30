@@ -272,17 +272,23 @@
 	});
 
 	let sidebarOpen = $state(true);
-	// $inspect(openThemes);
-	// $inspect(taxData.data.taxonomyNested.data);
-	$inspect($selectedIndicator);
 </script>
 
-<Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
+<!-- <Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
 	<div class="hero-text">
 		<h4>{selection.areas?.length} areas selected</h4>
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
-</Hero>
+</Hero> -->
+<Section width={'wider'} cls={'fake-hero'}>
+	<div class="hero-text">
+		<h1>Compare areas</h1>
+		<div class="hero-area-details">
+			<h4>{selection.areas?.length} areas selected</h4>
+			<p><a href="/pagebuilder">Change areas</a></p>
+		</div>
+	</div>
+</Section>
 
 <Container width={'wider'}>
 	<SidebarLayout bind:open={sidebarOpen} label="indicator">
@@ -530,12 +536,18 @@
 		max-width: 100%;
 		resize: none;
 	}
+
 	.hero-text {
 		display: flex;
 		align-items: center;
 		gap: 20px;
-		justify-content: space-around;
-		/* justify-content: flex-end; */
+		justify-content: space-between;
+	}
+
+	.hero-area-details {
+		display: flex;
+		gap: 20px;
+		justify-content: flex-end;
 	}
 
 	.missing-data-message {
