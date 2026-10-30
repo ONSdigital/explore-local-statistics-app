@@ -127,12 +127,11 @@
 		}
 
 		if (sharedComparisonCode) {
-			const sharedComparison = sharedComparisonCode
-				.map((areacd) => lookup[areacd])
-				.filter(Boolean)
-				.map((area) => ({ ...area, type: getAreaType(area) || 'null' }));
-			if (sharedComparison) {
+			const area = lookup[sharedComparisonCode];
+			if (area) {
+				const sharedComparison = { ...area, type: getAreaType(area) || 'null' };
 				chosenComparisonArea.set(sharedComparison);
+				modalPageState.selectedComparisonArea = sharedComparison;
 			}
 		}
 
@@ -148,7 +147,6 @@
 			history.replaceState(null, '', window.location.pathname + window.location.search);
 		}
 	}
-
 	onMount(async () => {
 		$selectedIndicator =
 			indicators.find((indicator) => indicator.slug === $selectedIndicator?.slug) ?? indicators[1];
@@ -280,6 +278,15 @@
 		<p><a href="/pagebuilder">Change areas</a></p>
 	</div>
 </Hero> -->
+{#snippet indicatorRadios(id, items)}
+	<Radios
+		{id}
+		items={toRadioItems(items)}
+		value={$selectedIndicator}
+		on:change={(e) => setSelected(e.detail.value.id)}
+		compact
+	/>
+{/snippet}
 <Section width={'wider'} cls={'fake-hero'}>
 	<div class="hero-text">
 		<h1>Compare areas</h1>
@@ -341,33 +348,23 @@
 						bind:open={openThemes[theme.slug]}
 					>
 						{#if openThemes[theme.slug]}
-							{#if theme.children[0].description}
-								<Radios
-									id={theme.slug}
-									items={theme.children}
-									bind:value={$selectedIndicator}
-									compact={true}
-								/>
-							{:else}
+							{#if theme.children.some((c) => c.children)}
 								{#each theme.children as subtopic}
-									{@const subtopicKey = `${theme.slug}/${subtopic.slug}`}
+									{@const key = `${theme.slug}/${subtopic.slug}`}
 									<div class="twisty">
 										<Details
 											title={subtopic.label}
 											cls="twisty subtopic-details"
-											bind:open={openSubtopics[subtopicKey]}
+											bind:open={openSubtopics[key]}
 										>
-											{#if openSubtopics[subtopicKey]}
-												<Radios
-													id={subtopicKey}
-													items={subtopic.children}
-													bind:value={$selectedIndicator}
-													compact={true}
-												/>
+											{#if openSubtopics[key]}
+												{@render indicatorRadios(key, subtopic.children)}
 											{/if}
 										</Details>
 									</div>
 								{/each}
+							{:else}
+								{@render indicatorRadios(theme.slug, theme.children)}
 							{/if}
 						{/if}
 					</Details>
@@ -494,6 +491,10 @@
 	}
 	.twisty {
 		margin-bottom: 15px;
+	}
+
+	:global(.ons-radios__items) {
+		margin-left: -2.5rem;
 	}
 
 	:global(.ons-details--open .ons-details__content) {
