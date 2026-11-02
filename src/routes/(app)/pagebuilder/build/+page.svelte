@@ -270,6 +270,8 @@
 	});
 
 	let sidebarOpen = $state(true);
+
+	$inspect(selectedAreas);
 </script>
 
 <!-- <Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
@@ -453,6 +455,10 @@
 			{:else if data && (data.message || !hasSelectedAreaData)}
 				<div class="no-data">
 					<p>No {selection.indicator.label} data available for the selected areas.</p>
+				</div>
+			{:else if !selectedAreas.length}
+				<div class="no-data">
+					<p>No areas selected for comparison. <a href="/pagebuilder">Select areas</a></p>
 				</div>
 			{:else}
 				<Spinner message="Loading chart data" />
