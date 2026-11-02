@@ -494,7 +494,7 @@
 	}
 
 	:global(.ons-radios__items) {
-		margin-left: -2.5rem;
+		margin-left: -1.5rem;
 	}
 
 	:global(.ons-details--open .ons-details__content) {

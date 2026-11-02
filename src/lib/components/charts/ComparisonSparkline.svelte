@@ -162,11 +162,13 @@
 				stroke-dasharray="4"
 			>
 			</line>
-			{#if filledComparison?.length && !yAxisFree}
+			<!-- hide comparison line from sparkline now yDomain scales. 
+			 !!!!! If turning back on, need to fix issue where comparisonline not tethered correctly to area -->
+			<!-- {#if filledComparison?.length && !yAxisFree}
 				{@render ribbon(filledComparison, ONScolours.grey60, 0.3)}
 				{@render linedash(comparisonData, ONScolours.grey60, 3, 1)}
 				{@render line(filledComparison, ONScolours.grey60, 'none', 1)}
-			{/if}
+			{/if} -->
 			{#if data?.length}
 				{@render ribbon(filledData, ONScolours.oceanBlue, 0.35)}
 				{@render linedash(data, ONScolours.oceanBlue, 3, 1)}

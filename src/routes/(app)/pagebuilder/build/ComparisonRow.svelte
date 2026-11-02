@@ -172,6 +172,15 @@
 		return [...byTime.values()].sort((a, b) => a - b);
 	});
 
+	function getSeriesStats(rows) {
+		const vals = rows.flatMap((d) => [d.value, d.lci_95, d.uci_95]).filter((v) => v != null);
+
+		const first = [...rows].sort((a, b) => a.period - b.period).find((d) => d.value != null);
+		if (!vals.length || !first) return null;
+
+		return { b: Math.abs(first.value), m: Math.min(...vals), M: Math.max(...vals) };
+	}
+
 	let areasData = $derived.by(() => {
 		const rowsByArea = new Map();
 
@@ -198,7 +207,26 @@
 				earliest.value != null && latest.value != null ? latest.value - earliest.value : null;
 		}
 
-		// add in missing areas
+		// calculation for rescaling the yDomain:
+		const stats = new Map();
+		for (const g of rowsByArea.values()) stats.set(g.areacd, getSeriesStats(g.rows));
+
+		const maxSpan = Math.max(
+			...[...stats.values()].filter((s) => s && s.b > 0).map((s) => (s.M - s.m) / s.b)
+		);
+
+		for (const g of rowsByArea.values()) {
+			const s = stats.get(g.areacd);
+			// if (!s || s.b === 0 || !Number.isFinite(r) || r === 0) {
+			// 	g.yDomain = null; // fall back to the shared domain
+			// 	continue;
+			// }
+			const centre = (s.m + s.M) / 2;
+			const half = (maxSpan * s.b) / 2;
+			g.yDomain = [centre - half, centre + half];
+		}
+
+		// add missing areas into the data so empty rows can be plotted
 		for (const missing of areasMissingData) {
 			rowsByArea.set(missing.areacd, {
 				areacd: missing.areacd,
@@ -563,7 +591,7 @@
 					<div class="sparkline-cell" use:updateSparklineWidth={area.areacd}>
 						<ComparisonSparkline
 							data={area.rows}
-							yDomain={sparklineYDomain}
+							yDomain={area.yDomain}
 							comparisonData={comparisonRows}
 							xDomain={sparklineXDomain}
 							{valuePeriod}
