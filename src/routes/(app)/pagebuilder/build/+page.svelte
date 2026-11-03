@@ -387,7 +387,7 @@
 
 				<div class="header-details">
 					{#if data.uci_95 && data.lci_95}
-						<div>
+						<div class="ci-note">
 							Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
 						</div>
 					{/if}
@@ -423,12 +423,7 @@
 			</div>
 		{/if}
 
-		<div
-			style:margin-bottom="20px"
-			style:margin-top="20px"
-			style:min-height="84px"
-			style:position="relative"
-		>
+		<div class="table">
 			{#if data && !data.message && hasSelectedAreaData}
 				<!-- <Tabs>
 				<Tab title="Comparison chart"> -->
@@ -494,6 +489,14 @@
 	.above-table {
 		/* background-color: var(--ons-color-grey-5); */
 	}
+
+	.table {
+		margin-bottom: '20px';
+		margin-top: '10px';
+		min-height: '84px';
+		position: 'relative';
+	}
+
 	.twisty {
 		margin-bottom: 15px;
 	}
@@ -559,38 +562,34 @@
 		justify-content: flex-end;
 	}
 
-	.missing-data-message {
-		font-size: 16px;
-		gap: 10px;
-		font-weight: bold;
-		float: right;
-		margin-top: -10px;
-		margin-bottom: 10px;
-	}
-
 	.header-details {
 		display: flex;
-		margin-top: 10px;
-		font-size: 16px;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
 		gap: 10px;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: flex-start;
+		margin-top: 10px;
+		font-size: 16px;
 		padding: 0.5em 0;
+		margin-bottom: 10px;
+	}
+
+	.ci-note {
+		flex: 1 1 14rem;
+		min-width: 0;
 	}
 
 	.legend-modals {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
+		align-items: flex-end;
 		gap: 10px;
+		flex: 0 1 auto;
 		margin-left: auto;
-		width: 100%;
-		min-width: 0;
 		max-width: 100%;
+		min-width: 0;
 		box-sizing: border-box;
+		justify-content: flex-end;
 	}
 	.legend-modals :global(.ons-btn) {
 		max-width: 100%;
@@ -599,18 +598,6 @@
 	}
 	.legend-modals :global(.ons-btn__inner) {
 		white-space: normal;
-	}
-	@media (max-width: 768px) {
-		.header-details {
-			flex-direction: column;
-			align-items: stretch;
-		}
-		.legend-modals {
-			flex-direction: column;
-			align-items: flex-end;
-			margin-left: 0;
-			justify-content: flex-end;
-		}
 	}
 
 	.indicator-info {
