@@ -271,7 +271,14 @@
 
 	let sidebarOpen = $state(true);
 
-	$inspect(selectedAreas);
+	const periodLabels = {
+		'1-year': '1-year period',
+		'2-year': '2-year period',
+		'3-year': '3-year period',
+		'4-year': '4-year period',
+		'academic-year': 'academic year',
+		'financial-year': 'financial year'
+	};
 </script>
 
 <!-- <Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
@@ -408,7 +415,7 @@
 							hasIntervals="null"
 							bind:pageState={timePageState}
 							{formatPeriod}
-							changeText={metadata.periodFormat.replace('-', ' ')}
+							changeText={periodLabels[metadata.periodFormat] ?? metadata.periodFormat}
 						/>
 					</div>
 				</div>
