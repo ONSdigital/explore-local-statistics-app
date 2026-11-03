@@ -513,9 +513,6 @@
 			{/if}
 		</div>
 	</div>
-
-	<!-- <Divider marginTop={false} marginBottom={false} mode="dark" width="full"></Divider> -->
-	<!-- <hr style:min-width="{contentWidth}px" /> -->
 	<div
 		class="rows-wrapper"
 		style:margin-top="10px"

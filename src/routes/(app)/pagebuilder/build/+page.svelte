@@ -170,19 +170,9 @@
 		$selectedIndicator = indicator;
 	}
 
-	let selectedTheme = $state();
-	let openThemes = $state({});
-	// Seed every subtopic as closed so Details' open prop and its chevron class start in sync.
-	// Taxonomy is static for this page instance, so initialize this state from the loaded tree.
-	let openSubtopics = $state(
-		Object.fromEntries(
-			taxData.data.taxonomyNested.data.flatMap((theme) =>
-				theme.children.flatMap((subtopic) =>
-					subtopic.children ? [[`${theme.slug}/${subtopic.slug}`, false]] : []
-				)
-			)
-		)
-	);
+	let openTheme = $state(null);
+	let openSubtopic = $state(null);
+
 	// add id into taxdata to be used by radios
 	let themeOptions = $derived(
 		taxData.data.taxonomyNested.data.map((theme) => ({
@@ -281,12 +271,6 @@
 	};
 </script>
 
-<!-- <Hero width={'wider'} title="Compare areas" theme={'light'} height="170px">
-	<div class="hero-text">
-		<h4>{selection.areas?.length} areas selected</h4>
-		<p><a href="/pagebuilder">Change areas</a></p>
-	</div>
-</Hero> -->
 {#snippet indicatorRadios(id, items)}
 	<Radios
 		{id}
@@ -309,10 +293,6 @@
 <Container width={'wider'}>
 	<SidebarLayout bind:open={sidebarOpen} label="indicator">
 		{#snippet sidebarTop()}
-			<!-- <div class="change-area-text">
-				<h4>{selection.areas?.length} areas selected</h4>
-				<p><a href="/pagebuilder">Change areas</a></p>
-			</div> -->
 			<div class="indicator-select">
 				<h3>Select an indicator</h3>
 				<div class="select-container">
@@ -329,24 +309,6 @@
 			</div>
 		{/snippet}
 		{#snippet sidebar()}
-			<!-- <Details title="Show all indicators"> -->
-			<!-- <Radios
-					label="Select a theme"
-					id="themes"
-					items={themeOptions}
-					bind:value={selectedTheme}
-					compact
-				></Radios>
-				{#if selectedTheme}
-					<Radios
-						label="Select an indicator"
-						id="indicators"
-						items={indicatorOptions}
-						bind:value={$selectedIndicator}
-						compact
-					></Radios>
-				{/if} 
-				</Details> -->
 			<h4>Browse by category</h4>
 			{#each themeOptions as theme}
 				<div class="twisty">
@@ -354,9 +316,15 @@
 						title={theme.label}
 						id={theme.slug}
 						cls="twisty"
-						bind:open={openThemes[theme.slug]}
+						bind:open={
+							() => openTheme === theme.slug,
+							(v) => {
+								openTheme = v ? theme.slug : openTheme === theme.slug ? null : openTheme;
+								if (v) openSubtopic = null;
+							}
+						}
 					>
-						{#if openThemes[theme.slug]}
+						{#if openTheme === theme.slug}
 							{#if theme.children.some((c) => c.children)}
 								{#each theme.children as subtopic}
 									{@const key = `${theme.slug}/${subtopic.slug}`}
@@ -364,9 +332,14 @@
 										<Details
 											title={subtopic.label}
 											cls="twisty subtopic-details"
-											bind:open={openSubtopics[key]}
+											bind:open={
+												() => openSubtopic === key,
+												(v) => {
+													openSubtopic = v ? key : openSubtopic === key ? null : openSubtopic;
+												}
+											}
 										>
-											{#if openSubtopics[key]}
+											{#if openSubtopic === key}
 												{@render indicatorRadios(key, subtopic.children)}
 											{/if}
 										</Details>
@@ -419,14 +392,6 @@
 						/>
 					</div>
 				</div>
-
-				<!-- {#if metadata.standardised && !comparisonHasSelectedPeriodData}
-					<div class="missing-data-message">
-						Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
-							timePageState.selectedPeriodRange[1]
-						)}.
-					</div>
-				{/if} -->
 			</div>
 		{/if}
 
