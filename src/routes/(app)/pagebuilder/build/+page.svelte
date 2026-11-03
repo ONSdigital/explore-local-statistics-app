@@ -413,14 +413,13 @@
 					</div>
 				</div>
 
-				{#if metadata.standardised && !comparisonHasSelectedPeriodData}
+				<!-- {#if metadata.standardised && !comparisonHasSelectedPeriodData}
 					<div class="missing-data-message">
-						<!-- Comparison data unavailable for {comparisonArea.areanm} -->
 						Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
 							timePageState.selectedPeriodRange[1]
 						)}.
 					</div>
-				{/if}
+				{/if} -->
 			</div>
 		{/if}
 
@@ -501,6 +500,9 @@
 
 	:global(.ons-radios__items) {
 		margin-left: -1.5rem;
+	}
+
+	:global(.fake-hero) {
 	}
 
 	:global(.ons-details--open .ons-details__content) {

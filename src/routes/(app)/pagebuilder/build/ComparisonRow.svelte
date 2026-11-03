@@ -546,7 +546,21 @@
 					<path d="M0 0 L12 0 L6 8 Z" fill="var(--ons-color-grey-25)" />
 				</svg>
 			</div>
+		{:else}
+			<div class="comparison-overlay" style:left="0px" style:right="0px">
+				<div
+					class="comparison-label missing-data-message"
+					bind:clientWidth={nameWidth}
+					bind:clientHeight={labelHeight}
+					style:left="50%"
+				>
+					Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
+						selectedPeriod
+					)}
+				</div>
+			</div>
 		{/if}
+
 		{#each sortedAreasData as area, i (area.areacd)}
 			<div
 				animate:flip={{
@@ -634,6 +648,26 @@
 	.rows-wrapper {
 		position: relative;
 	}
+	.comparison-name,
+	.missing-data-message {
+		position: absolute;
+		top: 0;
+		transform: translateX(-50%);
+		text-align: center;
+		padding: 5px;
+		line-height: 1.2;
+		white-space: nowrap;
+		z-index: 4;
+	}
+
+	.comparison-name {
+		background-color: var(--ons-color-grey-25);
+	}
+
+	.missing-data-message {
+		font-weight: bold;
+		font-size: 14px;
+	}
 
 	.comparison-header-row {
 		border-bottom: 1px solid var(--ons-color-grey-35);
@@ -661,15 +695,6 @@
 		position: relative;
 	}
 
-	.comparison-name {
-		position: absolute;
-		transform: translateX(-50%);
-		text-align: center;
-		padding: 5px;
-		background-color: var(--ons-color-grey-25);
-		white-space: nowrap;
-		z-index: 4;
-	}
 	.comparison-reference-bar {
 		position: absolute;
 		top: 20px;
