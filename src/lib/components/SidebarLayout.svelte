@@ -63,6 +63,9 @@
 		gap: 2rem;
 		align-items: start;
 		column-rule: 1px solid var(--ons-color-grey-25);
+		border: 1px solid var(--ons-color-grey-25);
+		border-radius: 0.5%;
+		padding: 20px;
 	}
 
 	aside {
@@ -76,7 +79,7 @@
 		flex-direction: column;
 		max-height: 100vh;
 		box-sizing: border-box;
-		padding: 1rem 0 1rem 0;
+		padding: 0 0 1rem 0;
 	}
 	.sidebar-top {
 		position: relative;

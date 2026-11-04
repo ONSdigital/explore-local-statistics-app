@@ -280,15 +280,19 @@
 		compact
 	/>
 {/snippet}
-<Section width={'wider'} cls={'fake-hero'}>
-	<div class="hero-text">
-		<h1>Compare areas</h1>
-		<div class="hero-area-details">
-			<h4>{selection.areas?.length} areas selected</h4>
-			<p><a href="/pagebuilder">Change areas</a></p>
+<!-- <Section width={'wider'} cls={'fake-hero'}> -->
+<div class="fake-hero">
+	<Container width={'wider'}>
+		<div class="hero-text">
+			<h1>Compare areas</h1>
+			<div class="hero-area-details">
+				<h4>{selection.areas?.length} areas selected</h4>
+				<p><a href="/pagebuilder">Change areas</a></p>
+			</div>
 		</div>
-	</div>
-</Section>
+	</Container>
+</div>
+<!-- </Section> -->
 
 <Container width={'wider'}>
 	<SidebarLayout bind:open={sidebarOpen} label="indicator">
@@ -447,17 +451,21 @@
 				</p>
 			</div>
 		{/if}
-		<div class="share-link">
-			<h4>Share this page</h4>
-			<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
-			<Button variant="secondary" on:click={copyShareUrl} small>
-				{clipped ? 'Link copied' : 'Copy link'}
-			</Button>
-		</div>
 	</SidebarLayout>
+	<div class="share-link">
+		<h4>Share this page</h4>
+		<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
+		<Button variant="secondary" on:click={copyShareUrl} small>
+			{clipped ? 'Link copied' : 'Copy link'}
+		</Button>
+	</div>
 </Container>
 
 <style>
+	.share-link {
+		margin-top: 20px;
+	}
+
 	.above-table {
 		/* background-color: var(--ons-color-grey-5); */
 	}
@@ -478,6 +486,23 @@
 	}
 
 	:global(.fake-hero) {
+		/* background-color: blanchedalmond; */
+		margin-bottom: 5px !important;
+		height: 80px;
+		display: flex;
+		align-items: center;
+	}
+	.hero-text {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.hero-area-details {
+		display: flex;
+		gap: 20px;
+		justify-content: flex-end;
 	}
 
 	:global(.ons-details--open .ons-details__content) {
@@ -519,19 +544,6 @@
 		line-height: 1.3;
 		max-width: 100%;
 		resize: none;
-	}
-
-	.hero-text {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-		justify-content: space-between;
-	}
-
-	.hero-area-details {
-		display: flex;
-		gap: 20px;
-		justify-content: flex-end;
 	}
 
 	.header-details {
