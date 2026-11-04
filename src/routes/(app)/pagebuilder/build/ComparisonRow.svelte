@@ -3,8 +3,9 @@
 	import ComparisonPointrange from '$lib/components/charts/ComparisonPointrange.svelte';
 	import ComparisonSparkline from '$lib/components/charts/ComparisonSparkline.svelte';
 	import { scaleLinear } from 'd3-scale';
+	import { median } from 'd3-array';
 	import { parsePeriod, parseData } from '$lib/utils';
-	import { Icon, Divider } from '@onsvisual/svelte-components';
+	import { Icon, Divider, Table } from '@onsvisual/svelte-components';
 	import { ONScolours } from '$lib/config';
 	import { flip } from 'svelte/animate';
 	import { sineInOut } from 'svelte/easing';
@@ -215,15 +216,27 @@
 			...[...stats.values()].filter((s) => s && s.b > 0).map((s) => (s.M - s.m) / s.b)
 		);
 
+		// using a floor of 5% of median value:
+		// const nonZeroBases = [...stats.values()].filter((s) => s && s.b > 0).map((s) => s.b);
+		// const floor = 0.1 * median(nonZeroBases);
+		// const eff = (s) => Math.max(s.b, floor);
+		// const maxSpan = Math.max(
+		// 	...[...stats.values()].filter(Boolean).map((s) => (s.M - s.m) / eff(s))
+		// );
+
 		for (const g of rowsByArea.values()) {
 			const s = stats.get(g.areacd);
-			// if (!s || s.b === 0 || !Number.isFinite(r) || r === 0) {
-			// 	g.yDomain = null; // fall back to the shared domain
-			// 	continue;
-			// }
+			if (!s || s.b === 0 || !Number.isFinite(maxSpan) || maxSpan === 0) {
+				g.yDomain = null; // fall back to the shared domain
+				continue;
+			}
 			const centre = (s.m + s.M) / 2;
 			const half = (maxSpan * s.b) / 2;
 			g.yDomain = [centre - half, centre + half];
+			// just for table:
+			// g.stats = s;
+			// g.span = (s.M - s.m) / s.b;
+			// g.width = maxSpan * s.b;
 		}
 
 		// add missing areas into the data so empty rows can be plotted
@@ -298,7 +311,8 @@
 	});
 
 	const colGap = 20;
-	const labelMargin = $derived(isMobile ? 8 : colGap);
+	// const labelMargin = $derived(isMobile ? 8 : colGap);
+	const labelMargin = 0;
 	const nColsPreceedingPointrange = 2;
 
 	let valueWidths = $state({});
@@ -415,6 +429,32 @@
 	const rowsPaddingTop = 35;
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
+
+	// const tableData = $derived(
+	// 	sortedAreasData.map(({ areanm, diff, yDomain, rows, stats, span, width }) => {
+	// 		const periods = Object.fromEntries(
+	// 			rows.map(({ period, value }) => [new Date(period).getFullYear(), value])
+	// 		);
+
+	// 		return { areanm, ...periods, diff, yDomain, ...stats, span, width };
+	// 	})
+	// );
+	// const yearColumns = $derived(
+	// 	sortedAreasData[0].rows.map((r) => new Date(r.period).getFullYear())
+	// );
+
+	// const columns = $derived([
+	// 	{ key: 'areanm', label: 'Area' },
+	// 	// { key: 'diff', label: 'raw change' },
+	// 	{ key: 'b', label: 'base value' },
+	// 	{ key: 'm', label: 'min' },
+	// 	{ key: 'M', label: 'max' },
+	// 	{ key: 'span', label: 'span' },
+	// 	{ key: 'width', label: 'width' },
+
+	// 	// ...yearColumns.map((y) => ({ key: String(y), label: String(y) }))
+	// 	{ key: 'yDomain', label: 'yDomain' }
+	// ]);
 </script>
 
 <div
@@ -602,7 +642,7 @@
 					<div class="sparkline-cell" use:updateSparklineWidth={area.areacd}>
 						<ComparisonSparkline
 							data={area.rows}
-							yDomain={area.yDomain}
+							yDomain={area.yDomain ?? sparklineYDomain}
 							comparisonData={comparisonRows}
 							xDomain={sparklineXDomain}
 							{valuePeriod}
@@ -619,6 +659,7 @@
 			</div>
 		{/each}
 	</div>
+	<!-- <Table data={tableData} {columns}></Table> -->
 </div>
 
 <style>
@@ -636,7 +677,9 @@
 		min-height: 70px;
 	}
 	.table-sort-button {
-		font-weight: 400;
+		font-weight: bold;
+		font-size: 16px;
+		color: black;
 		background: none;
 		stroke: none;
 		border: none;
@@ -651,14 +694,16 @@
 		top: 0;
 		transform: translateX(-50%);
 		text-align: center;
-		padding: 5px;
+		padding: 7px;
 		line-height: 1.2;
 		white-space: nowrap;
 		z-index: 4;
+		border-radius: 5px;
 	}
 
 	.comparison-name {
 		background-color: var(--ons-color-grey-25);
+		font-size: 16px;
 	}
 
 	.missing-data-message {
@@ -667,8 +712,8 @@
 	}
 
 	.comparison-header-row {
-		border-bottom: 1px solid var(--ons-color-grey-35);
-		border-top: 1px solid var(--ons-color-grey-35);
+		border-bottom: 3px solid var(--ons-color-grey-35);
+		/* border-top: 1px solid var(--ons-color-grey-35); */
 		padding-bottom: 10px;
 		padding-top: 10px;
 	}
@@ -725,7 +770,7 @@
 		white-space: nowrap;
 	}
 	.area-name {
-		font-weight: bold;
+		/* font-weight: bold; */
 		width: max-content;
 		overflow-wrap: anywhere;
 	}

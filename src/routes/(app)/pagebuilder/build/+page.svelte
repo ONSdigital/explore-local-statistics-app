@@ -462,6 +462,9 @@
 </Container>
 
 <style>
+	.table {
+		margin-bottom: 20px;
+	}
 	.share-link {
 		margin-top: 20px;
 	}
@@ -486,9 +489,9 @@
 	}
 
 	:global(.fake-hero) {
-		/* background-color: blanchedalmond; */
+		background-color: #e9eff4;
 		margin-bottom: 5px !important;
-		height: 80px;
+		height: 120px;
 		display: flex;
 		align-items: center;
 	}

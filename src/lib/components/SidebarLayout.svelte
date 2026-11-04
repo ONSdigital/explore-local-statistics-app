@@ -63,9 +63,9 @@
 		gap: 2rem;
 		align-items: start;
 		column-rule: 1px solid var(--ons-color-grey-25);
-		border: 1px solid var(--ons-color-grey-25);
-		border-radius: 0.5%;
-		padding: 20px;
+		/* border: 1px solid var(--ons-color-grey-25);
+		border-radius: 0.5%; */
+		/* padding: 20px; */
 	}
 
 	aside {

@@ -46,9 +46,9 @@
 			<rect
 				x={xScale(xDomain[0])}
 				width={xScale(xDomain[1]) - xScale(xDomain[0])}
-				y={10}
-				height={rowHeight - 20}
-				fill={ONScolours.grey10}
+				y={30}
+				height={rowHeight - 60}
+				fill={ONScolours.grey15}
 				opacity="01"
 			>
 			</rect>
@@ -154,7 +154,8 @@
 	}
 	.value-diamond {
 		fill: var(--ons-color-ocean-blue);
-		stroke: var(--ons-color-ocean-blue);
+		stroke: var(--ons-color-white);
+		stroke-width: 1.3px;
 	}
 	.reference-bar {
 		fill: var(--ons-color-grey-25);
