@@ -83,7 +83,7 @@
 	let suffix2 = $derived(suffix === '%' ? ' pp' : suffix);
 
 	let posColBox = '#B6E9FB';
-	let negColBox = '#76A2B7';
+	let negColBox = '#99b1bc';
 	let posColText = '#106B8C';
 	let negColText = '#00344D';
 
@@ -186,12 +186,7 @@
 			{/if}
 		</svg>
 	{/if}
-	<div
-		class="change-box"
-		style:padding="5px;"
-		style:background-color={changeBoxBg}
-		style:color={changeBoxText}
-	>
+	<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
 		<div class="change-text">
 			{#if diff !== 0}
 				<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
@@ -220,6 +215,8 @@
 		flex: 0 0 auto;
 		margin-left: 26px;
 		/* 20px to match column gap, plus 6 to match the diamond padding around the pointrange */
+		padding: 5px;
+		border-radius: 7px;
 	}
 	@media (max-width: 600px) {
 		.change-text {

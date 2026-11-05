@@ -707,8 +707,9 @@
 	}
 
 	.missing-data-message {
-		font-weight: bold;
-		font-size: 14px;
+		/* font-weight: bold; */
+		font-size: 16px;
+		background-color: var(--ons-color-grey-25);
 	}
 
 	.comparison-header-row {

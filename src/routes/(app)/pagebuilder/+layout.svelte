@@ -3,6 +3,7 @@
 	import { get } from '$lib/db.js';
 	import { onMount, setContext } from 'svelte';
 	import syncedStore from '$lib/synced-store.svelte';
+	import { Breadcrumb } from '@onsvisual/svelte-components';
 
 	let { children } = $props();
 	let mounted = $state(false);

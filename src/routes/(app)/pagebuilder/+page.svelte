@@ -245,7 +245,7 @@
 	}
 </script>
 
-<Hero title="Compare areas" background="#eaeaea">
+<Hero title="Compare areas" background="#e9eff4">
 	<p class="ons-hero__text">
 		Select your own custom group of areas and compare them for any indicator.
 	</p>
