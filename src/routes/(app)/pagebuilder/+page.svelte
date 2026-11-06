@@ -17,6 +17,7 @@
 		Container,
 		Checkbox,
 		Checkboxes,
+		Details,
 		Button,
 		Em,
 		Indent,
@@ -245,50 +246,56 @@
 	}
 </script>
 
-<Hero title="Compare areas" background="#e9eff4">
-	<p class="ons-hero__text">
-		Select your own custom group of areas and compare them for any indicator.
-	</p>
-</Hero>
-
-<Container>
-	<div class="entire-selection">
-		<h4 style:margin-bottom="0px" style:margin-top="30px">Select areas</h4>
-		<p>Search for a local authority, region, county, or other named area.</p>
-		<div class="select-container">
-			<Select
-				label=""
-				placeholder="Search for an area"
-				labelKey="areanm"
-				groupKey="type"
-				autoClear={false}
-				options={areas}
-				bind:value={selectedArea}
-				on:change={(e) => selectArea(e.detail)}
-				on:clear={resetAreaSelection}
-			></Select>
+<div class="select-hero">
+	<Container width={'wider'} cls={'top-container'}>
+		<div class="hero-text">
+			<h1>Compare areas</h1>
+			<p>Select your own custom group of areas and compare them for any of the 114 indicators.</p>
 		</div>
 
-		{#if selectedAreaCode}
-			<!-- //bodge to avoid rendering for United Kingdom, which has a type of United Kingdom -->
-			{#if selectedAreaType !== selectedAreaName}
-				<p style="margin-top:15px">
-					{selectedAreaName} is a {selectedAreaType.toLowerCase()}
-					{#if selectedAreaParent}
-						in
-						<a
-							href="#"
-							class="area-link"
-							on:click={(e) => {
-								e.preventDefault();
-								selectArea(selectedAreaParent);
-							}}
-						>
-							{selectedAreaParent.areanm}
-						</a>.
-					{/if}
-				</p>
+		<div class="select-dropdown">
+			<h4 style:margin-bottom="0px" style:margin-top="30px">Find areas to compare</h4>
+			<p>Search for a local authority, region, county, or other named area.</p>
+			<div class="select-container">
+				<Select
+					label=""
+					placeholder="Search for an area"
+					labelKey="areanm"
+					groupKey="type"
+					autoClear={false}
+					options={areas}
+					bind:value={selectedArea}
+					on:change={(e) => selectArea(e.detail)}
+					on:clear={resetAreaSelection}
+				></Select>
+			</div>
+			{#if selectedAreaCode}
+				{#if selectedAreaType !== selectedAreaName}
+					<p style="margin-top:15px">
+						{selectedAreaName} is a {selectedAreaType.toLowerCase()}
+						{#if selectedAreaParent}
+							in
+							<a
+								href="#"
+								class="area-link"
+								on:click={(e) => {
+									e.preventDefault();
+									selectArea(selectedAreaParent);
+								}}
+							>
+								{selectedAreaParent.areanm}
+							</a>.
+						{/if}
+					</p>
+				{/if}
 			{/if}
+		</div>
+	</Container>
+</div>
+
+<Container width={'wider'}>
+	<div class="entire-selection">
+		{#if selectedAreaCode}
 			<h4 style="margin-top:15px">Select area(s)</h4>
 			<div class="select-container">
 				<Checkbox
@@ -324,100 +331,100 @@
 			</div>
 		{/if}
 	</div>
-	<Accordion>
-		<AccordionItem title="Selected areas: {$selectedAreas.length}">
-			{#if $selectedAreas.length > 1}
-				<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
-			{/if}
-			{#if $selectedAreas.length}
-				<table class="ons-table ons-table--sortable">
-					<thead class="ons-table__head">
+	<!-- <Accordion> -->
+	<Details title="Your selected areas: {$selectedAreas.length}">
+		{#if $selectedAreas.length > 1}
+			<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
+		{/if}
+		{#if $selectedAreas.length}
+			<table class="ons-table ons-table--sortable">
+				<thead class="ons-table__head">
+					<tr class="ons-table__row">
+						<th
+							scope="col"
+							class="ons-table__header"
+							aria-sort={sortColumn === 'areanm' ? sortDirection : 'none'}
+						>
+							<button
+								type="button"
+								class="ons-table__sort-button"
+								on:click={() => toggleSort('areanm')}
+							>
+								Selected area<svg
+									id="sort-sprite-id-0"
+									class="ons-icon"
+									viewBox="0 0 12 19"
+									xmlns="http://www.w3.org/2000/svg"
+									focusable="false"
+									fill="currentColor"
+									role="img"
+									title="ons-icon-sort-sprite"
+								>
+									<path
+										class="ons-topTriangle"
+										d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+									></path>
+									<path class="ons-bottomTriangle" d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+									></path>
+								</svg>
+							</button>
+						</th>
+						<th
+							scope="col"
+							class="ons-table__header"
+							aria-sort={sortColumn === 'type' ? sortDirection : 'none'}
+						>
+							<button
+								type="button"
+								class="ons-table__sort-button"
+								on:click={() => toggleSort('type')}
+							>
+								Type<svg
+									id="sort-sprite-id-0"
+									class="ons-icon"
+									viewBox="0 0 12 19"
+									xmlns="http://www.w3.org/2000/svg"
+									focusable="false"
+									fill="currentColor"
+									role="img"
+									title="ons-icon-sort-sprite"
+								>
+									<path
+										class="ons-topTriangle"
+										d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+									></path>
+									<path class="ons-bottomTriangle" d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+									></path>
+								</svg>
+							</button>
+						</th>
+						<th scope="col" class="ons-table__header"></th>
+					</tr>
+				</thead>
+				<tbody class="ons-table__body">
+					{#each sortedAreas as area (area.areacd)}
 						<tr class="ons-table__row">
-							<th
-								scope="col"
-								class="ons-table__header"
-								aria-sort={sortColumn === 'areanm' ? sortDirection : 'none'}
-							>
-								<button
-									type="button"
-									class="ons-table__sort-button"
-									on:click={() => toggleSort('areanm')}
-								>
-									Selected area<svg
-										id="sort-sprite-id-0"
-										class="ons-icon"
-										viewBox="0 0 12 19"
-										xmlns="http://www.w3.org/2000/svg"
-										focusable="false"
-										fill="currentColor"
-										role="img"
-										title="ons-icon-sort-sprite"
-									>
-										<path
-											class="ons-topTriangle"
-											d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-										></path>
-										<path class="ons-bottomTriangle" d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-										></path>
-									</svg>
-								</button>
-							</th>
-							<th
-								scope="col"
-								class="ons-table__header"
-								aria-sort={sortColumn === 'type' ? sortDirection : 'none'}
-							>
-								<button
-									type="button"
-									class="ons-table__sort-button"
-									on:click={() => toggleSort('type')}
-								>
-									Type<svg
-										id="sort-sprite-id-0"
-										class="ons-icon"
-										viewBox="0 0 12 19"
-										xmlns="http://www.w3.org/2000/svg"
-										focusable="false"
-										fill="currentColor"
-										role="img"
-										title="ons-icon-sort-sprite"
-									>
-										<path
-											class="ons-topTriangle"
-											d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-										></path>
-										<path class="ons-bottomTriangle" d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-										></path>
-									</svg>
-								</button>
-							</th>
-							<th scope="col" class="ons-table__header"></th>
+							<td class="ons-table__cell">{area.areanm}</td>
+							<td class="ons-table__cell">{area.type}</td>
+							<td class="ons-table__cell">
+								<div class="remove-button">
+									<Button
+										text="remove"
+										icon="cross"
+										small
+										variant="secondary"
+										hideLabel
+										on:click={() => removeArea(area)}
+									></Button>
+								</div>
+							</td>
 						</tr>
-					</thead>
-					<tbody class="ons-table__body">
-						{#each sortedAreas as area (area.areacd)}
-							<tr class="ons-table__row">
-								<td class="ons-table__cell">{area.areanm}</td>
-								<td class="ons-table__cell">{area.type}</td>
-								<td class="ons-table__cell">
-									<div class="remove-button">
-										<Button
-											text="remove"
-											icon="cross"
-											small
-											variant="secondary"
-											hideLabel
-											on:click={() => removeArea(area)}
-										></Button>
-									</div>
-								</td>
-							</tr>
-						{/each}
-					</tbody>
-				</table>
-			{/if}
-		</AccordionItem>
-	</Accordion>
+					{/each}
+				</tbody>
+			</table>
+		{/if}
+	</Details>
+	<!-- </Accordion> -->
 	<div class="build-button">
 		<Button small="true" on:click={goToBuildPage} disabled={!buildButtonEnabled}
 			>Compare areas <Icon type="arrow"></Icon></Button
@@ -426,6 +433,30 @@
 </Container>
 
 <style>
+	:global(.top-container) {
+		background-color: #e9eff4;
+	}
+
+	:global(.ons-details--open .ons-details__content) {
+		border-left: 0px !important;
+		margin-left: -1.5rem;
+	}
+
+	.select-hero {
+		background-color: #e9eff4;
+		margin-bottom: 5px !important;
+		display: flex;
+		align-items: center;
+	}
+
+	.hero-text {
+		margin-top: 30px;
+	}
+
+	.select-dropdown {
+		margin-bottom: 20px;
+	}
+
 	.ons-table {
 		width: 100%;
 		border-collapse: collapse;

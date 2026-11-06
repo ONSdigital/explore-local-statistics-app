@@ -20,7 +20,8 @@ export const load: PageLoad = async ({ fetch }) => {
 		pageType: 'comparison',
 		breadcrumbLinks: [
 			{ label: 'Home', href: '/' },
-			{ label: 'Explore local statistics', href: resolve('/') }
+			{ label: 'Explore local statistics', href: resolve('/') },
+			{ label: 'Compare areas', href: resolve('/pagebuilder') }
 		]
 	};
 };

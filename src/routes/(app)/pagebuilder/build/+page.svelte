@@ -488,7 +488,7 @@
 		margin-left: -1.5rem;
 	}
 
-	:global(.fake-hero) {
+	.fake-hero {
 		background-color: #e9eff4;
 		margin-bottom: 5px !important;
 		height: 120px;
