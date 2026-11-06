@@ -7,9 +7,11 @@
 		onUpdate = () => null
 	} = $props();
 
+	const startIndex = options.indexOf(selectedRange[0]);
+	const endIndex = options.indexOf(selectedRange[1]);
 	let selectedIndices = $state([
-		options.indexOf(selectedRange[0]) ?? 0,
-		options.indexOf(selectedRange[1]) ?? options.length - 1
+		startIndex === -1 ? 0 : startIndex,
+		endIndex === -1 ? options.length - 1 : endIndex
 	]);
 	let xPercent = $state([0, 100]);
 	let dragging = $state([false, false]);
@@ -28,7 +30,9 @@
 
 		let xDomain;
 
-		const dragover = (e) => {
+		const move = (e) => {
+			// Self-heal if the button was released without a pointerup reaching us
+			if (e.pointerType === 'mouse' && e.buttons === 0) return end();
 			const clamp = (val) => (val < 0 ? 0 : val > 100 ? 100 : val);
 			xPercent[i] = clamp(((e.clientX - xDomain[0]) * 100) / (xDomain[1] - xDomain[0]));
 
@@ -43,21 +47,39 @@
 			updateRange();
 		};
 
-		el.addEventListener('dragstart', (e) => {
-			if (!disabled) {
-				dragging[i] = true;
-				const rect = parent.getBoundingClientRect();
-				xDomain = [Math.round(rect.left), Math.round(rect.right)];
-				window.addEventListener('dragover', dragover);
+		const start = (e) => {
+			if (disabled || dragging[i] || e.button !== 0) return;
+			e.preventDefault();
+			// Capture keeps pointermove firing even once the finger/cursor leaves the small thumb
+			el.setPointerCapture(e.pointerId);
+			dragging[i] = true;
+			const rect = parent.getBoundingClientRect();
+			xDomain = [rect.left, rect.right];
+			el.addEventListener('pointermove', move);
+		};
+
+		const end = () => {
+			if (!dragging[i]) return;
+			el.removeEventListener('pointermove', move);
+			dragging[i] = false;
+			onUpdate(selectedRange);
+		};
+
+		el.addEventListener('pointerdown', start);
+		el.addEventListener('pointerup', end);
+		el.addEventListener('pointercancel', end);
+		// Fires however capture ends, including cases where pointerup/pointercancel don't
+		el.addEventListener('lostpointercapture', end);
+
+		return {
+			destroy() {
+				el.removeEventListener('pointerdown', start);
+				el.removeEventListener('pointerup', end);
+				el.removeEventListener('pointercancel', end);
+				el.removeEventListener('lostpointercapture', end);
+				el.removeEventListener('pointermove', move);
 			}
-		});
-		el.addEventListener('dragend', () => {
-			if (!disabled) {
-				window.removeEventListener('dragover', dragover);
-				dragging[i] = false;
-				onUpdate(selectedRange);
-			}
-		});
+		};
 	}
 </script>
 
@@ -98,7 +120,6 @@
 				></div>
 				<div
 					class="range-marker range-marker-overlay"
-					draggable="true"
 					style:left="{scale(selectedIndices[i])}%"
 					use:handleDrag={i}
 				></div>
@@ -139,6 +160,9 @@
 		position: relative;
 		width: 100%;
 		height: 64px;
+		/* Rapid clicks would otherwise select tick text, which the browser can then start a native drag of */
+		-webkit-user-select: none;
+		user-select: none;
 	}
 	.range-track {
 		position: absolute;
@@ -170,8 +194,12 @@
 		outline: 3px solid var(--ons-color-focus);
 	}
 	.range-marker-overlay {
+		/* Larger invisible hit area than the visible marker, for touch */
+		width: 44px;
+		height: 44px;
 		background-color: transparent;
 		pointer-events: all;
+		touch-action: none; /* otherwise the browser pans/scrolls and fires pointercancel */
 		cursor: move; /* fallback if grab cursor is unsupported */
 		cursor: grab;
 		cursor: -moz-grab;
