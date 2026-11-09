@@ -273,6 +273,7 @@
 
 {#snippet indicatorRadios(id, items)}
 	<Radios
+		cls={'indicator-radios'}
 		{id}
 		items={toRadioItems(items)}
 		value={$selectedIndicator}
@@ -481,11 +482,19 @@
 	}
 
 	.twisty {
-		margin-bottom: 15px;
+		margin-bottom: 10px;
 	}
 
-	:global(.ons-radios__items) {
+	:global(.indicator-radios .ons-radios__items) {
 		margin-left: -1.5rem;
+		font-size: 16px;
+	}
+
+	:global(.indicator-radios .ons-radio.ons-radio--no-border > .ons-radio__input) {
+		width: 1rem;
+		height: 1rem;
+		top: 0.4rem;
+		border-width: 1.5px;
 	}
 
 	.fake-hero {
@@ -508,29 +517,39 @@
 		justify-content: flex-end;
 	}
 
-	:global(.ons-details--open .ons-details__content) {
+	:global(.twisty .ons-details--open .ons-details__content) {
 		border-left: 0px !important;
+		margin-top: 10px !important;
 	}
 
 	:global(.ons-input--textarea) {
 		word-wrap: break-word !important;
 	}
 
-	:global(.ons-details--initialised .ons-details__title) {
+	:global(.twisty .ons-details--initialised .ons-details__title) {
 		font-weight: 400 !important;
 		color: black;
+		font-size: 16px;
+	}
+	:global(.twisty .ons-details--initialised .ons-details__heading) {
+		padding-left: 1.5rem;
 	}
 
-	:global(.ons-details--initialised .ons-details__icon) {
+	:global(.twisty .ons-details--initialised .ons-details__icon) {
 		fill: black !important;
 		color: black !important;
 	}
-	:global(details.subtopic-details:not([open]) .ons-details__icon) {
-		top: -0.2rem !important;
+	:global(.twisty .ons-details__icon .ons-icon) {
+		width: 0.85rem;
+		height: 0.85rem;
+	}
+
+	:global(.twisty details.subtopic-details:not([open]) .ons-details__icon) {
+		top: 0rem !important;
 		transform: rotate(0deg) !important;
 	}
-	:global(details.subtopic-details[open] .ons-details__icon) {
-		top: 0.2rem !important;
+	:global(.twisty details.subtopic-details[open] .ons-details__icon) {
+		top: 0 !important;
 		transform: rotate(90deg) !important;
 	}
 

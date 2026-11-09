@@ -293,7 +293,7 @@
 	</Container>
 </div>
 
-<Container width={'wider'}>
+<Container width={'wider'} cls="pagebuilder-area-select">
 	<div class="entire-selection">
 		{#if selectedAreaCode}
 			<h4 style="margin-top:15px">Select area(s)</h4>
@@ -437,7 +437,7 @@
 		background-color: #e9eff4;
 	}
 
-	:global(.ons-details--open .ons-details__content) {
+	:global(.pagebuilder-area-select .ons-details--open .ons-details__content) {
 		border-left: 0px !important;
 		margin-left: -1.5rem;
 	}
