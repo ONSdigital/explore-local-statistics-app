@@ -430,7 +430,7 @@
 		return Math.max(min, Math.min(x, max));
 	});
 
-	const rowsPaddingTop = metadata.standardised ? 35 : 0;
+	const rowsPaddingTop = $derived(metadata.standardised ? 35 : 0);
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
 
@@ -459,6 +459,8 @@
 	// 	// ...yearColumns.map((y) => ({ key: String(y), label: String(y) }))
 	// 	{ key: 'yDomain', label: 'yDomain' }
 	// ]);
+	let headerContentWidth = $state(0);
+	let headerOverflow = $derived(Math.max(0, headerContentWidth - sparklineWidth));
 </script>
 
 <div
@@ -525,36 +527,43 @@
 				</svg>
 			</button>
 		</div>
+		<!-- empty header-cell cos there's an extra column -->
 		<div class="header-cell"></div>
-		<div class="header-cell">
-			{#if sparklineXDomain[0] !== sparklineXDomain[1]}
-				<button class="table-sort-button" on:click={() => toggleSort('diff')}>
-					Trend {formatPeriod(sparklineXDomain[0])} to {formatPeriod(sparklineXDomain[1])}
+		<div class="header-cell sparkline-header">
+			<div
+				class="sparkline-header-inner"
+				bind:clientWidth={headerContentWidth}
+				style:transform="translateX(-{headerOverflow}px)"
+			>
+				{#if sparklineXDomain[0] !== sparklineXDomain[1]}
+					<button class="table-sort-button" on:click={() => toggleSort('diff')}>
+						Trend {formatPeriod(sparklineXDomain[0])} to {formatPeriod(sparklineXDomain[1])}
 
-					<svg
-						class="ons-icon"
-						viewBox="0 0 12 19"
-						xmlns="http://www.w3.org/2000/svg"
-						focusable="false"
-						fill="currentColor"
-						role="img"
-						aria-hidden="true"
-					>
-						<path
-							class="ons-topTriangle"
-							fill={sortIconFill('diff').upperFill}
-							d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-						/>
-						<path
-							class="ons-bottomTriangle"
-							fill={sortIconFill('diff').lowerFill}
-							d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
-						/>
-					</svg>
-				</button>
-			{:else}
-				Trend
-			{/if}
+						<svg
+							class="ons-icon"
+							viewBox="0 0 12 19"
+							xmlns="http://www.w3.org/2000/svg"
+							focusable="false"
+							fill="currentColor"
+							role="img"
+							aria-hidden="true"
+						>
+							<path
+								class="ons-topTriangle"
+								fill={sortIconFill('diff').upperFill}
+								d="M6 0l6 7.2H0L6 0zm0 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+							/>
+							<path
+								class="ons-bottomTriangle"
+								fill={sortIconFill('diff').lowerFill}
+								d="M6 18.6l6-7.2H0l6 7.2zm0 3.6l6 7.2H0l6-7.2z"
+							/>
+						</svg>
+					</button>
+				{:else}
+					Trend
+				{/if}
+			</div>
 		</div>
 	</div>
 	<div
@@ -800,6 +809,15 @@
 		white-space: nowrap;
 		font-weight: bold;
 		font-size: 16px;
+	}
+	.sparkline-header {
+		min-width: 0;
+		white-space: nowrap;
+		text-align: left;
+	}
+
+	.sparkline-header-inner {
+		width: max-content;
 	}
 
 	.sparkline-cell {
