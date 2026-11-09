@@ -362,6 +362,10 @@
 	}
 
 	let sparklineWidths = $state({});
+	let changeBoxContentWidths = $state({});
+	let maxChangeBoxContentWidth = $derived(
+		Math.max(0, ...selectedAreaCodes.map((areacd) => changeBoxContentWidths[areacd] ?? 0))
+	);
 	let sparklineWidth = $derived.by(() => {
 		const widths = Object.values(sparklineWidths);
 		if (!widths.length) return 300; // fallback until first measure
@@ -426,7 +430,7 @@
 		return Math.max(min, Math.min(x, max));
 	});
 
-	const rowsPaddingTop = 35;
+	const rowsPaddingTop = metadata.standardised ? 35 : 0;
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
 
@@ -583,7 +587,7 @@
 					<path d="M0 0 L12 0 L6 8 Z" fill="var(--ons-color-grey-25)" />
 				</svg>
 			</div>
-		{:else}
+		{:else if metadata.standardised}
 			<div class="comparison-overlay" style:left="0px" style:right="0px">
 				<div
 					class="comparison-label missing-data-message"
@@ -651,6 +655,8 @@
 							{formatValue}
 							{allPeriods}
 							{isMobile}
+							changeBoxWidth={maxChangeBoxContentWidth}
+							bind:changeBoxContentWidth={changeBoxContentWidths[area.areacd]}
 						/>
 					</div>
 				{:else}

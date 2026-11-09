@@ -2,7 +2,6 @@
 	import { scaleLinear, scaleTime } from 'd3-scale';
 	import { ONScolours } from '$lib/config';
 	import { area, line as d3line, curveLinear } from 'd3-shape';
-	import { Icon } from '@onsvisual/svelte-components';
 	import { extent } from 'd3-array';
 	import ChangeboxArrow from '../visuals/ChangeboxArrow.svelte';
 
@@ -16,7 +15,9 @@
 		suffix,
 		valuePeriod,
 		allPeriods,
-		isMobile
+		isMobile,
+		changeBoxWidth = 0,
+		changeBoxContentWidth = $bindable()
 	} = $props();
 
 	// let combined = $derived([...data, ...comparisonData]); currently we are excluding the comparison area from the sparklin when y axis free, so not needed
@@ -119,6 +120,7 @@
 			stroke-width={strokewidth}
 			fill="none"
 			stroke-dasharray={dash}
+			stroke-linejoin="round"
 		/>
 		{#each isolatedPoints(rows) as d (d.period.getTime())}
 			<circle
@@ -140,6 +142,7 @@
 			stroke-width={strokewidth}
 			fill="none"
 			stroke-dasharray={dash}
+			stroke-linejoin="round"
 		/>
 	{/if}
 {/snippet}
@@ -188,14 +191,16 @@
 		</svg>
 	{/if}
 	<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
-		<div class="change-text">
-			{#if diff !== 0}
-				<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
-				<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
-			{/if}
-			{#if showChangeText}
-				{direction}
-			{/if}
+		<div class="change-text" style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}>
+			<span class="change-content" bind:clientWidth={changeBoxContentWidth}>
+				{#if diff !== 0}
+					<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
+					<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
+				{/if}
+				{#if showChangeText}
+					{direction}
+				{/if}
+			</span>
 		</div>
 	</div>
 </div>
@@ -221,9 +226,17 @@
 	}
 
 	.change-text {
+		display: flex;
+		align-items: center;
+		/* justify-content: center; i prefer the change text left aligned */
+		box-sizing: border-box;
+		gap: 0.2em;
+	}
+	.change-content {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3em;
+		gap: 0.2em;
+		white-space: nowrap;
 	}
 	@media (max-width: 600px) {
 		.change-text {

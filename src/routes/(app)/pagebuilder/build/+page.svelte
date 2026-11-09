@@ -384,7 +384,9 @@
 								areaslist={areas}
 							/>
 						{:else}
-							<p>Comparison area disabled for non-standardised indicator.</p>
+							<p class="comparison-disabled">
+								Comparison area disabled for non-standardised indicator.
+							</p>
 						{/if}
 						<OptionsModal
 							mode="comparison"
@@ -464,6 +466,10 @@
 
 	.above-table {
 		/* background-color: var(--ons-color-grey-5); */
+	}
+
+	.comparison-disabled {
+		margin-bottom: 0;
 	}
 
 	.table {
@@ -594,7 +600,7 @@
 	.legend-modals {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: flex-end;
+		align-items: center;
 		gap: 10px;
 		flex: 0 1 auto;
 		margin-left: auto;
