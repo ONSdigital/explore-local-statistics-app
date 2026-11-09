@@ -358,18 +358,17 @@
 				</div>
 			{/each}
 		{/snippet}
-		{#if data && !data.message && hasSelectedAreaData}
-			<div class="above-table">
-				<div class="indicator-info">
-					<h2>{selection?.indicator?.label}</h2>
-					<p class="content-subtitle">
-						{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
-						{#if uniquePeriods.length > 1}
-							to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
-						<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
-					</p>
-				</div>
-
+		<div class="above-table">
+			<div class="indicator-info">
+				<h2>{selection?.indicator?.label}</h2>
+				<p class="content-subtitle">
+					{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
+					{#if uniquePeriods.length > 1}
+						to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
+					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
+				</p>
+			</div>
+			{#if data && !data.message && hasSelectedAreaData}
 				<div class="header-details">
 					{#if data.uci_95 && data.lci_95}
 						<div class="ci-note">
@@ -397,13 +396,12 @@
 						/>
 					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
+		</div>
+		<!-- -->
 
 		<div class="table">
 			{#if data && !data.message && hasSelectedAreaData}
-				<!-- <Tabs>
-				<Tab title="Comparison chart"> -->
 				{#key selection.indicator?.slug}
 					<ComparisonRow
 						{data}
@@ -417,12 +415,6 @@
 						{uniquePeriods}
 					/>
 				{/key}
-				<!-- </Tab> -->
-				<!-- <Tab title="Line chart"> -->
-				<!-- <Line {data} {metadata} {formatValue} {formatPeriod} showIntervals={true}></Line> -->
-				<!-- </Tab> -->
-				<!-- <Tab title="Bar chart"></Tab> -->
-				<!-- </Tabs> -->
 			{:else if data && (data.message || !hasSelectedAreaData)}
 				<div class="no-data">
 					<p>No {selection.indicator.label} data available for the selected areas.</p>
@@ -451,15 +443,15 @@
 					{/each}
 				</p>
 			</div>
+			<div class="share-link">
+				<h4>Share this page</h4>
+				<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
+				<Button variant="secondary" on:click={copyShareUrl} small>
+					{clipped ? 'Link copied' : 'Copy link'}
+				</Button>
+			</div>
 		{/if}
 	</SidebarLayout>
-	<div class="share-link">
-		<h4>Share this page</h4>
-		<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
-		<Button variant="secondary" on:click={copyShareUrl} small>
-			{clipped ? 'Link copied' : 'Copy link'}
-		</Button>
-	</div>
 </Container>
 
 <style>
@@ -475,10 +467,24 @@
 	}
 
 	.table {
-		margin-bottom: '20px';
-		margin-top: '10px';
-		min-height: '84px';
-		position: 'relative';
+		margin-bottom: 20px;
+		margin-top: 10px;
+		min-height: 84px;
+		position: relative;
+	}
+
+	.no-data {
+		min-height: 84px;
+		margin-top: 40px;
+		font-size: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.no-data p {
+		margin: 0;
 	}
 
 	.twisty {

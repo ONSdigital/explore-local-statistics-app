@@ -4,6 +4,7 @@
 	import { area, line as d3line, curveLinear } from 'd3-shape';
 	import { Icon } from '@onsvisual/svelte-components';
 	import { extent } from 'd3-array';
+	import ChangeboxArrow from '../visuals/ChangeboxArrow.svelte';
 
 	let {
 		data,
@@ -189,7 +190,7 @@
 	<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
 		<div class="change-text">
 			{#if diff !== 0}
-				<Icon type="arrow" rotation={diff > 0 ? 270 : 90} />
+				<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
 				<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
 			{/if}
 			{#if showChangeText}
@@ -217,6 +218,12 @@
 		/* 20px to match column gap, plus 6 to match the diamond padding around the pointrange */
 		padding: 5px;
 		border-radius: 7px;
+	}
+
+	.change-text {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3em;
 	}
 	@media (max-width: 600px) {
 		.change-text {

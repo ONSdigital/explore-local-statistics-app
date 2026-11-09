@@ -481,8 +481,8 @@
 	}
 
 	.build-button {
-		margin: 0.5em 0.5em 0 0;
-		margin-bottom: 1.5em;
+		margin: 1em 0.5em 1.5em 0;
+		/* margin-bottom: 1.5em; */
 	}
 
 	.select-container {
