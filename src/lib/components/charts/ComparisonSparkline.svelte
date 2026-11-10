@@ -110,6 +110,17 @@
 {#snippet ribbon(rows, color = ONScolours.grey40, opacity = 0.7)}
 	{#if rows?.some(hasCI)}
 		<path d={ciAreaGen(rows)} fill={color} stroke="none" {opacity} style:pointer-events="none" />
+		{#each isolatedPoints(rows) as d (d.period.getTime())}
+			<line
+				x1={xScale(d.period)}
+				x2={xScale(d.period)}
+				y1={yScale(d.lci_95)}
+				y2={yScale(d.uci_95)}
+				stroke-width={2.5}
+				stroke={color}
+				stroke-opacity={opacity}
+			/>
+		{/each}
 	{/if}
 {/snippet}
 {#snippet line(rows, color, dash = 'none', strokewidth = 1.5)}
