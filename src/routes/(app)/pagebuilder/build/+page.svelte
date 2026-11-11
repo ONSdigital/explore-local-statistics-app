@@ -512,21 +512,24 @@
 	.fake-hero {
 		background-color: #e9eff4;
 		margin-bottom: 5px !important;
-		height: 120px;
 		display: flex;
 		align-items: center;
+		padding-bottom: 20px;
 	}
 	.hero-text {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-		justify-content: space-between;
-		width: 100%;
+		margin-top: 30px;
 	}
 	.hero-area-details {
 		display: flex;
-		gap: 20px;
-		justify-content: flex-end;
+		flex-wrap: wrap;
+		align-items: baseline;
+		column-gap: 20px;
+		row-gap: 3px;
+	}
+	.hero-area-details h4,
+	.hero-area-details p {
+		white-space: nowrap;
+		margin: 0;
 	}
 
 	:global(.twisty .ons-details--open .ons-details__content) {
@@ -583,7 +586,6 @@
 	.header-details {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
 		align-items: center;
 		gap: 10px;
 		margin-top: 10px;
@@ -593,33 +595,25 @@
 	}
 
 	.ci-note {
-		flex: 1 1 14rem;
+		flex: 1 0 100%;
+		order: 2;
 		min-width: 0;
 	}
 
 	.legend-modals {
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		align-items: center;
+		justify-content: flex-end;
 		gap: 10px;
 		flex: 0 1 auto;
+		order: 1;
+		min-width: max-content;
 		margin-left: auto;
-		max-width: 100%;
-		min-width: 0;
-		box-sizing: border-box;
-		justify-content: flex-end;
 	}
 	.legend-modals :global(.ons-btn) {
-		max-width: 100%;
-		white-space: normal;
-		box-sizing: border-box;
-	}
-	.legend-modals :global(.ons-btn__inner) {
-		white-space: normal;
-	}
-
-	.indicator-info {
-		margin-top: 20px;
+		width: auto;
+		white-space: nowrap;
 	}
 	.select-container {
 		margin-top: 1em;
@@ -628,6 +622,11 @@
 		max-width: 500px;
 		min-width: 0;
 		box-sizing: border-box;
+	}
+	@media (max-width: 600px) {
+		.legend-modals {
+			gap: 6px;
+		}
 	}
 	.select-container :global(.the-list-class) {
 		max-height: min(60vh, 400px) !important;
