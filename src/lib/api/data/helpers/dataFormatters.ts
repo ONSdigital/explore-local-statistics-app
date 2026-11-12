@@ -18,7 +18,7 @@ export function toJSONStat(
 	includeNames = false,
 	includeStatus = false
 ) {
-	// `qb` is the shared, in-memory-cached cube (see CLAUDE.md) and must never be
+	// `qb` is the shared, in-memory-cached cube (see src/lib/api/CLAUDE.md) and must never be
 	// mutated in place. Only `dimension` and `size` are written to below, so only those
 	// need copying - each dim's `category` gets a shallow copy (its `index`/`label` are
 	// always replaced wholesale, never mutated), and `size` just needs a new array.
