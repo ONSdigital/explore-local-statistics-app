@@ -34,6 +34,8 @@
 	import OptionsModal from '$lib/components/modals/OptionsModal.svelte';
 	import { Checkbox } from '@onsvisual/svelte-components';
 	import SidebarLayout from '$lib/components/SidebarLayout.svelte';
+	import { geoLevels } from '$lib/config/geoLevels.ts';
+	import { pluralise } from '@onsvisual/robo-utils';
 
 	let taxData = $props();
 	let areas = $derived(
@@ -269,6 +271,36 @@
 		'academic-year': 'academic year',
 		'financial-year': 'financial year'
 	};
+
+	// const geographyLevelLabels = $derived.by(() => {
+	// 	const labels = metadata.geography.levels.map(
+	// 		(level) => pluralise(geoLevels[level]?.label.toLowerCase()) ?? level
+	// 	);
+
+	// 	return [labels.slice(0, -1).join(', '), labels.slice(-1)[0]].join(
+	// 		labels.length < 2 ? '' : ', and '
+	// 	);
+	// });
+	const geographyLevelLabels = $derived(
+		new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(
+			metadata.geography.levels.map(
+				(level) => pluralise(geoLevels[level]?.label.toLowerCase()) ?? level
+			)
+		)
+	);
+
+	const countryLookup = {
+		E: { label: 'England' },
+		S: { label: 'Scotland' },
+		N: { label: 'Northern Ireland' },
+		W: { label: 'Wales' }
+	};
+
+	const countryLevelLabels = $derived(
+		new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(
+			metadata.geography.countries.map((country) => countryLookup[country]?.label ?? country)
+		)
+	);
 </script>
 
 {#snippet indicatorRadios(id, items)}
@@ -421,6 +453,14 @@
 				<div class="no-data">
 					<p>No {selection.indicator.label} data available for the selected areas.</p>
 				</div>
+				<div class="no-data-geographies">
+					<p>
+						This indicator has data available for the following geography levels: <strong
+							>{geographyLevelLabels}</strong
+						>
+						in the following countries: <strong>{countryLevelLabels}</strong>.
+					</p>
+				</div>
 			{:else if !selectedAreas.length}
 				<div class="no-data">
 					<p>No areas selected for comparison. <a href="/pagebuilder">Select areas</a></p>
@@ -482,6 +522,14 @@
 	.no-data {
 		min-height: 84px;
 		margin-top: 40px;
+		font-size: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.no-data-geographies {
 		font-size: 16px;
 		display: flex;
 		align-items: center;
