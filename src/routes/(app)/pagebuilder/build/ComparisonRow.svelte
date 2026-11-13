@@ -412,7 +412,7 @@
 	);
 
 	let comparisonOffset = $derived(
-		highlightWidth + labelWidth + valueWidth + colGap * nColsPreceedingPointrange + rowPadding * 2
+		highlightWidth + labelWidth + valueWidth + colGap * nColsPreceedingPointrange + rowPadding
 	);
 
 	let suffix = $derived(metadata?.suffix);

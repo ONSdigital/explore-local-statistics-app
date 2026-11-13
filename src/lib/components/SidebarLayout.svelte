@@ -68,6 +68,10 @@
 		/* padding: 20px; */
 	}
 
+	.main {
+		margin-top: 20px;
+	}
+
 	aside {
 		position: sticky;
 		top: 0;

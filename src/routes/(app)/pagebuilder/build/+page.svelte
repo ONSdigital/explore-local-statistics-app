@@ -272,20 +272,12 @@
 		'financial-year': 'financial year'
 	};
 
-	// const geographyLevelLabels = $derived.by(() => {
-	// 	const labels = metadata.geography.levels.map(
-	// 		(level) => pluralise(geoLevels[level]?.label.toLowerCase()) ?? level
-	// 	);
-
-	// 	return [labels.slice(0, -1).join(', '), labels.slice(-1)[0]].join(
-	// 		labels.length < 2 ? '' : ', and '
-	// 	);
-	// });
-	const geographyLevelLabels = $derived(
+	const indicatorGeographyLevels = $derived(
+		metadata.geography.levels.map((level) => geoLevels[level]?.label ?? level)
+	);
+	const indicatorGeographyLevelLabels = $derived(
 		new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(
-			metadata.geography.levels.map(
-				(level) => pluralise(geoLevels[level]?.label.toLowerCase()) ?? level
-			)
+			indicatorGeographyLevels.map((level) => pluralise(level.toLowerCase()))
 		)
 	);
 
@@ -295,14 +287,42 @@
 		N: { label: 'Northern Ireland' },
 		W: { label: 'Wales' }
 	};
-
-	const countryLevelLabels = $derived(
-		new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(
-			metadata.geography.countries.map((country) => countryLookup[country]?.label ?? country)
-		)
+	const indicatorCountries = $derived(
+		metadata.geography.countries.map((country) => countryLookup[country]?.label ?? country)
+	);
+	const indicatorCountryLabels = $derived(
+		new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(indicatorCountries)
+	);
+	const selectedAreasCountries = $derived(
+		$selectedAreas.map((area) => area.areacd.charAt(0)).map((code) => countryLookup[code].label)
 	);
 
+	const areSelectedAreasGeographyLevelsInData = $derived(
+		$selectedAreas.map((d) => d.type).some((d) => new Set(indicatorGeographyLevels).has(d))
+	);
+	const areSelectedAreasCountriesInData = $derived(
+		selectedAreasCountries.some((d) => new Set(indicatorCountries).has(d))
+	);
+
+	const geographyMismatch = $derived(!areSelectedAreasGeographyLevelsInData);
+	const countryMismatch = $derived(!areSelectedAreasCountriesInData);
+	const noDataReasons = $derived(
+		[
+			geographyMismatch &&
+				`This indicator is only available for <strong>${indicatorGeographyLevelLabels}<strong>.`,
+			countryMismatch &&
+				`This indicator only covers areas in <strong>${indicatorCountryLabels}<strong>.`
+		].filter(Boolean)
+	);
+
+	let noDataMessage = $derived(data && !data.message && hasSelectedAreaData ? [] : noDataReasons);
+
 	let highlightedArea = $state(null);
+
+	// 	This indicator has data available for the following geography levels: <strong
+	// 							>{geographyLevelLabels}</strong
+	// 						>
+	// 						in the following countries: <strong>{countryLevelLabels}</strong>.
 </script>
 
 {#snippet indicatorRadios(id, items)}
@@ -456,14 +476,13 @@
 				<div class="no-data">
 					<p>No {selection.indicator.label} data available for the selected areas.</p>
 				</div>
-				<div class="no-data-geographies">
-					<p>
-						This indicator has data available for the following geography levels: <strong
-							>{geographyLevelLabels}</strong
-						>
-						in the following countries: <strong>{countryLevelLabels}</strong>.
-					</p>
-				</div>
+				{#if noDataMessage.length}
+					<div class="no-data-message">
+						{#each noDataMessage as message}
+							<p>{@html message}</p>
+						{/each}
+					</div>
+				{/if}
 			{:else if !selectedAreas.length}
 				<div class="no-data">
 					<p>No areas selected for comparison. <a href="/pagebuilder">Select areas</a></p>
@@ -532,7 +551,7 @@
 		text-align: center;
 	}
 
-	.no-data-geographies {
+	.no-data-message {
 		font-size: 16px;
 		display: flex;
 		align-items: center;
