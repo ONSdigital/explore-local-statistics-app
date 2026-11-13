@@ -403,10 +403,19 @@
 				</p>
 			</div>
 			{#if data && !data.message && hasSelectedAreaData}
+				{@const showCi = data.uci_95 && data.lci_95}
 				<div class="header-details">
-					{#if data.uci_95 && data.lci_95}
-						<div class="ci-note">
-							Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+					<!-- only render when non-empty: an empty div still claims its flex-basis and forces a wrap -->
+					{#if showCi || !metadata.standardised}
+						<div class="header-notes">
+							{#if !metadata.standardised}
+								<p>Comparison area disabled for non-standardised indicator.</p>
+							{/if}
+							{#if showCi}
+								<p>
+									Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+								</p>
+							{/if}
 						</div>
 					{/if}
 					<div class="legend-modals">
@@ -417,10 +426,6 @@
 								bind:pageState={modalPageState}
 								areaslist={areas}
 							/>
-						{:else}
-							<p class="comparison-disabled">
-								Comparison area disabled for non-standardised indicator.
-							</p>
 						{/if}
 						<OptionsModal
 							mode="comparison"
@@ -509,10 +514,6 @@
 
 	.above-table {
 		/* background-color: var(--ons-color-grey-5); */
-	}
-
-	.comparison-disabled {
-		margin-bottom: 0;
 	}
 
 	.table {
@@ -635,37 +636,42 @@
 
 	.header-details {
 		display: flex;
-		flex-wrap: wrap;
+		/* wrap-reverse: once wrapped, the notes (first in DOM) sit below the buttons */
+		flex-wrap: wrap-reverse;
 		align-items: center;
-		gap: 10px;
+		gap: 10px 24px;
 		margin-top: 10px;
 		font-size: 16px;
 		padding: 0.5em 0;
 		margin-bottom: 10px;
 	}
 
-	.ci-note {
-		flex: 1 0 100%;
-		order: 2;
+	.header-notes {
+		/* basis sets how narrow the notes get before dropping below the buttons */
+		flex: 1 1 18rem;
 		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.header-notes p {
+		margin: 0;
 	}
 
 	.legend-modals {
+		flex: 0 1 auto;
+		max-width: 100%;
+		margin-left: auto;
 		display: flex;
-		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: flex-end;
+		/* only takes effect once stacked, when the group spans the full line */
+		justify-content: flex-start;
 		gap: 10px;
-		flex: 0 1 auto;
-		order: 1;
-		width: 100%;
-		/* min-width: max-content; */
-		margin-left: auto;
 	}
 	.legend-modals :global(.ons-btn) {
+		flex: 0 1 auto;
 		width: auto;
-		/* white-space: nowrap; */
 	}
 	.select-container {
 		margin-top: 1em;
@@ -674,11 +680,6 @@
 		max-width: 500px;
 		min-width: 0;
 		box-sizing: border-box;
-	}
-	@media (max-width: 600px) {
-		.legend-modals {
-			gap: 6px;
-		}
 	}
 	.select-container :global(.the-list-class) {
 		max-height: min(60vh, 400px) !important;
