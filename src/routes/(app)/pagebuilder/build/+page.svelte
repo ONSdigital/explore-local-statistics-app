@@ -301,6 +301,8 @@
 			metadata.geography.countries.map((country) => countryLookup[country]?.label ?? country)
 		)
 	);
+
+	let highlightedArea = $state(null);
 </script>
 
 {#snippet indicatorRadios(id, items)}
@@ -447,6 +449,7 @@
 						{formatPeriod}
 						selectedPeriod={timePageState.selectedPeriodRange[1]}
 						{uniquePeriods}
+						bind:highlightedArea
 					/>
 				{/key}
 			{:else if data && (data.message || !hasSelectedAreaData)}
@@ -650,18 +653,20 @@
 
 	.legend-modals {
 		display: flex;
-		flex-wrap: nowrap;
+		flex-direction: row;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: flex-end;
 		gap: 10px;
 		flex: 0 1 auto;
 		order: 1;
-		min-width: max-content;
+		width: 100%;
+		/* min-width: max-content; */
 		margin-left: auto;
 	}
 	.legend-modals :global(.ons-btn) {
 		width: auto;
-		white-space: nowrap;
+		/* white-space: nowrap; */
 	}
 	.select-container {
 		margin-top: 1em;

@@ -10,6 +10,7 @@
 	import { flip } from 'svelte/animate';
 	import { sineInOut } from 'svelte/easing';
 	import { prefersReducedMotion } from 'svelte/motion';
+	import StarIcon from '$lib/components/visuals/StarIcon.svelte';
 
 	let {
 		filteredData,
@@ -19,7 +20,8 @@
 		comparisonArea,
 		formatValue = (d) => d,
 		formatPeriod,
-		selectedPeriod = null
+		selectedPeriod = null,
+		highlightedArea = $bindable(null)
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -313,7 +315,7 @@
 	const colGap = 20;
 	// const labelMargin = $derived(isMobile ? 8 : colGap);
 	const labelMargin = 0;
-	const nColsPreceedingPointrange = 2;
+	const nColsPreceedingPointrange = 3;
 
 	let valueWidths = $state({});
 	let valueWidth = $derived.by(() => {
@@ -386,18 +388,23 @@
 		};
 	}
 	let pointRangeWidth = $derived.by(() => {
-		const fixed = leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 3;
+		const fixed =
+			highlightWidth + leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 4;
 		return Math.max(120, width - fixed);
 	});
+
+	const highlightWidth = 10;
 	let contentWidth = $derived(
-		labelWidth + valueWidth + pointRangeWidth + sparklineWidth + colGap * 3
+		highlightWidth + labelWidth + valueWidth + pointRangeWidth + sparklineWidth + colGap * 4
 	);
 
 	let xScale = $derived(
 		pointrangeXDomain ? scaleLinear().domain(pointrangeXDomain).range([0, pointRangeWidth]) : null
 	);
 
-	let comparisonOffset = $derived(labelWidth + valueWidth + colGap * nColsPreceedingPointrange);
+	let comparisonOffset = $derived(
+		highlightWidth + labelWidth + valueWidth + colGap * nColsPreceedingPointrange
+	);
 
 	let suffix = $derived(metadata?.suffix);
 	let prefix = $derived(metadata?.prefix);
@@ -461,6 +468,7 @@
 	// ]);
 	let headerContentWidth = $state(0);
 	let headerOverflow = $derived(Math.max(0, headerContentWidth - sparklineWidth));
+	let starred = $state(false);
 </script>
 
 <div
@@ -474,9 +482,13 @@
 >
 	<div
 		class="comparison-row-item comparison-header-row"
-		style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+		style:grid-template-columns="{highlightWidth}px {labelWidth}px {valueWidth}px {pointRangeWidth}px
+		{sparklineWidth}px"
 		style:min-width="{contentWidth}px"
+		style:column-gap="{colGap}px"
 	>
+		<!-- empty header-cell cos there's an extra column -->
+		<div class="header-cell"></div>
 		<div class="header-cell" style:margin-left="{labelMargin}px">
 			<button class="table-sort-button" on:click={() => toggleSort('areanm')}>
 				Area
@@ -620,9 +632,21 @@
 				}}
 				// class:alternating-row={i % 2 !== 0}
 				class="comparison-row-item"
-				style:grid-template-columns="{labelWidth}px {valueWidth}px {pointRangeWidth}px {sparklineWidth}px"
+				style:grid-template-columns="{highlightWidth}px {labelWidth}px {valueWidth}px {pointRangeWidth}px
+				{sparklineWidth}px"
 				style:border-bottom="0.5px solid {ONScolours.grey35}"
+				style:background-color={area.areacd === highlightedArea ? '#fcefca' : 'white'}
+				style:column-gap="{colGap}px"
 			>
+				<div class="highlight-star" style:max-width="{highlightWidth}px">
+					<button
+						class="highlight-button"
+						on:click={() =>
+							(highlightedArea = highlightedArea === area.areacd ? null : area.areacd)}
+					>
+						<StarIcon></StarIcon></button
+					>
+				</div>
 				<div
 					class="area-name"
 					style:margin-left="{labelMargin}px"
@@ -684,7 +708,7 @@
 	}
 
 	.data-unavilable {
-		grid-column: 4;
+		grid-column: 5;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -736,7 +760,6 @@
 	.comparison-row-item {
 		position: relative;
 		display: grid;
-		column-gap: 20px;
 		align-items: center;
 		justify-content: left;
 		width: 100%;
@@ -821,9 +844,13 @@
 	}
 
 	.sparkline-cell {
-		grid-column: 4;
+		grid-column: 5;
 		width: max-content;
 		position: relative;
 		z-index: 5;
+	}
+	.highlight-button {
+		background-color: transparent;
+		border: none;
 	}
 </style>
