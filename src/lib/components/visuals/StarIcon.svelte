@@ -11,8 +11,10 @@
 	// starts at the right value so nothing animates on mount
 	const fill = new Tween(filled ? 1 : 0, { duration: 200, easing: cubicOut });
 
+	let mounted = false;
 	$effect(() => {
 		fill.target = filled ? 1 : 0;
+		mounted = true;
 	});
 </script>
 
@@ -26,7 +28,7 @@
 	stroke-linejoin="round"
 	stroke-linecap="round"
 	aria-hidden="true"
-	class:pop={filled}
+	class:pop={filled && mounted}
 >
 	<path
 		d="M12 3 L14.94 8.95 L21.51 9.91 L16.76 14.55 L17.88 21.09 L12 18 L6.12 21.09 L7.24 14.55 L2.49 9.91 L9.06 8.95 Z"
@@ -42,7 +44,7 @@
 	}
 
 	.pop {
-		animation: pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+		animation: pop 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
 	@keyframes pop {
@@ -50,7 +52,7 @@
 			transform: scale(1);
 		}
 		50% {
-			transform: scale(1.25) rotate(12deg);
+			transform: scale(1.3) rotate(12deg);
 		}
 		100% {
 			transform: scale(1) rotate(0);

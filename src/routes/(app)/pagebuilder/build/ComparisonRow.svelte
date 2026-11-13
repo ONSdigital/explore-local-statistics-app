@@ -387,13 +387,22 @@
 			}
 		};
 	}
+
+	const highlightWidth = 15;
+	const rowPadding = 3;
 	let pointRangeWidth = $derived.by(() => {
 		const fixed =
-			highlightWidth + leftMargin + labelWidth + valueWidth + sparklineWidth + colGap * 4;
+			highlightWidth +
+			leftMargin +
+			labelWidth +
+			valueWidth +
+			sparklineWidth +
+			colGap * 4 +
+			rowPadding * 2 +
+			rowPadding * 2;
 		return Math.max(120, width - fixed);
 	});
 
-	const highlightWidth = 10;
 	let contentWidth = $derived(
 		highlightWidth + labelWidth + valueWidth + pointRangeWidth + sparklineWidth + colGap * 4
 	);
@@ -403,7 +412,7 @@
 	);
 
 	let comparisonOffset = $derived(
-		highlightWidth + labelWidth + valueWidth + colGap * nColsPreceedingPointrange
+		highlightWidth + labelWidth + valueWidth + colGap * nColsPreceedingPointrange + rowPadding * 2
 	);
 
 	let suffix = $derived(metadata?.suffix);
@@ -468,7 +477,6 @@
 	// ]);
 	let headerContentWidth = $state(0);
 	let headerOverflow = $derived(Math.max(0, headerContentWidth - sparklineWidth));
-	let starred = $state(false);
 </script>
 
 <div
@@ -484,6 +492,7 @@
 		class="comparison-row-item comparison-header-row"
 		style:grid-template-columns="{highlightWidth}px {labelWidth}px {valueWidth}px {pointRangeWidth}px
 		{sparklineWidth}px"
+		style:padding-inline="{rowPadding}px"
 		style:min-width="{contentWidth}px"
 		style:column-gap="{colGap}px"
 	>
@@ -636,15 +645,17 @@
 				{sparklineWidth}px"
 				style:border-bottom="0.5px solid {ONScolours.grey35}"
 				style:background-color={area.areacd === highlightedArea ? '#fcefca' : 'white'}
+				style:padding-inline="{rowPadding}px"
 				style:column-gap="{colGap}px"
 			>
-				<div class="highlight-star" style:max-width="{highlightWidth}px">
+				<div class="highlight-star" style:max-width="{highlightWidth}px" style:margin-left="3px">
 					<button
 						class="highlight-button"
+						class:active={area.areacd === highlightedArea}
 						on:click={() =>
 							(highlightedArea = highlightedArea === area.areacd ? null : area.areacd)}
 					>
-						<StarIcon></StarIcon></button
+						<StarIcon filled={area.areacd === highlightedArea} size="18"></StarIcon></button
 					>
 				</div>
 				<div
@@ -763,6 +774,7 @@
 		align-items: center;
 		justify-content: left;
 		width: 100%;
+		box-sizing: border-box;
 	}
 	.comparison-overlay {
 		position: absolute;
@@ -852,5 +864,21 @@
 	.highlight-button {
 		background-color: transparent;
 		border: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		color: var(--ons-color-grey-60);
+		transition: color 0.2s;
+	}
+	.highlight-button:hover {
+		color: var(--ons-color-grey-75);
+	}
+	.highlight-button.active {
+		color: #d4930a;
+	}
+	.highlight-button:focus-visible {
+		outline: 3px solid var(--ons-color-focus, #fd0);
+		outline-offset: 2px;
 	}
 </style>
