@@ -606,16 +606,15 @@
 		color: black !important;
 	}
 	:global(.twisty .ons-details__icon .ons-icon) {
-		width: 0.85rem;
-		height: 0.85rem;
+		transform: scale(0.75);
 	}
 
 	:global(.twisty details.subtopic-details:not([open]) .ons-details__icon) {
-		top: 0rem !important;
+		top: -0.1rem !important;
 		transform: rotate(0deg) !important;
 	}
 	:global(.twisty details.subtopic-details[open] .ons-details__icon) {
-		top: 0 !important;
+		top: 0.2rem !important;
 		transform: rotate(90deg) !important;
 	}
 
