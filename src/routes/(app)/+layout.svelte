@@ -80,7 +80,7 @@
 <Main>
 	<slot />
 </Main>
-<Footer />
+<Footer width={page.data.pageType === 'comparison' ? 'wider' : 'wide'} />
 
 <style>
 	:global(a:focus > svg.logo) {

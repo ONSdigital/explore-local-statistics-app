@@ -71,6 +71,7 @@
 	);
 
 	let formatPeriod = $derived(makePeriodFormatter(metadata?.periodFormat || 'year'));
+	let formatPeriodVerbose = $derived(makePeriodFormatter(metadata?.periodFormat || 'year', true));
 	let formatValue = $derived(makeValueFormatter(metadata?.decimalPlaces));
 
 	function makeShareUrl(areas, indicator, comparisonAreacd) {
@@ -319,10 +320,7 @@
 
 	let highlightedArea = $state(null);
 
-	// 	This indicator has data available for the following geography levels: <strong
-	// 							>{geographyLevelLabels}</strong
-	// 						>
-	// 						in the following countries: <strong>{countryLevelLabels}</strong>.
+	$inspect(metadata);
 </script>
 
 {#snippet indicatorRadios(id, items)}
@@ -416,9 +414,12 @@
 			<div class="indicator-info">
 				<h2>{selection?.indicator?.label}</h2>
 				<p class="content-subtitle">
-					{metadata?.subtitle}, {formatPeriod(uniquePeriods[0])}
-					{#if uniquePeriods.length > 1}
-						to {formatPeriod(uniquePeriods[uniquePeriods.length - 1])}{/if}.
+					{metadata?.subtitle}{#if hasSelectedAreaData}
+						, {formatPeriodVerbose(uniquePeriods[0])}
+						{#if uniquePeriods.length > 1}
+							to {formatPeriodVerbose(uniquePeriods[uniquePeriods.length - 1], true)}
+						{/if}
+					{/if}.
 					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
 				</p>
 			</div>
