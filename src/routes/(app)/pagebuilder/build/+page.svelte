@@ -682,6 +682,8 @@
 		max-width: 100%;
 		margin-left: auto;
 		display: flex;
+		/* overrides the global .legend-modals in app.css (column below 740px) */
+		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
 		/* only takes effect once stacked, when the group spans the full line */
