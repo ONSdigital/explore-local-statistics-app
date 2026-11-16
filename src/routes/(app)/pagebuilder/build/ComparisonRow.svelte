@@ -449,34 +449,10 @@
 	const rowsPaddingTop = $derived(metadata.standardised ? 35 : 0);
 	// how far the arrow tip reaches into the first row
 	let firstRowInset = $derived(Math.max(0, labelHeight + 8 - rowsPaddingTop));
-
-	// const tableData = $derived(
-	// 	sortedAreasData.map(({ areanm, diff, yDomain, rows, stats, span, width }) => {
-	// 		const periods = Object.fromEntries(
-	// 			rows.map(({ period, value }) => [new Date(period).getFullYear(), value])
-	// 		);
-
-	// 		return { areanm, ...periods, diff, yDomain, ...stats, span, width };
-	// 	})
-	// );
-	// const yearColumns = $derived(
-	// 	sortedAreasData[0].rows.map((r) => new Date(r.period).getFullYear())
-	// );
-
-	// const columns = $derived([
-	// 	{ key: 'areanm', label: 'Area' },
-	// 	// { key: 'diff', label: 'raw change' },
-	// 	{ key: 'b', label: 'base value' },
-	// 	{ key: 'm', label: 'min' },
-	// 	{ key: 'M', label: 'max' },
-	// 	{ key: 'span', label: 'span' },
-	// 	{ key: 'width', label: 'width' },
-
-	// 	// ...yearColumns.map((y) => ({ key: String(y), label: String(y) }))
-	// 	{ key: 'yDomain', label: 'yDomain' }
-	// ]);
 	let headerContentWidth = $state(0);
 	let headerOverflow = $derived(Math.max(0, headerContentWidth - sparklineWidth));
+
+	const noPointrange = $derived(areasData.map((d) => d.pointrangeRow).every((r) => r === null));
 </script>
 
 <div
@@ -685,6 +661,7 @@
 					{formatPeriod}
 					{valuePeriod}
 					fullSeriesMissing={area.isMissing}
+					{noPointrange}
 				/>
 				{#if !area.isMissing}
 					<div class="sparkline-cell" use:updateSparklineWidth={area.areacd}>

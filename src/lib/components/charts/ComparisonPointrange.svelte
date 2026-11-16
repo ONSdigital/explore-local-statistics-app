@@ -11,7 +11,8 @@
 		CIsStyle,
 		formatPeriod = (d) => d,
 		valuePeriod,
-		fullSeriesMissing
+		fullSeriesMissing,
+		noPointrange
 	} = $props();
 	let leftMargin = $state(0);
 	const barHeight = 20;
@@ -54,7 +55,7 @@
 			</rect>
 		{/if}
 		{#if reference}
-			{#if reference.barX != null}
+			{#if reference.barX != null && !noPointrange}
 				<rect
 					class="reference-bar"
 					x={reference.barX}
