@@ -320,7 +320,7 @@
 
 	let highlightedArea = $state(null);
 
-	$inspect(metadata);
+	let customOrder = $state(null);
 </script>
 
 {#snippet indicatorRadios(id, items)}
@@ -480,6 +480,7 @@
 						selectedPeriod={timePageState.selectedPeriodRange[1]}
 						{uniquePeriods}
 						bind:highlightedArea
+						bind:customOrder
 					/>
 				{/key}
 			{:else if data && (data.message || !hasSelectedAreaData)}

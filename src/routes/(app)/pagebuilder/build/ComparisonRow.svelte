@@ -21,7 +21,8 @@
 		formatValue = (d) => d,
 		formatPeriod,
 		selectedPeriod = null,
-		highlightedArea = $bindable(null)
+		highlightedArea = $bindable(null),
+		customOrder = $bindable(null)
 	} = $props();
 	let width = $state(800);
 	let leftMargin = $state(0);
@@ -29,6 +30,10 @@
 
 	let areasWithData = $derived([...new Set(data?.areacd)]);
 	let areasMissingData = $derived(selectedAreas.filter((d) => !areasWithData.includes(d.areacd)));
+
+	let sortColumn = $state(customOrder ? null : 'value');
+	let sortDirection = $state('descending');
+	let userSorted = $state(false);
 
 	// The period being displayed. Areas without an observation for exactly this period stay blank.
 	let latestPeriod = $derived.by(() => {
@@ -256,9 +261,6 @@
 		return Array.from(rowsByArea.values());
 	});
 
-	let sortColumn = $state('value');
-	let sortDirection = $state('descending');
-
 	function toggleSort(column) {
 		if (sortColumn !== column) {
 			sortColumn = column;
@@ -266,6 +268,7 @@
 		} else {
 			sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
 		}
+		userSorted = true;
 	}
 
 	function compareValues(a, b) {
@@ -280,11 +283,35 @@
 		return area[column];
 	}
 
-	let sortedAreasData = $derived.by(() => {
-		const sorted = [...areasData].sort((a, b) =>
-			compareValues(getSortValue(a, sortColumn), getSortValue(b, sortColumn))
+	function sortAreas(list, column, direction) {
+		const sorted = [...list].sort((a, b) =>
+			compareValues(getSortValue(a, column), getSortValue(b, column))
 		);
-		return sortDirection === 'descending' ? sorted.reverse() : sorted;
+		return direction === 'descending' ? sorted.reverse() : sorted;
+	}
+
+	let sortedAreasData = $derived.by(() => {
+		if (sortColumn) return sortAreas(areasData, sortColumn, sortDirection);
+
+		if (customOrder) {
+			const rank = new Map(customOrder.map((cd, i) => [cd, i]));
+			const known = areasData
+				.filter((d) => rank.has(d.areacd))
+				.sort((a, b) => rank.get(a.areacd) - rank.get(b.areacd));
+			// areas added since the order was saved go at the end, sorted by default
+			const added = sortAreas(
+				areasData.filter((d) => !rank.has(d.areacd)),
+				'value',
+				'descending'
+			);
+			return [...known, ...added];
+		}
+
+		return sortAreas(areasData, 'value', 'descending');
+	});
+
+	$effect(() => {
+		if (userSorted && sortColumn) customOrder = sortedAreasData.map((d) => d.areacd);
 	});
 
 	let comparisonGroup = $derived.by(() => {
