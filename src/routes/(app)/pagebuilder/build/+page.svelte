@@ -433,7 +433,11 @@
 							{/if}
 							{#if showCi}
 								<p>
-									Shaded bands show 95% confidence interval <a style:font-weight="bold">&#9432</a>
+									Shaded bands show likely range (95% <a
+										href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/uncertaintyandhowwemeasureit#confidence-interval"
+										>confidence interval</a
+									>
+									<Icon type="external" size="s"></Icon>).
 								</p>
 							{/if}
 						</div>
