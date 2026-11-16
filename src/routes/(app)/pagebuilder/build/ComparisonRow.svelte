@@ -33,7 +33,6 @@
 
 	let sortColumn = $state(customOrder ? null : 'value');
 	let sortDirection = $state('descending');
-	let userSorted = $state(false);
 
 	// The period being displayed. Areas without an observation for exactly this period stay blank.
 	let latestPeriod = $derived.by(() => {
@@ -268,7 +267,8 @@
 		} else {
 			sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
 		}
-		userSorted = true;
+
+		customOrder = sortAreas(areasData, sortColumn, sortDirection).map((d) => d.areacd);
 	}
 
 	function compareValues(a, b) {
@@ -308,10 +308,6 @@
 		}
 
 		return sortAreas(areasData, 'value', 'descending');
-	});
-
-	$effect(() => {
-		if (userSorted && sortColumn) customOrder = sortedAreasData.map((d) => d.areacd);
 	});
 
 	let comparisonGroup = $derived.by(() => {

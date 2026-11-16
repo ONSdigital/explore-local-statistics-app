@@ -202,7 +202,12 @@
 		</svg>
 	{/if}
 	<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
-		<div class="change-text" style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}>
+		<div
+			class="change-text"
+			style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}
+			// only centre the 'no change' text
+			style:justify-content={diff === 0 && showChangeText ? 'center' : 'start'}
+		>
 			<span class="change-content" bind:clientWidth={changeBoxContentWidth}>
 				{#if diff !== 0}
 					<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
@@ -239,7 +244,7 @@
 	.change-text {
 		display: flex;
 		align-items: center;
-		/* justify-content: center; i prefer the change text left aligned */
+		/* justify-content: center; */
 		box-sizing: border-box;
 		gap: 0.2em;
 	}
