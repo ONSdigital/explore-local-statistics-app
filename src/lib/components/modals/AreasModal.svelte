@@ -51,8 +51,8 @@
 </script>
 
 <Modal
-	title={mode === 'comparison' ? 'Select comparison area' : 'Select areas'}
-	label={mode === 'comparison' ? 'Change comparison area' : 'Change areas'}
+	title={mode === 'comparison' ? 'Change reference area' : 'Select areas'}
+	label={mode === 'comparison' ? 'Change reference area' : 'Change areas'}
 	icon={mode === 'comparison' ? null : 'pin'}
 	onOpen={() => (_pageState = cloneState(pageState))}
 	onConfirm={() => (pageState = cloneState(_pageState))}

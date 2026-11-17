@@ -624,7 +624,7 @@
 					bind:clientHeight={labelHeight}
 					style:left="50%"
 				>
-					Data unavailable for selected comparison area ({comparisonArea.areanm}) in {formatPeriod(
+					Data unavailable for selected reference area ({comparisonArea.areanm}) in {formatPeriod(
 						selectedPeriod
 					)}
 				</div>
