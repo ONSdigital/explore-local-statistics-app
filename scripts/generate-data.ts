@@ -219,7 +219,7 @@ function indicatorToCube(indicator, t, meta_data, tableSchema, dataset_name) {
 function validateIndicators(dataFolders, manifestMetadata) {
 	const indicatorsMissingFromManifest = [];
 	for (const dataset of dataFolders) {
-		const metadataPath = `${RAW_DATA_DIR}/${dataset}/${dataset}.json`;
+		const metadataPath = `${RAW_DATA_DIR}/${dataset}/${dataset}.csv-metadata.json`;
 		if (!fs.existsSync(metadataPath)) continue;
 
 		const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
