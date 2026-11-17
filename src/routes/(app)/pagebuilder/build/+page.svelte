@@ -7,6 +7,7 @@
 		Hero,
 		Details,
 		Container,
+		Notice,
 		Icon,
 		Tab,
 		Tabs,
@@ -319,7 +320,6 @@
 	let noDataMessage = $derived(data && !data.message && hasSelectedAreaData ? [] : noDataReasons);
 
 	let highlightedArea = $state(null);
-
 	let customOrder = $state(null);
 </script>
 
@@ -339,8 +339,11 @@
 		<div class="hero-text">
 			<h1>Compare areas</h1>
 			<div class="hero-area-details">
-				<h4>{selection.areas?.length} areas selected</h4>
-				<p><a href="/pagebuilder">Change areas</a></p>
+				<h4>
+					{selection.areas?.length}
+					{selection.areas?.length === 1 ? 'area' : 'areas'} selected
+				</h4>
+				<p><a href="/pagebuilder">Change or add areas</a></p>
 			</div>
 		</div>
 	</Container>
@@ -463,6 +466,12 @@
 					</div>
 				</div>
 			{/if}
+			{#if $selectedAreas.length === 1}
+				<Notice cls="only-one"
+					>You have only selected one area. <a href="/pagebuilder">Select additional areas</a> to compare
+					their values.</Notice
+				>
+			{/if}
 		</div>
 		<!-- -->
 
@@ -530,6 +539,10 @@
 </Container>
 
 <style>
+	:global(.only-one .ons-u-fs-r) {
+		font-size: 16px !important;
+		line-height: 24px;
+	}
 	.table {
 		margin-bottom: 20px;
 	}
