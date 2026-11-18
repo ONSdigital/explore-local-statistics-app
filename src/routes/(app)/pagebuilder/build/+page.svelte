@@ -553,8 +553,8 @@
 				</button>
 				<div id="share-link" style:display={showShareLink ? 'block' : 'none'} spellcheck="false">
 					<Textarea label="Shareable link" value={shareUrl} hideLabel readonly rows="2" />
-					<Button variant="secondary" on:click={copyEmbedCode} small>
-						{clipped ? 'Code copied' : 'Copy embed code'}
+					<Button variant="secondary" on:click={copyShareUrl} small>
+						{clipped ? 'Link copied' : 'Copy link'}
 					</Button>
 				</div>
 			</div>
