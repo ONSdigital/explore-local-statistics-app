@@ -412,7 +412,7 @@
 	}
 
 	const highlightWidth = 15;
-	const rowPadding = 3;
+	const rowPadding = 4;
 	let pointRangeWidth = $derived.by(() => {
 		const fixed =
 			highlightWidth +
@@ -421,13 +421,18 @@
 			valueWidth +
 			sparklineWidth +
 			colGap * 4 +
-			rowPadding * 2 +
 			rowPadding * 2;
 		return Math.max(120, width - fixed);
 	});
 
 	let contentWidth = $derived(
-		highlightWidth + labelWidth + valueWidth + pointRangeWidth + sparklineWidth + colGap * 4
+		highlightWidth +
+			labelWidth +
+			valueWidth +
+			pointRangeWidth +
+			sparklineWidth +
+			colGap * 4 +
+			rowPadding * 2
 	);
 
 	let xScale = $derived(
@@ -460,12 +465,15 @@
 	let nameWidth = $state(0);
 	let labelHeight = $state(0);
 
-	// keep the label inside the point range column
+	const arrowHalfWidth = 6; // half of the arrow svg width (12)
+	const labelRadius = 5; // matches .comparison-name border-radius
+	const cornerClearance = arrowHalfWidth + labelRadius;
+
 	let nameLeft = $derived.by(() => {
 		const x = comparisonBar?.valueX ?? 0;
 		const half = nameWidth / 2;
-		const min = half - 5;
-		const max = pointRangeWidth - half + 5;
+		const min = half - cornerClearance;
+		const max = pointRangeWidth - half + cornerClearance;
 		return Math.max(min, Math.min(x, max));
 	});
 
@@ -624,7 +632,7 @@
 					bind:clientHeight={labelHeight}
 					style:left="50%"
 				>
-					Data unavailable for selected reference area ({comparisonArea.areanm}) in {formatPeriod(
+					Data unavailable for reference area ({comparisonArea.areanm}) in {formatPeriod(
 						selectedPeriod
 					)}
 				</div>
@@ -647,7 +655,7 @@
 				style:padding-inline="{rowPadding}px"
 				style:column-gap="{colGap}px"
 			>
-				<div class="highlight-star" style:max-width="{highlightWidth}px" style:margin-left="3px">
+				<div class="highlight-star" style:max-width="{highlightWidth}px" style:margin-left="0px">
 					<button
 						class="highlight-button"
 						class:active={area.areacd === highlightedArea}
@@ -853,6 +861,18 @@
 
 	.sparkline-header-inner {
 		width: max-content;
+	}
+
+	@media (max-width: 1000px) {
+		.sparkline-header {
+			white-space: normal;
+		}
+		.sparkline-header-inner {
+			max-width: 200px;
+		}
+		.sparkline-header .table-sort-button {
+			text-align: left;
+		}
 	}
 
 	.sparkline-cell {

@@ -244,6 +244,11 @@
 		}
 		goto(resolve('/pagebuilder/build'));
 	}
+
+	let selectedAreasOpen = $state($selectedAreas.length > 0);
+	$effect(() => {
+		if ($selectedAreas.length === 0) selectedAreasOpen = false;
+	});
 </script>
 
 <div class="select-hero">
@@ -332,7 +337,11 @@
 		{/if}
 	</div>
 	<!-- <Accordion> -->
-	<Details cls="selected-areas-table" title="Your selected areas: {$selectedAreas.length}">
+	<Details
+		cls="selected-areas-table"
+		title="Your selected areas: {$selectedAreas.length}"
+		bind:open={selectedAreasOpen}
+	>
 		{#if $selectedAreas.length > 1}
 			<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 		{/if}
