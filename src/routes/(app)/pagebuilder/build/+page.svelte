@@ -446,11 +446,14 @@
 							{/if}
 							{#if showCi}
 								<p>
-									Shaded bands show likely range (95% <a
-										href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/uncertaintyandhowwemeasureit#confidence-interval"
-										>confidence interval</a
-									>
-									<Icon type="external" size="s"></Icon>).
+									Shaded bands show likely range (95%
+									<span class="nowrap"
+										><a
+											href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/uncertaintyandhowwemeasureit#confidence-interval"
+											>confidence interval</a
+										>
+										<Icon type="external" size="s"></Icon>).
+									</span>
 								</p>
 							{/if}
 						</div>
@@ -563,6 +566,10 @@
 </Container>
 
 <style>
+	.nowrap {
+		white-space: nowrap;
+	}
+
 	:global(.only-one .ons-u-fs-r) {
 		/* font-size: 16px !important;
 		line-height: 24px; */

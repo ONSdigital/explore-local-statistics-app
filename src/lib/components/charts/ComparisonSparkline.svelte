@@ -214,7 +214,8 @@
 				class="change-text"
 				style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}
 				// only centre the 'no change' text
-				style:justify-content={diff === 0 && showChangeText ? 'center' : 'start'}
+				// style:justify-content={diff === 0 && showChangeText ? 'center' : 'start'}
+				style:justify-content="center"
 			>
 				<span class="change-content" bind:clientWidth={changeBoxContentWidth}>
 					{#if diff !== 0}
