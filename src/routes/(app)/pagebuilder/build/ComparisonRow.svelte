@@ -702,6 +702,7 @@
 							comparisonData={comparisonRows}
 							xDomain={sparklineXDomain}
 							{valuePeriod}
+							{formatPeriod}
 							{prefix}
 							{suffix}
 							{formatValue}

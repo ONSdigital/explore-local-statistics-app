@@ -4,11 +4,13 @@
 	import { area, line as d3line, curveLinear } from 'd3-shape';
 	import { extent } from 'd3-array';
 	import ChangeboxArrow from '../visuals/ChangeboxArrow.svelte';
+	import { Tooltip } from '@onsvisual/svelte-components';
 
 	let {
 		data,
 		comparisonData,
 		formatValue = (d) => d,
+		formatPeriod = (d) => d,
 		yDomain,
 		xDomain,
 		prefix,
@@ -201,27 +203,38 @@
 			{/if}
 		</svg>
 	{/if}
-	<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
-		<div
-			class="change-text"
-			style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}
-			// only centre the 'no change' text
-			style:justify-content={diff === 0 && showChangeText ? 'center' : 'start'}
-		>
-			<span class="change-content" bind:clientWidth={changeBoxContentWidth}>
-				{#if diff !== 0}
-					<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
-					<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
-				{/if}
-				{#if showChangeText}
-					{direction}
-				{/if}
-			</span>
+	<Tooltip
+		cls="change-box-tooltip"
+		position="top"
+		text="{formatPeriod(data[0].period)} to {formatPeriod(data[data.length - 1].period)}"
+		zIndex="1000"
+	>
+		<div class="change-box" style:background-color={changeBoxBg} style:color={changeBoxText}>
+			<div
+				class="change-text"
+				style:width={changeBoxWidth ? `${changeBoxWidth}px` : 'max-content'}
+				// only centre the 'no change' text
+				style:justify-content={diff === 0 && showChangeText ? 'center' : 'start'}
+			>
+				<span class="change-content" bind:clientWidth={changeBoxContentWidth}>
+					{#if diff !== 0}
+						<ChangeboxArrow direction={diff > 0 ? 'up' : 'down'} />
+						<strong>{prefix}{formatValue(Math.abs(diff))}{suffix2}</strong>
+					{/if}
+					{#if showChangeText}
+						{direction}
+					{/if}
+				</span>
+			</div>
 		</div>
-	</div>
+	</Tooltip>
 </div>
 
 <style>
+	:global(body .tooltip[role='tooltip']) {
+		background: var(--ons-color-grey-75) !important;
+		z-index: 1000 !important;
+	}
 	.sparkline-individual {
 		display: flex;
 		align-items: center;
