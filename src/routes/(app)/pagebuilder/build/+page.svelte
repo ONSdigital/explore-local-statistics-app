@@ -42,6 +42,7 @@
 	let areas = $derived(
 		taxData?.data.areas.map((area) => ({ ...area, type: getAreaType(area) || '' }))
 	);
+	let showShareLink = $state(false);
 
 	let selectedAreas = getContext('selectedAreas')();
 	let selectedIndicator = getContext('selectedIndicator')();
@@ -308,16 +309,24 @@
 
 	const geographyMismatch = $derived(!areSelectedAreasGeographyLevelsInData);
 	const countryMismatch = $derived(!areSelectedAreasCountriesInData);
-	const noDataReasons = $derived(
-		[
-			geographyMismatch &&
-				`This indicator is only available for <strong>${indicatorGeographyLevelLabels}<strong>.`,
-			countryMismatch &&
-				`This indicator only covers areas in <strong>${indicatorCountryLabels}<strong>.`
-		].filter(Boolean)
-	);
 
-	let noDataMessage = $derived(data && !data.message && hasSelectedAreaData ? [] : noDataReasons);
+	const noDataMessage = $derived.by(() => {
+		if (data && !data.message && hasSelectedAreaData) return null;
+
+		const geography = `<strong>${indicatorGeographyLevelLabels}</strong>`;
+		const country = `<strong>${indicatorCountryLabels}</strong>`;
+
+		if (geographyMismatch && countryMismatch) {
+			return `This indicator is only available for ${geography} and only covers areas in ${country}.`;
+		}
+		if (geographyMismatch) {
+			return `This indicator is only available for ${geography}.`;
+		}
+		if (countryMismatch) {
+			return `This indicator only covers areas in ${country}.`;
+		}
+		return null;
+	});
 
 	let highlightedArea = $state(null);
 	let customOrder = $state(null);
@@ -423,7 +432,7 @@
 							to {formatPeriodVerbose(uniquePeriods[uniquePeriods.length - 1], true)}
 						{/if}
 					{/if}.
-					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>
+					<a href="/indicators/{selection.indicator.slug}">Explore this indicator</a>.
 				</p>
 			</div>
 			{#if data && !data.message && hasSelectedAreaData}
@@ -466,7 +475,7 @@
 					</div>
 				</div>
 			{/if}
-			{#if $selectedAreas.length === 1}
+			{#if $selectedAreas.length === 1 && data && !data.message && hasSelectedAreaData}
 				<Notice cls="only-one"
 					>You have only selected one area. <a href="/pagebuilder">Select additional areas</a> to compare
 					their values.</Notice
@@ -494,14 +503,14 @@
 				{/key}
 			{:else if data && (data.message || !hasSelectedAreaData)}
 				<div class="no-data">
-					<p>No {selection.indicator.label} data available for the selected areas.</p>
+					<p>{selection.indicator.label} data is not available for the selected areas.</p>
 				</div>
-				{#if noDataMessage.length}
-					<div class="no-data-message">
-						{#each noDataMessage as message}
-							<p>{@html message}</p>
-						{/each}
-					</div>
+				{#if noDataMessage}
+					<Notice>
+						<div class="no-data-message">
+							<p style:margin-bottom="0px">{@html noDataMessage}</p>
+						</div>
+					</Notice>
 				{/if}
 			{:else if !selectedAreas.length}
 				<div class="no-data">
@@ -527,12 +536,27 @@
 					{/each}
 				</p>
 			</div>
-			<div class="share-link">
+			<!-- <div class="share-link">
 				<h4>Share this page</h4>
 				<Textarea label="Shareable URL" value={shareUrl} hideLabel readonly rows="2" />
 				<Button variant="secondary" on:click={copyShareUrl} small>
 					{clipped ? 'Link copied' : 'Copy link'}
 				</Button>
+			</div> -->
+			<div class="share-link">
+				<button
+					class="ons-btn-link share-button"
+					aria-controls="share-link"
+					aria-expanded={showShareLink ? 'true' : 'false'}
+					onclick={() => (showShareLink = !showShareLink)}
+					>{showShareLink ? 'Hide shareable link' : 'Share this page'}
+				</button>
+				<div id="share-link" style:display={showShareLink ? 'block' : 'none'} spellcheck="false">
+					<Textarea label="Shareable link" value={shareUrl} hideLabel readonly rows="2" />
+					<Button variant="secondary" on:click={copyEmbedCode} small>
+						{clipped ? 'Code copied' : 'Copy embed code'}
+					</Button>
+				</div>
 			</div>
 		{/if}
 	</SidebarLayout>
@@ -540,14 +564,15 @@
 
 <style>
 	:global(.only-one .ons-u-fs-r) {
-		font-size: 16px !important;
-		line-height: 24px;
+		/* font-size: 16px !important;
+		line-height: 24px; */
 	}
 	.table {
 		margin-bottom: 20px;
 	}
 	.share-link {
 		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 
 	.above-table {

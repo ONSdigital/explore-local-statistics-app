@@ -332,7 +332,7 @@
 		{/if}
 	</div>
 	<!-- <Accordion> -->
-	<Details title="Your selected areas: {$selectedAreas.length}">
+	<Details cls="selected-areas-table" title="Your selected areas: {$selectedAreas.length}">
 		{#if $selectedAreas.length > 1}
 			<Button on:click={clearAllSelected} variant="secondary" small="true">Clear all</Button>
 		{/if}
@@ -489,6 +489,13 @@
 		margin-top: 1em;
 		width: 100%;
 		max-width: 550px;
+		box-sizing: border-box;
+	}
+
+	:global(.selected-areas-table) {
+		margin-top: 1em;
+		width: 100%;
+		max-width: 750px;
 		box-sizing: border-box;
 	}
 
