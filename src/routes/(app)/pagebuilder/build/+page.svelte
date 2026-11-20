@@ -325,7 +325,7 @@
 		if (countryMismatch) {
 			return `This indicator only covers areas in ${country}.`;
 		}
-		return null;
+		return `${selection.indicator.label} is not available for the selected areas.`;
 	});
 
 	let highlightedArea = $state(null);
@@ -505,19 +505,24 @@
 					/>
 				{/key}
 			{:else if data && (data.message || !hasSelectedAreaData)}
-				<div class="no-data">
-					<p>{selection.indicator.label} data is not available for the selected areas.</p>
-				</div>
 				{#if noDataMessage}
-					<Notice>
-						<div class="no-data-message">
-							<p style:margin-bottom="0px">{@html noDataMessage}</p>
-						</div>
-					</Notice>
+					<div style:margin-top="40px">
+						<Notice>
+							<div class="no-data-message">
+								<p style:margin-bottom="0px">{@html noDataMessage}</p>
+							</div>
+						</Notice>
+					</div>
 				{/if}
 			{:else if !selectedAreas.length}
-				<div class="no-data">
-					<p>No areas selected for comparison. <a href="/pagebuilder">Select areas</a></p>
+				<div style:margin-top="40px">
+					<Notice>
+						<div class="no-data-message">
+							<p style:margin-bottom="0px">
+								No areas selected for comparison. <a href="/pagebuilder">Select areas</a>
+							</p>
+						</div>
+					</Notice>
 				</div>
 			{:else}
 				<Spinner message="Loading chart data" />
@@ -593,26 +598,12 @@
 		position: relative;
 	}
 
-	.no-data {
-		min-height: 84px;
-		margin-top: 40px;
-		font-size: 16px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-	}
-
 	.no-data-message {
 		font-size: 16px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-	}
-
-	.no-data p {
-		margin: 0;
 	}
 
 	.twisty {
