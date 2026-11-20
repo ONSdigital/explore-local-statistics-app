@@ -57,11 +57,13 @@ export function parsePeriod(period) {
 	return period;
 }
 
-export function makePeriodFormatter(periodFormat: string) {
+export function makePeriodFormatter(periodFormat: string, verbose = false) {
 	const range = +periodFormat?.match?.(/^\d+/)?.[0];
+	const month = verbose ? '%B' : '%b';
+
 	const formatter =
 		periodFormat === 'month'
-			? utcFormat('%b %Y')
+			? utcFormat(`${month} %Y`)
 			: periodFormat === 'quarter'
 				? utcFormat('Q%q %Y')
 				: periodFormat === 'year'
@@ -69,7 +71,7 @@ export function makePeriodFormatter(periodFormat: string) {
 					: periodFormat === 'academic-year'
 						? (d) => {
 								const year = d.getFullYear();
-								return `AY ${year}-${(year + 1) % 100}`;
+								return `AY ${year}-${String((year + 1) % 100).padStart(2, '0')}`;
 							}
 						: periodFormat === 'financial-year'
 							? (d) => {
@@ -82,7 +84,14 @@ export function makePeriodFormatter(periodFormat: string) {
 										return `${year}-${String((year + range) % 100).padStart(2, '0')}`;
 									}
 								: utcFormat('%-d %b %Y');
-	return (p) => formatter(parsePeriod(p));
+	return (p) => {
+		if (p == null) return '';
+
+		const date = parsePeriod(p);
+		if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
+
+		return formatter(date);
+	};
 }
 
 export function shortenPeriodFormatter(formatter) {

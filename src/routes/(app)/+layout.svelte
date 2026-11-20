@@ -14,7 +14,8 @@
 		Header,
 		Breadcrumb,
 		Main,
-		Footer
+		Footer,
+		PhaseBanner
 	} from '@onsvisual/svelte-components';
 	import { geoLevelsAllLookup } from '$lib/config/geoLevels';
 
@@ -64,20 +65,22 @@
 
 <AnalyticsBanner {analyticsId} {analyticsProps} pageViewEnabled={false} />
 <Header
+	width={page.data.pageType === 'comparison' ? 'wider' : 'wide'}
 	headerBorder={!page.data.breadcrumbBackground}
 	menuBorder={page.data.breadcrumbBackground === 'var(--ons-color-branded-tint)'}
 />
 {#if page.data.breadcrumbLinks}
 	<Breadcrumb
 		links={page.data.breadcrumbLinks}
-		background={page.data.breadcrumbBackground || null}
+		width={page.data.pageType === 'comparison' ? 'wider' : 'wide'}
+		background={page.data.pageType === 'comparison' ? '#e9eff4' : page.data.breadcrumbBackground}
 		cls={page.data.breadcrumbClass || null}
 	/>
 {/if}
 <Main>
 	<slot />
 </Main>
-<Footer />
+<Footer width={page.data.pageType === 'comparison' ? 'wider' : 'wide'} />
 
 <style>
 	:global(a:focus > svg.logo) {
